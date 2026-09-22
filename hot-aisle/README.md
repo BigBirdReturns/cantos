@@ -1,31 +1,46 @@
-# Hot Aisle workload economics: free proof starter
+# Hot Aisle workload report · 2.0.0
 
-Prepared by Second Run, 22 September 2026. Independent research prototype; no provider endorsement. No rented hardware, cloud benchmarks, model loading, private account access or outreach occurred in creating this package.
+**Drop a vLLM result, enter the billable allocation, download a customer report.**
+
+Live: https://bigbirdreturns.github.io/axm-tools/hot-aisle/
+
+The page is self-contained. Open `index.html` from the offline kit or use the live page. There is no account, backend, model call, upload, telemetry or data persistence. Source files remain in browser memory and clear on reload.
+
+## Use
+
+1. Drop one or more `vllm bench serve` result JSONs on Hot Aisle. Summary and detailed outputs work; appended JSON/JSONL and a single console summary are also accepted.
+2. Confirm the number of **billable** GPUs and applicable rate. For the cost of a complete paid interval, enter its total charge instead of extrapolating a benchmark window.
+3. Optionally add comparator results. Matching model, revision, representation, tokenizer, workload, cache and offered-load identities are required for a savings comparison. Missing metadata never prevents the individual result report.
+4. Download the printable customer HTML and Evidence JSON. Optional latency gates require per-request samples; correctness requires a hash-bound evaluator sidecar. Completed responses are never relabeled as correct tasks.
+
+The sample button loads deliberately tiny **synthetic** fixtures. The banner and exports preserve that status. No AMD/NVIDIA workload measurement was performed for this release.
 
 ## What is implemented
 
-Open `index.html` locally. It uses a pinned public-price snapshot to calculate allocation-level price/throughput break-even thresholds. It optionally applies user-entered accepted-work rates and exports a local JSON receipt of the assumptions and result. It does not verify those rates. Zero accepted work, missing comparison criteria and invalid inputs do not produce a positive comparison.
+- vLLM summary, detailed, array, appended/NDJSON and console import; transactional error handling; duplicate-trial rejection.
+- Allocation-aware rental arithmetic, user-supplied total-charge override, current/announced price schedules and both break-even directions.
+- Per-request TTFT/E2E gates, optional client queue, separately bound evaluator pass/fail, and joint request-level counting.
+- Duration-weighted repeat aggregation. Successful-request percentiles are pooled only with complete raw samples; otherwise per-trial percentile ranges remain distinct.
+- Customer HTML, normalized evidence JSON with SHA-256, source-file verification, and a command-line recomputation path. Original filenames, generated text, prompts, error bodies and unknown metadata are not exported.
+- Summary mode retains unavailable fields instead of manufacturing per-request evidence. Legacy `request_goodput:` remains a source-reported latency observation, never task correctness.
 
-The page runs offline without dependencies, telemetry or automatic network requests. External source links open only when selected. A matching standard-library Python implementation is in `scripts/price_math.py`; run `python -m unittest discover -s hot-aisle/scripts -v` from the repository root for the arithmetic tests.
+## Verify
 
-`data/prices.json` preserves the exact rates, source locations, review date and commercial boundaries. The displayed October prices are announced future prices effective 1 October 2026. This is Nebius AI Cloud infrastructure pricing, not a Token Factory Dedicated Endpoint quote. Confirm actual allocation sizes and capacity availability; per-GPU list pricing does not establish single-GPU availability for each instance family. Additional costs default to zero and remain outside the calculation until supplied. Include all billed hardware and the entire paid commitment, including any idle period.
+```sh
+node scripts/test_workbench.cjs
+node scripts/recompute.cjs workload-evidence.json
+node scripts/recompute.cjs workload-evidence.json original-hot.json original-comparator.json
+python -m unittest discover -s scripts -p 'test_price_math.py' -v
+```
 
-## What is proposed, not implemented or measured
+Node uses built-in modules only. The verifier loads the exact engine embedded in the page, validates the saved checksum, and recomputes its derived values. Providing all original benchmark files also checks exact hashes and normalization. Without originals it verifies the supplied calculation, not the raw producer evidence. Neither route independently reruns hardware or authenticates the source operator. Evaluator judgments remain supplied evidence.
 
-`FIRST_CAMPAIGN.md` specifies one bounded workload experiment using Hot Aisle's existing OpenCode/vLLM example as the starting point. The capture runner, runtime-specific import adapter, independent task evaluator, matched competitor measurement and public workload verdict are not implemented by this package. The gift can start with already-approved raw run logs and an applicable quote instead of allocating compute.
+## Source, scope and maintenance
 
-A future report must separately classify producer-run results, independently rerun results, modeled prices and actual billed costs. A portable evidence packet supports inspection; it is not an attestation of historical authenticity or a claim of full execution survivability.
+`FORMATS.md` records the source-pinned format observations and refusal conditions. `FIRST_CAMPAIGN.md` remains the original proposed hardware campaign; v2 implements the file-to-report workflow, not that unexecuted GPU campaign. The initial `scripts/price_math.py` and its tests remain available for the price-only formulas.
 
-## Reuse
+`data/prices.json` and the matching embedded `prices-data` block are a **22 September 2026 snapshot**. October rates are announced future AI Cloud infrastructure prices, not Token Factory managed-endpoint quotes. Stock, instance sizes, tax, idle time, commitment terms and unentered costs are not inferred. Custom quotes can be entered directly.
 
-Original code and original documentation are MIT licensed. Provider trademarks, model licenses, runtime licenses and third-party pages retain their own rights. No model weights or third-party article copies are bundled. Hot Aisle can host or adapt this calculator without buying a service. The evidence methodology must permit any provider to lose a workload comparison.
+All files are steward-owned. The shipped `index.html` requires no build. The page's `report-engine` script is the executable authority; tests and the CLI extract that exact source. Any edit must rerun the qualification and regenerate the offline ZIP and release manifest. Do not patch frozen releases. There are no scheduled fetches or external-effect adapters.
 
-## Published location and deployment
-
-Live calculator: https://bigbirdreturns.github.io/axm-tools/hot-aisle/
-
-The existing root Pages workflow serves this directory unchanged. No new backend, accounts, shared libraries or scheduled work are introduced. The free source kit is this directory: the HTML, arithmetic implementation and tests, pricing snapshot, license and proposed campaign. The original standalone calculator still runs by opening index.html locally.
-
-## Ownership and what can rot
-
-All files are steward-owned. No customer inputs are persisted or uploaded. The rates are a visibly dated 22 September 2026 snapshot, not a live quote. Effective dates, available configurations and terms can change. Refresh data/prices.json and the matching embedded price-data block together after reviewing the cited primary sources. New GPU measurements require separate evidence and must not be inferred from price ratios. Model/runtime recipes in the proposed campaign can age independently. No frozen release is rewritten.
+Independent, MIT-licensed original code by Second Run. Provider, model and runtime names retain their own rights. No provider endorsement, first customer, measured performance win or willingness to pay is asserted.

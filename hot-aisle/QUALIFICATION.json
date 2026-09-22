@@ -1,0 +1,24 @@
+{
+  "schema": "hot-aisle/software-qualification@2",
+  "version": "2.0.0",
+  "date": "2026-09-22",
+  "index_sha256": "cd79dc1b81740c682e1529d55c9d76f91ae8750b97abab676d5dfdd52c917e57",
+  "tests": {
+    "import_math_evidence_regressions": 80,
+    "legacy_price_arithmetic": 13,
+    "browser_journeys": 28,
+    "failed": 0
+  },
+  "browser_scope": "Exact HTML rendered in isolated Chromium through set_content; host browser policy blocked URL navigation. Native File and Blob APIs and the SHA-256 fallback executed. Desktop/mobile/dark views inspected; HTTP deployment is a separate receipt.",
+  "native_export_recompute": "Downloaded report recomputed in a fresh Node process and matched both original synthetic result files.",
+  "source_schema": {
+    "repository": "vllm-project/vllm",
+    "commit": "4edb55169f69c76bb87ab9f154585917cb01bb17",
+    "path": "vllm/benchmarks/serve.py",
+    "blob": "14c72386a5d01c1163c99497890004c43ac09338"
+  },
+  "measurement_scope": "Synthetic schema fixtures only. No Hot Aisle customer result, GPU runtime, hardware comparison or measured commercial advantage is claimed.",
+  "browser_errors": 0,
+  "browser_network_requests": 0,
+  "publication_status": "Qualified source; live deployment is recorded separately."
+}
