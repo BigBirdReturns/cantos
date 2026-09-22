@@ -1,112 +1,130 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="color-scheme" content="dark">
-<meta name="description" content="Free, open workload-economics calculator for Hot Aisle MI300X versus Nebius GPU allocations. Dated prices, break-even throughput, cost per accepted outcome, and open source. Price model, not a benchmark.">
+<meta name="description" content="Hot Aisle workload economics calculator. Compare MI300X allocation cost against NVIDIA list pricing, then plug in measured accepted-work rates. Price model, not a benchmark.">
 <link rel="canonical" href="https://bigbirdreturns.github.io/axm-tools/hot-aisle/">
-<meta property="og:title" content="Hot Aisle / Cost per accepted outcome">
-<meta property="og:description" content="Free calculator: allocation-level price break-even, accepted-work economics and a reproducible first campaign. No GPU performance result claimed.">
+<meta property="og:title" content="Hot Aisle workload economics">
+<meta property="og:description" content="What throughput does MI300X need to break even? Open calculator with dated prices and exportable assumptions.">
 <meta property="og:url" content="https://bigbirdreturns.github.io/axm-tools/hot-aisle/">
 <meta property="og:type" content="website">
-<title>Hot Aisle / Workload Economics — independent proof starter</title>
+<title>Hot Aisle workload economics</title>
 <style>
-:root{--bg:#101412;--surface:#18201b;--ink:#eef3eb;--muted:#b3c2b3;--line:#405044;--accent:#d6fc7b;--warn:#ffcf87;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color-scheme:dark}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-size:16px;line-height:1.6}main{max-width:1120px;margin:0 auto;padding:30px 32px 60px}header{display:flex;justify-content:space-between;gap:20px;border-bottom:1px solid var(--line);padding-bottom:20px;font-size:12px;letter-spacing:.1em;text-transform:uppercase}header a{color:var(--accent)}.eyebrow{color:var(--accent);text-transform:uppercase;letter-spacing:.12em;font-size:12px;font-weight:700;margin:0 0 12px}h1{font-size:clamp(35px,5.6vw,66px);line-height:1.04;letter-spacing:-.045em;max-width:24ch;margin:22px 0}h2{font-size:25px;line-height:1.2;letter-spacing:-.025em;margin:0 0 16px}h3{font-size:19px;margin:0 0 10px}.intro{max-width:760px;color:var(--muted);font-size:18px}section{margin-top:32px}.panel{background:var(--surface);border:1px solid var(--line);padding:26px}.row{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}.tag{display:inline-block;padding:4px 9px;background:var(--accent);color:#101412;font-size:11px;font-weight:800;letter-spacing:.07em;text-transform:uppercase}.meta{font-size:13px;color:var(--muted)}.controls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin:24px 0}.half{display:grid;grid-template-columns:1fr 1fr;gap:24px}.field label{display:block;font-size:13px;margin-bottom:6px;color:var(--muted)}input,select,button{font:inherit}input,select{width:100%;padding:10px 11px;background:#101412;border:1px solid #65796b;color:var(--ink);border-radius:2px;min-height:46px}input::placeholder{color:#a6b6a9}a{color:var(--accent);overflow-wrap:anywhere}button{cursor:pointer;color:#101412;background:var(--accent);font-weight:700;padding:11px 17px;border:0;border-radius:2px}button:disabled{opacity:.45;cursor:not-allowed}a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline-offset:3px}table{border-collapse:collapse;width:100%;font-size:15px}th{font-size:12px;font-weight:600;color:var(--muted);text-align:left;line-height:1.4}th,td{padding:14px 8px;border-bottom:1px solid var(--line);vertical-align:top}th:nth-child(n+2),td:nth-child(n+2){text-align:right}td:nth-child(1),th:nth-child(1){padding-left:0}td:last-child,th:last-child{padding-right:0}td strong{font-size:20px;font-weight:750;color:var(--accent)}.note{font-size:13px;color:var(--muted);margin-top:16px}.equation{border-left:3px solid var(--accent);padding:12px 18px;font-family:ui-monospace,Consolas,monospace;font-size:14px;background:#131a15;overflow-wrap:anywhere}.basis{display:flex;gap:10px;align-items:flex-start;color:var(--muted);font-size:14px;margin:20px 0}.basis input{width:18px;min-height:18px;margin-top:4px;flex:0 0 18px}.result{border-top:1px solid var(--line);padding-top:18px;margin-top:20px}.result h3{color:var(--accent);font-size:25px}.subgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.small{font-size:12px}.warning{color:var(--warn)}details{border-top:1px solid var(--line);padding:16px 0}summary{cursor:pointer;font-weight:650}.sources{font-size:13px;color:var(--muted)}footer{margin-top:35px;border-top:1px solid var(--line);padding-top:20px;color:var(--muted);font-size:12px}p{margin:10px 0}#error{font-size:14px;color:var(--warn)}.skip{position:absolute;left:-10000px}.skip:focus{left:10px;top:10px;background:var(--bg);padding:10px}.chips{font-size:13px;display:flex;flex-wrap:wrap;gap:10px 24px;color:var(--muted);margin:20px 0}.chips b{color:var(--ink)}
-@media(max-width:680px){main{padding:20px 18px 40px}header{font-size:10px}.panel{padding:20px 15px}.controls,.half,.subgrid{grid-template-columns:1fr}h1{font-size:43px}.intro{font-size:16px}table{font-size:12px}th{font-size:10px}th,td{padding:12px 5px}td strong{font-size:16px}h2{font-size:23px}}
-@media print{body{background:white;color:#17231b}main{max-width:none;padding:0}header,footer,.controls,#scenario-controls,button{display:none}.panel,.equation{background:white;border-color:#aaa;break-inside:avoid}a,.meta,.note,.intro,th,.sources,.eyebrow{color:#293e2d}td strong,.result h3{color:#16391e}h1{font-size:36px}.tag{background:#dde8d3;color:black}}
+:root{--bg:#0c0f0d;--panel:#121713;--ink:#f3f5f1;--muted:#9fa8a0;--line:#2a332c;--accent:#c9f76f;--warn:#f4c77a;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color-scheme:dark}
+*{box-sizing:border-box}html{background:var(--bg)}body{margin:0;background:var(--bg);color:var(--ink);font-size:16px;line-height:1.5}main{width:min(920px,calc(100% - 32px));margin:0 auto;padding:34px 0 72px}a{color:var(--ink);text-decoration-color:#667168;text-underline-offset:3px}a:hover{text-decoration-color:var(--accent)}header{display:flex;justify-content:space-between;gap:16px;align-items:center;padding-bottom:24px;border-bottom:1px solid var(--line);font-size:13px;color:var(--muted)}header strong{color:var(--ink);font-weight:650}.hero{padding:54px 0 26px}.hero h1{font-size:clamp(38px,7vw,70px);letter-spacing:-.055em;line-height:.98;margin:0 0 18px;font-weight:720}.hero p{max-width:700px;color:var(--muted);font-size:18px;margin:0}.calculator{border-top:1px solid var(--line);padding-top:28px}.controls{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}.field label{display:block;color:var(--muted);font-size:12px;margin-bottom:6px}input,select,button{font:inherit}input,select{width:100%;min-height:44px;background:#0f1310;color:var(--ink);border:1px solid #475249;border-radius:4px;padding:9px 10px}button{background:var(--ink);color:var(--bg);border:0;border-radius:4px;padding:10px 14px;font-weight:700;cursor:pointer}.answer{margin:28px 0 10px;padding:26px 0 30px;border-bottom:1px solid var(--line)}.answer .kicker{color:var(--muted);font-size:13px;margin-bottom:6px}.answer .big{font-size:clamp(42px,8vw,78px);line-height:1;letter-spacing:-.055em;font-weight:760;color:var(--accent)}.answer .sentence{font-size:18px;margin-top:12px;max-width:720px}.equation{font:13px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:var(--muted);margin-top:11px}.measure{padding:26px 0 12px}.measure h2,.method h2{font-size:22px;letter-spacing:-.02em;margin:0 0 6px}.measure>p,.method>p{color:var(--muted);margin:0 0 20px}.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}.result{margin-top:18px;padding:20px;background:var(--panel);border:1px solid var(--line);border-radius:6px}.result h3{margin:0 0 6px;font-size:24px;letter-spacing:-.025em}.result p{margin:0;color:var(--muted)}.basis{display:flex;align-items:flex-start;gap:10px;color:var(--muted);font-size:13px;margin:14px 0}.basis input{width:16px;min-height:16px;flex:0 0 16px;margin-top:2px}.actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:14px}.actions span{color:var(--muted);font-size:12px}.method{margin-top:30px;padding-top:26px;border-top:1px solid var(--line)}details{border-top:1px solid var(--line);padding:14px 0}summary{cursor:pointer;font-weight:650}details p,details ul{color:var(--muted);font-size:14px}.links{display:flex;gap:18px;flex-wrap:wrap;font-size:13px;margin-top:18px}footer{margin-top:34px;padding-top:18px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}#error{color:var(--warn);font-size:13px}.advanced{margin-top:14px}.advanced .two{margin-top:12px}.advanced .controls{margin-top:12px}.subtle{font-size:12px;color:var(--muted)}
+@media(max-width:720px){main{width:min(100% - 24px,920px);padding-top:24px}.hero{padding-top:38px}.controls,.two{grid-template-columns:1fr}.hero p{font-size:16px}.answer .sentence{font-size:16px}}
+@media print{body{background:#fff;color:#111}.calculator,.result{border-color:#bbb}.hero p,.kicker,.equation,.measure>p,.method>p,details p,details ul,footer,.field label,.basis,.subtle{color:#444}.actions,header{display:none}.answer .big{color:#111}}
 </style>
 </head>
-<body><a class="skip" href="#main">Skip to calculator</a><main id="main">
-<header><span>Second Run / Independent research prototype</span><span>Price snapshot · 22 September 2026</span></header>
-<section><p class="eyebrow">Prepared for Hot Aisle</p><h1>Cost per<br>accepted outcome.</h1><p class="intro">Find the throughput a Hot Aisle allocation needs to match an NVIDIA allocation on cost. Then substitute accepted-work rates from a comparable test. Every rate below is a sourced list price; no performance result is prefilled.</p><div class="chips"><span><b>Offline:</b> no installation or telemetry</span><span><b>Compute:</b> no accounts or provisioning</span><span><b>Status:</b> price model, not a benchmark</span></div></section>
-<section class="panel" aria-labelledby="prices-heading"><div class="row"><h2 id="prices-heading">The break-even threshold</h2><span class="tag" id="date-tag">Upcoming · 01 Oct 2026</span></div><p class="meta">Nebius AI Cloud on-demand prices. Token Factory managed endpoints require a separate quote and operating-cost comparison.</p>
-<div class="controls">
-<div class="field"><label for="period">Nebius price schedule</label><select id="period"><option value="october_gpu_hour">Effective 1 October 2026</option><option value="current_gpu_hour">Current on 22 September 2026</option></select></div>
-<div class="field"><label for="hot-config">Hot Aisle billable allocation</label><select id="hot-config"><option value="vm1">1 × MI300X VM</option><option value="vm2">2 × MI300X VM</option><option value="vm4">4 × MI300X VM</option><option value="bare8">8 × MI300X bare metal</option></select></div>
-<div class="field"><label for="other-gpus">Competitor billable GPU count</label><input id="other-gpus" type="number" min="1" step="1" value="1"></div>
-<div class="field"><label for="hot-extra">Hot Aisle additional cost ($/hour)</label><input id="hot-extra" type="number" min="0" step="0.01" value="0"></div>
-<div class="field"><label for="other-extra">Competitor additional cost ($/hour)</label><input id="other-extra" type="number" min="0" step="0.01" value="0"></div>
-</div><p id="allocation" class="equation"></p><p id="terms" class="note"></p><p id="error" role="alert"></p>
-<table><thead><tr><th scope="col">Nebius allocation</th><th scope="col">GPU-hour<br>list rate</th><th scope="col">Allocation<br>$/hour*</th><th scope="col">Hot Aisle rate<br>needed to tie**</th></tr></thead><tbody id="rows"></tbody></table>
-<p class="note">* Every billable GPU plus entered hourly extras. Default extras are zero: omitted storage, tax, management, setup and other costs remain outside the model. Confirm the actual available allocation size and applicable contract before using a price.</p><p class="note">** Percentage of the comparator allocation's accepted-work rate. A higher measured ratio makes Hot Aisle cheaper under these inputs. Identical work units, correctness criteria and latency requirements are required. This does not establish GPU speed, model fit, stock availability or service equivalence.</p>
+<body>
+<main>
+<header><strong>Hot Aisle workload economics</strong><span>public prices reviewed 22 Sep 2026</span></header>
+
+<section class="hero">
+<h1>What throughput does MI300X need to break even?</h1>
+<p>Pick an allocation and a comparator. The first number is price-only. Add your measured accepted-work rates below to turn it into a workload result.</p>
 </section>
-<section class="panel" aria-labelledby="scenario-heading"><div class="row"><h2 id="scenario-heading">Apply your workload</h2><span class="tag">User-entered scenario</span></div><p class="meta">A fast incorrect answer does not count as an accepted unit. Average the accepted work over the paid interval, including paid setup, restarts and idle time. Pure steady-state throughput belongs in a separately labelled efficiency result.</p>
-<div id="scenario-controls"><div class="controls"><div class="field"><label for="competitor">Comparator GPU</label><select id="competitor"></select></div><div class="field"><label for="hot-q">Hot Aisle accepted units / billed second</label><input id="hot-q" type="number" min="0" step="any" placeholder="Enter observed or assumed rate"></div><div class="field"><label for="other-q">Comparator accepted units / billed second</label><input id="other-q" type="number" min="0" step="any" placeholder="Enter observed or assumed rate"></div></div>
-<div class="half"><div class="field"><label for="workload">Workload / model / precision / request profile</label><input id="workload" type="text" placeholder="Name the actual comparison"></div><div class="field"><label for="acceptance">Acceptance and latency criteria</label><input id="acceptance" type="text" placeholder="Validator, deadline and identical output unit"></div></div>
-<label class="basis"><input id="same-basis" type="checkbox"><span>I assert that both inputs use the same work units, acceptance requirements and billing-window definition. This assertion does not verify the data.</span></label></div>
-<div class="result" id="result" aria-live="polite"><h3>Awaiting comparable inputs</h3><p>Only the price break-even is established. No workload winner is asserted.</p></div>
-<div class="row" style="margin-top:20px"><button id="export" type="button">Export assumptions and calculation</button><span class="small meta">Local JSON export. No upload or external calls.</span></div></section>
-<section><h2>What makes the next result publishable?</h2><div class="half"><div><h3>A business number</h3><p>Cost per 1,000 accepted requests or cost per completed test-passing task, paired with tail latency, failure rate and the allocation actually billed.</p></div><div><h3>A reproduction packet</h3><p>Pinned model and software identities, request profile, full trials, independent acceptance checks, billing basis and a recipe that a second operator can rerun.</p></div></div><details><summary>Equations and evidence boundary</summary><p class="equation">C = billable GPU count × $/GPU-hour + hourly extras<br>Break-even Q_hot / Q_other = C_hot / C_other<br>$/1,000 accepted units = 1,000 × C / (3,600 × Q)</p><p class="note">This file validates arithmetic only. Source prices are a dated public snapshot; customer quotes, verified outcome measurements, latency gates and actual billing records would establish a workload comparison. Raw request data should stay private unless sharing is authorized. The companion plan describes the unexecuted benchmark, not a completed campaign.</p></details></section>
-<section class="panel" aria-labelledby="kit-heading"><h2 id="kit-heading">Take the free kit</h2><p><a href="https://github.com/BigBirdReturns/axm-tools/tree/main/hot-aisle">Inspect the source</a> · <a href="FIRST_CAMPAIGN.md">Read the proposed first campaign</a></p><p class="note">MIT-licensed calculator and arithmetic tests, dated pricing data, and the unexecuted workload-comparison plan. All source files are in the linked repository directory. No signup or telemetry.</p></section>
-<section class="sources"><h2>Sources and scope</h2><p><a href="https://hotaisle.xyz/pricing" target="_blank" rel="noopener">Hot Aisle pricing</a> · <a href="https://nebius.com/prices" target="_blank" rel="noopener">Nebius AI Cloud pricing</a> · <a href="https://docs.tokenfactory.nebius.com/ai-models-inference/dedicated-endpoints/billing-policy" target="_blank" rel="noopener">Token Factory billing boundary</a></p><p>Independent prototype prepared by Second Run, with no Hot Aisle or Nebius endorsement asserted. Public rates reviewed 22 September 2026. No paid resources were allocated and no AMD-versus-NVIDIA performance test was run for this prototype. All provider names remain their owners' marks. MIT-licensed original code.</p></section>
-<footer>Free, inspectable, standalone. The open calculation is the starting point; qualified workload evidence is the next deliverable.</footer>
+
+<section class="calculator" aria-labelledby="calc-title">
+<div class="controls">
+<div class="field"><label for="hot-config">Hot Aisle allocation</label><select id="hot-config"><option value="vm1">1 × MI300X VM</option><option value="vm2">2 × MI300X VM</option><option value="vm4">4 × MI300X VM</option><option value="bare8">8 × MI300X bare metal</option></select></div>
+<div class="field"><label for="competitor">Comparator</label><select id="competitor"></select></div>
+<div class="field"><label for="period">Nebius price schedule</label><select id="period"><option value="october_gpu_hour">1 Oct 2026</option><option value="current_gpu_hour">22 Sep 2026</option></select></div>
+</div>
+
+<details class="advanced"><summary>Allocation details</summary>
+<div class="controls">
+<div class="field"><label for="other-gpus">Comparator GPU count</label><input id="other-gpus" type="number" min="1" step="1" value="1"></div>
+<div class="field"><label for="hot-extra">Hot Aisle extras ($/hour)</label><input id="hot-extra" type="number" min="0" step="0.01" value="0"></div>
+<div class="field"><label for="other-extra">Comparator extras ($/hour)</label><input id="other-extra" type="number" min="0" step="0.01" value="0"></div>
+</div>
+</details>
+
+<div class="answer" aria-live="polite">
+<div class="kicker">Break-even accepted throughput</div>
+<div class="big" id="break-even">—</div>
+<div class="sentence" id="break-even-copy">Calculating…</div>
+<div class="equation" id="allocation"></div>
+<div id="error" role="alert"></div>
+</div>
+
+<div class="measure">
+<h2>Use your measured workload</h2>
+<p>Enter accepted units per billed second. Failed work, setup, restarts and paid idle time stay in the denominator.</p>
+<div class="two">
+<div class="field"><label for="hot-q">Hot Aisle accepted units / billed second</label><input id="hot-q" type="number" min="0" step="any" placeholder="e.g. 42.1"></div>
+<div class="field"><label for="other-q">Comparator accepted units / billed second</label><input id="other-q" type="number" min="0" step="any" placeholder="e.g. 58.4"></div>
+</div>
+<div class="two" style="margin-top:14px">
+<div class="field"><label for="workload">Workload</label><input id="workload" type="text" placeholder="model / precision / request profile"></div>
+<div class="field"><label for="acceptance">Acceptance gate</label><input id="acceptance" type="text" placeholder="validator + latency requirement"></div>
+</div>
+<label class="basis"><input id="same-basis" type="checkbox"><span>Both measurements use the same output unit, acceptance gate and billed-time definition.</span></label>
+<div class="result" id="result"><h3>Waiting for measured rates</h3><p>The price break-even above is valid without benchmark data. A workload comparison needs comparable measurements.</p></div>
+<div class="actions"><button id="export" type="button">Export calculation</button><span>JSON, local only.</span></div>
+</div>
+</section>
+
+<section class="method">
+<h2>Method</h2>
+<p>Three equations. Everything else is source data or an assumption you provide.</p>
+<details><summary>Equations</summary><p><code>C = billable GPU count × $/GPU-hour + hourly extras</code><br><code>Break-even Q_hot / Q_other = C_hot / C_other</code><br><code>$/1,000 accepted units = 1,000 × C / (3,600 × Q)</code></p></details>
+<details><summary>Price scope</summary><p>Hot Aisle uses the public MI300X VM rate of $2.99/GPU-hour for new allocations and $3.39/GPU-hour for 8-GPU bare metal. Nebius uses public AI Cloud on-demand GPU prices. Customer quotes, spot pricing, storage, tax, managed-service fees and unentered extras are outside the model.</p></details>
+<details><summary>Evidence boundary</summary><p>This page does not claim a GPU performance result. User-entered throughput remains unverified until backed by a reproducible run with pinned software, identical acceptance criteria and the full billed interval.</p></details>
+<div class="links"><a href="https://hotaisle.xyz/pricing" target="_blank" rel="noopener">Hot Aisle pricing</a><a href="https://nebius.com/prices" target="_blank" rel="noopener">Nebius pricing</a><a href="FIRST_CAMPAIGN.md">benchmark plan</a><a href="https://github.com/BigBirdReturns/axm-tools/tree/main/hot-aisle">source</a></div>
+</section>
+
+<footer>Independent calculator by Second Run. MIT-licensed. No Hot Aisle or Nebius endorsement asserted.</footer>
+
 <script id="price-data" type="application/json">{
-  "schema": "second-run/price-snapshot@1",
-  "reviewed_on": "2026-09-22",
-  "currency": "USD",
-  "status": "PUBLIC_LIST_PRICE_SNAPSHOT_NOT_A_BENCHMARK",
-  "hot_aisle": {
-    "vm_gpu_hour": 2.99,
-    "vm_gpu_counts": [1, 2, 4],
-    "vm_terms": "Minute billing; newly allocated compute. Existing eligible running allocations may retain $1.99; that rate is excluded here.",
-    "bare_metal_gpu_hour": 3.39,
-    "bare_metal_gpu_count": 8,
-    "bare_metal_terms": "Whole-node allocation; one-month minimum. $27.12 per full node-hour before any additional charges.",
-    "source": "https://hotaisle.xyz/pricing"
-  },
-  "nebius_ai_cloud": {
-    "effective_new_prices": "2026-10-01",
-    "products": [
-      {"gpu": "HGX H100", "current_gpu_hour": 3.85, "october_gpu_hour": 4.50},
-      {"gpu": "HGX H200", "current_gpu_hour": 4.50, "october_gpu_hour": 5.40},
-      {"gpu": "HGX B200", "current_gpu_hour": 7.15, "october_gpu_hour": 8.50},
-      {"gpu": "HGX B300", "current_gpu_hour": 7.85, "october_gpu_hour": 9.50},
-      {"gpu": "RTX PRO 6000", "current_gpu_hour": 1.80, "october_gpu_hour": 1.80}
-    ],
-    "scope": "AI Cloud on-demand list prices, not Token Factory Dedicated Endpoint prices. Per-GPU normalization does not establish available allocation sizes, stock or an equivalent managed service. Storage, taxes and contract/spot discounts are not inferred.",
-    "source": "https://nebius.com/prices"
-  },
-  "assumptions": [
-    "No performance result is prefilled.",
-    "Compare identical output units and the same acceptance and latency criteria.",
-    "Use every billable GPU and the complete paid interval, including paid setup and idle time.",
-    "The comparison excludes unentered costs and never proves readiness, quality, capacity availability or service equivalence.",
-    "User-entered throughput remains an unverified scenario input. A checkbox is not external verification."
-  ]
-}
-</script>
+  "schema":"second-run/price-snapshot@1",
+  "reviewed_on":"2026-09-22",
+  "currency":"USD",
+  "hot_aisle":{"vm_gpu_hour":2.99,"vm_gpu_counts":[1,2,4],"bare_metal_gpu_hour":3.39,"bare_metal_gpu_count":8,"source":"https://hotaisle.xyz/pricing"},
+  "nebius_ai_cloud":{"effective_new_prices":"2026-10-01","products":[
+    {"gpu":"HGX H100","current_gpu_hour":3.85,"october_gpu_hour":4.50},
+    {"gpu":"HGX H200","current_gpu_hour":4.50,"october_gpu_hour":5.40},
+    {"gpu":"HGX B200","current_gpu_hour":7.15,"october_gpu_hour":8.50},
+    {"gpu":"HGX B300","current_gpu_hour":7.85,"october_gpu_hour":9.50},
+    {"gpu":"RTX PRO 6000","current_gpu_hour":1.80,"october_gpu_hour":1.80}
+  ],"source":"https://nebius.com/prices"}
+}</script>
 <script>
 'use strict';
 const data=JSON.parse(document.getElementById('price-data').textContent);
 const el=id=>document.getElementById(id), money=x=>'$'+x.toFixed(2);
-const configurations=Object.fromEntries(data.hot_aisle.vm_gpu_counts.map(n=>['vm'+n,{gpus:n,rate:data.hot_aisle.vm_gpu_hour,bare:false}]));
-configurations.bare8={gpus:data.hot_aisle.bare_metal_gpu_count,rate:data.hot_aisle.bare_metal_gpu_hour,bare:true};
-for (const [i,p] of data.nebius_ai_cloud.products.entries()){const o=document.createElement('option');o.value=i;o.textContent=p.gpu;el('competitor').append(o)}
+const configs=Object.fromEntries(data.hot_aisle.vm_gpu_counts.map(n=>['vm'+n,{gpus:n,rate:data.hot_aisle.vm_gpu_hour,label:n+' × MI300X'}]));
+configs.bare8={gpus:data.hot_aisle.bare_metal_gpu_count,rate:data.hot_aisle.bare_metal_gpu_hour,label:'8 × MI300X bare metal'};
+for(const [i,p] of data.nebius_ai_cloud.products.entries()){const o=document.createElement('option');o.value=i;o.textContent=p.gpu;el('competitor').append(o)}
 let latest=null;
-function number(id,{integer=false,positive=false}={}){const raw=el(id).value.trim();const n=Number(raw);if(!raw||!Number.isFinite(n)||n<0||(positive&&n===0)||(integer&&!Number.isInteger(n)))throw Error('Check '+el(id).previousElementSibling.textContent+': enter a valid '+(positive?'positive':'nonnegative')+(integer?' integer':' number')+'.');return n}
-function update(){
-  latest=null;el('error').textContent='';el('export').disabled=false;
+function num(id,{integer=false,positive=false}={}){const raw=el(id).value.trim(),n=Number(raw);if(!raw||!Number.isFinite(n)||n<0||(positive&&n===0)||(integer&&!Number.isInteger(n)))throw Error('Check '+el(id).previousElementSibling.textContent+'.');return n}
+function render(){
+  latest=null;el('error').textContent='';
   try{
-    const c=configurations[el('hot-config').value],period=el('period').value,g=number('other-gpus',{integer:true,positive:true}),ha=number('hot-extra'),nb=number('other-extra');
-    const hot=c.gpus*c.rate+ha;
-    el('date-tag').textContent=period==='october_gpu_hour'?'Upcoming · 01 Oct 2026':'Snapshot · 22 Sep 2026';
-    el('allocation').textContent='Hot Aisle: '+c.gpus+' × '+money(c.rate)+' + '+money(ha)+' extras = '+money(hot)+' / billable allocation-hour';
-    el('terms').textContent=c.bare?'Whole 8-GPU bare-metal node; one-month minimum. Include the entire commitment interval when computing accepted units per billed second.':'MI300X VM new-allocation rate; minute billing. Eligible grandfathered $1.99 allocations are excluded. The default 1-GPU comparator is a price normalization, not an availability quote.';
-    const calculations=data.nebius_ai_cloud.products.map(p=>({gpu:p.gpu,gpu_hour:p[period],billable_gpus:g,allocation_hour:p[period]*g+nb,required_hot_throughput_ratio:hot/(p[period]*g+nb)}));
-    el('rows').replaceChildren();for (const row of calculations){const tr=document.createElement('tr');for(const [j,text] of [g+' × '+row.gpu,money(row.gpu_hour),money(row.allocation_hour),(row.required_hot_throughput_ratio*100).toFixed(1)+'%'].entries()){const td=document.createElement('td');if(j===3){const b=document.createElement('strong');b.textContent=text;td.append(b)}else td.textContent=text;tr.append(td)}el('rows').append(tr)}
-    latest={schema:'second-run/workload-price-model@1',status:'PRICE_MODEL_ONLY',source_snapshot:data,inputs:{hot_configuration:el('hot-config').value,hot_billable_gpus:c.gpus,hot_gpu_hour:c.rate,hot_extra_per_hour:ha,other_billable_gpus:g,other_extra_per_hour:nb,nebius_price_column:period},break_even:calculations,scenario:null};
-    const hqRaw=el('hot-q').value.trim(),nqRaw=el('other-q').value.trim(),same=el('same-basis').checked,w=el('workload').value.trim(),a=el('acceptance').value.trim();
-    const heading=document.createElement('h3'),body=document.createElement('p');
-    if(!hqRaw||!nqRaw||!same||!w||!a){heading.textContent='Awaiting comparable inputs';body.textContent='Supply both rates, workload, acceptance criteria and the same-basis assertion. The price thresholds remain valid; no workload winner is asserted.'}
-    else {const hq=number('hot-q'),nq=number('other-q');if(hq===0||nq===0){heading.textContent='Zero accepted-work rate';body.textContent='A finite cost per accepted unit cannot be calculated for a zero rate. Record the failed or idle interval rather than omitting it.';latest.scenario={status:'ZERO_ACCEPTED_RATE',hot_rate:hq,other_rate:nq}}
-    else {const r=calculations[Number(el('competitor').value)],hc=1000*hot/(3600*hq),nc=1000*r.allocation_hour/(3600*nq),saving=1-hc/nc;
-      heading.textContent=money(hc)+' vs '+money(nc)+' / 1,000 accepted units';body.textContent='User-input cost model: Hot Aisle is '+(Math.abs(saving)*100).toFixed(1)+'% '+(saving>=0?'lower':'higher')+' than '+r.gpu+' under the supplied assumptions. These values have not been independently verified.';
-      latest.status='USER_INPUT_SCENARIO_UNVERIFIED';latest.scenario={status:'USER_INPUT_SCENARIO_UNVERIFIED',workload:w,acceptance:a,same_basis_asserted:true,other_gpu:r.gpu,hot_accepted_units_per_billed_second:hq,other_accepted_units_per_billed_second:nq,hot_cost_per_1000:hc,other_cost_per_1000:nc,hot_relative_cost_reduction:saving};}}
-    el('result').replaceChildren(heading,body);
-  }catch(err){el('error').textContent=err.message;el('rows').replaceChildren();el('result').textContent='Calculation held: correct the input error.';el('export').disabled=true;latest=null}
+    const c=configs[el('hot-config').value],p=data.nebius_ai_cloud.products[Number(el('competitor').value)],period=el('period').value,g=num('other-gpus',{integer:true,positive:true}),he=num('hot-extra'),oe=num('other-extra');
+    const hot=c.gpus*c.rate+he, other=g*p[period]+oe, ratio=hot/other;
+    el('break-even').textContent=(ratio*100).toFixed(1)+'%';
+    el('break-even-copy').textContent=c.label+' needs '+(ratio*100).toFixed(1)+'% of '+g+' × '+p.gpu+' accepted throughput to tie on hourly cost under these inputs.';
+    el('allocation').textContent=money(hot)+'/hr ÷ '+money(other)+'/hr = '+ratio.toFixed(3);
+    latest={schema:'second-run/workload-price-model@2',status:'PRICE_MODEL_ONLY',source_snapshot:data,inputs:{hot_configuration:el('hot-config').value,hot_billable_gpus:c.gpus,hot_gpu_hour:c.rate,hot_extra_per_hour:he,other_gpu:p.gpu,other_billable_gpus:g,other_gpu_hour:p[period],other_extra_per_hour:oe,nebius_price_column:period},break_even_ratio:ratio,scenario:null};
+
+    const h=el('hot-q').value.trim(),o=el('other-q').value.trim(),same=el('same-basis').checked,w=el('workload').value.trim(),a=el('acceptance').value.trim();
+    const box=el('result');
+    if(!h||!o||!same||!w||!a){box.innerHTML='<h3>Waiting for measured rates</h3><p>The price break-even above is valid without benchmark data. A workload comparison needs comparable measurements.</p>';el('export').disabled=false;return}
+    const hq=num('hot-q'),oq=num('other-q');
+    if(hq===0||oq===0){box.innerHTML='<h3>Zero accepted-work rate</h3><p>A finite cost per accepted unit cannot be calculated for a zero rate. Keep the failed or idle interval in the record.</p>';latest.scenario={status:'ZERO_ACCEPTED_RATE',hot_rate:hq,other_rate:oq};el('export').disabled=false;return}
+    const hc=1000*hot/(3600*hq),oc=1000*other/(3600*oq),delta=1-hc/oc;
+    box.innerHTML='<h3>'+money(hc)+' vs '+money(oc)+' / 1,000 accepted units</h3><p>Under the entered measurements, Hot Aisle is '+(Math.abs(delta)*100).toFixed(1)+'% '+(delta>=0?'lower':'higher')+' cost than '+p.gpu+'. Inputs are user-supplied, not independently verified.</p>';
+    latest.status='USER_INPUT_SCENARIO_UNVERIFIED';latest.scenario={status:'USER_INPUT_SCENARIO_UNVERIFIED',workload:w,acceptance:a,same_basis_asserted:true,hot_accepted_units_per_billed_second:hq,other_accepted_units_per_billed_second:oq,hot_cost_per_1000:hc,other_cost_per_1000:oc,hot_relative_cost_reduction:delta};
+    el('export').disabled=false;
+  }catch(err){el('error').textContent=err.message;el('break-even').textContent='—';el('break-even-copy').textContent='Correct the input above.';el('export').disabled=true}
 }
-for(const e of document.querySelectorAll('input,select'))e.addEventListener('input',update);
-el('export').addEventListener('click',()=>{if(!latest)return;const payload={...latest,exported_at:new Date().toISOString()};const url=URL.createObjectURL(new Blob([JSON.stringify(payload,null,2)+'\n'],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download='workload-price-model.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),5000)});
-update();
-</script></main></body></html>
+document.querySelectorAll('input,select').forEach(x=>x.addEventListener('input',render));
+el('export').addEventListener('click',()=>{if(!latest)return;const payload={...latest,exported_at:new Date().toISOString()};const url=URL.createObjectURL(new Blob([JSON.stringify(payload,null,2)+'\n'],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download='hot-aisle-workload-economics.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),5000)});
+render();
+</script>
+</main>
+</body>
+</html>
