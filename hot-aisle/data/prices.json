@@ -1,0 +1,34 @@
+{
+  "schema": "second-run/price-snapshot@1",
+  "reviewed_on": "2026-09-22",
+  "currency": "USD",
+  "status": "PUBLIC_LIST_PRICE_SNAPSHOT_NOT_A_BENCHMARK",
+  "hot_aisle": {
+    "vm_gpu_hour": 2.99,
+    "vm_gpu_counts": [1, 2, 4],
+    "vm_terms": "Minute billing; newly allocated compute. Existing eligible running allocations may retain $1.99; that rate is excluded here.",
+    "bare_metal_gpu_hour": 3.39,
+    "bare_metal_gpu_count": 8,
+    "bare_metal_terms": "Whole-node allocation; one-month minimum. $27.12 per full node-hour before any additional charges.",
+    "source": "https://hotaisle.xyz/pricing"
+  },
+  "nebius_ai_cloud": {
+    "effective_new_prices": "2026-10-01",
+    "products": [
+      {"gpu": "HGX H100", "current_gpu_hour": 3.85, "october_gpu_hour": 4.50},
+      {"gpu": "HGX H200", "current_gpu_hour": 4.50, "october_gpu_hour": 5.40},
+      {"gpu": "HGX B200", "current_gpu_hour": 7.15, "october_gpu_hour": 8.50},
+      {"gpu": "HGX B300", "current_gpu_hour": 7.85, "october_gpu_hour": 9.50},
+      {"gpu": "RTX PRO 6000", "current_gpu_hour": 1.80, "october_gpu_hour": 1.80}
+    ],
+    "scope": "AI Cloud on-demand list prices, not Token Factory Dedicated Endpoint prices. Per-GPU normalization does not establish available allocation sizes, stock or an equivalent managed service. Storage, taxes and contract/spot discounts are not inferred.",
+    "source": "https://nebius.com/prices"
+  },
+  "assumptions": [
+    "No performance result is prefilled.",
+    "Compare identical output units and the same acceptance and latency criteria.",
+    "Use every billable GPU and the complete paid interval, including paid setup and idle time.",
+    "The comparison excludes unentered costs and never proves readiness, quality, capacity availability or service equivalence.",
+    "User-entered throughput remains an unverified scenario input. A checkbox is not external verification."
+  ]
+}
