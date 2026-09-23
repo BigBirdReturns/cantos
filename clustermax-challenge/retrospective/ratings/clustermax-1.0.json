@@ -1,0 +1,49 @@
+{
+  "schema": "secondrun.clustermax-medals.v1",
+  "release": "1.0",
+  "published_date": "2025-03-26",
+  "published_date_source": "https://newsletter.semianalysis.com/p/the-gpu-cloud-clustermax-rating-system-how-to-rent-gpus",
+  "sources": [
+    {
+      "url": "https://www.clustermax.ai/img/neocloud-ranking-v1.webp",
+      "sha256": "b9db38dd033a0d68f4cb62574f1b42801688a4ce5c36b73ade516e95abd22085",
+      "retrieved_utc": "2026-09-23T08:46:13Z",
+      "kind": "medal_table_image"
+    },
+    {
+      "url": "https://newsletter.semianalysis.com/p/the-gpu-cloud-clustermax-rating-system-how-to-rent-gpus",
+      "sha256": "e93ecb268643fff2b312dd45f07f598d61f00575a933ae06a44ef35177b47db2",
+      "retrieved_utc": "2026-09-23T08:47:36Z",
+      "kind": "publication_date_source"
+    }
+  ],
+  "providers": [
+    {"name": "CoreWeave", "tier": "Platinum", "confidence": "high", "note": "Sole platinum provider"},
+    {"name": "Crusoe", "tier": "Gold", "confidence": "high", "note": ""},
+    {"name": "Together.ai", "tier": "Gold", "confidence": "high", "note": "Logo reads \"together.ai\""},
+    {"name": "Nebius", "tier": "Gold", "confidence": "high", "note": "Logo reads \"NEBIUS\""},
+    {"name": "Lepton AI", "tier": "Gold", "confidence": "high", "note": ""},
+    {"name": "Oracle", "tier": "Gold", "confidence": "high", "note": "Oracle Cloud Infrastructure logo/wordmark"},
+    {"name": "Azure", "tier": "Gold", "confidence": "high", "note": "Microsoft Azure logo/wordmark"},
+    {"name": "AWS", "tier": "Silver", "confidence": "high", "note": "Amazon Web Services logo"},
+    {"name": "Lambda", "tier": "Silver", "confidence": "high", "note": ""},
+    {"name": "Scaleway", "tier": "Silver", "confidence": "high", "note": ""},
+    {"name": "SMC", "tier": "Silver", "confidence": "high", "note": "Logo reads \"smc\"; full company name not spelled out in image"},
+    {"name": "Google Cloud", "tier": "Bronze", "confidence": "high", "note": ""},
+    {"name": "TensorWave", "tier": "Bronze", "confidence": "high", "note": "Logo reads \"TENSORWAVE\""},
+    {"name": "DataCrunch", "tier": "Bronze", "confidence": "high", "note": "Logo reads \"Data Crunch\""},
+    {"name": "RunPod", "tier": "Bronze", "confidence": "high", "note": ""},
+    {"name": "DENVR Dataworks", "tier": "Bronze", "confidence": "high", "note": "Logo reads \"DENVR dataworks\""},
+    {"name": "Hot Aisle", "tier": "Underperforming", "confidence": "high", "note": ""},
+    {"name": "Shadeform", "tier": "Underperforming", "confidence": "high", "note": ""},
+    {"name": "Vast.ai", "tier": "Underperforming", "confidence": "high", "note": "Logo is a black \"V\" square with \"vast.ai\" wordmark beneath"},
+    {"name": "Massed Compute", "tier": "Underperforming", "confidence": "high", "note": ""},
+    {"name": "Prime Intellect", "tier": "Underperforming", "confidence": "high", "note": ""},
+    {"name": "Iris Energy", "tier": "Underperforming", "confidence": "high", "note": ""},
+    {"name": "GMI Cloud", "tier": "Underperforming", "confidence": "high", "note": ""},
+    {"name": "Salad", "tier": "Underperforming", "confidence": "high", "note": ""},
+    {"name": "Akash", "tier": "Underperforming", "confidence": "high", "note": ""},
+    {"name": "GPU.NET", "tier": "Underperforming", "confidence": "high", "note": ""}
+  ],
+  "unresolved": []
+}

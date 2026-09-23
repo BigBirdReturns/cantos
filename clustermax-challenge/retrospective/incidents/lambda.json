@@ -1,0 +1,279 @@
+{
+  "schema": "secondrun.status-incidents.v1",
+  "provider": "lambda",
+  "status_page_url": "https://status.lambda.ai",
+  "retrieved_utc": "2026-09-23T10:00:18Z",
+  "raw_files": [
+    {
+      "path": "retrospective/incidents/raw/lambda/api-v2-incidents.json",
+      "sha256": "d07b311315453c2748eb4a0c6babadf4d863945c750a21637d3da398145daa86",
+      "url": "https://status.lambda.ai/api/v2/incidents.json"
+    }
+  ],
+  "coverage_start": null,
+  "coverage_end": "2026-09-23",
+  "severity_map": {
+    "minor": "minor",
+    "major": "major",
+    "none": "none",
+    "critical": "critical"
+  },
+  "incidents": [
+    {
+      "id": "01KHBVXGS5FAPGZ4ZB76Q5V3A2",
+      "title": "Launch failures in us-east-1",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-02-13T16:04:05Z",
+      "resolved_utc": "2026-02-14T03:07:11Z",
+      "is_maintenance": false,
+      "url": "https://status.lambda.ai/incidents/01KHBVXGS5FAPGZ4ZB76Q5V3A2"
+    },
+    {
+      "id": "01KHF5F5EJ8K9KC7XJS4ESS2BT",
+      "title": "AUS01 - Power event and storage loss",
+      "impact_label": "major",
+      "severity": "major",
+      "started_utc": "2026-02-14T22:48:44Z",
+      "resolved_utc": "2026-02-15T02:20:28Z",
+      "is_maintenance": false,
+      "url": "https://status.lambda.ai/incidents/01KHF5F5EJ8K9KC7XJS4ESS2BT"
+    },
+    {
+      "id": "01KHXCAG48FJZ3X9R1RZKVEGWS",
+      "title": "Partial Outage in AUS01 (us-south-3) region",
+      "impact_label": "major",
+      "severity": "major",
+      "started_utc": "2026-02-20T11:17:53Z",
+      "resolved_utc": "2026-02-21T04:06:55Z",
+      "is_maintenance": false,
+      "url": "https://status.lambda.ai/incidents/01KHXCAG48FJZ3X9R1RZKVEGWS"
+    },
+    {
+      "id": "01KJ2XW8F37QA1T1NQ47MBKBD1",
+      "title": "Launch failures in Utah (us-west-3) region",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-02-22T15:00:53Z",
+      "resolved_utc": "2026-02-22T15:21:14Z",
+      "is_maintenance": false,
+      "url": "https://status.lambda.ai/incidents/01KJ2XW8F37QA1T1NQ47MBKBD1"
+    },
+    {
+      "id": "01KJC4SSKCJD234PSQKP18VHGE",
+      "title": "Launches Disabled in Multiple Regions",
+      "impact_label": "none",
+      "severity": "none",
+      "started_utc": "2026-02-26T04:55:02Z",
+      "resolved_utc": "2026-02-26T05:16:27Z",
+      "is_maintenance": false,
+      "url": "https://status.lambda.ai/incidents/01KJC4SSKCJD234PSQKP18VHGE"
+    },
+    {
+      "id": "01KJRBFZX0EX0BZZ6M8ZKWPQ8R",
+      "title": "Launches Failing in Multiple Regions",
+      "impact_label": "critical",
+      "severity": "critical",
+      "started_utc": "2026-03-02T22:42:54Z",
+      "resolved_utc": "2026-03-05T18:10:50Z",
+      "is_maintenance": false,
+      "url": "https://status.lambda.ai/incidents/01KJRBFZX0EX0BZZ6M8ZKWPQ8R"
+    },
+    {
+      "id": "01KKVP0C146XRA46E1X63KAXSH",
+      "title": "US-East 2 and US-East 3 placed under a tornado watch / severe weather warning all day - 3/16/25",
+      "impact_label": "none",
+      "severity": "none",
+      "started_utc": "2026-03-16T16:00:02Z",
+      "resolved_utc": "2026-03-16T23:12:55Z",
+      "is_maintenance": false,
+      "url": "https://status.lambda.ai/incidents/01KKVP0C146XRA46E1X63KAXSH"
+    },
+    {
+      "id": "01KM3VND6ZJ8S9KJ0Z68PFHABH",
+      "title": "Power Maintenance Causing Loss of Power Redundancy in us-west-3",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-03-19T20:12:49Z",
+      "resolved_utc": "2026-03-20T15:23:53Z",
+      "is_maintenance": false,
+      "url": "https://status.lambda.ai/incidents/01KM3VND6ZJ8S9KJ0Z68PFHABH"
+    },
+    {
+      "id": "01KMH25AA3X65KC5BZ4G8TXP5P",
+      "title": "Global Firewall Rulesets Page Not Loading",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-03-24T23:16:30Z",
+      "resolved_utc": "2026-03-25T00:15:44Z",
+      "is_maintenance": false,
+      "url": "https://status.lambda.ai/incidents/01KMH25AA3X65KC5BZ4G8TXP5P"
+    },
+    {
+      "id": "01KN9JF2JASD6Y7YXS754KC45B",
+      "title": "Non-admin users are unable to launch instances.",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-04-03T11:43:13Z",
+      "resolved_utc": "2026-04-03T12:32:36Z",
+      "is_maintenance": false,
+      "url": "https://status.lambda.ai/incidents/01KN9JF2JASD6Y7YXS754KC45B"
+    },
+    {
+      "id": "01KS1ESXBF02DFWBQVPJM5WQMC",
+      "title": "Launches and Terminations Failing in Multiple Regions",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-05-20T01:08:06Z",
+      "resolved_utc": "2026-05-20T04:30:59Z",
+      "is_maintenance": false,
+      "url": "https://status.lambda.ai/incidents/01KS1ESXBF02DFWBQVPJM5WQMC"
+    },
+    {
+      "id": "01KT8D90X9XNJ9GWPZ674TVGZS",
+      "title": "US-SOUTH-3 Instance Launch / Termination Issues",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-06-04T04:11:46Z",
+      "resolved_utc": "2026-06-04T05:55:49Z",
+      "is_maintenance": false,
+      "url": "https://status.lambda.ai/incidents/01KT8D90X9XNJ9GWPZ674TVGZS"
+    },
+    {
+      "id": "01KTA1WZNQ5B7EZ0HDCZ7SXE59",
+      "title": "Slow Instance Launches in Certain Regions",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-06-04T19:31:27Z",
+      "resolved_utc": "2026-06-04T19:45:21Z",
+      "is_maintenance": false,
+      "url": "https://status.lambda.ai/incidents/01KTA1WZNQ5B7EZ0HDCZ7SXE59"
+    },
+    {
+      "id": "01KVAB6GYM2E4RD1GAJC6SVS1F",
+      "title": "Failed Launches in US-EAST-3",
+      "impact_label": "none",
+      "severity": "none",
+      "started_utc": "2026-06-17T08:29:38Z",
+      "resolved_utc": "2026-06-17T09:17:06Z",
+      "is_maintenance": false,
+      "url": "https://status.lambda.ai/incidents/01KVAB6GYM2E4RD1GAJC6SVS1F"
+    },
+    {
+      "id": "01KVHWRVW22V0P5F7YA0BHCH2K",
+      "title": "US-SOUTH-2 Booting Failures of Newly Launched Instance",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-06-20T06:51:26Z",
+      "resolved_utc": "2026-06-24T13:04:38Z",
+      "is_maintenance": false,
+      "url": "https://status.lambda.ai/incidents/01KVHWRVW22V0P5F7YA0BHCH2K"
+    },
+    {
+      "id": "01KWGJ00W6TW7HM4YJD2TJD13Y",
+      "title": "US-SOUTH-2 - Instance Launch Issues",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-07-02T04:39:34Z",
+      "resolved_utc": "2026-07-02T05:38:35Z",
+      "is_maintenance": false,
+      "url": "https://status.lambda.ai/incidents/01KWGJ00W6TW7HM4YJD2TJD13Y"
+    },
+    {
+      "id": "01KYFW3DHZ7JJEQ4PTD21TBE96",
+      "title": "DAL01 - COLO Internet Connectivity Disruption (Upstream Provider)",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-07-26T18:48:20Z",
+      "resolved_utc": "2026-07-27T01:41:08Z",
+      "is_maintenance": false,
+      "url": "https://status.lambda.ai/incidents/01KYFW3DHZ7JJEQ4PTD21TBE96"
+    },
+    {
+      "id": "01KYHC2Q7VY59H7N9C6A80SWNQ",
+      "title": "Multiple Regions | Launch and Termination Issues",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-07-27T08:46:49Z",
+      "resolved_utc": "2026-07-27T11:45:41Z",
+      "is_maintenance": false,
+      "url": "https://status.lambda.ai/incidents/01KYHC2Q7VY59H7N9C6A80SWNQ"
+    },
+    {
+      "id": "01KYQQ38T4M12RDWN15ZMTTVV2",
+      "title": "Network issues in us-east-2",
+      "impact_label": "major",
+      "severity": "major",
+      "started_utc": "2026-07-29T19:54:48Z",
+      "resolved_utc": "2026-07-30T18:19:50Z",
+      "is_maintenance": false,
+      "url": "https://status.lambda.ai/incidents/01KYQQ38T4M12RDWN15ZMTTVV2"
+    },
+    {
+      "id": "01KYT90NCXPC1WMR06S7DYK9XG",
+      "title": "Investigating network connectivity issues in us-east-2",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-07-30T19:46:25Z",
+      "resolved_utc": "2026-07-30T22:49:13Z",
+      "is_maintenance": false,
+      "url": "https://status.lambda.ai/incidents/01KYT90NCXPC1WMR06S7DYK9XG"
+    },
+    {
+      "id": "01KZ1PGG9FTZH5T7586CVKH3KP",
+      "title": "Network Issues in us-midwest-2",
+      "impact_label": "none",
+      "severity": "none",
+      "started_utc": "2026-08-02T16:56:57Z",
+      "resolved_utc": "2026-08-25T03:53:59Z",
+      "is_maintenance": false,
+      "url": "https://status.lambda.ai/incidents/01KZ1PGG9FTZH5T7586CVKH3KP"
+    },
+    {
+      "id": "01KZ4VZ1THJPGWKQWNJ3DNJ1BA",
+      "title": "Degraded Performance in us-midwest-2",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-08-03T22:30:00Z",
+      "resolved_utc": "2026-08-25T04:23:24Z",
+      "is_maintenance": false,
+      "url": "https://status.lambda.ai/incidents/01KZ4VZ1THJPGWKQWNJ3DNJ1BA"
+    },
+    {
+      "id": "01M03AXJY701RDTD9P2KBDWQ0A",
+      "title": "Instances Unreachable in us-south-2 region",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-08-15T18:28:33Z",
+      "resolved_utc": "2026-08-17T20:39:32Z",
+      "is_maintenance": false,
+      "url": "https://status.lambda.ai/incidents/01M03AXJY701RDTD9P2KBDWQ0A"
+    },
+    {
+      "id": "01M0AVFW4JFW6R731YY0BQN6TK",
+      "title": "Network Maintenance in us-east-3",
+      "impact_label": "none",
+      "severity": "none",
+      "started_utc": "2026-08-18T16:32:51Z",
+      "resolved_utc": "2026-08-26T14:05:59Z",
+      "is_maintenance": false,
+      "url": "https://status.lambda.ai/incidents/01M0AVFW4JFW6R731YY0BQN6TK"
+    },
+    {
+      "id": "01M252C62E2SJC8ATZP5P0B6C4",
+      "title": "Issue with Cloud Services API Keys",
+      "impact_label": "major",
+      "severity": "major",
+      "started_utc": "2026-09-10T07:09:07Z",
+      "resolved_utc": "2026-09-10T16:03:19Z",
+      "is_maintenance": false,
+      "url": "https://status.lambda.ai/incidents/01M252C62E2SJC8ATZP5P0B6C4"
+    }
+  ],
+  "notes": [
+    "https://status.lambda.ai/api/v2/incidents.json returned 25 incidents (most such endpoints cap this at a fixed recent window, commonly ~50; it is not a complete history by itself)",
+    "https://status.lambda.ai/api/v2/scheduled-maintenances.json unavailable (HTTP Error 404: Not Found); scheduled maintenance not separately captured",
+    "no classic Atlassian /history page found at https://status.lambda.ai/history?page=1 (HTTP Error 404: Not Found); relying on the recent-incidents API only",
+    "coverage_start left null: pagination did not confirm it reached the true start of this provider's incident history; set it manually only if you can justify it (see SCHEMA.md)"
+  ]
+}

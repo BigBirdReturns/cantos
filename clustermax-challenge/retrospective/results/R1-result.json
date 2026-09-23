@@ -1,0 +1,1073 @@
+{
+  "schema": "secondrun.retrospective-result.v1",
+  "study_id": "R1-medals-vs-status-incidents",
+  "generated_at": "2026-09-23T10:12:32.927782+00:00",
+  "plan_hash_verified": true,
+  "plan_md_sha256": "6ba62fe9e0cd1ce13cc51c8215e33bdf375ae5fb77a7e4f603722085dce1b364",
+  "input_hashes": {
+    "PLAN.md": "6ba62fe9e0cd1ce13cc51c8215e33bdf375ae5fb77a7e4f603722085dce1b364",
+    "plan.json": "2ffe38d650bd7ef5fe1512b3e3f85b89d237a5b07101da9c212556925011b950",
+    "provider_map.json": "473e46513c3a081e436e1bad1b9c00c51dd2684ccf4716b0d67a428c6e1f0e62",
+    "ratings/clustermax-2.0.json": "9b980bb111f0cb457b6fbe9e8158879e08c98489e33665453a96986cb3c6366c",
+    "incidents/nebius.json": "beeec36b1b24b89dc18351c9b8e0795d8ff74f703740ef971a4694bd6be10776",
+    "incidents/lambda.json": "70faa611f7ad0c5a163c8396622cc45ad2278ba9d7b5cec5629cef903d355c77",
+    "incidents/scaleway.json": "59bbbc2c0ec900d773fb69605c9e579cd7f90120c6fa4a24930c9bbb1c91cf2a",
+    "incidents/cirrascale.json": "7d872050683f362071bd8c213ff4885eac96f9ab665c84fe93013ac09988d60c",
+    "incidents/hyperstack.json": "b9e7e73317adf4fb12e26f3f4e08aabf9fb1ed0a3feb57bbc7b296a3c102bfc1",
+    "incidents/latitude-sh.json": "9173f3c27efa737f6cac2853cbb4e7870268b7290b04a5b5b87c9265d3649743",
+    "incidents/lightning-ai.json": "c2852fec9975c66abbd381cad69ed5870ea3ef9b14856644b3ec00d31b7c162b",
+    "incidents/digitalocean.json": "0ee139bd5d4379740ca3daeea738d77a4965122d625e965744e80f326d9aeb01",
+    "incidents/sharon-ai.json": "5a6e0d8ca19a91dbfe6b28c1f204304ac71db041c6727265cd84f524736c22f9",
+    "incidents/akamai.json": "5901e1b3929c38028f8a4bea97bf16d1bdf5fa017bd8c6248efd6799f94648d9",
+    "ratings/clustermax-1.0.json": "e1fc6438d71e90273c728851acf58e7215bd0be2c53375b0001a590339331306"
+  },
+  "deviations": [],
+  "primary": {
+    "release": "2.0",
+    "published_date": "2025-11-06",
+    "window": {
+      "start": "2025-11-06",
+      "end": "2026-05-05",
+      "days": 180
+    },
+    "providers": [
+      {
+        "name": "CoreWeave",
+        "tier": "Platinum",
+        "confidence": "high",
+        "slug": "coreweave",
+        "status": "excluded",
+        "reason": "no incident data file found (expected coreweave.json)"
+      },
+      {
+        "name": "Oracle",
+        "tier": "Gold",
+        "confidence": "high",
+        "slug": "oracle",
+        "status": "excluded",
+        "reason": "no incident data file found (expected oracle.json)"
+      },
+      {
+        "name": "Nebius",
+        "tier": "Gold",
+        "confidence": "high",
+        "slug": "nebius",
+        "status": "eligible",
+        "ordinal": 4,
+        "coverage": [
+          "2025-01-01",
+          "2026-09-23"
+        ],
+        "major_or_critical_incident_count": 28,
+        "all_incident_count": 56,
+        "incident_hours": 174.4379,
+        "incident_hours_capped": false,
+        "included_in_correlation": true
+      },
+      {
+        "name": "Azure",
+        "tier": "Gold",
+        "confidence": "high",
+        "slug": "azure",
+        "status": "excluded",
+        "reason": "no incident data file found (expected azure.json)"
+      },
+      {
+        "name": "Crusoe",
+        "tier": "Gold",
+        "confidence": "high",
+        "slug": "crusoe",
+        "status": "excluded",
+        "reason": "no incident data file found (expected crusoe.json)"
+      },
+      {
+        "name": "FluidStack",
+        "tier": "Gold",
+        "confidence": "high",
+        "slug": "fluidstack",
+        "status": "excluded",
+        "reason": "no incident data file found (expected fluidstack.json)"
+      },
+      {
+        "name": "Together.ai",
+        "tier": "Silver",
+        "confidence": "high",
+        "slug": "together-ai",
+        "status": "excluded",
+        "reason": "no incident data file found (expected together-ai.json)"
+      },
+      {
+        "name": "Lambda",
+        "tier": "Silver",
+        "confidence": "high",
+        "slug": "lambda",
+        "status": "excluded",
+        "reason": "coverage_start/coverage_end not recorded; manual verification pending"
+      },
+      {
+        "name": "Google Cloud",
+        "tier": "Silver",
+        "confidence": "high",
+        "slug": "google-cloud",
+        "status": "excluded",
+        "reason": "no incident data file found (expected google-cloud.json)"
+      },
+      {
+        "name": "AWS",
+        "tier": "Silver",
+        "confidence": "high",
+        "slug": "aws",
+        "status": "excluded",
+        "reason": "no incident data file found (expected aws.json)"
+      },
+      {
+        "name": "Scaleway",
+        "tier": "Silver",
+        "confidence": "high",
+        "slug": "scaleway",
+        "status": "eligible",
+        "ordinal": 3,
+        "coverage": [
+          "2025-01-01",
+          "2026-09-23"
+        ],
+        "major_or_critical_incident_count": 29,
+        "all_incident_count": 258,
+        "incident_hours": 22594.1893,
+        "incident_hours_capped": false,
+        "included_in_correlation": true
+      },
+      {
+        "name": "Cirrascale",
+        "tier": "Silver",
+        "confidence": "high",
+        "slug": "cirrascale",
+        "status": "eligible",
+        "ordinal": 3,
+        "coverage": [
+          "2025-01-01",
+          "2026-09-23"
+        ],
+        "major_or_critical_incident_count": 1,
+        "all_incident_count": 1,
+        "incident_hours": 0.0,
+        "incident_hours_capped": false,
+        "included_in_correlation": true
+      },
+      {
+        "name": "Vultr",
+        "tier": "Silver",
+        "confidence": "high",
+        "slug": "vultr",
+        "status": "excluded",
+        "reason": "no incident data file found (expected vultr.json)"
+      },
+      {
+        "name": "Voltage Park",
+        "tier": "Silver",
+        "confidence": "high",
+        "slug": "voltage-park",
+        "status": "excluded",
+        "reason": "no incident data file found (expected voltage-park.json)"
+      },
+      {
+        "name": "GCore",
+        "tier": "Silver",
+        "confidence": "high",
+        "slug": "gcore",
+        "status": "excluded",
+        "reason": "no incident data file found (expected gcore.json)"
+      },
+      {
+        "name": "Firmus",
+        "tier": "Silver",
+        "confidence": "high",
+        "slug": "firmus",
+        "status": "excluded",
+        "reason": "no incident data file found (expected firmus.json)"
+      },
+      {
+        "name": "GMO GPU Cloud",
+        "tier": "Silver",
+        "confidence": "high",
+        "slug": "gmo-gpu-cloud",
+        "status": "excluded",
+        "reason": "no incident data file found (expected gmo-gpu-cloud.json)"
+      },
+      {
+        "name": "TensorWave",
+        "tier": "Silver",
+        "confidence": "high",
+        "slug": "tensorwave",
+        "status": "excluded",
+        "reason": "no incident data file found (expected tensorwave.json)"
+      },
+      {
+        "name": "Hyperstack",
+        "tier": "Bronze",
+        "confidence": "high",
+        "slug": "hyperstack",
+        "status": "eligible",
+        "ordinal": 2,
+        "coverage": [
+          "2025-01-01",
+          "2026-09-23"
+        ],
+        "major_or_critical_incident_count": 6,
+        "all_incident_count": 12,
+        "incident_hours": 394.81,
+        "incident_hours_capped": false,
+        "included_in_correlation": true
+      },
+      {
+        "name": "Shadeform",
+        "tier": "Bronze",
+        "confidence": "high",
+        "slug": "shadeform",
+        "status": "excluded",
+        "reason": "no incident data file found (expected shadeform.json)"
+      },
+      {
+        "name": "Neysa",
+        "tier": "Bronze",
+        "confidence": "high",
+        "slug": "neysa",
+        "status": "excluded",
+        "reason": "no incident data file found (expected neysa.json)"
+      },
+      {
+        "name": "STN",
+        "tier": "Bronze",
+        "confidence": "low",
+        "slug": "stn",
+        "status": "excluded",
+        "reason": "no incident data file found (expected stn.json)"
+      },
+      {
+        "name": "GMI",
+        "tier": "Bronze",
+        "confidence": "high",
+        "slug": "gmi",
+        "status": "excluded",
+        "reason": "no incident data file found (expected gmi.json)"
+      },
+      {
+        "name": "RunPod",
+        "tier": "Bronze",
+        "confidence": "high",
+        "slug": "runpod",
+        "status": "excluded",
+        "reason": "no incident data file found (expected runpod.json)"
+      },
+      {
+        "name": "Atlas Cloud",
+        "tier": "Bronze",
+        "confidence": "high",
+        "slug": "atlas-cloud",
+        "status": "excluded",
+        "reason": "no incident data file found (expected atlas-cloud.json)"
+      },
+      {
+        "name": "Prime Intellect",
+        "tier": "Bronze",
+        "confidence": "high",
+        "slug": "prime-intellect",
+        "status": "excluded",
+        "reason": "no incident data file found (expected prime-intellect.json)"
+      },
+      {
+        "name": "Cudo Compute",
+        "tier": "Bronze",
+        "confidence": "high",
+        "slug": "cudo-compute",
+        "status": "excluded",
+        "reason": "no incident data file found (expected cudo-compute.json)"
+      },
+      {
+        "name": "Qubrid",
+        "tier": "Bronze",
+        "confidence": "high",
+        "slug": "qubrid",
+        "status": "excluded",
+        "reason": "no incident data file found (expected qubrid.json)"
+      },
+      {
+        "name": "latitude.sh",
+        "tier": "Bronze",
+        "confidence": "high",
+        "slug": "latitude-sh",
+        "status": "eligible",
+        "ordinal": 2,
+        "coverage": [
+          "2025-01-01",
+          "2026-09-23"
+        ],
+        "major_or_critical_incident_count": 7,
+        "all_incident_count": 17,
+        "incident_hours": 75.2256,
+        "incident_hours_capped": false,
+        "included_in_correlation": true
+      },
+      {
+        "name": "Lightning AI",
+        "tier": "Bronze",
+        "confidence": "high",
+        "slug": "lightning-ai",
+        "status": "eligible",
+        "ordinal": 2,
+        "coverage": [
+          "2025-01-01",
+          "2026-09-23"
+        ],
+        "major_or_critical_incident_count": 0,
+        "all_incident_count": 4,
+        "incident_hours": 4.8823,
+        "incident_hours_capped": false,
+        "included_in_correlation": true
+      },
+      {
+        "name": "Verda",
+        "tier": "Bronze",
+        "confidence": "high",
+        "slug": "verda",
+        "status": "excluded",
+        "reason": "no incident data file found (expected verda.json)"
+      },
+      {
+        "name": "DENVR Dataworks",
+        "tier": "Bronze",
+        "confidence": "high",
+        "slug": "denvr-dataworks",
+        "status": "excluded",
+        "reason": "no incident data file found (expected denvr-dataworks.json)"
+      },
+      {
+        "name": "IBM Cloud",
+        "tier": "Bronze",
+        "confidence": "high",
+        "slug": "ibm-cloud",
+        "status": "excluded",
+        "reason": "no incident data file found (expected ibm-cloud.json)"
+      },
+      {
+        "name": "DigitalOcean",
+        "tier": "Bronze",
+        "confidence": "high",
+        "slug": "digitalocean",
+        "status": "eligible",
+        "ordinal": 2,
+        "coverage": [
+          "2025-01-01",
+          "2026-09-23"
+        ],
+        "major_or_critical_incident_count": 3,
+        "all_incident_count": 56,
+        "incident_hours": 175.9123,
+        "incident_hours_capped": false,
+        "included_in_correlation": true
+      },
+      {
+        "name": "Hot Aisle",
+        "tier": "Bronze",
+        "confidence": "high",
+        "slug": "hot-aisle",
+        "status": "excluded",
+        "reason": "no incident data file found (expected hot-aisle.json)"
+      },
+      {
+        "name": "Buzz HPC",
+        "tier": "Bronze",
+        "confidence": "high",
+        "slug": "buzz-hpc",
+        "status": "excluded",
+        "reason": "no incident data file found (expected buzz-hpc.json)"
+      },
+      {
+        "name": "Vast.ai",
+        "tier": "Bronze",
+        "confidence": "high",
+        "slug": "vast-ai",
+        "status": "excluded",
+        "reason": "no incident data file found (expected vast-ai.json)"
+      },
+      {
+        "name": "Sharon AI",
+        "tier": "Underperforming",
+        "confidence": "high",
+        "slug": "sharon-ai",
+        "status": "eligible",
+        "ordinal": 1,
+        "coverage": [
+          "2025-10-10",
+          "2026-09-23"
+        ],
+        "major_or_critical_incident_count": 0,
+        "all_incident_count": 0,
+        "incident_hours": 0.0,
+        "incident_hours_capped": false,
+        "included_in_correlation": true
+      },
+      {
+        "name": "IREN",
+        "tier": "Underperforming",
+        "confidence": "high",
+        "slug": "iren",
+        "status": "excluded",
+        "reason": "no incident data file found (expected iren.json)"
+      },
+      {
+        "name": "Hydra",
+        "tier": "Underperforming",
+        "confidence": "high",
+        "slug": "hydra",
+        "status": "excluded",
+        "reason": "no incident data file found (expected hydra.json)"
+      },
+      {
+        "name": "FarmGPU",
+        "tier": "Underperforming",
+        "confidence": "high",
+        "slug": "farmgpu",
+        "status": "excluded",
+        "reason": "no incident data file found (expected farmgpu.json)"
+      },
+      {
+        "name": "Whitefiber",
+        "tier": "Underperforming",
+        "confidence": "high",
+        "slug": "whitefiber",
+        "status": "excluded",
+        "reason": "no incident data file found (expected whitefiber.json)"
+      },
+      {
+        "name": "deepinfra",
+        "tier": "Underperforming",
+        "confidence": "high",
+        "slug": "deepinfra",
+        "status": "excluded",
+        "reason": "no incident data file found (expected deepinfra.json)"
+      },
+      {
+        "name": "dstack",
+        "tier": "Underperforming",
+        "confidence": "high",
+        "slug": "dstack",
+        "status": "excluded",
+        "reason": "no incident data file found (expected dstack.json)"
+      },
+      {
+        "name": "PaleBlueDot.AI",
+        "tier": "Underperforming",
+        "confidence": "high",
+        "slug": "palebluedot-ai",
+        "status": "excluded",
+        "reason": "no incident data file found (expected palebluedot-ai.json)"
+      },
+      {
+        "name": "Hyperbolic",
+        "tier": "Underperforming",
+        "confidence": "high",
+        "slug": "hyperbolic",
+        "status": "excluded",
+        "reason": "no incident data file found (expected hyperbolic.json)"
+      },
+      {
+        "name": "GPU.NET",
+        "tier": "Underperforming",
+        "confidence": "high",
+        "slug": "gpu-net",
+        "status": "excluded",
+        "reason": "no incident data file found (expected gpu-net.json)"
+      },
+      {
+        "name": "Akamai",
+        "tier": "Underperforming",
+        "confidence": "high",
+        "slug": "akamai",
+        "status": "eligible",
+        "ordinal": 1,
+        "coverage": [
+          "2025-01-01",
+          "2026-09-23"
+        ],
+        "major_or_critical_incident_count": 1,
+        "all_incident_count": 52,
+        "incident_hours": 2840.7336,
+        "incident_hours_capped": false,
+        "included_in_correlation": true
+      },
+      {
+        "name": "Hetzner",
+        "tier": "Underperforming",
+        "confidence": "high",
+        "slug": "hetzner",
+        "status": "excluded",
+        "reason": "no incident data file found (expected hetzner.json)"
+      },
+      {
+        "name": "Clore.ai",
+        "tier": "Underperforming",
+        "confidence": "high",
+        "slug": "clore-ai",
+        "status": "excluded",
+        "reason": "no incident data file found (expected clore-ai.json)"
+      },
+      {
+        "name": "Massed Compute",
+        "tier": "Underperforming",
+        "confidence": "high",
+        "slug": "massed-compute",
+        "status": "excluded",
+        "reason": "no incident data file found (expected massed-compute.json)"
+      },
+      {
+        "name": "Exabits",
+        "tier": "Underperforming",
+        "confidence": "high",
+        "slug": "exabits",
+        "status": "excluded",
+        "reason": "no incident data file found (expected exabits.json)"
+      },
+      {
+        "name": "Sesterce",
+        "tier": "Underperforming",
+        "confidence": "high",
+        "slug": "sesterce",
+        "status": "excluded",
+        "reason": "no incident data file found (expected sesterce.json)"
+      },
+      {
+        "name": "E2E Cloud",
+        "tier": "Underperforming",
+        "confidence": "high",
+        "slug": "e2e-cloud",
+        "status": "excluded",
+        "reason": "no incident data file found (expected e2e-cloud.json)"
+      },
+      {
+        "name": "OVHcloud",
+        "tier": "Underperforming",
+        "confidence": "high",
+        "slug": "ovhcloud",
+        "status": "excluded",
+        "reason": "no incident data file found (expected ovhcloud.json)"
+      },
+      {
+        "name": "Aethir",
+        "tier": "Underperforming",
+        "confidence": "high",
+        "slug": "aethir",
+        "status": "excluded",
+        "reason": "no incident data file found (expected aethir.json)"
+      },
+      {
+        "name": "Akash",
+        "tier": "Underperforming",
+        "confidence": "high",
+        "slug": "akash",
+        "status": "excluded",
+        "reason": "no incident data file found (expected akash.json)"
+      },
+      {
+        "name": "Salad",
+        "tier": "Underperforming",
+        "confidence": "high",
+        "slug": "salad",
+        "status": "excluded",
+        "reason": "no incident data file found (expected salad.json)"
+      },
+      {
+        "name": "Mithril",
+        "tier": "Underperforming",
+        "confidence": "high",
+        "slug": "mithril",
+        "status": "excluded",
+        "reason": "no incident data file found (expected mithril.json)"
+      },
+      {
+        "name": "Nscale",
+        "tier": "Unavailable",
+        "confidence": "high",
+        "status": "excluded",
+        "reason": "unrated/unavailable tier 'Unavailable' in this release"
+      },
+      {
+        "name": "Core42",
+        "tier": "Unavailable",
+        "confidence": "high",
+        "status": "excluded",
+        "reason": "unrated/unavailable tier 'Unavailable' in this release"
+      },
+      {
+        "name": "Humain",
+        "tier": "Unavailable",
+        "confidence": "high",
+        "status": "excluded",
+        "reason": "unrated/unavailable tier 'Unavailable' in this release"
+      },
+      {
+        "name": "Corvex",
+        "tier": "Unavailable",
+        "confidence": "high",
+        "status": "excluded",
+        "reason": "unrated/unavailable tier 'Unavailable' in this release"
+      },
+      {
+        "name": "Highrise",
+        "tier": "Unavailable",
+        "confidence": "high",
+        "status": "excluded",
+        "reason": "unrated/unavailable tier 'Unavailable' in this release"
+      },
+      {
+        "name": "BluSky AI",
+        "tier": "Unavailable",
+        "confidence": "high",
+        "status": "excluded",
+        "reason": "unrated/unavailable tier 'Unavailable' in this release"
+      },
+      {
+        "name": "Arc Compute",
+        "tier": "Unavailable",
+        "confidence": "high",
+        "status": "excluded",
+        "reason": "unrated/unavailable tier 'Unavailable' in this release"
+      },
+      {
+        "name": "Telus",
+        "tier": "Unavailable",
+        "confidence": "high",
+        "status": "excluded",
+        "reason": "unrated/unavailable tier 'Unavailable' in this release"
+      },
+      {
+        "name": "Telenor",
+        "tier": "Unavailable",
+        "confidence": "high",
+        "status": "excluded",
+        "reason": "unrated/unavailable tier 'Unavailable' in this release"
+      },
+      {
+        "name": "Mistral AI",
+        "tier": "Unavailable",
+        "confidence": "low",
+        "status": "excluded",
+        "reason": "unrated/unavailable tier 'Unavailable' in this release"
+      },
+      {
+        "name": "Firebird",
+        "tier": "Unavailable",
+        "confidence": "high",
+        "status": "excluded",
+        "reason": "unrated/unavailable tier 'Unavailable' in this release"
+      },
+      {
+        "name": "Alibaba Cloud",
+        "tier": "Unavailable",
+        "confidence": "high",
+        "status": "excluded",
+        "reason": "unrated/unavailable tier 'Unavailable' in this release"
+      },
+      {
+        "name": "MegaSpeed International",
+        "tier": "Unavailable",
+        "confidence": "high",
+        "status": "excluded",
+        "reason": "unrated/unavailable tier 'Unavailable' in this release"
+      },
+      {
+        "name": "BitDeer",
+        "tier": "Unavailable",
+        "confidence": "high",
+        "status": "excluded",
+        "reason": "unrated/unavailable tier 'Unavailable' in this release"
+      },
+      {
+        "name": "RunSun Cloud",
+        "tier": "Unavailable",
+        "confidence": "high",
+        "status": "excluded",
+        "reason": "unrated/unavailable tier 'Unavailable' in this release"
+      },
+      {
+        "name": "FPT Cloud",
+        "tier": "Unavailable",
+        "confidence": "high",
+        "status": "excluded",
+        "reason": "unrated/unavailable tier 'Unavailable' in this release"
+      },
+      {
+        "name": "backend AI",
+        "tier": "Unavailable",
+        "confidence": "high",
+        "status": "excluded",
+        "reason": "unrated/unavailable tier 'Unavailable' in this release"
+      },
+      {
+        "name": "NAVER",
+        "tier": "Unavailable",
+        "confidence": "high",
+        "status": "excluded",
+        "reason": "unrated/unavailable tier 'Unavailable' in this release"
+      },
+      {
+        "name": "Indosat Ooredoo Hutchison",
+        "tier": "Unavailable",
+        "confidence": "high",
+        "status": "excluded",
+        "reason": "unrated/unavailable tier 'Unavailable' in this release"
+      },
+      {
+        "name": "Sakura",
+        "tier": "Unavailable",
+        "confidence": "high",
+        "status": "excluded",
+        "reason": "unrated/unavailable tier 'Unavailable' in this release"
+      },
+      {
+        "name": "Yotta",
+        "tier": "Unavailable",
+        "confidence": "high",
+        "status": "excluded",
+        "reason": "unrated/unavailable tier 'Unavailable' in this release"
+      },
+      {
+        "name": "neevcloud",
+        "tier": "Unavailable",
+        "confidence": "high",
+        "status": "excluded",
+        "reason": "unrated/unavailable tier 'Unavailable' in this release"
+      },
+      {
+        "name": "evroc",
+        "tier": "Unavailable",
+        "confidence": "high",
+        "status": "excluded",
+        "reason": "unrated/unavailable tier 'Unavailable' in this release"
+      },
+      {
+        "name": "greenai.cloud",
+        "tier": "Unavailable",
+        "confidence": "high",
+        "status": "excluded",
+        "reason": "unrated/unavailable tier 'Unavailable' in this release"
+      }
+    ],
+    "included_count": 9,
+    "minimum_providers": 8,
+    "sufficient": true,
+    "hot_aisle": null,
+    "analysis": {
+      "major_or_critical_incident_count": {
+        "spearman_rho": 0.6377928041432807,
+        "bootstrap_95ci": {
+          "interval": [
+            0.0,
+            0.9365858115816939
+          ],
+          "draws": 5000,
+          "valid_draws": 4999,
+          "skipped_zero_variance_draws": 1,
+          "seed": 20260923
+        },
+        "permutation": {
+          "p_value": 0.07525,
+          "method": "random_20000",
+          "observed_rho": 0.6377928041432807,
+          "permutations_used": 20000,
+          "skipped_zero_variance": 0,
+          "seed": 20260923
+        },
+        "reading": "inconclusive"
+      },
+      "all_incident_count": {
+        "spearman_rho": 0.41017349611934645,
+        "bootstrap_95ci": {
+          "interval": [
+            -0.4570983002634959,
+            0.8800782326533971
+          ],
+          "draws": 5000,
+          "valid_draws": 4999,
+          "skipped_zero_variance_draws": 1,
+          "seed": 20260923
+        },
+        "permutation": {
+          "p_value": 0.2731,
+          "method": "random_20000",
+          "observed_rho": 0.41017349611934645,
+          "permutations_used": 20000,
+          "skipped_zero_variance": 0,
+          "seed": 20260923
+        },
+        "reading": null
+      },
+      "incident_hours": {
+        "spearman_rho": 0.05292561240249632,
+        "bootstrap_95ci": {
+          "interval": [
+            -0.7668931921093695,
+            0.7990508158506007
+          ],
+          "draws": 5000,
+          "valid_draws": 4999,
+          "skipped_zero_variance_draws": 1,
+          "seed": 20260923
+        },
+        "permutation": {
+          "p_value": 0.9109,
+          "method": "random_20000",
+          "observed_rho": 0.05292561240249632,
+          "permutations_used": 20000,
+          "skipped_zero_variance": 0,
+          "seed": 20260923
+        },
+        "reading": null
+      }
+    },
+    "reading": "inconclusive"
+  },
+  "secondary": {
+    "release": "1.0",
+    "published_date": "2025-03-26",
+    "window": {
+      "start": "2025-03-26",
+      "end": "2025-09-22",
+      "days": 180
+    },
+    "providers": [
+      {
+        "name": "CoreWeave",
+        "tier": "Platinum",
+        "confidence": "high",
+        "slug": "coreweave",
+        "status": "excluded",
+        "reason": "no incident data file found (expected coreweave.json)"
+      },
+      {
+        "name": "Crusoe",
+        "tier": "Gold",
+        "confidence": "high",
+        "slug": "crusoe",
+        "status": "excluded",
+        "reason": "no incident data file found (expected crusoe.json)"
+      },
+      {
+        "name": "Together.ai",
+        "tier": "Gold",
+        "confidence": "high",
+        "slug": "together-ai",
+        "status": "excluded",
+        "reason": "no incident data file found (expected together-ai.json)"
+      },
+      {
+        "name": "Nebius",
+        "tier": "Gold",
+        "confidence": "high",
+        "slug": "nebius",
+        "status": "eligible",
+        "ordinal": 4,
+        "coverage": [
+          "2025-01-01",
+          "2026-09-23"
+        ],
+        "major_or_critical_incident_count": 22,
+        "all_incident_count": 35,
+        "incident_hours": 47.9196,
+        "incident_hours_capped": false,
+        "included_in_correlation": true
+      },
+      {
+        "name": "Lepton AI",
+        "tier": "Gold",
+        "confidence": "high",
+        "slug": "lepton-ai",
+        "status": "excluded",
+        "reason": "no incident data file found (expected lepton-ai.json)"
+      },
+      {
+        "name": "Oracle",
+        "tier": "Gold",
+        "confidence": "high",
+        "slug": "oracle",
+        "status": "excluded",
+        "reason": "no incident data file found (expected oracle.json)"
+      },
+      {
+        "name": "Azure",
+        "tier": "Gold",
+        "confidence": "high",
+        "slug": "azure",
+        "status": "excluded",
+        "reason": "no incident data file found (expected azure.json)"
+      },
+      {
+        "name": "AWS",
+        "tier": "Silver",
+        "confidence": "high",
+        "slug": "aws",
+        "status": "excluded",
+        "reason": "no incident data file found (expected aws.json)"
+      },
+      {
+        "name": "Lambda",
+        "tier": "Silver",
+        "confidence": "high",
+        "slug": "lambda",
+        "status": "excluded",
+        "reason": "coverage_start/coverage_end not recorded; manual verification pending"
+      },
+      {
+        "name": "Scaleway",
+        "tier": "Silver",
+        "confidence": "high",
+        "slug": "scaleway",
+        "status": "eligible",
+        "ordinal": 3,
+        "coverage": [
+          "2025-01-01",
+          "2026-09-23"
+        ],
+        "major_or_critical_incident_count": 28,
+        "all_incident_count": 225,
+        "incident_hours": 24410.0461,
+        "incident_hours_capped": false,
+        "included_in_correlation": true
+      },
+      {
+        "name": "SMC",
+        "tier": "Silver",
+        "confidence": "high",
+        "slug": "smc",
+        "status": "excluded",
+        "reason": "no incident data file found (expected smc.json)"
+      },
+      {
+        "name": "Google Cloud",
+        "tier": "Bronze",
+        "confidence": "high",
+        "slug": "google-cloud",
+        "status": "excluded",
+        "reason": "no incident data file found (expected google-cloud.json)"
+      },
+      {
+        "name": "TensorWave",
+        "tier": "Bronze",
+        "confidence": "high",
+        "slug": "tensorwave",
+        "status": "excluded",
+        "reason": "no incident data file found (expected tensorwave.json)"
+      },
+      {
+        "name": "DataCrunch",
+        "tier": "Bronze",
+        "confidence": "high",
+        "slug": "verda",
+        "status": "excluded",
+        "reason": "no incident data file found (expected verda.json)"
+      },
+      {
+        "name": "RunPod",
+        "tier": "Bronze",
+        "confidence": "high",
+        "slug": "runpod",
+        "status": "excluded",
+        "reason": "no incident data file found (expected runpod.json)"
+      },
+      {
+        "name": "DENVR Dataworks",
+        "tier": "Bronze",
+        "confidence": "high",
+        "slug": "denvr-dataworks",
+        "status": "excluded",
+        "reason": "no incident data file found (expected denvr-dataworks.json)"
+      },
+      {
+        "name": "Hot Aisle",
+        "tier": "Underperforming",
+        "confidence": "high",
+        "slug": "hot-aisle",
+        "status": "excluded",
+        "reason": "no incident data file found (expected hot-aisle.json)"
+      },
+      {
+        "name": "Shadeform",
+        "tier": "Underperforming",
+        "confidence": "high",
+        "slug": "shadeform",
+        "status": "excluded",
+        "reason": "no incident data file found (expected shadeform.json)"
+      },
+      {
+        "name": "Vast.ai",
+        "tier": "Underperforming",
+        "confidence": "high",
+        "slug": "vast-ai",
+        "status": "excluded",
+        "reason": "no incident data file found (expected vast-ai.json)"
+      },
+      {
+        "name": "Massed Compute",
+        "tier": "Underperforming",
+        "confidence": "high",
+        "slug": "massed-compute",
+        "status": "excluded",
+        "reason": "no incident data file found (expected massed-compute.json)"
+      },
+      {
+        "name": "Prime Intellect",
+        "tier": "Underperforming",
+        "confidence": "high",
+        "slug": "prime-intellect",
+        "status": "excluded",
+        "reason": "no incident data file found (expected prime-intellect.json)"
+      },
+      {
+        "name": "Iris Energy",
+        "tier": "Underperforming",
+        "confidence": "high",
+        "slug": "iren",
+        "status": "excluded",
+        "reason": "no incident data file found (expected iren.json)"
+      },
+      {
+        "name": "GMI Cloud",
+        "tier": "Underperforming",
+        "confidence": "high",
+        "slug": "gmi",
+        "status": "excluded",
+        "reason": "no incident data file found (expected gmi.json)"
+      },
+      {
+        "name": "Salad",
+        "tier": "Underperforming",
+        "confidence": "high",
+        "slug": "salad",
+        "status": "excluded",
+        "reason": "no incident data file found (expected salad.json)"
+      },
+      {
+        "name": "Akash",
+        "tier": "Underperforming",
+        "confidence": "high",
+        "slug": "akash",
+        "status": "excluded",
+        "reason": "no incident data file found (expected akash.json)"
+      },
+      {
+        "name": "GPU.NET",
+        "tier": "Underperforming",
+        "confidence": "high",
+        "slug": "gpu-net",
+        "status": "excluded",
+        "reason": "no incident data file found (expected gpu-net.json)"
+      }
+    ],
+    "included_count": 2,
+    "minimum_providers": 8,
+    "sufficient": false,
+    "hot_aisle": null,
+    "reading": "insufficient",
+    "analysis": null
+  }
+}

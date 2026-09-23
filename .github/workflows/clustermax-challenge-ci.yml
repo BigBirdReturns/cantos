@@ -1,0 +1,67 @@
+name: ClusterMAX challenge
+on:
+  push:
+    paths: ['clustermax-challenge/**', '.github/workflows/clustermax-challenge-ci.yml']
+  pull_request:
+    paths: ['clustermax-challenge/**', '.github/workflows/clustermax-challenge-ci.yml']
+  workflow_dispatch: {}
+permissions:
+  contents: read
+jobs:
+  test:
+    name: Python tests, engine parity, submission checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Python unit tests (challenge, retrospective, collectors, submit_check)
+        run: python -m unittest discover -s clustermax-challenge/tests -p 'test_*.py' -v
+
+      - name: Engine parity tests (node)
+        run: node clustermax-challenge/tests/test_engine.cjs
+
+      # Every directory under submissions/ must pass submit_check.py --
+      # scripts/submit_check.py imports scripts/challenge.py's evaluate()
+      # directly, so this exercises the exact same admission logic a
+      # maintainer would run by hand before merging a submission PR.
+      - name: Validate every submission directory
+        run: |
+          set -euo pipefail
+          shopt -s nullglob
+          dirs=(clustermax-challenge/submissions/*/)
+          if [ ${#dirs[@]} -eq 0 ]; then
+            echo "No submissions under clustermax-challenge/submissions/ yet."
+            exit 0
+          fi
+          status=0
+          for dir in "${dirs[@]}"; do
+            echo "::group::submit_check ${dir}"
+            python clustermax-challenge/scripts/submit_check.py "${dir}" || status=1
+            echo "::endgroup::"
+          done
+          exit "${status}"
+
+  # Deliberately a separate job from `test` above: this repo's index.html and
+  # README.md carry unanswered [CONFIRM: ...] disclosure markers on purpose
+  # (only a human should answer them), so this gate stays red on its own
+  # without failing the test suite. See scripts/release_check.py.
+  release-readiness:
+    name: Release readiness (disclosure placeholders)
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check for unresolved disclosure placeholders
+        run: python clustermax-challenge/scripts/release_check.py

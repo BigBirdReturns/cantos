@@ -1,0 +1,1083 @@
+{
+  "schema": "secondrun.status-page-discovery.v1",
+  "retrieved_utc": "2026-09-23T09:09:24Z",
+  "providers": [
+    {
+      "rating_name": "CoreWeave",
+      "releases": [
+        "1.0",
+        "2.0"
+      ],
+      "tier_1_0": "Platinum",
+      "tier_2_0": "Platinum",
+      "homepage": "https://coreweave.com",
+      "status_url": "https://status.coreweave.com",
+      "platform": "status.io",
+      "api_summary_ok": false,
+      "history_url_pattern": "https://status.coreweave.com/pages/history/5e126e998f2f032e1f8f0f4b?date=YYYY-MM",
+      "oldest_incident_seen": null,
+      "covers_2025_11_to_2026_05": true,
+      "covers_2025_03_to_2025_09": true,
+      "notes": "status.io month probe (coarse, 6 sample months): {'2026-04': 'no-incidents-shown', '2025-11': 'no-incidents-shown', '2025-09': 'no-incidents-shown', '2025-06': 'no-incidents-shown', '2025-03': 'no-incidents-shown', '2025-01': 'no-incidents-shown'}; "
+    },
+    {
+      "rating_name": "Oracle",
+      "releases": [
+        "1.0",
+        "2.0"
+      ],
+      "tier_1_0": "Gold",
+      "tier_2_0": "Gold",
+      "homepage": null,
+      "status_url": "https://ocistatus.oraclecloud.com",
+      "platform": "hyperscaler-custom",
+      "api_summary_ok": null,
+      "history_url_pattern": "https://ocistatus.oraclecloud.com",
+      "oldest_incident_seen": null,
+      "covers_2025_11_to_2026_05": "unknown",
+      "covers_2025_03_to_2025_09": "unknown",
+      "notes": "hyperscaler; recorded as reference only, excluded from Statuspage comparability; "
+    },
+    {
+      "rating_name": "Nebius",
+      "releases": [
+        "1.0",
+        "2.0"
+      ],
+      "tier_1_0": "Gold",
+      "tier_2_0": "Gold",
+      "homepage": "https://nebius.com",
+      "status_url": "https://status.nebius.com",
+      "platform": "atlassian-statuspage",
+      "api_summary_ok": true,
+      "history_url_pattern": "https://status.nebius.com/api/v2/incidents.json (history?page=N UI is JS-rendered, not scraped)",
+      "oldest_incident_seen": "2026-02",
+      "covers_2025_11_to_2026_05": "unknown",
+      "covers_2025_03_to_2025_09": "unknown",
+      "notes": "history?page=1 loads=True; incidents.json returned 50 incidents (looks capped at ~50, true depth beyond 2026-02 unknown); "
+    },
+    {
+      "rating_name": "Azure",
+      "releases": [
+        "1.0",
+        "2.0"
+      ],
+      "tier_1_0": "Gold",
+      "tier_2_0": "Gold",
+      "homepage": null,
+      "status_url": "https://azure.status.microsoft",
+      "platform": "hyperscaler-custom",
+      "api_summary_ok": null,
+      "history_url_pattern": "https://azure.status.microsoft",
+      "oldest_incident_seen": null,
+      "covers_2025_11_to_2026_05": "unknown",
+      "covers_2025_03_to_2025_09": "unknown",
+      "notes": "hyperscaler; recorded as reference only, excluded from Statuspage comparability; "
+    },
+    {
+      "rating_name": "Crusoe",
+      "releases": [
+        "1.0",
+        "2.0"
+      ],
+      "tier_1_0": "Gold",
+      "tier_2_0": "Gold",
+      "homepage": "https://www.crusoe.ai/",
+      "status_url": "https://trust.crusoe.ai",
+      "platform": "trust-center (vanta, not an incident status page)",
+      "api_summary_ok": null,
+      "history_url_pattern": null,
+      "oldest_incident_seen": null,
+      "covers_2025_11_to_2026_05": "unknown",
+      "covers_2025_03_to_2025_09": "unknown",
+      "notes": "only a Vanta-style security trust center found (https://trust.crusoe.ai); no public incident/status page located; "
+    },
+    {
+      "rating_name": "FluidStack",
+      "releases": [
+        "2.0"
+      ],
+      "tier_1_0": null,
+      "tier_2_0": "Gold",
+      "homepage": "https://fluidstack.io",
+      "status_url": "https://status.fluidstack.io",
+      "platform": "betteruptime",
+      "api_summary_ok": false,
+      "history_url_pattern": "https://status.fluidstack.io",
+      "oldest_incident_seen": null,
+      "covers_2025_11_to_2026_05": "unknown",
+      "covers_2025_03_to_2025_09": "unknown",
+      "notes": "non-atlassian/non-status.io platform; manual history depth not probed within budget; "
+    },
+    {
+      "rating_name": "Together.ai",
+      "releases": [
+        "1.0",
+        "2.0"
+      ],
+      "tier_1_0": "Gold",
+      "tier_2_0": "Silver",
+      "homepage": "https://www.together.ai/",
+      "status_url": "https://status.together.ai",
+      "platform": "betteruptime",
+      "api_summary_ok": false,
+      "history_url_pattern": "https://status.together.ai",
+      "oldest_incident_seen": null,
+      "covers_2025_11_to_2026_05": "unknown",
+      "covers_2025_03_to_2025_09": "unknown",
+      "notes": "non-atlassian/non-status.io platform; manual history depth not probed within budget; "
+    },
+    {
+      "rating_name": "Lambda",
+      "releases": [
+        "1.0",
+        "2.0"
+      ],
+      "tier_1_0": "Silver",
+      "tier_2_0": "Silver",
+      "homepage": "https://lambda.ai",
+      "status_url": "https://status.lambda.ai",
+      "platform": "atlassian-statuspage",
+      "api_summary_ok": true,
+      "history_url_pattern": "https://status.lambda.ai/api/v2/incidents.json (history?page=N UI is JS-rendered, not scraped)",
+      "oldest_incident_seen": "2026-02",
+      "covers_2025_11_to_2026_05": false,
+      "covers_2025_03_to_2025_09": false,
+      "notes": "history?page=1 loads=False; incidents.json returned 25 incidents; "
+    },
+    {
+      "rating_name": "Google Cloud",
+      "releases": [
+        "1.0",
+        "2.0"
+      ],
+      "tier_1_0": "Bronze",
+      "tier_2_0": "Silver",
+      "homepage": "https://cloud.google.com",
+      "status_url": "https://status.cloud.google.com",
+      "platform": "hyperscaler-custom",
+      "api_summary_ok": null,
+      "history_url_pattern": "https://status.cloud.google.com",
+      "oldest_incident_seen": null,
+      "covers_2025_11_to_2026_05": "unknown",
+      "covers_2025_03_to_2025_09": "unknown",
+      "notes": "hyperscaler; recorded as reference only, excluded from Statuspage comparability; "
+    },
+    {
+      "rating_name": "AWS",
+      "releases": [
+        "1.0",
+        "2.0"
+      ],
+      "tier_1_0": "Silver",
+      "tier_2_0": "Silver",
+      "homepage": "https://aws.amazon.com",
+      "status_url": "https://health.aws.amazon.com/health/status",
+      "platform": "hyperscaler-custom",
+      "api_summary_ok": null,
+      "history_url_pattern": "https://health.aws.amazon.com/health/status",
+      "oldest_incident_seen": null,
+      "covers_2025_11_to_2026_05": "unknown",
+      "covers_2025_03_to_2025_09": "unknown",
+      "notes": "hyperscaler; recorded as reference only, excluded from Statuspage comparability; "
+    },
+    {
+      "rating_name": "Scaleway",
+      "releases": [
+        "1.0",
+        "2.0"
+      ],
+      "tier_1_0": "Silver",
+      "tier_2_0": "Silver",
+      "homepage": "https://www.scaleway.com/en/",
+      "status_url": "https://status.scaleway.com",
+      "platform": "atlassian-statuspage",
+      "api_summary_ok": true,
+      "history_url_pattern": "https://status.scaleway.com/api/v2/incidents.json (history?page=N UI is JS-rendered, not scraped)",
+      "oldest_incident_seen": "2026-08",
+      "covers_2025_11_to_2026_05": "unknown",
+      "covers_2025_03_to_2025_09": "unknown",
+      "notes": "history?page=1 loads=True; incidents.json returned 50 incidents (looks capped at ~50, true depth beyond 2026-08 unknown); "
+    },
+    {
+      "rating_name": "Cirrascale",
+      "releases": [
+        "2.0"
+      ],
+      "tier_1_0": null,
+      "tier_2_0": "Silver",
+      "homepage": "https://www.cirrascale.com/",
+      "status_url": "https://status.cirrascale.com",
+      "platform": "atlassian-statuspage",
+      "api_summary_ok": true,
+      "history_url_pattern": "https://status.cirrascale.com/api/v2/incidents.json (history?page=N UI is JS-rendered, not scraped)",
+      "oldest_incident_seen": "2025-04",
+      "covers_2025_11_to_2026_05": true,
+      "covers_2025_03_to_2025_09": false,
+      "notes": "history?page=1 loads=True; incidents.json returned 5 incidents; "
+    },
+    {
+      "rating_name": "Vultr",
+      "releases": [
+        "2.0"
+      ],
+      "tier_1_0": null,
+      "tier_2_0": "Silver",
+      "homepage": null,
+      "status_url": "https://status.vultr.com",
+      "platform": "custom",
+      "api_summary_ok": false,
+      "history_url_pattern": "https://status.vultr.com",
+      "oldest_incident_seen": null,
+      "covers_2025_11_to_2026_05": "unknown",
+      "covers_2025_03_to_2025_09": "unknown",
+      "notes": "homepage fetch failed for all candidates; non-atlassian/non-status.io platform; manual history depth not probed within budget; "
+    },
+    {
+      "rating_name": "Voltage Park",
+      "releases": [
+        "2.0"
+      ],
+      "tier_1_0": null,
+      "tier_2_0": "Silver",
+      "homepage": "https://voltagepark.com",
+      "status_url": "https://trust.voltagepark.com",
+      "platform": "trust-center (vanta, not an incident status page)",
+      "api_summary_ok": null,
+      "history_url_pattern": null,
+      "oldest_incident_seen": null,
+      "covers_2025_11_to_2026_05": "unknown",
+      "covers_2025_03_to_2025_09": "unknown",
+      "notes": "only a Vanta-style security trust center found (https://trust.voltagepark.com); no public incident/status page located; "
+    },
+    {
+      "rating_name": "GCore",
+      "releases": [
+        "2.0"
+      ],
+      "tier_1_0": null,
+      "tier_2_0": "Silver",
+      "homepage": "https://gcore.com",
+      "status_url": "https://status.gcore.com",
+      "platform": "atlassian-statuspage",
+      "api_summary_ok": true,
+      "history_url_pattern": "https://status.gcore.com/api/v2/incidents.json (history?page=N UI is JS-rendered, not scraped)",
+      "oldest_incident_seen": null,
+      "covers_2025_11_to_2026_05": "unknown",
+      "covers_2025_03_to_2025_09": "unknown",
+      "notes": "history?page=1 loads=True; incidents.json returned 0 incidents; "
+    },
+    {
+      "rating_name": "Firmus",
+      "releases": [
+        "2.0"
+      ],
+      "tier_1_0": null,
+      "tier_2_0": "Silver",
+      "homepage": "https://firmus.co",
+      "status_url": null,
+      "platform": "none",
+      "api_summary_ok": null,
+      "history_url_pattern": null,
+      "oldest_incident_seen": null,
+      "covers_2025_11_to_2026_05": "unknown",
+      "covers_2025_03_to_2025_09": "unknown",
+      "notes": "corrected homepage to firmus.co (firmus.ai guess was wrong). status.firmus.co and trust.firmus.co do not resolve; firmus.statuspage.io redirects to atlassian.com/software/statuspage (unclaimed slug). No status link found on firmus.co homepage. Likely same underlying provider as 'SMC' in 1.0 -- see SMC notes."
+    },
+    {
+      "rating_name": "GMO GPU Cloud",
+      "releases": [
+        "2.0"
+      ],
+      "tier_1_0": null,
+      "tier_2_0": "Silver",
+      "homepage": "https://gpucloud.gmo",
+      "status_url": null,
+      "platform": "none",
+      "api_summary_ok": null,
+      "history_url_pattern": null,
+      "oldest_incident_seen": null,
+      "covers_2025_11_to_2026_05": "unknown",
+      "covers_2025_03_to_2025_09": "unknown",
+      "notes": "homepage gpucloud.gmo confirmed correct via web search. No status/incident link found in homepage HTML (checked English 'status' and Japanese 稼働状況/障害情報 terms). group.gmo/status/ 404s. No public status page found for this specific service."
+    },
+    {
+      "rating_name": "TensorWave",
+      "releases": [
+        "1.0",
+        "2.0"
+      ],
+      "tier_1_0": "Bronze",
+      "tier_2_0": "Silver",
+      "homepage": "https://tensorwave.com",
+      "status_url": "https://security.tensorwave.com",
+      "platform": "unknown (blocked)",
+      "api_summary_ok": false,
+      "history_url_pattern": "https://security.tensorwave.com",
+      "oldest_incident_seen": null,
+      "covers_2025_11_to_2026_05": "unknown",
+      "covers_2025_03_to_2025_09": "unknown",
+      "notes": "security.tensorwave.com resolves but returns HTTP 403 'Request blocked' to automated requests (WAF); subdomain naming suggests a security/compliance trust portal, not necessarily an incident status page -- could not verify content. status.tensorwave.com does not resolve; tensorwave.statuspage.io redirects to /inactive (unclaimed slug). No confirmed public incident status page found."
+    },
+    {
+      "rating_name": "Hyperstack",
+      "releases": [
+        "2.0"
+      ],
+      "tier_1_0": null,
+      "tier_2_0": "Bronze",
+      "homepage": "https://www.hyperstack.cloud/",
+      "status_url": "https://status.hyperstack.cloud",
+      "platform": "atlassian-statuspage",
+      "api_summary_ok": true,
+      "history_url_pattern": "https://status.hyperstack.cloud/api/v2/incidents.json (history?page=N UI is JS-rendered, not scraped)",
+      "oldest_incident_seen": "2025-05",
+      "covers_2025_11_to_2026_05": true,
+      "covers_2025_03_to_2025_09": "unknown",
+      "notes": "history?page=1 loads=True; incidents.json returned 50 incidents (looks capped at ~50, true depth beyond 2025-05 unknown); "
+    },
+    {
+      "rating_name": "Shadeform",
+      "releases": [
+        "1.0",
+        "2.0"
+      ],
+      "tier_1_0": "Underperforming",
+      "tier_2_0": "Bronze",
+      "homepage": "https://shadeform.com/",
+      "status_url": "https://trust.shadeform.com",
+      "platform": "trust-center (vanta, not an incident status page)",
+      "api_summary_ok": null,
+      "history_url_pattern": null,
+      "oldest_incident_seen": null,
+      "covers_2025_11_to_2026_05": "unknown",
+      "covers_2025_03_to_2025_09": "unknown",
+      "notes": "only a Vanta-style security trust center found (https://trust.shadeform.com); no public incident/status page located; "
+    },
+    {
+      "rating_name": "Neysa",
+      "releases": [
+        "2.0"
+      ],
+      "tier_1_0": null,
+      "tier_2_0": "Bronze",
+      "homepage": "https://neysa.ai",
+      "status_url": "https://trust.neysa.ai",
+      "platform": "custom",
+      "api_summary_ok": false,
+      "history_url_pattern": "https://trust.neysa.ai",
+      "oldest_incident_seen": null,
+      "covers_2025_11_to_2026_05": "unknown",
+      "covers_2025_03_to_2025_09": "unknown",
+      "notes": "non-atlassian/non-status.io platform; manual history depth not probed within budget; "
+    },
+    {
+      "rating_name": "STN",
+      "releases": [
+        "2.0"
+      ],
+      "tier_1_0": null,
+      "tier_2_0": "Bronze",
+      "homepage": null,
+      "status_url": null,
+      "platform": "none",
+      "api_summary_ok": null,
+      "history_url_pattern": null,
+      "oldest_incident_seen": null,
+      "covers_2025_11_to_2026_05": "unknown",
+      "covers_2025_03_to_2025_09": "unknown",
+      "notes": "provider identity is ambiguous -- original ClusterMAX 2.0 rating note flags low confidence ('small circular logo reading STN; full company name not spelled out'). Web search surfaced only the clustermax.ai review page (https://www.clustermax.ai/cloudreview/stn), which describes STN as offering 'dedicated managed services for clusters built-to-order,' not STN's own homepage. The domain guess that resolved (sainvestmentinc.com) is very likely an unrelated company; treated as unresolved."
+    },
+    {
+      "rating_name": "GMI",
+      "releases": [
+        "1.0",
+        "2.0"
+      ],
+      "tier_1_0": "Underperforming",
+      "tier_2_0": "Bronze",
+      "homepage": "https://www.gmicloud.ai/en",
+      "status_url": "https://trust.gmicloud.ai",
+      "platform": "trust-center (vanta, not an incident status page)",
+      "api_summary_ok": null,
+      "history_url_pattern": null,
+      "oldest_incident_seen": null,
+      "covers_2025_11_to_2026_05": "unknown",
+      "covers_2025_03_to_2025_09": "unknown",
+      "notes": "only a Vanta-style security trust center found (https://trust.gmicloud.ai); no public incident/status page located; "
+    },
+    {
+      "rating_name": "RunPod",
+      "releases": [
+        "1.0",
+        "2.0"
+      ],
+      "tier_1_0": "Bronze",
+      "tier_2_0": "Bronze",
+      "homepage": "https://www.runpod.io/",
+      "status_url": "https://uptime.runpod.io",
+      "platform": "betteruptime",
+      "api_summary_ok": false,
+      "history_url_pattern": "https://uptime.runpod.io",
+      "oldest_incident_seen": null,
+      "covers_2025_11_to_2026_05": "unknown",
+      "covers_2025_03_to_2025_09": "unknown",
+      "notes": "non-atlassian/non-status.io platform; manual history depth not probed within budget; "
+    },
+    {
+      "rating_name": "Atlas Cloud",
+      "releases": [
+        "2.0"
+      ],
+      "tier_1_0": null,
+      "tier_2_0": "Bronze",
+      "homepage": "https://www.atlascloud.ai/",
+      "status_url": null,
+      "platform": "none",
+      "api_summary_ok": null,
+      "history_url_pattern": null,
+      "oldest_incident_seen": null,
+      "covers_2025_11_to_2026_05": "unknown",
+      "covers_2025_03_to_2025_09": "unknown",
+      "notes": "no reachable status page among candidates: ['https://status.atlascloud.ai', 'https://atlascloud.statuspage.io', 'https://trust.atlascloud.ai']"
+    },
+    {
+      "rating_name": "Prime Intellect",
+      "releases": [
+        "1.0",
+        "2.0"
+      ],
+      "tier_1_0": "Underperforming",
+      "tier_2_0": "Bronze",
+      "homepage": "https://www.primeintellect.ai/",
+      "status_url": "https://status.primeintellect.ai",
+      "platform": "betteruptime",
+      "api_summary_ok": false,
+      "history_url_pattern": "https://status.primeintellect.ai",
+      "oldest_incident_seen": null,
+      "covers_2025_11_to_2026_05": "unknown",
+      "covers_2025_03_to_2025_09": "unknown",
+      "notes": "non-atlassian/non-status.io platform; manual history depth not probed within budget; "
+    },
+    {
+      "rating_name": "Cudo Compute",
+      "releases": [
+        "2.0"
+      ],
+      "tier_1_0": null,
+      "tier_2_0": "Bronze",
+      "homepage": "https://www.cudocompute.com/",
+      "status_url": "https://status.cudocompute.com",
+      "platform": "betteruptime",
+      "api_summary_ok": false,
+      "history_url_pattern": "https://status.cudocompute.com",
+      "oldest_incident_seen": null,
+      "covers_2025_11_to_2026_05": "unknown",
+      "covers_2025_03_to_2025_09": "unknown",
+      "notes": "non-atlassian/non-status.io platform; manual history depth not probed within budget; "
+    },
+    {
+      "rating_name": "Qubrid",
+      "releases": [
+        "2.0"
+      ],
+      "tier_1_0": null,
+      "tier_2_0": "Bronze",
+      "homepage": "https://qubrid.com",
+      "status_url": null,
+      "platform": "none",
+      "api_summary_ok": null,
+      "history_url_pattern": null,
+      "oldest_incident_seen": null,
+      "covers_2025_11_to_2026_05": "unknown",
+      "covers_2025_03_to_2025_09": "unknown",
+      "notes": "no reachable status page among candidates: ['https://status.qubrid.com', 'https://qubrid.statuspage.io', 'https://trust.qubrid.com']"
+    },
+    {
+      "rating_name": "latitude.sh",
+      "releases": [
+        "2.0"
+      ],
+      "tier_1_0": null,
+      "tier_2_0": "Bronze",
+      "homepage": "https://www.latitude.sh/",
+      "status_url": "https://status.latitude.sh",
+      "platform": "atlassian-statuspage",
+      "api_summary_ok": true,
+      "history_url_pattern": "https://status.latitude.sh/api/v2/incidents.json (history?page=N UI is JS-rendered, not scraped)",
+      "oldest_incident_seen": "2025-06",
+      "covers_2025_11_to_2026_05": true,
+      "covers_2025_03_to_2025_09": "unknown",
+      "notes": "history?page=1 loads=True; incidents.json returned 50 incidents (looks capped at ~50, true depth beyond 2025-06 unknown); "
+    },
+    {
+      "rating_name": "Lightning AI",
+      "releases": [
+        "2.0"
+      ],
+      "tier_1_0": null,
+      "tier_2_0": "Bronze",
+      "homepage": "https://lightning.ai",
+      "status_url": "https://status.lightning.ai",
+      "platform": "atlassian-statuspage",
+      "api_summary_ok": true,
+      "history_url_pattern": "https://status.lightning.ai/api/v2/incidents.json (history?page=N UI is JS-rendered, not scraped)",
+      "oldest_incident_seen": "2022-08",
+      "covers_2025_11_to_2026_05": true,
+      "covers_2025_03_to_2025_09": true,
+      "notes": "history?page=1 loads=True; incidents.json returned 23 incidents; "
+    },
+    {
+      "rating_name": "Verda (formerly DataCrunch)",
+      "releases": [
+        "1.0",
+        "2.0"
+      ],
+      "tier_1_0": "Bronze",
+      "tier_2_0": "Bronze",
+      "homepage": "https://verda.ai",
+      "status_url": null,
+      "platform": "none",
+      "api_summary_ok": null,
+      "history_url_pattern": null,
+      "oldest_incident_seen": null,
+      "covers_2025_11_to_2026_05": "unknown",
+      "covers_2025_03_to_2025_09": "unknown",
+      "notes": "no reachable status page among candidates: ['https://status.verda.ai', 'https://verdaformerlydatacrunch.statuspage.io', 'https://trust.verda.ai']"
+    },
+    {
+      "rating_name": "DENVR Dataworks",
+      "releases": [
+        "1.0",
+        "2.0"
+      ],
+      "tier_1_0": "Bronze",
+      "tier_2_0": "Bronze",
+      "homepage": "https://www.denvr.com/",
+      "status_url": null,
+      "platform": "none",
+      "api_summary_ok": null,
+      "history_url_pattern": null,
+      "oldest_incident_seen": null,
+      "covers_2025_11_to_2026_05": "unknown",
+      "covers_2025_03_to_2025_09": "unknown",
+      "notes": "no reachable status page among candidates: ['https://status.denvr.com', 'https://denvrdataworks.statuspage.io', 'https://trust.denvr.com']"
+    },
+    {
+      "rating_name": "IBM Cloud",
+      "releases": [
+        "2.0"
+      ],
+      "tier_1_0": null,
+      "tier_2_0": "Bronze",
+      "homepage": "https://www.ibm.com/us-en",
+      "status_url": "https://cloud.ibm.com/status",
+      "platform": "hyperscaler-custom",
+      "api_summary_ok": null,
+      "history_url_pattern": "https://cloud.ibm.com/status",
+      "oldest_incident_seen": null,
+      "covers_2025_11_to_2026_05": "unknown",
+      "covers_2025_03_to_2025_09": "unknown",
+      "notes": "hyperscaler; recorded as reference only, excluded from Statuspage comparability; "
+    },
+    {
+      "rating_name": "DigitalOcean",
+      "releases": [
+        "2.0"
+      ],
+      "tier_1_0": null,
+      "tier_2_0": "Bronze",
+      "homepage": "https://www.digitalocean.com/",
+      "status_url": "https://status.digitalocean.com",
+      "platform": "atlassian-statuspage",
+      "api_summary_ok": true,
+      "history_url_pattern": "https://status.digitalocean.com/api/v2/incidents.json (history?page=N UI is JS-rendered, not scraped)",
+      "oldest_incident_seen": "2026-04",
+      "covers_2025_11_to_2026_05": "unknown",
+      "covers_2025_03_to_2025_09": "unknown",
+      "notes": "history?page=1 loads=True; incidents.json returned 50 incidents (looks capped at ~50, true depth beyond 2026-04 unknown); "
+    },
+    {
+      "rating_name": "Hot Aisle",
+      "releases": [
+        "1.0",
+        "2.0"
+      ],
+      "tier_1_0": "Underperforming",
+      "tier_2_0": "Bronze",
+      "homepage": "https://hotaisle.xyz",
+      "status_url": null,
+      "platform": "none",
+      "api_summary_ok": null,
+      "history_url_pattern": null,
+      "oldest_incident_seen": null,
+      "covers_2025_11_to_2026_05": "unknown",
+      "covers_2025_03_to_2025_09": "unknown",
+      "notes": "no reachable status page among candidates: ['https://status.hotaisle.xyz', 'https://hotaisle.statuspage.io', 'https://trust.hotaisle.xyz']"
+    },
+    {
+      "rating_name": "Buzz HPC",
+      "releases": [
+        "2.0"
+      ],
+      "tier_1_0": null,
+      "tier_2_0": "Bronze",
+      "homepage": "https://www.buzzhpc.ai",
+      "status_url": null,
+      "platform": "none",
+      "api_summary_ok": null,
+      "history_url_pattern": null,
+      "oldest_incident_seen": null,
+      "covers_2025_11_to_2026_05": "unknown",
+      "covers_2025_03_to_2025_09": "unknown",
+      "notes": "corrected homepage to buzzhpc.ai (buzzhpc.com guess failed to resolve). No status link found on homepage; status.buzzhpc.ai does not resolve; buzzhpc.statuspage.io redirects to atlassian.com/software/statuspage (unclaimed slug). No public status page found."
+    },
+    {
+      "rating_name": "Vast.ai",
+      "releases": [
+        "1.0",
+        "2.0"
+      ],
+      "tier_1_0": "Underperforming",
+      "tier_2_0": "Bronze",
+      "homepage": "https://vast.ai",
+      "status_url": "https://status.vast.ai",
+      "platform": "custom",
+      "api_summary_ok": false,
+      "history_url_pattern": "https://status.vast.ai",
+      "oldest_incident_seen": null,
+      "covers_2025_11_to_2026_05": "unknown",
+      "covers_2025_03_to_2025_09": "unknown",
+      "notes": "non-atlassian/non-status.io platform; manual history depth not probed within budget; "
+    },
+    {
+      "rating_name": "Sharon AI",
+      "releases": [
+        "2.0"
+      ],
+      "tier_1_0": null,
+      "tier_2_0": "Underperforming",
+      "homepage": "https://sharonai.com",
+      "status_url": "https://sharonai.statuspage.io",
+      "platform": "atlassian-statuspage",
+      "api_summary_ok": true,
+      "history_url_pattern": "https://sharonai.statuspage.io/api/v2/incidents.json (history?page=N UI is JS-rendered, not scraped)",
+      "oldest_incident_seen": "2026-07",
+      "covers_2025_11_to_2026_05": false,
+      "covers_2025_03_to_2025_09": false,
+      "notes": "history?page=1 loads=True; incidents.json returned 3 incidents; "
+    },
+    {
+      "rating_name": "IREN",
+      "releases": [
+        "2.0"
+      ],
+      "tier_1_0": null,
+      "tier_2_0": "Underperforming",
+      "homepage": "https://iren.com",
+      "status_url": null,
+      "platform": "none",
+      "api_summary_ok": null,
+      "history_url_pattern": null,
+      "oldest_incident_seen": null,
+      "covers_2025_11_to_2026_05": "unknown",
+      "covers_2025_03_to_2025_09": "unknown",
+      "notes": "no reachable status page among candidates: ['https://status.iren.com', 'https://iren.statuspage.io', 'https://trust.iren.com']"
+    },
+    {
+      "rating_name": "Hydra",
+      "releases": [
+        "2.0"
+      ],
+      "tier_1_0": null,
+      "tier_2_0": "Underperforming",
+      "homepage": "https://hydrahost.com",
+      "status_url": "https://status.hydrahost.com",
+      "platform": "betteruptime",
+      "api_summary_ok": false,
+      "history_url_pattern": "https://status.hydrahost.com",
+      "oldest_incident_seen": null,
+      "covers_2025_11_to_2026_05": "unknown",
+      "covers_2025_03_to_2025_09": "unknown",
+      "notes": "non-atlassian/non-status.io platform; manual history depth not probed within budget; "
+    },
+    {
+      "rating_name": "FarmGPU",
+      "releases": [
+        "2.0"
+      ],
+      "tier_1_0": null,
+      "tier_2_0": "Underperforming",
+      "homepage": "https://farmgpu.com",
+      "status_url": null,
+      "platform": "none",
+      "api_summary_ok": null,
+      "history_url_pattern": null,
+      "oldest_incident_seen": null,
+      "covers_2025_11_to_2026_05": "unknown",
+      "covers_2025_03_to_2025_09": "unknown",
+      "notes": "no reachable status page among candidates: ['https://status.farmgpu.com', 'https://farmgpu.statuspage.io', 'https://trust.farmgpu.com']"
+    },
+    {
+      "rating_name": "Whitefiber",
+      "releases": [
+        "2.0"
+      ],
+      "tier_1_0": null,
+      "tier_2_0": "Underperforming",
+      "homepage": "https://www.whitefiber.com/",
+      "status_url": null,
+      "platform": "none",
+      "api_summary_ok": null,
+      "history_url_pattern": null,
+      "oldest_incident_seen": null,
+      "covers_2025_11_to_2026_05": "unknown",
+      "covers_2025_03_to_2025_09": "unknown",
+      "notes": "no reachable status page among candidates: ['https://status.whitefiber.com', 'https://whitefiber.statuspage.io', 'https://trust.whitefiber.com']"
+    },
+    {
+      "rating_name": "deepinfra",
+      "releases": [
+        "2.0"
+      ],
+      "tier_1_0": null,
+      "tier_2_0": "Underperforming",
+      "homepage": "https://deepinfra.com",
+      "status_url": "https://status.deepinfra.com",
+      "platform": "custom",
+      "api_summary_ok": false,
+      "history_url_pattern": "https://status.deepinfra.com",
+      "oldest_incident_seen": null,
+      "covers_2025_11_to_2026_05": "unknown",
+      "covers_2025_03_to_2025_09": "unknown",
+      "notes": "non-atlassian/non-status.io platform; manual history depth not probed within budget; "
+    },
+    {
+      "rating_name": "dstack",
+      "releases": [
+        "2.0"
+      ],
+      "tier_1_0": null,
+      "tier_2_0": "Underperforming",
+      "homepage": "https://dstack.ai",
+      "status_url": null,
+      "platform": "none",
+      "api_summary_ok": null,
+      "history_url_pattern": null,
+      "oldest_incident_seen": null,
+      "covers_2025_11_to_2026_05": "unknown",
+      "covers_2025_03_to_2025_09": "unknown",
+      "notes": "no reachable status page among candidates: ['https://status.dstack.ai', 'https://dstack.statuspage.io', 'https://trust.dstack.ai']"
+    },
+    {
+      "rating_name": "PaleBlueDot.AI",
+      "releases": [
+        "2.0"
+      ],
+      "tier_1_0": null,
+      "tier_2_0": "Underperforming",
+      "homepage": "https://www.palebluedot.ai/",
+      "status_url": null,
+      "platform": "none",
+      "api_summary_ok": null,
+      "history_url_pattern": null,
+      "oldest_incident_seen": null,
+      "covers_2025_11_to_2026_05": "unknown",
+      "covers_2025_03_to_2025_09": "unknown",
+      "notes": "no reachable status page among candidates: ['https://status.palebluedot.ai', 'https://palebluedot.statuspage.io', 'https://trust.palebluedot.ai']"
+    },
+    {
+      "rating_name": "Hyperbolic",
+      "releases": [
+        "2.0"
+      ],
+      "tier_1_0": null,
+      "tier_2_0": "Underperforming",
+      "homepage": "https://www.hyperbolic.ai/",
+      "status_url": "https://status.hyperbolic.ai",
+      "platform": "custom",
+      "api_summary_ok": false,
+      "history_url_pattern": "https://status.hyperbolic.ai",
+      "oldest_incident_seen": null,
+      "covers_2025_11_to_2026_05": "unknown",
+      "covers_2025_03_to_2025_09": "unknown",
+      "notes": "non-atlassian/non-status.io platform; manual history depth not probed within budget; "
+    },
+    {
+      "rating_name": "GPU.NET",
+      "releases": [
+        "1.0",
+        "2.0"
+      ],
+      "tier_1_0": "Underperforming",
+      "tier_2_0": "Underperforming",
+      "homepage": "https://www.gpu.net/",
+      "status_url": "https://status.gpu.net",
+      "platform": "betteruptime",
+      "api_summary_ok": false,
+      "history_url_pattern": "https://status.gpu.net",
+      "oldest_incident_seen": null,
+      "covers_2025_11_to_2026_05": "unknown",
+      "covers_2025_03_to_2025_09": "unknown",
+      "notes": "non-atlassian/non-status.io platform; manual history depth not probed within budget; "
+    },
+    {
+      "rating_name": "Akamai",
+      "releases": [
+        "2.0"
+      ],
+      "tier_1_0": null,
+      "tier_2_0": "Underperforming",
+      "homepage": null,
+      "status_url": "https://www.akamaistatus.com",
+      "platform": "atlassian-statuspage",
+      "api_summary_ok": true,
+      "history_url_pattern": "https://www.akamaistatus.com/api/v2/incidents.json (history?page=N UI is JS-rendered, not scraped)",
+      "oldest_incident_seen": "2026-04",
+      "covers_2025_11_to_2026_05": "unknown",
+      "covers_2025_03_to_2025_09": "unknown",
+      "notes": "homepage fetch failed for all candidates; history?page=1 loads=True; incidents.json returned 50 incidents (looks capped at ~50, true depth beyond 2026-04 unknown); "
+    },
+    {
+      "rating_name": "Hetzner",
+      "releases": [
+        "2.0"
+      ],
+      "tier_1_0": null,
+      "tier_2_0": "Underperforming",
+      "homepage": "https://www.hetzner.com/",
+      "status_url": "https://status.hetzner.com",
+      "platform": "custom",
+      "api_summary_ok": false,
+      "history_url_pattern": "https://status.hetzner.com",
+      "oldest_incident_seen": null,
+      "covers_2025_11_to_2026_05": "unknown",
+      "covers_2025_03_to_2025_09": "unknown",
+      "notes": "non-atlassian/non-status.io platform; manual history depth not probed within budget; "
+    },
+    {
+      "rating_name": "Clore.ai",
+      "releases": [
+        "2.0"
+      ],
+      "tier_1_0": null,
+      "tier_2_0": "Underperforming",
+      "homepage": "https://clore.ai",
+      "status_url": null,
+      "platform": "none",
+      "api_summary_ok": null,
+      "history_url_pattern": null,
+      "oldest_incident_seen": null,
+      "covers_2025_11_to_2026_05": "unknown",
+      "covers_2025_03_to_2025_09": "unknown",
+      "notes": "no reachable status page among candidates: ['https://status.clore.ai', 'https://clore.statuspage.io', 'https://trust.clore.ai']"
+    },
+    {
+      "rating_name": "Massed Compute",
+      "releases": [
+        "1.0",
+        "2.0"
+      ],
+      "tier_1_0": "Underperforming",
+      "tier_2_0": "Underperforming",
+      "homepage": "https://massedcompute.com",
+      "status_url": "https://status.massedcompute.com",
+      "platform": "custom",
+      "api_summary_ok": false,
+      "history_url_pattern": "https://status.massedcompute.com",
+      "oldest_incident_seen": null,
+      "covers_2025_11_to_2026_05": "unknown",
+      "covers_2025_03_to_2025_09": "unknown",
+      "notes": "non-atlassian/non-status.io platform; manual history depth not probed within budget; "
+    },
+    {
+      "rating_name": "Exabits",
+      "releases": [
+        "2.0"
+      ],
+      "tier_1_0": null,
+      "tier_2_0": "Underperforming",
+      "homepage": "https://www.exabits.ai/",
+      "status_url": null,
+      "platform": "none",
+      "api_summary_ok": null,
+      "history_url_pattern": null,
+      "oldest_incident_seen": null,
+      "covers_2025_11_to_2026_05": "unknown",
+      "covers_2025_03_to_2025_09": "unknown",
+      "notes": "no reachable status page among candidates: ['https://status.exabits.ai', 'https://exabits.statuspage.io', 'https://trust.exabits.ai']"
+    },
+    {
+      "rating_name": "Sesterce",
+      "releases": [
+        "2.0"
+      ],
+      "tier_1_0": null,
+      "tier_2_0": "Underperforming",
+      "homepage": "https://www.sesterce.com/",
+      "status_url": null,
+      "platform": "none",
+      "api_summary_ok": null,
+      "history_url_pattern": null,
+      "oldest_incident_seen": null,
+      "covers_2025_11_to_2026_05": "unknown",
+      "covers_2025_03_to_2025_09": "unknown",
+      "notes": "no reachable status page among candidates: ['https://status.sesterce.com', 'https://sesterce.statuspage.io', 'https://trust.sesterce.com']"
+    },
+    {
+      "rating_name": "E2E Cloud",
+      "releases": [
+        "2.0"
+      ],
+      "tier_1_0": null,
+      "tier_2_0": "Underperforming",
+      "homepage": "https://www.e2enetworks.com/",
+      "status_url": "https://status.e2enetworks.com",
+      "platform": "custom",
+      "api_summary_ok": false,
+      "history_url_pattern": "https://status.e2enetworks.com",
+      "oldest_incident_seen": null,
+      "covers_2025_11_to_2026_05": "unknown",
+      "covers_2025_03_to_2025_09": "unknown",
+      "notes": "non-atlassian/non-status.io platform; manual history depth not probed within budget; "
+    },
+    {
+      "rating_name": "OVHcloud",
+      "releases": [
+        "2.0"
+      ],
+      "tier_1_0": null,
+      "tier_2_0": "Underperforming",
+      "homepage": "https://us.ovhcloud.com/",
+      "status_url": "https://status.us.ovhcloud.com",
+      "platform": "status.io",
+      "api_summary_ok": false,
+      "history_url_pattern": "https://status.us.ovhcloud.com/pages/history/59dd23da8827c804746f1664?date=YYYY-MM",
+      "oldest_incident_seen": "2025-01",
+      "covers_2025_11_to_2026_05": true,
+      "covers_2025_03_to_2025_09": true,
+      "notes": "status.io month probe (coarse, 6 sample months): {'2026-04': 'reachable-content-present', '2025-11': 'reachable-content-present', '2025-09': 'reachable-content-present', '2025-06': 'reachable-content-present', '2025-03': 'reachable-content-present', '2025-01': 'reachable-content-present'}; "
+    },
+    {
+      "rating_name": "Aethir",
+      "releases": [
+        "2.0"
+      ],
+      "tier_1_0": null,
+      "tier_2_0": "Underperforming",
+      "homepage": "https://aethir.com",
+      "status_url": null,
+      "platform": "none",
+      "api_summary_ok": null,
+      "history_url_pattern": null,
+      "oldest_incident_seen": null,
+      "covers_2025_11_to_2026_05": "unknown",
+      "covers_2025_03_to_2025_09": "unknown",
+      "notes": "no reachable status page among candidates: ['https://status.aethir.com', 'https://aethir.statuspage.io', 'https://trust.aethir.com']"
+    },
+    {
+      "rating_name": "Akash",
+      "releases": [
+        "1.0",
+        "2.0"
+      ],
+      "tier_1_0": "Underperforming",
+      "tier_2_0": "Underperforming",
+      "homepage": "https://akash.network",
+      "status_url": null,
+      "platform": "none",
+      "api_summary_ok": null,
+      "history_url_pattern": null,
+      "oldest_incident_seen": null,
+      "covers_2025_11_to_2026_05": "unknown",
+      "covers_2025_03_to_2025_09": "unknown",
+      "notes": "no reachable status page among candidates: ['https://status.akash.network', 'https://akash.statuspage.io', 'https://trust.akash.network']"
+    },
+    {
+      "rating_name": "Salad",
+      "releases": [
+        "1.0",
+        "2.0"
+      ],
+      "tier_1_0": "Underperforming",
+      "tier_2_0": "Underperforming",
+      "homepage": "https://salad.com",
+      "status_url": "https://status.salad.com",
+      "platform": "custom",
+      "api_summary_ok": false,
+      "history_url_pattern": "https://status.salad.com",
+      "oldest_incident_seen": null,
+      "covers_2025_11_to_2026_05": "unknown",
+      "covers_2025_03_to_2025_09": "unknown",
+      "notes": "non-atlassian/non-status.io platform; manual history depth not probed within budget; "
+    },
+    {
+      "rating_name": "Mithril",
+      "releases": [
+        "2.0"
+      ],
+      "tier_1_0": null,
+      "tier_2_0": "Underperforming",
+      "homepage": "https://mithril.ai",
+      "status_url": "https://status.mithril.ai",
+      "platform": "atlassian-statuspage",
+      "api_summary_ok": true,
+      "history_url_pattern": "https://status.mithril.ai/api/v2/incidents.json (history?page=N UI is JS-rendered, not scraped)",
+      "oldest_incident_seen": null,
+      "covers_2025_11_to_2026_05": "unknown",
+      "covers_2025_03_to_2025_09": "unknown",
+      "notes": "history?page=1 loads=True; incidents.json returned 0 incidents; "
+    },
+    {
+      "rating_name": "Lepton AI",
+      "releases": [
+        "1.0"
+      ],
+      "tier_1_0": "Gold",
+      "tier_2_0": null,
+      "homepage": "https://www.nvidia.com/en-us/data-center/dgx-cloud-lepton/",
+      "status_url": null,
+      "platform": "none",
+      "api_summary_ok": null,
+      "history_url_pattern": null,
+      "oldest_incident_seen": null,
+      "covers_2025_11_to_2026_05": "unknown",
+      "covers_2025_03_to_2025_09": "unknown",
+      "notes": "no reachable status page among candidates: ['https://status.nvidia.com', 'https://leptonai.statuspage.io', 'https://trust.nvidia.com']"
+    },
+    {
+      "rating_name": "SMC",
+      "releases": [
+        "1.0"
+      ],
+      "tier_1_0": "Silver",
+      "tier_2_0": null,
+      "homepage": "https://smc.co",
+      "status_url": null,
+      "platform": "none",
+      "api_summary_ok": null,
+      "history_url_pattern": null,
+      "oldest_incident_seen": null,
+      "covers_2025_11_to_2026_05": "unknown",
+      "covers_2025_03_to_2025_09": "unknown",
+      "notes": "real company is Sustainable Metal Cloud (smc.co), likely the same underlying provider as 'Firmus' in 2.0 (ClusterMAX review page title is 'Firmus / Sustainable Metal Cloud (SMC)'; not merged here since the source rating files carry no explicit merge note for this pair, unlike GMI/GMI Cloud or Verda/DataCrunch). smc.statuspage.io resolves and returns valid Atlassian JSON, but its sole component is named 'API (example)' and its only incident is literally titled 'This is an example incident' (created 2022-03-18) -- an unconfigured demo Statuspage tenant, not a real status page for this company. No status/trust link found on smc.co homepage; status.smc.co and trust.smc.co do not resolve. Treated as no public status page found."
+    },
+    {
+      "rating_name": "Iris Energy",
+      "releases": [
+        "1.0"
+      ],
+      "tier_1_0": "Underperforming",
+      "tier_2_0": null,
+      "homepage": "https://iren.com",
+      "status_url": null,
+      "platform": "none",
+      "api_summary_ok": null,
+      "history_url_pattern": null,
+      "oldest_incident_seen": null,
+      "covers_2025_11_to_2026_05": "unknown",
+      "covers_2025_03_to_2025_09": "unknown",
+      "notes": "no reachable status page among candidates: ['https://status.iren.com', 'https://irisenergy.statuspage.io', 'https://trust.iren.com']"
+    }
+  ]
+}

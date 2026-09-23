@@ -1,0 +1,14 @@
+{
+  "schema": "secondrun.rating-transform.v1",
+  "anchors": {
+    "Platinum": 0.90,
+    "Gold": 0.80,
+    "Silver": 0.70,
+    "Bronze": 0.60,
+    "Underperforming": 0.30
+  },
+  "weight": 0.25,
+  "reference_anchor": 0.50,
+  "alternative_weights": [0.10, 0.40],
+  "description": "These anchor probabilities, the blend weight and the neutral reference anchor are SecondRun's uncalibrated research assumptions, chosen to make a medal-to-probability mapping concrete enough to test. They are not probabilities asserted by SemiAnalysis, and they were not fitted to any real outcome data. Frozen before any provider outcome packet is scored; the alternative_weights values are a prespecified sensitivity check, not a search for the most favorable weight."
+}

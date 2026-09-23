@@ -1,0 +1,46 @@
+[
+  {
+    "url": "https://api.github.com/repos/SemiAnalysisAI/ClusterMAX/releases/378231185",
+    "assets_url": "https://api.github.com/repos/SemiAnalysisAI/ClusterMAX/releases/378231185/assets",
+    "upload_url": "https://uploads.github.com/repos/SemiAnalysisAI/ClusterMAX/releases/378231185/assets{?name,label}",
+    "html_url": "https://github.com/SemiAnalysisAI/ClusterMAX/releases/tag/v0.2.1",
+    "id": 378231185,
+    "author": {
+      "login": "JordanNanos",
+      "id": 16803355,
+      "node_id": "MDQ6VXNlcjE2ODAzMzU1",
+      "avatar_url": "https://avatars.githubusercontent.com/u/16803355?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/JordanNanos",
+      "html_url": "https://github.com/JordanNanos",
+      "followers_url": "https://api.github.com/users/JordanNanos/followers",
+      "following_url": "https://api.github.com/users/JordanNanos/following{/other_user}",
+      "gists_url": "https://api.github.com/users/JordanNanos/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/JordanNanos/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/JordanNanos/subscriptions",
+      "organizations_url": "https://api.github.com/users/JordanNanos/orgs",
+      "repos_url": "https://api.github.com/users/JordanNanos/repos",
+      "events_url": "https://api.github.com/users/JordanNanos/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/JordanNanos/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "node_id": "RE_kwDOUEbLkc4Wi1mR",
+    "tag_name": "v0.2.1",
+    "target_commitish": "d69d7d799434e54b485fe0e1f73ed570e3990593",
+    "name": "ClusterMAX 0.2.1",
+    "draft": false,
+    "immutable": false,
+    "prerelease": false,
+    "created_at": "2026-08-28T02:31:26Z",
+    "updated_at": "2026-08-28T02:38:39Z",
+    "published_at": "2026-08-28T02:38:39Z",
+    "assets": [
+
+    ],
+    "tarball_url": "https://api.github.com/repos/SemiAnalysisAI/ClusterMAX/tarball/v0.2.1",
+    "zipball_url": "https://api.github.com/repos/SemiAnalysisAI/ClusterMAX/zipball/v0.2.1",
+    "body": "ClusterMAX 0.2.1 is the first stable public release of the cmax command-line interface.\n\nInstall the stable release:\n\n```bash\npip install clustermax\ncmax --version\n```\n\nInstall the current ClusterMAX 0.3.0 development build:\n\n```bash\npip install --pre --upgrade clustermax\ncmax --version\n```\n\nThe package uses trusted publishing from GitHub Actions. No PyPI token is stored in the repository."
+  }
+]

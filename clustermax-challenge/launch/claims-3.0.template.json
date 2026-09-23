@@ -1,0 +1,18 @@
+{
+  "schema": "secondrun.launch-claims.v1",
+  "release_name": "ClusterMAX 3.0",
+  "release_url": "",
+  "retrieved_utc": "",
+  "medal_table_source": {"url": "", "sha256": "", "retrieved_utc": ""},
+  "rubric_source": {"url": "", "sha256": "", "retrieved_utc": ""},
+  "medals": {
+    "EXAMPLE_PROVIDER": {
+      "medal": "Gold",
+      "scope": {"status": "NOT_YET_RELEASED"},
+      "observation_conditions": {"status": "NOT_YET_RELEASED"},
+      "evidence": {"status": "NOT_YET_RELEASED"},
+      "test_dates": {"status": "NOT_YET_RELEASED"},
+      "predictive_check": {"status": "NOT_YET_RELEASED"}
+    }
+  }
+}

@@ -1,0 +1,339 @@
+{
+  "schema": "secondrun.status-incidents.v1",
+  "provider": "lightning-ai",
+  "status_page_url": "https://status.lightning.ai",
+  "retrieved_utc": "2026-09-23T10:01:35Z",
+  "raw_files": [
+    {
+      "path": "retrospective/incidents/raw/lightning-ai/history-page-1.json",
+      "sha256": "22f84bc9bab42ad054dbd976825b742a2da2784faf22fafc0afe2117de9ccd42",
+      "url": "https://status.lightning.ai/history.json?page=1"
+    },
+    {
+      "path": "retrospective/incidents/raw/lightning-ai/history-page-2.json",
+      "sha256": "8c5b2fd54f35f0d46e27ffc15bb3622b88546d86c2cfa1885bc18f23c1dc8d94",
+      "url": "https://status.lightning.ai/history.json?page=2"
+    },
+    {
+      "path": "retrospective/incidents/raw/lightning-ai/history-page-3.json",
+      "sha256": "ef845e303541b8ea661e731c8573acd5e1b92ae06604f51b8cc379fef503f29e",
+      "url": "https://status.lightning.ai/history.json?page=3"
+    },
+    {
+      "path": "retrospective/incidents/raw/lightning-ai/history-page-4.json",
+      "sha256": "38beb42663e6b109984bf415322d7199e8bf574b17a5f5117b4fbf64a956e696",
+      "url": "https://status.lightning.ai/history.json?page=4"
+    },
+    {
+      "path": "retrospective/incidents/raw/lightning-ai/history-page-5.json",
+      "sha256": "346c4e600285e64c5af0b802253706db2eefb62c01ebda2df4820773c33af7e6",
+      "url": "https://status.lightning.ai/history.json?page=5"
+    },
+    {
+      "path": "retrospective/incidents/raw/lightning-ai/history-page-6.json",
+      "sha256": "626b19effdfbc1335e771abe87938f66604251b9e741fec97f50a0db354734aa",
+      "url": "https://status.lightning.ai/history.json?page=6"
+    },
+    {
+      "path": "retrospective/incidents/raw/lightning-ai/history-page-7.json",
+      "sha256": "5e06ca4e3991a436b3fc6bdff24177b90c8b6c9d22cf383e2c3f15744dee4d02",
+      "url": "https://status.lightning.ai/history.json?page=7"
+    },
+    {
+      "path": "retrospective/incidents/raw/lightning-ai/incident-54075wyd8zk5.json",
+      "sha256": "a4c60b4c004bb14d4196e498da79f1d05fc8914775afaceaed7bd51283fbaa08",
+      "url": "https://status.lightning.ai/incidents/54075wyd8zk5.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/lightning-ai/incident-dfjmdbj7gwt5.json",
+      "sha256": "ec9c478db2a1ed411ec9cd88c979d95d51db55642bacc21a341c103a788337ac",
+      "url": "https://status.lightning.ai/incidents/dfjmdbj7gwt5.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/lightning-ai/incident-6h57dkwhgd86.json",
+      "sha256": "7bfeadb15e9d70f7b71a281a31f5a95a8dda0a7c32ea163450887bb4a13df115",
+      "url": "https://status.lightning.ai/incidents/6h57dkwhgd86.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/lightning-ai/incident-b8xxch3g03vp.json",
+      "sha256": "cc0d375f0b5afd1bda038c822071203de0023ead6e24ba349a1763a0f6b5ca8c",
+      "url": "https://status.lightning.ai/incidents/b8xxch3g03vp.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/lightning-ai/incident-m5vs9t40spfk.json",
+      "sha256": "e21f795144b9c4d68c9104c23ac4284271436189c0024ee4ba727ddfedf364f4",
+      "url": "https://status.lightning.ai/incidents/m5vs9t40spfk.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/lightning-ai/incident-mf42wm8403f7.json",
+      "sha256": "2e89f987a1e9496648b1596cd7603adc38eaf1b0e48f56cfc6c076c96a8c7517",
+      "url": "https://status.lightning.ai/incidents/mf42wm8403f7.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/lightning-ai/incident-lvczhv4bfrmm.json",
+      "sha256": "c9d2fd13061ec67fd380741573e0a6b242a2cc03539d0596b28fd26257f73ee7",
+      "url": "https://status.lightning.ai/incidents/lvczhv4bfrmm.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/lightning-ai/incident-gkkry0y17m9d.json",
+      "sha256": "c7b47fe3a98df3103bdc71efa3e261f86db0ce75860ac061312481ae6dfc2089",
+      "url": "https://status.lightning.ai/incidents/gkkry0y17m9d.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/lightning-ai/incident-069cdk26t1bd.json",
+      "sha256": "8d3d88b1a6bc9009657ee431b4cfcf94164cc458befdd38d5b88b46ff7bac990",
+      "url": "https://status.lightning.ai/incidents/069cdk26t1bd.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/lightning-ai/incident-6f6rkxlhm9rm.json",
+      "sha256": "8aa42158f6ee002ff1b02ee3330c95ce1b61705e235fc2132c22ef7f9d45adb1",
+      "url": "https://status.lightning.ai/incidents/6f6rkxlhm9rm.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/lightning-ai/incident-pv4dvp58mw7j.json",
+      "sha256": "d1d2ded4dc23edc3a31789dedc2c6c8f090ad63cc3d86d0a214210304e21016f",
+      "url": "https://status.lightning.ai/incidents/pv4dvp58mw7j.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/lightning-ai/incident-wtgn8m3536nn.json",
+      "sha256": "b77297530d06ffcf7e727be87a0aba35d5aa0fa4781200dd22d6748c65a3b6d5",
+      "url": "https://status.lightning.ai/incidents/wtgn8m3536nn.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/lightning-ai/incident-gv79jlyq6m2g.json",
+      "sha256": "496b48f4062cb74d1d27f6ec60aab6bfa1ec7015b791347907ae950081e9be56",
+      "url": "https://status.lightning.ai/incidents/gv79jlyq6m2g.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/lightning-ai/incident-p1nnxgmbbdm5.json",
+      "sha256": "ec3008cd74f82186e3ad2e8ff3c76210e1bc2008b2509bc0d63e32cbd2f625f0",
+      "url": "https://status.lightning.ai/incidents/p1nnxgmbbdm5.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/lightning-ai/incident-ts4jr3w0rkw9.json",
+      "sha256": "ee7db0f48b3e52abafdacb59c59ad427cc5206ff71881e70260880d02d4ade6e",
+      "url": "https://status.lightning.ai/incidents/ts4jr3w0rkw9.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/lightning-ai/incident-5zldrsl1hqm7.json",
+      "sha256": "95491bac8c03751469eee678d98789ce7bce22570a26f035d8ebddaf11b9697e",
+      "url": "https://status.lightning.ai/incidents/5zldrsl1hqm7.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/lightning-ai/incident-321hzm0qcc67.json",
+      "sha256": "c1b5e50905f54d6874fe0e78efb1208bf67654e317b312377a0c85766c5c3930",
+      "url": "https://status.lightning.ai/incidents/321hzm0qcc67.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/lightning-ai/incident-l9s43c7wbq9n.json",
+      "sha256": "9fd0378d244bde10effc165172cce3b23b406cc0b629f12b911dea7979eeb97b",
+      "url": "https://status.lightning.ai/incidents/l9s43c7wbq9n.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/lightning-ai/incident-0d9gvw1hbz3s.json",
+      "sha256": "c68d276989d39ff3e03573540de8540dbf2c0f334fe0cd5256356dd4d86b3fbc",
+      "url": "https://status.lightning.ai/incidents/0d9gvw1hbz3s.json"
+    }
+  ],
+  "coverage_start": "2025-01-01",
+  "coverage_end": "2026-09-23",
+  "severity_map": {
+    "minor": "minor",
+    "none": "none",
+    "major": "major",
+    "critical": "critical"
+  },
+  "incidents": [
+    {
+      "id": "0d9gvw1hbz3s",
+      "title": "Platform outage",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2025-04-07T11:15:00.371Z",
+      "resolved_utc": "2025-04-07T12:23:56.098Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/jhjfhftkwdd5"
+    },
+    {
+      "id": "l9s43c7wbq9n",
+      "title": "Credit activity bug",
+      "impact_label": "none",
+      "severity": "none",
+      "started_utc": "2025-04-23T22:19:49.000Z",
+      "resolved_utc": "2025-04-24T02:30:18.771Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/3ybxpjm1zxb4"
+    },
+    {
+      "id": "321hzm0qcc67",
+      "title": "Major Outage: All Workloads Impacted",
+      "impact_label": "major",
+      "severity": "major",
+      "started_utc": "2025-06-12T18:27:29.565Z",
+      "resolved_utc": "2025-06-12T20:43:30.872Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/d3ckt63vkh1j"
+    },
+    {
+      "id": "5zldrsl1hqm7",
+      "title": "Regional outage",
+      "impact_label": "none",
+      "severity": "none",
+      "started_utc": "2025-10-02T15:00:00.000Z",
+      "resolved_utc": "2025-10-02T15:00:00.000Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/2ystn7xlcp5j"
+    },
+    {
+      "id": "ts4jr3w0rkw9",
+      "title": "Temporary Service Interruption - Workloads restarted",
+      "impact_label": "none",
+      "severity": "none",
+      "started_utc": "2025-10-06T14:00:00.000Z",
+      "resolved_utc": "2025-10-06T14:00:00.000Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/lmgj83r6p2q4"
+    },
+    {
+      "id": "p1nnxgmbbdm5",
+      "title": "Service degraded - AWS",
+      "impact_label": "none",
+      "severity": "none",
+      "started_utc": "2025-10-20T07:30:52.000Z",
+      "resolved_utc": "2025-10-20T23:00:07.000Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/nb05cj8h34hd"
+    },
+    {
+      "id": "gv79jlyq6m2g",
+      "title": "Some services experiencing failures",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2025-11-18T21:10:22.645Z",
+      "resolved_utc": "2025-11-18T22:05:30.811Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/zr2d43bhvqvp"
+    },
+    {
+      "id": "wtgn8m3536nn",
+      "title": "Website down",
+      "impact_label": "none",
+      "severity": "none",
+      "started_utc": "2025-12-10T11:00:46.862Z",
+      "resolved_utc": "2025-12-10T11:22:10.000Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/qznfrfvw3tn3"
+    },
+    {
+      "id": "pv4dvp58mw7j",
+      "title": "Website down",
+      "impact_label": "none",
+      "severity": "none",
+      "started_utc": "2026-02-06T22:00:00.000Z",
+      "resolved_utc": "2026-02-06T22:00:00.000Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/0pbkrbb22rwk"
+    },
+    {
+      "id": "6f6rkxlhm9rm",
+      "title": "Degraded performance on Nebius",
+      "impact_label": "none",
+      "severity": "none",
+      "started_utc": "2026-04-29T19:13:54.709Z",
+      "resolved_utc": "2026-04-29T22:50:19.862Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/zlk0h2t9wprl"
+    },
+    {
+      "id": "069cdk26t1bd",
+      "title": "Degraded performance on Nebius",
+      "impact_label": "none",
+      "severity": "none",
+      "started_utc": "2026-05-14T19:08:51.183Z",
+      "resolved_utc": "2026-05-15T13:02:36.242Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/9pgz9m15xnnd"
+    },
+    {
+      "id": "gkkry0y17m9d",
+      "title": "Degraded performance on Nebius",
+      "impact_label": "none",
+      "severity": "none",
+      "started_utc": "2026-05-20T21:15:51.259Z",
+      "resolved_utc": "2026-05-21T01:12:16.230Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/8m0v3dnmg6ks"
+    },
+    {
+      "id": "lvczhv4bfrmm",
+      "title": "Degraded experience with AWS on Lightning Cloud",
+      "impact_label": "major",
+      "severity": "major",
+      "started_utc": "2026-06-08T20:58:33.373Z",
+      "resolved_utc": "2026-06-09T04:47:44.605Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/92cvxx5hp2ys"
+    },
+    {
+      "id": "mf42wm8403f7",
+      "title": "Website performance degraded",
+      "impact_label": "none",
+      "severity": "none",
+      "started_utc": "2026-06-22T14:37:38.000Z",
+      "resolved_utc": "2026-06-22T16:41:20.000Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/r56dy7v9l56l"
+    },
+    {
+      "id": "m5vs9t40spfk",
+      "title": "Degraded Studio environment restore performance",
+      "impact_label": "none",
+      "severity": "none",
+      "started_utc": "2026-07-22T14:00:33.000Z",
+      "resolved_utc": "2026-07-23T20:08:54.134Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/ztbg0lrxx8qz"
+    },
+    {
+      "id": "b8xxch3g03vp",
+      "title": "Website down",
+      "impact_label": "none",
+      "severity": "none",
+      "started_utc": "2026-07-28T17:18:06.000Z",
+      "resolved_utc": "2026-07-28T17:37:53.728Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/jrfx9cwyqbgw"
+    },
+    {
+      "id": "6h57dkwhgd86",
+      "title": "Lightning Cloud workloads",
+      "impact_label": "critical",
+      "severity": "critical",
+      "started_utc": "2026-08-14T16:36:43.000Z",
+      "resolved_utc": "2026-08-14T16:49:37.885Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/zm4b5x3m38kz"
+    },
+    {
+      "id": "dfjmdbj7gwt5",
+      "title": "Degraded Performance on Lightning Cloud Workloads",
+      "impact_label": "none",
+      "severity": "none",
+      "started_utc": "2026-09-04T22:29:43.687Z",
+      "resolved_utc": "2026-09-05T00:36:51.169Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/7vw126958ltg"
+    },
+    {
+      "id": "54075wyd8zk5",
+      "title": "Degraded Performance on Lightning Cloud Workloads",
+      "impact_label": "none",
+      "severity": "none",
+      "started_utc": "2026-09-10T20:37:03.110Z",
+      "resolved_utc": "2026-09-10T21:08:09.500Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/s00ljft5rg8b"
+    }
+  ],
+  "notes": []
+}
