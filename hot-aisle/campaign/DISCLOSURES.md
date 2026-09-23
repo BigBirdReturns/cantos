@@ -32,3 +32,14 @@ Read this before any number from `results/`. Written after two independent revie
 
 ## Timestamps
 All commits are **local and unpushed**. They order the work inside this repository but are not an independent registration, since git dates can be edited. Anything called "pre-registered" here means *privately recorded before the data*, not publicly timestamped.
+
+## Added 2026-09-23 late
+- **Whole-run view of Run 1** (per-run ledger, `ledger/examples/`): modeled from request to work end, all cells included, H100 $0.980 against MI300X $0.925 per 1k latency-accepted requests, **~5.7 % lower**. This is a different aggregation from the 53 % cell-level figure (selected qualifying cells, no setup). Both stand, labelled. Neither is an invoice or a correctness result.
+- **Run 2 post-hoc exploration** (`results/run2-explore-hotaisle-mi300x`, `run2/EXPLORE.md`). One repeat, same seeds as registered repeat 0. Forcing `--attention-backend ROCM_AITER_FA` (vLLM had auto-selected `ROCM_ATTN`):
+  - long c8: +28 % req/s
+  - long c32: +46 % (p95 TTFT 57 s → 37 s)
+  - short c32/c64: +9 % / +11 %
+  - c1: unchanged
+
+  The FP8 linear kernel stayed on the torch fallback. This is a hypothesis for a frozen confirmation run, not a claim.
+- The Hot Aisle VM was deleted 2026-09-23 ~22:35 UTC after all results were collected and manifests verified. About $15 of the $200 credit was used.
