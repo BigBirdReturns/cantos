@@ -22,6 +22,7 @@ RESULT_DIR=/tmp/workload-report
 HF_CACHE="${HF_CACHE:-$HOME/hf-cache}"
 MAX_MODEL_LEN=4096            # 2048 in + 256 out with margin; keeps the KV budget honest across arms
 MAX_BENCH_MINUTES="${MAX_BENCH_MINUTES:-50}"   # watchdog for the manual bench loop
+TP="${TP:-1}"                  # tensor parallel; set TP=2 on a 2-GPU allocation so the whole billed allocation serves
 
 here="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 log() { printf '%s %s\n' "$(date -u +%H:%M:%S)" "$*"; }
@@ -58,7 +59,7 @@ serve() {
     -e HF_HUB_ENABLE_HF_TRANSFER=0 ${HF_TOKEN:+-e HF_TOKEN="$HF_TOKEN"} \
     --entrypoint vllm "$image" serve "$MODEL" --revision "$REVISION" --tokenizer-revision "$REVISION" \
     --served-model-name "$MODEL" --port "$PORT" --max-model-len "$MAX_MODEL_LEN" \
-    --gpu-memory-utilization 0.90 --disable-log-requests >/dev/null
+    --tensor-parallel-size "${TP:-1}" --gpu-memory-utilization 0.90 >/dev/null   # request logging is off by default in vLLM >= 0.10; 0.30.0 rejects --disable-log-requests
   log "waiting for /v1/models (model download + load; typically 5-15 min on a datacenter link)"
   local t0=$SECONDS
   until curl -sf "http://127.0.0.1:$PORT/v1/models" >/dev/null; do
@@ -81,7 +82,7 @@ env_record() {
     driver="$(nvidia-smi --query-gpu=driver_version --format=csv,noheader 2>/dev/null | head -1 || true)"
   fi
   local vllm_version; vllm_version="$(dk exec vllm vllm --version 2>/dev/null | tail -1 || echo unknown)"
-  local image_id; image_id="$(dk inspect --format '{{index .RepoDigests 0}}' vllm 2>/dev/null || true)"
+  local image_id; image_id="$(dk image inspect --format "{{index .RepoDigests 0}}" "$(dk inspect --format "{{.Config.Image}}" vllm)" 2>/dev/null || true)"
   cat > "$RESULT_DIR/env.json" <<EOF
 {
   "schema": "second-run/arm-environment@1",

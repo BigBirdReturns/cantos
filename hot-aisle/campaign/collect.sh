@@ -9,7 +9,7 @@ arm="${1:?arm name, e.g. do-h100}"; host="${2:?user@host}"; port="${3:-22}"
 here="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 dest="$here/results/$arm"
 mkdir -p "$dest"
-scp -o BatchMode=yes -o StrictHostKeyChecking=accept-new -P "$port" "$host":/tmp/workload-report/'*' "$dest"/
+scp ${SSH_KEY:+-i "$SSH_KEY"} -o BatchMode=yes -o StrictHostKeyChecking=accept-new -P "$port" "$host":/tmp/workload-report/'*' "$dest"/
 ( cd "$dest" && sha256sum -c MANIFEST.sha256 )
 n=$(ls "$dest"/cell-*.json 2>/dev/null | wc -l)
 echo "$arm: $n result files verified in $dest"

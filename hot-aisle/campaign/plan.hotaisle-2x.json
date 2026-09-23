@@ -1,0 +1,79 @@
+{
+  "target": {
+    "adapter": "hotaisle",
+    "exec": "ssh",
+    "host": "__VM_SSH_HOST__",
+    "ssh_user": "__VM_SSH_USER__",
+    "name": "__VM_NAME__",
+    "deployment_id": "__VM_DEPLOYMENT_ID__",
+    "gpus": 2,
+    "gpu_model": "AMD MI300X",
+    "allocation_label": "2\u00d7 MI300X VM",
+    "vllm_command": [
+      "docker",
+      "exec",
+      "vllm",
+      "vllm",
+      "bench",
+      "serve"
+    ],
+    "remote_dir": "/tmp/workload-report"
+  },
+  "workload": {
+    "model": "Qwen/Qwen3-Coder-30B-A3B-Instruct-FP8",
+    "base_url": "http://127.0.0.1:8000",
+    "dataset": "random",
+    "input_len": 2048,
+    "output_len": 256,
+    "num_prompts": 200,
+    "request_rate": "inf",
+    "seed": 7
+  },
+  "concurrency": [
+    1,
+    8,
+    32,
+    64
+  ],
+  "repeats": 3,
+  "identity": {
+    "model_revision": "dcaee4d4dfc5ee71ad501f01f530e5652438fde0",
+    "precision": "FP8",
+    "tokenizer_revision": "dcaee4d4dfc5ee71ad501f01f530e5652438fde0",
+    "workload_id": "random-seed7-in2048-out256-n200-v1",
+    "cache_policy": "warm",
+    "runtime_digest": "rocm/vllm@sha256:30761c2125ce150d556bef46406a0158446421886bf83a2e60154c6e4ca17a13"
+  },
+  "price": {
+    "provider": "Hot Aisle",
+    "gpus": 2,
+    "rate": 2.99,
+    "extra": 0,
+    "source": "https://hotaisle.xyz/pricing",
+    "period": "2026-09-22 snapshot; replace with the API-retrieved price the runner shows at plan time"
+  },
+  "comparator": {
+    "provider": "DigitalOcean H100",
+    "gpus": 1,
+    "rate": 4.41,
+    "extra": 0,
+    "source": "https://www.digitalocean.com/pricing/gpu-droplets",
+    "period": "2026-09-22 snapshot"
+  },
+  "limits": {
+    "max_minutes": 75,
+    "max_spend_usd": 12
+  },
+  "gates": {
+    "ttft": null,
+    "e2e": null,
+    "queue": false,
+    "quality": false
+  },
+  "requirements": {
+    "max_p95_ttft_ms": 1000,
+    "max_p95_e2e_ms": 15000,
+    "min_accepted_per_s": null,
+    "max_failure_rate": 0.01
+  }
+}
