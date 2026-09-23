@@ -63,7 +63,9 @@ async function staticPass(browser) {
   await page.click('#copy'); await page.waitForTimeout(100);
   check('static', 'copy_confirms', /Copied|Saved as/.test(await page.locator('#copy').innerText()));
   await page.setViewportSize({ width: 390, height: 844 }); await page.waitForTimeout(200);
-  check('static', 'phone_no_horizontal_scroll', await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1));
+  const layout = await page.evaluate(() => ({width:innerWidth,scrollWidth:document.documentElement.scrollWidth,overflow:[...document.querySelectorAll('body *')].filter(e=>{const r=e.getBoundingClientRect();return r.width&&r.right>innerWidth+1&&!e.closest('.scrollx')&&!e.closest('.top nav');}).map(e=>({tag:e.tagName,id:e.id,class:e.className,width:e.getBoundingClientRect().width,right:e.getBoundingClientRect().right,text:e.textContent.slice(0,100)})).slice(0,30)}));
+  if(layout.scrollWidth>layout.width+1){results.layout=layout;fs.mkdirSync('instrument-browser-qa',{recursive:true});await page.screenshot({path:'instrument-browser-qa/overflow.png',fullPage:true});}
+  check('static', 'phone_no_horizontal_scroll', layout.scrollWidth <= layout.width + 1);
   check('static', 'phone_nav_visible', await page.locator('.top nav').isVisible());
   check('static', 'phone_ledger_scrolls_not_clips', await page.evaluate(() => { const w = document.querySelector('#headline .scrollx'); return !!w && getComputedStyle(w).overflowX === 'auto' && w.scrollWidth >= w.clientWidth; }));
   await page.close();
