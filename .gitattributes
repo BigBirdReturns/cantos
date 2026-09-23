@@ -4,3 +4,7 @@ integration/** text eol=lf
 *.zip binary
 
 .github/workflows/hot-aisle-ci.yml text eol=lf
+
+# Campaign evidence and hashed fixtures must stay byte-identical (MANIFEST.sha256).
+hot-aisle/campaign/results/** -text
+hot-aisle/campaign/**/fixtures/** -text
