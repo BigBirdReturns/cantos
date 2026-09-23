@@ -5,6 +5,7 @@
   "campaign": "first-qualified-workload-2026-09",
   "run": "run1",
   "arm": "do-h100",
+  "tier": null,
   "knot_id": null,
   "seat_id": "do-h100-nyc2",
   "provider": "digitalocean",
@@ -34,7 +35,8 @@
    "note": "local, unpushed commits (DISCLOSURES 'Timestamps'): privately recorded before the data, not publicly timestamped"
   },
   "null_reasons": {
-   "knot_id": "Run 1 predates the Knot lifecycle; the reconstructed event log uses knot id run1/do-h100"
+   "knot_id": "Run 1 predates the Knot lifecycle; the reconstructed event log uses knot id run1/do-h100",
+   "tier": "Run 1 declared no tuning tiers (DISCLOSURES: unequal software)"
   }
  },
  "clocks": {
@@ -71,7 +73,7 @@
    }
   },
   "null_reasons": {
-   "t_released": "Run 1 did not record the seat deletion time; the console/TUI delete was not logged"
+   "t_released": "Run 1 did not record the seat deletion time; the console/TUI delete was not logged (container stop is not release)"
   }
  },
  "acquisition": {
@@ -81,10 +83,12 @@
     "provider": "digitalocean",
     "region": "nyc2",
     "sku": "gpu-h100x1-80gb",
+    "layer": "delivered",
     "method": "console-create",
     "outcome": "available",
     "provisioned": true,
     "time_to_ssh_s": 60,
+    "attempt_id": null,
     "note": "arm B Run 1; droplet 603084148",
     "source": "campaign/availability/observations.jsonl"
    }
@@ -92,13 +96,13 @@
   "n_attempts": 1,
   "n_allocations": 1,
   "yield": 1.0,
-  "note": "Run 1 made exactly one create per arm and it succeeded; listings the same evening (H200, DO MI300X out of capacity) belong to other arms and are not attempts here."
+  "note": "Run 1 made exactly one create per arm and it succeeded; the same evening's listings (H200, DO MI300X out of capacity; H100 selectable at 19:14) are probes, not attempts, and belong to other arms."
  },
  "work": {
   "unit": "request",
   "evaluator": null,
   "acceptance_rule": {
-   "basis": "post-hoc per-request rule declared in DISCLOSURES.md (Run 1): a request is accepted if it completed and its own TTFT <= gate. The registered rule was cell-level (p95 TTFT, p95 E2E, failed <= 1%) and is kept per cell in work.cells.registered_cell_qualifies.",
+   "basis": "post-hoc per-request rule declared in DISCLOSURES.md (Run 1): a request is accepted if it completed and its own TTFT <= gate. The registered rule was cell-level (p95 TTFT, p95 E2E, failed <= 1%) and is kept per cell in work.cells.registered_cell_qualifies. Latency-only: no correctness.",
    "ttft_ms": 1000,
    "e2e_ms": null,
    "correctness": false,
@@ -125,7 +129,8 @@
     "e2e_gate": "applied",
     "registered_cell_qualifies": true,
     "median_itl_ms": 4.309,
-    "sha256": "cedb2d259bcdb4c619a02d844aa7f115f0e3ec48499c5adaeaeab9844db5fff9"
+    "sha256": "cedb2d259bcdb4c619a02d844aa7f115f0e3ec48499c5adaeaeab9844db5fff9",
+    "sha256_verified": true
    },
    {
     "cell": "cell-c1-r1",
@@ -141,7 +146,8 @@
     "e2e_gate": "applied",
     "registered_cell_qualifies": true,
     "median_itl_ms": 4.309,
-    "sha256": "e9ce72990735d57d1633aaaa473d0e1283b7f2f5ca6a507fa7994e85f4c91a62"
+    "sha256": "e9ce72990735d57d1633aaaa473d0e1283b7f2f5ca6a507fa7994e85f4c91a62",
+    "sha256_verified": true
    },
    {
     "cell": "cell-c1-r2",
@@ -157,7 +163,8 @@
     "e2e_gate": "applied",
     "registered_cell_qualifies": true,
     "median_itl_ms": 4.311,
-    "sha256": "3ae5a2dbaf125158066291e75706bf1c5faf96ea47c4b9ed53a22613f1eb0348"
+    "sha256": "3ae5a2dbaf125158066291e75706bf1c5faf96ea47c4b9ed53a22613f1eb0348",
+    "sha256_verified": true
    },
    {
     "cell": "cell-c32-r0",
@@ -173,7 +180,8 @@
     "e2e_gate": "applied",
     "registered_cell_qualifies": true,
     "median_itl_ms": 10.688,
-    "sha256": "15377f2b912166a25fc886bcf0bb5c39ccd1a2fa7b7f667d00ad0e892eadebbf"
+    "sha256": "15377f2b912166a25fc886bcf0bb5c39ccd1a2fa7b7f667d00ad0e892eadebbf",
+    "sha256_verified": true
    },
    {
     "cell": "cell-c32-r1",
@@ -189,7 +197,8 @@
     "e2e_gate": "applied",
     "registered_cell_qualifies": true,
     "median_itl_ms": 10.656,
-    "sha256": "036e5fdcc1cc386f65121821c57cae742ed8b942ef5c2e112411b9a3c26d059b"
+    "sha256": "036e5fdcc1cc386f65121821c57cae742ed8b942ef5c2e112411b9a3c26d059b",
+    "sha256_verified": true
    },
    {
     "cell": "cell-c32-r2",
@@ -205,7 +214,8 @@
     "e2e_gate": "applied",
     "registered_cell_qualifies": true,
     "median_itl_ms": 10.92,
-    "sha256": "51d7411b256aa983f813794bc531f51b083ace9f176ec8e0668a89a6eb8dd6c4"
+    "sha256": "51d7411b256aa983f813794bc531f51b083ace9f176ec8e0668a89a6eb8dd6c4",
+    "sha256_verified": true
    },
    {
     "cell": "cell-c64-r0",
@@ -221,7 +231,8 @@
     "e2e_gate": "applied",
     "registered_cell_qualifies": false,
     "median_itl_ms": 14.591,
-    "sha256": "83411ead507d7211196f0e9b9898a8df077418c18f44d238161a71547b50440e"
+    "sha256": "83411ead507d7211196f0e9b9898a8df077418c18f44d238161a71547b50440e",
+    "sha256_verified": true
    },
    {
     "cell": "cell-c64-r1",
@@ -237,7 +248,8 @@
     "e2e_gate": "applied",
     "registered_cell_qualifies": false,
     "median_itl_ms": 14.51,
-    "sha256": "a76a5fd96ffbe0264ca1913d7d5fdb8aa901aabe4b6e42fca67d3d666a3106de"
+    "sha256": "a76a5fd96ffbe0264ca1913d7d5fdb8aa901aabe4b6e42fca67d3d666a3106de",
+    "sha256_verified": true
    },
    {
     "cell": "cell-c64-r2",
@@ -253,7 +265,8 @@
     "e2e_gate": "applied",
     "registered_cell_qualifies": false,
     "median_itl_ms": 14.455,
-    "sha256": "cab41ff9314bbe5046adf76e726f7467d3d056dbc12c1a17928cb54141c542d5"
+    "sha256": "cab41ff9314bbe5046adf76e726f7467d3d056dbc12c1a17928cb54141c542d5",
+    "sha256_verified": true
    },
    {
     "cell": "cell-c8-r0",
@@ -269,7 +282,8 @@
     "e2e_gate": "applied",
     "registered_cell_qualifies": true,
     "median_itl_ms": 6.744,
-    "sha256": "20a7f4d404f3bd2b1d57be471f254e3689ee924bc558d953c29611fff8e13bce"
+    "sha256": "20a7f4d404f3bd2b1d57be471f254e3689ee924bc558d953c29611fff8e13bce",
+    "sha256_verified": true
    },
    {
     "cell": "cell-c8-r1",
@@ -285,7 +299,8 @@
     "e2e_gate": "applied",
     "registered_cell_qualifies": true,
     "median_itl_ms": 6.805,
-    "sha256": "35f0f3ebeefd059362afb767b1001a0197912dcae45eb25e2c24b92d65713782"
+    "sha256": "35f0f3ebeefd059362afb767b1001a0197912dcae45eb25e2c24b92d65713782",
+    "sha256_verified": true
    },
    {
     "cell": "cell-c8-r2",
@@ -301,13 +316,16 @@
     "e2e_gate": "applied",
     "registered_cell_qualifies": true,
     "median_itl_ms": 6.731,
-    "sha256": "5cf3b7b27c7fa0fae6efeba6e605e8667de62577b953e43e9cd99e4ffb642536"
+    "sha256": "5cf3b7b27c7fa0fae6efeba6e605e8667de62577b953e43e9cd99e4ffb642536",
+    "sha256_verified": true
    }
   ],
+  "task_classes": null,
   "null_reasons": {
    "evaluator": "Run 1 ran no evaluator (identity.json not_in_this_run: correctness sidecar)",
    "correct": "Run 1 ran no evaluator; identity.json lists the correctness sidecar under not_in_this_run",
-   "restarts": "Run 1 recorded no restart counter and serve.log was not collected (DISCLOSURES: unequal software note)"
+   "restarts": "Run 1 recorded no restart counter and serve.log was not collected (DISCLOSURES: unequal software note)",
+   "task_classes": "random-token workload; no task classes"
   }
  },
  "sustained": {
@@ -315,6 +333,7 @@
   "bucket_s": 300,
   "window_s": 1106.5,
   "meets_required_window": false,
+  "interrupted": false,
   "buckets": [
    {
     "index": 0,
@@ -348,12 +367,14 @@
  },
  "traversal": {
   "path": "resident-hbm",
+  "footprint_bytes": 31187041238,
+  "footprint_bytes_basis": "resident checkpoint bytes from identity.json (allocated weights); NOT the bytes read per step",
   "bytes_per_traversal": null,
   "bytes_per_traversal_basis": null,
   "traversals": null,
   "traversals_basis": null,
   "seconds_per_traversal": 0.004309,
-  "seconds_per_traversal_basis": "median inter-token latency at concurrency 1 across repeats (decode step ~ one full traversal from HBM)",
+  "seconds_per_traversal_basis": "median inter-token latency at concurrency 1 across repeats (decode step ~ one full traversal from HBM); estimated, not a forward-pass counter",
   "accepted_closures_per_traversal": null,
   "accepted_closures_per_traversal_basis": null,
   "by_depth": [
@@ -383,11 +404,11 @@
    }
   ],
   "null_reasons": {
-   "bytes_per_traversal": "MoE (30B-A3B): bytes touched per decode step are the active experts plus shared weights, not measured; the resident checkpoint (identity.model.bytes) is the footprint, not the traversal",
+   "bytes_per_traversal": "MoE (30B-A3B): bytes actually read per decode step are the active experts plus shared weights, not measured; footprint_bytes is not a substitute",
    "bytes_per_traversal_basis": "see bytes_per_traversal",
-   "traversals": "vLLM 0.27/0.30 bench output does not count forward passes; by_depth carries a duration/ITL estimate",
+   "traversals": "vLLM 0.27/0.30 bench output does not count forward passes; by_depth carries a duration/ITL estimate that is not a measurement",
    "traversals_basis": "see traversals",
-   "accepted_closures_per_traversal": "not measured; by_depth carries estimates per concurrency",
+   "accepted_closures_per_traversal": "not measured (traversals unmeasured); by_depth carries estimates per concurrency",
    "accepted_closures_per_traversal_basis": "see accepted_closures_per_traversal"
   }
  },
@@ -396,9 +417,12 @@
   "list_rate_per_gpu_hr": 4.41,
   "billing": "per second, 5-minute minimum",
   "payer": "self",
-  "modeled_minutes": 30.23,
-  "modeled_minutes_basis": "t_request -> t_work_end at list rate; t_released is unknown, so this is a LOWER bound on the billable window (the seat kept billing until deleted)",
-  "modeled_usd": 2.2222,
+  "modeled_minutes": null,
+  "modeled_minutes_basis": null,
+  "modeled_usd": null,
+  "modeled_lower_bound_minutes": 30.23,
+  "modeled_lower_bound_usd": 2.2222,
+  "modeled_lower_bound_basis": "t_request -> t_work_end at list rate; t_released is unknown, so the billable window is at least this long (the seat kept billing until deleted)",
   "billed_usd": null,
   "billed_ref": null,
   "credits_usd": null,
@@ -411,6 +435,9 @@
    "reason": "cloud seat; the buyer sees no meter"
   },
   "null_reasons": {
+   "modeled_minutes": "t_released unknown: the buyer's window (request -> release) cannot be modeled; see modeled_lower_bound_*",
+   "modeled_minutes_basis": "see modeled_minutes",
+   "modeled_usd": "t_released unknown; modeled_lower_bound_usd is the request -> work_end floor",
    "billed_usd": "invoice not yet posted / not yet entered (DISCLOSURES: billed invoices not measured)",
    "billed_ref": "see billed_usd",
    "credits_usd": "no credit applied to this arm (self-funded at list)"
@@ -419,47 +446,56 @@
  "derived": {
   "usd_per_accepted": 0.0009802382002646669,
   "usd_per_1k_accepted": 0.9802382002646669,
-  "wall_s_per_accepted": 0.39391265990295543,
-  "accepted_per_s": 2.538633818589026,
-  "cost_basis": "modeled",
-  "note": "Cost per accepted here is over the whole arm (request -> work end, all 12 cells including the slow c1 cells). It is NOT the per-cell $/1k that DISCLOSURES headlines (that is list rate / cell throughput at the cheapest qualifying cell)."
+  "cost_basis": "modeled-lower-bound",
+  "wall_s_per_accepted": null,
+  "work_s_per_accepted": 0.39391265990295543,
+  "accepted_per_work_s": 2.538633818589026,
+  "null_reasons": {
+   "wall_s_per_accepted": "t_released unknown: the buyer's clock (request -> release) per accepted cannot be computed; work_s_per_accepted is work time only and is not a substitute"
+  },
+  "note": "$/accepted here is a LOWER BOUND over the whole arm (request -> work end, all 12 cells including the slow c1 cells, no release time). It is a different aggregation from the DISCLOSURES headline (list rate / throughput at each arm's cheapest qualifying cell), and neither is an invoice or a correctness result."
  },
  "receipts": {
   "items": [
    {
     "kind": "cell",
     "path": "campaign/results/do-h100/cell-c1-r0.json",
-    "sha256": "cedb2d259bcdb4c619a02d844aa7f115f0e3ec48499c5adaeaeab9844db5fff9"
+    "sha256": "cedb2d259bcdb4c619a02d844aa7f115f0e3ec48499c5adaeaeab9844db5fff9",
+    "sha256_verified": true
    },
    {
     "kind": "cell",
     "path": "campaign/results/do-h100/cell-c1-r1.json",
-    "sha256": "e9ce72990735d57d1633aaaa473d0e1283b7f2f5ca6a507fa7994e85f4c91a62"
+    "sha256": "e9ce72990735d57d1633aaaa473d0e1283b7f2f5ca6a507fa7994e85f4c91a62",
+    "sha256_verified": true
    },
    {
     "kind": "cell",
     "path": "campaign/results/do-h100/cell-c1-r2.json",
-    "sha256": "3ae5a2dbaf125158066291e75706bf1c5faf96ea47c4b9ed53a22613f1eb0348"
+    "sha256": "3ae5a2dbaf125158066291e75706bf1c5faf96ea47c4b9ed53a22613f1eb0348",
+    "sha256_verified": true
    }
-  ]
+  ],
+  "manifest_verified": true
  },
  "notes": [
   "Funding: DigitalOcean arm self-funded at list ($4.41/GPU-hr).",
   "Unequal software (DISCLOSURES): CUDA arm vLLM 0.30.0 default FP8 MoE config; ROCm arm vLLM 0.27.1-dev whose image includes a tuned MI300X MoE config. serve.log not collected.",
-  "Acceptance is the declared post-hoc per-request TTFT rule; the registered cell-level rule is kept per cell.",
+  "Acceptance is the declared post-hoc per-request TTFT rule; the registered cell-level rule is kept per cell. Latency-only: no correctness was measured.",
   "One unrecorded warm-up pass (32 prompts at concurrency 8) preceded the first cell; not in any count.",
   "Arm C (DigitalOcean MI300X, $2.59) did not run; no claim that Hot Aisle is the cheapest MI300X.",
-  "Clocks before 19:00 UTC are approximate to a few minutes (availability/README.md)."
+  "Clocks before 19:00 UTC are approximate to a few minutes (availability/README.md). Release time is missing, so no buyer-clock figure exists for Run 1.",
+  "Lower-bound $/1k accepted here is $0.980 (H100, $2.222 / 2,267). Beside the MI300X's $0.925 that is a 5.7 % gap, against the 53 % DISCLOSURES headline: different aggregations (all cells plus setup vs each arm's cheapest qualifying cell), not a contradiction."
  ],
  "built_by": {
   "tool": "ledger/ledger_build_run1.py",
-  "at": "2026-09-23T21:56:42Z",
+  "at": "2026-09-23T22:27:07Z",
   "inputs": [
    "campaign/results/do-h100",
    "campaign/identity.json",
    "campaign/availability/observations.jsonl"
   ]
  },
- "_fixture": "trimmed copy of examples/run1-do-h100.ledger.json",
+ "_fixture": "trimmed copy of examples/run1-do-h100.ledger.json (schema r2)",
  "_expect": "is earlier than"
 }

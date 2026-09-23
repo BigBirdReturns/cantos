@@ -5,6 +5,7 @@
   "campaign": "first-qualified-workload-2026-09",
   "run": "run1",
   "arm": "estate",
+  "tier": null,
   "knot_id": "knot-fixture",
   "seat_id": "estate-w01-3090",
   "provider": "estate",
@@ -33,7 +34,9 @@
    "commit": "c283ecadd4b996a7a377273e61fa713eca082c0b",
    "note": "local, unpushed commits (DISCLOSURES 'Timestamps'): privately recorded before the data, not publicly timestamped"
   },
-  "null_reasons": {}
+  "null_reasons": {
+   "tier": "estate arm has no tuning tiers"
+  }
  },
  "clocks": {
   "t_request": "2026-09-29T10:00:00Z",
@@ -77,9 +80,11 @@
     "provider": "estate",
     "region": "OCTO-W01",
     "sku": "rtx-3090-24gb",
-    "method": "estate-lease",
+    "layer": "delivered",
+    "method": "tui-provision",
     "outcome": "available",
-    "provisioned": true
+    "provisioned": true,
+    "attempt_id": "fixture-lease-1"
    }
   ],
   "n_attempts": 1,
@@ -91,13 +96,13 @@
   "evaluator": {
    "name": "evalplus-humaneval-plus",
    "frozen": true,
-   "ref": "sha256:fixture"
+   "ref": "evalplus-0.3.1-human-v0.1.10 sidecar sha256:fixture"
   },
   "acceptance_rule": {
-   "basis": "post-hoc per-request rule declared in DISCLOSURES.md (Run 1): a request is accepted if it completed and its own TTFT <= gate. The registered rule was cell-level (p95 TTFT, p95 E2E, failed <= 1%) and is kept per cell in work.cells.registered_cell_qualifies.",
+   "basis": "post-hoc per-request rule declared in DISCLOSURES.md (Run 1): a request is accepted if it completed and its own TTFT <= gate. The registered rule was cell-level (p95 TTFT, p95 E2E, failed <= 1%) and is kept per cell in work.cells.registered_cell_qualifies. Latency-only: no correctness.",
    "ttft_ms": 1000,
    "e2e_ms": null,
-   "correctness": false,
+   "correctness": true,
    "e2e_note": "E2E gate held on both arms for symmetry: the ROCm image (vLLM 0.27.1-dev) writes no per-request latencies."
   },
   "attempted": 164,
@@ -107,8 +112,10 @@
   "lost": 4,
   "restarts": 0,
   "cells": null,
+  "task_classes": null,
   "null_reasons": {
-   "cells": "task run, no cells"
+   "cells": "task run, no cells",
+   "task_classes": "single class in this fixture"
   }
  },
  "sustained": {
@@ -116,6 +123,7 @@
   "bucket_s": 300,
   "window_s": 3600.0,
   "meets_required_window": true,
+  "interrupted": false,
   "buckets": [
    {
     "index": 0,
@@ -175,40 +183,37 @@
    {
     "index": 11,
     "start_s": 3300,
-    "accepted": 10
+    "accepted": 8
    }
   ],
-  "min_accepted_per_bucket": 10,
+  "min_accepted_per_bucket": 8,
   "median_accepted_per_bucket": 10,
-  "last_q_over_first_q": 1.0,
+  "last_q_over_first_q": 0.9333333333333333,
   "note": "Run 1's recorded window is the 12-cell sweep (c1 x3 first, c64 x3 last) with ~30 s bench start-up gaps between cells; bucket counts follow the concurrency schedule, not a steady arrival process. The last bucket is partial. Completion times on the AMD arm are ttft + sum(itl). This does not meet the 60-minute sustained requirement."
  },
  "traversal": {
   "path": "split-vram-ram",
-  "bytes_per_traversal": 33745206528,
-  "bytes_per_traversal_basis": "model bytes (dense assumption)",
+  "footprint_bytes": 33745206528,
+  "footprint_bytes_basis": "llama.cpp load log: CUDA0 + CPU model buffer bytes (allocated)",
+  "bytes_per_traversal": null,
+  "bytes_per_traversal_basis": null,
   "traversals": 49200,
-  "traversals_basis": "llama-server n_decode_total",
+  "traversals_basis": "llama-server n_decode_total delta",
   "seconds_per_traversal": 0.0732,
   "seconds_per_traversal_basis": "decode wall / n_decode",
-  "accepted_closures_per_traversal": 0.0024,
+  "accepted_closures_per_traversal": 0.0023983739837398375,
   "accepted_closures_per_traversal_basis": "accepted / traversals",
   "by_depth": null,
   "null_reasons": {
-   "by_depth": "single depth in this fixture"
+   "by_depth": "single depth in this fixture",
+   "bytes_per_traversal": "MoE active bytes unmeasured; footprint is not a substitute",
+   "bytes_per_traversal_basis": "see bytes_per_traversal"
   }
  },
  "money": {
   "currency": "USD",
-  "list_rate_per_gpu_hr": null,
   "billing": "owned-energy-only",
   "payer": "self",
-  "modeled_minutes": null,
-  "modeled_minutes_basis": null,
-  "modeled_usd": null,
-  "billed_usd": null,
-  "billed_ref": null,
-  "credits_usd": null,
   "energy": {
    "watts_mean": 310.0,
    "kwh": 0.3358,
@@ -221,48 +226,66 @@
    "modeled_minutes": "owned seat: energy only",
    "modeled_minutes_basis": "owned seat: energy only",
    "modeled_usd": "owned seat: energy only",
+   "modeled_lower_bound_minutes": "owned seat: energy only",
+   "modeled_lower_bound_usd": "owned seat: energy only",
+   "modeled_lower_bound_basis": "owned seat: energy only",
    "billed_usd": "owned seat: energy only",
    "billed_ref": "owned seat: energy only",
    "credits_usd": "owned seat: energy only"
-  }
+  },
+  "list_rate_per_gpu_hr": null,
+  "modeled_minutes": null,
+  "modeled_minutes_basis": null,
+  "modeled_usd": null,
+  "modeled_lower_bound_minutes": null,
+  "modeled_lower_bound_usd": null,
+  "modeled_lower_bound_basis": null,
+  "billed_usd": null,
+  "billed_ref": null,
+  "credits_usd": null
  },
  "derived": {
   "usd_per_accepted": 0.000853728813559322,
   "usd_per_1k_accepted": 0.8537288135593221,
-  "wall_s_per_accepted": 30.508474576271187,
-  "accepted_per_s": 0.03277777777777778,
-  "cost_basis": "energy"
+  "cost_basis": "energy",
+  "wall_s_per_accepted": 33.05084745762712,
+  "work_s_per_accepted": 30.508474576271187,
+  "accepted_per_work_s": 0.03277777777777778
  },
  "receipts": {
   "items": [
    {
     "kind": "cell",
     "path": "campaign/results/do-h100/cell-c1-r0.json",
-    "sha256": "cedb2d259bcdb4c619a02d844aa7f115f0e3ec48499c5adaeaeab9844db5fff9"
+    "sha256": "cedb2d259bcdb4c619a02d844aa7f115f0e3ec48499c5adaeaeab9844db5fff9",
+    "sha256_verified": true
    },
    {
     "kind": "cell",
     "path": "campaign/results/do-h100/cell-c1-r1.json",
-    "sha256": "e9ce72990735d57d1633aaaa473d0e1283b7f2f5ca6a507fa7994e85f4c91a62"
+    "sha256": "e9ce72990735d57d1633aaaa473d0e1283b7f2f5ca6a507fa7994e85f4c91a62",
+    "sha256_verified": true
    },
    {
     "kind": "cell",
     "path": "campaign/results/do-h100/cell-c1-r2.json",
-    "sha256": "3ae5a2dbaf125158066291e75706bf1c5faf96ea47c4b9ed53a22613f1eb0348"
+    "sha256": "3ae5a2dbaf125158066291e75706bf1c5faf96ea47c4b9ed53a22613f1eb0348",
+    "sha256_verified": true
    }
-  ]
+  ],
+  "manifest_verified": true
  },
  "notes": [
   "fixture: hypothetical fully-populated estate record; not a measurement"
  ],
  "built_by": {
   "tool": "ledger/ledger_build_run1.py",
-  "at": "2026-09-23T21:56:42Z",
+  "at": "2026-09-23T22:27:07Z",
   "inputs": [
    "campaign/results/do-h100",
    "campaign/identity.json",
    "campaign/availability/observations.jsonl"
   ]
  },
- "_fixture": "trimmed copy of examples/run1-do-h100.ledger.json"
+ "_fixture": "trimmed copy of examples/run1-do-h100.ledger.json (schema r2)"
 }

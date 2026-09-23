@@ -1,0 +1,2 @@
+{"atol":0,"base_input":[[1]],"canonical_solution":"    return x + 0\n","contract":"","entry_point":"task_mbpp_0","plus_input":[[2],[3]],"prompt":"def task_mbpp_0(x):\n    \"\"\"Return x plus 0.\"\"\"\n","task_id":"Mbpp/0"}
+{"atol":0,"base_input":[[1]],"canonical_solution":"    return x + 1\n","contract":"","entry_point":"task_mbpp_1","plus_input":[[2],[3]],"prompt":"def task_mbpp_1(x):\n    \"\"\"Return x plus 1.\"\"\"\n","task_id":"Mbpp/1"}

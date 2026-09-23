@@ -55,7 +55,9 @@
     "t_request_to_ready_s": 932,
     "basis": "measured, approximate: TUI provision 18:17 UTC (availability/observations.jsonl, +/- minutes) to env.json recorded_at 18:32:32Z (after health and warm-up)",
     "time_to_ssh_s": null,
-    "time_to_ssh_reason": "not recorded for the Hot Aisle TUI provision"
+    "time_to_ssh_reason": "not recorded for the Hot Aisle TUI provision",
+    "release_s": null,
+    "release_reason": "Run 1 did not record the delete/release time for this seat; release overhead is unmeasured"
    },
    "traversal": {
     "task_class": "random-2048/256 vLLM bench (Run 1)",
@@ -209,7 +211,9 @@
     "t_request_to_ready_s": 658,
     "basis": "measured, approximate: console create 17:49 UTC (+/- minutes) to env.json recorded_at 17:59:58Z",
     "time_to_ssh_s": 60,
-    "time_to_ssh_basis": "availability/observations.jsonl line 1"
+    "time_to_ssh_basis": "availability/observations.jsonl line 1",
+    "release_s": null,
+    "release_reason": "Run 1 did not record the delete/release time for this seat; release overhead is unmeasured"
    },
    "traversal": {
     "task_class": "random-2048/256 vLLM bench (Run 1)",
@@ -336,7 +340,9 @@
     "basis": null,
     "reason": "never provisioned",
     "time_to_ssh_s": null,
-    "time_to_ssh_reason": "never provisioned"
+    "time_to_ssh_reason": "never provisioned",
+    "release_s": null,
+    "release_reason": "never provisioned"
    },
    "traversal": {
     "task_class": null,
@@ -411,7 +417,9 @@
     "basis": null,
     "reason": "never provisioned",
     "time_to_ssh_s": null,
-    "time_to_ssh_reason": "never provisioned"
+    "time_to_ssh_reason": "never provisioned",
+    "release_s": null,
+    "release_reason": "never provisioned"
    },
    "traversal": {
     "task_class": null,
@@ -502,7 +510,9 @@
    "setup": {
     "t_request_to_ready_s": null,
     "basis": null,
-    "reason": "no lease receipt; model load times exist per run (e.g. Aperture 14B: 6.83 s) but no seat-level setup receipt"
+    "reason": "no lease receipt; model load times exist per run (e.g. Aperture 14B: 6.83 s) but no seat-level setup receipt",
+    "release_s": null,
+    "release_reason": "owned seat; no release step measured (stopping the server is not a provider release)"
    },
    "traversal": {
     "measured": [
@@ -649,7 +659,9 @@
    "setup": {
     "t_request_to_ready_s": null,
     "basis": null,
-    "reason": "no lease receipt"
+    "reason": "no lease receipt",
+    "release_s": null,
+    "release_reason": "owned seat; no release step measured (stopping the server is not a provider release)"
    },
    "traversal": {
     "measured": [
@@ -749,7 +761,9 @@
    "setup": {
     "t_request_to_ready_s": null,
     "basis": null,
-    "reason": "no lease receipt; Aperture 14B load 6.83 s is a model-load figure"
+    "reason": "no lease receipt; Aperture 14B load 6.83 s is a model-load figure",
+    "release_s": null,
+    "release_reason": "owned seat; no release step measured (stopping the server is not a provider release)"
    },
    "traversal": {
     "measured": [
@@ -858,7 +872,9 @@
    "setup": {
     "t_request_to_ready_s": null,
     "basis": null,
-    "reason": "always available to the operator; no lease"
+    "reason": "always available to the operator; no lease",
+    "release_s": null,
+    "release_reason": "owned seat; no release step measured (stopping the server is not a provider release)"
    },
    "traversal": {
     "measured": [],
@@ -922,7 +938,9 @@
    "setup": {
     "t_request_to_ready_s": null,
     "basis": null,
-    "reason": "always on"
+    "reason": "always on",
+    "release_s": null,
+    "release_reason": "owned seat; no release step measured (stopping the server is not a provider release)"
    },
    "traversal": {
     "measured": [],
@@ -983,7 +1001,9 @@
    "setup": {
     "t_request_to_ready_s": null,
     "basis": null,
-    "reason": "no lease"
+    "reason": "no lease",
+    "release_s": null,
+    "release_reason": "owned seat; no release step measured (stopping the server is not a provider release)"
    },
    "traversal": {
     "measured": [],
@@ -1042,7 +1062,9 @@
    "setup": {
     "t_request_to_ready_s": null,
     "basis": null,
-    "reason": "validator-only"
+    "reason": "validator-only",
+    "release_s": null,
+    "release_reason": "owned seat; no release step measured (stopping the server is not a provider release)"
    },
    "traversal": {
     "measured": [],
@@ -1100,7 +1122,9 @@
    "setup": {
     "t_request_to_ready_s": null,
     "basis": null,
-    "reason": "validator-only"
+    "reason": "validator-only",
+    "release_s": null,
+    "release_reason": "owned seat; no release step measured (stopping the server is not a provider release)"
    },
    "traversal": {
     "measured": [],
@@ -1161,7 +1185,9 @@
    "setup": {
     "t_request_to_ready_s": null,
     "basis": null,
-    "reason": "validator-only"
+    "reason": "validator-only",
+    "release_s": null,
+    "release_reason": "owned seat; no release step measured (stopping the server is not a provider release)"
    },
    "traversal": {
     "measured": [],
@@ -1194,6 +1220,8 @@
   "traversal.curves[]": "per (model_class, format): seconds per traversal by depth, with receipt",
   "link.bytes_per_second": "streamed-link rate used for non-resident bytes when present",
   "availability.declared_busy_until": "operator declaration for estate seats",
-  "priors[task_class].accept_rate": "expected accepted fraction from receipts"
- }
+  "priors[task_class].accept_rate": "expected accepted fraction from receipts",
+  "setup.release_s": "seconds from work end to provider-confirmed release; null with reason until measured (the planner counts 0 and says so)"
+ },
+ "_revision": "r2 2026-09-24: setup.release_s added (all null, unmeasured); footprint vs traversed bytes wording"
 }

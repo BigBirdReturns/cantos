@@ -17,13 +17,13 @@ Implemented in `knot_lifecycle.py` (stdlib). A Knot is one bounded unit of contr
 | `RELEASED` | provider confirmed the seat is gone; billing stops. **`t_released`** | `t_released` |
 | `PROVISIONING_FAILED` | create/provision did not reach ssh (out of capacity, limit 0, create failed) | `reason` |
 | `INTERRUPTED` | seat lost or deliberately stopped mid-work | `reason`, `unfinished_ids` |
-| `REASSIGNED` | unfinished ids handed to a new Knot on another seat (terminal for this Knot) | `to_knot_id`, `unfinished_ids` |
+| `REASSIGNED` | unfinished ids handed to a new Knot on another seat; the original seat still settles its partial work and releases | `to_knot_id`, `unfinished_ids` |
 | `DELIVERY_REJECTED` | delivered bytes fail the receipt check (manifest, identity) | |
 | `VERIFICATION_FAILED` | evaluator ran and the acceptance predicate failed | `evaluator`, `reason` |
 | `EXPIRED` | no seat within the Knot's deadline (terminal) | `reason` |
 | `CANCELLED` | withdrawn by the operator (terminal after RELEASED) | `reason` |
 
-Terminal: `RELEASED`, `REASSIGNED`, `EXPIRED`, `CANCELLED`.
+Terminal: `RELEASED`, `EXPIRED`. `REASSIGNED` and `CANCELLED` are not terminal: the seat keeps billing until the provider confirms release, so `REASSIGNED → SETTLED → RELEASED` (or `REASSIGNED → RELEASED`) records the original seat's final clock. `append` verifies the whole chain before writing; a broken log is never extended.
 
 ## Allowed transitions
 
@@ -41,6 +41,7 @@ DELIVERY_REJECTED   -> RUNNING | CANCELLED
 VERIFICATION_FAILED -> RUNNING | DELIVERED | CANCELLED
 KNOT_VERIFIED       -> SETTLED | RELEASED
 SETTLED             -> RELEASED
+REASSIGNED          -> SETTLED | RELEASED
 CANCELLED           -> RELEASED
 ```
 `*` `DELIVERED -> SETTLED` skips verification and is allowed only with `data.verifier == "none"` (Run 1 style: no evaluator existed). A `SETTLED` event with `authority: none` must carry `usd: 0` or none; it must not pretend money moved (CAIRN dry-run rule).

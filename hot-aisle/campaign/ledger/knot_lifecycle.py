@@ -7,7 +7,8 @@ for the deliberate-interrupt reschedule in the SYNTHESIS 'smallest demo'):
   ISSUED -> QUOTED -> RESERVED -> PROVISIONED -> RUNNING -> DELIVERED -> KNOT_VERIFIED -> SETTLED -> RELEASED
 
 Failure / side states: PROVISIONING_FAILED, INTERRUPTED, REASSIGNED, DELIVERY_REJECTED,
-VERIFICATION_FAILED, EXPIRED, CANCELLED. Terminal: RELEASED, REASSIGNED, EXPIRED, CANCELLED.
+VERIFICATION_FAILED, EXPIRED, CANCELLED. Terminal: RELEASED, EXPIRED. REASSIGNED and CANCELLED still
+lead to RELEASED, because the seat keeps billing until the provider confirms release.
 
 Event log format: one JSON object per line (JSONL), append-only, hash-chained:
   {"seq": n, "ts": "...Z", "knot_id": "...", "event": "...", "from": STATE|null, "to": STATE,
@@ -37,7 +38,7 @@ STATES = [
     "PROVISIONING_FAILED", "INTERRUPTED", "REASSIGNED", "DELIVERY_REJECTED",
     "VERIFICATION_FAILED", "EXPIRED", "CANCELLED",
 ]
-TERMINAL = {"RELEASED", "REASSIGNED", "EXPIRED", "CANCELLED"}
+TERMINAL = {"RELEASED", "EXPIRED"}   # work may be reassigned or cancelled, but the seat is still released and billed until then
 
 # from -> set(to). None = birth.
 TRANSITIONS = {
@@ -56,7 +57,7 @@ TRANSITIONS = {
     "KNOT_VERIFIED": {"SETTLED", "RELEASED"},
     "SETTLED": {"RELEASED"},
     "RELEASED": set(),
-    "REASSIGNED": set(),
+    "REASSIGNED": {"SETTLED", "RELEASED"},   # the original seat keeps its own billing clock: settle partial work, then release
     "EXPIRED": set(),
     "CANCELLED": {"RELEASED"},   # a cancelled seat is still released (billing stops only at release)
 }
@@ -158,8 +159,12 @@ def verify(events):
 
 
 def append_event(path, knot_id, to, actor, seat_id=None, data=None, ts=None, strict=True):
-    """Append one transition. Raises ValueError on an illegal transition (strict) so the log never lies."""
+    """Append one transition. Raises ValueError on an illegal transition (strict) so the log never lies.
+    The existing chain is verified first; a broken log is never extended."""
     events = read_log(path)
+    chain_errors = verify(events)
+    if chain_errors:
+        raise ValueError(f"refusing to append to a broken event log: {chain_errors[0]}")
     frm = current_states(events).get(knot_id, (None, None))[0]
     err = check_transition(frm, to, data)
     if err and strict:
@@ -189,14 +194,15 @@ def new_knot(path, knot_id, actor, spec=None, ts=None):
 
 # ---------------------------------------------------------------- self-test
 def selftest():
-    import tempfile
+    sys.path.insert(0, HERE)
     ok = True
     def check(cond, msg):
         nonlocal ok
         print(f"  {'PASS' if cond else 'FAIL'}  {msg}")
         ok = ok and cond
 
-    with tempfile.TemporaryDirectory() as td:
+    from ledger_common import tmpdir
+    with tmpdir("knot-selftest-") as td:
         log = os.path.join(td, "events.jsonl")
         new_knot(log, "k1", "test", {"count": 3})
         append_event(log, "k1", "PROVISIONED", "test", "seatA", {"seat_id": "seatA", "t_ssh_or_ready": "2026-09-24T00:01:00Z"})
@@ -216,6 +222,12 @@ def selftest():
         check(verify(ev) == [], "chain verifies")
         st = current_states(ev)
         check(st["k1"][0] == "REASSIGNED" and st["k2"][0] == "RELEASED", "final states k1=REASSIGNED k2=RELEASED")
+        # the interrupted seat still has to be released (its own billing clock) after reassignment
+        append_event(log, "k1", "SETTLED", "test", "seatA", {"settlement": {"authority": "none", "usd": 0}, "note": "partial work t1 only"})
+        append_event(log, "k1", "RELEASED", "test", "seatA", {"t_released": "2026-09-24T00:06:30Z"})
+        check(current_states(read_log(log))["k1"][0] == "RELEASED", "REASSIGNED -> SETTLED -> RELEASED records the original seat's release")
+        ev = read_log(log)
+        check(verify(ev) == [], "chain still verifies after the release events")
         # illegal transitions refuse
         for to, data in [("RUNNING", {"t_work_start": "x"}), ("ISSUED", {})]:
             try:
@@ -258,6 +270,11 @@ def selftest():
             f.write("\n".join(lines) + "\n")
         errs = verify(read_log(log))
         check(any("hash mismatch" in e for e in errs) and any("prev hash" in e for e in errs), "tampered line detected by chain")
+        try:
+            new_knot(log, "k6", "test")
+            check(False, "append to a broken chain refused")
+        except ValueError as e:
+            check("broken event log" in str(e), "append to a broken chain refused")
         # every state reachable and every transition target is a known state
         targets = set().union(*TRANSITIONS.values())
         check(targets <= set(STATES) and set(TRANSITIONS) - {None} == set(STATES), "transition table covers every state")

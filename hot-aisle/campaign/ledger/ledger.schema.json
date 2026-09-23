@@ -1,5 +1,6 @@
 {
   "schema": "second-run/run-ledger@1",
+  "_revision": "draft r2, 2026-09-24 (fix round 1): request->release wall clock with work throughput kept separate; footprint bytes separate from traversed bytes; evaluator must be frozen for correctness; modeled lower bound when release is unknown; attempts carry layer=delivered and one of three methods",
   "_about": "One record per run: one seat lease executing one Knot (or one campaign arm). Field groups follow research-2026-09/SYNTHESIS.md 'The unit: one run, not one token' plus the Correction (traversal group). Type words: string, number, integer, boolean, object, array, iso8601 (UTC 'Z' timestamp string), sha256 (64 hex), any. 'nullable': true means null is allowed BUT the group's null_reasons must then name the field. Validation is done by ledger_validate.py (stdlib), not by a jsonschema library.",
   "groups": {
     "identity": {
@@ -10,6 +11,7 @@
         "campaign": {"type": "string"},
         "run": {"type": "string", "doc": "run1 | run2 | run3 | estate-arm ..."},
         "arm": {"type": "string"},
+        "tier": {"type": "string", "nullable": true, "doc": "declared tuning tier (Run 3: T0 | T1)"},
         "knot_id": {"type": "string", "nullable": true, "doc": "Knot this run executed (knot_lifecycle.py); null for pre-Knot runs"},
         "seat_id": {"type": "string", "doc": "key in seats.json"},
         "provider": {"type": "string", "enum": ["hotaisle", "digitalocean", "runpod", "spheron", "vast", "estate"]},
@@ -17,14 +19,14 @@
         "sku": {"type": "string"},
         "gpus": {"type": "integer", "min": 0},
         "host": {"type": "string", "nullable": true},
-        "model": {"type": "object", "required": ["id", "revision", "precision", "bytes"], "doc": "revision = git sha; bytes = checkpoint bytes"},
-        "runtime": {"type": "object", "required": ["image", "digest", "engine", "engine_version"], "doc": "image digest pinned; engine = vllm | llama.cpp | ..."},
+        "model": {"type": "object", "required": ["id", "revision", "precision", "bytes"], "doc": "revision = git sha; bytes = checkpoint bytes (the footprint)"},
+        "runtime": {"type": "object", "required": ["image", "digest", "engine", "engine_version"], "doc": "image digest pinned; engine = vllm | llama.cpp | ...; Run 3 adds attention_backend / linear_kernel from serve.log"},
         "workload_id": {"type": "string"},
         "prereg": {"type": "object", "required": ["path", "commit"], "doc": "commit null when the prereg was not committed before data (say so in notes)"}
       }
     },
     "clocks": {
-      "_doc": "The clock starts at the capacity request and stops at confirmed release. All UTC ISO-8601. Each clock may carry a 'sources' entry naming where it came from and its precision.",
+      "_doc": "The buyer's clock starts at the capacity request and stops at confirmed release. All UTC ISO-8601. Each clock may carry a 'sources' entry naming where it came from and its precision.",
       "required": ["t_request", "t_ssh", "t_ready", "t_work_start", "t_work_end", "t_released"],
       "fields": {
         "t_request": {"type": "iso8601", "nullable": true, "doc": "capacity requested (create clicked / API call / TUI provision)"},
@@ -32,61 +34,65 @@
         "t_ready": {"type": "iso8601", "nullable": true, "doc": "engine healthy, model loaded"},
         "t_work_start": {"type": "iso8601", "nullable": true, "doc": "first recorded unit of work started"},
         "t_work_end": {"type": "iso8601", "nullable": true, "doc": "last recorded unit of work finished"},
-        "t_released": {"type": "iso8601", "nullable": true, "doc": "provider confirmed the seat was deleted / released"},
+        "t_released": {"type": "iso8601", "nullable": true, "doc": "provider confirmed the seat was deleted / released (container stop is NOT release)"},
         "sources": {"type": "object", "nullable": true, "doc": "field -> {source, precision}"}
       },
       "rules": ["non-null clocks must be non-decreasing in the order listed"]
     },
     "acquisition": {
-      "_doc": "The denominator. Every provisioning attempt for this run, including failures. A listing is not an attempt.",
+      "_doc": "The denominator. Every provisioning attempt for this run, including failures. A listing is not an attempt: attempts carry layer 'delivered' and method api-create | console-create | tui-provision.",
       "required": ["attempts", "n_attempts", "n_allocations", "yield"],
       "fields": {
-        "attempts": {"type": "array", "item_required": ["ts", "provider", "sku", "method", "outcome", "provisioned"], "doc": "same shape as availability/observations.jsonl lines with method in {console-create, tui-provision, api-create, estate-lease}"},
+        "attempts": {"type": "array", "item_required": ["ts", "provider", "sku", "layer", "method", "outcome", "provisioned"], "doc": "availability/observations.jsonl delivered-row shape"},
         "n_attempts": {"type": "integer", "min": 0},
         "n_allocations": {"type": "integer", "min": 0},
         "yield": {"type": "number", "nullable": true, "min": 0, "max": 1, "doc": "n_allocations / n_attempts; null when n_attempts = 0"}
       },
-      "rules": ["n_attempts == len(attempts)", "n_allocations == count(attempts.provisioned)", "yield == n_allocations/n_attempts when n_attempts > 0"]
+      "rules": ["n_attempts == len(attempts)", "n_allocations == count(attempts.provisioned)", "yield == n_allocations/n_attempts when n_attempts > 0", "every attempt: layer == delivered and method in {api-create, console-create, tui-provision}"]
     },
     "work": {
-      "_doc": "attempted / completed / correct / accepted / lost / restarts. correct means a frozen evaluator passed, not HTTP 200. accepted = correct AND within the latency gate (when no evaluator exists, accepted = completed AND within gate, and correct is null with a reason).",
+      "_doc": "attempted / completed / correct / accepted / lost / restarts. correct means a FROZEN evaluator passed, not HTTP 200. accepted = correct AND within the latency gate (when no evaluator exists, accepted = completed AND within gate, and correct is null with a reason).",
       "required": ["unit", "evaluator", "acceptance_rule", "attempted", "completed", "correct", "accepted", "lost", "restarts"],
       "fields": {
         "unit": {"type": "string", "enum": ["request", "task"]},
-        "evaluator": {"type": "object", "nullable": true, "required": ["name", "frozen", "ref"]},
+        "evaluator": {"type": "object", "nullable": true, "required": ["name", "frozen", "ref"], "doc": "frozen must be true and ref non-empty (criterion id / sidecar sha) for correct to be non-null"},
         "acceptance_rule": {"type": "object", "required": ["basis", "ttft_ms", "e2e_ms", "correctness"]},
         "attempted": {"type": "integer", "min": 0},
         "completed": {"type": "integer", "min": 0},
         "correct": {"type": "integer", "nullable": true, "min": 0},
         "accepted": {"type": "integer", "nullable": true, "min": 0},
-        "lost": {"type": "integer", "nullable": true, "min": 0, "doc": "sent and never answered (timeout, connection reset)"},
+        "lost": {"type": "integer", "nullable": true, "min": 0, "doc": "sent and never answered (timeout, connection reset, interrupted)"},
         "restarts": {"type": "integer", "nullable": true, "min": 0, "doc": "engine or seat restarts during the work window"},
-        "cells": {"type": "array", "nullable": true, "doc": "optional per-cell breakdown for benchmark-style runs"}
+        "cells": {"type": "array", "nullable": true, "doc": "optional per-cell breakdown for benchmark-style runs"},
+        "task_classes": {"type": "object", "nullable": true, "doc": "optional per-task-class counts (Run 3: HumanEval / Mbpp)"}
       },
-      "rules": ["completed <= attempted", "correct <= completed (when both non-null)", "accepted <= completed", "accepted <= correct (when correct non-null)", "lost <= attempted - completed (when lost non-null)"]
+      "rules": ["completed <= attempted", "correct <= completed (when both non-null)", "accepted <= completed", "accepted <= correct (when correct non-null)", "lost <= attempted - completed (when lost non-null)", "correct non-null requires evaluator.frozen == true and non-empty evaluator.ref"]
     },
     "sustained": {
-      "_doc": "A recorded window in 5-minute buckets: minimum, median, and last quarter / first quarter of accepted per bucket. required_window_s is 3600 (Fable) or 7200 (Astra); meets_required_window says whether this run's window is long enough to count.",
+      "_doc": "A recorded window in 5-minute buckets: minimum, median, and last quarter / first quarter of accepted per bucket. required_window_s is 3600 (Fable) or 7200 (Astra); meets_required_window says whether this run's window is long enough AND uninterrupted.",
       "required": ["required_window_s", "bucket_s", "window_s", "meets_required_window", "buckets", "min_accepted_per_bucket", "median_accepted_per_bucket", "last_q_over_first_q"],
       "fields": {
         "required_window_s": {"type": "integer", "min": 1},
         "bucket_s": {"type": "integer", "min": 1},
         "window_s": {"type": "number", "nullable": true, "min": 0},
         "meets_required_window": {"type": "boolean"},
+        "interrupted": {"type": "boolean", "nullable": true},
         "buckets": {"type": "array", "nullable": true, "item_required": ["index", "start_s", "accepted"]},
         "min_accepted_per_bucket": {"type": "number", "nullable": true},
         "median_accepted_per_bucket": {"type": "number", "nullable": true},
         "last_q_over_first_q": {"type": "number", "nullable": true},
         "note": {"type": "string", "nullable": true}
       },
-      "rules": ["meets_required_window == (window_s >= required_window_s) when window_s non-null"]
+      "rules": ["meets_required_window == (window_s >= required_window_s and not interrupted and work.accepted is non-null) when window_s non-null; an ungraded window never qualifies"]
     },
     "traversal": {
-      "_doc": "SYNTHESIS Correction: every decode step is one weight traversal. Resident seats traverse HBM; streamed seats traverse a link. Each numeric field carries a sibling '<field>_basis' saying measured | estimated | null and how.",
-      "required": ["path", "bytes_per_traversal", "traversals", "seconds_per_traversal", "accepted_closures_per_traversal"],
+      "_doc": "SYNTHESIS Correction: every decode step is one weight traversal. footprint_bytes is what is RESIDENT (allocated); bytes_per_traversal is what is TRAVERSED per step, which for MoE is the active subset and stays null unless measured. Each numeric field carries a sibling '<field>_basis' saying measured | estimated | null and how.",
+      "required": ["path", "footprint_bytes", "bytes_per_traversal", "traversals", "seconds_per_traversal", "accepted_closures_per_traversal"],
       "fields": {
         "path": {"type": "string", "nullable": true, "enum": ["resident-hbm", "resident-gddr", "split-vram-ram", "streamed-pcie", "streamed-thunderbolt", "streamed-lan", "streamed-disk"]},
-        "bytes_per_traversal": {"type": "integer", "nullable": true, "min": 0},
+        "footprint_bytes": {"type": "integer", "nullable": true, "min": 0, "doc": "resident weight bytes (model buffers); NOT traversed bytes"},
+        "footprint_bytes_basis": {"type": "string", "nullable": true},
+        "bytes_per_traversal": {"type": "integer", "nullable": true, "min": 0, "doc": "bytes actually read per decode step; null unless measured"},
         "bytes_per_traversal_basis": {"type": "string", "nullable": true},
         "traversals": {"type": "integer", "nullable": true, "min": 0},
         "traversals_basis": {"type": "string", "nullable": true},
@@ -95,43 +101,49 @@
         "accepted_closures_per_traversal": {"type": "number", "nullable": true, "min": 0},
         "accepted_closures_per_traversal_basis": {"type": "string", "nullable": true},
         "by_depth": {"type": "array", "nullable": true, "doc": "optional curve: [{depth, seconds_per_traversal, accepted_closures_per_traversal, basis}]"}
-      }
+      },
+      "rules": ["accepted_closures_per_traversal == work.accepted / traversals (rel 1e-3) when traversals and accepted are non-null", "footprint_bytes and bytes_per_traversal may not be silently equal for MoE models: the basis must say measured if they are"]
     },
     "money": {
-      "_doc": "Modeled = list rate x minutes. Billed = the invoice line when it posts (null until then). Credits are kept separate and never netted into modeled. Energy is for estate seats (metered watts x hours x tariff).",
-      "required": ["currency", "list_rate_per_gpu_hr", "billing", "payer", "modeled_minutes", "modeled_minutes_basis", "modeled_usd", "billed_usd", "billed_ref", "credits_usd", "energy"],
+      "_doc": "Modeled = list rate x minutes over the buyer's window (request -> release). When release is unknown, modeled_usd is null and modeled_lower_bound_usd carries request -> work_end (or the widest known window) with its basis. Billed = the invoice line when it posts. Credits are separate and never netted. Energy is for estate seats (metered watts x hours x tariff).",
+      "required": ["currency", "list_rate_per_gpu_hr", "billing", "payer", "modeled_minutes", "modeled_minutes_basis", "modeled_usd", "modeled_lower_bound_minutes", "modeled_lower_bound_usd", "modeled_lower_bound_basis", "billed_usd", "billed_ref", "credits_usd", "energy"],
       "fields": {
         "currency": {"type": "string", "enum": ["USD"]},
         "list_rate_per_gpu_hr": {"type": "number", "nullable": true, "min": 0},
         "billing": {"type": "string", "nullable": true, "doc": "per-minute | per-second-5min-min | owned-energy-only ..."},
         "payer": {"type": "string", "doc": "self | credit:<who> | gift:<who> | cost-covered:<who>"},
-        "modeled_minutes": {"type": "number", "nullable": true, "min": 0},
-        "modeled_minutes_basis": {"type": "string", "nullable": true, "doc": "which clocks bound the modeled window"},
+        "modeled_minutes": {"type": "number", "nullable": true, "min": 0, "doc": "(t_released - t_request) / 60; null unless both clocks exist"},
+        "modeled_minutes_basis": {"type": "string", "nullable": true},
         "modeled_usd": {"type": "number", "nullable": true, "min": 0},
+        "modeled_lower_bound_minutes": {"type": "number", "nullable": true, "min": 0},
+        "modeled_lower_bound_usd": {"type": "number", "nullable": true, "min": 0},
+        "modeled_lower_bound_basis": {"type": "string", "nullable": true, "doc": "which clocks bound the lower-bound window"},
         "billed_usd": {"type": "number", "nullable": true, "min": 0},
         "billed_ref": {"type": "string", "nullable": true, "doc": "invoice id / receipt path"},
         "credits_usd": {"type": "number", "nullable": true, "min": 0, "doc": "credit consumed, as the provider reports it"},
         "energy": {"type": "object", "required": ["watts_mean", "kwh", "tariff_usd_per_kwh", "usd", "meter"], "doc": "all nullable inside; meter names the instrument or null"}
       },
-      "rules": ["modeled_usd == list_rate_per_gpu_hr * gpus * modeled_minutes / 60 (tolerance 0.01) when all non-null"]
+      "rules": ["modeled_usd non-null requires t_request and t_released non-null and modeled_minutes == (t_released - t_request)/60 (tolerance 0.02 min)", "modeled_usd == list_rate_per_gpu_hr * gpus * modeled_minutes / 60 (tolerance 0.01)", "modeled_lower_bound_usd == list_rate_per_gpu_hr * gpus * modeled_lower_bound_minutes / 60 (tolerance 0.01)"]
     },
     "derived": {
-      "_doc": "Cost per accepted unit and wall clock per accepted unit. Computed from the groups above; the validator recomputes them.",
-      "required": ["usd_per_accepted", "usd_per_1k_accepted", "wall_s_per_accepted", "accepted_per_s", "cost_basis"],
+      "_doc": "Cost per accepted unit and wall clock per accepted unit. wall_s_per_accepted is the BUYER'S clock (t_request -> t_released) / accepted, null with a reason when either clock is unknown. Work-time throughput is kept separately and never substitutes for it.",
+      "required": ["usd_per_accepted", "usd_per_1k_accepted", "cost_basis", "wall_s_per_accepted", "work_s_per_accepted", "accepted_per_work_s"],
       "fields": {
         "usd_per_accepted": {"type": "number", "nullable": true, "min": 0},
         "usd_per_1k_accepted": {"type": "number", "nullable": true, "min": 0},
-        "wall_s_per_accepted": {"type": "number", "nullable": true, "min": 0, "doc": "(t_work_end - t_work_start) / accepted"},
-        "accepted_per_s": {"type": "number", "nullable": true, "min": 0},
-        "cost_basis": {"type": "string", "enum": ["modeled", "billed", "energy"], "doc": "which money figure the $/accepted uses"}
+        "cost_basis": {"type": "string", "enum": ["modeled", "modeled-lower-bound", "billed", "energy"], "doc": "which money figure the $/accepted uses"},
+        "wall_s_per_accepted": {"type": "number", "nullable": true, "min": 0, "doc": "(t_released - t_request) / accepted"},
+        "work_s_per_accepted": {"type": "number", "nullable": true, "min": 0, "doc": "(t_work_end - t_work_start) / accepted; work-time only"},
+        "accepted_per_work_s": {"type": "number", "nullable": true, "min": 0, "doc": "accepted / (t_work_end - t_work_start); work-time throughput"}
       },
-      "rules": ["usd_per_accepted == money.<basis>_usd / work.accepted (tolerance 1e-6 relative) when non-null", "wall_s_per_accepted == work_window_s / accepted when non-null"]
+      "rules": ["usd_per_accepted == money.<basis>_usd / work.accepted (rel 1e-6) when non-null", "wall_s_per_accepted == (t_released - t_request) / accepted when non-null; must be null when either clock is null", "work_s_per_accepted == work window / accepted; accepted_per_work_s == accepted / work window"]
     },
     "receipts": {
-      "_doc": "References to the retained bytes. Paths are repo-relative or absolute; sha256 when the file is content-addressed (cell files via MANIFEST.sha256).",
+      "_doc": "References to the retained bytes. Paths are repo-relative or absolute; sha256 when the file is content-addressed (MANIFEST.sha256); sha256_verified says whether the builder recomputed and matched it.",
       "required": ["items"],
       "fields": {
-        "items": {"type": "array", "item_required": ["kind", "path"], "doc": "kind in {cell, env, env_normalized, image, manifest, log, serve_log, engine_output, availability, invoice, prereg, event_log, meter}"}
+        "items": {"type": "array", "item_required": ["kind", "path"], "doc": "kind in {cell, env, env_normalized, image, manifest, log, serve_log, engine_output, evaluation, clocks, arm_summary, arm_file, replay, grade, smoke, availability, invoice, prereg, event_log, meter, closure, file}"},
+        "manifest_verified": {"type": "boolean", "nullable": true, "doc": "true when every MANIFEST line was recomputed and matched"}
       }
     }
   },

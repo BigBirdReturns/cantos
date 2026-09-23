@@ -1,0 +1,290 @@
+{
+ "schema": "second-run/run-ledger@1",
+ "identity": {
+  "run_id": "fixture/estate-w01-3090",
+  "campaign": "first-qualified-workload-2026-09",
+  "run": "run1",
+  "arm": "estate",
+  "tier": null,
+  "knot_id": "knot-fixture",
+  "seat_id": "estate-w01-3090",
+  "provider": "estate",
+  "region": "OCTO-W01",
+  "sku": "rtx-3090-24gb",
+  "gpus": 1,
+  "host": "OCTO-W01",
+  "model": {
+   "id": "Qwen/Qwen3-Coder-30B-A3B-Instruct-FP8",
+   "revision": "dcaee4d4dfc5ee71ad501f01f530e5652438fde0",
+   "precision": "FP8",
+   "bytes": 31187041238
+  },
+  "runtime": {
+   "image": "vllm/vllm-openai",
+   "digest": "sha256:8a69ffad015f138d7170c4ddc429e230a3bc1c1719f67e14324749df200a4b90",
+   "engine": "vllm",
+   "engine_version": "0.30.0",
+   "gpu": "NVIDIA H100 80GB HBM3",
+   "driver_or_rocm": "580.173.02",
+   "kernel": "5.15.0-185-generic"
+  },
+  "workload_id": "random-seed7-in2048-out256-n200-v1",
+  "prereg": {
+   "path": "campaign/identity.json",
+   "commit": "c283ecadd4b996a7a377273e61fa713eca082c0b",
+   "note": "local, unpushed commits (DISCLOSURES 'Timestamps'): privately recorded before the data, not publicly timestamped"
+  },
+  "null_reasons": {
+   "tier": "estate arm has no tuning tiers"
+  }
+ },
+ "clocks": {
+  "t_request": "2026-09-29T10:00:00Z",
+  "t_ssh": "2026-09-29T10:00:05Z",
+  "t_ready": "2026-09-29T10:03:00Z",
+  "t_work_start": "2026-09-29T10:04:00Z",
+  "t_work_end": "2026-09-29T11:04:00Z",
+  "t_released": "2026-09-29T11:05:00Z",
+  "sources": {
+   "t_request": {
+    "source": "campaign/availability/observations.jsonl",
+    "precision": "approximate to a few minutes (availability/README.md: times before 19:00 UTC)"
+   },
+   "t_ssh": {
+    "source": "observation time_to_ssh_s added to t_request",
+    "precision": "approximate"
+   },
+   "t_ready": {
+    "source": "env.json recorded_at; arm.sh writes it after health AND the unrecorded warm-up, so true health is earlier by the warm-up (~30-60 s)",
+    "precision": "1 s, upper bound"
+   },
+   "t_work_start": {
+    "source": "earliest cell 'date' (vLLM bench start, container clock assumed UTC; consistent with env.recorded_at)",
+    "precision": "1 s"
+   },
+   "t_work_end": {
+    "source": "latest cell 'date' + 'duration'",
+    "precision": "1 s"
+   },
+   "t_released": {
+    "source": null,
+    "precision": null
+   }
+  },
+  "null_reasons": {}
+ },
+ "acquisition": {
+  "attempts": [
+   {
+    "ts": "2026-09-29T10:00:00Z",
+    "provider": "estate",
+    "region": "OCTO-W01",
+    "sku": "rtx-3090-24gb",
+    "layer": "delivered",
+    "method": "tui-provision",
+    "outcome": "available",
+    "provisioned": true,
+    "attempt_id": "fixture-lease-1"
+   }
+  ],
+  "n_attempts": 1,
+  "n_allocations": 1,
+  "yield": 1.0
+ },
+ "work": {
+  "unit": "task",
+  "evaluator": {
+   "name": "evalplus-humaneval-plus",
+   "frozen": true,
+   "ref": "evalplus-0.3.1-human-v0.1.10 sidecar sha256:fixture"
+  },
+  "acceptance_rule": {
+   "basis": "post-hoc per-request rule declared in DISCLOSURES.md (Run 1): a request is accepted if it completed and its own TTFT <= gate. The registered rule was cell-level (p95 TTFT, p95 E2E, failed <= 1%) and is kept per cell in work.cells.registered_cell_qualifies. Latency-only: no correctness.",
+   "ttft_ms": 1000,
+   "e2e_ms": null,
+   "correctness": true,
+   "e2e_note": "E2E gate held on both arms for symmetry: the ROCm image (vLLM 0.27.1-dev) writes no per-request latencies."
+  },
+  "attempted": 164,
+  "completed": 160,
+  "correct": 120,
+  "accepted": 118,
+  "lost": 4,
+  "restarts": 0,
+  "cells": null,
+  "task_classes": null,
+  "null_reasons": {
+   "cells": "task run, no cells",
+   "task_classes": "single class in this fixture"
+  }
+ },
+ "sustained": {
+  "required_window_s": 3600,
+  "bucket_s": 300,
+  "window_s": 3600.0,
+  "meets_required_window": true,
+  "interrupted": false,
+  "buckets": [
+   {
+    "index": 0,
+    "start_s": 0,
+    "accepted": 10
+   },
+   {
+    "index": 1,
+    "start_s": 300,
+    "accepted": 10
+   },
+   {
+    "index": 2,
+    "start_s": 600,
+    "accepted": 10
+   },
+   {
+    "index": 3,
+    "start_s": 900,
+    "accepted": 10
+   },
+   {
+    "index": 4,
+    "start_s": 1200,
+    "accepted": 10
+   },
+   {
+    "index": 5,
+    "start_s": 1500,
+    "accepted": 10
+   },
+   {
+    "index": 6,
+    "start_s": 1800,
+    "accepted": 10
+   },
+   {
+    "index": 7,
+    "start_s": 2100,
+    "accepted": 10
+   },
+   {
+    "index": 8,
+    "start_s": 2400,
+    "accepted": 10
+   },
+   {
+    "index": 9,
+    "start_s": 2700,
+    "accepted": 10
+   },
+   {
+    "index": 10,
+    "start_s": 3000,
+    "accepted": 10
+   },
+   {
+    "index": 11,
+    "start_s": 3300,
+    "accepted": 8
+   }
+  ],
+  "min_accepted_per_bucket": 8,
+  "median_accepted_per_bucket": 10,
+  "last_q_over_first_q": 0.9333333333333333,
+  "note": "Run 1's recorded window is the 12-cell sweep (c1 x3 first, c64 x3 last) with ~30 s bench start-up gaps between cells; bucket counts follow the concurrency schedule, not a steady arrival process. The last bucket is partial. Completion times on the AMD arm are ttft + sum(itl). This does not meet the 60-minute sustained requirement."
+ },
+ "traversal": {
+  "path": "split-vram-ram",
+  "footprint_bytes": 33745206528,
+  "footprint_bytes_basis": "llama.cpp load log: CUDA0 + CPU model buffer bytes (allocated)",
+  "bytes_per_traversal": 33745206528,
+  "bytes_per_traversal_basis": "model buffer bytes",
+  "traversals": 49200,
+  "traversals_basis": "llama-server n_decode_total delta",
+  "seconds_per_traversal": 0.0732,
+  "seconds_per_traversal_basis": "decode wall / n_decode",
+  "accepted_closures_per_traversal": 0.0023983739837398375,
+  "accepted_closures_per_traversal_basis": "accepted / traversals",
+  "by_depth": null,
+  "null_reasons": {
+   "by_depth": "single depth in this fixture"
+  }
+ },
+ "money": {
+  "currency": "USD",
+  "billing": "owned-energy-only",
+  "payer": "self",
+  "energy": {
+   "watts_mean": 310.0,
+   "kwh": 0.3358,
+   "tariff_usd_per_kwh": 0.3,
+   "usd": 0.10074,
+   "meter": "fixture-plug-meter"
+  },
+  "null_reasons": {
+   "list_rate_per_gpu_hr": "owned seat: energy only",
+   "modeled_minutes": "owned seat: energy only",
+   "modeled_minutes_basis": "owned seat: energy only",
+   "modeled_usd": "owned seat: energy only",
+   "modeled_lower_bound_minutes": "owned seat: energy only",
+   "modeled_lower_bound_usd": "owned seat: energy only",
+   "modeled_lower_bound_basis": "owned seat: energy only",
+   "billed_usd": "owned seat: energy only",
+   "billed_ref": "owned seat: energy only",
+   "credits_usd": "owned seat: energy only"
+  },
+  "list_rate_per_gpu_hr": null,
+  "modeled_minutes": null,
+  "modeled_minutes_basis": null,
+  "modeled_usd": null,
+  "modeled_lower_bound_minutes": null,
+  "modeled_lower_bound_usd": null,
+  "modeled_lower_bound_basis": null,
+  "billed_usd": null,
+  "billed_ref": null,
+  "credits_usd": null
+ },
+ "derived": {
+  "usd_per_accepted": 0.000853728813559322,
+  "usd_per_1k_accepted": 0.8537288135593221,
+  "cost_basis": "energy",
+  "wall_s_per_accepted": 33.05084745762712,
+  "work_s_per_accepted": 30.508474576271187,
+  "accepted_per_work_s": 0.03277777777777778
+ },
+ "receipts": {
+  "items": [
+   {
+    "kind": "cell",
+    "path": "campaign/results/do-h100/cell-c1-r0.json",
+    "sha256": "cedb2d259bcdb4c619a02d844aa7f115f0e3ec48499c5adaeaeab9844db5fff9",
+    "sha256_verified": true
+   },
+   {
+    "kind": "cell",
+    "path": "campaign/results/do-h100/cell-c1-r1.json",
+    "sha256": "e9ce72990735d57d1633aaaa473d0e1283b7f2f5ca6a507fa7994e85f4c91a62",
+    "sha256_verified": true
+   },
+   {
+    "kind": "cell",
+    "path": "campaign/results/do-h100/cell-c1-r2.json",
+    "sha256": "3ae5a2dbaf125158066291e75706bf1c5faf96ea47c4b9ed53a22613f1eb0348",
+    "sha256_verified": true
+   }
+  ],
+  "manifest_verified": true
+ },
+ "notes": [
+  "fixture: hypothetical fully-populated estate record; not a measurement"
+ ],
+ "built_by": {
+  "tool": "ledger/ledger_build_run1.py",
+  "at": "2026-09-23T22:27:07Z",
+  "inputs": [
+   "campaign/results/do-h100",
+   "campaign/identity.json",
+   "campaign/availability/observations.jsonl"
+  ]
+ },
+ "_fixture": "trimmed copy of examples/run1-do-h100.ledger.json (schema r2)",
+ "_expect": "footprint is not traversed"
+}
