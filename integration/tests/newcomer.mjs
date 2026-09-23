@@ -1,0 +1,57 @@
+/* Fresh-browser task walkthrough. Synthetic results remain labeled throughout. */
+import http from 'node:http';
+import fs from 'node:fs';
+import path from 'node:path';
+import {fileURLToPath,pathToFileURL} from 'node:url';
+import {execFileSync} from 'node:child_process';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../..');
+const out=path.resolve(process.env.NEWCOMER_QA_DIR||'newcomer-qa');fs.mkdirSync(out,{recursive:true});
+const {chromium}=await import(process.env.PLAYWRIGHT_MODULE||'playwright');
+const checks=[],errors=[],requests=[];
+function check(name,value){if(!value)throw Error(name);checks.push(name);}
+const files={'/hot-aisle/':'hot-aisle/index.html','/compute/':'compute/index.html'};
+const server=http.createServer((req,res)=>{const key=new URL(req.url,'http://127.0.0.2').pathname;const name=files[key];if(!name){res.writeHead(404);res.end();return;}res.setHeader('Content-Type','text/html; charset=utf-8');res.end(fs.readFileSync(path.join(root,name)));});
+await new Promise(resolve=>server.listen(0,'127.0.0.2',resolve));
+const base=process.env.NEWCOMER_BASE_URL||'http://127.0.0.2:'+server.address().port+'/';
+const browser=await chromium.launch();
+try{
+ const context=await browser.newContext({viewport:{width:1440,height:1000},acceptDownloads:true,colorScheme:'light'});
+ const page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));page.on('request',r=>requests.push(r.url()));
+ await page.goto(base+'hot-aisle/',{waitUntil:'domcontentloaded'});
+ check('entry names Second Run and Hot Aisle',/Second Run/.test(await page.title())&&/Hot Aisle/.test(await page.locator('.lead').innerText()));
+ check('first result needs no runner setup',await page.locator('#setup').isHidden());
+ await page.getByRole('button',{name:'Try it on a sample',exact:true}).click();
+ await page.waitForSelector('#report .resultcard');
+ check('one click produces two priced results',await page.locator('#report .resultcard').count()===2);
+ check('sample status remains visible',await page.locator('#sample-banner').isVisible());
+ check('denominator remains completed requests',/completed/i.test(await page.locator('#report').innerText()));
+ const reportDownload=page.waitForEvent('download');await page.locator('#save-html').click();const report=await reportDownload;await report.saveAs(path.join(out,'sample-report.html'));
+ const evidenceDownload=page.waitForEvent('download');await page.locator('#save-json').click();const evidence=await evidenceDownload;await evidence.saveAs(path.join(out,'sample-evidence.json'));
+ const recomputed=JSON.parse(execFileSync(process.execPath,['hot-aisle/scripts/recompute.cjs',path.join(out,'sample-evidence.json')],{cwd:root,encoding:'utf8'}));
+ check('downloaded evidence recomputes in a fresh process',recomputed.status==='RECOMPUTED'&&recomputed.synthetic===true);
+ const kept=await context.newPage();await kept.goto(pathToFileURL(path.join(out,'sample-report.html')).href);
+ check('downloaded report remains explicitly synthetic',/synthetic/i.test(await kept.locator('body').innerText()));
+ check('downloaded report contains its source checksum',/sha-?256/i.test(await kept.locator('body').innerText()));
+ await kept.close();await page.locator('#report').screenshot({path:path.join(out,'retained-result.png')});
+ await page.locator('#compute-desk-link').click();await page.waitForSelector('#price-rows tr');
+ check('provider-neutral desk retains the handoff',new URL(page.url()).pathname.endsWith('/compute/')&&await page.locator('#memory').inputValue()==='192');
+ check('desk links back to the workload instrument',await page.locator('a[href*="hot-aisle"]').count()>0);
+ await page.locator('#price-rows input[type=checkbox]').first().check();await page.locator('#plan-shortlist').click();
+ check('a price decision can be retained',await page.locator('#saved-count').innerText()==='1');
+ await page.reload({waitUntil:'domcontentloaded'});await page.locator('#saved-top').click();await page.locator('[data-saved="0"]').click();
+ check('saved decision survives reload',await page.locator('#modal').isVisible());
+ const decisionDownload=page.waitForEvent('download');await page.locator('#export-decision').click();await (await decisionDownload).saveAs(path.join(out,'compute-decision.json'));
+ const decisionCheck=JSON.parse(execFileSync(process.execPath,['compute/scripts/recompute.cjs',path.join(out,'compute-decision.json')],{cwd:root,encoding:'utf8'}));
+ check('retained compute decision independently recomputes',decisionCheck.status==='RECOMPUTED');
+ await page.locator('#modal-close').click();await page.setViewportSize({width:390,height:844});
+ await page.screenshot({path:path.join(out,'returning-phone.png'),fullPage:true});
+ check('returning phone workspace fits',await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
+ await page.goto(base+'hot-aisle/',{waitUntil:'domcontentloaded'});
+ for(const width of [320,390,768]){await page.setViewportSize({width,height:844});check('public entry fits '+width,await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));}
+ check('no browser exceptions',errors.length===0);
+ await context.close();
+} catch(e){errors.push(e.stack);} finally{await browser.close();await new Promise(r=>server.close(r));}
+const foreign=requests.filter(u=>!u.startsWith(base)&&!u.startsWith('file:')&&!u.startsWith('blob:'));
+if(!process.env.NEWCOMER_BASE_URL&&foreign.length)errors.push('Unexpected external requests: '+foreign.join(', '));
+const result={schema:'second-run/newcomer-walkthrough@1',base,checks,passed:checks.length,errors,external_requests:foreign,scope:'Fresh-browser task walkthrough, not a human usability study or GPU measurement. Source assertions retain their synthetic status.'};
+fs.writeFileSync(path.join(out,'journeys.json'),JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify(result,null,2));process.exitCode=errors.length?1:0;

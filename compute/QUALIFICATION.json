@@ -1,16 +1,11 @@
 {
-  "schema": "second-run/integration-candidate-qualification@1",
+  "schema": "second-run/source-qualification-contract@1",
   "version": "0.2-integration",
-  "state": "AWAITING_NATIVE_CI_FOR_INTEGRATED_SOURCE",
-  "scope": "Software integration only. Benchmark executors and provider APIs in tests are labeled local fixtures.",
-  "local_tests": {
-    "compute_node": 59,
-    "instrument_engine": 80,
-    "runner_node": 13,
-    "seam_node": 17
-  },
-  "native_browser": "Run .github/workflows/hot-aisle-ci.yml against this exact source. Older set_content/browser receipts are not promoted.",
-  "prior_version": "0.1.0",
+  "state": "CONSULT_SOURCE_MATCHED_CI",
+  "scope": "Software and native-browser integration. Benchmark executors and provider APIs in tests are labeled fixtures.",
+  "authoritative_workflow": ".github/workflows/hot-aisle-ci.yml",
+  "result_binding": "Workflow outcomes apply only to their tested source identities. The workflow artifact retains exact page and kit hashes. This file describes the test contract, not a passing run.",
+  "historical_receipt": "integration/QUALIFICATION.json applies to its recorded hashes, not later revisions.",
   "hardware_campaign": "NOT_RUN",
   "provider_authentication": "NOT_QUALIFIED"
 }

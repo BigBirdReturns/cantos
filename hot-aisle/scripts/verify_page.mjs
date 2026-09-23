@@ -68,6 +68,7 @@ async function staticPass(browser) {
   check('static', 'phone_no_horizontal_scroll', layout.scrollWidth <= layout.width + 1);
   check('static', 'phone_nav_visible', await page.locator('.top nav').isVisible());
   check('static', 'phone_ledger_scrolls_not_clips', await page.evaluate(() => { const w = document.querySelector('#headline .scrollx'); return !!w && getComputedStyle(w).overflowX === 'auto' && w.scrollWidth >= w.clientWidth; }));
+  for (const width of [320,360,768]) { await page.setViewportSize({width,height:844}); await page.waitForTimeout(50); check('static','responsive_content_'+width,await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)); }
   await page.close();
 }
 

@@ -66,3 +66,9 @@ The public catalogue retains its actual review date. Rebuilding, copying, repric
 ## Native Windows recheck
 
 `QUALIFICATION.json` records the exact tested source hashes and fresh native browser counts. The recheck caught and repaired same-document private-link activation, corrected presentation-sensitive test assertions, and distinguishes unconfigured observations from failed reads. Both services were driven through actual localhost URLs; the desk saved and repriced a published record, reloaded it, held corrupt input, and retained saved decisions after the runner stopped. The campaign backend remained explicitly synthetic.
+
+## Publication acceptance
+
+Every current workflow uploading the full Pages site runs `integration/release_gate.py` before upload. It requires a successful native-CI run for the exact product and release-workflow source identities. A newer matching failed run holds release; unrelated data-only commits can reuse an identical passing source set. Uncommitted product changes, missing proof and timeouts hold publication. Data-refresh commits remain separate from whether their site artifact may deploy.
+
+Qualification JSON files describe the contract; workflow outcomes and captured source hashes establish results. The historical integration receipt applies only to its recorded bytes. Verify the gate with `python -m unittest discover -s integration/tests -p test_release_gate.py -v`.
