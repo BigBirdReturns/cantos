@@ -48,6 +48,13 @@ class Publication(unittest.TestCase):
         self.assertNotIn('Participation Ribbon',json.dumps(t))
     def test_no_full_copyrighted_page_redistributed(self):
         self.assertFalse((ROOT/'launch/sources-20260923/newsletter.html').exists())
+        # No paid newsletter article body anywhere in the published tree.
+        markers=(b'This post is for paid subscribers', b'body_html', b'truncated_body_text')
+        for f in ROOT.rglob('*'):
+            if f.is_file() and f.suffix in ('.html','.htm','.json','.txt','.md'):
+                data=f.read_bytes()
+                for m in markers:
+                    self.assertNotIn(m,data,f'{f.relative_to(ROOT)} contains paid-article marker')
     def test_unverified_rubric_blocks_binding(self):
         p={'rating_name':'ClusterMAX','rating_version':'3.0','trials':[{'provider_id':'Nebius'}]}
         with self.assertRaises(ll.InvalidLedger): ll.build_binding_draft(self.ledger,p,'a'*64)
