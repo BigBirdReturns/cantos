@@ -1,7 +1,7 @@
 {
   "schema": "secondrun.challenge-build.v1",
   "version": "1.1.0",
-  "created_at": "2026-09-23T21:46:05.203971+00:00",
+  "created_at": "2026-09-23T21:51:37.592018+00:00",
   "python": "3.13.15",
   "reference_tests_passed": 130,
   "engine_checks_passed": 61,
@@ -11,7 +11,7 @@
   "browser_scope": "Playwright Chromium, file:// navigation, real file-input load of data/demo-plan.json, data/demo-binding.json and data/demo-outcomes.json (plan/binding/outcomes order), Evaluate click, non-HOLD result render including rubric and subsidized_trials in the raw output, Run synthetic example (demo()) button also produces a non-HOLD result with the new binding_rules/rubric fields, score button stays disabled with only plan+outcomes selected, HOLD renders for an invalid/missing binding record, zero console/page errors confirmed 2026-09-23.",
   "clustermax_3_provider_outcomes": "NOT_TESTED",
   "source_hashes": {
-    "index.html": "f22643e166ea108fdc8032d0247b5b0b2188af7c271ae232361917bdb032c229",
+    "index.html": "d4d461d93081d96fb14448d8cf4b6aee762eb4f4d4a666f8da92cb03b736a960",
     "scripts/challenge.py": "0d0da6e3789ea2e1ef30667997b1b0873a19efbf87f6c36f422b84b8b7b76732",
     "scripts/make_demo.py": "bfa0c757530da5bf41858b481703285819c9e532ab921e97d4734b8db923985f",
     "scripts/probe_audit_runner.py": "2e5af53c258078c79b67f2bfb5e13be28b7a5f905f8225a60f4b0aef9adab5cc",
@@ -19,7 +19,7 @@
     "tests/test_challenge.py": "55b816d00579bfcf95f31c2a73ab95db2c6cc33f186267f5bcbe130c4f9ce513",
     "tests/test_engine.cjs": "d5bd2b2e7d7045fd817fbba4295f42674259e7bf50c4b65a5f46be2afc9766ce",
     "tests/test_launch_ledger.py": "9aab9dee2815934cb1e32f0222214e49d04f60a8599167382f5a0f9185256ab7",
-    "README.md": "9cb9df8da2d6ee6fb4f162f16931045f234da97ace6c215de38d3a731d53e4f6",
+    "README.md": "249b648558023725afdb292c0eaa9425bdd9f284528ecd654a6c645eeb1b5d5a",
     "design/transform.json": "27fd2eae72985567bcb0568d2dd75803afdfa0abbae47319667f6c3e0d077249",
     "launch/README.md": "cb79c20826bb5ea9781228d9f776eff3a9caf9974b6ed39d9a23f3f6655c1cd6",
     "launch/claims-3.0.template.json": "abed109b66b1cb7f7c51caa48da50cf2276d5a62a9522f4587fa0bc7ea9051d0"

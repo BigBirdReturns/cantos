@@ -238,10 +238,7 @@ another general-purpose badge.
 
 ## Disclosure
 
-Hot Aisle provided $200 in compute credits to support tests I had already planned
-independently. I have also built and shared tooling for its service. Hot Aisle is
-excluded from the primary ClusterMAX comparison. It was rated Underperforming in
-ClusterMAX 1.0 and Bronze in 2.0 and 2.1. I have publicly criticised SemiAnalysis.
+Hot Aisle provided $200 in compute credits for my own testing.
 
 ## ClusterMAX 3.0 is out (2026-09-23)
 
@@ -267,7 +264,6 @@ over the release.
   provider-arranged access, in one case on a cluster used under a provider
   engineer's account. The customer-scope gate exists to keep that kind of
   observation separate from ordinary customer access.
-* Hot Aisle, which provided the credits disclosed above, does not appear in 3.0.
 
 The paid release article is cited by URL and hash only; it is not republished here.
 [`launch/README.md`](launch/README.md) is the ledger procedure that will record,
