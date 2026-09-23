@@ -1,0 +1,459 @@
+{
+  "billing": {
+    "actual_total_usd": 0.48,
+    "currency": "USD",
+    "quote_total_usd": 0.6,
+    "reconciliation": "Synthetic values; an arithmetic fixture.",
+    "scope": "All 24 fictional attempts; no real expenditure or hardware measurement."
+  },
+  "evidence": "synthetic",
+  "label": "Configuration B",
+  "pins": {
+    "boundary": "complete-API-batch-USD@1",
+    "cache": "none",
+    "contract": "five-field-invoice@1",
+    "load": "sequential-24@1",
+    "model": "synthetic-model-b",
+    "precision": "not-applicable",
+    "revision": "fixture@1",
+    "runtime": "authored-example@1",
+    "taskset": "second-run-invoice-fixture@1",
+    "tokenizer": "not-applicable"
+  },
+  "run_id": "fixture-b",
+  "schema": "second-run/task-run@1",
+  "tasks": [
+    {
+      "attempts": [
+        {
+          "cost_usd": 0.02,
+          "elapsed_ms": 1000,
+          "output": "{\"invoice_id\":\"INV-001\",\"date\":\"2026-08-15\",\"currency\":\"USD\",\"total\":\"100.00\",\"purchase_order\":null}",
+          "status": "ok"
+        }
+      ],
+      "expected": {
+        "currency": "USD",
+        "date": "2026-08-15",
+        "invoice_id": "INV-001",
+        "purchase_order": null,
+        "total": "100.00"
+      },
+      "id": "task-001"
+    },
+    {
+      "attempts": [
+        {
+          "cost_usd": 0.02,
+          "elapsed_ms": 1080,
+          "output": "{\"invoice_id\":\"INV-002\",\"date\":\"2026-08-15\",\"currency\":\"USD\",\"total\":\"101.00\",\"purchase_order\":null}",
+          "status": "ok"
+        }
+      ],
+      "expected": {
+        "currency": "USD",
+        "date": "2026-08-15",
+        "invoice_id": "INV-002",
+        "purchase_order": null,
+        "total": "101.00"
+      },
+      "id": "task-002"
+    },
+    {
+      "attempts": [
+        {
+          "cost_usd": 0.02,
+          "elapsed_ms": 1160,
+          "output": "{\"invoice_id\":\"INV-003\",\"date\":\"2026-08-15\",\"currency\":\"USD\",\"total\":\"102.00\",\"purchase_order\":null}",
+          "status": "ok"
+        }
+      ],
+      "expected": {
+        "currency": "USD",
+        "date": "2026-08-15",
+        "invoice_id": "INV-003",
+        "purchase_order": null,
+        "total": "102.00"
+      },
+      "id": "task-003"
+    },
+    {
+      "attempts": [
+        {
+          "cost_usd": 0.02,
+          "elapsed_ms": 1240,
+          "output": "{\"invoice_id\":\"INV-004\",\"date\":\"2026-08-15\",\"currency\":\"USD\",\"total\":\"103.00\",\"purchase_order\":null}",
+          "status": "ok"
+        }
+      ],
+      "expected": {
+        "currency": "USD",
+        "date": "2026-08-15",
+        "invoice_id": "INV-004",
+        "purchase_order": null,
+        "total": "103.00"
+      },
+      "id": "task-004"
+    },
+    {
+      "attempts": [
+        {
+          "cost_usd": 0.02,
+          "elapsed_ms": 1320,
+          "output": "{\"invoice_id\":\"INV-005\",\"date\":\"2026-08-15\",\"currency\":\"USD\",\"total\":\"104.00\",\"purchase_order\":null}",
+          "status": "ok"
+        }
+      ],
+      "expected": {
+        "currency": "USD",
+        "date": "2026-08-15",
+        "invoice_id": "INV-005",
+        "purchase_order": null,
+        "total": "104.00"
+      },
+      "id": "task-005"
+    },
+    {
+      "attempts": [
+        {
+          "cost_usd": 0.02,
+          "elapsed_ms": 1400,
+          "output": "{\"invoice_id\":\"INV-006\",\"date\":\"2026-08-15\",\"currency\":\"USD\",\"total\":\"105.00\",\"purchase_order\":null}",
+          "status": "ok"
+        }
+      ],
+      "expected": {
+        "currency": "USD",
+        "date": "2026-08-15",
+        "invoice_id": "INV-006",
+        "purchase_order": null,
+        "total": "105.00"
+      },
+      "id": "task-006"
+    },
+    {
+      "attempts": [
+        {
+          "cost_usd": 0.02,
+          "elapsed_ms": 1480,
+          "output": "{\"invoice_id\":\"INV-007\",\"date\":\"2026-08-15\",\"currency\":\"USD\",\"total\":\"106.00\",\"purchase_order\":null}",
+          "status": "ok"
+        }
+      ],
+      "expected": {
+        "currency": "USD",
+        "date": "2026-08-15",
+        "invoice_id": "INV-007",
+        "purchase_order": null,
+        "total": "106.00"
+      },
+      "id": "task-007"
+    },
+    {
+      "attempts": [
+        {
+          "cost_usd": 0.02,
+          "elapsed_ms": 1560,
+          "output": "{\"invoice_id\":\"INV-008\",\"date\":\"2026-08-15\",\"currency\":\"USD\",\"total\":\"107.00\",\"purchase_order\":null}",
+          "status": "ok"
+        }
+      ],
+      "expected": {
+        "currency": "USD",
+        "date": "2026-08-15",
+        "invoice_id": "INV-008",
+        "purchase_order": null,
+        "total": "107.00"
+      },
+      "id": "task-008"
+    },
+    {
+      "attempts": [
+        {
+          "cost_usd": 0.02,
+          "elapsed_ms": 1640,
+          "output": "{\"invoice_id\":\"INV-009\",\"date\":\"2026-08-15\",\"currency\":\"USD\",\"total\":\"108.00\",\"purchase_order\":null}",
+          "status": "ok"
+        }
+      ],
+      "expected": {
+        "currency": "USD",
+        "date": "2026-08-15",
+        "invoice_id": "INV-009",
+        "purchase_order": null,
+        "total": "108.00"
+      },
+      "id": "task-009"
+    },
+    {
+      "attempts": [
+        {
+          "cost_usd": 0.02,
+          "elapsed_ms": 1720,
+          "output": "{\"invoice_id\":\"INV-010\",\"date\":\"2026-08-15\",\"currency\":\"USD\",\"total\":\"109.00\",\"purchase_order\":null}",
+          "status": "ok"
+        }
+      ],
+      "expected": {
+        "currency": "USD",
+        "date": "2026-08-15",
+        "invoice_id": "INV-010",
+        "purchase_order": null,
+        "total": "109.00"
+      },
+      "id": "task-010"
+    },
+    {
+      "attempts": [
+        {
+          "cost_usd": 0.02,
+          "elapsed_ms": 1800,
+          "output": "{\"invoice_id\":\"INV-011\",\"date\":\"2026-08-15\",\"currency\":\"USD\",\"total\":\"110.00\",\"purchase_order\":null}",
+          "status": "ok"
+        }
+      ],
+      "expected": {
+        "currency": "USD",
+        "date": "2026-08-15",
+        "invoice_id": "INV-011",
+        "purchase_order": null,
+        "total": "110.00"
+      },
+      "id": "task-011"
+    },
+    {
+      "attempts": [
+        {
+          "cost_usd": 0.02,
+          "elapsed_ms": 1880,
+          "output": "{\"invoice_id\":\"INV-012\",\"date\":\"2026-08-15\",\"currency\":\"USD\",\"total\":\"111.00\",\"purchase_order\":null}",
+          "status": "ok"
+        }
+      ],
+      "expected": {
+        "currency": "USD",
+        "date": "2026-08-15",
+        "invoice_id": "INV-012",
+        "purchase_order": null,
+        "total": "111.00"
+      },
+      "id": "task-012"
+    },
+    {
+      "attempts": [
+        {
+          "cost_usd": 0.02,
+          "elapsed_ms": 1960,
+          "output": "{\"invoice_id\":\"INV-013\",\"date\":\"2026-08-15\",\"currency\":\"USD\",\"total\":\"112.00\",\"purchase_order\":null}",
+          "status": "ok"
+        }
+      ],
+      "expected": {
+        "currency": "USD",
+        "date": "2026-08-15",
+        "invoice_id": "INV-013",
+        "purchase_order": null,
+        "total": "112.00"
+      },
+      "id": "task-013"
+    },
+    {
+      "attempts": [
+        {
+          "cost_usd": 0.02,
+          "elapsed_ms": 2040,
+          "output": "{\"invoice_id\":\"INV-014\",\"date\":\"2026-08-15\",\"currency\":\"USD\",\"total\":\"113.00\",\"purchase_order\":null}",
+          "status": "ok"
+        }
+      ],
+      "expected": {
+        "currency": "USD",
+        "date": "2026-08-15",
+        "invoice_id": "INV-014",
+        "purchase_order": null,
+        "total": "113.00"
+      },
+      "id": "task-014"
+    },
+    {
+      "attempts": [
+        {
+          "cost_usd": 0.02,
+          "elapsed_ms": 2120,
+          "output": "{\"invoice_id\":\"INV-015\",\"date\":\"2026-08-15\",\"currency\":\"USD\",\"total\":\"114.00\",\"purchase_order\":null}",
+          "status": "ok"
+        }
+      ],
+      "expected": {
+        "currency": "USD",
+        "date": "2026-08-15",
+        "invoice_id": "INV-015",
+        "purchase_order": null,
+        "total": "114.00"
+      },
+      "id": "task-015"
+    },
+    {
+      "attempts": [
+        {
+          "cost_usd": 0.02,
+          "elapsed_ms": 2200,
+          "output": "{\"invoice_id\":\"INV-016\",\"date\":\"2026-08-15\",\"currency\":\"USD\",\"total\":\"115.00\",\"purchase_order\":null}",
+          "status": "ok"
+        }
+      ],
+      "expected": {
+        "currency": "USD",
+        "date": "2026-08-15",
+        "invoice_id": "INV-016",
+        "purchase_order": null,
+        "total": "115.00"
+      },
+      "id": "task-016"
+    },
+    {
+      "attempts": [
+        {
+          "cost_usd": 0.02,
+          "elapsed_ms": 2280,
+          "output": "{\"invoice_id\":\"INV-017\",\"date\":\"2026-08-15\",\"currency\":\"USD\",\"total\":\"116.00\",\"purchase_order\":null}",
+          "status": "ok"
+        }
+      ],
+      "expected": {
+        "currency": "USD",
+        "date": "2026-08-15",
+        "invoice_id": "INV-017",
+        "purchase_order": null,
+        "total": "116.00"
+      },
+      "id": "task-017"
+    },
+    {
+      "attempts": [
+        {
+          "cost_usd": 0.02,
+          "elapsed_ms": 2360,
+          "output": "{\"invoice_id\":\"INV-018\",\"date\":\"2026-08-15\",\"currency\":\"USD\",\"total\":\"117.00\",\"purchase_order\":null}",
+          "status": "ok"
+        }
+      ],
+      "expected": {
+        "currency": "USD",
+        "date": "2026-08-15",
+        "invoice_id": "INV-018",
+        "purchase_order": null,
+        "total": "117.00"
+      },
+      "id": "task-018"
+    },
+    {
+      "attempts": [
+        {
+          "cost_usd": 0.02,
+          "elapsed_ms": 2440,
+          "output": "{\"invoice_id\":\"INV-019\",\"date\":\"2026-08-15\",\"currency\":\"USD\",\"total\":\"118.00\",\"purchase_order\":null}",
+          "status": "ok"
+        }
+      ],
+      "expected": {
+        "currency": "USD",
+        "date": "2026-08-15",
+        "invoice_id": "INV-019",
+        "purchase_order": null,
+        "total": "118.00"
+      },
+      "id": "task-019"
+    },
+    {
+      "attempts": [
+        {
+          "cost_usd": 0.02,
+          "elapsed_ms": 2520,
+          "output": "{\"invoice_id\":\"INV-020\",\"date\":\"2026-08-15\",\"currency\":\"USD\",\"total\":\"119.00\",\"purchase_order\":null}",
+          "status": "ok"
+        }
+      ],
+      "expected": {
+        "currency": "USD",
+        "date": "2026-08-15",
+        "invoice_id": "INV-020",
+        "purchase_order": null,
+        "total": "119.00"
+      },
+      "id": "task-020"
+    },
+    {
+      "attempts": [
+        {
+          "cost_usd": 0.02,
+          "elapsed_ms": 2600,
+          "output": "{\"invoice_id\":\"INV-021\",\"date\":\"2026-08-15\",\"currency\":\"USD\",\"total\":\"120.00\",\"purchase_order\":null}",
+          "status": "ok"
+        }
+      ],
+      "expected": {
+        "currency": "USD",
+        "date": "2026-08-15",
+        "invoice_id": "INV-021",
+        "purchase_order": null,
+        "total": "120.00"
+      },
+      "id": "task-021"
+    },
+    {
+      "attempts": [
+        {
+          "cost_usd": 0.02,
+          "elapsed_ms": 2680,
+          "output": "{\"invoice_id\":\"INV-022\",\"date\":\"2026-08-15\",\"currency\":\"USD\",\"total\":\"121.00\",\"purchase_order\":null}",
+          "status": "ok"
+        }
+      ],
+      "expected": {
+        "currency": "USD",
+        "date": "2026-08-15",
+        "invoice_id": "INV-022",
+        "purchase_order": null,
+        "total": "121.00"
+      },
+      "id": "task-022"
+    },
+    {
+      "attempts": [
+        {
+          "cost_usd": 0.02,
+          "elapsed_ms": 2760,
+          "output": "{\"invoice_id\":\"INV-023\",\"date\":\"2026-08-15\",\"currency\":\"USD\",\"total\":\"999.00\",\"purchase_order\":null}",
+          "status": "ok"
+        }
+      ],
+      "expected": {
+        "currency": "USD",
+        "date": "2026-08-15",
+        "invoice_id": "INV-023",
+        "purchase_order": null,
+        "total": "122.00"
+      },
+      "id": "task-023"
+    },
+    {
+      "attempts": [
+        {
+          "cost_usd": 0.02,
+          "elapsed_ms": 2840,
+          "output": "{\"invoice_id\":\"INV-024\",\"date\":\"2026-08-15\",\"currency\":\"USD\",\"total\":\"999.00\",\"purchase_order\":null}",
+          "status": "ok"
+        }
+      ],
+      "expected": {
+        "currency": "USD",
+        "date": "2026-08-15",
+        "invoice_id": "INV-024",
+        "purchase_order": null,
+        "total": "123.00"
+      },
+      "id": "task-024"
+    }
+  ]
+}

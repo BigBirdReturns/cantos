@@ -1,0 +1,91 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'"><title>Underwriting note / synthetic</title><style>body{font:16px/1.6 system-ui;margin:40px auto;padding:0 24px;max-width:980px;color:#17212c}h1{font-size:38px;line-height:1.1;letter-spacing:-.03em}.status{padding:14px;background:#fff0f6;border-left:4px solid #d72f71}.review{border:1px solid #d9dfe8;border-radius:8px;padding:16px 20px;margin:24px 0}.review p{margin:8px 0}article{border-top:1px solid #ccd;padding:20px 0}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f3f5f6;padding:15px}small,.small{color:#526070;font-size:13px}small{overflow-wrap:anywhere}.table-scroll{overflow:auto}table{width:100%;border-collapse:collapse;margin:22px 0}td,th{text-align:left;vertical-align:top;padding:12px;border-bottom:1px solid #d9dfe8}th{background:#f4f5f8;font-size:12px}summary{cursor:pointer;color:#a5114b;padding:10px 0}@media(max-width:600px){body{margin:24px auto;padding:0 18px}h1{font-size:30px}td,th{padding:8px;font-size:12px}}@media print{body{margin:0}.machine{display:none}.review{break-inside:avoid}h2{break-after:avoid}}</style><body><p class="small">SECOND RUN / RESEARCH DELIVERY</p><h1>Underwriting note / synthetic</h1><p>BEP preparation / independent Second Run edition</p><p class="status">SYNTHETIC FROZEN DILIGENCE / 2026-09-23T05:02:57.845Z</p><section class="review"><strong>Snapshot review: ACCEPT</strong><p>Synthetic example reviewer · 2026-09-23T05:02:57.844Z</p><p>Reviewed only the fictional contracts, receipts and reported dependency tests. No valuation or professional diligence opinion.</p><p class="small">Review is bound to this exact target and dependency set. The name is operator-supplied, not identity-authenticated.</p></section><article><small>diligence-input · v1 · instruments · synthetic</small><h2>Six relationships; what do they establish?</h2><p>Six fictional counterparties with distinct contract, cash and acceptance states.</p><p class="small">Authored record state: supported. Pinned inputs: source record.</p></article><article><small>diligence-note · v1 · conclusion · synthetic</small><h2>Underwriting note / synthetic</h2><p>The supplied $1.2m ARR assertion is not reconciled to the $180k active signed recurring consideration. Contracted amounts, cash, accepted deployments and independence tests retain different states.</p><p class="small">Authored record state: draft. Pinned inputs: diligence-result@1.</p></article><article><small>diligence-result · v1 · diligence · synthetic</small><h2>Customer-claim bridge</h2><p>Six relationships support $180,000 in active signed annualized consideration on the supplied records, with one accepted instrument.</p><details class="machine"><summary>Inspect complete calculation / record data</summary><pre>{
+  &quot;accepted_instruments&quot;: 1,
+  &quot;as_of&quot;: &quot;2026-09-22&quot;,
+  &quot;claimed_arr_usd&quot;: 1200000,
+  &quot;company&quot;: &quot;EdgeWorks (fictional)&quot;,
+  &quot;contracted_customers&quot;: 2,
+  &quot;recipe&quot;: &quot;diligence@1&quot;,
+  &quot;relationships&quot;: 6,
+  &quot;reported_cash_received_usd&quot;: 37000,
+  &quot;rows&quot;: [
+    {
+      &quot;active&quot;: true,
+      &quot;annual_included_usd&quot;: 120000,
+      &quot;id&quot;: &quot;C-101&quot;,
+      &quot;reason&quot;: &quot;Active signed recurring consideration&quot;,
+      &quot;recurring&quot;: true
+    },
+    {
+      &quot;active&quot;: true,
+      &quot;annual_included_usd&quot;: 60000,
+      &quot;id&quot;: &quot;C-102&quot;,
+      &quot;reason&quot;: &quot;Active signed recurring consideration&quot;,
+      &quot;recurring&quot;: true
+    },
+    {
+      &quot;active&quot;: true,
+      &quot;annual_included_usd&quot;: 0,
+      &quot;id&quot;: &quot;P-103&quot;,
+      &quot;reason&quot;: &quot;Nonrecurring or nonbinding instrument&quot;,
+      &quot;recurring&quot;: false
+    },
+    {
+      &quot;active&quot;: true,
+      &quot;annual_included_usd&quot;: 0,
+      &quot;id&quot;: &quot;M-104&quot;,
+      &quot;reason&quot;: &quot;Nonrecurring or nonbinding instrument&quot;,
+      &quot;recurring&quot;: false
+    },
+    {
+      &quot;active&quot;: true,
+      &quot;annual_included_usd&quot;: 0,
+      &quot;id&quot;: &quot;L-105&quot;,
+      &quot;reason&quot;: &quot;Nonrecurring or nonbinding instrument&quot;,
+      &quot;recurring&quot;: false
+    },
+    {
+      &quot;active&quot;: false,
+      &quot;annual_included_usd&quot;: 0,
+      &quot;id&quot;: &quot;C-106&quot;,
+      &quot;reason&quot;: &quot;Unsigned, terminated, not started or expired&quot;,
+      &quot;recurring&quot;: false
+    }
+  ],
+  &quot;scope&quot;: &quot;Supplied instrument classification. Signed annualized consideration is neither recognized revenue nor audited ARR. Cash is a supplied amount, not bank reconciliation.&quot;,
+  &quot;signed_annualized_usd&quot;: 180000,
+  &quot;tests&quot;: [
+    {
+      &quot;acceptance&quot;: &quot;Declared authorized work finishes within its floor. Expired permissions refuse. New tokens cannot be minted. Capture the exact dependency and exclusions.&quot;,
+      &quot;claim&quot;: &quot;Customer work continues after loss of vendor control plane.&quot;,
+      &quot;evidence_refs&quot;: [],
+      &quot;id&quot;: &quot;cut-control&quot;,
+      &quot;procedure&quot;: &quot;Freeze one workload and permission lease; block vendor endpoints outside the runtime; restart the approved service; replay known work; retain external network and process observations.&quot;,
+      &quot;result&quot;: &quot;not_run&quot;,
+      &quot;source_referenced_pass&quot;: false,
+      &quot;status&quot;: &quot;NOT_RUN&quot;
+    },
+    {
+      &quot;acceptance&quot;: &quot;Original evidence stays intact; every changed result is attributable to model/configuration version; regressions remain visible.&quot;,
+      &quot;claim&quot;: &quot;Customer can replace the model without losing decision evidence.&quot;,
+      &quot;evidence_refs&quot;: [],
+      &quot;id&quot;: &quot;replace-model&quot;,
+      &quot;procedure&quot;: &quot;Export the declared case; run a replacement configuration against the same permitted cases and cold-import the retained history.&quot;,
+      &quot;result&quot;: &quot;not_run&quot;,
+      &quot;source_referenced_pass&quot;: false,
+      &quot;status&quot;: &quot;NOT_RUN&quot;
+    },
+    {
+      &quot;acceptance&quot;: &quot;Payload matches the synthetic export fixture.&quot;,
+      &quot;claim&quot;: &quot;The application exports a file.&quot;,
+      &quot;evidence_refs&quot;: [
+        &quot;synthetic-export-fixture@1&quot;
+      ],
+      &quot;id&quot;: &quot;ui-export&quot;,
+      &quot;procedure&quot;: &quot;Use an authored synthetic export action and compare the saved object to the intended payload.&quot;,
+      &quot;result&quot;: &quot;pass&quot;,
+      &quot;source_referenced_pass&quot;: true,
+      &quot;status&quot;: &quot;PASS&quot;
+    }
+  ],
+  &quot;unbridged_usd&quot;: 1020000
+}</pre></details><p class="small">Authored record state: supported. Pinned inputs: diligence-input@1.</p></article><footer><p>Source identity and recomputable reasoning; not source truth, authenticated human identity or investment approval.</p><p>Snapshot SHA-256: <small>5ab7496bc41c872ea5712c89bd416c7a8773bb84432c00cbca2684dece5ab437</small></p><p class="small">Prepared locally with Research Desk 1.0.0. Full machine data is expandable in the digital report and retained in the separate packet. No publication, purchase, trade or production effect was executed.</p></footer></body></html>
