@@ -1,0 +1,15 @@
+{"ts":"2026-09-23T17:49:00Z","provider":"digitalocean","region":"nyc2","sku":"gpu-h100x1-80gb","gpus":1,"method":"console-create","outcome":"available","provisioned":true,"time_to_ssh_s":60,"note":"arm B Run 1; droplet 603084148"}
+{"ts":"2026-09-23T17:49:00Z","provider":"digitalocean","region":"nyc2","sku":"gpu-h100x8-640gb","gpus":8,"method":"console-plan-list","outcome":"out_of_capacity","provisioned":false,"note":"tooltip: out of capacity in the selected region"}
+{"ts":"2026-09-23T18:17:00Z","provider":"hotaisle","region":"enc1","sku":"vm-mi300x-1x","gpus":1,"method":"tui-provision-list","outcome":"available","count":1,"provisioned":true,"note":"enc1-gpuvm002; list also showed 2x VM (1 available) and 8x bare metal (1 available); banner: 'we're pretty full'"}
+{"ts":"2026-09-23T18:17:00Z","provider":"hotaisle","region":"enc1","sku":"vm-mi300x-2x","gpus":2,"method":"tui-provision-list","outcome":"available","count":1,"provisioned":false}
+{"ts":"2026-09-23T18:17:00Z","provider":"hotaisle","region":"enc1","sku":"bm-mi300x-8x","gpus":8,"method":"tui-provision-list","outcome":"available","count":1,"provisioned":false}
+{"ts":"2026-09-23T18:55:00Z","provider":"digitalocean","region":"nyc2","sku":"gpu-mi300x1-192gb","gpus":1,"method":"console-plan-list","outcome":"out_of_capacity","provisioned":false}
+{"ts":"2026-09-23T18:56:00Z","provider":"digitalocean","region":"tor1","sku":"gpu-mi300x1-192gb","gpus":1,"method":"console-plan-list","outcome":"out_of_capacity","provisioned":false}
+{"ts":"2026-09-23T19:08:00Z","provider":"digitalocean","region":"nyc2","sku":"gpu-h200x1-141gb","gpus":1,"method":"console-plan-list","outcome":"out_of_capacity","provisioned":false}
+{"ts":"2026-09-23T19:09:00Z","provider":"digitalocean","region":"ric1","sku":"gpu-h200x1-141gb","gpus":1,"method":"console-plan-list","outcome":"out_of_capacity","provisioned":false}
+{"ts":"2026-09-23T19:10:00Z","provider":"digitalocean","region":"tor1","sku":"gpu-h200x1-141gb","gpus":1,"method":"console-plan-list","outcome":"out_of_capacity","provisioned":false}
+{"ts":"2026-09-23T19:11:00Z","provider":"digitalocean","region":"mkc1","sku":"gpu-h200x1-141gb","gpus":1,"method":"console-plan-list","outcome":"out_of_capacity","provisioned":false}
+{"ts":"2026-09-23T19:12:00Z","provider":"digitalocean","region":"mem1","sku":"gpu-h200x1-141gb","gpus":1,"method":"console-plan-list","outcome":"out_of_capacity","provisioned":false}
+{"ts":"2026-09-23T19:13:00Z","provider":"digitalocean","region":"ams3","sku":"gpu-h200x1-141gb","gpus":1,"method":"console-plan-list","outcome":"out_of_capacity","provisioned":false}
+{"ts":"2026-09-23T19:14:00Z","provider":"digitalocean","region":"nyc2","sku":"gpu-h100x1-80gb","gpus":1,"method":"console-plan-list","outcome":"available","provisioned":false,"note":"selectable; create not completed (browser froze); arm skipped"}
+{"ts":"2026-09-23T00:00:00Z","provider":"runpod","region":"any","sku":"mi300x","gpus":1,"method":"prior-session-note","outcome":"out_of_stock","provisioned":false,"note":"recorded 2026-09-23 in campaign memory; exact time unknown"}
