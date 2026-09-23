@@ -29,7 +29,9 @@ def convert(directory, output, runtime='UNVERIFIED'):
                            'load_profile': f"azure-code:{plan['trace_sha256']}:{plan['trace_start']}:factor={plan['rate_factor']}:duration={plan['duration_s']}:seed={plan['requests'][0]['seed']}:workers={plan['workers']}:max_tokens=1024:temperature=0.2",
                            'plan_sha256': sha(Path(directory) / 'plan.json'),
                            'requests_sha256': hashlib.sha256(requests_bytes).hexdigest(),
-                           'lost_requests': sum(r['error'] == 'lost_or_unsent_after_interrupt' for r in rows)}}
+                           'lost_requests': sum(r['error'] == 'lost_after_send' for r in rows),
+                           'never_sent_requests': sum(r['error'] in ('never_sent_after_interrupt', 'client_concurrency_limit') for r in rows),
+                           'send_unknown_requests': sum(r['error'] == 'send_unknown_after_interrupt' for r in rows)}}
     write_json(output, result)
     Path(directory, 'requests.jsonl').write_bytes(requests_bytes)
     write_json(Path(directory, 'buckets.json'), buckets(plan, rows))

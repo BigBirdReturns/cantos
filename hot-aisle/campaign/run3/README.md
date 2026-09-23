@@ -60,7 +60,10 @@ deterministic for the same release bytes. The `--fixture` option bypasses produc
 and permanently marks the output synthetic; arm.py refuses it.
 
 Choose and freeze `TRACE_START` according to PREREG.md and set `TRACE_SHA`. `RATE_FACTOR=0.10`
-is the declared multiplier. The selected source must cover at least six minutes after that
+is the declared fallback multiplier, measuring price and correctness rather than capacity.
+Follow PREREG's short pre-data calibration, then refreeze the same factor for all scored arms;
+if unavailable, explicitly freeze the 0.10 fallback with capacity target UNVERIFIED.
+At the fallback the selected source must cover at least six minutes after that
 start, expanded to 3,600 seconds. The parser validates coverage over the full CSV; no repeat
 or fabricated arrivals. Freeze the same task hash/start/rate/trace hash for every arm.
 
@@ -83,7 +86,7 @@ in this build. Preserve a CPU smoke test before spending on GPU runs.
 ## Run one arm on the GPU seat
 
 Copy the kit, frozen tasks and retained trace onto the approved GPU seat. Required variables:
-`KIT`, `WORK`, `TASKS_SHA`, `TRACE_SHA`, `TRACE_START`, and the actual observed UTC
+`KIT`, `WORK`, `TASKS_SHA`, `TRACE_SHA`, `TRACE_START`, refrozen `RATE_FACTOR`, and the actual observed UTC
 `SSH_READY` timestamp from acquisition. Docker must work for the operator, port 8000 must
 be free, and `WORK/hf-cache` must be suitable for the pinned checkpoint. The ungated model
 needs no model token; provider access stays with the external acquisition operator.
@@ -92,7 +95,7 @@ needs no model token; provider access stays with the external acquisition operat
 bash "$KIT/arm3.sh" amd T0 --approved-run \
   --tasks "$WORK/tasks.json" --tasks-sha256 "$TASKS_SHA" \
   --trace "$WORK/AzureLLMInferenceTrace_code.csv" --trace-sha256 "$TRACE_SHA" \
-  --start "$TRACE_START" --rate-factor 0.10 \
+  --start "$TRACE_START" --rate-factor "$RATE_FACTOR" \
   --hf-cache "$WORK/hf-cache" --t-ssh "$SSH_READY" --out "$WORK/A-T0"
 ```
 
@@ -108,6 +111,35 @@ serve.log, image-inspect.json, gpu.txt, env.json, three smoke JSONs, tasks.json,
 replay/{plan.json,journal.jsonl,requests.jsonl,buckets.json,replay-status.json}, detailed.json,
 container-stop.log, MANIFEST.sha256. Failure paths retain what exists plus failure.json
 or recovery-failure.json. The manifest covers all files present at finalization except itself.
+env.json contains selected attention_backend and linear_kernel lists plus a `holds` list.
+Unknown selections are recorded as HOLDs and permit replay; T1 still requires the sole
+attention selection ROCM_AITER_FA. Qualification must inspect these identity HOLDs separately
+from the page engine's latency/quality checks. completed_ungraded does not imply qualification.
+
+### Arm summary contract for the Lane B adapter
+
+`ledger.json` has schema `second-run/run3-arm-summary@1`. It is a flat summary; a Lane B
+adapter must build the grouped `second-run/run-ledger@1` and join external closure evidence.
+Existing field names are retained:
+
+| Fields | Meaning |
+|---|---|
+| schema, status, arm, tier | Summary identity; status failed or completed_ungraded; arm A or N |
+| timestamps | t_request, t_ssh, t_ready, t_work_start, t_work_end, t_released, t_script_start, t_script_end; unavailable clocks null |
+| hourly_list_usd, funding | Dated declared list rate and funding text, not invoice evidence |
+| modeled_full_cost_usd, billed_usd, credits_usd, acquisition_attempts | External closure fields; null |
+| restarts, attempted, completed, failed, lost | Restarts zero; attempted is scheduled arrivals, failed includes all missing/rejected/error arrivals; lost is confirmed sends without terminal results |
+| never_sent, send_unknown | Added counts: never dispatched or client-limit rejected; dispatch with uncertain send or legacy missing result |
+| correct, accepted, cost_per_accepted_usd, wall_seconds_per_accepted | Null until external grading/closure join |
+| traversals_per_run, seconds_per_traversal, bytes_per_traversal, accepted_closures_per_traversal, energy_wh | Null, unmeasured |
+| note | Null/release semantics |
+
+Counts are null if detailed evidence could not be produced. `failed` includes `lost`,
+`never_sent` and `send_unknown`; never sum them again into failed. detailed.json metadata
+names those subsets `lost_requests`, `never_sent_requests`, and `send_unknown_requests`.
+Known terminal errors such as HTTP 503 are failed but not lost. Replay bucket fields remain
+offset_s/duration_s/attempted/completed/failed/correct/accepted/completed_per_s; adapters
+must map these explicitly instead of treating this file as a grouped run ledger.
 
 ## Replay or recover retained evidence directly
 
@@ -116,11 +148,13 @@ Only for an already serving approved run (the normal arm calls this itself):
 ```bash
 python3 -B "$KIT/replay.py" --tasks "$WORK/tasks.json" \
   --trace "$WORK/AzureLLMInferenceTrace_code.csv" --trace-sha256 "$TRACE_SHA" \
-  --start "$TRACE_START" --rate-factor 0.10 --out "$WORK/replay-new"
+  --start "$TRACE_START" --rate-factor "$RATE_FACTOR" --out "$WORK/replay-new"
 ```
 
-This writes a full schedule before issuing requests. Journal rows are flushed and fsynced
-as responses finish; request_index, not arrival order in the journal, is the join identity.
+This writes a full schedule before issuing requests, with journal_events=1. Journal rows
+are flushed and fsynced before dispatch (`event: dispatch`), after HTTPConnection.request
+returns (`event: sent`, confirming client send, not server receipt), and as responses finish
+(terminal rows have no event). request_index, not journal order, is the join identity.
 Output timestamps are Unix seconds; durations within a request use a monotonic clock.
 First token = first nonempty text chunk. Output token count is server usage, never characters
 or SSE chunk count. Missing usage fails the request. Failed token-array slots become zero
@@ -135,9 +169,16 @@ python3 -B "$KIT/convert.py" "$WORK/replay-copy" "$WORK/recovered-detailed.json"
 
 convert.py reconstructs canonical requests.jsonl and buckets.json from the schedule and
 journal. A truncated final journal line is ignored; a malformed complete line, duplicate
-index or wrong task/seed is refused. Absent results remain lost/unsent failures. Full planned
+terminal index, duplicate/out-of-order event or wrong task/seed is refused. Absent results
+become lost_after_send only with a retained sent event; no dispatch is
+never_sent_after_interrupt. A dispatch without a sent event becomes
+send_unknown_after_interrupt because network send and disk fsync cannot be atomic. Missing
+results from legacy plans without journal_events=1 also remain send_unknown. Full planned
 hour plus actual drain is the duration; incomplete runs are not sustained results. Conversion
 does not manufacture missing tokens or correctness. Preserve the original manifest and bytes.
+Client-limit rejections are never sent, yet count as failed transport in the <=1% gate,
+with all scheduled arrivals as denominator. More than 1% rejects useful-throughput
+qualification; exactly 1% passes this gate. No overload row is removed or retried.
 
 ## Grade on the CPU seat and verify with the page engine
 

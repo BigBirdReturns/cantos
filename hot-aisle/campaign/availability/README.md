@@ -2,7 +2,15 @@
 
 One JSON line per observation of whether a provider would sell a given GPU SKU, in a given region, at a given moment. Every provisioning attempt the campaign makes writes here, including failures. This is the raw material for the availability heatmap: provider × SKU × region × hour. Nobody publishes this from the buyer's side.
 
-Fields: `ts` (UTC), `provider`, `region`, `sku`, `gpus`, `method` (`console-plan-list` | `console-create` | `tui-provision-list` | `api` | `prior-session-note`), `outcome` (`available` | `out_of_capacity` | `out_of_stock` | `create_failed`), `provisioned`, and optional `count`, `time_to_ssh_s`, `note`.
+Fields: `ts` (UTC), `provider`, `region`, `sku`, `gpus`, `method`, `layer`,
+`outcome` (`available` | `out_of_capacity` | `out_of_stock` | `create_failed` |
+`ssh_failed` | `unknown`), `provisioned`, and `synthetic`. Scheduled listings use
+`method: api`, `layer: listed` and `reason`. Delivered rows use `layer: delivered`
+and require `method` to be `api-create`, `console-create` or `tui-provision`, plus
+`attempt_id`, `evidence`, `real_create_attempt` and `ssh_reached`;
+`time_to_ssh_s` is required for success. Historical rows may omit newer fields,
+use `console-plan-list`, `tui-provision-list` or `prior-session-note`, and include
+optional `count` or `note`. Historical bytes are preserved.
 
 Seeded 2026-09-23 from the first campaign. Times before 19:00 UTC are approximate to a few minutes. Probing on a schedule needs provider API tokens (DigitalOcean, Hot Aisle), which the operator holds. The admin TUI rate-limits repeated logins.
 
@@ -27,6 +35,11 @@ Checked 2026-09-24, using four search queries plus direct public source reads:
   at most 20 pages and 20 seconds per request. A positive requires the exact SKU,
   matching GPU count, `available: true`, and membership in `regions`. A missing SKU
   is unknown, not a stockout. This does not establish quota or successful creation.
+  These `available`/`regions` flags describe **configuration availability** and
+  may not move with capacity. Their correspondence to rentable capacity is
+  **UNVERIFIED until compared with console observations**. On 2026-09-23 the
+  campaign's console observations showed H200 out of capacity in all regions;
+  API listing flags must not override that evidence.
 - [DigitalOcean sizes:read scope](https://docs.digitalocean.com/reference/api/scopes/sizes/read/)
   also requires `regions:read`. Supply a read-scoped `DIGITALOCEAN_TOKEN`.
 - [Hot Aisle public API docs](https://admin.hotaisle.app/api/docs/) were reachable
@@ -67,6 +80,9 @@ All three test commands run the same offline suite. Fixtures are synthetic;
 `fixtures/observations.jsonl` intentionally exercises both evidence layers and
 must never be copied into the operational ledger. `fixtures/delivered.json` is
 marked synthetic and is deliberately rejected by the delivered helper.
+`fixtures/digitalocean-page1.json` contains a synthetic `links.pages.next` link
+to the second response (`digitalocean.json`); the suite verifies both pages'
+contents, the requested URLs and authorization headers entirely offline.
 
 `--dry-run` reads `fixtures/{digitalocean,hotaisle}.json`, never accesses the
 network even when tokens exist, and prints JSONL without writing by default.
@@ -89,6 +105,9 @@ timeouts, bad JSON, identity ambiguity and schema changes become unknown.
 Response bodies and tokens are never logged. A completely unknown sample exits
 1 *after* recording it; partial failures remain visible in the output/chart and
 exit 0. Configuration or append failures exit 2.
+Before tokens exist, every scheduled sample is all-unknown: exit 1 every 15
+minutes can produce repeated unit-failure alerts. Configure credentials and
+inspect the first sample before enabling the timer to avoid that alert noise.
 
 ### Record a delivered attempt
 
@@ -98,6 +117,9 @@ never provisions anything. Make a private receipt JSON using the fields in
 it false, and attest `real_create_attempt: true`. Use a globally unique
 `attempt_id` and an `evidence` reference to retained create/SSH records. Include
 an offset-aware `ts` for the attempt's start. Keep secrets out of evidence refs.
+Set `method` to the actual create channel: `api-create`, `console-create` or
+`tui-provision`. The helper preserves that method and writes `layer: delivered`;
+missing methods and listing methods are rejected.
 
 ```sh
 python3 -B probe.py --delivered /path/to/actual-attempt.json --output /var/lib/second-run-availability/observations.jsonl
@@ -130,9 +152,15 @@ hours. Each row is provider × SKU × region, labelled with GPU count. Colour is
 available / valid **API** probes, where valid outcomes are available,
 out_of_capacity and out_of_stock. Unknown probes never enter that denominator.
 No valid probes means grey. Tooltips, row totals, an HTML table and the text
-summary expose counts; missed slots are elapsed quarter-hour slots with no API
-observation. Multiple probes in one slot all count, but fill only one slot for
-the missed-slot calculation. This is a sampling fraction, not uptime.
+summary expose counts. Missed slots are elapsed quarter-hour slots with no API
+observation, starting with each row's first API observation (including unknowns).
+The first observed quarter-hour is included; earlier quarters in that hour and
+all earlier hours are labelled **not sampled**. Rows with no API observations
+have zero missed slots and remain entirely not sampled. An API observation
+before the displayed week still establishes the sampling start. Synthetic,
+future, manual and delivered observations do not start the API sampling clock.
+Multiple probes in one slot all count, but fill only one slot for the missed-slot
+calculation. This is a sampling fraction, not uptime.
 
 Delivered dots use a separate successful-SSH / attempt denominator. The first
 eight dots per hour are shown individually; additional attempts have an overflow
@@ -143,6 +171,8 @@ attempt. Historical manual listings and approximate notes are counted as
 excluded, rather than mixed into scheduled API denominators. Thus the supplied
 chart is grey for listed status and contains one historical delivered success;
 it does not fabricate a week of API history.
+A delivered tuple outside `probes.json` still gets its own row; it does not
+acquire an API sampling history merely because an attempt exists.
 
 ### N01 deployment instructions — not executed
 
@@ -195,5 +225,4 @@ third-party packages; the systemd host needs Python 3.9+ and CA certificates.
 
 Live credentials and systemd behavior remain UNVERIFIED: no provider API calls
 with credentials, provisioning, installs, commits, pushes or branches were made.
-See BUILD-REPORT.md for exact tests, the N01 contact failure and local test cleanup
-limitations.
+See BUILD-REPORT.md for exact tests, the N01 contact failure and cleanup status.

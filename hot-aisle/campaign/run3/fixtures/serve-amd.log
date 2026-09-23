@@ -1,3 +1,2 @@
-WARNING incompatible backend TURBOQUANT overriding ROCM_ATTN
-INFO Using ROCM_AITER_FA attention backend.
-INFO Using RowWiseTorchFP8ScaledMMLinearKernel for FP8 linear layers
+(EngineCore pid=164) INFO 09-23 19:12:24 [__init__.py:758] Selected RowWiseTorchFP8ScaledMMLinearKernel for CompressedTensorsW8A8Fp8
+(EngineCore pid=164) INFO 09-23 19:12:25 [rocm.py:708] Found incompatible backend(s) [TURBOQUANT] with AttentionType.DECODER. Overriding with ROCM_ATTN out of potential backends: ['ROCM_ATTN', 'ROCM_AITER_FA', 'ROCM_AITER_UNIFIED_ATTN', 'TRITON_ATTN'].

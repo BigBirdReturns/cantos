@@ -44,7 +44,7 @@ def schedule(trace, trace_sha, start, factor, duration=3600):
     return sorted(offsets)
 
 
-def request(endpoint, task, seed, scheduled_ts, timeout=60, max_tokens=1024):
+def request(endpoint, task, seed, scheduled_ts, timeout=60, max_tokens=1024, on_sent=None):
     row = {'task_id': task['task_id'], 'seed': seed, 'scheduled_ts': scheduled_ts,
            'send_ts': None, 'first_token_ts': None, 'end_ts': None,
            'output_text': '', 'output_tokens': None, 'input_tokens': None,
@@ -88,6 +88,8 @@ def request(endpoint, task, seed, scheduled_ts, timeout=60, max_tokens=1024):
         timer.start()
         conn.request('POST', '/v1/completions', body=encoded(payload),
                      headers={'Content-Type': 'application/json'})
+        if on_sent:
+            on_sent(row['send_ts'])
         response = conn.getresponse()
         if response.status != 200:
             raise ValueError(f'HTTP {response.status}')
@@ -140,7 +142,7 @@ def recover(directory):
     """Preserve denominator after interruption; partial final journal line is ignored."""
     directory = Path(directory)
     plan = read_json(directory / 'plan.json')
-    finished = {}
+    finished, dispatched, sent = {}, {}, {}
     journal = directory / 'journal.jsonl'
     if journal.exists():
         lines = journal.read_bytes().splitlines(keepends=True)
@@ -149,7 +151,21 @@ def recover(directory):
                 continue
             row = json.loads(line)
             n = row['request_index']
-            if n in finished or not 0 <= n < len(plan['requests']):
+            if not 0 <= n < len(plan['requests']):
+                raise ValueError('Foreign journal row')
+            spec = plan['requests'][n]
+            if any(row[k] != spec[k] for k in ('request_index', 'task_id', 'seed', 'scheduled_ts')):
+                raise ValueError('Journal does not match frozen schedule')
+            event = row.get('event')
+            if event is not None:
+                if event not in ('dispatch', 'sent') or n in finished:
+                    raise ValueError('Invalid journal event')
+                target = dispatched if event == 'dispatch' else sent
+                if n in target or (event == 'sent' and n not in dispatched):
+                    raise ValueError('Duplicate or out-of-order journal event')
+                target[n] = row
+                continue
+            if n in finished:
                 raise ValueError('Duplicate or foreign journal row')
             finished[n] = row
     rows = []
@@ -157,9 +173,15 @@ def recover(directory):
         n = spec['request_index']
         row = finished.get(n)
         if row is None:
-            row = dict(spec, send_ts=None, first_token_ts=None, end_ts=None,
+            if n in sent:
+                error = 'lost_after_send'
+            elif n in dispatched or plan.get('journal_events') != 1:
+                error = 'send_unknown_after_interrupt'
+            else:
+                error = 'never_sent_after_interrupt'
+            row = dict(spec, send_ts=sent.get(n, {}).get('send_ts'), first_token_ts=None, end_ts=None,
                        output_text='', output_tokens=None, input_tokens=None,
-                       finish_reason=None, error='lost_or_unsent_after_interrupt')
+                       finish_reason=None, error=error)
         if any(row[k] != spec[k] for k in ('request_index', 'task_id', 'seed', 'scheduled_ts')):
             raise ValueError('Journal does not match frozen schedule')
         rows.append(row)
@@ -196,7 +218,7 @@ def replay(tasks_path, trace, trace_sha, start, factor, out, endpoint='http://12
     out = Path(out)
     out.mkdir(exist_ok=False, parents=True)
     start_wall, start_mono = time.time(), time.monotonic()
-    plan = {'schema': 'second-run/replay-plan@1', 'synthetic': fixture,
+    plan = {'schema': 'second-run/replay-plan@1', 'synthetic': fixture, 'journal_events': 1,
             'start_ts': start_wall, 'duration_s': duration, 'rate_factor': factor,
             'trace_sha256': trace_sha, 'trace_start': start, 'tasks_sha256': sha(tasks_path),
             'model': MODEL, 'revision': REVISION, 'temperature': 0.2, 'max_tokens': 1024,
@@ -216,7 +238,11 @@ def replay(tasks_path, trace, trace_sha, start, factor, out, endpoint='http://12
 
         def work(spec, task):
             try:
-                row = request(endpoint, task, spec['seed'], spec['scheduled_ts'], timeout)
+                save(dict(spec, event='dispatch'))
+                def on_sent(send_ts):
+                    save(dict(spec, event='sent', send_ts=send_ts))
+                row = request(endpoint, task, spec['seed'], spec['scheduled_ts'], timeout,
+                              on_sent=on_sent)
                 save(dict(row, request_index=spec['request_index']))
             finally:
                 available.release()

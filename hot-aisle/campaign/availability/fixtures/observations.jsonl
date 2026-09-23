@@ -1,5 +1,5 @@
 {"ts":"2026-09-23T20:00:00Z","provider":"digitalocean","sku":"gpu-h100x1-80gb","region":"nyc2","gpus":1,"method":"api","layer":"listed","outcome":"available"}
 {"ts":"2026-09-23T20:15:00Z","provider":"digitalocean","sku":"gpu-h100x1-80gb","region":"nyc2","gpus":1,"method":"api","layer":"listed","outcome":"out_of_capacity"}
 {"ts":"2026-09-23T20:30:00Z","provider":"digitalocean","sku":"gpu-h100x1-80gb","region":"nyc2","gpus":1,"method":"api","layer":"listed","outcome":"unknown"}
-{"ts":"2026-09-23T20:12:00Z","provider":"digitalocean","sku":"gpu-h100x1-80gb","region":"nyc2","gpus":1,"method":"create-attempt","layer":"delivered","outcome":"available","ssh_reached":true,"attempt_id":"fixture-a"}
-{"ts":"2026-09-23T20:18:00Z","provider":"digitalocean","sku":"gpu-h100x1-80gb","region":"nyc2","gpus":1,"method":"create-attempt","layer":"delivered","outcome":"create_failed","ssh_reached":false,"attempt_id":"fixture-b"}
+{"ts":"2026-09-23T20:12:00Z","provider":"digitalocean","sku":"gpu-h100x1-80gb","region":"nyc2","gpus":1,"method":"api-create","layer":"delivered","outcome":"available","ssh_reached":true,"attempt_id":"fixture-a"}
+{"ts":"2026-09-23T20:18:00Z","provider":"digitalocean","sku":"gpu-h100x1-80gb","region":"nyc2","gpus":1,"method":"console-create","layer":"delivered","outcome":"create_failed","ssh_reached":false,"attempt_id":"fixture-b"}

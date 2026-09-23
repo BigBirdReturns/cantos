@@ -16,6 +16,7 @@ from convert import convert
 from replay import schedule
 
 WATCHDOG = 6600  # 110 min, includes cleanup; work budget is 105 min.
+REPLAY_TIMEOUT = 3720  # 3600 arrivals + 60 drain + 60 parse/load/exit.
 HERE = Path(__file__).resolve().parent
 
 
@@ -24,17 +25,36 @@ def utc():
 
 
 def backends(log):
-    # Selected/Using lines only. Ignore warnings that an attempted backend was overridden.
+    # Capture only the selected token, never the rejected or candidate list.
     attention, linear = [], []
     for line in log.splitlines():
-        if re.search(r'overrid|incompatible|not supported', line, re.I):
-            continue
+        override = re.search(r'Overriding with\s+([A-Z][A-Z0-9_]+)\b', line)
+        if override:
+            attention.append(override.group(1))
+        elif not re.search(r'incompatible|not supported', line, re.I):
+            selected = re.search(r'(?:Using|Selected)\s+([A-Z][A-Z0-9_]+)\s+(?:attention\s+)?backend\b', line)
+            if selected:
+                attention.append(selected.group(1))
         if re.search(r'Using|Selected', line, re.I):
-            if re.search(r'attention|backend', line, re.I):
-                attention.extend(re.findall(r'\b(?:ROCM_[A-Z0-9_]+|FLASH_ATTN|FLASHINFER|TRITON_ATTN|FLEX_ATTENTION)\b', line))
             linear.extend(re.findall(r'\b[A-Za-z0-9_]*(?:LinearKernel|ScaledMMLinearKernel)\b', line))
     return {'attention_backend': list(dict.fromkeys(attention)) or ['UNVERIFIED'],
             'linear_kernel': list(dict.fromkeys(linear)) or ['UNVERIFIED']}
+
+
+def backend_holds(selected):
+    known = {'ROCM_ATTN', 'ROCM_AITER_FA', 'ROCM_AITER_UNIFIED_ATTN',
+             'FLASH_ATTN', 'FLASHINFER', 'TRITON_ATTN', 'FLEX_ATTENTION'}
+    holds = []
+    if any(x not in known for x in selected['attention_backend']):
+        holds.append('HOLD: attention backend UNVERIFIED; review serve.log')
+    if 'UNVERIFIED' in selected['linear_kernel']:
+        holds.append('HOLD: linear kernel UNVERIFIED; review serve.log')
+    return holds
+
+
+def require_tier_backend(tier, selected):
+    if tier == 'T1' and selected['attention_backend'] != ['ROCM_AITER_FA']:
+        raise RuntimeError('T1 did not select ROCM_AITER_FA')
 
 
 def serve_command(kind, tier, name, cache):
@@ -122,7 +142,8 @@ def main():
         selected = backends((log.stdout + log.stderr).decode('utf-8', errors='replace'))
         env = {'schema': 'second-run/arm-environment@1', 'run': 'run3', 'kind': a.kind,
                'tier': a.tier, 'image': IMAGES[a.kind], 'model': MODEL, 'revision': REVISION,
-               'gpu_count': 1, 'tensor_parallel': 1, 'serve_argv': command, **selected}
+               'gpu_count': 1, 'tensor_parallel': 1, 'serve_argv': command,
+               'holds': backend_holds(selected), **selected}
         r = run(['docker', 'image', 'inspect', IMAGES[a.kind]], 10)
         (out / 'image-inspect.json').write_bytes(r.stdout)
         env['vllm_version'] = run(['docker', 'exec', name, 'python3', '-c', 'import vllm; print(vllm.__version__)'], 30).stdout.decode().strip()
@@ -132,10 +153,7 @@ def main():
         write_json(out / 'env.json', env)
         if not env['vllm_version'].startswith('0.30.0'):
             raise RuntimeError('Unexpected vLLM version')
-        if 'UNVERIFIED' in selected['attention_backend'] or 'UNVERIFIED' in selected['linear_kernel']:
-            raise RuntimeError('Selected backend/kernel not found; retain log and review before replay')
-        if a.tier == 'T1' and selected['attention_backend'] != ['ROCM_AITER_FA']:
-            raise RuntimeError('T1 did not select ROCM_AITER_FA')
+        require_tier_backend(a.tier, selected)
         # Three fixed greedy smoke requests; no correctness claim.
         for i, prompt in enumerate(['Explain a mutex.', 'Write iterative Fibonacci in Python.', 'What is 17 * 23?']):
             body = encoded({'model': MODEL, 'prompt': prompt, 'temperature': 0, 'seed': 0, 'max_tokens': 64})
@@ -152,7 +170,7 @@ def main():
         child = subprocess.Popen([sys.executable, '-B', str(HERE / 'replay.py'), '--tasks', str(out/'tasks.json'),
             '--trace', a.trace, '--trace-sha256', a.trace_sha256, '--start', a.start,
             '--rate-factor', str(a.rate_factor), '--out', str(out/'replay')])
-        if child.wait(timeout=3665) != 0:
+        if child.wait(timeout=REPLAY_TIMEOUT) != 0:
             raise RuntimeError('Replay failed')
         times['t_work_end'] = utc(); write_json(out / 'ledger-times.json', times)
         convert(out/'replay', out/'detailed.json', IMAGES[a.kind])
@@ -189,13 +207,15 @@ def main():
                 write_json(out/'recovery-failure.json', {'error': str(e)})
         times['t_script_end'] = utc(); write_json(out/'ledger-times.json', times)
         detail = read_json(out/'detailed.json') if (out/'detailed.json').exists() else {}
-        write_json(out/'ledger.json', {'schema': 'second-run/run-ledger@1', 'status': status,
+        write_json(out/'ledger.json', {'schema': 'second-run/run3-arm-summary@1', 'status': status,
             'arm': 'A' if a.kind == 'amd' else 'N', 'tier': a.tier, 'timestamps': times,
             'hourly_list_usd': 2.99 if a.kind == 'amd' else 4.41,
             'funding': 'self-funded; operator must verify invoice', 'modeled_full_cost_usd': None,
             'billed_usd': None, 'credits_usd': None, 'acquisition_attempts': None,
             'restarts': 0, 'attempted': detail.get('num_prompts'), 'completed': detail.get('completed'),
             'failed': detail.get('failed'), 'lost': detail.get('metadata', {}).get('lost_requests'),
+            'never_sent': detail.get('metadata', {}).get('never_sent_requests'),
+            'send_unknown': detail.get('metadata', {}).get('send_unknown_requests'),
             'correct': None, 'accepted': None, 'cost_per_accepted_usd': None,
             'wall_seconds_per_accepted': None,
             'traversals_per_run': None, 'seconds_per_traversal': None,

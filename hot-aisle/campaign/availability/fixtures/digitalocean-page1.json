@@ -1,0 +1,8 @@
+{
+  "_fixture": "SYNTHETIC pagination first page; next page is digitalocean.json",
+  "sizes": [
+    {"slug":"fixture-cpu-only","available":true,"regions":["nyc2"]}
+  ],
+  "links": {"pages": {"next":"https://api.digitalocean.com/v2/sizes?page=2"}},
+  "meta": {"total":5}
+}

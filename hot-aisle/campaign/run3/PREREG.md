@@ -3,7 +3,8 @@
 Status: **BUILT, NOT RUN; freeze packet incomplete until SOURCES.md prerequisites are supplied.**
 This file is a proposed protocol, not proof of public registration. No commit or publication
 is performed by this lane. Freeze this file, script hashes, datasets, task file, CPU grader
-image, exact trace start, and rate factor before renting. Preserve all failed attempts.
+image, exact trace start, and calibration procedure before renting. Refreeze the common
+rate factor after pre-data calibration and before scored data. Preserve all failed attempts.
 
 ## Question, arms and identities
 
@@ -14,6 +15,7 @@ tier; never silently replace A/T0 with the best-looking tier.
 
 - A/T0: Hot Aisle 1x MI300X VM, self-funded at dated list $2.99/GPU-hour.
   Only AMD tuning is `VLLM_ROCM_USE_AITER=1`; attention backend auto-selects.
+  Auto selection with this environment flag is not an unmodified vendor default.
 - A/T1: same allocation type, separate run, T0 plus `--attention-backend ROCM_AITER_FA`.
   Budget below assumes self-funded too. If credit funds this tier, disclose it separately.
 - N/T0: DigitalOcean 1x H100, self-funded at dated list $4.41/GPU-hour, CUDA image defaults.
@@ -35,7 +37,9 @@ EvalPlus 0.3.1; HumanEval+ v0.1.10; MBPP+ v0.2.0
 Both vendors must actually report vLLM 0.30.0. Common serve flags: max model length
 16,384, max sequences 256, GPU utilization 0.90, tensor parallel 1, prefix caching off;
 KV dtype defaults. `serve.log` retained in full, selection lines extracted into env.json.
-Unrecognized selection stops before replay for review, with no guessed kernel identity.
+Unrecognized selection records a HOLD in env.json and replay continues, with no guessed
+kernel identity. T1 still stops unless ROCM_AITER_FA is the sole selected attention backend.
+An identity HOLD blocks qualification, not evidence collection.
 Three fixed greedy smoke prompts, seed 0, max 64 output tokens. Smoke is not correctness.
 
 ## Workload and arrival freeze
@@ -53,19 +57,38 @@ Choose the first full hour boundary in the source CSV with coverage of the selec
 record its exact timezone-qualified start before renting. Naive Azure CSV timestamps are
 interpreted as UTC for reproducible ordering, not as a claim about upstream clock geography.
 
-Declared rate multiplier **0.10**: scheduled offset = (source timestamp - frozen start)/0.10,
+Declared fallback rate multiplier **0.10**: scheduled offset = (source timestamp - frozen start)/0.10,
 retaining offsets in [0,3600). Thus six source minutes expand into one replay hour, keeping
 bursts and relative interarrival spacing. Do not loop or pad a short source. At most 100,000
 scheduled requests, fitting the page engine's detailed input limit. This is a conservative
-declared rate, **not evidence of 70% measured capacity**. The synthesis's ~70% target is
-UNVERIFIED without a graded-workload calibration. A calibration-derived replacement factor
-requires a new pre-data freeze and budget allocation; no per-arm adaptation or mid-run tuning.
+declared rate that measures **price and correctness, not capacity**. At low load, completed
+throughput is limited by arrivals. It is not evidence of 70% measured capacity.
+
+Before scored data, perform one short, separately labeled calibration on A/T0: up to five
+minutes of measured traffic after readiness, the frozen task cycle and sampling settings,
+with a continuously supplied backlog and at most 256 outstanding requests. Retain raw
+requests, duration, errors, latency and the serving identity. Estimate capacity C as completed
+requests / measured second only if the run maintained a backlog and reached stable throughput;
+otherwise record calibration UNVERIFIED. Calibration is not scored evidence or a sustained run.
+Choose the common factor whose exact 3600-second CODE schedule count / 3600 is closest to
+0.70*C (subject to full source coverage and the 100,000-arrival cap). Record C, count, achieved
+offered rate, factor and hashes in the pre-data freeze. This targets the A/T0 reference capacity;
+it does not assert 70% utilization on N/T0 or A/T1. Use the same refrozen factor for every arm,
+with no per-arm adaptation or mid-run tuning. If calibration is unavailable or inconclusive,
+explicitly refreeze 0.10 as the fallback and label the capacity target UNVERIFIED. The kit does
+not automate the calibration load driver; the operator must retain and freeze its command.
+Charge calibration and any extra startup to the existing $4.22 contingency; approve that
+allocation before execution and stop at the $25 ceiling. No extra rental is implied.
 
 Serving-host loopback client, max 256 outstanding requests, no waiting client queue.
 An arrival at the limit is retained as a failed `client_concurrency_limit`, never delayed
 into a later arrival or omitted. Actual dispatch delay is measured separately. A 60-second
 absolute request deadline bounds even trickling SSE. No automatic retries. Client failure,
 missing token usage or incomplete SSE is a failed completion. Text and usage remain retained.
+`client_concurrency_limit` is never sent to the server, but still counts in failed / attempted
+for the <=1% transport gate. Exactly 1% passes; more than 1% blocks useful-throughput
+qualification. The denominator is every scheduled arrival, including never-sent requests.
+Retain the hour if this gate fails; do not discard overloads or retry them to improve the rate.
 
 ## Gates and metrics
 
@@ -101,12 +124,14 @@ One invocation per tier; no hidden three-repeat plan:
 | Image pull + model download + health, combined | 2400 |
 | Environment inspection + three smoke requests | 120 |
 | Recorded arrivals | 3600 |
-| Final request drain + child exit slack | 65 |
-| Conversion / normal bookkeeping slack | 115 |
+| Final request drain | 60 |
+| Child trace parse / task load / exit slack | 60 |
+| Conversion / normal bookkeeping slack | 60 |
 | Cleanup / log and manifest reserve | 300 |
 | **Total outer watchdog** | **6600 = 110 minutes** |
 
-2400 + 120 + 3600 + 65 + 115 = 6300 seconds: the work alarm. Cleanup reserve takes
+Child wait is 3720 = 3600 + 60 + 60 seconds, including parse/load and journal recovery.
+2400 + 120 + 3720 + 60 = 6300 seconds: the work alarm. Cleanup reserve takes
 the total to 6600. Outer GNU timeout sends TERM at 110 min and KILL after 30 seconds
 if hung. The budget conservatively reserves **two billed hours per invocation**, covering
 110.5 minutes plus at most 9.5 minutes total acquisition/release overhead. External operator
@@ -122,14 +147,22 @@ is implied; use an already authorized CPU seat. Its energy/cost must be entered 
 
 Stop if funding, approval, source lock or identity is missing; if capacity cannot be acquired
 within the external budget; if health misses 40 min including downloads; if preparation
-misses 42 min; if selected backend/kernel is unknown; if T1 fails to select ROCM_AITER_FA;
+misses 42 min; if T1 fails to select ROCM_AITER_FA;
 if the replay or watchdog fails; or if the $25 run allowance is exhausted. No crash restart
 or repeat without a new logged attempt and budget check. Preserve journals and logs.
 An interrupted hour is retained as incomplete, never promoted to sustained qualification.
 
-arm.py emits ledger-times.json and ledger.json. Observed here: supplied t_ssh, script start,
+arm.py emits ledger-times.json and ledger.json (`second-run/run3-arm-summary@1`, a flat
+arm summary, not the grouped `second-run/run-ledger@1`). Lane B owns the closure adapter;
+its implementation/command is outside this kit. See README for the stable field contract.
+Observed here: supplied t_ssh, script start,
 t_ready, t_work_start, t_work_end, script end; arm/tier, hourly list price, funding declaration,
-attempted/completed/failed/lost counts, restarts=0. It emits null for externally owned or
+attempted/completed/failed/lost counts, never_sent and send_unknown counts, restarts=0.
+Lost means a journal-confirmed HTTP send with no retained terminal result; never_sent
+includes undispatched arrivals and client-limit rejection. Dispatch without confirmed send
+is send_unknown, including the crash window between sending and fsync. Legacy journals
+without send events also preserve missing rows as send_unknown. All remain failed attempts.
+It emits null for externally owned or
 unmeasured fields: t_request, t_released, acquisition_attempts, modeled full cost, billed USD,
 credits, correct, accepted, cost/wall seconds per accepted, energy Wh, traversals per run,
 seconds and bytes per traversal, accepted closures per traversal. Grading adds source-bound

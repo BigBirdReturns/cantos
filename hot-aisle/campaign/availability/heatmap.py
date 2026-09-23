@@ -24,6 +24,7 @@ def aggregate(records, targets, now):
     start = now.replace(minute=0, second=0, microsecond=0) - timedelta(hours=167)
     grid = {key(r): [dict(yes=0, valid=0, unknown=0, slots=set(), attempts=[]) for _ in range(168)] for r in targets}
     excluded = defaultdict(int)
+    first_api = {}
     seen = set()
     for row in records:
         k = key(row)
@@ -31,6 +32,10 @@ def aggregate(records, targets, now):
         if row.get('synthetic') is True:
             excluded['synthetic'] += 1
             continue
+        # Older API observations establish when sampling began even if they no
+        # longer contribute to this week's availability denominator.
+        if when <= now and row.get('layer') == 'listed' and row.get('method') == 'api':
+            first_api[k] = min(first_api.get(k, when), when)
         if not start <= when <= now:
             excluded['outside window'] += 1
             continue
@@ -64,6 +69,12 @@ def aggregate(records, targets, now):
                      type(row.get('time_to_ssh_s')) in (int, float) and row['time_to_ssh_s'] >= 0)):
                 outcome = 'unknown'
             cell['attempts'].append(outcome if outcome in DOTS else 'unknown')
+    for k, cells in grid.items():
+        first_slot = int((first_api[k] - start).total_seconds() // 900) if k in first_api else 168 * 4
+        for i, cell in enumerate(cells):
+            elapsed = 4 if i < 167 else now.minute // 15 + 1
+            cell['not_sampled'] = min(elapsed, max(0, first_slot - i * 4))
+            cell['expected'] = elapsed - cell['not_sampled']
     return start, now, grid, dict(excluded)
 
 
@@ -71,7 +82,8 @@ def render(records, targets, now):
     start, now, grid, excluded = aggregate(records, targets, now)
     summary = [f'Availability: {stamp(start.isoformat())} through {stamp(now.isoformat())}',
                '168 UTC hour columns; current hour partial. Listed = yes / valid API probes.',
-               'Unknowns excluded from fraction. Missed = empty elapsed 15-minute slots.',
+               'Unknowns excluded from fraction. Missed = empty elapsed 15-minute slots from each row\'s first API observation.',
+               'Earlier hours/slots are not sampled; rows without API observations are entirely not sampled.',
                'Delivered = confirmed SSH / real create attempts; separate denominator.',
                'Historical manual listings are excluded from API fractions. No new results asserted.', '']
     width, height = 425 + 168 * 23, 100 + 65 * len(grid)
@@ -86,16 +98,17 @@ def render(records, targets, now):
     for ri, (k, cells) in enumerate(sorted(grid.items())):
         label = ' / '.join(map(str, k[:3])) + f' / {k[3]} GPU'
         y = 60 + ri * 65
-        totals = dict(yes=0, valid=0, unknown=0, missed=0, delivered=0, attempts=0)
+        totals = dict(yes=0, valid=0, unknown=0, missed=0, not_sampled=0, delivered=0, attempts=0)
         svg.append(f'<text x="8" y="{y+17}">{escape(label)}</text>')
         for i, cell in enumerate(cells):
-            expected = 4 if i < 167 else now.minute // 15 + 1
+            expected = cell['expected']
             missed = expected - len(cell['slots'])
             attempts = cell['attempts']
             delivered_count = attempts.count('available')
             for name in ('yes', 'valid', 'unknown'):
                 totals[name] += cell[name]
             totals['missed'] += missed
+            totals['not_sampled'] += cell['not_sampled']
             totals['attempts'] += len(attempts)
             totals['delivered'] += delivered_count
             hour = start + timedelta(hours=i)
@@ -104,6 +117,8 @@ def render(records, targets, now):
             caption = (f'{hour:%Y-%m-%d %H:00 UTC}: listed {cell["yes"]}/{cell["valid"]}; '
                        f'unknown {cell["unknown"]}; missed {missed}/{expected} slots; '
                        f'delivered {delivered_count}/{len(attempts)}; outcomes: {", ".join(attempts) or "none"}')
+            if cell['not_sampled']:
+                caption += f'; not sampled {cell["not_sampled"]} slots'
             x = 425+i*23
             svg.append(f'<rect x="{x}" y="{y}" width="21" height="23" fill="{color}"><title>{escape(label+": "+caption)}</title></rect>')
             for di, outcome in enumerate(attempts[:8]):
@@ -116,7 +131,9 @@ def render(records, targets, now):
         line = (f'listed {totals["yes"]}/{totals["valid"]}; unknown {totals["unknown"]}; '
                 f'missed {totals["missed"]}; delivered {totals["delivered"]}/{totals["attempts"]}')
         svg.append(f'<text class="small" x="8" y="{y+37}">{escape(line)}</text>')
-        summary.append('TOTAL ' + label + ' | ' + line)
+        unsampled = f'not sampled {totals["not_sampled"]} slots'
+        svg.append(f'<text class="small" x="8" y="{y+51}">{unsampled}</text>')
+        summary.append('TOTAL ' + label + ' | ' + line + '; ' + unsampled)
     svg.append('</svg>')
     summary.extend(['', 'Excluded records: ' + json.dumps(excluded, sort_keys=True)])
     page = '''<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -129,7 +146,8 @@ table{border-collapse:collapse;font-size:13px;width:100%}td,th{border:1px solid 
 @media(prefers-color-scheme:dark){:root{--bg:#0f172a;--fg:#e2e8f0;--line:#475569}}
 </style><h1>Availability ledger</h1>'''
     page += f'<p>{escape(summary[0])}. Current UTC hour is partial.</p>'
-    page += '<p>Cells: orange 0% → green 100% listed, divided by valid API probes. Grey means unknown or missed. Unknowns never count as stockouts. Hover cells for denominators, or read the table below.</p><p>Dots: green = reached SSH; orange = capacity/stock refusal; red = create failed; purple = SSH failed; slate = unknown. Delivered uses its own attempt denominator. More than eight attempts in an hour show an overflow count.</p><p>Listing is not a reservation or proof of account quota. Historical manual listings are retained in the source ledger and excluded from API fractions.</p>'
+    page += '<p>Missed slots start at each row\'s first API observation, including unknown observations. Earlier hours and quarter-hour slots are labelled not sampled. A row with no API observations has no missed slots.</p>'
+    page += '<p>Cells: orange 0% → green 100% listed, divided by valid API probes. Grey means unknown, missed or not sampled. Unknowns never count as stockouts. Hover cells for denominators, or read the table below.</p><p>Dots: green = reached SSH; orange = capacity/stock refusal; red = create failed; purple = SSH failed; slate = unknown. Delivered uses its own attempt denominator. More than eight attempts in an hour show an overflow count.</p><p>Listing is not a reservation or proof of account quota. Historical manual listings are retained in the source ledger and excluded from API fractions.</p>'
     page += '<div class="scroll" tabindex="0" aria-label="Scrollable seven-day heatmap">' + ''.join(svg) + '</div>'
     page += '<h2>Observed hours and denominators</h2><table><tr><th>Provider / SKU / region / GPUs</th><th>UTC hour and counts</th></tr>' + ''.join(details) + '</table>'
     page += '<p>Excluded records: ' + escape(json.dumps(excluded, sort_keys=True)) + '</p></html>\n'

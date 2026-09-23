@@ -4,6 +4,8 @@
   "sku":"gpu-h100x1-80gb",
   "region":"nyc2",
   "gpus":1,
+  "method":"api-create",
+  "layer":"delivered",
   "attempt_id":"FIXTURE-ONLY-DO-NOT-APPEND",
   "evidence":"SYNTHETIC example; replace with actual retained create and SSH evidence",
   "real_create_attempt":false,

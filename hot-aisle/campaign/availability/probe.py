@@ -191,6 +191,9 @@ def append(path, rows):
 
 def delivered(receipt):
     key(receipt)
+    method = receipt.get('method')
+    if method not in ('api-create', 'console-create', 'tui-provision'):
+        raise ValueError('delivered method must be api-create, console-create or tui-provision')
     row = {k: receipt[k] for k in ('provider', 'sku', 'region', 'gpus')}
     for name in ('attempt_id', 'evidence'):
         if not isinstance(receipt.get(name), str) or not receipt[name].strip():
@@ -208,7 +211,7 @@ def delivered(receipt):
         if type(seconds) not in (int, float) or not math.isfinite(seconds) or seconds < 0:
             raise ValueError('successful delivery needs finite nonnegative time_to_ssh_s')
         row['time_to_ssh_s'] = seconds
-    row.update(ts=stamp(receipt['ts']), method='create-attempt', layer='delivered', outcome=outcome, real_create_attempt=True,
+    row.update(ts=stamp(receipt['ts']), method=method, layer='delivered', outcome=outcome, real_create_attempt=True,
                provisioned=receipt['ssh_reached'], ssh_reached=receipt['ssh_reached'], synthetic=False)
     return row
 

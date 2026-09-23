@@ -129,3 +129,63 @@ tmpoemdmywy  tmpov89a2k3  tmps8ljtmdg  tmpv6jlozc8  tmpwdq52sbb  tmp__k9pn_t
 
 Git read-only checks used a per-command `safe.directory` option after Git
 reported repository ownership mismatch; no global Git configuration was changed.
+
+## Fix round 1
+
+Completed only Lane C from `build-2026-09-24/fix-A-C.brief`. All edits are
+inside this availability directory; no commits, branches, pushes, provider API
+calls, provisioning or installation occurred.
+
+Files changed:
+
+- `probe.py`: delivered receipts require and preserve `api-create`,
+  `console-create` or `tui-provision`, and emit `layer: delivered`.
+- `fixtures/delivered.json`, `fixtures/observations.jsonl`: use the concrete
+  create methods; the example receipt includes the delivered layer.
+- `heatmap.py`: missed slots begin at each tuple's earliest real API
+  observation, including unknown observations and observations before the
+  visible week. Earlier hours/quarters are labelled not sampled. Rows without
+  API history have no missed slots. Duplicate probes still fill only one slot.
+- `fixtures/digitalocean-page1.json`: added a synthetic pagination response
+  with `links.pages.next`; the second page is `digitalocean.json`.
+- `test_availability.py`: verifies concrete receipt methods and rejections,
+  pagination contents/URLs/auth, separate tuple sampling starts, mid-hour starts,
+  older history, exclusions, and delivered tuples outside the configured list.
+- `README.md`: updated field contract, sampling semantics, DigitalOcean
+  configuration-versus-capacity limitation (UNVERIFIED until compared with
+  console observations), September 23 H200 console observations, and expected
+  quarter-hour alert noise before tokens exist.
+- `heatmap.html`, `heatmap.txt`: regenerated from the original campaign ledger.
+
+Run from this directory:
+
+```sh
+python -B test_availability.py
+python -B probe.py --self-test
+python -B heatmap.py --self-test
+python -B heatmap.py --now 2026-09-23T23:59:59Z
+```
+
+Test results on Windows / Python 3.13: **23 tests passed** in each of the three
+entry points. Both self-test entry points include CLI tests, offline pagination,
+receipt validation, denominator checks and HTML/SVG parsing. Reproduction wrote
+both heatmap files from 15 source records: every configured row now has missed
+0 and not sampled 672 slots, retaining one historical SSH success and 14
+excluded manual records. The operational ledger SHA-256 remains
+`79c66c657b5a9bbd3b74dece8306fe843a11e763fe9b8f407bc3129d3e6861f7`.
+Lane-scoped `git diff --check` passes. No native browser or systemd/live-provider
+qualification was performed in this fix round.
+
+Cleanup status supersedes the earlier residue note: directory inspection before
+and after this round found only `fixtures/`; none of the old `tmp*` directories
+were present, and tests left no `tmp*`, `.selftest-*` or `test-tmp-*` directories.
+
+Open questions and operator inputs remain the deployment items above: provider
+tokens, verified Hot Aisle auth/path and regional scope, console/API capacity
+comparison, and coordinated installation authorization/custody. Real delivered
+receipts additionally need the actual create method; no method is inferred.
+
+The required canonical N01 probe was attempted again and failed before connecting
+with PermissionError writing `S:\Scratch\Runs\Estate-Peer\known_hosts`.
+N01 contact remains unestablished; no alternate route or recovery was attempted.
+Only the explicitly requested local lane fixes proceeded.

@@ -1,6 +1,7 @@
 """Offline Run 3 tests; all temporary outputs stay under this lane."""
 import copy
 import http.server
+import io
 import json
 from pathlib import Path
 import shutil
@@ -159,8 +160,32 @@ class ReplayTests(FixtureCase):
         journal.write_bytes(b''.join(lines[:2])+b'{"partial":')
         raw=convert.convert(directory,detail)
         self.assertEqual(raw['num_prompts'],6);self.assertEqual(raw['completed'],2)
-        self.assertEqual(raw['metadata']['lost_requests'],4)
+        self.assertEqual(raw['metadata']['lost_requests'],0)
+        self.assertEqual(raw['metadata']['send_unknown_requests'],4)
         self.assertEqual(raw['duration'],3600)
+
+    def test_recovery_separates_sent_unsent_and_uncertain(self):
+        directory,detail=self.evidence()
+        plan=read_json(directory/'plan.json');plan['journal_events']=1
+        write_json(directory/'plan.json',plan)
+        rows=jsonl(directory/'journal.jsonl')
+        events=[dict(plan['requests'][2],event='dispatch'),
+                dict(plan['requests'][2],event='sent',send_ts=1600.01),
+                dict(plan['requests'][3],event='dispatch')]
+        (directory/'journal.jsonl').write_bytes(b''.join(encoded(r) for r in rows[:2]+events)+b'{"partial":')
+        raw=convert.convert(directory,detail)
+        self.assertEqual((raw['num_prompts'],raw['completed'],raw['failed']),(6,2,4))
+        self.assertEqual(raw['metadata']['lost_requests'],1)
+        self.assertEqual(raw['metadata']['never_sent_requests'],2)
+        self.assertEqual(raw['metadata']['send_unknown_requests'],1)
+        recovered=jsonl(directory/'requests.jsonl')
+        self.assertEqual(recovered[2]['error'],'lost_after_send')
+        self.assertEqual(recovered[2]['send_ts'],1600.01)
+        self.assertEqual(recovered[3]['error'],'send_unknown_after_interrupt')
+        self.assertEqual(recovered[4]['error'],'never_sent_after_interrupt')
+        with (directory/'journal.jsonl').open('wb') as f:
+            f.write(encoded(events[1]))
+        with self.assertRaises(ValueError):replay.recover(directory)
 
     def test_overload_is_counted_and_not_queued(self):
         self.server.mode='slow'
@@ -169,6 +194,10 @@ class ReplayTests(FixtureCase):
         self.assertEqual(len(rows),6)
         self.assertEqual(sum(r['error']=='client_concurrency_limit' for r in rows),5)
         self.assertTrue(all(r['send_ts'] is None for r in rows if r['error']))
+        raw=convert.convert(self.root/'overload',self.root/'overload.json')
+        self.assertEqual(raw['metadata']['never_sent_requests'],5)
+        self.assertEqual(raw['metadata']['lost_requests'],0)
+        self.assertGreater(raw['failed']/raw['num_prompts'],.01)
 
 
 class GradeTests(FixtureCase):
@@ -225,11 +254,19 @@ class GradeTests(FixtureCase):
 
 
 class ArmTests(FixtureCase):
-    def test_backend_selection_excludes_override(self):
+    def test_backend_real_and_authored_fixtures(self):
         result=arm.backends((FIX/'serve-amd.log').read_text())
-        self.assertEqual(result['attention_backend'],['ROCM_AITER_FA'])
+        self.assertEqual(result['attention_backend'],['ROCM_ATTN'])
         self.assertEqual(result['linear_kernel'],['RowWiseTorchFP8ScaledMMLinearKernel'])
+        exploration=arm.backends((FIX/'serve-amd-exploration.log').read_text())
+        self.assertEqual(exploration['attention_backend'],['ROCM_AITER_FA'])
+        self.assertEqual(exploration['linear_kernel'],result['linear_kernel'])
+        self.assertEqual(arm.backends((FIX/'serve-nvidia.log').read_text())['attention_backend'],['FLASH_ATTN'])
         self.assertEqual(arm.backends('unrecognized')['attention_backend'],['UNVERIFIED'])
+        unknown=arm.backends('Using FUTURE_BACKEND backend (selected via --attention-backend)')
+        self.assertEqual(unknown['attention_backend'],['FUTURE_BACKEND'])
+        self.assertEqual(len(arm.backend_holds(unknown)),2)
+        self.assertEqual(arm.backend_holds(result),[])
 
     def test_vendor_tiers_and_watchdog(self):
         t0=arm.serve_command('amd','T0','fixture',Path('/tmp/cache'))
@@ -238,7 +275,37 @@ class ArmTests(FixtureCase):
         self.assertIn('VLLM_ROCM_USE_AITER=1',t0);self.assertNotIn('--attention-backend',t0)
         self.assertIn('ROCM_AITER_FA',t1);self.assertNotIn('VLLM_ROCM_USE_AITER=1',nv)
         with self.assertRaises(ValueError):arm.serve_command('nvidia','T1','fixture',Path('/tmp/cache'))
-        self.assertLessEqual(2400+120+3600+65+115+300,arm.WATCHDOG)
+        self.assertEqual(arm.REPLAY_TIMEOUT,3600+60+60)
+        self.assertEqual(2400+120+arm.REPLAY_TIMEOUT+60+300,arm.WATCHDOG)
+
+    def test_unknown_backend_continues_t0_but_stops_t1(self):
+        full=self.root/'full.json'
+        write_json(full,{'synthetic':False,'tasks':[{}]*542})
+        for tier,log,expected in [('T0','unrecognized',0),('T1','unrecognized',1),
+                                 ('T1','Using ROCM_AITER_FA backend (selected via --attention-backend)',0)]:
+            out=self.root/('arm-'+tier+'-'+str(expected))
+            argv=['arm.py','amd',tier,'--approved-run','--tasks',str(full),'--tasks-sha256',sha(full),
+                  '--trace',str(FIX/'code-slice.csv'),'--trace-sha256',sha(FIX/'code-slice.csv'),
+                  '--start','2023-11-16T00:00:00Z','--rate-factor','0.1','--out',str(out),
+                  '--hf-cache',str(self.root/'cache'),'--t-ssh','2023-11-16T00:00:00Z']
+            def run(cmd,**kwargs):
+                data=log.encode() if cmd[1]=='logs' else b'0.30.0'
+                return subprocess.CompletedProcess(cmd,0,stdout=data,stderr=b'')
+            def urlopen(req,**kwargs):
+                return io.BytesIO(encoded({'data':[{'id':arm.MODEL}], 'choices':[{'text':'smoke'}]}))
+            child=mock.Mock();child.wait.return_value=0;child.poll.return_value=0
+            with mock.patch.object(sys,'argv',argv), mock.patch.object(arm.subprocess,'run',side_effect=run), \
+                 mock.patch.object(arm.subprocess,'Popen',return_value=child) as launch, \
+                 mock.patch.object(arm.urllib.request,'urlopen',side_effect=urlopen), \
+                 mock.patch.object(arm,'convert'), mock.patch.object(arm.signal,'signal'), \
+                 mock.patch.object(arm.signal,'alarm',create=True):
+                self.assertEqual(arm.main(),expected)
+            self.assertTrue(read_json(out/'env.json')['holds'])
+            self.assertEqual(read_json(out/'ledger.json')['schema'],'second-run/run3-arm-summary@1')
+            if expected:
+                launch.assert_not_called()
+            else:
+                launch.assert_called_once();child.wait.assert_called_once_with(timeout=3720)
 
     def test_startup_failure_seals_ledger_and_manifest(self):
         full=self.root/'full.json'

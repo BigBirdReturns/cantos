@@ -1,21 +1,22 @@
 Availability: 2026-09-17T00:00:00Z through 2026-09-23T23:59:59Z
 168 UTC hour columns; current hour partial. Listed = yes / valid API probes.
-Unknowns excluded from fraction. Missed = empty elapsed 15-minute slots.
+Unknowns excluded from fraction. Missed = empty elapsed 15-minute slots from each row's first API observation.
+Earlier hours/slots are not sampled; rows without API observations are entirely not sampled.
 Delivered = confirmed SSH / real create attempts; separate denominator.
 Historical manual listings are excluded from API fractions. No new results asserted.
 
-digitalocean / gpu-h100x1-80gb / nyc2 / 1 GPU | 2026-09-23 17:00 UTC: listed 0/0; unknown 0; missed 4/4 slots; delivered 1/1; outcomes: available
-TOTAL digitalocean / gpu-h100x1-80gb / nyc2 / 1 GPU | listed 0/0; unknown 0; missed 672; delivered 1/1
-TOTAL digitalocean / gpu-h100x8-640gb / nyc2 / 8 GPU | listed 0/0; unknown 0; missed 672; delivered 0/0
-TOTAL digitalocean / gpu-h200x1-141gb / ams3 / 1 GPU | listed 0/0; unknown 0; missed 672; delivered 0/0
-TOTAL digitalocean / gpu-h200x1-141gb / mem1 / 1 GPU | listed 0/0; unknown 0; missed 672; delivered 0/0
-TOTAL digitalocean / gpu-h200x1-141gb / mkc1 / 1 GPU | listed 0/0; unknown 0; missed 672; delivered 0/0
-TOTAL digitalocean / gpu-h200x1-141gb / nyc2 / 1 GPU | listed 0/0; unknown 0; missed 672; delivered 0/0
-TOTAL digitalocean / gpu-h200x1-141gb / ric1 / 1 GPU | listed 0/0; unknown 0; missed 672; delivered 0/0
-TOTAL digitalocean / gpu-h200x1-141gb / tor1 / 1 GPU | listed 0/0; unknown 0; missed 672; delivered 0/0
-TOTAL digitalocean / gpu-mi300x1-192gb / nyc2 / 1 GPU | listed 0/0; unknown 0; missed 672; delivered 0/0
-TOTAL digitalocean / gpu-mi300x1-192gb / tor1 / 1 GPU | listed 0/0; unknown 0; missed 672; delivered 0/0
-TOTAL hotaisle / vm-mi300x-1x / enc1 / 1 GPU | listed 0/0; unknown 0; missed 672; delivered 0/0
-TOTAL hotaisle / vm-mi300x-2x / enc1 / 2 GPU | listed 0/0; unknown 0; missed 672; delivered 0/0
+digitalocean / gpu-h100x1-80gb / nyc2 / 1 GPU | 2026-09-23 17:00 UTC: listed 0/0; unknown 0; missed 0/0 slots; delivered 1/1; outcomes: available; not sampled 4 slots
+TOTAL digitalocean / gpu-h100x1-80gb / nyc2 / 1 GPU | listed 0/0; unknown 0; missed 0; delivered 1/1; not sampled 672 slots
+TOTAL digitalocean / gpu-h100x8-640gb / nyc2 / 8 GPU | listed 0/0; unknown 0; missed 0; delivered 0/0; not sampled 672 slots
+TOTAL digitalocean / gpu-h200x1-141gb / ams3 / 1 GPU | listed 0/0; unknown 0; missed 0; delivered 0/0; not sampled 672 slots
+TOTAL digitalocean / gpu-h200x1-141gb / mem1 / 1 GPU | listed 0/0; unknown 0; missed 0; delivered 0/0; not sampled 672 slots
+TOTAL digitalocean / gpu-h200x1-141gb / mkc1 / 1 GPU | listed 0/0; unknown 0; missed 0; delivered 0/0; not sampled 672 slots
+TOTAL digitalocean / gpu-h200x1-141gb / nyc2 / 1 GPU | listed 0/0; unknown 0; missed 0; delivered 0/0; not sampled 672 slots
+TOTAL digitalocean / gpu-h200x1-141gb / ric1 / 1 GPU | listed 0/0; unknown 0; missed 0; delivered 0/0; not sampled 672 slots
+TOTAL digitalocean / gpu-h200x1-141gb / tor1 / 1 GPU | listed 0/0; unknown 0; missed 0; delivered 0/0; not sampled 672 slots
+TOTAL digitalocean / gpu-mi300x1-192gb / nyc2 / 1 GPU | listed 0/0; unknown 0; missed 0; delivered 0/0; not sampled 672 slots
+TOTAL digitalocean / gpu-mi300x1-192gb / tor1 / 1 GPU | listed 0/0; unknown 0; missed 0; delivered 0/0; not sampled 672 slots
+TOTAL hotaisle / vm-mi300x-1x / enc1 / 1 GPU | listed 0/0; unknown 0; missed 0; delivered 0/0; not sampled 672 slots
+TOTAL hotaisle / vm-mi300x-2x / enc1 / 2 GPU | listed 0/0; unknown 0; missed 0; delivered 0/0; not sampled 672 slots
 
 Excluded records: {"legacy listing/note (not scheduled API probes)": 14}

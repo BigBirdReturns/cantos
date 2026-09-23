@@ -1,6 +1,8 @@
 # Lane A build report
 
-Status: **Kit built; 17 offline tests PASS. No GPU run or real EvalPlus container evaluation performed.**
+Status: **Fix round 1 complete; 19 offline tests PASS. No GPU run or real EvalPlus container evaluation performed.**
+The original build record below is historical; the appended Fix round 1 section supersedes
+its backend stop behavior, timeout split, recovery counts and cleanup observations.
 Scope: only `hot-aisle/campaign/run3/`. No commit, branch, push, provider API, rental,
 SSH, publication or contact with another person. Read-only upstream documentation was used.
 Other lane changes appeared concurrently and were left alone.
@@ -124,3 +126,65 @@ release must fit that external cap. Container stop does not stop provider billin
   qualification before a paid replay, plus prompt release after each arm.
 
 No benchmark result, provider comparison, correctness rate or public registration is asserted.
+
+## Fix round 1
+
+Scope: Lane A only. All file writes stayed in `hot-aisle/campaign/run3/`; other lanes
+were left untouched. No commit, push, branch, rental, provider API or GPU operation.
+The required Estate front-door probe failed before contact because its configured runtime
+file at `S:\Scratch\Runs\Estate-Peer\known_hosts` is sandbox-denied. Continued only the
+explicitly authorized local Lane A repair; no remote recovery or substitute execution.
+
+Files changed/built:
+
+- arm.py: parse the selected token in `Overriding with X` and `Using X backend
+  (selected via --attention-backend)`, ignoring candidate lists. Unknown backend/kernel
+  identity adds explicit env.json HOLDs while replay proceeds; T1 still requires AITER.
+  Child wait is 3720 seconds. Flat ledger.json now identifies itself as
+  `second-run/run3-arm-summary@1`; all previous fields retain their names.
+- replay.py and convert.py: durable dispatch/sent journal events distinguish missing
+  confirmed sends (`lost`) from never-sent and uncertain sends. Includes the unavoidable
+  network-send/fsync crash window and legacy journals as uncertainty, never fabricated loss.
+  Client-limit rejection is never-sent but remains a failed scheduled attempt.
+  Added summary fields never_sent/send_unknown and corresponding detailed metadata counts.
+- fixtures/serve-amd.log: exact selection lines copied from real Run 2 serve.log;
+  fixtures/serve-amd-exploration.log: observed lines supplied in the fix brief;
+  fixtures/serve-nvidia.log: explicitly AUTHORED, since no real CUDA log is available.
+  fixtures/README.md records source and evidence limits.
+- PREREG.md: 0.10 explicitly measures price/correctness, not capacity. Added one short
+  pre-data reference calibration targeting approximately 70% measured A/T0 capacity,
+  a common factor refreeze before scored data, fallback 0.10 and budget accounting.
+  Documented client_concurrency_limit's inclusion in the <=1% failure gate.
+- README.md: stable flat-summary field contract for Lane B's adapter, revised commands,
+  backend HOLDs and event/recovery semantics. selftest.py adds regression coverage.
+
+Run all offline tests from the repository root:
+
+```text
+python -B hot-aisle/campaign/run3/selftest.py
+```
+
+Result: **19 tests PASS** (3.917 seconds). Actual page-engine check:
+`{"engine":"2.0.0","attempted":6,"completed":5,"accepted":2,"holds":[]}`.
+Tests cover the real ROCm override/candidate line, supplied explicit AITER selection,
+authored CUDA selection, unknown identity HOLDs, mocked T0 continuation and T1 refusal,
+3720-second child timeout, renamed summary schema, mixed interruption recovery,
+legacy uncertainty, overload counts and all previous workload/grading/SSE checks.
+All seven Python AST parses and all five CLI `--help` paths PASS. `git diff --check`
+passes for Lane A. No tmp*, .selftest-* or __pycache__ directories remain in this lane.
+The old build's cleanup-remnant note no longer describes the current filesystem.
+
+Watchdog arithmetic: 2400 startup + 120 environment/smoke + 3720 child wait
+(3600 arrivals + 60 drain + 60 parse/load/recovery/exit) + 60 conversion/bookkeeping
+= 6300 work alarm; +300 cleanup = 6600 outer watchdog. Timing remains unverified on a GPU.
+
+Native Bash syntax checks were attempted for both unchanged shell scripts but could not
+start: Git Bash `CreateFileMapping ... Win32 error 5`. Shell/container/Linux qualification
+remains NOT RUN, not a passing test. No production calibration or performance result exists.
+
+Open questions/operator inputs remain reviewed dataset hashes, trace start, final common
+factor, serving/grader identity verification, calibration command/receipt, campaign funding
+approval, authorized seats, acquisition/release records and invoices. The calibration driver
+and Lane B closure adapter are external to this lane; no cross-lane edits were made.
+No tokens are needed for these offline tests. Unknown environment identity still blocks
+qualification even when the replay finishes, and production CUDA wording remains UNVERIFIED.

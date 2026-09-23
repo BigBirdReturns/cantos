@@ -92,12 +92,13 @@ class AvailabilityTests(unittest.TestCase):
         def fetch(url, header):
             calls.append((url, header))
             if len(calls) == 1:
-                return {'sizes':[], 'links':{'pages':{'next':probe.DO+'?page=2'}}}
+                return fixture('digitalocean-page1.json')
             return fixture('digitalocean.json')
         rows = probe.do_pages('fixture-secret', fetch)
-        self.assertEqual(len(rows), 4)
-        self.assertEqual(len(calls), 2)
+        self.assertEqual(rows, fixture('digitalocean-page1.json')['sizes'] + fixture('digitalocean.json')['sizes'])
+        self.assertEqual([url for url, _ in calls], [probe.DO+'?per_page=200', probe.DO+'?page=2'])
         self.assertTrue(all(h == 'Bearer fixture-secret' for _, h in calls))
+        self.assertEqual(probe.digitalocean(rows, self.target)[0], 'available')
 
     def test_pagination_rejects_cross_host_and_cycles(self):
         for url in ('https://evil.example/sizes', 'http://api.digitalocean.com/v2/sizes', probe.DO+'?per_page=200'):
@@ -153,6 +154,19 @@ class AvailabilityTests(unittest.TestCase):
             probe.append(self.out, [row])
         self.assertEqual(self.out.read_bytes(), b'{"partial":')
 
+    def test_delivered_methods_preserved_and_invalid_rejected(self):
+        receipt = self.receipt()
+        for method in ('api-create', 'console-create', 'tui-provision'):
+            with self.subTest(method=method):
+                row = probe.delivered(dict(receipt, method=method))
+                self.assertEqual((row['method'], row['layer']), (method, 'delivered'))
+        for method in ('create-attempt', 'api', 'console-plan-list', 'tui-provision-list', '', None):
+            with self.subTest(method=method), self.assertRaises(ValueError):
+                probe.delivered(dict(receipt, method=method))
+        del receipt['method']
+        with self.assertRaises(ValueError):
+            probe.delivered(receipt)
+
     def test_lock_prevents_competing_writer(self):
         with probe.ledger_lock(self.out):
             with self.assertRaises(FileExistsError):
@@ -188,6 +202,44 @@ class AvailabilityTests(unittest.TestCase):
         _, _, grid, excluded = heatmap.aggregate(records, [self.target], NOW)
         self.assertEqual(sum(c['valid'] for c in grid[probe.key(row)]), 0)
         self.assertEqual(sum(excluded.values()), 4)
+
+    def test_sampling_starts_per_row_in_first_observed_quarter(self):
+        row = self.records()[0]
+        records = [dict(row, ts='2026-09-23T20:47:00Z'),
+                   dict(row, ts='2026-09-23T20:32:00Z', outcome='unknown'),
+                   dict(row, ts='2026-09-23T20:33:00Z'),
+                   dict(row, region='other', ts='2026-09-23T21:00:00Z')]
+        _, _, grid, _ = heatmap.aggregate(records, [self.target], NOW)
+        cells = grid[probe.key(row)]
+        self.assertEqual((cells[165]['expected'], cells[165]['not_sampled']), (0, 4))
+        self.assertEqual((cells[166]['expected'], cells[166]['not_sampled']), (2, 2))
+        self.assertEqual(cells[167]['expected'] - len(cells[167]['slots']), 1)
+        other = grid[probe.key(records[-1])]
+        self.assertEqual((other[166]['expected'], other[167]['expected']), (0, 1))
+        page, summary = heatmap.render(records, [self.target], NOW)
+        self.assertIn('missed 1; delivered 0/0; not sampled 666 slots', summary)
+        self.assertIn('2026-09-23 19:00 UTC: listed 0/0; unknown 0; missed 0/0 slots; delivered 0/0; outcomes: none; not sampled 4 slots', page)
+
+    def test_sampling_before_window_and_no_api_history(self):
+        row = self.records()[0]
+        older = dict(row, ts='2026-09-01T00:00:00Z')
+        _, _, grid, _ = heatmap.aggregate([older], [self.target], NOW)
+        self.assertEqual(sum(c['expected'] for c in grid[probe.key(row)]), 669)
+        # Synthetic, future and manual observations cannot start the clock.
+        records = [dict(older, synthetic=True), dict(row, ts='2026-09-24T00:00:00Z'),
+                   dict(row, layer=None, method='console-plan-list'), self.records()[-1]]
+        _, _, grid, _ = heatmap.aggregate(records, [self.target, self.ha], NOW)
+        for cells in grid.values():
+            self.assertEqual(sum(c['expected'] for c in cells), 0)
+            self.assertEqual(sum(c['not_sampled'] for c in cells), 669)
+        _, summary = heatmap.render(records, [self.target], NOW)
+        self.assertIn('missed 0; delivered 0/1; not sampled 669 slots', summary)
+
+    def test_delivered_tuple_outside_config_gets_unsampled_row(self):
+        receipt = dict(self.records()[-1], region='outside-config')
+        _, _, grid, _ = heatmap.aggregate([receipt], [self.target], NOW)
+        self.assertIn(probe.key(receipt), grid)
+        self.assertEqual(sum(c['expected'] for c in grid[probe.key(receipt)]), 0)
 
     def test_legacy_create_only_counts_ssh_evidence(self):
         row = dict(self.records()[0], layer=None, method='console-create', provisioned=True)
