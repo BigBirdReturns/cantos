@@ -38,19 +38,23 @@ jobs:
           python hot-aisle/scripts/build_kit.py --check
           git diff --exit-code -- compute/index.html compute/MANIFEST.json compute/compute-kit.zip
       - name: Install exact browser test dependency
+        id: browser_setup
         run: |
           npm install --no-save --prefix /tmp/compute-browser playwright@1.58.0
           python -m pip install playwright==1.58.0
           /tmp/compute-browser/node_modules/.bin/playwright install --with-deps chromium
       - name: Instrument native browser, SSE and reconnect journeys
+        if: ${{ !cancelled() && steps.browser_setup.outcome == 'success' }}
         env:
           PLAYWRIGHT_MODULE: file:///tmp/compute-browser/node_modules/playwright/index.mjs
         run: |
           set -euo pipefail
           node hot-aisle/scripts/verify_page.mjs | tee instrument-journeys.json
       - name: Desk native browser journeys, with no set_content substitution
+        if: ${{ !cancelled() && steps.browser_setup.outcome == 'success' }}
         run: python compute/tests/test_browser.py --require-navigation --out compute-browser-qa
       - name: Two-service qualification-to-decision journey
+        if: ${{ !cancelled() && steps.browser_setup.outcome == 'success' }}
         env:
           NODE_PATH: /tmp/compute-browser/node_modules
           SEAM_QA_DIR: seam-browser-qa

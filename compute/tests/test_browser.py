@@ -77,7 +77,7 @@ with tempfile.TemporaryDirectory(prefix='compute-browser-') as td:
           for view in ('market','own','reuse','work'):
             page.locator('#tab-'+view).click();check(f'{view} has no page overflow at {width}px',page.evaluate('document.documentElement.scrollWidth<=innerWidth+1'))
           if width==390:
-            page.locator('#tab-market').click();page.locator('#clear-shortlist').click();page.evaluate('document.getElementById("toast").hidden=true');page.screenshot(path=str(OUT/'phone.png'),full_page=True)
+            page.locator('#tab-market').click();check('status toast does not intercept controls',page.locator('#toast').evaluate('(e)=>getComputedStyle(e).pointerEvents')=='none');page.locator('#clear-shortlist').click();page.evaluate('document.getElementById("toast").hidden=true');page.screenshot(path=str(OUT/'phone.png'),full_page=True)
         check('no JS errors',not errors)
         foreign=[u for u in requests if not u.startswith(url.split('#')[0])]
         check('zero external application requests',not foreign)
