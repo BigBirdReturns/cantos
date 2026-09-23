@@ -2,8 +2,8 @@
 """Validate a ClusterMAX-3.0 launch-claims ledger and, when it supplies enough,
 emit a binding.json draft. Stdlib only.
 
-This script does not know, guess at, or encode anything about ClusterMAX 3.0's
-actual rubric, medal table or release date. It is a fixed procedure for turning
+Version 2 can record released tiers and scoped review limitations separately from
+the frozen five-tier scoring contract. A ledger observation never expands a plan. It is a fixed procedure for turning
 whatever the release actually publishes into a ledger (schema
 secondrun.launch-claims.v1, see ../launch/claims-3.0.template.json) and, where the
 ledger supplies enough, a binding draft (schema secondrun.rating-binding.v2) for a
@@ -44,6 +44,9 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 LEDGER_SCHEMA = 'secondrun.launch-claims.v1'
+LEDGER_SCHEMA_V2 = 'secondrun.launch-claims.v2'
+OBSERVED_TIERS = ('Platinum', 'Gold', 'Silver', 'Bronze', 'Participation Ribbon', 'Underperforming', 'Unavailable')
+REVIEW_STATUSES = ('SUPPLIED', 'PARTIAL', 'NOT_IN_REVIEWED_SOURCES', 'NOT_REVIEWED')
 BINDING_SCHEMA = 'secondrun.rating-binding.v2'
 MEDALS = ('Platinum', 'Gold', 'Silver', 'Bronze', 'Underperforming')
 FIELDS = ('scope', 'observation_conditions', 'evidence', 'test_dates', 'predictive_check')
@@ -97,11 +100,16 @@ def validate_source_block(block, name):
     return block
 
 
-def validate_field(field_obj, path):
+def validate_field(field_obj, path, v2=False):
     need(isinstance(field_obj, dict), f'{path}: object required')
     status = field_obj.get('status')
-    need(status in STATUSES, f"{path}.status: must be one of {', '.join(STATUSES)}")
-    if status == 'SUPPLIED':
+    allowed = REVIEW_STATUSES if v2 else STATUSES
+    need(status in allowed, f'{path}.status: unsupported status')
+    if v2:
+        validate_source_block(field_obj.get('source'), f'{path}.source')
+        if status != 'SUPPLIED':
+            text(field_obj.get('limitation'), f'{path}.limitation')
+    if status in ('SUPPLIED', 'PARTIAL'):
         need('value' in field_obj and field_obj.get('value') not in (None, '', [], {}),
              f'{path}.value: required when SUPPLIED')
         validate_source_block(field_obj.get('source'), f'{path}.source')
@@ -115,25 +123,30 @@ def validate_ledger(ledger) -> dict:
     and the raw medals mapping. Raises InvalidLedger on a structurally broken
     ledger."""
     need(isinstance(ledger, dict), 'ledger: object required')
-    need(ledger.get('schema') == LEDGER_SCHEMA, 'Unsupported ledger schema')
+    need(ledger.get('schema') in (LEDGER_SCHEMA, LEDGER_SCHEMA_V2), 'Unsupported ledger schema')
+    v2 = ledger.get('schema') == LEDGER_SCHEMA_V2
+    if v2:
+        text(ledger.get('review_scope'), 'review_scope')
+        text(ledger.get('rating_version'), 'rating_version')
     text(ledger.get('release_name'), 'release_name')
     medals = ledger.get('medals')
     need(isinstance(medals, dict) and bool(medals), 'medals: nonempty object required')
 
-    field_status_counts = {field: {status: 0 for status in STATUSES} for field in FIELDS}
+    allowed_statuses = REVIEW_STATUSES if v2 else STATUSES
+    field_status_counts = {field: {status: 0 for status in allowed_statuses} for field in FIELDS}
     unevaluable = []
     for provider, entry in medals.items():
         need(isinstance(entry, dict), f'medals.{provider}: object required')
         medal = entry.get('medal')
-        need(isinstance(medal, str) and medal in MEDALS, f'medals.{provider}.medal: one of the frozen tiers required')
+        need(isinstance(medal, str) and medal in (OBSERVED_TIERS if v2 else MEDALS), f'medals.{provider}.medal: unsupported observation tier')
         for field in FIELDS:
             path = f'medals.{provider}.{field}'
-            status = validate_field(entry.get(field), path)
+            status = validate_field(entry.get(field), path, v2=v2)
             field_status_counts[field][status] += 1
-            if status == 'OMITTED':
+            if status in ('OMITTED', 'PARTIAL', 'NOT_IN_REVIEWED_SOURCES', 'NOT_REVIEWED'):
                 unevaluable.append({'provider': provider, 'field': field,
                                      'label': FIELD_LABELS[field],
-                                     'claim': entry[field]['omitted_claim']})
+                                     'claim': entry[field].get('limitation') or entry[field].get('omitted_claim')})
 
     has_sources = isinstance(ledger.get('medal_table_source'), dict) and isinstance(ledger.get('rubric_source'), dict)
     if has_sources:
@@ -149,11 +162,11 @@ def validate_ledger(ledger) -> dict:
 
 def print_summary(report: dict, out=sys.stdout) -> None:
     print('Per-field status (providers):', file=out)
-    header = f"  {'field':<26}{'SUPPLIED':>10}{'OMITTED':>10}{'NOT_YET_RELEASED':>18}"
-    print(header, file=out)
+    statuses = tuple(next(iter(report['field_status_counts'].values())).keys())
+    print('  field | ' + ' | '.join(statuses), file=out)
     for field in FIELDS:
         counts = report['field_status_counts'][field]
-        print(f"  {field:<26}{counts['SUPPLIED']:>10}{counts['OMITTED']:>10}{counts['NOT_YET_RELEASED']:>18}", file=out)
+        print('  ' + field + ' | ' + ' | '.join(str(counts[k]) for k in statuses), file=out)
     print(file=out)
     if report['unevaluable']:
         print(f"Unevaluable claims ({len(report['unevaluable'])}):", file=out)
@@ -164,6 +177,9 @@ def print_summary(report: dict, out=sys.stdout) -> None:
 
 
 def build_binding_draft(ledger: dict, plan: dict, plan_hash: str) -> dict:
+    validate_ledger(ledger)
+    if ledger.get('schema') == LEDGER_SCHEMA_V2:
+        need(plan.get('rating_version') == ledger.get('rating_version'), 'Plan and ledger rating versions differ')
     provider_ids = sorted({
         row.get('provider_id') for row in plan.get('trials', [])
         if isinstance(row, dict) and isinstance(row.get('provider_id'), str)
@@ -175,8 +191,11 @@ def build_binding_draft(ledger: dict, plan: dict, plan_hash: str) -> dict:
     medals_out = {}
     for pid in provider_ids:
         tier = medals[pid].get('medal')
+        need(tier != 'Unavailable', 'Unavailable is not an ordinal quality assessment')
         need(tier in MEDALS, f'medals.{pid}.medal: one of the frozen tiers required')
         medals_out[pid] = tier
+    validate_source_block(ledger.get('medal_table_source'), 'medal_table_source')
+    validate_source_block(ledger.get('rubric_source'), 'rubric_source')
     bound_at = datetime.now(timezone.utc).isoformat()
     return {
         'schema': BINDING_SCHEMA,

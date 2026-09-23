@@ -1,78 +1,24 @@
-# ClusterMAX 3.0 launch kit
+# ClusterMAX 3.0 launch evidence
 
-This challenge is frozen before ClusterMAX 3.0 exists: the plan, the
-medal-to-probability transform and the binding rules are all locked ahead of time
-(see the root [README.md](../README.md), "The three records"). Nobody involved in
-this repo knows what SemiAnalysis will put in 3.0's rubric or medal table, and this
-kit makes no claim about what the release will or will not contain, when it will
-ship, or what it will omit.
+ClusterMAX 3.0 has been released. Open [the reader view](index.html) or [the source-bound ledger](claims-3.0.observed.json). The ledger covers 17 selected provider assignments; it does not claim complete review of all 77 providers. Exact retrieval hashes are in [source observations](source-observations-20260923.json).
 
-What this kit *does* do, mechanically, once 3.0 actually ships:
+## Observation and scoring are separate
 
-1. **Record a ledger, per medal, of what the release actually supplies.**
-   [`claims-3.0.template.json`](claims-3.0.template.json) (schema
-   `secondrun.launch-claims.v1`) has five fields per provider medal:
+Schema `secondrun.launch-claims.v2` records SUPPLIED, PARTIAL, NOT_IN_REVIEWED_SOURCES and NOT_REVIEWED findings. Partial and unreviewed findings carry explicit limitations and sources. These are limits of this review, not assertions that evidence does not exist. The v1 template and validator remain supported for historical records.
 
-   - `scope` — the service/product and region the medal covers
-   - `observation_conditions` — the customer permissions and support tier that
-     produced the observations (ordinary vs. reviewer/white-glove)
-   - `evidence` — evidence published for the medal and how it yields the tier
-     (rubric link + per-criterion scores, if published)
-   - `test_dates` — when the observations were made
-   - `predictive_check` — whether the release provides anything allowing a
-     predictive check
+The ledger accepts Participation Ribbon and Unavailable as observations. The unchanged five-tier scorer refuses Participation Ribbon; Unavailable is never converted into Underperforming or a failed job. A new mapping requires a separately identified plan and post-release disclosure. No six-tier probability is invented here.
 
-   Each field carries a `status`: `SUPPLIED` (with a cited `source` — `url` +
-   `sha256` — and a `value`), `OMITTED` (with the exact `omitted_claim` that
-   consequently remains unevaluable), or `NOT_YET_RELEASED`.
-
-2. **Bind supplied medals to the frozen test, mechanically.**
-   `../scripts/launch_ledger.py` validates a filled ledger, prints a
-   supplied/omitted/not-yet-released summary per field and the list of
-   unevaluable claims, and — only when the ledger supplies a medal for every
-   plan provider plus a medal-table source and a rubric source — emits a
-   `binding.json` draft (schema `secondrun.rating-binding.v2`) for a given
-   frozen `--plan`, so the prospective test in this repo can be bound without
-   hand-editing.
-
-## Filling in the ledger
-
-Copy `claims-3.0.template.json`, replace `EXAMPLE_PROVIDER` with the real
-provider ids from your frozen plan's cohort (one entry per provider), and set
-each of the five fields' `status` based on what the release actually
-publishes for that provider:
-
-- If the release gives you enough to check the field, set `status: "SUPPLIED"`,
-  fill in `value`, and cite the exact page/document you read it from in
-  `source.url` / `source.sha256` (a lowercase SHA-256 of the bytes you
-  retrieved) / `source.retrieved_utc`.
-- If the release does not give you enough, set `status: "OMITTED"` and write
-  the exact claim that consequently remains unevaluable in `omitted_claim` —
-  be specific about what's missing, not just "insufficient data".
-- Leave `status: "NOT_YET_RELEASED"` for anything the release genuinely
-  hasn't published yet.
-
-Also fill in `medal_table_source` and `rubric_source` at the top level (the
-same `url` / `sha256` / `retrieved_utc` shape) once you have both — these feed
-`binding.source` / `binding.rubric` directly.
+## Use
 
 ```sh
-python ../scripts/launch_ledger.py path/to/filled-ledger.json
-python ../scripts/launch_ledger.py path/to/filled-ledger.json --plan ../data/demo-plan.json --output binding-draft.json
+python scripts/launch_ledger.py launch/claims-3.0.observed.json
+python scripts/launch_ledger.py launch/claims-3.0.observed.json --plan path/to/plan.json --output binding-draft.json
 ```
 
-The first form just validates the ledger and prints the summary table and the
-unevaluable-claims list. The second additionally emits a binding draft once the
-ledger covers every provider in the given plan. The emitted `bound_at` is
-stamped at the moment you run the command — confirm that's actually when you
-read the medal table and rubric, and that it still lands strictly before every
-trial's `started_at`, before treating the draft as a real binding (see the root
-README's "Bound, not backfilled" gate).
+A binding draft requires compatible tiers, sources and rating version. It does not register a study or authenticate external timestamps. Validate the complete submission before relying on a result.
 
-## What this is not
+## Chronology
 
-This kit does not predict, describe, or speculate about ClusterMAX 3.0's rubric,
-medal table, release date, or what it will or will not include. It is a fixed
-procedure, written and frozen before 3.0 ships, for turning whatever 3.0 actually
-publishes into a ledger and, where the ledger supports it, a binding — nothing
-here is written from foreknowledge of the release.
+The original instrument was published earlier on release day at `ee650e3`. Consolidated v1.3 (`448e003`) was pushed after the cited launch announcement. Neither code publication establishes a preregistered real customer cohort. This ledger is post-release work. Plans can still prospectively predict future jobs; freeze their design, predictions and mapping before observing those outcomes.
+
+The complete [77-provider transcription](release-3.0/clustermax-3.0.json) and [transition record](release-3.0/transitions.json) remain separate. The inspected article is recorded as methodology_source. The exact 3.0 rubric remains unverified, so this observation ledger cannot emit a real binding yet.

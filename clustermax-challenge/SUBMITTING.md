@@ -16,17 +16,19 @@ differently. Do not mix them in one submission.
 
 ## 1. Plan+binding+outcomes packets (the prospective test)
 
+For claims about ClusterMAX 3.0, identify the managed-cluster service, configuration, region, ordinary customer permissions and standard support in SUBMITTER.md. Bare-metal-only or token-endpoint evidence belongs to a different claim. Maintainer review must verify this service match; the generic scorer cannot infer it from a provider name. The original five-tier transform still holds Participation Ribbon inputs.
+
+
 ### Requirements
 
 - **Ordinary customer account.** No reviewer, admin, or special-access
   treatment. `plan.json`'s trials must declare `customer_role: "ordinary_tenant"`
   and `support: "standard"` -- anything else is held.
-- **Plan frozen before jobs ran, and before any medal or rubric is known.**
+- **Plan frozen before jobs ran.** Record separately whether the medals were already public.
   Every trial's `predicted_at` timestamp must be at or before the plan's
   `frozen_at`, and strictly before the job's own `started_at`. `plan.json`
   carries no `medal` field and no rubric hash -- you cannot add or edit
-  predictions after seeing outcomes, and you cannot know a medal or a not-yet-
-  published rubric at freeze time either. Instead `plan.json` commits to
+  predictions after seeing outcomes, a published medal can be known at freeze time if that fact is disclosed. Instead `plan.json` commits to
   `rating_name`, `rating_version` (expected), and a `binding_rules` object
   (`medal_source`, `rubric_source` -- which official sources the later binding
   must cite -- and `tiers`, which must equal the transform's frozen anchor
@@ -75,7 +77,7 @@ run your own jobs, submit your own outcomes.
 Pick one:
 
 - **Open a GitHub issue** using the
-  [ClusterMAX outcomes submission template](../../issues/new?template=clustermax-outcomes.yml)
+  [ClusterMAX outcomes submission template](https://github.com/BigBirdReturns/axm-tools/issues/new?template=clustermax-outcomes.yml)
   (`.github/ISSUE_TEMPLATE/clustermax-outcomes.yml`). Paste your `plan.json`,
   `binding.json` and `outcomes.json` (or link to them) and fill in the
   disclosure section. A maintainer will run `scripts/submit_check.py` against
@@ -124,8 +126,7 @@ Requirements:
 - State your relationship to the provider, if any, in the PR description.
 
 `retrospective/PLAN.md` and `retrospective/plan.json` are frozen and out of
-scope for correction requests -- they were pre-registered before any incident
-data was collected, and `scripts/retrospective.py` refuses to run if
+scope for correction requests -- the repository records their commitment before collection (git time is self-reported, not an independent registration timestamp), and `scripts/retrospective.py` refuses to run if
 `PLAN.md`'s hash no longer matches `plan.json`.
 
 ## What happens to a HOLD

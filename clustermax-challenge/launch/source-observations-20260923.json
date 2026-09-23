@@ -1,0 +1,47 @@
+{
+  "schema": "secondrun.source-observations.v1",
+  "created_at": "2026-09-23T22:02:17.785538+00:00",
+  "sources": [
+    {
+      "name": "homepage",
+      "url": "https://www.clustermax.ai/",
+      "final_url": "https://www.clustermax.ai/",
+      "retrieved_utc": "2026-09-23T21:54:16.815576+00:00",
+      "http_status": 200,
+      "sha256": "e33fc022644119b86c2b582768830f24a1264cc1cbdb7a4c9ac5cbe35070d725",
+      "custody": "Exact response retained on the author-controlled machine; copyrighted full pages are not redistributed."
+    },
+    {
+      "name": "v3",
+      "url": "https://www.clustermax.ai/v3",
+      "retrieved_utc": "2026-09-23T21:54:17.077192+00:00",
+      "retrieval_error": "HTTP Error 404: Not Found"
+    },
+    {
+      "name": "announcement",
+      "url": "https://x.com/JordanNanos/status/2102871532267847699",
+      "final_url": "https://x.com/JordanNanos/status/2102871532267847699",
+      "retrieved_utc": "2026-09-23T21:54:17.177068+00:00",
+      "http_status": 200,
+      "sha256": "482d21c1ce41d4b4dc855700e2f82bc7bcd19d4cbf9b51a1c219c6a09bf3ee21",
+      "custody": "Exact response retained on the author-controlled machine; copyrighted full pages are not redistributed."
+    },
+    {
+      "name": "newsletter",
+      "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+      "final_url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+      "retrieved_utc": "2026-09-23T21:54:18.241245+00:00",
+      "http_status": 200,
+      "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+      "custody": "Exact response retained on the author-controlled machine; copyrighted full pages are not redistributed."
+    },
+    {
+      "name": "ranking-3.0",
+      "url": "https://substack-post-media.s3.amazonaws.com/public/images/b2130ed4-61b4-49a8-98e5-03408801831c_1432x880.png",
+      "sha256": "79dc81e4cf7a503632c631b69f011f2a7af109e719cc32253344820cda402e02",
+      "retrieved_utc": "2026-09-23T22:03:49.938487+00:00",
+      "custody": "Exact image retained on author-controlled machine; primary source URL is public."
+    }
+  ],
+  "boundary": "HTTP success is not a claim that every paragraph was reviewed. The homepage still served older content; the announcement and article establish release."
+}

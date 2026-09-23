@@ -6,28 +6,28 @@
   "sources": [
     {
       "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
-      "sha256": "91fa2e524fd5a9239a23cfba6f69eecb94046cdb6743c7c80e9737aa0d059eb",
+      "sha256": "91fa2e524fd5a9239a23cfba6f69eecb94046cdb6743c7c80e9737aa0d059ebb",
       "retrieved_utc": "2026-09-23T21:38:10Z",
       "kind": "landing_page",
       "note": "og:title \"ClusterMAX 3.0: The Industry Standard GPU Cloud Rating System Returns\"; found via slug guess after clustermax.ai had not yet published a /v3.0 or /v3 page (site sitemap.xml unchanged, both 404 as of retrieval)"
     },
     {
       "url": "https://substack-post-media.s3.amazonaws.com/public/images/b2130ed4-61b4-49a8-98e5-03408801831c_1432x880.png",
-      "sha256": "79dc81e4cf7a503632c631b69f011f2a7af109e719cc32253344820cda402e0",
+      "sha256": "79dc81e4cf7a503632c631b69f011f2a7af109e719cc32253344820cda402e02",
       "retrieved_utc": "2026-09-23T21:38:10Z",
       "kind": "medal_table_image",
       "note": "Full-resolution source image (1432x880 PNG, 353995 bytes matching the post's embedded data-attrs byte count) embedded in the ClusterMAX 3.0 newsletter body; fetched directly from S3 origin, bypassing the Substack CDN's downscaled/webp renditions. This is the primary transcription source."
     },
     {
       "url": "https://pbs.twimg.com/media/HS7mSN3bcAAtDLs.jpg?name=orig",
-      "sha256": "5477994f1bf0881f02175344123eb167eddcded31c6cb7471fdeb5fe018b5c5",
+      "sha256": "5477994f1bf0881f02175344123eb167eddcded31c6cb7471fdeb5fe018b5c51",
       "retrieved_utc": "2026-09-23T21:38:10Z",
       "kind": "cross_check_image",
       "note": "Image attached to Jordan Nanos's announcement tweet (https://x.com/JordanNanos/status/2102871532267847699), same 1432x880 dimensions as the newsletter source PNG; used only to cross-check the transcription, not as the primary read"
     },
     {
       "url": "https://www.clustermax.ai/sitemap.xml",
-      "sha256": "12707b3a83a8c7c0fda474579d54a7c3d0e1274b13b9e0c58562508a1474b2f",
+      "sha256": "12707b3a83a8c7c0fda474579d54a7c3d0e1274b13b9e0c58562508a1474b2f7",
       "retrieved_utc": "2026-09-23T21:38:10Z",
       "kind": "negative_check",
       "note": "clustermax.ai has not yet published a v3.0/v3 page as of retrieval; sitemap still lists only v1/v2/v2.1. /v3.0 and /v3 both returned 404. Kept for the record that the medal table was sourced from the newsletter, not the clustermax.ai site."

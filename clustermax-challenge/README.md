@@ -2,12 +2,7 @@
 
 **Does the rating predict the job?**
 
-ClusterMAX calls itself the industry standard. We could find no published study testing
-whether its medals predict customer outcomes. Here is the test. Anyone with job records can run
-it: add the rating to a public-specs-and-price predictor, then measure whether it
-improves predictions on ordinary customer jobs at held-out providers. This is a
-standing, open challenge, not a one-off report — it stays open until someone runs it
-on real records.
+ClusterMAX 3.0 is out. This standing test asks whether adding its medal improves predictions of ordinary customer outcomes beyond public specifications and price. The instrument accepts source-bound submissions; no prospective customer-outcome result has been supplied. The separate R1 retrospective result is inconclusive. See the [3.0 evidence ledger](launch/index.html).
 
 This is a test of incremental predictive value, not a competing provider rating.
 Freeze a public-specs-and-price baseline, a version of that same predictor with the
@@ -39,8 +34,7 @@ Scoring a submission takes three separate JSON records, in this order:
    before the jobs ran. Predictors, cohort, transform, primary metric and
    minimum effect are all locked here. Critically, **it carries no `medal`
    field**: a design can (and should) be frozen before a rating even exists
-   for the providers under test, so nothing here can depend on knowing a
-   medal in advance. It also carries no rubric hash: a design frozen before
+   for the providers under test, so medal observation stays separate from design. A post-medal design is permitted when explicitly identified and frozen before future outcomes. It also carries no rubric hash: a design frozen before
    ClusterMAX 3.0 exists cannot know 3.0's rubric. Instead it commits to
    `rating_name`, `rating_version` (expected), and a `binding_rules` object
    (`medal_source`, `rubric_source` — which official sources the binding must
@@ -87,8 +81,7 @@ release gate, not part of `evaluate()`.
 * **[Retrospective study R1](retrospective/PLAN.md)** — a frozen, look-back question
   about whether ClusterMAX medals track providers' own public incident records. Plan
   committed before collection (commit 73da1cf; git time is self-reported, not an
-  independent timestamp), run 2026-09-23: 9 of 59 providers rated in 2.0 publish
-  status history deep enough to check; reading **inconclusive** (Spearman rho +0.64
+  independent timestamp), run 2026-09-23: our collection obtained 9 eligible histories from 59 providers rated in 2.0; reading **inconclusive** (Spearman rho +0.64
   between medal and self-reported major/critical incidents, 95% bootstrap interval
   0.00 to 0.94, permutation p = 0.075). The direction (higher medal, more reported
   incidents) fits the plan's stated limit that detailed self-reporting looks worse.
@@ -147,8 +140,7 @@ handful of jobs from one session on one day.
    plan bytes. Freeze the rating version (expected), the binding rules (which official
    medal-table and rubric sources the later binding must cite, and the frozen tier set),
    the transform, predictors, cohort, primary metric and minimum effect before any test
-   job starts — before, in general, a medal even exists for the test providers, and
-   before the rating's own rubric for that version is even known.
+   job starts. Record whether this occurs before or after publication of the medals; do not claim pre-medal priority from a self-reported date.
 2. **Bound, not backfilled.** The medal binding is a separate record (see "The three
    records" above), hash-referencing the exact plan it binds to. It must be bound at or
    after the plan's freeze and strictly before every trial's `started_at`, name the same
@@ -240,34 +232,15 @@ another general-purpose badge.
 
 Hot Aisle provided $200 in compute credits for my own testing.
 
-## ClusterMAX 3.0 is out (2026-09-23)
+## ClusterMAX 3.0 release
 
-SemiAnalysis published ClusterMAX 3.0 on 2026-09-23 at 21:20 UTC. This version of
-the challenge reached GitHub at 21:27 UTC, minutes later, so it claims no priority
-over the release.
+The [77-provider transcription](launch/release-3.0/clustermax-3.0.json) and [transitions from 2.1](launch/release-3.0/transitions.json) from the parallel release are preserved. Our 17-provider scoped ledger complements that transcription; it does not replace it.
 
-* **Medal table transcribed** from the official image, with source hashes:
-  [`launch/release-3.0/clustermax-3.0.json`](launch/release-3.0/clustermax-3.0.json).
-  77 providers: 2 Platinum, 2 Gold, 5 Silver, 10 Bronze, 15 Participation Ribbon,
-  11 Underperforming, 32 Unavailable. Changes from 2.1 are in
-  [`transitions.json`](launch/release-3.0/transitions.json).
-* **New tier.** 3.0 adds Participation Ribbon between Bronze and Underperforming.
-  The frozen transform has no value for it, so under the frozen rules those 15
-  providers cannot be bound; an unknown tier is never treated as Underperforming.
-  Any extension will be published as a separate transform, labelled as set after
-  the release.
-* **Binding waits for the rubric.** When checked after the release, clustermax.ai's
-  criteria pages still showed 2.1. The medal binding records the exact rubric hash,
-  so it waits for the 3.0 rubric to be published.
-* **No predictive claim found.** We found no statement in the release that medals
-  predict customer outcomes. Its write-ups describe testing through
-  provider-arranged access, in one case on a cluster used under a provider
-  engineer's account. The customer-scope gate exists to keep that kind of
-  observation separate from ordinary customer access.
+The [source-bound launch ledger](launch/index.html) is post-release. It records 17 selected assignments, the managed-cluster scope and the precise limits of this review. Actual benchmark and recovery testing are acknowledged; a separate prospective prediction study remains open.
 
-The paid release article is cited by URL and hash only; it is not republished here.
-[`launch/README.md`](launch/README.md) is the ledger procedure that will record,
-per medal, which particulars the release supplies and which it omits.
+Participation Ribbon is accepted by the observation ledger but refused by the original five-tier transform. Unavailable remains a separate assessment state. No probability is silently invented for either. A compatible future plan may be registered after medals are public and before its jobs; this cannot be called pre-medal registration.
+
+[Read the R1 interpretation note](retrospective/READOUT.md): collection coverage is not proof of publication coverage; status-report counts are not customer failure rates. Original R1 inputs, plan and outputs are retained unchanged.
 
 ## Archive: earlier public-code probes
 
