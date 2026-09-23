@@ -1,34 +1,19 @@
-# Hot Aisle workload report — source-driven verification.
-#
-# Every push or PR that touches hot-aisle/ runs: the engine's unit suite, the runner's
-# lifecycle/interface suite, the price arithmetic tests, browser journeys against the
-# actual page revision (static and connected), a kit-consistency check (MANIFEST.json
-# and workload-report.zip must be what scripts/build_kit.py produces from source), and
-# a price-snapshot freshness check. Nothing here is hand-pinned to a byte hash.
-#
-# Deployment is unchanged: main is served by GitHub Pages through the repo's Pages
-# workflow. This workflow gates what reaches main; it does not deploy.
-
-name: Hot Aisle workload report
-
+name: Compute desk and workload instrument
 on:
   push:
-    paths: ['hot-aisle/**', '.github/workflows/hot-aisle-ci.yml']
+    paths: ['hot-aisle/**', 'compute/**', 'integration/**', '.gitattributes', '.github/workflows/hot-aisle-ci.yml']
   pull_request:
-    paths: ['hot-aisle/**', '.github/workflows/hot-aisle-ci.yml']
+    paths: ['hot-aisle/**', 'compute/**', 'integration/**', '.gitattributes', '.github/workflows/hot-aisle-ci.yml']
   workflow_dispatch: {}
-
 permissions:
   contents: read
-
 jobs:
   verify:
-    name: Engine, runner, browser journeys, kit
+    name: Authorities, software, native browsers, reproducible kits
     runs-on: ubuntu-latest
     timeout-minutes: 15
-    defaults:
-      run:
-        working-directory: hot-aisle
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -37,44 +22,60 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-
-      - name: Engine unit suite (extracted from index.html)
-        run: node scripts/test_workbench.cjs
-
-      - name: Runner lifecycle and interface suite
-        run: node --test runner/test/*.test.cjs
-
-      - name: Price arithmetic
-        run: python -m unittest discover -s scripts -p 'test_price_math.py' -v
-
-      - name: Install Playwright + Chromium
+      - name: Generated authority copies match their sources
+        run: python integration/build.py --check
+      - name: Measured-result engine and scenario engines
         run: |
-          npm install --no-save playwright@1
-          npx playwright install --with-deps chromium
-
-      - name: Browser journeys (static + connected) against this revision
-        run: node scripts/verify_page.mjs | tee ../journeys.json
-
-      - name: Offline kit matches source
-        run: python scripts/build_kit.py --check
-
-      - name: Price snapshot freshness
+          set -euo pipefail
+          node hot-aisle/scripts/test_workbench.cjs | tee instrument-engine.log
+          node --test hot-aisle/runner/test/*.test.cjs compute/tests/test_core.cjs compute/tests/test_bridge.cjs integration/tests/seam.test.cjs | tee software-tests.log
+          python -m unittest discover -s hot-aisle/scripts -p 'test_price_math.py' -v
+          python -m unittest discover -s compute/tests -p 'test_prices.py' -v
+      - name: Source-driven kits are reproducible
+        run: |
+          set -euo pipefail
+          python compute/scripts/build.py
+          python hot-aisle/scripts/build_kit.py --check
+          git diff --exit-code -- compute/index.html compute/MANIFEST.json compute/compute-kit.zip
+      - name: Install exact browser test dependency
+        run: |
+          npm install --no-save --prefix /tmp/compute-browser playwright@1.58.0
+          python -m pip install playwright==1.58.0
+          /tmp/compute-browser/node_modules/.bin/playwright install --with-deps chromium
+      - name: Instrument native browser, SSE and reconnect journeys
+        env:
+          PLAYWRIGHT_MODULE: file:///tmp/compute-browser/node_modules/playwright/index.mjs
+        run: |
+          set -euo pipefail
+          node hot-aisle/scripts/verify_page.mjs | tee instrument-journeys.json
+      - name: Desk native browser journeys, with no set_content substitution
+        run: python compute/tests/test_browser.py --require-navigation --out compute-browser-qa
+      - name: Two-service qualification-to-decision journey
+        env:
+          NODE_PATH: /tmp/compute-browser/node_modules
+          SEAM_QA_DIR: seam-browser-qa
+        run: node integration/tests/browser.cjs
+      - name: Capture exact tested-source identity
+        if: always()
         run: |
           python - <<'PY'
-          import json, datetime, sys
-          d = json.load(open('data/prices.json'))
-          age = (datetime.date.today() - datetime.date.fromisoformat(d['reviewed_on'])).days
-          print(f"price snapshot reviewed {d['reviewed_on']} ({age} days ago)")
-          if age > 120: print('::error::price snapshot older than 120 days; refresh data/prices.json and the embedded prices-data block'); sys.exit(1)
-          if age > 45: print('::warning::price snapshot older than 45 days')
+          from pathlib import Path
+          import hashlib,json,os
+          paths=['compute/index.html','hot-aisle/index.html','compute/data/catalog.json','hot-aisle/data/catalog.json','compute/compute-kit.zip','hot-aisle/workload-report.zip']
+          record={'source_commit':os.environ['GITHUB_SHA'],'run_id':os.environ['GITHUB_RUN_ID'],'files':{p:hashlib.sha256(Path(p).read_bytes()).hexdigest() for p in paths if Path(p).exists()},'scope':'Software and native local-service browser tests with explicitly synthetic benchmark fixtures. No provider account or GPU measurement.'}
+          Path('integration-ci-identity.json').write_text(json.dumps(record,indent=2)+'\n')
           PY
-
-      - name: Upload journey report
+      - uses: actions/upload-artifact@v4
         if: always()
-        uses: actions/upload-artifact@v4
         with:
-          name: hot-aisle-journeys-${{ github.run_id }}
+          name: compute-seam-${{ github.run_id }}
           path: |
-            journeys.json
+            instrument-engine.log
+            software-tests.log
+            instrument-journeys.json
+            integration-ci-identity.json
+            compute-browser-qa/
+            seam-browser-qa/
+            compute/compute-kit.zip
             hot-aisle/workload-report.zip
-          if-no-files-found: ignore
+          if-no-files-found: error

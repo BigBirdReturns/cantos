@@ -1,3 +1,4 @@
+const catalogue = require('../catalog.cjs');
 'use strict';
 /* Local integration environment. A fake Hot Aisle API with the subset of endpoints the
    adapter reads, plus a target that runs the fake benchmark on this machine. It lets
@@ -57,7 +58,7 @@ function demoPlanInput(overrides = {}) {
     repeats: overrides.repeats ?? 2,
     identity: { model_revision: 'demo-rev', precision: 'FP8', tokenizer_revision: 'demo-rev', cache_policy: 'warm', runtime_digest: 'rocm/vllm@sha256:demo', ...(overrides.identity || {}) },
     price: { provider: 'Hot Aisle', gpus: 1, rate: 2.99, extra: 0, source: 'local demo (fake API on-demand price)', period: 'synthetic', ...(overrides.price || {}) },
-    comparator: overrides.comparator === null ? null : { provider: 'Nebius HGX H100', gpus: 1, rate: 3.85, extra: 0, source: 'https://nebius.com/prices', period: '2026-09-22 snapshot', ...(overrides.comparator || {}) },
+    comparator: overrides.comparator === null ? null : (overrides.comparator || catalogue.quote('do-h100')),
     limits: { max_minutes: 30, max_spend_usd: 5, ...(overrides.limits || {}) },
     gates: overrides.gates || {},
     requirements: overrides.requirements || { max_p95_ttft_ms: 1000, max_p95_e2e_ms: 15000 },

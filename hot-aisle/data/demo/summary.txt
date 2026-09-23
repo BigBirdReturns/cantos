@@ -1,8 +1,8 @@
-DEMONSTRATION (synthetic) — Qualified record rec-20260922T235055Z-5ea477: QUALIFIED
+DEMONSTRATION (synthetic) — Qualified record rec-20260923T013303Z-a1a010: QUALIFIED
 Qwen/Qwen3-Coder-30B-A3B-Instruct · 2,048 in / 256 out · concurrency 1, 8, 32
 Hot Aisle · 1× MI300X VM (synthetic) · $2.99 / GPU-hr: $0.2419 per 1,000 completed requests at concurrency 32; p95 TTFT 275 ms; p95 E2E 9,951 ms; 2 trial(s).
   concurrency 1: meets requirements · $2.8123/1,000
   concurrency 8: meets requirements · $0.6987/1,000
   concurrency 32: meets requirements · $0.2419/1,000
-Nebius HGX H100 at $3.85 / GPU-hr would need 4.42 completed requests/s to tie on rental cost (price ratio, not a measurement).
+DigitalOcean H100 at $4.41 / GPU-hr would need 5.063 completed requests/s to tie on rental cost (price ratio, not a measurement).
 Reasons: Primary cell (concurrency 32) meets every stated requirement.

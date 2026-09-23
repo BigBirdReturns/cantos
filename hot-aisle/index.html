@@ -90,7 +90,7 @@ dialog{max-width:680px;width:calc(100% - 30px);max-height:85vh;overflow:auto;bac
 <div id="instrument"></div>
 </section>
 <section class="wrap section" id="record"><div class="sectionhead"><div><p class="eyebrow">Latest qualified record</p><h2 id="record-title">Demonstration record</h2><p id="record-sub">Projected in this browser from the record's retained trials through the page's own engine, then checked against the record's checksum. Nothing on this card is typed in.</p></div><div class="row" id="record-actions"></div></div><div class="headline" id="headline"></div></section>
-<section class="wrap section" id="prices"><div class="sectionhead"><div><p class="eyebrow">No file needed</p><h2>Price-only break-even</h2><p>At the same allocation size, the share of a comparator's throughput that MI300X needs to tie on rental cost. Price ratios, not measured speed.</p></div><div class="inline"><label for="price-period">Comparator schedule</label><select id="price-period"><option value="current_gpu_hour">Nebius · 22 Sept 2026 snapshot</option><option value="october_gpu_hour">Nebius · announced 1 Oct 2026</option></select></div></div><div class="tiles" id="breaktable"></div><p class="fine" id="price-fresh">Prices per GPU-hour, AI Cloud infrastructure list rates. Confirm the purchasable instance size. Custom rates and whole-bill charges go in the workbench.</p></section>
+<section class="wrap section" id="prices"><div class="sectionhead"><div><p class="eyebrow">No file needed</p><h2>Price-only break-even</h2><p>At the same allocation size, the share of a comparator's throughput that MI300X needs to tie on rental cost. Price ratios, not measured speed.</p></div><div class="inline"><label for="price-period">Comparator schedule</label><select id="price-period"><option value="current_gpu_hour">All providers · 22 Sept 2026 snapshot</option><option value="october_gpu_hour">All providers · announced 1 Oct 2026</option></select></div></div><div class="tiles" id="breaktable"></div><p class="fine" id="price-fresh">Prices per GPU-hour, AI Cloud infrastructure list rates. Confirm the purchasable instance size. Custom rates and whole-bill charges go in the workbench.</p></section>
 <section class="wrap workbench" id="workbench"><div class="sectionhead"><div><p class="eyebrow">Import</p><h2>Bring your own result</h2><p>Offline or third-party evidence. Import one or more trials on each side; a comparator is optional. Files stay in memory and clear on reload.</p></div><div class="row"><button id="example" type="button">Try a sample</button></div></div>
 <div id="sample-banner" class="notice sample" hidden><b>Synthetic sample.</b> Five fixture requests that exercise the software. Not a Hot Aisle or NVIDIA measurement. <button id="clear-example" type="button">Clear sample</button></div>
 <div id="global-error" class="error" role="alert"></div>
@@ -109,40 +109,725 @@ dialog{max-width:680px;width:calc(100% - 30px);max-height:85vh;overflow:auto;bac
 </main>
 <footer><div class="wrap footerlinks"><span>Independent, free tool by Second Run. Provider names confer no endorsement.</span><a href="workload-report.zip" download>Offline kit</a><a href="README.md">Operating notes</a><a href="FORMATS.md">Formats</a><a href="RUNNER.md">Runner</a><a href="LICENSE">MIT license</a><span class="mono">Price snapshot 2026-09-22</span></div></footer>
 <dialog id="paste-dialog"><h2>Paste one benchmark result</h2><p class="fine">JSON, appended JSON results or one vLLM console summary.</p><label for="paste-text">Benchmark output</label><textarea id="paste-text"></textarea><p id="paste-error" class="error" role="alert"></p><div class="dialogactions"><button id="paste-cancel" type="button">Cancel</button><button class="primary" id="paste-import" type="button">Import result</button></div></dialog>
-<!-- demo-record:begin --><script id="demo-record" type="application/json">{"schema":"hot-aisle/qualified-record@1","id":"rec-20260922T235055Z-5ea477","created":"2026-09-22T23:50:56.186Z","job_id":"job-20260922T235055Z-5ea477","synthetic":true,"observed":{"trials":[{"cell":{"concurrency":1,"repeat":0},"source":{"sha256":"57895e64e10dd5bc13dcba48c4768139fe0fc3406fd92edc7e38113b818218c5","record_index":0,"bytes":3339},"normalized":{"format":"vllm-serve-json","source":{"sha256":"57895e64e10dd5bc13dcba48c4768139fe0fc3406fd92edc7e38113b818218c5","record_index":0,"bytes":3339},"identity":{"model":"Qwen/Qwen3-Coder-30B-A3B-Instruct","revision":"demo-rev","precision":"FP8","tokenizer":"demo-rev","workload":"sha256:b0ddd66d9e8eb6f903fc0a37240e7da8","cache":"warm","runtime":"rocm/vllm@sha256:demo","load":"dataset=random;in=2048;out=256;prompts=48;concurrency=1;rate=inf;seed=7"},"duration":155.229,"completed":46,"attempted":48,"outputTokens":11837,"metrics":{"ttft":{"samples":[116.8,127.6,132.39999999999998,151.2,126.7,145.5,148.79999999999998,124.8,149.4,136.8,128.6,117.1,115.8,120.2,145.3,123,122.7,148.79999999999998,113.60000000000001,117.3,148.7,150.2,132.5,133.8,120.80000000000001,135.4,128.3,146.4,154.79999999999998,116.8,119.1,140.2,140.8,115.2,113.60000000000001,127.5,129.3,122.2,140.7,147,160,143.7,136.6,156.70000000000002,159.20000000000002,153],"percentiles":{"p50":133.15,"p95":156.22500000000002,"p99":159.64000000000001},"basis":"recomputed from successful-request samples"},"e2e":{"samples":[3808.6000000000004,3130.2,3475.6,3253.2999999999997,3288.9,3991.8999999999996,3046.8,3151.1,2720.7,2806,3424.4,3397.9,3327.7999999999997,3415.9,2763.1,2932.2,2640.2000000000003,3652.7,2911.1,3196.4,3267.6,3930.1,2728.4,3842.6,3274.2,3066.7,2970.9,3086.3999999999996,3446.7,2951.4,2989.9,3154.1,3113.1000000000004,3387.1000000000004,3596.2999999999997,3239.9,2934.7,2863.4,3141.7000000000003,2779,3232.1,2872.5,3173.5,3414.1,3870.8,2699.3],"percentiles":{"p50":3163.8,"p95":3863.75,"p99":3964.0899999999997},"basis":"recomputed from successful-request samples"}},"rows":[{"success":true,"ttft_ms":116.8,"e2e_ms":3808.6000000000004,"queue_ms":2.49},{"success":true,"ttft_ms":127.6,"e2e_ms":3130.2,"queue_ms":1.9},{"success":true,"ttft_ms":132.39999999999998,"e2e_ms":3475.6,"queue_ms":1.16},{"success":true,"ttft_ms":151.2,"e2e_ms":3253.2999999999997,"queue_ms":0.5},{"success":true,"ttft_ms":126.7,"e2e_ms":3288.9,"queue_ms":1.46},{"success":true,"ttft_ms":145.5,"e2e_ms":3991.8999999999996,"queue_ms":0.25},{"success":true,"ttft_ms":148.79999999999998,"e2e_ms":3046.8,"queue_ms":3.21},{"success":true,"ttft_ms":124.8,"e2e_ms":3151.1,"queue_ms":2.25},{"success":true,"ttft_ms":149.4,"e2e_ms":2720.7,"queue_ms":3.25},{"success":true,"ttft_ms":136.8,"e2e_ms":2806,"queue_ms":2.8600000000000003},{"success":true,"ttft_ms":128.6,"e2e_ms":3424.4,"queue_ms":2.9},{"success":true,"ttft_ms":117.1,"e2e_ms":3397.9,"queue_ms":2.2300000000000004},{"success":true,"ttft_ms":115.8,"e2e_ms":3327.7999999999997,"queue_ms":1.1199999999999999},{"success":true,"ttft_ms":120.2,"e2e_ms":3415.9,"queue_ms":1.82},{"success":true,"ttft_ms":145.3,"e2e_ms":2763.1,"queue_ms":0.36000000000000004},{"success":true,"ttft_ms":123,"e2e_ms":2932.2,"queue_ms":2.85},{"success":true,"ttft_ms":122.7,"e2e_ms":2640.2000000000003,"queue_ms":1.1199999999999999},{"success":true,"ttft_ms":148.79999999999998,"e2e_ms":3652.7,"queue_ms":3.76},{"success":true,"ttft_ms":113.60000000000001,"e2e_ms":2911.1,"queue_ms":0.18000000000000002},{"success":false,"ttft_ms":0,"e2e_ms":0,"queue_ms":0},{"success":true,"ttft_ms":117.3,"e2e_ms":3196.4,"queue_ms":0.2},{"success":true,"ttft_ms":148.7,"e2e_ms":3267.6,"queue_ms":0.95},{"success":true,"ttft_ms":150.2,"e2e_ms":3930.1,"queue_ms":2.98},{"success":false,"ttft_ms":0,"e2e_ms":0,"queue_ms":0},{"success":true,"ttft_ms":132.5,"e2e_ms":2728.4,"queue_ms":0.12000000000000001},{"success":true,"ttft_ms":133.8,"e2e_ms":3842.6,"queue_ms":2.4699999999999998},{"success":true,"ttft_ms":120.80000000000001,"e2e_ms":3274.2,"queue_ms":2.8},{"success":true,"ttft_ms":135.4,"e2e_ms":3066.7,"queue_ms":3.63},{"success":true,"ttft_ms":128.3,"e2e_ms":2970.9,"queue_ms":0.82},{"success":true,"ttft_ms":146.4,"e2e_ms":3086.3999999999996,"queue_ms":1.16},{"success":true,"ttft_ms":154.79999999999998,"e2e_ms":3446.7,"queue_ms":3.19},{"success":true,"ttft_ms":116.8,"e2e_ms":2951.4,"queue_ms":1.85},{"success":true,"ttft_ms":119.1,"e2e_ms":2989.9,"queue_ms":2.19},{"success":true,"ttft_ms":140.2,"e2e_ms":3154.1,"queue_ms":0.85},{"success":true,"ttft_ms":140.8,"e2e_ms":3113.1000000000004,"queue_ms":2.18},{"success":true,"ttft_ms":115.2,"e2e_ms":3387.1000000000004,"queue_ms":1.49},{"success":true,"ttft_ms":113.60000000000001,"e2e_ms":3596.2999999999997,"queue_ms":1.96},{"success":true,"ttft_ms":127.5,"e2e_ms":3239.9,"queue_ms":2.79},{"success":true,"ttft_ms":129.3,"e2e_ms":2934.7,"queue_ms":3.7100000000000004},{"success":true,"ttft_ms":122.2,"e2e_ms":2863.4,"queue_ms":1.1199999999999999},{"success":true,"ttft_ms":140.7,"e2e_ms":3141.7000000000003,"queue_ms":1.56},{"success":true,"ttft_ms":147,"e2e_ms":2779,"queue_ms":2.59},{"success":true,"ttft_ms":160,"e2e_ms":3232.1,"queue_ms":2.07},{"success":true,"ttft_ms":143.7,"e2e_ms":2872.5,"queue_ms":2.8800000000000003},{"success":true,"ttft_ms":136.6,"e2e_ms":3173.5,"queue_ms":0.92},{"success":true,"ttft_ms":156.70000000000002,"e2e_ms":3414.1,"queue_ms":0.45},{"success":true,"ttft_ms":159.20000000000002,"e2e_ms":3870.8,"queue_ms":3.21},{"success":true,"ttft_ms":153,"e2e_ms":2699.3,"queue_ms":3.4299999999999997}],"reportedGoodput":null,"warnings":[],"synthetic":true},"started":"2026-09-22T23:50:55.918Z","ended":"2026-09-22T23:50:55.964Z"},{"cell":{"concurrency":1,"repeat":1},"source":{"sha256":"2f057ef80b3db039e220103d8b2d4187ee279052e051b09193df0c8b71c8c82c","record_index":0,"bytes":3330},"normalized":{"format":"vllm-serve-json","source":{"sha256":"2f057ef80b3db039e220103d8b2d4187ee279052e051b09193df0c8b71c8c82c","record_index":0,"bytes":3330},"identity":{"model":"Qwen/Qwen3-Coder-30B-A3B-Instruct","revision":"demo-rev","precision":"FP8","tokenizer":"demo-rev","workload":"sha256:b0ddd66d9e8eb6f903fc0a37240e7da8","cache":"warm","runtime":"rocm/vllm@sha256:demo","load":"dataset=random;in=2048;out=256;prompts=48;concurrency=1;rate=inf;seed=7"},"duration":159.675,"completed":47,"attempted":48,"outputTokens":12095,"metrics":{"ttft":{"samples":[112.19999999999999,117.3,130.70000000000002,152.79999999999998,115.4,156.20000000000002,119.1,128.1,153.9,125,136.6,141.1,140.2,137.6,120,116.4,151.5,116.2,153.5,123.39999999999999,119.2,151.29999999999998,155.20000000000002,111.10000000000001,119.9,156.70000000000002,132,123.1,118,142.8,110.10000000000001,147.4,123.5,142.7,110.8,115.4,140.4,111,111.8,119.2,157.5,129.1,119.3,131.70000000000002,114.3,156.5,121.30000000000001],"percentiles":{"p50":125,"p95":156.41,"p99":157.132},"basis":"recomputed from successful-request samples"},"e2e":{"samples":[3350.5,3599.4,3244,2888.1,3207.3999999999996,2978.9,2935.8,2930.4,2663.3,2873.6000000000004,2850.9,3024.3,3169.2999999999997,3424.6,3575.6,2751.2,3449.8,3106,3486.4,3359.2,2907.7000000000003,2775.9,3381.5,2640.1,3176.5,3521.2,3061.9,3550.5,3293.7,3271,3045.3,3126.9,3031.4,3339.2,3866.2999999999997,3163.2,3044.9,3355,3184.5,3089.2,3578.7,3762.7999999999997,3942.8,3208.8999999999996,3778.3,3451,3177.7000000000003],"percentiles":{"p50":3184.5,"p95":3773.65,"p99":3907.61},"basis":"recomputed from successful-request samples"}},"rows":[{"success":true,"ttft_ms":112.19999999999999,"e2e_ms":3350.5,"queue_ms":2.97},{"success":true,"ttft_ms":117.3,"e2e_ms":3599.4,"queue_ms":0.68},{"success":true,"ttft_ms":130.70000000000002,"e2e_ms":3244,"queue_ms":1.55},{"success":true,"ttft_ms":152.79999999999998,"e2e_ms":2888.1,"queue_ms":1.58},{"success":true,"ttft_ms":115.4,"e2e_ms":3207.3999999999996,"queue_ms":2.67},{"success":true,"ttft_ms":156.20000000000002,"e2e_ms":2978.9,"queue_ms":0.38},{"success":true,"ttft_ms":119.1,"e2e_ms":2935.8,"queue_ms":2.8600000000000003},{"success":true,"ttft_ms":128.1,"e2e_ms":2930.4,"queue_ms":0.45},{"success":true,"ttft_ms":153.9,"e2e_ms":2663.3,"queue_ms":1.0399999999999998},{"success":true,"ttft_ms":125,"e2e_ms":2873.6000000000004,"queue_ms":0.22},{"success":true,"ttft_ms":136.6,"e2e_ms":2850.9,"queue_ms":2.81},{"success":true,"ttft_ms":141.1,"e2e_ms":3024.3,"queue_ms":3.46},{"success":true,"ttft_ms":140.2,"e2e_ms":3169.2999999999997,"queue_ms":0.68},{"success":true,"ttft_ms":137.6,"e2e_ms":3424.6,"queue_ms":1.14},{"success":true,"ttft_ms":120,"e2e_ms":3575.6,"queue_ms":0.86},{"success":true,"ttft_ms":116.4,"e2e_ms":2751.2,"queue_ms":3.73},{"success":true,"ttft_ms":151.5,"e2e_ms":3449.8,"queue_ms":0.64},{"success":true,"ttft_ms":116.2,"e2e_ms":3106,"queue_ms":3.3},{"success":true,"ttft_ms":153.5,"e2e_ms":3486.4,"queue_ms":0.060000000000000005},{"success":true,"ttft_ms":123.39999999999999,"e2e_ms":3359.2,"queue_ms":0.79},{"success":true,"ttft_ms":119.2,"e2e_ms":2907.7000000000003,"queue_ms":2.72},{"success":true,"ttft_ms":151.29999999999998,"e2e_ms":2775.9,"queue_ms":3.25},{"success":true,"ttft_ms":155.20000000000002,"e2e_ms":3381.5,"queue_ms":0.65},{"success":true,"ttft_ms":111.10000000000001,"e2e_ms":2640.1,"queue_ms":0.47},{"success":true,"ttft_ms":119.9,"e2e_ms":3176.5,"queue_ms":3.9699999999999998},{"success":true,"ttft_ms":156.70000000000002,"e2e_ms":3521.2,"queue_ms":1.74},{"success":true,"ttft_ms":132,"e2e_ms":3061.9,"queue_ms":1.58},{"success":true,"ttft_ms":123.1,"e2e_ms":3550.5,"queue_ms":3.9699999999999998},{"success":true,"ttft_ms":118,"e2e_ms":3293.7,"queue_ms":0.79},{"success":true,"ttft_ms":142.8,"e2e_ms":3271,"queue_ms":0.37},{"success":true,"ttft_ms":110.10000000000001,"e2e_ms":3045.3,"queue_ms":1.46},{"success":true,"ttft_ms":147.4,"e2e_ms":3126.9,"queue_ms":0.5199999999999999},{"success":true,"ttft_ms":123.5,"e2e_ms":3031.4,"queue_ms":2.82},{"success":true,"ttft_ms":142.7,"e2e_ms":3339.2,"queue_ms":1.96},{"success":true,"ttft_ms":110.8,"e2e_ms":3866.2999999999997,"queue_ms":0.02},{"success":true,"ttft_ms":115.4,"e2e_ms":3163.2,"queue_ms":3.35},{"success":true,"ttft_ms":140.4,"e2e_ms":3044.9,"queue_ms":0.04},{"success":false,"ttft_ms":0,"e2e_ms":0,"queue_ms":0},{"success":true,"ttft_ms":111,"e2e_ms":3355,"queue_ms":2.29},{"success":true,"ttft_ms":111.8,"e2e_ms":3184.5,"queue_ms":2.33},{"success":true,"ttft_ms":119.2,"e2e_ms":3089.2,"queue_ms":3.3600000000000003},{"success":true,"ttft_ms":157.5,"e2e_ms":3578.7,"queue_ms":2.48},{"success":true,"ttft_ms":129.1,"e2e_ms":3762.7999999999997,"queue_ms":2.49},{"success":true,"ttft_ms":119.3,"e2e_ms":3942.8,"queue_ms":1.05},{"success":true,"ttft_ms":131.70000000000002,"e2e_ms":3208.8999999999996,"queue_ms":2.5},{"success":true,"ttft_ms":114.3,"e2e_ms":3778.3,"queue_ms":0.46},{"success":true,"ttft_ms":156.5,"e2e_ms":3451,"queue_ms":2.27},{"success":true,"ttft_ms":121.30000000000001,"e2e_ms":3177.7000000000003,"queue_ms":1.56}],"reportedGoodput":null,"warnings":[],"synthetic":true},"started":"2026-09-22T23:50:55.965Z","ended":"2026-09-22T23:50:56.008Z"},{"cell":{"concurrency":8,"repeat":0},"source":{"sha256":"f36b39ad3608a4ba517eef27c9f5180a0aa7c739f25f55edd49ae64ea85dc176","record_index":0,"bytes":3322},"normalized":{"format":"vllm-serve-json","source":{"sha256":"f36b39ad3608a4ba517eef27c9f5180a0aa7c739f25f55edd49ae64ea85dc176","record_index":0,"bytes":3322},"identity":{"model":"Qwen/Qwen3-Coder-30B-A3B-Instruct","revision":"demo-rev","precision":"FP8","tokenizer":"demo-rev","workload":"sha256:b0ddd66d9e8eb6f903fc0a37240e7da8","cache":"warm","runtime":"rocm/vllm@sha256:demo","load":"dataset=random;in=2048;out=256;prompts=48;concurrency=8;rate=inf;seed=7"},"duration":39.941,"completed":47,"attempted":48,"outputTokens":12174,"metrics":{"ttft":{"samples":[203.1,195.20000000000002,179.10000000000002,188,181.60000000000002,200,185.5,175.6,179.9,193.20000000000002,181.60000000000002,197.2,203.9,177.5,205.3,215.29999999999998,224.70000000000002,199.6,187.9,209.3,187.1,221.4,197.9,204.5,210.60000000000002,215.29999999999998,220,186,181.5,180.4,213.2,183.2,195,214.4,178.5,175.6,188.79999999999998,215.79999999999998,213.9,203.3,205.7,190.29999999999998,193.3,189.20000000000002,221,190.8,217.70000000000002],"percentiles":{"p50":195.20000000000002,"p95":220.7,"p99":223.18200000000002},"basis":"recomputed from successful-request samples"},"e2e":{"samples":[5867.099999999999,6007.3,5419.6,5555.6,5542.4,6825.400000000001,6473.4,6293,5200.5,7092.900000000001,6910.400000000001,6879,5749.3,6474.400000000001,7508.9,6171,6866.3,5622.4,6288.299999999999,5899,6318.5,7028.2,6110.1,6956.299999999999,6752,6864.8,6759.7,7115.5,5973.5,6260.6,5969.8,5109.6,6876.1,7285.8,7390.4,5981.200000000001,6483.1,6092.6,6021,7261.8,5583.700000000001,6763.7,7215,5570.9,7239.3,5875.7,6996.7],"percentiles":{"p50":6318.5,"p95":7278.6,"p99":7454.389999999999},"basis":"recomputed from successful-request samples"}},"rows":[{"success":true,"ttft_ms":203.1,"e2e_ms":5867.099999999999,"queue_ms":3.21},{"success":true,"ttft_ms":195.20000000000002,"e2e_ms":6007.3,"queue_ms":1.32},{"success":true,"ttft_ms":179.10000000000002,"e2e_ms":5419.6,"queue_ms":2.8},{"success":true,"ttft_ms":188,"e2e_ms":5555.6,"queue_ms":0.33},{"success":true,"ttft_ms":181.60000000000002,"e2e_ms":5542.4,"queue_ms":0.34},{"success":true,"ttft_ms":200,"e2e_ms":6825.400000000001,"queue_ms":0.13999999999999999},{"success":true,"ttft_ms":185.5,"e2e_ms":6473.4,"queue_ms":2.68},{"success":true,"ttft_ms":175.6,"e2e_ms":6293,"queue_ms":1.1900000000000002},{"success":true,"ttft_ms":179.9,"e2e_ms":5200.5,"queue_ms":0.93},{"success":true,"ttft_ms":193.20000000000002,"e2e_ms":7092.900000000001,"queue_ms":3.62},{"success":true,"ttft_ms":181.60000000000002,"e2e_ms":6910.400000000001,"queue_ms":3.28},{"success":true,"ttft_ms":197.2,"e2e_ms":6879,"queue_ms":1.4400000000000002},{"success":true,"ttft_ms":203.9,"e2e_ms":5749.3,"queue_ms":3.4},{"success":true,"ttft_ms":177.5,"e2e_ms":6474.400000000001,"queue_ms":2.94},{"success":true,"ttft_ms":205.3,"e2e_ms":7508.9,"queue_ms":3.5},{"success":true,"ttft_ms":215.29999999999998,"e2e_ms":6171,"queue_ms":1.3699999999999999},{"success":true,"ttft_ms":224.70000000000002,"e2e_ms":6866.3,"queue_ms":2.84},{"success":true,"ttft_ms":199.6,"e2e_ms":5622.4,"queue_ms":2.2399999999999998},{"success":true,"ttft_ms":187.9,"e2e_ms":6288.299999999999,"queue_ms":2.63},{"success":true,"ttft_ms":209.3,"e2e_ms":5899,"queue_ms":0.22},{"success":true,"ttft_ms":187.1,"e2e_ms":6318.5,"queue_ms":3.1},{"success":true,"ttft_ms":221.4,"e2e_ms":7028.2,"queue_ms":1.76},{"success":true,"ttft_ms":197.9,"e2e_ms":6110.1,"queue_ms":1.51},{"success":true,"ttft_ms":204.5,"e2e_ms":6956.299999999999,"queue_ms":1.24},{"success":true,"ttft_ms":210.60000000000002,"e2e_ms":6752,"queue_ms":3.42},{"success":true,"ttft_ms":215.29999999999998,"e2e_ms":6864.8,"queue_ms":2.9499999999999997},{"success":true,"ttft_ms":220,"e2e_ms":6759.7,"queue_ms":1.63},{"success":true,"ttft_ms":186,"e2e_ms":7115.5,"queue_ms":3.15},{"success":true,"ttft_ms":181.5,"e2e_ms":5973.5,"queue_ms":0.83},{"success":false,"ttft_ms":0,"e2e_ms":0,"queue_ms":0},{"success":true,"ttft_ms":180.4,"e2e_ms":6260.6,"queue_ms":2.2},{"success":true,"ttft_ms":213.2,"e2e_ms":5969.8,"queue_ms":0.76},{"success":true,"ttft_ms":183.2,"e2e_ms":5109.6,"queue_ms":1.1},{"success":true,"ttft_ms":195,"e2e_ms":6876.1,"queue_ms":1.5299999999999998},{"success":true,"ttft_ms":214.4,"e2e_ms":7285.8,"queue_ms":2.6},{"success":true,"ttft_ms":178.5,"e2e_ms":7390.4,"queue_ms":2.57},{"success":true,"ttft_ms":175.6,"e2e_ms":5981.200000000001,"queue_ms":1.45},{"success":true,"ttft_ms":188.79999999999998,"e2e_ms":6483.1,"queue_ms":1.6199999999999999},{"success":true,"ttft_ms":215.79999999999998,"e2e_ms":6092.6,"queue_ms":1.11},{"success":true,"ttft_ms":213.9,"e2e_ms":6021,"queue_ms":1.31},{"success":true,"ttft_ms":203.3,"e2e_ms":7261.8,"queue_ms":0.9700000000000001},{"success":true,"ttft_ms":205.7,"e2e_ms":5583.700000000001,"queue_ms":0.37},{"success":true,"ttft_ms":190.29999999999998,"e2e_ms":6763.7,"queue_ms":3.0100000000000002},{"success":true,"ttft_ms":193.3,"e2e_ms":7215,"queue_ms":2.56},{"success":true,"ttft_ms":189.20000000000002,"e2e_ms":5570.9,"queue_ms":2.83},{"success":true,"ttft_ms":221,"e2e_ms":7239.3,"queue_ms":0.95},{"success":true,"ttft_ms":190.8,"e2e_ms":5875.7,"queue_ms":0.78},{"success":true,"ttft_ms":217.70000000000002,"e2e_ms":6996.7,"queue_ms":0.78}],"reportedGoodput":null,"warnings":[],"synthetic":true},"started":"2026-09-22T23:50:56.009Z","ended":"2026-09-22T23:50:56.050Z"},{"cell":{"concurrency":8,"repeat":1},"source":{"sha256":"d1a29600b011ac6f5261010de8a110067af415093f6ae8062428482b181f6996","record_index":0,"bytes":3334},"normalized":{"format":"vllm-serve-json","source":{"sha256":"d1a29600b011ac6f5261010de8a110067af415093f6ae8062428482b181f6996","record_index":0,"bytes":3334},"identity":{"model":"Qwen/Qwen3-Coder-30B-A3B-Instruct","revision":"demo-rev","precision":"FP8","tokenizer":"demo-rev","workload":"sha256:b0ddd66d9e8eb6f903fc0a37240e7da8","cache":"warm","runtime":"rocm/vllm@sha256:demo","load":"dataset=random;in=2048;out=256;prompts=48;concurrency=8;rate=inf;seed=7"},"duration":39.982,"completed":48,"attempted":48,"outputTokens":12049,"metrics":{"ttft":{"samples":[198.4,184.9,177.4,189.6,220.29999999999998,210.7,205.8,178.9,184.4,181.4,189.6,221.1,178.29999999999998,194.89999999999998,180.10000000000002,208.7,203.4,217,177.7,209.7,221.6,220.5,192.1,204.2,189.6,176.9,196.70000000000002,188.9,225,198.4,201.9,208.4,204.9,195.89999999999998,181.7,180.10000000000002,215.5,177.7,200.6,197.8,181.60000000000002,176.9,201.5,205.9,215.9,209.7,177.8,203.2],"percentiles":{"p50":198.10000000000002,"p95":220.89,"p99":223.40200000000002},"basis":"recomputed from successful-request samples"},"e2e":{"samples":[5159.6,6961.5,6133.099999999999,6671.2,6628,6144.3,6436.3,5758.8,5104.599999999999,7234.5,7555.3,6717.900000000001,5385.2,6453,6046.9,5765.1,6526.5,6519.9,5554.2,6005.9,6673.8,6282.5,6213,7402.5,5135.3,6327.5,5669.900000000001,5625.7,6721,6262.7,6698.2,7294.5,5504.7,6095.799999999999,6881.400000000001,5875.6,5689.099999999999,6777,5054.400000000001,6162.5,5868.7,6103.799999999999,6625.9,6671.1,7508.200000000001,5801.700000000001,6772.1,6351.5],"percentiles":{"p50":6272.6,"p95":7364.7,"p99":7533.1630000000005},"basis":"recomputed from successful-request samples"}},"rows":[{"success":true,"ttft_ms":198.4,"e2e_ms":5159.6,"queue_ms":3.69},{"success":true,"ttft_ms":184.9,"e2e_ms":6961.5,"queue_ms":0.09000000000000001},{"success":true,"ttft_ms":177.4,"e2e_ms":6133.099999999999,"queue_ms":3.18},{"success":true,"ttft_ms":189.6,"e2e_ms":6671.2,"queue_ms":1.41},{"success":true,"ttft_ms":220.29999999999998,"e2e_ms":6628,"queue_ms":1.55},{"success":true,"ttft_ms":210.7,"e2e_ms":6144.3,"queue_ms":0.27},{"success":true,"ttft_ms":205.8,"e2e_ms":6436.3,"queue_ms":2.34},{"success":true,"ttft_ms":178.9,"e2e_ms":5758.8,"queue_ms":3.3899999999999997},{"success":true,"ttft_ms":184.4,"e2e_ms":5104.599999999999,"queue_ms":2.71},{"success":true,"ttft_ms":181.4,"e2e_ms":7234.5,"queue_ms":0.98},{"success":true,"ttft_ms":189.6,"e2e_ms":7555.3,"queue_ms":3.19},{"success":true,"ttft_ms":221.1,"e2e_ms":6717.900000000001,"queue_ms":2.66},{"success":true,"ttft_ms":178.29999999999998,"e2e_ms":5385.2,"queue_ms":2.96},{"success":true,"ttft_ms":194.89999999999998,"e2e_ms":6453,"queue_ms":2.26},{"success":true,"ttft_ms":180.10000000000002,"e2e_ms":6046.9,"queue_ms":4},{"success":true,"ttft_ms":208.7,"e2e_ms":5765.1,"queue_ms":2.25},{"success":true,"ttft_ms":203.4,"e2e_ms":6526.5,"queue_ms":2.3600000000000003},{"success":true,"ttft_ms":217,"e2e_ms":6519.9,"queue_ms":1.77},{"success":true,"ttft_ms":177.7,"e2e_ms":5554.2,"queue_ms":2.5100000000000002},{"success":true,"ttft_ms":209.7,"e2e_ms":6005.9,"queue_ms":3.93},{"success":true,"ttft_ms":221.6,"e2e_ms":6673.8,"queue_ms":1.65},{"success":true,"ttft_ms":220.5,"e2e_ms":6282.5,"queue_ms":1.21},{"success":true,"ttft_ms":192.1,"e2e_ms":6213,"queue_ms":1.1},{"success":true,"ttft_ms":204.2,"e2e_ms":7402.5,"queue_ms":1.98},{"success":true,"ttft_ms":189.6,"e2e_ms":5135.3,"queue_ms":2.1},{"success":true,"ttft_ms":176.9,"e2e_ms":6327.5,"queue_ms":2.77},{"success":true,"ttft_ms":196.70000000000002,"e2e_ms":5669.900000000001,"queue_ms":2.61},{"success":true,"ttft_ms":188.9,"e2e_ms":5625.7,"queue_ms":0.6},{"success":true,"ttft_ms":225,"e2e_ms":6721,"queue_ms":2.62},{"success":true,"ttft_ms":198.4,"e2e_ms":6262.7,"queue_ms":1.24},{"success":true,"ttft_ms":201.9,"e2e_ms":6698.2,"queue_ms":2.94},{"success":true,"ttft_ms":208.4,"e2e_ms":7294.5,"queue_ms":2.94},{"success":true,"ttft_ms":204.9,"e2e_ms":5504.7,"queue_ms":0.4},{"success":true,"ttft_ms":195.89999999999998,"e2e_ms":6095.799999999999,"queue_ms":1.9},{"success":true,"ttft_ms":181.7,"e2e_ms":6881.400000000001,"queue_ms":3.52},{"success":true,"ttft_ms":180.10000000000002,"e2e_ms":5875.6,"queue_ms":0.47},{"success":true,"ttft_ms":215.5,"e2e_ms":5689.099999999999,"queue_ms":2.85},{"success":true,"ttft_ms":177.7,"e2e_ms":6777,"queue_ms":3.63},{"success":true,"ttft_ms":200.6,"e2e_ms":5054.400000000001,"queue_ms":3.6},{"success":true,"ttft_ms":197.8,"e2e_ms":6162.5,"queue_ms":0.58},{"success":true,"ttft_ms":181.60000000000002,"e2e_ms":5868.7,"queue_ms":3.4099999999999997},{"success":true,"ttft_ms":176.9,"e2e_ms":6103.799999999999,"queue_ms":3.3800000000000003},{"success":true,"ttft_ms":201.5,"e2e_ms":6625.9,"queue_ms":1.58},{"success":true,"ttft_ms":205.9,"e2e_ms":6671.1,"queue_ms":3.17},{"success":true,"ttft_ms":215.9,"e2e_ms":7508.200000000001,"queue_ms":2.57},{"success":true,"ttft_ms":209.7,"e2e_ms":5801.700000000001,"queue_ms":3.61},{"success":true,"ttft_ms":177.8,"e2e_ms":6772.1,"queue_ms":3.3},{"success":true,"ttft_ms":203.2,"e2e_ms":6351.5,"queue_ms":2.04}],"reportedGoodput":null,"warnings":[],"synthetic":true},"started":"2026-09-22T23:50:56.051Z","ended":"2026-09-22T23:50:56.093Z"},{"cell":{"concurrency":32,"repeat":0},"source":{"sha256":"c5af53b94a83b3a2517ee228a15ae3a6cc6f1c9ce08559e125ccb39c7b7c31bb","record_index":0,"bytes":3342},"normalized":{"format":"vllm-serve-json","source":{"sha256":"c5af53b94a83b3a2517ee228a15ae3a6cc6f1c9ce08559e125ccb39c7b7c31bb","record_index":0,"bytes":3342},"identity":{"model":"Qwen/Qwen3-Coder-30B-A3B-Instruct","revision":"demo-rev","precision":"FP8","tokenizer":"demo-rev","workload":"sha256:b0ddd66d9e8eb6f903fc0a37240e7da8","cache":"warm","runtime":"rocm/vllm@sha256:demo","load":"dataset=random;in=2048;out=256;prompts=48;concurrency=32;rate=inf;seed=7"},"duration":13.559,"completed":47,"attempted":48,"outputTokens":12085,"metrics":{"ttft":{"samples":[238.8,252.9,272.1,240.3,245.5,255.80000000000004,244.4,261.5,274.6,262.29999999999995,232,247.5,246,271.3,272.9,271.9,271.5,256.7,232.4,238.1,233.6,257,247.20000000000002,268.7,278.3,252.7,274.4,235.9,237.2,270.6,246.2,252.8,233.4,258.2,236.9,271,253.9,233.3,275.4,250.4,233.3,249.9,231.9,272.9,257.5,262.5,245.7],"percentiles":{"p50":252.8,"p95":274.54,"p99":276.966},"basis":"recomputed from successful-request samples"},"e2e":{"samples":[8921.900000000001,9123.5,8763.8,9964.5,9666.2,8149.900000000001,8918.4,9770.5,9724.199999999999,8742.4,8237.7,8592.599999999999,9962.7,7704.1,7995.4,10465.7,7185.900000000001,8534,8254.300000000001,9511.2,9253.1,8215.6,9587.199999999999,7973.7,8836.800000000001,6989.099999999999,8012.499999999999,7648.900000000001,8272.9,7904.4,8080.9,7744.799999999999,8222.4,8398.300000000001,7826.1,7304.2,8846,8085.5,7150.5,8058.6,7955.9,8567.199999999999,8676.9,9545.5,6806.9,7629.2,8214.3],"percentiles":{"p50":8254.300000000001,"p95":9905.04,"p99":10235.148},"basis":"recomputed from successful-request samples"}},"rows":[{"success":true,"ttft_ms":238.8,"e2e_ms":8921.900000000001,"queue_ms":3.96},{"success":true,"ttft_ms":252.9,"e2e_ms":9123.5,"queue_ms":1.61},{"success":true,"ttft_ms":272.1,"e2e_ms":8763.8,"queue_ms":2.68},{"success":true,"ttft_ms":240.3,"e2e_ms":9964.5,"queue_ms":3.2},{"success":true,"ttft_ms":245.5,"e2e_ms":9666.2,"queue_ms":0.49},{"success":true,"ttft_ms":255.80000000000004,"e2e_ms":8149.900000000001,"queue_ms":3.76},{"success":true,"ttft_ms":244.4,"e2e_ms":8918.4,"queue_ms":3.16},{"success":true,"ttft_ms":261.5,"e2e_ms":9770.5,"queue_ms":2.7},{"success":true,"ttft_ms":274.6,"e2e_ms":9724.199999999999,"queue_ms":2.68},{"success":true,"ttft_ms":262.29999999999995,"e2e_ms":8742.4,"queue_ms":1.09},{"success":true,"ttft_ms":232,"e2e_ms":8237.7,"queue_ms":1.73},{"success":true,"ttft_ms":247.5,"e2e_ms":8592.599999999999,"queue_ms":1.58},{"success":true,"ttft_ms":246,"e2e_ms":9962.7,"queue_ms":2.67},{"success":true,"ttft_ms":271.3,"e2e_ms":7704.1,"queue_ms":3.91},{"success":true,"ttft_ms":272.9,"e2e_ms":7995.4,"queue_ms":1.1},{"success":true,"ttft_ms":271.9,"e2e_ms":10465.7,"queue_ms":2.57},{"success":true,"ttft_ms":271.5,"e2e_ms":7185.900000000001,"queue_ms":1.89},{"success":true,"ttft_ms":256.7,"e2e_ms":8534,"queue_ms":1.57},{"success":false,"ttft_ms":0,"e2e_ms":0,"queue_ms":0},{"success":true,"ttft_ms":232.4,"e2e_ms":8254.300000000001,"queue_ms":1.5299999999999998},{"success":true,"ttft_ms":238.1,"e2e_ms":9511.2,"queue_ms":1.08},{"success":true,"ttft_ms":233.6,"e2e_ms":9253.1,"queue_ms":0.25},{"success":true,"ttft_ms":257,"e2e_ms":8215.6,"queue_ms":2.0100000000000002},{"success":true,"ttft_ms":247.20000000000002,"e2e_ms":9587.199999999999,"queue_ms":2.92},{"success":true,"ttft_ms":268.7,"e2e_ms":7973.7,"queue_ms":1.97},{"success":true,"ttft_ms":278.3,"e2e_ms":8836.800000000001,"queue_ms":1.63},{"success":true,"ttft_ms":252.7,"e2e_ms":6989.099999999999,"queue_ms":1.4300000000000002},{"success":true,"ttft_ms":274.4,"e2e_ms":8012.499999999999,"queue_ms":2.94},{"success":true,"ttft_ms":235.9,"e2e_ms":7648.900000000001,"queue_ms":0.74},{"success":true,"ttft_ms":237.2,"e2e_ms":8272.9,"queue_ms":3.16},{"success":true,"ttft_ms":270.6,"e2e_ms":7904.4,"queue_ms":0.75},{"success":true,"ttft_ms":246.2,"e2e_ms":8080.9,"queue_ms":0.37},{"success":true,"ttft_ms":252.8,"e2e_ms":7744.799999999999,"queue_ms":1.01},{"success":true,"ttft_ms":233.4,"e2e_ms":8222.4,"queue_ms":1.13},{"success":true,"ttft_ms":258.2,"e2e_ms":8398.300000000001,"queue_ms":2.19},{"success":true,"ttft_ms":236.9,"e2e_ms":7826.1,"queue_ms":2.56},{"success":true,"ttft_ms":271,"e2e_ms":7304.2,"queue_ms":2.87},{"success":true,"ttft_ms":253.9,"e2e_ms":8846,"queue_ms":2.0100000000000002},{"success":true,"ttft_ms":233.3,"e2e_ms":8085.5,"queue_ms":1.25},{"success":true,"ttft_ms":275.4,"e2e_ms":7150.5,"queue_ms":3.49},{"success":true,"ttft_ms":250.4,"e2e_ms":8058.6,"queue_ms":3.17},{"success":true,"ttft_ms":233.3,"e2e_ms":7955.9,"queue_ms":3.81},{"success":true,"ttft_ms":249.9,"e2e_ms":8567.199999999999,"queue_ms":1.2},{"success":true,"ttft_ms":231.9,"e2e_ms":8676.9,"queue_ms":1.85},{"success":true,"ttft_ms":272.9,"e2e_ms":9545.5,"queue_ms":0.92},{"success":true,"ttft_ms":257.5,"e2e_ms":6806.9,"queue_ms":3.4},{"success":true,"ttft_ms":262.5,"e2e_ms":7629.2,"queue_ms":1.01},{"success":true,"ttft_ms":245.7,"e2e_ms":8214.3,"queue_ms":2.5}],"reportedGoodput":null,"warnings":[],"synthetic":true},"started":"2026-09-22T23:50:56.094Z","ended":"2026-09-22T23:50:56.141Z"},{"cell":{"concurrency":32,"repeat":1},"source":{"sha256":"7f177fab7dcc467275cd3d773df01b3903d17fe6b764ceda4ef44d0454657946","record_index":0,"bytes":3335},"normalized":{"format":"vllm-serve-json","source":{"sha256":"7f177fab7dcc467275cd3d773df01b3903d17fe6b764ceda4ef44d0454657946","record_index":0,"bytes":3335},"identity":{"model":"Qwen/Qwen3-Coder-30B-A3B-Instruct","revision":"demo-rev","precision":"FP8","tokenizer":"demo-rev","workload":"sha256:b0ddd66d9e8eb6f903fc0a37240e7da8","cache":"warm","runtime":"rocm/vllm@sha256:demo","load":"dataset=random;in=2048;out=256;prompts=48;concurrency=32;rate=inf;seed=7"},"duration":14.115,"completed":48,"attempted":48,"outputTokens":12504,"metrics":{"ttft":{"samples":[234.1,242.7,270.4,241.9,234.2,266.5,264.79999999999995,264.79999999999995,279,250.5,240,271.5,270.4,238.7,247.6,265.29999999999995,250.3,274.1,244,267.2,248.5,269.6,251.8,256.29999999999995,276,258,237.2,268.9,232.2,243.60000000000002,249.70000000000002,236.2,252.6,247.1,236.7,256.40000000000003,241.60000000000002,241.9,253,258.79999999999995,240.4,246.2,252.7,277.8,250.5,247.29999999999998,258.7,270],"percentiles":{"p50":251.15,"p95":275.335,"p99":278.436},"basis":"recomputed from successful-request samples"},"e2e":{"samples":[9533.099999999999,7916.9,9872,8983.800000000001,9437.099999999999,9702.9,8838,9101.6,9534.4,8927,9048.6,8334.8,7821,8346.1,8476.900000000001,7334.2,9175.5,7323.5,8452.8,9212,8382.7,9249,7169.7,9464.7,7685.3,8476.3,9946,7909.5,8785.9,9269.1,7699.2,7767.9,8953.5,9986.7,9682.5,6739.5,7217.4,10143.5,7092.6,8498.8,9070.3,8473.2,7909,8627.800000000001,9339.7,9505,8227.6,8286.199999999999],"percentiles":{"p50":8706.85,"p95":9920.1,"p99":10069.804},"basis":"recomputed from successful-request samples"}},"rows":[{"success":true,"ttft_ms":234.1,"e2e_ms":9533.099999999999,"queue_ms":0.44},{"success":true,"ttft_ms":242.7,"e2e_ms":7916.9,"queue_ms":0.38},{"success":true,"ttft_ms":270.4,"e2e_ms":9872,"queue_ms":3.07},{"success":true,"ttft_ms":241.9,"e2e_ms":8983.800000000001,"queue_ms":0.27999999999999997},{"success":true,"ttft_ms":234.2,"e2e_ms":9437.099999999999,"queue_ms":1.7},{"success":true,"ttft_ms":266.5,"e2e_ms":9702.9,"queue_ms":3.8800000000000003},{"success":true,"ttft_ms":264.79999999999995,"e2e_ms":8838,"queue_ms":2.81},{"success":true,"ttft_ms":264.79999999999995,"e2e_ms":9101.6,"queue_ms":0.9},{"success":true,"ttft_ms":279,"e2e_ms":9534.4,"queue_ms":0.47},{"success":true,"ttft_ms":250.5,"e2e_ms":8927,"queue_ms":2.4499999999999997},{"success":true,"ttft_ms":240,"e2e_ms":9048.6,"queue_ms":1.64},{"success":true,"ttft_ms":271.5,"e2e_ms":8334.8,"queue_ms":2.81},{"success":true,"ttft_ms":270.4,"e2e_ms":7821,"queue_ms":2.22},{"success":true,"ttft_ms":238.7,"e2e_ms":8346.1,"queue_ms":3.23},{"success":true,"ttft_ms":247.6,"e2e_ms":8476.900000000001,"queue_ms":1.6},{"success":true,"ttft_ms":265.29999999999995,"e2e_ms":7334.2,"queue_ms":3.4499999999999997},{"success":true,"ttft_ms":250.3,"e2e_ms":9175.5,"queue_ms":1.41},{"success":true,"ttft_ms":274.1,"e2e_ms":7323.5,"queue_ms":1.11},{"success":true,"ttft_ms":244,"e2e_ms":8452.8,"queue_ms":2.34},{"success":true,"ttft_ms":267.2,"e2e_ms":9212,"queue_ms":2.12},{"success":true,"ttft_ms":248.5,"e2e_ms":8382.7,"queue_ms":0.25},{"success":true,"ttft_ms":269.6,"e2e_ms":9249,"queue_ms":3.3600000000000003},{"success":true,"ttft_ms":251.8,"e2e_ms":7169.7,"queue_ms":2.07},{"success":true,"ttft_ms":256.29999999999995,"e2e_ms":9464.7,"queue_ms":2},{"success":true,"ttft_ms":276,"e2e_ms":7685.3,"queue_ms":0.27},{"success":true,"ttft_ms":258,"e2e_ms":8476.3,"queue_ms":1.13},{"success":true,"ttft_ms":237.2,"e2e_ms":9946,"queue_ms":3.3},{"success":true,"ttft_ms":268.9,"e2e_ms":7909.5,"queue_ms":1.6199999999999999},{"success":true,"ttft_ms":232.2,"e2e_ms":8785.9,"queue_ms":2.06},{"success":true,"ttft_ms":243.60000000000002,"e2e_ms":9269.1,"queue_ms":3.07},{"success":true,"ttft_ms":249.70000000000002,"e2e_ms":7699.2,"queue_ms":3.4499999999999997},{"success":true,"ttft_ms":236.2,"e2e_ms":7767.9,"queue_ms":1.5299999999999998},{"success":true,"ttft_ms":252.6,"e2e_ms":8953.5,"queue_ms":1.8},{"success":true,"ttft_ms":247.1,"e2e_ms":9986.7,"queue_ms":3.42},{"success":true,"ttft_ms":236.7,"e2e_ms":9682.5,"queue_ms":3.52},{"success":true,"ttft_ms":256.40000000000003,"e2e_ms":6739.5,"queue_ms":0.9},{"success":true,"ttft_ms":241.60000000000002,"e2e_ms":7217.4,"queue_ms":2.2300000000000004},{"success":true,"ttft_ms":241.9,"e2e_ms":10143.5,"queue_ms":1.9200000000000002},{"success":true,"ttft_ms":253,"e2e_ms":7092.6,"queue_ms":0.66},{"success":true,"ttft_ms":258.79999999999995,"e2e_ms":8498.8,"queue_ms":0.030000000000000002},{"success":true,"ttft_ms":240.4,"e2e_ms":9070.3,"queue_ms":0.45},{"success":true,"ttft_ms":246.2,"e2e_ms":8473.2,"queue_ms":1.83},{"success":true,"ttft_ms":252.7,"e2e_ms":7909,"queue_ms":3.9},{"success":true,"ttft_ms":277.8,"e2e_ms":8627.800000000001,"queue_ms":1.42},{"success":true,"ttft_ms":250.5,"e2e_ms":9339.7,"queue_ms":0.27},{"success":true,"ttft_ms":247.29999999999998,"e2e_ms":9505,"queue_ms":1.2899999999999998},{"success":true,"ttft_ms":258.7,"e2e_ms":8227.6,"queue_ms":0.99},{"success":true,"ttft_ms":270,"e2e_ms":8286.199999999999,"queue_ms":3.32}],"reportedGoodput":null,"warnings":[],"synthetic":true},"started":"2026-09-22T23:50:56.142Z","ended":"2026-09-22T23:50:56.184Z"}],"failed_trials":[],"disposition":{"outcome":"complete","reason":"All 6 trials completed."}},"declared":{"plan":{"schema":"hot-aisle/evaluation-plan@1","target":{"adapter":"local","exec":"local","name":"local-demo","deployment_id":"dep-mi300x-01","host":"127.0.0.1","gpus":1,"gpu_model":"AMD MI300X (synthetic)","allocation_label":"1× MI300X VM (synthetic)","vllm_command":["C:\\Program Files\\nodejs\\node.exe","D:\\Projects\\Cloud\\BigBirdReturns\\axm-tools-hot-aisle-v3\\hot-aisle\\runner\\fixtures\\fake-vllm.cjs"],"env":{"FAKE_VLLM_DELAY_MS":"0"}},"workload":{"backend":"openai","dataset":"random","request_rate":"inf","seed":7,"model":"Qwen/Qwen3-Coder-30B-A3B-Instruct","base_url":"http://127.0.0.1:8000","input_len":2048,"output_len":256,"num_prompts":48},"concurrency":[1,8,32],"repeats":2,"identity":{"model_revision":"demo-rev","precision":"FP8","tokenizer_revision":"demo-rev","cache_policy":"warm","runtime_digest":"rocm/vllm@sha256:demo","workload_id":"sha256:b0ddd66d9e8eb6f903fc0a37240e7da8"},"price":{"provider":"Hot Aisle","extra":0,"gpus":1,"rate":2.99,"source":"local demo (fake API on-demand price)","period":"synthetic"},"comparator":{"extra":0,"provider":"Nebius HGX H100","gpus":1,"rate":3.85,"source":"https://nebius.com/prices","period":"2026-09-22 snapshot"},"limits":{"max_minutes":30,"max_spend_usd":5},"gates":{"ttft":null,"e2e":null,"queue":false,"quality":false},"requirements":{"max_p95_ttft_ms":1000,"max_p95_e2e_ms":15000,"min_accepted_per_s":null,"max_failure_rate":null},"primary_concurrency":null,"created":"2026-09-22T23:50:55.914Z","workload_id":"sha256:b0ddd66d9e8eb6f903fc0a37240e7da8","cells":[{"concurrency":1,"repeat":0},{"concurrency":1,"repeat":1},{"concurrency":8,"repeat":0},{"concurrency":8,"repeat":1},{"concurrency":32,"repeat":0},{"concurrency":32,"repeat":1}],"commands":["'C:\\Program Files\\nodejs\\node.exe' 'D:\\Projects\\Cloud\\BigBirdReturns\\axm-tools-hot-aisle-v3\\hot-aisle\\runner\\fixtures\\fake-vllm.cjs' --backend openai --base-url http://127.0.0.1:8000 --model Qwen/Qwen3-Coder-30B-A3B-Instruct --dataset-name random --num-prompts 48 --max-concurrency 1 --request-rate inf --seed 7 --label workload-report --save-result --save-detailed --percentile-metrics ttft,tpot,itl,e2el --metric-percentiles 50,95,99 --result-dir '<result-dir>' --result-filename cell-c1-r0.json --random-input-len 2048 --random-output-len 256 --metadata model_revision=demo-rev precision=FP8 tokenizer_revision=demo-rev workload_id=sha256:b0ddd66d9e8eb6f903fc0a37240e7da8 cache_policy=warm runtime_digest=rocm/vllm@sha256:demo 'load_profile=dataset=random;in=2048;out=256;prompts=48;concurrency=1;rate=inf;seed=7' plan_sha256=0e0381b3fac646f1a06646480eee126c8971ae63437027b3436398662e925f89 cell=c1-r0"],"estimate":{"cells":6,"rough_seconds":315,"rough_spend_usd":0.26,"hourly_usd":2.99,"basis":"Coarse planning estimate (decode ~20 ms/token, ~20 s overhead per trial). The limits, not this estimate, bound the run."},"sha256":"0e0381b3fac646f1a06646480eee126c8971ae63437027b3436398662e925f89"},"identity":{"model_revision":"demo-rev","precision":"FP8","tokenizer_revision":"demo-rev","cache_policy":"warm","runtime_digest":"rocm/vllm@sha256:demo","workload_id":"sha256:b0ddd66d9e8eb6f903fc0a37240e7da8"},"price":{"provider":"Hot Aisle","extra":0,"gpus":1,"rate":2.99,"source":"local demo (fake API on-demand price)","period":"synthetic"},"comparator":{"extra":0,"provider":"Nebius HGX H100","gpus":1,"rate":3.85,"source":"https://nebius.com/prices","period":"2026-09-22 snapshot"},"approval":{"by":"build-demo","at":"2026-09-22T23:50:55.916Z","plan_sha256":"0e0381b3fac646f1a06646480eee126c8971ae63437027b3436398662e925f89"}},"rule":{"gates":{"ttft":null,"e2e":null,"queue":false,"quality":false},"requirements":{"max_p95_ttft_ms":1000,"max_p95_e2e_ms":15000,"min_accepted_per_s":null,"max_failure_rate":null}},"scenario":{"allocation":{"label":"1× MI300X VM (synthetic)","gpus":1,"gpu_model":"AMD MI300X (synthetic)","adapter":"local","deployment_id":"dep-mi300x-01"}},"derived":{"cells":[{"concurrency":1,"runs":2,"aggregate":{"identity":{"model":"Qwen/Qwen3-Coder-30B-A3B-Instruct","revision":"demo-rev","precision":"FP8","tokenizer":"demo-rev","workload":"sha256:b0ddd66d9e8eb6f903fc0a37240e7da8","cache":"warm","load":"dataset=random;in=2048;out=256;prompts=48;concurrency=1;rate=inf;seed=7","runtime":"rocm/vllm@sha256:demo"},"unit":"completed requests","gates":{"ttft_ms":null,"e2e_ms":null,"include_client_queue":false,"quality":false},"criterion":"","runs":2,"duration":314.904,"completed":93,"attempted":96,"failed":3,"accepted":93,"rate":0.29532809999237863,"completedRate":0.29532809999237863,"failureRate":0.03125,"qualifiedFraction":0.96875,"metrics":{"ttft":{"p50":129.3,"p95":156.58,"p99":159.264,"basis":"pooled successful-request samples","n":93},"e2e":{"p50":3177.7000000000003,"p95":3852.08,"p99":3946.728,"basis":"pooled successful-request samples","n":93}},"trialRateRange":[0.2943478941600125,0.2963363804443757],"trialRateStd":0.0014060721359696682,"holds":[],"warnings":[],"synthetic":true,"sources":[{"sha256":"57895e64e10dd5bc13dcba48c4768139fe0fc3406fd92edc7e38113b818218c5","record_index":0,"bytes":3339},{"sha256":"2f057ef80b3db039e220103d8b2d4187ee279052e051b09193df0c8b71c8c82c","record_index":0,"bytes":3330}]},"cost":{"provider":"Hot Aisle","gpus":1,"rate":2.99,"extra":0,"hourly":2.99,"total":0.26154526666666666,"costPer1000":2.8123146953405023,"basis":"modeled charge for summed benchmark windows","source":"local demo (fake API on-demand price)","period":"synthetic","quote":"","unit":"completed requests"},"meets":true,"reasons":[],"error":null},{"concurrency":8,"runs":2,"aggregate":{"identity":{"model":"Qwen/Qwen3-Coder-30B-A3B-Instruct","revision":"demo-rev","precision":"FP8","tokenizer":"demo-rev","workload":"sha256:b0ddd66d9e8eb6f903fc0a37240e7da8","cache":"warm","load":"dataset=random;in=2048;out=256;prompts=48;concurrency=8;rate=inf;seed=7","runtime":"rocm/vllm@sha256:demo"},"unit":"completed requests","gates":{"ttft_ms":null,"e2e_ms":null,"include_client_queue":false,"quality":false},"criterion":"","runs":2,"duration":79.923,"completed":95,"attempted":96,"failed":1,"accepted":95,"rate":1.1886440699172953,"completedRate":1.1886440699172953,"failureRate":0.01041666666666663,"qualifiedFraction":0.9895833333333334,"metrics":{"ttft":{"p50":197.2,"p95":221.03,"p99":224.71800000000002,"basis":"pooled successful-request samples","n":95},"e2e":{"p50":6293,"p95":7323.2699999999995,"p99":7511.684,"basis":"pooled successful-request samples","n":95}},"trialRateRange":[1.1767356851355748,1.2005402431093992],"trialRateStd":0.016832364366439544,"holds":[],"warnings":[],"synthetic":true,"sources":[{"sha256":"f36b39ad3608a4ba517eef27c9f5180a0aa7c739f25f55edd49ae64ea85dc176","record_index":0,"bytes":3322},{"sha256":"d1a29600b011ac6f5261010de8a110067af415093f6ae8062428482b181f6996","record_index":0,"bytes":3334}]},"cost":{"provider":"Hot Aisle","gpus":1,"rate":2.99,"extra":0,"hourly":2.99,"total":0.06638049166666667,"costPer1000":0.6987420175438597,"basis":"modeled charge for summed benchmark windows","source":"local demo (fake API on-demand price)","period":"synthetic","quote":"","unit":"completed requests"},"meets":true,"reasons":[],"error":null},{"concurrency":32,"runs":2,"aggregate":{"identity":{"model":"Qwen/Qwen3-Coder-30B-A3B-Instruct","revision":"demo-rev","precision":"FP8","tokenizer":"demo-rev","workload":"sha256:b0ddd66d9e8eb6f903fc0a37240e7da8","cache":"warm","load":"dataset=random;in=2048;out=256;prompts=48;concurrency=32;rate=inf;seed=7","runtime":"rocm/vllm@sha256:demo"},"unit":"completed requests","gates":{"ttft_ms":null,"e2e_ms":null,"include_client_queue":false,"quality":false},"criterion":"","runs":2,"duration":27.674,"completed":95,"attempted":96,"failed":1,"accepted":95,"rate":3.4328250343282503,"completedRate":3.4328250343282503,"failureRate":0.01041666666666663,"qualifiedFraction":0.9895833333333334,"metrics":{"ttft":{"p50":252.6,"p95":274.84000000000003,"p99":278.342,"basis":"pooled successful-request samples","n":95},"e2e":{"p50":8476.900000000001,"p95":9951.01,"p99":10162.832,"basis":"pooled successful-request samples","n":95}},"trialRateRange":[3.4006376195536663,3.4663323253927283],"trialRateStd":0.04645317198685622,"holds":[],"warnings":[],"synthetic":true,"sources":[{"sha256":"c5af53b94a83b3a2517ee228a15ae3a6cc6f1c9ce08559e125ccb39c7b7c31bb","record_index":0,"bytes":3342},{"sha256":"7f177fab7dcc467275cd3d773df01b3903d17fe6b764ceda4ef44d0454657946","record_index":0,"bytes":3335}]},"cost":{"provider":"Hot Aisle","gpus":1,"rate":2.99,"extra":0,"hourly":2.99,"total":0.022984794444444446,"costPer1000":0.24194520467836259,"basis":"modeled charge for summed benchmark windows","source":"local demo (fake API on-demand price)","period":"synthetic","quote":"","unit":"completed requests"},"meets":true,"reasons":[],"error":null}],"primary_concurrency":32,"comparison":{"kind":"price_threshold","provider":"Nebius HGX H100","allocation_hour_usd":3.85,"required_rate_to_tie":4.420192769954435,"note":"Price ratio only. The comparator has no measured evidence in this record."},"disposition":{"qualified":true,"reasons":["Primary cell (concurrency 32) meets every stated requirement."],"cells_meeting":[1,8,32]},"engine":{"version":"2.0.0","engine_sha256":"aac0ceae852496382bc3cec78039d7a7cd140a6008452c1478c7eb6836a1acc0"}},"disposition":{"qualified":true,"reasons":["Primary cell (concurrency 32) meets every stated requirement."],"cells_meeting":[1,8,32]},"sha256":"4cb39f365e7e96ce4816f45ee858a5207c34da0a3920349fa4710105d9d5cc37","links":{"report":"data/demo/report.html","evidence":"data/demo/evidence.json","record":"data/demo/record.json"}}</script><!-- demo-record:end -->
+<!-- demo-record:begin --><script id="demo-record" type="application/json">{"schema":"hot-aisle/qualified-record@1","id":"rec-20260923T013303Z-a1a010","created":"2026-09-23T01:33:04.015Z","job_id":"job-20260923T013303Z-a1a010","synthetic":true,"observed":{"trials":[{"cell":{"concurrency":1,"repeat":0},"source":{"sha256":"21520427f56069521dfbe81c4163e3d39f93355306c23e80d3649e7bcaed1727","record_index":0,"bytes":3339},"normalized":{"format":"vllm-serve-json","source":{"sha256":"21520427f56069521dfbe81c4163e3d39f93355306c23e80d3649e7bcaed1727","record_index":0,"bytes":3339},"identity":{"model":"Qwen/Qwen3-Coder-30B-A3B-Instruct","revision":"demo-rev","precision":"FP8","tokenizer":"demo-rev","workload":"sha256:b0ddd66d9e8eb6f903fc0a37240e7da8","cache":"warm","runtime":"rocm/vllm@sha256:demo","load":"dataset=random;in=2048;out=256;prompts=48;concurrency=1;rate=inf;seed=7"},"duration":155.229,"completed":46,"attempted":48,"outputTokens":11837,"metrics":{"ttft":{"samples":[116.8,127.6,132.39999999999998,151.2,126.7,145.5,148.79999999999998,124.8,149.4,136.8,128.6,117.1,115.8,120.2,145.3,123,122.7,148.79999999999998,113.60000000000001,117.3,148.7,150.2,132.5,133.8,120.80000000000001,135.4,128.3,146.4,154.79999999999998,116.8,119.1,140.2,140.8,115.2,113.60000000000001,127.5,129.3,122.2,140.7,147,160,143.7,136.6,156.70000000000002,159.20000000000002,153],"percentiles":{"p50":133.15,"p95":156.22500000000002,"p99":159.64000000000001},"basis":"recomputed from successful-request samples"},"e2e":{"samples":[3808.6000000000004,3130.2,3475.6,3253.2999999999997,3288.9,3991.8999999999996,3046.8,3151.1,2720.7,2806,3424.4,3397.9,3327.7999999999997,3415.9,2763.1,2932.2,2640.2000000000003,3652.7,2911.1,3196.4,3267.6,3930.1,2728.4,3842.6,3274.2,3066.7,2970.9,3086.3999999999996,3446.7,2951.4,2989.9,3154.1,3113.1000000000004,3387.1000000000004,3596.2999999999997,3239.9,2934.7,2863.4,3141.7000000000003,2779,3232.1,2872.5,3173.5,3414.1,3870.8,2699.3],"percentiles":{"p50":3163.8,"p95":3863.75,"p99":3964.0899999999997},"basis":"recomputed from successful-request samples"}},"rows":[{"success":true,"ttft_ms":116.8,"e2e_ms":3808.6000000000004,"queue_ms":2.49},{"success":true,"ttft_ms":127.6,"e2e_ms":3130.2,"queue_ms":1.9},{"success":true,"ttft_ms":132.39999999999998,"e2e_ms":3475.6,"queue_ms":1.16},{"success":true,"ttft_ms":151.2,"e2e_ms":3253.2999999999997,"queue_ms":0.5},{"success":true,"ttft_ms":126.7,"e2e_ms":3288.9,"queue_ms":1.46},{"success":true,"ttft_ms":145.5,"e2e_ms":3991.8999999999996,"queue_ms":0.25},{"success":true,"ttft_ms":148.79999999999998,"e2e_ms":3046.8,"queue_ms":3.21},{"success":true,"ttft_ms":124.8,"e2e_ms":3151.1,"queue_ms":2.25},{"success":true,"ttft_ms":149.4,"e2e_ms":2720.7,"queue_ms":3.25},{"success":true,"ttft_ms":136.8,"e2e_ms":2806,"queue_ms":2.8600000000000003},{"success":true,"ttft_ms":128.6,"e2e_ms":3424.4,"queue_ms":2.9},{"success":true,"ttft_ms":117.1,"e2e_ms":3397.9,"queue_ms":2.2300000000000004},{"success":true,"ttft_ms":115.8,"e2e_ms":3327.7999999999997,"queue_ms":1.1199999999999999},{"success":true,"ttft_ms":120.2,"e2e_ms":3415.9,"queue_ms":1.82},{"success":true,"ttft_ms":145.3,"e2e_ms":2763.1,"queue_ms":0.36000000000000004},{"success":true,"ttft_ms":123,"e2e_ms":2932.2,"queue_ms":2.85},{"success":true,"ttft_ms":122.7,"e2e_ms":2640.2000000000003,"queue_ms":1.1199999999999999},{"success":true,"ttft_ms":148.79999999999998,"e2e_ms":3652.7,"queue_ms":3.76},{"success":true,"ttft_ms":113.60000000000001,"e2e_ms":2911.1,"queue_ms":0.18000000000000002},{"success":false,"ttft_ms":0,"e2e_ms":0,"queue_ms":0},{"success":true,"ttft_ms":117.3,"e2e_ms":3196.4,"queue_ms":0.2},{"success":true,"ttft_ms":148.7,"e2e_ms":3267.6,"queue_ms":0.95},{"success":true,"ttft_ms":150.2,"e2e_ms":3930.1,"queue_ms":2.98},{"success":false,"ttft_ms":0,"e2e_ms":0,"queue_ms":0},{"success":true,"ttft_ms":132.5,"e2e_ms":2728.4,"queue_ms":0.12000000000000001},{"success":true,"ttft_ms":133.8,"e2e_ms":3842.6,"queue_ms":2.4699999999999998},{"success":true,"ttft_ms":120.80000000000001,"e2e_ms":3274.2,"queue_ms":2.8},{"success":true,"ttft_ms":135.4,"e2e_ms":3066.7,"queue_ms":3.63},{"success":true,"ttft_ms":128.3,"e2e_ms":2970.9,"queue_ms":0.82},{"success":true,"ttft_ms":146.4,"e2e_ms":3086.3999999999996,"queue_ms":1.16},{"success":true,"ttft_ms":154.79999999999998,"e2e_ms":3446.7,"queue_ms":3.19},{"success":true,"ttft_ms":116.8,"e2e_ms":2951.4,"queue_ms":1.85},{"success":true,"ttft_ms":119.1,"e2e_ms":2989.9,"queue_ms":2.19},{"success":true,"ttft_ms":140.2,"e2e_ms":3154.1,"queue_ms":0.85},{"success":true,"ttft_ms":140.8,"e2e_ms":3113.1000000000004,"queue_ms":2.18},{"success":true,"ttft_ms":115.2,"e2e_ms":3387.1000000000004,"queue_ms":1.49},{"success":true,"ttft_ms":113.60000000000001,"e2e_ms":3596.2999999999997,"queue_ms":1.96},{"success":true,"ttft_ms":127.5,"e2e_ms":3239.9,"queue_ms":2.79},{"success":true,"ttft_ms":129.3,"e2e_ms":2934.7,"queue_ms":3.7100000000000004},{"success":true,"ttft_ms":122.2,"e2e_ms":2863.4,"queue_ms":1.1199999999999999},{"success":true,"ttft_ms":140.7,"e2e_ms":3141.7000000000003,"queue_ms":1.56},{"success":true,"ttft_ms":147,"e2e_ms":2779,"queue_ms":2.59},{"success":true,"ttft_ms":160,"e2e_ms":3232.1,"queue_ms":2.07},{"success":true,"ttft_ms":143.7,"e2e_ms":2872.5,"queue_ms":2.8800000000000003},{"success":true,"ttft_ms":136.6,"e2e_ms":3173.5,"queue_ms":0.92},{"success":true,"ttft_ms":156.70000000000002,"e2e_ms":3414.1,"queue_ms":0.45},{"success":true,"ttft_ms":159.20000000000002,"e2e_ms":3870.8,"queue_ms":3.21},{"success":true,"ttft_ms":153,"e2e_ms":2699.3,"queue_ms":3.4299999999999997}],"reportedGoodput":null,"warnings":[],"synthetic":true},"started":"2026-09-23T01:33:03.736Z","ended":"2026-09-23T01:33:03.784Z"},{"cell":{"concurrency":1,"repeat":1},"source":{"sha256":"7967652557d857aedef25c44f22372097e76877084cb66d9a859bbc1b9f2fd05","record_index":0,"bytes":3330},"normalized":{"format":"vllm-serve-json","source":{"sha256":"7967652557d857aedef25c44f22372097e76877084cb66d9a859bbc1b9f2fd05","record_index":0,"bytes":3330},"identity":{"model":"Qwen/Qwen3-Coder-30B-A3B-Instruct","revision":"demo-rev","precision":"FP8","tokenizer":"demo-rev","workload":"sha256:b0ddd66d9e8eb6f903fc0a37240e7da8","cache":"warm","runtime":"rocm/vllm@sha256:demo","load":"dataset=random;in=2048;out=256;prompts=48;concurrency=1;rate=inf;seed=7"},"duration":159.675,"completed":47,"attempted":48,"outputTokens":12095,"metrics":{"ttft":{"samples":[112.19999999999999,117.3,130.70000000000002,152.79999999999998,115.4,156.20000000000002,119.1,128.1,153.9,125,136.6,141.1,140.2,137.6,120,116.4,151.5,116.2,153.5,123.39999999999999,119.2,151.29999999999998,155.20000000000002,111.10000000000001,119.9,156.70000000000002,132,123.1,118,142.8,110.10000000000001,147.4,123.5,142.7,110.8,115.4,140.4,111,111.8,119.2,157.5,129.1,119.3,131.70000000000002,114.3,156.5,121.30000000000001],"percentiles":{"p50":125,"p95":156.41,"p99":157.132},"basis":"recomputed from successful-request samples"},"e2e":{"samples":[3350.5,3599.4,3244,2888.1,3207.3999999999996,2978.9,2935.8,2930.4,2663.3,2873.6000000000004,2850.9,3024.3,3169.2999999999997,3424.6,3575.6,2751.2,3449.8,3106,3486.4,3359.2,2907.7000000000003,2775.9,3381.5,2640.1,3176.5,3521.2,3061.9,3550.5,3293.7,3271,3045.3,3126.9,3031.4,3339.2,3866.2999999999997,3163.2,3044.9,3355,3184.5,3089.2,3578.7,3762.7999999999997,3942.8,3208.8999999999996,3778.3,3451,3177.7000000000003],"percentiles":{"p50":3184.5,"p95":3773.65,"p99":3907.61},"basis":"recomputed from successful-request samples"}},"rows":[{"success":true,"ttft_ms":112.19999999999999,"e2e_ms":3350.5,"queue_ms":2.97},{"success":true,"ttft_ms":117.3,"e2e_ms":3599.4,"queue_ms":0.68},{"success":true,"ttft_ms":130.70000000000002,"e2e_ms":3244,"queue_ms":1.55},{"success":true,"ttft_ms":152.79999999999998,"e2e_ms":2888.1,"queue_ms":1.58},{"success":true,"ttft_ms":115.4,"e2e_ms":3207.3999999999996,"queue_ms":2.67},{"success":true,"ttft_ms":156.20000000000002,"e2e_ms":2978.9,"queue_ms":0.38},{"success":true,"ttft_ms":119.1,"e2e_ms":2935.8,"queue_ms":2.8600000000000003},{"success":true,"ttft_ms":128.1,"e2e_ms":2930.4,"queue_ms":0.45},{"success":true,"ttft_ms":153.9,"e2e_ms":2663.3,"queue_ms":1.0399999999999998},{"success":true,"ttft_ms":125,"e2e_ms":2873.6000000000004,"queue_ms":0.22},{"success":true,"ttft_ms":136.6,"e2e_ms":2850.9,"queue_ms":2.81},{"success":true,"ttft_ms":141.1,"e2e_ms":3024.3,"queue_ms":3.46},{"success":true,"ttft_ms":140.2,"e2e_ms":3169.2999999999997,"queue_ms":0.68},{"success":true,"ttft_ms":137.6,"e2e_ms":3424.6,"queue_ms":1.14},{"success":true,"ttft_ms":120,"e2e_ms":3575.6,"queue_ms":0.86},{"success":true,"ttft_ms":116.4,"e2e_ms":2751.2,"queue_ms":3.73},{"success":true,"ttft_ms":151.5,"e2e_ms":3449.8,"queue_ms":0.64},{"success":true,"ttft_ms":116.2,"e2e_ms":3106,"queue_ms":3.3},{"success":true,"ttft_ms":153.5,"e2e_ms":3486.4,"queue_ms":0.060000000000000005},{"success":true,"ttft_ms":123.39999999999999,"e2e_ms":3359.2,"queue_ms":0.79},{"success":true,"ttft_ms":119.2,"e2e_ms":2907.7000000000003,"queue_ms":2.72},{"success":true,"ttft_ms":151.29999999999998,"e2e_ms":2775.9,"queue_ms":3.25},{"success":true,"ttft_ms":155.20000000000002,"e2e_ms":3381.5,"queue_ms":0.65},{"success":true,"ttft_ms":111.10000000000001,"e2e_ms":2640.1,"queue_ms":0.47},{"success":true,"ttft_ms":119.9,"e2e_ms":3176.5,"queue_ms":3.9699999999999998},{"success":true,"ttft_ms":156.70000000000002,"e2e_ms":3521.2,"queue_ms":1.74},{"success":true,"ttft_ms":132,"e2e_ms":3061.9,"queue_ms":1.58},{"success":true,"ttft_ms":123.1,"e2e_ms":3550.5,"queue_ms":3.9699999999999998},{"success":true,"ttft_ms":118,"e2e_ms":3293.7,"queue_ms":0.79},{"success":true,"ttft_ms":142.8,"e2e_ms":3271,"queue_ms":0.37},{"success":true,"ttft_ms":110.10000000000001,"e2e_ms":3045.3,"queue_ms":1.46},{"success":true,"ttft_ms":147.4,"e2e_ms":3126.9,"queue_ms":0.5199999999999999},{"success":true,"ttft_ms":123.5,"e2e_ms":3031.4,"queue_ms":2.82},{"success":true,"ttft_ms":142.7,"e2e_ms":3339.2,"queue_ms":1.96},{"success":true,"ttft_ms":110.8,"e2e_ms":3866.2999999999997,"queue_ms":0.02},{"success":true,"ttft_ms":115.4,"e2e_ms":3163.2,"queue_ms":3.35},{"success":true,"ttft_ms":140.4,"e2e_ms":3044.9,"queue_ms":0.04},{"success":false,"ttft_ms":0,"e2e_ms":0,"queue_ms":0},{"success":true,"ttft_ms":111,"e2e_ms":3355,"queue_ms":2.29},{"success":true,"ttft_ms":111.8,"e2e_ms":3184.5,"queue_ms":2.33},{"success":true,"ttft_ms":119.2,"e2e_ms":3089.2,"queue_ms":3.3600000000000003},{"success":true,"ttft_ms":157.5,"e2e_ms":3578.7,"queue_ms":2.48},{"success":true,"ttft_ms":129.1,"e2e_ms":3762.7999999999997,"queue_ms":2.49},{"success":true,"ttft_ms":119.3,"e2e_ms":3942.8,"queue_ms":1.05},{"success":true,"ttft_ms":131.70000000000002,"e2e_ms":3208.8999999999996,"queue_ms":2.5},{"success":true,"ttft_ms":114.3,"e2e_ms":3778.3,"queue_ms":0.46},{"success":true,"ttft_ms":156.5,"e2e_ms":3451,"queue_ms":2.27},{"success":true,"ttft_ms":121.30000000000001,"e2e_ms":3177.7000000000003,"queue_ms":1.56}],"reportedGoodput":null,"warnings":[],"synthetic":true},"started":"2026-09-23T01:33:03.785Z","ended":"2026-09-23T01:33:03.829Z"},{"cell":{"concurrency":8,"repeat":0},"source":{"sha256":"5e1e914ea56dc0abc8e4a6a8cced00a065b305a8f744fcb9ffe3b03471399859","record_index":0,"bytes":3322},"normalized":{"format":"vllm-serve-json","source":{"sha256":"5e1e914ea56dc0abc8e4a6a8cced00a065b305a8f744fcb9ffe3b03471399859","record_index":0,"bytes":3322},"identity":{"model":"Qwen/Qwen3-Coder-30B-A3B-Instruct","revision":"demo-rev","precision":"FP8","tokenizer":"demo-rev","workload":"sha256:b0ddd66d9e8eb6f903fc0a37240e7da8","cache":"warm","runtime":"rocm/vllm@sha256:demo","load":"dataset=random;in=2048;out=256;prompts=48;concurrency=8;rate=inf;seed=7"},"duration":39.941,"completed":47,"attempted":48,"outputTokens":12174,"metrics":{"ttft":{"samples":[203.1,195.20000000000002,179.10000000000002,188,181.60000000000002,200,185.5,175.6,179.9,193.20000000000002,181.60000000000002,197.2,203.9,177.5,205.3,215.29999999999998,224.70000000000002,199.6,187.9,209.3,187.1,221.4,197.9,204.5,210.60000000000002,215.29999999999998,220,186,181.5,180.4,213.2,183.2,195,214.4,178.5,175.6,188.79999999999998,215.79999999999998,213.9,203.3,205.7,190.29999999999998,193.3,189.20000000000002,221,190.8,217.70000000000002],"percentiles":{"p50":195.20000000000002,"p95":220.7,"p99":223.18200000000002},"basis":"recomputed from successful-request samples"},"e2e":{"samples":[5867.099999999999,6007.3,5419.6,5555.6,5542.4,6825.400000000001,6473.4,6293,5200.5,7092.900000000001,6910.400000000001,6879,5749.3,6474.400000000001,7508.9,6171,6866.3,5622.4,6288.299999999999,5899,6318.5,7028.2,6110.1,6956.299999999999,6752,6864.8,6759.7,7115.5,5973.5,6260.6,5969.8,5109.6,6876.1,7285.8,7390.4,5981.200000000001,6483.1,6092.6,6021,7261.8,5583.700000000001,6763.7,7215,5570.9,7239.3,5875.7,6996.7],"percentiles":{"p50":6318.5,"p95":7278.6,"p99":7454.389999999999},"basis":"recomputed from successful-request samples"}},"rows":[{"success":true,"ttft_ms":203.1,"e2e_ms":5867.099999999999,"queue_ms":3.21},{"success":true,"ttft_ms":195.20000000000002,"e2e_ms":6007.3,"queue_ms":1.32},{"success":true,"ttft_ms":179.10000000000002,"e2e_ms":5419.6,"queue_ms":2.8},{"success":true,"ttft_ms":188,"e2e_ms":5555.6,"queue_ms":0.33},{"success":true,"ttft_ms":181.60000000000002,"e2e_ms":5542.4,"queue_ms":0.34},{"success":true,"ttft_ms":200,"e2e_ms":6825.400000000001,"queue_ms":0.13999999999999999},{"success":true,"ttft_ms":185.5,"e2e_ms":6473.4,"queue_ms":2.68},{"success":true,"ttft_ms":175.6,"e2e_ms":6293,"queue_ms":1.1900000000000002},{"success":true,"ttft_ms":179.9,"e2e_ms":5200.5,"queue_ms":0.93},{"success":true,"ttft_ms":193.20000000000002,"e2e_ms":7092.900000000001,"queue_ms":3.62},{"success":true,"ttft_ms":181.60000000000002,"e2e_ms":6910.400000000001,"queue_ms":3.28},{"success":true,"ttft_ms":197.2,"e2e_ms":6879,"queue_ms":1.4400000000000002},{"success":true,"ttft_ms":203.9,"e2e_ms":5749.3,"queue_ms":3.4},{"success":true,"ttft_ms":177.5,"e2e_ms":6474.400000000001,"queue_ms":2.94},{"success":true,"ttft_ms":205.3,"e2e_ms":7508.9,"queue_ms":3.5},{"success":true,"ttft_ms":215.29999999999998,"e2e_ms":6171,"queue_ms":1.3699999999999999},{"success":true,"ttft_ms":224.70000000000002,"e2e_ms":6866.3,"queue_ms":2.84},{"success":true,"ttft_ms":199.6,"e2e_ms":5622.4,"queue_ms":2.2399999999999998},{"success":true,"ttft_ms":187.9,"e2e_ms":6288.299999999999,"queue_ms":2.63},{"success":true,"ttft_ms":209.3,"e2e_ms":5899,"queue_ms":0.22},{"success":true,"ttft_ms":187.1,"e2e_ms":6318.5,"queue_ms":3.1},{"success":true,"ttft_ms":221.4,"e2e_ms":7028.2,"queue_ms":1.76},{"success":true,"ttft_ms":197.9,"e2e_ms":6110.1,"queue_ms":1.51},{"success":true,"ttft_ms":204.5,"e2e_ms":6956.299999999999,"queue_ms":1.24},{"success":true,"ttft_ms":210.60000000000002,"e2e_ms":6752,"queue_ms":3.42},{"success":true,"ttft_ms":215.29999999999998,"e2e_ms":6864.8,"queue_ms":2.9499999999999997},{"success":true,"ttft_ms":220,"e2e_ms":6759.7,"queue_ms":1.63},{"success":true,"ttft_ms":186,"e2e_ms":7115.5,"queue_ms":3.15},{"success":true,"ttft_ms":181.5,"e2e_ms":5973.5,"queue_ms":0.83},{"success":false,"ttft_ms":0,"e2e_ms":0,"queue_ms":0},{"success":true,"ttft_ms":180.4,"e2e_ms":6260.6,"queue_ms":2.2},{"success":true,"ttft_ms":213.2,"e2e_ms":5969.8,"queue_ms":0.76},{"success":true,"ttft_ms":183.2,"e2e_ms":5109.6,"queue_ms":1.1},{"success":true,"ttft_ms":195,"e2e_ms":6876.1,"queue_ms":1.5299999999999998},{"success":true,"ttft_ms":214.4,"e2e_ms":7285.8,"queue_ms":2.6},{"success":true,"ttft_ms":178.5,"e2e_ms":7390.4,"queue_ms":2.57},{"success":true,"ttft_ms":175.6,"e2e_ms":5981.200000000001,"queue_ms":1.45},{"success":true,"ttft_ms":188.79999999999998,"e2e_ms":6483.1,"queue_ms":1.6199999999999999},{"success":true,"ttft_ms":215.79999999999998,"e2e_ms":6092.6,"queue_ms":1.11},{"success":true,"ttft_ms":213.9,"e2e_ms":6021,"queue_ms":1.31},{"success":true,"ttft_ms":203.3,"e2e_ms":7261.8,"queue_ms":0.9700000000000001},{"success":true,"ttft_ms":205.7,"e2e_ms":5583.700000000001,"queue_ms":0.37},{"success":true,"ttft_ms":190.29999999999998,"e2e_ms":6763.7,"queue_ms":3.0100000000000002},{"success":true,"ttft_ms":193.3,"e2e_ms":7215,"queue_ms":2.56},{"success":true,"ttft_ms":189.20000000000002,"e2e_ms":5570.9,"queue_ms":2.83},{"success":true,"ttft_ms":221,"e2e_ms":7239.3,"queue_ms":0.95},{"success":true,"ttft_ms":190.8,"e2e_ms":5875.7,"queue_ms":0.78},{"success":true,"ttft_ms":217.70000000000002,"e2e_ms":6996.7,"queue_ms":0.78}],"reportedGoodput":null,"warnings":[],"synthetic":true},"started":"2026-09-23T01:33:03.830Z","ended":"2026-09-23T01:33:03.874Z"},{"cell":{"concurrency":8,"repeat":1},"source":{"sha256":"61e11d38bf0ad1de5f4f051cdd3a8c829ac6e37e87d4fcda786ff6004545cbd6","record_index":0,"bytes":3334},"normalized":{"format":"vllm-serve-json","source":{"sha256":"61e11d38bf0ad1de5f4f051cdd3a8c829ac6e37e87d4fcda786ff6004545cbd6","record_index":0,"bytes":3334},"identity":{"model":"Qwen/Qwen3-Coder-30B-A3B-Instruct","revision":"demo-rev","precision":"FP8","tokenizer":"demo-rev","workload":"sha256:b0ddd66d9e8eb6f903fc0a37240e7da8","cache":"warm","runtime":"rocm/vllm@sha256:demo","load":"dataset=random;in=2048;out=256;prompts=48;concurrency=8;rate=inf;seed=7"},"duration":39.982,"completed":48,"attempted":48,"outputTokens":12049,"metrics":{"ttft":{"samples":[198.4,184.9,177.4,189.6,220.29999999999998,210.7,205.8,178.9,184.4,181.4,189.6,221.1,178.29999999999998,194.89999999999998,180.10000000000002,208.7,203.4,217,177.7,209.7,221.6,220.5,192.1,204.2,189.6,176.9,196.70000000000002,188.9,225,198.4,201.9,208.4,204.9,195.89999999999998,181.7,180.10000000000002,215.5,177.7,200.6,197.8,181.60000000000002,176.9,201.5,205.9,215.9,209.7,177.8,203.2],"percentiles":{"p50":198.10000000000002,"p95":220.89,"p99":223.40200000000002},"basis":"recomputed from successful-request samples"},"e2e":{"samples":[5159.6,6961.5,6133.099999999999,6671.2,6628,6144.3,6436.3,5758.8,5104.599999999999,7234.5,7555.3,6717.900000000001,5385.2,6453,6046.9,5765.1,6526.5,6519.9,5554.2,6005.9,6673.8,6282.5,6213,7402.5,5135.3,6327.5,5669.900000000001,5625.7,6721,6262.7,6698.2,7294.5,5504.7,6095.799999999999,6881.400000000001,5875.6,5689.099999999999,6777,5054.400000000001,6162.5,5868.7,6103.799999999999,6625.9,6671.1,7508.200000000001,5801.700000000001,6772.1,6351.5],"percentiles":{"p50":6272.6,"p95":7364.7,"p99":7533.1630000000005},"basis":"recomputed from successful-request samples"}},"rows":[{"success":true,"ttft_ms":198.4,"e2e_ms":5159.6,"queue_ms":3.69},{"success":true,"ttft_ms":184.9,"e2e_ms":6961.5,"queue_ms":0.09000000000000001},{"success":true,"ttft_ms":177.4,"e2e_ms":6133.099999999999,"queue_ms":3.18},{"success":true,"ttft_ms":189.6,"e2e_ms":6671.2,"queue_ms":1.41},{"success":true,"ttft_ms":220.29999999999998,"e2e_ms":6628,"queue_ms":1.55},{"success":true,"ttft_ms":210.7,"e2e_ms":6144.3,"queue_ms":0.27},{"success":true,"ttft_ms":205.8,"e2e_ms":6436.3,"queue_ms":2.34},{"success":true,"ttft_ms":178.9,"e2e_ms":5758.8,"queue_ms":3.3899999999999997},{"success":true,"ttft_ms":184.4,"e2e_ms":5104.599999999999,"queue_ms":2.71},{"success":true,"ttft_ms":181.4,"e2e_ms":7234.5,"queue_ms":0.98},{"success":true,"ttft_ms":189.6,"e2e_ms":7555.3,"queue_ms":3.19},{"success":true,"ttft_ms":221.1,"e2e_ms":6717.900000000001,"queue_ms":2.66},{"success":true,"ttft_ms":178.29999999999998,"e2e_ms":5385.2,"queue_ms":2.96},{"success":true,"ttft_ms":194.89999999999998,"e2e_ms":6453,"queue_ms":2.26},{"success":true,"ttft_ms":180.10000000000002,"e2e_ms":6046.9,"queue_ms":4},{"success":true,"ttft_ms":208.7,"e2e_ms":5765.1,"queue_ms":2.25},{"success":true,"ttft_ms":203.4,"e2e_ms":6526.5,"queue_ms":2.3600000000000003},{"success":true,"ttft_ms":217,"e2e_ms":6519.9,"queue_ms":1.77},{"success":true,"ttft_ms":177.7,"e2e_ms":5554.2,"queue_ms":2.5100000000000002},{"success":true,"ttft_ms":209.7,"e2e_ms":6005.9,"queue_ms":3.93},{"success":true,"ttft_ms":221.6,"e2e_ms":6673.8,"queue_ms":1.65},{"success":true,"ttft_ms":220.5,"e2e_ms":6282.5,"queue_ms":1.21},{"success":true,"ttft_ms":192.1,"e2e_ms":6213,"queue_ms":1.1},{"success":true,"ttft_ms":204.2,"e2e_ms":7402.5,"queue_ms":1.98},{"success":true,"ttft_ms":189.6,"e2e_ms":5135.3,"queue_ms":2.1},{"success":true,"ttft_ms":176.9,"e2e_ms":6327.5,"queue_ms":2.77},{"success":true,"ttft_ms":196.70000000000002,"e2e_ms":5669.900000000001,"queue_ms":2.61},{"success":true,"ttft_ms":188.9,"e2e_ms":5625.7,"queue_ms":0.6},{"success":true,"ttft_ms":225,"e2e_ms":6721,"queue_ms":2.62},{"success":true,"ttft_ms":198.4,"e2e_ms":6262.7,"queue_ms":1.24},{"success":true,"ttft_ms":201.9,"e2e_ms":6698.2,"queue_ms":2.94},{"success":true,"ttft_ms":208.4,"e2e_ms":7294.5,"queue_ms":2.94},{"success":true,"ttft_ms":204.9,"e2e_ms":5504.7,"queue_ms":0.4},{"success":true,"ttft_ms":195.89999999999998,"e2e_ms":6095.799999999999,"queue_ms":1.9},{"success":true,"ttft_ms":181.7,"e2e_ms":6881.400000000001,"queue_ms":3.52},{"success":true,"ttft_ms":180.10000000000002,"e2e_ms":5875.6,"queue_ms":0.47},{"success":true,"ttft_ms":215.5,"e2e_ms":5689.099999999999,"queue_ms":2.85},{"success":true,"ttft_ms":177.7,"e2e_ms":6777,"queue_ms":3.63},{"success":true,"ttft_ms":200.6,"e2e_ms":5054.400000000001,"queue_ms":3.6},{"success":true,"ttft_ms":197.8,"e2e_ms":6162.5,"queue_ms":0.58},{"success":true,"ttft_ms":181.60000000000002,"e2e_ms":5868.7,"queue_ms":3.4099999999999997},{"success":true,"ttft_ms":176.9,"e2e_ms":6103.799999999999,"queue_ms":3.3800000000000003},{"success":true,"ttft_ms":201.5,"e2e_ms":6625.9,"queue_ms":1.58},{"success":true,"ttft_ms":205.9,"e2e_ms":6671.1,"queue_ms":3.17},{"success":true,"ttft_ms":215.9,"e2e_ms":7508.200000000001,"queue_ms":2.57},{"success":true,"ttft_ms":209.7,"e2e_ms":5801.700000000001,"queue_ms":3.61},{"success":true,"ttft_ms":177.8,"e2e_ms":6772.1,"queue_ms":3.3},{"success":true,"ttft_ms":203.2,"e2e_ms":6351.5,"queue_ms":2.04}],"reportedGoodput":null,"warnings":[],"synthetic":true},"started":"2026-09-23T01:33:03.875Z","ended":"2026-09-23T01:33:03.921Z"},{"cell":{"concurrency":32,"repeat":0},"source":{"sha256":"15dc2d03d2301e7c7a113858c58ae694eeffd6c2a1763cfa49737ad6463f5716","record_index":0,"bytes":3342},"normalized":{"format":"vllm-serve-json","source":{"sha256":"15dc2d03d2301e7c7a113858c58ae694eeffd6c2a1763cfa49737ad6463f5716","record_index":0,"bytes":3342},"identity":{"model":"Qwen/Qwen3-Coder-30B-A3B-Instruct","revision":"demo-rev","precision":"FP8","tokenizer":"demo-rev","workload":"sha256:b0ddd66d9e8eb6f903fc0a37240e7da8","cache":"warm","runtime":"rocm/vllm@sha256:demo","load":"dataset=random;in=2048;out=256;prompts=48;concurrency=32;rate=inf;seed=7"},"duration":13.559,"completed":47,"attempted":48,"outputTokens":12085,"metrics":{"ttft":{"samples":[238.8,252.9,272.1,240.3,245.5,255.80000000000004,244.4,261.5,274.6,262.29999999999995,232,247.5,246,271.3,272.9,271.9,271.5,256.7,232.4,238.1,233.6,257,247.20000000000002,268.7,278.3,252.7,274.4,235.9,237.2,270.6,246.2,252.8,233.4,258.2,236.9,271,253.9,233.3,275.4,250.4,233.3,249.9,231.9,272.9,257.5,262.5,245.7],"percentiles":{"p50":252.8,"p95":274.54,"p99":276.966},"basis":"recomputed from successful-request samples"},"e2e":{"samples":[8921.900000000001,9123.5,8763.8,9964.5,9666.2,8149.900000000001,8918.4,9770.5,9724.199999999999,8742.4,8237.7,8592.599999999999,9962.7,7704.1,7995.4,10465.7,7185.900000000001,8534,8254.300000000001,9511.2,9253.1,8215.6,9587.199999999999,7973.7,8836.800000000001,6989.099999999999,8012.499999999999,7648.900000000001,8272.9,7904.4,8080.9,7744.799999999999,8222.4,8398.300000000001,7826.1,7304.2,8846,8085.5,7150.5,8058.6,7955.9,8567.199999999999,8676.9,9545.5,6806.9,7629.2,8214.3],"percentiles":{"p50":8254.300000000001,"p95":9905.04,"p99":10235.148},"basis":"recomputed from successful-request samples"}},"rows":[{"success":true,"ttft_ms":238.8,"e2e_ms":8921.900000000001,"queue_ms":3.96},{"success":true,"ttft_ms":252.9,"e2e_ms":9123.5,"queue_ms":1.61},{"success":true,"ttft_ms":272.1,"e2e_ms":8763.8,"queue_ms":2.68},{"success":true,"ttft_ms":240.3,"e2e_ms":9964.5,"queue_ms":3.2},{"success":true,"ttft_ms":245.5,"e2e_ms":9666.2,"queue_ms":0.49},{"success":true,"ttft_ms":255.80000000000004,"e2e_ms":8149.900000000001,"queue_ms":3.76},{"success":true,"ttft_ms":244.4,"e2e_ms":8918.4,"queue_ms":3.16},{"success":true,"ttft_ms":261.5,"e2e_ms":9770.5,"queue_ms":2.7},{"success":true,"ttft_ms":274.6,"e2e_ms":9724.199999999999,"queue_ms":2.68},{"success":true,"ttft_ms":262.29999999999995,"e2e_ms":8742.4,"queue_ms":1.09},{"success":true,"ttft_ms":232,"e2e_ms":8237.7,"queue_ms":1.73},{"success":true,"ttft_ms":247.5,"e2e_ms":8592.599999999999,"queue_ms":1.58},{"success":true,"ttft_ms":246,"e2e_ms":9962.7,"queue_ms":2.67},{"success":true,"ttft_ms":271.3,"e2e_ms":7704.1,"queue_ms":3.91},{"success":true,"ttft_ms":272.9,"e2e_ms":7995.4,"queue_ms":1.1},{"success":true,"ttft_ms":271.9,"e2e_ms":10465.7,"queue_ms":2.57},{"success":true,"ttft_ms":271.5,"e2e_ms":7185.900000000001,"queue_ms":1.89},{"success":true,"ttft_ms":256.7,"e2e_ms":8534,"queue_ms":1.57},{"success":false,"ttft_ms":0,"e2e_ms":0,"queue_ms":0},{"success":true,"ttft_ms":232.4,"e2e_ms":8254.300000000001,"queue_ms":1.5299999999999998},{"success":true,"ttft_ms":238.1,"e2e_ms":9511.2,"queue_ms":1.08},{"success":true,"ttft_ms":233.6,"e2e_ms":9253.1,"queue_ms":0.25},{"success":true,"ttft_ms":257,"e2e_ms":8215.6,"queue_ms":2.0100000000000002},{"success":true,"ttft_ms":247.20000000000002,"e2e_ms":9587.199999999999,"queue_ms":2.92},{"success":true,"ttft_ms":268.7,"e2e_ms":7973.7,"queue_ms":1.97},{"success":true,"ttft_ms":278.3,"e2e_ms":8836.800000000001,"queue_ms":1.63},{"success":true,"ttft_ms":252.7,"e2e_ms":6989.099999999999,"queue_ms":1.4300000000000002},{"success":true,"ttft_ms":274.4,"e2e_ms":8012.499999999999,"queue_ms":2.94},{"success":true,"ttft_ms":235.9,"e2e_ms":7648.900000000001,"queue_ms":0.74},{"success":true,"ttft_ms":237.2,"e2e_ms":8272.9,"queue_ms":3.16},{"success":true,"ttft_ms":270.6,"e2e_ms":7904.4,"queue_ms":0.75},{"success":true,"ttft_ms":246.2,"e2e_ms":8080.9,"queue_ms":0.37},{"success":true,"ttft_ms":252.8,"e2e_ms":7744.799999999999,"queue_ms":1.01},{"success":true,"ttft_ms":233.4,"e2e_ms":8222.4,"queue_ms":1.13},{"success":true,"ttft_ms":258.2,"e2e_ms":8398.300000000001,"queue_ms":2.19},{"success":true,"ttft_ms":236.9,"e2e_ms":7826.1,"queue_ms":2.56},{"success":true,"ttft_ms":271,"e2e_ms":7304.2,"queue_ms":2.87},{"success":true,"ttft_ms":253.9,"e2e_ms":8846,"queue_ms":2.0100000000000002},{"success":true,"ttft_ms":233.3,"e2e_ms":8085.5,"queue_ms":1.25},{"success":true,"ttft_ms":275.4,"e2e_ms":7150.5,"queue_ms":3.49},{"success":true,"ttft_ms":250.4,"e2e_ms":8058.6,"queue_ms":3.17},{"success":true,"ttft_ms":233.3,"e2e_ms":7955.9,"queue_ms":3.81},{"success":true,"ttft_ms":249.9,"e2e_ms":8567.199999999999,"queue_ms":1.2},{"success":true,"ttft_ms":231.9,"e2e_ms":8676.9,"queue_ms":1.85},{"success":true,"ttft_ms":272.9,"e2e_ms":9545.5,"queue_ms":0.92},{"success":true,"ttft_ms":257.5,"e2e_ms":6806.9,"queue_ms":3.4},{"success":true,"ttft_ms":262.5,"e2e_ms":7629.2,"queue_ms":1.01},{"success":true,"ttft_ms":245.7,"e2e_ms":8214.3,"queue_ms":2.5}],"reportedGoodput":null,"warnings":[],"synthetic":true},"started":"2026-09-23T01:33:03.922Z","ended":"2026-09-23T01:33:03.965Z"},{"cell":{"concurrency":32,"repeat":1},"source":{"sha256":"5769c433b6e316fcd485c97308027aba57e82db49d86bb92e4181ba396ac410d","record_index":0,"bytes":3335},"normalized":{"format":"vllm-serve-json","source":{"sha256":"5769c433b6e316fcd485c97308027aba57e82db49d86bb92e4181ba396ac410d","record_index":0,"bytes":3335},"identity":{"model":"Qwen/Qwen3-Coder-30B-A3B-Instruct","revision":"demo-rev","precision":"FP8","tokenizer":"demo-rev","workload":"sha256:b0ddd66d9e8eb6f903fc0a37240e7da8","cache":"warm","runtime":"rocm/vllm@sha256:demo","load":"dataset=random;in=2048;out=256;prompts=48;concurrency=32;rate=inf;seed=7"},"duration":14.115,"completed":48,"attempted":48,"outputTokens":12504,"metrics":{"ttft":{"samples":[234.1,242.7,270.4,241.9,234.2,266.5,264.79999999999995,264.79999999999995,279,250.5,240,271.5,270.4,238.7,247.6,265.29999999999995,250.3,274.1,244,267.2,248.5,269.6,251.8,256.29999999999995,276,258,237.2,268.9,232.2,243.60000000000002,249.70000000000002,236.2,252.6,247.1,236.7,256.40000000000003,241.60000000000002,241.9,253,258.79999999999995,240.4,246.2,252.7,277.8,250.5,247.29999999999998,258.7,270],"percentiles":{"p50":251.15,"p95":275.335,"p99":278.436},"basis":"recomputed from successful-request samples"},"e2e":{"samples":[9533.099999999999,7916.9,9872,8983.800000000001,9437.099999999999,9702.9,8838,9101.6,9534.4,8927,9048.6,8334.8,7821,8346.1,8476.900000000001,7334.2,9175.5,7323.5,8452.8,9212,8382.7,9249,7169.7,9464.7,7685.3,8476.3,9946,7909.5,8785.9,9269.1,7699.2,7767.9,8953.5,9986.7,9682.5,6739.5,7217.4,10143.5,7092.6,8498.8,9070.3,8473.2,7909,8627.800000000001,9339.7,9505,8227.6,8286.199999999999],"percentiles":{"p50":8706.85,"p95":9920.1,"p99":10069.804},"basis":"recomputed from successful-request samples"}},"rows":[{"success":true,"ttft_ms":234.1,"e2e_ms":9533.099999999999,"queue_ms":0.44},{"success":true,"ttft_ms":242.7,"e2e_ms":7916.9,"queue_ms":0.38},{"success":true,"ttft_ms":270.4,"e2e_ms":9872,"queue_ms":3.07},{"success":true,"ttft_ms":241.9,"e2e_ms":8983.800000000001,"queue_ms":0.27999999999999997},{"success":true,"ttft_ms":234.2,"e2e_ms":9437.099999999999,"queue_ms":1.7},{"success":true,"ttft_ms":266.5,"e2e_ms":9702.9,"queue_ms":3.8800000000000003},{"success":true,"ttft_ms":264.79999999999995,"e2e_ms":8838,"queue_ms":2.81},{"success":true,"ttft_ms":264.79999999999995,"e2e_ms":9101.6,"queue_ms":0.9},{"success":true,"ttft_ms":279,"e2e_ms":9534.4,"queue_ms":0.47},{"success":true,"ttft_ms":250.5,"e2e_ms":8927,"queue_ms":2.4499999999999997},{"success":true,"ttft_ms":240,"e2e_ms":9048.6,"queue_ms":1.64},{"success":true,"ttft_ms":271.5,"e2e_ms":8334.8,"queue_ms":2.81},{"success":true,"ttft_ms":270.4,"e2e_ms":7821,"queue_ms":2.22},{"success":true,"ttft_ms":238.7,"e2e_ms":8346.1,"queue_ms":3.23},{"success":true,"ttft_ms":247.6,"e2e_ms":8476.900000000001,"queue_ms":1.6},{"success":true,"ttft_ms":265.29999999999995,"e2e_ms":7334.2,"queue_ms":3.4499999999999997},{"success":true,"ttft_ms":250.3,"e2e_ms":9175.5,"queue_ms":1.41},{"success":true,"ttft_ms":274.1,"e2e_ms":7323.5,"queue_ms":1.11},{"success":true,"ttft_ms":244,"e2e_ms":8452.8,"queue_ms":2.34},{"success":true,"ttft_ms":267.2,"e2e_ms":9212,"queue_ms":2.12},{"success":true,"ttft_ms":248.5,"e2e_ms":8382.7,"queue_ms":0.25},{"success":true,"ttft_ms":269.6,"e2e_ms":9249,"queue_ms":3.3600000000000003},{"success":true,"ttft_ms":251.8,"e2e_ms":7169.7,"queue_ms":2.07},{"success":true,"ttft_ms":256.29999999999995,"e2e_ms":9464.7,"queue_ms":2},{"success":true,"ttft_ms":276,"e2e_ms":7685.3,"queue_ms":0.27},{"success":true,"ttft_ms":258,"e2e_ms":8476.3,"queue_ms":1.13},{"success":true,"ttft_ms":237.2,"e2e_ms":9946,"queue_ms":3.3},{"success":true,"ttft_ms":268.9,"e2e_ms":7909.5,"queue_ms":1.6199999999999999},{"success":true,"ttft_ms":232.2,"e2e_ms":8785.9,"queue_ms":2.06},{"success":true,"ttft_ms":243.60000000000002,"e2e_ms":9269.1,"queue_ms":3.07},{"success":true,"ttft_ms":249.70000000000002,"e2e_ms":7699.2,"queue_ms":3.4499999999999997},{"success":true,"ttft_ms":236.2,"e2e_ms":7767.9,"queue_ms":1.5299999999999998},{"success":true,"ttft_ms":252.6,"e2e_ms":8953.5,"queue_ms":1.8},{"success":true,"ttft_ms":247.1,"e2e_ms":9986.7,"queue_ms":3.42},{"success":true,"ttft_ms":236.7,"e2e_ms":9682.5,"queue_ms":3.52},{"success":true,"ttft_ms":256.40000000000003,"e2e_ms":6739.5,"queue_ms":0.9},{"success":true,"ttft_ms":241.60000000000002,"e2e_ms":7217.4,"queue_ms":2.2300000000000004},{"success":true,"ttft_ms":241.9,"e2e_ms":10143.5,"queue_ms":1.9200000000000002},{"success":true,"ttft_ms":253,"e2e_ms":7092.6,"queue_ms":0.66},{"success":true,"ttft_ms":258.79999999999995,"e2e_ms":8498.8,"queue_ms":0.030000000000000002},{"success":true,"ttft_ms":240.4,"e2e_ms":9070.3,"queue_ms":0.45},{"success":true,"ttft_ms":246.2,"e2e_ms":8473.2,"queue_ms":1.83},{"success":true,"ttft_ms":252.7,"e2e_ms":7909,"queue_ms":3.9},{"success":true,"ttft_ms":277.8,"e2e_ms":8627.800000000001,"queue_ms":1.42},{"success":true,"ttft_ms":250.5,"e2e_ms":9339.7,"queue_ms":0.27},{"success":true,"ttft_ms":247.29999999999998,"e2e_ms":9505,"queue_ms":1.2899999999999998},{"success":true,"ttft_ms":258.7,"e2e_ms":8227.6,"queue_ms":0.99},{"success":true,"ttft_ms":270,"e2e_ms":8286.199999999999,"queue_ms":3.32}],"reportedGoodput":null,"warnings":[],"synthetic":true},"started":"2026-09-23T01:33:03.966Z","ended":"2026-09-23T01:33:04.012Z"}],"failed_trials":[],"disposition":{"outcome":"complete","reason":"All 6 trials completed."}},"declared":{"plan":{"schema":"hot-aisle/evaluation-plan@1","target":{"adapter":"local","exec":"local","name":"local-demo","deployment_id":"dep-mi300x-01","host":"127.0.0.1","gpus":1,"gpu_model":"AMD MI300X (synthetic)","allocation_label":"1× MI300X VM (synthetic)","vllm_command":["C:\\Program Files\\nodejs\\node.exe","S:\\Scratch\\Worktrees\\axm-tools-compute-seam\\hot-aisle\\runner\\fixtures\\fake-vllm.cjs"],"env":{"FAKE_VLLM_DELAY_MS":"0"}},"workload":{"backend":"openai","dataset":"random","request_rate":"inf","seed":7,"model":"Qwen/Qwen3-Coder-30B-A3B-Instruct","base_url":"http://127.0.0.1:8000","input_len":2048,"output_len":256,"num_prompts":48},"concurrency":[1,8,32],"repeats":2,"identity":{"model_revision":"demo-rev","precision":"FP8","tokenizer_revision":"demo-rev","cache_policy":"warm","runtime_digest":"rocm/vllm@sha256:demo","workload_id":"sha256:b0ddd66d9e8eb6f903fc0a37240e7da8"},"price":{"provider":"Hot Aisle","extra":0,"gpus":1,"rate":2.99,"source":"local demo (fake API on-demand price)","period":"synthetic"},"comparator":{"extra":0,"provider":"DigitalOcean H100","gpus":1,"rate":4.41,"source":"https://www.digitalocean.com/pricing/gpu-droplets","period":"2026-09-22 scenario; reviewed 2026-09-22","quote":"On-demand. Destroy the instance to stop billing. Official pages disagree on a 1- versus 5-minute minimum; short-run invoice precision is unqualified.","catalog_ref":{"sha256":"3fbf8ba08c7312a5343d8d87e456e19715b27dc7d9abe78ca542a55b3789c35f","offer_id":"do-h100","reviewed_on":"2026-09-22","as_of":"2026-09-22"},"minimum_hours":0},"limits":{"max_minutes":30,"max_spend_usd":5},"gates":{"ttft":null,"e2e":null,"queue":false,"quality":false},"requirements":{"max_p95_ttft_ms":1000,"max_p95_e2e_ms":15000,"min_accepted_per_s":null,"max_failure_rate":null},"primary_concurrency":null,"created":"2026-09-23T01:33:03.727Z","workload_id":"sha256:b0ddd66d9e8eb6f903fc0a37240e7da8","cells":[{"concurrency":1,"repeat":0},{"concurrency":1,"repeat":1},{"concurrency":8,"repeat":0},{"concurrency":8,"repeat":1},{"concurrency":32,"repeat":0},{"concurrency":32,"repeat":1}],"commands":["'C:\\Program Files\\nodejs\\node.exe' 'S:\\Scratch\\Worktrees\\axm-tools-compute-seam\\hot-aisle\\runner\\fixtures\\fake-vllm.cjs' --backend openai --base-url http://127.0.0.1:8000 --model Qwen/Qwen3-Coder-30B-A3B-Instruct --dataset-name random --num-prompts 48 --max-concurrency 1 --request-rate inf --seed 7 --label workload-report --save-result --save-detailed --percentile-metrics ttft,tpot,itl,e2el --metric-percentiles 50,95,99 --result-dir '<result-dir>' --result-filename cell-c1-r0.json --random-input-len 2048 --random-output-len 256 --metadata model_revision=demo-rev precision=FP8 tokenizer_revision=demo-rev workload_id=sha256:b0ddd66d9e8eb6f903fc0a37240e7da8 cache_policy=warm runtime_digest=rocm/vllm@sha256:demo 'load_profile=dataset=random;in=2048;out=256;prompts=48;concurrency=1;rate=inf;seed=7' plan_sha256=f9adab57dee20af2c299f845477be4d93d5ceaf29d42243b41e03a44dac712fd cell=c1-r0"],"estimate":{"cells":6,"rough_seconds":315,"rough_spend_usd":0.26,"hourly_usd":2.99,"basis":"Coarse planning estimate (decode ~20 ms/token, ~20 s overhead per trial). The limits, not this estimate, bound the run."},"sha256":"f9adab57dee20af2c299f845477be4d93d5ceaf29d42243b41e03a44dac712fd"},"identity":{"model_revision":"demo-rev","precision":"FP8","tokenizer_revision":"demo-rev","cache_policy":"warm","runtime_digest":"rocm/vllm@sha256:demo","workload_id":"sha256:b0ddd66d9e8eb6f903fc0a37240e7da8"},"price":{"provider":"Hot Aisle","extra":0,"gpus":1,"rate":2.99,"source":"local demo (fake API on-demand price)","period":"synthetic"},"comparator":{"extra":0,"provider":"DigitalOcean H100","gpus":1,"rate":4.41,"source":"https://www.digitalocean.com/pricing/gpu-droplets","period":"2026-09-22 scenario; reviewed 2026-09-22","quote":"On-demand. Destroy the instance to stop billing. Official pages disagree on a 1- versus 5-minute minimum; short-run invoice precision is unqualified.","catalog_ref":{"sha256":"3fbf8ba08c7312a5343d8d87e456e19715b27dc7d9abe78ca542a55b3789c35f","offer_id":"do-h100","reviewed_on":"2026-09-22","as_of":"2026-09-22"},"minimum_hours":0},"approval":{"by":"build-demo","at":"2026-09-23T01:33:03.733Z","plan_sha256":"f9adab57dee20af2c299f845477be4d93d5ceaf29d42243b41e03a44dac712fd"}},"rule":{"gates":{"ttft":null,"e2e":null,"queue":false,"quality":false},"requirements":{"max_p95_ttft_ms":1000,"max_p95_e2e_ms":15000,"min_accepted_per_s":null,"max_failure_rate":null}},"scenario":{"allocation":{"label":"1× MI300X VM (synthetic)","gpus":1,"gpu_model":"AMD MI300X (synthetic)","adapter":"local","deployment_id":"dep-mi300x-01"}},"derived":{"cells":[{"concurrency":1,"runs":2,"aggregate":{"identity":{"model":"Qwen/Qwen3-Coder-30B-A3B-Instruct","revision":"demo-rev","precision":"FP8","tokenizer":"demo-rev","workload":"sha256:b0ddd66d9e8eb6f903fc0a37240e7da8","cache":"warm","load":"dataset=random;in=2048;out=256;prompts=48;concurrency=1;rate=inf;seed=7","runtime":"rocm/vllm@sha256:demo"},"unit":"completed requests","gates":{"ttft_ms":null,"e2e_ms":null,"include_client_queue":false,"quality":false},"criterion":"","runs":2,"duration":314.904,"completed":93,"attempted":96,"failed":3,"accepted":93,"rate":0.29532809999237863,"completedRate":0.29532809999237863,"failureRate":0.03125,"qualifiedFraction":0.96875,"metrics":{"ttft":{"p50":129.3,"p95":156.58,"p99":159.264,"basis":"pooled successful-request samples","n":93},"e2e":{"p50":3177.7000000000003,"p95":3852.08,"p99":3946.728,"basis":"pooled successful-request samples","n":93}},"trialRateRange":[0.2943478941600125,0.2963363804443757],"trialRateStd":0.0014060721359696682,"holds":[],"warnings":[],"synthetic":true,"sources":[{"sha256":"21520427f56069521dfbe81c4163e3d39f93355306c23e80d3649e7bcaed1727","record_index":0,"bytes":3339},{"sha256":"7967652557d857aedef25c44f22372097e76877084cb66d9a859bbc1b9f2fd05","record_index":0,"bytes":3330}]},"cost":{"provider":"Hot Aisle","gpus":1,"rate":2.99,"extra":0,"hourly":2.99,"total":0.26154526666666666,"costPer1000":2.8123146953405023,"basis":"modeled charge for summed benchmark windows","source":"local demo (fake API on-demand price)","period":"synthetic","quote":"","unit":"completed requests"},"meets":true,"reasons":[],"error":null},{"concurrency":8,"runs":2,"aggregate":{"identity":{"model":"Qwen/Qwen3-Coder-30B-A3B-Instruct","revision":"demo-rev","precision":"FP8","tokenizer":"demo-rev","workload":"sha256:b0ddd66d9e8eb6f903fc0a37240e7da8","cache":"warm","load":"dataset=random;in=2048;out=256;prompts=48;concurrency=8;rate=inf;seed=7","runtime":"rocm/vllm@sha256:demo"},"unit":"completed requests","gates":{"ttft_ms":null,"e2e_ms":null,"include_client_queue":false,"quality":false},"criterion":"","runs":2,"duration":79.923,"completed":95,"attempted":96,"failed":1,"accepted":95,"rate":1.1886440699172953,"completedRate":1.1886440699172953,"failureRate":0.01041666666666663,"qualifiedFraction":0.9895833333333334,"metrics":{"ttft":{"p50":197.2,"p95":221.03,"p99":224.71800000000002,"basis":"pooled successful-request samples","n":95},"e2e":{"p50":6293,"p95":7323.2699999999995,"p99":7511.684,"basis":"pooled successful-request samples","n":95}},"trialRateRange":[1.1767356851355748,1.2005402431093992],"trialRateStd":0.016832364366439544,"holds":[],"warnings":[],"synthetic":true,"sources":[{"sha256":"5e1e914ea56dc0abc8e4a6a8cced00a065b305a8f744fcb9ffe3b03471399859","record_index":0,"bytes":3322},{"sha256":"61e11d38bf0ad1de5f4f051cdd3a8c829ac6e37e87d4fcda786ff6004545cbd6","record_index":0,"bytes":3334}]},"cost":{"provider":"Hot Aisle","gpus":1,"rate":2.99,"extra":0,"hourly":2.99,"total":0.06638049166666667,"costPer1000":0.6987420175438597,"basis":"modeled charge for summed benchmark windows","source":"local demo (fake API on-demand price)","period":"synthetic","quote":"","unit":"completed requests"},"meets":true,"reasons":[],"error":null},{"concurrency":32,"runs":2,"aggregate":{"identity":{"model":"Qwen/Qwen3-Coder-30B-A3B-Instruct","revision":"demo-rev","precision":"FP8","tokenizer":"demo-rev","workload":"sha256:b0ddd66d9e8eb6f903fc0a37240e7da8","cache":"warm","load":"dataset=random;in=2048;out=256;prompts=48;concurrency=32;rate=inf;seed=7","runtime":"rocm/vllm@sha256:demo"},"unit":"completed requests","gates":{"ttft_ms":null,"e2e_ms":null,"include_client_queue":false,"quality":false},"criterion":"","runs":2,"duration":27.674,"completed":95,"attempted":96,"failed":1,"accepted":95,"rate":3.4328250343282503,"completedRate":3.4328250343282503,"failureRate":0.01041666666666663,"qualifiedFraction":0.9895833333333334,"metrics":{"ttft":{"p50":252.6,"p95":274.84000000000003,"p99":278.342,"basis":"pooled successful-request samples","n":95},"e2e":{"p50":8476.900000000001,"p95":9951.01,"p99":10162.832,"basis":"pooled successful-request samples","n":95}},"trialRateRange":[3.4006376195536663,3.4663323253927283],"trialRateStd":0.04645317198685622,"holds":[],"warnings":[],"synthetic":true,"sources":[{"sha256":"15dc2d03d2301e7c7a113858c58ae694eeffd6c2a1763cfa49737ad6463f5716","record_index":0,"bytes":3342},{"sha256":"5769c433b6e316fcd485c97308027aba57e82db49d86bb92e4181ba396ac410d","record_index":0,"bytes":3335}]},"cost":{"provider":"Hot Aisle","gpus":1,"rate":2.99,"extra":0,"hourly":2.99,"total":0.022984794444444446,"costPer1000":0.24194520467836259,"basis":"modeled charge for summed benchmark windows","source":"local demo (fake API on-demand price)","period":"synthetic","quote":"","unit":"completed requests"},"meets":true,"reasons":[],"error":null}],"primary_concurrency":32,"comparison":{"kind":"price_threshold","provider":"DigitalOcean H100","allocation_hour_usd":4.41,"required_rate_to_tie":5.063129900129626,"note":"Price ratio only. The comparator has no measured evidence in this record."},"disposition":{"qualified":true,"reasons":["Primary cell (concurrency 32) meets every stated requirement."],"cells_meeting":[1,8,32]},"engine":{"version":"2.0.0","engine_sha256":"78600d009f43ca37a81fa15231dfb5be307d8b0a01cfcfe42d94ed8015061593"}},"disposition":{"qualified":true,"reasons":["Primary cell (concurrency 32) meets every stated requirement."],"cells_meeting":[1,8,32]},"sha256":"b6472924568fc940eaef2427c4f3fd22665cbc0c28937f7e18b35d2d28f7bb16","links":{"report":"data/demo/report.html","evidence":"data/demo/evidence.json","record":"data/demo/record.json"}}</script><!-- demo-record:end -->
 <script id="prices-data" type="application/json">{
   "schema": "second-run/price-snapshot@1",
   "reviewed_on": "2026-09-22",
   "currency": "USD",
-  "status": "PUBLIC_LIST_PRICE_SNAPSHOT_NOT_A_BENCHMARK",
+  "generated_from": {
+    "path": "compute/data/catalog.json",
+    "sha256": "3fbf8ba08c7312a5343d8d87e456e19715b27dc7d9abe78ca542a55b3789c35f"
+  },
   "hot_aisle": {
     "vm_gpu_hour": 2.99,
-    "vm_gpu_counts": [1, 2, 4],
-    "vm_terms": "Minute billing; newly allocated compute. Existing eligible running allocations may retain $1.99; that rate is excluded here.",
+    "vm_gpu_counts": [
+      1,
+      2,
+      4
+    ],
     "bare_metal_gpu_hour": 3.39,
     "bare_metal_gpu_count": 8,
-    "bare_metal_terms": "Whole-node allocation; one-month minimum. $27.12 per full node-hour before any additional charges.",
     "source": "https://hotaisle.xyz/pricing"
   },
   "nebius_ai_cloud": {
     "effective_new_prices": "2026-10-01",
+    "source": "https://nebius.com/prices",
     "products": [
-      {"gpu": "HGX H100", "current_gpu_hour": 3.85, "october_gpu_hour": 4.50},
-      {"gpu": "HGX H200", "current_gpu_hour": 4.50, "october_gpu_hour": 5.40},
-      {"gpu": "HGX B200", "current_gpu_hour": 7.15, "october_gpu_hour": 8.50},
-      {"gpu": "HGX B300", "current_gpu_hour": 7.85, "october_gpu_hour": 9.50},
-      {"gpu": "RTX PRO 6000", "current_gpu_hour": 1.80, "october_gpu_hour": 1.80}
-    ],
-    "scope": "AI Cloud on-demand list prices, not Token Factory Dedicated Endpoint prices. Per-GPU normalization does not establish available allocation sizes, stock or an equivalent managed service. Storage, taxes and contract/spot discounts are not inferred.",
-    "source": "https://nebius.com/prices"
+      {
+        "gpu": "H100",
+        "current_gpu_hour": 3.85,
+        "october_gpu_hour": 4.5
+      },
+      {
+        "gpu": "H200",
+        "current_gpu_hour": 4.5,
+        "october_gpu_hour": 5.4
+      },
+      {
+        "gpu": "B200",
+        "current_gpu_hour": 7.15,
+        "october_gpu_hour": 8.5
+      },
+      {
+        "gpu": "B300",
+        "current_gpu_hour": 7.85,
+        "october_gpu_hour": 9.5
+      },
+      {
+        "gpu": "RTX PRO 6000",
+        "current_gpu_hour": 1.8,
+        "october_gpu_hour": 1.8
+      }
+    ]
+  }
+}</script>
+<script id="catalog-data" type="application/json">{
+  "schema": "second-run/compute-catalog@1",
+  "version": "0.1.0",
+  "reviewedOn": "2026-09-22",
+  "currency": "USD",
+  "staleAfterDays": 30,
+  "sources": {
+    "hotaisle": {
+      "title": "Hot Aisle pricing",
+      "url": "https://hotaisle.xyz/pricing",
+      "reviewedOn": "2026-09-22",
+      "kind": "provider",
+      "note": "1, 2 and 4 MI300X VMs at $2.99/GPU-hour; eight-GPU bare metal at $3.39 with a one-month minimum."
+    },
+    "digitalocean": {
+      "title": "DigitalOcean GPU pricing",
+      "url": "https://www.digitalocean.com/pricing/gpu-droplets",
+      "reviewedOn": "2026-09-22",
+      "kind": "provider",
+      "note": "On-demand rates after August 1, 2026. Pricing page says 5-minute minimum; current documentation says 60 seconds. Verify the applicable minimum before a short job."
+    },
+    "digitalocean-docs": {
+      "title": "DigitalOcean billing documentation",
+      "url": "https://docs.digitalocean.com/products/droplets/details/pricing/",
+      "reviewedOn": "2026-09-22",
+      "kind": "provider",
+      "note": "GPU billing ends on destruction, not power-off. Minimum-billing wording conflicts with the pricing page."
+    },
+    "nebius": {
+      "title": "Nebius AI Cloud prices",
+      "url": "https://nebius.com/prices",
+      "reviewedOn": "2026-09-22",
+      "kind": "provider",
+      "note": "Current and announced October 1 schedules. GPU-hour normalization does not prove single-GPU instance availability. Token Factory is a different product."
+    },
+    "runpod": {
+      "title": "Runpod public Pods price table",
+      "url": "https://www.runpod.io/pricing",
+      "reviewedOn": "2026-09-22",
+      "kind": "provider",
+      "note": "Public Pods table reviewed September 22, page updated September 13. Cloud tier, region and actual available configuration must be confirmed in the provider console."
+    },
+    "aperture": {
+      "title": "Aperture physical evidence contract",
+      "url": "https://github.com/BigBirdReturns/aperture/blob/40ae1f94ae2c505cde915e4a56832ad492adf18e/lib/support.mjs",
+      "reviewedOn": "2026-09-22",
+      "kind": "method",
+      "note": "aperture-support/1 schema. Support receipts describe hardware; they do not confer native model-fit or performance qualification."
+    },
+    "tierbench": {
+      "title": "TierBench cost-per-success method",
+      "url": "https://github.com/BigBirdReturns/tier-bench",
+      "reviewedOn": "2026-09-22",
+      "kind": "method",
+      "note": "Task-conditioned validation; account for failed attempts, verification and escalation. Existing findings remain bounded to their task sets."
+    },
+    "workload-engine": {
+      "title": "Retained workload report engine",
+      "url": "https://github.com/BigBirdReturns/axm-tools/tree/179a0d82ae9901d6535f4b4f9f7812dfcb374ce3/hot-aisle",
+      "reviewedOn": "2026-09-22",
+      "kind": "method",
+      "note": "Exact v2 engine reused inside this self-contained tool, not imported across directories. Source-bound normalization and repeat aggregation."
+    }
   },
-  "assumptions": [
-    "No performance result is prefilled.",
-    "Compare identical output units and the same acceptance and latency criteria.",
-    "Use every billable GPU and the complete paid interval, including paid setup and idle time.",
-    "The comparison excludes unentered costs and never proves readiness, quality, capacity availability or service equivalence.",
-    "User-entered throughput remains an unverified scenario input. A checkbox is not external verification."
-  ]
+  "providers": [
+    {
+      "id": "hotaisle",
+      "name": "Hot Aisle",
+      "letter": "HA",
+      "source": "hotaisle"
+    },
+    {
+      "id": "digitalocean",
+      "name": "DigitalOcean",
+      "letter": "DO",
+      "source": "digitalocean"
+    },
+    {
+      "id": "nebius",
+      "name": "Nebius",
+      "letter": "NB",
+      "source": "nebius"
+    },
+    {
+      "id": "runpod",
+      "name": "Runpod",
+      "letter": "RP",
+      "source": "runpod"
+    }
+  ],
+  "offers": [
+    {
+      "id": "ha-mi300x-1",
+      "provider": "hotaisle",
+      "gpu": "MI300X",
+      "vendor": "AMD",
+      "memoryGB": 192,
+      "gpus": 1,
+      "rate": 2.99,
+      "rateBasis": "per_gpu_hour",
+      "schedules": [],
+      "source": "hotaisle",
+      "reviewedOn": "2026-09-22",
+      "minimumHours": 0,
+      "kind": "on-demand",
+      "allocation": "listed",
+      "stock": "unverified",
+      "terms": "Minute billing on reserved VM time. New allocations; grandfathered rates are excluded.",
+      "label": "Small VM"
+    },
+    {
+      "id": "ha-mi300x-2",
+      "provider": "hotaisle",
+      "gpu": "MI300X",
+      "vendor": "AMD",
+      "memoryGB": 192,
+      "gpus": 2,
+      "rate": 2.99,
+      "rateBasis": "per_gpu_hour",
+      "schedules": [],
+      "source": "hotaisle",
+      "reviewedOn": "2026-09-22",
+      "minimumHours": 0,
+      "kind": "on-demand",
+      "allocation": "listed",
+      "stock": "unverified",
+      "terms": "Minute billing on reserved VM time. New allocations; grandfathered rates are excluded.",
+      "label": "Medium VM"
+    },
+    {
+      "id": "ha-mi300x-4",
+      "provider": "hotaisle",
+      "gpu": "MI300X",
+      "vendor": "AMD",
+      "memoryGB": 192,
+      "gpus": 4,
+      "rate": 2.99,
+      "rateBasis": "per_gpu_hour",
+      "schedules": [],
+      "source": "hotaisle",
+      "reviewedOn": "2026-09-22",
+      "minimumHours": 0,
+      "kind": "on-demand",
+      "allocation": "listed",
+      "stock": "unverified",
+      "terms": "Minute billing on reserved VM time. New allocations; grandfathered rates are excluded.",
+      "label": "Medium VM"
+    },
+    {
+      "id": "ha-mi300x-8",
+      "provider": "hotaisle",
+      "gpu": "MI300X",
+      "vendor": "AMD",
+      "memoryGB": 192,
+      "gpus": 8,
+      "rate": 3.39,
+      "rateBasis": "per_gpu_hour",
+      "schedules": [],
+      "source": "hotaisle",
+      "reviewedOn": "2026-09-22",
+      "minimumHours": 720,
+      "kind": "monthly",
+      "allocation": "listed",
+      "stock": "unverified",
+      "terms": "One-month minimum; model uses a 30-day / 720-hour commitment. Confirm contract month.",
+      "label": "Large bare metal"
+    },
+    {
+      "id": "do-mi300x",
+      "provider": "digitalocean",
+      "gpu": "MI300X",
+      "vendor": "AMD",
+      "memoryGB": 192,
+      "gpus": 1,
+      "rate": 2.59,
+      "rateBasis": "per_gpu_hour",
+      "schedules": [],
+      "source": "digitalocean",
+      "reviewedOn": "2026-09-22",
+      "minimumHours": 0,
+      "kind": "on-demand",
+      "allocation": "listed",
+      "stock": "unverified",
+      "terms": "On-demand. Destroy the instance to stop billing. Official pages disagree on a 1- versus 5-minute minimum; short-run invoice precision is unqualified."
+    },
+    {
+      "id": "do-mi325x",
+      "provider": "digitalocean",
+      "gpu": "MI325X",
+      "vendor": "AMD",
+      "memoryGB": 256,
+      "gpus": 1,
+      "rate": 3.8,
+      "rateBasis": "per_gpu_hour",
+      "schedules": [],
+      "source": "digitalocean",
+      "reviewedOn": "2026-09-22",
+      "minimumHours": 0,
+      "kind": "on-demand",
+      "allocation": "listed",
+      "stock": "unverified",
+      "terms": "On-demand. Destroy the instance to stop billing. Official pages disagree on a 1- versus 5-minute minimum; short-run invoice precision is unqualified."
+    },
+    {
+      "id": "do-h100",
+      "provider": "digitalocean",
+      "gpu": "H100",
+      "vendor": "NVIDIA",
+      "memoryGB": 80,
+      "gpus": 1,
+      "rate": 4.41,
+      "rateBasis": "per_gpu_hour",
+      "schedules": [],
+      "source": "digitalocean",
+      "reviewedOn": "2026-09-22",
+      "minimumHours": 0,
+      "kind": "on-demand",
+      "allocation": "listed",
+      "stock": "unverified",
+      "terms": "On-demand. Destroy the instance to stop billing. Official pages disagree on a 1- versus 5-minute minimum; short-run invoice precision is unqualified."
+    },
+    {
+      "id": "do-h200",
+      "provider": "digitalocean",
+      "gpu": "H200",
+      "vendor": "NVIDIA",
+      "memoryGB": 141,
+      "gpus": 1,
+      "rate": 4.47,
+      "rateBasis": "per_gpu_hour",
+      "schedules": [],
+      "source": "digitalocean",
+      "reviewedOn": "2026-09-22",
+      "minimumHours": 0,
+      "kind": "on-demand",
+      "allocation": "listed",
+      "stock": "unverified",
+      "terms": "On-demand. Destroy the instance to stop billing. Official pages disagree on a 1- versus 5-minute minimum; short-run invoice precision is unqualified."
+    },
+    {
+      "id": "do-l40s",
+      "provider": "digitalocean",
+      "gpu": "L40S",
+      "vendor": "NVIDIA",
+      "memoryGB": 48,
+      "gpus": 1,
+      "rate": 1.57,
+      "rateBasis": "per_gpu_hour",
+      "schedules": [],
+      "source": "digitalocean",
+      "reviewedOn": "2026-09-22",
+      "minimumHours": 0,
+      "kind": "on-demand",
+      "allocation": "listed",
+      "stock": "unverified",
+      "terms": "On-demand. Destroy the instance to stop billing. Official pages disagree on a 1- versus 5-minute minimum; short-run invoice precision is unqualified."
+    },
+    {
+      "id": "do-rtx4000",
+      "provider": "digitalocean",
+      "gpu": "RTX 4000 Ada",
+      "vendor": "NVIDIA",
+      "memoryGB": 20,
+      "gpus": 1,
+      "rate": 0.76,
+      "rateBasis": "per_gpu_hour",
+      "schedules": [],
+      "source": "digitalocean",
+      "reviewedOn": "2026-09-22",
+      "minimumHours": 0,
+      "kind": "on-demand",
+      "allocation": "listed",
+      "stock": "unverified",
+      "terms": "On-demand. Destroy the instance to stop billing. Official pages disagree on a 1- versus 5-minute minimum; short-run invoice precision is unqualified."
+    },
+    {
+      "id": "do-rtx6000",
+      "provider": "digitalocean",
+      "gpu": "RTX 6000 Ada",
+      "vendor": "NVIDIA",
+      "memoryGB": 48,
+      "gpus": 1,
+      "rate": 1.57,
+      "rateBasis": "per_gpu_hour",
+      "schedules": [],
+      "source": "digitalocean",
+      "reviewedOn": "2026-09-22",
+      "minimumHours": 0,
+      "kind": "on-demand",
+      "allocation": "listed",
+      "stock": "unverified",
+      "terms": "On-demand. Destroy the instance to stop billing. Official pages disagree on a 1- versus 5-minute minimum; short-run invoice precision is unqualified."
+    },
+    {
+      "id": "nb-h100",
+      "provider": "nebius",
+      "gpu": "H100",
+      "vendor": "NVIDIA",
+      "memoryGB": 80,
+      "gpus": 1,
+      "rate": 3.85,
+      "rateBasis": "per_gpu_hour",
+      "schedules": [
+        {
+          "effectiveOn": "2026-10-01",
+          "rate": 4.5
+        }
+      ],
+      "source": "nebius",
+      "reviewedOn": "2026-09-22",
+      "minimumHours": 0,
+      "kind": "on-demand",
+      "allocation": "normalized",
+      "stock": "unverified",
+      "terms": "AI Cloud on-demand per-GPU normalization. Confirm actual billable GPU count, region and instance. Memory class is contextual, not a fit test."
+    },
+    {
+      "id": "nb-h200",
+      "provider": "nebius",
+      "gpu": "H200",
+      "vendor": "NVIDIA",
+      "memoryGB": 141,
+      "gpus": 1,
+      "rate": 4.5,
+      "rateBasis": "per_gpu_hour",
+      "schedules": [
+        {
+          "effectiveOn": "2026-10-01",
+          "rate": 5.4
+        }
+      ],
+      "source": "nebius",
+      "reviewedOn": "2026-09-22",
+      "minimumHours": 0,
+      "kind": "on-demand",
+      "allocation": "normalized",
+      "stock": "unverified",
+      "terms": "AI Cloud on-demand per-GPU normalization. Confirm actual billable GPU count, region and instance. Memory class is contextual, not a fit test."
+    },
+    {
+      "id": "nb-b200",
+      "provider": "nebius",
+      "gpu": "B200",
+      "vendor": "NVIDIA",
+      "memoryGB": 180,
+      "gpus": 1,
+      "rate": 7.15,
+      "rateBasis": "per_gpu_hour",
+      "schedules": [
+        {
+          "effectiveOn": "2026-10-01",
+          "rate": 8.5
+        }
+      ],
+      "source": "nebius",
+      "reviewedOn": "2026-09-22",
+      "minimumHours": 0,
+      "kind": "on-demand",
+      "allocation": "normalized",
+      "stock": "unverified",
+      "terms": "AI Cloud on-demand per-GPU normalization. Confirm actual billable GPU count, region and instance. Memory class is contextual, not a fit test."
+    },
+    {
+      "id": "nb-b300",
+      "provider": "nebius",
+      "gpu": "B300",
+      "vendor": "NVIDIA",
+      "memoryGB": 288,
+      "gpus": 1,
+      "rate": 7.85,
+      "rateBasis": "per_gpu_hour",
+      "schedules": [
+        {
+          "effectiveOn": "2026-10-01",
+          "rate": 9.5
+        }
+      ],
+      "source": "nebius",
+      "reviewedOn": "2026-09-22",
+      "minimumHours": 0,
+      "kind": "on-demand",
+      "allocation": "normalized",
+      "stock": "unverified",
+      "terms": "AI Cloud on-demand per-GPU normalization. Confirm actual billable GPU count, region and instance. Memory class is contextual, not a fit test."
+    },
+    {
+      "id": "nb-pro6000",
+      "provider": "nebius",
+      "gpu": "RTX PRO 6000",
+      "vendor": "NVIDIA",
+      "memoryGB": 96,
+      "gpus": 1,
+      "rate": 1.8,
+      "rateBasis": "per_gpu_hour",
+      "schedules": [
+        {
+          "effectiveOn": "2026-10-01",
+          "rate": 1.8
+        }
+      ],
+      "source": "nebius",
+      "reviewedOn": "2026-09-22",
+      "minimumHours": 0,
+      "kind": "on-demand",
+      "allocation": "normalized",
+      "stock": "unverified",
+      "terms": "AI Cloud on-demand per-GPU normalization. Confirm actual billable GPU count, region and instance. Memory class is contextual, not a fit test."
+    },
+    {
+      "id": "rp-a5000",
+      "provider": "runpod",
+      "gpu": "RTX A5000",
+      "vendor": "NVIDIA",
+      "memoryGB": 24,
+      "gpus": 1,
+      "rate": 0.27,
+      "rateBasis": "per_gpu_hour",
+      "schedules": [],
+      "source": "runpod",
+      "reviewedOn": "2026-09-22",
+      "minimumHours": 0,
+      "kind": "public-pods",
+      "allocation": "listed",
+      "stock": "unverified",
+      "terms": "Advertised Pods table. Confirm community/secure tier, region, GPU count, storage and actual quote; stock is not checked."
+    },
+    {
+      "id": "rp-3090",
+      "provider": "runpod",
+      "gpu": "RTX 3090",
+      "vendor": "NVIDIA",
+      "memoryGB": 24,
+      "gpus": 1,
+      "rate": 0.5,
+      "rateBasis": "per_gpu_hour",
+      "schedules": [],
+      "source": "runpod",
+      "reviewedOn": "2026-09-22",
+      "minimumHours": 0,
+      "kind": "public-pods",
+      "allocation": "listed",
+      "stock": "unverified",
+      "terms": "Advertised Pods table. Confirm community/secure tier, region, GPU count, storage and actual quote; stock is not checked."
+    },
+    {
+      "id": "rp-4090",
+      "provider": "runpod",
+      "gpu": "RTX 4090",
+      "vendor": "NVIDIA",
+      "memoryGB": 24,
+      "gpus": 1,
+      "rate": 0.74,
+      "rateBasis": "per_gpu_hour",
+      "schedules": [],
+      "source": "runpod",
+      "reviewedOn": "2026-09-22",
+      "minimumHours": 0,
+      "kind": "public-pods",
+      "allocation": "listed",
+      "stock": "unverified",
+      "terms": "Advertised Pods table. Confirm community/secure tier, region, GPU count, storage and actual quote; stock is not checked."
+    },
+    {
+      "id": "rp-5090",
+      "provider": "runpod",
+      "gpu": "RTX 5090",
+      "vendor": "NVIDIA",
+      "memoryGB": 32,
+      "gpus": 1,
+      "rate": 0.99,
+      "rateBasis": "per_gpu_hour",
+      "schedules": [],
+      "source": "runpod",
+      "reviewedOn": "2026-09-22",
+      "minimumHours": 0,
+      "kind": "public-pods",
+      "allocation": "listed",
+      "stock": "unverified",
+      "terms": "Advertised Pods table. Confirm community/secure tier, region, GPU count, storage and actual quote; stock is not checked."
+    },
+    {
+      "id": "rp-a40",
+      "provider": "runpod",
+      "gpu": "A40",
+      "vendor": "NVIDIA",
+      "memoryGB": 48,
+      "gpus": 1,
+      "rate": 0.49,
+      "rateBasis": "per_gpu_hour",
+      "schedules": [],
+      "source": "runpod",
+      "reviewedOn": "2026-09-22",
+      "minimumHours": 0,
+      "kind": "public-pods",
+      "allocation": "listed",
+      "stock": "unverified",
+      "terms": "Advertised Pods table. Confirm community/secure tier, region, GPU count, storage and actual quote; stock is not checked."
+    },
+    {
+      "id": "rp-a6000",
+      "provider": "runpod",
+      "gpu": "RTX A6000",
+      "vendor": "NVIDIA",
+      "memoryGB": 48,
+      "gpus": 1,
+      "rate": 0.53,
+      "rateBasis": "per_gpu_hour",
+      "schedules": [],
+      "source": "runpod",
+      "reviewedOn": "2026-09-22",
+      "minimumHours": 0,
+      "kind": "public-pods",
+      "allocation": "listed",
+      "stock": "unverified",
+      "terms": "Advertised Pods table. Confirm community/secure tier, region, GPU count, storage and actual quote; stock is not checked."
+    },
+    {
+      "id": "rp-rtx6000",
+      "provider": "runpod",
+      "gpu": "RTX 6000 Ada",
+      "vendor": "NVIDIA",
+      "memoryGB": 48,
+      "gpus": 1,
+      "rate": 0.84,
+      "rateBasis": "per_gpu_hour",
+      "schedules": [],
+      "source": "runpod",
+      "reviewedOn": "2026-09-22",
+      "minimumHours": 0,
+      "kind": "public-pods",
+      "allocation": "listed",
+      "stock": "unverified",
+      "terms": "Advertised Pods table. Confirm community/secure tier, region, GPU count, storage and actual quote; stock is not checked."
+    },
+    {
+      "id": "rp-l40s",
+      "provider": "runpod",
+      "gpu": "L40S",
+      "vendor": "NVIDIA",
+      "memoryGB": 48,
+      "gpus": 1,
+      "rate": 1.09,
+      "rateBasis": "per_gpu_hour",
+      "schedules": [],
+      "source": "runpod",
+      "reviewedOn": "2026-09-22",
+      "minimumHours": 0,
+      "kind": "public-pods",
+      "allocation": "listed",
+      "stock": "unverified",
+      "terms": "Advertised Pods table. Confirm community/secure tier, region, GPU count, storage and actual quote; stock is not checked."
+    },
+    {
+      "id": "rp-a100",
+      "provider": "runpod",
+      "gpu": "A100 PCIe",
+      "vendor": "NVIDIA",
+      "memoryGB": 80,
+      "gpus": 1,
+      "rate": 1.59,
+      "rateBasis": "per_gpu_hour",
+      "schedules": [],
+      "source": "runpod",
+      "reviewedOn": "2026-09-22",
+      "minimumHours": 0,
+      "kind": "public-pods",
+      "allocation": "listed",
+      "stock": "unverified",
+      "terms": "Advertised Pods table. Confirm community/secure tier, region, GPU count, storage and actual quote; stock is not checked."
+    },
+    {
+      "id": "rp-h100",
+      "provider": "runpod",
+      "gpu": "H100 PCIe",
+      "vendor": "NVIDIA",
+      "memoryGB": 80,
+      "gpus": 1,
+      "rate": 2.89,
+      "rateBasis": "per_gpu_hour",
+      "schedules": [],
+      "source": "runpod",
+      "reviewedOn": "2026-09-22",
+      "minimumHours": 0,
+      "kind": "public-pods",
+      "allocation": "listed",
+      "stock": "unverified",
+      "terms": "Advertised Pods table. Confirm community/secure tier, region, GPU count, storage and actual quote; stock is not checked."
+    },
+    {
+      "id": "rp-h100sxm",
+      "provider": "runpod",
+      "gpu": "H100 SXM",
+      "vendor": "NVIDIA",
+      "memoryGB": 80,
+      "gpus": 1,
+      "rate": 3.49,
+      "rateBasis": "per_gpu_hour",
+      "schedules": [],
+      "source": "runpod",
+      "reviewedOn": "2026-09-22",
+      "minimumHours": 0,
+      "kind": "public-pods",
+      "allocation": "listed",
+      "stock": "unverified",
+      "terms": "Advertised Pods table. Confirm community/secure tier, region, GPU count, storage and actual quote; stock is not checked."
+    },
+    {
+      "id": "rp-pro6000",
+      "provider": "runpod",
+      "gpu": "RTX PRO 6000",
+      "vendor": "NVIDIA",
+      "memoryGB": 96,
+      "gpus": 1,
+      "rate": 2.09,
+      "rateBasis": "per_gpu_hour",
+      "schedules": [],
+      "source": "runpod",
+      "reviewedOn": "2026-09-22",
+      "minimumHours": 0,
+      "kind": "public-pods",
+      "allocation": "listed",
+      "stock": "unverified",
+      "terms": "Advertised Pods table. Confirm community/secure tier, region, GPU count, storage and actual quote; stock is not checked."
+    },
+    {
+      "id": "rp-h200",
+      "provider": "runpod",
+      "gpu": "H200",
+      "vendor": "NVIDIA",
+      "memoryGB": 141,
+      "gpus": 1,
+      "rate": 4.59,
+      "rateBasis": "per_gpu_hour",
+      "schedules": [],
+      "source": "runpod",
+      "reviewedOn": "2026-09-22",
+      "minimumHours": 0,
+      "kind": "public-pods",
+      "allocation": "listed",
+      "stock": "unverified",
+      "terms": "Advertised Pods table. Confirm community/secure tier, region, GPU count, storage and actual quote; stock is not checked."
+    },
+    {
+      "id": "rp-b200",
+      "provider": "runpod",
+      "gpu": "B200",
+      "vendor": "NVIDIA",
+      "memoryGB": 180,
+      "gpus": 1,
+      "rate": 6.79,
+      "rateBasis": "per_gpu_hour",
+      "schedules": [],
+      "source": "runpod",
+      "reviewedOn": "2026-09-22",
+      "minimumHours": 0,
+      "kind": "public-pods",
+      "allocation": "listed",
+      "stock": "unverified",
+      "terms": "Advertised Pods table. Confirm community/secure tier, region, GPU count, storage and actual quote; stock is not checked."
+    }
+  ],
+  "boundaries": {
+    "price": "Published price snapshots, not live offers or availability.",
+    "memory": "Advertised memory per GPU; not pooled memory or native artifact-fit qualification.",
+    "performance": "No default throughput, quality, utilization, or revenue assumptions are assigned to a provider.",
+    "billing": "Continuous reserved-time estimate, before unentered extras. Whole-month minimums are explicitly applied."
+  }
 }
 </script>
 <script id="report-engine">/* Hot Aisle Workload Report 2.0.0 | MIT | No I/O, no eval, no dependencies. */
@@ -305,6 +990,370 @@ function recompute(envelope){
 const API={sha256,restoreRun,recompute,VERSION,MAX_REQUESTS,MAX_RUNS,parseDocuments,parseConsole,normalize,aggregate,contract,attachQuality,costing,compare,threshold,quantile,canonical,receiptHTML,escape};if(typeof module==='object'&&module.exports)module.exports=API;root.HA=API;
 })(typeof globalThis==='undefined'?this:globalThis);
 </script>
+<script id="qualified-engine">/* GENERATED by integration/build.py from the instrument sources. */
+(function(root,factory){const H=typeof module==='object'&&module.exports?require('./workload-engine.cjs'):root.HA;const api=factory(H);if(typeof module==='object'&&module.exports)module.exports=api;root.WorkloadQualification=api;})(typeof globalThis!=='undefined'?globalThis:this,function(HA){
+'use strict';
+const authority={"engine": {"engine_sha256": "78600d009f43ca37a81fa15231dfb5be307d8b0a01cfcfe42d94ed8015061593", "version": "2.0.0"}, "sources": {"publication": "ca7b940782c8a10166525b59073ef5181d690b278651236d7fbec91f6e6e2cd0", "record": "00c4bdd43fe2edff1b7681a10417023701be0fc83fbe2a0484e94e50708c8960", "revalidate": "41827343a9223c7764d52c9e16ec40d6fe61a044996f0fa286f04ca10dca2cf5"}};
+const engine={load:()=>HA,identity:()=>authority.engine,sha256:x=>HA.sha256(typeof x==='string'?new TextEncoder().encode(x):x)};
+const record=(()=>{
+'use strict';
+/* The qualified record: one durable object that separates what was observed, what the
+   operator declared, which acceptance rule applied and which economic scenario was
+   priced. Every visible number (headline, report, agent summary, evidence packet) is
+   a projection computed from it through the page's engine. Nothing is typed twice. */
+
+
+function cells(job) {
+  const HA = engine.load();
+  const plan = job.plan;
+  const byConcurrency = new Map();
+  for (const t of job.trials) if (t.status === 'completed') { if (!byConcurrency.has(t.cell.concurrency)) byConcurrency.set(t.cell.concurrency, []); byConcurrency.get(t.cell.concurrency).push(t); }
+  const out = [];
+  for (const [concurrency, trials] of [...byConcurrency.entries()].sort((a, b) => a[0] - b[0])) {
+    const runs = trials.map(t => HA.restoreRun(t.normalized));
+    const settings = { identity: declaredIdentity(plan), ttft: plan.gates.ttft, e2e: plan.gates.e2e, queue: plan.gates.queue, quality: plan.gates.quality };
+    let aggregate, cost, error = null;
+    try { aggregate = HA.aggregate(runs, settings); cost = HA.costing(aggregate, plan.price); } catch (e) { error = e.message; }
+    const check = aggregate ? requirements(aggregate, plan.requirements) : { meets: false, reasons: [error] };
+    out.push({ concurrency, trials: trials.map(t => ({ cell: t.cell, source: t.source, normalized: t.normalized })), settings, aggregate: aggregate || null, cost: cost || null, meets: check.meets, reasons: check.reasons, error });
+  }
+  return out;
+}
+
+function declaredIdentity(plan) {
+  const map = { model_revision: 'revision', precision: 'precision', tokenizer_revision: 'tokenizer', cache_policy: 'cache', runtime_digest: 'runtime', workload_id: 'workload' };
+  const out = {};
+  for (const [k, id] of Object.entries(map)) if (plan.identity[k]) out[id] = plan.identity[k];
+  return out;
+}
+
+function requirements(a, req) {
+  const reasons = [];
+  if (a.holds.length) reasons.push(...a.holds);
+  if (req.max_p95_ttft_ms !== null && req.max_p95_ttft_ms !== undefined) { const v = a.metrics.ttft.p95; if (v === null) reasons.push('p95 TTFT unavailable.'); else if (v > req.max_p95_ttft_ms) reasons.push('p95 TTFT ' + v.toFixed(0) + ' ms exceeds ' + req.max_p95_ttft_ms + ' ms.'); }
+  if (req.max_p95_e2e_ms !== null && req.max_p95_e2e_ms !== undefined) { const v = a.metrics.e2e.p95; if (v === null) reasons.push('p95 E2E unavailable.'); else if (v > req.max_p95_e2e_ms) reasons.push('p95 E2E ' + v.toFixed(0) + ' ms exceeds ' + req.max_p95_e2e_ms + ' ms.'); }
+  if (req.min_accepted_per_s !== null && req.min_accepted_per_s !== undefined) { if (a.rate === null) reasons.push('Accepted rate unavailable.'); else if (a.rate < req.min_accepted_per_s) reasons.push('Accepted rate ' + a.rate.toFixed(3) + '/s below ' + req.min_accepted_per_s + '/s.'); }
+  if (req.max_failure_rate !== null && req.max_failure_rate !== undefined) { if (a.failureRate === null) reasons.push('Failure rate unavailable.'); else if (a.failureRate > req.max_failure_rate) reasons.push('Failure rate ' + (a.failureRate * 100).toFixed(1) + '% exceeds ' + (req.max_failure_rate * 100) + '%.'); }
+  return { meets: !reasons.length, reasons };
+}
+
+function derive(rec) {
+  const HA = engine.load();
+  const job = { plan: rec.declared.plan, trials: rec.observed.trials.map(t => ({ status: 'completed', cell: t.cell, source: t.source, normalized: t.normalized })) };
+  const cs = cells(job);
+  const primary = pickPrimary(cs, rec.declared.plan.primary_concurrency);
+  let comparison = null;
+  if (rec.declared.comparator && primary && primary.cost) {
+    const pc = rec.declared.comparator;
+    comparison = { kind: 'price_threshold', provider: pc.provider, allocation_hour_usd: pc.gpus * pc.rate + (pc.extra || 0), required_rate_to_tie: primary.aggregate.rate !== null && primary.cost.hourly > 0 ? HA.threshold(primary.aggregate.rate, primary.cost.hourly, pc.gpus * pc.rate + (pc.extra || 0)) : null, note: 'Price ratio only. The comparator has no measured evidence in this record.' };
+  }
+  const qualified = !!(primary && primary.meets && primary.aggregate && !primary.aggregate.holds.length);
+  const reasons = primary ? (primary.meets ? ['Primary cell (concurrency ' + primary.concurrency + ') meets every stated requirement.'] : primary.reasons) : ['No completed cell.'];
+  return {
+    cells: cs.map(c => ({ concurrency: c.concurrency, runs: c.trials.length, aggregate: c.aggregate, cost: c.cost, meets: c.meets, reasons: c.reasons, error: c.error })),
+    primary_concurrency: primary ? primary.concurrency : null,
+    comparison,
+    disposition: { qualified, reasons, cells_meeting: cs.filter(c => c.meets).map(c => c.concurrency) },
+    engine: (({ version, engine_sha256 }) => ({ version, engine_sha256 }))(engine.identity()),
+  };
+}
+
+function pickPrimary(cs, wanted) {
+  if (!cs.length) return null;
+  if (wanted !== null && wanted !== undefined) return cs.find(c => c.concurrency === wanted) || null;
+  const meeting = cs.filter(c => c.meets && c.cost && c.cost.costPer1000 !== null);
+  if (meeting.length) return meeting.reduce((best, c) => c.cost.costPer1000 < best.cost.costPer1000 ? c : best);
+  return cs[cs.length - 1];
+}
+
+function build(job) {
+  const HA = engine.load();
+  const rec = {
+    schema: 'hot-aisle/qualified-record@1',
+    id: job.id.replace(/^job-/, 'rec-'),
+    created: new Date().toISOString(),
+    job_id: job.id,
+    synthetic: job.plan.target.adapter === 'local' || job.trials.some(t => t.normalized && t.normalized.synthetic),
+    observed: { trials: job.trials.filter(t => t.status === 'completed').map(t => ({ cell: t.cell, source: t.source, normalized: t.normalized, started: t.started, ended: t.ended })), failed_trials: job.trials.filter(t => t.status === 'failed').map(t => ({ cell: t.cell, error: t.error })), disposition: job.disposition },
+    declared: { plan: job.plan, identity: job.plan.identity, price: job.plan.price, comparator: job.plan.comparator, approval: job.approval },
+    rule: { gates: job.plan.gates, requirements: job.plan.requirements },
+    scenario: { allocation: { label: job.plan.target.allocation_label || (job.plan.price.gpus + '× ' + (job.plan.target.gpu_model || 'GPU')), gpus: job.plan.price.gpus, gpu_model: job.plan.target.gpu_model || null, adapter: job.plan.target.adapter, deployment_id: job.plan.target.deployment_id || null } },
+  };
+  rec.derived = derive(rec);
+  rec.disposition = rec.derived.disposition;
+  rec.sha256 = engine.sha256(HA.canonical(withoutSha(rec)));
+  return rec;
+}
+
+function withoutSha(rec) { const { sha256, ...rest } = rec; return rest; }
+
+/* Recomputes the derived section from observed + declared + rule and compares it to
+   the stored one. Mirrors the engine's own recompute discipline: a record whose stored
+   conclusions do not follow from its evidence is not verified. */
+function verify(rec) {
+  const HA = engine.load();
+  const problems = [];
+  if (rec.schema !== 'hot-aisle/qualified-record@1') problems.push('Unsupported record schema.');
+  if (engine.sha256(HA.canonical(withoutSha(rec))) !== rec.sha256) problems.push('Record checksum mismatch.');
+  const {sha256:planSha,commands,...planBody}=rec.declared.plan;
+  if(engine.sha256(HA.canonical(planBody))!==planSha)problems.push('Plan body does not match its identity.');
+  const fresh = derive(rec);
+  const strip = d => ({ ...d, engine: undefined });
+  if (HA.canonical(strip(fresh)) !== HA.canonical(strip(rec.derived))) problems.push('Derived conclusions do not follow from the retained evidence.');
+  if (rec.synthetic !== (rec.declared.plan.target.adapter === 'local' || rec.observed.trials.some(t => t.normalized.synthetic))) problems.push('Synthetic status mismatch.');
+  if (HA.canonical(rec.disposition) !== HA.canonical(rec.derived.disposition)) problems.push('Top-level disposition differs from the derived verdict.');
+  for (const key of ['price','identity','comparator'])
+    if (HA.canonical(rec.declared[key]) !== HA.canonical(rec.declared.plan[key])) problems.push('Declared '+key+' differs from the approved plan.');
+  for (const key of ['gates','requirements'])
+    if (HA.canonical(rec.rule[key]) !== HA.canonical(rec.declared.plan[key])) problems.push('Rule '+key+' differs from the approved plan.');
+  if (rec.declared.approval && rec.declared.approval.plan_sha256 !== rec.declared.plan.sha256) problems.push('Approval is bound to a different plan.');
+
+  return { verified: !problems.length, problems, engine: fresh.engine };
+}
+
+/* Projections. */
+function primaryCell(rec) { return rec.derived.cells.find(c => c.concurrency === rec.derived.primary_concurrency) || null; }
+
+function packet(rec, concurrency = rec.derived.primary_concurrency) {
+  const HA = engine.load();
+  const cell = rec.derived.cells.find(c => c.concurrency === concurrency);
+  if (!cell || !cell.aggregate) throw new Error('No aggregable cell at concurrency ' + concurrency + '.');
+  const trials = rec.observed.trials.filter(t => t.cell.concurrency === concurrency);
+  const settings = { identity: declaredIdentity(rec.declared.plan), ttft: rec.rule.gates.ttft, e2e: rec.rule.gates.e2e, queue: rec.rule.gates.queue, quality: rec.rule.gates.quality };
+  const side = { id: 'a', label: rec.declared.price.provider, settings, price: rec.declared.price, normalized: trials.map(t => t.normalized), aggregate: cell.aggregate, cost: cell.cost };
+  const p = { schema: 'hot-aisle/workload-report@2', version: HA.VERSION, generated_at: rec.created, title: cell.aggregate.identity.model || 'Workload cost report', synthetic: !!cell.aggregate.synthetic, sides: [side], comparison: null };
+  return { schema: 'hot-aisle/sealed-report@1', sha256: engine.sha256(HA.canonical(p)), payload: p };
+}
+
+function receipt(rec, concurrency) {
+  const HA = engine.load();
+  const env = packet(rec, concurrency);
+  return HA.receiptHTML(env.payload).replace('</footer>', '<p class="hash">Evidence JSON payload SHA-256: ' + env.sha256 + '</p><p class="hash">Qualified record ' + HA.escape(rec.id) + ' · ' + rec.sha256 + '</p></footer>');
+}
+
+function headline(rec, { evidence_url = null, report_url = null, published_on = null } = {}) {
+  const cell = primaryCell(rec);
+  const a = cell && cell.aggregate, c = cell && cell.cost;
+  const plan = rec.declared.plan;
+  const side = { label: rec.declared.price.provider, allocation: rec.scenario.allocation.label, rate: '$' + rec.declared.price.rate.toFixed(2) + ' / GPU-hr', cost_per_1000: c ? c.costPer1000 : null, p95_ttft_ms: a ? a.metrics.ttft.p95 : null, p95_e2e_ms: a ? a.metrics.e2e.p95 : null, runs: a ? a.runs : 0, accepted_per_s: a ? a.rate : null, unit: a ? a.unit : null };
+  const comp = rec.declared.comparator ? { label: rec.declared.comparator.provider, allocation: rec.declared.comparator.gpus + '× ' + rec.declared.comparator.provider.replace(/^Nebius /, ''), rate: '$' + rec.declared.comparator.rate.toFixed(2) + ' / GPU-hr', cost_per_1000: null, p95_ttft_ms: null, p95_e2e_ms: null, runs: 0, price_only: true, required_rate_to_tie: rec.derived.comparison ? rec.derived.comparison.required_rate_to_tie : null } : null;
+  return {
+    schema: 'hot-aisle/headline@2', status: rec.synthetic ? 'demonstration' : 'published', record_id: rec.id, record_sha256: rec.sha256, generated: true,
+    unit: a ? a.unit : 'accepted requests',
+    workload: plan.workload.model + ' · ' + plan.workload.input_len.toLocaleString('en-US') + ' in / ' + plan.workload.output_len + ' out · concurrency ' + plan.concurrency.join(', '),
+    primary_concurrency: rec.derived.primary_concurrency,
+    qualified: rec.disposition.qualified, reasons: rec.disposition.reasons,
+    sides: comp ? [side, comp] : [side],
+    saving: null,
+    published_on, evidence_url, report_url,
+  };
+}
+
+function summary(rec) {
+  const h = headline(rec);
+  const s = h.sides[0];
+  const lines = [(rec.synthetic ? 'DEMONSTRATION (synthetic) — ' : '') + 'Qualified record ' + rec.id + ': ' + (rec.disposition.qualified ? 'QUALIFIED' : 'NOT QUALIFIED')];
+  lines.push(h.workload);
+  lines.push(s.label + ' · ' + s.allocation + ' · ' + s.rate + ': ' + (s.cost_per_1000 === null ? 'no finite cost' : '$' + s.cost_per_1000.toFixed(s.cost_per_1000 < 1 ? 4 : 2)) + ' per 1,000 ' + h.unit + ' at concurrency ' + h.primary_concurrency + '; p95 TTFT ' + fmt(s.p95_ttft_ms) + ' ms; p95 E2E ' + fmt(s.p95_e2e_ms) + ' ms; ' + s.runs + ' trial(s).');
+  for (const c of rec.derived.cells) lines.push('  concurrency ' + c.concurrency + ': ' + (c.meets ? 'meets requirements' : 'does not meet: ' + c.reasons.join(' ')) + (c.cost && c.cost.costPer1000 !== null ? ' · $' + c.cost.costPer1000.toFixed(4) + '/1,000' : ''));
+  if (h.sides[1]) lines.push(h.sides[1].label + ' at ' + h.sides[1].rate + ' would need ' + fmt(h.sides[1].required_rate_to_tie, 3) + ' ' + h.unit + '/s to tie on rental cost (price ratio, not a measurement).');
+  lines.push('Reasons: ' + rec.disposition.reasons.join(' '));
+  return lines.join('\n');
+}
+
+function fmt(v, d = 0) { return v === null || v === undefined ? '—' : Number(v).toLocaleString('en-US', { maximumFractionDigits: d }); }
+
+return { build, verify, derive, packet, receipt, headline, summary, primaryCell, requirements, declaredIdentity };
+
+})();
+const revalidate=(()=>{
+'use strict';
+/* Selective revalidation. Given a qualified record and a change, decide which
+   conclusions still stand, which can be recomputed from retained evidence with no
+   GPU time, which require new measurement, and the smallest plan that restores
+   confidence. The dependency model is explicit so the answer is inspectable. */
+
+
+
+const RUNTIME_KEYS = ['model_revision', 'precision', 'tokenizer_revision', 'runtime_digest', 'cache_policy'];
+const WORKLOAD_KEYS = ['model', 'dataset', 'input_len', 'output_len', 'num_prompts', 'request_rate', 'backend'];
+
+function revalidate(rec, change) {
+  const verified=record.verify(rec);if(!verified.verified)throw Error('Revalidation requires a verified record: '+verified.problems.join(' '));
+  if(change?.price?.gpus!==undefined&&change.price.gpus!==rec.declared.plan.price.gpus)throw Error('A different GPU allocation requires new performance qualification; change only its price here.');
+  if (!change || typeof change !== 'object') throw new Error('change must be an object.');
+  const kinds = Object.keys(change).filter(k => change[k] !== undefined && change[k] !== null);
+  if (!kinds.length) throw new Error('Nothing changed.');
+  const plan = rec.declared.plan;
+  const conclusions = [];
+  let candidate = null, scenario = null, requiredCells = new Set(), reevaluate = false;
+
+  /* Economics depend only on price inputs and retained aggregates. */
+  if (change.price) {
+    const price = { ...plan.price, ...change.price };
+    scenario = priceScenario(rec, price);
+    conclusions.push(c('economics', 'recomputed', 'Cost per 1,000 recomputed from retained trials at ' + price.gpus + ' × $' + price.rate + ' + $' + (price.extra || 0) + '/h. No GPU time.'));
+    conclusions.push(c('performance', 'stands', 'Throughput and latency do not depend on price.'));
+  }
+
+  /* Gates change the accepted denominator; recomputable only when request rows exist. */
+  if (change.gates) {
+    const rows = rec.observed.trials.every(t => t.normalized.rows);
+    if (rows && !(change.gates.quality && !rec.observed.trials.every(t => t.normalized.quality))) {
+      scenario = gateScenario(rec, { ...plan.gates, ...change.gates }, scenario);
+      conclusions.push(c('acceptance', 'recomputed', 'Accepted counts recomputed from retained per-request samples under the new gates.'));
+    } else {
+      for (const cell of rec.derived.cells) requiredCells.add(cell.concurrency);
+      conclusions.push(c('acceptance', 'requires_measurement', rows ? 'Evaluator-passed gating needs a sidecar for every trial; none retained.' : 'Retained trials have no per-request samples; gating needs a detailed rerun.'));
+    }
+  }
+
+  /* Requirements are thresholds over existing aggregates: always recomputable. */
+  if (change.requirements) {
+    scenario = requirementScenario(rec, { ...plan.requirements, ...change.requirements }, scenario);
+    conclusions.push(c('qualification', 'recomputed', 'Requirement thresholds re-applied to retained aggregates.'));
+  }
+
+  /* Traffic: cells already measured under identical workload stand; new cells need
+     measurement; a changed request shape is a different workload identity. */
+  if (change.traffic) {
+    const t = change.traffic;
+    const shapeChanged = WORKLOAD_KEYS.some(k => t[k] !== undefined && t[k] !== plan.workload[k]);
+    const wanted = t.concurrency ? [...new Set(t.concurrency.map(Number))].sort((a, b) => a - b) : plan.concurrency;
+    if (shapeChanged) {
+      for (const cc of wanted) requiredCells.add(cc);
+      conclusions.push(c('capacity', 'requires_measurement', 'Request shape changed (' + WORKLOAD_KEYS.filter(k => t[k] !== undefined && t[k] !== plan.workload[k]).join(', ') + '); every cell needs new evidence under the new workload identity.'));
+    } else {
+      const have = new Set(rec.derived.cells.map(x => x.concurrency));
+      const missing = wanted.filter(x => !have.has(x)), kept = wanted.filter(x => have.has(x));
+      for (const cc of missing) requiredCells.add(cc);
+      if (kept.length) conclusions.push(c('capacity', 'stands', 'Cells at concurrency ' + kept.join(', ') + ' were measured under this workload and stand.'));
+      if (missing.length) conclusions.push(c('capacity', 'requires_measurement', 'Concurrency ' + missing.join(', ') + ' has no evidence; ' + plan.repeats + ' trial(s) each.'));
+      const dropped = [...have].filter(x => !wanted.includes(x));
+      if (dropped.length) conclusions.push(c('capacity', 'stands', 'Concurrency ' + dropped.join(', ') + ' no longer requested; evidence retained.'));
+    }
+  }
+
+  /* Runtime or model identity: the record is superseded; a new candidate is planned. */
+  if (change.runtime) {
+    const changed = RUNTIME_KEYS.filter(k => change.runtime[k] !== undefined && change.runtime[k] !== plan.identity[k]);
+    if (changed.length) {
+      candidate = { ...cloneInput(plan), identity: { ...plan.identity, ...pick(change.runtime, RUNTIME_KEYS) } };
+      for (const cc of plan.concurrency) requiredCells.add(cc);
+      conclusions.push(c('qualification', 'superseded', 'Runtime identity changed (' + changed.join(', ') + '). This record stays as history; a new candidate qualification covers all cells.'));
+      conclusions.push(c('economics', 'stands', 'Price inputs are unchanged, but they will be applied to the candidate\'s new measurements.'));
+    } else conclusions.push(c('qualification', 'stands', 'Declared runtime identity is unchanged.'));
+  }
+
+  /* Evaluator correction: only evaluator-gated conclusions are affected, and they need
+     re-adjudication of retained requests, not new GPU time. */
+  if (change.evaluator) {
+    if (plan.gates.quality) { reevaluate = true; conclusions.push(c('acceptance', 'requires_reevaluation', 'Acceptance counted evaluator-passed outcomes. Re-run the corrected evaluator over the retained request set and attach new sidecars; no benchmark rerun.')); }
+    else conclusions.push(c('acceptance', 'stands', 'Acceptance did not depend on an evaluator.'));
+  }
+
+  const required = [...requiredCells].sort((a, b) => a - b);
+  let minimal = null;
+  if (required.length) {
+    const base = candidate || cloneInput(plan);
+    if (change.traffic) base.workload = { ...base.workload, ...pick(change.traffic, WORKLOAD_KEYS) };
+    minimal = { ...base, concurrency: required, note: (required.length === plan.concurrency.length && !change.traffic ? 'Full candidate qualification.' : 'Only the cells without valid evidence.') + ' Prior trials are retained in ' + rec.id + '.' };
+  }
+  const summary = { stands: conclusions.filter(x => x.status === 'stands').length, recomputed: conclusions.filter(x => x.status === 'recomputed').length, requires_measurement: required.length ? required.length * plan.repeats : 0, superseded: conclusions.some(x => x.status === 'superseded') };
+  return { schema: 'hot-aisle/revalidation@1', record_id: rec.id, change, conclusions, scenario, minimal_plan: minimal, reevaluate, summary };
+}
+
+function c(subject, status, detail) { return { subject, status, detail }; }
+function pick(o, keys) { const out = {}; for (const k of keys) if (o[k] !== undefined) out[k] = o[k]; return out; }
+function cloneInput(plan) {
+  return { target: { ...plan.target }, workload: { ...plan.workload }, concurrency: [...plan.concurrency], repeats: plan.repeats, identity: { ...plan.identity }, price: { ...plan.price }, comparator: plan.comparator ? { ...plan.comparator } : null, limits: { ...plan.limits }, gates: { ...plan.gates }, requirements: { ...plan.requirements }, primary_concurrency: plan.primary_concurrency };
+}
+
+/* Scenario projections reuse the record's own machinery with substituted inputs; the
+   observed section is untouched. */
+function rederive(rec, planPatch) {
+  const clone = JSON.parse(JSON.stringify(rec));
+  Object.assign(clone.declared.plan, planPatch);
+  if (planPatch.price) clone.declared.price = planPatch.price;
+  if (planPatch.gates) clone.rule.gates = planPatch.gates;
+  if (planPatch.requirements) clone.rule.requirements = planPatch.requirements;
+  const derived = record.derive(clone);
+  return { cells: derived.cells.map(x => ({ concurrency: x.concurrency, cost_per_1000: x.cost ? x.cost.costPer1000 : null, accepted_per_s: x.aggregate ? x.aggregate.rate : null, unit: x.aggregate ? x.aggregate.unit : null, meets: x.meets, reasons: x.reasons })), primary_concurrency: derived.primary_concurrency, qualified: derived.disposition.qualified, reasons: derived.disposition.reasons };
+}
+function priceScenario(rec, price) { return { kind: 'price', price, ...rederive(rec, { price }) }; }
+function gateScenario(rec, gates, prev) { const s = rederive(rec, { gates, ...(prev && prev.price ? { price: prev.price } : {}) }); return { kind: prev ? prev.kind + '+gates' : 'gates', gates, ...(prev && prev.price ? { price: prev.price } : {}), ...s }; }
+function requirementScenario(rec, requirements, prev) { const s = rederive(rec, { requirements, ...(prev && prev.price ? { price: prev.price } : {}), ...(prev && prev.gates ? { gates: prev.gates } : {}) }); return { ...(prev || {}), kind: prev ? prev.kind + '+requirements' : 'requirements', requirements, ...s }; }
+
+return { revalidate, RUNTIME_KEYS, WORKLOAD_KEYS };
+
+})();
+const publication=(()=>{
+'use strict';
+/* The runner owns the qualified record and its publication contract.
+   A desk consumes this pair; it never interprets raw vLLM rows again. */
+
+
+
+function verifyRecord(rec) {
+  if (!rec || typeof rec !== 'object') throw Error('Qualified record required.');
+  const v = record.verify(rec);
+  if (!v.verified) throw Error('Qualified record rejected: ' + v.problems.join(' '));
+  if (rec.derived.engine.engine_sha256 !== engine.identity().engine_sha256)
+    throw Error('Report-engine identity differs; requalify the verifier for this record.');
+  return rec;
+}
+function bundle(rec) {
+  verifyRecord(rec);
+  const evidence = record.packet(rec);
+  engine.load().recompute(evidence);
+  return {schema:'hot-aisle/publication@1', record:rec, evidence};
+}
+function verify(input) {
+  if (!input || input.schema !== 'hot-aisle/publication@1') throw Error('Unsupported publication contract.');
+  const rec = verifyRecord(input.record), HA=engine.load();
+  HA.recompute(input.evidence);
+  if (HA.canonical(input.evidence) !== HA.canonical(record.packet(rec)))
+    throw Error('Evidence packet does not belong to this qualified record and primary cell.');
+  return input;
+}
+function identity(input) {
+  verify(input);
+  return engine.sha256(engine.load().canonical(input));
+}
+function projection(input) {
+  verify(input);
+  const rec=input.record, cell=record.primaryCell(rec);
+  const expected=rec.declared.plan.concurrency.length*rec.declared.plan.repeats;
+  return {publication_id:rec.id+'-'+rec.sha256.slice(0,16), record_id:rec.id,
+    record_sha256:rec.sha256, publication_sha256:identity(input),
+    model:rec.declared.plan.workload.model, created:rec.created,
+    synthetic:rec.synthetic, qualified:rec.disposition.qualified,
+    completed_trials:rec.observed.trials.length, expected_trials:expected,
+    complete:rec.observed.trials.length===expected && rec.observed.failed_trials.length===0,
+    primary_concurrency:rec.derived.primary_concurrency,
+    headline:record.headline(rec), cell};
+}
+return {bundle,verify,identity,projection};
+
+})();
+
+function decision(bundle,change=null,createdAt=new Date().toISOString(),previous=null){
+ if(previous!==null&&!/^[a-f0-9]{64}$/.test(previous))throw Error("Invalid previous decision identity.");
+ publication.verify(bundle);
+ const result=change?revalidate.revalidate(bundle.record,change):publication.projection(bundle);
+ const payload={kind:'qualified-record',createdAt,title:bundle.record.declared.plan.workload.model,bundle,change,result,...(previous?{previous}:{})};
+ return {schema:'second-run/qualified-decision@1',sha256:engine.sha256(HA.canonical(payload)),payload};
+}
+function verifyDecision(envelope){
+ if(envelope?.schema!=='second-run/qualified-decision@1'||envelope.sha256!==engine.sha256(HA.canonical(envelope.payload)))throw Error('Qualified decision checksum mismatch.');
+ const fresh=decision(envelope.payload.bundle,envelope.payload.change,envelope.payload.createdAt,envelope.payload.previous||null);
+ if(HA.canonical(fresh)!==HA.canonical(envelope))throw Error('Qualified decision does not recompute from its instrument record.');
+ return envelope;
+}
+return {authority,record,revalidate:revalidate.revalidate,publication,decision,verifyDecision};
+});
+</script>
+
 <script id="sample-data" type="application/json">{
   "a": {
     "synthetic": true,
@@ -446,19 +1495,25 @@ const API={sha256,restoreRun,recompute,VERSION,MAX_REQUESTS,MAX_RUNS,parseDocume
 <script id="report-app">(function(){
 'use strict';
 const $=id=>document.getElementById(id),E=HA.escape,prices=JSON.parse($('prices-data').textContent);
+const catalogue=JSON.parse($('catalog-data').textContent),Q=WorkloadQualification;
+const providerName=id=>catalogue.providers.find(p=>p.id===id)?.name||id;
+const comparatorOffers=catalogue.offers.filter(o=>o.provider!=='hotaisle').sort((a,b)=>(a.id==='do-h100'?-1:b.id==='do-h100'?1:0));
+function scheduledRate(o){let rate=o.rate;const date=$('price-period').value==='october_gpu_hour'?'2026-10-01':catalogue.reviewedOn;for(const s of [...(o.schedules||[])].sort((a,b)=>a.effectiveOn.localeCompare(b.effectiveOn)))if(s.effectiveOn<=date)rate=s.rate;return rate;}
+function offerLabel(o){return providerName(o.provider)+' · '+o.gpus+'× '+o.gpu;}
+
 const state={a:[],b:[]},names={a:'Hot Aisle',b:'Comparison'},overrides={a:{},b:{}};
 let current=null,pasteSide='a',busy=false,sequence=0;
 const fmt=(v,d=2)=>v===null||v===undefined?'—':v.toLocaleString('en-US',{maximumFractionDigits:d}),money=v=>v===null||v===undefined?'—':'$'+v.toFixed(v<1?4:2);
 const fields=[['model','Model'],['revision','Model revision'],['precision','Precision / representation'],['tokenizer','Tokenizer revision'],['workload','Request-set ID / digest'],['cache','Cache policy'],['load','Offered load / concurrency'],['runtime','Runtime / container digest']];
-function lane(s){return '<section class="lane'+(s==='a'?' me':'')+'" id="lane-'+s+'"><div class="lanehead"><h2>'+names[s]+'</h2><span class="mini">'+(s==='a'?'Side A · MI300X':'Side B · optional')+'</span></div><input class="fileinput" id="file-'+s+'" type="file" accept=".json,.jsonl,.ndjson,.txt,.log" multiple><button type="button" class="drop" id="drop-'+s+'"><b>Drop vLLM result files</b><span>or click to browse · JSON / JSONL / console output</span></button><div class="row"><button type="button" id="paste-'+s+'">Paste output</button><button type="button" id="clear-'+s+'">Clear</button></div><p id="error-'+s+'" class="error" role="alert"></p><ul id="runs-'+s+'" class="runlist"></ul><div style="margin-top:16px"><label for="preset-'+s+'">Billable allocation</label><select id="preset-'+s+'">'+(s==='a'?'<option value="vm1">Small VM · 1× MI300X</option><option value="vm2">Medium VM · 2× MI300X</option><option value="vm4">Medium VM · 4× MI300X</option><option value="bare8">Large bare metal · 8× MI300X</option>':prices.nebius_ai_cloud.products.map((p,i)=>'<option value="'+i+'">Nebius '+E(p.gpu)+'</option>').join(''))+'<option value="custom">Custom rate / quote</option></select></div><div class="three" style="margin-top:12px"><div><label for="gpus-'+s+'">Billed GPUs</label><input id="gpus-'+s+'" type="number" min="1" step="1" value="1"></div><div><label for="rate-'+s+'">$ / GPU-hour</label><input id="rate-'+s+'" type="number" min="0" step="any" value="'+(s==='a'?2.99:3.85)+'"></div><div><label for="extra-'+s+'">Extras $ / hour</label><input id="extra-'+s+'" type="number" min="0" step="any" value="0"></div></div><p class="fine" id="price-note-'+s+'"></p><details><summary>Whole-bill cost and price source</summary><p class="fine">Leave blank for steady-window rental arithmetic. Enter the entire charge only when the imported results belong to that billing interval; include paid idle time and all allocations.</p><label for="total-'+s+'">Total charge for these imported results ($)</label><input id="total-'+s+'" type="number" min="0" step="any" placeholder="Optional total-charge override"><label for="quote-'+s+'" style="margin-top:10px">Quote / cost explanation</label><input id="quote-'+s+'" type="text" maxlength="500" placeholder="Optional quote ID, terms or billing note"></details><details id="identity-'+s+'"><summary>Comparison conditions <span id="identity-status-'+s+'"></span></summary><p class="fine">Known metadata fills automatically. Supply missing identifiers to compare equivalent work. Conflicts with imported metadata are held, not overwritten.</p><div class="two">'+fields.map(([key,label])=>'<div><label for="'+s+'-'+key+'">'+label+'</label><input id="'+s+'-'+key+'" type="text" maxlength="500" placeholder="Not in source"></div>').join('')+'</div></details><details><summary>Attach request-evaluation evidence</summary><p class="fine">Optional, hash-bound per-request pass/fail JSON. A transport success alone never counts as a correct answer.</p><input type="file" id="quality-'+s+'" accept=".json" multiple aria-label="'+names[s]+' evaluation sidecars"><p class="fine"><a href="FORMATS.md">Sidecar format</a></p></details></section>';}
+function lane(s){return '<section class="lane'+(s==='a'?' me':'')+'" id="lane-'+s+'"><div class="lanehead"><h2>'+names[s]+'</h2><span class="mini">'+(s==='a'?'Side A · MI300X':'Side B · optional')+'</span></div><input class="fileinput" id="file-'+s+'" type="file" accept=".json,.jsonl,.ndjson,.txt,.log" multiple><button type="button" class="drop" id="drop-'+s+'"><b>Drop vLLM result files</b><span>or click to browse · JSON / JSONL / console output</span></button><div class="row"><button type="button" id="paste-'+s+'">Paste output</button><button type="button" id="clear-'+s+'">Clear</button></div><p id="error-'+s+'" class="error" role="alert"></p><ul id="runs-'+s+'" class="runlist"></ul><div style="margin-top:16px"><label for="preset-'+s+'">Billable allocation</label><select id="preset-'+s+'">'+(s==='a'?'<option value="vm1">Small VM · 1× MI300X</option><option value="vm2">Medium VM · 2× MI300X</option><option value="vm4">Medium VM · 4× MI300X</option><option value="bare8">Large bare metal · 8× MI300X</option>':comparatorOffers.map((p,i)=>'<option value="'+i+'">'+E(offerLabel(p))+'</option>').join(''))+'<option value="custom">Custom rate / quote</option></select></div><div class="three" style="margin-top:12px"><div><label for="gpus-'+s+'">Billed GPUs</label><input id="gpus-'+s+'" type="number" min="1" step="1" value="1"></div><div><label for="rate-'+s+'">$ / GPU-hour</label><input id="rate-'+s+'" type="number" min="0" step="any" value="'+(s==='a'?prices.hot_aisle.vm_gpu_hour:scheduledRate(comparatorOffers[0]))+'"></div><div><label for="extra-'+s+'">Extras $ / hour</label><input id="extra-'+s+'" type="number" min="0" step="any" value="0"></div></div><p class="fine" id="price-note-'+s+'"></p><details><summary>Whole-bill cost and price source</summary><p class="fine">Leave blank for steady-window rental arithmetic. Enter the entire charge only when the imported results belong to that billing interval; include paid idle time and all allocations.</p><label for="total-'+s+'">Total charge for these imported results ($)</label><input id="total-'+s+'" type="number" min="0" step="any" placeholder="Optional total-charge override"><label for="quote-'+s+'" style="margin-top:10px">Quote / cost explanation</label><input id="quote-'+s+'" type="text" maxlength="500" placeholder="Optional quote ID, terms or billing note"></details><details id="identity-'+s+'"><summary>Comparison conditions <span id="identity-status-'+s+'"></span></summary><p class="fine">Known metadata fills automatically. Supply missing identifiers to compare equivalent work. Conflicts with imported metadata are held, not overwritten.</p><div class="two">'+fields.map(([key,label])=>'<div><label for="'+s+'-'+key+'">'+label+'</label><input id="'+s+'-'+key+'" type="text" maxlength="500" placeholder="Not in source"></div>').join('')+'</div></details><details><summary>Attach request-evaluation evidence</summary><p class="fine">Optional, hash-bound per-request pass/fail JSON. A transport success alone never counts as a correct answer.</p><input type="file" id="quality-'+s+'" accept=".json" multiple aria-label="'+names[s]+' evaluation sidecars"><p class="fine"><a href="FORMATS.md">Sidecar format</a></p></details></section>';}
 $('lanes').innerHTML=lane('a')+lane('b');
 async function digest(bytes){if(!globalThis.crypto?.subtle)return HA.sha256(bytes);return [...new Uint8Array(await crypto.subtle.digest('SHA-256',bytes))].map(b=>b.toString(16).padStart(2,'0')).join('');}
 const asBytes=s=>new TextEncoder().encode(s);
 function numberInput(id,optional=false){let s=$(id).value.trim();if(optional&&s==='')return null;if(!s)throw Error('Complete '+$(id).previousElementSibling.textContent+'.');const n=Number(s);if(!Number.isFinite(n)||n<0)throw Error('Use a finite nonnegative number for '+$(id).previousElementSibling.textContent+'.');return n;}
 function settings(s){const i={};for(const [k] of fields)if(overrides[s][k])i[k]=overrides[s][k];return {identity:i,ttft:numberInput('gate-ttft',true),e2e:numberInput('gate-e2e',true),queue:$('gate-queue').checked,quality:$('gate-quality').checked};}
-function price(s){const preset=$('preset-'+s).value,custom=preset==='custom',period=$('price-period').value;
- return {provider:s==='a'?'Hot Aisle':custom?'Custom comparator':'Nebius '+prices.nebius_ai_cloud.products[Number(preset)].gpu,gpus:numberInput('gpus-'+s),rate:numberInput('rate-'+s),extra:numberInput('extra-'+s),total:numberInput('total-'+s,true),quote:$('quote-'+s).value,source:custom?'user-entered rate':s==='a'?prices.hot_aisle.source:prices.nebius_ai_cloud.source,period:custom?'user-supplied':s==='b'&&period==='october_gpu_hour'?'announced 2026-10-01':'2026-09-22 snapshot'};}
-function priceNote(s){let p=price(s);$('price-note-'+s).textContent=p.source==='user-entered rate'?'Custom rate. Record the applicable quote or terms.':s==='a'?($('preset-a').value==='bare8'?'One-month minimum; window estimates are not the whole commitment.':'Billed by the minute. Window estimates exclude paid time outside the benchmark.'):'AI Cloud list-rate normalization; confirm available instance size. '+p.period+'.';}
+function price(s){const preset=$('preset-'+s).value,custom=preset==='custom',offer=s==='b'&&!custom?comparatorOffers[Number(preset)]:null;
+ return {provider:s==='a'?'Hot Aisle':custom?'Custom comparator':providerName(offer.provider)+' '+offer.gpu,gpus:numberInput('gpus-'+s),rate:numberInput('rate-'+s),extra:numberInput('extra-'+s),total:numberInput('total-'+s,true),quote:$('quote-'+s).value,source:custom?'user-entered rate':s==='a'?prices.hot_aisle.source:catalogue.sources[offer.source].url,period:custom?'user-supplied':$('price-period').value==='october_gpu_hour'?'announced 2026-10-01; reviewed '+catalogue.reviewedOn:catalogue.reviewedOn+' snapshot'};}
+function priceNote(s){const p=price(s),i=$('preset-'+s).value;const o=s==='b'&&i!=='custom'?comparatorOffers[Number(i)]:null;$('price-note-'+s).textContent=i==='custom'?'Custom quote. Retain its source and full billing terms.':o?o.terms+' · '+p.period: i==='bare8'?'One-month minimum. Supply the full bill for whole-commitment economics.':'Minute billing. Benchmark-window costs exclude other paid time.';}
 function syncIdentities(s){const c=HA.contract(state[s],overrides[s]);for(const [k] of fields)if(!overrides[s][k])$(s+'-'+k).value=c.values[k]||'';const missing=fields.filter(([k])=>k!=='runtime'&&!c.values[k]).length;$('identity-status-'+s).textContent=!state[s].length?'':missing?'· '+missing+' missing':'· supplied';}
 function renderRuns(s){$('runs-'+s).replaceChildren();for(let i=0;i<state[s].length;i++){let r=state[s][i],li=document.createElement('li'),t=document.createElement('span'),b=document.createElement('button');b.type='button';t.textContent='Trial '+(i+1)+' · '+r.completed+' completed / '+(r.attempted??'?')+' · '+fmt(r.duration)+' s'+(r.quality?' · evaluation attached':'');b.textContent='Remove';b.setAttribute('aria-label','Remove '+s+' trial '+(i+1));b.onclick=()=>{state[s].splice(i,1);syncIdentities(s);renderRuns(s);update();};li.append(t,b);$('runs-'+s).append(li);}}
 function metricCell(m,p){return m[p]!==null&&m[p]!==undefined?fmt(m[p],1):m.ranges?.[p]?m.ranges[p].map(x=>fmt(x,1)).join('–'):'—';}
@@ -479,7 +1534,8 @@ function update(){
  for(const id of ['save-html','save-json','copy'])$(id).disabled=!current||busy;
  renderBreakEven();
 }
-function renderBreakEven(){const period=$('price-period').value,me=prices.hot_aisle.vm_gpu_hour;$('breaktable').innerHTML='<div class="tile me"><div class="k"><span>MI300X VM</span><span>Hot Aisle</span></div><div class="v">'+money(me)+'</div><div class="s">per GPU-hour, billed by the minute</div></div>'+prices.nebius_ai_cloud.products.map(p=>'<div class="tile"><div class="k"><span>'+E(p.gpu)+'</span><span>'+money(p[period])+'/hr</span></div><div class="v">'+fmt(100*me/p[period],0)+'%</div><div class="s">of its throughput ties the rental cost</div></div>').join('');}
+function renderBreakEven(){const me=prices.hot_aisle.vm_gpu_hour,ids=['do-h100','do-mi300x','nb-h100','nb-h200','nb-b200'];$('breaktable').innerHTML='<div class="tile me"><div class="k"><span>MI300X VM</span><span>Hot Aisle</span></div><div class="v">'+money(me)+'</div><div class="s">per GPU-hour, billed by the minute</div></div>'+ids.map(id=>catalogue.offers.find(o=>o.id===id)).map(o=>'<div class="tile"><div class="k"><span>'+E(providerName(o.provider)+' '+o.gpu)+'</span><span>'+money(scheduledRate(o))+'/hr</span></div><div class="v">'+fmt(100*me/scheduledRate(o),0)+'%</div><div class="s">of its throughput ties the rental cost</div></div>').join('');}
+
 async function importSources(s,files){
  if(busy)throw Error('Wait for the current import to finish.');busy=true;update();$('error-'+s).textContent='Reading and hashing locally…';
  try{if(files.length>50)throw Error('Choose at most 50 files.');if(files.reduce((n,f)=>n+f.size,0)>50*1024*1024)throw Error('Import at most 50 MiB in one batch.');let next=[...state[s]],evaluations=[];
@@ -493,7 +1549,7 @@ async function importSources(s,files){
  finally{busy=false;update();}
 }
 function reset(s){state[s]=[];overrides[s]={};for(const [k] of fields)$(s+'-'+k).value='';$('error-'+s).textContent='';renderRuns(s);syncIdentities(s);update();}
-function preset(s){const v=$('preset-'+s).value;if(v==='custom'){update();return;}if(s==='a'){const n=v==='bare8'?8:Number(v.slice(2));$('gpus-a').value=n;$('rate-a').value=v==='bare8'?3.39:2.99;}else $('rate-b').value=prices.nebius_ai_cloud.products[Number(v)][$('price-period').value];update();}
+function preset(s){const v=$('preset-'+s).value;if(v==='custom'){update();return;}if(s==='a'){const n=v==='bare8'?8:Number(v.slice(2));$('gpus-a').value=n;$('rate-a').value=v==='bare8'?3.39:2.99;}else {$('rate-b').value=scheduledRate(comparatorOffers[Number(v)]);$('gpus-b').value=comparatorOffers[Number(v)].gpus;}update();}
 for(const s of ['a','b']){
  $('drop-'+s).onclick=()=>$('file-'+s).click();$('file-'+s).onchange=e=>{importSources(s,[...e.target.files]).catch(()=>{});e.target.value='';};$('quality-'+s).onchange=e=>{importSources(s,[...e.target.files]).catch(()=>{});e.target.value='';};
  const drop=$('drop-'+s);drop.ondragover=e=>{e.preventDefault();drop.classList.add('drag');};drop.ondragleave=()=>drop.classList.remove('drag');drop.ondrop=e=>{e.preventDefault();drop.classList.remove('drag');importSources(s,[...e.dataTransfer.files]).catch(()=>{});};
@@ -523,16 +1579,9 @@ for(const s of ['a','b'])syncIdentities(s);update();
    runs the engine, and only then compares with what the record claims. */
 function declaredIdentity(plan){const map={model_revision:'revision',precision:'precision',tokenizer_revision:'tokenizer',cache_policy:'cache',runtime_digest:'runtime',workload_id:'workload'};const o={};for(const [k,id] of Object.entries(map))if(plan.identity[k])o[id]=plan.identity[k];return o;}
 async function projectRecord(rec){
- const plan=rec.declared.plan,by=new Map();
- for(const t of rec.observed.trials){if(!by.has(t.cell.concurrency))by.set(t.cell.concurrency,[]);by.get(t.cell.concurrency).push(t);}
- const cells=[];
- for(const [concurrency,trials] of [...by.entries()].sort((a,b)=>a[0]-b[0])){let aggregate=null,cost=null,error=null;try{aggregate=HA.aggregate(trials.map(t=>HA.restoreRun(t.normalized)),{identity:declaredIdentity(plan),ttft:plan.gates.ttft,e2e:plan.gates.e2e,queue:plan.gates.queue,quality:plan.gates.quality});cost=HA.costing(aggregate,plan.price);}catch(e){error=e.message;}cells.push({concurrency,runs:trials.length,aggregate,cost,error});}
- const strip=c=>({concurrency:c.concurrency,runs:c.runs,aggregate:c.aggregate&&{...c.aggregate,warnings:[]},cost:c.cost});
- const claimed=rec.derived.cells.map(strip),fresh=cells.map(strip);
- const derivedMatch=HA.canonical(claimed)===HA.canonical(fresh);
- const {sha256:_s,links:_l,...rest}=rec;let shaMatch=false;try{shaMatch=(await digest(asBytes(HA.canonical(rest))))===rec.sha256;}catch(e){}
- const primary=cells.find(c=>c.concurrency===rec.derived.primary_concurrency)||null;
- return {cells,primary,derivedMatch,shaMatch,verified:derivedMatch&&shaMatch};
+ const {links,...plain}=rec;const bundle=Q.publication.bundle(plain);Q.publication.verify(bundle);
+ const fresh=Q.record.derive(plain);const primary=fresh.cells.find(c=>c.concurrency===fresh.primary_concurrency)||null;
+ return {cells:fresh.cells,primary,derivedMatch:true,shaMatch:true,verified:true};
 }
 function recordCard(rec,proj,origin){
  const plan=rec.declared.plan,a=proj.primary&&proj.primary.aggregate,c=proj.primary&&proj.primary.cost,q=rec.disposition.qualified;
@@ -566,11 +1615,11 @@ function rail(){const dot=$('rail-dot');dot.className='dot'+(R.error?' err':R.jo
 }
 async function connect(url){R.error='';R.base=url.replace(/\/$/,'');try{R.status=await api('/api/status');R.env=await api('/api/environment?adapter='+(R.status.demo||!R.status.adapters.hotaisle?'local':'hotaisle'));R.jobs=await api('/api/jobs');const live=R.jobs.find(j=>j.state==='running')||R.jobs.find(j=>['approved','planned','interrupted'].includes(j.state));if(live)await attach(live.id);else{const done=R.jobs.find(j=>j.record_id);if(done){R.job=await api('/api/jobs/'+done.id);await loadRecord(done.record_id);}}$('intro-ctas').hidden=true;$('connect-note').hidden=true;}catch(e){R.error=e.message;R.base=null;R.status=null;}rail();renderInstrument();}
 async function attach(id){R.job=await api('/api/jobs/'+id);if(R.es)R.es.close();R.es=new EventSource(R.base+'/api/jobs/'+id+'/events');R.es.addEventListener('job',async e=>{const s=JSON.parse(e.data);R.job={...R.job,state:s.state,progress:s.progress,disposition:s.disposition,record_id:s.record_id};if(['completed','cancelled','failed','interrupted'].includes(s.state)){R.job=await api('/api/jobs/'+id);R.es.close();R.es=null;if(s.record_id)await loadRecord(s.record_id);}rail();renderInstrument();});R.es.addEventListener('trial',async()=>{R.job=await api('/api/jobs/'+id);renderInstrument();});R.es.addEventListener('line',e=>{const l=JSON.parse(e.data);const box=document.getElementById('joblog');if(box){box.textContent=(box.textContent+'\n'+l.line).split('\n').slice(-8).join('\n');box.scrollTop=box.scrollHeight;}});rail();renderInstrument();}
-async function loadRecord(id){R.rec=await api('/api/records/'+id);R.reval=null;R.proj=await showRecord(R.rec,'from the connected runner','<a class="button small ghost" href="'+R.base+'/api/records/'+id+'/report.html" target="_blank" rel="noopener">Report</a><a class="button small ghost" href="'+R.base+'/api/records/'+id+'/evidence.json" target="_blank" rel="noopener">Evidence JSON</a><a class="button small ghost" href="'+R.base+'/api/records/'+id+'/summary" target="_blank" rel="noopener">Summary</a><button class="small" id="publish" type="button">Publish</button>');const pb=$('publish');if(pb)pb.onclick=async()=>{try{const r=await post('/api/records/'+id+'/publish');pb.textContent='Published → '+r.published;pb.disabled=true;}catch(e){pb.textContent=e.message;}};}
-function defaultForm(){const alloc=R.env&&R.env.allocations&&R.env.allocations[0];const demo=R.status&&R.status.demo;return R.form||(R.form={model:'Qwen/Qwen3-Coder-30B-A3B-Instruct',base_url:'http://127.0.0.1:8000',input_len:2048,output_len:256,num_prompts:demo?48:200,concurrency:'1, 8, 32',repeats:demo?2:3,max_p95_ttft_ms:1000,max_p95_e2e_ms:15000,max_minutes:demo?30:90,max_spend_usd:demo?5:25,rate:alloc&&alloc.price?alloc.price.gpu_hour_usd:2.99,gpus:alloc?alloc.gpus.count||1:1,exec:demo?'local':'ssh',host:alloc&&alloc.ssh?alloc.ssh.host:'',ssh_user:'hotaisle',runtime_digest:'',model_revision:'',precision:'',comparator_rate:3.85});}
+async function loadRecord(id){R.rec=await api('/api/records/'+id);R.reval=null;R.proj=await showRecord(R.rec,'from the connected runner','<a class="button small ghost" href="'+R.base+'/api/records/'+id+'/report.html" target="_blank" rel="noopener">Report</a><a class="button small ghost" href="'+R.base+'/api/records/'+id+'/evidence.json" target="_blank" rel="noopener">Evidence JSON</a><a class="button small ghost" href="'+R.base+'/api/records/'+id+'/summary" target="_blank" rel="noopener">Summary</a><button class="small" id="publish" type="button">Publish to connected desk</button>');const pb=$('publish');if(pb)pb.onclick=async()=>{try{const r=await post('/api/records/'+id+'/publish');pb.textContent='Published locally · '+r.publication_id;pb.disabled=true;}catch(e){pb.textContent=e.message;}};}
+function defaultForm(){const alloc=R.env&&R.env.allocations&&R.env.allocations[0];const demo=R.status&&R.status.demo;return R.form||(R.form={model:'Qwen/Qwen3-Coder-30B-A3B-Instruct',base_url:'http://127.0.0.1:8000',input_len:2048,output_len:256,num_prompts:demo?48:200,concurrency:'1, 8, 32',repeats:demo?2:3,max_p95_ttft_ms:1000,max_p95_e2e_ms:15000,max_minutes:demo?30:90,max_spend_usd:demo?5:25,rate:alloc&&alloc.price?alloc.price.gpu_hour_usd:2.99,gpus:alloc?alloc.gpus.count||1:1,exec:demo?'local':'ssh',host:alloc&&alloc.ssh?alloc.ssh.host:'',ssh_user:'hotaisle',runtime_digest:'',model_revision:'',precision:'',comparator_rate:scheduledRate(comparatorOffers[0])});}
 function planInput(){const f=R.form,demo=R.status&&R.status.demo,alloc=R.env&&R.env.allocations&&R.env.allocations[0];
  const target=demo?{adapter:'local',exec:'local',name:alloc?alloc.name:'local-demo',deployment_id:alloc?alloc.deployment_id:null,host:'127.0.0.1',gpus:f.gpus,gpu_model:'AMD MI300X (synthetic)',allocation_label:f.gpus+'× MI300X VM (synthetic)'}:{adapter:'hotaisle',exec:f.exec,name:alloc?alloc.name:'allocation',deployment_id:alloc?alloc.deployment_id:null,host:f.host,ssh_user:f.ssh_user,gpus:f.gpus,gpu_model:alloc?alloc.gpus.model:'MI300X',allocation_label:f.gpus+'× '+(alloc?alloc.gpus.model:'MI300X')+' VM'};
- return {target,workload:{model:f.model,base_url:f.base_url,dataset:'random',input_len:Number(f.input_len),output_len:Number(f.output_len),num_prompts:Number(f.num_prompts),request_rate:'inf',seed:7},concurrency:String(f.concurrency).split(/[,\s]+/).filter(Boolean).map(Number),repeats:Number(f.repeats),identity:{model_revision:f.model_revision,precision:f.precision,tokenizer_revision:f.model_revision,cache_policy:'warm',runtime_digest:f.runtime_digest},price:{provider:'Hot Aisle',gpus:Number(f.gpus),rate:Number(f.rate),extra:0,source:alloc&&alloc.price&&alloc.price.retrieved?'retrieved from Hot Aisle API '+R.env.retrieved_at:prices.hot_aisle.source,period:alloc&&alloc.price&&alloc.price.retrieved?'retrieved':'2026-09-22 snapshot'},comparator:f.comparator_rate?{provider:'Nebius HGX H100',gpus:Number(f.gpus),rate:Number(f.comparator_rate),extra:0,source:prices.nebius_ai_cloud.source,period:'2026-09-22 snapshot'}:null,limits:{max_minutes:Number(f.max_minutes),max_spend_usd:Number(f.max_spend_usd)},gates:{},requirements:{max_p95_ttft_ms:Number(f.max_p95_ttft_ms)||null,max_p95_e2e_ms:Number(f.max_p95_e2e_ms)||null}};}
+ return {target,workload:{model:f.model,base_url:f.base_url,dataset:'random',input_len:Number(f.input_len),output_len:Number(f.output_len),num_prompts:Number(f.num_prompts),request_rate:'inf',seed:7},concurrency:String(f.concurrency).split(/[,\s]+/).filter(Boolean).map(Number),repeats:Number(f.repeats),identity:{model_revision:f.model_revision,precision:f.precision,tokenizer_revision:f.model_revision,cache_policy:'warm',runtime_digest:f.runtime_digest},price:{provider:'Hot Aisle',gpus:Number(f.gpus),rate:Number(f.rate),extra:0,source:alloc&&alloc.price&&alloc.price.retrieved?'retrieved from Hot Aisle API '+R.env.retrieved_at:prices.hot_aisle.source,period:alloc&&alloc.price&&alloc.price.retrieved?'retrieved':'2026-09-22 snapshot'},comparator:f.comparator_rate?{provider:providerName(comparatorOffers[0].provider)+' '+comparatorOffers[0].gpu,gpus:Number(f.gpus),rate:Number(f.comparator_rate),extra:0,source:catalogue.sources[comparatorOffers[0].source].url,period:catalogue.reviewedOn+' catalogue snapshot'}:null,limits:{max_minutes:Number(f.max_minutes),max_spend_usd:Number(f.max_spend_usd)},gates:{},requirements:{max_p95_ttft_ms:Number(f.max_p95_ttft_ms)||null,max_p95_e2e_ms:Number(f.max_p95_e2e_ms)||null}};}
 function field(id,label,value,attrs=''){return '<div><label for="f-'+id+'">'+label+'</label><input id="f-'+id+'" class="mono" value="'+E(value)+'" '+attrs+'></div>';}
 function renderInstrument(){
  const box=$('instrument');
@@ -582,7 +1631,7 @@ function renderInstrument(){
   html='<div class="panel"><div class="bar"><p class="eyebrow">'+(R.status.demo?'Synthetic environment':'Environment')+' · '+E(R.env.team)+'</p><span class="chip live">Connected</span></div><div class="body">'+envCard+(job?'<p class="fine" style="margin-top:14px">Last job '+E(job.id)+' '+E(job.state)+(job.disposition?' · '+E(job.disposition.reason):'')+(job.record_id?' Its record is shown below.':' No record was written.')+'</p>':'')+'<div class="row" style="margin-top:16px"><button class="primary" id="open-plan" type="button">Prepare an evaluation</button>'+(R.rec?'<a class="button ghost" href="#record">Review the record</a>':'')+'</div></div></div>'+(R.rec?revalPanel():'');
  }
  else if(!job||R.planOpen){
-  html='<div class="panel"><div class="bar"><p class="eyebrow">Prepare an evaluation · nothing runs until you approve</p><span class="chip neutral">Plan</span></div><div class="body">'+envCard+'<div class="form">'+field('model','Model',f.model,'class="span2"')+field('base_url','Server base URL',f.base_url)+field('num_prompts','Prompts per trial',f.num_prompts,'type="number" min="1"')+field('input_len','Input tokens',f.input_len,'type="number" min="1"')+field('output_len','Output tokens',f.output_len,'type="number" min="1"')+field('concurrency','Concurrency cells',f.concurrency)+field('repeats','Repeats per cell',f.repeats,'type="number" min="1" max="10"')+field('max_p95_ttft_ms','Require p95 TTFT ≤ ms',f.max_p95_ttft_ms,'type="number" min="0"')+field('max_p95_e2e_ms','Require p95 E2E ≤ ms',f.max_p95_e2e_ms,'type="number" min="0"')+field('max_minutes','Limit · minutes',f.max_minutes,'type="number" min="1"')+field('max_spend_usd','Limit · spend $',f.max_spend_usd,'type="number" min="0" step="0.5"')+field('gpus','Billed GPUs',f.gpus,'type="number" min="1"')+field('rate','$ / GPU-hour',f.rate,'type="number" min="0" step="0.01"')+field('comparator_rate','Comparator $ / GPU-hr (H100)',f.comparator_rate,'type="number" min="0" step="0.01"')+field('runtime_digest','Runtime digest',f.runtime_digest,'placeholder="rocm/vllm@sha256:…"')+field('model_revision','Model revision',f.model_revision,'placeholder="commit or tag"')+field('precision','Precision',f.precision,'placeholder="FP8"')+(R.status.demo?'':'<div><label for="f-exec">Execution</label><select id="f-exec"><option value="ssh"'+(f.exec==='ssh'?' selected':'')+'>ssh to the allocation</option><option value="local"'+(f.exec==='local'?' selected':'')+'>local (runner is on the VM)</option></select></div>'+field('host','SSH host',f.host)+field('ssh_user','SSH user',f.ssh_user))+'</div><p class="error" id="plan-error">'+E(R.error||'')+'</p><div class="row" style="margin-top:16px"><button class="primary" id="preview" type="button">Preview plan</button>'+(job?'<button class="ghost" id="close-plan" type="button">Back</button>':'')+'</div>'+(R.plan?'<div style="margin-top:20px"><div class="kv"><div class="k">Plan '+E(R.plan.id.slice(-6))+' · sha256</div><div class="v mono" style="font-size:13px">'+E(R.plan.plan.sha256)+'</div><div class="s">'+R.plan.plan.cells.length+' cells · concurrency '+R.plan.plan.concurrency.join(', ')+' × '+R.plan.plan.repeats+' · rough '+R.plan.plan.estimate.rough_seconds+' s / $'+R.plan.plan.estimate.rough_spend_usd+' · hard limits '+R.plan.plan.limits.max_minutes+' min / $'+R.plan.plan.limits.max_spend_usd+'</div></div><code class="term"><i>$</i> '+E(R.plan.plan.commands[0])+'</code><div class="row"><button class="primary" id="approve-start" type="button">Approve this hash and start</button><span class="fine">Approval binds the plan; a changed plan needs a new approval.</span></div></div>':'')+'</div></div>';
+  html='<div class="panel"><div class="bar"><p class="eyebrow">Prepare an evaluation · nothing runs until you approve</p><span class="chip neutral">Plan</span></div><div class="body">'+envCard+'<div class="form">'+field('model','Model',f.model,'class="span2"')+field('base_url','Server base URL',f.base_url)+field('num_prompts','Prompts per trial',f.num_prompts,'type="number" min="1"')+field('input_len','Input tokens',f.input_len,'type="number" min="1"')+field('output_len','Output tokens',f.output_len,'type="number" min="1"')+field('concurrency','Concurrency cells',f.concurrency)+field('repeats','Repeats per cell',f.repeats,'type="number" min="1" max="10"')+field('max_p95_ttft_ms','Require p95 TTFT ≤ ms',f.max_p95_ttft_ms,'type="number" min="0"')+field('max_p95_e2e_ms','Require p95 E2E ≤ ms',f.max_p95_e2e_ms,'type="number" min="0"')+field('max_minutes','Limit · minutes',f.max_minutes,'type="number" min="1"')+field('max_spend_usd','Limit · spend $',f.max_spend_usd,'type="number" min="0" step="0.5"')+field('gpus','Billed GPUs',f.gpus,'type="number" min="1"')+field('rate','$ / GPU-hour',f.rate,'type="number" min="0" step="0.01"')+field('comparator_rate','DigitalOcean H100 $ / GPU-hr (editable quote)',f.comparator_rate,'type="number" min="0" step="0.01"')+field('runtime_digest','Runtime digest',f.runtime_digest,'placeholder="rocm/vllm@sha256:…"')+field('model_revision','Model revision',f.model_revision,'placeholder="commit or tag"')+field('precision','Precision',f.precision,'placeholder="FP8"')+(R.status.demo?'':'<div><label for="f-exec">Execution</label><select id="f-exec"><option value="ssh"'+(f.exec==='ssh'?' selected':'')+'>ssh to the allocation</option><option value="local"'+(f.exec==='local'?' selected':'')+'>local (runner is on the VM)</option></select></div>'+field('host','SSH host',f.host)+field('ssh_user','SSH user',f.ssh_user))+'</div><p class="error" id="plan-error">'+E(R.error||'')+'</p><div class="row" style="margin-top:16px"><button class="primary" id="preview" type="button">Preview plan</button>'+(job?'<button class="ghost" id="close-plan" type="button">Back</button>':'')+'</div>'+(R.plan?'<div style="margin-top:20px"><div class="kv"><div class="k">Plan '+E(R.plan.id.slice(-6))+' · sha256</div><div class="v mono" style="font-size:13px">'+E(R.plan.plan.sha256)+'</div><div class="s">'+R.plan.plan.cells.length+' cells · concurrency '+R.plan.plan.concurrency.join(', ')+' × '+R.plan.plan.repeats+' · rough '+R.plan.plan.estimate.rough_seconds+' s / $'+R.plan.plan.estimate.rough_spend_usd+' · hard limits '+R.plan.plan.limits.max_minutes+' min / $'+R.plan.plan.limits.max_spend_usd+'</div></div><code class="term"><i>$</i> '+E(R.plan.plan.commands[0])+'</code><div class="row"><button class="primary" id="approve-start" type="button">Approve this hash and start</button><span class="fine">Approval binds the plan; a changed plan needs a new approval.</span></div></div>':'')+'</div></div>';
  }
  else if(['running','approved','interrupted','planned'].includes(job.state)){
   const p=job.progress||{completed:0,total:job.trials.length},pct=Math.round(100*p.completed/Math.max(1,p.total));

@@ -97,10 +97,19 @@ function verify(rec) {
   const problems = [];
   if (rec.schema !== 'hot-aisle/qualified-record@1') problems.push('Unsupported record schema.');
   if (engine.sha256(HA.canonical(withoutSha(rec))) !== rec.sha256) problems.push('Record checksum mismatch.');
+  const {sha256:planSha,commands,...planBody}=rec.declared.plan;
+  if(engine.sha256(HA.canonical(planBody))!==planSha)problems.push('Plan body does not match its identity.');
   const fresh = derive(rec);
   const strip = d => ({ ...d, engine: undefined });
   if (HA.canonical(strip(fresh)) !== HA.canonical(strip(rec.derived))) problems.push('Derived conclusions do not follow from the retained evidence.');
   if (rec.synthetic !== (rec.declared.plan.target.adapter === 'local' || rec.observed.trials.some(t => t.normalized.synthetic))) problems.push('Synthetic status mismatch.');
+  if (HA.canonical(rec.disposition) !== HA.canonical(rec.derived.disposition)) problems.push('Top-level disposition differs from the derived verdict.');
+  for (const key of ['price','identity','comparator'])
+    if (HA.canonical(rec.declared[key]) !== HA.canonical(rec.declared.plan[key])) problems.push('Declared '+key+' differs from the approved plan.');
+  for (const key of ['gates','requirements'])
+    if (HA.canonical(rec.rule[key]) !== HA.canonical(rec.declared.plan[key])) problems.push('Rule '+key+' differs from the approved plan.');
+  if (rec.declared.approval && rec.declared.approval.plan_sha256 !== rec.declared.plan.sha256) problems.push('Approval is bound to a different plan.');
+
   return { verified: !problems.length, problems, engine: fresh.engine };
 }
 

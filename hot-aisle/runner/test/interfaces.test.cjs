@@ -52,7 +52,7 @@ test('localhost server: status, plan, approve, start, events, record views, orig
     const input = await (await fetch(base + '/api/demo/plan?repeats=1&concurrency=1')).json();
     assert.equal((await fetch(base + '/api/jobs', { method: 'POST', body: JSON.stringify(input) })).status, 403, 'POST without client header refused');
     assert.equal((await fetch(base + '/api/jobs', { method: 'POST', headers: { ...H, Origin: 'https://evil.example' }, body: JSON.stringify(input) })).status, 403, 'foreign origin refused');
-    const job = await (await fetch(base + '/api/jobs', { method: 'POST', headers: { ...H, Origin: 'http://127.0.0.1:5555' }, body: JSON.stringify(input) })).json();
+    const job = await (await fetch(base + '/api/jobs', { method: 'POST', headers: { ...H, Origin: base }, body: JSON.stringify(input) })).json();
     assert.equal(job.state, 'planned');
     assert.equal((await (await fetch(base + '/api/jobs/' + job.id + '/approve', { method: 'POST', headers: H, body: JSON.stringify({ plan_sha256: job.plan_sha256 }) })).json()).state, 'approved');
     const events = [];

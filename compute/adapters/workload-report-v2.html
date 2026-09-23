@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light dark"><title>Hot Aisle · Workload report</title>
+<meta name="description" content="Drop a vLLM benchmark result. Calculate workload cost, inspect latency and export a customer report. Free, open source and local to your browser.">
+<link rel="canonical" href="https://bigbirdreturns.github.io/axm-tools/hot-aisle/">
+<meta property="og:title" content="Hot Aisle · What does this workload cost?"><meta property="og:description" content="vLLM results in. A costed, source-bound report out. No signup or uploads."><meta property="og:type" content="website"><meta property="og:url" content="https://bigbirdreturns.github.io/axm-tools/hot-aisle/">
+<style>
+:root{--bg:#f7f7f2;--panel:#fff;--ink:#192421;--muted:#52635d;--line:#cbd4cb;--tint:#e9f1e8;--accent:#1b523c;--accentink:#fff;--warn:#75470c;--warntint:#fff2d7;--error:#a52e27;--radius:7px;color-scheme:light;font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+@media(prefers-color-scheme:dark){:root{--bg:#121714;--panel:#1a211d;--ink:#eff3ed;--muted:#b0beb5;--line:#435548;--tint:#253b2d;--accent:#c9f086;--accentink:#122012;--warn:#ffd392;--warntint:#382b15;--error:#ffada3;color-scheme:dark}}
+*{box-sizing:border-box}body{margin:0;color:var(--ink);background:var(--bg);font:16px/1.5 system-ui,sans-serif}main,header,footer{max-width:1160px;margin:auto;padding-inline:28px}header{height:72px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);gap:20px}.brand{font-size:15px;font-weight:700;letter-spacing:.03em}.brand span{font-weight:400;color:var(--muted)}nav{display:flex;gap:20px;align-items:center}a{color:var(--accent);text-underline-offset:3px}h1{font-size:clamp(32px,4.4vw,49px);letter-spacing:-.035em;line-height:1.13;margin:0 0 12px}h2{font-size:23px;letter-spacing:-.02em;margin:0}h3{font-size:17px;margin:0 0 12px}p{margin:9px 0}.intro{padding-block:40px 28px;display:flex;justify-content:space-between;gap:24px;align-items:end}.intro p{color:var(--muted);max-width:620px}.button,button{border:1px solid var(--line);border-radius:5px;padding:10px 15px;background:var(--panel);color:var(--ink);font:600 14px/1.4 system-ui;cursor:pointer;min-height:42px;text-decoration:none;display:inline-block}button:hover,.button:hover{border-color:var(--accent)}button.primary{background:var(--accent);color:var(--accentink);border-color:var(--accent)}button:disabled{opacity:.48;cursor:not-allowed}input,select,textarea{font:inherit;color:var(--ink);background:var(--panel);width:100%;border:1px solid var(--line);padding:8px 10px;border-radius:4px;min-height:41px}textarea{min-height:130px;font:12px/1.5 ui-monospace,monospace;resize:vertical}input[type=checkbox]{width:17px;min-height:17px;margin:0 6px 0 0;accent-color:var(--accent)}input[type=file]{padding:9px;font-size:13px}.fileinput{position:absolute;width:1px;height:1px;overflow:hidden;opacity:0;padding:0;min-height:0}label{font-size:12px;color:var(--muted);display:block;margin-bottom:5px}a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible,textarea:focus-visible{outline:3px solid var(--accent);outline-offset:3px}.hidden,[hidden]{display:none!important}.lanes{display:grid;grid-template-columns:1fr 1fr;gap:22px}.lane{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:21px;min-width:0}.lanehead{display:flex;align-items:center;justify-content:space-between;gap:12px}.lanehead .mini{font:12px ui-monospace,monospace;color:var(--muted)}.drop{width:100%;border:1px dashed var(--line);border-radius:5px;margin:18px 0;padding:19px 14px;text-align:center;cursor:pointer;background:var(--bg);min-height:127px;display:flex;align-items:center;justify-content:center;flex-direction:column}.drop:hover,.drop.drag{border-color:var(--accent);background:var(--tint)}.drop b{font-size:16px}.drop span{font-size:12px;color:var(--muted);margin-top:7px}.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}.fine{font-size:12px;color:var(--muted)}.runlist{padding:0;margin:10px 0;list-style:none}.runlist li{font-size:12px;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:7px 0;border-top:1px solid var(--line)}.runlist span{min-width:0;overflow-wrap:anywhere}.runlist button{padding:2px 7px;min-height:28px;font-size:12px}details{margin-top:14px;border-top:1px solid var(--line);padding-top:12px}summary{font-size:13px;font-weight:600;cursor:pointer}details .two,details .three{margin-top:14px}details p{font-size:13px}.error{color:var(--error);font-size:13px;overflow-wrap:anywhere}.notice{border:1px solid var(--line);background:var(--tint);padding:12px 16px;border-radius:5px;margin:0 0 20px;font-size:14px}.sample{background:var(--warntint);color:var(--warn);border-color:var(--warn)}.gates{margin-top:22px}.gates summary{font-size:15px}.gatefields{display:flex;align-items:end;flex-wrap:wrap;gap:18px;padding:14px 0}.gatefields>div{max-width:210px}.check{font-size:13px;color:var(--ink);display:flex;align-items:center;gap:4px;line-height:1.3}.resultarea{margin-top:30px;padding-top:24px;border-top:1px solid var(--line)}.resulthead{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap}.actions{display:flex;gap:8px;flex-wrap:wrap}.cards{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:20px}.resultcard{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:23px;min-width:0}.money{font-size:44px;line-height:1.15;letter-spacing:-.04em;font-variant-numeric:tabular-nums;margin-top:13px;overflow-wrap:anywhere}.unit{font-size:13px;color:var(--muted);margin-bottom:19px}.statistics{display:grid;grid-template-columns:1fr 1fr;gap:18px}.stat strong{font-size:22px;font-variant-numeric:tabular-nums}.stat span{display:block;font-size:12px;color:var(--muted)}table{width:100%;border-collapse:collapse;font-size:13px;margin-top:14px;font-variant-numeric:tabular-nums}th,td{padding:9px 5px;text-align:right;border-bottom:1px solid var(--line)}th:first-child,td:first-child{text-align:left}th{font-size:12px;color:var(--muted);font-weight:500}.comparison{margin-top:19px;background:var(--tint);border-radius:5px;padding:17px 20px}.comparison strong{font-size:22px}.comparison p{font-size:13px}.empty{padding:25px;text-align:center;border:1px solid var(--line);border-radius:6px;color:var(--muted);font-size:14px}.smallcaps{font:11px ui-monospace,monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}.hash{font:11px/1.5 ui-monospace,monospace;overflow-wrap:anywhere}.footerlinks{display:flex;flex-wrap:wrap;gap:14px}footer{margin-top:38px;padding-block:22px 32px;color:var(--muted);font-size:12px;border-top:1px solid var(--line)}dialog{max-width:640px;width:calc(100% - 30px);max-height:85vh;overflow:auto;background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:7px;padding:25px}dialog::backdrop{background:#0008}.dialogactions{display:flex;justify-content:flex-end;gap:10px;margin-top:15px}.skip{position:absolute;left:-9000px}.skip:focus{left:10px;top:10px;background:var(--panel);padding:10px;z-index:3}.breaktable{max-width:780px}.spec{display:block;font:12px/1.6 ui-monospace,monospace;white-space:pre-wrap;overflow-wrap:anywhere;padding:15px;background:var(--bg);border:1px solid var(--line);margin-top:12px}
+@media(max-width:720px){main,header,footer{padding-inline:17px}header{height:auto;min-height:65px;padding-block:15px;flex-wrap:wrap}.brand{font-size:14px}nav{gap:12px;font-size:12px}.intro{padding-top:27px;display:block}.intro button{margin-top:8px}.lanes,.cards{grid-template-columns:1fr}.lane,.resultcard{padding:18px}.money{font-size:39px}.three{gap:8px}.statistics{gap:12px}.resulthead{align-items:start}.two{grid-template-columns:1fr}.gatefields>div{max-width:none;flex:1 1 140px}table{font-size:12px}}
+@media print{header,nav,.intro,.lanes,.gates,.actions,#utilities,footer{display:none}body{background:white;color:black}.resultcard{break-inside:avoid}.cards{display:block}.resultarea{border:0;margin:0}}
+</style></head><body>
+<a class="skip" href="#main">Skip to workbench</a>
+<header><div class="brand">HOT AISLE <span>/ workload report</span></div><nav><a href="#prices">Price comparison</a><a href="https://github.com/BigBirdReturns/axm-tools/tree/main/hot-aisle">Source</a><span class="fine">v2.0</span></nav></header>
+<main id="main"><section class="intro"><div><h1>What does this workload cost?</h1><p>Drop a vLLM result. Get the cost, latency and a report you can hand to a customer. Files stay in this browser.</p></div><button id="example">Try a sample</button></section>
+<div id="sample-banner" class="notice sample" hidden><b>Synthetic sample.</b> These figures test the software. They are not Hot Aisle or NVIDIA measurements. <button id="clear-example">Clear sample</button></div>
+<div id="global-error" class="error" role="alert"></div>
+<div class="lanes" id="lanes"></div>
+<details class="gates"><summary>Count only results that meet your requirements</summary><p class="fine">By default, “completed” means a successful response, not a correct task. Optional gates below change the cost denominator; absent request samples hold that calculation.</p><div class="gatefields"><div><label for="gate-ttft">Maximum first-token latency (ms)</label><input id="gate-ttft" type="number" min="0" placeholder="No limit"></div><div><label for="gate-e2e">Maximum completion latency (ms)</label><input id="gate-e2e" type="number" min="0" placeholder="No limit"></div><label class="check"><input id="gate-queue" type="checkbox">Include client queue time</label><label class="check"><input id="gate-quality" type="checkbox">Require evaluator-passed outcomes</label></div><p class="fine">Gates are applied to the same successful requests, not multiplied percentages. Evaluation sidecars bind per-request pass/fail to an exact source hash. Their author remains responsible for the correctness criterion.</p></details>
+<section class="resultarea" id="results"><div class="resulthead"><h2>Your report</h2><div class="actions"><a class="button" href="#lanes">Edit inputs</a><button id="save-html" class="primary" disabled>Download customer report</button><button id="save-json" disabled>Evidence JSON</button><button id="copy" disabled>Copy summary</button></div></div><div id="report" aria-live="polite"><p class="empty">Import a result on either side. A comparison file is optional.</p></div></section>
+<section id="utilities">
+<details id="prices"><summary>Price-only break-even calculator</summary><p>At the same allocation size, Hot Aisle needs the following share of a comparator’s throughput to tie GPU-rental cost. These are price ratios, not measured speed.</p><label for="price-period">Nebius AI Cloud price schedule</label><select id="price-period"><option value="current_gpu_hour">22 September 2026 snapshot</option><option value="october_gpu_hour">Announced 1 October 2026</option></select><div class="breaktable" id="breaktable"></div><p class="fine">Prices are per GPU-hour. Confirm the purchasable instance size. This is AI Cloud infrastructure, not Token Factory managed endpoints. Custom rates and whole-bill charges can be entered above.</p></details>
+<details><summary>Get a compatible result from your existing server</summary><p>Add these flags to your existing, approved <code>vllm bench serve</code> command. Keep your actual model, request set and offered load.</p><code class="spec">--save-result --save-detailed \
+--percentile-metrics ttft,tpot,itl,e2el --metric-percentiles 50,95,99 \
+--result-filename workload-result.json</code><button id="copy-flags">Copy flags</button><p class="fine">This page does not start benchmarks, install runtimes, download models or rent GPUs. Detailed results may contain generated text and errors. Those fields are excluded from reports. Pin your runtime and retain the original file privately.</p><p><a href="FIRST_CAMPAIGN.md">Measurement plan</a> · <a href="FORMATS.md">Supported formats and evaluation sidecars</a></p></details>
+<details><summary>Verify a source file against a report</summary><p class="fine">Select a saved Evidence JSON and any original result file. Hash matching proves byte identity with the report’s commitment, not the producer’s honesty.</p><div class="two"><div><label for="verify-packet">Evidence JSON</label><input type="file" id="verify-packet" accept=".json"></div><div><label for="verify-source">Original result</label><input type="file" id="verify-source"></div></div><button id="verify" style="margin-top:12px">Verify file</button><p id="verify-result" role="status"></p></details>
+<details><summary>Assumptions, sources and what stays private</summary><p>Cost starts with the allocation you enter and the sum of the benchmark windows. Setup, restarts, idle time, storage and taxes outside those windows are excluded unless you enter them. A whole-bill override divides your supplied charge by the outcomes in the imported set.</p><p>Repeated runs are weighted by measured duration. Percentiles are pooled only when every trial has successful-request samples; otherwise per-trial ranges stay separate. Samples from failed requests never improve latency statistics. Summary goodput is recorded but never relabeled as correctness.</p><p>Model, revision, precision, tokenizer, workload, cache and offered-load identities must match before a savings claim appears. Entered identities are declarations; imported benchmarks are producer evidence. There is no automatic independent-verification badge.</p><p>Files remain in memory and clear on reload. Reports omit prompts, responses, error bodies, original filenames and unknown metadata. They retain selected model/runtime identifiers, normalized timings and file hashes; review these identifiers before sharing. Provider names confer no endorsement.</p><p><a href="https://hotaisle.xyz/pricing">Hot Aisle prices</a> · <a href="https://nebius.com/prices">Nebius prices</a> · <a href="https://docs.vllm.ai/en/latest/cli/bench/serve/">vLLM export options</a></p></details>
+</section></main>
+<footer><div class="footerlinks"><span>Independent, free tool by Second Run.</span><a href="workload-report.zip" download>Download offline kit</a><a href="README.md">Operating notes</a><a href="LICENSE">MIT license</a><span>Price snapshot: 22 September 2026.</span></div></footer>
+<dialog id="paste-dialog"><h2>Paste one benchmark result</h2><p class="fine">JSON, appended JSON results or one vLLM console summary.</p><label for="paste-text">Benchmark output</label><textarea id="paste-text"></textarea><p id="paste-error" class="error" role="alert"></p><div class="dialogactions"><button id="paste-cancel">Cancel</button><button class="primary" id="paste-import">Import result</button></div></dialog>
+<script id="prices-data" type="application/json">{
+  "schema": "second-run/price-snapshot@1",
+  "reviewed_on": "2026-09-22",
+  "currency": "USD",
+  "status": "PUBLIC_LIST_PRICE_SNAPSHOT_NOT_A_BENCHMARK",
+  "hot_aisle": {
+    "vm_gpu_hour": 2.99,
+    "vm_gpu_counts": [1, 2, 4],
+    "vm_terms": "Minute billing; newly allocated compute. Existing eligible running allocations may retain $1.99; that rate is excluded here.",
+    "bare_metal_gpu_hour": 3.39,
+    "bare_metal_gpu_count": 8,
+    "bare_metal_terms": "Whole-node allocation; one-month minimum. $27.12 per full node-hour before any additional charges.",
+    "source": "https://hotaisle.xyz/pricing"
+  },
+  "nebius_ai_cloud": {
+    "effective_new_prices": "2026-10-01",
+    "products": [
+      {"gpu": "HGX H100", "current_gpu_hour": 3.85, "october_gpu_hour": 4.50},
+      {"gpu": "HGX H200", "current_gpu_hour": 4.50, "october_gpu_hour": 5.40},
+      {"gpu": "HGX B200", "current_gpu_hour": 7.15, "october_gpu_hour": 8.50},
+      {"gpu": "HGX B300", "current_gpu_hour": 7.85, "october_gpu_hour": 9.50},
+      {"gpu": "RTX PRO 6000", "current_gpu_hour": 1.80, "october_gpu_hour": 1.80}
+    ],
+    "scope": "AI Cloud on-demand list prices, not Token Factory Dedicated Endpoint prices. Per-GPU normalization does not establish available allocation sizes, stock or an equivalent managed service. Storage, taxes and contract/spot discounts are not inferred.",
+    "source": "https://nebius.com/prices"
+  },
+  "assumptions": [
+    "No performance result is prefilled.",
+    "Compare identical output units and the same acceptance and latency criteria.",
+    "Use every billable GPU and the complete paid interval, including paid setup and idle time.",
+    "The comparison excludes unentered costs and never proves readiness, quality, capacity availability or service equivalence.",
+    "User-entered throughput remains an unverified scenario input. A checkbox is not external verification."
+  ]
+}
+</script>
+<script id="report-engine">/* Hot Aisle Workload Report 2.0.0 | MIT | No I/O, no eval, no dependencies. */
+(function(root){
+'use strict';
+const VERSION='2.0.0', MAX_REQUESTS=100000, MAX_RUNS=50;
+const fail=m=>{throw Error(m)};
+const obj=x=>x!==null&&typeof x==='object'&&!Array.isArray(x);
+const num=(x,name,min=0)=>typeof x==='number'&&Number.isFinite(x)&&x>=min?x:fail(name+' must be a finite number ≥ '+min+'.');
+const count=(x,name)=>Number.isSafeInteger(num(x,name))&&x<=MAX_REQUESTS?x:fail(name+' must be an integer ≤ '+MAX_REQUESTS+'.');
+const opt=(x,name)=>x===undefined||x===null?null:num(x,name);
+const text=x=>typeof x==='string'?x.slice(0,500):typeof x==='number'&&Number.isFinite(x)?String(x):'';
+const escape=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function canonical(x){if(x===null||typeof x!=='object')return JSON.stringify(x);if(Array.isArray(x))return '['+x.map(canonical).join(',')+']';return '{'+Object.keys(x).sort().map(k=>JSON.stringify(k)+':'+canonical(x[k])).join(',')+'}';}
+function parseDocuments(raw){
+ if(typeof raw!=='string'||raw.length>25*1024*1024)fail('Use a UTF-8 result file up to 25 MiB.');
+ let s=raw.replace(/^\uFEFF/,'').trim();if(!s)fail('The result is empty.');
+ if(!/^[\[{]/.test(s)||s.includes('Serving Benchmark Result'))return [parseConsole(s)];
+ // Accept JSON, arrays, NDJSON and vLLM --append-result concatenated objects.
+ const values=[];let start=-1,depth=0,inString=false,escaped=false;
+ for(let i=0;i<s.length;i++){let c=s[i];if(start<0){if(/\s/.test(c))continue;if(c!=='{'&&c!=='[')fail('Expected a JSON object, array or another appended result.');start=i;}
+  if(inString){if(escaped)escaped=false;else if(c==='\\')escaped=true;else if(c==='"')inString=false;continue;}
+  if(c==='"')inString=true;else if(c==='{'||c==='[')depth++;else if(c==='}'||c===']'){depth--;if(depth===0){let v;try{v=JSON.parse(s.slice(start,i+1));}catch(e){fail('Invalid JSON: '+e.message);}values.push(...(Array.isArray(v)?v:[v]));start=-1;if(values.length>MAX_RUNS)fail('At most 50 trials per import.');}}
+ }
+ if(start>=0||inString||depth)fail('The JSON is incomplete.');if(!values.length)fail('No results found.');return values;
+}
+function parseConsole(s){
+ const out={format:'vllm-console-summary'};
+ const labels={'Successful requests':'completed','Failed requests':'failed','Benchmark duration (s)':'duration','Total input tokens':'total_input_tokens','Total generated tokens':'total_output_tokens','Request throughput (req/s)':'request_throughput','Request goodput (req/s)':'request_goodput','Maximum request concurrency':'max_concurrency','Request rate configured (RPS)':'request_rate'};
+ for(const line of s.replace(/\x1b\[[0-9;]*m/g,'').split(/\r?\n/)){const m=line.trim().match(/^(.+?):\s+([\d.eE+\-]+)\s*$/);if(!m)continue;const name=labels[m[1]];if(name){if(out[name]!==undefined)fail('Paste one console result at a time; use JSON for repeated runs.');out[name]=Number(m[2]);}
+  const q=m[1].match(/^(Mean|Median|P50|P95|P99) (TTFT|TPOT|ITL|E2EL) \(ms\)$/);if(q)out[(q[1]==='Median'?'median':q[1].toLowerCase())+'_'+q[2].toLowerCase()+'_ms']=Number(m[2]);
+ }
+ if(out.duration===undefined||out.completed===undefined)fail('Expected a vLLM result JSON or its “Serving Benchmark Result” console block.');return out;
+}
+function quantile(values,p){if(!values.length)return null;const a=[...values].sort((x,y)=>x-y),i=(a.length-1)*p/100,lo=Math.floor(i),hi=Math.ceil(i);return a[lo]+(a[hi]-a[lo])*(i-lo);}
+function percentiles(a){return a===null?null:{p50:quantile(a,50),p95:quantile(a,95),p99:quantile(a,99)};}
+function normalize(raw,source){
+ if(!obj(raw))fail('Every trial must be a result object.');
+ const d=num(raw.duration,'duration',Number.MIN_VALUE),completed=count(raw.completed,'completed');
+ let n=raw.num_prompts===undefined?null:count(raw.num_prompts,'num_prompts');
+ const failed=raw.failed===undefined?null:count(raw.failed,'failed');
+ if(failed!==null){if(n!==null&&n!==failed+completed)fail('num_prompts differs from completed + failed.');n=failed+completed;}
+ const arrays=['errors','ttfts','latencies','queue_times','output_lens','input_lens'];
+ for(const key of arrays)if(raw[key]!==undefined){if(!Array.isArray(raw[key])||raw[key].length>MAX_REQUESTS)fail(key+' must be a bounded array.');if(n===null)n=raw[key].length;if(raw[key].length!==n)fail(key+' length differs from attempted requests.');}
+ if(n!==null&&completed>n)fail('Completed requests exceed attempted requests.');
+ if(n!==null&&n>MAX_REQUESTS)fail('Too many requests.');
+ const warnings=[];let mask=null;
+ if(raw.errors!==undefined){if(raw.errors.some(e=>typeof e!=='string'))fail('errors must contain strings.');mask=raw.errors.map(e=>e==='');if(mask.filter(Boolean).length!==completed)fail('The errors array disagrees with the completed-request count.');}
+ else if(n!==null&&completed===n)mask=Array(n).fill(true);
+ const vectors={};for(const key of arrays.filter(k=>k!=='errors')){if(raw[key]!==undefined){vectors[key]=raw[key].map((v,i)=>num(v,key+'['+i+']'));if(key.endsWith('_lens')&&vectors[key].some(v=>!Number.isSafeInteger(v)))fail(key+' must contain integer lengths.');}}
+ function metric(key,label){const samples=vectors[key]&&mask?vectors[key].filter((_,i)=>mask[i]).map(x=>x*1000):null;const summary={};for(const p of [50,95,99]){const k='p'+p+'_'+label+'_ms';summary['p'+p]=opt(raw[k]??(p===50?raw['median_'+label+'_ms']:null),k);}let prev=null;for(const p of ['p50','p95','p99'])if(summary[p]!==null){if(prev!==null&&summary[p]<prev)fail('Percentile summary is not monotonic.');prev=summary[p];}return {samples,percentiles:samples!==null?percentiles(samples):summary,basis:samples!==null?'recomputed from successful-request samples':'producer-reported summary'};}
+ const metrics={ttft:metric('ttfts','ttft'),e2e:metric('latencies','e2el')};
+ for(const m of Object.values(metrics))if(!completed){m.samples=[];m.percentiles={p50:null,p95:null,p99:null};}
+ if(vectors.latencies&&vectors.ttfts&&mask)for(let i=0;i<n;i++)if(mask[i]&&vectors.latencies[i]+1e-9<vectors.ttfts[i])fail('End-to-end latency is smaller than time to first token.');
+ const totalOutput=opt(raw.total_output_tokens,'total_output_tokens');
+ if(totalOutput!==null&&!Number.isSafeInteger(totalOutput))fail('Total output tokens must be an integer.');
+ if(totalOutput!==null&&vectors.output_lens&&mask){const total=vectors.output_lens.reduce((s,v,i)=>s+(mask[i]?v:0),0);if(total!==totalOutput)fail('Output-token total disagrees with the successful-request lengths.');}
+ const throughput=opt(raw.request_throughput,'request_throughput');if(throughput!==null&&Math.abs(throughput-completed/d)>Math.max(.02,completed/d*.01))warnings.push('Reported throughput differs from count ÷ duration; this report uses count ÷ duration.');
+ const goodput=opt(raw.request_goodput??raw['request_goodput:'],'request_goodput');if(goodput!==null&&goodput>completed/d+Math.max(.001,completed/d*.001))fail('Reported goodput exceeds completed-request throughput.');
+ const meta=obj(raw.metadata)?raw.metadata:{};const field=k=>text(raw[k]??meta[k]);
+ const identity={model:field('model_id')||field('model'),revision:field('model_revision'),precision:field('precision')||field('dtype'),tokenizer:field('tokenizer_revision'),workload:field('workload_id')||field('dataset_sha256'),cache:field('cache_policy'),runtime:field('runtime_digest')||field('runtime'),load:field('load_profile')};
+ if(!identity.load&&(raw.request_rate!==undefined||raw.max_concurrency!==undefined))identity.load='rps='+text(raw.request_rate)+'; concurrency='+text(raw.max_concurrency)+'; burstiness='+text(raw.burstiness);
+ const rows=mask?mask.map((success,i)=>({success,ttft_ms:vectors.ttfts?vectors.ttfts[i]*1000:null,e2e_ms:vectors.latencies?vectors.latencies[i]*1000:null,queue_ms:vectors.queue_times?vectors.queue_times[i]*1000:null})):null;
+ return {format:raw.format==='vllm-console-summary'?'vllm-console-summary':'vllm-serve-json',source,identity,duration:d,completed,attempted:n,outputTokens:totalOutput,metrics,rows,reportedGoodput:goodput,warnings,synthetic:raw.synthetic===true};
+}
+const CONTRACT=['model','revision','precision','tokenizer','workload','cache','load'];
+function contract(runs,overrides={}){const result={},issues=[];for(const k of [...CONTRACT,'runtime']){const vals=[...new Set(runs.map(r=>r.identity[k]).filter(Boolean))];if(vals.length>1)issues.push('Mixed '+k+' across trials.');if(overrides[k]&&vals.some(v=>v!==overrides[k]))issues.push('Entered '+k+' conflicts with imported metadata.');result[k]=text(overrides[k])||vals[0]||'';}return {values:result,issues};}
+function attachQuality(run,q){
+ if(!obj(q)||q.schema!=='hot-aisle/request-evaluation@1')fail('Unsupported evaluation sidecar.');
+ if(q.source_sha256!==run.source.sha256||q.record_index!==run.source.record_index)fail('Evaluation does not match this exact source file and record index.');
+ if(!run.rows||!Array.isArray(q.passed)||q.passed.length!==run.rows.length||q.passed.some(v=>typeof v!=='boolean'))fail('Evaluation requires one boolean per original request and an unambiguous success mask.');
+ if(!text(q.evaluator)||!text(q.criterion_id))fail('Evaluation needs an evaluator and a criterion ID.');
+ if(q.passed.some((v,i)=>v&&!run.rows[i].success))fail('Evaluation marks a failed request as passed.');
+ return {...run,quality:{evaluator:text(q.evaluator),criterion:text(q.criterion_id),passed:q.passed}};
+}
+function aggregate(runs,settings={}){
+ if(!runs.length)fail('Import at least one trial.');if(runs.length>MAX_RUNS)fail('At most 50 trials.');if(runs.reduce((n,r)=>n+(r.rows?.length||0),0)>250000)fail('At most 250,000 detailed request rows per side.');
+ const seen=new Set();for(const r of runs){const k=r.source.sha256+':'+r.source.record_index;if(seen.has(k))fail('Duplicate trial: the same source record cannot be counted twice.');seen.add(k);}
+ const c=contract(runs,settings.identity||{});if(c.issues.length)fail(c.issues.join(' '));
+ const ttft=opt(settings.ttft,'TTFT limit'),e2e=opt(settings.e2e,'E2E limit');
+ const useQ=settings.quality===true,useLatency=ttft!==null||e2e!==null;
+ const label=useQ?(useLatency?'evaluator-passed, latency-qualified requests':'evaluator-passed requests'):(useLatency?'latency-qualified requests':'completed requests');
+ const gates={ttft_ms:ttft,e2e_ms:e2e,include_client_queue:settings.queue===true,quality:useQ};
+ const holds=[],warnings=[],criteria=new Set();let accepted=0;
+ for(const r of runs){warnings.push(...r.warnings);if(useQ){if(!r.quality)holds.push('Missing evaluation for a trial.');else criteria.add(r.quality.criterion);}
+  if(useQ||useLatency){if(!r.rows){holds.push('Request-level outcomes are unavailable; import a detailed JSON.');continue;}
+   for(let i=0;i<r.rows.length;i++){const row=r.rows[i];if(!row.success)continue;
+    if(ttft!==null&&row.ttft_ms===null)holds.push('TTFT samples are missing.');if(e2e!==null&&row.e2e_ms===null)holds.push('End-to-end samples are missing.');
+    if(settings.queue&&useLatency&&row.queue_ms===null)holds.push('Client queue samples are missing.');
+    const extra=settings.queue?(row.queue_ms??0):0;
+    if((ttft===null||row.ttft_ms!==null&&row.ttft_ms+extra<=ttft)&&(e2e===null||row.e2e_ms!==null&&row.e2e_ms+extra<=e2e)&&(!useQ||r.quality?.passed[i]===true))accepted++;
+   }
+  }else accepted+=r.completed;
+ }
+ if(criteria.size>1)holds.push('Different evaluation criteria across trials.');
+ const duration=runs.reduce((s,r)=>s+r.duration,0),completed=runs.reduce((s,r)=>s+r.completed,0),attempted=runs.every(r=>r.attempted!==null)?runs.reduce((s,r)=>s+r.attempted,0):null;
+ if(!Number.isFinite(duration)||!Number.isFinite(completed/duration)||!Number.isFinite(accepted/duration))fail('Trial totals overflow the calculation.');
+ const good=holds.length?null:accepted;
+ const metrics={};for(const name of ['ttft','e2e']){
+  const sampleComplete=runs.every(r=>r.metrics[name].samples!==null);
+  if(sampleComplete){const a=runs.flatMap(r=>r.metrics[name].samples);metrics[name]={...percentiles(a),basis:'pooled successful-request samples',n:a.length};}
+  else if(runs.length===1)metrics[name]={...runs[0].metrics[name].percentiles,basis:runs[0].metrics[name].basis,n:null};
+  else{const ranges={};for(const p of ['p50','p95','p99']){const vals=runs.map(r=>r.metrics[name].percentiles[p]);ranges[p]=vals.every(v=>v!==null)?[Math.min(...vals),Math.max(...vals)]:null;}metrics[name]={p50:null,p95:null,p99:null,basis:'per-trial percentile ranges; percentiles are not averaged',ranges,n:null};}
+ }
+ const trialRates=runs.map(r=>r.completed/r.duration),mean=trialRates.reduce((a,b)=>a+b,0)/runs.length;
+ return {identity:c.values,unit:label,gates,criterion:criteria.size===1?[...criteria][0]:'',runs:runs.length,duration,completed,attempted,failed:attempted===null?null:attempted-completed,accepted:good,rate:good===null?null:good/duration,completedRate:completed/duration,failureRate:attempted?1-completed/attempted:null,qualifiedFraction:attempted&&good!==null?good/attempted:null,metrics,trialRateRange:[Math.min(...trialRates),Math.max(...trialRates)],trialRateStd:runs.length>1?Math.sqrt(trialRates.reduce((s,x)=>s+(x-mean)**2,0)/(runs.length-1)):null,holds:[...new Set(holds)],warnings:[...new Set(warnings)],synthetic:runs.some(r=>r.synthetic),sources:runs.map(r=>r.source)};
+}
+function costing(a,p){
+ const gpu=num(p.gpus,'Billable GPUs',1);if(!Number.isSafeInteger(gpu))fail('Billable GPUs must be an integer.');
+ const rate=num(p.rate,'GPU-hour price'),extra=num(p.extra??0,'Hourly extras'),hourly=gpu*rate+extra;
+ const supplied=p.total!==undefined&&p.total!==null&&p.total!=='';const total=supplied?num(p.total,'Total charge'):hourly*a.duration/3600;
+ const cost=a.accepted===null||a.accepted===0?null:1000*total/a.accepted;
+ if(!Number.isFinite(hourly)||!Number.isFinite(total)||(cost!==null&&!Number.isFinite(cost)))fail('Cost inputs overflow the calculation.');
+ return {provider:text(p.provider),gpus:gpu,rate,extra,hourly,total,costPer1000:cost,basis:supplied?'user-supplied total charge':'modeled charge for summed benchmark windows',source:text(p.source),period:text(p.period),quote:text(p.quote),unit:a.unit};
+}
+function compare(a,pa,b,pb){
+ const issues=[];for(const k of CONTRACT){if(!a.identity[k]||!b.identity[k])issues.push('Specify '+k+' for both sides.');else if(a.identity[k]!==b.identity[k])issues.push('Different '+k+'.');}
+ if(canonical(a.gates)!==canonical(b.gates)||a.unit!==b.unit||a.criterion!==b.criterion)issues.push('Different result or acceptance basis.');
+ if(a.holds.length||b.holds.length)issues.push('A request gate could not be evaluated.');if(a.accepted===0||b.accepted===0)issues.push('A side produced zero qualifying requests.');
+ if(pa.basis!==pb.basis)issues.push('Different billing bases.');
+ if(a.sources.some(x=>b.sources.some(y=>x.sha256===y.sha256&&x.record_index===y.record_index)))issues.push('The same source trial appears on both sides.');
+ if(pa.costPer1000===null||pb.costPer1000===null)issues.push('Cost per result is unavailable.');
+ const eligible=!issues.length;
+ return {status:eligible?'COMPARISON_OF_SUPPLIED_EVIDENCE':'DESCRIPTIVE_ONLY',issues:[...new Set(issues)],saving:eligible&&pb.costPer1000>0?1-pa.costPer1000/pb.costPer1000:null,winner:eligible?(pa.costPer1000<pb.costPer1000?'A':pa.costPer1000>pb.costPer1000?'B':'tie'):null,synthetic:a.synthetic||b.synthetic};
+}
+function threshold(hotRate,hotHourly,otherHourly){num(hotRate,'Throughput');num(hotHourly,'Hot Aisle allocation-hour price',Number.MIN_VALUE);num(otherHourly,'Other allocation-hour price');return hotRate*otherHourly/hotHourly;}
+function receiptHTML(packet){
+ const e=escape,fmt=x=>x===null||x===undefined?'Not available':x.toLocaleString('en-US',{maximumFractionDigits:3}),usd=x=>x===null?'Not available':'$'+x.toFixed(x<1?4:2);
+ const rows=packet.sides.map(s=>{const a=s.aggregate,c=s.cost;return '<article><h2>'+e(s.label)+'</h2><p>'+e(a.identity.model||'Model not supplied')+'</p><strong class="price">'+usd(c.costPer1000)+'</strong><p>per 1,000 '+e(a.unit)+'</p><dl><dt>Result rate</dt><dd>'+fmt(a.rate)+' / second</dd><dt>Completed / attempted</dt><dd>'+fmt(a.completed)+' / '+fmt(a.attempted)+'</dd><dt>Trials / total measured seconds</dt><dd>'+a.runs+' / '+fmt(a.duration)+'</dd><dt>Allocation</dt><dd>'+c.gpus+' GPUs × '+usd(c.rate)+'/hour + '+usd(c.extra)+'/hour extras</dd><dt>Cost basis</dt><dd>'+e(c.basis)+'; '+usd(c.total)+'</dd><dt>Price source / period</dt><dd>'+e(c.source)+' / '+e(c.period)+'</dd><dt>Quote / cost note</dt><dd>'+e(c.quote||'None')+'</dd></dl><h3>Successful-request latency (ms)</h3><table><tr><th></th><th>p50</th><th>p95</th><th>p99</th></tr>'+['ttft','e2e'].map(k=>'<tr><th>'+e(k.toUpperCase())+'</th>'+['p50','p95','p99'].map(p=>'<td>'+fmt(a.metrics[k][p])+'</td>').join('')+'</tr><tr><td colspan="4">'+e(a.metrics[k].basis)+(a.metrics[k].ranges?' · ranges: '+e(JSON.stringify(a.metrics[k].ranges)):'')+'</td></tr>').join('')+'</table><details><summary>Conditions and input commitments</summary><pre>'+e(JSON.stringify({identity:a.identity,gates:a.gates,criterion:a.criterion,holds:a.holds,warnings:a.warnings},null,2))+'</pre><h3>Input commitments</h3>'+a.sources.map(x=>'<p class="hash">SHA-256 '+e(x.sha256)+'<br>Record '+x.record_index+' · '+x.bytes+' bytes</p>').join('')+'</details></article>';}).join('');
+ const comp=packet.comparison;
+ return '<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Workload cost report</title><style>body{font:15px/1.5 system-ui,sans-serif;max-width:1000px;margin:35px auto;padding:0 24px;color:#202322;background:#fafaf7}header{border-bottom:2px solid;padding-bottom:15px}h1{font-size:30px}h2{font-size:23px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:35px}.price{font-size:42px}dl{display:grid;grid-template-columns:1fr 1fr;gap:7px}dd{margin:0}dt{color:#575c58}pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px}table{width:100%;border-collapse:collapse}td,th{text-align:left;padding:7px;border-bottom:1px solid #ddd}.hash{overflow-wrap:anywhere;font:11px/1.5 monospace}.notice{padding:12px;background:#eee9cf}footer{border-top:1px solid;margin-top:24px;font-size:12px}@media(max-width:480px){.grid{display:block}dl{grid-template-columns:1fr}dd{margin-bottom:12px}}@media print{body{margin:0;background:white}.grid{display:block}article{break-inside:avoid}h3{break-after:avoid}details{display:none}.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}body{font-size:11px}.price{font-size:32px}h1{font-size:25px}h2{font-size:18px}footer{font-size:10px}}</style><header><p>WORKLOAD REPORT · '+e(packet.version)+'</p><h1>'+e(packet.title||'Cost per result')+'</h1><p>'+e(packet.generated_at)+'</p></header><p class="notice">'+(packet.synthetic?'SYNTHETIC DEMONSTRATION. These are software-test fixtures, not GPU measurements.':'Imported producer results and user-supplied commercial inputs. No independent hardware rerun or source authenticity is claimed.')+'</p>'+(comp?'<p><b>'+e(comp.status)+'</b> '+(comp.saving!==null?e((Math.abs(comp.saving)*100).toFixed(1)+'% '+(comp.saving>=0?'lower':'higher')+' modeled cost for A relative to B.'):e(comp.issues.join(' ')))+'</p>':'')+'<div class="grid">'+rows+'</div><footer>Completion is transport success, not task correctness. Latency gates and evaluator-declared outcomes are separate. Pooled windows do not establish production availability; setup, idle time and omitted costs remain outside window estimates. Raw prompts, generated text, source filenames and error bodies are excluded. Keep originals privately to verify their hashes against this report. Packet checksum binds supplied bytes, not the truth of their producer. Export the JSON packet for recomputation. Independent tool by Second Run; no provider endorsement.</footer></html>';
+}
+
+function sha256(input){
+ const bytes=input instanceof Uint8Array?input:new Uint8Array(input),len=bytes.length;
+ const k=[0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,0xe49b69c1,0xefbe4786,0x0fc19dc6,0x240ca1cc,0x2de92c6f,0x4a7484aa,0x5cb0a9dc,0x76f988da,0x983e5152,0xa831c66d,0xb00327c8,0xbf597fc7,0xc6e00bf3,0xd5a79147,0x06ca6351,0x14292967,0x27b70a85,0x2e1b2138,0x4d2c6dfc,0x53380d13,0x650a7354,0x766a0abb,0x81c2c92e,0x92722c85,0xa2bfe8a1,0xa81a664b,0xc24b8b70,0xc76c51a3,0xd192e819,0xd6990624,0xf40e3585,0x106aa070,0x19a4c116,0x1e376c08,0x2748774c,0x34b0bcb5,0x391c0cb3,0x4ed8aa4a,0x5b9cca4f,0x682e6ff3,0x748f82ee,0x78a5636f,0x84c87814,0x8cc70208,0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2];
+ const h=new Uint32Array([0x6a09e667,0xbb67ae85,0x3c6ef372,0xa54ff53a,0x510e527f,0x9b05688c,0x1f83d9ab,0x5be0cd19]);
+ const buffer=new Uint8Array(Math.ceil((len+9)/64)*64);buffer.set(bytes);buffer[len]=128;const view=new DataView(buffer.buffer);view.setUint32(buffer.length-8,Math.floor(len/0x20000000));view.setUint32(buffer.length-4,(len*8)>>>0);
+ const w=new Uint32Array(64),r=(x,n)=>(x>>>n)|(x<<(32-n));
+ for(let pos=0;pos<buffer.length;pos+=64){for(let i=0;i<16;i++)w[i]=view.getUint32(pos+4*i);for(let i=16;i<64;i++){let x=w[i-15],y=w[i-2];w[i]=(w[i-16]+(r(x,7)^r(x,18)^(x>>>3))+w[i-7]+(r(y,17)^r(y,19)^(y>>>10)))>>>0;}
+  let [a,b,c,d,e,f,g,z]=h;for(let i=0;i<64;i++){let t1=(z+(r(e,6)^r(e,11)^r(e,25))+((e&f)^(~e&g))+k[i]+w[i])>>>0,t2=((r(a,2)^r(a,13)^r(a,22))+((a&b)^(a&c)^(b&c)))>>>0;z=g;g=f;f=e;e=(d+t1)>>>0;d=c;c=b;b=a;a=(t1+t2)>>>0;}const q=[a,b,c,d,e,f,g,z];for(let i=0;i<8;i++)h[i]=(h[i]+q[i])>>>0;
+ }
+ return [...h].map(v=>v.toString(16).padStart(8,'0')).join('');
+}
+function restoreRun(r){
+ if(!obj(r)||!obj(r.source)||!/^([a-f0-9]{64})$/.test(r.source.sha256)||!Number.isSafeInteger(r.source.record_index)||r.source.record_index<0||!Number.isSafeInteger(r.source.bytes)||r.source.bytes<0)fail('Invalid normalized source commitment.');
+ const raw={duration:r.duration,completed:r.completed,synthetic:r.synthetic,model_id:r.identity?.model,total_output_tokens:r.outputTokens};if(r.attempted!==null)raw.num_prompts=r.attempted;
+ for(const [key,id] of Object.entries({model_revision:'revision',precision:'precision',tokenizer_revision:'tokenizer',workload_id:'workload',cache_policy:'cache',runtime_digest:'runtime',load_profile:'load'}))raw[key]=r.identity?.[id]||'';
+ for(const [key,label] of [['ttft','ttft'],['e2e','e2el']])for(const p of ['p50','p95','p99'])raw[p+'_'+label+'_ms']=r.metrics?.[key]?.percentiles?.[p];
+ if(r.rows!==null){if(!Array.isArray(r.rows)||r.rows.some(row=>!obj(row)||typeof row.success!=='boolean'))fail('Invalid normalized request outcomes.');raw.errors=r.rows.map(row=>row.success?'':'redacted failure');for(const [key,field] of [['ttfts','ttft_ms'],['latencies','e2e_ms'],['queue_times','queue_ms']]){if(r.rows.every(row=>row[field]!==null)){raw[key]=r.rows.map(row=>num(row[field],field)/1000);}else if(r.rows.some(row=>row[field]!==null))fail('Mixed missing request samples.');}}
+ let clean=normalize(raw,r.source);if(r.quality)clean=attachQuality(clean,{schema:'hot-aisle/request-evaluation@1',source_sha256:r.source.sha256,record_index:r.source.record_index,evaluator:r.quality.evaluator,criterion_id:r.quality.criterion,passed:r.quality.passed});return clean;
+}
+function recompute(envelope){
+ if(!obj(envelope)||envelope.schema!=='hot-aisle/sealed-report@1'||!obj(envelope.payload))fail('Unsupported report envelope.');const p=envelope.payload;
+ if(sha256(new TextEncoder().encode(canonical(p)))!==envelope.sha256)fail('Report checksum mismatch.');if(p.schema!=='hot-aisle/workload-report@2'||p.version!==VERSION||!Array.isArray(p.sides)||!p.sides.length||p.sides.length>2)fail('Unsupported report payload.');
+ const sides=p.sides.map(s=>{if(!Array.isArray(s.normalized))fail('Missing normalized trials.');const runs=s.normalized.map(restoreRun),a=aggregate(runs,s.settings),c=costing(a,s.price);if(canonical({...a,warnings:[]})!==canonical({...s.aggregate,warnings:[]})||canonical(c)!==canonical(s.cost))fail('Derived results disagree with the normalized evidence.');return {...s,aggregate:a,cost:c};});
+ const comparison=sides.length===2?compare(sides[0].aggregate,sides[0].cost,sides[1].aggregate,sides[1].cost):null;if(canonical(comparison)!==canonical(p.comparison))fail('Comparison does not match the evidence.');if(p.synthetic!==sides.some(s=>s.aggregate.synthetic))fail('Synthetic status mismatch.');return {...p,sides,comparison};
+}
+
+const API={sha256,restoreRun,recompute,VERSION,MAX_REQUESTS,MAX_RUNS,parseDocuments,parseConsole,normalize,aggregate,contract,attachQuality,costing,compare,threshold,quantile,canonical,receiptHTML,escape};if(typeof module==='object'&&module.exports)module.exports=API;root.HA=API;
+})(typeof globalThis==='undefined'?this:globalThis);
+</script>
+<script id="sample-data" type="application/json">{
+  "a": {
+    "synthetic": true,
+    "model_id": "SYNTHETIC / example-model",
+    "metadata": {
+      "model_revision": "fixture-v1",
+      "precision": "FP16",
+      "tokenizer_revision": "fixture-v1",
+      "workload_id": "synthetic-five-requests",
+      "cache_policy": "cold",
+      "load_profile": "5 requests; concurrency 1",
+      "runtime_digest": "synthetic-runtime-a"
+    },
+    "num_prompts": 5,
+    "completed": 4,
+    "failed": 1,
+    "duration": 10,
+    "total_output_tokens": 40,
+    "request_throughput": 0.4,
+    "ttfts": [
+      0.1,
+      0.2,
+      0.3,
+      0.4,
+      0
+    ],
+    "latencies": [
+      1,
+      2,
+      3,
+      4,
+      0
+    ],
+    "queue_times": [
+      0.01,
+      0.02,
+      0.03,
+      0.04,
+      0
+    ],
+    "output_lens": [
+      10,
+      10,
+      10,
+      10,
+      0
+    ],
+    "input_lens": [
+      20,
+      20,
+      20,
+      20,
+      20
+    ],
+    "errors": [
+      "",
+      "",
+      "",
+      "",
+      "synthetic failure"
+    ],
+    "generated_texts": [
+      "SYNTHETIC",
+      "SYNTHETIC",
+      "SYNTHETIC",
+      "SYNTHETIC",
+      "SYNTHETIC"
+    ]
+  },
+  "b": {
+    "synthetic": true,
+    "model_id": "SYNTHETIC / example-model",
+    "metadata": {
+      "model_revision": "fixture-v1",
+      "precision": "FP16",
+      "tokenizer_revision": "fixture-v1",
+      "workload_id": "synthetic-five-requests",
+      "cache_policy": "cold",
+      "load_profile": "5 requests; concurrency 1",
+      "runtime_digest": "synthetic-runtime-b"
+    },
+    "num_prompts": 5,
+    "completed": 4,
+    "failed": 1,
+    "duration": 12,
+    "total_output_tokens": 40,
+    "request_throughput": 0.3333333333333333,
+    "ttfts": [
+      0.15,
+      0.25,
+      0.35,
+      0.45,
+      0
+    ],
+    "latencies": [
+      1.5,
+      2.5,
+      3.5,
+      4.5,
+      0
+    ],
+    "queue_times": [
+      0.01,
+      0.02,
+      0.03,
+      0.04,
+      0
+    ],
+    "output_lens": [
+      10,
+      10,
+      10,
+      10,
+      0
+    ],
+    "input_lens": [
+      20,
+      20,
+      20,
+      20,
+      20
+    ],
+    "errors": [
+      "",
+      "",
+      "",
+      "",
+      "synthetic failure"
+    ],
+    "generated_texts": [
+      "SYNTHETIC",
+      "SYNTHETIC",
+      "SYNTHETIC",
+      "SYNTHETIC",
+      "SYNTHETIC"
+    ]
+  }
+}</script>
+<script id="report-app">(function(){
+'use strict';
+const $=id=>document.getElementById(id),E=HA.escape,prices=JSON.parse($('prices-data').textContent);
+const state={a:[],b:[]},names={a:'Hot Aisle',b:'Comparison'},overrides={a:{},b:{}};
+let current=null,pasteSide='a',busy=false,sequence=0;
+const fmt=(v,d=2)=>v===null||v===undefined?'—':v.toLocaleString('en-US',{maximumFractionDigits:d}),money=v=>v===null?'—':'$'+v.toFixed(v<1?4:2);
+const fields=[['model','Model'],['revision','Model revision'],['precision','Precision / representation'],['tokenizer','Tokenizer revision'],['workload','Request-set ID / digest'],['cache','Cache policy'],['load','Offered load / concurrency'],['runtime','Runtime / container digest']];
+function lane(s){return '<section class="lane" id="lane-'+s+'"><div class="lanehead"><h2>'+names[s]+'</h2><span class="mini">'+(s==='a'?'A':'B · optional')+'</span></div><input class="fileinput" id="file-'+s+'" type="file" accept=".json,.jsonl,.ndjson,.txt,.log" multiple><button type="button" class="drop" id="drop-'+s+'"><b>Drop vLLM result files</b><span>or click to browse · JSON / JSONL / console output</span></button><div class="row"><button id="paste-'+s+'">Paste output</button> <button id="clear-'+s+'">Clear</button></div><p id="error-'+s+'" class="error" role="alert"></p><ul id="runs-'+s+'" class="runlist"></ul><div><label for="preset-'+s+'">Billable allocation</label><select id="preset-'+s+'">'+(s==='a'?'<option value="vm1">MI300X · 1 GPU VM</option><option value="vm2">MI300X · 2 GPU VM</option><option value="vm4">MI300X · 4 GPU VM</option><option value="bare8">MI300X · 8 GPU bare metal</option>':prices.nebius_ai_cloud.products.map((p,i)=>'<option value="'+i+'">Nebius '+E(p.gpu)+'</option>').join(''))+'<option value="custom">Custom rate / quote</option></select></div><div class="three" style="margin-top:12px"><div><label for="gpus-'+s+'">Billed GPUs</label><input id="gpus-'+s+'" type="number" min="1" step="1" value="1"></div><div><label for="rate-'+s+'">$ / GPU-hour</label><input id="rate-'+s+'" type="number" min="0" step="any" value="'+(s==='a'?2.99:3.85)+'"></div><div><label for="extra-'+s+'">Extras $ / hour</label><input id="extra-'+s+'" type="number" min="0" step="any" value="0"></div></div><p class="fine" id="price-note-'+s+'"></p><details><summary>Whole-bill cost and price source</summary><p class="fine">Leave blank for steady-window rental arithmetic. Enter the entire charge only when the imported results belong to that billing interval; include paid idle time and all allocations.</p><label for="total-'+s+'">Total charge for these imported results ($)</label><input id="total-'+s+'" type="number" min="0" step="any" placeholder="Optional total-charge override"><label for="quote-'+s+'" style="margin-top:10px">Quote / cost explanation</label><input id="quote-'+s+'" type="text" maxlength="500" placeholder="Optional quote ID, terms or billing note"></details><details id="identity-'+s+'"><summary>Comparison conditions <span id="identity-status-'+s+'"></span></summary><p class="fine">Known metadata fills automatically. Supply missing identifiers to compare equivalent work. Conflicts with imported metadata are held, not overwritten.</p><div class="two">'+fields.map(([key,label])=>'<div><label for="'+s+'-'+key+'">'+label+'</label><input id="'+s+'-'+key+'" type="text" maxlength="500" placeholder="Not in source"></div>').join('')+'</div></details><details><summary>Attach request-evaluation evidence</summary><p class="fine">Optional, hash-bound per-request pass/fail JSON. A transport success alone never counts as a correct answer.</p><input type="file" id="quality-'+s+'" accept=".json" multiple aria-label="'+names[s]+' evaluation sidecars"><p><a href="FORMATS.md">Sidecar format</a></p></details></section>';}
+$('lanes').innerHTML=lane('a')+lane('b');
+async function digest(bytes){if(!globalThis.crypto?.subtle)return HA.sha256(bytes);return [...new Uint8Array(await crypto.subtle.digest('SHA-256',bytes))].map(b=>b.toString(16).padStart(2,'0')).join('');}
+const asBytes=s=>new TextEncoder().encode(s);
+function numberInput(id,optional=false){let s=$(id).value.trim();if(optional&&s==='')return null;if(!s)throw Error('Complete '+$(id).previousElementSibling.textContent+'.');const n=Number(s);if(!Number.isFinite(n)||n<0)throw Error('Use a finite nonnegative number for '+$(id).previousElementSibling.textContent+'.');return n;}
+function settings(s){const i={};for(const [k] of fields)if(overrides[s][k])i[k]=overrides[s][k];return {identity:i,ttft:numberInput('gate-ttft',true),e2e:numberInput('gate-e2e',true),queue:$('gate-queue').checked,quality:$('gate-quality').checked};}
+function price(s){const preset=$('preset-'+s).value,custom=preset==='custom',period=$('price-period').value;
+ return {provider:s==='a'?'Hot Aisle':custom?'Custom comparator':'Nebius '+prices.nebius_ai_cloud.products[Number(preset)].gpu,gpus:numberInput('gpus-'+s),rate:numberInput('rate-'+s),extra:numberInput('extra-'+s),total:numberInput('total-'+s,true),quote:$('quote-'+s).value,source:custom?'user-entered rate':s==='a'?prices.hot_aisle.source:prices.nebius_ai_cloud.source,period:custom?'user-supplied':s==='b'&&period==='october_gpu_hour'?'announced 2026-10-01':'2026-09-22 snapshot'};}
+function priceNote(s){let p=price(s);$('price-note-'+s).textContent=p.source==='user-entered rate'?'Custom rate. Record the applicable quote or terms.':s==='a'?($('preset-a').value==='bare8'?'One-month minimum; window estimates are not the whole commitment.':'Minute billing. Window estimates exclude paid time outside the benchmark.'):'AI Cloud list-rate normalization; confirm available instance size. '+p.period+'.';}
+function syncIdentities(s){const c=HA.contract(state[s],overrides[s]);for(const [k] of fields)if(!overrides[s][k])$(s+'-'+k).value=c.values[k]||'';const missing=fields.filter(([k])=>k!=='runtime'&&!c.values[k]).length;$('identity-status-'+s).textContent=!state[s].length?'':missing?'· '+missing+' missing':'· supplied';}
+function renderRuns(s){$('runs-'+s).replaceChildren();for(let i=0;i<state[s].length;i++){let r=state[s][i],li=document.createElement('li'),t=document.createElement('span'),b=document.createElement('button');t.textContent='Trial '+(i+1)+' · '+r.completed+' completed / '+(r.attempted??'?')+' · '+fmt(r.duration)+' s'+(r.quality?' · evaluation attached':'');b.textContent='Remove';b.setAttribute('aria-label','Remove '+s+' trial '+(i+1));b.onclick=()=>{state[s].splice(i,1);syncIdentities(s);renderRuns(s);update();};li.append(t,b);$('runs-'+s).append(li);}}
+function metricCell(m,p){return m[p]!==null&&m[p]!==undefined?fmt(m[p],1):m.ranges?.[p]?m.ranges[p].map(x=>fmt(x,1)).join('–'):'—';}
+function card(s){const a=s.aggregate,c=s.cost;return '<article class="resultcard"><div class="smallcaps">'+E(s.label)+' · '+a.runs+' '+(a.runs===1?'trial':'trials')+'</div><p>'+E(a.identity.model||'Model not supplied')+'</p><div class="money">'+money(c.costPer1000)+'</div><div class="unit">per 1,000 '+E(a.unit)+'</div><div class="statistics"><div class="stat"><strong>'+fmt(a.rate)+'</strong><span>'+E(a.unit)+' / second</span></div><div class="stat"><strong>'+fmt(a.failureRate===null?null:a.failureRate*100,1)+(a.failureRate!==null?'%':'')+'</strong><span>failed responses / attempted</span></div></div><table><thead><tr><th>Latency (ms)</th><th>p50</th><th>p95</th><th>p99</th></tr></thead><tbody>'+[['ttft','First token'],['e2e','Complete response']].map(([k,label])=>'<tr><th>'+label+'</th>'+['p50','p95','p99'].map(p=>'<td>'+metricCell(a.metrics[k],p)+'</td>').join('')+'</tr>').join('')+'</tbody></table><p class="fine">'+E(a.metrics.ttft.basis)+'. Latencies exclude client queue; gates include it only when selected.</p><p class="fine">'+a.completed+' completed / '+(a.attempted??'unknown')+' attempted · '+fmt(a.duration)+' measured seconds · '+E(c.basis)+'.</p>'+a.holds.map(t=>'<p class="error">'+E(t)+'</p>').join('')+(a.accepted===0?'<p class="error">Zero qualifying outcomes. Cost per result has no finite value.</p>':'')+'<details><summary>Trial spread and evidence</summary><p>Completed-request rates: '+a.trialRateRange.map(x=>fmt(x)).join('–')+' / second'+(a.trialRateStd!==null?'; sample standard deviation '+fmt(a.trialRateStd):'; single trial')+'.</p><p>Quoted allocation: '+c.gpus+' × '+money(c.rate)+' + '+money(c.extra)+' extras / hour. Modeled or supplied total: '+money(c.total)+'.</p>'+state[s.id].map((r,i)=>'<p class="hash">Trial '+(i+1)+' · source SHA-256 '+E(r.source.sha256)+' · record '+r.source.record_index+'</p>'+(r.reportedGoodput!==null?'<p class="fine">Producer-reported latency goodput: '+fmt(r.reportedGoodput)+' / second; not task correctness.</p>':'')).join('')+a.warnings.map(w=>'<p class="fine">'+E(w)+'</p>').join('')+'</details></article>';}
+function summary(packet){let lines=[packet.synthetic?'SYNTHETIC EXAMPLE — not GPU measurements':'Workload report — supplied benchmark evidence'];for(const s of packet.sides)lines.push(s.label+': '+money(s.cost.costPer1000)+' per 1,000 '+s.aggregate.unit+'; '+fmt(s.aggregate.rate)+'/s; '+s.aggregate.runs+' trial(s).');if(packet.comparison?.saving!==null&&packet.comparison?.saving!==undefined)lines.push((Math.abs(packet.comparison.saving)*100).toFixed(1)+'% '+(packet.comparison.saving>=0?'lower':'higher')+' modeled cost for A versus B, under supplied matching conditions.');lines.push('Prices and measurements are separate. Raw source hashes and assumptions are in the report.');return lines.join('\n');}
+function update(){
+ current=null;$('global-error').textContent='';const sides=[],errors=[];
+ for(const s of ['a','b']){try{priceNote(s);if(state[s].length){let set=settings(s),p=price(s),a=HA.aggregate(state[s],set);sides.push({id:s,label:p.provider,settings:set,price:p,normalized:state[s],aggregate:a,cost:HA.costing(a,p)});}}catch(e){errors.push(names[s]+': '+e.message);}}
+ $('sample-banner').hidden=!['a','b'].some(s=>state[s].some(r=>r.synthetic));
+ if(state.a.length||state.b.length)$('main').insertBefore($('results'),$('lanes'));else $('utilities').before($('results'));
+ if(errors.length){$('global-error').textContent=errors.join(' ');$('report').innerHTML='<p class="empty">Calculation held. Fix the indicated inputs; imported results remain intact.</p>';}
+ else if(!sides.length){$('report').innerHTML='<p class="empty">Import a result on either side. A comparison file is optional.</p>';}
+ else{const comparison=sides.length===2?HA.compare(sides[0].aggregate,sides[0].cost,sides[1].aggregate,sides[1].cost):null;current={schema:'hot-aisle/workload-report@2',version:HA.VERSION,generated_at:new Date().toISOString(),title:sides[0].aggregate.identity.model||'Workload cost report',synthetic:sides.some(s=>s.aggregate.synthetic),sides,comparison};let bottom='';
+ if(comparison){bottom='<div class="comparison"><strong>'+(comparison.saving!==null?(Math.abs(comparison.saving)*100).toFixed(1)+'% '+(comparison.saving>=0?'lower':'higher')+' cost for A':'Two results. Comparison held.')+'</strong><p>'+(comparison.saving!==null?'Same supplied workload conditions and result basis. This compares producer evidence, not independently rerun hardware.':E(comparison.issues.join(' ')))+'</p></div>';}
+ else{const one=sides[0];if(one.id==='a'&&one.aggregate.rate!==null&&one.cost.hourly>0&&one.cost.basis==='modeled charge for summed benchmark windows'){const priceB=price('b'),otherHourly=priceB.rate*priceB.gpus+priceB.extra,required=HA.threshold(one.aggregate.rate,one.cost.hourly,otherHourly);bottom='<div class="comparison"><strong>'+fmt(required)+' / second to tie</strong><p>'+E(priceB.provider)+' would need this '+E(one.aggregate.unit)+' rate at '+money(otherHourly)+'/allocation-hour to match Hot Aisle’s <b>window rental efficiency</b>. This is a threshold, not a measured comparator result.</p></div>';}}
+ $('report').innerHTML='<div class="cards">'+sides.map(card).join('')+'</div>'+bottom;
+ }
+ for(const id of ['save-html','save-json','copy'])$(id).disabled=!current||busy;
+ renderBreakEven();
+}
+function renderBreakEven(){const period=$('price-period').value;$('breaktable').innerHTML='<table><tr><th>GPU</th><th>$/GPU-hour</th><th>Hot Aisle throughput to tie</th></tr>'+prices.nebius_ai_cloud.products.map(p=>'<tr><td>'+E(p.gpu)+'</td><td>'+money(p[period])+'</td><td>'+fmt(100*prices.hot_aisle.vm_gpu_hour/p[period],1)+'%</td></tr>').join('')+'</table>';}
+async function importSources(s,files){
+ if(busy)throw Error('Wait for the current import to finish.');busy=true;update();$('error-'+s).textContent='Reading and hashing locally…';
+ try{if(files.length>50)throw Error('Choose at most 50 files.');if(files.reduce((n,f)=>n+f.size,0)>50*1024*1024)throw Error('Import at most 50 MiB in one batch.');let next=[...state[s]],evaluations=[];
+ for(const file of files){if(file.size>25*1024*1024)throw Error('Each file must be ≤25 MiB.');const bytes=await file.arrayBuffer(),sha=await digest(bytes),str=new TextDecoder('utf-8',{fatal:true}).decode(bytes),docs=HA.parseDocuments(str);
+  for(let i=0;i<docs.length;i++){const doc=docs[i];if(doc.schema==='hot-aisle/request-evaluation@1')evaluations.push(doc);else{const source={sha256:sha,record_index:i,bytes:bytes.byteLength};if(next.some(r=>r.source.sha256===sha&&r.source.record_index===i))throw Error('Duplicate source record. Existing trials were left unchanged.');next.push(HA.normalize(doc,source));}}
+ }
+ for(const q of evaluations){const i=next.findIndex(r=>r.source.sha256===q.source_sha256&&r.source.record_index===q.record_index);if(i<0)throw Error('Evaluation source not found. Import its exact benchmark file first or in the same batch.');next[i]=HA.attachQuality(next[i],q);}
+ // Validate cross-trial metadata before admission, without requiring optional gates.
+ HA.aggregate(next,{identity:overrides[s]});state[s]=next;sequence++;syncIdentities(s);renderRuns(s);$('error-'+s).textContent='';
+ }catch(e){$('error-'+s).textContent=e.message+' Import rejected; prior trials retained.';throw e;}
+ finally{busy=false;update();}
+}
+function reset(s){state[s]=[];overrides[s]={};for(const [k] of fields)$(s+'-'+k).value='';$('error-'+s).textContent='';renderRuns(s);syncIdentities(s);update();}
+function preset(s){const v=$('preset-'+s).value;if(v==='custom'){update();return;}if(s==='a'){const n=v==='bare8'?8:Number(v.slice(2));$('gpus-a').value=n;$('rate-a').value=v==='bare8'?3.39:2.99;}else $('rate-b').value=prices.nebius_ai_cloud.products[Number(v)][$('price-period').value];update();}
+for(const s of ['a','b']){
+ $('drop-'+s).onclick=()=>$('file-'+s).click();$('file-'+s).onchange=e=>{importSources(s,[...e.target.files]).catch(()=>{});e.target.value='';};$('quality-'+s).onchange=e=>{importSources(s,[...e.target.files]).catch(()=>{});e.target.value='';};
+ const drop=$('drop-'+s);drop.ondragover=e=>{e.preventDefault();drop.classList.add('drag');};drop.ondragleave=()=>drop.classList.remove('drag');drop.ondrop=e=>{e.preventDefault();drop.classList.remove('drag');importSources(s,[...e.dataTransfer.files]).catch(()=>{});};
+ $('clear-'+s).onclick=()=>{if(!busy)reset(s);};$('paste-'+s).onclick=()=>{pasteSide=s;$('paste-text').value='';$('paste-error').textContent='';$('paste-dialog').showModal();$('paste-text').focus();};$('preset-'+s).onchange=()=>preset(s);
+ for(const id of ['gpus','rate','extra','total','quote'])$(id+'-'+s).oninput=()=>{if(id==='rate'||id==='gpus')$('preset-'+s).value='custom';update();};
+ for(const [k] of fields)$(s+'-'+k).oninput=()=>{overrides[s][k]=$(s+'-'+k).value.trim();syncIdentities(s);update();};
+}
+$('paste-cancel').onclick=()=>$('paste-dialog').close();$('paste-import').onclick=async()=>{try{await importSources(pasteSide,[new File([$('paste-text').value],'pasted-result.txt',{type:'text/plain'})]);$('paste-dialog').close();}catch(e){$('paste-error').textContent=e.message;}};
+for(const id of ['gate-ttft','gate-e2e','gate-queue','gate-quality'])$(id).oninput=update;
+$('price-period').onchange=()=>{preset('b');update();};
+$('example').onclick=async()=>{if(busy)return;if((state.a.length||state.b.length)&&!confirm('Replace the imported results with clearly marked synthetic samples?'))return;reset('a');reset('b');$('gate-ttft').value='';$('gate-e2e').value='';$('gate-quality').checked=false;$('gate-queue').checked=false;$('preset-a').value='vm1';$('preset-b').value='0';$('total-a').value='';$('total-b').value='';$('extra-a').value='0';$('extra-b').value='0';$('gpus-b').value='1';preset('a');preset('b');const samples=JSON.parse($('sample-data').textContent);try{for(const s of ['a','b'])await importSources(s,[new File([JSON.stringify(samples[s])],'synthetic-'+s+'.json',{type:'application/json'})]);}catch(e){$('global-error').textContent=e.message;}};
+$('clear-example').onclick=()=>{if(!busy){reset('a');reset('b');}};
+function download(name,body,type){const url=URL.createObjectURL(new Blob([body],{type})),a=document.createElement('a');a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+async function seal(packet){return {schema:'hot-aisle/sealed-report@1',sha256:await digest(asBytes(HA.canonical(packet))),payload:packet};}
+$('save-html').onclick=async()=>{if(!current)return;const p=current;const sealed=await seal(p);let html=HA.receiptHTML(p).replace('</footer>','<p class="hash">Evidence JSON payload SHA-256: '+sealed.sha256+'</p></footer>');download('workload-report'+(p.synthetic?'-SYNTHETIC':'')+'.html',html,'text/html');};
+$('save-json').onclick=async()=>{if(current)download('workload-evidence'+(current.synthetic?'-SYNTHETIC':'')+'.json',JSON.stringify(await seal(current),null,2)+'\n','application/json');};
+async function copyText(s){try{await navigator.clipboard.writeText(s);}catch(e){download('workload-summary.txt',s,'text/plain');}}
+$('copy').onclick=()=>{if(current)copyText(summary(current));};$('copy-flags').onclick=()=>copyText('--save-result --save-detailed --percentile-metrics ttft,tpot,itl,e2el --metric-percentiles 50,95,99 --result-filename workload-result.json');
+$('verify').onclick=async()=>{try{const p=$('verify-packet').files[0],f=$('verify-source').files[0];if(!p||!f)throw Error('Select the evidence JSON and an original result.');if(p.size>50*1024*1024||f.size>25*1024*1024)throw Error('File is too large.');const envelope=JSON.parse(await p.text());if(envelope.schema!=='hot-aisle/sealed-report@1'||!envelope.payload||envelope.sha256!==await digest(asBytes(HA.canonical(envelope.payload))))throw Error('Report checksum mismatch or unsupported report.');const sha=await digest(await f.arrayBuffer()),sources=envelope.payload.sides.flatMap(s=>s.aggregate.sources);if(!sources.some(s=>s.sha256===sha&&s.bytes===f.size))throw Error('Original file does not match any source commitment.');$('verify-result').textContent='MATCH. Report checksum and exact source bytes agree. This establishes byte identity, not independent source authenticity.';}catch(e){$('verify-result').textContent='NOT VERIFIED. '+e.message;}};
+// Block accidental file navigation outside the drop targets.
+window.addEventListener('dragover',e=>{if(e.dataTransfer?.types.includes('Files'))e.preventDefault();});window.addEventListener('drop',e=>e.preventDefault());
+for(const s of ['a','b'])syncIdentities(s);update();
+})();
+</script>
+</body></html>

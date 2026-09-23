@@ -18,7 +18,7 @@ function alive(pid) { if (!pid) return false; try { process.kill(pid, 0); return
 
 function canonicalPlan(plan) {
   const HA = engine.load();
-  const { sha256, ...rest } = plan;
+  const { sha256, commands, ...rest } = plan;
   return HA.canonical(rest);
 }
 
@@ -77,6 +77,7 @@ class Jobs extends EventEmitter {
   approve(id, { by = 'operator', plan_sha256 } = {}) {
     const job = this.get(id);
     if (job.state !== 'planned') throw new Error('Job ' + id + ' is ' + job.state + ', not awaiting approval.');
+    if (engine.sha256(canonicalPlan(job.plan)) !== job.plan.sha256) throw new Error('Plan body does not match its identity.');
     if (plan_sha256 && plan_sha256 !== job.plan.sha256) throw new Error('Approval names a different plan (' + plan_sha256.slice(0, 12) + ' ≠ ' + job.plan.sha256.slice(0, 12) + ').');
     job.approval = { by, at: new Date().toISOString(), plan_sha256: job.plan.sha256 };
     job.state = 'approved';
@@ -90,6 +91,7 @@ class Jobs extends EventEmitter {
     let job = this.get(id);
     if (job.state === 'running') { if (job.lease && (job.lease.instance === this.instance || alive(job.lease.pid))) return this.summary(job); job.state = 'interrupted'; }
     if (!['approved', 'interrupted'].includes(job.state)) throw new Error('Job ' + id + ' is ' + job.state + '; only approved or interrupted jobs can start.');
+    if (engine.sha256(canonicalPlan(job.plan)) !== job.plan.sha256) throw new Error('Plan body changed since preparation.');
     if (!job.approval || job.approval.plan_sha256 !== job.plan.sha256) throw new Error('Plan changed since approval.');
     const resumed = job.state === 'interrupted';
     job.state = 'running';

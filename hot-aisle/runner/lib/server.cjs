@@ -10,6 +10,8 @@ const engine = require('./engine.cjs');
 const { Jobs } = require('./jobs.cjs');
 const { Store } = require('./store.cjs');
 const record = require('./record.cjs');
+const publications = require('./publication-store.cjs');
+const prices = require('./catalog.cjs');
 const { revalidate } = require('./revalidate.cjs');
 const local = require('./adapters/local.cjs');
 const { HotAisle, tokenFromEnvironment } = require('./adapters/hotaisle.cjs');
@@ -33,8 +35,10 @@ function createServer({ store = new Store(), jobs = new Jobs(store), pageDir = p
   }
 
   const server = http.createServer(async (req, res) => {
+    const allowedHosts = ['127.0.0.1','localhost','[::1]'].map(h=>h+':'+server.address().port);
+    if(!allowedHosts.includes(req.headers.host)){res.writeHead(403);return res.end('Host not allowed.');}
     const origin = req.headers.origin;
-    if (origin !== undefined && !ORIGINS.test(origin)) { res.writeHead(403); return res.end('Origin not allowed.'); }
+    if (origin !== undefined && !allowedHosts.some(h=>origin==='http://'+h)) { res.writeHead(403); return res.end('Origin not allowed.'); }
     if (origin) { res.setHeader('Access-Control-Allow-Origin', origin); res.setHeader('Vary', 'Origin'); res.setHeader('Access-Control-Allow-Headers', 'Content-Type, X-Workload-Client'); res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS'); }
     if (req.method === 'OPTIONS') { res.writeHead(204); return res.end(); }
     const url = new URL(req.url, 'http://127.0.0.1');
@@ -59,6 +63,9 @@ function createServer({ store = new Store(), jobs = new Jobs(store), pageDir = p
       if ((m = p.match(/^\/api\/jobs\/([A-Za-z0-9._-]+)\/cancel$/)) && req.method === 'POST') return json(200, jobs.cancel(m[1]));
       if ((m = p.match(/^\/api\/jobs\/([A-Za-z0-9._-]+)\/events$/))) { res.writeHead(200, { 'Content-Type': 'text/event-stream', 'Cache-Control': 'no-store', Connection: 'keep-alive' }); res.write('event: job\ndata: ' + JSON.stringify(jobs.summary(jobs.get(m[1]))) + '\n\n'); clients.set(res, m[1]); req.on('close', () => clients.delete(res)); return; }
       if (p === '/api/events') { res.writeHead(200, { 'Content-Type': 'text/event-stream', 'Cache-Control': 'no-store', Connection: 'keep-alive' }); res.write('event: hello\ndata: {}\n\n'); clients.set(res, null); req.on('close', () => clients.delete(res)); return; }
+      if (p === '/api/catalog' && req.method === 'GET') return json(200, prices.snapshot());
+      if (p === '/api/publications' && req.method === 'GET') return json(200, publications.list(store));
+      if ((m=p.match(/^\/api\/publications\/([A-Za-z0-9._-]+)$/)) && req.method === 'GET') return json(200, publications.read(store,m[1]));
       if (p === '/api/records') return json(200, store.list('records').map(id => { const r = store.read('records', id); return { id, created: r.created, synthetic: r.synthetic, qualified: r.disposition.qualified, model: r.declared.plan.workload.model, primary_concurrency: r.derived.primary_concurrency, job_id: r.job_id, sha256: r.sha256 }; }).sort((a, b) => a.created < b.created ? 1 : -1));
       if ((m = p.match(/^\/api\/records\/([A-Za-z0-9._-]+)(\/(verify|headline|summary|report\.html|evidence\.json|revalidate|publish))?$/))) {
         const rec = store.read('records', m[1]); if (!rec) return json(404, { error: 'Unknown record.' });
@@ -84,14 +91,7 @@ function num(v) { return v === null || v === undefined || v === '' ? undefined :
 
 /* Publishing is an explicit act over an existing record: the headline, evidence packet
    and report are generated side by side from the same record. */
-function publish(store, rec) {
-  const dir = path.join(store.root, 'published', rec.id);
-  fs.mkdirSync(dir, { recursive: true });
-  const today = new Date().toISOString().slice(0, 10);
-  const files = { 'headline.json': JSON.stringify(record.headline(rec, { published_on: today, evidence_url: 'evidence.json', report_url: 'report.html' }), null, 2) + '\n', 'evidence.json': JSON.stringify(record.packet(rec), null, 2) + '\n', 'report.html': record.receipt(rec), 'record.json': JSON.stringify(rec, null, 2) + '\n', 'summary.txt': record.summary(rec) + '\n' };
-  for (const [name, body] of Object.entries(files)) fs.writeFileSync(path.join(dir, name), body);
-  return { published: dir, files: Object.keys(files), synthetic: rec.synthetic, note: rec.synthetic ? 'Synthetic demonstration; the headline status is "demonstration", never "published".' : 'Copy headline.json and evidence.json beside the page (data/) to surface this record.' };
-}
+function publish(store, rec) { return publications.publish(store, rec); }
 
 function serveStatic(root, p, res) {
   const clean = path.normalize(decodeURIComponent(p)).replace(/^([/\\])+/, '');

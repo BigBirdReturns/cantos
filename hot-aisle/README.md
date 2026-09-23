@@ -5,7 +5,7 @@
 Live: https://bigbirdreturns.github.io/axm-tools/hot-aisle/
 
 2.2 (22 September 2026) turns the page into an instrument over a connected runner.
-The `report-engine` script is byte-identical to 2.0.0; everything else projects from it.
+The `report-engine` retains its 2.0 arithmetic; the integration standardizes source line endings and pins the resulting identity. Every measured finding projects from it.
 
 - **Connected acquisition.** `runner/` reads the authorized Hot Aisle team, allocations,
   state, balance and retrieved on-demand prices through the public API, drives
@@ -71,6 +71,10 @@ Node uses built-in modules only. The verifier loads the exact engine embedded in
 
 `data/prices.json` and the matching embedded `prices-data` block are a **22 September 2026 snapshot**. October rates are announced future AI Cloud infrastructure prices, not Token Factory managed-endpoint quotes. Stock, instance sizes, tax, idle time, commitment terms and unentered costs are not inferred. Custom quotes can be entered directly.
 
-All files are steward-owned. The shipped `index.html` requires no build. The page's `report-engine` script is the executable authority; tests and the CLI extract that exact source. Any edit must rerun the qualification and regenerate the offline ZIP and release manifest. Do not patch frozen releases. There are no scheduled fetches or external-effect adapters.
+All files are steward-owned. The shipped `index.html` requires no build. The page's `report-engine` script is the executable authority; tests and the CLI extract that exact source. Any edit must rerun the qualification and regenerate the offline ZIP and release manifest. Do not patch frozen releases. No scheduled fetch is activated here. The opt-in runner is the explicit execution adapter, separate from the static report viewer.
 
 Independent, MIT-licensed original code by Second Run. Provider, model and runtime names retain their own rights. No provider endorsement, first customer, measured performance win or willingness to pay is asserted.
+
+## Decision desk handoff
+
+`Publish to connected desk` creates an immutable local `hot-aisle/publication@1` containing this record and its matching sealed packet. `/api/publications` exposes only those explicitly published snapshots. One catalogue is edited in `compute/data/catalog.json` and copied by `integration/build.py`; `node runner/bin/workload.cjs quote do-h100` retrieves the dated DigitalOcean quote. Tenant API prices and custom quotes remain separate evidence. See the combined source `integration/README.md`.

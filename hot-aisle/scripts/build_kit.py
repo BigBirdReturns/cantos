@@ -14,7 +14,7 @@ import zipfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-INCLUDE = ['index.html', 'README.md', 'RUNNER.md', 'FORMATS.md', 'FIRST_CAMPAIGN.md', 'LICENSE', 'QUALIFICATION.json', 'data/prices.json']
+INCLUDE = ['index.html', 'README.md', 'RUNNER.md', 'FORMATS.md', 'FIRST_CAMPAIGN.md', 'LICENSE', 'QUALIFICATION.json', 'data/prices.json', 'data/catalog.json']
 GLOBS = ['data/demo/*', 'examples/*.json', 'scripts/*.py', 'scripts/*.cjs', 'scripts/*.mjs', 'runner/package.json', 'runner/bin/*.cjs', 'runner/lib/*.cjs', 'runner/lib/adapters/*.cjs', 'runner/fixtures/*.cjs', 'runner/test/*.cjs']
 ZIP_DATE = (2026, 9, 22, 0, 0, 0)
 
@@ -39,14 +39,16 @@ def manifest() -> dict:
 def archive_bytes(man: dict) -> bytes:
     import io
     buf = io.BytesIO()
-    with zipfile.ZipFile(buf, 'w', zipfile.ZIP_DEFLATED) as z:
+    with zipfile.ZipFile(buf, 'w', zipfile.ZIP_STORED) as z:
         for name in sorted(man['files']):
             info = zipfile.ZipInfo(name, date_time=ZIP_DATE)
-            info.compress_type = zipfile.ZIP_DEFLATED
+            info.create_system = 3
+            info.compress_type = zipfile.ZIP_STORED
             info.external_attr = 0o644 << 16
             z.writestr(info, (ROOT / name).read_bytes())
         info = zipfile.ZipInfo('MANIFEST.json', date_time=ZIP_DATE)
-        info.compress_type = zipfile.ZIP_DEFLATED
+        info.create_system = 3
+        info.compress_type = zipfile.ZIP_STORED
         info.external_attr = 0o644 << 16
         z.writestr(info, json.dumps(man, indent=2) + '\n')
     return buf.getvalue()

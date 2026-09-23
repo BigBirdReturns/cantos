@@ -1,0 +1,136 @@
+{
+  "schema": "second-run/compute-release@1",
+  "version": "0.2.0",
+  "files": [
+    {
+      "path": "index.html",
+      "bytes": 172310,
+      "sha256": "93d7b8f6f73043ae2a996cbbc01ca77d5d032848a37b819deb4b25180391a89e"
+    },
+    {
+      "path": "template.html",
+      "bytes": 19638,
+      "sha256": "254846e3bec49c4104c0465119981730b3c531bed08fef0f4872e777eeee6957"
+    },
+    {
+      "path": "style.css",
+      "bytes": 21443,
+      "sha256": "1ab6c11c6b3cb739c78de5ebb05f2b6445b8f5e038c1178755cf188e8d9d0e63"
+    },
+    {
+      "path": "app.js",
+      "bytes": 45676,
+      "sha256": "699592605fb9528ceb3fc82cb85eb521590ce1660a8742211fffbb3c8d51dd29"
+    },
+    {
+      "path": "engine.cjs",
+      "bytes": 10929,
+      "sha256": "f1639a4b1434769be4c5773d5f1fd38c616a2f4e85cabe8abd2ddab75d73dd48"
+    },
+    {
+      "path": "data/catalog.json",
+      "bytes": 21060,
+      "sha256": "3fbf8ba08c7312a5343d8d87e456e19715b27dc7d9abe78ca542a55b3789c35f"
+    },
+    {
+      "path": "adapters/workload-engine.cjs",
+      "bytes": 24798,
+      "sha256": "78600d009f43ca37a81fa15231dfb5be307d8b0a01cfcfe42d94ed8015061593"
+    },
+    {
+      "path": "adapters/qualified-engine.cjs",
+      "bytes": 26558,
+      "sha256": "8525b2af5a2ec9dbf93a18a0f60135b8489417dae9c716b011d2d338dc4eb39e"
+    },
+    {
+      "path": "adapters/instrument.cjs",
+      "bytes": 2598,
+      "sha256": "fbb92531d95beb8b4d61d92ca41360a1f5cb99621587d7d72a864794a77b13e9"
+    },
+    {
+      "path": "adapters/workload-report-v2.html",
+      "bytes": 63398,
+      "sha256": "cd79dc1b81740c682e1529d55c9d76f91ae8750b97abab676d5dfdd52c917e57"
+    },
+    {
+      "path": "scripts/connect.cjs",
+      "bytes": 18765,
+      "sha256": "fd9429df08f62bf21f73e475964fba90134e9555b034810e63e8f780d7525c88"
+    },
+    {
+      "path": "scripts/recompute.cjs",
+      "bytes": 1797,
+      "sha256": "ff856f82705df05682b01d05431f5dca9bd0ea8971f17a9a8a1a92420b9e765d"
+    },
+    {
+      "path": "scripts/build.py",
+      "bytes": 2770,
+      "sha256": "2e127c07195617d950acb23019573174fb2982f97286964dcbaaa27c456d6158"
+    },
+    {
+      "path": "scripts/review_prices.py",
+      "bytes": 4434,
+      "sha256": "290088b7ed9f828a70f50912f64e587bdc7cfb268397e4123f20b61877e2a46d"
+    },
+    {
+      "path": "README.md",
+      "bytes": 8981,
+      "sha256": "3f59db34e66b0c2c7627be2413c7324fa70ce0e3ac02d837a2cabfa3b394c176"
+    },
+    {
+      "path": "LICENSE",
+      "bytes": 1080,
+      "sha256": "f3d120fa577423fba79c423f8615dbed8a385900021e33fe28be86b44ec52825"
+    },
+    {
+      "path": "PROVENANCE.json",
+      "bytes": 1512,
+      "sha256": "95883b9f838019b9d16dfa6f9c29d09c6793dd34cb747d8605ae996f182a4a60"
+    },
+    {
+      "path": "METHOD.md",
+      "bytes": 5530,
+      "sha256": "035e67bea9450896bf7c710274bca87496f09a2bf18bc17c4b296d806a9c6902"
+    },
+    {
+      "path": "QUALIFICATION.json",
+      "bytes": 640,
+      "sha256": "e61e4807df90606c0456ffae50fe4b049d799a35bbfc1e2b27bda00362cf1ff6"
+    },
+    {
+      "path": "tests/fixtures.json",
+      "bytes": 2277,
+      "sha256": "f798f0110fa5be462000a488bc00de983f595d1a195ef5fe4161b3c50b3c5b72"
+    },
+    {
+      "path": "tests/test_core.cjs",
+      "bytes": 8026,
+      "sha256": "e983ca5ecfb5aba152617263d117d2232d6fd3cad1707082d9366373c0ba41f3"
+    },
+    {
+      "path": "tests/test_bridge.cjs",
+      "bytes": 9069,
+      "sha256": "c6e8e3d33433d77d1ac46b48e0ce3a09f13570219562b9dcda38004a322d8bf1"
+    },
+    {
+      "path": "tests/test_browser.py",
+      "bytes": 11307,
+      "sha256": "766a73adfe81d36aac0b9f6bc8ab98ceda69e66b19189844477c04383bc5d86e"
+    },
+    {
+      "path": "tests/test_prices.py",
+      "bytes": 1543,
+      "sha256": "bcb7b449431ed16f65959675d9b538ee8b38f2a260a19b6f2adb73c6402f7839"
+    },
+    {
+      "path": "ci/compute-ci.yml",
+      "bytes": 1522,
+      "sha256": "12702e171f1b7777f8e409dc217320a3f83afa02137f5aef488bd08c1c7eb91d"
+    },
+    {
+      "path": "ci/compute-price-review.yml",
+      "bytes": 788,
+      "sha256": "acf5a644a002d9f3dbcf0010c0b0d2b4930c1a6b13bf8a357d0f2b2af09456e2"
+    }
+  ]
+}

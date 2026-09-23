@@ -1,0 +1,33 @@
+{
+  "schema": "second-run/compute-provenance@1",
+  "created_on": "2026-09-22",
+  "original_work": "Second Run Compute 0.1.0 economic models, UI, private observation adapter, MCP tools and tests",
+  "donors": [
+    {
+      "name": "Hot Aisle workload-report v2 engine",
+      "repository": "BigBirdReturns/axm-tools",
+      "commit": "179a0d82ae9901d6535f4b4f9f7812dfcb374ce3",
+      "source": "hot-aisle/index.html script#report-engine",
+      "original_page_sha256": "cd79dc1b81740c682e1529d55c9d76f91ae8750b97abab676d5dfdd52c917e57",
+      "copied_path": "adapters/workload-engine.cjs",
+      "copied_sha256": "78600d009f43ca37a81fa15231dfb5be307d8b0a01cfcfe42d94ed8015061593",
+      "license": "MIT",
+      "scope": "Exact pure engine copy. Native hardware performance not inherited."
+    },
+    {
+      "name": "Aperture support receipt contract",
+      "repository": "BigBirdReturns/aperture",
+      "commit": "40ae1f94ae2c505cde915e4a56832ad492adf18e",
+      "path": "lib/support.mjs",
+      "blob": "a8a7b4d7c3b3a0fa31e4f332f9a1de29b6f31b42",
+      "scope": "Schema adaptation only; no scan or native fit performed."
+    },
+    {
+      "name": "TierBench",
+      "repository": "BigBirdReturns/tier-bench",
+      "scope": "Method donor: task-conditioned acceptance and full cost accounting. No benchmark result transferred to current GPU catalogue."
+    }
+  ],
+  "public_sources": "data/catalog.json",
+  "production_worktrees": "Claude hot-aisle-v3 and the Second Run launch worktree were not modified."
+}

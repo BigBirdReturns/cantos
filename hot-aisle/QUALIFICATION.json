@@ -1,21 +1,16 @@
 {
-  "schema": "hot-aisle/software-qualification@3",
-  "version": "2.2.0",
-  "date": "2026-09-22",
-  "current": {
-    "scope": "Checks that ran against this revision. CI (.github/workflows/hot-aisle-ci.yml) reruns every one of them on each push or PR touching hot-aisle/.",
-    "engine_unit_suite": { "command": "node scripts/test_workbench.cjs", "tests": 80, "failed": 0 },
-    "runner_suite": { "command": "node --test runner/test/*.test.cjs", "tests": 13, "failed": 0, "covers": ["plan hash + approval binding", "lifecycle to verified record", "projections equal engine output", "packet recomputes under HA.recompute", "cancel keeps completed trials", "reconnect resumes only missing trials", "dead lease recovered as interrupted", "corrupt evidence fails its trial", "spend limit stops early", "requirements decide qualification", "revalidation: price/traffic/runtime/evaluator/gates", "Hot Aisle adapter vs fake API", "localhost service incl. origin policy + SSE", "MCP stdio protocol"] },
-    "price_arithmetic": { "command": "python -m unittest discover -s scripts -p test_price_math.py", "tests": 13, "failed": 0 },
-    "browser_journeys": { "command": "node scripts/verify_page.mjs", "note": "Static pass (file://): zero network, no console errors, shipped record recomputed and matches, sample import, dark mode, phone width. Connected pass (runner --demo): auto-connect, prepare, plan hash, approve+start, completion, in-browser recomputation, three revalidations, reload reattach, start-and-cancel keeps trials.", "result_file": "journeys.json (CI artifact)" },
-    "kit": { "command": "python scripts/build_kit.py --check", "note": "MANIFEST.json and workload-report.zip are generated from source; CI fails if the committed copies differ." },
-    "engine": { "version": "2.0.0", "note": "report-engine script byte-identical to release 2.0.0; the runner loads it from index.html." }
+  "schema": "second-run/integration-candidate-qualification@1",
+  "version": "2.2-integration",
+  "state": "AWAITING_NATIVE_CI_FOR_INTEGRATED_SOURCE",
+  "scope": "Software integration only. Benchmark executors and provider APIs in tests are labeled local fixtures.",
+  "local_tests": {
+    "compute_node": 59,
+    "instrument_engine": 80,
+    "runner_node": 13,
+    "seam_node": 17
   },
-  "inherited": {
-    "scope": "Evidence recorded for earlier revisions and not rerun as-is against this one.",
-    "release_2_0_0": { "date": "2026-09-22", "browser_journeys": 28, "browser_scope": "Exact 2.0.0 HTML rendered in isolated Chromium through set_content; desktop/mobile/dark views inspected.", "index_sha256": "cd79dc1b81740c682e1529d55c9d76f91ae8750b97abab676d5dfdd52c917e57" }
-  },
-  "source_schema": { "repository": "vllm-project/vllm", "commit": "4edb55169f69c76bb87ab9f154585917cb01bb17", "path": "vllm/benchmarks/serve.py", "blob": "14c72386a5d01c1163c99497890004c43ac09338" },
-  "provider_api": { "swagger": "https://admin.hotaisle.app/api/docs/swagger.json", "endpoints_used": ["/user/", "/teams/", "/teams/{team}/virtual_machines/", "/teams/{team}/virtual_machines/{vm}/state/", "/teams/{team}/virtual_machines/available/", "/teams/{team}/balance/"], "note": "Adapter exercised against a local fake implementing these endpoints; not yet exercised against the live API with a customer token." },
-  "measurement_scope": "No Hot Aisle customer result, GPU runtime, hardware comparison or measured commercial advantage is claimed. The shipped demonstration record is synthetic by construction and labelled so in every projection."
+  "native_browser": "Run .github/workflows/hot-aisle-ci.yml against this exact source. Older set_content/browser receipts are not promoted.",
+  "prior_version": "2.2.0",
+  "hardware_campaign": "NOT_RUN",
+  "provider_authentication": "NOT_QUALIFIED"
 }

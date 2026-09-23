@@ -14,6 +14,7 @@ const { createServer, publish } = require('../lib/server.cjs');
 
 const HELP = `workload — connected qualification for a vLLM workload on Hot Aisle
 
+  quote <catalogue-offer-id> [--as-of YYYY-MM-DD]        dated allocation price, no execution
   inspect [--adapter hotaisle|local] [--team handle]   read the authorized environment
   plan <plan.json | --demo> [--json]                    validate and freeze a plan (runs nothing)
   approve <job> [--by name]                             bind approval to the plan hash
@@ -40,6 +41,7 @@ async function main() {
   const store = new Store();
   const jobs = new Jobs(store);
   switch (cmd) {
+    case 'quote': return out(require('../lib/catalog.cjs').quote(args[1],flag('as-of',undefined)));
     case 'inspect': {
       if (flag('adapter', 'hotaisle') === 'local') { const api = await local.startFakeApi(); try { out(await new HotAisle({ token: api.token, baseUrl: api.baseUrl }).inspect({ team: 'demo-team' })); } finally { await api.close(); } }
       else out(await new HotAisle().inspect({ team: flag('team') }));

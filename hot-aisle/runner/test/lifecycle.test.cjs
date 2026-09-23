@@ -73,7 +73,8 @@ test('full lifecycle produces a verified qualified record whose projections matc
 test('cancel stops the owned benchmark and retains completed trials; reconnect resumes only the rest', async () => {
   const store = new Store(tmp());
   const jobs = new Jobs(store);
-  const job = jobs.plan(plan({ concurrency: [1, 8, 32], repeats: 1, target: { env: { FAKE_VLLM_DELAY_MS: '700' } } }));
+  const mark = tmp();
+  const job = jobs.plan(plan({ concurrency: [1, 8, 32], repeats: 1, target: { env: { FAKE_VLLM_DELAY_MS: '700', FAKE_VLLM_MARK:mark } } }));
   jobs.approve(job.id, { plan_sha256: job.plan.sha256 });
   const running = jobs.start(job.id);
   await new Promise(r => { const h = t => { if (t.status === 'completed') { jobs.off('trial', h); r(); } }; jobs.on('trial', h); });
@@ -87,12 +88,11 @@ test('cancel stops the owned benchmark and retains completed trials; reconnect r
   const j = jobs2.get(job.id);
   assert.equal(j.state, 'cancelled');
   j.state = 'interrupted'; jobs2.save(j);
-  const mark = tmp();
-  j.plan.target.env = { FAKE_VLLM_MARK: mark }; jobs2.save(j);
+  const markedBefore = fs.readdirSync(mark).length; // instrumentation was frozen before approval
   const s2 = await jobs2.start(job.id);
   assert.equal(s2.state, 'completed');
   assert.equal(s2.trials.completed, 3);
-  assert.equal(fs.readdirSync(mark).length, 2, 'only the two missing trials ran');
+  assert.equal(fs.readdirSync(mark).length-markedBefore, 2, 'only the two missing trials ran');
 });
 
 test('a dead lease is recovered as interrupted, never as running', () => {

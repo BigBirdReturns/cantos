@@ -126,3 +126,5 @@ MCP Apps UI resource (`ui://hot-aisle/evaluation`, `text/html;profile=mcp-app`).
 Provisioning VMs, installing vLLM, downloading models, comparator runs on other clouds
 (import their result files instead), and any independent attestation of who produced a
 result. The local environment proves the pipeline, not the hardware.
+
+Integration hardening: plan approval and start now recompute the plan-body hash (generated command previews are excluded). Altering a prepared body causes a hold before execution. Price-only revalidation rejects changed GPU counts. Immutable local publications include the record and matching packet; source authenticity remains outside the checksum guarantee.

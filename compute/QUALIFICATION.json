@@ -1,0 +1,16 @@
+{
+  "schema": "second-run/integration-candidate-qualification@1",
+  "version": "0.2-integration",
+  "state": "AWAITING_NATIVE_CI_FOR_INTEGRATED_SOURCE",
+  "scope": "Software integration only. Benchmark executors and provider APIs in tests are labeled local fixtures.",
+  "local_tests": {
+    "compute_node": 59,
+    "instrument_engine": 80,
+    "runner_node": 13,
+    "seam_node": 17
+  },
+  "native_browser": "Run .github/workflows/hot-aisle-ci.yml against this exact source. Older set_content/browser receipts are not promoted.",
+  "prior_version": "0.1.0",
+  "hardware_campaign": "NOT_RUN",
+  "provider_authentication": "NOT_QUALIFIED"
+}

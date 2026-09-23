@@ -1,0 +1,1578 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="dark light"><meta name="description" content="Compare GPU rental prices, owned hardware costs, and qualified workload reuse. Source-backed compute planning with local and MCP connections."><meta property="og:title" content="Second Run Compute"><meta property="og:description" content="Find the right compute for your work. Compare prices, own versus rent, and the cost of doing the same work again."><title>Compute · Second Run</title><link rel="icon" href="data:,">
+<style>[hidden]{display:none!important}
+:root{color-scheme:dark;--bg:#101214;--surface:#181b1e;--raised:#202429;--ink:#f0f0ec;--muted:#a6aaaf;--subtle:#737c83;--line:#30363b;--line2:#252b30;--accent:#ff9c64;--accentbg:#32251e;--green:#a3d5bb;--blue:#9bbbed;--purple:#c3b1de;--bad:#ffb0a7;--shadow:0 20px 70px #0006;--sans:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;--mono:'JetBrains Mono',ui-monospace,'SFMono-Regular',Consolas,monospace;font-family:var(--sans)}
+:root[data-theme=light]{color-scheme:light;--bg:#f4f3ef;--surface:#fffefa;--raised:#eeeee8;--ink:#202626;--muted:#5f686c;--subtle:#70777b;--line:#cdd2ce;--line2:#e3e5df;--accent:#a94713;--accentbg:#f8e9df;--green:#28614b;--blue:#315f98;--purple:#6d508d;--bad:#a23732;--shadow:0 20px 70px #1e261d24}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-size:14px;line-height:1.55}button,input,select,textarea{font:inherit;color:inherit}button,a,input,select,summary{-webkit-tap-highlight-color:transparent}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.42}a{color:inherit;text-underline-offset:4px}a:hover{color:var(--accent)}button{border:1px solid var(--line);background:var(--surface);border-radius:6px;padding:9px 13px;font-size:12px;font-weight:600;min-height:37px;transition:background .12s, border-color .12s}button:hover:not(:disabled){background:var(--raised);border-color:var(--subtle)}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:4px}button.primary,.primary{background:var(--accent);border-color:var(--accent);color:var(--bg);font-weight:700}button.primary:hover:not(:disabled){background:var(--ink);border-color:var(--ink)}button.quiet{border-color:transparent;background:transparent;color:var(--muted)}button.link{padding:0;min-height:28px;background:none;border:0;text-align:left;color:var(--accent)}input:not([type=checkbox]):not([type=range]),select,textarea{width:100%;border:1px solid var(--line);background:var(--bg);padding:10px 11px;border-radius:5px;min-height:41px;outline-offset:2px}input[type=checkbox]{accent-color:var(--accent);width:16px;height:16px;cursor:pointer}input[type=range]{width:100%;accent-color:var(--accent)}label{display:block;font-size:11px;line-height:1.4;color:var(--muted);margin:0 0 7px}h1,h2,h3,p{margin:0}h2{font-weight:600;font-size:21px;letter-spacing:-.5px;line-height:1.3}h3{font-size:15px;font-weight:650;line-height:1.4}p+p{margin-top:9px}small,.small{font-size:11px}.muted{color:var(--muted)}.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}.eyebrow{font:10px/1.4 var(--mono);text-transform:uppercase;letter-spacing:1.4px;color:var(--muted)}.badge{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:4px;padding:3px 6px;font:9px/1.4 var(--mono);letter-spacing:.3px;text-transform:uppercase;color:var(--muted);white-space:nowrap}.badge.positive{color:var(--green);border-color:var(--green)}.badge.amber{color:var(--accent);border-color:var(--accent)}.badge.bad{color:var(--bad);border-color:var(--bad)}.row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.between{justify-content:space-between}.stack>*+*{margin-top:14px}.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.four{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}.divider{border:0;border-top:1px solid var(--line2);margin:20px 0}.skip{position:absolute;left:-9999px}.skip:focus{left:12px;top:10px;z-index:99;background:var(--surface);padding:12px}.shell{max-width:1400px;width:calc(100% - 80px);margin:auto}.topbar{height:67px;border-bottom:1px solid var(--line2);display:flex;align-items:center;justify-content:space-between;gap:16px}.wordmark{display:flex;align-items:center;gap:14px;text-decoration:none;white-space:nowrap}.wordmark strong{font-size:15px;letter-spacing:-.5px}.wordmark .slash{color:var(--subtle);font-size:20px}.wordmark .product{font:12px var(--mono);letter-spacing:.7px;color:var(--muted)}.toplinks{display:flex;align-items:center;gap:12px}.toplinks .tiny{font-size:11px}.iconbtn{width:37px;padding:0;font-size:16px}.signal{display:inline-block;width:6px;height:6px;background:var(--accent);border-radius:50%;margin-right:5px}.intro{display:grid;grid-template-columns:1.45fr 1fr;align-items:end;gap:50px;padding:34px 0 27px}.intro h1{font-size:clamp(29px,3.45vw,46px);line-height:1.1;letter-spacing:-1.9px;font-weight:600;max-width:740px;margin-top:10px}.intro p{color:var(--muted);max-width:510px;font-size:13px;margin-top:12px}.intro-right{display:flex;flex-direction:column;align-items:end;gap:14px}.snapshot{font:10px var(--mono);color:var(--muted);letter-spacing:.1px}.marketstrip{display:flex;gap:18px;align-items:center;color:var(--muted);font-size:11px}.marketstrip b{color:var(--ink);font-family:var(--mono);font-size:13px;font-weight:500}.tabs{display:flex;align-items:center;gap:4px;border-bottom:1px solid var(--line);margin-bottom:23px;overflow:auto}.tab{border:0;background:transparent;color:var(--muted);border-radius:0;padding:14px 18px;white-space:nowrap;font-size:12px;font-weight:600;min-height:48px;border-bottom:2px solid transparent}.tab:first-child{padding-left:0;margin-right:6px}.tab[aria-selected=true]{color:var(--ink);border-bottom-color:var(--accent)}.tab:hover{background:transparent!important;border-color:transparent!important}.tab[aria-selected=true]:hover{border-bottom-color:var(--accent)!important}.tab span{font-family:var(--mono);color:var(--subtle);font-size:10px;margin-right:7px}.tabfill{flex:1}.tabs .subaction{flex-shrink:0}.view{padding-bottom:25px}.view[hidden]{display:none!important}.workspace{display:grid;grid-template-columns:244px minmax(0,1fr);gap:22px;align-items:start}.sidepanel{border:1px solid var(--line);border-radius:8px;background:var(--surface);padding:20px}.sidepanel h3{font-size:14px}.field{margin-top:17px}.field .labelrow{display:flex;justify-content:space-between}.field .labelrow output{color:var(--ink);font-family:var(--mono);font-size:12px}.segmented{display:flex;gap:0;border:1px solid var(--line);border-radius:5px;overflow:hidden;margin-top:10px}.segmented button{min-height:30px;border:0;flex:1;background:var(--bg);border-radius:0;padding:6px;font:10px var(--mono);color:var(--muted)}.segmented button[aria-pressed=true]{background:var(--raised);color:var(--accent)}.hint{color:var(--muted);font-size:10px;line-height:1.55;margin-top:8px}.sidepanel details{font-size:11px;color:var(--muted);border-top:1px solid var(--line2);padding-top:12px;margin-top:17px}.sidepanel details .field{margin-top:12px}.sidepanel details summary{cursor:pointer;color:var(--ink);font-size:11px}.sidepanel .full{display:block;width:100%;margin-top:18px}.contextnote{margin-top:15px;display:flex;gap:8px;align-items:start;font-size:11px;color:var(--muted);line-height:1.6}.contextnote .dot{width:5px;height:5px;flex-shrink:0;margin-top:7px;background:var(--accent);border-radius:50%}.mainpanel{min-width:0}.overview{display:grid;grid-template-columns:.9fr .9fr 1.6fr;border:1px solid var(--line);background:var(--surface);border-radius:8px;overflow:hidden;margin-bottom:20px}.overview>.metric{padding:20px;border-right:1px solid var(--line2);display:flex;flex-direction:column;justify-content:space-between;gap:12px}.metric .value{font:500 33px/1.15 var(--mono);letter-spacing:-1.7px}.metric .value sup{font-size:12px;letter-spacing:0;color:var(--muted);margin-left:3px;vertical-align:baseline}.metric .desc{font-size:11px;color:var(--muted);line-height:1.5}.metric .accent{color:var(--accent)}.plotpanel{padding:16px 18px 12px;min-width:0}.plothead{display:flex;justify-content:space-between;gap:8px;align-items:start}.plothead .eyebrow{font-size:9px}.plot{height:139px;margin-top:6px}.plot svg{height:100%;width:100%;overflow:visible}.plot .axis,.chart-axis{fill:var(--subtle);font:8px var(--mono)}.plot .grid,.chart-grid{stroke:var(--line2);stroke-width:1}.plot circle{cursor:pointer;stroke:var(--surface);stroke-width:1.2}.plot circle:hover{r:5.5;stroke:var(--ink)}.legend{display:flex;gap:12px;flex-wrap:wrap;font:9px var(--mono);color:var(--muted)}.legend i{display:inline-block;width:6px;height:6px;margin-right:5px;border-radius:50%;background:currentColor}.p-hotaisle{color:var(--accent);fill:var(--accent)}.p-digitalocean{color:var(--blue);fill:var(--blue)}.p-nebius{color:var(--green);fill:var(--green)}.p-runpod{color:var(--purple);fill:var(--purple)}.tablepanel{border:1px solid var(--line);border-radius:8px;background:var(--surface);overflow:hidden}.tabletop{padding:16px 20px;display:flex;align-items:center;justify-content:space-between;gap:15px}.tabletop h2{font-size:15px;letter-spacing:-.1px}.searchbox{position:relative;width:210px}.searchbox input{padding-left:28px!important;font-size:11px!important;min-height:34px!important}.searchbox span{position:absolute;left:10px;top:8px;color:var(--muted)}.tablewrap{overflow:auto;max-height:490px}table{width:100%;border-collapse:collapse;white-space:nowrap;font-size:12px}thead{position:sticky;top:0;z-index:1;background:var(--raised)}th{font:9px/1.45 var(--mono);letter-spacing:.3px;text-transform:uppercase;color:var(--muted);font-weight:400;text-align:left;padding:12px 12px;border-block:1px solid var(--line2)}td{padding:12px;border-bottom:1px solid var(--line2);vertical-align:middle}tr:last-child td{border-bottom:0}tbody tr{transition:background .1s}tbody tr:hover,tbody tr.selected{background:var(--raised)}th:first-child,td:first-child{padding-left:18px;width:35px}th:last-child,td:last-child{padding-right:18px}.gpu{font-weight:600;display:block;font-size:12px}.gpu-detail{font:9px/1.5 var(--mono);color:var(--muted);margin-top:4px}.provider{display:flex;align-items:center;gap:6px;color:var(--muted);font-size:10px}.provider .pdot{width:5px;height:5px;border-radius:50%;background:currentColor}.num{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums}.costcell{position:relative;min-width:115px}.costcell .bar{position:absolute;width:var(--bar,0);height:3px;background:var(--line);bottom:9px;right:12px;border-radius:3px}.costcell strong{font-size:13px;font-weight:500}.iconlink{background:none;border:0;color:var(--muted);font-size:18px;padding:1px 5px;min-height:30px}.mini{font:9px var(--mono);color:var(--subtle)}.tablefoot{padding:11px 18px;border-top:1px solid var(--line);color:var(--muted);font-size:10px;display:flex;gap:20px;justify-content:space-between}.empty{padding:45px 20px;text-align:center;color:var(--muted)}.tray{display:flex;align-items:center;justify-content:space-between;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:6px;background:var(--raised);padding:13px 16px;margin-top:16px;gap:12px}.tray .desc{font-size:11px;color:var(--muted)}.tray strong{font-size:12px}.tray [data-remove]{padding:3px 6px;min-height:25px}.overview-title{margin-bottom:18px}.overview-title p{margin-top:6px;color:var(--muted);font-size:12px}.sectioncard{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:22px}.sectioncard+.sectioncard{margin-top:18px}.bigstat{font:500 42px/1.15 var(--mono);letter-spacing:-2px;margin-top:14px}.bigstat small{font:12px var(--sans);color:var(--muted);letter-spacing:0}.linechart{height:220px;margin:20px 0}.linechart svg{width:100%;height:100%;overflow:visible}.linechart text{fill:var(--muted);font:9px var(--mono)}.linechart .curve-a{fill:none;stroke:var(--accent);stroke-width:2.5}.linechart .curve-b{fill:none;stroke:var(--blue);stroke-width:2;stroke-dasharray:6 4}.modelnotice{font-size:11px;color:var(--muted);padding:11px 14px;border:1px solid var(--line);border-radius:5px;margin-bottom:17px}.modelnotice b{color:var(--ink)}.statgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin:20px 0}.statgrid>div{padding-right:18px;border-right:1px solid var(--line2)}.statgrid>div:last-child{border:0}.statgrid .v{font:400 25px var(--mono);letter-spacing:-1px;margin:7px 0;color:var(--ink)}.statgrid .v.accent{color:var(--accent)}.statgrid p{font-size:10px;color:var(--muted)}.routeclass{display:grid;grid-template-columns:1.1fr 70px repeat(4,minmax(0,1fr));gap:10px;padding:15px 0;align-items:end;border-top:1px solid var(--line2)}.routeclass input,.routeclass select{font-size:11px!important;min-height:36px!important;padding:7px!important}.routeclass label{font-size:9px;margin-bottom:5px}.routeclass h3{font-size:12px}.routeclass .type{font:9px var(--mono);color:var(--muted)}.routeflow{display:flex;align-items:center;gap:18px;margin:20px 0}.flow-block{flex:1;padding:17px;border:1px solid var(--line);border-radius:6px}.flow-block strong{font:22px var(--mono)}.flow-block p{font-size:11px;color:var(--muted)}.flow-arrow{color:var(--accent);font-size:22px}.flow-meter{height:10px;background:var(--raised);border-radius:3px;overflow:hidden;margin-top:12px;display:flex}.flow-meter i{height:100%;display:block;background:var(--accent)}.flow-meter i.secondary{background:var(--blue)}.connection-grid{display:grid;grid-template-columns:1.3fr .8fr;gap:20px}.connection-head{display:flex;gap:13px;align-items:center;margin-bottom:17px}.connection-icon{width:40px;height:40px;display:grid;place-items:center;border:1px solid var(--line);border-radius:8px;color:var(--accent);font:22px var(--mono)}.connectorstate{display:flex;justify-content:space-between;align-items:center;margin-top:20px;padding-top:16px;border-top:1px solid var(--line2);font:11px var(--mono)}pre,code{font-family:var(--mono);font-size:11px;white-space:pre-wrap;overflow-wrap:anywhere}pre{padding:14px;background:var(--bg);border:1px solid var(--line);border-radius:5px;margin:13px 0;line-height:1.6}details{margin-top:14px}summary{cursor:pointer;font-size:12px;font-weight:500}details p{margin-top:10px;font-size:11px;color:var(--muted)}.worklist{margin-top:20px}.workrow{padding:18px 0;border-top:1px solid var(--line2);display:flex;align-items:center;justify-content:space-between;gap:15px}.workrow h3{font-size:13px}.workrow p{font-size:11px;color:var(--muted);margin-top:4px}.saved-list{margin-top:18px}.sourceentry{padding:16px 0;border-bottom:1px solid var(--line2)}.sourceentry h3{font-size:13px;margin-bottom:6px}.sourceentry p{font-size:11px;color:var(--muted)}.banner{background:var(--accentbg);color:var(--accent);padding:10px 15px;font-size:11px;border:1px solid var(--accent);border-radius:5px;margin:0 0 20px}.error{color:var(--bad);padding:10px 0;font-size:12px}.error:empty{display:none}.footnote{font-size:10px;color:var(--muted);line-height:1.7}.pagefoot{border-top:1px solid var(--line);padding:19px 0 32px;margin-top:20px;display:flex;justify-content:space-between;gap:25px;align-items:start}.pagefoot .footerbrand{font-size:12px;font-weight:600}.pagefoot p{font-size:10px;color:var(--muted);max-width:530px;margin-top:5px}.pagefoot nav{display:flex;gap:20px;font-size:10px;flex-wrap:wrap}.pagefoot button{background:none;border:0;min-height:0;font-size:10px;padding:0;color:var(--muted)}dialog{color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:0;box-shadow:var(--shadow);max-width:720px;width:calc(100% - 32px);max-height:86vh;overflow:auto}dialog::backdrop{background:#0008;backdrop-filter:blur(3px)}.dialogtop{padding:23px 26px 17px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line)}.dialogbody{padding:24px 26px}.dialogbody p{font-size:12px;color:var(--muted)}.dialogbody h3{margin-bottom:9px}.dialogbody .two{margin-top:15px}.dialogbody .offer-value{font:42px var(--mono);margin:10px 0}.dialogbody dl{display:grid;grid-template-columns:1fr 1fr;font-size:12px;gap:10px;margin:20px 0}.dialogbody dt{color:var(--muted)}.dialogbody dd{margin:0;text-align:right}.dialogactions{margin-top:22px;display:flex;gap:10px;flex-wrap:wrap}.modal-tabs{display:flex;gap:8px;margin-bottom:20px}.modal-tabs button{flex:1}.notify{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);border:1px solid var(--line);padding:12px 20px;border-radius:7px;background:var(--surface);box-shadow:var(--shadow);font-size:12px;z-index:200;max-width:90vw}.notify[hidden]{display:none}.comparison-card{border:1px solid var(--line);border-top:2px solid var(--accent);border-radius:5px;padding:16px}.comparison-card h3{font-size:13px}.comparison-card .bigstat{font-size:26px}.comparison-card p{font-size:10px;margin-top:8px}.matrix{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.showhelp{font-size:11px;line-height:1.65;color:var(--muted);padding:15px;border-left:2px solid var(--accent);margin-top:16px;background:var(--bg)}
+@media(min-width:1600px){.shell{width:calc(100% - 140px)}}
+@media(max-width:1100px){.shell{width:calc(100% - 40px)}.workspace{grid-template-columns:215px minmax(0,1fr);gap:16px}.sidepanel{padding:16px}.overview{grid-template-columns:1fr 1fr}.plotpanel{grid-column:1/-1;border-top:1px solid var(--line2);padding-top:12px}.plot{height:120px}.intro{gap:25px}.toplinks .tiny{display:none}.routeclass{grid-template-columns:1.2fr repeat(2,1fr)}.routeclass .classname{grid-column:1/-1}.routeclass .classname{display:flex;justify-content:space-between}.routeclass .type{margin-left:12px}.four{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:760px){.shell{width:calc(100% - 28px)}.topbar{height:59px}.toplinks{gap:6px}.toplinks .save-top{display:none}.wordmark{gap:7px}.wordmark .product{font-size:10px}.wordmark strong{font-size:13px}.intro{grid-template-columns:1fr;gap:18px;padding:25px 0 17px}.intro h1{font-size:34px;letter-spacing:-1.3px}.intro p{font-size:12px}.intro-right{align-items:start;gap:10px}.marketstrip{gap:15px}.tabs{margin-bottom:17px}.tab{padding:13px 10px;font-size:11px}.tab span{display:none}.tabs .subaction{display:none}.workspace{display:block}.sidepanel{margin-bottom:18px}.sidepanel.collapsible-mobile{padding:14px}.sidepanel.collapsible-mobile .filtergrid{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}.sidepanel.collapsible-mobile .field{margin-top:12px}.sidepanel.collapsible-mobile .field.hours{grid-column:1/-1}.sidepanel .contextnote{display:none}.overview .metric{padding:17px;gap:10px}.metric .value{font-size:29px}.tabletop{padding:13px}.searchbox{width:160px}td{padding:11px 9px}th{padding:10px 9px}.tablewrap{max-height:520px}.tablefoot{display:block;padding:10px 13px}.tray{position:sticky;bottom:10px;z-index:5;box-shadow:var(--shadow);padding:11px}.tray .desc{max-width:150px}.tray .row{gap:5px}.three,.two,.four{grid-template-columns:1fr}.statgrid{gap:11px}.statgrid .v{font-size:19px;letter-spacing:-.7px}.statgrid p{font-size:9px}.sectioncard{padding:17px}.connection-grid{grid-template-columns:1fr}.routeclass{grid-template-columns:repeat(2,1fr)}.routeclass .classname{display:block}.routeclass .type{margin-left:0}.matrix{grid-template-columns:1fr}.pagefoot{display:block}.pagefoot nav{margin-top:15px}.dialogtop{padding:18px}.dialogbody{padding:18px}.linechart{height:190px}.workrow{align-items:start}.workrow .row{justify-content:flex-end}.toplinks button{padding:7px 9px}.toplinks .iconbtn{padding:0}.plothead{align-items:center}.plothead .legend{gap:8px}.routeflow{gap:9px}.flow-block{padding:12px}.flow-block strong{font-size:20px}.flow-arrow{font-size:18px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+@media print{.topbar,.intro,.tabs,.sidepanel,.tray,.pagefoot,button,.plotpanel{display:none!important}.shell{width:100%}.workspace{display:block}body{background:white;color:black}th,td,.sectioncard,.tablepanel{border-color:#aaa}table{font-size:10px}.tablewrap{max-height:none;overflow:visible}.view[hidden]{display:none!important}}
+
+.gpu-open{min-height:25px;padding:0;border:0;background:transparent;text-align:left;color:var(--ink);font:inherit;font-weight:600}.gpu-open:hover{text-decoration:underline}.mobile-provider{display:none}
+@media(max-width:760px){
+ #view-market .workspace{display:flex;flex-direction:column;gap:15px}#view-market .mainpanel{display:contents}#view-market .overview{order:0}#view-market aside{order:1}#view-market .tablepanel{order:2}#view-market .plotpanel{display:none}
+ #view-market .tray{position:fixed;bottom:12px;left:14px;right:14px;order:3;margin:0}#view-market .contextnote{display:none}
+ #view-market table{min-width:0;table-layout:fixed}#view-market th:first-child,#view-market td:first-child{width:34px}#view-market th:nth-child(2){width:auto}#view-market th:nth-child(6){width:95px}
+ #view-market th:nth-child(3),#view-market th:nth-child(4),#view-market th:nth-child(5),#view-market th:nth-child(7),#view-market th:nth-child(8),#view-market td:nth-child(3),#view-market td:nth-child(4),#view-market td:nth-child(5),#view-market td:nth-child(7),#view-market td:nth-child(8){display:none}
+ .mobile-provider{display:block;font-size:9px;color:var(--muted);margin-top:3px}.gpu-open{min-height:32px}.tabs{scrollbar-width:thin}.tabletop{flex-wrap:wrap}.searchbox{width:100%}.tablepanel .costcell{min-width:0}
+ .sidepanel .filtergrid{grid-template-columns:1fr 1fr}.intro-right{gap:7px}.intro{padding-block:20px 15px}.intro h1{font-size:30px}.intro p{font-size:12px}.tablefoot{font-size:10px}.tablefoot span{display:block}.view-market .overview .metric{min-height:110px}.shell{padding-bottom:35px}
+}
+</style></head><body><a href="#main" class="skip">Skip to calculations</a>
+<div class="shell"><header class="topbar"><a class="wordmark" href="#" aria-label="Second Run Compute home"><strong>SECOND RUN</strong><span class="slash">/</span><span class="product">COMPUTE</span></a><div class="toplinks"><span class="tiny muted">Your work. Your numbers.</span><button class="quiet save-top" id="saved-top">Saved decisions <span id="saved-count">0</span></button><button id="theme" class="iconbtn" aria-label="Switch color theme">◐</button><button class="primary" id="connect-top">Connect workspace</button></div></header>
+<section class="intro"><div><div class="eyebrow"><span class="signal"></span>The compute decision desk</div><h1>Find the right compute<br>for your work.</h1><p>Compare cloud prices, the hardware you own, and the work you can stop repeating.</p></div><div class="intro-right"><button class="quiet snapshot" id="snapshot-button">Prices reviewed <span id="reviewed-date">22 Sep 2026</span> ↗</button><div class="marketstrip"><span><b id="provider-count">4</b> providers</span><span><b id="offer-count">30</b> configurations</span><span><b>0</b> accounts needed</span></div></div></section>
+<div id="stale-banner" class="banner" hidden></div>
+<nav class="tabs" role="tablist" aria-label="Compute tools"><button class="tab" role="tab" aria-selected="true" aria-controls="view-market" id="tab-market" data-tab="market"><span>01</span>Compare compute</button><button class="tab" role="tab" aria-selected="false" aria-controls="view-own" id="tab-own" data-tab="own" tabindex="-1"><span>02</span>Own vs rent</button><button class="tab" role="tab" aria-selected="false" aria-controls="view-reuse" id="tab-reuse" data-tab="reuse" tabindex="-1"><span>03</span>The second run</button><button class="tab" role="tab" aria-selected="false" aria-controls="view-work" id="tab-work" data-tab="work" tabindex="-1"><span>04</span>My workspace</button><div class="tabfill"></div><button id="method-top" class="quiet subaction">How the numbers work ↗</button></nav>
+<main id="main">
+<section class="view" id="view-market" role="tabpanel" aria-labelledby="tab-market"><div class="workspace"><aside><div class="sidepanel collapsible-mobile"><div class="row between"><h3>Your requirements</h3><button id="reset-market" class="quiet" style="padding:0;min-height:24px;font-size:10px">Reset</button></div><div class="filtergrid">
+<div class="field"><label for="memory">Memory per GPU</label><select id="memory"><option value="0">Show all capacities</option><option value="16">At least 16 GB</option><option value="24" selected>At least 24 GB</option><option value="32">At least 32 GB</option><option value="48">At least 48 GB</option><option value="80">At least 80 GB</option><option value="96">At least 96 GB</option><option value="141">At least 141 GB</option><option value="192">At least 192 GB</option><option value="256">At least 256 GB</option></select><p class="hint">Advertised capacity; native model fit comes next.</p></div>
+<div class="field"><label for="allocation">Allocation size</label><select id="allocation"><option value="1" selected>1 GPU</option><option value="0">Any allocation</option><option value="2">2 GPUs</option><option value="4">4 GPUs</option><option value="8">8 GPUs</option></select></div>
+<div class="field hours"><div class="labelrow"><label for="hours">Reserved hours per 30 days</label><output id="hours-label" for="hours">160 h</output></div><input type="range" id="hours" min="1" max="720" step="1" value="160"><div class="segmented" aria-label="Usage presets"><button data-hours="40">Occasional</button><button data-hours="160" aria-pressed="true">Workdays</button><button data-hours="720">Always on</button></div></div>
+<div class="field"><label for="vendor">Accelerator</label><select id="vendor"><option value="all">AMD + NVIDIA</option><option value="AMD">AMD</option><option value="NVIDIA">NVIDIA</option></select></div><div class="field"><label for="provider">Provider</label><select id="provider"><option value="all">All providers</option></select></div>
+<div class="field"><label for="as-of">Price schedule</label><select id="as-of"><option value="2026-09-22">22 Sep 2026 snapshot</option><option value="2026-10-01">1 Oct 2026 announced</option></select></div></div>
+<details><summary>Include other costs</summary><div class="field"><label for="extras">Additional cost / hour, USD</label><input type="number" id="extras" min="0" step=".01" value="0"></div><div class="field"><label for="fixed">One-time costs, USD</label><input type="number" id="fixed" min="0" step="1" value="0"></div><p class="hint">Applied to each candidate. Use provider source links to confirm the actual quote before a decision.</p></details>
+<details><summary>Estimate a memory budget</summary><div class="field"><label for="parameters">Total resident parameters, billions</label><input type="number" id="parameters" min=".001" step="1" value="30"></div><div class="field"><label for="bits">Weight representation, bits</label><select id="bits"><option value="4">4-bit</option><option value="8">8-bit</option><option value="16">16-bit</option></select></div><div class="field"><label for="kv">KV-cache budget, GB</label><input type="number" id="kv" min="0" value="4"></div><p id="footprint" class="hint"></p><button id="apply-memory" class="full">Use this screening budget</button></details></div><p class="contextnote"><span class="dot"></span><span>A shortlist of prices, not a GPU speed ranking. Connect your own results to calculate the cost of actual work.</span></p></aside>
+<div class="mainpanel"><div id="market-error" class="error" role="alert"></div><div class="overview"><div class="metric"><div class="eyebrow">Lowest matching list rate</div><div class="value accent" id="lowest">$0.27<sup>/h</sup></div><div class="desc" id="lowest-caption">RTX A5000 · Runpod</div></div><div class="metric"><div class="eyebrow">At your reserved hours</div><div class="value" id="period-cost">$43.20</div><div class="desc" id="period-caption">160 hours · before extras</div></div><div class="plotpanel"><div class="plothead"><span class="eyebrow">Price × memory</span><div class="legend" id="legend"></div></div><div id="market-plot" class="plot"></div><p class="hint" style="margin-top:0">Per-GPU memory and allocation-hour price. Each point is a listed configuration.</p></div></div>
+<div class="tablepanel"><div class="tabletop"><div><h2>Compute priceboard <span id="result-count" class="muted small"></span></h2><p class="hint" style="margin-top:3px">Ordered by allocation cost for your selected hours.</p></div><div class="searchbox"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Find a GPU or provider" aria-label="Search GPUs and providers"></div></div><div class="tablewrap"><table aria-label="Compute prices"><thead><tr><th><span class="sr-only" aria-label="Shortlist">+</span></th><th>GPU / allocation</th><th>Provider</th><th class="num">GB / GPU</th><th class="num">$/allocation-h</th><th class="num">Your period</th><th>Basis</th><th></th></tr></thead><tbody id="price-rows"></tbody></table></div><div class="tablefoot"><span>Whole allocations counted. Confirm availability and billing terms.</span><span>USD · <button class="link" id="source-note" style="font-size:10px">Sources & dates ↗</button></span></div></div>
+<div class="tray" id="shortlist-tray" hidden><div><strong id="shortlist-title">2 configurations selected</strong><div class="desc" id="shortlist-desc">Compare the cost, then qualify the work.</div></div><div class="row"><button class="quiet" id="clear-shortlist">Clear</button><button id="compare-shortlist">Compare</button><button class="primary" id="plan-shortlist">Build a decision</button></div></div>
+</div></div></section>
+<section class="view" id="view-own" role="tabpanel" aria-labelledby="tab-own" hidden><div class="overview-title"><div class="eyebrow">Capital, energy & time</div><h2 style="margin-top:6px">When does owning the machine make sense?</h2><p>Model the whole system, including idle power. Compare the same work when you have measured rates.</p></div><div class="workspace"><aside class="sidepanel"><h3>Your machine</h3><div class="field"><label for="own-name">Machine label</label><input id="own-name" value="My local workstation" maxlength="100"></div><div class="two"><div class="field"><label for="capex">Purchase cost, $</label><input id="capex" type="number" min="0" value="1500"></div><div class="field"><label for="residual">Residual value, $</label><input id="residual" type="number" min="0" value="300"></div></div><div class="field"><label for="horizon">Ownership horizon</label><select id="horizon"><option value="12">12 months</option><option value="24" selected>24 months</option><option value="36">36 months</option><option value="48">48 months</option></select></div><div class="two"><div class="field"><label for="load-watts">Load power, W</label><input id="load-watts" type="number" min="0" value="400"></div><div class="field"><label for="idle-watts">Idle power, W</label><input id="idle-watts" type="number" min="0" value="70"></div></div><div class="field"><label for="kwh">Electricity, $ / kWh</label><input id="kwh" type="number" min="0" step=".01" value=".20"></div><div class="field"><label for="ops">Maintenance & other cost / month, $</label><input id="ops" type="number" min="0" value="10"></div><div class="field"><div class="labelrow"><label for="own-hours">Active hours / 30 days</label><output id="own-hours-label">160 h</output></div><input type="range" id="own-hours" min="0" max="720" value="160"></div><details><summary>Compare equivalent work</summary><div class="field"><label for="local-rate">Local accepted units / hour</label><input id="local-rate" type="number" min="0" step="any" placeholder="Your measured rate"></div><div class="field"><label for="cloud-rate">Cloud accepted units / hour</label><input id="cloud-rate" type="number" min="0" step="any" placeholder="Same workload and requirements"></div><p class="hint">Supplied rates scale the cloud hours. Without both rates this is equal time, not equal output.</p></details></aside><div class="mainpanel"><div class="sectioncard"><div class="row between"><div><div class="eyebrow">Rental alternative</div><h3 style="margin-top:6px">Choose the machine you would rent</h3></div><select id="rental-offer" style="max-width:290px" aria-label="Rental alternative"></select></div><div id="own-error" class="error" role="alert"></div><div class="statgrid"><div><div class="eyebrow">Own / month</div><div class="v accent" id="own-cost"></div><p>Energy + maintenance + amortization</p></div><div><div class="eyebrow">Rent / month</div><div class="v" id="rent-cost"></div><p id="rent-hours-label"></p></div><div><div class="eyebrow">Cash break-even</div><div class="v" id="cash-months"></div><p>Upfront purchase / operating savings</p></div></div><div class="row between"><span class="eyebrow">Monthly economics by active hours</span><div class="legend"><span style="color:var(--accent)"><i></i>Own</span><span style="color:var(--blue)"><i></i>Rent</span></div></div><div id="own-chart" class="linechart"></div><div id="own-basis" class="modelnotice"></div><div id="own-breakdown" class="row between footnote"></div></div><div class="sectioncard"><div class="row between"><div><h3>Keep the calculation with the decision.</h3><p class="muted small" style="margin-top:6px">Your inputs stay editable. A source-bound snapshot preserves what you compared.</p></div><button class="primary" id="save-own">Save ownership decision</button></div></div></div></div></section>
+<section class="view" id="view-reuse" role="tabpanel" aria-labelledby="tab-reuse" hidden><div class="overview-title"><div class="eyebrow">The second run</div><h2 style="margin-top:6px">What if you stopped paying premium prices for routine work?</h2><p>Separate reusable procedures, smaller-model work and the judgment that remains. Count every retry.</p></div><div class="modelnotice"><b>Editable scenario.</b> These workload shares and timings are assumptions. Actual routing requires task qualification and your approval.</div><div class="sectioncard"><div class="four"><div><label for="premium-offer">Current premium allocation</label><select id="premium-offer"></select></div><div><label for="volume">Requests per batch</label><input id="volume" type="number" min="1" value="10000"></div><div><label for="qual-cost">Initial qualification cost, $</label><input id="qual-cost" type="number" min="0" value="50"></div><div><label for="repeat-batches">Repeat batches</label><input id="repeat-batches" type="number" min="1" value="12"></div></div><div id="route-classes" style="margin-top:24px"></div><div class="row between" style="margin-top:15px"><div><label for="validation-cost">Validation cost per request, $</label><input id="validation-cost" type="number" value=".00001" step="any" min="0" style="max-width:180px"></div><button id="reset-reuse" class="quiet">Reset scenario</button></div><div id="reuse-error" class="error" role="alert"></div></div><div class="two" style="margin-top:18px"><div class="sectioncard"><div class="eyebrow">Workload movement</div><div class="routeflow"><div class="flow-block"><p>Requests off premium</p><strong id="moved-pct"></strong><div class="flow-meter"><i id="moved-bar"></i></div></div><span class="flow-arrow">≠</span><div class="flow-block"><p>Premium GPU time saved</p><strong id="time-pct"></strong><div class="flow-meter"><i id="time-bar" class="secondary"></i></div></div></div><p class="footnote">Less GPU time is not automatically a released allocation. Residency, isolation and scheduling must establish reusable capacity.</p><div class="statgrid"><div><div class="eyebrow">Baseline / batch</div><div class="v" id="baseline-batch"></div></div><div><div class="eyebrow">Proposed / batch</div><div class="v accent" id="proposed-batch"></div></div><div><div class="eyebrow">Break-even batch</div><div class="v" id="break-even-batch"></div></div></div></div><div class="sectioncard"><div class="row between"><div class="eyebrow">Cumulative cost as work repeats</div><div class="legend"><span style="color:var(--blue)"><i></i>Baseline</span><span style="color:var(--accent)"><i></i>Reuse + setup</span></div></div><div id="reuse-chart" class="linechart" style="height:170px"></div><div class="row between"><p id="reuse-total" class="small"></p><button class="primary" id="save-reuse">Save route proposal</button></div></div></div></section>
+<section class="view" id="view-work" role="tabpanel" aria-labelledby="tab-work" hidden><div class="overview-title"><div class="eyebrow">From public prices to your actual work</div><h2 style="margin-top:6px">Bring the workspace. Keep the evidence.</h2><p>Connect to the qualification instrument. Keep its verified records beside your price, ownership and reuse decisions. Your agent uses the same read-only interface through MCP.</p></div><div class="sectioncard" style="margin-bottom:18px"><div class="row between"><h3>Published qualification records</h3><span id="publication-state" class="small muted"></span></div><div id="publication-list"></div></div><div class="connection-grid"><div class="sectioncard"><div class="connection-head"><div class="connection-icon">⌘</div><div><h3>Local workspace connection</h3><p class="small muted">Read existing runs without moving files between tools.</p></div></div><p class="small muted">The local helper serves this interface on your machine. It reads only the directory and endpoint you explicitly configure.</p><div class="dialogactions"><button class="primary" id="connect-work">Connect a workspace</button><button id="refresh-work" disabled>Refresh observations</button><button id="sample-work">Explore a sample</button></div><div class="connectorstate"><span id="connection-status">DISCONNECTED</span><span class="muted">Read-only · no provisioning</span></div><div id="connection-error" class="error" role="alert"></div><div id="runtime-summary"></div><div id="run-list" class="worklist"></div></div><div class="sectioncard"><div class="connection-head"><div class="connection-icon">↗</div><div><h3>Use it through your agent</h3><p class="small muted">A working stdio MCP server, not a prompt template.</p></div></div><p class="small muted">Search the priceboard, calculate ownership, model qualified-route proposals and inspect permitted results with the same engine.</p><pre id="mcp-example">node compute/scripts/connect.cjs --mcp \
+  --results /path/to/approved-results</pre><button id="copy-mcp">Copy MCP configuration</button><p class="hint">Node 22+. Exact local paths are chosen once during setup. Your normal orchestration remains the execution authority.</p></div></div><div class="sectioncard"><div class="row between"><div><h3>Saved decisions</h3><p class="small muted" style="margin-top:5px">Explicitly saved on this browser. Export a decision to keep it independently.</p></div><button id="delete-saved" class="quiet">Clear saved decisions</button></div><div id="saved-list" class="saved-list"></div><details><summary>Offline import and verification</summary><p><a href="adapters/workload-report-v2.html">Open the full source-bound benchmark comparator ↗</a>. The retained v2 workbench supports matched-side comparison and per-request quality gates.</p><p>Existing vLLM JSON, JSONL, console summaries, Aperture support receipts and saved compute decisions are accepted locally. Import is the fallback when a connection is unavailable.</p><div class="row" style="margin-top:12px"><input id="import-files" type="file" multiple accept=".json,.jsonl,.txt" aria-label="Import existing evidence"><button id="verify-decision">Verify saved decision</button></div><div id="import-error" class="error" role="alert"></div></details></div></section>
+</main><footer class="pagefoot"><div><div class="footerbrand">SECOND RUN <span class="muted">/ Compute</span></div><p>Published prices, explicit assumptions, reusable evidence. Compare a route here; qualify it before changing production.</p></div><nav><button id="footer-sources">Sources & freshness</button><button id="footer-method">Method</button><a href="compute-kit.zip" download>Offline + MCP kit</a><a href="README.md" target="_blank" rel="noopener">Source ↗</a></nav></footer></div>
+<dialog id="modal"><div class="dialogtop"><h2 id="modal-title"></h2><button id="modal-close" class="iconbtn" aria-label="Close dialog">×</button></div><div id="modal-body" class="dialogbody"></div></dialog><div id="toast" class="notify" role="status" hidden></div><input type="file" id="verify-input" hidden accept=".json">
+<script id="catalog-data" type="application/json">{
+  "schema": "second-run/compute-catalog@1",
+  "version": "0.1.0",
+  "reviewedOn": "2026-09-22",
+  "currency": "USD",
+  "staleAfterDays": 30,
+  "sources": {
+    "hotaisle": {
+      "title": "Hot Aisle pricing",
+      "url": "https://hotaisle.xyz/pricing",
+      "reviewedOn": "2026-09-22",
+      "kind": "provider",
+      "note": "1, 2 and 4 MI300X VMs at $2.99/GPU-hour; eight-GPU bare metal at $3.39 with a one-month minimum."
+    },
+    "digitalocean": {
+      "title": "DigitalOcean GPU pricing",
+      "url": "https://www.digitalocean.com/pricing/gpu-droplets",
+      "reviewedOn": "2026-09-22",
+      "kind": "provider",
+      "note": "On-demand rates after August 1, 2026. Pricing page says 5-minute minimum; current documentation says 60 seconds. Verify the applicable minimum before a short job."
+    },
+    "digitalocean-docs": {
+      "title": "DigitalOcean billing documentation",
+      "url": "https://docs.digitalocean.com/products/droplets/details/pricing/",
+      "reviewedOn": "2026-09-22",
+      "kind": "provider",
+      "note": "GPU billing ends on destruction, not power-off. Minimum-billing wording conflicts with the pricing page."
+    },
+    "nebius": {
+      "title": "Nebius AI Cloud prices",
+      "url": "https://nebius.com/prices",
+      "reviewedOn": "2026-09-22",
+      "kind": "provider",
+      "note": "Current and announced October 1 schedules. GPU-hour normalization does not prove single-GPU instance availability. Token Factory is a different product."
+    },
+    "runpod": {
+      "title": "Runpod public Pods price table",
+      "url": "https://www.runpod.io/pricing",
+      "reviewedOn": "2026-09-22",
+      "kind": "provider",
+      "note": "Public Pods table reviewed September 22, page updated September 13. Cloud tier, region and actual available configuration must be confirmed in the provider console."
+    },
+    "aperture": {
+      "title": "Aperture physical evidence contract",
+      "url": "https://github.com/BigBirdReturns/aperture/blob/40ae1f94ae2c505cde915e4a56832ad492adf18e/lib/support.mjs",
+      "reviewedOn": "2026-09-22",
+      "kind": "method",
+      "note": "aperture-support/1 schema. Support receipts describe hardware; they do not confer native model-fit or performance qualification."
+    },
+    "tierbench": {
+      "title": "TierBench cost-per-success method",
+      "url": "https://github.com/BigBirdReturns/tier-bench",
+      "reviewedOn": "2026-09-22",
+      "kind": "method",
+      "note": "Task-conditioned validation; account for failed attempts, verification and escalation. Existing findings remain bounded to their task sets."
+    },
+    "workload-engine": {
+      "title": "Retained workload report engine",
+      "url": "https://github.com/BigBirdReturns/axm-tools/tree/179a0d82ae9901d6535f4b4f9f7812dfcb374ce3/hot-aisle",
+      "reviewedOn": "2026-09-22",
+      "kind": "method",
+      "note": "Exact v2 engine reused inside this self-contained tool, not imported across directories. Source-bound normalization and repeat aggregation."
+    }
+  },
+  "providers": [
+    {
+      "id": "hotaisle",
+      "name": "Hot Aisle",
+      "letter": "HA",
+      "source": "hotaisle"
+    },
+    {
+      "id": "digitalocean",
+      "name": "DigitalOcean",
+      "letter": "DO",
+      "source": "digitalocean"
+    },
+    {
+      "id": "nebius",
+      "name": "Nebius",
+      "letter": "NB",
+      "source": "nebius"
+    },
+    {
+      "id": "runpod",
+      "name": "Runpod",
+      "letter": "RP",
+      "source": "runpod"
+    }
+  ],
+  "offers": [
+    {
+      "id": "ha-mi300x-1",
+      "provider": "hotaisle",
+      "gpu": "MI300X",
+      "vendor": "AMD",
+      "memoryGB": 192,
+      "gpus": 1,
+      "rate": 2.99,
+      "rateBasis": "per_gpu_hour",
+      "schedules": [],
+      "source": "hotaisle",
+      "reviewedOn": "2026-09-22",
+      "minimumHours": 0,
+      "kind": "on-demand",
+      "allocation": "listed",
+      "stock": "unverified",
+      "terms": "Minute billing on reserved VM time. New allocations; grandfathered rates are excluded.",
+      "label": "Small VM"
+    },
+    {
+      "id": "ha-mi300x-2",
+      "provider": "hotaisle",
+      "gpu": "MI300X",
+      "vendor": "AMD",
+      "memoryGB": 192,
+      "gpus": 2,
+      "rate": 2.99,
+      "rateBasis": "per_gpu_hour",
+      "schedules": [],
+      "source": "hotaisle",
+      "reviewedOn": "2026-09-22",
+      "minimumHours": 0,
+      "kind": "on-demand",
+      "allocation": "listed",
+      "stock": "unverified",
+      "terms": "Minute billing on reserved VM time. New allocations; grandfathered rates are excluded.",
+      "label": "Medium VM"
+    },
+    {
+      "id": "ha-mi300x-4",
+      "provider": "hotaisle",
+      "gpu": "MI300X",
+      "vendor": "AMD",
+      "memoryGB": 192,
+      "gpus": 4,
+      "rate": 2.99,
+      "rateBasis": "per_gpu_hour",
+      "schedules": [],
+      "source": "hotaisle",
+      "reviewedOn": "2026-09-22",
+      "minimumHours": 0,
+      "kind": "on-demand",
+      "allocation": "listed",
+      "stock": "unverified",
+      "terms": "Minute billing on reserved VM time. New allocations; grandfathered rates are excluded.",
+      "label": "Medium VM"
+    },
+    {
+      "id": "ha-mi300x-8",
+      "provider": "hotaisle",
+      "gpu": "MI300X",
+      "vendor": "AMD",
+      "memoryGB": 192,
+      "gpus": 8,
+      "rate": 3.39,
+      "rateBasis": "per_gpu_hour",
+      "schedules": [],
+      "source": "hotaisle",
+      "reviewedOn": "2026-09-22",
+      "minimumHours": 720,
+      "kind": "monthly",
+      "allocation": "listed",
+      "stock": "unverified",
+      "terms": "One-month minimum; model uses a 30-day / 720-hour commitment. Confirm contract month.",
+      "label": "Large bare metal"
+    },
+    {
+      "id": "do-mi300x",
+      "provider": "digitalocean",
+      "gpu": "MI300X",
+      "vendor": "AMD",
+      "memoryGB": 192,
+      "gpus": 1,
+      "rate": 2.59,
+      "rateBasis": "per_gpu_hour",
+      "schedules": [],
+      "source": "digitalocean",
+      "reviewedOn": "2026-09-22",
+      "minimumHours": 0,
+      "kind": "on-demand",
+      "allocation": "listed",
+      "stock": "unverified",
+      "terms": "On-demand. Destroy the instance to stop billing. Official pages disagree on a 1- versus 5-minute minimum; short-run invoice precision is unqualified."
+    },
+    {
+      "id": "do-mi325x",
+      "provider": "digitalocean",
+      "gpu": "MI325X",
+      "vendor": "AMD",
+      "memoryGB": 256,
+      "gpus": 1,
+      "rate": 3.8,
+      "rateBasis": "per_gpu_hour",
+      "schedules": [],
+      "source": "digitalocean",
+      "reviewedOn": "2026-09-22",
+      "minimumHours": 0,
+      "kind": "on-demand",
+      "allocation": "listed",
+      "stock": "unverified",
+      "terms": "On-demand. Destroy the instance to stop billing. Official pages disagree on a 1- versus 5-minute minimum; short-run invoice precision is unqualified."
+    },
+    {
+      "id": "do-h100",
+      "provider": "digitalocean",
+      "gpu": "H100",
+      "vendor": "NVIDIA",
+      "memoryGB": 80,
+      "gpus": 1,
+      "rate": 4.41,
+      "rateBasis": "per_gpu_hour",
+      "schedules": [],
+      "source": "digitalocean",
+      "reviewedOn": "2026-09-22",
+      "minimumHours": 0,
+      "kind": "on-demand",
+      "allocation": "listed",
+      "stock": "unverified",
+      "terms": "On-demand. Destroy the instance to stop billing. Official pages disagree on a 1- versus 5-minute minimum; short-run invoice precision is unqualified."
+    },
+    {
+      "id": "do-h200",
+      "provider": "digitalocean",
+      "gpu": "H200",
+      "vendor": "NVIDIA",
+      "memoryGB": 141,
+      "gpus": 1,
+      "rate": 4.47,
+      "rateBasis": "per_gpu_hour",
+      "schedules": [],
+      "source": "digitalocean",
+      "reviewedOn": "2026-09-22",
+      "minimumHours": 0,
+      "kind": "on-demand",
+      "allocation": "listed",
+      "stock": "unverified",
+      "terms": "On-demand. Destroy the instance to stop billing. Official pages disagree on a 1- versus 5-minute minimum; short-run invoice precision is unqualified."
+    },
+    {
+      "id": "do-l40s",
+      "provider": "digitalocean",
+      "gpu": "L40S",
+      "vendor": "NVIDIA",
+      "memoryGB": 48,
+      "gpus": 1,
+      "rate": 1.57,
+      "rateBasis": "per_gpu_hour",
+      "schedules": [],
+      "source": "digitalocean",
+      "reviewedOn": "2026-09-22",
+      "minimumHours": 0,
+      "kind": "on-demand",
+      "allocation": "listed",
+      "stock": "unverified",
+      "terms": "On-demand. Destroy the instance to stop billing. Official pages disagree on a 1- versus 5-minute minimum; short-run invoice precision is unqualified."
+    },
+    {
+      "id": "do-rtx4000",
+      "provider": "digitalocean",
+      "gpu": "RTX 4000 Ada",
+      "vendor": "NVIDIA",
+      "memoryGB": 20,
+      "gpus": 1,
+      "rate": 0.76,
+      "rateBasis": "per_gpu_hour",
+      "schedules": [],
+      "source": "digitalocean",
+      "reviewedOn": "2026-09-22",
+      "minimumHours": 0,
+      "kind": "on-demand",
+      "allocation": "listed",
+      "stock": "unverified",
+      "terms": "On-demand. Destroy the instance to stop billing. Official pages disagree on a 1- versus 5-minute minimum; short-run invoice precision is unqualified."
+    },
+    {
+      "id": "do-rtx6000",
+      "provider": "digitalocean",
+      "gpu": "RTX 6000 Ada",
+      "vendor": "NVIDIA",
+      "memoryGB": 48,
+      "gpus": 1,
+      "rate": 1.57,
+      "rateBasis": "per_gpu_hour",
+      "schedules": [],
+      "source": "digitalocean",
+      "reviewedOn": "2026-09-22",
+      "minimumHours": 0,
+      "kind": "on-demand",
+      "allocation": "listed",
+      "stock": "unverified",
+      "terms": "On-demand. Destroy the instance to stop billing. Official pages disagree on a 1- versus 5-minute minimum; short-run invoice precision is unqualified."
+    },
+    {
+      "id": "nb-h100",
+      "provider": "nebius",
+      "gpu": "H100",
+      "vendor": "NVIDIA",
+      "memoryGB": 80,
+      "gpus": 1,
+      "rate": 3.85,
+      "rateBasis": "per_gpu_hour",
+      "schedules": [
+        {
+          "effectiveOn": "2026-10-01",
+          "rate": 4.5
+        }
+      ],
+      "source": "nebius",
+      "reviewedOn": "2026-09-22",
+      "minimumHours": 0,
+      "kind": "on-demand",
+      "allocation": "normalized",
+      "stock": "unverified",
+      "terms": "AI Cloud on-demand per-GPU normalization. Confirm actual billable GPU count, region and instance. Memory class is contextual, not a fit test."
+    },
+    {
+      "id": "nb-h200",
+      "provider": "nebius",
+      "gpu": "H200",
+      "vendor": "NVIDIA",
+      "memoryGB": 141,
+      "gpus": 1,
+      "rate": 4.5,
+      "rateBasis": "per_gpu_hour",
+      "schedules": [
+        {
+          "effectiveOn": "2026-10-01",
+          "rate": 5.4
+        }
+      ],
+      "source": "nebius",
+      "reviewedOn": "2026-09-22",
+      "minimumHours": 0,
+      "kind": "on-demand",
+      "allocation": "normalized",
+      "stock": "unverified",
+      "terms": "AI Cloud on-demand per-GPU normalization. Confirm actual billable GPU count, region and instance. Memory class is contextual, not a fit test."
+    },
+    {
+      "id": "nb-b200",
+      "provider": "nebius",
+      "gpu": "B200",
+      "vendor": "NVIDIA",
+      "memoryGB": 180,
+      "gpus": 1,
+      "rate": 7.15,
+      "rateBasis": "per_gpu_hour",
+      "schedules": [
+        {
+          "effectiveOn": "2026-10-01",
+          "rate": 8.5
+        }
+      ],
+      "source": "nebius",
+      "reviewedOn": "2026-09-22",
+      "minimumHours": 0,
+      "kind": "on-demand",
+      "allocation": "normalized",
+      "stock": "unverified",
+      "terms": "AI Cloud on-demand per-GPU normalization. Confirm actual billable GPU count, region and instance. Memory class is contextual, not a fit test."
+    },
+    {
+      "id": "nb-b300",
+      "provider": "nebius",
+      "gpu": "B300",
+      "vendor": "NVIDIA",
+      "memoryGB": 288,
+      "gpus": 1,
+      "rate": 7.85,
+      "rateBasis": "per_gpu_hour",
+      "schedules": [
+        {
+          "effectiveOn": "2026-10-01",
+          "rate": 9.5
+        }
+      ],
+      "source": "nebius",
+      "reviewedOn": "2026-09-22",
+      "minimumHours": 0,
+      "kind": "on-demand",
+      "allocation": "normalized",
+      "stock": "unverified",
+      "terms": "AI Cloud on-demand per-GPU normalization. Confirm actual billable GPU count, region and instance. Memory class is contextual, not a fit test."
+    },
+    {
+      "id": "nb-pro6000",
+      "provider": "nebius",
+      "gpu": "RTX PRO 6000",
+      "vendor": "NVIDIA",
+      "memoryGB": 96,
+      "gpus": 1,
+      "rate": 1.8,
+      "rateBasis": "per_gpu_hour",
+      "schedules": [
+        {
+          "effectiveOn": "2026-10-01",
+          "rate": 1.8
+        }
+      ],
+      "source": "nebius",
+      "reviewedOn": "2026-09-22",
+      "minimumHours": 0,
+      "kind": "on-demand",
+      "allocation": "normalized",
+      "stock": "unverified",
+      "terms": "AI Cloud on-demand per-GPU normalization. Confirm actual billable GPU count, region and instance. Memory class is contextual, not a fit test."
+    },
+    {
+      "id": "rp-a5000",
+      "provider": "runpod",
+      "gpu": "RTX A5000",
+      "vendor": "NVIDIA",
+      "memoryGB": 24,
+      "gpus": 1,
+      "rate": 0.27,
+      "rateBasis": "per_gpu_hour",
+      "schedules": [],
+      "source": "runpod",
+      "reviewedOn": "2026-09-22",
+      "minimumHours": 0,
+      "kind": "public-pods",
+      "allocation": "listed",
+      "stock": "unverified",
+      "terms": "Advertised Pods table. Confirm community/secure tier, region, GPU count, storage and actual quote; stock is not checked."
+    },
+    {
+      "id": "rp-3090",
+      "provider": "runpod",
+      "gpu": "RTX 3090",
+      "vendor": "NVIDIA",
+      "memoryGB": 24,
+      "gpus": 1,
+      "rate": 0.5,
+      "rateBasis": "per_gpu_hour",
+      "schedules": [],
+      "source": "runpod",
+      "reviewedOn": "2026-09-22",
+      "minimumHours": 0,
+      "kind": "public-pods",
+      "allocation": "listed",
+      "stock": "unverified",
+      "terms": "Advertised Pods table. Confirm community/secure tier, region, GPU count, storage and actual quote; stock is not checked."
+    },
+    {
+      "id": "rp-4090",
+      "provider": "runpod",
+      "gpu": "RTX 4090",
+      "vendor": "NVIDIA",
+      "memoryGB": 24,
+      "gpus": 1,
+      "rate": 0.74,
+      "rateBasis": "per_gpu_hour",
+      "schedules": [],
+      "source": "runpod",
+      "reviewedOn": "2026-09-22",
+      "minimumHours": 0,
+      "kind": "public-pods",
+      "allocation": "listed",
+      "stock": "unverified",
+      "terms": "Advertised Pods table. Confirm community/secure tier, region, GPU count, storage and actual quote; stock is not checked."
+    },
+    {
+      "id": "rp-5090",
+      "provider": "runpod",
+      "gpu": "RTX 5090",
+      "vendor": "NVIDIA",
+      "memoryGB": 32,
+      "gpus": 1,
+      "rate": 0.99,
+      "rateBasis": "per_gpu_hour",
+      "schedules": [],
+      "source": "runpod",
+      "reviewedOn": "2026-09-22",
+      "minimumHours": 0,
+      "kind": "public-pods",
+      "allocation": "listed",
+      "stock": "unverified",
+      "terms": "Advertised Pods table. Confirm community/secure tier, region, GPU count, storage and actual quote; stock is not checked."
+    },
+    {
+      "id": "rp-a40",
+      "provider": "runpod",
+      "gpu": "A40",
+      "vendor": "NVIDIA",
+      "memoryGB": 48,
+      "gpus": 1,
+      "rate": 0.49,
+      "rateBasis": "per_gpu_hour",
+      "schedules": [],
+      "source": "runpod",
+      "reviewedOn": "2026-09-22",
+      "minimumHours": 0,
+      "kind": "public-pods",
+      "allocation": "listed",
+      "stock": "unverified",
+      "terms": "Advertised Pods table. Confirm community/secure tier, region, GPU count, storage and actual quote; stock is not checked."
+    },
+    {
+      "id": "rp-a6000",
+      "provider": "runpod",
+      "gpu": "RTX A6000",
+      "vendor": "NVIDIA",
+      "memoryGB": 48,
+      "gpus": 1,
+      "rate": 0.53,
+      "rateBasis": "per_gpu_hour",
+      "schedules": [],
+      "source": "runpod",
+      "reviewedOn": "2026-09-22",
+      "minimumHours": 0,
+      "kind": "public-pods",
+      "allocation": "listed",
+      "stock": "unverified",
+      "terms": "Advertised Pods table. Confirm community/secure tier, region, GPU count, storage and actual quote; stock is not checked."
+    },
+    {
+      "id": "rp-rtx6000",
+      "provider": "runpod",
+      "gpu": "RTX 6000 Ada",
+      "vendor": "NVIDIA",
+      "memoryGB": 48,
+      "gpus": 1,
+      "rate": 0.84,
+      "rateBasis": "per_gpu_hour",
+      "schedules": [],
+      "source": "runpod",
+      "reviewedOn": "2026-09-22",
+      "minimumHours": 0,
+      "kind": "public-pods",
+      "allocation": "listed",
+      "stock": "unverified",
+      "terms": "Advertised Pods table. Confirm community/secure tier, region, GPU count, storage and actual quote; stock is not checked."
+    },
+    {
+      "id": "rp-l40s",
+      "provider": "runpod",
+      "gpu": "L40S",
+      "vendor": "NVIDIA",
+      "memoryGB": 48,
+      "gpus": 1,
+      "rate": 1.09,
+      "rateBasis": "per_gpu_hour",
+      "schedules": [],
+      "source": "runpod",
+      "reviewedOn": "2026-09-22",
+      "minimumHours": 0,
+      "kind": "public-pods",
+      "allocation": "listed",
+      "stock": "unverified",
+      "terms": "Advertised Pods table. Confirm community/secure tier, region, GPU count, storage and actual quote; stock is not checked."
+    },
+    {
+      "id": "rp-a100",
+      "provider": "runpod",
+      "gpu": "A100 PCIe",
+      "vendor": "NVIDIA",
+      "memoryGB": 80,
+      "gpus": 1,
+      "rate": 1.59,
+      "rateBasis": "per_gpu_hour",
+      "schedules": [],
+      "source": "runpod",
+      "reviewedOn": "2026-09-22",
+      "minimumHours": 0,
+      "kind": "public-pods",
+      "allocation": "listed",
+      "stock": "unverified",
+      "terms": "Advertised Pods table. Confirm community/secure tier, region, GPU count, storage and actual quote; stock is not checked."
+    },
+    {
+      "id": "rp-h100",
+      "provider": "runpod",
+      "gpu": "H100 PCIe",
+      "vendor": "NVIDIA",
+      "memoryGB": 80,
+      "gpus": 1,
+      "rate": 2.89,
+      "rateBasis": "per_gpu_hour",
+      "schedules": [],
+      "source": "runpod",
+      "reviewedOn": "2026-09-22",
+      "minimumHours": 0,
+      "kind": "public-pods",
+      "allocation": "listed",
+      "stock": "unverified",
+      "terms": "Advertised Pods table. Confirm community/secure tier, region, GPU count, storage and actual quote; stock is not checked."
+    },
+    {
+      "id": "rp-h100sxm",
+      "provider": "runpod",
+      "gpu": "H100 SXM",
+      "vendor": "NVIDIA",
+      "memoryGB": 80,
+      "gpus": 1,
+      "rate": 3.49,
+      "rateBasis": "per_gpu_hour",
+      "schedules": [],
+      "source": "runpod",
+      "reviewedOn": "2026-09-22",
+      "minimumHours": 0,
+      "kind": "public-pods",
+      "allocation": "listed",
+      "stock": "unverified",
+      "terms": "Advertised Pods table. Confirm community/secure tier, region, GPU count, storage and actual quote; stock is not checked."
+    },
+    {
+      "id": "rp-pro6000",
+      "provider": "runpod",
+      "gpu": "RTX PRO 6000",
+      "vendor": "NVIDIA",
+      "memoryGB": 96,
+      "gpus": 1,
+      "rate": 2.09,
+      "rateBasis": "per_gpu_hour",
+      "schedules": [],
+      "source": "runpod",
+      "reviewedOn": "2026-09-22",
+      "minimumHours": 0,
+      "kind": "public-pods",
+      "allocation": "listed",
+      "stock": "unverified",
+      "terms": "Advertised Pods table. Confirm community/secure tier, region, GPU count, storage and actual quote; stock is not checked."
+    },
+    {
+      "id": "rp-h200",
+      "provider": "runpod",
+      "gpu": "H200",
+      "vendor": "NVIDIA",
+      "memoryGB": 141,
+      "gpus": 1,
+      "rate": 4.59,
+      "rateBasis": "per_gpu_hour",
+      "schedules": [],
+      "source": "runpod",
+      "reviewedOn": "2026-09-22",
+      "minimumHours": 0,
+      "kind": "public-pods",
+      "allocation": "listed",
+      "stock": "unverified",
+      "terms": "Advertised Pods table. Confirm community/secure tier, region, GPU count, storage and actual quote; stock is not checked."
+    },
+    {
+      "id": "rp-b200",
+      "provider": "runpod",
+      "gpu": "B200",
+      "vendor": "NVIDIA",
+      "memoryGB": 180,
+      "gpus": 1,
+      "rate": 6.79,
+      "rateBasis": "per_gpu_hour",
+      "schedules": [],
+      "source": "runpod",
+      "reviewedOn": "2026-09-22",
+      "minimumHours": 0,
+      "kind": "public-pods",
+      "allocation": "listed",
+      "stock": "unverified",
+      "terms": "Advertised Pods table. Confirm community/secure tier, region, GPU count, storage and actual quote; stock is not checked."
+    }
+  ],
+  "boundaries": {
+    "price": "Published price snapshots, not live offers or availability.",
+    "memory": "Advertised memory per GPU; not pooled memory or native artifact-fit qualification.",
+    "performance": "No default throughput, quality, utilization, or revenue assumptions are assigned to a provider.",
+    "billing": "Continuous reserved-time estimate, before unentered extras. Whole-month minimums are explicitly applied."
+  }
+}
+</script><script id="sample-data" type="application/json">{
+  "a": {
+    "synthetic": true,
+    "model_id": "SYNTHETIC / example-model",
+    "metadata": {
+      "model_revision": "fixture-v1",
+      "precision": "FP16",
+      "tokenizer_revision": "fixture-v1",
+      "workload_id": "synthetic-five-requests",
+      "cache_policy": "cold",
+      "load_profile": "5 requests; concurrency 1",
+      "runtime_digest": "synthetic-runtime-a"
+    },
+    "num_prompts": 5,
+    "completed": 4,
+    "failed": 1,
+    "duration": 10,
+    "total_output_tokens": 40,
+    "request_throughput": 0.4,
+    "ttfts": [
+      0.1,
+      0.2,
+      0.3,
+      0.4,
+      0
+    ],
+    "latencies": [
+      1,
+      2,
+      3,
+      4,
+      0
+    ],
+    "queue_times": [
+      0.01,
+      0.02,
+      0.03,
+      0.04,
+      0
+    ],
+    "output_lens": [
+      10,
+      10,
+      10,
+      10,
+      0
+    ],
+    "input_lens": [
+      20,
+      20,
+      20,
+      20,
+      20
+    ],
+    "errors": [
+      "",
+      "",
+      "",
+      "",
+      "synthetic failure"
+    ],
+    "generated_texts": [
+      "SYNTHETIC",
+      "SYNTHETIC",
+      "SYNTHETIC",
+      "SYNTHETIC",
+      "SYNTHETIC"
+    ]
+  },
+  "b": {
+    "synthetic": true,
+    "model_id": "SYNTHETIC / example-model",
+    "metadata": {
+      "model_revision": "fixture-v1",
+      "precision": "FP16",
+      "tokenizer_revision": "fixture-v1",
+      "workload_id": "synthetic-five-requests",
+      "cache_policy": "cold",
+      "load_profile": "5 requests; concurrency 1",
+      "runtime_digest": "synthetic-runtime-b"
+    },
+    "num_prompts": 5,
+    "completed": 4,
+    "failed": 1,
+    "duration": 12,
+    "total_output_tokens": 40,
+    "request_throughput": 0.3333333333333333,
+    "ttfts": [
+      0.15,
+      0.25,
+      0.35,
+      0.45,
+      0
+    ],
+    "latencies": [
+      1.5,
+      2.5,
+      3.5,
+      4.5,
+      0
+    ],
+    "queue_times": [
+      0.01,
+      0.02,
+      0.03,
+      0.04,
+      0
+    ],
+    "output_lens": [
+      10,
+      10,
+      10,
+      10,
+      0
+    ],
+    "input_lens": [
+      20,
+      20,
+      20,
+      20,
+      20
+    ],
+    "errors": [
+      "",
+      "",
+      "",
+      "",
+      "synthetic failure"
+    ],
+    "generated_texts": [
+      "SYNTHETIC",
+      "SYNTHETIC",
+      "SYNTHETIC",
+      "SYNTHETIC",
+      "SYNTHETIC"
+    ]
+  }
+}</script><script id="donor-engine">/* Hot Aisle Workload Report 2.0.0 | MIT | No I/O, no eval, no dependencies. */
+(function(root){
+'use strict';
+const VERSION='2.0.0', MAX_REQUESTS=100000, MAX_RUNS=50;
+const fail=m=>{throw Error(m)};
+const obj=x=>x!==null&&typeof x==='object'&&!Array.isArray(x);
+const num=(x,name,min=0)=>typeof x==='number'&&Number.isFinite(x)&&x>=min?x:fail(name+' must be a finite number ≥ '+min+'.');
+const count=(x,name)=>Number.isSafeInteger(num(x,name))&&x<=MAX_REQUESTS?x:fail(name+' must be an integer ≤ '+MAX_REQUESTS+'.');
+const opt=(x,name)=>x===undefined||x===null?null:num(x,name);
+const text=x=>typeof x==='string'?x.slice(0,500):typeof x==='number'&&Number.isFinite(x)?String(x):'';
+const escape=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function canonical(x){if(x===null||typeof x!=='object')return JSON.stringify(x);if(Array.isArray(x))return '['+x.map(canonical).join(',')+']';return '{'+Object.keys(x).sort().map(k=>JSON.stringify(k)+':'+canonical(x[k])).join(',')+'}';}
+function parseDocuments(raw){
+ if(typeof raw!=='string'||raw.length>25*1024*1024)fail('Use a UTF-8 result file up to 25 MiB.');
+ let s=raw.replace(/^\uFEFF/,'').trim();if(!s)fail('The result is empty.');
+ if(!/^[\[{]/.test(s)||s.includes('Serving Benchmark Result'))return [parseConsole(s)];
+ // Accept JSON, arrays, NDJSON and vLLM --append-result concatenated objects.
+ const values=[];let start=-1,depth=0,inString=false,escaped=false;
+ for(let i=0;i<s.length;i++){let c=s[i];if(start<0){if(/\s/.test(c))continue;if(c!=='{'&&c!=='[')fail('Expected a JSON object, array or another appended result.');start=i;}
+  if(inString){if(escaped)escaped=false;else if(c==='\\')escaped=true;else if(c==='"')inString=false;continue;}
+  if(c==='"')inString=true;else if(c==='{'||c==='[')depth++;else if(c==='}'||c===']'){depth--;if(depth===0){let v;try{v=JSON.parse(s.slice(start,i+1));}catch(e){fail('Invalid JSON: '+e.message);}values.push(...(Array.isArray(v)?v:[v]));start=-1;if(values.length>MAX_RUNS)fail('At most 50 trials per import.');}}
+ }
+ if(start>=0||inString||depth)fail('The JSON is incomplete.');if(!values.length)fail('No results found.');return values;
+}
+function parseConsole(s){
+ const out={format:'vllm-console-summary'};
+ const labels={'Successful requests':'completed','Failed requests':'failed','Benchmark duration (s)':'duration','Total input tokens':'total_input_tokens','Total generated tokens':'total_output_tokens','Request throughput (req/s)':'request_throughput','Request goodput (req/s)':'request_goodput','Maximum request concurrency':'max_concurrency','Request rate configured (RPS)':'request_rate'};
+ for(const line of s.replace(/\x1b\[[0-9;]*m/g,'').split(/\r?\n/)){const m=line.trim().match(/^(.+?):\s+([\d.eE+\-]+)\s*$/);if(!m)continue;const name=labels[m[1]];if(name){if(out[name]!==undefined)fail('Paste one console result at a time; use JSON for repeated runs.');out[name]=Number(m[2]);}
+  const q=m[1].match(/^(Mean|Median|P50|P95|P99) (TTFT|TPOT|ITL|E2EL) \(ms\)$/);if(q)out[(q[1]==='Median'?'median':q[1].toLowerCase())+'_'+q[2].toLowerCase()+'_ms']=Number(m[2]);
+ }
+ if(out.duration===undefined||out.completed===undefined)fail('Expected a vLLM result JSON or its “Serving Benchmark Result” console block.');return out;
+}
+function quantile(values,p){if(!values.length)return null;const a=[...values].sort((x,y)=>x-y),i=(a.length-1)*p/100,lo=Math.floor(i),hi=Math.ceil(i);return a[lo]+(a[hi]-a[lo])*(i-lo);}
+function percentiles(a){return a===null?null:{p50:quantile(a,50),p95:quantile(a,95),p99:quantile(a,99)};}
+function normalize(raw,source){
+ if(!obj(raw))fail('Every trial must be a result object.');
+ const d=num(raw.duration,'duration',Number.MIN_VALUE),completed=count(raw.completed,'completed');
+ let n=raw.num_prompts===undefined?null:count(raw.num_prompts,'num_prompts');
+ const failed=raw.failed===undefined?null:count(raw.failed,'failed');
+ if(failed!==null){if(n!==null&&n!==failed+completed)fail('num_prompts differs from completed + failed.');n=failed+completed;}
+ const arrays=['errors','ttfts','latencies','queue_times','output_lens','input_lens'];
+ for(const key of arrays)if(raw[key]!==undefined){if(!Array.isArray(raw[key])||raw[key].length>MAX_REQUESTS)fail(key+' must be a bounded array.');if(n===null)n=raw[key].length;if(raw[key].length!==n)fail(key+' length differs from attempted requests.');}
+ if(n!==null&&completed>n)fail('Completed requests exceed attempted requests.');
+ if(n!==null&&n>MAX_REQUESTS)fail('Too many requests.');
+ const warnings=[];let mask=null;
+ if(raw.errors!==undefined){if(raw.errors.some(e=>typeof e!=='string'))fail('errors must contain strings.');mask=raw.errors.map(e=>e==='');if(mask.filter(Boolean).length!==completed)fail('The errors array disagrees with the completed-request count.');}
+ else if(n!==null&&completed===n)mask=Array(n).fill(true);
+ const vectors={};for(const key of arrays.filter(k=>k!=='errors')){if(raw[key]!==undefined){vectors[key]=raw[key].map((v,i)=>num(v,key+'['+i+']'));if(key.endsWith('_lens')&&vectors[key].some(v=>!Number.isSafeInteger(v)))fail(key+' must contain integer lengths.');}}
+ function metric(key,label){const samples=vectors[key]&&mask?vectors[key].filter((_,i)=>mask[i]).map(x=>x*1000):null;const summary={};for(const p of [50,95,99]){const k='p'+p+'_'+label+'_ms';summary['p'+p]=opt(raw[k]??(p===50?raw['median_'+label+'_ms']:null),k);}let prev=null;for(const p of ['p50','p95','p99'])if(summary[p]!==null){if(prev!==null&&summary[p]<prev)fail('Percentile summary is not monotonic.');prev=summary[p];}return {samples,percentiles:samples!==null?percentiles(samples):summary,basis:samples!==null?'recomputed from successful-request samples':'producer-reported summary'};}
+ const metrics={ttft:metric('ttfts','ttft'),e2e:metric('latencies','e2el')};
+ for(const m of Object.values(metrics))if(!completed){m.samples=[];m.percentiles={p50:null,p95:null,p99:null};}
+ if(vectors.latencies&&vectors.ttfts&&mask)for(let i=0;i<n;i++)if(mask[i]&&vectors.latencies[i]+1e-9<vectors.ttfts[i])fail('End-to-end latency is smaller than time to first token.');
+ const totalOutput=opt(raw.total_output_tokens,'total_output_tokens');
+ if(totalOutput!==null&&!Number.isSafeInteger(totalOutput))fail('Total output tokens must be an integer.');
+ if(totalOutput!==null&&vectors.output_lens&&mask){const total=vectors.output_lens.reduce((s,v,i)=>s+(mask[i]?v:0),0);if(total!==totalOutput)fail('Output-token total disagrees with the successful-request lengths.');}
+ const throughput=opt(raw.request_throughput,'request_throughput');if(throughput!==null&&Math.abs(throughput-completed/d)>Math.max(.02,completed/d*.01))warnings.push('Reported throughput differs from count ÷ duration; this report uses count ÷ duration.');
+ const goodput=opt(raw.request_goodput??raw['request_goodput:'],'request_goodput');if(goodput!==null&&goodput>completed/d+Math.max(.001,completed/d*.001))fail('Reported goodput exceeds completed-request throughput.');
+ const meta=obj(raw.metadata)?raw.metadata:{};const field=k=>text(raw[k]??meta[k]);
+ const identity={model:field('model_id')||field('model'),revision:field('model_revision'),precision:field('precision')||field('dtype'),tokenizer:field('tokenizer_revision'),workload:field('workload_id')||field('dataset_sha256'),cache:field('cache_policy'),runtime:field('runtime_digest')||field('runtime'),load:field('load_profile')};
+ if(!identity.load&&(raw.request_rate!==undefined||raw.max_concurrency!==undefined))identity.load='rps='+text(raw.request_rate)+'; concurrency='+text(raw.max_concurrency)+'; burstiness='+text(raw.burstiness);
+ const rows=mask?mask.map((success,i)=>({success,ttft_ms:vectors.ttfts?vectors.ttfts[i]*1000:null,e2e_ms:vectors.latencies?vectors.latencies[i]*1000:null,queue_ms:vectors.queue_times?vectors.queue_times[i]*1000:null})):null;
+ return {format:raw.format==='vllm-console-summary'?'vllm-console-summary':'vllm-serve-json',source,identity,duration:d,completed,attempted:n,outputTokens:totalOutput,metrics,rows,reportedGoodput:goodput,warnings,synthetic:raw.synthetic===true};
+}
+const CONTRACT=['model','revision','precision','tokenizer','workload','cache','load'];
+function contract(runs,overrides={}){const result={},issues=[];for(const k of [...CONTRACT,'runtime']){const vals=[...new Set(runs.map(r=>r.identity[k]).filter(Boolean))];if(vals.length>1)issues.push('Mixed '+k+' across trials.');if(overrides[k]&&vals.some(v=>v!==overrides[k]))issues.push('Entered '+k+' conflicts with imported metadata.');result[k]=text(overrides[k])||vals[0]||'';}return {values:result,issues};}
+function attachQuality(run,q){
+ if(!obj(q)||q.schema!=='hot-aisle/request-evaluation@1')fail('Unsupported evaluation sidecar.');
+ if(q.source_sha256!==run.source.sha256||q.record_index!==run.source.record_index)fail('Evaluation does not match this exact source file and record index.');
+ if(!run.rows||!Array.isArray(q.passed)||q.passed.length!==run.rows.length||q.passed.some(v=>typeof v!=='boolean'))fail('Evaluation requires one boolean per original request and an unambiguous success mask.');
+ if(!text(q.evaluator)||!text(q.criterion_id))fail('Evaluation needs an evaluator and a criterion ID.');
+ if(q.passed.some((v,i)=>v&&!run.rows[i].success))fail('Evaluation marks a failed request as passed.');
+ return {...run,quality:{evaluator:text(q.evaluator),criterion:text(q.criterion_id),passed:q.passed}};
+}
+function aggregate(runs,settings={}){
+ if(!runs.length)fail('Import at least one trial.');if(runs.length>MAX_RUNS)fail('At most 50 trials.');if(runs.reduce((n,r)=>n+(r.rows?.length||0),0)>250000)fail('At most 250,000 detailed request rows per side.');
+ const seen=new Set();for(const r of runs){const k=r.source.sha256+':'+r.source.record_index;if(seen.has(k))fail('Duplicate trial: the same source record cannot be counted twice.');seen.add(k);}
+ const c=contract(runs,settings.identity||{});if(c.issues.length)fail(c.issues.join(' '));
+ const ttft=opt(settings.ttft,'TTFT limit'),e2e=opt(settings.e2e,'E2E limit');
+ const useQ=settings.quality===true,useLatency=ttft!==null||e2e!==null;
+ const label=useQ?(useLatency?'evaluator-passed, latency-qualified requests':'evaluator-passed requests'):(useLatency?'latency-qualified requests':'completed requests');
+ const gates={ttft_ms:ttft,e2e_ms:e2e,include_client_queue:settings.queue===true,quality:useQ};
+ const holds=[],warnings=[],criteria=new Set();let accepted=0;
+ for(const r of runs){warnings.push(...r.warnings);if(useQ){if(!r.quality)holds.push('Missing evaluation for a trial.');else criteria.add(r.quality.criterion);}
+  if(useQ||useLatency){if(!r.rows){holds.push('Request-level outcomes are unavailable; import a detailed JSON.');continue;}
+   for(let i=0;i<r.rows.length;i++){const row=r.rows[i];if(!row.success)continue;
+    if(ttft!==null&&row.ttft_ms===null)holds.push('TTFT samples are missing.');if(e2e!==null&&row.e2e_ms===null)holds.push('End-to-end samples are missing.');
+    if(settings.queue&&useLatency&&row.queue_ms===null)holds.push('Client queue samples are missing.');
+    const extra=settings.queue?(row.queue_ms??0):0;
+    if((ttft===null||row.ttft_ms!==null&&row.ttft_ms+extra<=ttft)&&(e2e===null||row.e2e_ms!==null&&row.e2e_ms+extra<=e2e)&&(!useQ||r.quality?.passed[i]===true))accepted++;
+   }
+  }else accepted+=r.completed;
+ }
+ if(criteria.size>1)holds.push('Different evaluation criteria across trials.');
+ const duration=runs.reduce((s,r)=>s+r.duration,0),completed=runs.reduce((s,r)=>s+r.completed,0),attempted=runs.every(r=>r.attempted!==null)?runs.reduce((s,r)=>s+r.attempted,0):null;
+ if(!Number.isFinite(duration)||!Number.isFinite(completed/duration)||!Number.isFinite(accepted/duration))fail('Trial totals overflow the calculation.');
+ const good=holds.length?null:accepted;
+ const metrics={};for(const name of ['ttft','e2e']){
+  const sampleComplete=runs.every(r=>r.metrics[name].samples!==null);
+  if(sampleComplete){const a=runs.flatMap(r=>r.metrics[name].samples);metrics[name]={...percentiles(a),basis:'pooled successful-request samples',n:a.length};}
+  else if(runs.length===1)metrics[name]={...runs[0].metrics[name].percentiles,basis:runs[0].metrics[name].basis,n:null};
+  else{const ranges={};for(const p of ['p50','p95','p99']){const vals=runs.map(r=>r.metrics[name].percentiles[p]);ranges[p]=vals.every(v=>v!==null)?[Math.min(...vals),Math.max(...vals)]:null;}metrics[name]={p50:null,p95:null,p99:null,basis:'per-trial percentile ranges; percentiles are not averaged',ranges,n:null};}
+ }
+ const trialRates=runs.map(r=>r.completed/r.duration),mean=trialRates.reduce((a,b)=>a+b,0)/runs.length;
+ return {identity:c.values,unit:label,gates,criterion:criteria.size===1?[...criteria][0]:'',runs:runs.length,duration,completed,attempted,failed:attempted===null?null:attempted-completed,accepted:good,rate:good===null?null:good/duration,completedRate:completed/duration,failureRate:attempted?1-completed/attempted:null,qualifiedFraction:attempted&&good!==null?good/attempted:null,metrics,trialRateRange:[Math.min(...trialRates),Math.max(...trialRates)],trialRateStd:runs.length>1?Math.sqrt(trialRates.reduce((s,x)=>s+(x-mean)**2,0)/(runs.length-1)):null,holds:[...new Set(holds)],warnings:[...new Set(warnings)],synthetic:runs.some(r=>r.synthetic),sources:runs.map(r=>r.source)};
+}
+function costing(a,p){
+ const gpu=num(p.gpus,'Billable GPUs',1);if(!Number.isSafeInteger(gpu))fail('Billable GPUs must be an integer.');
+ const rate=num(p.rate,'GPU-hour price'),extra=num(p.extra??0,'Hourly extras'),hourly=gpu*rate+extra;
+ const supplied=p.total!==undefined&&p.total!==null&&p.total!=='';const total=supplied?num(p.total,'Total charge'):hourly*a.duration/3600;
+ const cost=a.accepted===null||a.accepted===0?null:1000*total/a.accepted;
+ if(!Number.isFinite(hourly)||!Number.isFinite(total)||(cost!==null&&!Number.isFinite(cost)))fail('Cost inputs overflow the calculation.');
+ return {provider:text(p.provider),gpus:gpu,rate,extra,hourly,total,costPer1000:cost,basis:supplied?'user-supplied total charge':'modeled charge for summed benchmark windows',source:text(p.source),period:text(p.period),quote:text(p.quote),unit:a.unit};
+}
+function compare(a,pa,b,pb){
+ const issues=[];for(const k of CONTRACT){if(!a.identity[k]||!b.identity[k])issues.push('Specify '+k+' for both sides.');else if(a.identity[k]!==b.identity[k])issues.push('Different '+k+'.');}
+ if(canonical(a.gates)!==canonical(b.gates)||a.unit!==b.unit||a.criterion!==b.criterion)issues.push('Different result or acceptance basis.');
+ if(a.holds.length||b.holds.length)issues.push('A request gate could not be evaluated.');if(a.accepted===0||b.accepted===0)issues.push('A side produced zero qualifying requests.');
+ if(pa.basis!==pb.basis)issues.push('Different billing bases.');
+ if(a.sources.some(x=>b.sources.some(y=>x.sha256===y.sha256&&x.record_index===y.record_index)))issues.push('The same source trial appears on both sides.');
+ if(pa.costPer1000===null||pb.costPer1000===null)issues.push('Cost per result is unavailable.');
+ const eligible=!issues.length;
+ return {status:eligible?'COMPARISON_OF_SUPPLIED_EVIDENCE':'DESCRIPTIVE_ONLY',issues:[...new Set(issues)],saving:eligible&&pb.costPer1000>0?1-pa.costPer1000/pb.costPer1000:null,winner:eligible?(pa.costPer1000<pb.costPer1000?'A':pa.costPer1000>pb.costPer1000?'B':'tie'):null,synthetic:a.synthetic||b.synthetic};
+}
+function threshold(hotRate,hotHourly,otherHourly){num(hotRate,'Throughput');num(hotHourly,'Hot Aisle allocation-hour price',Number.MIN_VALUE);num(otherHourly,'Other allocation-hour price');return hotRate*otherHourly/hotHourly;}
+function receiptHTML(packet){
+ const e=escape,fmt=x=>x===null||x===undefined?'Not available':x.toLocaleString('en-US',{maximumFractionDigits:3}),usd=x=>x===null?'Not available':'$'+x.toFixed(x<1?4:2);
+ const rows=packet.sides.map(s=>{const a=s.aggregate,c=s.cost;return '<article><h2>'+e(s.label)+'</h2><p>'+e(a.identity.model||'Model not supplied')+'</p><strong class="price">'+usd(c.costPer1000)+'</strong><p>per 1,000 '+e(a.unit)+'</p><dl><dt>Result rate</dt><dd>'+fmt(a.rate)+' / second</dd><dt>Completed / attempted</dt><dd>'+fmt(a.completed)+' / '+fmt(a.attempted)+'</dd><dt>Trials / total measured seconds</dt><dd>'+a.runs+' / '+fmt(a.duration)+'</dd><dt>Allocation</dt><dd>'+c.gpus+' GPUs × '+usd(c.rate)+'/hour + '+usd(c.extra)+'/hour extras</dd><dt>Cost basis</dt><dd>'+e(c.basis)+'; '+usd(c.total)+'</dd><dt>Price source / period</dt><dd>'+e(c.source)+' / '+e(c.period)+'</dd><dt>Quote / cost note</dt><dd>'+e(c.quote||'None')+'</dd></dl><h3>Successful-request latency (ms)</h3><table><tr><th></th><th>p50</th><th>p95</th><th>p99</th></tr>'+['ttft','e2e'].map(k=>'<tr><th>'+e(k.toUpperCase())+'</th>'+['p50','p95','p99'].map(p=>'<td>'+fmt(a.metrics[k][p])+'</td>').join('')+'</tr><tr><td colspan="4">'+e(a.metrics[k].basis)+(a.metrics[k].ranges?' · ranges: '+e(JSON.stringify(a.metrics[k].ranges)):'')+'</td></tr>').join('')+'</table><details><summary>Conditions and input commitments</summary><pre>'+e(JSON.stringify({identity:a.identity,gates:a.gates,criterion:a.criterion,holds:a.holds,warnings:a.warnings},null,2))+'</pre><h3>Input commitments</h3>'+a.sources.map(x=>'<p class="hash">SHA-256 '+e(x.sha256)+'<br>Record '+x.record_index+' · '+x.bytes+' bytes</p>').join('')+'</details></article>';}).join('');
+ const comp=packet.comparison;
+ return '<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Workload cost report</title><style>body{font:15px/1.5 system-ui,sans-serif;max-width:1000px;margin:35px auto;padding:0 24px;color:#202322;background:#fafaf7}header{border-bottom:2px solid;padding-bottom:15px}h1{font-size:30px}h2{font-size:23px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:35px}.price{font-size:42px}dl{display:grid;grid-template-columns:1fr 1fr;gap:7px}dd{margin:0}dt{color:#575c58}pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px}table{width:100%;border-collapse:collapse}td,th{text-align:left;padding:7px;border-bottom:1px solid #ddd}.hash{overflow-wrap:anywhere;font:11px/1.5 monospace}.notice{padding:12px;background:#eee9cf}footer{border-top:1px solid;margin-top:24px;font-size:12px}@media(max-width:480px){.grid{display:block}dl{grid-template-columns:1fr}dd{margin-bottom:12px}}@media print{body{margin:0;background:white}.grid{display:block}article{break-inside:avoid}h3{break-after:avoid}details{display:none}.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}body{font-size:11px}.price{font-size:32px}h1{font-size:25px}h2{font-size:18px}footer{font-size:10px}}</style><header><p>WORKLOAD REPORT · '+e(packet.version)+'</p><h1>'+e(packet.title||'Cost per result')+'</h1><p>'+e(packet.generated_at)+'</p></header><p class="notice">'+(packet.synthetic?'SYNTHETIC DEMONSTRATION. These are software-test fixtures, not GPU measurements.':'Imported producer results and user-supplied commercial inputs. No independent hardware rerun or source authenticity is claimed.')+'</p>'+(comp?'<p><b>'+e(comp.status)+'</b> '+(comp.saving!==null?e((Math.abs(comp.saving)*100).toFixed(1)+'% '+(comp.saving>=0?'lower':'higher')+' modeled cost for A relative to B.'):e(comp.issues.join(' ')))+'</p>':'')+'<div class="grid">'+rows+'</div><footer>Completion is transport success, not task correctness. Latency gates and evaluator-declared outcomes are separate. Pooled windows do not establish production availability; setup, idle time and omitted costs remain outside window estimates. Raw prompts, generated text, source filenames and error bodies are excluded. Keep originals privately to verify their hashes against this report. Packet checksum binds supplied bytes, not the truth of their producer. Export the JSON packet for recomputation. Independent tool by Second Run; no provider endorsement.</footer></html>';
+}
+
+function sha256(input){
+ const bytes=input instanceof Uint8Array?input:new Uint8Array(input),len=bytes.length;
+ const k=[0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,0xe49b69c1,0xefbe4786,0x0fc19dc6,0x240ca1cc,0x2de92c6f,0x4a7484aa,0x5cb0a9dc,0x76f988da,0x983e5152,0xa831c66d,0xb00327c8,0xbf597fc7,0xc6e00bf3,0xd5a79147,0x06ca6351,0x14292967,0x27b70a85,0x2e1b2138,0x4d2c6dfc,0x53380d13,0x650a7354,0x766a0abb,0x81c2c92e,0x92722c85,0xa2bfe8a1,0xa81a664b,0xc24b8b70,0xc76c51a3,0xd192e819,0xd6990624,0xf40e3585,0x106aa070,0x19a4c116,0x1e376c08,0x2748774c,0x34b0bcb5,0x391c0cb3,0x4ed8aa4a,0x5b9cca4f,0x682e6ff3,0x748f82ee,0x78a5636f,0x84c87814,0x8cc70208,0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2];
+ const h=new Uint32Array([0x6a09e667,0xbb67ae85,0x3c6ef372,0xa54ff53a,0x510e527f,0x9b05688c,0x1f83d9ab,0x5be0cd19]);
+ const buffer=new Uint8Array(Math.ceil((len+9)/64)*64);buffer.set(bytes);buffer[len]=128;const view=new DataView(buffer.buffer);view.setUint32(buffer.length-8,Math.floor(len/0x20000000));view.setUint32(buffer.length-4,(len*8)>>>0);
+ const w=new Uint32Array(64),r=(x,n)=>(x>>>n)|(x<<(32-n));
+ for(let pos=0;pos<buffer.length;pos+=64){for(let i=0;i<16;i++)w[i]=view.getUint32(pos+4*i);for(let i=16;i<64;i++){let x=w[i-15],y=w[i-2];w[i]=(w[i-16]+(r(x,7)^r(x,18)^(x>>>3))+w[i-7]+(r(y,17)^r(y,19)^(y>>>10)))>>>0;}
+  let [a,b,c,d,e,f,g,z]=h;for(let i=0;i<64;i++){let t1=(z+(r(e,6)^r(e,11)^r(e,25))+((e&f)^(~e&g))+k[i]+w[i])>>>0,t2=((r(a,2)^r(a,13)^r(a,22))+((a&b)^(a&c)^(b&c)))>>>0;z=g;g=f;f=e;e=(d+t1)>>>0;d=c;c=b;b=a;a=(t1+t2)>>>0;}const q=[a,b,c,d,e,f,g,z];for(let i=0;i<8;i++)h[i]=(h[i]+q[i])>>>0;
+ }
+ return [...h].map(v=>v.toString(16).padStart(8,'0')).join('');
+}
+function restoreRun(r){
+ if(!obj(r)||!obj(r.source)||!/^([a-f0-9]{64})$/.test(r.source.sha256)||!Number.isSafeInteger(r.source.record_index)||r.source.record_index<0||!Number.isSafeInteger(r.source.bytes)||r.source.bytes<0)fail('Invalid normalized source commitment.');
+ const raw={duration:r.duration,completed:r.completed,synthetic:r.synthetic,model_id:r.identity?.model,total_output_tokens:r.outputTokens};if(r.attempted!==null)raw.num_prompts=r.attempted;
+ for(const [key,id] of Object.entries({model_revision:'revision',precision:'precision',tokenizer_revision:'tokenizer',workload_id:'workload',cache_policy:'cache',runtime_digest:'runtime',load_profile:'load'}))raw[key]=r.identity?.[id]||'';
+ for(const [key,label] of [['ttft','ttft'],['e2e','e2el']])for(const p of ['p50','p95','p99'])raw[p+'_'+label+'_ms']=r.metrics?.[key]?.percentiles?.[p];
+ if(r.rows!==null){if(!Array.isArray(r.rows)||r.rows.some(row=>!obj(row)||typeof row.success!=='boolean'))fail('Invalid normalized request outcomes.');raw.errors=r.rows.map(row=>row.success?'':'redacted failure');for(const [key,field] of [['ttfts','ttft_ms'],['latencies','e2e_ms'],['queue_times','queue_ms']]){if(r.rows.every(row=>row[field]!==null)){raw[key]=r.rows.map(row=>num(row[field],field)/1000);}else if(r.rows.some(row=>row[field]!==null))fail('Mixed missing request samples.');}}
+ let clean=normalize(raw,r.source);if(r.quality)clean=attachQuality(clean,{schema:'hot-aisle/request-evaluation@1',source_sha256:r.source.sha256,record_index:r.source.record_index,evaluator:r.quality.evaluator,criterion_id:r.quality.criterion,passed:r.quality.passed});return clean;
+}
+function recompute(envelope){
+ if(!obj(envelope)||envelope.schema!=='hot-aisle/sealed-report@1'||!obj(envelope.payload))fail('Unsupported report envelope.');const p=envelope.payload;
+ if(sha256(new TextEncoder().encode(canonical(p)))!==envelope.sha256)fail('Report checksum mismatch.');if(p.schema!=='hot-aisle/workload-report@2'||p.version!==VERSION||!Array.isArray(p.sides)||!p.sides.length||p.sides.length>2)fail('Unsupported report payload.');
+ const sides=p.sides.map(s=>{if(!Array.isArray(s.normalized))fail('Missing normalized trials.');const runs=s.normalized.map(restoreRun),a=aggregate(runs,s.settings),c=costing(a,s.price);if(canonical({...a,warnings:[]})!==canonical({...s.aggregate,warnings:[]})||canonical(c)!==canonical(s.cost))fail('Derived results disagree with the normalized evidence.');return {...s,aggregate:a,cost:c};});
+ const comparison=sides.length===2?compare(sides[0].aggregate,sides[0].cost,sides[1].aggregate,sides[1].cost):null;if(canonical(comparison)!==canonical(p.comparison))fail('Comparison does not match the evidence.');if(p.synthetic!==sides.some(s=>s.aggregate.synthetic))fail('Synthetic status mismatch.');return {...p,sides,comparison};
+}
+
+const API={sha256,restoreRun,recompute,VERSION,MAX_REQUESTS,MAX_RUNS,parseDocuments,parseConsole,normalize,aggregate,contract,attachQuality,costing,compare,threshold,quantile,canonical,receiptHTML,escape};if(typeof module==='object'&&module.exports)module.exports=API;root.HA=API;
+})(typeof globalThis==='undefined'?this:globalThis);
+</script><script id="qualified-engine">/* GENERATED by integration/build.py from the instrument sources. */
+(function(root,factory){const H=typeof module==='object'&&module.exports?require('./workload-engine.cjs'):root.HA;const api=factory(H);if(typeof module==='object'&&module.exports)module.exports=api;root.WorkloadQualification=api;})(typeof globalThis!=='undefined'?globalThis:this,function(HA){
+'use strict';
+const authority={"engine": {"engine_sha256": "78600d009f43ca37a81fa15231dfb5be307d8b0a01cfcfe42d94ed8015061593", "version": "2.0.0"}, "sources": {"publication": "ca7b940782c8a10166525b59073ef5181d690b278651236d7fbec91f6e6e2cd0", "record": "00c4bdd43fe2edff1b7681a10417023701be0fc83fbe2a0484e94e50708c8960", "revalidate": "41827343a9223c7764d52c9e16ec40d6fe61a044996f0fa286f04ca10dca2cf5"}};
+const engine={load:()=>HA,identity:()=>authority.engine,sha256:x=>HA.sha256(typeof x==='string'?new TextEncoder().encode(x):x)};
+const record=(()=>{
+'use strict';
+/* The qualified record: one durable object that separates what was observed, what the
+   operator declared, which acceptance rule applied and which economic scenario was
+   priced. Every visible number (headline, report, agent summary, evidence packet) is
+   a projection computed from it through the page's engine. Nothing is typed twice. */
+
+
+function cells(job) {
+  const HA = engine.load();
+  const plan = job.plan;
+  const byConcurrency = new Map();
+  for (const t of job.trials) if (t.status === 'completed') { if (!byConcurrency.has(t.cell.concurrency)) byConcurrency.set(t.cell.concurrency, []); byConcurrency.get(t.cell.concurrency).push(t); }
+  const out = [];
+  for (const [concurrency, trials] of [...byConcurrency.entries()].sort((a, b) => a[0] - b[0])) {
+    const runs = trials.map(t => HA.restoreRun(t.normalized));
+    const settings = { identity: declaredIdentity(plan), ttft: plan.gates.ttft, e2e: plan.gates.e2e, queue: plan.gates.queue, quality: plan.gates.quality };
+    let aggregate, cost, error = null;
+    try { aggregate = HA.aggregate(runs, settings); cost = HA.costing(aggregate, plan.price); } catch (e) { error = e.message; }
+    const check = aggregate ? requirements(aggregate, plan.requirements) : { meets: false, reasons: [error] };
+    out.push({ concurrency, trials: trials.map(t => ({ cell: t.cell, source: t.source, normalized: t.normalized })), settings, aggregate: aggregate || null, cost: cost || null, meets: check.meets, reasons: check.reasons, error });
+  }
+  return out;
+}
+
+function declaredIdentity(plan) {
+  const map = { model_revision: 'revision', precision: 'precision', tokenizer_revision: 'tokenizer', cache_policy: 'cache', runtime_digest: 'runtime', workload_id: 'workload' };
+  const out = {};
+  for (const [k, id] of Object.entries(map)) if (plan.identity[k]) out[id] = plan.identity[k];
+  return out;
+}
+
+function requirements(a, req) {
+  const reasons = [];
+  if (a.holds.length) reasons.push(...a.holds);
+  if (req.max_p95_ttft_ms !== null && req.max_p95_ttft_ms !== undefined) { const v = a.metrics.ttft.p95; if (v === null) reasons.push('p95 TTFT unavailable.'); else if (v > req.max_p95_ttft_ms) reasons.push('p95 TTFT ' + v.toFixed(0) + ' ms exceeds ' + req.max_p95_ttft_ms + ' ms.'); }
+  if (req.max_p95_e2e_ms !== null && req.max_p95_e2e_ms !== undefined) { const v = a.metrics.e2e.p95; if (v === null) reasons.push('p95 E2E unavailable.'); else if (v > req.max_p95_e2e_ms) reasons.push('p95 E2E ' + v.toFixed(0) + ' ms exceeds ' + req.max_p95_e2e_ms + ' ms.'); }
+  if (req.min_accepted_per_s !== null && req.min_accepted_per_s !== undefined) { if (a.rate === null) reasons.push('Accepted rate unavailable.'); else if (a.rate < req.min_accepted_per_s) reasons.push('Accepted rate ' + a.rate.toFixed(3) + '/s below ' + req.min_accepted_per_s + '/s.'); }
+  if (req.max_failure_rate !== null && req.max_failure_rate !== undefined) { if (a.failureRate === null) reasons.push('Failure rate unavailable.'); else if (a.failureRate > req.max_failure_rate) reasons.push('Failure rate ' + (a.failureRate * 100).toFixed(1) + '% exceeds ' + (req.max_failure_rate * 100) + '%.'); }
+  return { meets: !reasons.length, reasons };
+}
+
+function derive(rec) {
+  const HA = engine.load();
+  const job = { plan: rec.declared.plan, trials: rec.observed.trials.map(t => ({ status: 'completed', cell: t.cell, source: t.source, normalized: t.normalized })) };
+  const cs = cells(job);
+  const primary = pickPrimary(cs, rec.declared.plan.primary_concurrency);
+  let comparison = null;
+  if (rec.declared.comparator && primary && primary.cost) {
+    const pc = rec.declared.comparator;
+    comparison = { kind: 'price_threshold', provider: pc.provider, allocation_hour_usd: pc.gpus * pc.rate + (pc.extra || 0), required_rate_to_tie: primary.aggregate.rate !== null && primary.cost.hourly > 0 ? HA.threshold(primary.aggregate.rate, primary.cost.hourly, pc.gpus * pc.rate + (pc.extra || 0)) : null, note: 'Price ratio only. The comparator has no measured evidence in this record.' };
+  }
+  const qualified = !!(primary && primary.meets && primary.aggregate && !primary.aggregate.holds.length);
+  const reasons = primary ? (primary.meets ? ['Primary cell (concurrency ' + primary.concurrency + ') meets every stated requirement.'] : primary.reasons) : ['No completed cell.'];
+  return {
+    cells: cs.map(c => ({ concurrency: c.concurrency, runs: c.trials.length, aggregate: c.aggregate, cost: c.cost, meets: c.meets, reasons: c.reasons, error: c.error })),
+    primary_concurrency: primary ? primary.concurrency : null,
+    comparison,
+    disposition: { qualified, reasons, cells_meeting: cs.filter(c => c.meets).map(c => c.concurrency) },
+    engine: (({ version, engine_sha256 }) => ({ version, engine_sha256 }))(engine.identity()),
+  };
+}
+
+function pickPrimary(cs, wanted) {
+  if (!cs.length) return null;
+  if (wanted !== null && wanted !== undefined) return cs.find(c => c.concurrency === wanted) || null;
+  const meeting = cs.filter(c => c.meets && c.cost && c.cost.costPer1000 !== null);
+  if (meeting.length) return meeting.reduce((best, c) => c.cost.costPer1000 < best.cost.costPer1000 ? c : best);
+  return cs[cs.length - 1];
+}
+
+function build(job) {
+  const HA = engine.load();
+  const rec = {
+    schema: 'hot-aisle/qualified-record@1',
+    id: job.id.replace(/^job-/, 'rec-'),
+    created: new Date().toISOString(),
+    job_id: job.id,
+    synthetic: job.plan.target.adapter === 'local' || job.trials.some(t => t.normalized && t.normalized.synthetic),
+    observed: { trials: job.trials.filter(t => t.status === 'completed').map(t => ({ cell: t.cell, source: t.source, normalized: t.normalized, started: t.started, ended: t.ended })), failed_trials: job.trials.filter(t => t.status === 'failed').map(t => ({ cell: t.cell, error: t.error })), disposition: job.disposition },
+    declared: { plan: job.plan, identity: job.plan.identity, price: job.plan.price, comparator: job.plan.comparator, approval: job.approval },
+    rule: { gates: job.plan.gates, requirements: job.plan.requirements },
+    scenario: { allocation: { label: job.plan.target.allocation_label || (job.plan.price.gpus + '× ' + (job.plan.target.gpu_model || 'GPU')), gpus: job.plan.price.gpus, gpu_model: job.plan.target.gpu_model || null, adapter: job.plan.target.adapter, deployment_id: job.plan.target.deployment_id || null } },
+  };
+  rec.derived = derive(rec);
+  rec.disposition = rec.derived.disposition;
+  rec.sha256 = engine.sha256(HA.canonical(withoutSha(rec)));
+  return rec;
+}
+
+function withoutSha(rec) { const { sha256, ...rest } = rec; return rest; }
+
+/* Recomputes the derived section from observed + declared + rule and compares it to
+   the stored one. Mirrors the engine's own recompute discipline: a record whose stored
+   conclusions do not follow from its evidence is not verified. */
+function verify(rec) {
+  const HA = engine.load();
+  const problems = [];
+  if (rec.schema !== 'hot-aisle/qualified-record@1') problems.push('Unsupported record schema.');
+  if (engine.sha256(HA.canonical(withoutSha(rec))) !== rec.sha256) problems.push('Record checksum mismatch.');
+  const {sha256:planSha,commands,...planBody}=rec.declared.plan;
+  if(engine.sha256(HA.canonical(planBody))!==planSha)problems.push('Plan body does not match its identity.');
+  const fresh = derive(rec);
+  const strip = d => ({ ...d, engine: undefined });
+  if (HA.canonical(strip(fresh)) !== HA.canonical(strip(rec.derived))) problems.push('Derived conclusions do not follow from the retained evidence.');
+  if (rec.synthetic !== (rec.declared.plan.target.adapter === 'local' || rec.observed.trials.some(t => t.normalized.synthetic))) problems.push('Synthetic status mismatch.');
+  if (HA.canonical(rec.disposition) !== HA.canonical(rec.derived.disposition)) problems.push('Top-level disposition differs from the derived verdict.');
+  for (const key of ['price','identity','comparator'])
+    if (HA.canonical(rec.declared[key]) !== HA.canonical(rec.declared.plan[key])) problems.push('Declared '+key+' differs from the approved plan.');
+  for (const key of ['gates','requirements'])
+    if (HA.canonical(rec.rule[key]) !== HA.canonical(rec.declared.plan[key])) problems.push('Rule '+key+' differs from the approved plan.');
+  if (rec.declared.approval && rec.declared.approval.plan_sha256 !== rec.declared.plan.sha256) problems.push('Approval is bound to a different plan.');
+
+  return { verified: !problems.length, problems, engine: fresh.engine };
+}
+
+/* Projections. */
+function primaryCell(rec) { return rec.derived.cells.find(c => c.concurrency === rec.derived.primary_concurrency) || null; }
+
+function packet(rec, concurrency = rec.derived.primary_concurrency) {
+  const HA = engine.load();
+  const cell = rec.derived.cells.find(c => c.concurrency === concurrency);
+  if (!cell || !cell.aggregate) throw new Error('No aggregable cell at concurrency ' + concurrency + '.');
+  const trials = rec.observed.trials.filter(t => t.cell.concurrency === concurrency);
+  const settings = { identity: declaredIdentity(rec.declared.plan), ttft: rec.rule.gates.ttft, e2e: rec.rule.gates.e2e, queue: rec.rule.gates.queue, quality: rec.rule.gates.quality };
+  const side = { id: 'a', label: rec.declared.price.provider, settings, price: rec.declared.price, normalized: trials.map(t => t.normalized), aggregate: cell.aggregate, cost: cell.cost };
+  const p = { schema: 'hot-aisle/workload-report@2', version: HA.VERSION, generated_at: rec.created, title: cell.aggregate.identity.model || 'Workload cost report', synthetic: !!cell.aggregate.synthetic, sides: [side], comparison: null };
+  return { schema: 'hot-aisle/sealed-report@1', sha256: engine.sha256(HA.canonical(p)), payload: p };
+}
+
+function receipt(rec, concurrency) {
+  const HA = engine.load();
+  const env = packet(rec, concurrency);
+  return HA.receiptHTML(env.payload).replace('</footer>', '<p class="hash">Evidence JSON payload SHA-256: ' + env.sha256 + '</p><p class="hash">Qualified record ' + HA.escape(rec.id) + ' · ' + rec.sha256 + '</p></footer>');
+}
+
+function headline(rec, { evidence_url = null, report_url = null, published_on = null } = {}) {
+  const cell = primaryCell(rec);
+  const a = cell && cell.aggregate, c = cell && cell.cost;
+  const plan = rec.declared.plan;
+  const side = { label: rec.declared.price.provider, allocation: rec.scenario.allocation.label, rate: '$' + rec.declared.price.rate.toFixed(2) + ' / GPU-hr', cost_per_1000: c ? c.costPer1000 : null, p95_ttft_ms: a ? a.metrics.ttft.p95 : null, p95_e2e_ms: a ? a.metrics.e2e.p95 : null, runs: a ? a.runs : 0, accepted_per_s: a ? a.rate : null, unit: a ? a.unit : null };
+  const comp = rec.declared.comparator ? { label: rec.declared.comparator.provider, allocation: rec.declared.comparator.gpus + '× ' + rec.declared.comparator.provider.replace(/^Nebius /, ''), rate: '$' + rec.declared.comparator.rate.toFixed(2) + ' / GPU-hr', cost_per_1000: null, p95_ttft_ms: null, p95_e2e_ms: null, runs: 0, price_only: true, required_rate_to_tie: rec.derived.comparison ? rec.derived.comparison.required_rate_to_tie : null } : null;
+  return {
+    schema: 'hot-aisle/headline@2', status: rec.synthetic ? 'demonstration' : 'published', record_id: rec.id, record_sha256: rec.sha256, generated: true,
+    unit: a ? a.unit : 'accepted requests',
+    workload: plan.workload.model + ' · ' + plan.workload.input_len.toLocaleString('en-US') + ' in / ' + plan.workload.output_len + ' out · concurrency ' + plan.concurrency.join(', '),
+    primary_concurrency: rec.derived.primary_concurrency,
+    qualified: rec.disposition.qualified, reasons: rec.disposition.reasons,
+    sides: comp ? [side, comp] : [side],
+    saving: null,
+    published_on, evidence_url, report_url,
+  };
+}
+
+function summary(rec) {
+  const h = headline(rec);
+  const s = h.sides[0];
+  const lines = [(rec.synthetic ? 'DEMONSTRATION (synthetic) — ' : '') + 'Qualified record ' + rec.id + ': ' + (rec.disposition.qualified ? 'QUALIFIED' : 'NOT QUALIFIED')];
+  lines.push(h.workload);
+  lines.push(s.label + ' · ' + s.allocation + ' · ' + s.rate + ': ' + (s.cost_per_1000 === null ? 'no finite cost' : '$' + s.cost_per_1000.toFixed(s.cost_per_1000 < 1 ? 4 : 2)) + ' per 1,000 ' + h.unit + ' at concurrency ' + h.primary_concurrency + '; p95 TTFT ' + fmt(s.p95_ttft_ms) + ' ms; p95 E2E ' + fmt(s.p95_e2e_ms) + ' ms; ' + s.runs + ' trial(s).');
+  for (const c of rec.derived.cells) lines.push('  concurrency ' + c.concurrency + ': ' + (c.meets ? 'meets requirements' : 'does not meet: ' + c.reasons.join(' ')) + (c.cost && c.cost.costPer1000 !== null ? ' · $' + c.cost.costPer1000.toFixed(4) + '/1,000' : ''));
+  if (h.sides[1]) lines.push(h.sides[1].label + ' at ' + h.sides[1].rate + ' would need ' + fmt(h.sides[1].required_rate_to_tie, 3) + ' ' + h.unit + '/s to tie on rental cost (price ratio, not a measurement).');
+  lines.push('Reasons: ' + rec.disposition.reasons.join(' '));
+  return lines.join('\n');
+}
+
+function fmt(v, d = 0) { return v === null || v === undefined ? '—' : Number(v).toLocaleString('en-US', { maximumFractionDigits: d }); }
+
+return { build, verify, derive, packet, receipt, headline, summary, primaryCell, requirements, declaredIdentity };
+
+})();
+const revalidate=(()=>{
+'use strict';
+/* Selective revalidation. Given a qualified record and a change, decide which
+   conclusions still stand, which can be recomputed from retained evidence with no
+   GPU time, which require new measurement, and the smallest plan that restores
+   confidence. The dependency model is explicit so the answer is inspectable. */
+
+
+
+const RUNTIME_KEYS = ['model_revision', 'precision', 'tokenizer_revision', 'runtime_digest', 'cache_policy'];
+const WORKLOAD_KEYS = ['model', 'dataset', 'input_len', 'output_len', 'num_prompts', 'request_rate', 'backend'];
+
+function revalidate(rec, change) {
+  const verified=record.verify(rec);if(!verified.verified)throw Error('Revalidation requires a verified record: '+verified.problems.join(' '));
+  if(change?.price?.gpus!==undefined&&change.price.gpus!==rec.declared.plan.price.gpus)throw Error('A different GPU allocation requires new performance qualification; change only its price here.');
+  if (!change || typeof change !== 'object') throw new Error('change must be an object.');
+  const kinds = Object.keys(change).filter(k => change[k] !== undefined && change[k] !== null);
+  if (!kinds.length) throw new Error('Nothing changed.');
+  const plan = rec.declared.plan;
+  const conclusions = [];
+  let candidate = null, scenario = null, requiredCells = new Set(), reevaluate = false;
+
+  /* Economics depend only on price inputs and retained aggregates. */
+  if (change.price) {
+    const price = { ...plan.price, ...change.price };
+    scenario = priceScenario(rec, price);
+    conclusions.push(c('economics', 'recomputed', 'Cost per 1,000 recomputed from retained trials at ' + price.gpus + ' × $' + price.rate + ' + $' + (price.extra || 0) + '/h. No GPU time.'));
+    conclusions.push(c('performance', 'stands', 'Throughput and latency do not depend on price.'));
+  }
+
+  /* Gates change the accepted denominator; recomputable only when request rows exist. */
+  if (change.gates) {
+    const rows = rec.observed.trials.every(t => t.normalized.rows);
+    if (rows && !(change.gates.quality && !rec.observed.trials.every(t => t.normalized.quality))) {
+      scenario = gateScenario(rec, { ...plan.gates, ...change.gates }, scenario);
+      conclusions.push(c('acceptance', 'recomputed', 'Accepted counts recomputed from retained per-request samples under the new gates.'));
+    } else {
+      for (const cell of rec.derived.cells) requiredCells.add(cell.concurrency);
+      conclusions.push(c('acceptance', 'requires_measurement', rows ? 'Evaluator-passed gating needs a sidecar for every trial; none retained.' : 'Retained trials have no per-request samples; gating needs a detailed rerun.'));
+    }
+  }
+
+  /* Requirements are thresholds over existing aggregates: always recomputable. */
+  if (change.requirements) {
+    scenario = requirementScenario(rec, { ...plan.requirements, ...change.requirements }, scenario);
+    conclusions.push(c('qualification', 'recomputed', 'Requirement thresholds re-applied to retained aggregates.'));
+  }
+
+  /* Traffic: cells already measured under identical workload stand; new cells need
+     measurement; a changed request shape is a different workload identity. */
+  if (change.traffic) {
+    const t = change.traffic;
+    const shapeChanged = WORKLOAD_KEYS.some(k => t[k] !== undefined && t[k] !== plan.workload[k]);
+    const wanted = t.concurrency ? [...new Set(t.concurrency.map(Number))].sort((a, b) => a - b) : plan.concurrency;
+    if (shapeChanged) {
+      for (const cc of wanted) requiredCells.add(cc);
+      conclusions.push(c('capacity', 'requires_measurement', 'Request shape changed (' + WORKLOAD_KEYS.filter(k => t[k] !== undefined && t[k] !== plan.workload[k]).join(', ') + '); every cell needs new evidence under the new workload identity.'));
+    } else {
+      const have = new Set(rec.derived.cells.map(x => x.concurrency));
+      const missing = wanted.filter(x => !have.has(x)), kept = wanted.filter(x => have.has(x));
+      for (const cc of missing) requiredCells.add(cc);
+      if (kept.length) conclusions.push(c('capacity', 'stands', 'Cells at concurrency ' + kept.join(', ') + ' were measured under this workload and stand.'));
+      if (missing.length) conclusions.push(c('capacity', 'requires_measurement', 'Concurrency ' + missing.join(', ') + ' has no evidence; ' + plan.repeats + ' trial(s) each.'));
+      const dropped = [...have].filter(x => !wanted.includes(x));
+      if (dropped.length) conclusions.push(c('capacity', 'stands', 'Concurrency ' + dropped.join(', ') + ' no longer requested; evidence retained.'));
+    }
+  }
+
+  /* Runtime or model identity: the record is superseded; a new candidate is planned. */
+  if (change.runtime) {
+    const changed = RUNTIME_KEYS.filter(k => change.runtime[k] !== undefined && change.runtime[k] !== plan.identity[k]);
+    if (changed.length) {
+      candidate = { ...cloneInput(plan), identity: { ...plan.identity, ...pick(change.runtime, RUNTIME_KEYS) } };
+      for (const cc of plan.concurrency) requiredCells.add(cc);
+      conclusions.push(c('qualification', 'superseded', 'Runtime identity changed (' + changed.join(', ') + '). This record stays as history; a new candidate qualification covers all cells.'));
+      conclusions.push(c('economics', 'stands', 'Price inputs are unchanged, but they will be applied to the candidate\'s new measurements.'));
+    } else conclusions.push(c('qualification', 'stands', 'Declared runtime identity is unchanged.'));
+  }
+
+  /* Evaluator correction: only evaluator-gated conclusions are affected, and they need
+     re-adjudication of retained requests, not new GPU time. */
+  if (change.evaluator) {
+    if (plan.gates.quality) { reevaluate = true; conclusions.push(c('acceptance', 'requires_reevaluation', 'Acceptance counted evaluator-passed outcomes. Re-run the corrected evaluator over the retained request set and attach new sidecars; no benchmark rerun.')); }
+    else conclusions.push(c('acceptance', 'stands', 'Acceptance did not depend on an evaluator.'));
+  }
+
+  const required = [...requiredCells].sort((a, b) => a - b);
+  let minimal = null;
+  if (required.length) {
+    const base = candidate || cloneInput(plan);
+    if (change.traffic) base.workload = { ...base.workload, ...pick(change.traffic, WORKLOAD_KEYS) };
+    minimal = { ...base, concurrency: required, note: (required.length === plan.concurrency.length && !change.traffic ? 'Full candidate qualification.' : 'Only the cells without valid evidence.') + ' Prior trials are retained in ' + rec.id + '.' };
+  }
+  const summary = { stands: conclusions.filter(x => x.status === 'stands').length, recomputed: conclusions.filter(x => x.status === 'recomputed').length, requires_measurement: required.length ? required.length * plan.repeats : 0, superseded: conclusions.some(x => x.status === 'superseded') };
+  return { schema: 'hot-aisle/revalidation@1', record_id: rec.id, change, conclusions, scenario, minimal_plan: minimal, reevaluate, summary };
+}
+
+function c(subject, status, detail) { return { subject, status, detail }; }
+function pick(o, keys) { const out = {}; for (const k of keys) if (o[k] !== undefined) out[k] = o[k]; return out; }
+function cloneInput(plan) {
+  return { target: { ...plan.target }, workload: { ...plan.workload }, concurrency: [...plan.concurrency], repeats: plan.repeats, identity: { ...plan.identity }, price: { ...plan.price }, comparator: plan.comparator ? { ...plan.comparator } : null, limits: { ...plan.limits }, gates: { ...plan.gates }, requirements: { ...plan.requirements }, primary_concurrency: plan.primary_concurrency };
+}
+
+/* Scenario projections reuse the record's own machinery with substituted inputs; the
+   observed section is untouched. */
+function rederive(rec, planPatch) {
+  const clone = JSON.parse(JSON.stringify(rec));
+  Object.assign(clone.declared.plan, planPatch);
+  if (planPatch.price) clone.declared.price = planPatch.price;
+  if (planPatch.gates) clone.rule.gates = planPatch.gates;
+  if (planPatch.requirements) clone.rule.requirements = planPatch.requirements;
+  const derived = record.derive(clone);
+  return { cells: derived.cells.map(x => ({ concurrency: x.concurrency, cost_per_1000: x.cost ? x.cost.costPer1000 : null, accepted_per_s: x.aggregate ? x.aggregate.rate : null, unit: x.aggregate ? x.aggregate.unit : null, meets: x.meets, reasons: x.reasons })), primary_concurrency: derived.primary_concurrency, qualified: derived.disposition.qualified, reasons: derived.disposition.reasons };
+}
+function priceScenario(rec, price) { return { kind: 'price', price, ...rederive(rec, { price }) }; }
+function gateScenario(rec, gates, prev) { const s = rederive(rec, { gates, ...(prev && prev.price ? { price: prev.price } : {}) }); return { kind: prev ? prev.kind + '+gates' : 'gates', gates, ...(prev && prev.price ? { price: prev.price } : {}), ...s }; }
+function requirementScenario(rec, requirements, prev) { const s = rederive(rec, { requirements, ...(prev && prev.price ? { price: prev.price } : {}), ...(prev && prev.gates ? { gates: prev.gates } : {}) }); return { ...(prev || {}), kind: prev ? prev.kind + '+requirements' : 'requirements', requirements, ...s }; }
+
+return { revalidate, RUNTIME_KEYS, WORKLOAD_KEYS };
+
+})();
+const publication=(()=>{
+'use strict';
+/* The runner owns the qualified record and its publication contract.
+   A desk consumes this pair; it never interprets raw vLLM rows again. */
+
+
+
+function verifyRecord(rec) {
+  if (!rec || typeof rec !== 'object') throw Error('Qualified record required.');
+  const v = record.verify(rec);
+  if (!v.verified) throw Error('Qualified record rejected: ' + v.problems.join(' '));
+  if (rec.derived.engine.engine_sha256 !== engine.identity().engine_sha256)
+    throw Error('Report-engine identity differs; requalify the verifier for this record.');
+  return rec;
+}
+function bundle(rec) {
+  verifyRecord(rec);
+  const evidence = record.packet(rec);
+  engine.load().recompute(evidence);
+  return {schema:'hot-aisle/publication@1', record:rec, evidence};
+}
+function verify(input) {
+  if (!input || input.schema !== 'hot-aisle/publication@1') throw Error('Unsupported publication contract.');
+  const rec = verifyRecord(input.record), HA=engine.load();
+  HA.recompute(input.evidence);
+  if (HA.canonical(input.evidence) !== HA.canonical(record.packet(rec)))
+    throw Error('Evidence packet does not belong to this qualified record and primary cell.');
+  return input;
+}
+function identity(input) {
+  verify(input);
+  return engine.sha256(engine.load().canonical(input));
+}
+function projection(input) {
+  verify(input);
+  const rec=input.record, cell=record.primaryCell(rec);
+  const expected=rec.declared.plan.concurrency.length*rec.declared.plan.repeats;
+  return {publication_id:rec.id+'-'+rec.sha256.slice(0,16), record_id:rec.id,
+    record_sha256:rec.sha256, publication_sha256:identity(input),
+    model:rec.declared.plan.workload.model, created:rec.created,
+    synthetic:rec.synthetic, qualified:rec.disposition.qualified,
+    completed_trials:rec.observed.trials.length, expected_trials:expected,
+    complete:rec.observed.trials.length===expected && rec.observed.failed_trials.length===0,
+    primary_concurrency:rec.derived.primary_concurrency,
+    headline:record.headline(rec), cell};
+}
+return {bundle,verify,identity,projection};
+
+})();
+
+function decision(bundle,change=null,createdAt=new Date().toISOString(),previous=null){
+ if(previous!==null&&!/^[a-f0-9]{64}$/.test(previous))throw Error("Invalid previous decision identity.");
+ publication.verify(bundle);
+ const result=change?revalidate.revalidate(bundle.record,change):publication.projection(bundle);
+ const payload={kind:'qualified-record',createdAt,title:bundle.record.declared.plan.workload.model,bundle,change,result,...(previous?{previous}:{})};
+ return {schema:'second-run/qualified-decision@1',sha256:engine.sha256(HA.canonical(payload)),payload};
+}
+function verifyDecision(envelope){
+ if(envelope?.schema!=='second-run/qualified-decision@1'||envelope.sha256!==engine.sha256(HA.canonical(envelope.payload)))throw Error('Qualified decision checksum mismatch.');
+ const fresh=decision(envelope.payload.bundle,envelope.payload.change,envelope.payload.createdAt,envelope.payload.previous||null);
+ if(HA.canonical(fresh)!==HA.canonical(envelope))throw Error('Qualified decision does not recompute from its instrument record.');
+ return envelope;
+}
+return {authority,record,revalidate:revalidate.revalidate,publication,decision,verifyDecision};
+});
+</script><script id="compute-engine">/* Second Run Compute 0.1.0 | MIT. Pure calculations. No I/O or execution authority. */
+(function (root) {
+'use strict';
+const VERSION='0.1.0';
+const fail=m=>{throw new Error(m);};
+const finite=(v,n,min=0,max=Number.MAX_SAFE_INTEGER)=>typeof v==='number'&&Number.isFinite(v)&&v>=min&&v<=max?v:fail(n+' is outside the supported range.');
+const integer=(v,n,min=0,max=Number.MAX_SAFE_INTEGER)=>Number.isSafeInteger(finite(v,n,min,max))?v:fail(n+' must be an integer.');
+const text=(s,max=200)=>typeof s==='string'?s.slice(0,max):'';
+function date(s){if(typeof s!=='string'||!/^\d{4}-\d{2}-\d{2}$/.test(s)||new Date(s+'T00:00:00Z').toISOString().slice(0,10)!==s)fail('Use a valid ISO date.');return s;}
+function canonical(x){if(x===null||typeof x!=='object'){if(typeof x==='number'&&!Number.isFinite(x))fail('Nonfinite value.');return JSON.stringify(x);}if(Array.isArray(x))return '['+x.map(canonical).join(',')+']';return '{'+Object.keys(x).sort().map(k=>JSON.stringify(k)+':'+canonical(x[k])).join(',')+'}';}
+function validateCatalog(c){
+ if(c?.schema!=='second-run/compute-catalog@1'||!Array.isArray(c.offers)||c.offers.length>1000)fail('Unsupported catalog.');date(c.reviewedOn);integer(c.staleAfterDays,'Price review interval',1,365);
+ const ids=new Set();for(const o of c.offers){if(!/^[a-z0-9-]+$/.test(o.id)||ids.has(o.id))fail('Invalid or duplicate offer ID.');ids.add(o.id);if(!c.providers.some(p=>p.id===o.provider)||!c.sources[o.source])fail('Unknown provider or source.');finite(o.rate,'GPU-hour price');finite(o.memoryGB,'Advertised memory',1,100000);integer(o.gpus,'Billable GPU count',1,1024);finite(o.minimumHours,'Minimum charge',0,87600);date(o.reviewedOn);for(const s of o.schedules){date(s.effectiveOn);finite(s.rate,'Scheduled price');}if(!/^https:\/\//.test(c.sources[o.source].url))fail('Source must be HTTPS.');}return c;
+}
+function priceAt(o,asOf){date(asOf);if(asOf<o.reviewedOn)fail('This snapshot does not establish earlier prices.');let rate=o.rate,effective=o.reviewedOn;for(const s of [...o.schedules].sort((a,b)=>a.effectiveOn.localeCompare(b.effectiveOn)))if(s.effectiveOn<=asOf){rate=s.rate;effective=s.effectiveOn;}return {rate,effective,scheduled:effective>o.reviewedOn};}
+function freshness(c,today){date(today);const age=Math.floor((Date.parse(today)-Date.parse(c.reviewedOn))/86400000);return {reviewedOn:c.reviewedOn,ageDays:age,status:age<0?'FUTURE_SNAPSHOT':age>c.staleAfterDays?'STALE':'DATED_SNAPSHOT',staleAfterDays:c.staleAfterDays};}
+function quote(o,params){
+ const h=finite(params.hours,'Reserved hours',0,87600),extra=finite(params.extraPerHour??0,'Hourly extras'),fixed=finite(params.fixedCost??0,'One-time extras');const p=priceAt(o,params.asOf);
+ const billedHours=h===0?0:Math.max(h,o.minimumHours);const rate=p.rate*o.gpus;
+ return {id:o.id,provider:o.provider,gpu:o.gpu,vendor:o.vendor,memoryGB:o.memoryGB,gpus:o.gpus,ratePerGPU:p.rate,allocationHourly:rate,hours:h,billedHours,minimumApplied:billedHours>h,gpuCharge:rate*billedHours,extraCharge:extra*billedHours+fixed,total:rate*billedHours+extra*billedHours+fixed,effectiveOn:p.effective,allocation:o.allocation,stock:o.stock,terms:o.terms,source:o.source,kind:o.kind,evidence:'PUBLISHED_PRICE_MODEL'};
+}
+function market(c,p){validateCatalog(c);finite(p.minMemoryGB??0,'Per-GPU memory floor',0,100000);const rows=c.offers.filter(o=>(!p.provider||p.provider==='all'||o.provider===p.provider)&&(!p.vendor||p.vendor==='all'||o.vendor===p.vendor)&&o.memoryGB>=(p.minMemoryGB??0)&&(!p.gpus||o.gpus===p.gpus)&&(!p.query||(o.gpu+' '+o.provider).toLowerCase().includes(text(p.query).toLowerCase()))).map(o=>quote(o,p));return rows.sort((a,b)=>a.total-b.total||a.id.localeCompare(b.id));}
+function ownership(p){
+ const h=finite(p.hours,'Active hours',0,720),capex=finite(p.capex,'Purchase cost'),residual=finite(p.residual,'Residual value',0,capex),months=finite(p.months,'Ownership horizon',1,120),load=finite(p.loadWatts,'System load power',0,1000000),idle=finite(p.idleWatts,'System idle power',0,load),energy=finite(p.kwhPrice,'Electricity price',0,100),factor=finite(p.powerFactor??1,'Facility power multiplier',1,10),ops=finite(p.opsMonthly??0,'Monthly operating cost'),cloud=finite(p.cloudHourly,'Cloud allocation rate');
+ const power=(h*load+(720-h)*idle)/1000*energy*factor,amortization=(capex-residual)/months,local=power+ops+amortization;
+ if((p.localRate!==undefined)!==(p.cloudRate!==undefined))fail('Supply both work rates or neither.');
+ const equalThroughput=p.localRate!==undefined&&p.cloudRate!==undefined;
+ const throughputRatio=equalThroughput?finite(p.localRate,'Local work rate',Number.EPSILON)/finite(p.cloudRate,'Cloud work rate',Number.EPSILON):1;
+ const cloudHours=h*throughputRatio,requiredCopies=cloudHours>0?Math.ceil(cloudHours/720):0;
+ const minH=finite(p.cloudMinimumHours??0,'Cloud minimum hours');
+ // Costs below concern one comparator allocation; >720h requires parallelism / a longer window.
+ const cloudBillableHours=cloudHours===0?0:Math.max(cloudHours,minH),cloudCost=cloudBillableHours*cloud;
+ const saving=cloudCost-(power+ops),cashBreakeven=saving>0?capex/saving:null;
+ return {basis:equalThroughput?'USER_DECLARED_EQUAL_WORK_RATES':'EQUAL_RESERVED_HOURS_NOT_EQUAL_OUTPUT',hours:h,cloudHours,cloudBillableHours,cloudCopiesNeeded:requiredCopies,energyMonthly:power,amortizationMonthly:amortization,opsMonthly:ops,ownershipMonthly:local,rentalMonthly:cloudCost,monthlyDifference:cloudCost-local,cashBreakevenMonths:cashBreakeven,ownershipHorizonCost:local*months,rentalHorizonCost:cloudCost*months,capacityWarning:cloudHours>720,hardwarePerformanceVerified:false};
+}
+function route(p){
+ const volume=integer(p.requests,'Requests per batch',1,1e9),premium=finite(p.premiumHourly,'Premium allocation rate'),setup=finite(p.qualificationCost,'Initial qualification cost'),verifier=finite(p.validationCostPerRequest??0,'Validation cost per request'),repeats=integer(p.repeats??1,'Repeat batches',1,100000);
+ if(!Array.isArray(p.classes)||p.classes.length<1||p.classes.length>30)fail('Provide 1–30 workload classes.');
+ if(Math.abs(p.classes.reduce((s,c)=>s+finite(c.share,'Workload share',0,100),0)-100)>1e-7)fail('Workload shares must total 100%.');
+ const classes=p.classes.map(c=>{
+ if(typeof c.premium!=='boolean')fail('Premium-path designation must be boolean.');
+ const count=volume*c.share/100,baseSec=finite(c.baselineSeconds,'Baseline seconds per request'),newSec=finite(c.targetSeconds,'Target seconds per request'),newPrice=finite(c.targetHourly,'Target hourly price'),fallback=finite(c.fallbackPercent,'Fallback percentage',0,100)/100;
+ if(c.premium&&fallback!==0)fail('The premium terminal path must have zero fallback.');
+ if(c.premium&&Math.abs(newPrice-premium)>1e-9)fail('Premium path rate must match the selected premium allocation.');
+ const base=count*baseSec/3600*premium,target=count*newSec/3600*newPrice,fallbackSeconds=c.premium?0:count*fallback*baseSec;
+ return {name:text(c.name),share:c.share,requests:count,baseSeconds:count*baseSec,premiumSeconds:c.premium?count*newSec:fallbackSeconds,baselineCost:base,attemptCost:target,fallbackCost:fallbackSeconds/3600*premium,newCost:target+fallbackSeconds/3600*premium+count*verifier,movedRequests:c.premium?0:count*(1-fallback),status:'SCENARIO_REQUIRES_TASK_QUALIFICATION'};});
+ const sum=k=>classes.reduce((n,c)=>n+c[k],0);const baseline=sum('baselineCost'),recurring=sum('newCost'),delta=baseline-recurring,pb=sum('baseSeconds'),pa=sum('premiumSeconds');
+ return {classes,requests:volume,repeats,baselinePerBatch:baseline,recurringPerBatch:recurring,qualificationCost:setup,firstBatch:recurring+setup,baselineTotal:baseline*repeats,proposedTotal:recurring*repeats+setup,savingsTotal:delta*repeats-setup,breakEvenBatches:delta>0?Math.floor(setup/delta)+1:null,requestsMovedPct:sum('movedRequests')/volume*100,premiumSecondsBefore:pb,premiumSecondsAfter:pa,premiumTimeReductionPct:pb>0?(1-pa/pb)*100:null,capacityReleased:null,status:'MODELED_POLICY_NOT_ADMITTED',qualification:'Task acceptance, end-to-end latency, placement, residency, and actual allocation release require measurement.'};
+}
+function footprint(p){const countB=finite(p.parametersB,'Parameters',0.001,10000),bits=finite(p.bits,'Bits per parameter',1,64),overhead=finite(p.overheadPct??15,'Representation overhead',0,200),runtime=finite(p.runtimeGB??3,'Runtime budget'),kv=finite(p.kvGB??0,'KV-cache budget');return {weightGB:countB*bits/8,estimatedGB:countB*bits/8*(1+overhead/100)+runtime+kv,status:'PLANNING_ESTIMATE_NOT_NATIVE_FIT',note:'All resident parameters, including MoE experts. Runtime, KV-cache, concurrency and quantization layout must be qualified.'};}
+function plan(c,p){validateCatalog(c);const ids=p.offerIds??[];if(!Array.isArray(ids)||new Set(ids).size!==ids.length||ids.length>4)fail('Select at most four offers.');const offers=ids.map(id=>c.offers.find(o=>o.id===id)??fail('Unknown offer.'));
+ return {schema:'second-run/compute-plan@1',version:VERSION,status:'PROPOSAL',asOf:date(p.asOf),catalogReviewedOn:c.reviewedOn,workload:text(p.workload||'Unspecified workload'),requirements:{minMemoryGB:finite(p.minMemoryGB??0,'Memory requirement'),acceptance:text(p.acceptance||'Acceptance contract required',2000)},reservedHours:finite(p.hours,'Hours',0,87600),options:offers.map(o=>quote(o,p)),authority:{provision:false,execute:false,pay:false,publish:false},nextChecks:['Confirm purchasable allocation, region and current quote.','Qualify exact artifact/runtime fit; advertised memory is a filter only.','Run the agreed acceptance and latency tests on representative held-out work.','Count all failed attempts, setup, transfer, verification and billable idle time.'],invalidation:{price:'Recompute economics from retained performance.',model_runtime_workload_acceptance:'Requalify affected results; preserve the baseline.'}};
+}
+function aperture(raw){if(raw?.schema!=='aperture-support/1')fail('Use an aperture-support/1 receipt.');const safeNum=v=>typeof v==='number'&&Number.isFinite(v)&&v>=0?v:null;return {schema:'second-run/hardware-view@1',basis:'SUPPLIED_APERTURE_RECEIPT',createdAt:text(raw.createdAt),version:text(raw.apertureVersion),cpu:text(raw.cpu?.model),logicalCPUs:safeNum(raw.cpu?.logicalCpus),memory:{totalBytes:safeNum(raw.memory?.totalBytes),headroomBytes:safeNum(raw.memory?.allocationHeadroomBytes)},graphics:(raw.nvidia?.length?raw.nvidia:raw.graphics??[]).slice(0,32).map(g=>({name:text(g.name),totalBytes:safeNum(g.totalBytes??g.capacityBytes),freeBytes:safeNum(g.freeBytes),driver:text(g.driver),memoryDomain:text(g.memoryDomain)})),qualification:'Inventory only. No new hardware scan, stress test, native fit or inference run.'};}
+const api={VERSION,finite,integer,date,text,canonical,validateCatalog,priceAt,freshness,quote,market,ownership,route,footprint,plan,aperture};
+if(typeof module==='object'&&module.exports)module.exports=api;root.Compute=api;
+})(typeof globalThis==='undefined'?this:globalThis);
+</script><script>/* Browser interaction layer. All computations use Compute; all imports use the retained HA engine. */
+'use strict';
+const $=id=>document.getElementById(id), C=Compute, H=HA, Q=WorkloadQualification, esc=H.escape;
+const catalog=C.validateCatalog(JSON.parse($('catalog-data').textContent));
+const samples=JSON.parse($('sample-data').textContent);
+const providerName=id=>catalog.providers.find(p=>p.id===id)?.name||id;
+const money=(v,d=2)=>v===null||v===undefined?'—':new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',minimumFractionDigits:d,maximumFractionDigits:d}).format(v);
+const nfmt=(v,d=1)=>v===null||v===undefined?'—':new Intl.NumberFormat('en-US',{maximumFractionDigits:d}).format(v);
+const val=id=>{const s=$(id).value.trim();if(!s)throw Error('Complete '+($(id).labels?.[0]?.textContent||id)+'.');const v=Number(s);if(!Number.isFinite(v))throw Error('Enter a finite number.');return v;};
+const url=s=>/^https:\/\//.test(s)?s:'#';
+const digest=s=>H.sha256(new TextEncoder().encode(s));
+const state={tab:'market',shortlist:[],rows:[],saved:[],runs:[],publications:[],instrumentStatus:'NOT_CONFIGURED',catalogMatch:null,hardware:null,connected:false,key:null,token:null,routeClasses:[],marketResult:null,ownResult:null,reuseResult:null};
+let toastTimer;
+function toast(s){$('toast').textContent=s;$('toast').hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').hidden=true,4800);}
+function modal(title,body){$('modal-title').textContent=title;$('modal-body').innerHTML=body;if(!$('modal').open)$('modal').showModal();}
+$('modal-close').onclick=()=>$('modal').close();
+$('modal').addEventListener('click',e=>{if(e.target===$('modal')){const r=$('modal').getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)$('modal').close();}});
+function download(name,body,type='application/json'){const a=document.createElement('a'),u=URL.createObjectURL(new Blob([body],{type}));a.href=u;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),1000);}
+async function copy(s){try{await navigator.clipboard.writeText(s);toast('Copied.');}catch{download('compute-instructions.txt',s,'text/plain');toast('Clipboard unavailable; saved as text.');}}
+function switchTab(name){if(!['market','own','reuse','work'].includes(name))return;state.tab=name;for(const b of document.querySelectorAll('[data-tab]')){const selected=b.dataset.tab===name;b.setAttribute('aria-selected',String(selected));b.tabIndex=selected?0:-1;$('view-'+b.dataset.tab).hidden=!selected;}if(name==='own')renderOwn();if(name==='reuse')renderReuse();if(name==='work')renderWork();}
+for(const b of document.querySelectorAll('[data-tab]')){b.onclick=()=>switchTab(b.dataset.tab);b.onkeydown=e=>{const keys=['ArrowLeft','ArrowRight','Home','End'];if(!keys.includes(e.key))return;e.preventDefault();const tabs=[...document.querySelectorAll('[data-tab]')],i=tabs.indexOf(b),j=e.key==='Home'?0:e.key==='End'?tabs.length-1:(i+(e.key==='ArrowRight'?1:-1)+tabs.length)%tabs.length;switchTab(tabs[j].dataset.tab);tabs[j].focus();};}
+$('theme').onclick=()=>{document.documentElement.dataset.theme=document.documentElement.dataset.theme==='light'?'dark':'light';};
+try{if(matchMedia('(prefers-color-scheme: light)').matches)document.documentElement.dataset.theme='light';}catch{}
+function sourceView(){const f=C.freshness(catalog,new Date().toISOString().slice(0,10));modal('Sources, dates & price scope',`<p>Each price is a dated provider observation. The priceboard makes no availability or performance assertion.</p><div class="modelnotice" style="margin-top:17px"><b>${esc(f.status.replaceAll('_',' '))}</b> · reviewed ${esc(f.reviewedOn)} · ${f.ageDays} days old. Review interval: ${f.staleAfterDays} days.</div>${Object.values(catalog.sources).map(s=>`<div class="sourceentry"><h3><a href="${esc(url(s.url))}" target="_blank" rel="noopener">${esc(s.title)} ↗</a></h3><p>${esc(s.note)}</p><p class="mono">${esc(s.reviewedOn)} · ${esc(s.kind)}</p></div>`).join('')}<div class="showhelp">DigitalOcean's current on-demand price is $2.59 for MI300X and $4.41 for H100 in this review. Earlier $1.99 / $3.39 comparisons are historical. Its official pages also disagree on the minimum charge interval. This desk preserves that conflict rather than guessing.</div>`);}
+for(const id of ['snapshot-button','source-note','footer-sources'])$(id).onclick=sourceView;
+function methodView(){modal('The method, in plain language',`<div class="stack"><div><h3>Start with the allocation you pay for.</h3><p>Hourly GPU price × every reserved GPU × billed hours, plus entered extras. A monthly minimum remains in the calculation even when you use only part of the month. Short-session billing granularity requires a confirmed quote.</p></div><div><h3>Qualify the work before calling it cheaper.</h3><p>A memory filter creates a shortlist, not native model-fit proof. Same-model hardware comparisons and different-model outcome comparisons have different acceptance contracts. No provider inherits a speed or quality score here.</p></div><div><h3>Count all the attempts.</h3><p>The reuse model counts the first attempt, per-request validation, fallback work and the initial qualification cost. Requests moved and premium GPU time saved are reported separately. Releasing physical capacity requires a further placement and residency check.</p></div><div><h3>Use the same engine everywhere.</h3><p>The browser, local workspace helper, CLI and MCP tools share the calculation engine. Existing vLLM results are normalized by the retained workload-report engine. Files and supplied evaluator assertions remain producer evidence.</p></div><div><h3>Save decisions explicitly.</h3><p>Public browsing uses no account or application telemetry. Saving creates a local browser record. A connected session reads only its configured evidence directory, Aperture receipt and optional model endpoint. No model call, provisioning, benchmark, payment or production change runs from this desk.</p></div><div><h3>Keep the evidence independent.</h3><p>Exports contain the selected prices, inputs, derived results and a checksum. Recompute in the offline kit. Checksums bind a calculation, not the truth of source assertions or the operator's identity.</p></div></div>`);}
+for(const id of ['method-top','footer-method'])$(id).onclick=methodView;
+function marketParams(){return {asOf:$('as-of').value,hours:val('hours'),minMemoryGB:val('memory'),gpus:val('allocation'),provider:$('provider').value,vendor:$('vendor').value,query:$('search').value,extraPerHour:val('extras'),fixedCost:val('fixed')};}
+function footprint(){try{const r=C.footprint({parametersB:val('parameters'),bits:val('bits'),kvGB:val('kv'),runtimeGB:3,overheadPct:15});$('footprint').textContent=nfmt(r.estimatedGB,1)+' GB planning budget: weights + 15% representation allowance + 3 GB runtime + your KV budget. Not native fit.';return r.estimatedGB;}catch(e){$('footprint').textContent=e.message;return null;}}
+$('apply-memory').onclick=()=>{const needed=footprint();if(!needed)return;const options=[...$('memory').options].map(o=>Number(o.value)).filter(v=>v>=needed);if(!options.length){toast('Budget exceeds the listed screening options. Use an exact native-fit assessment.');return;}$('memory').value=Math.min(...options);renderMarket();};
+for(const id of ['parameters','bits','kv'])$(id).oninput=footprint;
+function renderMarket(){
+ state.marketResult=null;try{const p=marketParams(),rows=C.market(catalog,p);state.rows=rows;$('market-error').textContent='';$('hours-label').textContent=p.hours+' h';for(const b of document.querySelectorAll('[data-hours]'))b.setAttribute('aria-pressed',String(Number(b.dataset.hours)===p.hours));$('result-count').textContent='· '+rows.length;
+ if(rows.length){const r=rows[0];$('lowest').innerHTML=money(r.allocationHourly)+'<sup>/h</sup>';$('lowest-caption').textContent=(r.gpus>1?r.gpus+' × ':'')+r.gpu+' · '+providerName(r.provider);$('period-cost').textContent=money(r.total);$('period-caption').textContent=r.billedHours+' billed hours'+(r.minimumApplied?' · minimum applied':' · selected price schedule');}
+ else{$('lowest').textContent='—';$('lowest-caption').textContent='No listed configuration matches';$('period-cost').textContent='—';$('period-caption').textContent='Change a filter to broaden the shortlist.';}
+ const max=rows.length?Math.max(...rows.map(r=>r.total)):1;
+ $('price-rows').innerHTML=rows.length?rows.map(r=>`<tr class="${state.shortlist.includes(r.id)?'selected':''}" data-row="${r.id}"><td><input type="checkbox" aria-label="Shortlist ${esc(providerName(r.provider)+' '+r.gpu+' '+r.gpus+' GPU')}" data-select="${r.id}" ${state.shortlist.includes(r.id)?'checked':''}></td><td><button class="gpu gpu-open" data-offer="${r.id}">${esc(r.gpu)}</button><span class="mobile-provider">${esc(providerName(r.provider))} · ${nfmt(r.memoryGB,0)} GB / GPU</span><span class="gpu-detail">${r.gpus} GPU${r.gpus>1?'s':''} · ${r.kind==='monthly'?'monthly minimum':r.kind==='public-pods'?'public Pods':'on demand'}</span></td><td><span class="provider p-${r.provider}"><i class="pdot"></i>${esc(providerName(r.provider))}</span></td><td class="num">${nfmt(r.memoryGB,0)}</td><td class="num">${money(r.allocationHourly)}</td><td class="num costcell"><strong>${money(r.total)}</strong><i class="bar" style="--bar:${Math.max(4,r.total/max*75)}%"></i></td><td><span class="badge">${r.allocation==='normalized'?'Normalized':r.kind==='public-pods'?'Advertised':'List price'}</span></td><td><button class="iconlink" data-offer="${r.id}" aria-label="Inspect ${esc(providerName(r.provider)+' '+r.gpu)}">↗</button></td></tr>`).join(''):'<tr><td colspan="8" class="empty">No results under these filters. Reset or lower the memory floor.</td></tr>';
+ for(const e of document.querySelectorAll('[data-select]'))e.onchange=()=>selectOffer(e.dataset.select,e.checked);
+ for(const e of document.querySelectorAll('[data-offer]'))e.onclick=()=>offerView(e.dataset.offer);
+ renderPlot(rows);renderTray();state.marketResult={params:p,rows};
+ }catch(e){$('market-error').textContent=e.message;$('price-rows').innerHTML='<tr><td colspan="8" class="empty">Calculation held. Correct the highlighted input.</td></tr>';$('lowest').textContent='—';$('period-cost').textContent='—';state.rows=[];}
+}
+function renderPlot(rows){const w=390,h=134,l=30,t=9,r=9,b=23,iw=w-l-r,ih=h-t-b;const maxM=Math.max(192,...rows.map(x=>x.memoryGB)),maxP=Math.max(4,...rows.map(x=>x.allocationHourly));const x=m=>l+m/maxM*iw,y=p=>h-b-p/maxP*ih;
+ let s=`<svg viewBox="0 0 ${w} ${h}" role="img" aria-label="Allocation price versus advertised memory per GPU. Exact values are in the priceboard.">`;
+ for(let i=0;i<3;i++){const v=i*maxP/2;s+=`<line class="grid" x1="${l}" x2="${w-r}" y1="${y(v)}" y2="${y(v)}"/><text class="axis" x="${l-5}" y="${y(v)+3}" text-anchor="end">$${nfmt(v,1)}</text>`;}
+ for(let i=0;i<3;i++){const v=i*maxM/2;s+=`<text class="axis" x="${x(v)}" y="${h-5}" text-anchor="middle">${nfmt(v,0)} GB</text>`;}
+ for(const row of rows)s+=`<circle class="p-${row.provider}" cx="${x(row.memoryGB)}" cy="${y(row.allocationHourly)}" r="${state.shortlist.includes(row.id)?5:3.6}" tabindex="0" data-dot="${row.id}" aria-label="${esc(row.gpu+' '+providerName(row.provider)+' '+money(row.allocationHourly)+' per allocation hour')}"><title>${esc(providerName(row.provider)+' · '+row.gpu+' · '+money(row.allocationHourly)+'/h')}</title></circle>`;
+ $('market-plot').innerHTML=s+'</svg>';for(const e of document.querySelectorAll('[data-dot]')){e.onclick=()=>offerView(e.dataset.dot);e.onkeydown=ev=>{if(ev.key==='Enter'||ev.key===' ')offerView(e.dataset.dot);};}
+}
+function selectOffer(id,selected){if(selected&&!state.shortlist.includes(id)){if(state.shortlist.length===4){toast('Compare up to four configurations at a time.');renderMarket();return;}state.shortlist.push(id);}else if(!selected)state.shortlist=state.shortlist.filter(x=>x!==id);renderMarket();}
+function renderTray(){$('shortlist-tray').hidden=!state.shortlist.length;$('shortlist-title').textContent=state.shortlist.length+' configuration'+(state.shortlist.length===1?'':'s')+' selected';$('shortlist-desc').textContent=state.shortlist.map(id=>catalog.offers.find(o=>o.id===id).gpu).join(' · ');}
+function offerView(id){const o=catalog.offers.find(x=>x.id===id),q=C.quote(o,marketParams()),s=catalog.sources[o.source];modal(providerName(o.provider)+' · '+o.gpu,`<div class="row between"><span class="badge amber">${o.gpus} GPU${o.gpus>1?'s':''} · ${esc(o.kind)}</span><span class="badge">Price model</span></div><div class="offer-value">${money(q.allocationHourly)}<span class="small muted"> / allocation-hour</span></div><p>${money(q.total)} for ${nfmt(q.billedHours,0)} billed hours under your inputs.</p><dl><dt>Memory per GPU</dt><dd>${o.memoryGB} advertised GB</dd><dt>Effective price date</dt><dd>${esc(q.effectiveOn)}</dd><dt>GPU-hour rate</dt><dd>${money(q.ratePerGPU)}</dd><dt>Allocation basis</dt><dd>${esc(o.allocation)}</dd><dt>Native fit / workload performance</dt><dd>Qualification required</dd><dt>Stock / deployment availability</dt><dd>Check provider</dd></dl><p>${esc(o.terms)}</p><p style="margin-top:12px"><a href="${esc(s.url)}" target="_blank" rel="noopener">Inspect provider pricing ↗</a></p><div class="dialogactions"><button class="primary" id="detail-select">${state.shortlist.includes(id)?'Remove from':'Add to'} shortlist</button><button id="detail-own">Compare with owning</button><button id="detail-reuse">Use as premium baseline</button></div>`);$('detail-select').onclick=()=>{selectOffer(id,!state.shortlist.includes(id));$('modal').close();};$('detail-own').onclick=()=>{$('rental-offer').value=id;$('modal').close();switchTab('own');};$('detail-reuse').onclick=()=>{$('premium-offer').value=id;$('modal').close();switchTab('reuse');};}
+$('compare-shortlist').onclick=()=>{const p=marketParams(),rs=state.shortlist.map(id=>C.quote(catalog.offers.find(o=>o.id===id),p));modal('Your compute shortlist',`<div class="matrix">${rs.map(r=>`<div class="comparison-card"><div class="eyebrow">${esc(providerName(r.provider))}</div><h3>${r.gpus} × ${esc(r.gpu)}</h3><div class="bigstat">${money(r.total)}</div><p>${r.billedHours} billed hours · ${r.memoryGB} GB per GPU</p><p>${esc(r.terms)}</p></div>`).join('')}</div><div class="showhelp">To tie the first option on cost per result, each alternative needs ${rs.map(r=>nfmt(r.allocationHourly/rs[0].allocationHourly*100,1)+'%').join(' / ')} of its accepted-work rate, respectively, when minimum commitments and other costs are equal. This is a price threshold, not a measured speed comparison.</div><div class="dialogactions"><button class="primary" id="compare-save">Save this decision</button></div>`);$('compare-save').onclick=()=>{saveDecision('market');$('modal').close();};};
+$('clear-shortlist').onclick=()=>{state.shortlist=[];renderMarket();};
+$('plan-shortlist').onclick=()=>saveDecision('market');
+for(const e of document.querySelectorAll('[data-hours]'))e.onclick=()=>{$('hours').value=e.dataset.hours;renderMarket();};
+for(const id of ['memory','allocation','hours','vendor','provider','as-of','search','extras','fixed'])$(id).addEventListener('input',renderMarket);
+$('reset-market').onclick=()=>{$('memory').value='24';$('allocation').value='1';$('hours').value=160;$('vendor').value='all';$('provider').value='all';$('search').value='';$('extras').value=0;$('fixed').value=0;renderMarket();};
+function linePlot(id,points,xLabel,yLabel,labels){const w=700,h=205,l=50,r=16,t=15,b=30,iw=w-l-r,ih=h-t-b,xMax=Math.max(1,...points.map(p=>p.x)),yMax=Math.max(1,...points.flatMap(p=>[p.a,p.b]));let s=`<svg viewBox="0 0 ${w} ${h}" role="img" aria-label="${esc(labels)}"><title>${esc(labels)}</title>`;const x=v=>l+v/xMax*iw,y=v=>h-b-v/yMax*ih;
+ for(let i=0;i<=3;i++){const v=yMax*i/3;s+=`<line class="chart-grid" x1="${l}" x2="${w-r}" y1="${y(v)}" y2="${y(v)}"/><text x="${l-8}" y="${y(v)+3}" text-anchor="end">$${nfmt(v,0)}</text>`;}
+ for(let i=0;i<=4;i++){const v=xMax*i/4;s+=`<text x="${x(v)}" y="${h-10}" text-anchor="middle">${nfmt(v,0)}</text>`;}
+ s+=`<text x="${w-r}" y="${h+3}" text-anchor="end">${esc(xLabel)}</text>`;
+ for(const [key,cls] of [['a','curve-a'],['b','curve-b']])s+=`<path class="${cls}" d="${points.map((p,i)=>(i?'L':'M')+x(p.x).toFixed(2)+','+y(p[key]).toFixed(2)).join(' ')}"/>`;
+ $(id).innerHTML=s+'</svg>';
+}
+function ownParams(){const o=catalog.offers.find(o=>o.id===$('rental-offer').value),q=C.quote(o,{asOf:$('as-of').value,hours:val('own-hours')});const p={hours:val('own-hours'),capex:val('capex'),residual:val('residual'),months:val('horizon'),loadWatts:val('load-watts'),idleWatts:val('idle-watts'),kwhPrice:val('kwh'),opsMonthly:val('ops'),powerFactor:1,cloudHourly:q.allocationHourly,cloudMinimumHours:o.minimumHours};const l=$('local-rate').value.trim(),r=$('cloud-rate').value.trim();if(!!l!==!!r)throw Error('Supply both local and cloud accepted-work rates, or leave both empty.');if(l&&r){p.localRate=Number(l);p.cloudRate=Number(r);}return p;}
+function renderOwn(){state.ownResult=null;try{const p=ownParams(),r=C.ownership(p);state.ownResult={params:p,result:r};$('own-error').textContent='';$('own-hours-label').textContent=p.hours+' h';$('own-cost').textContent=money(r.ownershipMonthly);$('rent-cost').textContent=money(r.rentalMonthly);$('cash-months').textContent=r.cashBreakevenMonths===null?'No crossing':nfmt(r.cashBreakevenMonths,1)+' mo';$('rent-hours-label').textContent=nfmt(r.cloudBillableHours,1)+' comparator allocation-hours';$('own-basis').innerHTML=`<b>${r.basis==='USER_DECLARED_EQUAL_WORK_RATES'?'Same work, supplied rates.':'Equal reserved hours.'}</b> ${r.basis==='USER_DECLARED_EQUAL_WORK_RATES'?'Output equivalence remains your declaration; qualification is separate.':'This compares ownership cost with rental time, not GPU performance.'}${r.capacityWarning?' Required cloud time exceeds one allocation-month; parallelism or a longer window needs qualification.':''}`;$('own-breakdown').innerHTML=`<span>Energy ${money(r.energyMonthly)}</span><span>Amortization ${money(r.amortizationMonthly)}</span><span>Other ${money(r.opsMonthly)}</span><span>${p.months}-month ownership cost <b>${money(r.ownershipHorizonCost)}</b></span>`;linePlot('own-chart',Array.from({length:37},(_,i)=>{const x=i*20,r=C.ownership({...p,hours:x});return {x,a:r.ownershipMonthly,b:r.rentalMonthly};}),'active hours per 30 days','USD','Ownership and rental monthly costs by active hours. Orange is ownership; blue is rental.');}catch(e){$('own-error').textContent=e.message;for(const id of ['own-cost','rent-cost','cash-months'])$(id).textContent='—';$('own-chart').replaceChildren();$('own-breakdown').replaceChildren();}}
+for(const id of ['capex','residual','horizon','load-watts','idle-watts','kwh','ops','own-hours','local-rate','cloud-rate','rental-offer'])$(id).oninput=renderOwn;
+const routeDefaults=()=>[{name:'Reusable operations',share:60,baselineSeconds:1,targetSeconds:.05,targetHourly:.08,fallbackPercent:0,premium:false},{name:'Smaller-model work',share:20,baselineSeconds:1,targetSeconds:1.5,targetHourly:.49,fallbackPercent:5,premium:false},{name:'Fresh judgment',share:20,baselineSeconds:20,targetSeconds:20,targetHourly:2.99,fallbackPercent:0,premium:true}];
+function routeFields(){state.routeClasses=routeDefaults();$('route-classes').innerHTML=state.routeClasses.map((c,i)=>`<div class="routeclass"><div class="classname"><h3>${esc(c.name)}</h3><span class="type">${c.premium?'PREMIUM PATH':'CANDIDATE PATH'}</span></div>${[['share','Share, %'],['baselineSeconds','Baseline sec / req'],['targetSeconds','Target sec / req'],['targetHourly','Target $ / hour'],['fallbackPercent','Fallback, %']].map(([k,label])=>`<div><label for="r-${i}-${k}">${label}</label><input type="number" id="r-${i}-${k}" min="0" step="any" value="${c[k]}" ${c.premium&&(k==='targetHourly'||k==='fallbackPercent')?'readonly':''}></div>`).join('')}</div>`).join('');for(const e of $('route-classes').querySelectorAll('input'))e.oninput=renderReuse;}
+function reuseParams(){const offer=catalog.offers.find(o=>o.id===$('premium-offer').value),q=C.quote(offer,{asOf:$('as-of').value,hours:1});const classes=state.routeClasses.map((c,i)=>({...c,...Object.fromEntries(['share','baselineSeconds','targetSeconds','targetHourly','fallbackPercent'].map(k=>[k,val('r-'+i+'-'+k)]))}));classes[2].targetHourly=q.allocationHourly;$('r-2-targetHourly').value=q.allocationHourly;return {requests:val('volume'),premiumHourly:q.allocationHourly,qualificationCost:val('qual-cost'),validationCostPerRequest:val('validation-cost'),repeats:val('repeat-batches'),classes};}
+function renderReuse(){state.reuseResult=null;try{const p=reuseParams(),r=C.route(p);state.reuseResult={params:p,result:r};$('reuse-error').textContent='';$('moved-pct').textContent=nfmt(r.requestsMovedPct,1)+'%';$('time-pct').textContent=nfmt(r.premiumTimeReductionPct,1)+'%';$('moved-bar').style.width=Math.max(0,Math.min(100,r.requestsMovedPct))+'%';$('time-bar').style.width=Math.max(0,Math.min(100,r.premiumTimeReductionPct??0))+'%';$('baseline-batch').textContent=money(r.baselinePerBatch);$('proposed-batch').textContent=money(r.recurringPerBatch);$('break-even-batch').textContent=r.breakEvenBatches??'Never';$('reuse-total').innerHTML=`At ${r.repeats} repeats: <b>${money(r.proposedTotal)}</b> proposed vs ${money(r.baselineTotal)} baseline.<br><span class="muted">${money(Math.abs(r.savingsTotal))} ${r.savingsTotal>=0?'modeled savings':'additional cost'}, including setup.</span>`;const max=Math.max(12,Math.min(500,r.repeats));linePlot('reuse-chart',Array.from({length:31},(_,i)=>{const x=i*max/30;return {x,a:r.qualificationCost+r.recurringPerBatch*x,b:r.baselinePerBatch*x};}),'repeat batches','USD','Scenario cumulative cost. Orange includes initial qualification and recurring optimized work. Blue repeats the baseline.');}catch(e){$('reuse-error').textContent=e.message;for(const id of ['moved-pct','time-pct','baseline-batch','proposed-batch','break-even-batch'])$(id).textContent='—';$('reuse-chart').replaceChildren();$('reuse-total').textContent='Correct the scenario to recompute.';$('moved-bar').style.width='0%';$('time-bar').style.width='0%';}}
+for(const id of ['premium-offer','volume','qual-cost','validation-cost','repeat-batches'])$(id).oninput=renderReuse;
+$('reset-reuse').onclick=()=>{routeFields();renderReuse();};
+function seal(payload){return {schema:'second-run/sealed-compute-decision@1',sha256:digest(C.canonical(payload)),payload};}
+function computeSaved(p){if(p.schema!=='second-run/compute-decision@1'||p.version!==C.VERSION)throw Error('Unsupported decision version.');if(p.kind==='market')return C.plan(p.catalog,p.inputs);if(p.kind==='own')return C.ownership(p.inputs);if(p.kind==='reuse')return C.route(p.inputs);throw Error('Unsupported decision kind.');}
+function verifySaved(e){if(e?.schema==='second-run/qualified-decision@1')return Q.verifyDecision(e);if(e?.schema!=='second-run/sealed-compute-decision@1'||!e.payload||e.sha256!==digest(C.canonical(e.payload)))throw Error('Decision checksum mismatch.');const r=computeSaved(e.payload);if(C.canonical(r)!==C.canonical(e.payload.result))throw Error('Saved result differs from recomputation.');return e;}
+function saveDecision(kind){try{let p,result,title;if(kind==='market'){if(!state.shortlist.length)throw Error('Select at least one configuration.');p={...marketParams(),offerIds:[...state.shortlist],workload:'Compute shortlist',acceptance:'To be qualified before execution'};result=C.plan(catalog,p);title=p.minMemoryGB+' GB+ · '+p.hours+' h shortlist';}else if(kind==='own'){p=ownParams();result=C.ownership(p);title=$('own-name').value.slice(0,100)+' · own vs rent';}else{p=reuseParams();result=C.route(p);title='Route proposal · '+p.requests+' requests × '+p.repeats;}
+ const payload={schema:'second-run/compute-decision@1',version:C.VERSION,createdAt:new Date().toISOString(),title,kind,inputs:p,catalog,result,authority:'PLANNING_ONLY'};const e=seal(payload);state.saved.unshift(e);state.saved=state.saved.slice(0,12);const persisted=persistSaved();renderWork();toast(persisted?'Saved locally with inputs, sources and a recomputable result.':'Saved in this session. Browser storage is unavailable; export the decision to retain it.');}catch(e){toast(e.message);}}
+function persistSaved(){let persisted=true;try{localStorage.setItem('second-run-compute-decisions-v1',JSON.stringify(state.saved));}catch{persisted=false;toast('Browser storage unavailable. Export the decision to retain it.');}$('saved-count').textContent=state.saved.length;return persisted;}
+try{const s=JSON.parse(localStorage.getItem('second-run-compute-decisions-v1')||'[]');if(Array.isArray(s))state.saved=s.slice(0,12).map(verifySaved);}catch{state.saved=[];}
+$('saved-count').textContent=state.saved.length;
+$('saved-top').onclick=()=>{switchTab('work');$('saved-list').scrollIntoView({block:'center'});};
+$('save-own').onclick=()=>saveDecision('own');$('save-reuse').onclick=()=>saveDecision('reuse');
+$('delete-saved').onclick=()=>{if(state.saved.length&&confirm('Remove the saved decisions from this browser? Exported files remain unchanged.')){state.saved=[];persistSaved();renderWork();}};
+function showDecision(e){if(e?.schema==='second-run/qualified-decision@1')return showQualified(e);const p=verifySaved(e).payload;const table=p.kind==='market'?`<table><thead><tr><th>Configuration</th><th class="num">Period cost</th></tr></thead><tbody>${p.result.options.map(o=>`<tr><td>${esc(providerName(o.provider))} · ${o.gpus} × ${esc(o.gpu)}</td><td class="num">${money(o.total)}</td></tr>`).join('')}</tbody></table>`:p.kind==='own'?`<div class="statgrid"><div><div class="eyebrow">Own / month</div><div class="v">${money(p.result.ownershipMonthly)}</div></div><div><div class="eyebrow">Rent / month</div><div class="v">${money(p.result.rentalMonthly)}</div></div></div>`:`<div class="statgrid"><div><div class="eyebrow">Baseline total</div><div class="v">${money(p.result.baselineTotal)}</div></div><div><div class="eyebrow">Proposed total</div><div class="v">${money(p.result.proposedTotal)}</div></div></div>`;
+ modal(p.title,`<div class="row between"><span class="badge amber">Recomputed scenario</span><span class="small muted">${esc(p.createdAt.slice(0,16).replace('T',' '))} UTC</span></div><div style="margin-top:20px">${table}</div><p class="footnote" style="margin-top:15px">${esc(p.result.basis||p.result.status||'PROPOSAL')}. This saved object authorizes no execution or purchase.</p><details><summary>Inputs and source record</summary><pre>${esc(JSON.stringify(p.inputs,null,2))}</pre><p class="mono">SHA-256 ${e.sha256}</p></details><div class="dialogactions"><button class="primary" id="export-decision">Export decision</button><button id="export-summary">Printable summary</button><button id="reprice">Recompute with this price schedule</button></div>`);
+ $('export-decision').onclick=()=>download('compute-decision.json',JSON.stringify(e,null,2)+'\n');$('export-summary').onclick=()=>download('compute-decision.html',`<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(p.title)}</title><style>body{font:15px/1.6 system-ui;max-width:850px;margin:40px auto;padding:20px;color:#182024}h1{font-size:30px}table{width:100%;border-collapse:collapse}td,th{padding:10px;border-bottom:1px solid #bbb;text-align:left}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:12px/1.6 monospace}.eyebrow{font-size:12px}.v{font-size:25px}.statgrid{display:flex;gap:50px}</style><h1>${esc(p.title)}</h1><p>Second Run Compute · ${esc(p.createdAt)} · Planning scenario</p>${table}<h2>Inputs</h2><pre>${esc(JSON.stringify(p.inputs,null,2))}</pre><p>Price snapshot: ${esc(p.catalog.reviewedOn)}. No hardware performance or availability claim. Sources are retained in the companion decision JSON.</p><p>Payload SHA-256: ${e.sha256}</p></html>`,'text/html');
+ $('reprice').onclick=()=>{if(p.kind!=='market'){toast('Ownership and route scenarios preserve their entered rates. Create a new scenario after selecting a current allocation.');return;}const inputs={...p.inputs,asOf:$('as-of').value};const result=C.plan(catalog,inputs),payload={...p,createdAt:new Date().toISOString(),inputs,catalog,result,previous:e.sha256};state.saved.unshift(seal(payload));state.saved=state.saved.slice(0,12);persistSaved();renderWork();showDecision(state.saved[0]);};
+}
+function connectDialog(){modal('Connect the qualification instrument',`<p>The instrument owns evaluations and publishes immutable records. This decision desk reads and recomputes those records without creating another execution queue.</p><h3>Start the instrument</h3><pre>node hot-aisle/runner/bin/workload.cjs serve --port 8787</pre><h3>Connect the desk</h3><pre>node compute/scripts/connect.cjs --port 8765 --runner http://127.0.0.1:8787</pre><p>Open the private localhost link printed by the desk. Publish a record in the instrument, then refresh this workspace.</p><details><summary>Existing evidence and hardware inputs</summary><p>Optional: <code>--results /approved/results</code>, <code>--aperture /path/to/aperture-support.json</code>, <code>--endpoint http://127.0.0.1:8000</code>. These are read-only fallbacks, not an evaluation runner.</p></details><h3>MCP</h3><pre>node compute/scripts/connect.cjs --mcp --runner http://127.0.0.1:8787</pre><div class="dialogactions"><a href="compute-kit.zip" download>Desk offline + MCP kit</a><button id="copy-local">Copy desk command</button></div><p class="hint">The combined integration kit includes both components. Cloud credentials stay with the instrument. No public website receives them.</p>`);$('copy-local').onclick=()=>copy('node compute/scripts/connect.cjs --port 8765 --runner http://127.0.0.1:8787');}
+$('connect-top').onclick=connectDialog;$('connect-work').onclick=connectDialog;
+$('copy-mcp').onclick=()=>copy(JSON.stringify({mcpServers:{'second-run-compute':{command:'node',args:['/absolute/path/compute/scripts/connect.cjs','--mcp','--runner','http://127.0.0.1:8787']}}},null,2));
+function renderWork(){
+ renderPublications();
+ $('saved-count').textContent=state.saved.length;$('saved-list').innerHTML=state.saved.length?state.saved.map((e,i)=>`<div class="workrow"><div><h3>${esc(e.payload.title)}</h3><p>${esc(e.payload.createdAt.slice(0,16).replace('T',' '))} UTC · ${esc(e.payload.kind)} · ${e.sha256.slice(0,12)}</p></div><div class="row"><span class="badge">${e.payload.kind==='qualified-record'?'Instrument decision':'Saved scenario'}</span><button data-saved="${i}">Open decision ↗</button></div></div>`).join(''):'<p class="empty">Save a shortlist, ownership comparison or route proposal. Your assumptions travel with it.</p>';
+ for(const b of document.querySelectorAll('[data-saved]'))b.onclick=()=>showDecision(state.saved[Number(b.dataset.saved)]);
+ $('run-list').innerHTML=state.runs.length?state.runs.map((r,i)=>`<div class="workrow"><div><h3>${esc(r.title||r.model||'Benchmark result')}</h3><p>${r.synthetic?'Synthetic fixture':'Supplied benchmark'} · ${r.trials} trial${r.trials===1?'':'s'} · ${nfmt(r.completed,0)} completed · ${nfmt(r.duration,1)} seconds</p></div><button data-run="${i}">Inspect result ↗</button></div>`).join(''):'<p class="empty">No observed runs yet. Connect a directory or explore the sample.</p>';
+ for(const b of document.querySelectorAll('[data-run]'))b.onclick=()=>inspectRun(state.runs[Number(b.dataset.run)]);
+ const hw=state.hardware;$('runtime-summary').innerHTML=hw?`<div class="showhelp"><b>Aperture hardware receipt</b><p>${esc(hw.cpu)} · ${hw.graphics.map(g=>esc(g.name)+(g.totalBytes?' · '+nfmt(g.totalBytes/1024**3,1)+' GiB':'')).join('<br>')}</p><p class="hint">${esc(hw.qualification)}</p></div>`:'';
+ if(state.runtime){$('runtime-summary').innerHTML+=`<div class="showhelp"><b>${state.runtime.status==='OBSERVED'?'Connected runtime':'Runtime observation unavailable'}</b><p>${state.runtime.models?.map(esc).join(' · ')||esc(state.runtime.message||'')}</p><p class="hint">GET /v1/models and selected metrics only. Endpoint reachability is not a benchmark.</p></div>`;}
+}
+/* Instrument records are recomputed by generated instrument code, never by Compute. */
+function renderPublications(){
+ const rows=state.publications||[];
+ $('publication-list').innerHTML=rows.length?rows.map((p,i)=>`<div class="workrow"><div><h3>${esc(p.model)}</h3><p>${p.synthetic?'Synthetic integration run':'Producer-run record'} · ${p.completed_trials}/${p.expected_trials} planned trials · ${p.qualified?'primary cell meets requirements':'requirements not met'}${p.complete?'':' · partial campaign'}</p><p class="mono small">${esc(p.record_sha256.slice(0,16))}</p></div><button data-publication="${i}">Review qualified record ↗</button></div>`).join(''):'<p class="empty">Publish a completed or partial record in the connected instrument. It appears here automatically when you refresh. Raw benchmark files remain an import fallback.</p>';
+ $('publication-state').textContent=state.instrumentStatus==='CONNECTED'?'Connected instrument · '+(state.catalogMatch||'catalogue not observed'):state.instrumentStatus==='UNAVAILABLE'?'Instrument unavailable · retained observations shown':'Connect the qualification instrument';
+ for(const b of document.querySelectorAll('[data-publication]'))b.onclick=async()=>{try{const p=rows[Number(b.dataset.publication)],bundle=p.bundle||await api('/api/publications/'+p.publication_id);Q.publication.verify(bundle);p.bundle=bundle;showQualified(Q.decision(bundle));}catch(e){toast('Record held: '+e.message);}};
+}
+function showQualified(envelope){
+ const p=Q.verifyDecision(envelope).payload,rec=p.bundle.record,view=Q.publication.projection(p.bundle),primary=view.cell;
+ const a=primary?.aggregate,c=primary?.cost;
+ const scenario=p.change?p.result.scenario:null;
+ modal(p.title,`<div class="row between"><span class="badge ${rec.synthetic?'amber':''}">${rec.synthetic?'Synthetic integration record':'Producer evidence · recomputed'}</span><span class="mini">${view.completed_trials}/${view.expected_trials} planned trials</span></div>
+ <div class="statgrid"><div><div class="eyebrow">Recorded cost / 1,000</div><div class="v accent">${money(c?.costPer1000,4)}</div><p>${esc(a?.unit||'unit unavailable')}</p></div><div><div class="eyebrow">p95 first token</div><div class="v">${nfmt(a?.metrics.ttft.p95,1)} ms</div></div><div><div class="eyebrow">Primary concurrency</div><div class="v">${view.primary_concurrency??'—'}</div></div></div>
+ <p class="small">${esc(rec.disposition.reasons.join(' '))} ${view.complete?'All planned trials are retained.':'Partial campaign. Qualification of a measured cell does not complete the plan.'}</p>
+ <div class="modelnotice"><b>${rec.synthetic?'Software demonstration.':'Scoped producer record.'}</b> ${rec.synthetic?'Fixture measurements exercise the complete integration; they are not a GPU comparison.':'The verified object preserves observed trials and supplied identity, price and acceptance rules.'} A comparator price threshold is not a measured competitor result.</div>
+ <table><thead><tr><th>Concurrency</th><th class="num">Trials</th><th class="num">Cost / 1,000</th><th>Requirements</th></tr></thead><tbody>${rec.derived.cells.map(x=>`<tr><td>${x.concurrency}</td><td class="num">${x.runs}</td><td class="num">${money(x.cost?.costPer1000,4)}</td><td>${x.meets?'Meets':'Held'}</td></tr>`).join('')}</tbody></table>
+ <details ${p.change?'open':''}><summary>Reprice this same measured allocation</summary><p class="hint">A new price creates a linked scenario from the retained trials. It runs no benchmark and transfers no performance to different hardware.</p><div class="row"><div class="field"><label for="qualified-rate">Price / GPU-hour, USD</label><input type="number" id="qualified-rate" min="0" step="any" value="${esc(String(p.change?.price?.rate??rec.declared.price.rate))}"></div><button id="qualified-reprice">Recompute price only</button></div>${scenario?`<div id="qualified-scenario" class="showhelp"><b>Repriced scenario · no GPU execution</b><p>${scenario.cells.map(x=>'c'+x.concurrency+': '+money(x.cost_per_1000,4)+' / 1,000').join(' · ')}</p></div>`:''}</details>
+ <details><summary>Retained identity and verification</summary><p class="mono">Record SHA-256: ${esc(rec.sha256)}</p><p class="mono">Evidence SHA-256: ${esc(p.bundle.evidence.sha256)}</p><p class="mono">Decision SHA-256: ${esc(envelope.sha256)}</p>${p.previous?`<p class="mono">Previous decision: ${esc(p.previous)}</p>`:''}<p class="small">Engine ${esc(Q.authority.engine.version)}. Source identity and raw producer authenticity are separate from calculation verification.</p><pre>${esc(JSON.stringify({allocation:rec.scenario.allocation,requirements:rec.rule.requirements,price:rec.declared.price},null,2))}</pre></details>
+ <div class="dialogactions"><button class="primary" id="qualified-save">Save this decision locally</button><button id="qualified-export">Export decision</button><button id="qualified-report">Instrument report</button></div>`);
+ $('qualified-save').onclick=()=>{if(!state.saved.some(e=>e.sha256===envelope.sha256))state.saved.unshift(envelope);state.saved=state.saved.slice(0,12);persistSaved();renderWork();toast('Retained locally with its qualified record and sealed evidence.');};
+ $('qualified-export').onclick=()=>download('qualified-decision.json',JSON.stringify(envelope,null,2)+'\n');
+ $('qualified-report').onclick=()=>download('instrument-report.html',Q.record.receipt(rec),'text/html');
+ $('qualified-reprice').onclick=()=>{try{const rate=val('qualified-rate');if(rate<0)throw Error('Price must be nonnegative.');const e=Q.decision(p.bundle,{price:{rate}},new Date().toISOString(),envelope.sha256);showQualified(e);}catch(e){toast(e.message);}};
+}
+
+function normalizeImported(bytes){const source=H.sha256(bytes),docs=H.parseDocuments(new TextDecoder('utf-8',{fatal:true}).decode(bytes));const rows=docs.map((d,i)=>H.normalize(d,{sha256:source,bytes:bytes.byteLength,record_index:i}));const aggregate=H.aggregate(rows,{identity:{}});return {id:source,title:aggregate.identity.model||'Unnamed workload',model:aggregate.identity.model,trials:rows.length,completed:aggregate.completed,duration:aggregate.duration,synthetic:aggregate.synthetic,aggregate,normalized:rows,sha256:source};}
+async function inspectRun(run){try{if(!run.aggregate&&state.connected){run=await api('/api/runs/'+run.id);}const a=run.aggregate;if(!a)throw Error('No normalized evidence available.');modal(run.title||'Observed workload',`<div class="row between"><span class="badge ${a.synthetic?'amber':''}">${a.synthetic?'Synthetic fixture':'Producer evidence'}</span><span class="mini">${run.sha256?.slice(0,16)||''}</span></div><div class="statgrid"><div><div class="eyebrow">Completed / second</div><div class="v">${nfmt(a.rate,3)}</div></div><div><div class="eyebrow">Completed</div><div class="v">${nfmt(a.completed,0)}</div></div><div><div class="eyebrow">Measured seconds</div><div class="v">${nfmt(a.duration,2)}</div></div></div><p class="small">${esc(a.unit)}. Cost is a separate declaration of which allocation was billed.</p><div class="field"><label for="run-offer">Attach a price scenario</label><select id="run-offer">${catalog.offers.map(o=>`<option value="${o.id}">${esc(providerName(o.provider)+' · '+o.gpus+' × '+o.gpu)}</option>`).join('')}</select></div><div id="run-economics" class="showhelp"></div><details><summary>Workload identity and latency basis</summary><pre>${esc(JSON.stringify({identity:a.identity,metrics:a.metrics,holds:a.holds},null,2))}</pre></details><div class="dialogactions"><button id="run-export">Export normalized observation</button></div>`);
+ function draw(){const o=catalog.offers.find(o=>o.id===$('run-offer').value),q=C.quote(o,{asOf:$('as-of').value,hours:a.duration/3600});$('run-economics').innerHTML=`<b>${a.completed?money(q.total/a.completed*1000,4):'No finite cost'} / 1,000 completed responses</b><p>Modeling the supplied result on ${esc(providerName(o.provider)+' '+o.gpu)} pricing. This does not establish where the benchmark ran or transfer its speed to another GPU. ${q.minimumApplied?'Minimum commitment applied.':''}</p>`;}$('run-offer').value='ha-mi300x-1';$('run-offer').onchange=draw;draw();$('run-export').onclick=()=>download('normalized-workload.json',JSON.stringify(run,null,2)+'\n');
+ }catch(e){toast(e.message);}}
+$('sample-work').onclick=()=>{try{state.runs=['a','b'].map(s=>normalizeImported(new TextEncoder().encode(JSON.stringify(samples[s]))));renderWork();toast('Loaded synthetic examples, clearly labeled.');}catch(e){toast(e.message);}};
+$('import-files').onchange=async e=>{try{const files=[...e.target.files];if(files.length>20||files.reduce((n,f)=>n+f.size,0)>50*1024*1024)throw Error('Import at most 20 files / 50 MiB.');let next=[...state.runs],hardware=state.hardware,saved=[...state.saved],publications=[...state.publications];for(const f of files){if(f.size>25*1024*1024)throw Error('Each file must be at most 25 MiB.');const bytes=new Uint8Array(await f.arrayBuffer());let raw;try{raw=JSON.parse(new TextDecoder('utf-8',{fatal:true}).decode(bytes));}catch{}
+ if(raw?.schema==='hot-aisle/publication@1'){Q.publication.verify(raw);publications.unshift({...Q.publication.projection(raw),bundle:raw});}else if(raw?.schema==='second-run/qualified-decision@1'){saved.unshift(Q.verifyDecision(raw));}else if(raw?.schema==='aperture-support/1'){hardware=C.aperture(raw);}else if(raw?.schema==='second-run/sealed-compute-decision@1'){const q=verifySaved(raw);saved.unshift(q);}else{const run=normalizeImported(bytes);if(next.some(r=>r.id===run.id))throw Error('Duplicate source file. Existing evidence retained.');next.push(run);}}
+ state.runs=next;state.hardware=hardware;state.publications=publications;state.saved=saved.slice(0,12);if(saved.length)persistSaved();$('import-error').textContent='';renderWork();toast('Imported and normalized locally.');}catch(err){$('import-error').textContent=err.message;}finally{e.target.value='';}};
+$('verify-decision').onclick=()=>$('verify-input').click();$('verify-input').onchange=async e=>{try{const f=e.target.files[0];if(!f||f.size>5*1024*1024)throw Error('Select a decision file smaller than 5 MiB.');const envelope=verifySaved(JSON.parse(await f.text()));showDecision(envelope);toast('Checksum and recomputed result match.');}catch(err){toast(err.message);}finally{e.target.value='';}};
+async function api(path){if(!state.token)throw Error('No local connection.');const r=await fetch(path,{headers:{Authorization:'Bearer '+state.token},cache:'no-store',redirect:'error'});if(!r.ok)throw Error('Local helper returned '+r.status+'.');return r.json();}
+async function refreshWorkspace(){try{const s=await api('/api/status'),r=await api('/api/runs');state.connected=true;state.runs=r.runs;state.hardware=s.hardware;state.runtime=s.runtime;let notice=r.holds?.length?r.holds.length+' raw input(s) held. ':'';
+ try{const publications=await api('/api/publications');state.instrumentStatus=publications.status;state.catalogMatch=publications.catalog?.state||null;if(publications.status==='CONNECTED'){state.publications=publications.publications;notice+=publications.holds.length+' publication(s) held. ';}}catch(e){state.instrumentStatus='UNAVAILABLE';notice+='Instrument unavailable; previously observed records retained. ';}
+ $('connection-status').textContent='CONNECTED · '+state.publications.length+' PUBLISHED RECORDS';$('connection-error').textContent=notice;$('connect-top').textContent='Workspace connected';$('refresh-work').disabled=false;renderWork();}catch(e){state.connected=false;state.instrumentStatus='UNAVAILABLE';state.runtime=null;$('connection-status').textContent='DISCONNECTED';$('connection-error').textContent=e.message+' Existing observations remain available.';$('connect-top').textContent='Reconnect workspace';renderWork();}}
+$('refresh-work').onclick=refreshWorkspace;
+for(const p of catalog.providers){const o=document.createElement('option');o.value=p.id;o.textContent=p.name;$('provider').append(o);}
+for(const id of ['rental-offer','premium-offer']){for(const o of catalog.offers){const el=document.createElement('option');el.value=o.id;el.textContent=providerName(o.provider)+' · '+o.gpus+' × '+o.gpu;$(id).append(el);}}
+$('rental-offer').value='rp-3090';$('premium-offer').value='ha-mi300x-1';
+$('legend').innerHTML=catalog.providers.map(p=>`<span class="p-${p.id}"><i></i>${p.letter}</span>`).join('');$('provider-count').textContent=catalog.providers.length;$('offer-count').textContent=catalog.offers.length;
+const freshness=C.freshness(catalog,new Date().toISOString().slice(0,10));if(freshness.status==='STALE'||freshness.status==='FUTURE_SNAPSHOT'){$('stale-banner').hidden=false;$('stale-banner').textContent=freshness.status==='STALE'?'Price review is '+freshness.ageDays+' days old. Historical comparisons remain available; verify current quotes before purchasing.':'This price snapshot is dated in the future relative to your clock.';}
+if(new Date().toISOString().slice(0,10)>='2026-10-01')$('as-of').value='2026-10-01';
+routeFields();footprint();renderMarket();renderOwn();renderReuse();renderWork();
+try{if(['127.0.0.1','localhost'].includes(location.hostname)){const hash=new URLSearchParams(location.hash.slice(1));const token=hash.get('connection')||sessionStorage.getItem('compute-local-session');if(token&&/^[a-f0-9]{64}$/.test(token)){state.token=token;sessionStorage.setItem('compute-local-session',token);history.replaceState(null,'',location.pathname);switchTab('work');refreshWorkspace();}}}catch{}
+</script>
+</body></html>
