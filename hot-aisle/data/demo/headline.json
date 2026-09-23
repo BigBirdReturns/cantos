@@ -1,0 +1,42 @@
+{
+  "schema": "hot-aisle/headline@2",
+  "status": "demonstration",
+  "record_id": "rec-20260922T235055Z-5ea477",
+  "record_sha256": "4cb39f365e7e96ce4816f45ee858a5207c34da0a3920349fa4710105d9d5cc37",
+  "generated": true,
+  "unit": "completed requests",
+  "workload": "Qwen/Qwen3-Coder-30B-A3B-Instruct · 2,048 in / 256 out · concurrency 1, 8, 32",
+  "primary_concurrency": 32,
+  "qualified": true,
+  "reasons": [
+    "Primary cell (concurrency 32) meets every stated requirement."
+  ],
+  "sides": [
+    {
+      "label": "Hot Aisle",
+      "allocation": "1× MI300X VM (synthetic)",
+      "rate": "$2.99 / GPU-hr",
+      "cost_per_1000": 0.24194520467836259,
+      "p95_ttft_ms": 274.84000000000003,
+      "p95_e2e_ms": 9951.01,
+      "runs": 2,
+      "accepted_per_s": 3.4328250343282503,
+      "unit": "completed requests"
+    },
+    {
+      "label": "Nebius HGX H100",
+      "allocation": "1× HGX H100",
+      "rate": "$3.85 / GPU-hr",
+      "cost_per_1000": null,
+      "p95_ttft_ms": null,
+      "p95_e2e_ms": null,
+      "runs": 0,
+      "price_only": true,
+      "required_rate_to_tie": 4.420192769954435
+    }
+  ],
+  "saving": null,
+  "published_on": null,
+  "evidence_url": "evidence.json",
+  "report_url": "report.html"
+}

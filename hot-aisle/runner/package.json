@@ -1,0 +1,11 @@
+{
+  "name": "@second-run/workload-report-runner",
+  "version": "2.2.0",
+  "description": "Connected qualification for vLLM workloads on Hot Aisle: durable evaluations, qualified records, selective revalidation. CLI, localhost service and MCP server over one engine.",
+  "license": "MIT",
+  "private": true,
+  "bin": { "workload": "bin/workload.cjs" },
+  "scripts": { "test": "node --test test/*.test.cjs", "demo": "node bin/workload.cjs demo --fast", "serve": "node bin/workload.cjs serve --demo" },
+  "engines": { "node": ">=20" },
+  "dependencies": {}
+}

@@ -1,10 +1,37 @@
-# Hot Aisle workload report · 2.0.0
+# Hot Aisle workload report · 2.2.0
 
-**Drop a vLLM result, enter the billable allocation, download a customer report.**
+**Qualify a deployment. Keep the evidence.**
 
 Live: https://bigbirdreturns.github.io/axm-tools/hot-aisle/
 
-The page is self-contained. Open `index.html` from the offline kit or use the live page. There is no account, backend, model call, upload, telemetry or data persistence. Source files remain in browser memory and clear on reload.
+2.2 (22 September 2026) turns the page into an instrument over a connected runner.
+The `report-engine` script is byte-identical to 2.0.0; everything else projects from it.
+
+- **Connected acquisition.** `runner/` reads the authorized Hot Aisle team, allocations,
+  state, balance and retrieved on-demand prices through the public API, drives
+  `vllm bench serve` on the allocation with the pinned export flags, and retains the
+  exact result bytes. Same core behind a CLI, a localhost service (the page's connected
+  mode) and an MCP server. See `RUNNER.md`.
+- **Durable evaluations.** A plan is approved by hash. Trials are the unit of
+  retention: cancel, a time or spend limit, or a crash keeps every completed trial; a
+  reconnecting page, a new process or another interface finds the same job and resumes
+  only what never completed.
+- **One qualified record, every view a projection.** The record separates observed,
+  declared, rule and scenario. The page recomputes it in the browser through the
+  engine and checks its checksum before showing a number; the customer report,
+  evidence packet, MCP result and CLI summary come from the same record. The shipped
+  demonstration record is built by `runner/bin/build-demo.cjs` from the local
+  integration environment and is marked synthetic in every projection.
+- **Selective revalidation.** A price change recomputes economics from retained
+  trials; new concurrency needs only the new cells; a changed request shape or runtime
+  identity supersedes the record with a candidate plan; an evaluator correction
+  re-adjudicates retained requests. The answer always names the minimal plan.
+- **Source-driven finish.** `.github/workflows/hot-aisle-ci.yml` runs the engine suite,
+  the runner suite, price arithmetic, browser journeys against the actual revision
+  (static and connected) and a kit-consistency check. `scripts/build_kit.py` generates
+  `MANIFEST.json` and `workload-report.zip` deterministically from source.
+
+The import path below remains for offline and third-party evidence.
 
 ## Use
 
@@ -28,6 +55,9 @@ The sample button loads deliberately tiny **synthetic** fixtures. The banner and
 
 ```sh
 node scripts/test_workbench.cjs
+node --test runner/test/*.test.cjs
+node scripts/verify_page.mjs            # needs playwright + chromium
+python scripts/build_kit.py --check
 node scripts/recompute.cjs workload-evidence.json
 node scripts/recompute.cjs workload-evidence.json original-hot.json original-comparator.json
 python -m unittest discover -s scripts -p 'test_price_math.py' -v

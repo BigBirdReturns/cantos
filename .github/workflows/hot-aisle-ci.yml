@@ -1,0 +1,78 @@
+# Hot Aisle workload report — source-driven verification.
+#
+# Every push or PR that touches hot-aisle/ runs: the engine's unit suite, the runner's
+# lifecycle/interface suite, the price arithmetic tests, browser journeys against the
+# actual page revision (static and connected), a kit-consistency check (MANIFEST.json
+# and workload-report.zip must be what scripts/build_kit.py produces from source), and
+# a price-snapshot freshness check. Nothing here is hand-pinned to a byte hash.
+#
+# Deployment is unchanged: main is served by GitHub Pages through the repo's Pages
+# workflow. This workflow gates what reaches main; it does not deploy.
+
+name: Hot Aisle workload report
+
+on:
+  push:
+    paths: ['hot-aisle/**', '.github/workflows/hot-aisle-ci.yml']
+  pull_request:
+    paths: ['hot-aisle/**', '.github/workflows/hot-aisle-ci.yml']
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Engine, runner, browser journeys, kit
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: hot-aisle
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Engine unit suite (extracted from index.html)
+        run: node scripts/test_workbench.cjs
+
+      - name: Runner lifecycle and interface suite
+        run: node --test runner/test/*.test.cjs
+
+      - name: Price arithmetic
+        run: python -m unittest discover -s scripts -p 'test_price_math.py' -v
+
+      - name: Install Playwright + Chromium
+        run: |
+          npm install --no-save playwright@1
+          npx playwright install --with-deps chromium
+
+      - name: Browser journeys (static + connected) against this revision
+        run: node scripts/verify_page.mjs | tee ../journeys.json
+
+      - name: Offline kit matches source
+        run: python scripts/build_kit.py --check
+
+      - name: Price snapshot freshness
+        run: |
+          python - <<'PY'
+          import json, datetime, sys
+          d = json.load(open('data/prices.json'))
+          age = (datetime.date.today() - datetime.date.fromisoformat(d['reviewed_on'])).days
+          print(f"price snapshot reviewed {d['reviewed_on']} ({age} days ago)")
+          if age > 120: print('::error::price snapshot older than 120 days; refresh data/prices.json and the embedded prices-data block'); sys.exit(1)
+          if age > 45: print('::warning::price snapshot older than 45 days')
+          PY
+
+      - name: Upload journey report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: hot-aisle-journeys-${{ github.run_id }}
+          path: journeys.json
+          if-no-files-found: ignore
