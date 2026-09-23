@@ -1,0 +1,55 @@
+{
+ "dir": "hotaisle-mi300x",
+ "rate": 2.99,
+ "gates": {
+  "ttft_ms": 1000,
+  "e2e_ms": null
+ },
+ "engine": "2.0.0",
+ "cells": [
+  {
+   "cell": "cell-c1",
+   "runs": 3,
+   "completed": 600,
+   "attempted": 600,
+   "accepted": 600,
+   "accepted_pct": 100,
+   "accepted_per_s": 0.496,
+   "holds": [],
+   "cost_per_1k": 1.6751
+  },
+  {
+   "cell": "cell-c8",
+   "runs": 3,
+   "completed": 600,
+   "attempted": 600,
+   "accepted": 600,
+   "accepted_pct": 100,
+   "accepted_per_s": 3.019,
+   "holds": [],
+   "cost_per_1k": 0.2751
+  },
+  {
+   "cell": "cell-c32",
+   "runs": 3,
+   "completed": 600,
+   "attempted": 600,
+   "accepted": 600,
+   "accepted_pct": 100,
+   "accepted_per_s": 7.856,
+   "holds": [],
+   "cost_per_1k": 0.1057
+  },
+  {
+   "cell": "cell-c64",
+   "runs": 3,
+   "completed": 600,
+   "attempted": 600,
+   "accepted": 600,
+   "accepted_pct": 100,
+   "accepted_per_s": 11.579,
+   "holds": [],
+   "cost_per_1k": 0.0717
+  }
+ ]
+}

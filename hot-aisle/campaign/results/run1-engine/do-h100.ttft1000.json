@@ -1,0 +1,55 @@
+{
+ "dir": "do-h100",
+ "rate": 4.41,
+ "gates": {
+  "ttft_ms": 1000,
+  "e2e_ms": null
+ },
+ "engine": "2.0.0",
+ "cells": [
+  {
+   "cell": "cell-c1",
+   "runs": 3,
+   "completed": 600,
+   "attempted": 600,
+   "accepted": 600,
+   "accepted_pct": 100,
+   "accepted_per_s": 0.859,
+   "holds": [],
+   "cost_per_1k": 1.4253
+  },
+  {
+   "cell": "cell-c8",
+   "runs": 3,
+   "completed": 600,
+   "attempted": 600,
+   "accepted": 600,
+   "accepted_pct": 100,
+   "accepted_per_s": 3.982,
+   "holds": [],
+   "cost_per_1k": 0.3076
+  },
+  {
+   "cell": "cell-c32",
+   "runs": 3,
+   "completed": 600,
+   "attempted": 600,
+   "accepted": 585,
+   "accepted_pct": 97.5,
+   "accepted_per_s": 8.026,
+   "holds": [],
+   "cost_per_1k": 0.1526
+  },
+  {
+   "cell": "cell-c64",
+   "runs": 3,
+   "completed": 600,
+   "attempted": 600,
+   "accepted": 482,
+   "accepted_pct": 80.3,
+   "accepted_per_s": 8.489,
+   "holds": [],
+   "cost_per_1k": 0.1443
+  }
+ ]
+}
