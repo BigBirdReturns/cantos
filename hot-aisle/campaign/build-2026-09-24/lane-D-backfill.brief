@@ -1,0 +1,30 @@
+LANE D · Backfill from everyone else's history. Directory: hot-aisle\campaign\backfill\ (new). Follow COMMON-BUILD.md rules: write only in this directory, stdlib only, no commits, no credentials.
+
+Goal: use other people's published measurements as our starting point, run our own measurements at the edge, track the gap, and re-run a historical checkpoint only when something has changed.
+
+1. SOURCES.md inventory of public, machine-readable historical data covering MI300X/MI325X/MI355X/H100/H200/B200 inference or neocloud price and availability. For each source give: URL, format, license/terms, update cadence, fields, and whether it is raw per-run data or a summary. Candidates:
+   - SemiAnalysis InferenceMAX GitHub results and configs
+   - MLCommons MLPerf Inference results repos (v4.x–v5.x)
+   - vLLM performance dashboard/benchmarks data
+   - AMD ROCm published performance numbers
+   - NVIDIA published perf tables
+   - provider price histories (Wayback snapshots of pricing pages; any open GPU price trackers)
+   - Artificial Analysis. Check its terms and do not scrape if they forbid it.
+
+   Cap: 15 web searches. Cite everything.
+2. Importer (stdlib Python) for the two best sources, most likely InferenceMAX and MLPerf. It downloads or reads raw files, then normalises them into `imported-observation@1` records. Each record carries:
+   - source and provenance: URL, commit or tag, retrieved_at, sha256 of the raw file
+   - hardware, gpus, model, precision, framework and version, and config
+   - workload shape, metric name, value and units
+   - `tier: "imported"`: never mixed with our own measured records
+
+   Commit small raw-file fixtures for tests. Fetch full data live, with a `--offline` mode.
+3. `delta.py`. For every imported record comparable to one of our measured cells (`results/`: Run 1 on H100 and MI300X, Run 2 and the exploration on MI300X; match hardware, model or model class, precision, shape and concurrency where possible), emit the gap: ours ÷ theirs, plus the reasons it is not like-for-like (framework version, backend, flags, gates). Also list the imported checkpoints we have NOT reproduced, ranked by rerun value.
+4. `RERUN-POLICY.md`: when a historical checkpoint gets re-run. Triggers:
+   - new framework major/minor version, or kernel/backend change (for example the ROCm backend auto-selection found 2026-09-23)
+   - new hardware or firmware
+   - gap above a threshold
+   - age
+
+   Also cover how lessons carry forward without re-running when a change is architectural (for example a backend flag is known to matter across models).
+5. Tests offline on fixtures, and BUILD-REPORT.md.

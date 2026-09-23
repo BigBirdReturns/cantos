@@ -1,0 +1,13 @@
+{
+  "_fixture": true,
+  "model_id": "RedHatAI/Llama-3.3-70B-Instruct-FP8-dynamic",
+  "shape": "long",
+  "precision": "FP8-dynamic",
+  "max_concurrency": 8,
+  "request_rate": "inf",
+  "output_throughput": 200,
+  "total_token_throughput": 3400,
+  "request_throughput": 0.390625,
+  "p95_ttft_ms": 2000,
+  "cache_policy": "no-prefix-cache"
+}

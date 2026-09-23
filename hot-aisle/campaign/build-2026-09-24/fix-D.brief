@@ -1,0 +1,35 @@
+FIX ROUND for LANE D (hot-aisle\campaign\backfill\). COMMON-BUILD.md rules apply. Do not commit. Do not edit other dirs.
+
+Real data now exists locally at `backfill\data-raw\`:
+- 100 recent InferenceX `results_bmk` CI artifacts, each unzipped to `results_bmk_<artifact_id>\agg_bmk.json` (a JSON list).
+- `index-100.txt`: artifact id, created_at, head_sha for each.
+- `latest.txt`.
+
+Downloaded 2026-09-23 ~23:40 UTC with `gh api repos/SemiAnalysisAI/InferenceX/actions/artifacts?name=results_bmk` and `.../artifacts/<id>/zip`.
+
+What the 198 rows contain:
+- Hardware: b200, gb200, gb300, b300, mi355x, h200 and some mi300x.
+- Frameworks: sglang, dynamo-sglang, trt, vllm, atom, *-disagg.
+- `scenario_type`: absent (fixed-sequence) or `agentic-coding`.
+- Keys include `hw` (like `cluster:mi355x-amds`), conc, image (with digest), model, framework, precision, spec_decoding, disagg, num_gpus/tp/ep/pp/dcp_size/pcp_size, `num_requests_total/successful`, `request_accounting`, nested `request_metrics` (latency ttft/e2el/itl/tpot as dicts, tokens, throughput), `server_metrics`, and power fields: `avg_power_w`, `joules_per_successful_query`, `joules_per_output_token`, `power_valid`.
+- Some agentic runs have `num_requests_successful = 0`. Keep them as failures, never drop them.
+
+Required:
+1. Rewrite the InferenceX adapter against the REAL schema. Inspect several files of each scenario type first; do not guess. Both scenario types go into `imported-observation@1` with:
+   - provenance: artifact id, workflow run id if present, head_sha, created_at, sha256 of `agg_bmk.json`
+   - `num_requests_total` / `successful` / success rate
+   - power/energy fields
+   - GPU count derived per the documented rule
+2. Build real (small, 3–5 file) fixtures from `data-raw` copies, replacing the authored InferenceX fixtures. Keep one authored fixture only if it is clearly labelled.
+3. `fetch_history.py` (stdlib; shells out to `gh` if present, else uses urllib with `GH_TOKEN`). Incrementally pages through all `results_bmk` artifacts (about 11k exist), skipping ids already downloaded and expired ones.
+   - Must respect rate limits: sleep on 403/429, and cap requests per invocation with `--max`.
+   - Optional hardware/model filter after download.
+   - Writes an index and a receipt of what was fetched.
+   - Make it resumable.
+
+   Test it offline with a mocked API.
+4. Run the importer over all of `data-raw` for real. Write `imported/inferencex-<date>.jsonl` and a short `IMPORT-SUMMARY.md`: counts by hardware × framework × scenario, success rates, energy per query ranges. Real data, labelled imported.
+5. Point `delta.py` at the real imports. Report honestly how many rows are comparable to our cells (likely few or none among the newest 100, since our cells are H100/MI300X on vLLM random 2048/256 or 8k/512). State which history filter (MI300X/H100/H200 + vLLM/sglang + shape) the fetcher should run to find comparables.
+6. Rerun all tests. Append "Fix round 1" to BUILD-REPORT.md.
+
+Network: GitHub API reads only, and only if your sandbox allows it. If not, work purely from `data-raw`.

@@ -1,0 +1,18 @@
+[
+  {
+    "_fixture": "SYNTHETIC parser fixture, not a published measurement",
+    "hw": "MI300X", "model": "RedHatAI/Llama-3.3-70B-Instruct-FP8-dynamic",
+    "precision": "FP8", "framework": "vllm", "framework_version": "0.29.0",
+    "tp": 1, "pp": 1, "pcp_size": 1, "isl": 8192, "osl": 512, "conc": 8,
+    "image": "UNVERIFIED", "backend": "UNVERIFIED", "dataset": "random",
+    "output_tput_per_gpu": 100, "tput_per_gpu": 1700, "p95_ttft": 2.5,
+    "request_throughput": 0.1953125
+  },
+  {
+    "_fixture": "SYNTHETIC parser fixture, not a published measurement",
+    "hw": "H100", "model": "Qwen/Qwen3-Coder-30B-A3B-Instruct-FP8",
+    "precision": "FP8", "framework": "vllm", "framework_version": "0.29.0",
+    "tp": 1, "pp": 1, "isl": 2048, "osl": 256, "conc": 32,
+    "output_tput_per_gpu": 2000, "median_ttft": 0.5
+  }
+]

@@ -1,0 +1,9 @@
+SYNTHETIC parser fixture. These are NOT published MLPerf results.
+Scenario : Offline
+Mode : PerformanceOnly
+Samples per second: 10
+Tokens per second: 2500
+Result is : VALID
+Min duration satisfied : Yes
+Min queries satisfied : Yes
+99.00 percentile latency (ns) : 1000000000
