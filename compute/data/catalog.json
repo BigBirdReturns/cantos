@@ -38,7 +38,7 @@
       "url": "https://www.runpod.io/pricing",
       "reviewedOn": "2026-09-22",
       "kind": "provider",
-      "note": "Public Pods table reviewed September 22, page updated September 13. Cloud tier, region and actual available configuration must be confirmed in the provider console."
+      "note": "Public Pods table reviewed September 22, page updated September 13. Listed rates are the Secure Cloud tier; the same page lists Community Cloud rates roughly 30-45% lower. Region and actual available configuration must be confirmed in the provider console."
     },
     "aperture": {
       "title": "Aperture physical evidence contract",
@@ -420,9 +420,10 @@
       "reviewedOn": "2026-09-22",
       "minimumHours": 0,
       "kind": "public-pods",
+      "tier": "Secure Cloud",
       "allocation": "listed",
       "stock": "unverified",
-      "terms": "Advertised Pods table. Confirm community/secure tier, region, GPU count, storage and actual quote; stock is not checked."
+      "terms": "Advertised Pods table, Secure Cloud tier. The same page lists Community Cloud roughly 30-45% lower. Confirm tier, region, GPU count, storage and actual quote; stock is not checked."
     },
     {
       "id": "rp-3090",
@@ -438,9 +439,10 @@
       "reviewedOn": "2026-09-22",
       "minimumHours": 0,
       "kind": "public-pods",
+      "tier": "Secure Cloud",
       "allocation": "listed",
       "stock": "unverified",
-      "terms": "Advertised Pods table. Confirm community/secure tier, region, GPU count, storage and actual quote; stock is not checked."
+      "terms": "Advertised Pods table, Secure Cloud tier. The same page lists Community Cloud roughly 30-45% lower. Confirm tier, region, GPU count, storage and actual quote; stock is not checked."
     },
     {
       "id": "rp-4090",
@@ -456,9 +458,10 @@
       "reviewedOn": "2026-09-22",
       "minimumHours": 0,
       "kind": "public-pods",
+      "tier": "Secure Cloud",
       "allocation": "listed",
       "stock": "unverified",
-      "terms": "Advertised Pods table. Confirm community/secure tier, region, GPU count, storage and actual quote; stock is not checked."
+      "terms": "Advertised Pods table, Secure Cloud tier. The same page lists Community Cloud roughly 30-45% lower. Confirm tier, region, GPU count, storage and actual quote; stock is not checked."
     },
     {
       "id": "rp-5090",
@@ -474,9 +477,10 @@
       "reviewedOn": "2026-09-22",
       "minimumHours": 0,
       "kind": "public-pods",
+      "tier": "Secure Cloud",
       "allocation": "listed",
       "stock": "unverified",
-      "terms": "Advertised Pods table. Confirm community/secure tier, region, GPU count, storage and actual quote; stock is not checked."
+      "terms": "Advertised Pods table, Secure Cloud tier. The same page lists Community Cloud roughly 30-45% lower. Confirm tier, region, GPU count, storage and actual quote; stock is not checked."
     },
     {
       "id": "rp-a40",
@@ -492,9 +496,10 @@
       "reviewedOn": "2026-09-22",
       "minimumHours": 0,
       "kind": "public-pods",
+      "tier": "Secure Cloud",
       "allocation": "listed",
       "stock": "unverified",
-      "terms": "Advertised Pods table. Confirm community/secure tier, region, GPU count, storage and actual quote; stock is not checked."
+      "terms": "Advertised Pods table, Secure Cloud tier. The same page lists Community Cloud roughly 30-45% lower. Confirm tier, region, GPU count, storage and actual quote; stock is not checked."
     },
     {
       "id": "rp-a6000",
@@ -510,9 +515,10 @@
       "reviewedOn": "2026-09-22",
       "minimumHours": 0,
       "kind": "public-pods",
+      "tier": "Secure Cloud",
       "allocation": "listed",
       "stock": "unverified",
-      "terms": "Advertised Pods table. Confirm community/secure tier, region, GPU count, storage and actual quote; stock is not checked."
+      "terms": "Advertised Pods table, Secure Cloud tier. The same page lists Community Cloud roughly 30-45% lower. Confirm tier, region, GPU count, storage and actual quote; stock is not checked."
     },
     {
       "id": "rp-rtx6000",
@@ -528,9 +534,10 @@
       "reviewedOn": "2026-09-22",
       "minimumHours": 0,
       "kind": "public-pods",
+      "tier": "Secure Cloud",
       "allocation": "listed",
       "stock": "unverified",
-      "terms": "Advertised Pods table. Confirm community/secure tier, region, GPU count, storage and actual quote; stock is not checked."
+      "terms": "Advertised Pods table, Secure Cloud tier. The same page lists Community Cloud roughly 30-45% lower. Confirm tier, region, GPU count, storage and actual quote; stock is not checked."
     },
     {
       "id": "rp-l40s",
@@ -546,9 +553,10 @@
       "reviewedOn": "2026-09-22",
       "minimumHours": 0,
       "kind": "public-pods",
+      "tier": "Secure Cloud",
       "allocation": "listed",
       "stock": "unverified",
-      "terms": "Advertised Pods table. Confirm community/secure tier, region, GPU count, storage and actual quote; stock is not checked."
+      "terms": "Advertised Pods table, Secure Cloud tier. The same page lists Community Cloud roughly 30-45% lower. Confirm tier, region, GPU count, storage and actual quote; stock is not checked."
     },
     {
       "id": "rp-a100",
@@ -564,9 +572,10 @@
       "reviewedOn": "2026-09-22",
       "minimumHours": 0,
       "kind": "public-pods",
+      "tier": "Secure Cloud",
       "allocation": "listed",
       "stock": "unverified",
-      "terms": "Advertised Pods table. Confirm community/secure tier, region, GPU count, storage and actual quote; stock is not checked."
+      "terms": "Advertised Pods table, Secure Cloud tier. The same page lists Community Cloud roughly 30-45% lower. Confirm tier, region, GPU count, storage and actual quote; stock is not checked."
     },
     {
       "id": "rp-h100",
@@ -582,9 +591,10 @@
       "reviewedOn": "2026-09-22",
       "minimumHours": 0,
       "kind": "public-pods",
+      "tier": "Secure Cloud",
       "allocation": "listed",
       "stock": "unverified",
-      "terms": "Advertised Pods table. Confirm community/secure tier, region, GPU count, storage and actual quote; stock is not checked."
+      "terms": "Advertised Pods table, Secure Cloud tier. The same page lists Community Cloud roughly 30-45% lower. Confirm tier, region, GPU count, storage and actual quote; stock is not checked."
     },
     {
       "id": "rp-h100sxm",
@@ -600,9 +610,10 @@
       "reviewedOn": "2026-09-22",
       "minimumHours": 0,
       "kind": "public-pods",
+      "tier": "Secure Cloud",
       "allocation": "listed",
       "stock": "unverified",
-      "terms": "Advertised Pods table. Confirm community/secure tier, region, GPU count, storage and actual quote; stock is not checked."
+      "terms": "Advertised Pods table, Secure Cloud tier. The same page lists Community Cloud roughly 30-45% lower. Confirm tier, region, GPU count, storage and actual quote; stock is not checked."
     },
     {
       "id": "rp-pro6000",
@@ -618,9 +629,10 @@
       "reviewedOn": "2026-09-22",
       "minimumHours": 0,
       "kind": "public-pods",
+      "tier": "Secure Cloud",
       "allocation": "listed",
       "stock": "unverified",
-      "terms": "Advertised Pods table. Confirm community/secure tier, region, GPU count, storage and actual quote; stock is not checked."
+      "terms": "Advertised Pods table, Secure Cloud tier. The same page lists Community Cloud roughly 30-45% lower. Confirm tier, region, GPU count, storage and actual quote; stock is not checked."
     },
     {
       "id": "rp-h200",
@@ -636,9 +648,10 @@
       "reviewedOn": "2026-09-22",
       "minimumHours": 0,
       "kind": "public-pods",
+      "tier": "Secure Cloud",
       "allocation": "listed",
       "stock": "unverified",
-      "terms": "Advertised Pods table. Confirm community/secure tier, region, GPU count, storage and actual quote; stock is not checked."
+      "terms": "Advertised Pods table, Secure Cloud tier. The same page lists Community Cloud roughly 30-45% lower. Confirm tier, region, GPU count, storage and actual quote; stock is not checked."
     },
     {
       "id": "rp-b200",
@@ -654,9 +667,10 @@
       "reviewedOn": "2026-09-22",
       "minimumHours": 0,
       "kind": "public-pods",
+      "tier": "Secure Cloud",
       "allocation": "listed",
       "stock": "unverified",
-      "terms": "Advertised Pods table. Confirm community/secure tier, region, GPU count, storage and actual quote; stock is not checked."
+      "terms": "Advertised Pods table, Secure Cloud tier. The same page lists Community Cloud roughly 30-45% lower. Confirm tier, region, GPU count, storage and actual quote; stock is not checked."
     }
   ],
   "boundaries": {

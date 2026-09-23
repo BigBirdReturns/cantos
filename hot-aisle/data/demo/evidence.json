@@ -1,10 +1,10 @@
 {
   "schema": "hot-aisle/sealed-report@1",
-  "sha256": "09b06786f0fa918af9c663c8b6128ae700c555d07a58ce18b2fcc0f924a89eba",
+  "sha256": "36127478623189b65790a5260e26af9752527c92bd56c0c75a894b3391f2776b",
   "payload": {
     "schema": "hot-aisle/workload-report@2",
     "version": "2.0.0",
-    "generated_at": "2026-09-23T01:33:04.015Z",
+    "generated_at": "2026-09-23T03:48:55.595Z",
     "title": "Qwen/Qwen3-Coder-30B-A3B-Instruct",
     "synthetic": true,
     "sides": [
@@ -37,7 +37,7 @@
           {
             "format": "vllm-serve-json",
             "source": {
-              "sha256": "15dc2d03d2301e7c7a113858c58ae694eeffd6c2a1763cfa49737ad6463f5716",
+              "sha256": "724ff34cd45dbd4e55674fcc24ecd87b48be7c7bf019305bd02c50210adfb5d9",
               "record_index": 0,
               "bytes": 3342
             },
@@ -468,7 +468,7 @@
           {
             "format": "vllm-serve-json",
             "source": {
-              "sha256": "5769c433b6e316fcd485c97308027aba57e82db49d86bb92e4181ba396ac410d",
+              "sha256": "3f233d4369eb65cea4f48a9cd2877162fe74f8de1e78af9c5a03c7791ec78f93",
               "record_index": 0,
               "bytes": 3335
             },
@@ -954,12 +954,12 @@
           "synthetic": true,
           "sources": [
             {
-              "sha256": "15dc2d03d2301e7c7a113858c58ae694eeffd6c2a1763cfa49737ad6463f5716",
+              "sha256": "724ff34cd45dbd4e55674fcc24ecd87b48be7c7bf019305bd02c50210adfb5d9",
               "record_index": 0,
               "bytes": 3342
             },
             {
-              "sha256": "5769c433b6e316fcd485c97308027aba57e82db49d86bb92e4181ba396ac410d",
+              "sha256": "3f233d4369eb65cea4f48a9cd2877162fe74f8de1e78af9c5a03c7791ec78f93",
               "record_index": 0,
               "bytes": 3335
             }

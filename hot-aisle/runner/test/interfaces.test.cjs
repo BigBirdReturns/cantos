@@ -80,6 +80,27 @@ test('localhost server: status, plan, approve, start, events, record views, orig
   } finally { server.close(); await fakeApi.close(); }
 });
 
+test('published page origin: preflight carries the private-network grant; loopback and GitHub Pages origins pass, others and "null" are refused', async () => {
+  const store = new Store(tmp());
+  const server = createServer({ store, jobs: new Jobs(store) });
+  const base = await server.listenOn(0);
+  const PAGE = 'https://bigbirdreturns.github.io';
+  try {
+    const pre = await fetch(base + '/api/status', { method: 'OPTIONS', headers: { Origin: PAGE, 'Access-Control-Request-Method': 'GET', 'Access-Control-Request-Headers': 'x-workload-client', 'Access-Control-Request-Private-Network': 'true' } });
+    assert.equal(pre.status, 204);
+    assert.equal(pre.headers.get('access-control-allow-origin'), PAGE);
+    assert.equal(pre.headers.get('access-control-allow-private-network'), 'true');
+    assert.match(pre.headers.get('access-control-allow-headers'), /X-Workload-Client/);
+    const get = await fetch(base + '/api/status', { headers: { Origin: PAGE } });
+    assert.equal(get.status, 200);
+    assert.equal(get.headers.get('access-control-allow-origin'), PAGE);
+    assert.equal((await get.json()).runner, 'connected');
+    for (const origin of ['http://localhost:5173', 'http://127.0.0.1:8787', 'http://[::1]:8787']) assert.equal((await fetch(base + '/api/status', { headers: { Origin: origin } })).status, 200, origin + ' is a loopback page');
+    for (const origin of ['https://evil.example', 'http://bigbirdreturns.github.io', 'https://bigbirdreturns.github.io.evil.example', 'null']) assert.equal((await fetch(base + '/api/status', { headers: { Origin: origin } })).status, 403, origin + ' refused');
+    assert.equal((await fetch(base + '/api/status', { method: 'OPTIONS', headers: { Origin: 'https://evil.example', 'Access-Control-Request-Method': 'GET' } })).status, 403, 'preflight from a foreign origin refused');
+  } finally { server.close(); }
+});
+
 test('MCP server: initialize, list, prepare/start/status/result/revalidate over stdio', async () => {
   const home = tmp();
   const child = spawn(process.execPath, [path.join(__dirname, '..', 'bin', 'workload.cjs'), 'mcp'], { env: { ...process.env, WORKLOAD_HOME: home }, stdio: ['pipe', 'pipe', 'pipe'] });

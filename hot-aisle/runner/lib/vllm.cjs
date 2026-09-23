@@ -8,6 +8,19 @@ const path = require('node:path');
 
 const EXPORT_FLAGS = ['--save-result', '--save-detailed', '--percentile-metrics', 'ttft,tpot,itl,e2el', '--metric-percentiles', '50,95,99'];
 
+/* Portable spelling of the fake benchmark, as stored in plans and records. Paths are
+   relative to the kit root (the folder holding index.html); "node" means whichever
+   Node runs this runner. resolveCommand() turns it into something spawnable. */
+const KIT_ROOT = path.resolve(__dirname, '..', '..');
+const FAKE_COMMAND = ['node', 'runner/fixtures/fake-vllm.cjs'];
+function resolveCommand(command) {
+  return command.map((part, i) => {
+    if (i === 0 && part === 'node') return process.execPath;
+    if (/^runner\/[A-Za-z0-9_./-]+$/.test(part) && !part.includes('..')) return path.join(KIT_ROOT, ...part.split('/'));
+    return part;
+  });
+}
+
 function metadataArgs(identity, cell, plan) {
   const pairs = {
     model_revision: identity.model_revision,
@@ -83,7 +96,8 @@ function execute({ target, plan, cell, workDir, signal, onLine }) {
       sshArgs.push((target.ssh_user ? target.ssh_user + '@' : '') + target.host, remote);
       child = spawn('ssh', sshArgs, { stdio: ['ignore', 'pipe', 'pipe'], env: process.env });
     } else {
-      child = spawn(command[0], [...command.slice(1), ...args], { stdio: ['ignore', 'pipe', 'pipe'], env: { ...process.env, ...(target.env || {}) }, cwd: workDir });
+      const local = resolveCommand(command);
+      child = spawn(local[0], [...local.slice(1), ...args], { stdio: ['ignore', 'pipe', 'pipe'], env: { ...process.env, ...(target.env || {}) }, cwd: workDir });
     }
     child.stdout.on('data', line);
     child.stderr.on('data', line);
@@ -115,4 +129,4 @@ function scp(target, remote, local) {
   });
 }
 
-module.exports = { buildArgs, commandString, execute, EXPORT_FLAGS, loadProfile, shellQuote };
+module.exports = { buildArgs, commandString, execute, resolveCommand, EXPORT_FLAGS, FAKE_COMMAND, KIT_ROOT, loadProfile, shellQuote };

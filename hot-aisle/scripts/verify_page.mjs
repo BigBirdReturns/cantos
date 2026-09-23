@@ -37,16 +37,35 @@ async function staticPass(browser) {
   check('static', 'six_breakeven_tiles', (await page.locator('#breaktable .tile').count()) === 6);
   const chip = await page.locator('#headline .chip').first().innerText().catch(() => '');
   check('static', 'demo_record_recomputed_matches', /RECOMPUTED HERE · MATCHES/i.test(chip), chip);
-  check('static', 'demo_record_marked_synthetic', /DEMONSTRATION/i.test(await page.locator('#headline .bar .eyebrow').innerText()));
+  check('static', 'demo_record_marked_synthetic', /SYNTHETIC EXAMPLE/i.test(await page.locator('#headline .bar .eyebrow').innerText()));
   check('static', 'rail_not_connected', /not connected/i.test(await page.locator('#rail-state').innerText()));
+  check('static', 'demo_record_not_badged_qualified', !/^QUALIFIED$/i.test((await page.locator('#headline .bar .chip').last().innerText()).trim()));
+  check('static', 'section_says_no_gpu_measured', /no GPU was measured/i.test(await page.locator('#record-eyebrow').innerText()));
+  check('static', 'no_machine_paths_in_page', !new RegExp('Program' + ' Files|[A-Z]:\\\\').test(await page.content()));
+  check('static', 'runner_url_box_hidden_until_asked', await page.locator('#setup').isHidden());
+  await page.click('#open-setup'); await page.waitForTimeout(100);
+  check('static', 'setup_panel_opens', await page.locator('#runner-url').isVisible());
+  await page.fill('#runner-url', 'not a url at all'); await page.click('#connect'); await page.waitForTimeout(200);
+  check('static', 'bad_runner_url_refused_without_fetch', /full URL/.test(await page.locator('#connect-msg').innerText()) && external.length === 0);
+  await page.fill('#runner-url', 'http://127.0.0.1:1'); await page.click('#connect');
+  await page.waitForFunction(() => /No runner answered/.test(document.getElementById('connect-msg').textContent), null, { timeout: 8000 });
+  check('static', 'unreachable_runner_plain_message', /node runner\/bin\/workload\.cjs serve/.test(await page.locator('#connect-msg').innerText()));
+  check('static', 'connect_button_recovers', !(await page.locator('#connect').isDisabled()) && /Connect runner/.test(await page.locator('#connect').innerText()));
+  check('static', 'rail_reports_unreachable', /unreachable/i.test(await page.locator('#rail-state').innerText()));
+  await page.click('#open-setup');
   await page.click('#example'); await page.waitForTimeout(1000);
   check('static', 'sample_two_cards', (await page.locator('#report .resultcard').count()) === 2);
   check('static', 'sample_comparison', /lower cost/i.test(await page.locator('#report .comparison strong').innerText().catch(() => '')));
   check('static', 'download_enabled', !(await page.locator('#save-html').isDisabled()));
   await page.click('#theme'); await page.waitForTimeout(200);
   check('static', 'dark_toggle', (await page.evaluate(() => document.documentElement.dataset.theme)) === 'dark');
+  check('static', 'theme_persisted', (await page.evaluate(() => { try { return localStorage.getItem('theme'); } catch (e) { return 'unavailable'; } })) !== 'light');
+  await page.click('#copy'); await page.waitForTimeout(100);
+  check('static', 'copy_confirms', /Copied|Saved as/.test(await page.locator('#copy').innerText()));
   await page.setViewportSize({ width: 390, height: 844 }); await page.waitForTimeout(200);
   check('static', 'phone_no_horizontal_scroll', await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1));
+  check('static', 'phone_nav_visible', await page.locator('.top nav').isVisible());
+  check('static', 'phone_ledger_scrolls_not_clips', await page.evaluate(() => { const w = document.querySelector('#headline .scrollx'); return !!w && getComputedStyle(w).overflowX === 'auto' && w.scrollWidth >= w.clientWidth; }));
   await page.close();
 }
 

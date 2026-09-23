@@ -1,8 +1,8 @@
 {
   "schema": "hot-aisle/qualified-record@1",
-  "id": "rec-20260923T013303Z-a1a010",
-  "created": "2026-09-23T01:33:04.015Z",
-  "job_id": "job-20260923T013303Z-a1a010",
+  "id": "rec-20260923T034855Z-f27b5e",
+  "created": "2026-09-23T03:48:55.595Z",
+  "job_id": "job-20260923T034855Z-f27b5e",
   "synthetic": true,
   "observed": {
     "trials": [
@@ -12,14 +12,14 @@
           "repeat": 0
         },
         "source": {
-          "sha256": "21520427f56069521dfbe81c4163e3d39f93355306c23e80d3649e7bcaed1727",
+          "sha256": "2584db5615976f8b59c8a8369d1455454cbe224c2796efe2b0103f5ac977f267",
           "record_index": 0,
           "bytes": 3339
         },
         "normalized": {
           "format": "vllm-serve-json",
           "source": {
-            "sha256": "21520427f56069521dfbe81c4163e3d39f93355306c23e80d3649e7bcaed1727",
+            "sha256": "2584db5615976f8b59c8a8369d1455454cbe224c2796efe2b0103f5ac977f267",
             "record_index": 0,
             "bytes": 3339
           },
@@ -445,8 +445,8 @@
           "warnings": [],
           "synthetic": true
         },
-        "started": "2026-09-23T01:33:03.736Z",
-        "ended": "2026-09-23T01:33:03.784Z"
+        "started": "2026-09-23T03:48:55.326Z",
+        "ended": "2026-09-23T03:48:55.374Z"
       },
       {
         "cell": {
@@ -454,14 +454,14 @@
           "repeat": 1
         },
         "source": {
-          "sha256": "7967652557d857aedef25c44f22372097e76877084cb66d9a859bbc1b9f2fd05",
+          "sha256": "16dcfa4fc43d396d7f16b8f7fc65701edd0e19f05dde1b877a52d07ddc270c3d",
           "record_index": 0,
           "bytes": 3330
         },
         "normalized": {
           "format": "vllm-serve-json",
           "source": {
-            "sha256": "7967652557d857aedef25c44f22372097e76877084cb66d9a859bbc1b9f2fd05",
+            "sha256": "16dcfa4fc43d396d7f16b8f7fc65701edd0e19f05dde1b877a52d07ddc270c3d",
             "record_index": 0,
             "bytes": 3330
           },
@@ -889,8 +889,8 @@
           "warnings": [],
           "synthetic": true
         },
-        "started": "2026-09-23T01:33:03.785Z",
-        "ended": "2026-09-23T01:33:03.829Z"
+        "started": "2026-09-23T03:48:55.375Z",
+        "ended": "2026-09-23T03:48:55.419Z"
       },
       {
         "cell": {
@@ -898,14 +898,14 @@
           "repeat": 0
         },
         "source": {
-          "sha256": "5e1e914ea56dc0abc8e4a6a8cced00a065b305a8f744fcb9ffe3b03471399859",
+          "sha256": "29ec5c6c7808d405498f58fb8125644db39c404e7e4df3f16ffe32e628e08cc6",
           "record_index": 0,
           "bytes": 3322
         },
         "normalized": {
           "format": "vllm-serve-json",
           "source": {
-            "sha256": "5e1e914ea56dc0abc8e4a6a8cced00a065b305a8f744fcb9ffe3b03471399859",
+            "sha256": "29ec5c6c7808d405498f58fb8125644db39c404e7e4df3f16ffe32e628e08cc6",
             "record_index": 0,
             "bytes": 3322
           },
@@ -1333,8 +1333,8 @@
           "warnings": [],
           "synthetic": true
         },
-        "started": "2026-09-23T01:33:03.830Z",
-        "ended": "2026-09-23T01:33:03.874Z"
+        "started": "2026-09-23T03:48:55.420Z",
+        "ended": "2026-09-23T03:48:55.463Z"
       },
       {
         "cell": {
@@ -1342,14 +1342,14 @@
           "repeat": 1
         },
         "source": {
-          "sha256": "61e11d38bf0ad1de5f4f051cdd3a8c829ac6e37e87d4fcda786ff6004545cbd6",
+          "sha256": "f7d18eb7ad5840b0a12c719865e486bfef6432f8c0db4a60ac890d5cf7726014",
           "record_index": 0,
           "bytes": 3334
         },
         "normalized": {
           "format": "vllm-serve-json",
           "source": {
-            "sha256": "61e11d38bf0ad1de5f4f051cdd3a8c829ac6e37e87d4fcda786ff6004545cbd6",
+            "sha256": "f7d18eb7ad5840b0a12c719865e486bfef6432f8c0db4a60ac890d5cf7726014",
             "record_index": 0,
             "bytes": 3334
           },
@@ -1779,8 +1779,8 @@
           "warnings": [],
           "synthetic": true
         },
-        "started": "2026-09-23T01:33:03.875Z",
-        "ended": "2026-09-23T01:33:03.921Z"
+        "started": "2026-09-23T03:48:55.464Z",
+        "ended": "2026-09-23T03:48:55.506Z"
       },
       {
         "cell": {
@@ -1788,14 +1788,14 @@
           "repeat": 0
         },
         "source": {
-          "sha256": "15dc2d03d2301e7c7a113858c58ae694eeffd6c2a1763cfa49737ad6463f5716",
+          "sha256": "724ff34cd45dbd4e55674fcc24ecd87b48be7c7bf019305bd02c50210adfb5d9",
           "record_index": 0,
           "bytes": 3342
         },
         "normalized": {
           "format": "vllm-serve-json",
           "source": {
-            "sha256": "15dc2d03d2301e7c7a113858c58ae694eeffd6c2a1763cfa49737ad6463f5716",
+            "sha256": "724ff34cd45dbd4e55674fcc24ecd87b48be7c7bf019305bd02c50210adfb5d9",
             "record_index": 0,
             "bytes": 3342
           },
@@ -2223,8 +2223,8 @@
           "warnings": [],
           "synthetic": true
         },
-        "started": "2026-09-23T01:33:03.922Z",
-        "ended": "2026-09-23T01:33:03.965Z"
+        "started": "2026-09-23T03:48:55.508Z",
+        "ended": "2026-09-23T03:48:55.549Z"
       },
       {
         "cell": {
@@ -2232,14 +2232,14 @@
           "repeat": 1
         },
         "source": {
-          "sha256": "5769c433b6e316fcd485c97308027aba57e82db49d86bb92e4181ba396ac410d",
+          "sha256": "3f233d4369eb65cea4f48a9cd2877162fe74f8de1e78af9c5a03c7791ec78f93",
           "record_index": 0,
           "bytes": 3335
         },
         "normalized": {
           "format": "vllm-serve-json",
           "source": {
-            "sha256": "5769c433b6e316fcd485c97308027aba57e82db49d86bb92e4181ba396ac410d",
+            "sha256": "3f233d4369eb65cea4f48a9cd2877162fe74f8de1e78af9c5a03c7791ec78f93",
             "record_index": 0,
             "bytes": 3335
           },
@@ -2669,8 +2669,8 @@
           "warnings": [],
           "synthetic": true
         },
-        "started": "2026-09-23T01:33:03.966Z",
-        "ended": "2026-09-23T01:33:04.012Z"
+        "started": "2026-09-23T03:48:55.550Z",
+        "ended": "2026-09-23T03:48:55.593Z"
       }
     ],
     "failed_trials": [],
@@ -2692,8 +2692,8 @@
         "gpu_model": "AMD MI300X (synthetic)",
         "allocation_label": "1× MI300X VM (synthetic)",
         "vllm_command": [
-          "C:\\Program Files\\nodejs\\node.exe",
-          "S:\\Scratch\\Worktrees\\axm-tools-compute-seam\\hot-aisle\\runner\\fixtures\\fake-vllm.cjs"
+          "node",
+          "runner/fixtures/fake-vllm.cjs"
         ],
         "env": {
           "FAKE_VLLM_DELAY_MS": "0"
@@ -2765,7 +2765,7 @@
         "max_failure_rate": null
       },
       "primary_concurrency": null,
-      "created": "2026-09-23T01:33:03.727Z",
+      "created": "2026-09-23T03:48:55.321Z",
       "workload_id": "sha256:b0ddd66d9e8eb6f903fc0a37240e7da8",
       "cells": [
         {
@@ -2794,7 +2794,7 @@
         }
       ],
       "commands": [
-        "'C:\\Program Files\\nodejs\\node.exe' 'S:\\Scratch\\Worktrees\\axm-tools-compute-seam\\hot-aisle\\runner\\fixtures\\fake-vllm.cjs' --backend openai --base-url http://127.0.0.1:8000 --model Qwen/Qwen3-Coder-30B-A3B-Instruct --dataset-name random --num-prompts 48 --max-concurrency 1 --request-rate inf --seed 7 --label workload-report --save-result --save-detailed --percentile-metrics ttft,tpot,itl,e2el --metric-percentiles 50,95,99 --result-dir '<result-dir>' --result-filename cell-c1-r0.json --random-input-len 2048 --random-output-len 256 --metadata model_revision=demo-rev precision=FP8 tokenizer_revision=demo-rev workload_id=sha256:b0ddd66d9e8eb6f903fc0a37240e7da8 cache_policy=warm runtime_digest=rocm/vllm@sha256:demo 'load_profile=dataset=random;in=2048;out=256;prompts=48;concurrency=1;rate=inf;seed=7' plan_sha256=f9adab57dee20af2c299f845477be4d93d5ceaf29d42243b41e03a44dac712fd cell=c1-r0"
+        "node runner/fixtures/fake-vllm.cjs --backend openai --base-url http://127.0.0.1:8000 --model Qwen/Qwen3-Coder-30B-A3B-Instruct --dataset-name random --num-prompts 48 --max-concurrency 1 --request-rate inf --seed 7 --label workload-report --save-result --save-detailed --percentile-metrics ttft,tpot,itl,e2el --metric-percentiles 50,95,99 --result-dir '<result-dir>' --result-filename cell-c1-r0.json --random-input-len 2048 --random-output-len 256 --metadata model_revision=demo-rev precision=FP8 tokenizer_revision=demo-rev workload_id=sha256:b0ddd66d9e8eb6f903fc0a37240e7da8 cache_policy=warm runtime_digest=rocm/vllm@sha256:demo 'load_profile=dataset=random;in=2048;out=256;prompts=48;concurrency=1;rate=inf;seed=7' plan_sha256=fdfa179e7f2af5bf159f4cf71f2d78b7a61ef0b3c12bb9fefc58efbaab326103 cell=c1-r0"
       ],
       "estimate": {
         "cells": 6,
@@ -2803,7 +2803,7 @@
         "hourly_usd": 2.99,
         "basis": "Coarse planning estimate (decode ~20 ms/token, ~20 s overhead per trial). The limits, not this estimate, bound the run."
       },
-      "sha256": "f9adab57dee20af2c299f845477be4d93d5ceaf29d42243b41e03a44dac712fd"
+      "sha256": "fdfa179e7f2af5bf159f4cf71f2d78b7a61ef0b3c12bb9fefc58efbaab326103"
     },
     "identity": {
       "model_revision": "demo-rev",
@@ -2839,8 +2839,8 @@
     },
     "approval": {
       "by": "build-demo",
-      "at": "2026-09-23T01:33:03.733Z",
-      "plan_sha256": "f9adab57dee20af2c299f845477be4d93d5ceaf29d42243b41e03a44dac712fd"
+      "at": "2026-09-23T03:48:55.324Z",
+      "plan_sha256": "fdfa179e7f2af5bf159f4cf71f2d78b7a61ef0b3c12bb9fefc58efbaab326103"
     }
   },
   "rule": {
@@ -2926,12 +2926,12 @@
           "synthetic": true,
           "sources": [
             {
-              "sha256": "21520427f56069521dfbe81c4163e3d39f93355306c23e80d3649e7bcaed1727",
+              "sha256": "2584db5615976f8b59c8a8369d1455454cbe224c2796efe2b0103f5ac977f267",
               "record_index": 0,
               "bytes": 3339
             },
             {
-              "sha256": "7967652557d857aedef25c44f22372097e76877084cb66d9a859bbc1b9f2fd05",
+              "sha256": "16dcfa4fc43d396d7f16b8f7fc65701edd0e19f05dde1b877a52d07ddc270c3d",
               "record_index": 0,
               "bytes": 3330
             }
@@ -3013,12 +3013,12 @@
           "synthetic": true,
           "sources": [
             {
-              "sha256": "5e1e914ea56dc0abc8e4a6a8cced00a065b305a8f744fcb9ffe3b03471399859",
+              "sha256": "29ec5c6c7808d405498f58fb8125644db39c404e7e4df3f16ffe32e628e08cc6",
               "record_index": 0,
               "bytes": 3322
             },
             {
-              "sha256": "61e11d38bf0ad1de5f4f051cdd3a8c829ac6e37e87d4fcda786ff6004545cbd6",
+              "sha256": "f7d18eb7ad5840b0a12c719865e486bfef6432f8c0db4a60ac890d5cf7726014",
               "record_index": 0,
               "bytes": 3334
             }
@@ -3100,12 +3100,12 @@
           "synthetic": true,
           "sources": [
             {
-              "sha256": "15dc2d03d2301e7c7a113858c58ae694eeffd6c2a1763cfa49737ad6463f5716",
+              "sha256": "724ff34cd45dbd4e55674fcc24ecd87b48be7c7bf019305bd02c50210adfb5d9",
               "record_index": 0,
               "bytes": 3342
             },
             {
-              "sha256": "5769c433b6e316fcd485c97308027aba57e82db49d86bb92e4181ba396ac410d",
+              "sha256": "3f233d4369eb65cea4f48a9cd2877162fe74f8de1e78af9c5a03c7791ec78f93",
               "record_index": 0,
               "bytes": 3335
             }
@@ -3165,5 +3165,5 @@
       32
     ]
   },
-  "sha256": "b6472924568fc940eaef2427c4f3fd22665cbc0c28937f7e18b35d2d28f7bb16"
+  "sha256": "3930aca25c76bf8e0335e33b8713b8edc68f0921946da8743e3eb2a7abd68e24"
 }

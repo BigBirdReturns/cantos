@@ -6,7 +6,7 @@ const catalogue = require('../catalog.cjs');
    exercised end to end before any token or GPU is involved. Everything it yields is
    marked synthetic. */
 const http = require('node:http');
-const path = require('node:path');
+const vllm = require('../vllm.cjs');
 
 const FAKE_TOKEN = 'local-demo-token';
 
@@ -44,7 +44,7 @@ function localTarget(overrides = {}) {
   return {
     adapter: 'local', exec: 'local', name: 'local-demo', deployment_id: 'dep-mi300x-01', host: '127.0.0.1',
     gpus: 1, gpu_model: 'AMD MI300X (synthetic)', allocation_label: '1× MI300X VM (synthetic)',
-    vllm_command: [process.execPath, path.join(__dirname, '..', '..', 'fixtures', 'fake-vllm.cjs')],
+    vllm_command: vllm.FAKE_COMMAND.slice(),
     env: {},
     ...overrides,
   };

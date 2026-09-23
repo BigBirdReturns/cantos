@@ -11,7 +11,7 @@ Three interfaces, one core, one engine (the `report-engine` script in `index.htm
 | Interface | Start | Use |
 | --- | --- | --- |
 | CLI | `node runner/bin/workload.cjs …` | scripts, CI, a VM shell |
-| Localhost service | `node runner/bin/workload.cjs serve` | the page at `http://127.0.0.1:8787/` |
+| Localhost service | `node runner/bin/workload.cjs serve` | the page at `http://localhost:8787/`, or connect the published page to it |
 | MCP server | `node runner/bin/workload.cjs mcp` | Claude Code, Claude Desktop, any MCP host |
 
 Node ≥ 20. No dependencies. State lives in `$WORKLOAD_HOME` (default `~/.workload-report`).
@@ -118,6 +118,12 @@ MCP Apps UI resource (`ui://hot-aisle/evaluation`, `text/html;profile=mcp-app`).
 - Token from `HOTAISLE_API_TOKEN` or `~/.hotaisle/config.json`; never written by the runner.
 - The service binds 127.0.0.1. State-changing calls need `X-Workload-Client: page` and a
   loopback or known page origin. The runner's own source is not served.
+- Browser origins allowed to drive it: the runner's own page (`http://127.0.0.1`,
+  `http://localhost`, `http://[::1]`, any port) and the published page at
+  `https://bigbirdreturns.github.io`. Preflights answer
+  `Access-Control-Allow-Private-Network: true`, which Chrome requires before a public
+  page may reach localhost; a browser that still blocks it is why the runner serves the
+  page itself at `http://localhost:8787`. A `file://` copy (`Origin: null`) is refused.
 - API use is read-only. Benchmarks run over your SSH key, as your user, under a
   HUP/TERM trap so a dropped session kills the benchmark rather than leaving it billing.
 

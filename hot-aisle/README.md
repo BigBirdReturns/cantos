@@ -40,7 +40,7 @@ The import path below remains for offline and third-party evidence.
 3. Optionally add comparator results. Matching model, revision, representation, tokenizer, workload, cache and offered-load identities are required for a savings comparison. Missing metadata never prevents the individual result report.
 4. Download the printable customer HTML and Evidence JSON. Optional latency gates require per-request samples; correctness requires a hash-bound evaluator sidecar. Completed responses are never relabeled as correct tasks.
 
-The sample button loads deliberately tiny **synthetic** fixtures. The banner and exports preserve that status. No AMD/NVIDIA workload measurement was performed for this release.
+The sample button loads deliberately tiny **synthetic** fixtures. The banner and exports preserve that status. No AMD/NVIDIA workload measurement was performed for this release: no MI300X or H100 has been measured with this tool yet, and the example record shipped in the page is a software fixture built from the fake benchmark (`runner/fixtures/fake-vllm.cjs`), stored with a portable command (`node runner/fixtures/fake-vllm.cjs`) so the record never carries a build machine's paths.
 
 ## What is implemented
 

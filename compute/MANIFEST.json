@@ -1,26 +1,27 @@
 {
   "schema": "second-run/compute-release@1",
   "version": "0.2.0",
+  "engineVersion": "0.1.0",
   "files": [
     {
       "path": "index.html",
-      "bytes": 173186,
-      "sha256": "20b3fd4e639e96a16424bd751d1fd14f12c35e36573ba98b1f4f568b96abfa46"
+      "bytes": 191196,
+      "sha256": "57bd853d9792064b7f82c2f4f28abf9748cfec4f6652812fb4e2c0b4a3e6d1f6"
     },
     {
       "path": "template.html",
-      "bytes": 19638,
-      "sha256": "254846e3bec49c4104c0465119981730b3c531bed08fef0f4872e777eeee6957"
+      "bytes": 21067,
+      "sha256": "04f42e1614b46cdff5cd6316225e30d594b29d622ca9e7b21af43f2c08e205ab"
     },
     {
       "path": "style.css",
-      "bytes": 21916,
-      "sha256": "fe4bd8fb1d177625427b649a49f32213a2464ab7268cc1f509e36a537cca3537"
+      "bytes": 24527,
+      "sha256": "df63438ce8d9e68d9b5e4f95a53921edeb007a95853a9ab0bdead8a482e2f351"
     },
     {
       "path": "app.js",
-      "bytes": 46079,
-      "sha256": "04310f7d0724eb7947b727800d4e219bdd17401c4b1b55528468f893b0a8a123"
+      "bytes": 56566,
+      "sha256": "aaa4cb40c346109907aac725327d1e8757febcc85fe7b04e959ad22d316d1139"
     },
     {
       "path": "engine.cjs",
@@ -29,8 +30,8 @@
     },
     {
       "path": "data/catalog.json",
-      "bytes": 21060,
-      "sha256": "3fbf8ba08c7312a5343d8d87e456e19715b27dc7d9abe78ca542a55b3789c35f"
+      "bytes": 22412,
+      "sha256": "95374a91ac9e4bd660b1945a9e61333ace86984a20795e3fac0758c30b7a9973"
     },
     {
       "path": "adapters/workload-engine.cjs",
@@ -39,8 +40,8 @@
     },
     {
       "path": "adapters/qualified-engine.cjs",
-      "bytes": 26558,
-      "sha256": "8525b2af5a2ec9dbf93a18a0f60135b8489417dae9c716b011d2d338dc4eb39e"
+      "bytes": 28600,
+      "sha256": "5ec9a9bd6bacf9a8b5a98e39734bb7464c35b0cf9f505e9a066fe34963b6568a"
     },
     {
       "path": "adapters/instrument.cjs",
@@ -64,8 +65,8 @@
     },
     {
       "path": "scripts/build.py",
-      "bytes": 2770,
-      "sha256": "2e127c07195617d950acb23019573174fb2982f97286964dcbaaa27c456d6158"
+      "bytes": 4225,
+      "sha256": "a734c71b7865411faf904c163ff52270d5ef4d46feb26950e65dc584ce2c1043"
     },
     {
       "path": "scripts/review_prices.py",
@@ -74,8 +75,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 8981,
-      "sha256": "3f59db34e66b0c2c7627be2413c7324fa70ce0e3ac02d837a2cabfa3b394c176"
+      "bytes": 10509,
+      "sha256": "4f09c6b4bd05734f77836a5a23e8e90bf139ec659071d467f8c2216a6f951097"
     },
     {
       "path": "LICENSE",
@@ -104,8 +105,8 @@
     },
     {
       "path": "tests/test_core.cjs",
-      "bytes": 8026,
-      "sha256": "e983ca5ecfb5aba152617263d117d2232d6fd3cad1707082d9366373c0ba41f3"
+      "bytes": 9809,
+      "sha256": "8d7d712ffa4acb196acdb1c25c373ce9f3be59fcd7ce577bbeaa7077806746c2"
     },
     {
       "path": "tests/test_bridge.cjs",
@@ -114,23 +115,13 @@
     },
     {
       "path": "tests/test_browser.py",
-      "bytes": 11527,
-      "sha256": "f2ce3ccc74b3c75c88326ef6a6bb868efbe9022570f456ee4c77bdfd878e4b5c"
+      "bytes": 15467,
+      "sha256": "4b2e45c8a7739a9fa4b782023c4c11c47e31e73e9d0575fee9df12a4f864a059"
     },
     {
       "path": "tests/test_prices.py",
       "bytes": 1543,
       "sha256": "bcb7b449431ed16f65959675d9b538ee8b38f2a260a19b6f2adb73c6402f7839"
-    },
-    {
-      "path": "ci/compute-ci.yml",
-      "bytes": 1522,
-      "sha256": "12702e171f1b7777f8e409dc217320a3f83afa02137f5aef488bd08c1c7eb91d"
-    },
-    {
-      "path": "ci/compute-price-review.yml",
-      "bytes": 788,
-      "sha256": "acf5a644a002d9f3dbcf0010c0b0d2b4930c1a6b13bf8a357d0f2b2af09456e2"
     }
   ]
 }

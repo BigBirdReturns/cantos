@@ -16,7 +16,10 @@ const { revalidate } = require('./revalidate.cjs');
 const local = require('./adapters/local.cjs');
 const { HotAisle, tokenFromEnvironment } = require('./adapters/hotaisle.cjs');
 
-const ORIGINS = /^(https?:\/\/(127\.0\.0\.1|localhost|\[::1\])(:\d+)?|https:\/\/bigbirdreturns\.github\.io|null)$/;
+/* Origins that may drive the runner from a browser: the runner's own loopback page (any
+   port, so a kit served elsewhere on this machine still works) and the published page
+   on GitHub Pages. A file:// page sends Origin "null" and is refused. */
+const ORIGINS = /^(https?:\/\/(127\.0\.0\.1|localhost|\[::1\])(:\d+)?|https:\/\/bigbirdreturns\.github\.io)$/;
 const STATIC = { '.html': 'text/html; charset=utf-8', '.md': 'text/markdown; charset=utf-8', '.json': 'application/json', '.zip': 'application/zip', '.txt': 'text/plain; charset=utf-8', '.cjs': 'text/javascript', '.py': 'text/plain; charset=utf-8' };
 
 function createServer({ store = new Store(), jobs = new Jobs(store), pageDir = path.dirname(engine.PAGE), fakeApi = null } = {}) {
@@ -38,8 +41,15 @@ function createServer({ store = new Store(), jobs = new Jobs(store), pageDir = p
     const allowedHosts = ['127.0.0.1','localhost','[::1]'].map(h=>h+':'+server.address().port);
     if(!allowedHosts.includes(req.headers.host)){res.writeHead(403);return res.end('Host not allowed.');}
     const origin = req.headers.origin;
-    if (origin !== undefined && !allowedHosts.some(h=>origin==='http://'+h)) { res.writeHead(403); return res.end('Origin not allowed.'); }
-    if (origin) { res.setHeader('Access-Control-Allow-Origin', origin); res.setHeader('Vary', 'Origin'); res.setHeader('Access-Control-Allow-Headers', 'Content-Type, X-Workload-Client'); res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS'); }
+    if (origin !== undefined && !ORIGINS.test(origin)) { res.writeHead(403); return res.end('Origin not allowed.'); }
+    if (origin) {
+      res.setHeader('Access-Control-Allow-Origin', origin); res.setHeader('Vary', 'Origin');
+      res.setHeader('Access-Control-Allow-Headers', 'Content-Type, X-Workload-Client'); res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+      /* Chrome's private-network-access preflight (a public https page talking to 127.0.0.1)
+         needs this or the browser drops the request before it reaches us. */
+      res.setHeader('Access-Control-Allow-Private-Network', 'true');
+      res.setHeader('Access-Control-Max-Age', '600');
+    }
     if (req.method === 'OPTIONS') { res.writeHead(204); return res.end(); }
     const url = new URL(req.url, 'http://127.0.0.1');
     const json = (code, body) => { res.writeHead(code, { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' }); res.end(JSON.stringify(body)); };

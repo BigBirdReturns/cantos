@@ -120,6 +120,47 @@ test('corrupt evidence fails its trial; the record uses only admitted trials; al
   assert.equal(ok.state, 'completed');
 });
 
+test('plans and records carry the fake benchmark in portable form; the executor resolves it', async () => {
+  const vllm = require('../lib/vllm.cjs');
+  const store = new Store(tmp());
+  const { job, rec } = await run(store, { concurrency: [1] });
+  assert.deepEqual(job.plan.target.vllm_command, ['node', 'runner/fixtures/fake-vllm.cjs']);
+  assert.match(job.plan.commands[0], /^node runner\/fixtures\/fake-vllm\.cjs /);
+  const text = JSON.stringify(rec);
+  for (const leak of [process.execPath, __dirname, 'Program' + ' Files', 'Scr' + 'atch', ':\\']) assert.ok(!text.includes(leak), 'record must not contain ' + leak);
+  const resolved = vllm.resolveCommand(job.plan.target.vllm_command);
+  assert.equal(resolved[0], process.execPath);
+  assert.ok(path.isAbsolute(resolved[1]) && fs.existsSync(resolved[1]), 'fixture resolves to a real file');
+  assert.deepEqual(vllm.resolveCommand(['vllm', 'bench', 'serve']), ['vllm', 'bench', 'serve']);
+  assert.deepEqual(vllm.resolveCommand(['node', 'runner/../secret']), [process.execPath, 'runner/../secret']);
+});
+
+test('verification refuses a record whose concurrency is not a positive integer, even with a fresh checksum', async () => {
+  const store = new Store(tmp());
+  const { rec } = await run(store, { concurrency: [1, 8] });
+  const HA = engine.load();
+  const reseal = r => { const { sha256, ...rest } = r; r.sha256 = engine.sha256(HA.canonical(rest)); return r; };
+  const forged = (mutate) => { const r = JSON.parse(JSON.stringify(rec)); mutate(r); return reseal(r); };
+  assert.equal(record.verify(reseal(JSON.parse(JSON.stringify(rec)))).verified, true, 'resealing an untouched record keeps it verified');
+  const html = '<img src=x onerror=alert(1)>';
+  const cases = {
+    'trial cell': r => { r.observed.trials[0].cell.concurrency = html; },
+    'plan concurrency': r => { r.declared.plan.concurrency[0] = html; },
+    'primary concurrency': r => { r.declared.plan.primary_concurrency = html; r.derived.primary_concurrency = html; },
+    'derived cell': r => { r.derived.cells[0].concurrency = html; },
+    'fractional': r => { r.observed.trials[0].cell.concurrency = 1.5; r.declared.plan.concurrency[0] = 1.5; },
+    'zero': r => { r.declared.plan.concurrency[0] = 0; },
+    'string number': r => { r.declared.plan.concurrency[0] = '8'; },
+  };
+  for (const [name, mutate] of Object.entries(cases)) {
+    const v = record.verify(forged(mutate));
+    assert.equal(v.verified, false, name + ' must not verify');
+    assert.ok(v.problems.some(p => /positive integer/.test(p)), name + ' names the integer rule: ' + v.problems.join(' '));
+  }
+  const P = require('../lib/publication.cjs');
+  assert.throws(() => P.bundle(forged(cases['trial cell'])), /positive integer/);
+});
+
 test('a non-local target refuses synthetic evidence', () => {
   const store = new Store(tmp());
   const jobs = new Jobs(store);

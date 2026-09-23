@@ -1,19 +1,25 @@
-# Second Run Compute · 0.2 integration candidate
+# Second Run Compute · release 0.2
 
-**Compare rental allocations, model ownership, price reusable work, and connect the evidence you already produce.**
+**Compare rental allocations, model ownership, price reusable work, and keep the evidence you already produce.**
 
-Open `index.html`. The public application works without an account, installation or application network requests. It includes four provider price snapshots, three economic models, saved decisions, source inspection and a private-workspace connection path. All core calculations run locally. This is a compute decision desk, not a broker or scheduler.
+Open `index.html`. The public application works without an account, installation or application network requests. It includes four provider price snapshots, three economic models, saved decisions, source inspection and a private local-runner connection path. All core calculations run locally. This is a compute decision desk, not a broker or scheduler.
+
+Versions: this release is **0.2.0** (`MANIFEST.json`). The calculation engine `engine.cjs` carries its own version, `Compute.VERSION` (currently 0.1.0); it is stamped into every saved decision and changes only when the arithmetic changes, so bumping it invalidates earlier saved decisions.
 
 ## Start
 
-Unzip the kit. For the offline calculator, open `compute/index.html` in a browser. To consume explicitly published qualification records, start the instrument and connect the desk:
+Unzip the kit (`compute-kit.zip`, this desk only). For the offline calculator, open `compute/index.html` in a browser.
+
+To read records published by the **Hot Aisle runner**, which is a separate download (`../hot-aisle/workload-report.zip` next to this desk, or the `hot-aisle/` directory of the combined source), start the runner from its extracted folder, then start this desk's local helper and point it at the runner:
 
 ```sh
-node hot-aisle/runner/bin/workload.cjs serve --port 8787
+# from the extracted runner kit
+node runner/bin/workload.cjs serve --port 8787
+# from the extracted desk kit
 node compute/scripts/connect.cjs --port 8765 --runner http://127.0.0.1:8787
 ```
 
-Open the **private localhost link printed by the helper**. It serves this same page and automatically discovers immutable records published by that instrument. Refresh to observe newer results. An explicit stable port preserves the browser origin used for saved decisions across restarts; omit `--port` for an ephemeral port. Stop the helper with Ctrl+C.
+Open the **private localhost link printed by the helper**. It serves this same page and automatically discovers immutable records published by that runner. Refresh to observe newer results. An explicit stable port preserves the browser origin used for saved decisions across restarts; omit `--port` for an ephemeral port. Stop the helper with Ctrl+C.
 
 The helper requires Node 22 or newer and built-in modules only. It does not install software, run shell commands, call a model, scan hardware, start a benchmark, provision a GPU, pay a bill or change an existing job queue.
 
@@ -49,13 +55,13 @@ A client can ask: “Compare one-GPU allocations with at least 80 GB for 160 hou
 
 ## The four views
 
-**Compare compute** filters advertised per-GPU memory, allocation size, provider and reserved hours. The chart plots actual catalog price/memory values, not invented throughput. Every row exposes its source, date, allocation basis and terms. Shortlist up to four options and save a decision. In that saved decision, repricing creates a new version linked to the old checksum.
+**Compare compute** filters advertised per-GPU memory, allocation size, provider and reserved hours. The chart plots actual catalog price/memory values, not invented throughput. Every row exposes its source, date, allocation basis, listed tier where a provider has several, and terms. Shortlist up to four options and save a decision. In that saved decision, repricing creates a new version linked to the old checksum. Filters and the shortlist are remembered in this browser so a return visit starts where the last one ended. Arriving from the workload report with `?from=hot-aisle&memory=192` presets the memory floor and shortlists the MI300X and H100 comparison.
 
 **Own vs rent** includes purchase cost, residual value, horizon, whole-system load and idle energy, and ongoing costs. Without measured rates it compares reserved time, not equal output. Supplying both rates scales the rental hours needed for the same declared work. Capacity and quality still require qualification. Cash payback uses purchase price against monthly rental-cost avoidance after operating cost; it is not a resale or investment-return forecast.
 
-**The second run** models reusable procedures, smaller-model work and retained premium work. The calculation counts failed first attempts, premium fallback, per-request verification and initial qualification cost. It distinguishes requests moved from premium GPU time saved. Model inputs are scenarios, and saved routes remain proposals. It does not infer that a whole physical GPU becomes available.
+**Reuse routine work** models reusable procedures, smaller-model work and retained premium work. The calculation counts failed first attempts, premium fallback, per-request verification and initial qualification cost. It distinguishes requests moved from premium GPU time saved. Model inputs are scenarios, and saved routes remain proposals. It does not infer that a whole physical GPU becomes available.
 
-**My workspace** discovers authorized results through the local helper or exposes them to an agent through MCP. Supported benchmark files are normalized using the exact retained v2 workload-report engine. Imports are a fallback for disconnected use. Synthetic examples are marked everywhere. Saved decisions persist locally only after a save; raw benchmark inputs remain in memory. Original approved files remain the durable source on disk.
+**Your results** shows runs and records read from the local Hot Aisle runner through the helper, or exposes them to an agent through MCP. Until a runner is connected, a synthetic sample (marked everywhere) shows what an observed run looks like. Supported benchmark files are normalized using the exact retained v2 workload-report engine. Imports are a fallback for disconnected use. Saved decisions persist locally only after a save, up to 12; an entry that no longer verifies is kept and marked "needs re-verification" rather than dropped, and the stored list is never overwritten with fewer entries than were read unless you clear it. Raw benchmark inputs remain in memory. Original approved files remain the durable source on disk.
 
 The mature vLLM comparison utility is preserved byte-for-byte in `adapters/workload-report-v2.html` as an advanced fallback. Its historical source/kit links retain their original scope. Its same-model comparison and joint acceptance gates are not replaced by a priceboard or a weaker-model routing scenario.
 
@@ -72,17 +78,17 @@ python compute/tests/test_browser.py --require-navigation
 node compute/scripts/recompute.cjs compute-decision.json
 ```
 
-`engine.cjs` is the economic authority. `adapters/workload-engine.cjs` is a pinned, credited copy of the existing workload-normalization engine. The page inlines both. Sources, tests and bridge remain inside this tool directory; it imports no sibling tool at runtime. `scripts/build.py` generates the single page, manifest and offline ZIP from current source. Do not edit the generated page as the source of truth.
+`engine.cjs` is the economic authority. `adapters/workload-engine.cjs` and `adapters/qualified-engine.cjs` are generated copies of the Hot Aisle engine and runner libraries (`integration/build.py` in the combined source); edit the originals, not the copies. The page inlines all of them. Sources, tests and bridge remain inside this tool directory; it imports no sibling tool at runtime. `scripts/build.py` generates the single page, manifest and offline ZIP from current source, including the review date and price-schedule options shown in the page, which come from `data/catalog.json`. Do not edit the generated page as the source of truth.
 
-Install `ci/compute-ci.yml` under `.github/workflows/` in a repository with this `compute/` directory. It runs source, API/MCP and **native-navigation browser tests**, then builds a fresh artifact. The optional price-review workflow is a maintainer template, not an activated schedule in this kit. Publishing the `compute/` directory to any static host is sufficient for the public page; private connections continue to run locally.
+Continuous integration for this directory runs from `.github/workflows/hot-aisle-ci.yml` in the combined repository (source, API/MCP and native-navigation browser tests, then a fresh build that must match the committed artifacts). Publishing the `compute/` directory to any static host is sufficient for the public page; private connections continue to run locally.
 
 ## Price upkeep
 
-`data/catalog.json` owns provider observations and effective-date schedules. The current snapshot was reviewed on 22 September 2026. The UI flags it after 30 days. Check `scripts/review_prices.py --help` for a bounded public-source drift review. It produces source hashes and token-level discrepancy receipts and fails when it cannot establish the expected tokens. **It never upgrades token presence to a verified quote or renews the review date automatically.** A maintainer approves changed prices, availability assumptions and effective dates. The live source parsers have not been qualified against every provider delivery environment.
+`data/catalog.json` owns provider observations and effective-date schedules. The current snapshot was reviewed on 22 September 2026. The UI flags it after 30 days. Runpod rows carry `tier: "Secure Cloud"`; the same source page lists Community Cloud rates roughly 30-45% lower, which this catalog does not model. Check `scripts/review_prices.py --help` for a bounded public-source drift review. It produces source hashes and token-level discrepancy receipts and fails when it cannot establish the expected tokens. **It never upgrades token presence to a verified quote or renews the review date automatically.** A maintainer approves changed prices, availability assumptions and effective dates. The live source parsers have not been qualified against every provider delivery environment.
 
 ## Privacy and security
 
-The public page sends no application telemetry. Explicit saves use browser storage. Shareable decision exports contain the supplied scenario and dated catalog; they grant no authority. Normalized run exports omit generated text, prompts, original filenames, raw error bodies and unrecognized metadata. Selected model names and timestamps can still identify work.
+The public page sends no application telemetry. Explicit saves, remembered filters and the theme choice use browser storage on this origin only. Shareable decision exports contain the supplied scenario and dated catalog; they grant no authority. Normalized run exports omit generated text, prompts, original filenames, raw error bodies and unrecognized metadata. Selected model names and timestamps can still identify work.
 
 The helper binds loopback, checks the Host and Origin, rejects writes, requires a per-process bearer token for data, excludes symlinks and limits directory/file sizes. Tokens travel in a local URL fragment and are removed from the address after connection. Use a trusted local machine: these controls are not tenant authentication for an internet-exposed service. No provider key is bundled. A checksum supports exact recomputation, not source authenticity.
 
@@ -90,4 +96,4 @@ See `METHOD.md`, `PROVENANCE.json` and `QUALIFICATION.json` for the calculation 
 
 ## Integrated qualification records
 
-The instrument owns measured-result arithmetic and qualification. The desk consumes its qualified record and sealed packet through a generated verifier, preserving the exact original object in saved decisions. `integration/README.md` in the combined source explains ownership, local publication, one catalogue and native browser qualification. Scenario arithmetic remains in the desk; source-bound workload findings remain in the instrument.
+The Hot Aisle runner owns measured-result arithmetic and qualification. The desk consumes its qualified record and sealed packet through a generated verifier, preserving the exact original object in saved decisions. `integration/README.md` in the combined source explains ownership, local publication, one catalogue and native browser qualification. Scenario arithmetic remains in the desk; source-bound workload findings remain in the runner.

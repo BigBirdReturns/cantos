@@ -207,8 +207,11 @@ function normalizePlan(input) {
   if (!t.adapter || !['hotaisle', 'local'].includes(t.adapter)) throw new Error('target.adapter must be hotaisle or local.');
   if (!['local', 'ssh'].includes(t.exec)) throw new Error('target.exec must be local or ssh.');
   if (t.exec === 'ssh' && !t.host) throw new Error('target.host is required for ssh execution.');
-  /* The local adapter is the integration environment: it always drives the fake benchmark. */
-  if (t.adapter === 'local' && !t.vllm_command) t.vllm_command = [process.execPath, path.join(__dirname, '..', 'fixtures', 'fake-vllm.cjs')];
+  /* The local adapter is the integration environment: it always drives the fake benchmark.
+     The plan stores the portable form (kit-relative path, "node" for the runtime); the
+     executor resolves it against this kit and this Node at exec time, so a plan, a
+     record and the shipped demo never carry the build machine's paths. */
+  if (t.adapter === 'local' && !t.vllm_command) t.vllm_command = vllm.FAKE_COMMAND.slice();
   if (t.adapter === 'hotaisle' && t.vllm_command && /fake-vllm/.test(t.vllm_command.join(' '))) throw new Error('A Hot Aisle target cannot use the fake benchmark.');
   const w = { backend: 'openai', dataset: 'random', request_rate: 'inf', seed: 1, ...(input.workload || {}) };
   for (const k of ['model', 'base_url']) if (!w[k]) throw new Error('workload.' + k + ' is required.');

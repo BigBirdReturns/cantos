@@ -92,10 +92,31 @@ function withoutSha(rec) { const { sha256, ...rest } = rec; return rest; }
 /* Recomputes the derived section from observed + declared + rule and compares it to
    the stored one. Mirrors the engine's own recompute discipline: a record whose stored
    conclusions do not follow from its evidence is not verified. */
+/* Concurrency is the one value a record carries that later becomes a table cell, a
+   URL parameter and a plan input everywhere downstream. The runner refuses a non-
+   integer at plan time; a hand-built record must fail here for the same reason. */
+function wholeConcurrency(v) { return Number.isSafeInteger(v) && v >= 1; }
+function concurrencyProblems(rec) {
+  const out = [];
+  const plan = rec.declared && rec.declared.plan;
+  if (!plan || !Array.isArray(plan.concurrency) || !plan.concurrency.length || !plan.concurrency.every(wholeConcurrency)) out.push('Plan concurrency must be positive integers.');
+  if (plan && plan.primary_concurrency !== null && plan.primary_concurrency !== undefined && !wholeConcurrency(plan.primary_concurrency)) out.push('Plan primary_concurrency must be a positive integer.');
+  if (plan && Array.isArray(plan.cells) && !plan.cells.every(c => c && wholeConcurrency(c.concurrency) && Number.isSafeInteger(c.repeat) && c.repeat >= 0)) out.push('Plan cells must name positive integer concurrencies.');
+  const trials = rec.observed && rec.observed.trials;
+  if (!Array.isArray(trials) || !trials.every(t => t && t.cell && wholeConcurrency(t.cell.concurrency) && Number.isSafeInteger(t.cell.repeat) && t.cell.repeat >= 0)) out.push('Trial cells must name positive integer concurrencies.');
+  const failed = rec.observed && rec.observed.failed_trials;
+  if (Array.isArray(failed) && !failed.every(t => t && t.cell && wholeConcurrency(t.cell.concurrency))) out.push('Failed-trial cells must name positive integer concurrencies.');
+  const derived = rec.derived || {};
+  if (!Array.isArray(derived.cells) || !derived.cells.every(c => c && wholeConcurrency(c.concurrency))) out.push('Derived cells must name positive integer concurrencies.');
+  if (derived.primary_concurrency !== null && derived.primary_concurrency !== undefined && !wholeConcurrency(derived.primary_concurrency)) out.push('Derived primary_concurrency must be a positive integer.');
+  return out;
+}
+
 function verify(rec) {
   const HA = engine.load();
   const problems = [];
   if (rec.schema !== 'hot-aisle/qualified-record@1') problems.push('Unsupported record schema.');
+  problems.push(...concurrencyProblems(rec));
   if (engine.sha256(HA.canonical(withoutSha(rec))) !== rec.sha256) problems.push('Record checksum mismatch.');
   const {sha256:planSha,commands,...planBody}=rec.declared.plan;
   if(engine.sha256(HA.canonical(planBody))!==planSha)problems.push('Plan body does not match its identity.');
