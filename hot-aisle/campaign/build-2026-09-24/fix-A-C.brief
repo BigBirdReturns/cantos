@@ -1,0 +1,24 @@
+FIX ROUND 1 for lanes A (hot-aisle\campaign\run3\) and C (hot-aisle\campaign\availability\).
+
+Read build-2026-09-24\review-fable-on-A-C.md: a peer review of your own work. Fix the items listed below. Rules are unchanged from COMMON-BUILD.md: write only in those two directories, stdlib only, no commits.
+
+LANE A, required:
+1. Backend extraction (review 1a).
+   - Parse `Overriding with (X)` as the selected attention backend. Also parse `Using X backend (selected via --attention-backend)`.
+   - Build fixtures from REAL logs: copy relevant lines from `hot-aisle\campaign\results\run2-hotaisle-mi300x\serve.log`. The exploration run also produced the line "Using ROCM_AITER_FA backend (selected via --attention-backend)" and "Selected RowWiseTorchFP8ScaledMMLinearKernel for CompressedTensorsW8A8Fp8".
+   - There is no real CUDA log on disk. Keep an NVIDIA fixture explicitly marked AUTHORED.
+   - An unrecognised backend becomes a recorded HOLD in env.json, and the replay continues. It is no longer a pre-replay hard stop. The only exception: T1 must still stop if ROCM_AITER_FA is not selected.
+2. Timeout (review 1b). Either move the trace parse and task load before t_work_start, or widen the child wait into the bookkeeping slack. Show the new watchdog arithmetic in PREREG.
+3. Schema id (review 2a). Rename arm.py's output schema to `second-run/run3-arm-summary@1`. Lane B is writing an adapter to run-ledger@1. Keep your field names stable and document them in README.
+4. Load (review 2b). State in PREREG what factor 0.10 measures: price and correctness, not capacity. Add a pre-data calibration step: one short run to pick the factor that targets ~70 % of measured capacity, then refreeze the factor before scored data. Keep 0.10 as the declared fallback.
+5. Review improvements 3 (separate never-sent from lost) and 4 (document how the client_concurrency_limit failure interacts with the 1 % gate).
+6. Rerun all tests. Append a "Fix round 1" section to run3\BUILD-REPORT.md.
+
+LANE C, required:
+1. Delivered rows: `method` must be one of `api-create`, `console-create` or `tui-provision`, with `layer` "delivered". Do not use `create-attempt`. Update the helper, fixtures, tests and README field list.
+2. Start the "missed" count at each row's first API observation; label earlier hours "not sampled".
+3. README: say that DigitalOcean's `available`/`regions` flags are configuration availability and may not move with capacity. UNVERIFIED until compared with console observations: on 2026-09-23 the console showed H200 out of capacity in all regions. Note the alert noise when the all-unknown exit 1 fires every 15 minutes before tokens exist.
+4. Add a pagination fixture (`links.pages.next`).
+5. Rerun tests. Append a "Fix round 1" section to availability\BUILD-REPORT.md.
+
+Do not leave `tmp*` or `.selftest-*` directories behind.
