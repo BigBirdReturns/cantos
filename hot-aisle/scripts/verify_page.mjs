@@ -37,6 +37,14 @@ async function staticPass(browser) {
   check('static', 'no_console_errors', errors.length === 0, errors.join(' | '));
   check('static', 'zero_external_requests', external.length === 0, external.join(' '));
   check('static', 'six_breakeven_tiles', (await page.locator('#breaktable .tile').count()) === 6);
+  // front door: an empty drop target first; the fixture and the workbench stay folded until asked
+  check('static', 'front_door_is_empty_state', (await page.locator('#stage-empty').isVisible()) && (await page.locator('#hero-card').isHidden()));
+  check('static', 'front_door_names_price_and_snapshot', /\$2\.99 \/ GPU-hr.*reviewed 2026-09-22/.test(await page.locator('#hero-price').innerText()));
+  check('static', 'assumptions_folded_by_default', !(await page.evaluate(() => document.getElementById('inspect').open)));
+  check('static', 'sample_record_folded_by_default', !(await page.evaluate(() => document.getElementById('record-details').open)));
+  check('static', 'no_fixture_money_above_the_fold', !(await page.locator('#stage').innerText()).includes('$0.'));
+  await page.locator('#record-details > summary').click(); await page.waitForTimeout(150);
+  check('static', 'sample_record_opens', await page.locator('#headline').isVisible());
   const chip = await page.locator('#headline .chip').first().innerText().catch(() => '');
   check('static', 'demo_record_recomputed_matches', /RECOMPUTED HERE · MATCHES/i.test(chip), chip);
   check('static', 'demo_record_marked_synthetic', /SYNTHETIC EXAMPLE/i.test(await page.locator('#headline .bar .eyebrow').innerText()));
@@ -55,7 +63,15 @@ async function staticPass(browser) {
   check('static', 'connect_button_recovers', !(await page.locator('#connect').isDisabled()) && /Connect runner/.test(await page.locator('#connect').innerText()));
   check('static', 'rail_reports_unreachable', /unreachable/i.test(await page.locator('#rail-state').innerText()));
   await page.click('#open-setup');
-  await page.click('#example'); await page.waitForTimeout(1000);
+  // the front-door sample fills the stage card; the full report stays folded until Inspect assumptions
+  await page.click('#try-sample'); await page.waitForTimeout(1000);
+  check('static', 'stage_card_after_sample', (await page.locator('#hero-card').isVisible()) && (await page.locator('#stage-empty').isHidden()));
+  check('static', 'stage_card_shows_money', /^\$\d/.test((await page.locator('#hero-card .money').innerText()).trim()));
+  check('static', 'stage_card_marked_synthetic', /synthetic sample/i.test(await page.locator('#hero-card .bar').innerText()));
+  check('static', 'stage_card_comparison_sentence', /(lower|higher)[\s\S]*same acceptance criterion/i.test(await page.locator('#hero-card .aside').innerText()));
+  check('static', 'assumptions_still_folded', !(await page.evaluate(() => document.getElementById('inspect').open)));
+  await page.click('#hero-inspect'); await page.waitForTimeout(400);
+  check('static', 'inspect_opens_from_card', (await page.evaluate(() => document.getElementById('inspect').open)) && (await page.locator('#report').isVisible()));
   check('static', 'sample_two_cards', (await page.locator('#report .resultcard').count()) === 2);
   check('static', 'sample_comparison', /lower cost/i.test(await page.locator('#report .comparison strong').innerText().catch(() => '')));
   check('static', 'download_enabled', !(await page.locator('#save-html').isDisabled()));
@@ -64,13 +80,18 @@ async function staticPass(browser) {
   check('static', 'theme_persisted', (await page.evaluate(() => { try { return localStorage.getItem('theme'); } catch (e) { return 'unavailable'; } })) !== 'light');
   await page.click('#copy'); await page.waitForTimeout(100);
   check('static', 'copy_confirms', /Copied|Saved as/.test(await page.locator('#copy').innerText()));
+  await page.click('#hero-copy'); await page.waitForTimeout(100);
+  check('static', 'stage_copy_confirms', /Copied|Saved as/.test(await page.locator('#hero-copy').innerText()));
   await page.setViewportSize({ width: 390, height: 844 }); await page.waitForTimeout(200);
   const layout = await page.evaluate(() => ({width:innerWidth,scrollWidth:document.documentElement.scrollWidth,overflow:[...document.querySelectorAll('body *')].filter(e=>{const r=e.getBoundingClientRect();return r.width&&r.right>innerWidth+1&&!e.closest('.scrollx')&&!e.closest('.top nav');}).map(e=>({tag:e.tagName,id:e.id,class:e.className,width:e.getBoundingClientRect().width,right:e.getBoundingClientRect().right,text:e.textContent.slice(0,100)})).slice(0,30)}));
   if(layout.scrollWidth>layout.width+1){results.layout=layout;fs.mkdirSync('instrument-browser-qa',{recursive:true});await page.screenshot({path:'instrument-browser-qa/overflow.png',fullPage:true});}
   check('static', 'phone_no_horizontal_scroll', layout.scrollWidth <= layout.width + 1);
   check('static', 'phone_nav_visible', await page.locator('.top nav').isVisible());
+  check('static', 'phone_stage_card_stacks', await page.evaluate(() => { const c = document.querySelector('#hero-card .grid'); return !!c && getComputedStyle(c).gridTemplateColumns.split(' ').length === 1; }));
   check('static', 'phone_ledger_scrolls_not_clips', await page.evaluate(() => { const w = document.querySelector('#headline .scrollx'); return !!w && getComputedStyle(w).overflowX === 'auto' && w.scrollWidth >= w.clientWidth; }));
   for (const width of [320,360,768]) { await page.setViewportSize({width,height:844}); await page.waitForTimeout(50); check('static','responsive_content_'+width,await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)); }
+  await page.click('#hero-reset'); await page.waitForTimeout(200);
+  check('static', 'start_over_returns_to_empty_state', (await page.locator('#stage-empty').isVisible()) && (await page.locator('#hero-card').isHidden()) && (await page.locator('#save-html').isDisabled()));
   await page.close();
 }
 
@@ -104,6 +125,9 @@ async function connectedPass(browser) {
     await page.click('#approve-start');
     await page.waitForFunction(() => document.querySelector('#headline .bar .eyebrow') && /from the connected runner/i.test(document.querySelector('#headline .bar .eyebrow').textContent), null, { timeout: 60000 });
     check('connected', 'job_completed_record_shown', true);
+    check('connected', 'record_takes_the_stage', /from the connected runner/i.test(await page.locator('#hero-card .bar').innerText()) && /^\$\d/.test((await page.locator('#hero-card .money').innerText()).trim()));
+    check('connected', 'stage_breakeven_is_price_ratio', /to tie on rental cost[\s\S]*not a measurement/i.test(await page.locator('#hero-card .aside').innerText()));
+    check('connected', 'record_ledger_unfolds_for_runner_record', (await page.evaluate(() => document.getElementById('record-details').open)) && (await page.locator('#publish').isVisible()));
     const chip = await page.locator('#headline .chip').first().innerText();
     check('connected', 'record_recomputed_in_browser', /MATCHES/i.test(chip), chip);
     check('connected', 'record_rows', (await page.locator('#headline .ledger tbody tr').count()) === 2);

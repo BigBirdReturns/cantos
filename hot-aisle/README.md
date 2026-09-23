@@ -1,10 +1,23 @@
-# Hot Aisle workload report · 2.2.0
+# Hot Aisle workload report · 2.3.0
 
-**Qualify a deployment. Keep the evidence.**
+**Drop your vLLM result. One figure. A receipt anyone can recompute.**
 
 Live: https://bigbirdreturns.github.io/axm-tools/hot-aisle/
 
-2.2 (22 September 2026) turns the page into an instrument over a connected runner.
+2.3 (22 September 2026) puts the front door first. The page opens on an empty drop
+target. A `vllm bench serve` result becomes one card: cost per 1,000 accepted requests
+on the allocation you priced, the accepted-request rate, p95 first token, the rejected
+share, and the share of that rate a comparator must deliver at its list price to tie on
+rental cost. With a comparator file on the other side the card shows both costs and the
+difference under matching conditions. Two buttons: download the receipt, inspect the
+assumptions. Everything from 2.2 (prices, gates, comparison conditions, the full report,
+receipt verification, the price-only break-even, the vLLM flags) is folded under
+*Inspect assumptions*, and the shipped synthetic record is folded under its own heading,
+so no fixture figure is the first number on the page. A connected runner's record takes
+the same card. The report engine and the runner are unchanged; the browser qualification
+gained checks for the front door.
+
+2.2 (22 September 2026) turned the page into an instrument over a connected runner.
 The `report-engine` retains its 2.0 arithmetic; the integration standardizes source line endings and pins the resulting identity. Every measured finding projects from it.
 
 - **Connected acquisition.** `runner/` reads the authorized Hot Aisle team, allocations,
@@ -31,11 +44,9 @@ The `report-engine` retains its 2.0 arithmetic; the integration standardizes sou
   (static and connected) and a kit-consistency check. `scripts/build_kit.py` generates
   `MANIFEST.json` and `workload-report.zip` deterministically from source.
 
-The import path below remains for offline and third-party evidence.
-
 ## Use
 
-1. Drop one or more `vllm bench serve` result JSONs on Hot Aisle. Summary and detailed outputs work; appended JSON/JSONL and a single console summary are also accepted.
+1. Drop one or more `vllm bench serve` result JSONs on the front door (Hot Aisle side). Add more trials or a comparator under *Inspect assumptions*. Summary and detailed outputs work; appended JSON/JSONL and a single console summary are also accepted.
 2. Confirm the number of **billable** GPUs and applicable rate. For the cost of a complete paid interval, enter its total charge instead of extrapolating a benchmark window.
 3. Optionally add comparator results. Matching model, revision, representation, tokenizer, workload, cache and offered-load identities are required for a savings comparison. Missing metadata never prevents the individual result report.
 4. Download the printable customer HTML and Evidence JSON. Optional latency gates require per-request samples; correctness requires a hash-bound evaluator sidecar. Completed responses are never relabeled as correct tasks.

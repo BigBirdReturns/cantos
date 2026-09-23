@@ -61,7 +61,7 @@ function createServer({ store = new Store(), jobs = new Jobs(store), pageDir = p
       }
       const p = url.pathname;
       let m;
-      if (p === '/api/status') return json(200, { runner: 'connected', version: '2.2.0', engine: engine.identity(), home: store.root, jobs: store.list('jobs').length, records: store.list('records').length, adapters: { local: true, hotaisle: !!tokenFromEnvironment() }, demo: !!fakeApi });
+      if (p === '/api/status') return json(200, { runner: 'connected', version: '2.3.0', engine: engine.identity(), home: store.root, jobs: store.list('jobs').length, records: store.list('records').length, adapters: { local: true, hotaisle: !!tokenFromEnvironment() }, demo: !!fakeApi });
       if (p === '/api/environment') return json(200, await environment(url.searchParams.get('adapter') || 'local', url.searchParams.get('team') || undefined));
       if (p === '/api/demo/plan') return json(200, local.demoPlanInput({ repeats: Number(url.searchParams.get('repeats') || 2), concurrency: (url.searchParams.get('concurrency') || '1,8,32').split(',').map(Number) }));
       if (p === '/api/jobs' && req.method === 'GET') return json(200, jobs.list());

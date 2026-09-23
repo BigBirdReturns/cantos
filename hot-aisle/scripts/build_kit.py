@@ -33,7 +33,7 @@ def manifest() -> dict:
     for name in members():
         body = (ROOT / name).read_bytes()
         files[name] = {'sha256': hashlib.sha256(body).hexdigest(), 'bytes': len(body)}
-    return {'schema': 'hot-aisle/distribution@3', 'version': '2.2.0', 'scope': 'Byte manifest of the offline kit, generated from source by scripts/build_kit.py. Excludes itself and the enclosing archive; does not authenticate source assertions.', 'files': files}
+    return {'schema': 'hot-aisle/distribution@3', 'version': '2.3.0', 'scope': 'Byte manifest of the offline kit, generated from source by scripts/build_kit.py. Excludes itself and the enclosing archive; does not authenticate source assertions.', 'files': files}
 
 
 def archive_bytes(man: dict) -> bytes:
