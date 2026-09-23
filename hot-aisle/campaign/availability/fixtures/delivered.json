@@ -1,0 +1,14 @@
+{
+  "ts":"2026-09-23T20:10:00Z",
+  "provider":"digitalocean",
+  "sku":"gpu-h100x1-80gb",
+  "region":"nyc2",
+  "gpus":1,
+  "attempt_id":"FIXTURE-ONLY-DO-NOT-APPEND",
+  "evidence":"SYNTHETIC example; replace with actual retained create and SSH evidence",
+  "real_create_attempt":false,
+  "synthetic":true,
+  "ssh_reached":true,
+  "time_to_ssh_s":60,
+  "outcome":"available"
+}

@@ -1,0 +1,22 @@
+[Unit]
+Description=Second Run read-only availability probe and heatmap
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+DynamicUser=yes
+StateDirectory=second-run-availability
+WorkingDirectory=/var/lib/second-run-availability
+EnvironmentFile=/etc/second-run-availability.env
+Environment=PYTHONDONTWRITEBYTECODE=1
+ExecStart=/usr/bin/python3 /opt/second-run-availability/probe.py --config /opt/second-run-availability/probes.json --output /var/lib/second-run-availability/observations.jsonl
+# Refresh even when all probes were unknown and ExecStart failed with status 1.
+ExecStopPost=/usr/bin/python3 /opt/second-run-availability/heatmap.py --config /opt/second-run-availability/probes.json --input /var/lib/second-run-availability/observations.jsonl --html /var/lib/second-run-availability/heatmap.html --summary /var/lib/second-run-availability/heatmap.txt
+TimeoutStartSec=10min
+UMask=0077
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=yes
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6

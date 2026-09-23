@@ -1,0 +1,2 @@
+{"ts":"2026-09-23T17:49:00Z","provider":"digitalocean","region":"nyc2","sku":"gpu-h100x1-80gb","gpus":1,"method":"console-create","outcome":"available","provisioned":true,"time_to_ssh_s":60,"note":"arm B Run 1; droplet 603084148"}
+{"ts":"2026-09-23T18:17:00Z","provider":"hotaisle","region":"enc1","sku":"vm-mi300x-1x","gpus":1,"method":"tui-provision-list","outcome":"available","count":1,"provisioned":true,"note":"enc1-gpuvm002; list also showed 2x VM (1 available) and 8x bare metal (1 available); banner: 'we're pretty full'"}

@@ -1,0 +1,31 @@
+LANE A · Run 3 kit. Directory: hot-aisle\campaign\run3\
+
+Build per the SYNTHESIS "Run 3" section (Fable column adopted).
+- Model: Qwen/Qwen3-Coder-30B-A3B-Instruct-FP8 @ dcaee4d4dfc5ee71ad501f01f530e5652438fde0.
+- vLLM 0.30.0 on both vendors:
+  - CUDA: vllm/vllm-openai@sha256:8a69ffad015f138d7170c4ddc429e230a3bc1c1719f67e14324749df200a4b90
+  - ROCm: vllm/vllm-openai-rocm:v0.30.0@sha256:2e7da1ad1c66836802072588adea75f9f4991da5f9545b4318e91d422c22ce6a
+- AMD runs in two declared tiers:
+  - T0 auto: VLLM_ROCM_USE_AITER=1 only
+  - T1: T0 plus --attention-backend ROCM_AITER_FA
+- serve.log is collected. The selected attention backend and linear kernel are extracted into env.json.
+
+Deliverables:
+1. PREREG.md, covering:
+   - question, pins, arms (A: Hot Aisle 1xMI300X, self-funded at list; N: DO 1xH100; L: estate, later), workload, gates
+   - the per-run ledger fields it will emit
+   - a schedule that provably fits its own watchdog (show the arithmetic)
+   - stop rules; budget about $25 of $50
+   - disclosures carried from DISCLOSURES.md
+2. Workload builder (stdlib Python). Produces a frozen task file from the EvalPlus HumanEval+ (164) and MBPP+ (378) prompts, with task_id, prompt and grading reference for each task.
+   - Document the exact upstream dataset release, URL and sha to fetch on the seat.
+   - Include a fixture of about 5 tasks for tests.
+3. Trace replayer (stdlib Python, runs on the serving host).
+   - Schedule: replays a 60-minute arrival schedule derived from the Azure LLM inference 2023 CODE trace, rate-scaled by a declared factor. Document the source URL and file, and include a fixture slice.
+   - Requests: cycles the frozen tasks with distinct seeds, temperature 0.2, no ignore-eos, streaming OpenAI-compatible /v1/completions.
+   - Per request it records: task_id, seed, scheduled_ts, send_ts, first_token_ts, end_ts, output text, output tokens, error.
+   - Also writes 5-minute bucket summaries.
+   - Output must convert to the page engine's vLLM detailed schema (ttfts, latencies, errors, input_lens, output_lens). Provide the converter and verify it with the engine, loading ../../index.html the way engine_table.cjs does.
+4. Grader wrapper. Runs EvalPlus evaluation in a container on a CPU seat over the replayer's outputs, and emits a sidecar in the hot-aisle/request-evaluation@1 style marking each request passed or failed. See runner/lib/record.cjs and scripts/test_workbench.cjs for the evaluation schema.
+5. arm3.sh. Runs serve (both vendors, both tiers) → health → env.json with backend extraction → smoke → replay → manifest, under a watchdog. Writes the ledger timestamps (t_ssh, t_ready, t_work_start, t_work_end) to ledger-times.json.
+6. Offline self-tests for items 2–4 on fixtures; a fake OpenAI server in stdlib is fine. Then BUILD-REPORT.md.

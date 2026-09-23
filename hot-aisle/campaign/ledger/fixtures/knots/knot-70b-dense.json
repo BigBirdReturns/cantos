@@ -1,0 +1,21 @@
+{
+  "schema": "second-run/knot-spec@1",
+  "knot_id": "knot-70b-dense-fp8",
+  "task_class": "graded-coding",
+  "count": 200,
+  "evaluator": {"name": "evalplus-humaneval-plus", "frozen": true, "needs_seat_role": "grader"},
+  "deadline_s": 5400,
+  "start_at": "2026-09-24T18:00:00Z",
+  "tokens_in_per_closure": 400,
+  "tokens_out_per_closure": 300,
+  "model": {
+    "id": "RedHatAI/Llama-3.3-70B-Instruct-FP8-dynamic",
+    "class": "dense-70b",
+    "formats": [
+      {"format": "fp8", "bytes": 72700000000, "bytes_basis": "run2/PREREG.md: 72.7 GB of weights", "recipes": ["vllm-cuda", "vllm-rocm"]},
+      {"format": "gguf-q4", "bytes": 42500000000, "bytes_basis": "UNVERIFIED ~42.5 GB Q4_K_M; not on disk", "recipes": ["llama.cpp-cuda", "ollama"]}
+    ]
+  },
+  "traversal_profile": {"batch_depths": [1, 8, 32], "closures_per_traversal_curve": null},
+  "policy": {"max_usd": 25.0, "kwh_usd": 0.30, "kwh_usd_basis": "assumed"}
+}

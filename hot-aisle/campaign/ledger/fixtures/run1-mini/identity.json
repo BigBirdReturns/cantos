@@ -1,0 +1,62 @@
+{
+  "schema": "second-run/campaign-identity@1",
+  "campaign": "first-qualified-workload-2026-09",
+  "pinned_on": "2026-09-23",
+  "model": {
+    "id": "Qwen/Qwen3-Coder-30B-A3B-Instruct-FP8",
+    "revision": "dcaee4d4dfc5ee71ad501f01f530e5652438fde0",
+    "tokenizer_revision": "dcaee4d4dfc5ee71ad501f01f530e5652438fde0",
+    "precision": "FP8",
+    "precision_note": "fine-grained FP8 e4m3, block size 128, as shipped by Qwen; native on MI300X and H100",
+    "bytes": 31187041238,
+    "license": "Apache-2.0",
+    "source": "https://huggingface.co/Qwen/Qwen3-Coder-30B-A3B-Instruct-FP8"
+  },
+  "runtimes": {
+    "amd": {
+      "image": "rocm/vllm",
+      "digest": "sha256:30761c2125ce150d556bef46406a0158446421886bf83a2e60154c6e4ca17a13",
+      "published": "2026-09-22T16:51:47Z",
+      "runtime_digest": "rocm/vllm@sha256:30761c2125ce150d556bef46406a0158446421886bf83a2e60154c6e4ca17a13",
+      "source": "https://hub.docker.com/r/rocm/vllm"
+    },
+    "nvidia": {
+      "image": "vllm/vllm-openai",
+      "digest": "sha256:8a69ffad015f138d7170c4ddc429e230a3bc1c1719f67e14324749df200a4b90",
+      "amd64_digest": "sha256:5f5e535216848d0c52159c8c13a0af04be5f6fe1a84e79914300610796f76d40",
+      "published": "2026-09-22T02:15:08Z",
+      "runtime_digest": "vllm/vllm-openai@sha256:8a69ffad015f138d7170c4ddc429e230a3bc1c1719f67e14324749df200a4b90",
+      "source": "https://hub.docker.com/r/vllm/vllm-openai"
+    }
+  },
+  "workload": {
+    "workload_id": "random-seed7-in2048-out256-n200-v1",
+    "dataset": "random",
+    "input_len": 2048,
+    "output_len": 256,
+    "num_prompts": 200,
+    "request_rate": "inf",
+    "seed": 7,
+    "seed_rule": "seed + repeat index, as the runner does",
+    "concurrency": [1, 8, 32, 64],
+    "repeats": 3,
+    "cache_policy": "warm",
+    "warm_up": "one unrecorded pass of 32 prompts at concurrency 8 before the first recorded trial"
+  },
+  "requirements": {
+    "max_p95_ttft_ms": 1000,
+    "max_p95_e2e_ms": 15000,
+    "max_failure_rate": 0.01
+  },
+  "arms": {
+    "hotaisle-mi300x": { "provider": "Hot Aisle", "gpus": 1, "list_rate": 2.99, "billing": "per minute", "path": "runner (API-authenticated, ssh exec)", "price_source": "retrieved from the Hot Aisle API at plan time" },
+    "do-h100": { "provider": "DigitalOcean H100", "gpus": 1, "list_rate": 4.41, "billing": "per second, 5-minute minimum", "path": "manual: campaign/arm.sh on the droplet, files imported as supplied evidence", "catalogue_offer": "do-h100", "image_slug": "gpu-h100x1-base" },
+    "do-mi300x": { "provider": "DigitalOcean MI300X", "gpus": 1, "list_rate": 2.59, "billing": "per second, 5-minute minimum", "path": "manual: campaign/arm.sh on the droplet, files imported as supplied evidence", "catalogue_offer": "do-mi300x", "image_slug": "gpu-amd-base" }
+  },
+  "not_in_this_run": [
+    "correctness sidecar (accepted = completed under latency gates only)",
+    "cold-cache trials (cache_policy is declared warm; the warm-up pass is unrecorded)",
+    "any second model or request shape",
+    "independent attestation of who produced a result"
+  ]
+}

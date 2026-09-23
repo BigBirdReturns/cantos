@@ -1,0 +1,11 @@
+[Unit]
+Description=Sample Second Run availability every fifteen minutes
+
+[Timer]
+OnCalendar=*-*-* *:00,15,30,45:00 UTC
+AccuracySec=1s
+Persistent=true
+Unit=availability.service
+
+[Install]
+WantedBy=timers.target

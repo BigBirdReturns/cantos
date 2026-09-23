@@ -1,0 +1,10 @@
+{
+  "sizes": [
+    {"slug":"gpu-h100x1-80gb","available":true,"regions":["nyc2"],"gpu_info":{"count":1}},
+    {"slug":"gpu-h100x8-640gb","available":false,"regions":["nyc2"],"gpu_info":{"count":8}},
+    {"slug":"gpu-mi300x1-192gb","available":true,"regions":["tor1"],"gpu_info":{"count":1}},
+    {"slug":"gpu-h200x1-141gb","available":false,"regions":[],"gpu_info":{"count":1}}
+  ],
+  "links": {},
+  "meta": {"total":4}
+}

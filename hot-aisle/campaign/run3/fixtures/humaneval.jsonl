@@ -1,0 +1,3 @@
+{"task_id": "HumanEval/0", "prompt": "def task_humaneval_0(x):\n    \"\"\"Return x plus 0.\"\"\"\n", "canonical_solution": "    return x + 0\n", "entry_point": "task_humaneval_0", "contract": "", "base_input": [[1]], "plus_input": [[2], [3]], "atol": 0}
+{"task_id": "HumanEval/1", "prompt": "def task_humaneval_1(x):\n    \"\"\"Return x plus 1.\"\"\"\n", "canonical_solution": "    return x + 1\n", "entry_point": "task_humaneval_1", "contract": "", "base_input": [[1]], "plus_input": [[2], [3]], "atol": 0}
+{"task_id": "HumanEval/2", "prompt": "def task_humaneval_2(x):\n    \"\"\"Return x plus 2.\"\"\"\n", "canonical_solution": "    return x + 2\n", "entry_point": "task_humaneval_2", "contract": "", "base_input": [[1]], "plus_input": [[2], [3]], "atol": 0}

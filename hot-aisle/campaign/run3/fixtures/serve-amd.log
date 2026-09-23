@@ -1,0 +1,3 @@
+WARNING incompatible backend TURBOQUANT overriding ROCM_ATTN
+INFO Using ROCM_AITER_FA attention backend.
+INFO Using RowWiseTorchFP8ScaledMMLinearKernel for FP8 linear layers

@@ -1,0 +1,52 @@
+# ledger · per-run ledger, Knot lifecycle, seat registry, WATERLINE planner, estate arm pre-registration
+
+Lane B of the 2026-09-24 build (`../build-2026-09-24/lane-B.brief`). Everything here is stdlib Python, runs offline on fixtures kept under `fixtures/`, and asserts no result. Design authority: `../research-2026-09/SYNTHESIS.md`.
+
+| File | What |
+|---|---|
+| `ledger.schema.json`, `SCHEMA.md` | the run-ledger record, `second-run/run-ledger@1`: identity, clocks, acquisition, work, sustained, traversal, money, derived, receipts |
+| `ledger_validate.py` | validator (types, null-reasons, clock order, acquisition counts, work ordering, money and derived arithmetic) |
+| `ledger_build_run1.py` | builds `examples/run1-{do-h100,hotaisle-mi300x}.ledger.json` + reconstructed `events.jsonl` from `../results/`; nulls carry reasons |
+| `knot_lifecycle.py`, `KNOT-LIFECYCLE.md` | Knot state machine (ISSUED … RELEASED, PROVISIONING_FAILED, INTERRUPTED, REASSIGNED, …) and the hash-chained append-only event log |
+| `seats.json` | seat registry: Hot Aisle 1×MI300X, DO H100, DO H200 (unavailable), DO MI300X (never ran), estate 3090 W01, 3090 N01 eGPU, 4060 W01, CPUs, iGPUs/NPU validator-only; measured fields cite receipts |
+| `waterline.py` | feasibility-before-price planner: feasible seats, written refusal per infeasible seat, fastest / cheapest / most-efficient plans with wall clock, cost, success probability (and "too thin" flags) |
+| `ESTATE-ARM-PREREG.md` | draft pre-registration for the estate arm of Run 3 (after ~2026-09-28) |
+| `fixtures/` | `ledger/` valid+invalid records; `run1-mini/` two real cells per arm (generated texts stripped); `knots/` three Knot specs; `availability-2026-09-23.jsonl` |
+| `examples/` | the worked example output (rebuilt by `ledger_build_run1.py`) |
+| `test_all.py` | runs every self-test |
+| `BUILD-REPORT.md` | what was built, test output, open questions, what the operator must supply |
+
+## Run
+
+From this directory (`hot-aisle/campaign/ledger/`):
+
+```sh
+python test_all.py                                   # every offline self-test; exit 0 = all pass
+
+python ledger_validate.py examples/*.ledger.json     # validate records; exit 1 lists every problem
+python ledger_validate.py --selftest                 # fixtures/ledger/valid-* must pass, invalid-* must fail with the named error
+
+python ledger_build_run1.py                          # rebuild the Run 1 worked example from ../results, ../identity.json, ../availability
+python ledger_build_run1.py --selftest               # same builder on fixtures/run1-mini, checked against expected.json
+
+python knot_lifecycle.py --selftest
+python knot_lifecycle.py new    events.jsonl knot-1 operator '{"count":200}'
+python knot_lifecycle.py event  events.jsonl knot-1 PROVISIONED runner do-h100-nyc2 '{"seat_id":"do-h100-nyc2","t_ssh_or_ready":"2026-09-24T18:03:00Z"}'
+python knot_lifecycle.py state  events.jsonl
+python knot_lifecycle.py verify events.jsonl         # replays the chain; any edited line fails
+
+python waterline.py check-seats                      # seats.json: measured fields cite receipts, nulls carry reasons
+python waterline.py --selftest
+python waterline.py plan fixtures/knots/knot-30b-coding.json                                   # exit 0 = plans, 2 = refused with reasons
+python waterline.py plan fixtures/knots/knot-70b-dense.json --start-at 2026-09-29T10:00:00Z --json plan.json
+python waterline.py plan fixtures/knots/knot-estate-arm-120b.json --start-at 2026-09-29T10:00:00Z
+```
+
+`waterline.py plan` reads `seats.json` and `../availability/observations.jsonl` by default; `--seats` and `--availability` override. Availability probabilities come only from those observations (listed ÷ probes × delivered ÷ attempts) and are flagged **too thin** below 5 probes, which is every SKU today.
+
+## Conventions kept
+
+- Python stdlib only; no build step; nothing installs.
+- Every null in a ledger record has a written reason; every measured number in `seats.json` cites a receipt path; UNVERIFIED is written where a value could not be checked.
+- Timestamps are UTC ISO-8601. Prices are dated list prices. Costs are modeled until an invoice posts, and credits are never netted.
+- `examples/` are outputs of the builder; edit the builder, not the examples.

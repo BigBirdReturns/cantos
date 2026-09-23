@@ -1,0 +1,32 @@
+LANE B · Per-run ledger, Knot lifecycle, seat registry, WATERLINE planner, estate streaming-arm pre-registration. Directory: hot-aisle\campaign\ledger\
+
+Deliverables:
+1. Ledger schema (JSON, documented) for one run, with these field groups:
+   - identity
+   - clocks: t_request, t_ssh, t_ready, t_work_start, t_work_end, t_released
+   - acquisition attempts (the denominator)
+   - work: attempted, completed, correct, accepted, lost, restarts
+   - sustained buckets
+   - traversal: traversals, bytes_per_traversal, seconds_per_traversal, accepted_closures_per_traversal
+   - money: modeled (list × minutes), billed when posted, credits, energy
+   - derived: $/accepted, wall-clock/accepted
+   - receipt references
+
+   Also build a stdlib validator, and a builder that assembles a ledger from Run 1's existing files (results/do-h100, results/hotaisle-mi300x) as a worked example. Fields Run 1 cannot supply are null with a reason.
+2. Knot lifecycle state machine: ISSUED, PROVISIONED, RUNNING, DELIVERED, KNOT_VERIFIED, SETTLED, RELEASED, PROVISIONING_FAILED and any others needed, with allowed transitions and an append-only event log format.
+3. seats.json registry covering:
+   - Hot Aisle 1xMI300X, DO H100, DO H200 (unavailable)
+   - estate seats: 3090 W01, 3090 N01 eGPU, 4060 W01, CPUs, and iGPUs/NPU as validator-only
+
+   Fill measured fields ONLY where receipts exist, citing paths (the estate receipts are listed in the SYNTHESIS Correction section); otherwise null with a reason. Include link bandwidth and traversal cost where measured.
+4. waterline.py (stdlib planner).
+   - Input: a Knot spec (model bytes, closures-per-traversal curve or batch depth, deadline, evaluator, count), plus seats.json and the availability observations.
+   - Output: feasible seats, reasons for each infeasible one, and three plans (fastest, cheapest, most efficient by closures per traversal or per $).
+   - Each plan carries estimated wall clock, cost, and success probability from availability data. Say when that data is too thin.
+   - It must refuse with written reasons (for example, traversal time exceeds the deadline), never a bare "does not fit".
+5. ESTATE-ARM-PREREG.md: the missing measurement.
+   - One model that does not fit in a 3090's VRAM, streamed end to end on the estate, after about 2026-09-28 when a 3090 frees up.
+   - A graded task batch at increasing depth.
+   - Reports traversals, seconds and bytes per traversal, accepted closures per traversal, and metered watts.
+   - Size it from the real receipts' numbers, and say explicitly which path it measures (llama.cpp partial offload or true streaming).
+6. Offline tests. Then BUILD-REPORT.md.

@@ -1,0 +1,23 @@
+{
+  "schema": "second-run/availability-probes@1",
+  "hotaisle": {
+    "team": null,
+    "auth_status": "UNVERIFIED: Token prefix inferred from existing runner; confirm before activation",
+    "region_scope": null,
+    "region_note": "UNVERIFIED: official VM response has no region. Set enc1 only after verifying team endpoint scope."
+  },
+  "probes": [
+    {"provider":"hotaisle","sku":"vm-mi300x-1x","region":"enc1","gpus":1},
+    {"provider":"hotaisle","sku":"vm-mi300x-2x","region":"enc1","gpus":2},
+    {"provider":"digitalocean","sku":"gpu-h100x1-80gb","region":"nyc2","gpus":1},
+    {"provider":"digitalocean","sku":"gpu-h100x8-640gb","region":"nyc2","gpus":8},
+    {"provider":"digitalocean","sku":"gpu-mi300x1-192gb","region":"nyc2","gpus":1},
+    {"provider":"digitalocean","sku":"gpu-mi300x1-192gb","region":"tor1","gpus":1},
+    {"provider":"digitalocean","sku":"gpu-h200x1-141gb","region":"nyc2","gpus":1},
+    {"provider":"digitalocean","sku":"gpu-h200x1-141gb","region":"ric1","gpus":1},
+    {"provider":"digitalocean","sku":"gpu-h200x1-141gb","region":"tor1","gpus":1},
+    {"provider":"digitalocean","sku":"gpu-h200x1-141gb","region":"mkc1","gpus":1},
+    {"provider":"digitalocean","sku":"gpu-h200x1-141gb","region":"mem1","gpus":1},
+    {"provider":"digitalocean","sku":"gpu-h200x1-141gb","region":"ams3","gpus":1}
+  ]
+}

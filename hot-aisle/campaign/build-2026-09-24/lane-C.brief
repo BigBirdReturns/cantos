@@ -1,0 +1,29 @@
+LANE C · Availability probes and heatmap. Directory: hot-aisle\campaign\availability\
+
+Existing files: observations.jsonl and README.md. You may extend README.md. observations.jsonl is append-only: never rewrite existing lines.
+
+Deliverables:
+1. probe.py (stdlib).
+   - Providers:
+     - Hot Aisle: API `GET /virtual_machines/available/`. Find the base URL and auth header format in Hot Aisle's public API docs; mark UNVERIFIED if you cannot confirm them.
+     - DigitalOcean: `GET https://api.digitalocean.com/v2/sizes` with a Bearer token. GPU sizes carry region lists and an "available" flag; verify this from the docs.
+   - Tokens come from env HOTAISLE_API_TOKEN and DIGITALOCEAN_TOKEN. A missing token records outcome "unknown" with a reason and never crashes.
+   - Fixed tuples (provider, sku, region, gpus) are read from a config file, probes.json.
+   - Appends observations with method "api" and layer "listed".
+   - The separate "delivered" layer is written only by real create attempts. Provide a helper to append those.
+   - `--dry-run` uses fixtures.
+2. heatmap.py (stdlib) → heatmap.html: static, inline SVG, no external deps, readable in light and dark.
+   - Rows: provider × sku × region. Columns: UTC hour over the last 7 days.
+   - Cell colour = listed fraction over valid probes; grey = unknown or missed.
+   - Dots mark delivered attempts, with outcome.
+   - Shows denominators.
+   - Also writes a text summary.
+3. Deployment for N01:
+   - systemd service and timer units (every 15 minutes)
+   - an env-file template for tokens (never real tokens)
+   - install instructions
+
+   Do not install anything.
+4. Offline tests on fixture API responses. Then BUILD-REPORT.md.
+
+Web: you may read public API docs (cap: 8 searches).

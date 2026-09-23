@@ -1,0 +1,21 @@
+{
+  "schema": "second-run/knot-spec@1",
+  "knot_id": "knot-estate-arm-gptoss120b-q2",
+  "task_class": "graded-coding",
+  "count": 164,
+  "evaluator": {"name": "evalplus-humaneval-plus", "frozen": true, "needs_seat_role": "grader"},
+  "deadline_s": 16200,
+  "start_at": "2026-09-24T18:00:00Z",
+  "tokens_in_per_closure": 200,
+  "tokens_out_per_closure": 300,
+  "model": {
+    "id": "gpt-oss-120b Q2_0 GGUF (S:/Models/EST-FABRIC-NET-TETHER-1/gpt-oss-120b-Q2_0.gguf)",
+    "class": "moe-120b-a5b",
+    "formats": [
+      {"format": "gguf-q2", "bytes": 33745206528, "bytes_basis": "model_size in B1-gptoss120b-solo-W01-3090-partial.json (llama-bench, 2026-09-09)", "recipes": ["llama.cpp-cuda"]}
+    ]
+  },
+  "traversal_profile": {"batch_depths": [1, 4, 16], "closures_per_traversal_curve": null},
+  "policy": {"max_usd": 5.0, "kwh_usd": 0.30, "kwh_usd_basis": "assumed; operator to supply the tariff"},
+  "_note": "ESTATE-ARM-PREREG.md Knot: one depth level per cell; the deadline is the 4.5 h watchdog"
+}

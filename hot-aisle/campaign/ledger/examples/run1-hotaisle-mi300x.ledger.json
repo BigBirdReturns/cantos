@@ -1,0 +1,605 @@
+{
+ "schema": "second-run/run-ledger@1",
+ "identity": {
+  "run_id": "run1/hotaisle-mi300x",
+  "campaign": "first-qualified-workload-2026-09",
+  "run": "run1",
+  "arm": "hotaisle-mi300x",
+  "knot_id": null,
+  "seat_id": "hotaisle-mi300x-1x-enc1",
+  "provider": "hotaisle",
+  "region": "enc1",
+  "sku": "vm-mi300x-1x",
+  "gpus": 1,
+  "host": "enc1-gpuvm002",
+  "model": {
+   "id": "Qwen/Qwen3-Coder-30B-A3B-Instruct-FP8",
+   "revision": "dcaee4d4dfc5ee71ad501f01f530e5652438fde0",
+   "precision": "FP8",
+   "bytes": 31187041238
+  },
+  "runtime": {
+   "image": "rocm/vllm",
+   "digest": "sha256:30761c2125ce150d556bef46406a0158446421886bf83a2e60154c6e4ca17a13",
+   "engine": "vllm",
+   "engine_version": "0.27.1.dev5+gf46a9dfe2.d20260827.rocm100",
+   "gpu": "AMD Instinct MI300X VF",
+   "driver_or_rocm": "7.2.4",
+   "kernel": "6.8.0-124-generic"
+  },
+  "workload_id": "random-seed7-in2048-out256-n200-v1",
+  "prereg": {
+   "path": "campaign/identity.json",
+   "commit": "c283ecadd4b996a7a377273e61fa713eca082c0b",
+   "note": "local, unpushed commits (DISCLOSURES 'Timestamps'): privately recorded before the data, not publicly timestamped"
+  },
+  "null_reasons": {
+   "knot_id": "Run 1 predates the Knot lifecycle; the reconstructed event log uses knot id run1/hotaisle-mi300x"
+  }
+ },
+ "clocks": {
+  "t_request": "2026-09-23T18:17:00Z",
+  "t_ssh": null,
+  "t_ready": "2026-09-23T18:32:32Z",
+  "t_work_start": "2026-09-23T18:40:03Z",
+  "t_work_end": "2026-09-23T19:01:32Z",
+  "t_released": null,
+  "sources": {
+   "t_request": {
+    "source": "campaign/availability/observations.jsonl",
+    "precision": "approximate to a few minutes (availability/README.md: times before 19:00 UTC)"
+   },
+   "t_ssh": {
+    "source": null,
+    "precision": null
+   },
+   "t_ready": {
+    "source": "env.json recorded_at; arm.sh writes it after health AND the unrecorded warm-up, so true health is earlier by the warm-up (~30-60 s)",
+    "precision": "1 s, upper bound"
+   },
+   "t_work_start": {
+    "source": "earliest cell 'date' (vLLM bench start, container clock assumed UTC; consistent with env.recorded_at)",
+    "precision": "1 s"
+   },
+   "t_work_end": {
+    "source": "latest cell 'date' + 'duration'",
+    "precision": "1 s"
+   },
+   "t_released": {
+    "source": null,
+    "precision": null
+   }
+  },
+  "null_reasons": {
+   "t_ssh": "Run 1 did not record the first ssh time for this seat (Hot Aisle TUI provision; no time_to_ssh_s in the observation)",
+   "t_released": "Run 1 did not record the seat deletion time; the console/TUI delete was not logged"
+  }
+ },
+ "acquisition": {
+  "attempts": [
+   {
+    "ts": "2026-09-23T18:17:00Z",
+    "provider": "hotaisle",
+    "region": "enc1",
+    "sku": "vm-mi300x-1x",
+    "method": "tui-provision",
+    "outcome": "available",
+    "provisioned": true,
+    "time_to_ssh_s": null,
+    "note": "enc1-gpuvm002; list also showed 2x VM (1 available) and 8x bare metal (1 available); banner: 'we're pretty full'",
+    "source": "campaign/availability/observations.jsonl"
+   }
+  ],
+  "n_attempts": 1,
+  "n_allocations": 1,
+  "yield": 1.0,
+  "note": "Run 1 made exactly one create per arm and it succeeded; listings the same evening (H200, DO MI300X out of capacity) belong to other arms and are not attempts here."
+ },
+ "work": {
+  "unit": "request",
+  "evaluator": null,
+  "acceptance_rule": {
+   "basis": "post-hoc per-request rule declared in DISCLOSURES.md (Run 1): a request is accepted if it completed and its own TTFT <= gate. The registered rule was cell-level (p95 TTFT, p95 E2E, failed <= 1%) and is kept per cell in work.cells.registered_cell_qualifies.",
+   "ttft_ms": 1000,
+   "e2e_ms": null,
+   "correctness": false,
+   "e2e_note": "E2E gate held on both arms for symmetry: the ROCm image (vLLM 0.27.1-dev) writes no per-request latencies."
+  },
+  "attempted": 2400,
+  "completed": 2400,
+  "correct": null,
+  "accepted": 2400,
+  "lost": 0,
+  "restarts": null,
+  "cells": [
+   {
+    "cell": "cell-c1-r0",
+    "concurrency": 1,
+    "attempted": 200,
+    "completed": 200,
+    "failed": 0,
+    "accepted_ttft_gate": 200,
+    "duration_s": 403.522,
+    "request_throughput": 0.4956,
+    "p95_ttft_ms": 105.9,
+    "p95_e2e_ms": null,
+    "e2e_gate": "held (no per-request latencies in this image's output)",
+    "registered_cell_qualifies": true,
+    "median_itl_ms": 7.532,
+    "sha256": "d8493eddfeb532bd294c09c60a33f70ab2862bb48fdb95eaacfb4cad276c7355"
+   },
+   {
+    "cell": "cell-c1-r1",
+    "concurrency": 1,
+    "attempted": 200,
+    "completed": 200,
+    "failed": 0,
+    "accepted_ttft_gate": 200,
+    "duration_s": 403.377,
+    "request_throughput": 0.4958,
+    "p95_ttft_ms": 105.0,
+    "p95_e2e_ms": null,
+    "e2e_gate": "held (no per-request latencies in this image's output)",
+    "registered_cell_qualifies": true,
+    "median_itl_ms": 7.532,
+    "sha256": "870411b100f98edbad00eec69fdf9bbf6c409784577e0ae9ff71ab4e5e3f24d7"
+   },
+   {
+    "cell": "cell-c1-r2",
+    "concurrency": 1,
+    "attempted": 200,
+    "completed": 200,
+    "failed": 0,
+    "accepted_ttft_gate": 200,
+    "duration_s": 403.207,
+    "request_throughput": 0.496,
+    "p95_ttft_ms": 106.5,
+    "p95_e2e_ms": null,
+    "e2e_gate": "held (no per-request latencies in this image's output)",
+    "registered_cell_qualifies": true,
+    "median_itl_ms": 7.531,
+    "sha256": "8e6f527ba909a02555badd6a3e4269a90f5f907693e7b5f29b1a9cb2c1b1ce19"
+   },
+   {
+    "cell": "cell-c32-r0",
+    "concurrency": 32,
+    "attempted": 200,
+    "completed": 200,
+    "failed": 0,
+    "accepted_ttft_gate": 200,
+    "duration_s": 25.389,
+    "request_throughput": 7.8774,
+    "p95_ttft_ms": 346.7,
+    "p95_e2e_ms": null,
+    "e2e_gate": "held (no per-request latencies in this image's output)",
+    "registered_cell_qualifies": true,
+    "median_itl_ms": 13.617,
+    "sha256": "9be765aaa1d1f58282bbfed184297139daa62d6a98ef6f9cbd5033233d497320"
+   },
+   {
+    "cell": "cell-c32-r1",
+    "concurrency": 32,
+    "attempted": 200,
+    "completed": 200,
+    "failed": 0,
+    "accepted_ttft_gate": 200,
+    "duration_s": 25.638,
+    "request_throughput": 7.801,
+    "p95_ttft_ms": 329.2,
+    "p95_e2e_ms": null,
+    "e2e_gate": "held (no per-request latencies in this image's output)",
+    "registered_cell_qualifies": true,
+    "median_itl_ms": 13.8,
+    "sha256": "27ea03e80a5b56cef4703c1222b13f0e4fa5dcc254abb80fcf4ee9dbeba6ad6e"
+   },
+   {
+    "cell": "cell-c32-r2",
+    "concurrency": 32,
+    "attempted": 200,
+    "completed": 200,
+    "failed": 0,
+    "accepted_ttft_gate": 200,
+    "duration_s": 25.352,
+    "request_throughput": 7.8891,
+    "p95_ttft_ms": 323.2,
+    "p95_e2e_ms": null,
+    "e2e_gate": "held (no per-request latencies in this image's output)",
+    "registered_cell_qualifies": true,
+    "median_itl_ms": 13.696,
+    "sha256": "d12a5faef42d367bb9acac264ea284d6bd77f3356917fe0654e30ed4b2c905a1"
+   },
+   {
+    "cell": "cell-c64-r0",
+    "concurrency": 64,
+    "attempted": 200,
+    "completed": 200,
+    "failed": 0,
+    "accepted_ttft_gate": 200,
+    "duration_s": 17.427,
+    "request_throughput": 11.4761,
+    "p95_ttft_ms": 649.2,
+    "p95_e2e_ms": null,
+    "e2e_gate": "held (no per-request latencies in this image's output)",
+    "registered_cell_qualifies": true,
+    "median_itl_ms": 17.391,
+    "sha256": "5ef1658288fb1f76bb1cf630a6feeea38c8918cf027c3c5cad0a875299d29769"
+   },
+   {
+    "cell": "cell-c64-r1",
+    "concurrency": 64,
+    "attempted": 200,
+    "completed": 200,
+    "failed": 0,
+    "accepted_ttft_gate": 200,
+    "duration_s": 17.12,
+    "request_throughput": 11.6825,
+    "p95_ttft_ms": 697.5,
+    "p95_e2e_ms": null,
+    "e2e_gate": "held (no per-request latencies in this image's output)",
+    "registered_cell_qualifies": true,
+    "median_itl_ms": 17.118,
+    "sha256": "c82324e0629c6cf0cad2d2367f53e12ed63f8632d2aa5bd7e2dc982ac210035b"
+   },
+   {
+    "cell": "cell-c64-r2",
+    "concurrency": 64,
+    "attempted": 200,
+    "completed": 200,
+    "failed": 0,
+    "accepted_ttft_gate": 200,
+    "duration_s": 17.269,
+    "request_throughput": 11.5812,
+    "p95_ttft_ms": 650.6,
+    "p95_e2e_ms": null,
+    "e2e_gate": "held (no per-request latencies in this image's output)",
+    "registered_cell_qualifies": true,
+    "median_itl_ms": 17.254,
+    "sha256": "a29cc8fdc9bec6596cc28460edb736da0f0896527bb6f14ad92b8c4e4497f99c"
+   },
+   {
+    "cell": "cell-c8-r0",
+    "concurrency": 8,
+    "attempted": 200,
+    "completed": 200,
+    "failed": 0,
+    "accepted_ttft_gate": 200,
+    "duration_s": 66.533,
+    "request_throughput": 3.006,
+    "p95_ttft_ms": 174.4,
+    "p95_e2e_ms": null,
+    "e2e_gate": "held (no per-request latencies in this image's output)",
+    "registered_cell_qualifies": true,
+    "median_itl_ms": 9.981,
+    "sha256": "ad52f219da15e4440a75bb35da16fb0718ba07c1ec5c13a662daf74458c6cdd9"
+   },
+   {
+    "cell": "cell-c8-r1",
+    "concurrency": 8,
+    "attempted": 200,
+    "completed": 200,
+    "failed": 0,
+    "accepted_ttft_gate": 200,
+    "duration_s": 66.142,
+    "request_throughput": 3.0238,
+    "p95_ttft_ms": 151.2,
+    "p95_e2e_ms": null,
+    "e2e_gate": "held (no per-request latencies in this image's output)",
+    "registered_cell_qualifies": true,
+    "median_itl_ms": 9.873,
+    "sha256": "1f6510e6cdb5f8a7a6bc135868bff8083687e8a346ff745213c7c6a7fe01993c"
+   },
+   {
+    "cell": "cell-c8-r2",
+    "concurrency": 8,
+    "attempted": 200,
+    "completed": 200,
+    "failed": 0,
+    "accepted_ttft_gate": 200,
+    "duration_s": 66.074,
+    "request_throughput": 3.0269,
+    "p95_ttft_ms": 144.5,
+    "p95_e2e_ms": null,
+    "e2e_gate": "held (no per-request latencies in this image's output)",
+    "registered_cell_qualifies": true,
+    "median_itl_ms": 9.867,
+    "sha256": "9231b5a7096add51d0d7f5809efed7ac515d2b197e20b03bf9e8c8651109f63c"
+   }
+  ],
+  "null_reasons": {
+   "evaluator": "Run 1 ran no evaluator (identity.json not_in_this_run: correctness sidecar)",
+   "correct": "Run 1 ran no evaluator; identity.json lists the correctness sidecar under not_in_this_run",
+   "restarts": "Run 1 recorded no restart counter and serve.log was not collected (DISCLOSURES: unequal software note)"
+  }
+ },
+ "sustained": {
+  "required_window_s": 3600,
+  "bucket_s": 300,
+  "window_s": 1675.3,
+  "meets_required_window": false,
+  "buckets": [
+   {
+    "index": 0,
+    "start_s": 0,
+    "accepted": 148,
+    "completed": 148
+   },
+   {
+    "index": 1,
+    "start_s": 300,
+    "accepted": 143,
+    "completed": 143
+   },
+   {
+    "index": 2,
+    "start_s": 600,
+    "accepted": 142,
+    "completed": 142
+   },
+   {
+    "index": 3,
+    "start_s": 900,
+    "accepted": 149,
+    "completed": 149
+   },
+   {
+    "index": 4,
+    "start_s": 1200,
+    "accepted": 746,
+    "completed": 746
+   },
+   {
+    "index": 5,
+    "start_s": 1500,
+    "accepted": 1072,
+    "completed": 1072
+   }
+  ],
+  "min_accepted_per_bucket": 142,
+  "median_accepted_per_bucket": 148.5,
+  "last_q_over_first_q": 7.243243243243243,
+  "note": "Run 1's recorded window is the 12-cell sweep (c1 x3 first, c64 x3 last) with ~30 s bench start-up gaps between cells; bucket counts follow the concurrency schedule, not a steady arrival process. The last bucket is partial. Completion times on the AMD arm are ttft + sum(itl). This does not meet the 60-minute sustained requirement."
+ },
+ "traversal": {
+  "path": "resident-hbm",
+  "bytes_per_traversal": null,
+  "bytes_per_traversal_basis": null,
+  "traversals": null,
+  "traversals_basis": null,
+  "seconds_per_traversal": 0.007532,
+  "seconds_per_traversal_basis": "median inter-token latency at concurrency 1 across repeats (decode step ~ one full traversal from HBM)",
+  "accepted_closures_per_traversal": null,
+  "accepted_closures_per_traversal_basis": null,
+  "by_depth": [
+   {
+    "depth": 1,
+    "seconds_per_traversal": 0.007532,
+    "accepted_closures_per_traversal": 0.003734,
+    "basis": "estimated: seconds/traversal = median ITL at this concurrency (one decode step ~ one traversal); traversals ~ cell duration / median ITL, prefill steps not separated; closures = accepted requests"
+   },
+   {
+    "depth": 8,
+    "seconds_per_traversal": 0.009873,
+    "accepted_closures_per_traversal": 0.029908,
+    "basis": "estimated: seconds/traversal = median ITL at this concurrency (one decode step ~ one traversal); traversals ~ cell duration / median ITL, prefill steps not separated; closures = accepted requests"
+   },
+   {
+    "depth": 32,
+    "seconds_per_traversal": 0.013696,
+    "accepted_closures_per_traversal": 0.107658,
+    "basis": "estimated: seconds/traversal = median ITL at this concurrency (one decode step ~ one traversal); traversals ~ cell duration / median ITL, prefill steps not separated; closures = accepted requests"
+   },
+   {
+    "depth": 64,
+    "seconds_per_traversal": 0.017254,
+    "accepted_closures_per_traversal": 0.199794,
+    "basis": "estimated: seconds/traversal = median ITL at this concurrency (one decode step ~ one traversal); traversals ~ cell duration / median ITL, prefill steps not separated; closures = accepted requests"
+   }
+  ],
+  "null_reasons": {
+   "bytes_per_traversal": "MoE (30B-A3B): bytes touched per decode step are the active experts plus shared weights, not measured; the resident checkpoint (identity.model.bytes) is the footprint, not the traversal",
+   "bytes_per_traversal_basis": "see bytes_per_traversal",
+   "traversals": "vLLM 0.27/0.30 bench output does not count forward passes; by_depth carries a duration/ITL estimate",
+   "traversals_basis": "see traversals",
+   "accepted_closures_per_traversal": "not measured; by_depth carries estimates per concurrency",
+   "accepted_closures_per_traversal_basis": "see accepted_closures_per_traversal"
+  }
+ },
+ "money": {
+  "currency": "USD",
+  "list_rate_per_gpu_hr": 2.99,
+  "billing": "per minute",
+  "payer": "credit:hotaisle",
+  "modeled_minutes": 44.54,
+  "modeled_minutes_basis": "t_request -> t_work_end at list rate; t_released is unknown, so this is a LOWER bound on the billable window (the seat kept billing until deleted)",
+  "modeled_usd": 2.2195,
+  "billed_usd": null,
+  "billed_ref": null,
+  "credits_usd": null,
+  "energy": {
+   "watts_mean": null,
+   "kwh": null,
+   "tariff_usd_per_kwh": null,
+   "usd": null,
+   "meter": null,
+   "reason": "cloud seat; the buyer sees no meter"
+  },
+  "null_reasons": {
+   "billed_usd": "invoice not yet posted / not yet entered (DISCLOSURES: billed invoices not measured)",
+   "billed_ref": "see billed_usd",
+   "credits_usd": "credit consumption not yet read from the Hot Aisle balance; compute ran on the $200 credit (DISCLOSURES)"
+  }
+ },
+ "derived": {
+  "usd_per_accepted": 0.0009247916666666666,
+  "usd_per_1k_accepted": 0.9247916666666667,
+  "wall_s_per_accepted": 0.5370833333333334,
+  "accepted_per_s": 1.8619084561675718,
+  "cost_basis": "modeled",
+  "note": "Cost per accepted here is over the whole arm (request -> work end, all 12 cells including the slow c1 cells). It is NOT the per-cell $/1k that DISCLOSURES headlines (that is list rate / cell throughput at the cheapest qualifying cell)."
+ },
+ "receipts": {
+  "items": [
+   {
+    "kind": "cell",
+    "path": "campaign/results/hotaisle-mi300x/cell-c1-r0.json",
+    "sha256": "d8493eddfeb532bd294c09c60a33f70ab2862bb48fdb95eaacfb4cad276c7355"
+   },
+   {
+    "kind": "cell",
+    "path": "campaign/results/hotaisle-mi300x/cell-c1-r1.json",
+    "sha256": "870411b100f98edbad00eec69fdf9bbf6c409784577e0ae9ff71ab4e5e3f24d7"
+   },
+   {
+    "kind": "cell",
+    "path": "campaign/results/hotaisle-mi300x/cell-c1-r2.json",
+    "sha256": "8e6f527ba909a02555badd6a3e4269a90f5f907693e7b5f29b1a9cb2c1b1ce19"
+   },
+   {
+    "kind": "cell",
+    "path": "campaign/results/hotaisle-mi300x/cell-c32-r0.json",
+    "sha256": "9be765aaa1d1f58282bbfed184297139daa62d6a98ef6f9cbd5033233d497320"
+   },
+   {
+    "kind": "cell",
+    "path": "campaign/results/hotaisle-mi300x/cell-c32-r1.json",
+    "sha256": "27ea03e80a5b56cef4703c1222b13f0e4fa5dcc254abb80fcf4ee9dbeba6ad6e"
+   },
+   {
+    "kind": "cell",
+    "path": "campaign/results/hotaisle-mi300x/cell-c32-r2.json",
+    "sha256": "d12a5faef42d367bb9acac264ea284d6bd77f3356917fe0654e30ed4b2c905a1"
+   },
+   {
+    "kind": "cell",
+    "path": "campaign/results/hotaisle-mi300x/cell-c64-r0.json",
+    "sha256": "5ef1658288fb1f76bb1cf630a6feeea38c8918cf027c3c5cad0a875299d29769"
+   },
+   {
+    "kind": "cell",
+    "path": "campaign/results/hotaisle-mi300x/cell-c64-r1.json",
+    "sha256": "c82324e0629c6cf0cad2d2367f53e12ed63f8632d2aa5bd7e2dc982ac210035b"
+   },
+   {
+    "kind": "cell",
+    "path": "campaign/results/hotaisle-mi300x/cell-c64-r2.json",
+    "sha256": "a29cc8fdc9bec6596cc28460edb736da0f0896527bb6f14ad92b8c4e4497f99c"
+   },
+   {
+    "kind": "cell",
+    "path": "campaign/results/hotaisle-mi300x/cell-c8-r0.json",
+    "sha256": "ad52f219da15e4440a75bb35da16fb0718ba07c1ec5c13a662daf74458c6cdd9"
+   },
+   {
+    "kind": "cell",
+    "path": "campaign/results/hotaisle-mi300x/cell-c8-r1.json",
+    "sha256": "1f6510e6cdb5f8a7a6bc135868bff8083687e8a346ff745213c7c6a7fe01993c"
+   },
+   {
+    "kind": "cell",
+    "path": "campaign/results/hotaisle-mi300x/cell-c8-r2.json",
+    "sha256": "9231b5a7096add51d0d7f5809efed7ac515d2b197e20b03bf9e8c8651109f63c"
+   },
+   {
+    "kind": "log",
+    "path": "campaign/results/hotaisle-mi300x/cell-c1-r0.log"
+   },
+   {
+    "kind": "log",
+    "path": "campaign/results/hotaisle-mi300x/cell-c1-r1.log"
+   },
+   {
+    "kind": "log",
+    "path": "campaign/results/hotaisle-mi300x/cell-c1-r2.log"
+   },
+   {
+    "kind": "log",
+    "path": "campaign/results/hotaisle-mi300x/cell-c32-r0.log"
+   },
+   {
+    "kind": "log",
+    "path": "campaign/results/hotaisle-mi300x/cell-c32-r1.log"
+   },
+   {
+    "kind": "log",
+    "path": "campaign/results/hotaisle-mi300x/cell-c32-r2.log"
+   },
+   {
+    "kind": "log",
+    "path": "campaign/results/hotaisle-mi300x/cell-c64-r0.log"
+   },
+   {
+    "kind": "log",
+    "path": "campaign/results/hotaisle-mi300x/cell-c64-r1.log"
+   },
+   {
+    "kind": "log",
+    "path": "campaign/results/hotaisle-mi300x/cell-c64-r2.log"
+   },
+   {
+    "kind": "log",
+    "path": "campaign/results/hotaisle-mi300x/cell-c8-r0.log"
+   },
+   {
+    "kind": "log",
+    "path": "campaign/results/hotaisle-mi300x/cell-c8-r1.log"
+   },
+   {
+    "kind": "log",
+    "path": "campaign/results/hotaisle-mi300x/cell-c8-r2.log"
+   },
+   {
+    "kind": "env",
+    "path": "campaign/results/hotaisle-mi300x/env.json",
+    "sha256": "8aaf729e310147de0e406b61a821abd0359cc63f55c287ed14afdb286a32949f"
+   },
+   {
+    "kind": "env_normalized",
+    "path": "campaign/results/hotaisle-mi300x/env.normalized.json",
+    "sha256": null
+   },
+   {
+    "kind": "image",
+    "path": "campaign/results/hotaisle-mi300x/image.txt",
+    "sha256": null
+   },
+   {
+    "kind": "manifest",
+    "path": "campaign/results/hotaisle-mi300x/MANIFEST.sha256",
+    "sha256": null
+   },
+   {
+    "kind": "engine_output",
+    "path": "campaign/results/run1-engine/hotaisle-mi300x.ttft1000.json"
+   },
+   {
+    "kind": "availability",
+    "path": "campaign/availability/observations.jsonl"
+   },
+   {
+    "kind": "prereg",
+    "path": "campaign/identity.json"
+   },
+   {
+    "kind": "event_log",
+    "path": "campaign/ledger/examples/run1-hotaisle-mi300x.events.jsonl"
+   }
+  ]
+ },
+ "notes": [
+  "Funding: Hot Aisle arm ran on a $200 credit given by Hot Aisle; costs are modeled at undiscounted list ($2.99/GPU-hr).",
+  "Unequal software (DISCLOSURES): CUDA arm vLLM 0.30.0 default FP8 MoE config; ROCm arm vLLM 0.27.1-dev whose image includes a tuned MI300X MoE config. serve.log not collected.",
+  "Acceptance is the declared post-hoc per-request TTFT rule; the registered cell-level rule is kept per cell.",
+  "One unrecorded warm-up pass (32 prompts at concurrency 8) preceded the first cell; not in any count.",
+  "Arm C (DigitalOcean MI300X, $2.59) did not run; no claim that Hot Aisle is the cheapest MI300X.",
+  "Clocks before 19:00 UTC are approximate to a few minutes (availability/README.md)."
+ ],
+ "built_by": {
+  "tool": "ledger/ledger_build_run1.py",
+  "at": "2026-09-23T22:07:29Z",
+  "inputs": [
+   "campaign/results/hotaisle-mi300x",
+   "campaign/identity.json",
+   "campaign/availability/observations.jsonl"
+  ]
+ }
+}

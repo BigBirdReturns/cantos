@@ -1,0 +1,1199 @@
+{
+ "schema": "second-run/seat-registry@1",
+ "_about": "One measured profile per seat (SYNTHESIS North star 2: traversal cost, $/hr or watts, setup overhead, availability, accepted closures per traversal per task class). Measured fields are filled ONLY where a receipt exists and cite its path; everything else is null with a reason. 'link' is the path weights travel on a decode step. Prices are dated list prices, not quotes. Nothing here is a claim about performance; it is what the receipts say.",
+ "as_of": "2026-09-23",
+ "units": {
+  "bytes": "B",
+  "seconds": "s",
+  "rates": "USD per GPU-hour",
+  "watts": "W",
+  "bandwidth": "bytes per second"
+ },
+ "seats": {
+  "hotaisle-mi300x-1x-enc1": {
+   "cell": "hotaisle",
+   "provider": "hotaisle",
+   "region": "enc1",
+   "sku": "vm-mi300x-1x",
+   "kind": "cloud-vm",
+   "accelerator": {
+    "model": "AMD Instinct MI300X VF",
+    "count": 1,
+    "memory_bytes": 206158430208,
+    "memory_note": "192 GiB HBM3 nameplate; rocm-smi total not retained in the receipt",
+    "memory_domain": "single",
+    "usable_for_weights_bytes": 172800000000,
+    "usable_basis": "0.90 x 192 GB (vLLM gpu-memory-utilization used in Runs 1-2); Run 2 loaded 72.7 GB of weights here"
+   },
+   "identity_receipt": "hot-aisle/campaign/results/hotaisle-mi300x/env.normalized.json",
+   "link": {
+    "path": "resident-hbm",
+    "bytes_per_second": null,
+    "bytes_per_second_reason": "HBM bandwidth not measured; traversal timing below is the measured proxy"
+   },
+   "software": {
+    "engine": "vllm",
+    "recipes": [
+     "vllm-rocm"
+    ],
+    "formats_supported": [
+     "fp8",
+     "bf16",
+     "awq-int4"
+    ],
+    "image_receipt": "hot-aisle/campaign/results/hotaisle-mi300x/image.txt",
+    "note": "Run 1 ran rocm/vllm 0.27.1-dev; Run 2 prereg pins vllm/vllm-openai-rocm:v0.30.0. Formats beyond FP8 are UNVERIFIED on this seat."
+   },
+   "price": {
+    "list_rate_per_gpu_hr": 2.99,
+    "billing": "per-minute",
+    "minimum": null,
+    "source": "hot-aisle/campaign/identity.json arms.hotaisle-mi300x (retrieved 2026-09-22/23)",
+    "credit_note": "campaign compute ran on a $200 Hot Aisle credit; modeled at list"
+   },
+   "setup": {
+    "t_request_to_ready_s": 932,
+    "basis": "measured, approximate: TUI provision 18:17 UTC (availability/observations.jsonl, +/- minutes) to env.json recorded_at 18:32:32Z (after health and warm-up)",
+    "time_to_ssh_s": null,
+    "time_to_ssh_reason": "not recorded for the Hot Aisle TUI provision"
+   },
+   "traversal": {
+    "task_class": "random-2048/256 vLLM bench (Run 1)",
+    "seconds_per_traversal_by_depth": [
+     {
+      "depth": 1,
+      "seconds": 0.007532
+     },
+     {
+      "depth": 8,
+      "seconds": 0.00998
+     },
+     {
+      "depth": 32,
+      "seconds": 0.01362
+     },
+     {
+      "depth": 64,
+      "seconds": 0.01739
+     }
+    ],
+    "basis": "median ITL per concurrency, repeat 0 of hot-aisle/campaign/results/hotaisle-mi300x/cell-c{1,8,32,64}-r0.json (one decode step ~ one traversal); estimated, not a forward-pass counter",
+    "bytes_per_traversal": null,
+    "bytes_per_traversal_reason": "MoE active bytes not measured",
+    "accepted_closures_per_traversal_by_depth": "see ledger/examples/run1-hotaisle-mi300x.ledger.json traversal.by_depth",
+    "curves": [
+     {
+      "model_class": "moe-30b-a3b",
+      "format": "fp8",
+      "task_class": "random-2048/256",
+      "by_depth": [
+       {
+        "depth": 1,
+        "seconds": 0.007532
+       },
+       {
+        "depth": 8,
+        "seconds": 0.00998
+       },
+       {
+        "depth": 32,
+        "seconds": 0.01362
+       },
+       {
+        "depth": 64,
+        "seconds": 0.01739
+       }
+      ],
+      "basis": "median ITL per concurrency, repeat 0 (estimated traversal time, not a forward-pass counter)",
+      "receipt": "hot-aisle/campaign/results/hotaisle-mi300x/cell-c{1,8,32,64}-r0.json"
+     },
+     {
+      "model_class": "dense-70b",
+      "format": "fp8",
+      "task_class": "random long 8192/512 (Run 2, pre-registered AITER serve, ROCM_ATTN auto-selected)",
+      "by_depth": [
+       {
+        "depth": 1,
+        "seconds": 0.02772
+       },
+       {
+        "depth": 8,
+        "seconds": 0.034162
+       },
+       {
+        "depth": 32,
+        "seconds": 0.056626
+       },
+       {
+        "depth": 64,
+        "seconds": 0.062198
+       },
+       {
+        "depth": 128,
+        "seconds": 0.062249
+       }
+      ],
+      "basis": "median ITL per concurrency, median over repeats, long shape; c64/c128 exceed the KV budget by construction (DISCLOSURES Run 2) so those points measure preemption, not steady decode",
+      "receipt": "hot-aisle/campaign/results/run2-hotaisle-mi300x/cell-long-c{1,8,32,64,128}-r{0,1}.json"
+     }
+    ]
+   },
+   "priors": {
+    "random-2048/256@ttft1000": {
+     "accept_rate": 1.0,
+     "n": 2400,
+     "receipt": "hot-aisle/campaign/results/run1-engine/hotaisle-mi300x.ttft1000.json"
+    },
+    "graded-coding": null,
+    "graded-coding_reason": "no graded batch has run on this seat yet (Run 3)"
+   },
+   "availability": {
+    "source": "hot-aisle/campaign/availability/observations.jsonl",
+    "key": {
+     "provider": "hotaisle",
+     "sku": "vm-mi300x-1x"
+    },
+    "declared_busy_until": null,
+    "note": "TUI banner 2026-09-23: 'we're pretty full'; 1 VM listed"
+   },
+   "roles": [
+    "execute"
+   ],
+   "status": "available-when-listed",
+   "power": {
+    "watts_mean": null,
+    "reason": "cloud seat; no meter"
+   }
+  },
+  "do-h100-nyc2": {
+   "cell": "digitalocean",
+   "provider": "digitalocean",
+   "region": "nyc2",
+   "sku": "gpu-h100x1-80gb",
+   "kind": "cloud-droplet",
+   "accelerator": {
+    "model": "NVIDIA H100 80GB HBM3",
+    "count": 1,
+    "memory_bytes": 85899345920,
+    "memory_note": "80 GiB nameplate; ~72 GB usable for weights at 0.90 utilization (run2/PREREG.md)",
+    "memory_domain": "single",
+    "usable_for_weights_bytes": 72000000000,
+    "usable_basis": "run2/PREREG.md: 72.7 GB of weights is not expected to load at 0.90 utilization (~72 GB usable)"
+   },
+   "identity_receipt": "hot-aisle/campaign/results/do-h100/env.normalized.json",
+   "link": {
+    "path": "resident-hbm",
+    "bytes_per_second": null,
+    "bytes_per_second_reason": "not measured"
+   },
+   "software": {
+    "engine": "vllm",
+    "recipes": [
+     "vllm-cuda"
+    ],
+    "formats_supported": [
+     "fp8",
+     "bf16",
+     "awq-int4"
+    ],
+    "image_receipt": "hot-aisle/campaign/results/do-h100/image.txt",
+    "note": "image gpu-h100x1-base (CUDA 13.1); vLLM 0.30.0 by digest"
+   },
+   "price": {
+    "list_rate_per_gpu_hr": 4.41,
+    "billing": "per-second-5min-min",
+    "minimum_s": 300,
+    "source": "hot-aisle/campaign/identity.json arms.do-h100"
+   },
+   "setup": {
+    "t_request_to_ready_s": 658,
+    "basis": "measured, approximate: console create 17:49 UTC (+/- minutes) to env.json recorded_at 17:59:58Z",
+    "time_to_ssh_s": 60,
+    "time_to_ssh_basis": "availability/observations.jsonl line 1"
+   },
+   "traversal": {
+    "task_class": "random-2048/256 vLLM bench (Run 1)",
+    "seconds_per_traversal_by_depth": [
+     {
+      "depth": 1,
+      "seconds": 0.004309
+     },
+     {
+      "depth": 8,
+      "seconds": 0.00674
+     },
+     {
+      "depth": 32,
+      "seconds": 0.01069
+     },
+     {
+      "depth": 64,
+      "seconds": 0.01459
+     }
+    ],
+    "basis": "median ITL per concurrency, repeat 0 of hot-aisle/campaign/results/do-h100/cell-c{1,8,32,64}-r0.json; estimated, not a forward-pass counter",
+    "bytes_per_traversal": null,
+    "bytes_per_traversal_reason": "MoE active bytes not measured",
+    "accepted_closures_per_traversal_by_depth": "see ledger/examples/run1-do-h100.ledger.json traversal.by_depth",
+    "curves": [
+     {
+      "model_class": "moe-30b-a3b",
+      "format": "fp8",
+      "task_class": "random-2048/256",
+      "by_depth": [
+       {
+        "depth": 1,
+        "seconds": 0.004309
+       },
+       {
+        "depth": 8,
+        "seconds": 0.00674
+       },
+       {
+        "depth": 32,
+        "seconds": 0.01069
+       },
+       {
+        "depth": 64,
+        "seconds": 0.01459
+       }
+      ],
+      "basis": "median ITL per concurrency, repeat 0 (estimated traversal time)",
+      "receipt": "hot-aisle/campaign/results/do-h100/cell-c{1,8,32,64}-r0.json"
+     }
+    ]
+   },
+   "priors": {
+    "random-2048/256@ttft1000": {
+     "accept_rate": 0.9446,
+     "n": 2400,
+     "receipt": "hot-aisle/campaign/results/run1-engine/do-h100.ttft1000.json",
+     "note": "c64 cells fall off the 1 s TTFT gate (80.3 % accepted)"
+    },
+    "graded-coding": null,
+    "graded-coding_reason": "no graded batch has run on this seat yet"
+   },
+   "availability": {
+    "source": "hot-aisle/campaign/availability/observations.jsonl",
+    "key": {
+     "provider": "digitalocean",
+     "sku": "gpu-h100x1-80gb"
+    },
+    "declared_busy_until": null,
+    "note": "new accounts start at GPU Droplet limit 0; a support ticket raised it to 1 (CLAUDE.md field facts)"
+   },
+   "roles": [
+    "execute"
+   ],
+   "status": "available-when-listed",
+   "power": {
+    "watts_mean": null,
+    "reason": "cloud seat; no meter"
+   }
+  },
+  "do-h200-any": {
+   "cell": "digitalocean",
+   "provider": "digitalocean",
+   "region": null,
+   "sku": "gpu-h200x1-141gb",
+   "kind": "cloud-droplet",
+   "accelerator": {
+    "model": "NVIDIA H200 141GB",
+    "count": 1,
+    "memory_bytes": 151397597184,
+    "memory_note": "141 GiB nameplate; UNVERIFIED on this account",
+    "memory_domain": "single",
+    "usable_for_weights_bytes": 126900000000,
+    "usable_basis": "0.90 x 141 GB nameplate; UNVERIFIED"
+   },
+   "identity_receipt": null,
+   "identity_reason": "never provisioned: out of capacity in all six regions on 2026-09-23 (nyc2, ric1, tor1, mkc1, mem1, ams3)",
+   "link": {
+    "path": "resident-hbm",
+    "bytes_per_second": null,
+    "bytes_per_second_reason": "never ran"
+   },
+   "software": {
+    "engine": "vllm",
+    "recipes": [
+     "vllm-cuda"
+    ],
+    "formats_supported": [
+     "fp8",
+     "bf16",
+     "awq-int4"
+    ],
+    "note": "expected same image family as do-h100; UNVERIFIED"
+   },
+   "price": {
+    "list_rate_per_gpu_hr": 4.47,
+    "billing": "per-second-5min-min",
+    "minimum_s": 300,
+    "source": "hot-aisle/campaign/run2/PREREG.md arm H (list, 2026-09-23)"
+   },
+   "setup": {
+    "t_request_to_ready_s": null,
+    "basis": null,
+    "reason": "never provisioned",
+    "time_to_ssh_s": null,
+    "time_to_ssh_reason": "never provisioned"
+   },
+   "traversal": {
+    "task_class": null,
+    "seconds_per_traversal_by_depth": null,
+    "basis": null,
+    "reason": "never ran",
+    "bytes_per_traversal": null,
+    "bytes_per_traversal_reason": "never ran",
+    "curves": []
+   },
+   "priors": {},
+   "availability": {
+    "source": "hot-aisle/campaign/availability/observations.jsonl",
+    "key": {
+     "provider": "digitalocean",
+     "sku": "gpu-h200x1-141gb"
+    },
+    "declared_busy_until": null,
+    "note": "0 of 6 regions listed on 2026-09-23 evening"
+   },
+   "roles": [
+    "execute"
+   ],
+   "status": "unavailable",
+   "power": {
+    "watts_mean": null,
+    "reason": "cloud seat; no meter"
+   }
+  },
+  "do-mi300x-any": {
+   "cell": "digitalocean",
+   "provider": "digitalocean",
+   "region": null,
+   "sku": "gpu-mi300x1-192gb",
+   "kind": "cloud-droplet",
+   "accelerator": {
+    "model": "AMD Instinct MI300X",
+    "count": 1,
+    "memory_bytes": 206158430208,
+    "memory_note": "192 GiB nameplate; UNVERIFIED on this account",
+    "memory_domain": "single",
+    "usable_for_weights_bytes": 172800000000,
+    "usable_basis": "0.90 x 192 GB nameplate; UNVERIFIED"
+   },
+   "identity_receipt": null,
+   "identity_reason": "arm C never ran (DISCLOSURES); out of capacity nyc2/tor1 on 2026-09-23",
+   "link": {
+    "path": "resident-hbm",
+    "bytes_per_second": null,
+    "bytes_per_second_reason": "never ran"
+   },
+   "software": {
+    "engine": "vllm",
+    "recipes": [
+     "vllm-rocm"
+    ],
+    "formats_supported": [
+     "fp8",
+     "bf16",
+     "awq-int4"
+    ],
+    "note": "image gpu-amd-base (ROCm 7.14); UNVERIFIED"
+   },
+   "price": {
+    "list_rate_per_gpu_hr": 2.59,
+    "billing": "per-second-5min-min",
+    "minimum_s": 300,
+    "source": "hot-aisle/campaign/identity.json arms.do-mi300x"
+   },
+   "setup": {
+    "t_request_to_ready_s": null,
+    "basis": null,
+    "reason": "never provisioned",
+    "time_to_ssh_s": null,
+    "time_to_ssh_reason": "never provisioned"
+   },
+   "traversal": {
+    "task_class": null,
+    "seconds_per_traversal_by_depth": null,
+    "basis": null,
+    "reason": "never ran; same silicon as hotaisle-mi300x-1x-enc1 but a different image, so its curve is not inherited",
+    "bytes_per_traversal": null,
+    "bytes_per_traversal_reason": "never ran",
+    "curves": []
+   },
+   "priors": {},
+   "availability": {
+    "source": "hot-aisle/campaign/availability/observations.jsonl",
+    "key": {
+     "provider": "digitalocean",
+     "sku": "gpu-mi300x1-192gb"
+    },
+    "declared_busy_until": null
+   },
+   "roles": [
+    "execute"
+   ],
+   "status": "unavailable",
+   "power": {
+    "watts_mean": null,
+    "reason": "cloud seat; no meter"
+   }
+  },
+  "estate-w01-3090": {
+   "cell": "estate",
+   "provider": "estate",
+   "region": "OCTO-W01",
+   "sku": "rtx-3090-24gb",
+   "kind": "owned-gpu",
+   "accelerator": {
+    "model": "NVIDIA GeForce RTX 3090",
+    "count": 1,
+    "memory_bytes": 25769803776,
+    "memory_note": "24 GiB GDDR6X; 24182 MiB minimum free observed idle (Aperture receipt)",
+    "memory_domain": "single",
+    "uuid": "GPU-0b31e56a-34eb-e8ef-e888-a6d6f044097b",
+    "pci": "00000000:25:00.0",
+    "usable_for_weights_bytes": 20000000000,
+    "usable_basis": "SYNTHESIS: single-GPU jobs of about 20 GB of weights or less on a 3090; the rest is context and runtime"
+   },
+   "identity_receipt": "D:/Projects/Tooling/Estate/main/evidence/campaigns/2026-08-28-est-fabric-net-tether-1/10-DEVICE-AND-BINARY-BINDINGS.json",
+   "identity_note": "the 2026-08-25 reconciliation (evidence/receipts/700.973) placed this UUID in the laptop; the 2026-09-09 binding above is the later receipt and puts it in OCTO-W01 as CUDA0",
+   "host": {
+    "cpu": "13th Gen Intel Core i5-13500T (14c/20t)",
+    "ram_bytes": 34111151667,
+    "ram_basis": "w01-host-facts.txt: 31.77 GiB",
+    "os": "Windows x64"
+   },
+   "link": {
+    "path": "split-vram-ram",
+    "pcie": {
+     "generation": null,
+     "width": null,
+     "reason": "PCIe link width/gen for the W01 3090 not in any receipt read; SYNTHESIS says 'PCIe Gen3 x4' for the estate without a receipt path (UNVERIFIED)"
+    },
+    "bytes_per_second": null,
+    "bytes_per_second_reason": "no H2D link benchmark receipt for this card",
+    "split": {
+     "host_ram_bytes": 34111151667,
+     "note": "partial offload: non-resident layers live in host RAM and are computed by the CPU (llama.cpp); this is a split, not a stream. No streamed-disk receipt exists."
+    }
+   },
+   "software": {
+    "engine": "llama.cpp",
+    "recipes": [
+     "llama.cpp-cuda",
+     "ollama"
+    ],
+    "formats_supported": [
+     "gguf-q4",
+     "gguf-q8",
+     "gguf-q2"
+    ],
+    "note": "llama.cpp b10665 prebuilt (CUDA 12.4) per RUNLOG; vLLM not installed on Windows host; FP8 weights are not native on Ampere -> AWQ/GGUF builds only"
+   },
+   "price": {
+    "list_rate_per_gpu_hr": null,
+    "billing": "owned-energy-only",
+    "reason": "owned; cost is metered energy x tariff, both to be supplied",
+    "nameplate_watts": 350,
+    "nameplate_basis": "RTX 3090 board power nameplate, not measured"
+   },
+   "setup": {
+    "t_request_to_ready_s": null,
+    "basis": null,
+    "reason": "no lease receipt; model load times exist per run (e.g. Aperture 14B: 6.83 s) but no seat-level setup receipt"
+   },
+   "traversal": {
+    "measured": [
+     {
+      "task_class": "llama-bench pp512/tg128",
+      "model": "gpt-oss 120B Q2_0 GGUF, 33,745,206,528 B, ngl 22 of 36 (partial offload, rest on CPU)",
+      "tg_tokens_per_s": 12.44,
+      "tg_stddev": 1.2,
+      "pp_tokens_per_s": 94.92,
+      "seconds_per_traversal_depth1": 0.0804,
+      "seconds_basis": "1 / tg128 tokens/s; each generated token is one traversal over VRAM-resident layers plus CPU-resident layers",
+      "receipt": "D:/Projects/Tooling/Estate/main/evidence/campaigns/2026-08-28-est-fabric-net-tether-1/raw-RUN-20260909T083240Z/B1-gptoss120b-solo-W01-3090-partial.json",
+      "date": "2026-09-09"
+     },
+     {
+      "task_class": "llama-bench pp512/tg128",
+      "model": "Qwen2.5-7B-Instruct Q4_K_M, 4,677,120,000 B, fully resident",
+      "tg_tokens_per_s": 134.92,
+      "pp_tokens_per_s": 5364.86,
+      "seconds_per_traversal_depth1": 0.00741,
+      "receipt": "D:/Projects/Tooling/Estate/main/evidence/campaigns/2026-08-28-est-fabric-net-tether-1/raw-RUN-20260909T083240Z/A2-qwen7b-solo-W01-3090.json",
+      "date": "2026-09-09"
+     }
+    ],
+    "seconds_per_traversal_by_depth": null,
+    "by_depth_reason": "only depth 1 measured (llama-bench); the ESTATE-ARM-PREREG measures depth 1/4/16",
+    "resident_bytes_per_second_estimate": 631000000000,
+    "resident_bytes_per_second_basis": "4.68 GB / 0.00741 s from the resident 7B receipt; a derived figure, not a bandwidth test",
+    "curves": [
+     {
+      "model_class": "dense-7b",
+      "format": "gguf-q4",
+      "task_class": "llama-bench tg128",
+      "by_depth": [
+       {
+        "depth": 1,
+        "seconds": 0.00741
+       }
+      ],
+      "basis": "1 / tg128 tokens/s, fully resident",
+      "receipt": "D:/Projects/Tooling/Estate/main/evidence/campaigns/2026-08-28-est-fabric-net-tether-1/raw-RUN-20260909T083240Z/A2-qwen7b-solo-W01-3090.json"
+     },
+     {
+      "model_class": "moe-120b-a5b",
+      "format": "gguf-q2",
+      "task_class": "llama-bench tg128, ngl 22 of 36 (partial offload)",
+      "by_depth": [
+       {
+        "depth": 1,
+        "seconds": 0.0804
+       }
+      ],
+      "basis": "1 / tg128 tokens/s; split-vram-ram path (CPU computes the offloaded layers; nothing streams over PCIe per step)",
+      "receipt": "D:/Projects/Tooling/Estate/main/evidence/campaigns/2026-08-28-est-fabric-net-tether-1/raw-RUN-20260909T083240Z/B1-gptoss120b-solo-W01-3090-partial.json"
+     }
+    ]
+   },
+   "priors": {
+    "graded-coding": null,
+    "graded-coding_reason": "no graded batch has run on the estate"
+   },
+   "availability": {
+    "source": "operator declaration",
+    "declared_busy_until": "2026-09-28T00:00:00Z",
+    "note": "busy with SeedVR2 until about 2026-09-28 (SYNTHESIS); no probe data for estate seats"
+   },
+   "roles": [
+    "execute"
+   ],
+   "status": "busy",
+   "power": {
+    "watts_mean": null,
+    "reason": "no metered-watts receipt found; the estate arm prereg requires a plug meter"
+   }
+  },
+  "estate-n01-3090-egpu": {
+   "cell": "estate",
+   "provider": "estate",
+   "region": "OCTO-N01",
+   "sku": "rtx-3090-24gb-egpu",
+   "kind": "owned-gpu",
+   "accelerator": {
+    "model": "NVIDIA GeForce RTX 3090",
+    "count": 1,
+    "memory_bytes": 25769803776,
+    "memory_note": "24,576 MiB; Ollama saw 23.8 GiB",
+    "memory_domain": "single",
+    "uuid": "GPU-26b361bc-9d79-bfcf-b51e-35c175fc93c7",
+    "pci": "00000000:09:00.0",
+    "power_cap_w": 220,
+    "usable_for_weights_bytes": 20000000000,
+    "usable_basis": "same rule as estate-w01-3090 (SYNTHESIS ~20 GB); UNVERIFIED on this card"
+   },
+   "identity_receipt": "D:/Projects/Tooling/Estate/main/evidence/receipts/700.977.OCTO-N01-RTX3090-HOTPLUG-RECOVERY-2026-08-27.md",
+   "identity_note": "eGPU in a Sonnet eGFX Breakaway Box 650 over Thunderbolt 3; driver 580.173.02; PCIe width x4 (receipt); 220 W power cap set by egpu-tune.service. The 2026-08-25 reconciliation listed a different admitted UUID (GPU-b84a8323) as unobservable; the 09-09 binding names GPU-26b361bc",
+   "host": {
+    "cpu": null,
+    "cpu_reason": "NUC CPU model not in the receipts read (Iris Pro 580 iGPU implies a Skylake-H NUC; UNVERIFIED)",
+    "ram_bytes": null,
+    "ram_reason": "not in receipts read",
+    "os": "Linux (always-on estate node)"
+   },
+   "link": {
+    "path": "streamed-thunderbolt",
+    "pcie": {
+     "generation": 3,
+     "generation_basis": "Thunderbolt 3 tunnels PCIe 3.0 (nameplate)",
+     "width": 4,
+     "width_basis": "receipt 700.977: 'PCIe width x4'"
+    },
+    "bytes_per_second": null,
+    "bytes_per_second_reason": "no H2D bandwidth receipt; nameplate ~2.8 GB/s usable over TB3 is NOT a measurement",
+    "lan": {
+     "to_w01": {
+      "path": "tailscale",
+      "mib_per_s": 9.06,
+      "rtt_ms_mean": 51,
+      "receipt": "D:/Projects/Tooling/Estate/main/evidence/campaigns/2026-08-28-est-fabric-net-tether-1/20-NETWORK-BASELINE.json",
+      "note": "scp 256 MiB in 28.3 s; direct LAN ssh was unreachable/host-key-mismatch and NOT USED"
+     }
+    }
+   },
+   "software": {
+    "engine": "llama.cpp",
+    "recipes": [
+     "llama.cpp-cuda",
+     "ollama",
+     "llama.cpp-rpc-server"
+    ],
+    "formats_supported": [
+     "gguf-q4",
+     "gguf-q8",
+     "gguf-q2"
+    ],
+    "note": "Ollama 0.32.8 (receipt 700.977); llama.cpp RPC server built in a CUDA 12.4.1 container, flash-attn off (10-DEVICE-AND-BINARY-BINDINGS.json)"
+   },
+   "price": {
+    "list_rate_per_gpu_hr": null,
+    "billing": "owned-energy-only",
+    "reason": "owned; metered energy x tariff to be supplied",
+    "nameplate_watts": 220,
+    "nameplate_basis": "power cap from receipt 700.977, not a measurement"
+   },
+   "setup": {
+    "t_request_to_ready_s": null,
+    "basis": null,
+    "reason": "no lease receipt"
+   },
+   "traversal": {
+    "measured": [
+     {
+      "task_class": "llama.cpp RPC carrier split (0.274 GB model) W01 CUDA0 + N01 RPC0",
+      "result": "PASS, response sha256 recorded; tailscale tx 97.75 MB",
+      "seconds_per_traversal_depth1": null,
+      "seconds_reason": "carrier run recorded no token rate ('NO_WIN_ESTABLISHED', 'CAPACITY_MODEL_ABSENT')",
+      "receipt": "D:/Projects/Tooling/Estate/main/evidence/campaigns/2026-08-28-est-fabric-net-tether-1/40-TWO-3090-RPC-SPLIT.json",
+      "date": "2026-09-09"
+     }
+    ],
+    "seconds_per_traversal_by_depth": null,
+    "by_depth_reason": "no token-rate receipt for this seat alone; the Ollama qwen3.5:4b generation in receipt 700.977 recorded token counts but the rate was not read into this registry",
+    "curves": []
+   },
+   "priors": {
+    "graded-coding": null,
+    "graded-coding_reason": "none"
+   },
+   "availability": {
+    "source": "operator declaration",
+    "declared_busy_until": "2026-09-28T00:00:00Z",
+    "note": "busy with SeedVR2 until about 2026-09-28 (SYNTHESIS)"
+   },
+   "roles": [
+    "execute"
+   ],
+   "status": "busy",
+   "power": {
+    "watts_mean": null,
+    "reason": "no metered-watts receipt"
+   }
+  },
+  "estate-w01-4060": {
+   "cell": "estate",
+   "provider": "estate",
+   "region": "OCTO-W01",
+   "sku": "rtx-4060-8gb",
+   "kind": "owned-gpu",
+   "accelerator": {
+    "model": "NVIDIA GeForce RTX 4060",
+    "count": 1,
+    "memory_bytes": 8585740288,
+    "memory_note": "driver-reported physical bytes (Aperture FINAL-RECEIPT)",
+    "memory_domain": "single",
+    "uuid": "GPU-e0b1541d-fc7d-38f5-d4c0-c15a3bd241a0",
+    "pci": "00000000:01:00.0",
+    "usable_for_weights_bytes": 5711593472,
+    "usable_basis": "fit_gpu_budget_bytes from S:/Scratch/Runs/Aperture-Physical-Capacity-20260905-02/FINAL-RECEIPT.json"
+   },
+   "identity_receipt": "D:/Projects/Tooling/Estate/main/evidence/campaigns/2026-08-28-est-fabric-net-tether-1/10-DEVICE-AND-BINARY-BINDINGS.json",
+   "host": {
+    "cpu": "13th Gen Intel Core i5-13500T (14c/20t)",
+    "ram_bytes": 34111151667,
+    "os": "Windows x64"
+   },
+   "link": {
+    "path": "streamed-pcie",
+    "pcie": {
+     "generation": null,
+     "width": null,
+     "reason": "RTX 4060 is a x8 card; the slot's negotiated link is not in any receipt read (UNVERIFIED)"
+    },
+    "bytes_per_second_cold": 145000000,
+    "bytes_per_second_warm": 817000000,
+    "bytes_per_second_basis": "Kimi K3 routed-expert slice, layer 2: 2,877,751,296 B read in 19.80 s cold (disk -> RAM -> GPU) and 3.52 s warm (page cache -> GPU); this is the whole read+H2D pipeline at layer granularity, NOT a link benchmark",
+    "receipts": [
+     "S:/Scratch/Runs/TierRuns/Kimi-RealRoute/pink-cold-worker-latest.json",
+     "S:/Scratch/Runs/TierRuns/Kimi-RealRoute/pink-cold-sync.json",
+     "S:/Scratch/Runs/TierRuns/Kimi-RealRoute/transport/pink-result.json"
+    ],
+    "bytes_per_second": 817000000,
+    "bytes_per_second_note": "= warm figure; the planner uses it as the streamed-link rate for bytes that do not fit"
+   },
+   "software": {
+    "engine": "llama.cpp",
+    "recipes": [
+     "llama.cpp-cuda",
+     "node-llama-cpp",
+     "kimi3-expert-slice-worker"
+    ],
+    "formats_supported": [
+     "gguf-q4",
+     "gguf-q8",
+     "safetensors-slices"
+    ],
+    "note": "node-llama-cpp 3.20.0 (Aperture receipt); octopodes/kimi3-real-route worker (slice streaming, no end-to-end token)"
+   },
+   "price": {
+    "list_rate_per_gpu_hr": null,
+    "billing": "owned-energy-only",
+    "reason": "owned",
+    "nameplate_watts": 115,
+    "nameplate_basis": "RTX 4060 board power nameplate, not measured"
+   },
+   "setup": {
+    "t_request_to_ready_s": null,
+    "basis": null,
+    "reason": "no lease receipt; Aperture 14B load 6.83 s is a model-load figure"
+   },
+   "traversal": {
+    "measured": [
+     {
+      "task_class": "llama-bench pp512/tg128",
+      "model": "Qwen2.5-7B-Instruct Q4_K_M, fully resident",
+      "tg_tokens_per_s": 52.66,
+      "pp_tokens_per_s": 2614.66,
+      "seconds_per_traversal_depth1": 0.01899,
+      "receipt": "D:/Projects/Tooling/Estate/main/evidence/campaigns/2026-08-28-est-fabric-net-tether-1/raw-RUN-20260909T083240Z/A3-qwen7b-solo-W01-4060.json",
+      "date": "2026-09-09"
+     },
+     {
+      "task_class": "single prompt, split 28 of 49 layers on GPU, rest CPU",
+      "model": "Qwen2.5-14B-Instruct Q4_K_M, 8,988,110,496 B",
+      "result": "COMPLETED_NOT_TASK_QUALIFIED; output '42' correct; 3 output tokens in 1.434 s generation",
+      "seconds_per_traversal_depth1": null,
+      "seconds_reason": "3 tokens is not a rate measurement",
+      "receipt": "S:/Scratch/Runs/Aperture-Physical-Capacity-20260905-02/FINAL-RECEIPT.json",
+      "date": "2026-09-05"
+     },
+     {
+      "task_class": "Kimi K3 routed-expert slice (layer 2, 164 experts; layer 38, 146 experts)",
+      "model": "Kimi-K3 safetensors slices",
+      "result": "outputs finite; median decode forward 84.2 ms cold / 16.2 ms warm per expert assignment; no end-to-end token",
+      "receipt": "S:/Scratch/Runs/TierRuns/Kimi-RealRoute/pink-cold-worker-latest.json",
+      "date": "2026-07-30"
+     }
+    ],
+    "seconds_per_traversal_by_depth": null,
+    "by_depth_reason": "only depth 1 measured",
+    "curves": [
+     {
+      "model_class": "dense-7b",
+      "format": "gguf-q4",
+      "task_class": "llama-bench tg128",
+      "by_depth": [
+       {
+        "depth": 1,
+        "seconds": 0.01899
+       }
+      ],
+      "basis": "1 / tg128 tokens/s, fully resident",
+      "receipt": "D:/Projects/Tooling/Estate/main/evidence/campaigns/2026-08-28-est-fabric-net-tether-1/raw-RUN-20260909T083240Z/A3-qwen7b-solo-W01-4060.json"
+     }
+    ],
+    "resident_bytes_per_second_estimate": 246000000000,
+    "resident_bytes_per_second_basis": "4.68 GB / 0.01899 s from the resident 7B receipt (A3-qwen7b-solo-W01-4060.json); a derived figure, not a bandwidth test"
+   },
+   "priors": {
+    "graded-coding": null,
+    "graded-coding_reason": "none"
+   },
+   "availability": {
+    "source": "operator declaration",
+    "declared_busy_until": null,
+    "note": "not named as busy; UNVERIFIED whether SeedVR2 uses it"
+   },
+   "roles": [
+    "execute"
+   ],
+   "status": "available-declared",
+   "power": {
+    "watts_mean": null,
+    "reason": "no metered-watts receipt"
+   }
+  },
+  "estate-w01-cpu": {
+   "cell": "estate",
+   "provider": "estate",
+   "region": "OCTO-W01",
+   "sku": "cpu-i5-13500t",
+   "kind": "owned-cpu",
+   "accelerator": {
+    "model": "13th Gen Intel Core i5-13500T",
+    "count": 1,
+    "cores": 14,
+    "threads": 20,
+    "memory_bytes": 34111151667,
+    "memory_note": "system RAM 31.77 GiB (w01-host-facts.txt)",
+    "memory_domain": "host",
+    "usable_for_weights_bytes": null
+   },
+   "identity_receipt": "D:/Projects/Tooling/Estate/main/evidence/campaigns/2026-08-28-est-fabric-net-tether-1/raw-RUN-20260909T083240Z/w01-host-facts.txt",
+   "link": {
+    "path": "resident-ram",
+    "bytes_per_second": null,
+    "bytes_per_second_reason": "not measured"
+   },
+   "software": {
+    "engine": null,
+    "recipes": [
+     "evalplus-grader",
+     "ledger-custody",
+     "availability-probe"
+    ],
+    "formats_supported": [],
+    "note": "grader role (EvalPlus in a container) is planned in Run 3, not yet exercised; UNVERIFIED"
+   },
+   "price": {
+    "list_rate_per_gpu_hr": null,
+    "billing": "owned-energy-only",
+    "nameplate_watts": 35,
+    "nameplate_basis": "i5-13500T PBP nameplate, not measured"
+   },
+   "setup": {
+    "t_request_to_ready_s": null,
+    "basis": null,
+    "reason": "always available to the operator; no lease"
+   },
+   "traversal": {
+    "measured": [],
+    "seconds_per_traversal_by_depth": null,
+    "by_depth_reason": "CPU seat is not an execution seat for LLM decode in this registry",
+    "curves": []
+   },
+   "priors": {},
+   "availability": {
+    "source": "operator declaration",
+    "declared_busy_until": null
+   },
+   "roles": [
+    "grader",
+    "custody",
+    "probe"
+   ],
+   "status": "available-declared",
+   "power": {
+    "watts_mean": null,
+    "reason": "no meter"
+   }
+  },
+  "estate-n01-cpu": {
+   "cell": "estate",
+   "provider": "estate",
+   "region": "OCTO-N01",
+   "sku": "cpu-nuc",
+   "kind": "owned-cpu",
+   "accelerator": {
+    "model": null,
+    "model_reason": "NUC CPU not named in receipts read",
+    "count": 1,
+    "memory_bytes": null,
+    "memory_reason": "not in receipts read",
+    "memory_domain": "host",
+    "usable_for_weights_bytes": null
+   },
+   "identity_receipt": "D:/Projects/Tooling/Estate/main/estate_machine_registry.json (OCTO-N01: always-on estate node)",
+   "link": {
+    "path": "resident-ram",
+    "bytes_per_second": null,
+    "bytes_per_second_reason": "not measured"
+   },
+   "software": {
+    "engine": null,
+    "recipes": [
+     "availability-probe",
+     "ledger-custody",
+     "evalplus-grader"
+    ],
+    "formats_supported": [],
+    "note": "SYNTHESIS names N01 as the always-on probe seat; grader role UNVERIFIED"
+   },
+   "price": {
+    "list_rate_per_gpu_hr": null,
+    "billing": "owned-energy-only",
+    "nameplate_watts": null,
+    "nameplate_reason": "CPU unknown"
+   },
+   "setup": {
+    "t_request_to_ready_s": null,
+    "basis": null,
+    "reason": "always on"
+   },
+   "traversal": {
+    "measured": [],
+    "seconds_per_traversal_by_depth": null,
+    "by_depth_reason": "not an execution seat",
+    "curves": []
+   },
+   "priors": {},
+   "availability": {
+    "source": "operator declaration",
+    "declared_busy_until": null
+   },
+   "roles": [
+    "probe",
+    "custody",
+    "grader"
+   ],
+   "status": "available-declared",
+   "power": {
+    "watts_mean": null,
+    "reason": "no meter"
+   }
+  },
+  "estate-l01-cpu": {
+   "cell": "estate",
+   "provider": "estate",
+   "region": "OCTO-L01",
+   "sku": "cpu-laptop",
+   "kind": "owned-cpu",
+   "accelerator": {
+    "model": null,
+    "model_reason": "laptop CPU not named in receipts read",
+    "count": 1,
+    "memory_bytes": null,
+    "memory_reason": "not in receipts read",
+    "memory_domain": "host",
+    "usable_for_weights_bytes": null
+   },
+   "identity_receipt": "D:/Projects/Tooling/Estate/main/estate_machine_registry.json (OCTO-L01: detachable compute and mobile seat)",
+   "link": {
+    "path": "resident-ram",
+    "bytes_per_second": null,
+    "bytes_per_second_reason": "not measured"
+   },
+   "software": {
+    "engine": null,
+    "recipes": [
+     "ledger-custody"
+    ],
+    "formats_supported": [],
+    "note": "mobile seat; no execution receipt in this registry"
+   },
+   "price": {
+    "list_rate_per_gpu_hr": null,
+    "billing": "owned-energy-only",
+    "nameplate_watts": null
+   },
+   "setup": {
+    "t_request_to_ready_s": null,
+    "basis": null,
+    "reason": "no lease"
+   },
+   "traversal": {
+    "measured": [],
+    "seconds_per_traversal_by_depth": null,
+    "by_depth_reason": "not an execution seat",
+    "curves": []
+   },
+   "priors": {},
+   "availability": {
+    "source": "operator declaration",
+    "declared_busy_until": null,
+    "note": "mobile; presence not probed"
+   },
+   "roles": [
+    "custody"
+   ],
+   "status": "available-declared",
+   "power": {
+    "watts_mean": null,
+    "reason": "no meter"
+   }
+  },
+  "estate-w01-igpu-uhd770": {
+   "cell": "estate",
+   "provider": "estate",
+   "region": "OCTO-W01",
+   "sku": "igpu-intel-uhd-770",
+   "kind": "owned-igpu",
+   "accelerator": {
+    "model": "Intel UHD 770",
+    "count": 1,
+    "memory_bytes": null,
+    "memory_reason": "shares host RAM; no allocation receipt",
+    "memory_domain": "host-shared",
+    "usable_for_weights_bytes": null
+   },
+   "identity_receipt": "D:/Projects/Tooling/Estate/main/evidence/campaigns/2026-08-28-est-fabric-net-tether-1/10-DEVICE-AND-BINARY-BINDINGS.json (route Vulkan1)",
+   "link": {
+    "path": "resident-ram",
+    "bytes_per_second": null,
+    "bytes_per_second_reason": "not measured"
+   },
+   "software": {
+    "engine": null,
+    "recipes": [
+     "validator-only"
+    ],
+    "formats_supported": [],
+    "note": "90-ROUTING-DISPOSITION.json: IGPU_IN_TOKEN_PATH UNMEASURED, igpu-support-only route NOT admitted"
+   },
+   "price": {
+    "list_rate_per_gpu_hr": null,
+    "billing": "owned-energy-only",
+    "nameplate_watts": null
+   },
+   "setup": {
+    "t_request_to_ready_s": null,
+    "basis": null,
+    "reason": "validator-only"
+   },
+   "traversal": {
+    "measured": [],
+    "seconds_per_traversal_by_depth": null,
+    "by_depth_reason": "validator-only until qualified (SYNTHESIS)",
+    "curves": []
+   },
+   "priors": {},
+   "availability": {
+    "source": "operator declaration",
+    "declared_busy_until": null
+   },
+   "roles": [
+    "validator"
+   ],
+   "status": "validator-only",
+   "power": {
+    "watts_mean": null,
+    "reason": "no meter"
+   }
+  },
+  "estate-n01-igpu-irispro580": {
+   "cell": "estate",
+   "provider": "estate",
+   "region": "OCTO-N01",
+   "sku": "igpu-intel-iris-pro-580",
+   "kind": "owned-igpu",
+   "accelerator": {
+    "model": "Intel Iris Pro 580",
+    "count": 1,
+    "memory_bytes": null,
+    "memory_reason": "shares host RAM",
+    "memory_domain": "host-shared",
+    "usable_for_weights_bytes": null
+   },
+   "identity_receipt": "D:/Projects/Tooling/Estate/main/evidence/campaigns/2026-08-28-est-fabric-net-tether-1/10-DEVICE-AND-BINARY-BINDINGS.json (route RPC-Vulkan0; Vulkan not built on the NUC)",
+   "link": {
+    "path": "resident-ram",
+    "bytes_per_second": null,
+    "bytes_per_second_reason": "not measured"
+   },
+   "software": {
+    "engine": null,
+    "recipes": [
+     "validator-only"
+    ],
+    "formats_supported": [],
+    "note": "Vulkan toolchain missing on the NUC (configure_results); nothing has run on it"
+   },
+   "price": {
+    "list_rate_per_gpu_hr": null,
+    "billing": "owned-energy-only",
+    "nameplate_watts": null
+   },
+   "setup": {
+    "t_request_to_ready_s": null,
+    "basis": null,
+    "reason": "validator-only"
+   },
+   "traversal": {
+    "measured": [],
+    "seconds_per_traversal_by_depth": null,
+    "by_depth_reason": "validator-only until qualified",
+    "curves": []
+   },
+   "priors": {},
+   "availability": {
+    "source": "operator declaration",
+    "declared_busy_until": null
+   },
+   "roles": [
+    "validator"
+   ],
+   "status": "validator-only",
+   "power": {
+    "watts_mean": null,
+    "reason": "no meter"
+   }
+  },
+  "estate-npu": {
+   "cell": "estate",
+   "provider": "estate",
+   "region": null,
+   "region_reason": "no receipt read names which host carries the NPU; SYNTHESIS lists 'the NPU' among estate seats (UNVERIFIED host)",
+   "sku": "npu-unidentified",
+   "kind": "owned-npu",
+   "accelerator": {
+    "model": null,
+    "model_reason": "UNVERIFIED: no receipt found naming the NPU",
+    "count": 1,
+    "memory_bytes": null,
+    "memory_reason": "unknown",
+    "memory_domain": "host-shared",
+    "usable_for_weights_bytes": null
+   },
+   "identity_receipt": null,
+   "identity_reason": "none found in D:/Projects/Tooling/Estate/main receipts read for this build",
+   "link": {
+    "path": "resident-ram",
+    "bytes_per_second": null,
+    "bytes_per_second_reason": "not measured"
+   },
+   "software": {
+    "engine": null,
+    "recipes": [
+     "validator-only"
+    ],
+    "formats_supported": [],
+    "note": "validator-only until qualified (SYNTHESIS)"
+   },
+   "price": {
+    "list_rate_per_gpu_hr": null,
+    "billing": "owned-energy-only",
+    "nameplate_watts": null
+   },
+   "setup": {
+    "t_request_to_ready_s": null,
+    "basis": null,
+    "reason": "validator-only"
+   },
+   "traversal": {
+    "measured": [],
+    "seconds_per_traversal_by_depth": null,
+    "by_depth_reason": "validator-only",
+    "curves": []
+   },
+   "priors": {},
+   "availability": {
+    "source": "operator declaration",
+    "declared_busy_until": null
+   },
+   "roles": [
+    "validator"
+   ],
+   "status": "validator-only",
+   "power": {
+    "watts_mean": null,
+    "reason": "no meter"
+   }
+  }
+ },
+ "not_in_registry": [
+  "OCTO-L01 GPUs: the 2026-08-25 reconciliation lists two 3090s in the laptop (UUIDs GPU-0b31e56a, GPU-493239dc) but the 2026-09-09 binding places GPU-0b31e56a in OCTO-W01; the laptop's current GPU state is unresolved and no seat is registered for it",
+  "RunPod MI300X (out of stock, prior-session note only) and Spheron H100 ($3.59/hr, 20-min minimum, never attempted)",
+  "Hot Aisle 2x VM and 8x bare metal (listed 2026-09-23, never provisioned)"
+ ],
+ "planner_fields": {
+  "accelerator.usable_for_weights_bytes": "bytes of weights the seat can hold resident (with basis)",
+  "traversal.curves[]": "per (model_class, format): seconds per traversal by depth, with receipt",
+  "link.bytes_per_second": "streamed-link rate used for non-resident bytes when present",
+  "availability.declared_busy_until": "operator declaration for estate seats",
+  "priors[task_class].accept_rate": "expected accepted fraction from receipts"
+ }
+}
