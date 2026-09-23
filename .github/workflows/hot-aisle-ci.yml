@@ -74,5 +74,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: hot-aisle-journeys-${{ github.run_id }}
-          path: journeys.json
+          path: |
+            journeys.json
+            hot-aisle/workload-report.zip
           if-no-files-found: ignore
