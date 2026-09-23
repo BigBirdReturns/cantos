@@ -1,0 +1,37 @@
+{
+  "schema": "our-auto/router-policy@1",
+  "scratch_root": "S:\\Projects\\Measurement\\Tier-Bench\\codex-auto-router\\runs",
+  "durable_receipt_root": "D:\\Projects\\Measurement\\Tier-Bench\\exports\\our-auto-router",
+  "ollama_url": "http://127.0.0.1:11434/api/generate",
+  "local_timeout_seconds": 120,
+  "cloud_timeout_seconds": 300,
+  "context_tokens": 8192,
+  "max_cloud_attempts": 2,
+  "gpu_busy_fraction": 0.65,
+  "spark": {
+    "minimum_remaining_percent": 25,
+    "maximum_snapshot_age_hours": 6,
+    "usage_snapshot_glob": "D:\\Projects\\Measurement\\Tier-Bench\\exports\\codex_weekly_usage_audit_*.json"
+  },
+  "routes": {
+    "structured": [
+      {"provider": "ollama", "model": "qwen3.5:9b-q4_K_M", "effort": "none"},
+      {"provider": "codex", "model": "gpt-5.6-luna", "effort": "low"},
+      {"provider": "codex", "model": "gpt-5.6-terra", "effort": "medium"}
+    ],
+    "code": [
+      {"provider": "codex", "model": "gpt-5.6-luna", "effort": "low"},
+      {"provider": "codex", "model": "gpt-5.6-terra", "effort": "medium"},
+      {"provider": "codex", "model": "gpt-5.6-sol", "effort": "high"}
+    ],
+    "complex": [
+      {"provider": "codex", "model": "gpt-5.6-terra", "effort": "medium"},
+      {"provider": "codex", "model": "gpt-5.6-sol", "effort": "high"}
+    ]
+  },
+  "latency_cloud_order": [
+    {"provider": "codex", "model": "gpt-5.3-codex-spark", "effort": "low"},
+    {"provider": "codex", "model": "gpt-5.6-luna", "effort": "low"},
+    {"provider": "codex", "model": "gpt-5.6-terra", "effort": "medium"}
+  ]
+}

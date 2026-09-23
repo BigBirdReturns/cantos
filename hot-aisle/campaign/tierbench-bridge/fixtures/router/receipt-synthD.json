@@ -1,0 +1,35 @@
+{
+  "schema": "our-auto/run@1",
+  "synthetic": true,
+  "_note": "SYNTHETIC receipt in route.py's our-auto/run@1 shape (integrations/our-auto-router/scripts/route.py). No real run directory was read. Token counts are invented to exercise the pricing path; nothing here is evidence.",
+  "prefer_latency": false,
+  "workspace": null,
+  "allow_read_tools": false,
+  "run_dir": "S:/x/runs/synthD",
+  "receipt_paths": [
+    "S:/x/runs/synthD/receipt.json"
+  ],
+  "started_at_utc": "2026-07-19T02:00:00+00:00",
+  "kind": "code",
+  "allow_cloud": true,
+  "prompt_file": "S:/x/prompt3.txt",
+  "prompt_sha256": "1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a",
+  "validator": "S:/x/validate_code.py",
+  "validator_sha256": "7777777777777777777777777777777777777777777777777777777777777777",
+  "attempts": [
+    {
+      "index": 1,
+      "provider": "codex",
+      "model": "gpt-5.6-luna",
+      "effort": "low",
+      "attempt_dir": "attempt-01-gpt-5.6-luna",
+      "call_status": "failed",
+      "elapsed_seconds": 300.0,
+      "error_type": "TimeoutExpired",
+      "error": "codex timed out"
+    }
+  ],
+  "completed_at_utc": "2026-07-19T02:05:00+00:00",
+  "status": "no_passing_candidate",
+  "selected_candidate": null
+}

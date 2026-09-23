@@ -1,0 +1,63 @@
+{
+  "schema": "our-auto/run@1",
+  "synthetic": true,
+  "_note": "SYNTHETIC receipt in route.py's our-auto/run@1 shape (integrations/our-auto-router/scripts/route.py). No real run directory was read. Token counts are invented to exercise the pricing path; nothing here is evidence.",
+  "prefer_latency": false,
+  "workspace": null,
+  "allow_read_tools": false,
+  "run_dir": "S:/x/runs/synthA",
+  "receipt_paths": [
+    "S:/x/runs/synthA/receipt.json"
+  ],
+  "started_at_utc": "2026-07-18T21:40:00+00:00",
+  "kind": "structured",
+  "allow_cloud": false,
+  "prompt_file": "S:/x/prompt.txt",
+  "prompt_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "validator": "S:/x/validate_json.py",
+  "validator_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+  "attempts": [
+    {
+      "index": 1,
+      "provider": "ollama",
+      "model": "qwen3.5:9b-q4_K_M",
+      "effort": "none",
+      "attempt_dir": "attempt-01-qwen3.5_9b-q4_K_M",
+      "gpu_probe": "gpu_memory_fraction=0.120;limit=0.650",
+      "call_status": "completed",
+      "elapsed_seconds": 1.098,
+      "done": true,
+      "done_reason": "stop",
+      "prompt_eval_count": 46,
+      "eval_count": 13,
+      "total_duration_ns": 1027249700,
+      "raw_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+      "candidate_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+      "validator": {
+        "passed": true,
+        "exit_code": 0,
+        "elapsed_seconds": 0.05,
+        "command": [
+          "python",
+          "validate_json.py",
+          "<CANDIDATE>"
+        ],
+        "stdout_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+        "stderr_sha256": "5555555555555555555555555555555555555555555555555555555555555555"
+      }
+    },
+    {
+      "index": 2,
+      "provider": "codex",
+      "model": "gpt-5.6-luna",
+      "effort": "low",
+      "attempt_dir": "attempt-02-gpt-5.6-luna",
+      "call_status": "skipped",
+      "reason": "cloud_not_allowed"
+    }
+  ],
+  "completed_at_utc": "2026-07-18T21:40:02+00:00",
+  "status": "pass",
+  "selected_candidate": "attempt-01-qwen3.5_9b-q4_K_M/candidate.txt",
+  "selected_candidate_sha256": "3333333333333333333333333333333333333333333333333333333333333333"
+}

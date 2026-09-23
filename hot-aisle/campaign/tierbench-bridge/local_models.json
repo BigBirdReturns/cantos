@@ -1,0 +1,40 @@
+{
+  "schema": "second-run/local-model-registry@1",
+  "_about": "Maps a Tier-Bench model tier that runs on OPEN WEIGHTS to the Knot model spec the fabric WATERLINE needs (class, formats with bytes and recipes). API and subscription tiers are not here: they consume no fabric seat. Bytes marked UNVERIFIED must be pinned (sha256 + revision) before any rental; the planner passes the basis through and marks such plans unmeasured.",
+  "as_of": "2026-09-23",
+  "tiers": {
+    "qwen3.5:9b-q4_K_M@none": {
+      "provider": "ollama",
+      "model": {
+        "id": "Qwen/Qwen3.5-9B",
+        "class": "dense-9b",
+        "formats": [
+          {"format": "gguf-q4", "bytes": 5800000000, "bytes_basis": "UNVERIFIED ~5.8 GB Q4_K_M estimate for a 9B dense model; pin the Ollama blob digest before use", "recipes": ["ollama", "llama.cpp-cuda"]}
+        ]
+      },
+      "evidence_note": "our-auto-router routing-evidence.md (2026-07-18): local STRUCTURED floor only; excluded from the coding route after a SyntaxError on the coding canary. No Tier-Bench Call rows exist for it.",
+      "resource_key": "gpu:3090",
+      "resource_key_basis": "docs/residue-resource-lanes.md: operator-declared physical key; the router host's GPU is not recorded in receipts, so this is a proposal"
+    },
+    "qwen2.5-coder@none": {
+      "provider": "ollama",
+      "model": {
+        "id": "Qwen/Qwen2.5-Coder-7B-Instruct",
+        "class": "dense-7b",
+        "formats": [
+          {"format": "gguf-q4", "bytes": 4700000000, "bytes_basis": "UNVERIFIED ~4.7 GB Q4_K_M; models.json lists params_B 7", "recipes": ["ollama", "llama.cpp-cuda"]}
+        ]
+      },
+      "evidence_note": "models.json declares tier_ceiling T2 (a hypothesis, not measured). routing-evidence.md: failed the coding canary (Markdown fences, mutated inputs); excluded from the active coding route.",
+      "resource_key": "gpu:3090"
+    },
+    "qwen3-coder-30b-a3b-fp8@vllm": {
+      "provider": "fabric",
+      "model": "self",
+      "model_note": "'self' = use the Knot's own model field (Run 3's pinned Qwen3-Coder-30B-A3B-Instruct-FP8, revision dcaee4d4); the fabric seats.json curves for moe-30b-a3b/fp8 apply",
+      "evidence_note": "No Tier-Bench Call rows: Run 3 has not run. RUN3-GRID.md is the plan to create them.",
+      "resource_key": null,
+      "resource_key_reason": "cloud seat or estate 3090 decided by the fabric plan"
+    }
+  }
+}

@@ -1,0 +1,150 @@
+{
+  "schema": "second-run/tierbench-fixture-provenance@1",
+  "pin": "9693cb99694338e72c15d0ffbb87b5a1c5bbf16a",
+  "entry_lock": {
+    "W": "D:\\Projects\\Measurement\\Tier-Bench\\worktrees\\task-computer-no-console-current-main-20260730",
+    "R": "D:\\Projects\\Measurement\\Tier-Bench\\integrations\\our-auto-router"
+  },
+  "sources": {
+    "ledger.jsonl": {
+      "path": "D:\\Projects\\Measurement\\Tier-Bench\\worktrees\\task-computer-no-console-current-main-20260730\\experiments\\breadth\\run\\ledger.jsonl",
+      "sha256": "4e26a7950999093c943c2e099e603e3cad961b2b232538b25bb5042cb5c27c1c",
+      "git_head": "27fbc0cb3d810b4d53ffb7370881b9bb1c77b5c5",
+      "git_last_commit": "da9b0a9cd1df25070e3763a1b6d1835d5b0f71e3",
+      "git_head_reason": null,
+      "in_pin_9693cb9": true,
+      "mtime": 1785430640.8123155,
+      "note": "52 verbatim rows; source line indexes [0, 1, 2, 3, 4, 5, 9, 10, 11, 39, 40, 41, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 61, 62, 63, 67, 68, 69, 70, 71, 72, 73, 74, 81, 82, 94, 95, 96, 107, 108, 109, 113, 114, 115, 125, 126, 127, 128, 136, 137, 138, 148]"
+    },
+    "map.json": {
+      "path": "D:\\Projects\\Measurement\\Tier-Bench\\worktrees\\task-computer-no-console-current-main-20260730\\experiments\\breadth\\run\\map.json",
+      "sha256": "50dd5d85282367a7413e3d197cba450c556dcabcbf389ea1be642c018109ae79",
+      "git_head": "27fbc0cb3d810b4d53ffb7370881b9bb1c77b5c5",
+      "git_last_commit": "3683f4638a9a2faa712b7af84def0f96de12d301",
+      "git_head_reason": null,
+      "in_pin_9693cb9": true,
+      "mtime": 1785430640.813316,
+      "note": "tasks subset"
+    },
+    "waterline.json": {
+      "path": "D:\\Projects\\Measurement\\Tier-Bench\\worktrees\\task-computer-no-console-current-main-20260730\\experiments\\breadth\\run\\waterline.json",
+      "sha256": "9520c6f9f8279dc41dc25d562585333d08ada71a00a8c893f49ad25b36ed745e",
+      "git_head": "27fbc0cb3d810b4d53ffb7370881b9bb1c77b5c5",
+      "git_last_commit": "681e275edcdcd9f538ddcdd42477d7a32ed4f82c",
+      "git_head_reason": null,
+      "in_pin_9693cb9": true,
+      "mtime": 1785430640.8333151,
+      "note": "whole file"
+    },
+    "models.json": {
+      "path": "D:\\Projects\\Measurement\\Tier-Bench\\worktrees\\task-computer-no-console-current-main-20260730\\models.json",
+      "sha256": "9e5d29f11a81933ebc11a23602c603dcad2922b6cb126a296442de699c6996c8",
+      "git_head": "27fbc0cb3d810b4d53ffb7370881b9bb1c77b5c5",
+      "git_last_commit": "ba58efb9dca6256c372d66211d48da4be99cde24",
+      "git_head_reason": null,
+      "in_pin_9693cb9": true,
+      "mtime": 1785430641.254648,
+      "note": "models subset ['claude-haiku-4-5', 'claude-sonnet-5', 'claude-opus-5', 'claude-fable-5', 'gpt-5-mini', 'gpt-5.5', 'qwen2.5-coder', 'llama3.1', 'deepseek-chat']"
+    },
+    "ledger.py": {
+      "path": "D:\\Projects\\Measurement\\Tier-Bench\\worktrees\\task-computer-no-console-current-main-20260730\\experiments\\breadth\\ledger.py",
+      "sha256": "f87eaeb44eed11b1ab32023f80f8fd73736bf3597226ee0d031bd5d7771731a7",
+      "git_head": "27fbc0cb3d810b4d53ffb7370881b9bb1c77b5c5",
+      "git_last_commit": "0a6ae8b06f4a078dbf0fdf2d737769a3c1537d87",
+      "git_head_reason": null,
+      "in_pin_9693cb9": true,
+      "mtime": 1785430640.1470869,
+      "note": "Call dataclass shape only; not copied"
+    },
+    "residue-broker.md": {
+      "path": "D:\\Projects\\Measurement\\Tier-Bench\\worktrees\\task-computer-no-console-current-main-20260730\\docs\\residue-broker.md",
+      "sha256": "5dc44ae90c08fb1a1ce2198de9f91bb2e91882c9bbbd5cb92c8885515e58ef9e",
+      "git_head": "27fbc0cb3d810b4d53ffb7370881b9bb1c77b5c5",
+      "git_last_commit": "ca5983474ef81b43f1372cea6c58d0c2427a1295",
+      "git_head_reason": null,
+      "in_pin_9693cb9": true,
+      "mtime": 1785430640.083498,
+      "note": "read for BRIDGE.md; not copied"
+    },
+    "burden-discipline.md": {
+      "path": "D:\\Projects\\Measurement\\Tier-Bench\\worktrees\\task-computer-no-console-current-main-20260730\\docs\\burden-discipline.md",
+      "sha256": "0ae723fad326bd7a068dd81ba2f962c140be0bd968a686e1daba9371d86d6970",
+      "git_head": "27fbc0cb3d810b4d53ffb7370881b9bb1c77b5c5",
+      "git_last_commit": "7abaf459e7c4c51310a467376ca76dfb1fe11bc8",
+      "git_head_reason": null,
+      "in_pin_9693cb9": true,
+      "mtime": 1785430640.0799174,
+      "note": "read for BRIDGE.md; not copied"
+    },
+    "residue-resource-lanes.md": {
+      "path": "D:\\Projects\\Measurement\\Tier-Bench\\worktrees\\task-computer-no-console-current-main-20260730\\docs\\residue-resource-lanes.md",
+      "sha256": "70d521d0a9ef2184fa57ee110f1f9e466599383e4bec866ac6241a43765a4f68",
+      "git_head": "27fbc0cb3d810b4d53ffb7370881b9bb1c77b5c5",
+      "git_last_commit": "8ece42660229c10bcfa61f5654fe3d4cdfc18d85",
+      "git_head_reason": null,
+      "in_pin_9693cb9": true,
+      "mtime": 1785430640.0845156,
+      "note": "read for BRIDGE.md; not copied"
+    },
+    "tier_runner/fabric/seats.py": {
+      "path": "D:\\Projects\\Measurement\\Tier-Bench\\worktrees\\task-computer-no-console-current-main-20260730\\tier_runner\\fabric\\seats.py",
+      "sha256": "496e60ac85185af7da18e787b24f9b158e18e815e5ce9d50a3dcbb7547e19622",
+      "git_head": "27fbc0cb3d810b4d53ffb7370881b9bb1c77b5c5",
+      "git_last_commit": "98e12ac26f8394e8175b74f3e657fab96ad138ea",
+      "git_head_reason": null,
+      "in_pin_9693cb9": false,
+      "mtime": 1787104714.8784003,
+      "note": "SeatIdentity / seat_leases shape; post-pin commit; not copied"
+    },
+    "tier_runner/fabric/protocol.py": {
+      "path": "D:\\Projects\\Measurement\\Tier-Bench\\worktrees\\task-computer-no-console-current-main-20260730\\tier_runner\\fabric\\protocol.py",
+      "sha256": "235650d43aa31fcc0705c7bd888ba10b2501e46338b8fd31c8bb41d60b570743",
+      "git_head": "27fbc0cb3d810b4d53ffb7370881b9bb1c77b5c5",
+      "git_last_commit": "98e12ac26f8394e8175b74f3e657fab96ad138ea",
+      "git_head_reason": null,
+      "in_pin_9693cb9": false,
+      "mtime": 1787104635.1227288,
+      "note": "SeatIdentity / seat_leases shape; post-pin commit; not copied"
+    },
+    "tier_runner/fabric/store.py": {
+      "path": "D:\\Projects\\Measurement\\Tier-Bench\\worktrees\\task-computer-no-console-current-main-20260730\\tier_runner\\fabric\\store.py",
+      "sha256": "07f8982852caa8199a6ddc44c1150e07a892a62b91c6457fa786e9691149e23a",
+      "git_head": "27fbc0cb3d810b4d53ffb7370881b9bb1c77b5c5",
+      "git_last_commit": "86d05f2cd695b1100c70aea38c4507971b8d5521",
+      "git_head_reason": null,
+      "in_pin_9693cb9": false,
+      "mtime": 1787234504.1506252,
+      "note": "SeatIdentity / seat_leases shape; post-pin commit; not copied"
+    },
+    "policy.json": {
+      "path": "D:\\Projects\\Measurement\\Tier-Bench\\integrations\\our-auto-router\\references\\policy.json",
+      "sha256": "f74a911eb721ca95de2162a0bcd43376269cde1e9bbafb3c38dab8cb05aa7924",
+      "git_head": null,
+      "git_last_commit": null,
+      "git_head_reason": "not a git repository; sha256 and mtime are the only pins",
+      "in_pin_9693cb9": null,
+      "mtime": 1785033409.6079755,
+      "note": "whole file, byte copy"
+    },
+    "race6-results.operator-diagnostic.json": {
+      "path": "D:\\Projects\\Measurement\\Tier-Bench\\integrations\\our-auto-router\\references\\race6-results.operator-diagnostic.json",
+      "sha256": "28d2fe9498dfa9936518fe7e88dbbb0c041de9796e6f3fff1b1c77ce5c875653",
+      "git_head": null,
+      "git_last_commit": null,
+      "git_head_reason": "not a git repository; sha256 and mtime are the only pins",
+      "in_pin_9693cb9": null,
+      "mtime": 1784350065.4638746,
+      "note": "whole file, byte copy"
+    },
+    "route.py": {
+      "path": "D:\\Projects\\Measurement\\Tier-Bench\\integrations\\our-auto-router\\scripts\\route.py",
+      "sha256": "ce5b94e11baefa02d052ab915d59a7f812ce08b06fd58fa70fcfeca7a7d5e280",
+      "git_head": null,
+      "git_last_commit": null,
+      "git_head_reason": "not a git repository; sha256 and mtime are the only pins",
+      "in_pin_9693cb9": null,
+      "mtime": 1784881780.7108483,
+      "note": "receipt schema our-auto/run@1 read; not copied"
+    }
+  }
+}

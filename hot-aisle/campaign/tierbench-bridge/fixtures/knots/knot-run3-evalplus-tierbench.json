@@ -1,0 +1,73 @@
+{
+  "schema": "second-run/knot-spec@1",
+  "knot_id": "knot-run3-evalplus-tierbench",
+  "task_class": "graded-coding",
+  "tierbench": {
+    "task_classes": [
+      "tierbench-T1"
+    ],
+    "basis": "EvalPlus HumanEval+/MBPP+ is implement-from-docstring, the shape of Tier-Bench's t1_impl_from_docstring_001. This is an ANALOGY declared by the Knot, not a measured equivalence (RUN3-GRID.md).",
+    "k": 3,
+    "open_weight_tier": "qwen3-coder-30b-a3b-fp8@vllm",
+    "open_weight_tier_note": "the tier this Knot's model field describes when run on a fabric seat; no Tier-Bench Call rows exist for it yet"
+  },
+  "count": 542,
+  "evaluator": {
+    "name": "evalplus-base-plus",
+    "frozen": true,
+    "needs_seat_role": "grader",
+    "hidden": false,
+    "hidden_note": "EvalPlus plus-tests are public; Tier-Bench would not call this hidden-graded"
+  },
+  "deadline_s": 5400,
+  "start_at": "2026-09-24T18:00:00Z",
+  "tokens_in_per_closure": 400,
+  "tokens_out_per_closure": 300,
+  "model": {
+    "id": "Qwen/Qwen3-Coder-30B-A3B-Instruct",
+    "class": "moe-30b-a3b",
+    "formats": [
+      {
+        "format": "fp8",
+        "bytes": 31187041238,
+        "bytes_basis": "identity.json (pinned)",
+        "recipes": [
+          "vllm-cuda",
+          "vllm-rocm"
+        ]
+      },
+      {
+        "format": "awq-int4",
+        "bytes": 16500000000,
+        "bytes_basis": "UNVERIFIED ~16 GB (SYNTHESIS)",
+        "recipes": [
+          "vllm-cuda",
+          "vllm-rocm"
+        ]
+      },
+      {
+        "format": "gguf-q4",
+        "bytes": 18600000000,
+        "bytes_basis": "UNVERIFIED ~18.6 GB Q4_K_M estimate; pin before use",
+        "recipes": [
+          "llama.cpp-cuda",
+          "ollama"
+        ]
+      }
+    ]
+  },
+  "traversal_profile": {
+    "batch_depths": [
+      1,
+      8,
+      32,
+      64
+    ],
+    "closures_per_traversal_curve": null
+  },
+  "policy": {
+    "max_usd": 25.0,
+    "kwh_usd": 0.3,
+    "kwh_usd_basis": "assumed; operator to supply the tariff"
+  }
+}

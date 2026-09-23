@@ -1,0 +1,60 @@
+{
+  "schema": "our-auto/run@1",
+  "synthetic": true,
+  "_note": "SYNTHETIC receipt in route.py's our-auto/run@1 shape (integrations/our-auto-router/scripts/route.py). No real run directory was read. Token counts are invented to exercise the pricing path; nothing here is evidence.",
+  "prefer_latency": false,
+  "workspace": null,
+  "allow_read_tools": false,
+  "run_dir": "S:/x/runs/synthB",
+  "receipt_paths": [
+    "S:/x/runs/synthB/receipt.json"
+  ],
+  "started_at_utc": "2026-07-19T00:38:00+00:00",
+  "kind": "code",
+  "allow_cloud": true,
+  "prompt_file": "S:/x/prompt.txt",
+  "prompt_sha256": "6666666666666666666666666666666666666666666666666666666666666666",
+  "validator": "S:/x/validate_code.py",
+  "validator_sha256": "7777777777777777777777777777777777777777777777777777777777777777",
+  "attempts": [
+    {
+      "index": 1,
+      "provider": "codex",
+      "model": "gpt-5.6-luna",
+      "effort": "low",
+      "attempt_dir": "attempt-01-gpt-5.6-luna",
+      "call_status": "completed",
+      "exit_code": 0,
+      "elapsed_seconds": 6.957,
+      "command": [
+        "codex",
+        "exec",
+        "..."
+      ],
+      "stdout_sha256": "8888888888888888888888888888888888888888888888888888888888888888",
+      "stderr_sha256": "9999999999999999999999999999999999999999999999999999999999999999",
+      "usage": {
+        "input_tokens": 1800,
+        "cached_input_tokens": 600,
+        "output_tokens": 420
+      },
+      "candidate_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "validator": {
+        "passed": true,
+        "exit_code": 0,
+        "elapsed_seconds": 0.4,
+        "command": [
+          "python",
+          "validate_code.py",
+          "<CANDIDATE>"
+        ],
+        "stdout_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "stderr_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+      }
+    }
+  ],
+  "completed_at_utc": "2026-07-19T00:38:08+00:00",
+  "status": "pass",
+  "selected_candidate": "attempt-01-gpt-5.6-luna/candidate.txt",
+  "selected_candidate_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+}

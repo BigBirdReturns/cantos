@@ -1,0 +1,124 @@
+{
+  "_comment": [
+    "EXCERPT of Tier-Bench models.json for offline tests; prices as of the source's 'Last reviewed: 2026-07-26'"
+  ],
+  "models": {
+    "claude-haiku-4-5": {
+      "provider": "anthropic",
+      "input_per_1M": 1.0,
+      "output_per_1M": 5.0,
+      "tier_ceiling": "T2",
+      "measured": {
+        "settled_floor": {
+          "max_spec_following_tier": "T4",
+          "evidence_layer": "k3-floor-20260708",
+          "measured_status": "measured (K=3, hidden-graded)"
+        },
+        "judgment_residue": {
+          "known_failures": [
+            {
+              "task_id": "task02_wildcard",
+              "residue": "escape-inside-class malformed-vs-non-match boundary",
+              "status": "unstable_at_floor (3/5)",
+              "evidence_layer": "model-ladder-task02-20260708"
+            }
+          ]
+        }
+      }
+    },
+    "claude-sonnet-5": {
+      "provider": "anthropic",
+      "input_per_1M": 3.0,
+      "output_per_1M": 15.0,
+      "tier_ceiling": "T3",
+      "measured": {
+        "judgment_residue": {
+          "clears": [
+            {
+              "task_id": "task02_wildcard",
+              "rung": "low",
+              "score": "hidden 10681/10681 x3",
+              "cost_usd_per_trial": 0.227,
+              "cost_basis": "real-billed",
+              "evidence_layer": "model-ladder-task02-20260708"
+            }
+          ]
+        }
+      }
+    },
+    "claude-opus-5": {
+      "provider": "anthropic",
+      "input_per_1M": 5.0,
+      "output_per_1M": 25.0,
+      "tier_ceiling": "T5",
+      "context_tokens": 1000000,
+      "max_output_tokens": 128000,
+      "effort_levels": [
+        "low",
+        "medium",
+        "high",
+        "max"
+      ],
+      "measured_status": "unmeasured"
+    },
+    "claude-fable-5": {
+      "provider": "anthropic",
+      "input_per_1M": 10.0,
+      "output_per_1M": 50.0,
+      "tier_ceiling": "T5",
+      "effort_levels": [
+        "low",
+        "medium",
+        "high",
+        "max"
+      ],
+      "measured_status": "unmeasured_against_opus5"
+    },
+    "gpt-5-mini": {
+      "provider": "openai",
+      "input_per_1M": 0.25,
+      "output_per_1M": 2.0,
+      "tier_ceiling": "T3"
+    },
+    "gpt-5.5": {
+      "provider": "openai",
+      "input_per_1M": 5.0,
+      "output_per_1M": 30.0,
+      "tier_ceiling": "T5"
+    },
+    "deepseek-chat": {
+      "provider": "deepseek",
+      "input_per_1M": 0.28,
+      "output_per_1M": 0.42,
+      "tier_ceiling": "T2"
+    },
+    "llama3.1": {
+      "provider": "ollama",
+      "input_per_1M": 0,
+      "output_per_1M": 0,
+      "tier_ceiling": "T1",
+      "params_B": 8
+    },
+    "qwen2.5-coder": {
+      "provider": "ollama",
+      "input_per_1M": 0,
+      "output_per_1M": 0,
+      "tier_ceiling": "T2",
+      "params_B": 7
+    }
+  },
+  "roles": {
+    "_comment": [
+      "Named roles decouple 'who does what' from model names, which churn.",
+      "driver: plans, verifies, and repairs \u2014 spends judgment tokens only.",
+      "The orchestrator uses roles.driver as its planner; override per-run",
+      "with --driver or the TIER_BENCH_DRIVER env var. Execution ('hands')",
+      "always auto-routes to the cheapest capable model, never the driver.",
+      "apprentice: a cheaper model being taught the driver role. Set it as",
+      "--driver and score it with diff_report --target <apprentice> to see",
+      "how close it is to replicating the frontier. See driver/README.md."
+    ],
+    "driver": "claude-fable-5",
+    "apprentice": "claude-haiku-4-5"
+  }
+}

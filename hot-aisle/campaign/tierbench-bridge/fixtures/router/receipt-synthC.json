@@ -1,0 +1,76 @@
+{
+  "schema": "our-auto/run@1",
+  "synthetic": true,
+  "_note": "SYNTHETIC receipt in route.py's our-auto/run@1 shape (integrations/our-auto-router/scripts/route.py). No real run directory was read. Token counts are invented to exercise the pricing path; nothing here is evidence.",
+  "prefer_latency": false,
+  "workspace": "S:/x/ws",
+  "allow_read_tools": true,
+  "run_dir": "S:/x/runs/synthC",
+  "receipt_paths": [
+    "S:/x/runs/synthC/receipt.json"
+  ],
+  "started_at_utc": "2026-07-19T01:00:00+00:00",
+  "kind": "code",
+  "allow_cloud": true,
+  "prompt_file": "S:/x/prompt2.txt",
+  "prompt_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+  "validator": "S:/x/validate_code.py",
+  "validator_sha256": "7777777777777777777777777777777777777777777777777777777777777777",
+  "attempts": [
+    {
+      "index": 1,
+      "provider": "codex",
+      "model": "gpt-5.6-luna",
+      "effort": "low",
+      "attempt_dir": "attempt-01-gpt-5.6-luna",
+      "call_status": "completed",
+      "exit_code": 0,
+      "elapsed_seconds": 9.2,
+      "usage": {
+        "input_tokens": 5200,
+        "cached_input_tokens": 0,
+        "output_tokens": 900
+      },
+      "candidate_sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "validator": {
+        "passed": false,
+        "exit_code": 1,
+        "elapsed_seconds": 0.4
+      }
+    },
+    {
+      "index": 2,
+      "provider": "codex",
+      "model": "gpt-5.6-terra",
+      "effort": "medium",
+      "attempt_dir": "attempt-02-gpt-5.6-terra",
+      "call_status": "completed",
+      "exit_code": 0,
+      "elapsed_seconds": 41.0,
+      "usage": {
+        "input_tokens": 5300,
+        "cached_input_tokens": 0,
+        "output_tokens": 1500
+      },
+      "candidate_sha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "validator": {
+        "passed": true,
+        "exit_code": 0,
+        "elapsed_seconds": 0.4
+      }
+    },
+    {
+      "index": 3,
+      "provider": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "high",
+      "attempt_dir": "attempt-03-gpt-5.6-sol",
+      "call_status": "skipped",
+      "reason": "cloud_attempt_ceiling"
+    }
+  ],
+  "completed_at_utc": "2026-07-19T01:01:00+00:00",
+  "status": "pass",
+  "selected_candidate": "attempt-02-gpt-5.6-terra/candidate.txt",
+  "selected_candidate_sha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+}
