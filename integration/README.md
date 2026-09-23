@@ -62,3 +62,7 @@ The source-driven workflow `.github/workflows/hot-aisle-ci.yml` also runs the in
 This integration does not run or fund a customer hardware campaign, authenticate a provider result, provision resources, transfer a repository to another organization or publish customer evidence on the internet. Real Hot Aisle authentication, native vLLM/ROCm compatibility and a matched comparator campaign remain unqualified. The runner's modeled time/spend checks apply between trials and are not a provider billing cap; that boundary must be addressed before describing a native campaign as hard-budgeted. Existing job schemas without the current plan-body identity may be retained as history but are not silently re-approved.
 
 The public catalogue retains its actual review date. Rebuilding, copying, repricing and reconnecting do not renew it. The integration uses the supplied September 22 snapshot; no source-price refresh is implied.
+
+## Native Windows recheck
+
+`QUALIFICATION.json` records the exact tested source hashes and fresh native browser counts. The recheck caught and repaired same-document private-link activation, corrected presentation-sensitive test assertions, and distinguishes unconfigured observations from failed reads. Both services were driven through actual localhost URLs; the desk saved and repriced a published record, reloaded it, held corrupt input, and retained saved decisions after the runner stopped. The campaign backend remained explicitly synthetic.

@@ -1,0 +1,49 @@
+{
+  "schema": "second-run/compute-instrument-native-qualification@1",
+  "checked_at": "2026-09-23T02:36:08.667380+00:00",
+  "base_commit": "291aecf66aeacab40ab515574dec250b8ba0dc46",
+  "branch": "agent/compute-qualified-seam",
+  "state": "PASS",
+  "environment": {
+    "host": "OCTO-W01",
+    "node": "v24.19.0",
+    "python": "Python 3.13.15",
+    "playwright": "1.58.0"
+  },
+  "source_hashes": {
+    "compute/index.html": "5e67e3bf9fa77d7ad73c2eb2ed1c2ee86f838597b1cd80552524c87b406e48df",
+    "compute/app.js": "04310f7d0724eb7947b727800d4e219bdd17401c4b1b55528468f893b0a8a123",
+    "compute/data/catalog.json": "3fbf8ba08c7312a5343d8d87e456e19715b27dc7d9abe78ca542a55b3789c35f",
+    "compute/compute-kit.zip": "dd47ae54ad8d23d0aa9f202803bbb715710def802c90c113f8cd8255c1724cb3",
+    "hot-aisle/index.html": "c608097d5d8eaf7a008ffb7719eeb838b2211ecd759274ddfa9bf6975fc6eaab",
+    "hot-aisle/data/catalog.json": "3fbf8ba08c7312a5343d8d87e456e19715b27dc7d9abe78ca542a55b3789c35f",
+    "hot-aisle/workload-report.zip": "16f83dd7c3987c2572b522b5176d1f531912f4c57aeafeda8724e416ac412753",
+    "integration/tests/browser.cjs": "7db31eaff1bb4bd894ce52067562d16dd1da3e45e519f42ea601e4da41220187",
+    "compute/tests/test_browser.py": "f2ce3ccc74b3c75c88326ef6a6bb868efbe9022570f456ee4c77bdfd878e4b5c",
+    "integration/AUTHORITIES.json": "981fbafde32b4e239b60c91f162b9f3d15e6ddb34b717f5a48a95f043c67ed9a"
+  },
+  "tests": {
+    "report_engine": 80,
+    "runner_desk_and_seam": 89,
+    "instrument_price": 13,
+    "desk_price": 7,
+    "instrument_native_browser": 26,
+    "desk_native_browser": 46,
+    "two_service_native_browser": 28,
+    "failed": 0
+  },
+  "browser_mode": "NATIVE_LOCALHOST_AND_FILE_NAVIGATION_NO_SET_CONTENT",
+  "browser_errors": [],
+  "external_application_requests": [],
+  "scope": "Software integration using explicit synthetic benchmark fixtures. No provider token, GPU rental, native vLLM run or AMD/NVIDIA performance measurement.",
+  "initial_failures": [
+    "An already-open desk did not consume a new private connection fragment.",
+    "A case-sensitive test rejected a visibly uppercase synthetic badge. Identity verification also needed to open its disclosure."
+  ],
+  "repairs": [
+    "Handle private connection fragments on hashchange as well as initial load; distinguish CONNECTING from CONNECTED.",
+    "Assert semantic synthetic labeling independent of CSS casing and open the identity disclosure before checking visibility.",
+    "Show held-record warnings only for actual holds; an unconfigured runtime is not an outage."
+  ],
+  "release_state": "LOCAL_BRANCH_ONLY; source-driven CI is wired but this branch was not pushed or deployed."
+}

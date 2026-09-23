@@ -12,6 +12,8 @@ def check(name,ok):
     checks.append(name)
 def wait_text(page,sel,value):
     page.wait_for_function('(x)=>document.querySelector(x.s).textContent.includes(x.v)',arg={'s':sel,'v':value})
+def wait_connected(page):
+    page.wait_for_function("()=>document.querySelector('#connection-status').textContent.startsWith('CONNECTED ·')")
 with tempfile.TemporaryDirectory(prefix='compute-browser-') as td:
     td=Path(td);fixture=json.loads((ROOT/'tests/fixtures.json').read_text(encoding='utf-8'));(td/'test-run.json').write_text(json.dumps(fixture['a']))
     cp=subprocess.Popen(['node',str(ROOT/'scripts/connect.cjs'),'--results',str(td)],stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
@@ -85,10 +87,10 @@ with tempfile.TemporaryDirectory(prefix='compute-browser-') as td:
         age_page=context.new_page();age_page.clock.install(time=__import__('datetime').datetime(2026,11,1,tzinfo=__import__('datetime').timezone.utc));(age_page.goto(url.split('#')[0],wait_until='networkidle') if mode=='NATIVE_LOCALHOST_NAVIGATION' else age_page.set_content((ROOT/'index.html').read_text(encoding='utf-8')));check('stale source banner visible under future clock',age_page.locator('#stale-banner').is_visible());check('announced price schedule activates on effective date',age_page.locator('#as-of').input_value()=='2026-10-01');age_page.close()
         connected='HTTP and MCP independently tested by Node; browser connection requires native navigation'
         if mode=='NATIVE_LOCALHOST_NAVIGATION':
-          page.set_viewport_size({'width':1440,'height':960});page.goto(url,wait_until='networkidle');wait_text(page,'#connection-status','CONNECTED')
+          page.set_viewport_size({'width':1440,'height':960});page.goto(url,wait_until='networkidle');wait_connected(page)
           check('native browser connected without file transport',page.locator('#run-list [data-run]').count()==1)
           check('connection token stripped from browser address',page.evaluate('location.hash')=='')
-          page.locator('#refresh-work').click();wait_text(page,'#connection-status','CONNECTED')
+          page.locator('#refresh-work').click();wait_connected(page)
           check('native reconnect returns same supplied run',page.locator('#run-list [data-run]').count()==1)
           connected='NATIVE_LOCALHOST_READ_ONLY_BROWSER_CONNECTION'
         receipt={'checks':len(checks),'passed':checks,'failed':0,'browser_mode':mode,'connected_browser':connected,'console_errors':errors,'external_requests':foreign,'scope':'Synthetic fixtures and software interactions. No GPU benchmark, provider account or execution policy admitted.'}
