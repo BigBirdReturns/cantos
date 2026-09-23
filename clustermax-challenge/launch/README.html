@@ -1,0 +1,44 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ClusterMAX 3.0 launch evidence | SecondRun</title>
+<meta name="description" content="ClusterMAX Challenge documentation, rendered from README.md.">
+<style>:root{color-scheme:dark light;--bg:#111114;--ink:#f5f2f1;--muted:#aaa6ab;--line:#353239;--pink:#ff5d96;--panel:#1a191e}
+@media(prefers-color-scheme:light){:root{--bg:#fbfafb;--ink:#17151a;--muted:#5b5560;--line:#ddd8de;--pink:#c81760;--panel:#f1eef1}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+main{max-width:760px;margin:auto;padding:26px 20px 64px}
+nav{display:flex;gap:18px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:16px;margin-bottom:8px;font-size:14px}
+nav .brand{color:var(--pink);font-weight:700}
+a{color:var(--ink);text-underline-offset:3px;overflow-wrap:anywhere}
+a:hover{color:var(--pink)}
+h1{font-size:clamp(28px,6vw,42px);line-height:1.15;letter-spacing:-.03em;margin:26px 0 14px}
+h2{font-size:22px;letter-spacing:-.02em;margin:34px 0 10px;border-top:1px solid var(--line);padding-top:20px}
+h3{font-size:18px;margin:22px 0 8px}
+h4{font-size:16px;margin:18px 0 6px;color:var(--muted)}
+p{margin:12px 0}
+ul,ol{padding-left:22px}
+li{margin:6px 0}
+code{background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:.1em .35em;font-size:.9em;overflow-wrap:anywhere}
+pre{background:var(--panel);border:1px solid var(--line);border-radius:5px;padding:14px;overflow-x:auto;font-size:13px;line-height:1.5}
+pre code{background:none;border:none;padding:0}
+table{border-collapse:collapse;width:100%;font-size:14px;margin:14px 0;display:block;overflow-x:auto}
+th,td{text-align:left;border-bottom:1px solid var(--line);padding:8px 10px;overflow-wrap:anywhere}
+th{color:var(--muted);font-weight:600}
+.muted{color:var(--muted);font-size:13px}
+footer{border-top:1px solid var(--line);margin-top:40px;padding-top:16px;font-size:12px;color:var(--muted)}
+@media(max-width:400px){main{padding:18px 14px 44px}h1{margin-top:16px}pre{font-size:12px;padding:10px}}</style></head><body><main>
+<nav><span class="brand">SecondRun</span><a href="../index.html">Open the test</a><a href="../README.html">Protocol</a><a href="../SUBMITTING.html">Submit records</a><a href="README.md">View source (.md)</a></nav>
+<h1 id="clustermax-3-0-launch-evidence">ClusterMAX 3.0 launch evidence</h1>
+<p>ClusterMAX 3.0 has been released. Open <a href="index.html">the reader view</a> or <a href="claims-3.0.observed.json">the source-bound ledger</a>. The ledger covers 17 selected provider assignments; it does not claim complete review of all 77 providers. Exact retrieval hashes are in <a href="source-observations-20260923.json">source observations</a>.</p>
+<h2 id="observation-and-scoring-are-separate">Observation and scoring are separate</h2>
+<p>Schema <code>secondrun.launch-claims.v2</code> records SUPPLIED, PARTIAL, NOT_IN_REVIEWED_SOURCES and NOT_REVIEWED findings. Partial and unreviewed findings carry explicit limitations and sources. These are limits of this review, not assertions that evidence does not exist. The v1 template and validator remain supported for historical records.</p>
+<p>The ledger accepts Participation Ribbon and Unavailable as observations. The unchanged five-tier scorer refuses Participation Ribbon; Unavailable is never converted into Underperforming or a failed job. A new mapping requires a separately identified plan and post-release disclosure. No six-tier probability is invented here.</p>
+<h2 id="use">Use</h2>
+<pre><code class="language-sh">python scripts/launch_ledger.py launch/claims-3.0.observed.json
+python scripts/launch_ledger.py launch/claims-3.0.observed.json --plan path/to/plan.json --output binding-draft.json</code></pre>
+<p>A binding draft requires compatible tiers, sources and rating version. It does not register a study or authenticate external timestamps. Validate the complete submission before relying on a result.</p>
+<h2 id="chronology">Chronology</h2>
+<p>The original instrument was published earlier on release day at <code>ee650e3</code>. Consolidated v1.3 (<code>448e003</code>) was created locally at 21:16 UTC (self-reported commit time, not an independent clock) and first reached GitHub at 21:27:08 UTC -- after the cited 3.0 article's own recorded <code>datePublished</code> of 21:20:29 UTC. Neither code publication establishes a preregistered real customer cohort. This ledger is post-release work. Plans can still prospectively predict future jobs; freeze their design, predictions and mapping before observing those outcomes.</p>
+<p>The complete <a href="release-3.0/clustermax-3.0.json">77-provider transcription</a> and <a href="release-3.0/transitions.json">transition record</a> remain separate. The inspected article is recorded as methodology_source. The exact 3.0 rubric remains unverified, so this observation ledger cannot emit a real binding yet.</p>
+<footer>Rendered from <a href="README.md">README.md</a>, the authoritative source -- this page is generated by <code>scripts/build_docs.py</code> and never hand-edited. <a href="https://github.com/BigBirdReturns/axm-tools/tree/main/clustermax-challenge">Source and tests</a>.</footer>
+</main></body></html>

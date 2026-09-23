@@ -1,0 +1,29 @@
+{
+  "_template_note": "THIS IS A TEMPLATE. plan_sha256/binding_sha256 below are computed from this exact plan.template.json/binding.template.json pair. Your own files will hash differently.",
+  "schema": "secondrun.rating-outcomes.v4",
+  "plan_sha256": "7f117cd8c6000be737021c968a44d88b7324221670042aa5d1842f8f79364562",
+  "binding_sha256": "3afba1021a5ab3f59a0f77a06b8a41896baebeb796d43d1193967ae66c3bcf39",
+  "trials": [
+    {
+      "trial_id": "TEMPLATE-PROVIDER_A-0001",
+      "provider_id": "TEMPLATE_PROVIDER_A",
+      "service_id": "TEMPLATE-managed-cluster-8xH100",
+      "region": "us-east-1",
+      "workload_sha256": "60573a23b5f149744332933beb3cdcf24868d94ffa607bad98aa3af9a5b2c818",
+      "validator_sha256": "0af01c525e7bc0061bfa2ac69efa17f863c8efcb3970a8b53570aa3443b84234",
+      "customer_role": "ordinary_tenant",
+      "support": "standard",
+      "session_id": "S1",
+      "started_at": "2026-01-04T10:00:00Z",
+      "finished_at": "2026-01-04T10:22:00Z",
+      "status": "complete",
+      "accepted": 987,
+      "attempted": 1000,
+      "p95_ms": 410.5,
+      "total_cost_usd": 21.4,
+      "credits_redeemed_usd": 0,
+      "receipt_ref": "TEMPLATE -- replace: a pointer to your actual job receipt/invoice (id, filename, or URL)",
+      "receipt_sha256": "333d4f6a9d03bc53efdaca4d9f065002e60dd863aae48aa7bfad0a8354ff47e9"
+    }
+  ]
+}

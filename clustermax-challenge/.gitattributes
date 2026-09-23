@@ -1,3 +1,16 @@
+# -text marks these trees as binary to Git: no line-ending conversion in
+# either direction, ever, on any platform/config (including Windows
+# core.autocrlf=true). These trees hold JSON whose SHA-256 is load-bearing
+# (plan/binding/outcomes packets, the frozen transform, R1 inputs, the launch
+# ledger) -- an LF/CRLF roundtrip on checkout or commit would silently change
+# the bytes without changing what a human reads, and every hash in this repo
+# is computed over exact file bytes. To verify after a fresh checkout: `git
+# hash-object data/demo-plan.json` (or sha256sum it directly) and compare
+# against the sha256 baked into data/build.json / the file's own declared
+# hash -- with -text in effect that must match on Linux, macOS and Windows
+# alike; without it, a Windows checkout with autocrlf=true would silently
+# rewrite LF to CRLF and the hash would differ from the one committed.
 retrospective/** -text
 design/** -text
 submissions/** -text
+data/** -text

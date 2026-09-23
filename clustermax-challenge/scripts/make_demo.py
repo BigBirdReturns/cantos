@@ -1,22 +1,40 @@
 #!/usr/bin/env python3
-"""Create a deterministic, explicitly synthetic positive-control dataset."""
-import hashlib, json, random
+"""Create deterministic, explicitly synthetic demo packets (v1.4 regression fixtures).
+
+Three variants, each a (plan, binding, outcomes) triple:
+  informative  data/demo-*.json               10 providers, Gold/Silver/Bronze bound in the
+                                              same order as the hidden true pass rates. The
+                                              medal permutation test should be positive
+                                              (exact enumeration of 4200 assignments).
+  shuffled     data/demo-shuffled-*.json      same hidden outcome process, but the bound
+                                              medals are a fixed shuffle unrelated to it:
+                                              should be inconclusive.
+  level-shift  data/demo-level-shift-*.json   12 identical providers (true pass 0.9,
+                                              baseline 0.5), Gold/Silver/Bronze only. v1.3's
+                                              fixed 0.50 reference called this positive; the
+                                              permutation test (Monte Carlo, 34650 > 20000
+                                              assignments) should be inconclusive.
+"""
+import hashlib, json, random, sys
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
+sys.path.insert(0,str(ROOT/'scripts'))
+from challenge import canonical_sha256
 MEDALS=('Platinum','Gold','Silver','Bronze','Underperforming')
 # True pass probability used only to generate synthetic outcomes; deliberately more
-# separated than the frozen transform's compressed 0.25-weighted anchors, the way a
-# real unknown outcome process need not match a predictor's stated confidence.
-TRUE_PASS_PROBABILITY={'Platinum':0.85,'Gold':0.70,'Silver':0.50,'Bronze':0.30,'Underperforming':0.15}
-# Baseline probabilities, offset from the medal cycle so the plain baseline carries
-# its own (weaker, uncorrelated) signal instead of coinciding with the medal-blind
-# reference anchor -- this lets the demo show a real difference between "vs baseline"
-# and "vs reference" instead of the two comparisons collapsing to the same numbers.
+# separated than the frozen transform's compressed 0.25-weighted anchors.
+TRUE_PASS_PROBABILITY={'Gold':0.85,'Silver':0.60,'Bronze':0.30}
+# Baseline probabilities, offset from the tier order so the plain baseline carries its
+# own weaker signal and "vs baseline" differs from the permutation statistic.
 BASELINE_PROBABILITY=[0.35,0.45,0.5,0.55,0.65]
-PROVIDERS=30
+TRUE_TIERS=('Gold','Gold','Gold','Silver','Silver','Silver','Silver','Bronze','Bronze','Bronze')
+# A fixed rearrangement of the same multiset with no rank relationship to TRUE_TIERS.
+SHUFFLED_TIERS=('Silver','Bronze','Gold','Bronze','Gold','Silver','Silver','Gold','Silver','Bronze')
+LEVEL_SHIFT_TIERS=('Gold','Silver','Bronze')*4
 TRIALS_PER_PROVIDER=15
 SESSIONS_PER_PROVIDER=5
 DATES_PER_PROVIDER=3
+VARIANTS={'informative':'demo','shuffled':'demo-shuffled','level-shift':'demo-level-shift'}
 # Synthetic-demo disclosure text: obviously not a real answer, never place real
 # disclosure content in a demo/synthetic plan.
 DISCLOSURE={
@@ -29,17 +47,24 @@ DISCLOSURE={
 
 def sha(s): return hashlib.sha256(s.encode()).hexdigest()
 def dump(x): return (json.dumps(x,indent=2,allow_nan=False)+'\n').encode()
-def canonical_sha256(obj): return hashlib.sha256(json.dumps(obj,sort_keys=True,separators=(',',':'),allow_nan=False,ensure_ascii=False).encode('utf-8')).hexdigest()
 
 def load_transform():
-    transform=json.loads((ROOT/'design/transform.json').read_text(encoding='utf-8'))
-    return transform
+    return json.loads((ROOT/'design/transform.json').read_text(encoding='utf-8'))
 
-def build():
+def cohort(variant):
+    """List of (bound medal, true pass probability, baseline probability) per provider."""
+    if variant=='informative':
+        return [(t,TRUE_PASS_PROBABILITY[t],BASELINE_PROBABILITY[(p+2)%5]) for p,t in enumerate(TRUE_TIERS)]
+    if variant=='shuffled':
+        return [(s,TRUE_PASS_PROBABILITY[t],BASELINE_PROBABILITY[(p+2)%5])
+                for p,(t,s) in enumerate(zip(TRUE_TIERS,SHUFFLED_TIERS))]
+    if variant=='level-shift':
+        return [(t,0.9,0.5) for t in LEVEL_SHIFT_TIERS]
+    raise ValueError('unknown demo variant: '+variant)
+
+def build(variant='informative'):
     rng=random.Random(93)
     transform=load_transform()
-    weight=transform['weight']
-    anchors=transform['anchors']
     inputs=['gpu','allocation','price','workload','region','service']
     model={'description':'Synthetic specs-and-price baseline; no real model was trained.',
       'model_sha256':sha('synthetic baseline'),'inputs':inputs,
@@ -49,7 +74,7 @@ def build():
       'rubric_source':'Official ClusterMAX rubric/methodology document for the bound rating_version.',
       'tiers':list(MEDALS)}
     plan={'schema':'secondrun.rating-plan.v4','synthetic':True,
-      'study_id':'synthetic-positive-control','rating_name':'Synthetic example, not ClusterMAX',
+      'study_id':'synthetic-'+variant+'-control','rating_name':'Synthetic example, not ClusterMAX',
       'rating_version':'demo-1',
       'frozen_at':frozen_at,'minimum_providers':8,'minimum_lift':0.004,
       'outcome_definition':'Complete at least 900 accepted requests, p95 <= 200 ms and total cost <= USD 1.',
@@ -59,12 +84,9 @@ def build():
       'model_sha256':sha('synthetic augmented'),'inputs':inputs+['rating']},'trials':[]}
     outcomes={'schema':'secondrun.rating-outcomes.v4','plan_sha256':'','binding_sha256':'','trials':[]}
     medals={}
-    for p in range(PROVIDERS):
+    for p,(medal,true_probability,pb) in enumerate(cohort(variant)):
         provider_id=f'EXAMPLE_{p+1:02d}'
-        medal=MEDALS[p % len(MEDALS)]
         medals[provider_id]=medal
-        pb=BASELINE_PROBABILITY[(p + 2) % len(BASELINE_PROBABILITY)]
-        true_probability=TRUE_PASS_PROBABILITY[medal]
         for n in range(TRIALS_PER_PROVIDER):
             rid=f'P{p+1:02d}-T{n+1:02d}'
             session=f'S{(n % SESSIONS_PER_PROVIDER)+1}'
@@ -80,8 +102,7 @@ def build():
                 'gates':{'accepted_min':900,'p95_max_ms':200,'cost_max_usd':1}})
             good=rng.random()<true_probability
             # First provider's trials carry a token demo credit redemption so the
-            # engine's credits/subsidized-trials accounting is exercised end to
-            # end by the default demo, not just by tests that hand-construct it.
+            # engine's credits/subsidized-trials accounting is exercised end to end.
             credits=0.10 if p==0 else 0
             outcomes['trials'].append({'trial_id':rid,**ctx,'started_at':started,
                 'finished_at':finished,'status':'complete' if good else 'timeout',
@@ -97,16 +118,17 @@ def build():
       'rubric':{'url':'https://example.invalid/synthetic-rubric','sha256':sha('synthetic rubric'),
                  'retrieved_utc':'2026-01-02T06:00:00Z'},
       # Bound after the plan froze (2026-01-02T00:00:00Z) and strictly before the earliest
-      # job start (2026-01-03T00:00:00Z), the way a real binding is filled in after the
-      # rating publishes but before any attempt runs. Both source/rubric retrieved_utc
-      # (06:00) are also at-or-before bound_at (12:00), same day.
+      # job start (2026-01-03T00:00:00Z). The synthetic rating is not in design/registry.json,
+      # so results are flagged source_unverified.
       'bound_at':'2026-01-02T12:00:00Z','medals':medals}
     binding_bytes=dump(binding)
     outcomes['plan_sha256']=plan_hash
     outcomes['binding_sha256']=hashlib.sha256(binding_bytes).hexdigest()
     return pb_bytes,binding_bytes,dump(outcomes)
+
 if __name__=='__main__':
-    a,b,c=build()
-    (ROOT/'data/demo-plan.json').write_bytes(a)
-    (ROOT/'data/demo-binding.json').write_bytes(b)
-    (ROOT/'data/demo-outcomes.json').write_bytes(c)
+    for variant,prefix in VARIANTS.items():
+        a,b,c=build(variant)
+        (ROOT/f'data/{prefix}-plan.json').write_bytes(a)
+        (ROOT/f'data/{prefix}-binding.json').write_bytes(b)
+        (ROOT/f'data/{prefix}-outcomes.json').write_bytes(c)

@@ -1,0 +1,21 @@
+{
+  "_template_note": "THIS IS A TEMPLATE. plan_sha256 below is computed from this exact plan.template.json (so the pair is internally consistent as an example) -- when you build your own plan.json, re-run csv_to_packet.py or recompute this hash yourself; it will differ from the value shown here.",
+  "schema": "secondrun.rating-binding.v2",
+  "plan_sha256": "7f117cd8c6000be737021c968a44d88b7324221670042aa5d1842f8f79364562",
+  "rating_name": "ClusterMAX",
+  "rating_version": "TEMPLATE -- replace: the rating_version you expect the binding to name, e.g. \"3.0\"",
+  "source": {
+    "url": "TEMPLATE -- replace: the exact URL of the official medal table you read",
+    "sha256": "34e5d501669508efdbe0d3d202e27ca4eff448f92b87dd4acc982ba18842b238",
+    "retrieved_utc": "2026-01-03T00:00:00Z"
+  },
+  "rubric": {
+    "url": "TEMPLATE -- replace: the exact URL of the official rubric/methodology document you read",
+    "sha256": "c6af39ca30764cd8885d00ce3da9048e38bc3e52617f85f6a491d30e40c8d8bb",
+    "retrieved_utc": "2026-01-03T00:00:00Z"
+  },
+  "bound_at": "2026-01-03T01:00:00Z",
+  "medals": {
+    "TEMPLATE_PROVIDER_A": "Gold"
+  }
+}

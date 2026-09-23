@@ -1,9 +1,22 @@
-import copy, hashlib, importlib.util, json, sys, unittest
+import copy, hashlib, importlib.util, json, math, re, sys, unittest
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'scripts'))
-from challenge import evaluate, canonical_sha256, PLACEHOLDER_TOKENS, DISCLOSURE_FIELDS
+import challenge
+from challenge import (evaluate, canonical_sha256, canonical_json, es_number, count_arrangements,
+                       validate_transform, InvalidPacket, PLACEHOLDER_TOKENS, DISCLOSURE_FIELDS)
 from make_demo import build, dump
+
+# Real ClusterMAX 3.0 names with their transcribed tiers, for registered-source tests.
+REGISTERED_NAMES=[('CoreWeave','Platinum'),('Oracle','Gold'),('Google Cloud','Gold'),('Azure','Silver'),
+                  ('Firmus','Silver'),('Lambda','Silver'),('GMI','Silver'),('AWS','Bronze'),('GCore','Bronze'),('Verda','Bronze')]
+PNG_SHA='79dc81e4cf7a503632c631b69f011f2a7af109e719cc32253344820cda402e02'
+
+def rename_providers(p,b,o,names):
+    ids=sorted(b['medals'])
+    mapping={old:new for old,(new,_) in zip(ids,names)}
+    for row in p['trials']+o['trials']: row['provider_id']=mapping[row['provider_id']]
+    b['medals']={new:tier for new,tier in names}
 
 class ChallengeTests(unittest.TestCase):
     @classmethod
@@ -21,13 +34,279 @@ class ChallengeTests(unittest.TestCase):
         if relock_binding_in_outcomes: o['binding_sha256']=hashlib.sha256(bb).hexdigest()
         return evaluate(pb,bb,dump(o))
 
-    def held(self,fn): self.assertEqual(self.run_case(fn)['status'],'HOLD')
+    def held(self,fn,contains=None):
+        r=self.run_case(fn)
+        self.assertEqual(r['status'],'HOLD',r.get('signal'))
+        if contains: self.assertIn(contains,r['reason'])
+        return r
 
+    def admitted(self,fn):
+        r=self.run_case(fn)
+        self.assertEqual(r['status'],'PILOT_DESCRIPTIVE_RESULT',r.get('reason'))
+        return r
+
+    # -- v1.4 primary test: medal permutation ---------------------------------------
     def test_positive_control(self):
         r=self.run_case()
         self.assertEqual(r['status'],'PILOT_DESCRIPTIVE_RESULT')
         self.assertEqual(r['signal'],'positive')
         self.assertEqual(r['evidence_status'],'SYNTHETIC_DEMO')
+        t=r['medal_permutation_test']
+        self.assertEqual(t['question'],'Do medals rank providers better than chance?')
+        self.assertEqual(t['method'],'exact_enumeration')
+        self.assertEqual(t['permutations'],4200)  # 10!/(3!4!3!)
+        self.assertEqual(t['distinct_medals'],3)
+        self.assertLessEqual(t['p_help'],0.05)
+        self.assertGreater(t['T_obs'],r['minimum_lift'])
+        # exact enumeration counts the observed assignment among the N, no +1
+        self.assertAlmostEqual(t['p_help']*t['permutations'],round(t['p_help']*t['permutations']),places=9)
+        self.assertGreaterEqual(t['p_help'],1/t['permutations'])
+
+    def test_shuffled_medals_inconclusive(self):
+        r=evaluate(*build('shuffled'))
+        self.assertEqual(r['status'],'PILOT_DESCRIPTIVE_RESULT')
+        self.assertEqual(r['signal'],'inconclusive')
+        self.assertGreater(r['medal_permutation_test']['p_help'],0.05)
+
+    def test_level_shift_only_no_longer_positive(self):
+        r=evaluate(*build('level-shift'))
+        self.assertEqual(r['status'],'PILOT_DESCRIPTIVE_RESULT')
+        self.assertEqual(r['signal'],'inconclusive')
+        t=r['medal_permutation_test']
+        self.assertEqual(t['method'],'monte_carlo')  # 12!/(4!4!4!) = 34650 > 20000
+        self.assertEqual(t['permutations'],20000)
+        # (1+count)/(1+N) form
+        self.assertAlmostEqual(t['p_help']*20001,round(t['p_help']*20001),places=6)
+        # v1.3's decision rule (lower bound of the 0.50-reference interval > minimum_lift)
+        # called this cohort positive: every provider is identical, only the level moved.
+        ref=r['descriptive']['comparison_vs_reference']
+        self.assertGreater(ref['bootstrap_95'][0],r['minimum_lift'])
+
+    def test_inverted_medals_negative(self):
+        swap={'Gold':'Bronze','Bronze':'Gold','Silver':'Silver'}
+        r=self.admitted(lambda p,b,o: b.update(medals={k:swap[v] for k,v in b['medals'].items()}))
+        self.assertEqual(r['signal'],'negative')
+        self.assertLessEqual(r['medal_permutation_test']['p_hurt'],0.05)
+        self.assertLess(r['medal_permutation_test']['T_obs'],-r['minimum_lift'])
+
+    def test_single_medal_not_testable(self):
+        r=self.admitted(lambda p,b,o: b.update(medals={k:'Gold' for k in b['medals']}))
+        self.assertEqual(r['signal'],'not_testable')
+        t=r['medal_permutation_test']
+        self.assertIsNone(t['p_help']); self.assertAlmostEqual(t['T_obs'],0.0,places=12)
+
+    def test_level_shift_invariance(self):
+        # Relabelling every provider one tier up shifts the level, not the ranking: T must not move much
+        # beyond the change in anchor spacing (here spacing is equal, 0.10), so T is unchanged.
+        up={'Gold':'Platinum','Silver':'Gold','Bronze':'Silver'}
+        base=self.run_case()['medal_permutation_test']
+        r=self.admitted(lambda p,b,o: b.update(medals={k:up[v] for k,v in b['medals'].items()}))
+        self.assertAlmostEqual(r['medal_permutation_test']['T_obs'],base['T_obs'],places=12)
+        self.assertEqual(r['medal_permutation_test']['p_help'],base['p_help'])
+
+    def test_descriptive_comparisons_kept(self):
+        r=self.run_case()
+        self.assertNotIn('comparison_vs_reference',r)
+        d=r['descriptive']
+        self.assertIn('level shift',d['note'])
+        self.assertIn('reference_brier',d['comparison_vs_reference'])
+        self.assertEqual(d['comparison_vs_reference']['reference_anchor'],0.5)
+        self.assertEqual(len(d['sensitivity']),len(self.plan['transform']['alternative_weights']))
+        self.assertEqual(len(d['leave_one_provider_out']),r['providers'])
+        self.assertEqual(len(r['medal_permutation_test']['sensitivity']),2)
+        self.assertEqual(r['schema'],'secondrun.rating-result.v5')
+        self.assertEqual(r['test_version'],'1.4.0')
+
+    def test_count_arrangements(self):
+        self.assertEqual(count_arrangements([3,4,3],20000),4200)
+        self.assertEqual(count_arrangements([4,4,4],20000),20001)
+        self.assertEqual(count_arrangements([9,1],20000),10)
+        self.assertEqual(count_arrangements([1]*7,20000),5040)
+
+    # -- transform lock --------------------------------------------------------------
+    def test_transform_hash_mismatch(self):
+        self.held(lambda p,b,o: p['transform'].update(weight=0.5), 'transform_sha256')
+
+    def test_unregistered_transform_held(self):
+        def mutate(p,b,o):
+            p['transform']['reference_anchor']=0.95
+            p['transform_sha256']=canonical_sha256(p['transform'])
+        self.held(mutate,'not a registered published transform')
+
+    def test_registered_transform_is_design_transform(self):
+        t=json.loads((ROOT/'design/transform.json').read_text(encoding='utf-8'))
+        reg=json.loads((ROOT/'design/registry.json').read_text(encoding='utf-8'))
+        self.assertEqual([x['sha256'] for x in reg['transforms']],[canonical_sha256(t)])
+        self.assertEqual(canonical_sha256(t),'2a5d65120ea83be53edd2ccc671b46e77b3e810f53fa8e33c73871668c6f1d90')
+
+    def test_inverted_anchors_rejected(self):
+        t=json.loads((ROOT/'design/transform.json').read_text(encoding='utf-8'))
+        t['anchors']={'Platinum':0.1,'Gold':0.2,'Silver':0.5,'Bronze':0.8,'Underperforming':0.9}
+        with self.assertRaisesRegex(InvalidPacket,'strictly decreasing'): validate_transform(t)
+        t['anchors']={'Platinum':0.9,'Gold':0.8,'Silver':0.8,'Bronze':0.6,'Underperforming':0.3}
+        with self.assertRaisesRegex(InvalidPacket,'strictly decreasing'): validate_transform(t)
+
+    def test_index_embeds_registry_and_transform(self):
+        h=(ROOT/'index.html').read_text(encoding='utf-8')
+        reg=json.loads(re.search(r'^const REGISTRY=(.*);$',h,re.M).group(1))
+        self.assertEqual(reg,json.loads((ROOT/'design/registry.json').read_text(encoding='utf-8')))
+        t=json.loads(re.search(r'^const PUBLISHED_TRANSFORM=(.*);$',h,re.M).group(1))
+        self.assertEqual(t,json.loads((ROOT/'design/transform.json').read_text(encoding='utf-8')))
+        self.assertIn("const VERSION='1.4.0'",h)
+
+    # -- uniform gates / training ----------------------------------------------------
+    def test_nonuniform_gates_held(self):
+        def mutate(p,b,o):
+            for row in p['trials']:
+                if row['provider_id']=='EXAMPLE_01': row['gates']['cost_max_usd']=0.5
+        self.held(mutate,'gates differ')
+
+    def test_uniform_gates_integral_float_equal(self):
+        def mutate(p,b,o): p['trials'][0]['gates']['cost_max_usd']=1.0
+        self.admitted(mutate)
+
+    def test_empty_training_providers_held(self):
+        self.held(lambda p,b,o:[m.update(training_providers=[]) for m in (p['baseline'],p['with_rating'])],
+                  'training_providers must be nonempty')
+
+    # -- source registry --------------------------------------------------------------
+    def registered(self,p,b,o,names=REGISTERED_NAMES,sha=PNG_SHA):
+        rename_providers(p,b,o,names)
+        for x in (p,b): x.update(rating_name='ClusterMAX',rating_version='3.0')
+        b['source']['sha256']=sha
+
+    def test_registry_transcription_matches_release(self):
+        reg=json.loads((ROOT/'design/registry.json').read_text(encoding='utf-8'))
+        entry=reg['ratings'][0]
+        t=json.loads((ROOT/entry['transcription']['path']).read_text(encoding='utf-8'))
+        self.assertEqual(entry['transcription']['tiers'],{x['name']:x['tier'] for x in t['providers']})
+        sums=(ROOT/'launch/release-3.0/raw/SHA256SUMS.txt').read_text(encoding='utf-8')
+        for s in entry['medal_table_sources']:
+            self.assertEqual(hashlib.sha256((ROOT/s['path']).read_bytes()).hexdigest(),s['sha256'])
+            self.assertIn(s['sha256'],sums)
+
+    def test_registered_source_admitted(self):
+        r=self.admitted(self.registered)
+        self.assertEqual(r['source_verification'],'registered_source')
+
+    def test_tweet_image_digest_also_registered(self):
+        r=self.admitted(lambda p,b,o:self.registered(p,b,o,sha='5477994f1bf0881f02175344123eb167eddcded31c6cb7471fdeb5fe018b5c51'))
+        self.assertEqual(r['source_verification'],'registered_source')
+
+    def test_registered_rating_wrong_source_held(self):
+        self.held(lambda p,b,o:self.registered(p,b,o,sha='a'*64),'not a registered medal-table source')
+
+    def test_registered_rating_tier_mismatch_held(self):
+        names=list(REGISTERED_NAMES); names[0]=('CoreWeave','Gold')
+        self.held(lambda p,b,o:self.registered(p,b,o,names=names),'differs from the registered transcription')
+
+    def test_registered_rating_unknown_provider_held(self):
+        names=[('Coreweave','Platinum')]+REGISTERED_NAMES[1:]
+        self.held(lambda p,b,o:self.registered(p,b,o,names=names),'not in the registered transcription')
+
+    def test_registered_rating_name_normalized(self):
+        def mutate(p,b,o):
+            self.registered(p,b,o)
+            for x in (p,b): x['rating_name']='Cluster MAX'
+            b['source']['sha256']='b'*64
+        self.held(mutate,'not a registered medal-table source')
+
+    def test_unregistered_version_flagged(self):
+        def mutate(p,b,o):
+            self.registered(p,b,o,sha='c'*64)
+            for x in (p,b): x['rating_version']='3.1'
+        r=self.admitted(mutate)
+        self.assertEqual(r['source_verification'],'source_unverified')
+        self.assertEqual(self.run_case()['source_verification'],'source_unverified')
+
+    # -- parity rules (shared with tests/test_engine.cjs) ------------------------------
+    def test_prototype_names_are_plain_strings(self):
+        for tier in ('constructor','__proto__','toString','hasOwnProperty'):
+            with self.subTest(tier=tier):
+                self.held(lambda p,b,o,tier=tier: b['medals'].update(EXAMPLE_01=tier),'not one of the frozen transform anchors')
+        r=self.admitted(lambda p,b,o: rename_providers(p,b,o,[('__proto__','Gold')]+[(f'EXAMPLE_{i:02d}',t) for i,t in
+            zip(range(2,11),['Gold','Gold','Silver','Silver','Silver','Silver','Bronze','Bronze','Bronze'])]))
+        self.assertIn('__proto__',r['provider_results'])
+
+    def test_integral_float_integers_accepted(self):
+        base=self.run_case()
+        def mutate(p,b,o):
+            p['minimum_providers']=8.0
+            for row in p['trials']: row['gates']['accepted_min']=900.0
+            for row in o['trials']: row['accepted']=float(row['accepted'])
+        r=self.admitted(mutate)
+        self.assertEqual(r['medal_permutation_test'],base['medal_permutation_test'])
+        self.assertIsInstance(r['economics'][0]['accepted'],int)
+
+    def test_non_integers_rejected(self):
+        self.held(lambda p,b,o:[row['gates'].update(accepted_min=900.5) for row in p['trials']],'accepted_min: integer required')
+        self.held(lambda p,b,o:p.update(minimum_providers=8.5),'At least eight')
+        self.held(lambda p,b,o:p.update(minimum_providers=True),'At least eight')
+        self.held(lambda p,b,o:o['trials'][0].update(accepted=True),'integer required')
+        self.held(lambda p,b,o:o['trials'][0].update(attempted=10**400),'integer required')
+
+    def test_submillisecond_prediction_after_freeze_held(self):
+        self.held(lambda p,b,o:p['trials'][0].update(predicted_at='2026-01-02T00:00:00.0004Z'),'not prospective')
+
+    def test_fraction_truncated_to_microseconds(self):
+        # 0.0000009 s truncates to 0 us: equal to frozen_at, so still admissible (pred <= frozen)
+        self.admitted(lambda p,b,o:p['trials'][0].update(predicted_at='2026-01-02T00:00:00.0000009Z'))
+        self.admitted(lambda p,b,o:p['trials'][0].update(predicted_at='2026-01-01T12:00:00.1234567+00:00'))
+
+    def test_submillisecond_bound_before_start(self):
+        def mutate(p,b,o,bound,start):
+            b['bound_at']=bound
+            o['trials'][0].update(started_at=start)
+        # distinct microseconds within one millisecond: strictly before -> admissible
+        self.admitted(lambda p,b,o:mutate(p,b,o,'2026-01-02T23:59:59.999001Z','2026-01-02T23:59:59.999002Z'))
+        # equal after truncation to microseconds -> not strictly before -> held
+        self.held(lambda p,b,o:mutate(p,b,o,'2026-01-02T23:59:59.9990004Z','2026-01-02T23:59:59.9990009Z'),'strictly before')
+
+    def test_timestamp_range_and_offsets(self):
+        self.held(lambda p,b,o:p['baseline'].update(frozen_at='1969-12-31T00:00:00Z'),'year outside')
+        self.held(lambda p,b,o:p['trials'][0].update(predicted_at='2026-01-01T12:00:00+24:00'),'invalid timezone offset')
+        self.held(lambda p,b,o:p['trials'][0].update(predicted_at='2026-02-29T12:00:00Z'),'invalid calendar date')
+        self.held(lambda p,b,o:p['trials'][0].update(predicted_at='2026-01-01T12:00:00٣Z'),'RFC3339')
+        self.admitted(lambda p,b,o:p['trials'][0].update(predicted_at='2026-01-01T17:30:00+05:30'))
+
+    def test_es_number_vectors(self):
+        vectors={0.1:'0.1',1e-7:'1e-7',100.0:'100',0.30000000000000004:'0.30000000000000004',-0.0:'0',
+                 1e21:'1e+21',1.5e20:'150000000000000000000',1e-6:'0.000001',2**60:'1152921504606847000',
+                 9007199254740993:'9007199254740992',5e-324:'5e-324',-2.5e-8:'-2.5e-8',123.456:'123.456'}
+        for v,s in vectors.items():
+            with self.subTest(v=v): self.assertEqual(es_number(v),s)
+
+    def test_canonical_json_js_compatible(self):
+        self.assertEqual(canonical_json({'b':1.0,'a':[0.1,1e-7,100.0,0.30000000000000004,True,None,'é']}),
+                         '{"a":[0.1,1e-7,100,0.30000000000000004,true,null,"é"],"b":1}')
+        # UTF-16 code-unit key order: an astral character (D83D...) sorts before U+FF21.
+        self.assertEqual(canonical_json({'Ａk':1,'\U0001F600k':2}),'{"\U0001F600k":2,"Ａk":1}')
+        with self.assertRaises(InvalidPacket): canonical_json({'x':'\ud800'})
+
+    def test_lone_surrogate_in_transform_held(self):
+        def mutate(p,b,o):
+            p['transform']['description']+='\ud800'
+            p['transform_sha256']='0'*64
+        p,b,o=copy.deepcopy(self.plan),copy.deepcopy(self.binding),copy.deepcopy(self.outcomes)
+        mutate(p,b,o)
+        pb=json.dumps(p).encode()  # ensure_ascii keeps the lone surrogate as an escape
+        b['plan_sha256']=o['plan_sha256']=hashlib.sha256(pb).hexdigest();bb=dump(b)
+        o['binding_sha256']=hashlib.sha256(bb).hexdigest()
+        r=evaluate(pb,bb,dump(o))
+        self.assertEqual(r['status'],'HOLD'); self.assertIn('lone surrogate',r['reason'])
+
+    def test_missing_p95_key_held(self):
+        self.held(lambda p,b,o:o['trials'][0].pop('p95_ms'),'p95_ms required')
+
+    def test_huge_number_is_not_finite(self):
+        for literal in (b'1e400', b'1'+b'0'*400):
+            with self.subTest(literal=literal[:6]):
+                p,b,o=copy.deepcopy(self.plan),copy.deepcopy(self.binding),copy.deepcopy(self.outcomes)
+                pb=dump(p).replace(b'"p_baseline": 0.5,',b'"p_baseline": '+literal+b',',1)
+                b['plan_sha256']=o['plan_sha256']=hashlib.sha256(pb).hexdigest();bb=dump(b)
+                o['binding_sha256']=hashlib.sha256(bb).hexdigest()
+                r=evaluate(pb,bb,dump(o))
+                self.assertEqual(r['status'],'HOLD'); self.assertIn('p_baseline: finite number required',r['reason'])
 
     def test_binding_happy_path(self):
         r=self.run_case()
@@ -35,44 +314,6 @@ class ChallengeTests(unittest.TestCase):
         self.assertEqual(r['binding']['schema'],'secondrun.rating-binding.v2')
         self.assertEqual(r['binding_sha256'],hashlib.sha256(dump(self.binding)).hexdigest())
         self.assertNotIn('medal',self.plan['trials'][0])
-
-    def test_reference_comparison_present(self):
-        r=self.run_case()
-        self.assertIn('comparison_vs_baseline', r)
-        self.assertIn('comparison_vs_reference', r)
-        self.assertIn('reference_brier', r['comparison_vs_reference'])
-        self.assertIn('sensitivity', r)
-        self.assertEqual(len(r['sensitivity']), len(self.plan['transform']['alternative_weights']))
-        self.assertIn('leave_one_provider_out', r)
-        self.assertEqual(len(r['leave_one_provider_out']), r['providers'])
-
-    def test_signal_negative_on_inverted_anchors(self):
-        def mutate(p,b,o):
-            anchors=p['transform']['anchors']
-            swapped={'Platinum':anchors['Underperforming'],'Gold':anchors['Bronze'],
-                     'Silver':anchors['Silver'],'Bronze':anchors['Gold'],
-                     'Underperforming':anchors['Platinum']}
-            p['transform']['anchors']=swapped
-            p['transform_sha256']=canonical_sha256(p['transform'])
-        r=self.run_case(mutate)
-        self.assertEqual(r['status'],'PILOT_DESCRIPTIVE_RESULT')
-        self.assertEqual(r['signal'],'negative')
-        self.assertLess(r['comparison_vs_reference']['mean_lift'],0)
-
-    def test_signal_inconclusive_on_zero_weight(self):
-        def mutate(p,b,o):
-            p['transform']['weight']=0.0
-            p['transform_sha256']=canonical_sha256(p['transform'])
-        r=self.run_case(mutate)
-        self.assertEqual(r['status'],'PILOT_DESCRIPTIVE_RESULT')
-        self.assertEqual(r['signal'],'inconclusive')
-        self.assertEqual(r['comparison_vs_reference']['mean_lift'],0)
-        self.assertEqual(r['comparison_vs_baseline']['mean_lift'],0)
-
-    def test_transform_hash_mismatch(self):
-        def mutate(p,b,o):
-            p['transform']['weight']=0.5  # transform_sha256 left stale
-        self.held(mutate)
 
     # -- binding gates --------------------------------------------------
     def test_plan_hash_mismatch(self):
@@ -217,7 +458,8 @@ class ChallengeTests(unittest.TestCase):
         base_costs={c['trial_id']:(c['total_cost_usd'],c['cost_per_1000_accepted']) for c in base['economics']}
         varied_costs={c['trial_id']:(c['total_cost_usd'],c['cost_per_1000_accepted']) for c in varied['economics']}
         self.assertEqual(base_costs, varied_costs)
-        self.assertEqual(base['comparison_vs_baseline']['mean_lift'], varied['comparison_vs_baseline']['mean_lift'])
+        self.assertEqual(base['descriptive']['comparison_vs_baseline']['mean_lift'], varied['descriptive']['comparison_vs_baseline']['mean_lift'])
+        self.assertEqual(base['medal_permutation_test'], varied['medal_permutation_test'])
 
     # -- disclosure -------------------------------------------------------
     def test_disclosure_field_missing(self):

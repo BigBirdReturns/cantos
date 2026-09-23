@@ -97,10 +97,12 @@ release gate, not part of `evaluate()`.
 outcome packet is scored, how an ordinal medal becomes a probability contribution:
 an anchor probability per tier (Platinum 0.90 down to Underperforming 0.30), a
 blend weight (0.25) against the supplied baseline probability, a medal-blind
-**reference anchor** (0.50), and two prespecified alternative weights (0.10, 0.40)
-for sensitivity. These are SecondRun's uncalibrated research assumptions, adopted to
-make the mapping concrete enough to test — **not probabilities asserted by
-SemiAnalysis**, and not fitted to any real outcome data.
+**reference anchor** (0.50, used only in the v1.3 descriptive comparisons — see
+"The medal permutation test" below for the primary result), and two prespecified
+alternative weights (0.10, 0.40) for sensitivity. These are SecondRun's
+uncalibrated research assumptions, adopted to make the mapping concrete enough to
+test — **not probabilities asserted by SemiAnalysis**, and not fitted to any real
+outcome data.
 
 A plan carries the transform object inline plus `transform_sha256`, the SHA-256 of
 its canonical JSON bytes (`sort_keys=True, separators=(',', ':')`, identical
@@ -113,13 +115,61 @@ p_with_rating = (1 - weight) * p_baseline + weight * anchor[bound_medal]
 p_reference    = (1 - weight) * p_baseline + weight * reference_anchor
 ```
 
-Results report **two** paired comparisons: baseline vs. with-rating,
-and **reference vs. with-rating** — the second isolates medal-specific information
-from the mere presence of a rating input, since both blends use the same weight and
-differ only in whether the anchor is medal-aware. The prespecified alternative
-weights and a leave-one-provider-out recomputation of the reference-comparison lift
-are reported alongside the primary result as sensitivity checks, not as a search for
-the most favorable weight.
+Results also report the two v1.3 paired comparisons — baseline vs. with-rating, and
+fixed 0.50-reference vs. with-rating — but as **descriptive only** (see "The medal
+permutation test" below for why). The prespecified alternative weights and a
+leave-one-provider-out recomputation of the reference-comparison lift are reported
+alongside them as sensitivity checks, not as a search for the most favorable weight.
+
+## The medal permutation test
+
+This is the headline test as of v1.4.0. It asks one question: do the bound medals
+rank the held-out providers better than chance?
+
+For each test provider it compares two predictors built from the *same* baseline
+and the *same* blend weight, differing only in which anchor they blend toward:
+
+```
+p_medal = (1 - weight) * p_baseline + weight * anchor[bound_medal]
+p_level = (1 - weight) * p_baseline + weight * mean(bound anchors across the cohort)
+```
+
+`T`, the statistic, is the provider-equal-weighted mean over test providers of
+`Brier(p_level) - Brier(p_medal)`. Because `p_medal` and `p_level` receive the same
+*average* shift (the cohort-mean bound anchor vs. each provider's own bound
+anchor), `T` measures only the ranking information in *which* provider got which
+medal — not a level/calibration shift. The null hypothesis is that bound medal
+labels are exchangeable across providers: every distinct assignment of the
+multiset of bound medals to providers is enumerated when there are at most 20,000
+of them (`p = count/N`, the observed assignment counted among the N); otherwise
+20,000 seeded Fisher-Yates shuffles (seed 20260923) are drawn instead
+(`p = (1+count)/(1+N)`). `signal` is `positive` when `p_help <= 0.05` and `T`
+exceeds the preregistered minimum lift, `negative` when `p_hurt <= 0.05` and `T` is
+below minus that same lift, `not_testable` when the cohort holds fewer than two
+distinct bound medals, and `inconclusive` otherwise.
+
+**Why the primary test changed.** An independent adversarial review of the v1.3
+design found that its `positive`/`negative` calls — based on the fixed 0.50
+reference — rewarded any uniform upward shift in pass rate, not medal-specific
+information: every anchor from Bronze up sits above 0.50, so a cohort that simply
+passed often "improved" on the reference regardless of which medals its providers
+actually held, and shuffled, rank-irrelevant medals could still score positive. No
+real submission had ever been scored under v1.3; the flaw was caught before it
+judged a real packet. The permutation test isolates medal-specific ranking
+information from that level shift by holding both compared predictors to the same
+average anchor.
+
+**Locks added in v1.4.** A plan's inline `transform` must canonically hash to a
+transform listed in `design/registry.json` — an edited or custom transform is held,
+even if internally well-formed. Transform anchors must be strictly decreasing,
+Platinum > Gold > Silver > Bronze > Underperforming. Every trial sharing a
+`workload_sha256` must carry identical `gates`. Both predictors'
+`training_providers` lists must be nonempty. A binding for a rating version that is
+itself registered in `design/registry.json` (currently ClusterMAX 3.0) must cite
+one of that entry's registered medal-table source digests as `binding.source.sha256`,
+and every bound medal must equal the registered transcription's tier for that exact
+provider name — an unregistered rating is still scored, just flagged
+`source_unverified`.
 
 ## The coverage floor
 
@@ -160,21 +210,26 @@ handful of jobs from one session on one day.
    transform is frozen before scoring; never choose anchors or weight after looking
    at test outcomes.
 7. **Coverage floor.** See above.
-8. **Incremental value.** Compare Brier loss of the baseline and baseline-plus-rating,
-   and separately of the medal-blind reference and baseline-plus-rating, on the same
-   jobs. Average within provider, then give each provider equal weight. Resample
-   providers, not individual jobs. Report the paired 95% percentile bootstrap
-   interval for both comparisons and the preregistered minimum useful improvement.
+8. **Incremental ranking value.** The primary test (see "The medal permutation
+   test" above) is a medal-permutation significance test: does giving each
+   held-out provider its own bound medal's anchor beat giving every provider the
+   cohort-mean anchor, against a preregistered minimum useful lift? Give each
+   provider equal weight; resample providers, not individual jobs, for the
+   descriptive bootstrap interval. The v1.3 comparisons against the plain
+   baseline and the fixed 0.50 reference are still computed and reported, but as
+   descriptive context only — they include a level shift and do not isolate
+   medal-specific information.
 
-An admissible packet reports `PILOT_DESCRIPTIVE_RESULT` with a `signal`:
-`positive` when the lower bound of the reference-comparison bootstrap interval
-exceeds the preregistered minimum lift, `negative` when the upper bound is below
-zero, and `inconclusive` otherwise. Incomplete, contradictory or out-of-scope
-records report `HOLD`. Absence of data reports `NOT_TESTED` on the page. Exit codes:
-`0` for an admissible descriptive result, `2` for `HOLD`. A `positive` or `negative`
-signal concerns this cohort, endpoint, transform and predictor mapping — it is a
-pilot descriptive result, not a certification, and not a claim about every possible
-use of a rating.
+An admissible packet reports `PILOT_DESCRIPTIVE_RESULT` with a `signal` from the
+medal permutation test: `positive` when `p_help <= 0.05` and the observed `T`
+exceeds the preregistered minimum lift, `negative` when `p_hurt <= 0.05` and `T`
+is below minus that same lift, `not_testable` when the cohort holds fewer than
+two distinct bound medals, and `inconclusive` otherwise. Incomplete,
+contradictory or out-of-scope records report `HOLD`. Absence of data reports
+`NOT_TESTED` on the page. Exit codes: `0` for an admissible descriptive result,
+`2` for `HOLD`. A `positive` or `negative` signal concerns this cohort, endpoint,
+transform and predictor mapping — it is a pilot descriptive result, not a
+certification, and not a claim about every possible use of a rating.
 
 ## What the endpoint means
 
@@ -209,6 +264,19 @@ The baseline is supplied, not fitted by this tool. A weak baseline, fabricated
 receipt, false training declaration or undisclosed model input can still bias an
 apparently valid packet. Independent custody, timestamping and review are external
 requirements. Hashes detect byte changes; they do not prove origin or honesty.
+
+**What is not, and cannot be, locked.** The per-row `p_baseline` is the submitter's
+own choice; nothing in this engine fits it or checks it against the outcomes. The
+only defenses are structural: the plan (and its baseline's `model_sha256`) must be
+frozen, and the binding made, strictly before the medal is known to determine
+`p_baseline` from it (`bound_at` at or after `frozen_at`, and strictly before every
+trial's `started_at`). A baseline chosen or quietly tuned after seeing the medals
+would still pass every check here — this engine cannot detect that from the
+numbers alone. And because ClusterMAX 3.0's medals became public on 2026-09-23 at
+21:20 UTC, any plan frozen after that moment was necessarily written with the
+medals already knowable; read any such result's baseline with that in mind, even
+though the plan schema does not separately flag it beyond whatever the submitter
+wrote in `disclosure`.
 
 Provider grouping prevents treating repeated jobs at one provider as independent
 providers. It does not remove common hardware, regional, customer or time shocks.
@@ -258,6 +326,53 @@ checking the pinned Git blob hash. The source tested is ClusterMAX commit
 `97865af001e5bbf2f0ea5672ec0f8c0d7fb123f4`, file `cmax/audit_runner.py`, Git blob
 `b8086eccad5ceb4bf65325355a47209d49bc1aa7`. Source is not redistributed in this kit.
 The record is in `data/upstream-probes.json`.
+
+## Glossary
+
+* **HOLD.** The status a submitted packet gets when it fails a structural or
+  provenance check (a missing field, an untimestamped prediction, a
+  training/test leak, a missing disclosure, a hash that doesn't match, and so
+  on). It is not a verdict on the provider or the rating -- see "What happens
+  to a HOLD" in [SUBMITTING.md](SUBMITTING.md).
+* **Binding.** The separate record (`binding.json`) that fills in, after the
+  rating actually publishes, which medal each held-out provider got and where
+  that medal table and rubric came from. It hash-references the exact
+  `plan.json` it binds to, so a medal can't be quietly chosen once outcomes
+  are known. See "The three records" above.
+* **Transform.** `design/transform.json`: the frozen, uncalibrated mapping
+  from an ordinal medal tier to a probability contribution (an anchor value
+  per tier, a blend weight against the baseline, and a fixed 0.50 reference
+  anchor used only in the descriptive v1.3 comparisons, not the primary test).
+  Must canonically hash to an entry in `design/registry.json` since v1.4. See
+  "The medal-to-probability transform" above.
+* **Brier loss.** The squared error between a predicted probability and the
+  actual binary outcome, `(prediction - outcome)^2`. Lower is better. The
+  primary medal permutation test compares each provider's own-medal blend
+  against a cohort-mean-anchor blend built from the same baseline and weight;
+  the descriptive comparisons separately report the plain baseline and the
+  fixed 0.50-reference blend. All are averaged within provider, then across
+  providers.
+* **Provider bootstrap.** The uncertainty procedure used throughout: resample
+  held-out *providers* (not individual jobs) with replacement 5,000 times,
+  recompute the mean lift each time, and report the 2.5th/97.5th percentile
+  interval. Resampling providers rather than jobs keeps repeated jobs at one
+  provider from being treated as independent evidence. Reported as descriptive
+  context alongside the medal permutation test's p-values, not as the primary
+  significance check.
+* **Permutation test.** Since v1.4, the primary significance check for this
+  challenge (see "The medal permutation test" above): how often does the same
+  ranking statistic, computed after every distinct way of reassigning the
+  bound medals to providers (or a large seeded sample of reassignments), reach
+  or exceed the actually observed value? R1 separately uses a permutation test
+  over incident counts; that one remains a secondary check alongside R1's
+  bootstrap interval, not the primary read.
+* **R1.** The standing shorthand for the one completed retrospective study in
+  this repo -- [`retrospective/PLAN.md`](retrospective/PLAN.md) asks whether
+  ClusterMAX medals track providers' own public incident-report counts. It is
+  a look-back association study, not the prospective customer-outcome test
+  this page is about. See "Other work on this challenge" above and
+  [`retrospective/READOUT.md`](retrospective/READOUT.md) for its interpretation
+  and limits, including a post-hoc sensitivity addendum.
 
 ## Files and maintenance
 

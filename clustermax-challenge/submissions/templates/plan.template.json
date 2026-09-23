@@ -1,0 +1,101 @@
+{
+  "_template_note": "THIS IS A TEMPLATE, not a submittable packet. It shows the shape of plan.json with exactly one example trial. A real submission needs >= 8 held-out providers, each with >= 10 trials, >= 5 distinct sessions and >= 3 distinct UTC dates -- see \"Minimum you need before you start\" in SUBMITTING.md. Field-by-field documentation is in the sibling FIELDS.md. Remove this field before submitting.",
+  "schema": "secondrun.rating-plan.v4",
+  "synthetic": false,
+  "study_id": "TEMPLATE -- replace: a short slug identifying your study, e.g. \"acme-cloud-inference-2026-11\"",
+  "rating_name": "ClusterMAX",
+  "rating_version": "TEMPLATE -- replace: the rating_version you expect the binding to name, e.g. \"3.0\"",
+  "frozen_at": "2026-01-02T00:00:00Z",
+  "minimum_providers": 8,
+  "minimum_lift": 0.01,
+  "outcome_definition": "TEMPLATE -- replace: the exact plain-English endpoint your gates encode, e.g. \"Complete with >=950/1000 accepted requests, p95 latency <=500 ms, total cost <= $25.\"",
+  "disclosure": {
+    "relationship": "TEMPLATE -- replace: e.g. \"No relationship with any provider or rating named in this plan.\" or state the relationship explicitly.",
+    "compensation": "TEMPLATE -- replace: e.g. \"None received.\" or state amount/kind and from whom.",
+    "credits": "TEMPLATE -- replace: e.g. \"None redeemed toward these jobs.\" or name the provider and amount.",
+    "special_support": "TEMPLATE -- replace: e.g. \"None; ordinary self-signup account and standard support only.\"",
+    "editorial_influence": "TEMPLATE -- replace: e.g. \"None; no named party reviewed or influenced this plan before freezing.\""
+  },
+  "binding_rules": {
+    "medal_source": "TEMPLATE -- replace: the official source you expect the later binding to cite for the medal table, e.g. \"Official ClusterMAX medal table page, as published by SemiAnalysis.\"",
+    "rubric_source": "TEMPLATE -- replace: the official source you expect the later binding to cite for the rubric, e.g. \"Official ClusterMAX rubric/methodology document for the bound rating_version.\"",
+    "tiers": [
+      "Platinum",
+      "Gold",
+      "Silver",
+      "Bronze",
+      "Underperforming"
+    ]
+  },
+  "transform": {
+    "schema": "secondrun.rating-transform.v1",
+    "anchors": {
+      "Platinum": 0.9,
+      "Gold": 0.8,
+      "Silver": 0.7,
+      "Bronze": 0.6,
+      "Underperforming": 0.3
+    },
+    "weight": 0.25,
+    "reference_anchor": 0.5,
+    "alternative_weights": [
+      0.1,
+      0.4
+    ],
+    "description": "These anchor probabilities, the blend weight and the neutral reference anchor are SecondRun's uncalibrated research assumptions, chosen to make a medal-to-probability mapping concrete enough to test. They are not probabilities asserted by SemiAnalysis, and they were not fitted to any real outcome data. Frozen before any provider outcome packet is scored; the alternative_weights values are a prespecified sensitivity check, not a search for the most favorable weight."
+  },
+  "transform_sha256": "2a5d65120ea83be53edd2ccc671b46e77b3e810f53fa8e33c73871668c6f1d90",
+  "baseline": {
+    "description": "TEMPLATE -- replace: one line describing your specs-and-price baseline predictor.",
+    "model_sha256": "907ad9f61fc92045d4e59fa7a69a91e461a8aec063cb9cfd6fcfa55d553dd6fa",
+    "inputs": [
+      "gpu_type",
+      "allocation_size",
+      "list_price_per_hour",
+      "workload_class",
+      "region"
+    ],
+    "training_providers": [
+      "TEMPLATE_TRAINING_PROVIDER_1",
+      "TEMPLATE_TRAINING_PROVIDER_2"
+    ],
+    "frozen_at": "2026-01-01T00:00:00Z"
+  },
+  "with_rating": {
+    "description": "TEMPLATE -- replace: one line describing the same baseline plus the rating input.",
+    "model_sha256": "a19c9566a908404a856eb5fab07fcec8bf6516ee6416620ab772c1225f2f8a7b",
+    "inputs": [
+      "gpu_type",
+      "allocation_size",
+      "list_price_per_hour",
+      "workload_class",
+      "region",
+      "rating"
+    ],
+    "training_providers": [
+      "TEMPLATE_TRAINING_PROVIDER_1",
+      "TEMPLATE_TRAINING_PROVIDER_2"
+    ],
+    "frozen_at": "2026-01-01T00:00:00Z"
+  },
+  "trials": [
+    {
+      "trial_id": "TEMPLATE-PROVIDER_A-0001",
+      "provider_id": "TEMPLATE_PROVIDER_A",
+      "service_id": "TEMPLATE-managed-cluster-8xH100",
+      "region": "us-east-1",
+      "workload_sha256": "60573a23b5f149744332933beb3cdcf24868d94ffa607bad98aa3af9a5b2c818",
+      "validator_sha256": "0af01c525e7bc0061bfa2ac69efa17f863c8efcb3970a8b53570aa3443b84234",
+      "customer_role": "ordinary_tenant",
+      "support": "standard",
+      "session_id": "S1",
+      "predicted_at": "2026-01-02T09:00:00Z",
+      "p_baseline": 0.7,
+      "gates": {
+        "accepted_min": 950,
+        "p95_max_ms": 500,
+        "cost_max_usd": 25.0
+      }
+    }
+  ]
+}

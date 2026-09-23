@@ -1,6 +1,6 @@
 {
   "schema": "secondrun.rating-binding.v2",
-  "plan_sha256": "61be962fb5fd55d05a654a3d7419031d7ea2ef57ee2b32332e33787bdc158747",
+  "plan_sha256": "a4bb43d8efae6f2e762770161346e40fd4b494fafff83aecf8fb2060b28b8cca",
   "rating_name": "Synthetic example, not ClusterMAX",
   "rating_version": "demo-1",
   "source": {
@@ -16,14 +16,16 @@
   "bound_at": "2026-01-02T12:00:00Z",
   "medals": {
     "EXAMPLE_01": "Gold",
-    "EXAMPLE_02": "Gold",
-    "EXAMPLE_03": "Gold",
-    "EXAMPLE_04": "Silver",
+    "EXAMPLE_02": "Silver",
+    "EXAMPLE_03": "Bronze",
+    "EXAMPLE_04": "Gold",
     "EXAMPLE_05": "Silver",
-    "EXAMPLE_06": "Silver",
-    "EXAMPLE_07": "Silver",
-    "EXAMPLE_08": "Bronze",
+    "EXAMPLE_06": "Bronze",
+    "EXAMPLE_07": "Gold",
+    "EXAMPLE_08": "Silver",
     "EXAMPLE_09": "Bronze",
-    "EXAMPLE_10": "Bronze"
+    "EXAMPLE_10": "Gold",
+    "EXAMPLE_11": "Silver",
+    "EXAMPLE_12": "Bronze"
   }
 }

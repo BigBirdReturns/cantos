@@ -19,6 +19,6 @@ A binding draft requires compatible tiers, sources and rating version. It does n
 
 ## Chronology
 
-The original instrument was published earlier on release day at `ee650e3`. Consolidated v1.3 (`448e003`) was pushed after the cited launch announcement. Neither code publication establishes a preregistered real customer cohort. This ledger is post-release work. Plans can still prospectively predict future jobs; freeze their design, predictions and mapping before observing those outcomes.
+The original instrument was published earlier on release day at `ee650e3`. Consolidated v1.3 (`448e003`) was created locally at 21:16 UTC (self-reported commit time, not an independent clock) and first reached GitHub at 21:27:08 UTC -- after the cited 3.0 article's own recorded `datePublished` of 21:20:29 UTC. Neither code publication establishes a preregistered real customer cohort. This ledger is post-release work. Plans can still prospectively predict future jobs; freeze their design, predictions and mapping before observing those outcomes.
 
 The complete [77-provider transcription](release-3.0/clustermax-3.0.json) and [transition record](release-3.0/transitions.json) remain separate. The inspected article is recorded as methodology_source. The exact 3.0 rubric remains unverified, so this observation ledger cannot emit a real binding yet.

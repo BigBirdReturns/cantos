@@ -1,0 +1,76 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>R1 ineligible / not-collected providers | SecondRun</title>
+<meta name="description" content="ClusterMAX Challenge documentation, rendered from INELIGIBLE.md.">
+<style>:root{color-scheme:dark light;--bg:#111114;--ink:#f5f2f1;--muted:#aaa6ab;--line:#353239;--pink:#ff5d96;--panel:#1a191e}
+@media(prefers-color-scheme:light){:root{--bg:#fbfafb;--ink:#17151a;--muted:#5b5560;--line:#ddd8de;--pink:#c81760;--panel:#f1eef1}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+main{max-width:760px;margin:auto;padding:26px 20px 64px}
+nav{display:flex;gap:18px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:16px;margin-bottom:8px;font-size:14px}
+nav .brand{color:var(--pink);font-weight:700}
+a{color:var(--ink);text-underline-offset:3px;overflow-wrap:anywhere}
+a:hover{color:var(--pink)}
+h1{font-size:clamp(28px,6vw,42px);line-height:1.15;letter-spacing:-.03em;margin:26px 0 14px}
+h2{font-size:22px;letter-spacing:-.02em;margin:34px 0 10px;border-top:1px solid var(--line);padding-top:20px}
+h3{font-size:18px;margin:22px 0 8px}
+h4{font-size:16px;margin:18px 0 6px;color:var(--muted)}
+p{margin:12px 0}
+ul,ol{padding-left:22px}
+li{margin:6px 0}
+code{background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:.1em .35em;font-size:.9em;overflow-wrap:anywhere}
+pre{background:var(--panel);border:1px solid var(--line);border-radius:5px;padding:14px;overflow-x:auto;font-size:13px;line-height:1.5}
+pre code{background:none;border:none;padding:0}
+table{border-collapse:collapse;width:100%;font-size:14px;margin:14px 0;display:block;overflow-x:auto}
+th,td{text-align:left;border-bottom:1px solid var(--line);padding:8px 10px;overflow-wrap:anywhere}
+th{color:var(--muted);font-weight:600}
+.muted{color:var(--muted);font-size:13px}
+footer{border-top:1px solid var(--line);margin-top:40px;padding-top:16px;font-size:12px;color:var(--muted)}
+@media(max-width:400px){main{padding:18px 14px 44px}h1{margin-top:16px}pre{font-size:12px;padding:10px}}</style></head><body><main>
+<nav><span class="brand">SecondRun</span><a href="../../index.html">Open the test</a><a href="../../README.html">Protocol</a><a href="../../SUBMITTING.html">Submit records</a><a href="INELIGIBLE.md">View source (.md)</a></nav>
+<h1 id="r1-ineligible-not-collected-providers">R1 ineligible / not-collected providers</h1>
+<p>For every provider rated in ClusterMAX 1.0 or 2.0 (excluding the "Unavailable" tier, which <code>scripts/retrospective.py</code> excludes before ever looking at incident data) that does <strong>not</strong> have a <code>retrospective/incidents/&lt;slug&gt;.json</code> file, this records why, so the exclusion is checkable. All findings below are from direct <code>urllib</code>/<code>curl</code> probes run 2026-09-23 (no WebSearch), separate from and in some cases correcting <code>retrospective/status-pages.json</code>'s discovery notes (that discovery run pre-dates the fixed Atlassian <code>history.json</code> collector and, for a few platforms, the live surface has changed since discovery ran).</p>
+<p>No severity is ever invented for a provider whose platform has none; where a provider is listed here as "no severity field," that's a statement about the platform, not a decision to guess one.</p>
+<h2 id="collected-but-not-fully-eligible-has-a-slug-json-may-still-be">Collected but not fully eligible (has a <code>&lt;slug&gt;.json</code>, may still be</h2>
+<p>excluded by <code>retrospective.py</code>'s coverage-window rule)</p>
+<ul>
+<li><strong>Lambda</strong> (<code>lambda.json</code>, incident.io-hosted, not real Atlassian Statuspage): <code>/history.json</code> 404s -- this platform does not expose it. Only <code>/api/v2/incidents.json</code> is available, which caps at the ~25 most recent incidents with no confirmed pagination to the start of history, so <code>coverage_start</code> is correctly left <code>null</code> per SCHEMA.md. Not superseded by the new history.json collector (that collector simply doesn't apply to this platform); the file is kept as-is.</li>
+</ul>
+<h2 id="hyperscaler-status-pages-checked-individually-no-blanket-exclusion">Hyperscaler status pages (checked individually -- no blanket exclusion)</h2>
+<ul>
+<li><strong>AWS</strong>: <code>status.aws.amazon.com/data.json</code> is real JSON but is a current/active-events feed (2 events at check time, oldest ~hours old), not an archive; no history endpoint found. <code>health.aws.amazon.com/health/status</code> requires an AWS console login.</li>
+<li><strong>Azure</strong>: <code>azure.status.microsoft/en-us/status/history/</code> is a client-rendered React app; the fetched HTML contains no incident dates, severities, or <code>__NEXT_DATA__</code>/JSON payload to parse statically.</li>
+<li><strong>Google Cloud</strong>: <code>status.cloud.google.com/incidents.json</code> is real JSON with <code>severity</code> (<code>low</code>/<code>medium</code>/<code>high</code>) and <code>begin</code>/<code>end</code> timestamps, but it only returned 6 incidents, earliest <code>2026-02-27</code> -- short of both the primary window start (2025-11-06) and the secondary window (2025-03-26..2025-09-22) by a wide margin. No further-back archive endpoint found (<code>/2025.json</code>, <code>/history.json</code>, <code>/incidents/2025.json</code> all 404). Rolling/short window, not a full archive.</li>
+<li><strong>Oracle</strong> (<code>ocistatus.oraclecloud.com</code>): client-rendered SPA shell (2459 bytes of HTML, no incident content); no JSON API found.</li>
+<li><strong>IBM Cloud</strong> (<code>cloud.ibm.com/status</code>): client-rendered SPA shell (4925 bytes of HTML, no incident content); no JSON API found.</li>
+</ul>
+<h2 id="status-io-coreweave-ovhcloud">status.io (CoreWeave, OVHcloud)</h2>
+<p>Both are on status.io. <code>api.status.io/1.0/status/&lt;page_id&gt;</code> gives only current status (its <code>/incidents</code> and <code>/history</code> sub-resources return HTTP 403). The HTML history page (<code>&lt;status_url&gt;/pages/history/&lt;page_id&gt;?date=YYYY-MM</code>) <strong>ignores the <code>date</code> query parameter entirely</strong> -- verified by requesting <code>date=2024-01</code> and <code>date=2026-08</code> and getting byte-identical output each time, always showing only the current rolling window (for OVHcloud: a single "September 2026" <code>timelineMajor</code> block with ~20 recent events; for CoreWeave: a "No incidents in the last day" empty state). <code>status-pages.json</code>'s discovery notes ("reachable-content-present" for 6 sampled months) reflect this same always-current page, not real per-month filtering -- a false positive in that discovery pass. A path-segment variant (<code>/pages/history/&lt;id&gt;/2025-03</code>) 404s. No way found to reach 2025-03 depth.</p>
+<h2 id="betteruptime-better-stack-fluidstack-together-ai-runpod-prime">betteruptime / Better Stack (FluidStack, Together.ai, RunPod, Prime</h2>
+<p>Intellect, Cudo Compute, Hydra, GPU.NET)</p>
+<p>Confirmed on 7 representative pages (status.fluidstack.io, status.together.ai, uptime.runpod.io, status.primeintellect.ai, status.cudocompute.com, status.hydrahost.com, status.gpu.net): the only static endpoint that returns real, page-specific JSON is <code>/index.json</code> (a JSON:API document), and its <code>included</code> array holds at most the single currently-active <code>status_report</code> -- not a history. Every other guessed route (<code>/history</code>, <code>/history.json</code>, <code>/incidents.json</code>, <code>/feed</code>, <code>/reports.json</code>, <code>/api/v2/status.json</code>, <code>/status_reports.json</code>) serves the same byte-identical client-rendered SPA shell for every page on the same platform (the route is handled client-side after JS loads). The authenticated API (<code>uptime.betterstack.com/api/v2/...</code>) returns <code>401 Unauthorized</code> without a bearer token we don't have. No static path to a full incident history was found for this platform.</p>
+<h2 id="trust-center-pages-vanta-not-incident-status-pages-by-design">Trust-center pages (Vanta), not incident status pages by design</h2>
+<p><strong>Crusoe</strong>, <strong>Voltage Park</strong>, <strong>Shadeform</strong>, <strong>GMI</strong> (trust.gmicloud.ai): each resolves to a Vanta-style security/compliance trust center, which publishes controls and audit attestations, not an incident timeline. No incident data exists on these pages to collect.</p>
+<h2 id="custom-platforms-each-independently-probed-none-reaches-2025-03-with-a">Custom platforms (each independently probed; none reaches 2025-03 with a</h2>
+<p>severity or equivalent)</p>
+<ul>
+<li><strong>Vultr</strong>: root page loads; <code>/history</code>, <code>/feed</code> return 403; <code>/index.json</code>, <code>/api/v2/status.json</code>, <code>/history.json</code> all 404. No endpoint found.</li>
+<li><strong>Vast.ai</strong>: hand-rolled JS widget (<code>index.js</code>) that renders <code>maxDays = 30</code> of daily uptime squares from <code>logs/&lt;component&gt;_report.log</code>, colored by a computed uptime threshold (<code>success</code>/<code>partial</code>/<code>failure</code>), not a provider-assigned severity. Even if scraped, the window is 30 days, far short of the 180-day study window, let alone back to 2025-03. Too shallow and no real severity field.</li>
+<li><strong>Hetzner</strong>: <code>/history</code>, <code>/feed</code>, <code>/index.json</code>, <code>/api/v2/status.json</code>, <code>/history.json</code> all 404. No endpoint found.</li>
+<li><strong>deepinfra</strong>: same -- all guessed endpoints 404.</li>
+<li><strong>Salad</strong>: <code>/history</code> returns real JSON, but it is a fixed rolling ~7-day window (<code>period_start</code>/<code>period_end</code> unix timestamps spanning ~7 days); <code>period_start</code>/<code>period_end</code> query parameters are accepted but silently ignored (verified: a request for a much wider range returned the same byte-identical 7-day payload). No per-incident severity field either (only aggregate <code>outages</code>/<code>downtime_secs</code> counters). Too shallow, no severity.</li>
+<li><strong>Massed Compute</strong>: tiny homepage (1300 bytes); no history/feed/json endpoint found.</li>
+<li><strong>Hyperbolic</strong>: <code>/history</code> returns HTML but it is an empty client-rendered SPA shell -- zero occurrences of any date, incident, or severity string in the fetched markup.</li>
+<li><strong>E2E Cloud</strong>: <code>/history</code> returns substantive HTML (mentions of "incident"/"Resolved") but zero occurrences of any 2025 date and only 8 of "2026-" (likely component/version strings, not incident dates); no discernible per-incident start/end timestamps or severity labels found in the static markup. Would need JS execution to confirm; not implemented here without that evidence.</li>
+<li><strong>Neysa</strong> (trust.neysa.ai): despite the "custom" platform label, this is effectively another trust-center-style page; <code>/history</code>, <code>/feed</code>, <code>/index.json</code>, <code>/history.json</code> all 404.</li>
+<li><strong>Mithril</strong> (flagged <code>atlassian-statuspage</code> by the original discovery, <code>api_summary_ok: true</code>): on live recheck, <code>/api/v2/status.json</code>, <code>/api/v2/incidents.json</code>, and <code>/history.json</code> all now 404, though the homepage itself loads (200KB). Whatever backed the <code>/api/v2</code> surface at discovery time is no longer reachable; no working incident API found.</li>
+<li><strong>GCore</strong> (also flagged <code>atlassian-statuspage</code> with <code>api_summary_ok: true</code> at discovery, "0 incidents"): same story as Mithril -- <code>/api/v2/*</code> and <code>/history.json</code> now all 404 despite a large (2.2MB) homepage. No working incident API found.</li>
+</ul>
+<h2 id="no-public-status-incident-page-located-at-all">No public status/incident page located at all</h2>
+<p>(status-pages.json already establishes this per-provider via candidate-URL probing; verified for Hot Aisle below since it's explicitly in scope.)</p>
+<p>TensorWave, Firmus, GMO GPU Cloud, STN, Atlas Cloud, Qubrid, Verda/DataCrunch, DENVR Dataworks, Buzz HPC, IREN/Iris Energy, FarmGPU, Whitefiber, dstack, PaleBlueDot.AI, Clore.ai, Exabits, Sesterce, Aethir, Akash, Lepton AI, SMC (the <code>smc.statuspage.io</code> slug resolves but is an unconfigured demo tenant -- its only "incident" is literally titled "This is an example incident", created 2022-03-18 -- treated as no real status page).</p>
+<p><strong>Hot Aisle</strong>: re-checked directly (not just via status-pages.json's candidate list). <code>hotaisle.xyz</code> (homepage) has no status/uptime link anywhere in its markup. <code>hotaisle.statuspage.io</code> resolves but to Atlassian's generic unclaimed-slug marketing page (<code>&lt;title&gt;Real-Time Incident Communication with Statuspage | Atlassian&lt;/title&gt;</code>), confirmed by fetching <code>/api/v2/status.json</code>, <code>/history.json</code>, and <code>/api/v2/incidents.json</code> on that host and getting the identical marketing-page bytes back for all three. <code>status.hotaisle.xyz</code> and <code>trust.hotaisle.xyz</code> do not resolve (DNS failure). No public status page exists for Hot Aisle; it is excluded from collection (and, per PLAN.md, was already excluded from the primary correlation by design regardless).</p>
+<h2 id="judgment-call-flagged-explicitly">Judgment call flagged explicitly</h2>
+<p>Per the coordinator's correction, hyperscaler status pages are <strong>not</strong> blanket-excluded as "not comparable" -- each was checked individually above on the same retrievability/coverage terms as every other provider, and each is ineligible for a stated technical reason (shallow/rolling data or a client-rendered page with no static incident content), not because it is a hyperscaler.</p>
+<footer>Rendered from <a href="INELIGIBLE.md">INELIGIBLE.md</a>, the authoritative source -- this page is generated by <code>scripts/build_docs.py</code> and never hand-edited. <a href="https://github.com/BigBirdReturns/axm-tools/tree/main/clustermax-challenge">Source and tests</a>.</footer>
+</main></body></html>

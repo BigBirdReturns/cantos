@@ -1,0 +1,196 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>R1 result: do ClusterMAX medals track providers’ own public incident records? | SecondRun</title>
+<meta name="description" content="ClusterMAX Challenge documentation, rendered from R1-result.md.">
+<style>:root{color-scheme:dark light;--bg:#111114;--ink:#f5f2f1;--muted:#aaa6ab;--line:#353239;--pink:#ff5d96;--panel:#1a191e}
+@media(prefers-color-scheme:light){:root{--bg:#fbfafb;--ink:#17151a;--muted:#5b5560;--line:#ddd8de;--pink:#c81760;--panel:#f1eef1}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+main{max-width:760px;margin:auto;padding:26px 20px 64px}
+nav{display:flex;gap:18px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:16px;margin-bottom:8px;font-size:14px}
+nav .brand{color:var(--pink);font-weight:700}
+a{color:var(--ink);text-underline-offset:3px;overflow-wrap:anywhere}
+a:hover{color:var(--pink)}
+h1{font-size:clamp(28px,6vw,42px);line-height:1.15;letter-spacing:-.03em;margin:26px 0 14px}
+h2{font-size:22px;letter-spacing:-.02em;margin:34px 0 10px;border-top:1px solid var(--line);padding-top:20px}
+h3{font-size:18px;margin:22px 0 8px}
+h4{font-size:16px;margin:18px 0 6px;color:var(--muted)}
+p{margin:12px 0}
+ul,ol{padding-left:22px}
+li{margin:6px 0}
+code{background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:.1em .35em;font-size:.9em;overflow-wrap:anywhere}
+pre{background:var(--panel);border:1px solid var(--line);border-radius:5px;padding:14px;overflow-x:auto;font-size:13px;line-height:1.5}
+pre code{background:none;border:none;padding:0}
+table{border-collapse:collapse;width:100%;font-size:14px;margin:14px 0;display:block;overflow-x:auto}
+th,td{text-align:left;border-bottom:1px solid var(--line);padding:8px 10px;overflow-wrap:anywhere}
+th{color:var(--muted);font-weight:600}
+.muted{color:var(--muted);font-size:13px}
+footer{border-top:1px solid var(--line);margin-top:40px;padding-top:16px;font-size:12px;color:var(--muted)}
+@media(max-width:400px){main{padding:18px 14px 44px}h1{margin-top:16px}pre{font-size:12px;padding:10px}}</style></head><body><main>
+<nav><span class="brand">SecondRun</span><a href="../../index.html">Open the test</a><a href="../../README.html">Protocol</a><a href="../../SUBMITTING.html">Submit records</a><a href="R1-result.md">View source (.md)</a></nav>
+<h1 id="r1-result-do-clustermax-medals-track-providers-own-public-incident-records">R1 result: do ClusterMAX medals track providers’ own public incident records?</h1>
+<p>Study: <code>R1-medals-vs-status-incidents</code>. Generated 2026-09-23T10:12:32.927782+00:00.</p>
+<p>Plan hash verified: <strong>True</strong> (PLAN.md sha256 <code>6ba62fe9e0cd1ce13cc51c8215e33bdf375ae5fb77a7e4f603722085dce1b364</code> matches <code>retrospective/plan.json</code>).</p>
+<h2 id="input-hashes">Input hashes</h2>
+<ul>
+<li><code>PLAN.md</code>: <code>6ba62fe9e0cd1ce13cc51c8215e33bdf375ae5fb77a7e4f603722085dce1b364</code></li>
+<li><code>incidents/akamai.json</code>: <code>5901e1b3929c38028f8a4bea97bf16d1bdf5fa017bd8c6248efd6799f94648d9</code></li>
+<li><code>incidents/cirrascale.json</code>: <code>7d872050683f362071bd8c213ff4885eac96f9ab665c84fe93013ac09988d60c</code></li>
+<li><code>incidents/digitalocean.json</code>: <code>0ee139bd5d4379740ca3daeea738d77a4965122d625e965744e80f326d9aeb01</code></li>
+<li><code>incidents/hyperstack.json</code>: <code>b9e7e73317adf4fb12e26f3f4e08aabf9fb1ed0a3feb57bbc7b296a3c102bfc1</code></li>
+<li><code>incidents/lambda.json</code>: <code>70faa611f7ad0c5a163c8396622cc45ad2278ba9d7b5cec5629cef903d355c77</code></li>
+<li><code>incidents/latitude-sh.json</code>: <code>9173f3c27efa737f6cac2853cbb4e7870268b7290b04a5b5b87c9265d3649743</code></li>
+<li><code>incidents/lightning-ai.json</code>: <code>c2852fec9975c66abbd381cad69ed5870ea3ef9b14856644b3ec00d31b7c162b</code></li>
+<li><code>incidents/nebius.json</code>: <code>beeec36b1b24b89dc18351c9b8e0795d8ff74f703740ef971a4694bd6be10776</code></li>
+<li><code>incidents/scaleway.json</code>: <code>59bbbc2c0ec900d773fb69605c9e579cd7f90120c6fa4a24930c9bbb1c91cf2a</code></li>
+<li><code>incidents/sharon-ai.json</code>: <code>5a6e0d8ca19a91dbfe6b28c1f204304ac71db041c6727265cd84f524736c22f9</code></li>
+<li><code>plan.json</code>: <code>2ffe38d650bd7ef5fe1512b3e3f85b89d237a5b07101da9c212556925011b950</code></li>
+<li><code>provider_map.json</code>: <code>473e46513c3a081e436e1bad1b9c00c51dd2684ccf4716b0d67a428c6e1f0e62</code></li>
+<li><code>ratings/clustermax-1.0.json</code>: <code>e1fc6438d71e90273c728851acf58e7215bd0be2c53375b0001a590339331306</code></li>
+<li><code>ratings/clustermax-2.0.json</code>: <code>9b980bb111f0cb457b6fbe9e8158879e08c98489e33665453a96986cb3c6366c</code></li>
+</ul>
+<h2 id="deviations-from-the-frozen-plan">Deviations from the frozen plan</h2>
+<p>None.</p>
+<h2 id="primary-release-2-0">Primary release: 2.0</h2>
+<p>Published 2025-11-06. Window: [2025-11-06, 2026-05-05) (180 days). Included in correlation: 9 (minimum required: 8). <strong>Reading: inconclusive</strong></p>
+<h3 id="analysis">Analysis</h3>
+<h4 id="majororcriticalincidentcount"><code>major_or_critical_incident_count</code></h4>
+<ul>
+<li>Spearman rho (average ranks): 0.6377928041432807</li>
+<li>Bootstrap 95% interval: [0.0, 0.9365858115816939] (4999/5000 valid draws, 1 skipped for zero rank variance, seed 20260923)</li>
+<li>Permutation p-value (two-sided): 0.07525 (method=random_20000, 20000 permutations, 0 skipped for zero rank variance)</li>
+<li>Reading: <strong>inconclusive</strong></li>
+</ul>
+<h4 id="allincidentcount"><code>all_incident_count</code></h4>
+<ul>
+<li>Spearman rho (average ranks): 0.41017349611934645</li>
+<li>Bootstrap 95% interval: [-0.4570983002634959, 0.8800782326533971] (4999/5000 valid draws, 1 skipped for zero rank variance, seed 20260923)</li>
+<li>Permutation p-value (two-sided): 0.2731 (method=random_20000, 20000 permutations, 0 skipped for zero rank variance)</li>
+</ul>
+<h4 id="incidenthours"><code>incident_hours</code></h4>
+<ul>
+<li>Spearman rho (average ranks): 0.05292561240249632</li>
+<li>Bootstrap 95% interval: [-0.7668931921093695, 0.7990508158506007] (4999/5000 valid draws, 1 skipped for zero rank variance, seed 20260923)</li>
+<li>Permutation p-value (two-sided): 0.9109 (method=random_20000, 20000 permutations, 0 skipped for zero rank variance)</li>
+</ul>
+<h3 id="providers">Providers</h3>
+<ul>
+<li><strong>CoreWeave</strong> (Platinum): excluded -- no incident data file found (expected coreweave.json)</li>
+<li><strong>Oracle</strong> (Gold): excluded -- no incident data file found (expected oracle.json)</li>
+<li><strong>Nebius</strong> (Gold): eligible -- ordinal=4 major/critical=28 all=56 hours=174.4379</li>
+<li><strong>Azure</strong> (Gold): excluded -- no incident data file found (expected azure.json)</li>
+<li><strong>Crusoe</strong> (Gold): excluded -- no incident data file found (expected crusoe.json)</li>
+<li><strong>FluidStack</strong> (Gold): excluded -- no incident data file found (expected fluidstack.json)</li>
+<li><strong>Together.ai</strong> (Silver): excluded -- no incident data file found (expected together-ai.json)</li>
+<li><strong>Lambda</strong> (Silver): excluded -- coverage_start/coverage_end not recorded; manual verification pending</li>
+<li><strong>Google Cloud</strong> (Silver): excluded -- no incident data file found (expected google-cloud.json)</li>
+<li><strong>AWS</strong> (Silver): excluded -- no incident data file found (expected aws.json)</li>
+<li><strong>Scaleway</strong> (Silver): eligible -- ordinal=3 major/critical=29 all=258 hours=22594.1893</li>
+<li><strong>Cirrascale</strong> (Silver): eligible -- ordinal=3 major/critical=1 all=1 hours=0.0</li>
+<li><strong>Vultr</strong> (Silver): excluded -- no incident data file found (expected vultr.json)</li>
+<li><strong>Voltage Park</strong> (Silver): excluded -- no incident data file found (expected voltage-park.json)</li>
+<li><strong>GCore</strong> (Silver): excluded -- no incident data file found (expected gcore.json)</li>
+<li><strong>Firmus</strong> (Silver): excluded -- no incident data file found (expected firmus.json)</li>
+<li><strong>GMO GPU Cloud</strong> (Silver): excluded -- no incident data file found (expected gmo-gpu-cloud.json)</li>
+<li><strong>TensorWave</strong> (Silver): excluded -- no incident data file found (expected tensorwave.json)</li>
+<li><strong>Hyperstack</strong> (Bronze): eligible -- ordinal=2 major/critical=6 all=12 hours=394.81</li>
+<li><strong>Shadeform</strong> (Bronze): excluded -- no incident data file found (expected shadeform.json)</li>
+<li><strong>Neysa</strong> (Bronze): excluded -- no incident data file found (expected neysa.json)</li>
+<li><strong>STN</strong> (Bronze): excluded -- no incident data file found (expected stn.json)</li>
+<li><strong>GMI</strong> (Bronze): excluded -- no incident data file found (expected gmi.json)</li>
+<li><strong>RunPod</strong> (Bronze): excluded -- no incident data file found (expected runpod.json)</li>
+<li><strong>Atlas Cloud</strong> (Bronze): excluded -- no incident data file found (expected atlas-cloud.json)</li>
+<li><strong>Prime Intellect</strong> (Bronze): excluded -- no incident data file found (expected prime-intellect.json)</li>
+<li><strong>Cudo Compute</strong> (Bronze): excluded -- no incident data file found (expected cudo-compute.json)</li>
+<li><strong>Qubrid</strong> (Bronze): excluded -- no incident data file found (expected qubrid.json)</li>
+<li><strong>latitude.sh</strong> (Bronze): eligible -- ordinal=2 major/critical=7 all=17 hours=75.2256</li>
+<li><strong>Lightning AI</strong> (Bronze): eligible -- ordinal=2 major/critical=0 all=4 hours=4.8823</li>
+<li><strong>Verda</strong> (Bronze): excluded -- no incident data file found (expected verda.json)</li>
+<li><strong>DENVR Dataworks</strong> (Bronze): excluded -- no incident data file found (expected denvr-dataworks.json)</li>
+<li><strong>IBM Cloud</strong> (Bronze): excluded -- no incident data file found (expected ibm-cloud.json)</li>
+<li><strong>DigitalOcean</strong> (Bronze): eligible -- ordinal=2 major/critical=3 all=56 hours=175.9123</li>
+<li><strong>Hot Aisle</strong> (Bronze): excluded -- no incident data file found (expected hot-aisle.json)</li>
+<li><strong>Buzz HPC</strong> (Bronze): excluded -- no incident data file found (expected buzz-hpc.json)</li>
+<li><strong>Vast.ai</strong> (Bronze): excluded -- no incident data file found (expected vast-ai.json)</li>
+<li><strong>Sharon AI</strong> (Underperforming): eligible -- ordinal=1 major/critical=0 all=0 hours=0.0</li>
+<li><strong>IREN</strong> (Underperforming): excluded -- no incident data file found (expected iren.json)</li>
+<li><strong>Hydra</strong> (Underperforming): excluded -- no incident data file found (expected hydra.json)</li>
+<li><strong>FarmGPU</strong> (Underperforming): excluded -- no incident data file found (expected farmgpu.json)</li>
+<li><strong>Whitefiber</strong> (Underperforming): excluded -- no incident data file found (expected whitefiber.json)</li>
+<li><strong>deepinfra</strong> (Underperforming): excluded -- no incident data file found (expected deepinfra.json)</li>
+<li><strong>dstack</strong> (Underperforming): excluded -- no incident data file found (expected dstack.json)</li>
+<li><strong>PaleBlueDot.AI</strong> (Underperforming): excluded -- no incident data file found (expected palebluedot-ai.json)</li>
+<li><strong>Hyperbolic</strong> (Underperforming): excluded -- no incident data file found (expected hyperbolic.json)</li>
+<li><strong>GPU.NET</strong> (Underperforming): excluded -- no incident data file found (expected gpu-net.json)</li>
+<li><strong>Akamai</strong> (Underperforming): eligible -- ordinal=1 major/critical=1 all=52 hours=2840.7336</li>
+<li><strong>Hetzner</strong> (Underperforming): excluded -- no incident data file found (expected hetzner.json)</li>
+<li><strong>Clore.ai</strong> (Underperforming): excluded -- no incident data file found (expected clore-ai.json)</li>
+<li><strong>Massed Compute</strong> (Underperforming): excluded -- no incident data file found (expected massed-compute.json)</li>
+<li><strong>Exabits</strong> (Underperforming): excluded -- no incident data file found (expected exabits.json)</li>
+<li><strong>Sesterce</strong> (Underperforming): excluded -- no incident data file found (expected sesterce.json)</li>
+<li><strong>E2E Cloud</strong> (Underperforming): excluded -- no incident data file found (expected e2e-cloud.json)</li>
+<li><strong>OVHcloud</strong> (Underperforming): excluded -- no incident data file found (expected ovhcloud.json)</li>
+<li><strong>Aethir</strong> (Underperforming): excluded -- no incident data file found (expected aethir.json)</li>
+<li><strong>Akash</strong> (Underperforming): excluded -- no incident data file found (expected akash.json)</li>
+<li><strong>Salad</strong> (Underperforming): excluded -- no incident data file found (expected salad.json)</li>
+<li><strong>Mithril</strong> (Underperforming): excluded -- no incident data file found (expected mithril.json)</li>
+<li><strong>Nscale</strong> (Unavailable): excluded -- unrated/unavailable tier 'Unavailable' in this release</li>
+<li><strong>Core42</strong> (Unavailable): excluded -- unrated/unavailable tier 'Unavailable' in this release</li>
+<li><strong>Humain</strong> (Unavailable): excluded -- unrated/unavailable tier 'Unavailable' in this release</li>
+<li><strong>Corvex</strong> (Unavailable): excluded -- unrated/unavailable tier 'Unavailable' in this release</li>
+<li><strong>Highrise</strong> (Unavailable): excluded -- unrated/unavailable tier 'Unavailable' in this release</li>
+<li><strong>BluSky AI</strong> (Unavailable): excluded -- unrated/unavailable tier 'Unavailable' in this release</li>
+<li><strong>Arc Compute</strong> (Unavailable): excluded -- unrated/unavailable tier 'Unavailable' in this release</li>
+<li><strong>Telus</strong> (Unavailable): excluded -- unrated/unavailable tier 'Unavailable' in this release</li>
+<li><strong>Telenor</strong> (Unavailable): excluded -- unrated/unavailable tier 'Unavailable' in this release</li>
+<li><strong>Mistral AI</strong> (Unavailable): excluded -- unrated/unavailable tier 'Unavailable' in this release</li>
+<li><strong>Firebird</strong> (Unavailable): excluded -- unrated/unavailable tier 'Unavailable' in this release</li>
+<li><strong>Alibaba Cloud</strong> (Unavailable): excluded -- unrated/unavailable tier 'Unavailable' in this release</li>
+<li><strong>MegaSpeed International</strong> (Unavailable): excluded -- unrated/unavailable tier 'Unavailable' in this release</li>
+<li><strong>BitDeer</strong> (Unavailable): excluded -- unrated/unavailable tier 'Unavailable' in this release</li>
+<li><strong>RunSun Cloud</strong> (Unavailable): excluded -- unrated/unavailable tier 'Unavailable' in this release</li>
+<li><strong>FPT Cloud</strong> (Unavailable): excluded -- unrated/unavailable tier 'Unavailable' in this release</li>
+<li><strong>backend AI</strong> (Unavailable): excluded -- unrated/unavailable tier 'Unavailable' in this release</li>
+<li><strong>NAVER</strong> (Unavailable): excluded -- unrated/unavailable tier 'Unavailable' in this release</li>
+<li><strong>Indosat Ooredoo Hutchison</strong> (Unavailable): excluded -- unrated/unavailable tier 'Unavailable' in this release</li>
+<li><strong>Sakura</strong> (Unavailable): excluded -- unrated/unavailable tier 'Unavailable' in this release</li>
+<li><strong>Yotta</strong> (Unavailable): excluded -- unrated/unavailable tier 'Unavailable' in this release</li>
+<li><strong>neevcloud</strong> (Unavailable): excluded -- unrated/unavailable tier 'Unavailable' in this release</li>
+<li><strong>evroc</strong> (Unavailable): excluded -- unrated/unavailable tier 'Unavailable' in this release</li>
+<li><strong>greenai.cloud</strong> (Unavailable): excluded -- unrated/unavailable tier 'Unavailable' in this release</li>
+</ul>
+<h2 id="secondary-release-1-0">Secondary release: 1.0</h2>
+<p>Published 2025-03-26. Window: [2025-03-26, 2025-09-22) (180 days). Included in correlation: 2 (minimum required: 8). <strong>Reading: insufficient</strong></p>
+<h3 id="providers">Providers</h3>
+<ul>
+<li><strong>CoreWeave</strong> (Platinum): excluded -- no incident data file found (expected coreweave.json)</li>
+<li><strong>Crusoe</strong> (Gold): excluded -- no incident data file found (expected crusoe.json)</li>
+<li><strong>Together.ai</strong> (Gold): excluded -- no incident data file found (expected together-ai.json)</li>
+<li><strong>Nebius</strong> (Gold): eligible -- ordinal=4 major/critical=22 all=35 hours=47.9196</li>
+<li><strong>Lepton AI</strong> (Gold): excluded -- no incident data file found (expected lepton-ai.json)</li>
+<li><strong>Oracle</strong> (Gold): excluded -- no incident data file found (expected oracle.json)</li>
+<li><strong>Azure</strong> (Gold): excluded -- no incident data file found (expected azure.json)</li>
+<li><strong>AWS</strong> (Silver): excluded -- no incident data file found (expected aws.json)</li>
+<li><strong>Lambda</strong> (Silver): excluded -- coverage_start/coverage_end not recorded; manual verification pending</li>
+<li><strong>Scaleway</strong> (Silver): eligible -- ordinal=3 major/critical=28 all=225 hours=24410.0461</li>
+<li><strong>SMC</strong> (Silver): excluded -- no incident data file found (expected smc.json)</li>
+<li><strong>Google Cloud</strong> (Bronze): excluded -- no incident data file found (expected google-cloud.json)</li>
+<li><strong>TensorWave</strong> (Bronze): excluded -- no incident data file found (expected tensorwave.json)</li>
+<li><strong>DataCrunch</strong> (Bronze): excluded -- no incident data file found (expected verda.json)</li>
+<li><strong>RunPod</strong> (Bronze): excluded -- no incident data file found (expected runpod.json)</li>
+<li><strong>DENVR Dataworks</strong> (Bronze): excluded -- no incident data file found (expected denvr-dataworks.json)</li>
+<li><strong>Hot Aisle</strong> (Underperforming): excluded -- no incident data file found (expected hot-aisle.json)</li>
+<li><strong>Shadeform</strong> (Underperforming): excluded -- no incident data file found (expected shadeform.json)</li>
+<li><strong>Vast.ai</strong> (Underperforming): excluded -- no incident data file found (expected vast-ai.json)</li>
+<li><strong>Massed Compute</strong> (Underperforming): excluded -- no incident data file found (expected massed-compute.json)</li>
+<li><strong>Prime Intellect</strong> (Underperforming): excluded -- no incident data file found (expected prime-intellect.json)</li>
+<li><strong>Iris Energy</strong> (Underperforming): excluded -- no incident data file found (expected iren.json)</li>
+<li><strong>GMI Cloud</strong> (Underperforming): excluded -- no incident data file found (expected gmi.json)</li>
+<li><strong>Salad</strong> (Underperforming): excluded -- no incident data file found (expected salad.json)</li>
+<li><strong>Akash</strong> (Underperforming): excluded -- no incident data file found (expected akash.json)</li>
+<li><strong>GPU.NET</strong> (Underperforming): excluded -- no incident data file found (expected gpu-net.json)</li>
+</ul>
+<h2 id="known-limits-from-plan-md">Known limits (from PLAN.md)</h2>
+<p>Status pages are self-reported; this is retrospective and observational; reliability is one of ten ClusterMAX criteria. See <code>retrospective/PLAN.md</code> in full for all stated limits.</p>
+<footer>Rendered from <a href="R1-result.md">R1-result.md</a>, the authoritative source -- this page is generated by <code>scripts/build_docs.py</code> and never hand-edited. <a href="https://github.com/BigBirdReturns/axm-tools/tree/main/clustermax-challenge">Source and tests</a>.</footer>
+</main></body></html>

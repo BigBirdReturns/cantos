@@ -1,0 +1,112 @@
+{
+  "schema": "secondrun.rating-registry.v1",
+  "description": "Published inputs the v1.4 engine accepts. A plan's inline transform must canonically hash to one of 'transforms'. A binding for a rating listed under 'ratings' must cite one of its medal_table_sources sha256 values as binding.source.sha256, and every bound medal must equal the registered transcription tier for that exact provider name. Ratings not listed here are scored but flagged source_unverified. index.html embeds this object verbatim (checked by tests).",
+  "transforms": [
+    {
+      "sha256": "2a5d65120ea83be53edd2ccc671b46e77b3e810f53fa8e33c73871668c6f1d90",
+      "path": "design/transform.json",
+      "registered_for": "1.4.0",
+      "note": "Canonical sha256 (sorted keys, ECMAScript number formatting, UTF-8) of design/transform.json; same digest as under v1.3."
+    }
+  ],
+  "ratings": [
+    {
+      "rating_name": "ClusterMAX",
+      "rating_version": "3.0",
+      "medal_table_sources": [
+        {
+          "sha256": "79dc81e4cf7a503632c631b69f011f2a7af109e719cc32253344820cda402e02",
+          "kind": "medal_table_image",
+          "path": "launch/release-3.0/raw/neocloud-ranking-v3.0-newsletter-source.png"
+        },
+        {
+          "sha256": "5477994f1bf0881f02175344123eb167eddcded31c6cb7471fdeb5fe018b5c51",
+          "kind": "cross_check_image",
+          "path": "launch/release-3.0/raw/tweet-image-orig.jpg"
+        }
+      ],
+      "transcription": {
+        "path": "launch/release-3.0/clustermax-3.0.json",
+        "tiers": {
+          "CoreWeave": "Platinum",
+          "Nebius": "Platinum",
+          "Oracle": "Gold",
+          "Google Cloud": "Gold",
+          "Azure": "Silver",
+          "Firmus": "Silver",
+          "Lambda": "Silver",
+          "GMI": "Silver",
+          "TensorWave": "Silver",
+          "AWS": "Bronze",
+          "GCore": "Bronze",
+          "Verda": "Bronze",
+          "moonlite": "Bronze",
+          "Prime Intellect": "Bronze",
+          "together.ai": "Bronze",
+          "Crusoe": "Bronze",
+          "DigitalOcean": "Bronze",
+          "GMO GPU Cloud": "Bronze",
+          "Hyperstack": "Bronze",
+          "Vultr": "Participation Ribbon",
+          "neysa": "Participation Ribbon",
+          "VESSL AI": "Participation Ribbon",
+          "Shadeform": "Participation Ribbon",
+          "RunPod": "Participation Ribbon",
+          "Radiant": "Participation Ribbon",
+          "FPT AI Factory": "Participation Ribbon",
+          "Core42": "Participation Ribbon",
+          "latitude.sh": "Participation Ribbon",
+          "IBM Cloud": "Participation Ribbon",
+          "Buzz HPC": "Participation Ribbon",
+          "Vast.ai": "Participation Ribbon",
+          "BitDeer": "Participation Ribbon",
+          "Hyperbolic": "Participation Ribbon",
+          "STN": "Participation Ribbon",
+          "Sharon AI": "Underperforming",
+          "IREN": "Underperforming",
+          "Hydra": "Underperforming",
+          "FarmGPU": "Underperforming",
+          "Whitefiber": "Underperforming",
+          "PaleBlueDot.AI": "Underperforming",
+          "Akamai": "Underperforming",
+          "Hetzner": "Underperforming",
+          "Mithril": "Underperforming",
+          "OVHcloud": "Underperforming",
+          "Massed Compute": "Underperforming",
+          "FluidStack": "Unavailable",
+          "Cirrascale": "Unavailable",
+          "Lightning AI": "Unavailable",
+          "Scaleway": "Unavailable",
+          "Cudo Compute": "Unavailable",
+          "DENVR Dataworks": "Unavailable",
+          "Atlas Cloud": "Unavailable",
+          "SpaceX": "Unavailable",
+          "Mistral AI": "Unavailable",
+          "PIC": "Unavailable",
+          "NScale": "Unavailable",
+          "Highrise": "Unavailable",
+          "Corvex": "Unavailable",
+          "Andromeda": "Unavailable",
+          "Volta": "Unavailable",
+          "firebird": "Unavailable",
+          "Tatra SuperCompute": "Unavailable",
+          "Sesterce": "Unavailable",
+          "groq": "Unavailable",
+          "Yotta": "Unavailable",
+          "darya.ai": "Unavailable",
+          "boostrun": "Unavailable",
+          "GLOBAL AI": "Unavailable",
+          "Argentum": "Unavailable",
+          "QumulusAI": "Unavailable",
+          "Alibaba Cloud": "Unavailable",
+          "MegaSpeed International": "Unavailable",
+          "BytePlus": "Unavailable",
+          "Humain": "Unavailable",
+          "SK telecom": "Unavailable",
+          "NAVER": "Unavailable",
+          "Indosat Ooredoo Hutchison": "Unavailable"
+        }
+      }
+    }
+  ]
+}
