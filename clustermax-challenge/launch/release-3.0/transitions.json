@@ -1,0 +1,592 @@
+{
+  "schema": "secondrun.clustermax-transitions.v1",
+  "compared_releases": {
+    "from": "2.1",
+    "to": "3.0"
+  },
+  "notes": "tier_3_0 = \"Not Present\" means the provider does not appear anywhere in the ClusterMAX 3.0 medal-table image (all rows checked at zoom); tier_2_1 = \"Not Present\" means the provider is a new entrant not in clustermax-2.1.json. Name matching is by exact string except where a per-row note explains a case/formatting difference, a merger, or a dropped/absent provider.",
+  "transitions": [
+    {
+      "name": "Aethir",
+      "tier_2_1": "Underperforming",
+      "tier_3_0": "Not Present",
+      "note": "Not present anywhere in the ClusterMAX 3.0 medal-table image (checked all tier rows at zoom, full width) and not named in the newsletter article body text. Appears dropped from coverage entirely rather than re-tiered -- consistent with the article's own note that a bucket of smaller providers is \"still covered in our market view, but not part of the rating system.\""
+    },
+    {
+      "name": "Akamai",
+      "tier_2_1": "Underperforming",
+      "tier_3_0": "Underperforming",
+      "note": ""
+    },
+    {
+      "name": "Akash",
+      "tier_2_1": "Underperforming",
+      "tier_3_0": "Not Present",
+      "note": "Not present anywhere in the ClusterMAX 3.0 medal-table image (checked all tier rows at zoom, full width) and not named in the newsletter article body text. Appears dropped from coverage entirely rather than re-tiered -- consistent with the article's own note that a bucket of smaller providers is \"still covered in our market view, but not part of the rating system.\""
+    },
+    {
+      "name": "Alibaba Cloud",
+      "tier_2_1": "Unavailable",
+      "tier_3_0": "Unavailable",
+      "note": ""
+    },
+    {
+      "name": "Andromeda",
+      "tier_2_1": "Not Present",
+      "tier_3_0": "Unavailable",
+      "note": "New entrant / not present in clustermax-2.1.json"
+    },
+    {
+      "name": "Arc Compute",
+      "tier_2_1": "Unavailable",
+      "tier_3_0": "Not Present",
+      "note": "Not present anywhere in the ClusterMAX 3.0 medal-table image (checked all tier rows at zoom, full width) and not named in the newsletter article body text. Appears dropped from coverage entirely rather than re-tiered -- consistent with the article's own note that a bucket of smaller providers is \"still covered in our market view, but not part of the rating system.\""
+    },
+    {
+      "name": "Argentum",
+      "tier_2_1": "Not Present",
+      "tier_3_0": "Unavailable",
+      "note": "New entrant / not present in clustermax-2.1.json"
+    },
+    {
+      "name": "Atlas Cloud",
+      "tier_2_1": "Bronze",
+      "tier_3_0": "Unavailable",
+      "note": ""
+    },
+    {
+      "name": "AWS",
+      "tier_2_1": "Silver",
+      "tier_3_0": "Bronze",
+      "note": ""
+    },
+    {
+      "name": "Azure",
+      "tier_2_1": "Gold",
+      "tier_3_0": "Silver",
+      "note": ""
+    },
+    {
+      "name": "backend AI",
+      "tier_2_1": "Unavailable",
+      "tier_3_0": "Not Present",
+      "note": "Not present anywhere in the ClusterMAX 3.0 medal-table image (checked all tier rows at zoom, full width) and not named in the newsletter article body text. Appears dropped from coverage entirely rather than re-tiered -- consistent with the article's own note that a bucket of smaller providers is \"still covered in our market view, but not part of the rating system.\""
+    },
+    {
+      "name": "BitDeer",
+      "tier_2_1": "Bronze",
+      "tier_3_0": "Participation Ribbon",
+      "note": ""
+    },
+    {
+      "name": "BluSky AI",
+      "tier_2_1": "Unavailable",
+      "tier_3_0": "Not Present",
+      "note": "Not present anywhere in the ClusterMAX 3.0 medal-table image (checked all tier rows at zoom, full width) and not named in the newsletter article body text. Appears dropped from coverage entirely rather than re-tiered -- consistent with the article's own note that a bucket of smaller providers is \"still covered in our market view, but not part of the rating system.\""
+    },
+    {
+      "name": "boostrun",
+      "tier_2_1": "Unavailable",
+      "tier_3_0": "Unavailable",
+      "note": ""
+    },
+    {
+      "name": "Buzz HPC",
+      "tier_2_1": "Bronze",
+      "tier_3_0": "Participation Ribbon",
+      "note": ""
+    },
+    {
+      "name": "BytePlus",
+      "tier_2_1": "Unavailable",
+      "tier_3_0": "Unavailable",
+      "note": ""
+    },
+    {
+      "name": "Cirrascale",
+      "tier_2_1": "Silver",
+      "tier_3_0": "Unavailable",
+      "note": ""
+    },
+    {
+      "name": "Clore.ai",
+      "tier_2_1": "Underperforming",
+      "tier_3_0": "Not Present",
+      "note": "Not present anywhere in the ClusterMAX 3.0 medal-table image (checked all tier rows at zoom, full width) and not named in the newsletter article body text. Appears dropped from coverage entirely rather than re-tiered -- consistent with the article's own note that a bucket of smaller providers is \"still covered in our market view, but not part of the rating system.\""
+    },
+    {
+      "name": "Core42",
+      "tier_2_1": "Bronze",
+      "tier_3_0": "Participation Ribbon",
+      "note": ""
+    },
+    {
+      "name": "CoreWeave",
+      "tier_2_1": "Platinum",
+      "tier_3_0": "Platinum",
+      "note": ""
+    },
+    {
+      "name": "Corvex",
+      "tier_2_1": "Unavailable",
+      "tier_3_0": "Unavailable",
+      "note": ""
+    },
+    {
+      "name": "Crusoe",
+      "tier_2_1": "Gold",
+      "tier_3_0": "Bronze",
+      "note": ""
+    },
+    {
+      "name": "Cudo Compute",
+      "tier_2_1": "Bronze",
+      "tier_3_0": "Unavailable",
+      "note": ""
+    },
+    {
+      "name": "darya.ai",
+      "tier_2_1": "Not Present",
+      "tier_3_0": "Unavailable",
+      "note": "New entrant / not present in clustermax-2.1.json"
+    },
+    {
+      "name": "deepinfra",
+      "tier_2_1": "Underperforming",
+      "tier_3_0": "Not Present",
+      "note": "Not present anywhere in the ClusterMAX 3.0 medal-table image (checked all tier rows at zoom, full width) and not named in the newsletter article body text. Appears dropped from coverage entirely rather than re-tiered -- consistent with the article's own note that a bucket of smaller providers is \"still covered in our market view, but not part of the rating system.\""
+    },
+    {
+      "name": "DENVR Dataworks",
+      "tier_2_1": "Bronze",
+      "tier_3_0": "Unavailable",
+      "note": ""
+    },
+    {
+      "name": "DigitalOcean",
+      "tier_2_1": "Bronze",
+      "tier_3_0": "Bronze",
+      "note": ""
+    },
+    {
+      "name": "dstack",
+      "tier_2_1": "Underperforming",
+      "tier_3_0": "Not Present",
+      "note": "Not present anywhere in the ClusterMAX 3.0 medal-table image (checked all tier rows at zoom, full width) and not named in the newsletter article body text. Appears dropped from coverage entirely rather than re-tiered -- consistent with the article's own note that a bucket of smaller providers is \"still covered in our market view, but not part of the rating system.\""
+    },
+    {
+      "name": "E2E Cloud",
+      "tier_2_1": "Underperforming",
+      "tier_3_0": "Not Present",
+      "note": "Not present anywhere in the ClusterMAX 3.0 medal-table image (checked all tier rows at zoom, full width) and not named in the newsletter article body text. Appears dropped from coverage entirely rather than re-tiered -- consistent with the article's own note that a bucket of smaller providers is \"still covered in our market view, but not part of the rating system.\""
+    },
+    {
+      "name": "Exabits",
+      "tier_2_1": "Underperforming",
+      "tier_3_0": "Not Present",
+      "note": "Not present anywhere in the ClusterMAX 3.0 medal-table image (checked all tier rows at zoom, full width) and not named in the newsletter article body text. Appears dropped from coverage entirely rather than re-tiered -- consistent with the article's own note that a bucket of smaller providers is \"still covered in our market view, but not part of the rating system.\""
+    },
+    {
+      "name": "FarmGPU",
+      "tier_2_1": "Underperforming",
+      "tier_3_0": "Underperforming",
+      "note": ""
+    },
+    {
+      "name": "Firebird",
+      "tier_2_1": "Unavailable",
+      "tier_3_0": "Unavailable",
+      "note": "Matched to 3.0 image label \"firebird\" (case/formatting differs only)"
+    },
+    {
+      "name": "Firmus",
+      "tier_2_1": "Silver",
+      "tier_3_0": "Silver",
+      "note": ""
+    },
+    {
+      "name": "FluidStack",
+      "tier_2_1": "Gold",
+      "tier_3_0": "Unavailable",
+      "note": ""
+    },
+    {
+      "name": "FPT AI Factory",
+      "tier_2_1": "Bronze",
+      "tier_3_0": "Participation Ribbon",
+      "note": ""
+    },
+    {
+      "name": "GCore",
+      "tier_2_1": "Silver",
+      "tier_3_0": "Bronze",
+      "note": ""
+    },
+    {
+      "name": "GLOBAL AI",
+      "tier_2_1": "Not Present",
+      "tier_3_0": "Unavailable",
+      "note": "New entrant / not present in clustermax-2.1.json"
+    },
+    {
+      "name": "GMI",
+      "tier_2_1": "Bronze",
+      "tier_3_0": "Silver",
+      "note": ""
+    },
+    {
+      "name": "GMO GPU Cloud",
+      "tier_2_1": "Silver",
+      "tier_3_0": "Bronze",
+      "note": ""
+    },
+    {
+      "name": "Google Cloud",
+      "tier_2_1": "Silver",
+      "tier_3_0": "Gold",
+      "note": ""
+    },
+    {
+      "name": "GPU.NET",
+      "tier_2_1": "Underperforming",
+      "tier_3_0": "Not Present",
+      "note": "Not present anywhere in the ClusterMAX 3.0 medal-table image (checked all tier rows at zoom, full width) and not named in the newsletter article body text. Appears dropped from coverage entirely rather than re-tiered -- consistent with the article's own note that a bucket of smaller providers is \"still covered in our market view, but not part of the rating system.\""
+    },
+    {
+      "name": "groq",
+      "tier_2_1": "Not Present",
+      "tier_3_0": "Unavailable",
+      "note": "New entrant / not present in clustermax-2.1.json"
+    },
+    {
+      "name": "Hetzner",
+      "tier_2_1": "Underperforming",
+      "tier_3_0": "Underperforming",
+      "note": ""
+    },
+    {
+      "name": "Highrise",
+      "tier_2_1": "Unavailable",
+      "tier_3_0": "Unavailable",
+      "note": ""
+    },
+    {
+      "name": "Hot Aisle",
+      "tier_2_1": "Bronze",
+      "tier_3_0": "Not Present",
+      "note": "Not present anywhere in the ClusterMAX 3.0 medal-table image (checked all tier rows at zoom, full width) and not named in the newsletter article body text. Appears dropped from coverage entirely rather than re-tiered -- consistent with the article's own note that a bucket of smaller providers is \"still covered in our market view, but not part of the rating system.\""
+    },
+    {
+      "name": "Humain",
+      "tier_2_1": "Unavailable",
+      "tier_3_0": "Unavailable",
+      "note": ""
+    },
+    {
+      "name": "Hydra",
+      "tier_2_1": "Underperforming",
+      "tier_3_0": "Underperforming",
+      "note": ""
+    },
+    {
+      "name": "Hyperbolic",
+      "tier_2_1": "Underperforming",
+      "tier_3_0": "Participation Ribbon",
+      "note": ""
+    },
+    {
+      "name": "Hyperstack",
+      "tier_2_1": "Bronze",
+      "tier_3_0": "Bronze",
+      "note": ""
+    },
+    {
+      "name": "IBM Cloud",
+      "tier_2_1": "Bronze",
+      "tier_3_0": "Participation Ribbon",
+      "note": ""
+    },
+    {
+      "name": "Indosat Ooredoo Hutchison",
+      "tier_2_1": "Unavailable",
+      "tier_3_0": "Unavailable",
+      "note": ""
+    },
+    {
+      "name": "IREN",
+      "tier_2_1": "Underperforming",
+      "tier_3_0": "Underperforming",
+      "note": ""
+    },
+    {
+      "name": "Lambda",
+      "tier_2_1": "Silver",
+      "tier_3_0": "Silver",
+      "note": ""
+    },
+    {
+      "name": "latitude.sh",
+      "tier_2_1": "Bronze",
+      "tier_3_0": "Participation Ribbon",
+      "note": ""
+    },
+    {
+      "name": "Lightning AI",
+      "tier_2_1": "Bronze",
+      "tier_3_0": "Unavailable",
+      "note": ""
+    },
+    {
+      "name": "Massed Compute",
+      "tier_2_1": "Underperforming",
+      "tier_3_0": "Underperforming",
+      "note": ""
+    },
+    {
+      "name": "MegaSpeed International",
+      "tier_2_1": "Unavailable",
+      "tier_3_0": "Unavailable",
+      "note": ""
+    },
+    {
+      "name": "Mistral AI",
+      "tier_2_1": "Unavailable",
+      "tier_3_0": "Unavailable",
+      "note": ""
+    },
+    {
+      "name": "Mithril",
+      "tier_2_1": "Underperforming",
+      "tier_3_0": "Underperforming",
+      "note": ""
+    },
+    {
+      "name": "Moonlite",
+      "tier_2_1": "Unavailable",
+      "tier_3_0": "Bronze",
+      "note": "Matched to 3.0 image label \"moonlite\" (case/formatting differs only)"
+    },
+    {
+      "name": "NAVER",
+      "tier_2_1": "Unavailable",
+      "tier_3_0": "Unavailable",
+      "note": ""
+    },
+    {
+      "name": "Nebius",
+      "tier_2_1": "Gold",
+      "tier_3_0": "Platinum",
+      "note": ""
+    },
+    {
+      "name": "neevcloud",
+      "tier_2_1": "Unavailable",
+      "tier_3_0": "Not Present",
+      "note": "Not present anywhere in the ClusterMAX 3.0 medal-table image (checked all tier rows at zoom, full width) and not named in the newsletter article body text. Appears dropped from coverage entirely rather than re-tiered -- consistent with the article's own note that a bucket of smaller providers is \"still covered in our market view, but not part of the rating system.\""
+    },
+    {
+      "name": "Neysa",
+      "tier_2_1": "Bronze",
+      "tier_3_0": "Participation Ribbon",
+      "note": "Matched to 3.0 image label \"neysa\" (case/formatting differs only)"
+    },
+    {
+      "name": "Nscale",
+      "tier_2_1": "Unavailable",
+      "tier_3_0": "Unavailable",
+      "note": "Matched to 3.0 image label \"NScale\" (case/formatting differs only)"
+    },
+    {
+      "name": "Oracle",
+      "tier_2_1": "Gold",
+      "tier_3_0": "Gold",
+      "note": ""
+    },
+    {
+      "name": "OVHcloud",
+      "tier_2_1": "Underperforming",
+      "tier_3_0": "Underperforming",
+      "note": ""
+    },
+    {
+      "name": "PaleBlueDot.AI",
+      "tier_2_1": "Underperforming",
+      "tier_3_0": "Underperforming",
+      "note": ""
+    },
+    {
+      "name": "PIC",
+      "tier_2_1": "Not Present",
+      "tier_3_0": "Unavailable",
+      "note": "New entrant / not present in clustermax-2.1.json"
+    },
+    {
+      "name": "Prime Intellect",
+      "tier_2_1": "Bronze",
+      "tier_3_0": "Bronze",
+      "note": ""
+    },
+    {
+      "name": "Qubrid",
+      "tier_2_1": "Bronze",
+      "tier_3_0": "Not Present",
+      "note": "Not present anywhere in the ClusterMAX 3.0 medal-table image (checked all tier rows at zoom, full width) and not named in the newsletter article body text. Appears dropped from coverage entirely rather than re-tiered -- consistent with the article's own note that a bucket of smaller providers is \"still covered in our market view, but not part of the rating system.\""
+    },
+    {
+      "name": "QumulusAI",
+      "tier_2_1": "Unavailable",
+      "tier_3_0": "Unavailable",
+      "note": ""
+    },
+    {
+      "name": "Radiant",
+      "tier_2_1": "Bronze",
+      "tier_3_0": "Participation Ribbon",
+      "note": ""
+    },
+    {
+      "name": "RunPod",
+      "tier_2_1": "Bronze",
+      "tier_3_0": "Participation Ribbon",
+      "note": ""
+    },
+    {
+      "name": "RunSun Cloud",
+      "tier_2_1": "Unavailable",
+      "tier_3_0": "Not Present",
+      "note": "Not present anywhere in the ClusterMAX 3.0 medal-table image (checked all tier rows at zoom, full width) and not named in the newsletter article body text. Appears dropped from coverage entirely rather than re-tiered -- consistent with the article's own note that a bucket of smaller providers is \"still covered in our market view, but not part of the rating system.\""
+    },
+    {
+      "name": "Sakura",
+      "tier_2_1": "Unavailable",
+      "tier_3_0": "Not Present",
+      "note": "Not present anywhere in the ClusterMAX 3.0 medal-table image (checked all tier rows at zoom, full width) and not named in the newsletter article body text. Appears dropped from coverage entirely rather than re-tiered -- consistent with the article's own note that a bucket of smaller providers is \"still covered in our market view, but not part of the rating system.\""
+    },
+    {
+      "name": "Salad",
+      "tier_2_1": "Underperforming",
+      "tier_3_0": "Not Present",
+      "note": "Not present anywhere in the ClusterMAX 3.0 medal-table image (checked all tier rows at zoom, full width) and not named in the newsletter article body text. Appears dropped from coverage entirely rather than re-tiered -- consistent with the article's own note that a bucket of smaller providers is \"still covered in our market view, but not part of the rating system.\""
+    },
+    {
+      "name": "Scaleway",
+      "tier_2_1": "Silver",
+      "tier_3_0": "Unavailable",
+      "note": ""
+    },
+    {
+      "name": "Sesterce",
+      "tier_2_1": "Underperforming",
+      "tier_3_0": "Unavailable",
+      "note": ""
+    },
+    {
+      "name": "Shadeform",
+      "tier_2_1": "Bronze",
+      "tier_3_0": "Participation Ribbon",
+      "note": ""
+    },
+    {
+      "name": "Sharon AI",
+      "tier_2_1": "Underperforming",
+      "tier_3_0": "Underperforming",
+      "note": ""
+    },
+    {
+      "name": "SK telecom",
+      "tier_2_1": "Unavailable",
+      "tier_3_0": "Unavailable",
+      "note": ""
+    },
+    {
+      "name": "SpaceX",
+      "tier_2_1": "Not Present",
+      "tier_3_0": "Unavailable",
+      "note": "New entrant / not present in clustermax-2.1.json"
+    },
+    {
+      "name": "STN",
+      "tier_2_1": "Bronze",
+      "tier_3_0": "Participation Ribbon",
+      "note": ""
+    },
+    {
+      "name": "Tatra SuperCompute",
+      "tier_2_1": "Unavailable",
+      "tier_3_0": "Unavailable",
+      "note": ""
+    },
+    {
+      "name": "Telenor",
+      "tier_2_1": "Unavailable",
+      "tier_3_0": "Not Present",
+      "note": "Not present anywhere in the ClusterMAX 3.0 medal-table image (checked all tier rows at zoom, full width) and not named in the newsletter article body text. Appears dropped from coverage entirely rather than re-tiered -- consistent with the article's own note that a bucket of smaller providers is \"still covered in our market view, but not part of the rating system.\""
+    },
+    {
+      "name": "Telus",
+      "tier_2_1": "Unavailable",
+      "tier_3_0": "Not Present",
+      "note": "Not present anywhere in the ClusterMAX 3.0 medal-table image (checked all tier rows at zoom, full width) and not named in the newsletter article body text. Appears dropped from coverage entirely rather than re-tiered -- consistent with the article's own note that a bucket of smaller providers is \"still covered in our market view, but not part of the rating system.\""
+    },
+    {
+      "name": "TensorWave",
+      "tier_2_1": "Silver",
+      "tier_3_0": "Silver",
+      "note": ""
+    },
+    {
+      "name": "Together.ai",
+      "tier_2_1": "Silver",
+      "tier_3_0": "Bronze",
+      "note": "Matched to 3.0 image label \"together.ai\" (case/formatting differs only)"
+    },
+    {
+      "name": "Vast.ai",
+      "tier_2_1": "Bronze",
+      "tier_3_0": "Participation Ribbon",
+      "note": ""
+    },
+    {
+      "name": "Verda",
+      "tier_2_1": "Bronze",
+      "tier_3_0": "Bronze",
+      "note": ""
+    },
+    {
+      "name": "VESSL AI",
+      "tier_2_1": "Unavailable",
+      "tier_3_0": "Participation Ribbon",
+      "note": ""
+    },
+    {
+      "name": "Volta",
+      "tier_2_1": "Not Present",
+      "tier_3_0": "Unavailable",
+      "note": "New entrant / not present in clustermax-2.1.json"
+    },
+    {
+      "name": "Voltage Park",
+      "tier_2_1": "Silver",
+      "tier_3_0": "Unavailable",
+      "note": "Merged into \"Lightning AI\" per ClusterMAX 3.0 article body text (\"Lightning AI (recently merged with Voltage Park) ... the combined company has unfortunately run out of GPUs\"); no longer listed standalone in the 3.0 image. tier_3_0 shown is the merged entity's tier, not a separate Voltage Park logo."
+    },
+    {
+      "name": "Vultr",
+      "tier_2_1": "Silver",
+      "tier_3_0": "Participation Ribbon",
+      "note": ""
+    },
+    {
+      "name": "Whitefiber",
+      "tier_2_1": "Underperforming",
+      "tier_3_0": "Underperforming",
+      "note": ""
+    },
+    {
+      "name": "Yotta",
+      "tier_2_1": "Unavailable",
+      "tier_3_0": "Unavailable",
+      "note": ""
+    }
+  ]
+}

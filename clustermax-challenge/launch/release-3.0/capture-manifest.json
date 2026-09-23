@@ -1,0 +1,277 @@
+{
+ "schema": "secondrun.capture-manifest.v1",
+ "captured_utc_date": "2026-09-23",
+ "note": "Captures of third-party pages are held privately and not republished (the ClusterMAX 3.0 newsletter article is paid content). Hashes identify the exact bytes read.",
+ "files": [
+  {
+   "file": "newsletter-archive-recheck.json",
+   "sha256": "45e18a039fd0144064262710a26a220e5d1d95760f4fd903de020ec321bb1149",
+   "bytes": 89900
+  },
+  {
+   "file": "newsletter-archive.json",
+   "sha256": "45e18a039fd0144064262710a26a220e5d1d95760f4fd903de020ec321bb1149",
+   "bytes": 89900
+  },
+  {
+   "file": "newsletter-clustermax-30-api.json",
+   "sha256": "fadbac40c1a253781bfb3f875413944d7d58dbb27e9caf14e955b49c1b1d82ee",
+   "bytes": 586300
+  },
+  {
+   "file": "newsletter-clustermax-30.html",
+   "sha256": "91fa2e524fd5a9239a23cfba6f69eecb94046cdb6743c7c80e9737aa0d059ebb",
+   "bytes": 1392354
+  },
+  {
+   "file": "cloudreview_text.txt",
+   "sha256": "9381ba3b71a502dc51fc7f0d558c197b076ce9ed151a2875717c247acaccc9be",
+   "bytes": 99942
+  },
+  {
+   "file": "cloudreview_text_clean.txt",
+   "sha256": "1ea3b507a611c00ee543cfd81fb40fbd13f991912445c843901d3a99737425c7",
+   "bytes": 3611
+  },
+  {
+   "file": "clustermax_ai.html",
+   "sha256": "009bbafa235359f9fb31547f12615be2c515991e517bd2102b086fddf3965c26",
+   "bytes": 54847
+  },
+  {
+   "file": "clustermax_ai_cloudreview.html",
+   "sha256": "6461e43a88c4b9d09d3422595391ec8e6df84851bffe6d513a0ed8c5a354e050",
+   "bytes": 151259
+  },
+  {
+   "file": "clustermax_ai_criteria.html",
+   "sha256": "580c066c308ea8d25c8323cb3aea9f43f05bb21e46638fb1fcedd61052555fe0",
+   "bytes": 46829
+  },
+  {
+   "file": "clustermax_ai_expectations.html",
+   "sha256": "9bf134b2d82d77e51903b338a8ae01fa50b38ef1d4d0fdaf43c9aa2cc431d5e5",
+   "bytes": 46672
+  },
+  {
+   "file": "clustermax_ai_health-checks.html",
+   "sha256": "4c0979f91ea56f219408fa9ec3d61bfaa7b8835d3316c80142c9f1e08da50e83",
+   "bytes": 46672
+  },
+  {
+   "file": "clustermax_ai_kubernetes.html",
+   "sha256": "d7d447e8e9674b14406445548ae88463268faeddf6a5db0cca0b771b6017d77a",
+   "bytes": 47495
+  },
+  {
+   "file": "clustermax_ai_land-acknowledgement.html",
+   "sha256": "c55f67f700456054e1ada4ec932510f2ef756f267391ad5c698d9bd43cb7de4e",
+   "bytes": 60676
+  },
+  {
+   "file": "clustermax_ai_methodology.html",
+   "sha256": "bfc8a6eb69fc46bcfe1573b3b78109d9d2fb444b6655279514fa182d8cfe3e40",
+   "bytes": 47495
+  },
+  {
+   "file": "clustermax_ai_monitoring-dashboards.html",
+   "sha256": "84de31b293f914fc7005aef2e9862357273176157454477917929b6de02957a0",
+   "bytes": 47495
+  },
+  {
+   "file": "clustermax_ai_overview.html",
+   "sha256": "fb6eeb56ea1c465c1bb2e95cec2bdca104dafb826c68b502a5a912c06a211feb",
+   "bytes": 58786
+  },
+  {
+   "file": "clustermax_ai_quotes.html",
+   "sha256": "d2ccb8063afab2cfc1bf7c359e1829729ba8b5d23d25ea1f25f4c2a8683a6f95",
+   "bytes": 127586
+  },
+  {
+   "file": "clustermax_ai_slurm.html",
+   "sha256": "a2f1ee5e7467e2a10452614480c0e574c44a8e1ce3b79b27c596a6532a8aab62",
+   "bytes": 46672
+  },
+  {
+   "file": "clustermax_ai_standalone-machines.html",
+   "sha256": "b2443ee19377129d2a46d1321845ee4541feaccac854aecbdbdc6b9bedec09b4",
+   "bytes": 47495
+  },
+  {
+   "file": "clustermax_ai_tco.html",
+   "sha256": "fdf2e41d70d39f905477d3c08f91517e0e74f2010c62302f9f8557f7f8bc83da",
+   "bytes": 552953
+  },
+  {
+   "file": "clustermax_ai_v3.html",
+   "sha256": "5ceb1f711066fca448a5a2cb6e2d5afe7e3023560aa376afaaa0ccc818771fd8",
+   "bytes": 47495
+  },
+  {
+   "file": "clustermax_ai_v3_0.html",
+   "sha256": "d0ca29b391146cf7d9fb13ec74db42b314460675e3c524a2c2004856b8507687",
+   "bytes": 47495
+  },
+  {
+   "file": "clustermax_semianalysis_com.html",
+   "sha256": "15568d3dee401b5b7cfff45232fcac913da6750143f1245d5d785015f7d0ccd8",
+   "bytes": 54286
+  },
+  {
+   "file": "fxtwitter-jordannanos-2102871532267847699.json",
+   "sha256": "afdc68534cf81f0c7c271ea245d3075da8cca32e7732f714559176b1daf2720e",
+   "bytes": 5500
+  },
+  {
+   "file": "llms-full.txt",
+   "sha256": "04a7bc8aa1e03a7be22f1fb92623fa01e86984888f5ada5af8ccced43e8f5abd",
+   "bytes": 321094
+  },
+  {
+   "file": "llms.txt",
+   "sha256": "b23f4dbfd962cae441c8bdbbb48a549b9bd8cac437e8ed764ff602bac9a5cbc9",
+   "bytes": 15182
+  },
+  {
+   "file": "newsletter-clustermax-30-body.html",
+   "sha256": "b008d6e42d3567d0d8a2492866bcab839035b5dede8a850e3d2766e9ef7f6590",
+   "bytes": 567550
+  },
+  {
+   "file": "newsletter-clustermax-30-body.txt",
+   "sha256": "21f8bbe395bf33f0b242590128e829f163dbc78e572afaa66562e5eb572017f9",
+   "bytes": 183629
+  },
+  {
+   "file": "overview_text.txt",
+   "sha256": "300c28958081d82cca9f54ddfd7cac7779505aa9ec3aed00b7debf68abbe3089",
+   "bytes": 28152
+  },
+  {
+   "file": "pg_cloudreview__coreweave.html",
+   "sha256": "4610695897eb32f5280ae8d23a752415f4974b231ad64ceba65fcb2f44419611",
+   "bytes": 210385
+  },
+  {
+   "file": "pg_cloudreview__nebius.html",
+   "sha256": "436555f5825b1c74313f9090a11269a56b5be4a47804e20e7c5ddcbf79647f1c",
+   "bytes": 155452
+  },
+  {
+   "file": "pg_criteria.html",
+   "sha256": "6606ec7e37ee88d4f5e46d22ac807c7bad50ef0f6101a1bf2f83d4767d459e92",
+   "bytes": 46829
+  },
+  {
+   "file": "pg_criteria__availability.html",
+   "sha256": "69761babdd5f9b903f730685483617e52040d23e817e446f020b8aa4cbfb7bc9",
+   "bytes": 53784
+  },
+  {
+   "file": "pg_criteria__lifecycle.html",
+   "sha256": "4d4c4b6deb21b7f84d91d7ebd590bc136bf90f4bb8825c22e33b9c58243e5940",
+   "bytes": 55957
+  },
+  {
+   "file": "pg_criteria__monitoring.html",
+   "sha256": "5faf56decb6e12547b39bff8d0b2162e4bcddcdf17d031b1a60c72e2d2d15f66",
+   "bytes": 58028
+  },
+  {
+   "file": "pg_criteria__networking.html",
+   "sha256": "c6bed55af49cbe1030c3a9013d593332acb83b269a4144e35cb9808558e3a2b1",
+   "bytes": 54825
+  },
+  {
+   "file": "pg_criteria__orchestration.html",
+   "sha256": "4111acd4cc466896103d84c01a0e395c76ce02dd29ef57e054e86bcaf44fb56f",
+   "bytes": 57444
+  },
+  {
+   "file": "pg_criteria__partnerships.html",
+   "sha256": "06f78b95c00ce350cbd9d8b4f4946febe5258e76290f401ed464296aebb511e3",
+   "bytes": 53149
+  },
+  {
+   "file": "pg_criteria__pricing.html",
+   "sha256": "f1d2cb0f89b0079dbc81b702cffe14de46043e45f0f64f837f1a070299130c94",
+   "bytes": 53186
+  },
+  {
+   "file": "pg_criteria__reliability.html",
+   "sha256": "653420b54ac2aba501d04b3b0f83f6b0b8df2e6066387122f53c218f46e86496",
+   "bytes": 57901
+  },
+  {
+   "file": "pg_criteria__security.html",
+   "sha256": "70bb33c6b151962ceea2d358dd0545806a91f6f77f0f6be67d4dfc7a64af563b",
+   "bytes": 73681
+  },
+  {
+   "file": "pg_criteria__storage.html",
+   "sha256": "52b66518c88916fc74861e973841595b44753604d9ac086ccb2c88227c14c7c8",
+   "bytes": 57036
+  },
+  {
+   "file": "pg_expectations.html",
+   "sha256": "50360937d4c3e8d06ae875c0a1c9805261ec1291e8ffc14f6c30db44ed8124c2",
+   "bytes": 46672
+  },
+  {
+   "file": "pg_expectations__health-checks.html",
+   "sha256": "d6a89024693311a6de0e97fbc65cee144c3913ceeec13bbd13e8257916056bae",
+   "bytes": 86516
+  },
+  {
+   "file": "pg_expectations__kubernetes.html",
+   "sha256": "cd86b0d02424dec5e6a26401bce2b2f8dc3d617c83702fc3d8c370a045983c5c",
+   "bytes": 91449
+  },
+  {
+   "file": "pg_expectations__monitoring.html",
+   "sha256": "bd4bbcb6fb753abeb7890febbf4c4a469c237fbe98d4c7e02853ce94cae73ce8",
+   "bytes": 101743
+  },
+  {
+   "file": "pg_expectations__slurm.html",
+   "sha256": "5bafa84009d5ec583c757fea8eefe15995d63aa473bbb6aca82fa450439939e5",
+   "bytes": 125897
+  },
+  {
+   "file": "pg_expectations__standalone.html",
+   "sha256": "61122dcf2da469bfb408bc01f07df8277b9661cae62af5780e35b3c81b304cbd",
+   "bytes": 89952
+  },
+  {
+   "file": "pg_v2.1.html",
+   "sha256": "5f41ed935525e9e66c6e4dcb1e704481bfa503bd62bcdb2c11fe6a8fca95c52f",
+   "bytes": 52872
+  },
+  {
+   "file": "recheck_cloudreview.html",
+   "sha256": "5f1407c27e00feb4e9f490d4b45b1adcf0a8e01b69eb8b67fd10f0162b30f18f",
+   "bytes": 151259
+  },
+  {
+   "file": "recheck_criteria.html",
+   "sha256": "b7e0a78323d52c511c61352e765e76fdda317606f5e496ef3086de85829a3ecb",
+   "bytes": 46829
+  },
+  {
+   "file": "recheck_overview.html",
+   "sha256": "ddd13ba1c45c91b9ff1cc74f6f22c6a0d63e6d1f61a9cf9163071a266df86ae2",
+   "bytes": 58786
+  },
+  {
+   "file": "robots.txt",
+   "sha256": "63088f5d06004b881679e21e61ef032cb68bbfebfbfde6fce458e17312d2147d",
+   "bytes": 917
+  },
+  {
+   "file": "sitemap.xml",
+   "sha256": "12707b3a83a8c7c0fda474579d54a7c3d0e1274b13b9e0c58562508a1474b2f7",
+   "bytes": 36847
+  }
+ ]
+}

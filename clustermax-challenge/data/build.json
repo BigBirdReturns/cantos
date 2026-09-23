@@ -1,7 +1,7 @@
 {
   "schema": "secondrun.challenge-build.v1",
-  "version": "1.3.0",
-  "created_at": "2026-09-23T21:12:56.962333+00:00",
+  "version": "1.1.0",
+  "created_at": "2026-09-23T21:46:05.203971+00:00",
   "python": "3.13.15",
   "reference_tests_passed": 130,
   "engine_checks_passed": 61,
@@ -11,17 +11,17 @@
   "browser_scope": "Playwright Chromium, file:// navigation, real file-input load of data/demo-plan.json, data/demo-binding.json and data/demo-outcomes.json (plan/binding/outcomes order), Evaluate click, non-HOLD result render including rubric and subsidized_trials in the raw output, Run synthetic example (demo()) button also produces a non-HOLD result with the new binding_rules/rubric fields, score button stays disabled with only plan+outcomes selected, HOLD renders for an invalid/missing binding record, zero console/page errors confirmed 2026-09-23.",
   "clustermax_3_provider_outcomes": "NOT_TESTED",
   "source_hashes": {
-    "index.html": "f0a3cbcddccb90afe6556bb73d733cd664ae766ee49d84bf530c0acb35c03abe",
-    "scripts/challenge.py": "c542380992fd6bc117528ea6aa2058c74b737e9b2b035720289aec696c8dc915",
-    "scripts/make_demo.py": "8c74a863aad9f13bda08d0010b20b0e1bd1d3e48a4eb264e5b9686fa0d0a46f5",
+    "index.html": "f22643e166ea108fdc8032d0247b5b0b2188af7c271ae232361917bdb032c229",
+    "scripts/challenge.py": "0d0da6e3789ea2e1ef30667997b1b0873a19efbf87f6c36f422b84b8b7b76732",
+    "scripts/make_demo.py": "bfa0c757530da5bf41858b481703285819c9e532ab921e97d4734b8db923985f",
     "scripts/probe_audit_runner.py": "2e5af53c258078c79b67f2bfb5e13be28b7a5f905f8225a60f4b0aef9adab5cc",
-    "scripts/launch_ledger.py": "0a90d1a1ee5fa2391261b479451a040c37801e3e1b9e554a2709e08a3861f49f",
-    "tests/test_challenge.py": "07c5e094536a1feb79b64af28821fd3fcac25a87257cab77ca233c7a9e9f46fd",
-    "tests/test_engine.cjs": "b94114fc14d52d932d2765a11c0ccd0e93b2b44fb5351956e45ed9c23a18bd74",
-    "tests/test_launch_ledger.py": "7fce91b557b03df40f3edb3a2f6f71858b9d660cacbba4e71040eef64622a77c",
-    "README.md": "6f2c56fec33ae3b76f48ce3622769a65f62b1a6479cb26a6e08d92063ccd4453",
+    "scripts/launch_ledger.py": "c40e1a180da519ad9db1652dbd2b1e59efa6d3df4c9d6afb1fd7a5247ef5b31c",
+    "tests/test_challenge.py": "55b816d00579bfcf95f31c2a73ab95db2c6cc33f186267f5bcbe130c4f9ce513",
+    "tests/test_engine.cjs": "d5bd2b2e7d7045fd817fbba4295f42674259e7bf50c4b65a5f46be2afc9766ce",
+    "tests/test_launch_ledger.py": "9aab9dee2815934cb1e32f0222214e49d04f60a8599167382f5a0f9185256ab7",
+    "README.md": "9cb9df8da2d6ee6fb4f162f16931045f234da97ace6c215de38d3a731d53e4f6",
     "design/transform.json": "27fd2eae72985567bcb0568d2dd75803afdfa0abbae47319667f6c3e0d077249",
-    "launch/README.md": "1b3387fc39841f18360459b80b9ff81f2e8d31ec1034bddc67ccfd2adefea4cd",
-    "launch/claims-3.0.template.json": "724a560e45fe77bcb0e1cf901dd7825557b001af0dfe9672079ece2c8164d9da"
+    "launch/README.md": "cb79c20826bb5ea9781228d9f776eff3a9caf9974b6ed39d9a23f3f6655c1cd6",
+    "launch/claims-3.0.template.json": "abed109b66b1cb7f7c51caa48da50cf2276d5a62a9522f4587fa0bc7ea9051d0"
   }
 }

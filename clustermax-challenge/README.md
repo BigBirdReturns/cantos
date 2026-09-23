@@ -243,20 +243,35 @@ independently. I have also built and shared tooling for its service. Hot Aisle i
 excluded from the primary ClusterMAX comparison. It was rated Underperforming in
 ClusterMAX 1.0 and Bronze in 2.0 and 2.1. I have publicly criticised SemiAnalysis.
 
-## When ClusterMAX 3.0 ships
+## ClusterMAX 3.0 is out (2026-09-23)
 
-This challenge does not know what ClusterMAX 3.0's rubric or medal table will
-contain, and makes no claim about what the release will or won't include. When it
-ships, [`launch/README.md`](launch/README.md) is the procedure this repo follows: it
-records, per medal, exactly which particulars the release supplies — the
-service/product and region the medal covers, the customer permissions and support
-tier that produced the observations, the evidence published for the medal and how it
-yields the tier, the test dates, and whether the release provides anything allowing a
-predictive check — and which particulars it omits, then binds supplied medals to this
-frozen test. `scripts/launch_ledger.py` validates a filled ledger against
-`launch/claims-3.0.template.json`'s schema and, once the ledger supplies medals plus a
-medal-table source and a rubric source, can emit a `binding.json` draft for a frozen
-plan.
+SemiAnalysis published ClusterMAX 3.0 on 2026-09-23 at 21:20 UTC. This version of
+the challenge reached GitHub at 21:27 UTC, minutes later, so it claims no priority
+over the release.
+
+* **Medal table transcribed** from the official image, with source hashes:
+  [`launch/release-3.0/clustermax-3.0.json`](launch/release-3.0/clustermax-3.0.json).
+  77 providers: 2 Platinum, 2 Gold, 5 Silver, 10 Bronze, 15 Participation Ribbon,
+  11 Underperforming, 32 Unavailable. Changes from 2.1 are in
+  [`transitions.json`](launch/release-3.0/transitions.json).
+* **New tier.** 3.0 adds Participation Ribbon between Bronze and Underperforming.
+  The frozen transform has no value for it, so under the frozen rules those 15
+  providers cannot be bound; an unknown tier is never treated as Underperforming.
+  Any extension will be published as a separate transform, labelled as set after
+  the release.
+* **Binding waits for the rubric.** When checked after the release, clustermax.ai's
+  criteria pages still showed 2.1. The medal binding records the exact rubric hash,
+  so it waits for the 3.0 rubric to be published.
+* **No predictive claim found.** We found no statement in the release that medals
+  predict customer outcomes. Its write-ups describe testing through
+  provider-arranged access, in one case on a cluster used under a provider
+  engineer's account. The customer-scope gate exists to keep that kind of
+  observation separate from ordinary customer access.
+* Hot Aisle, which provided the credits disclosed above, does not appear in 3.0.
+
+The paid release article is cited by URL and hash only; it is not republished here.
+[`launch/README.md`](launch/README.md) is the ledger procedure that will record,
+per medal, which particulars the release supplies and which it omits.
 
 ## Archive: earlier public-code probes
 
@@ -293,7 +308,7 @@ gate never blocks the (green) test job. `scripts/build_manifest.py` recomputes
 `data/build.json`'s source hashes. `launch/README.md` and
 `launch/claims-3.0.template.json` (schema `secondrun.launch-claims.v1`) are the
 ClusterMAX 3.0 launch kit; `scripts/launch_ledger.py` validates a filled ledger and
-can emit a binding draft from it (see "When ClusterMAX 3.0 ships" above). Source and
+can emit a binding draft from it (see "ClusterMAX 3.0 is out" above). Source and
 protocol references are in `data/sources.json`. All files are steward-owned; no
 scheduled task writes them. Original code is MIT licensed. ClusterMAX belongs to
 SemiAnalysis; no affiliation or endorsement is implied.
