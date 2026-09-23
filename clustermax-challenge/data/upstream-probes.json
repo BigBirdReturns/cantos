@@ -1,0 +1,97 @@
+{
+  "schema": "secondrun.upstream-control-flow-probes.v1",
+  "source_url": "https://github.com/SemiAnalysisAI/ClusterMAX/blob/97865af001e5bbf2f0ea5672ec0f8c0d7fb123f4/cmax/audit_runner.py",
+  "upstream_commit": "97865af001e5bbf2f0ea5672ec0f8c0d7fb123f4",
+  "upstream_git_blob": "b8086eccad5ceb4bf65325355a47209d49bc1aa7",
+  "source_sha256": "9443af45114b20514806ae38fe6dd86607530bf3e07bf215cce46301f8c63821",
+  "scope": "Exact upstream run() executed; collector, reporter and detection replaced by synthetic doubles.",
+  "not_tested": [
+    "full CLI",
+    "real collectors",
+    "cloud hosts",
+    "provider ratings",
+    "ClusterMAX 3.0 private tests"
+  ],
+  "finding": "Process success is not a coverage or all-checks-passed certificate. This is documented API behavior, not an exploit.",
+  "cases": [
+    {
+      "case": "default_fail",
+      "synthetic_check_status": "fail",
+      "exit_on_fail": false,
+      "collector_exit": 0,
+      "artifact_present": true,
+      "expected": 0,
+      "observed": 0,
+      "expectation_met": true,
+      "stdout": "==> cmax audit: <TEMP>/audit\nFAIL [synthetic reporter]\n"
+    },
+    {
+      "case": "gating_fail",
+      "synthetic_check_status": "fail",
+      "exit_on_fail": true,
+      "collector_exit": 0,
+      "artifact_present": true,
+      "expected": 2,
+      "observed": 2,
+      "expectation_met": true,
+      "stdout": "==> cmax audit: <TEMP>/audit\nFAIL [synthetic reporter]\n"
+    },
+    {
+      "case": "gating_warning",
+      "synthetic_check_status": "warning",
+      "exit_on_fail": true,
+      "collector_exit": 0,
+      "artifact_present": true,
+      "expected": 0,
+      "observed": 0,
+      "expectation_met": true,
+      "stdout": "==> cmax audit: <TEMP>/audit\nWARNING [synthetic reporter]\n"
+    },
+    {
+      "case": "gating_skipped",
+      "synthetic_check_status": "skipped",
+      "exit_on_fail": true,
+      "collector_exit": 0,
+      "artifact_present": true,
+      "expected": 0,
+      "observed": 0,
+      "expectation_met": true,
+      "stdout": "==> cmax audit: <TEMP>/audit\nSKIPPED [synthetic reporter]\n"
+    },
+    {
+      "case": "gating_pass",
+      "synthetic_check_status": "pass",
+      "exit_on_fail": true,
+      "collector_exit": 0,
+      "artifact_present": true,
+      "expected": 0,
+      "observed": 0,
+      "expectation_met": true,
+      "stdout": "==> cmax audit: <TEMP>/audit\nPASS [synthetic reporter]\n"
+    },
+    {
+      "case": "collector_failure",
+      "synthetic_check_status": "pass",
+      "exit_on_fail": true,
+      "collector_exit": 7,
+      "artifact_present": true,
+      "expected": "AuditError",
+      "observed": "AuditError",
+      "expectation_met": true,
+      "stdout": "==> cmax audit: <TEMP>/audit\n"
+    },
+    {
+      "case": "missing_artifact",
+      "synthetic_check_status": "pass",
+      "exit_on_fail": true,
+      "collector_exit": 0,
+      "artifact_present": false,
+      "expected": "AuditError",
+      "observed": "AuditError",
+      "expectation_met": true,
+      "stdout": "==> cmax audit: <TEMP>/audit\n"
+    }
+  ],
+  "expectations_met": 7,
+  "cases_run": 7
+}

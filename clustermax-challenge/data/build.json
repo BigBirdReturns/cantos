@@ -1,0 +1,22 @@
+{
+  "schema": "secondrun.challenge-build.v1",
+  "version": "1.0.0",
+  "created_at": "2026-09-23T06:55:29.937548+00:00",
+  "python": "3.13.5",
+  "reference_tests_passed": 22,
+  "engine_checks_passed": 16,
+  "browser_checks_passed": 11,
+  "upstream_control_flow_probes": 7,
+  "upstream_probe_scope": "Exact audit_runner.py, hash verified. Collector/report/detection mocked. No provider audit.",
+  "browser_scope": "Chromium in-memory DOM, file input, download, layout and SHA fallback; file/localhost navigation blocked by execution environment.",
+  "clustermax_3_provider_outcomes": "NOT_TESTED",
+  "source_hashes": {
+    "index.html": "ff25c4de3977b9f51d09a979b4f780fc5965b88693dd612b1d70cee90790ba50",
+    "scripts/challenge.py": "437885f744c1031d0f60f8702d006efa5dcbf0cb92b6a4152c75a112e84c3be2",
+    "scripts/probe_audit_runner.py": "7d8f08d40a3fd939b651753113e5aa697b6287d979564d51eb982715969b2874",
+    "scripts/make_demo.py": "dddb76bbc9ca64b2a7094f271742daea973089de5b5398d5bda148e0b8903bae",
+    "tests/test_challenge.py": "27536b5f4f7cc83359482fa723be02369f10497d5d2b9fbd471031833b3f3d8f",
+    "tests/test_engine.cjs": "168cdaeacb82f7adfb4f5fe3b8c6260c42630a7c7185d7c09daed1157e337533",
+    "README.md": "c1f70cb9daa64f8ebf22c0605362e41ac5e7eb1ca6426e9a00da786c4f8946b1"
+  }
+}
