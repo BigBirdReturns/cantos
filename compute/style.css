@@ -17,3 +17,12 @@
  .mobile-provider{display:block;font-size:9px;color:var(--muted);margin-top:3px}.gpu-open{min-height:32px}.tabs{scrollbar-width:thin}.tabletop{flex-wrap:wrap}.searchbox{width:100%}.tablepanel .costcell{min-width:0}
  .sidepanel .filtergrid{grid-template-columns:1fr 1fr}.intro-right{gap:7px}.intro{padding-block:20px 15px}.intro h1{font-size:30px}.intro p{font-size:12px}.tablefoot{font-size:10px}.tablefoot span{display:block}.view-market .overview .metric{min-height:110px}.shell{padding-bottom:35px}
 }
+
+/* Native Linux Chromium: let 320px layouts accommodate fallback-font widths. */
+@media(max-width:400px){
+ .topbar{height:auto;min-height:59px;flex-wrap:wrap;padding-block:12px;gap:10px}
+ .toplinks{margin-left:auto;max-width:100%;flex-wrap:wrap}
+ .connectorstate{flex-wrap:wrap;gap:8px}
+ .workrow{flex-wrap:wrap}.workrow>div{min-width:0;max-width:100%;overflow-wrap:anywhere}
+ .workrow button{max-width:100%}.workrow .row{justify-content:flex-start}
+}

@@ -18,6 +18,15 @@
  .mobile-provider{display:block;font-size:9px;color:var(--muted);margin-top:3px}.gpu-open{min-height:32px}.tabs{scrollbar-width:thin}.tabletop{flex-wrap:wrap}.searchbox{width:100%}.tablepanel .costcell{min-width:0}
  .sidepanel .filtergrid{grid-template-columns:1fr 1fr}.intro-right{gap:7px}.intro{padding-block:20px 15px}.intro h1{font-size:30px}.intro p{font-size:12px}.tablefoot{font-size:10px}.tablefoot span{display:block}.view-market .overview .metric{min-height:110px}.shell{padding-bottom:35px}
 }
+
+/* Native Linux Chromium: let 320px layouts accommodate fallback-font widths. */
+@media(max-width:400px){
+ .topbar{height:auto;min-height:59px;flex-wrap:wrap;padding-block:12px;gap:10px}
+ .toplinks{margin-left:auto;max-width:100%;flex-wrap:wrap}
+ .connectorstate{flex-wrap:wrap;gap:8px}
+ .workrow{flex-wrap:wrap}.workrow>div{min-width:0;max-width:100%;overflow-wrap:anywhere}
+ .workrow button{max-width:100%}.workrow .row{justify-content:flex-start}
+}
 </style></head><body><a href="#main" class="skip">Skip to calculations</a>
 <div class="shell"><header class="topbar"><a class="wordmark" href="#" aria-label="Second Run Compute home"><strong>SECOND RUN</strong><span class="slash">/</span><span class="product">COMPUTE</span></a><div class="toplinks"><span class="tiny muted">Your work. Your numbers.</span><button class="quiet save-top" id="saved-top">Saved decisions <span id="saved-count">0</span></button><button id="theme" class="iconbtn" aria-label="Switch color theme">◐</button><button class="primary" id="connect-top">Connect workspace</button></div></header>
 <section class="intro"><div><div class="eyebrow"><span class="signal"></span>The compute decision desk</div><h1>Find the right compute<br>for your work.</h1><p>Compare cloud prices, the hardware you own, and the work you can stop repeating.</p></div><div class="intro-right"><button class="quiet snapshot" id="snapshot-button">Prices reviewed <span id="reviewed-date">22 Sep 2026</span> ↗</button><div class="marketstrip"><span><b id="provider-count">4</b> providers</span><span><b id="offer-count">30</b> configurations</span><span><b>0</b> accounts needed</span></div></div></section>
