@@ -12,7 +12,7 @@ import delta as D
 
 class BackfillTests(unittest.TestCase):
     def setUp(self):
-        self.manifest = I.BASE / "fixtures/manifest.json"
+        self.manifest = I.BASE / "fixtures/authored-manifest.json"
         self.rows = I.import_manifest(self.manifest, offline=True)
         self.row = copy.deepcopy(self.rows[0])
         self.cell = {"id": "synthetic/cell", "hardware": "MI300X", "gpus": 1,

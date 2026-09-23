@@ -1,33 +1,67 @@
 {
   "schema": "backfill-manifest@1",
   "fixture": true,
-  "note": "SYNTHETIC raw-format examples; retrieved_at is fixture creation label, URL cites schema owner, not a measurement origin. No verified external checkpoint.",
+  "note": "Five byte-identical real artifact copies; fixture status prevents accidental publication of test ratios. See original provenance.",
   "files": [
     {
+      "artifact_id": 10716032664,
+      "created_at": "2026-09-22T19:49:39Z",
+      "head_sha": "7e257acec661842d9b7f5651f92b4c29ea162fd7",
       "source": "inferencemax",
-      "path": "inferencemax.json",
-      "url": "https://github.com/SemiAnalysisAI/InferenceX",
-      "revision": "UNVERIFIED",
-      "retrieved_at": "2026-09-23T00:00:00Z",
-      "sha256": "ee0ac9c16b51131c2d5f5bf5ccdcd0bf8574ccfc0f5ac83d9a6e5895c9fd899a",
-      "observed_at": null
+      "path": "inferencex-10716032664.json",
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/10716032664",
+      "revision": "7e257acec661842d9b7f5651f92b4c29ea162fd7",
+      "retrieved_at": "2026-09-23T23:40:00Z",
+      "observed_at": null,
+      "sha256": "02be26ddb553d3bc992d257aab110e98c3dcd7cfc4ef685299c2bd9f6faea5fd"
     },
     {
-      "source": "mlperf",
-      "path": "mlperf_log_summary.txt",
-      "url": "https://github.com/mlcommons/inference_results_v5.0",
-      "revision": "UNVERIFIED",
-      "retrieved_at": "2026-09-23T00:00:00Z",
-      "sha256": "b527aaaad1ada64450ebc3b58b522c87111009dcbb9118d618bb64e619415e2e",
+      "artifact_id": 10716378525,
+      "created_at": "2026-09-22T19:58:31Z",
+      "head_sha": "b4724b08bb1488105ff6fba32a46ad37470d6417",
+      "source": "inferencemax",
+      "path": "inferencex-10716378525.json",
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/10716378525",
+      "revision": "b4724b08bb1488105ff6fba32a46ad37470d6417",
+      "retrieved_at": "2026-09-23T23:40:00Z",
       "observed_at": null,
-      "metadata": {
-        "hardware": "H100",
-        "gpus": 8,
-        "model": "Llama2-70b",
-        "precision": "FP8",
-        "framework": "TensorRT-LLM",
-        "framework_version": "UNVERIFIED"
-      }
+      "sha256": "a7c54f8d003ed05caf0223e799f705258333d179dba58c0240dae1b0c7e7b9f6"
+    },
+    {
+      "artifact_id": 10718795856,
+      "created_at": "2026-09-22T20:41:50Z",
+      "head_sha": "d3ddb20bb8e131b1388331d9e66ffce90392a6e4",
+      "source": "inferencemax",
+      "path": "inferencex-10718795856.json",
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/10718795856",
+      "revision": "d3ddb20bb8e131b1388331d9e66ffce90392a6e4",
+      "retrieved_at": "2026-09-23T23:40:00Z",
+      "observed_at": null,
+      "sha256": "ff59cfa055785c876b15d0a639e565193f86ecb5024645d449170472eca381e7"
+    },
+    {
+      "artifact_id": 10721648398,
+      "created_at": "2026-09-22T22:14:06Z",
+      "head_sha": "d3ddb20bb8e131b1388331d9e66ffce90392a6e4",
+      "source": "inferencemax",
+      "path": "inferencex-10721648398.json",
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/10721648398",
+      "revision": "d3ddb20bb8e131b1388331d9e66ffce90392a6e4",
+      "retrieved_at": "2026-09-23T23:40:00Z",
+      "observed_at": null,
+      "sha256": "d2f64cff4bc7c0337a987388c2aa7f3983e92adab2f1cee0d3c6379dbc290a63"
+    },
+    {
+      "artifact_id": 10780222898,
+      "created_at": "2026-09-23T22:36:01Z",
+      "head_sha": "0c7295f0cbde7e072f0ff587ef7814b9a356b192",
+      "source": "inferencemax",
+      "path": "inferencex-10780222898.json",
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/10780222898",
+      "revision": "0c7295f0cbde7e072f0ff587ef7814b9a356b192",
+      "retrieved_at": "2026-09-23T23:40:00Z",
+      "observed_at": null,
+      "sha256": "d079a3dfd4f80916e16b4f1509456111816739b6ab12823bf2eb265118546a0e"
     }
   ]
 }

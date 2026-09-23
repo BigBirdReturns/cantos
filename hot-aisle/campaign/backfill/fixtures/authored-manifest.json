@@ -1,0 +1,33 @@
+{
+  "schema": "backfill-manifest@1",
+  "fixture": true,
+  "note": "SYNTHETIC raw-format examples; retrieved_at is fixture creation label, URL cites schema owner, not a measurement origin. No verified external checkpoint.",
+  "files": [
+    {
+      "source": "inferencemax",
+      "path": "authored-inferencemax.json",
+      "url": "https://github.com/SemiAnalysisAI/InferenceX",
+      "revision": "UNVERIFIED",
+      "retrieved_at": "2026-09-23T00:00:00Z",
+      "sha256": "ee0ac9c16b51131c2d5f5bf5ccdcd0bf8574ccfc0f5ac83d9a6e5895c9fd899a",
+      "observed_at": null
+    },
+    {
+      "source": "mlperf",
+      "path": "mlperf_log_summary.txt",
+      "url": "https://github.com/mlcommons/inference_results_v5.0",
+      "revision": "UNVERIFIED",
+      "retrieved_at": "2026-09-23T00:00:00Z",
+      "sha256": "b527aaaad1ada64450ebc3b58b522c87111009dcbb9118d618bb64e619415e2e",
+      "observed_at": null,
+      "metadata": {
+        "hardware": "H100",
+        "gpus": 8,
+        "model": "Llama2-70b",
+        "precision": "FP8",
+        "framework": "TensorRT-LLM",
+        "framework_version": "UNVERIFIED"
+      }
+    }
+  ]
+}
