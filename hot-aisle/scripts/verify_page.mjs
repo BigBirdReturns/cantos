@@ -30,6 +30,8 @@ async function newPage(browser) {
 
 async function staticPass(browser) {
   const { page, errors, external } = await newPage(browser);
+  // Exercise the real download fallback consistently, including its longer button label.
+  await page.addInitScript(()=>Object.defineProperty(navigator,'clipboard',{value:undefined}));
   await page.goto(pathToFileURL(page_path).href);
   await page.waitForTimeout(600);
   check('static', 'no_console_errors', errors.length === 0, errors.join(' | '));
