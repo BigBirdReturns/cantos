@@ -1,4 +1,5 @@
 """Freeze Azure CODE arrivals and replay streaming completions on the serving host."""
+import re
 import argparse
 import concurrent.futures
 import csv
@@ -17,6 +18,9 @@ from common import MODEL, REVISION, encoded, read_json, sha, verify, write_json
 
 
 def timestamp(value):
+    # Azure CSV carries 7 fractional digits; Python < 3.11 fromisoformat accepts at most 6.
+    # Truncate to microseconds explicitly (what 3.11+ does) so every seat builds the same schedule.
+    value = re.sub(r'(\.\d{6})\d+', r'\1', value.strip())
     parsed = dt.datetime.fromisoformat(value.replace('Z', '+00:00'))
     return parsed.replace(tzinfo=parsed.tzinfo or dt.timezone.utc).timestamp()
 
