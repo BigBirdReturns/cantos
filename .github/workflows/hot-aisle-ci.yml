@@ -28,7 +28,7 @@ jobs:
         run: |
           set -euo pipefail
           node hot-aisle/scripts/test_workbench.cjs | tee instrument-engine.log
-          node --test hot-aisle/runner/test/*.test.cjs compute/tests/test_core.cjs compute/tests/test_bridge.cjs integration/tests/seam.test.cjs | tee software-tests.log
+          node --test hot-aisle/runner/test/*.test.cjs compute/tests/test_core.cjs compute/tests/test_bridge.cjs integration/tests/seam.test.cjs compute/community/tests/test_core.cjs | tee software-tests.log
           python -m unittest discover -s hot-aisle/scripts -p 'test_price_math.py' -v
           python -m unittest discover -s compute/tests -p 'test_prices.py' -v
           python -m unittest discover -s integration/tests -p 'test_release_gate.py' -v
@@ -36,8 +36,9 @@ jobs:
         run: |
           set -euo pipefail
           python compute/scripts/build.py
+          node compute/community/build.cjs
           python hot-aisle/scripts/build_kit.py --check
-          git diff --exit-code -- compute/index.html compute/MANIFEST.json compute/compute-kit.zip
+          git diff --exit-code -- compute/index.html compute/MANIFEST.json compute/compute-kit.zip compute/results.html compute/community-kit.zip compute/community
       - name: Install exact browser test dependency
         id: browser_setup
         run: |
@@ -65,14 +66,19 @@ jobs:
         env:
           PLAYWRIGHT_MODULE: file:///tmp/compute-browser/node_modules/playwright/index.mjs
         run: node integration/tests/newcomer.mjs
+      - name: Community claims, contributions and independent hub journey
+        if: ${{ !cancelled() && steps.browser_setup.outcome == 'success' }}
+        env:
+          NODE_PATH: /tmp/compute-browser/node_modules
+        run: node compute/community/tests/browser.cjs
       - name: Capture exact tested-source identity
         if: always()
         run: |
           python - <<'PY'
           from pathlib import Path
           import hashlib,json,os
-          paths=['compute/index.html','hot-aisle/index.html','compute/data/catalog.json','hot-aisle/data/catalog.json','compute/compute-kit.zip','hot-aisle/workload-report.zip']
-          record={'source_commit':os.environ['GITHUB_SHA'],'run_id':os.environ['GITHUB_RUN_ID'],'files':{p:hashlib.sha256(Path(p).read_bytes()).hexdigest() for p in paths if Path(p).exists()},'scope':'Software and native local-service browser tests with explicitly synthetic benchmark fixtures. No provider account or GPU measurement.'}
+          paths=['compute/index.html','hot-aisle/index.html','compute/data/catalog.json','hot-aisle/data/catalog.json','compute/compute-kit.zip','hot-aisle/workload-report.zip','compute/results.html','compute/community-kit.zip','compute/community/MANIFEST.json']
+          record={'source_commit':os.environ['GITHUB_SHA'],'run_id':os.environ['GITHUB_RUN_ID'],'files':{p:hashlib.sha256(Path(p).read_bytes()).hexdigest() for p in paths if Path(p).exists()},'scope':'Software and native local-service tests with authored fixtures, retained source-bound campaign projections, and independent-hub origin-loss tests. No new provider account access, GPU measurement, or outside adoption is asserted.'}
           Path('integration-ci-identity.json').write_text(json.dumps(record,indent=2)+'\n')
           PY
       - uses: actions/upload-artifact@v4
@@ -88,6 +94,8 @@ jobs:
             compute-browser-qa/
             seam-browser-qa/
             newcomer-qa/
+            community-browser-qa/
+            compute/community-kit.zip
             compute/compute-kit.zip
             hot-aisle/workload-report.zip
           if-no-files-found: error
