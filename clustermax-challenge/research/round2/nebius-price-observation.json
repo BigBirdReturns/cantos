@@ -1,0 +1,41 @@
+{
+  "schema": "secondrun.price-observation.v1",
+  "source": {
+    "url": "https://nebius.com/prices",
+    "final_url": "https://nebius.com/prices",
+    "retrieved_at": "2026-09-24T06:16:17.277926+00:00",
+    "sha256": "9a5f3542991c7a522c440415f0e49556b172e940064e0e05cccb4e12a73950ff",
+    "bytes": 268420,
+    "status": "CAPTURED_PRIVATE_NOT_REPUBLISHED"
+  },
+  "effective_on": "2026-10-01",
+  "announcement_first_published_at": null,
+  "status": "ANNOUNCED_FUTURE_SCHEDULE",
+  "prices": [
+    {
+      "gpu": "H100",
+      "current_usd_per_gpu_hour": 3.85,
+      "announced_usd_per_gpu_hour": 4.5,
+      "change_percent": 16.883116883116877
+    },
+    {
+      "gpu": "H200",
+      "current_usd_per_gpu_hour": 4.5,
+      "announced_usd_per_gpu_hour": 5.4,
+      "change_percent": 20.000000000000018
+    },
+    {
+      "gpu": "B200",
+      "current_usd_per_gpu_hour": 7.15,
+      "announced_usd_per_gpu_hour": 8.5,
+      "change_percent": 18.881118881118873
+    },
+    {
+      "gpu": "B300",
+      "current_usd_per_gpu_hour": 7.85,
+      "announced_usd_per_gpu_hour": 9.5,
+      "change_percent": 21.019108280254773
+    }
+  ],
+  "scope": "Public normalized on-demand GPU hours; availability, commitments, SKU allocation size, taxes and customer quotes differ. Does not establish when any negotiated premium began."
+}

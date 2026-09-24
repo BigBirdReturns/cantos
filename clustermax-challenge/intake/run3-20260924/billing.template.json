@@ -1,0 +1,25 @@
+{
+  "bills": [
+    {
+      "schema": "secondrun.allocation-bill.v1",
+      "allocation_id": "REPLACE_WITH_ALLOCATION_ID",
+      "currency": "USD",
+      "complete_run_roster": false,
+      "receipt_path": "PRIVATE_RECEIPT_PATH",
+      "receipt_sha256": null,
+      "gross_charge_usd": null,
+      "credits_usd": null,
+      "cash_charge_usd": null,
+      "line_items": [
+        {
+          "category": "compute/setup/idle/storage/transfer/tax",
+          "amount_usd": null
+        }
+      ],
+      "run_shares": {
+        "ACTUAL_RUN_ID": null
+      },
+      "allocation_basis": "REVIEW REQUIRED: retain all allocation costs, including failed attempts and unscored smoke"
+    }
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "checked_at": "2026-09-24T06:06:04.541661+00:00",
+  "source_commit": "cbc7e234fbb39fbde2fdec93bba42141d899c206",
+  "live": [
+    {
+      "path": "hot-aisle/index.html",
+      "http": 200,
+      "bytes": 224177,
+      "sha256": "72d40a08d44f0d6c85db62ecd145a75ec879ee8353235c9804e4b7946d20b1b6",
+      "matches_commit": true
+    },
+    {
+      "path": "hot-aisle/MANIFEST.json",
+      "http": 200,
+      "bytes": 6102,
+      "sha256": "dca09efacc3b4a0707941da7a485754986e770942d4d3ea7bc60317b014c2405",
+      "matches_commit": true
+    },
+    {
+      "path": "hot-aisle/workload-report.zip",
+      "http": 200,
+      "bytes": 591349,
+      "sha256": "b2dfa70223eff1d5b74c659c7603136c3f0c61eb86150af223a36e7ca6ecb711",
+      "matches_commit": true
+    },
+    {
+      "path": "compute/index.html",
+      "http": 200,
+      "bytes": 191196,
+      "sha256": "57bd853d9792064b7f82c2f4f28abf9748cfec4f6652812fb4e2c0b4a3e6d1f6",
+      "matches_commit": true
+    },
+    {
+      "path": "clustermax-challenge/index.html",
+      "http": 200,
+      "bytes": 57414,
+      "sha256": "9bd653f75d2cfd24dd8e6573ddb25345cdcb0030bbc59a5760f7e09da283d78a",
+      "matches_commit": true
+    },
+    {
+      "path": "hot-aisle/campaign/results/RUN3-RESULTS.md",
+      "http": 200,
+      "bytes": 3452,
+      "sha256": "4988fa8028da6ec17c8145d31b0112ce0a46004ce26f9fa603b3dfd0b348de99",
+      "matches_commit": true
+    }
+  ],
+  "hot-aisle-ci.yml": [
+    {
+      "id": 35960622237,
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "5276ef9f090673a4a514a692a2799b402e0ebb07",
+      "created_at": "2026-09-24T05:35:26Z",
+      "html_url": "https://github.com/BigBirdReturns/axm-tools/actions/runs/35960622237"
+    },
+    {
+      "id": 35950177960,
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "5c9b557f5c2bbe860fccb969242833a6c7a2e923",
+      "created_at": "2026-09-24T03:08:11Z",
+      "html_url": "https://github.com/BigBirdReturns/axm-tools/actions/runs/35950177960"
+    },
+    {
+      "id": 35936228979,
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "2097b31c05fe515a8704fa89c98a74ab2e97b497",
+      "created_at": "2026-09-23T23:58:55Z",
+      "html_url": "https://github.com/BigBirdReturns/axm-tools/actions/runs/35936228979"
+    }
+  ],
+  "clustermax-challenge-ci.yml": [
+    {
+      "id": 35940300782,
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "f585673f70c896049819e11d2bed6874ff633815",
+      "created_at": "2026-09-24T00:51:23Z",
+      "html_url": "https://github.com/BigBirdReturns/axm-tools/actions/runs/35940300782"
+    },
+    {
+      "id": 35939647620,
+      "status": "completed",
+      "conclusion": "failure",
+      "head_sha": "8f17ed19870e8abd92af23a05d865fadf8496843",
+      "created_at": "2026-09-24T00:42:46Z",
+      "html_url": "https://github.com/BigBirdReturns/axm-tools/actions/runs/35939647620"
+    },
+    {
+      "id": 35933256450,
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "64be88b415cac4adc9443e4dc4f3abd3b2e7e9ee",
+      "created_at": "2026-09-23T23:22:18Z",
+      "html_url": "https://github.com/BigBirdReturns/axm-tools/actions/runs/35933256450"
+    }
+  ]
+}

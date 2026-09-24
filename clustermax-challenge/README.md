@@ -401,3 +401,7 @@ What can rot: upstream paths and API contracts, public pricing assumptions used 
 a submitter, and browser APIs. A changed upstream file is refused by the pinned
 probe. New targets require a separate reviewed snapshot. Do not overwrite the
 recorded results to make a later version look as though it was tested earlier.
+
+## Evidence follow-through (24 September 2026 UTC)
+
+[Real Run 3 intake](intake/run3-20260924/index.html) recomputes actual campaign acceptance counts and provides a sealed calculator report. Three scored arms across two providers remain outside the prospective rating test; full invoices are unresolved. The [Round 2 matrix](research/round2/index.html) indexes 77 providers, with 11 excerpts reviewed and explicit independent-evidence gaps. Neither is a registered customer-outcome finding.

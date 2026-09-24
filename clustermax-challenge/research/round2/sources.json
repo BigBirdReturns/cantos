@@ -1,0 +1,35 @@
+{
+  "report": {
+    "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+    "status": "UNAVAILABLE",
+    "error": "HTTP Error 403: Forbidden"
+  },
+  "nebius_prices": {
+    "url": "https://nebius.com/prices",
+    "final_url": "https://nebius.com/prices",
+    "retrieved_at": "2026-09-24T06:16:17.277926+00:00",
+    "sha256": "9a5f3542991c7a522c440415f0e49556b172e940064e0e05cccb4e12a73950ff",
+    "bytes": 268420,
+    "status": "CAPTURED_PRIVATE_NOT_REPUBLISHED"
+  },
+  "digitalocean_prices": {
+    "url": "https://www.digitalocean.com/pricing/gpu-droplets",
+    "status": "UNAVAILABLE",
+    "error": "HTTP Error 403: Forbidden"
+  },
+  "oracle_prices": {
+    "url": "https://www.oracle.com/cloud/price-list/",
+    "final_url": "https://www.oracle.com/cloud/price-list/",
+    "retrieved_at": "2026-09-24T06:16:17.744447+00:00",
+    "sha256": "280a32ba63049486e208a686b678cfe738130938585d9cc067cb184cf410ab1f",
+    "bytes": 352968,
+    "status": "CAPTURED_PRIVATE_NOT_REPUBLISHED"
+  },
+  "report_retained": {
+    "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+    "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+    "retrieved_at": "2026-09-23T21:54:18.241245+00:00",
+    "status": "REUSED_EXACT_RETAINED_SOURCE",
+    "fresh_fetch": "403; retained source identity preserved"
+  }
+}

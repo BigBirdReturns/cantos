@@ -1,0 +1,294 @@
+{
+  "schema": "secondrun.real-calculator-replay.v1",
+  "checked_at": "2026-09-24T06:22:30.609Z",
+  "engine_sha256": "78600d009f43ca37a81fa15231dfb5be307d8b0a01cfcfe42d94ed8015061593",
+  "scope": "Exact embedded calculator engine on real retained result bytes and evaluation sidecars. Modeled benchmark-window prices, not invoices or whole-allocation savings.",
+  "runs": [
+    {
+      "name": "run3-scored-a-t0",
+      "label": "Hot Aisle",
+      "settings": {
+        "quality": true,
+        "queue": true,
+        "ttft": 1000,
+        "e2e": 60000
+      },
+      "price": {
+        "provider": "Hot Aisle",
+        "gpus": 1,
+        "rate": 2.99,
+        "extra": 0,
+        "source": "campaign listed price; benchmark window model only",
+        "period": "2026-09-24"
+      },
+      "aggregate": {
+        "identity": {
+          "model": "Qwen/Qwen3-Coder-30B-A3B-Instruct-FP8",
+          "revision": "dcaee4d4dfc5ee71ad501f01f530e5652438fde0",
+          "precision": "FP8",
+          "tokenizer": "dcaee4d4dfc5ee71ad501f01f530e5652438fde0",
+          "workload": "sha256:6c508237082261ac927b96825e2f097782389b1cebc3f78360f0665a8db3501f",
+          "cache": "no-prefix-cache",
+          "load": "azure-code:54e9a6d2a4bd06ba1e060304b900abbc74cbea53de96506e60fe5bb4f2277fb6:2023-11-16T18:17:04Z:factor=0.95:duration=3600:seed=700000:workers=256:max_tokens=1024:temperature=0.2",
+          "runtime": "vllm/vllm-openai-rocm:v0.30.0@sha256:2e7da1ad1c66836802072588adea75f9f4991da5f9545b4318e91d422c22ce6a"
+        },
+        "unit": "evaluator-passed, latency-qualified requests",
+        "gates": {
+          "ttft_ms": 1000,
+          "e2e_ms": 60000,
+          "include_client_queue": true,
+          "quality": true
+        },
+        "criterion": "evalplus-0.3.1-human-v0.1.10-mbpp-v0.2.0-base-and-plus-raw-completion-v1",
+        "runs": 1,
+        "duration": 3606.5796859264374,
+        "completed": 8622,
+        "attempted": 8622,
+        "failed": 0,
+        "accepted": 4336,
+        "rate": 1.2022471087828448,
+        "completedRate": 2.3906306669570316,
+        "failureRate": 0,
+        "qualifiedFraction": 0.5028995592669914,
+        "metrics": {
+          "ttft": {
+            "p50": 52.89793014526367,
+            "p95": 155.0379991531372,
+            "p99": 568.9300656318761,
+            "basis": "pooled successful-request samples",
+            "n": 8622
+          },
+          "e2e": {
+            "p50": 2280.2412509918213,
+            "p95": 12353.63903045654,
+            "p99": 15339.370515346529,
+            "basis": "pooled successful-request samples",
+            "n": 8622
+          }
+        },
+        "trialRateRange": [
+          2.3906306669570316,
+          2.3906306669570316
+        ],
+        "trialRateStd": null,
+        "holds": [],
+        "warnings": [],
+        "synthetic": false,
+        "sources": [
+          {
+            "sha256": "ef907e4cbe45832890109c4ca0d37851ad8e4f087beb70421506af897e6a67ab",
+            "record_index": 0,
+            "bytes": 605631
+          }
+        ]
+      },
+      "cost": {
+        "provider": "Hot Aisle",
+        "gpus": 1,
+        "rate": 2.99,
+        "extra": 0,
+        "hourly": 2.99,
+        "total": 2.9954647947000135,
+        "costPer1000": 0.690835976637457,
+        "basis": "modeled charge for summed benchmark windows",
+        "source": "campaign listed price; benchmark window model only",
+        "period": "2026-09-24",
+        "quote": "",
+        "unit": "evaluator-passed, latency-qualified requests"
+      }
+    },
+    {
+      "name": "run3-scored-a-t1",
+      "label": "Hot Aisle",
+      "settings": {
+        "quality": true,
+        "queue": true,
+        "ttft": 1000,
+        "e2e": 60000
+      },
+      "price": {
+        "provider": "Hot Aisle",
+        "gpus": 1,
+        "rate": 2.99,
+        "extra": 0,
+        "source": "campaign listed price; benchmark window model only",
+        "period": "2026-09-24"
+      },
+      "aggregate": {
+        "identity": {
+          "model": "Qwen/Qwen3-Coder-30B-A3B-Instruct-FP8",
+          "revision": "dcaee4d4dfc5ee71ad501f01f530e5652438fde0",
+          "precision": "FP8",
+          "tokenizer": "dcaee4d4dfc5ee71ad501f01f530e5652438fde0",
+          "workload": "sha256:6c508237082261ac927b96825e2f097782389b1cebc3f78360f0665a8db3501f",
+          "cache": "no-prefix-cache",
+          "load": "azure-code:54e9a6d2a4bd06ba1e060304b900abbc74cbea53de96506e60fe5bb4f2277fb6:2023-11-16T18:17:04Z:factor=0.95:duration=3600:seed=700000:workers=256:max_tokens=1024:temperature=0.2",
+          "runtime": "vllm/vllm-openai-rocm:v0.30.0@sha256:2e7da1ad1c66836802072588adea75f9f4991da5f9545b4318e91d422c22ce6a"
+        },
+        "unit": "evaluator-passed, latency-qualified requests",
+        "gates": {
+          "ttft_ms": 1000,
+          "e2e_ms": 60000,
+          "include_client_queue": true,
+          "quality": true
+        },
+        "criterion": "evalplus-0.3.1-human-v0.1.10-mbpp-v0.2.0-base-and-plus-raw-completion-v1",
+        "runs": 1,
+        "duration": 3607.192642688751,
+        "completed": 8615,
+        "attempted": 8622,
+        "failed": 7,
+        "accepted": 4292,
+        "rate": 1.1898449639775277,
+        "completedRate": 2.3882838687479966,
+        "failureRate": 0.0008118765947575657,
+        "qualifiedFraction": 0.49779633495708653,
+        "metrics": {
+          "ttft": {
+            "p50": 60.109615325927734,
+            "p95": 202.3512363433838,
+            "p99": 1118.8951253890998,
+            "basis": "pooled successful-request samples",
+            "n": 8615
+          },
+          "e2e": {
+            "p50": 2415.5964851379395,
+            "p95": 12805.592799186707,
+            "p99": 16259.338035583503,
+            "basis": "pooled successful-request samples",
+            "n": 8615
+          }
+        },
+        "trialRateRange": [
+          2.3882838687479966,
+          2.3882838687479966
+        ],
+        "trialRateStd": null,
+        "holds": [],
+        "warnings": [],
+        "synthetic": false,
+        "sources": [
+          {
+            "sha256": "d20a5440675b122209a586b1e0353fe3ae957f0179183f66f85636370980a82a",
+            "record_index": 0,
+            "bytes": 605203
+          }
+        ]
+      },
+      "cost": {
+        "provider": "Hot Aisle",
+        "gpus": 1,
+        "rate": 2.99,
+        "extra": 0,
+        "hourly": 2.99,
+        "total": 2.9959738893442687,
+        "costPer1000": 0.6980367868928864,
+        "basis": "modeled charge for summed benchmark windows",
+        "source": "campaign listed price; benchmark window model only",
+        "period": "2026-09-24",
+        "quote": "",
+        "unit": "evaluator-passed, latency-qualified requests"
+      }
+    },
+    {
+      "name": "run3-scored-n-t0",
+      "label": "DigitalOcean",
+      "settings": {
+        "quality": true,
+        "queue": true,
+        "ttft": 1000,
+        "e2e": 60000
+      },
+      "price": {
+        "provider": "DigitalOcean",
+        "gpus": 1,
+        "rate": 4.41,
+        "extra": 0,
+        "source": "campaign listed price; benchmark window model only",
+        "period": "2026-09-24"
+      },
+      "aggregate": {
+        "identity": {
+          "model": "Qwen/Qwen3-Coder-30B-A3B-Instruct-FP8",
+          "revision": "dcaee4d4dfc5ee71ad501f01f530e5652438fde0",
+          "precision": "FP8",
+          "tokenizer": "dcaee4d4dfc5ee71ad501f01f530e5652438fde0",
+          "workload": "sha256:6c508237082261ac927b96825e2f097782389b1cebc3f78360f0665a8db3501f",
+          "cache": "no-prefix-cache",
+          "load": "azure-code:54e9a6d2a4bd06ba1e060304b900abbc74cbea53de96506e60fe5bb4f2277fb6:2023-11-16T18:17:04Z:factor=0.95:duration=3600:seed=700000:workers=256:max_tokens=1024:temperature=0.2",
+          "runtime": "vllm/vllm-openai@sha256:8a69ffad015f138d7170c4ddc429e230a3bc1c1719f67e14324749df200a4b90"
+        },
+        "unit": "evaluator-passed, latency-qualified requests",
+        "gates": {
+          "ttft_ms": 1000,
+          "e2e_ms": 60000,
+          "include_client_queue": true,
+          "quality": true
+        },
+        "criterion": "evalplus-0.3.1-human-v0.1.10-mbpp-v0.2.0-base-and-plus-raw-completion-v1",
+        "runs": 1,
+        "duration": 3606.393463611603,
+        "completed": 8622,
+        "attempted": 8622,
+        "failed": 0,
+        "accepted": 4280,
+        "rate": 1.1867812104211772,
+        "completedRate": 2.3907541112736896,
+        "failureRate": 0,
+        "qualifiedFraction": 0.4964045465089306,
+        "metrics": {
+          "ttft": {
+            "p50": 34.70313549041748,
+            "p95": 76.19653940200806,
+            "p99": 2233.606595993127,
+            "basis": "pooled successful-request samples",
+            "n": 8622
+          },
+          "e2e": {
+            "p50": 2298.888325691223,
+            "p95": 12067.812025547022,
+            "p99": 15998.755187988312,
+            "basis": "pooled successful-request samples",
+            "n": 8622
+          }
+        },
+        "trialRateRange": [
+          2.3907541112736896,
+          2.3907541112736896
+        ],
+        "trialRateStd": null,
+        "holds": [],
+        "warnings": [],
+        "synthetic": false,
+        "sources": [
+          {
+            "sha256": "f1a435b029675ffd2a7c6bb96fc0526c5294bb8acdda9ac76bbe764f9fb99b77",
+            "record_index": 0,
+            "bytes": 612180
+          }
+        ]
+      },
+      "cost": {
+        "provider": "DigitalOcean",
+        "gpus": 1,
+        "rate": 4.41,
+        "extra": 0,
+        "hourly": 4.41,
+        "total": 4.417831992924214,
+        "costPer1000": 1.0322037366645358,
+        "basis": "modeled charge for summed benchmark windows",
+        "source": "campaign listed price; benchmark window model only",
+        "period": "2026-09-24",
+        "quote": "",
+        "unit": "evaluator-passed, latency-qualified requests"
+      }
+    }
+  ],
+  "comparison": {
+    "status": "COMPARISON_OF_SUPPLIED_EVIDENCE",
+    "issues": [],
+    "saving": 0.33071742321934905,
+    "winner": "A",
+    "synthetic": false
+  }
+}

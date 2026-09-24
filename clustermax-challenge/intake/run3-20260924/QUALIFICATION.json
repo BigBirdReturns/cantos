@@ -1,0 +1,42 @@
+{
+  "schema": "secondrun.followthrough-qualification.v1",
+  "source_parent": "cbc7e234fbb39fbde2fdec93bba42141d899c206",
+  "created_at": "2026-09-24T06:33:15.911821+00:00",
+  "software_boundary": "No scorer, formula, Hot Aisle engine or campaign source changed. New standalone intake, report and research staging.",
+  "real_checks": {
+    "source_ledgers": 4,
+    "scored_runs": 3,
+    "providers": 2,
+    "acceptance_counts_recomputed": [
+      4336,
+      4292,
+      4280,
+      458
+    ],
+    "calculator_recompute": "PASS",
+    "native_browser_requalified": false,
+    "whole_bills_reconciled": 0,
+    "prospective_clustermax_result": false
+  },
+  "research": {
+    "indexed_providers": 77,
+    "reviewed_excerpts": 11,
+    "harvest_database_written": false
+  },
+  "actions": {
+    "new_paid_jobs": 0,
+    "new_model_calls": 0,
+    "new_grading_runs": 0,
+    "account_api_calls": 0,
+    "social_posts": 0
+  },
+  "source_hashes": {
+    "scripts/campaign_intake.py": "a09510b811a1b2f465cba5358f24a547d19bcddaceddf502025e115a71994997",
+    "tests/test_campaign_intake.py": "e04c658df7fb1fdfcb7e0facb33f5bf69e09bc983c9b88e47aa9ced9f2e9dc3b",
+    "intake/run3-20260924/spec.json": "65505f5eada21e9ec03a367daa26756778b509eb398c7a4fa0248b2d54c2818e",
+    "intake/run3-20260924/intake.json": "36550f3b0b1879b93f0511a8e8ae7f0b2164d9fee324e8d87c7d4b7d74b54546",
+    "intake/run3-20260924/calculator-evidence.json": "8112ba48691c9f5859de5df02e4d3d004b46783486f888ca212e9c4f9c156ac5",
+    "research/round2/provider-matrix.jsonl": "fa08278fb366a0dd795af6b9a59291d9b39607045b9b2b03b6faf12400e8bce0",
+    "research/round2/nebius-price-observation.json": "dbe20638d6f89b8cc8972296d9e45489c768d0805b1140419a600fb8acacfd88"
+  }
+}

@@ -1,0 +1,41 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Workload cost report</title><style>body{font:15px/1.5 system-ui,sans-serif;max-width:1000px;margin:35px auto;padding:0 24px;color:#202322;background:#fafaf7}header{border-bottom:2px solid;padding-bottom:15px}h1{font-size:30px}h2{font-size:23px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:35px}.price{font-size:42px}dl{display:grid;grid-template-columns:1fr 1fr;gap:7px}dd{margin:0}dt{color:#575c58}pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px}table{width:100%;border-collapse:collapse}td,th{text-align:left;padding:7px;border-bottom:1px solid #ddd}.hash{overflow-wrap:anywhere;font:11px/1.5 monospace}.notice{padding:12px;background:#eee9cf}footer{border-top:1px solid;margin-top:24px;font-size:12px}@media(max-width:480px){.grid{display:block}dl{grid-template-columns:1fr}dd{margin-bottom:12px}}@media print{body{margin:0;background:white}.grid{display:block}article{break-inside:avoid}h3{break-after:avoid}details{display:none}.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}body{font-size:11px}.price{font-size:32px}h1{font-size:25px}h2{font-size:18px}footer{font-size:10px}}</style><header><p>WORKLOAD REPORT · 2.0.0</p><h1>Run 3: matched retained evidence, benchmark-window modeled cost only</h1><p>2026-09-24T06:22:30.638Z</p></header><p class="notice">Imported producer results and user-supplied commercial inputs. No independent hardware rerun or source authenticity is claimed.</p><p><b>COMPARISON_OF_SUPPLIED_EVIDENCE</b> 33.1% lower modeled cost for A relative to B.</p><div class="grid"><article><h2>Hot Aisle</h2><p>Qwen/Qwen3-Coder-30B-A3B-Instruct-FP8</p><strong class="price">$0.6908</strong><p>per 1,000 evaluator-passed, latency-qualified requests</p><dl><dt>Result rate</dt><dd>1.202 / second</dd><dt>Completed / attempted</dt><dd>8,622 / 8,622</dd><dt>Trials / total measured seconds</dt><dd>1 / 3,606.58</dd><dt>Allocation</dt><dd>1 GPUs × $2.99/hour + $0.0000/hour extras</dd><dt>Cost basis</dt><dd>modeled charge for summed benchmark windows; $3.00</dd><dt>Price source / period</dt><dd>campaign listed price; benchmark window model only / 2026-09-24</dd><dt>Quote / cost note</dt><dd>None</dd></dl><h3>Successful-request latency (ms)</h3><table><tr><th></th><th>p50</th><th>p95</th><th>p99</th></tr><tr><th>TTFT</th><td>52.898</td><td>155.038</td><td>568.93</td></tr><tr><td colspan="4">pooled successful-request samples</td></tr><tr><th>E2E</th><td>2,280.241</td><td>12,353.639</td><td>15,339.371</td></tr><tr><td colspan="4">pooled successful-request samples</td></tr></table><details><summary>Conditions and input commitments</summary><pre>{
+  &quot;identity&quot;: {
+    &quot;model&quot;: &quot;Qwen/Qwen3-Coder-30B-A3B-Instruct-FP8&quot;,
+    &quot;revision&quot;: &quot;dcaee4d4dfc5ee71ad501f01f530e5652438fde0&quot;,
+    &quot;precision&quot;: &quot;FP8&quot;,
+    &quot;tokenizer&quot;: &quot;dcaee4d4dfc5ee71ad501f01f530e5652438fde0&quot;,
+    &quot;workload&quot;: &quot;sha256:6c508237082261ac927b96825e2f097782389b1cebc3f78360f0665a8db3501f&quot;,
+    &quot;cache&quot;: &quot;no-prefix-cache&quot;,
+    &quot;load&quot;: &quot;azure-code:54e9a6d2a4bd06ba1e060304b900abbc74cbea53de96506e60fe5bb4f2277fb6:2023-11-16T18:17:04Z:factor=0.95:duration=3600:seed=700000:workers=256:max_tokens=1024:temperature=0.2&quot;,
+    &quot;runtime&quot;: &quot;vllm/vllm-openai-rocm:v0.30.0@sha256:2e7da1ad1c66836802072588adea75f9f4991da5f9545b4318e91d422c22ce6a&quot;
+  },
+  &quot;gates&quot;: {
+    &quot;ttft_ms&quot;: 1000,
+    &quot;e2e_ms&quot;: 60000,
+    &quot;include_client_queue&quot;: true,
+    &quot;quality&quot;: true
+  },
+  &quot;criterion&quot;: &quot;evalplus-0.3.1-human-v0.1.10-mbpp-v0.2.0-base-and-plus-raw-completion-v1&quot;,
+  &quot;holds&quot;: [],
+  &quot;warnings&quot;: []
+}</pre><h3>Input commitments</h3><p class="hash">SHA-256 ef907e4cbe45832890109c4ca0d37851ad8e4f087beb70421506af897e6a67ab<br>Record 0 · 605631 bytes</p></details></article><article><h2>DigitalOcean</h2><p>Qwen/Qwen3-Coder-30B-A3B-Instruct-FP8</p><strong class="price">$1.03</strong><p>per 1,000 evaluator-passed, latency-qualified requests</p><dl><dt>Result rate</dt><dd>1.187 / second</dd><dt>Completed / attempted</dt><dd>8,622 / 8,622</dd><dt>Trials / total measured seconds</dt><dd>1 / 3,606.393</dd><dt>Allocation</dt><dd>1 GPUs × $4.41/hour + $0.0000/hour extras</dd><dt>Cost basis</dt><dd>modeled charge for summed benchmark windows; $4.42</dd><dt>Price source / period</dt><dd>campaign listed price; benchmark window model only / 2026-09-24</dd><dt>Quote / cost note</dt><dd>None</dd></dl><h3>Successful-request latency (ms)</h3><table><tr><th></th><th>p50</th><th>p95</th><th>p99</th></tr><tr><th>TTFT</th><td>34.703</td><td>76.197</td><td>2,233.607</td></tr><tr><td colspan="4">pooled successful-request samples</td></tr><tr><th>E2E</th><td>2,298.888</td><td>12,067.812</td><td>15,998.755</td></tr><tr><td colspan="4">pooled successful-request samples</td></tr></table><details><summary>Conditions and input commitments</summary><pre>{
+  &quot;identity&quot;: {
+    &quot;model&quot;: &quot;Qwen/Qwen3-Coder-30B-A3B-Instruct-FP8&quot;,
+    &quot;revision&quot;: &quot;dcaee4d4dfc5ee71ad501f01f530e5652438fde0&quot;,
+    &quot;precision&quot;: &quot;FP8&quot;,
+    &quot;tokenizer&quot;: &quot;dcaee4d4dfc5ee71ad501f01f530e5652438fde0&quot;,
+    &quot;workload&quot;: &quot;sha256:6c508237082261ac927b96825e2f097782389b1cebc3f78360f0665a8db3501f&quot;,
+    &quot;cache&quot;: &quot;no-prefix-cache&quot;,
+    &quot;load&quot;: &quot;azure-code:54e9a6d2a4bd06ba1e060304b900abbc74cbea53de96506e60fe5bb4f2277fb6:2023-11-16T18:17:04Z:factor=0.95:duration=3600:seed=700000:workers=256:max_tokens=1024:temperature=0.2&quot;,
+    &quot;runtime&quot;: &quot;vllm/vllm-openai@sha256:8a69ffad015f138d7170c4ddc429e230a3bc1c1719f67e14324749df200a4b90&quot;
+  },
+  &quot;gates&quot;: {
+    &quot;ttft_ms&quot;: 1000,
+    &quot;e2e_ms&quot;: 60000,
+    &quot;include_client_queue&quot;: true,
+    &quot;quality&quot;: true
+  },
+  &quot;criterion&quot;: &quot;evalplus-0.3.1-human-v0.1.10-mbpp-v0.2.0-base-and-plus-raw-completion-v1&quot;,
+  &quot;holds&quot;: [],
+  &quot;warnings&quot;: []
+}</pre><h3>Input commitments</h3><p class="hash">SHA-256 f1a435b029675ffd2a7c6bb96fc0526c5294bb8acdda9ac76bbe764f9fb99b77<br>Record 0 · 612180 bytes</p></details></article></div><footer>Completion is transport success, not task correctness. Latency gates and evaluator-declared outcomes are separate. Pooled windows do not establish production availability; setup, idle time and omitted costs remain outside window estimates. Raw prompts, generated text, source filenames and error bodies are excluded. Keep originals privately to verify their hashes against this report. Packet checksum binds supplied bytes, not the truth of their producer. Export the JSON packet for recomputation. Independent tool by Second Run; no provider endorsement.</footer></html>

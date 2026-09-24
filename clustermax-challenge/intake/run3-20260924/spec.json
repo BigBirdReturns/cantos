@@ -1,0 +1,26 @@
+{
+  "schema": "secondrun.campaign-intake-spec.v1",
+  "source_commit": "cbc7e234fbb39fbde2fdec93bba42141d899c206",
+  "runs": [
+    {
+      "directory": "campaign/results/run3-scored-a-t0",
+      "ledger": "campaign/results/run3-scored-a-t0/ledger/run3-run3-scored-a-t0.ledger.json",
+      "role": "scored_arm"
+    },
+    {
+      "directory": "campaign/results/run3-scored-a-t1",
+      "ledger": "campaign/results/run3-scored-a-t1/ledger/run3-run3-scored-a-t1.ledger.json",
+      "role": "scored_arm"
+    },
+    {
+      "directory": "campaign/results/run3-scored-n-t0",
+      "ledger": "campaign/results/run3-scored-n-t0/ledger/run3-run3-scored-n-t0.ledger.json",
+      "role": "scored_arm"
+    },
+    {
+      "directory": "campaign/results/run3-smoke-a-t0",
+      "ledger": "campaign/results/run3-smoke-a-t0/ledger/run3-run3-smoke-a-t0.ledger.json",
+      "role": "unscored_smoke"
+    }
+  ]
+}
