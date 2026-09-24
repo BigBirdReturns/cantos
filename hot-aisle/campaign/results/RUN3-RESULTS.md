@@ -20,7 +20,7 @@
 ## What it says
 
 1. **Hot Aisle is ~38 % cheaper per accepted closure, per whole run, at list prices.** Both machines did essentially the same work: accepted counts are within 1.3 %. So the gap is price. The H100 is quicker in the typical case (TTFT p50 35 ms against 53 ms). The MI300X holds a far tighter tail through the bursts (p99 571 ms against 2,254 ms).
-2. **At H100 prices below ~$2.99/h the ranking flips:**
+2. **At H100 prices below ~$2.72/h the ranking flips** (4.41 × 0.74 / 1.20):
 
    | H100 $/h | $ / 1k accepted |
    |---|---|

@@ -39,3 +39,22 @@ Rules for lanes:
 - One row per SKU per provider per kind. Spot and on-demand are separate rows.
 - Append rows as you go; a killed lane must leave its rows on disk.
 - Record the smallest rentable unit. If a provider sells only 8-GPU nodes, `gpus: 8`.
+
+## v2 candidate fields (from INVARIANTS.md, 2026-09-24; optional until a lane fills them)
+
+| field | type | source page |
+|---|---|---|
+| `form_factor` | `PCIe`, `SXM`, `NVL`, `OAM`, `unknown` | SKU spec |
+| `tenancy` | `dedicated`, `shared`, `vm`, `container`, `bare-metal`, `unknown` | instance docs |
+| `quote_ts`, `price_valid_until` | UTC ISO | pricing page |
+| `commitment` | `none`, `hourly`, `monthly`, `yearly`, `reserved` | pricing page |
+| `billing_quantum`, `minimum_charge` | string | billing FAQ |
+| `stopped_storage_rate`, `storage_after_release`, `egress_rate`, `failed_start_billed` | string or null | billing FAQ |
+| `account_class`, `quota_default`, `kyc_required` | string | onboarding docs |
+| `spot_notice`, `eviction_policy`, `disk_survival` | string | spot terms |
+| `custom_image`, `root_access`, `api_provision`, `api_delete` | `yes`, `no`, `unknown` | deploy docs |
+| `support_channel`, `first_response_commitment`, `credit_policy` | string | support page |
+| `rating_edition`, `rated_product`, `rated_scope_matches_offer` | string, string, `yes`/`no`/`n/a` | ClusterMAX page |
+
+Per-run observations (time to ready, model download time, evictions, support response) belong
+in the campaign ledger, not here.
