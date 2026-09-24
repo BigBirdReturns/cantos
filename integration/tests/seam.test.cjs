@@ -68,3 +68,12 @@ test('runner rejects untrusted Host headers',async()=>{const s=instrument.create
 
 test('mutating an approved plan body is rejected before any execution',async()=>{const j=jobs.plan(local.demoPlanInput({repeats:1,concurrency:[1]}));jobs.approve(j.id,{plan_sha256:j.plan.sha256});const altered=jobs.get(j.id);altered.plan.workload.num_prompts+=1;store.write('jobs',j.id,altered);await assert.rejects(()=>jobs.start(j.id),/body changed/);assert.equal(jobs.get(j.id).trials[0].status,'pending');});
 test('price-only change cannot borrow performance from another GPU allocation',()=>{assert.throws(()=>Q.decision(bundle,{price:{gpus:8}}),/new performance qualification/);});
+
+require('node:test').test('published-origin theme bootstrap has no remote font dependency',()=>{
+ const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),assert=require('node:assert/strict');
+ const html=fs.readFileSync(path.resolve(__dirname,'../../hot-aisle/index.html'),'utf8');
+ const bootstrap=html.match(/<script>([\s\S]*?)<\/script>/);assert.ok(bootstrap,'theme bootstrap is present');
+ const appended=[],document={documentElement:{dataset:{}},createElement:()=>({}),head:{append:x=>appended.push(x)}};
+ vm.runInNewContext(bootstrap[1],{location:{hostname:'bigbirdreturns.github.io',protocol:'https:'},localStorage:{getItem:()=> 'dark'},document},{timeout:1000});
+ assert.equal(document.documentElement.dataset.theme,'dark');assert.equal(appended.length,0,'public visits must not insert remote dependencies');
+});
