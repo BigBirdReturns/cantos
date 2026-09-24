@@ -33,13 +33,14 @@ def build():
         text=text.replace(marker,body)
     (ROOT/'index.html').write_text(text,encoding='utf-8',newline='\n')
     allow=['index.html','template.html','style.css','app.js','engine.cjs','data/catalog.json','adapters/workload-engine.cjs','adapters/qualified-engine.cjs','adapters/instrument.cjs','adapters/workload-report-v2.html','scripts/connect.cjs','scripts/recompute.cjs','scripts/build.py','scripts/review_prices.py','README.md','LICENSE','PROVENANCE.json','METHOD.md','QUALIFICATION.json','tests/fixtures.json','tests/test_core.cjs','tests/test_bridge.cjs','tests/test_browser.py','tests/test_prices.py']
+    allow += ['scripts/materials.cjs', 'scripts/material_feeds.py', 'materials/registry.json', 'materials/observations.json', 'materials/README.md', 'tests/test_materials.cjs', 'tests/test_material_feeds.py']
     files=[]
     for name in allow:
         p=ROOT/name
         if not p.exists():raise FileNotFoundError('Required release source missing: '+name)
         files.append({'path':name,'bytes':p.stat().st_size,'sha256':hashlib.sha256(p.read_bytes()).hexdigest()})
-    # Release 0.2.0 packages engine.cjs at its own version (Compute.VERSION); the engine version is stamped into saved decisions and changes only with the arithmetic.
-    manifest={'schema':'second-run/compute-release@1','version':'0.2.0','engineVersion':re.search(r"const VERSION='([^']+)'",(ROOT/'engine.cjs').read_text(encoding='utf-8')).group(1),'files':files}
+    # Release 0.3.0 packages engine.cjs at its own version (Compute.VERSION); the engine version is stamped into saved decisions and changes only with the arithmetic.
+    manifest={'schema':'second-run/compute-release@1','version':'0.3.0','engineVersion':re.search(r"const VERSION='([^']+)'",(ROOT/'engine.cjs').read_text(encoding='utf-8')).group(1),'files':files}
     (ROOT/'MANIFEST.json').write_text(json.dumps(manifest,indent=2)+'\n',encoding='utf-8',newline='\n')
     with zipfile.ZipFile(ROOT/'compute-kit.zip','w',compression=zipfile.ZIP_STORED) as z:
         for name in [x['path'] for x in files]+['MANIFEST.json']:

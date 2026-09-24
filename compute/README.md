@@ -1,10 +1,10 @@
-# Second Run Compute · release 0.2
+# Second Run Compute · release 0.3
 
 **Compare rental allocations, model ownership, price reusable work, and keep the evidence you already produce.**
 
 Open `index.html`. The public application works without an account, installation or application network requests. It includes four provider price snapshots, three economic models, saved decisions, source inspection and a private local-runner connection path. All core calculations run locally. This is a compute decision desk, not a broker or scheduler.
 
-Versions: this release is **0.2.0** (`MANIFEST.json`). The calculation engine `engine.cjs` carries its own version, `Compute.VERSION` (currently 0.1.0); it is stamped into every saved decision and changes only when the arithmetic changes, so bumping it invalidates earlier saved decisions.
+Versions: this release is **0.3.0** (`MANIFEST.json`). The calculation engine `engine.cjs` carries its own version, `Compute.VERSION` (currently 0.1.0); it is stamped into every saved decision and changes only when the arithmetic changes, so bumping it invalidates earlier saved decisions.
 
 ## Start
 
@@ -49,7 +49,7 @@ Add a local stdio server in a client that supports the negotiated protocol versi
 }
 ```
 
-The server implements initialization, tool discovery and calls over newline-delimited JSON-RPC. It negotiates MCP 2025-11-25 or 2025-06-18. The ten read-only tools include `compute_list_publications`, `compute_get_publication`, `compute_list_offers`, `compute_ownership`, `compute_route_scenario`, `compute_plan`, `compute_list_runs`, `compute_get_run`, `compute_hardware`, and `compute_endpoint`. They invoke the same calculations used by the page. This release is **stdio MCP**, not a remote HTTP MCP service or an MCP App iframe.
+The server implements initialization, tool discovery and calls over newline-delimited JSON-RPC. It negotiates MCP 2025-11-25 or 2025-06-18. The eleven read-only tools include `compute_materials`, `compute_list_publications`, `compute_get_publication`, `compute_list_offers`, `compute_ownership`, `compute_route_scenario`, `compute_plan`, `compute_list_runs`, `compute_get_run`, `compute_hardware`, and `compute_endpoint`. They invoke the same calculations used by the page. This release is **stdio MCP**, not a remote HTTP MCP service or an MCP App iframe.
 
 A client can ask: “Compare one-GPU allocations with at least 80 GB for 160 hours, then prepare a shortlist.” Or: “Read my existing run and model its cost.” Tool calls cannot rent or run compute. Starting new evaluations and enforcing a production route belong to the existing execution owner and require a separately qualified adapter.
 
@@ -97,3 +97,7 @@ See `METHOD.md`, `PROVENANCE.json` and `QUALIFICATION.json` for the calculation 
 ## Integrated qualification records
 
 The Hot Aisle runner owns measured-result arithmetic and qualification. The desk consumes its qualified record and sealed packet through a generated verifier, preserving the exact original object in saved decisions. `integration/README.md` in the combined source explains ownership, local publication, one catalogue and native browser qualification. Scenario arithmetic remains in the desk; source-bound workload findings remain in the runner.
+
+## Operating inputs, 24 September 2026
+
+`compute_materials` now exposes a reviewed source registry and captured feed observations through this same read-only MCP server. Ask for recipe `coding-burst`, `documents-and-search`, `repeated-context` or `numerical-batch`. [materials/README.md](materials/README.md) explains source freshness, public capture boundaries and the implementation choices. This adds no scheduler, provider preference, application telemetry or billable execution. The existing calculation engine, price catalogue and saved-decision contract are unchanged.
