@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Second Run Receipt 3</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500&display=swap">
+<style>
+  :root {
+    --ground: #f5f1e8;
+    --paper: #fbf9f4;
+    --ink: #1c1a15;
+    --ink-2: #4d4840;
+    --ink-3: #7a7369;
+    --line: #d9d2c4;
+    --amber: #c98a12;
+    --amber-ink: #8a5d06;
+    --win: #1f6b3a;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #15140f; --paper: #1d1b15; --ink: #f0ebe0; --ink-2: #bdb5a6; --ink-3: #8d8578;
+      --line: #35322a; --amber: #e0a020; --amber-ink: #e0a020; --win: #5cc481; color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #15140f; --paper: #1d1b15; --ink: #f0ebe0; --ink-2: #bdb5a6; --ink-3: #8d8578;
+    --line: #35322a; --amber: #e0a020; --amber-ink: #e0a020; --win: #5cc481; color-scheme: dark;
+  }
+  body { background: var(--ground); color: var(--ink); font-family: "IBM Plex Sans", system-ui, sans-serif; font-size: 15px; line-height: 1.45; padding-inline: 16px; padding-block: 28px 40px; }
+  .sheet { max-width: 760px; margin: 0 auto; background: var(--paper); border: 1px solid var(--line); padding: 28px 28px 24px; }
+  .mono { font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace; font-variant-numeric: tabular-nums; }
+  .cond { font-family: "Barlow Condensed", "Arial Narrow", sans-serif; }
+  header { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; border-bottom: 2px solid var(--amber); padding-bottom: 10px; }
+  .mark { font-family: "Barlow Condensed", sans-serif; font-weight: 700; font-size: 26px; letter-spacing: .06em; text-transform: uppercase; }
+  .mark span { color: var(--amber-ink); }
+  .ref { font-family: "IBM Plex Mono", monospace; font-size: 12px; color: var(--ink-3); letter-spacing: .04em; }
+  .spec { font-family: "IBM Plex Mono", monospace; font-size: 12.5px; color: var(--ink-2); margin: 14px 0 6px; line-height: 1.6; }
+  .spec b { color: var(--ink); font-weight: 500; }
+  .head { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 18px 0 6px; }
+  .head .num { font-family: "Barlow Condensed", sans-serif; font-weight: 700; font-size: 56px; line-height: 1; letter-spacing: -.01em; font-variant-numeric: tabular-nums; }
+  .head .lab { font-family: "IBM Plex Mono", monospace; font-size: 12px; color: var(--ink-3); text-transform: uppercase; letter-spacing: .08em; margin-top: 6px; }
+  .head .seat { font-size: 13.5px; color: var(--ink-2); margin-top: 2px; }
+  .head .amber .num { color: var(--amber-ink); }
+  .tablewrap { overflow-x: auto; margin-top: 14px; }
+  table { width: 100%; border-collapse: collapse; font-family: "IBM Plex Mono", monospace; font-size: 13.5px; font-variant-numeric: tabular-nums; }
+  th, td { text-align: right; padding: 7px 8px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  th:first-child, td:first-child { text-align: left; color: var(--ink-2); font-family: "IBM Plex Sans", sans-serif; white-space: normal; }
+  thead th { color: var(--ink-3); font-weight: 500; font-size: 12px; text-transform: uppercase; letter-spacing: .06em; border-bottom: 1px solid var(--ink-3); }
+  td.win { color: var(--win); font-weight: 500; }
+  .rule { display: flex; align-items: center; gap: 10px; margin: 20px 0 10px; font-family: "IBM Plex Mono", monospace; font-size: 11.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); }
+  .rule::before, .rule::after { content: ""; flex: 1; border-top: 1px dashed var(--line); }
+  .tie { display: grid; grid-template-columns: auto 1fr; gap: 6px 14px; font-family: "IBM Plex Mono", monospace; font-size: 13.5px; align-items: baseline; }
+  .tie .k { color: var(--ink-3); font-size: 12px; text-transform: uppercase; letter-spacing: .06em; padding-top: 2px; }
+  .tie .big { font-family: "Barlow Condensed", sans-serif; font-weight: 700; font-size: 30px; line-height: 1.05; }
+  .tie .note { font-family: "IBM Plex Sans", sans-serif; color: var(--ink-2); font-size: 13.5px; }
+  .foot { margin-top: 22px; padding-top: 12px; border-top: 1px solid var(--line); display: grid; gap: 6px; font-size: 13.5px; color: var(--ink-2); }
+  .foot .mono { color: var(--ink); }
+  .foot p { margin: 0; }
+  .foot strong { font-weight: 500; color: var(--ink); }
+  a { color: var(--amber-ink); text-decoration: underline; text-underline-offset: 2px; }
+  @media (max-width: 560px) {
+    .sheet { padding: 20px 16px; }
+    .head { grid-template-columns: 1fr; gap: 10px; }
+    .head .num { font-size: 46px; }
+    .tie { grid-template-columns: 1fr; gap: 2px; }
+    .tie .k { margin-top: 8px; }
+  }
+</style>
+</head>
+<body style="margin:0">
+
+<div class="sheet">
+  <header>
+    <div class="mark">Second <span>Run</span></div>
+    <div class="ref">RECEIPT 3 · 2026-09-24 · ONE RUN PER ARM</div>
+  </header>
+
+  <p class="spec">
+    <b>Qwen3-Coder-30B-A3B-Instruct-FP8</b> on vLLM 0.30.0, both seats. 542 EvalPlus tasks (HumanEval+ 164, MBPP+ 378), cycled.
+    Arrivals replayed from the Azure code trace for one hour at 0.95: <b>8,622 requests</b>, bursts to 531 a minute.
+    Accepted = tests pass <b>and</b> first token ≤ 1 s <b>and</b> done ≤ 60 s from scheduled arrival.
+  </p>
+
+  <div class="head">
+    <div class="amber">
+      <div class="num mono">$0.74</div>
+      <div class="lab">per 1,000 accepted · whole run, request to release</div>
+      <div class="seat">Hot Aisle · 1× MI300X · $2.99/h list</div>
+    </div>
+    <div>
+      <div class="num mono">$1.20</div>
+      <div class="lab">per 1,000 accepted · whole run, request to release</div>
+      <div class="seat">DigitalOcean · 1× H100 · $4.41/h list</div>
+    </div>
+  </div>
+
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Measured</th><th>Hot Aisle MI300X</th><th>DigitalOcean H100</th></tr></thead>
+      <tbody>
+        <tr><td>Completed / failed (of 8,622)</td><td>8,622 / 0</td><td>8,622 / 0</td></tr>
+        <tr><td>Accepted</td><td class="win">4,336 (50.3 %)</td><td>4,280 (49.6 %)</td></tr>
+        <tr><td>Time on seat, request to release</td><td>64.7 min</td><td>69.8 min</td></tr>
+        <tr><td>First token, p50</td><td>53 ms</td><td class="win">35 ms</td></tr>
+        <tr><td>First token, p99</td><td class="win">571 ms</td><td>2,254 ms</td></tr>
+        <tr><td>Attention · FP8 kernel, from serve.log</td><td>ROCM_ATTN · AiterFp8BlockScaled</td><td>FLASH_ATTN · FlashInferFp8DeepGEMM</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="spec" style="margin-top:8px">Same work within 1.3 %. The gap is the hourly price. The H100 is quicker in the typical case; the MI300X holds the tail through the bursts.</p>
+
+  <div class="rule">Modeled below this line</div>
+
+  <div class="tie">
+    <div class="k">Tie line</div>
+    <div><span class="big mono">$2.72 / h</span> <span class="note">is where a 1× H100 matches $0.74, if it delivers the same accepted work. 4.41 × 0.74 ÷ 1.20.</span></div>
+    <div class="k">Under it today</div>
+    <div class="mono">Latitude.sh $1.68 → $0.46 · Voltage Park $1.99 → $0.54 · Massed Compute $2.73 → $0.74 <span class="note">List prices read 2026-09-24. Nobody has run them on this workload. That is the next run.</span></div>
+    <div class="k">Post-hoc</div>
+    <div class="note">Stripping code fences and test scaffolding before grading moved HumanEval+ from 24.4 % to 82.4 % correct on the same MI300X run and bill. Check your harness before you blame the GPU.</div>
+  </div>
+
+  <div class="foot">
+    <p><strong>Spent:</strong> <span class="mono">$8.15</span> of Hot Aisle credit (seat shared with a smoke run and a second AMD arm; whole seat $0.90 per 1,000) · <span class="mono">$5.13</span> DigitalOcean, cash.</p>
+    <p><strong>Disclosure:</strong> Hot Aisle's credit funded the AMD arm and Hot Aisle is a sales prospect. The H100 arm was self-funded.</p>
+    <p><strong>Caveat:</strong> one run per arm, no repeats. HumanEval+ correct counts vary run to run at temperature 0.2. Invoices not yet reconciled.</p>
+    <p><strong>Rerun it:</strong> freeze, ledgers and grader are in <a href="https://github.com/BigBirdReturns/axm-tools/blob/main/hot-aisle/campaign/results/RUN3-RESULTS.md">axm-tools · hot-aisle/campaign/results</a>. The number should come back the same.</p>
+  </div>
+</div>
+
+</body>
+</html>
