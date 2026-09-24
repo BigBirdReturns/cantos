@@ -28,9 +28,11 @@ test or must encode. "Suggested" means one source or one organisation.
    volume. Encode: every allocation attempt, success or not, with wait time and substitute SKU;
    a listed price with no capacity is a price of infinity for that hour.
 
-3. **A provider rating is screening evidence, not a seat guarantee.** ClusterMAX 3.0 scopes
-   itself to "managed clusters", not "who can build the best powered shell", and its authors
-   defend that scope. The buyer-side reaction is the same in two places: @flatkey101 (Sep 24),
+3. **A provider rating is screening evidence, not a seat guarantee.** ClusterMAX 3.0 reviewed 77
+   providers and gave 19 a Medallion rating; it released its configuration-audit phase publicly
+   ("pip install clustermax", "we have released this part for free") and keeps the performance and
+   reliability phases internal ("the rest we keep internally for now"). It scopes itself to
+   "managed clusters", not "who can build the best powered shell", and its authors defend that scope. The buyer-side reaction is the same in two places: @flatkey101 (Sep 24),
    "useful as a public reference, still a bad substitute for your own bakeoff on code and cluster
    behavior"; Jim Liu (Sep 23) on Vast.ai's tier: "Some of these GPUs are literally hosted in
    people's basements." Both sides agree the rating does not tell one account what one GPU beside
@@ -42,6 +44,13 @@ test or must encode. "Suggested" means one source or one organisation.
    speed; Reddit's own summary: "report accepted count and fraction next to cost per accepted
    request so low coverage cannot hide behind the ratio". Run 3 already does this. Encode:
    parse verdict, correctness verdict and deadline verdict retained separately.
+   Correction (2026-09-24, verified in the InferenceX repo, docs/eval-agentx-procedures.md):
+   InferenceX runs graded evals (GSM8K, GPQA Diamond via lm-evaluation-harness, vendor tool-call
+   schema suites) with score thresholds, as eval jobs separate from throughput jobs; its own text:
+   a throughput-only run "provides throughput evidence, not model-evaluation evidence". AgentX
+   replays recorded token, cache and session structure with synthesized prompt text. The earlier
+   line "InferenceMAX grades nothing" was wrong. The distinction that survives: they grade a model
+   on a configuration; we grade and deadline-qualify each request of a replayed trace on a rented seat.
 
 5. **Startup, storage and retries belong on the bill.** r/StableDiffusion and r/RunPod: ten-minute
    setups, storage billed while stopped, negative balances, hours lost waiting on support.
@@ -62,8 +71,10 @@ test or must encode. "Suggested" means one source or one organisation.
    measured whether that changes accepted work on a coding workload. This is the next run.
 8. Index prices are not rentable prices. Mercatus AI's weekly index (Sep 21) shows MI300X $4.98
    above H100 $3.89; our compile shows self-serve MI300X at $1.99–3.99 and H100 at $1.68–3.99.
-   Index composition, not silicon, explains the inversion. Encode: never cite an index without
-   the basket.
+   Mercatus publishes a methodology (prices every 5 minutes from "50+ cloud providers", USD per
+   GPU-hour, "volume-weighted average of on-demand prices") but not the constituents or weights,
+   so the inversion cannot be reconstructed from the page. Encode: cite an index with its
+   methodology and note what it withholds; "basket unstated" was too blunt.
 9. Kernel changes need correctness checks, not just speed. One X account attributes accuracy
    loss to AMD kernels, undated. Run 3 grades every request, so this is already covered; keep it.
 10. Interruptions cost lost work, not discounted runtime. One r/deeplearning report of 12 hours
