@@ -76,7 +76,7 @@ class WorkloadTests(FixtureCase):
         other=self.root/'again.json'
         workload.build(FIX/'humaneval.jsonl',FIX/'mbpp.jsonl',{d:sha(FIX/(d+'.jsonl')) for d in ('humaneval','mbpp')},other,True)
         self.assertEqual(sha(self.tasks),sha(other))
-        self.assertIn('plus_input',self.frozen['tasks'][0]['grading_reference']['record'])
+        self.assertIn('plus_input',json.loads(self.frozen['tasks'][0]['grading_reference']['record_raw']))
 
     def test_hash_and_count_and_overwrite_refused(self):
         hashes={d:sha(FIX/(d+'.jsonl')) for d in ('humaneval','mbpp')}

@@ -44,9 +44,9 @@ def prepare(tasks_path, requests_path, detailed_path, out):
                 ids.append(None)
         sample_path = out / (dataset + '.jsonl')
         sample_path.write_bytes(b''.join(encoded(s) for s in samples))
-        refs = [t['grading_reference']['record'] for t in tasks['tasks'] if t['dataset'] == dataset]
+        refs = [t['grading_reference']['record_raw'] for t in tasks['tasks'] if t['dataset'] == dataset]
         ref_path = out / (dataset + '-reference.jsonl')
-        ref_path.write_bytes(b''.join(encoded(r) for r in refs))
+        ref_path.write_bytes(b''.join(r.encode('utf-8') + b'\n' for r in refs))
         mapping['datasets'][dataset] = {'request_indices': ids, 'samples_sha256': sha(sample_path),
                                         'reference_sha256': sha(ref_path),
                                         'reference_md5': hashlib.md5(ref_path.read_bytes()).hexdigest()}

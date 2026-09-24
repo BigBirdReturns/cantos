@@ -35,7 +35,13 @@ def backends(log):
             selected = re.search(r'(?:Using|Selected)\s+([A-Z][A-Z0-9_]+)\s+(?:attention\s+)?backend\b', line)
             if selected:
                 attention.append(selected.group(1))
-        if re.search(r'Using|Selected', line, re.I):
+        # vLLM 0.30 names the chosen linear kernel as "Selected <Kernel> for <LinearMethod>"
+        # (e.g. RowWiseTorchFP8ScaledMMLinearKernel, AiterFp8BlockScaledMMKernel); older logs
+        # only carry the *LinearKernel suffix.
+        chosen = re.search(r'Selected\s+([A-Za-z0-9_]+Kernel)\s+for\s+[A-Za-z0-9_]+', line)
+        if chosen:
+            linear.append(chosen.group(1))
+        elif re.search(r'Using|Selected', line, re.I):
             linear.extend(re.findall(r'\b[A-Za-z0-9_]*(?:LinearKernel|ScaledMMLinearKernel)\b', line))
     return {'attention_backend': list(dict.fromkeys(attention)) or ['UNVERIFIED'],
             'linear_kernel': list(dict.fromkeys(linear)) or ['UNVERIFIED']}

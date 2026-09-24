@@ -19,7 +19,10 @@ def build(humaneval, mbpp, hashes, out, fixture=False):
         release, name, count, prefix = RELEASES[dataset]
         raw = Path(path).read_bytes()
         data = gzip.decompress(raw) if raw[:2] == b'\x1f\x8b' else raw
-        rows = [json.loads(line) for line in data.decode('utf-8').splitlines() if line.strip()]
+        # Keep each release line verbatim: EvalPlus inputs contain IEEE specials (Infinity/NaN)
+        # that strict JSON cannot re-encode; graders receive the upstream bytes unchanged.
+        lines = [line for line in data.decode('utf-8').splitlines() if line.strip()]
+        rows = [dict(json.loads(line), _raw=line) for line in lines]
         if not fixture and len(rows) != count:
             raise ValueError(f'{dataset}: expected {count} tasks, got {len(rows)}')
         sources[dataset] = {'release': release, 'sha256': sha(path),
@@ -35,8 +38,8 @@ def build(humaneval, mbpp, hashes, out, fixture=False):
                 raise ValueError('Empty prompt')
             tasks.append({'task_id': row['task_id'], 'dataset': dataset, 'prompt': row['prompt'],
                           'grading_reference': {'release': release, 'source_sha256': sha(path),
-                                                'record_sha256': hashlib.sha256(encoded(row)).hexdigest(),
-                                                'record': row}})
+                                                'record_sha256': hashlib.sha256(row['_raw'].encode('utf-8')).hexdigest(),
+                                                'record_raw': row['_raw']}})
     if not tasks or len({t['task_id'] for t in tasks}) != len(tasks):
         raise ValueError('Empty or duplicate task set')
     artifact = {'schema': 'second-run/frozen-tasks@1', 'synthetic': fixture,
