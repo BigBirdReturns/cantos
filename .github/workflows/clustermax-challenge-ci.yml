@@ -44,16 +44,17 @@ jobs:
           fi
           status=0
           for dir in "${dirs[@]}"; do
+            # templates/ holds blank fill-in files, not a submission.
+            [ "$(basename "${dir}")" = "templates" ] && continue
             echo "::group::submit_check ${dir}"
             python clustermax-challenge/scripts/submit_check.py "${dir}" || status=1
             echo "::endgroup::"
           done
           exit "${status}"
 
-  # Deliberately a separate job from `test` above: this repo's index.html and
-  # README.md carry unanswered [CONFIRM: ...] disclosure markers on purpose
-  # (only a human should answer them), so this gate stays red on its own
-  # without failing the test suite. See scripts/release_check.py.
+  # Deliberately a separate job from `test` above: it fails if index.html or
+  # README.md ever carry unanswered disclosure placeholders (only a human should
+  # answer them), without failing the test suite. See scripts/release_check.py.
   release-readiness:
     name: Release readiness (disclosure placeholders)
     runs-on: ubuntu-latest
