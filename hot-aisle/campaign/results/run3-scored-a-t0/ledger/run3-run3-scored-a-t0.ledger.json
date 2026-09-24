@@ -1,0 +1,490 @@
+{
+ "schema": "second-run/run-ledger@1",
+ "identity": {
+  "run_id": "run3-scored-a-t0-20260924",
+  "campaign": "run3",
+  "run": "run3",
+  "arm": "A/T0",
+  "tier": "T0",
+  "knot_id": null,
+  "seat_id": "hotaisle-enc1-gpuvm004",
+  "provider": "hotaisle",
+  "region": "enc1",
+  "sku": "vm-mi300x-1x",
+  "gpus": 1,
+  "host": "enc1-gpuvm004",
+  "model": {
+   "id": "Qwen/Qwen3-Coder-30B-A3B-Instruct-FP8",
+   "revision": "dcaee4d4dfc5ee71ad501f01f530e5652438fde0",
+   "precision": "FP8",
+   "bytes": 31187041238
+  },
+  "runtime": {
+   "image": "vllm/vllm-openai-rocm:v0.30.0",
+   "digest": "sha256:2e7da1ad1c66836802072588adea75f9f4991da5f9545b4318e91d422c22ce6a",
+   "engine": "vllm",
+   "engine_version": "0.30.0",
+   "attention_backend": [
+    "ROCM_ATTN"
+   ],
+   "linear_kernel": [
+    "AiterFp8BlockScaledMMKernel"
+   ]
+  },
+  "workload_id": "sha256:6c508237082261ac927b96825e2f097782389b1cebc3f78360f0665a8db3501f",
+  "prereg": {
+   "path": "campaign/run3/PREREG.md",
+   "commit": "0b032ac",
+   "trace_sha256": "54e9a6d2a4bd06ba1e060304b900abbc74cbea53de96506e60fe5bb4f2277fb6",
+   "trace_start": "2023-11-16T18:17:04Z",
+   "rate_factor": 0.95
+  },
+  "null_reasons": {
+   "knot_id": "no knot_id in closure.json"
+  }
+ },
+ "clocks": {
+  "t_request": null,
+  "t_ssh": "2026-09-24T00:10:57Z",
+  "t_ready": "2026-09-24T00:45:07Z",
+  "t_work_start": "2026-09-24T00:45:11Z",
+  "t_work_end": "2026-09-24T01:45:19Z",
+  "t_released": null,
+  "sources": {
+   "t_request": {
+    "source": "ledger-times.json",
+    "precision": "operator-recorded"
+   },
+   "t_ssh": {
+    "source": "arm.py --t-ssh (observed before the script started)",
+    "precision": "1 s"
+   },
+   "t_ready": {
+    "source": "ledger-times.json: /v1/models listed the model",
+    "precision": "1 s"
+   },
+   "t_work_start": {
+    "source": "ledger-times.json: replay child started",
+    "precision": "1 s"
+   },
+   "t_work_end": {
+    "source": "ledger-times.json: replay child exited (or the finally-block stamp after an interrupt)",
+    "precision": "1 s"
+   },
+   "t_released": {
+    "source": "closure.json (provider confirmation; container stop is not release)",
+    "precision": "operator-recorded"
+   },
+   "t_script_start": "2026-09-24T00:42:43Z",
+   "t_script_end": "2026-09-24T01:45:22Z"
+  },
+  "null_reasons": {
+   "t_request": "not in closure.json: arm.py cannot observe the capacity request; the operator must supply it",
+   "t_released": "not in closure.json: provider release is external to the seat (arm.py note: container stop is not release)"
+  }
+ },
+ "acquisition": {
+  "attempts": [],
+  "n_attempts": 0,
+  "n_allocations": 0,
+  "yield": null,
+  "null_reasons": {
+   "yield": "no attempts in closure.json (arm.py writes acquisition_attempts null: acquisition is external to the seat)"
+  }
+ },
+ "work": {
+  "unit": "request",
+  "evaluator": {
+   "name": "EvalPlus 0.3.1",
+   "frozen": true,
+   "ref": "evalplus-0.3.1-human-v0.1.10-mbpp-v0.2.0-base-and-plus-raw-completion-v1 ; sidecar sha256:f5e2fe316996ac26d953fb5ebe6d0415b2debd9664c1bc74a309776748ff08ca",
+   "criterion_id": "evalplus-0.3.1-human-v0.1.10-mbpp-v0.2.0-base-and-plus-raw-completion-v1",
+   "result_sha256": {
+    "humaneval": "1a95005dd6225ea3bd5802779d20353e8507ece343391d977b4c155f302a797b",
+    "mbpp": "2dfd04fadd9524492fe9b8fdea4aa108e7692e9429de25704cedfc832f4da0c9"
+   }
+  },
+  "acceptance_rule": {
+   "basis": "run3/PREREG.md: accepted = completed AND EvalPlus base+plus pass AND first text <= 1 s AND end <= 60 s from the SCHEDULED arrival (queue_time + ttft, queue_time + latency in detailed.json)",
+   "ttft_ms": 1000,
+   "e2e_ms": 60000,
+   "correctness": true,
+   "queue": true
+  },
+  "attempted": 8622,
+  "completed": 8622,
+  "correct": 4371,
+  "accepted": 4336,
+  "lost": 0,
+  "restarts": 0,
+  "cells": null,
+  "task_classes": {
+   "HumanEval": {
+    "accepted": 637,
+    "attempted": 2624,
+    "completed": 2624,
+    "correct": 640
+   },
+   "Mbpp": {
+    "accepted": 3699,
+    "attempted": 5998,
+    "completed": 5998,
+    "correct": 3731
+   }
+  },
+  "null_reasons": {
+   "cells": "replay run, not a cell sweep"
+  }
+ },
+ "sustained": {
+  "required_window_s": 3600,
+  "bucket_s": 300,
+  "window_s": 3600,
+  "meets_required_window": true,
+  "interrupted": false,
+  "buckets": [
+   {
+    "index": 0,
+    "start_s": 0,
+    "duration_s": 300,
+    "attempted": 736,
+    "completed": 736,
+    "correct": 336,
+    "accepted": 301
+   },
+   {
+    "index": 1,
+    "start_s": 300,
+    "duration_s": 300,
+    "attempted": 376,
+    "completed": 376,
+    "correct": 227,
+    "accepted": 227
+   },
+   {
+    "index": 2,
+    "start_s": 600,
+    "duration_s": 300,
+    "attempted": 907,
+    "completed": 907,
+    "correct": 438,
+    "accepted": 438
+   },
+   {
+    "index": 3,
+    "start_s": 900,
+    "duration_s": 300,
+    "attempted": 1293,
+    "completed": 1293,
+    "correct": 683,
+    "accepted": 683
+   },
+   {
+    "index": 4,
+    "start_s": 1200,
+    "duration_s": 300,
+    "attempted": 1183,
+    "completed": 1183,
+    "correct": 564,
+    "accepted": 564
+   },
+   {
+    "index": 5,
+    "start_s": 1500,
+    "duration_s": 300,
+    "attempted": 857,
+    "completed": 857,
+    "correct": 471,
+    "accepted": 471
+   },
+   {
+    "index": 6,
+    "start_s": 1800,
+    "duration_s": 300,
+    "attempted": 968,
+    "completed": 968,
+    "correct": 483,
+    "accepted": 483
+   },
+   {
+    "index": 7,
+    "start_s": 2100,
+    "duration_s": 300,
+    "attempted": 694,
+    "completed": 694,
+    "correct": 362,
+    "accepted": 362
+   },
+   {
+    "index": 8,
+    "start_s": 2400,
+    "duration_s": 300,
+    "attempted": 666,
+    "completed": 666,
+    "correct": 321,
+    "accepted": 321
+   },
+   {
+    "index": 9,
+    "start_s": 2700,
+    "duration_s": 300,
+    "attempted": 390,
+    "completed": 390,
+    "correct": 203,
+    "accepted": 203
+   },
+   {
+    "index": 10,
+    "start_s": 3000,
+    "duration_s": 300,
+    "attempted": 128,
+    "completed": 128,
+    "correct": 64,
+    "accepted": 64
+   },
+   {
+    "index": 11,
+    "start_s": 3300,
+    "duration_s": 300,
+    "attempted": 424,
+    "completed": 424,
+    "correct": 219,
+    "accepted": 219
+   }
+  ],
+  "min_accepted_per_bucket": 64,
+  "median_accepted_per_bucket": 341.5,
+  "last_q_over_first_q": 0.5031055900621118,
+  "note": "buckets are by SCHEDULED arrival (replay.buckets); accepted is filled only after grading (grade.summary)",
+  "null_reasons": {},
+  "source_summary": {
+   "minimum_accepted_per_s": 0.21333333333333335,
+   "median_accepted_per_s": 1.1383333333333334,
+   "last_quarter_over_first_quarter": 0.5031055900621118,
+   "zero_first_quarter": false
+  }
+ },
+ "traversal": {
+  "path": "resident-hbm",
+  "footprint_bytes": 31187041238,
+  "footprint_bytes_basis": "resident checkpoint bytes (identity.json); allocated weights, not traversed bytes",
+  "bytes_per_traversal": null,
+  "bytes_per_traversal_basis": null,
+  "traversals": null,
+  "traversals_basis": null,
+  "seconds_per_traversal": null,
+  "seconds_per_traversal_basis": null,
+  "accepted_closures_per_traversal": null,
+  "accepted_closures_per_traversal_basis": null,
+  "by_depth": null,
+  "null_reasons": {
+   "bytes_per_traversal": "Run 3 does not instrument weight traversals (PREREG: token counts do not substitute for measured traversals)",
+   "bytes_per_traversal_basis": "Run 3 does not instrument weight traversals (PREREG: token counts do not substitute for measured traversals)",
+   "traversals": "Run 3 does not instrument weight traversals (PREREG: token counts do not substitute for measured traversals)",
+   "traversals_basis": "Run 3 does not instrument weight traversals (PREREG: token counts do not substitute for measured traversals)",
+   "seconds_per_traversal": "Run 3 does not instrument weight traversals (PREREG: token counts do not substitute for measured traversals)",
+   "seconds_per_traversal_basis": "Run 3 does not instrument weight traversals (PREREG: token counts do not substitute for measured traversals)",
+   "accepted_closures_per_traversal": "Run 3 does not instrument weight traversals (PREREG: token counts do not substitute for measured traversals)",
+   "accepted_closures_per_traversal_basis": "Run 3 does not instrument weight traversals (PREREG: token counts do not substitute for measured traversals)",
+   "by_depth": "Run 3 does not instrument weight traversals (PREREG: token counts do not substitute for measured traversals)"
+  }
+ },
+ "money": {
+  "currency": "USD",
+  "list_rate_per_gpu_hr": 2.99,
+  "billing": "per-minute",
+  "payer": "hotaisle-credit",
+  "modeled_minutes": null,
+  "modeled_minutes_basis": null,
+  "modeled_usd": null,
+  "modeled_lower_bound_minutes": 94.37,
+  "modeled_lower_bound_usd": 4.7026,
+  "modeled_lower_bound_basis": "t_ssh -> t_work_end at list; release and/or request unknown, so the billable window is at least this long",
+  "billed_usd": null,
+  "billed_ref": null,
+  "credits_usd": null,
+  "energy": {
+   "watts_mean": null,
+   "kwh": null,
+   "tariff_usd_per_kwh": null,
+   "usd": null,
+   "meter": null,
+   "reason": "cloud seat; no meter"
+  },
+  "null_reasons": {
+   "modeled_minutes": "t_request and/or t_released unknown (closure.json)",
+   "modeled_minutes_basis": "see modeled_minutes",
+   "modeled_usd": "buyer's window unknown; see modeled_lower_bound_usd",
+   "billed_usd": "invoice not posted / not entered in closure.json",
+   "billed_ref": "see billed_usd",
+   "credits_usd": "not entered in closure.json (PREREG: credit, modeled and invoice are three fields)"
+  }
+ },
+ "derived": {
+  "usd_per_accepted": 0.0010845479704797048,
+  "usd_per_1k_accepted": 1.0845479704797047,
+  "cost_basis": "modeled-lower-bound",
+  "wall_s_per_accepted": null,
+  "work_s_per_accepted": 0.8321033210332104,
+  "accepted_per_work_s": 1.2017738359201773,
+  "null_reasons": {
+   "wall_s_per_accepted": "buyer's clock needs t_request and t_released (closure.json) and accepted > 0; work time is not a substitute"
+  }
+ },
+ "receipts": {
+  "items": [
+   {
+    "kind": "arm_file",
+    "path": "campaign/results/run3-scored-a-t0/container-id.txt",
+    "sha256": "acb1e8004681dd9c2fee5091b14a62db57522172a4ea483d7da568a3f6ba5a78",
+    "sha256_verified": true
+   },
+   {
+    "kind": "log",
+    "path": "campaign/results/run3-scored-a-t0/container-stop.log",
+    "sha256": "19c792359ce21ab0dd9c3470bb8dfca49577699ca43ca5f11ec5cd09882328c7",
+    "sha256_verified": true
+   },
+   {
+    "kind": "engine_output",
+    "path": "campaign/results/run3-scored-a-t0/detailed.json",
+    "sha256": "ef907e4cbe45832890109c4ca0d37851ad8e4f087beb70421506af897e6a67ab",
+    "sha256_verified": true
+   },
+   {
+    "kind": "env",
+    "path": "campaign/results/run3-scored-a-t0/env.json",
+    "sha256": "4749075dbf594555d76a66af6e3b0db655d95739158f0b963001d7965a3bc0b0",
+    "sha256_verified": true
+   },
+   {
+    "kind": "arm_file",
+    "path": "campaign/results/run3-scored-a-t0/gpu.txt",
+    "sha256": "d56ff2d018245fe6f8d458685033cd811e8b344e868680c66bd85f2ecec865c1",
+    "sha256_verified": true
+   },
+   {
+    "kind": "image",
+    "path": "campaign/results/run3-scored-a-t0/image-inspect.json",
+    "sha256": "0905ff2324be61e2d31c1cdb1919e615b322a708ff200ce39c87686d1a87178c",
+    "sha256_verified": true
+   },
+   {
+    "kind": "arm_file",
+    "path": "campaign/results/run3-scored-a-t0/invocation.json",
+    "sha256": "34e65448616090eb10b4cdcf67bc63ea1b56dff16c05cf8e3a2112e9543b8467",
+    "sha256_verified": true
+   },
+   {
+    "kind": "clocks",
+    "path": "campaign/results/run3-scored-a-t0/ledger-times.json",
+    "sha256": "bda7da5d7c7a9fae395da7212299450df3c8a16f6352ebe7653d63c93ab89307",
+    "sha256_verified": true
+   },
+   {
+    "kind": "arm_summary",
+    "path": "campaign/results/run3-scored-a-t0/ledger.json",
+    "sha256": "6221e2ba65e4e9bdd28b7975705e715c90a2866a36327e40879688431f7e6257",
+    "sha256_verified": true
+   },
+   {
+    "kind": "log",
+    "path": "campaign/results/run3-scored-a-t0/pull.log",
+    "sha256": "e11441506724844f0d937da1b3bf6eefcfffac872ff216a0772965364781fc0d",
+    "sha256_verified": true
+   },
+   {
+    "kind": "replay",
+    "path": "campaign/results/run3-scored-a-t0/replay/buckets.json",
+    "sha256": "3500b72544ee86f218fbbe194064489a09c338abd349593a7bce157f157d7775",
+    "sha256_verified": true
+   },
+   {
+    "kind": "replay",
+    "path": "campaign/results/run3-scored-a-t0/replay/journal.jsonl",
+    "sha256": "eabd04bf9e057e026318cdb24f6c1b03a98154a1a6f8300b742339d4816217be",
+    "sha256_verified": true
+   },
+   {
+    "kind": "replay",
+    "path": "campaign/results/run3-scored-a-t0/replay/plan.json",
+    "sha256": "9955f6f5776a222d10bbabbe784478ad9da0b1f6c016648bb6a0e62d9741c933",
+    "sha256_verified": true
+   },
+   {
+    "kind": "replay",
+    "path": "campaign/results/run3-scored-a-t0/replay/replay-status.json",
+    "sha256": "72dccbacdfc807e585fc524ebecff08b3ba91d67f089fd9b253b9ea5a73fe02c",
+    "sha256_verified": true
+   },
+   {
+    "kind": "replay",
+    "path": "campaign/results/run3-scored-a-t0/replay/requests.jsonl",
+    "sha256": "9b752b672dd148d0df9eead556188ec1e4b095db27c783c3988eb6eb30f071dd",
+    "sha256_verified": true
+   },
+   {
+    "kind": "serve_log",
+    "path": "campaign/results/run3-scored-a-t0/serve.log",
+    "sha256": "77451d418f9a73e4a5e162b47e8473f4949e943846310ac758a16396af1c5337",
+    "sha256_verified": true
+   },
+   {
+    "kind": "smoke",
+    "path": "campaign/results/run3-scored-a-t0/smoke-0.json",
+    "sha256": "7b5af193e8fc7a269eac9cdfd9c03535cde2c0e131991152ad1c3af78e7ba045",
+    "sha256_verified": true
+   },
+   {
+    "kind": "smoke",
+    "path": "campaign/results/run3-scored-a-t0/smoke-1.json",
+    "sha256": "fa7d6d6a9b7937b826a4c29272855397a376fce464686907549de365eebc0236",
+    "sha256_verified": true
+   },
+   {
+    "kind": "smoke",
+    "path": "campaign/results/run3-scored-a-t0/smoke-2.json",
+    "sha256": "8f3f54c5543e95b019356a71022fa99afe649526eb8b38705aa6fefb038aa69f",
+    "sha256_verified": true
+   },
+   {
+    "kind": "arm_file",
+    "path": "campaign/results/run3-scored-a-t0/tasks.json",
+    "sha256": "6c508237082261ac927b96825e2f097782389b1cebc3f78360f0665a8db3501f",
+    "sha256_verified": true
+   },
+   {
+    "kind": "manifest",
+    "path": "campaign/results/run3-scored-a-t0/MANIFEST.sha256"
+   },
+   {
+    "kind": "prereg",
+    "path": "campaign/run3/PREREG.md"
+   },
+   {
+    "kind": "closure",
+    "path": "campaign/results/run3-scored-a-t0/closure.json"
+   },
+   {
+    "kind": "event_log",
+    "path": "campaign/results/run3-scored-a-t0/ledger/run3-run3-scored-a-t0.events.jsonl"
+   }
+  ],
+  "manifest_verified": true
+ },
+ "notes": [
+  "Acquisition attempts are not in this record: supply them in closure.json from availability/observations.jsonl delivered rows.",
+  "replay marks never-sent and sent-but-unanswered requests alike as lost_or_unsent_after_interrupt; 'lost' here counts that label (schema: sent and unanswered)",
+  "arm.py status: completed_ungraded; funding declaration: self-funded; operator must verify invoice",
+  "Declared rate factor 0.95 on the frozen trace; PREREG: at 0.10 the run measures price and correctness under real arrivals, not capacity.",
+  "AMD T0 carries VLLM_ROCM_USE_AITER=1 with the attention backend auto-selected; 'auto' is not 'default' (env.json names the selection)."
+ ],
+ "built_by": {
+  "tool": "ledger/ledger_build_run3.py",
+  "at": "2026-09-24T02:07:37Z",
+  "inputs": [
+   "campaign/results/run3-scored-a-t0",
+   "campaign/results/run3-scored-a-t0/closure.json"
+  ]
+ }
+}
