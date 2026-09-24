@@ -1,0 +1,68 @@
+{
+  "schema": "second-run/result-packet@1",
+  "payload": {
+    "schema": "second-run/result@1",
+    "kind": "tierbench-trials",
+    "metadata": {
+      "title": "b2_grade_httpx_3614_base_url_query · claude-fable-5",
+      "provider": "TierBench historical model route",
+      "hardware": "Execution surface declared in original ledger",
+      "workload": "TierBench / b2_grade_httpx_3614_base_url_query",
+      "variant": "instrument",
+      "observed_at": "2026-07-13T02:56:25+00:00",
+      "contributor": "Second Run",
+      "funding": "Original TierBench experiments; accounting basis preserved per record.",
+      "relationship": "Original experiment operator; no independent replication asserted.",
+      "limitations": [
+        "Historical trial summary, not a fresh run on the current model label.",
+        "No cross-task hardware or provider ranking is inferred.",
+        "All recorded attempts are retained; unavailable cost or latency stays unknown. A historical zero without an explicit billing basis remains source_cost_usd=0 but contributes unknown cost, not free execution.",
+        "Token splits and dollar figures may be estimates; this is not invoice reconciliation.",
+        "Source names and hashes do not establish independent replication."
+      ],
+      "sources": [
+        {
+          "label": "experiments/breadth/run/ledger.jsonl",
+          "url": "https://github.com/BigBirdReturns/tier-bench/blob/f6137258ce3f0462ccbf09c6adee01454332f7ec/experiments/breadth/run/ledger.jsonl",
+          "sha256": "b8fe8844afc83319b6300cfca77097ac5987262443ffafad1f1bb254d2083a68",
+          "revision": "f6137258ce3f0462ccbf09c6adee01454332f7ec"
+        }
+      ],
+      "relation": null
+    },
+    "body": {
+      "task": "b2_grade_httpx_3614_base_url_query",
+      "model": "claude-fable-5",
+      "effort": "high",
+      "support": "instrument",
+      "cost_basis": "shadow-estimated",
+      "unit": "source-reported task passes",
+      "verifier": "Original TierBench validator reports; not independently rerun for this board.",
+      "claim_basis": "Historical source rows imported from an exact commit; task and grader epochs may be incomplete.",
+      "source_sha256": "b8fe8844afc83319b6300cfca77097ac5987262443ffafad1f1bb254d2083a68",
+      "trials": [
+        {
+          "line": 132,
+          "sha256": "f22a821117c33c527032d95bf676755ee0b41ebcdf0038f09e5b8b851c2568f3",
+          "outcome": "error",
+          "cost_usd": 0.549521,
+          "source_cost_usd": 0.549521,
+          "latency_ms": 0,
+          "input_tokens": 0,
+          "output_tokens": 0
+        },
+        {
+          "line": 150,
+          "sha256": "b5f46da56fcb2f78cb6e286918a1d997152748d2ddb304cdd1b4851f22690a0a",
+          "outcome": "partial",
+          "cost_usd": 1.688743,
+          "source_cost_usd": 1.688743,
+          "latency_ms": 0,
+          "input_tokens": 0,
+          "output_tokens": 0
+        }
+      ]
+    }
+  },
+  "sha256": "daafdb2ef5b6640735541214fc79140165b6fe66867deb8a3670892f15106f0f"
+}

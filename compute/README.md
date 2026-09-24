@@ -98,6 +98,14 @@ See `METHOD.md`, `PROVENANCE.json` and `QUALIFICATION.json` for the calculation 
 
 The Hot Aisle runner owns measured-result arithmetic and qualification. The desk consumes its qualified record and sealed packet through a generated verifier, preserving the exact original object in saved decisions. `integration/README.md` in the combined source explains ownership, local publication, one catalogue and native browser qualification. Scenario arithmetic remains in the desk; source-bound workload findings remain in the runner.
 
+## Community beta, 24 September 2026
+
+Open [the results board](results.html) to search the source-bound campaign results and retained TierBench observations, compare a structured claim, and export a decision carrying its evidence. The board is a view of this product, not a new execution owner. Its historical summaries preserve source-reported, estimated and upper-bound cost bases; the three native campaign paths delegate outcomes and economics to the existing report engine. No summary becomes an independently reproduced run.
+
+[community/README.md](community/README.md) explains the safe contribution preview, explicit public submission, reviewed local admission and independently operable hubs. [community-kit.zip](community-kit.zip) includes the board, source, verifier, records and current calculator page. The older compute-kit.zip continues to package the calculator and private read-only helper; use the community kit for the board. Runtime execution remains with the existing approved runner.
+
+Native qualification: node compute/community/tests/browser.cjs (pinned Playwright is a test-only dependency). It exercises actual localhost services, exported evidence and decisions in another process, public-preview consent invalidation, and a second-generation hub after its first origin is stopped. Those isolated test operators are software fixtures, not evidence of outside adoption. Public sharing never occurs automatically.
+
 ## Operating inputs, 24 September 2026
 
 `compute_materials` now exposes a reviewed source registry and captured feed observations through this same read-only MCP server. Ask for recipe `coding-burst`, `documents-and-search`, `repeated-context` or `numerical-batch`. [materials/README.md](materials/README.md) explains source freshness, public capture boundaries and the implementation choices. This adds no scheduler, provider preference, application telemetry or billable execution. The existing calculation engine, price catalogue and saved-decision contract are unchanged.

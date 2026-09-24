@@ -1,0 +1,23 @@
+{
+  "schema": "second-run/community-qualification@1",
+  "state": "native-local-checks-passed",
+  "records": 57,
+  "unit_tests": 41,
+  "native_browser_checks": 35,
+  "external_requests": 0,
+  "native_navigation": true,
+  "set_content_used": false,
+  "source_sha256": {
+    "core.cjs": "ee3c316aa6c30e68ba427252fbd7fe5c599381f2cfbde4d9919e7497fa860b89",
+    "app.js": "9c3c6acd7f7750e53132636067042a2b6760b577b4cb8966daac0c2772170ea6",
+    "style.css": "2c83e44ddc94c0e27e386f127c707c12c4cfb52a9c53e80a8ce900ffe2c7c57a",
+    "template.html": "bde85b3c23958b93c3f03f90fdd6d5da617a2e35723dc95d0c05ee58eb2e946c",
+    "workload-engine.cjs": "78600d009f43ca37a81fa15231dfb5be307d8b0a01cfcfe42d94ed8015061593",
+    "qualified-engine.cjs": "5ec9a9bd6bacf9a8b5a98e39734bb7464c35b0cf9f505e9a066fe34963b6568a",
+    "tests/browser.cjs": "d075f8c9953d941bf3526752397ac184154fe0a6d2e4819c650447609598b806",
+    "cli.cjs": "76823af49e1d880ecfc851daebbf4df64d45fed23de5f79a3e04de482ea776af",
+    "build.cjs": "822de106750f2f928d72ce7aa16c76bcab3c21ce991df3037818df0f0df10d53",
+    "import-seed.cjs": "60639b0504c9867501a0f732de46c9515ccee81f2b24124d59bec7cab20ee4f7"
+  },
+  "scope": "Software on controlled local hubs with authored fixtures; original campaign findings are retained inputs. No new GPU execution, public submission, or independent community adoption is claimed. Full Linux product CI is the publication gate, not inferred from this local record."
+}

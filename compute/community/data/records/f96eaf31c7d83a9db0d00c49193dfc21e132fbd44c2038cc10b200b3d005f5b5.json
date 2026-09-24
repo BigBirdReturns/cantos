@@ -1,0 +1,88 @@
+{
+  "schema": "second-run/result-packet@1",
+  "payload": {
+    "schema": "second-run/result@1",
+    "kind": "tierbench-trials",
+    "metadata": {
+      "title": "b2_grade_httpx_3221_ipv6_no_proxy · claude-fable-5",
+      "provider": "TierBench historical model route",
+      "hardware": "Execution surface declared in original ledger",
+      "workload": "TierBench / b2_grade_httpx_3221_ipv6_no_proxy",
+      "variant": "instrument",
+      "observed_at": "2026-07-13T02:56:25+00:00",
+      "contributor": "Second Run",
+      "funding": "Original TierBench experiments; accounting basis preserved per record.",
+      "relationship": "Original experiment operator; no independent replication asserted.",
+      "limitations": [
+        "Historical trial summary, not a fresh run on the current model label.",
+        "No cross-task hardware or provider ranking is inferred.",
+        "All recorded attempts are retained; unavailable cost or latency stays unknown. A historical zero without an explicit billing basis remains source_cost_usd=0 but contributes unknown cost, not free execution.",
+        "Token splits and dollar figures may be estimates; this is not invoice reconciliation.",
+        "Source names and hashes do not establish independent replication."
+      ],
+      "sources": [
+        {
+          "label": "experiments/breadth/run/ledger.jsonl",
+          "url": "https://github.com/BigBirdReturns/tier-bench/blob/f6137258ce3f0462ccbf09c6adee01454332f7ec/experiments/breadth/run/ledger.jsonl",
+          "sha256": "b8fe8844afc83319b6300cfca77097ac5987262443ffafad1f1bb254d2083a68",
+          "revision": "f6137258ce3f0462ccbf09c6adee01454332f7ec"
+        }
+      ],
+      "relation": null
+    },
+    "body": {
+      "task": "b2_grade_httpx_3221_ipv6_no_proxy",
+      "model": "claude-fable-5",
+      "effort": "high",
+      "support": "instrument",
+      "cost_basis": "shadow-estimated",
+      "unit": "source-reported task passes",
+      "verifier": "Original TierBench validator reports; not independently rerun for this board.",
+      "claim_basis": "Historical source rows imported from an exact commit; task and grader epochs may be incomplete.",
+      "source_sha256": "b8fe8844afc83319b6300cfca77097ac5987262443ffafad1f1bb254d2083a68",
+      "trials": [
+        {
+          "line": 130,
+          "sha256": "d9f5b6ef5d0337a16acea620ab333cf33317cbe45f1d24d25b37ad86d4b2416e",
+          "outcome": "partial",
+          "cost_usd": 1.815777,
+          "source_cost_usd": 1.815777,
+          "latency_ms": 0,
+          "input_tokens": 0,
+          "output_tokens": 0
+        },
+        {
+          "line": 131,
+          "sha256": "327d44b0f4462f2f244b589d2795806f41f94aecf2b2de17eb3d018ee056f3ad",
+          "outcome": "partial",
+          "cost_usd": 1.554385,
+          "source_cost_usd": 1.554385,
+          "latency_ms": 0,
+          "input_tokens": 0,
+          "output_tokens": 0
+        },
+        {
+          "line": 133,
+          "sha256": "e1ac27ffea14ef5982f6a230c7d50d4d584cc56df24392a21e545e3fb562f7ec",
+          "outcome": "error",
+          "cost_usd": 0.29886,
+          "source_cost_usd": 0.29886,
+          "latency_ms": 0,
+          "input_tokens": 0,
+          "output_tokens": 0
+        },
+        {
+          "line": 151,
+          "sha256": "29be5dbcef5eedbd37f7876fd245ef2bc3a0d40403eca62d81476b435613a11f",
+          "outcome": "partial",
+          "cost_usd": 1.724523,
+          "source_cost_usd": 1.724523,
+          "latency_ms": 0,
+          "input_tokens": 0,
+          "output_tokens": 0
+        }
+      ]
+    }
+  },
+  "sha256": "f96eaf31c7d83a9db0d00c49193dfc21e132fbd44c2038cc10b200b3d005f5b5"
+}
