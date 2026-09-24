@@ -1,6 +1,6 @@
 {
   "schema": "second-run/material-registry@1",
-  "version": "0.1.1",
+  "version": "0.1.0",
   "reviewed_on": "2026-09-24",
   "sources": [
     {
@@ -77,7 +77,7 @@
     },
     {
       "id": "sglang-gateway",
-      "url": "https://docs.sglang.io/docs/advanced_features/sgl_model_gateway",
+      "url": "https://docs.sglang.ai/advanced_features/sgl_model_gateway.html",
       "kind": "document",
       "layer": "routing",
       "purpose": "Cache-aware routing plus congestion and worker lifecycle interfaces.",
@@ -95,7 +95,7 @@
     },
     {
       "id": "skypilot-jobs",
-      "url": "https://docs.skypilot.ai/en/latest/reference/yaml-spec.html",
+      "url": "https://docs.skypilot.co/en/latest/reference/yaml-spec.html",
       "kind": "document",
       "layer": "lifecycle",
       "purpose": "Alternative batch/recovery adapter, not a second execution owner.",

@@ -34,6 +34,7 @@ def build():
     (ROOT/'index.html').write_text(text,encoding='utf-8',newline='\n')
     allow=['index.html','template.html','style.css','app.js','engine.cjs','data/catalog.json','adapters/workload-engine.cjs','adapters/qualified-engine.cjs','adapters/instrument.cjs','adapters/workload-report-v2.html','scripts/connect.cjs','scripts/recompute.cjs','scripts/build.py','scripts/review_prices.py','README.md','LICENSE','PROVENANCE.json','METHOD.md','QUALIFICATION.json','tests/fixtures.json','tests/test_core.cjs','tests/test_bridge.cjs','tests/test_browser.py','tests/test_prices.py']
     allow += ['scripts/materials.cjs', 'scripts/material_feeds.py', 'materials/registry.json', 'materials/observations.json', 'materials/README.md', 'tests/test_materials.cjs', 'tests/test_material_feeds.py']
+    allow += ['materials/history/registry-0.1.0.json','materials/history/observations-0.1.0.json','materials/history/source-moves.json']
     files=[]
     for name in allow:
         p=ROOT/name

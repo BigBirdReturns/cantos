@@ -23,7 +23,7 @@ MAX_BYTES = 2 * 1024 * 1024
 REGISTRY_SCHEMA = 'second-run/material-registry@1'
 SNAPSHOT_SCHEMA = 'second-run/material-observations@1'
 ALLOWED_HOSTS = frozenset(('hotaisle.xyz', 'dstack.ai', 'opencode.ai',
-    'docs.lmcache.ai', 'docs.sglang.ai', 'docs.vllm.ai', 'docs.skypilot.co',
+    'docs.lmcache.ai', 'docs.sglang.ai', 'docs.sglang.io', 'docs.vllm.ai', 'docs.skypilot.co', 'docs.skypilot.ai',
     'github.com', 'api.github.com'))
 ID = re.compile(r'^[a-z0-9]+(?:-[a-z0-9]+)*$')
 SHA = re.compile(r'^[a-f0-9]{64}$')

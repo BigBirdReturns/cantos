@@ -65,8 +65,8 @@
     },
     {
       "path": "scripts/build.py",
-      "bytes": 4434,
-      "sha256": "25fc9ffd43be1e14b6f21a420af672373e0263e56395c2c84bb7570fc6ac4046"
+      "bytes": 4571,
+      "sha256": "3e8cf4cdea5fc8386636743a72116f3ffd8b355c249240ec68398434a622fc93"
     },
     {
       "path": "scripts/review_prices.py",
@@ -130,23 +130,23 @@
     },
     {
       "path": "scripts/material_feeds.py",
-      "bytes": 11442,
-      "sha256": "0d501a35e06cf673d90cbc9d075205e30ff4e6489f04613e1ddaafc699968a8c"
+      "bytes": 11480,
+      "sha256": "a167a63c5cc565a7bc100cdd4330d534f4075cd81044f7ab23cb0ec7dacde316"
     },
     {
       "path": "materials/registry.json",
       "bytes": 16165,
-      "sha256": "0aa96820327aa15c6c9a0117f5d72132804fbf8a36ba9b367a5fe62c8a095953"
+      "sha256": "cf98fc64f1ff6fcb07debb14edc6936c92fd33f588a1f3261114c4c68b5441e5"
     },
     {
       "path": "materials/observations.json",
-      "bytes": 26234,
-      "sha256": "c70ede1a3f44f08e340bb2d51ee0c597c0f9a3c5ad60d971d3a4583c9ee06afb"
+      "bytes": 26876,
+      "sha256": "013404f5a81bb3a19af641238ba938725386f4cfcd7730e19f9e345234444a14"
     },
     {
       "path": "materials/README.md",
-      "bytes": 4119,
-      "sha256": "c4d912643e72e40d8189c467fef28fefe9d90a8b0e057de76b78e88268f025dc"
+      "bytes": 4264,
+      "sha256": "2f8d97daa51ce4f652262ffb91a5366ff0b41401c8dcea266de8184cb80e00bd"
     },
     {
       "path": "tests/test_materials.cjs",
@@ -157,6 +157,21 @@
       "path": "tests/test_material_feeds.py",
       "bytes": 5836,
       "sha256": "a538c55cd6290f82cb741d27efc7c4ea122b2a5b93d2101aa05e411e6674b5b7"
+    },
+    {
+      "path": "materials/history/registry-0.1.0.json",
+      "bytes": 16165,
+      "sha256": "0aa96820327aa15c6c9a0117f5d72132804fbf8a36ba9b367a5fe62c8a095953"
+    },
+    {
+      "path": "materials/history/observations-0.1.0.json",
+      "bytes": 26234,
+      "sha256": "c70ede1a3f44f08e340bb2d51ee0c597c0f9a3c5ad60d971d3a4583c9ee06afb"
+    },
+    {
+      "path": "materials/history/source-moves.json",
+      "bytes": 772,
+      "sha256": "cbc88924a458124d45065d17a491d28bcca026b4892fb325295eafdb4747e699"
     }
   ]
 }
