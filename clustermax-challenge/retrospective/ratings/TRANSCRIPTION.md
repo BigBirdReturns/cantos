@@ -51,3 +51,17 @@ None outstanding after re-inspection. (Two low-confidence identifications are lo
 - `raw/` — downloaded originals + `SHA256SUMS.txt` + wayback/GitHub lookups used while trying to pin the 2.1 date (inconclusive, kept for the record).
 - `crops/` (removed before commit) — PIL-generated row/section crops used for the second transcription pass; regenerate from `raw/` if needed.
 - `clustermax-1.0.json`, `clustermax-2.0.json`, `clustermax-2.1.json` — per schema `secondrun.clustermax-medals.v1`.
+
+## Erratum (2026-09-24)
+
+An independent re-extraction (estate reference harvest `clustermax-20260923`,
+277 ratings across 1.0, 2.0, 2.1 and 3.0) agreed with every tier in these files
+except one omission: the 2.0 and 2.1 charts carry a stylized "A" logo in the
+**Unavailable** band, between BluSky Ai and ARC COMPUTE, that this transcription
+missed. The 3.0 transcription lists it as Andromeda; the harvest maps it to
+Andromeda with reduced identity confidence. Correct counts are 84 entries for 2.0
+(Unavailable 25) and 90 for 2.1 (Unavailable 27).
+
+`clustermax-2.0.json` and `clustermax-2.1.json` are left byte-identical because
+they are hashed inputs to the frozen R1 result. The omission has no effect on R1
+or on any analysis here: Unavailable providers are excluded by the plan.
