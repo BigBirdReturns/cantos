@@ -1,0 +1,17 @@
+{
+  "prior_registry_sha256": "0aa96820327aa15c6c9a0117f5d72132804fbf8a36ba9b367a5fe62c8a095953",
+  "changes": [
+    {
+      "id": "sglang-gateway",
+      "from": "https://docs.sglang.ai/advanced_features/sgl_model_gateway.html",
+      "to": "https://docs.sglang.io/docs/advanced_features/sgl_model_gateway",
+      "basis": "Official documentation redirects manually reviewed on 2026-09-24; collector redirect refusal remains unchanged."
+    },
+    {
+      "id": "skypilot-jobs",
+      "from": "https://docs.skypilot.co/en/latest/reference/yaml-spec.html",
+      "to": "https://docs.skypilot.ai/en/latest/reference/yaml-spec.html",
+      "basis": "Official documentation redirects manually reviewed on 2026-09-24; collector redirect refusal remains unchanged."
+    }
+  ]
+}
