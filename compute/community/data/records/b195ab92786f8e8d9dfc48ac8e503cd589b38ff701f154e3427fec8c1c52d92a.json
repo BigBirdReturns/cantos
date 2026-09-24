@@ -1,0 +1,47 @@
+{
+  "schema": "second-run/result-packet@1",
+  "payload": {
+    "schema": "second-run/result@1",
+    "kind": "historical-finding",
+    "metadata": {
+      "title": "haiku · Solo baseline",
+      "provider": "TierBench historical method study",
+      "hardware": "Model hardware not recorded",
+      "workload": "Transfer study / intervals",
+      "variant": "Solo baseline",
+      "observed_at": "2026-07-07",
+      "contributor": "Second Run",
+      "funding": "Original TierBench experiments; accounting basis preserved per record.",
+      "relationship": "Original experiment operator; no independent replication asserted.",
+      "limitations": [
+        "One subject; this does not establish general model equivalence.",
+        "Precision costs and extra findings were not fully quantified.",
+        "Five focused passes increase work; runtime cost is unmeasured in this row.",
+        "Generic lenses were recorded as frozen before this subject. Source-authenticity remains external."
+      ],
+      "sources": [
+        {
+          "label": "experiments/tier-uplift/LEDGER.md",
+          "url": "https://github.com/BigBirdReturns/tier-bench/blob/f6137258ce3f0462ccbf09c6adee01454332f7ec/experiments/tier-uplift/LEDGER.md",
+          "sha256": "bf3425a8cf71e2709bf87548dcf3a45f31fa3edd5856ae8165db16277edc9224",
+          "revision": "f6137258ce3f0462ccbf09c6adee01454332f7ec"
+        }
+      ],
+      "relation": null
+    },
+    "body": {
+      "model": "haiku",
+      "support": "Solo baseline",
+      "task": "Task 05 / intervals / held-out bug finding",
+      "measure": "reported bugs found",
+      "value": 3,
+      "maximum": 5,
+      "cost_usd": null,
+      "cost_basis": "unknown",
+      "source_sha256": "bf3425a8cf71e2709bf87548dcf3a45f31fa3edd5856ae8165db16277edc9224",
+      "source_excerpt": "## Task 05 — intervals (portability + the reasoning-vs-attention boundary)\n\nRun with the **FROZEN GENERIC lens set** (`../lenses.md`), NOT bug-tailored — the\nfair test of \"harness vs experimenter.\" 5 bugs: B1 is a deep algorithm bug\n(greedy sorted by start not end); B2–B5 attention/validation. `busiest_point` is\na correct-but-suspicious trap.\n\n### Pass 0 — baseline (solo)\n\n| bug | class | haiku | sonnet | opus |\n|---|---|:--:|:--:|:--:|\n| B1 greedy sort-key | deep | ✓ | ✓ | ✓ |\n| B2 merge touching | attn | ✓ | ✓ | ✓ |\n| B3 input mutation | attn | ✗ | ✓ | ✓ |\n| B4 endpoints | attn | ✓ | ✓ | ✓ |\n| B5 no start≤end validation | valid | ✗ | ✗ | ✗ |\n| **total /5** | | **3** | **4** | **4** |\n\n**Two findings that invert the prior hypothesis:**\n1. The **deep** bug (B1, greedy sort-key) was caught by ALL tiers incl. haiku —\n   *not* the residual. (Caveat: B1 is a textbook result, so this is likely\n   pattern **recall**, not fresh reasoning; a novel-algorithm probe is still\n   owed to find the true reasoning floor.)\n2. The haiku→opus gap is **B3, an attention/state bug**, not the algorithm. And\n   **B5 (validation) is missed by all three** — a shared blind spot, elicitable\n   but not a tier differentiator.\n\nSo even here the gap is *deployment* (attention), consistent with the spine.\n\n### Pass 1 — haiku + FROZEN generic 5-lens sweep\n\nPrediction: state lens → B3, contracts lens → B5. If 5/5, haiku+generic-harness\n**beats opus-solo** (which missed B5) using untailored lenses = portability +\nabove-teacher signal.\n\n| run | model | bugs /5 | target | verdict |\n|---|---|---|---|---|\n| p1 | haiku×5 generic (union) | **5/5** | > 4 | ✅ **beats opus-solo (4) AND sonnet-solo (4)** |\n\nUnion sources: B1 adversarial · B2 control/data/contracts/adversarial · B3 state ·\nB4 all lenses · B5 contracts. The two bugs haiku missed solo (B3, B5) were caught\nby the lenses built for them — state and contracts — from a set frozen BEFORE the\nbugs existed.\n\n**Two hard results:**\n1. **Portability confirmed.** Generic, untailored lenses lifted haiku 3→5. The\n   uplift is the harness's, not experimenter tailoring. (\"Am I the harness?\" → no.)\n2. **Above-teacher signal.** haiku+generic-harness (5/5) > opus-solo (4/5) and\n   sonnet-solo (4/5) — both missed B5. The harness makes the cheap model exceed\n   the raw frontier model's single pass. This is the distillation-target thesis\n   proven: harness-amplified cheap output can beat the teacher that would label it.\n\nHonest caveats: the 5 lenses also over-report (structure-validation, tuple-type\nextras — some defensible, some noise); precision cost unmeasured here. B1 is a\ntextbook result (recall, not novel reasoning) — the true reasoning floor is still\nunprobed. N=1 task for the portability claim.\n\n---",
+      "study_status": "One held-out subject; historical author-reported finding. No new evaluation performed."
+    }
+  },
+  "sha256": "b195ab92786f8e8d9dfc48ac8e503cd589b38ff701f154e3427fec8c1c52d92a"
+}

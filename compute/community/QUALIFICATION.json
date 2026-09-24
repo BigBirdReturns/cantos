@@ -1,0 +1,20 @@
+{
+  "schema": "second-run/community-qualification@1",
+  "state": "native-local-checks-passed",
+  "records": 57,
+  "unit_tests": 41,
+  "native_browser_checks": 31,
+  "external_requests": 0,
+  "native_navigation": true,
+  "set_content_used": false,
+  "source_sha256": {
+    "core.cjs": "ee3c316aa6c30e68ba427252fbd7fe5c599381f2cfbde4d9919e7497fa860b89",
+    "app.js": "7d9245f039f8ad904ce21284b3d7cf641edbf5069ebbc18ce47419051c8f66a3",
+    "style.css": "2c83e44ddc94c0e27e386f127c707c12c4cfb52a9c53e80a8ce900ffe2c7c57a",
+    "template.html": "bde85b3c23958b93c3f03f90fdd6d5da617a2e35723dc95d0c05ee58eb2e946c",
+    "workload-engine.cjs": "78600d009f43ca37a81fa15231dfb5be307d8b0a01cfcfe42d94ed8015061593",
+    "qualified-engine.cjs": "5ec9a9bd6bacf9a8b5a98e39734bb7464c35b0cf9f505e9a066fe34963b6568a",
+    "tests/browser.cjs": "26caa7d90695992c2caf2cd0a592dd9b407a8f3b5adb0fa0913c5cbe6fe91b5e"
+  },
+  "scope": "Software on controlled local hubs with authored fixtures; original campaign findings are retained inputs. No new GPU execution, public submission, or independent community adoption is claimed. Full Linux product CI is the publication gate, not inferred from this local record."
+}
