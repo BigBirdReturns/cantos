@@ -23,6 +23,12 @@ pre-create price/release checks, an $8 first-allocation ceiling within the exist
 $50 campaign cap, collection, deletion and N01 grading. Source hashes are checked
 before execution. It does not grant authority to publish or run the later trials.
 
+On the verified Windows key seat, the SSH service terminates ordinary background
+children at disconnect. Launch workers through registered Windows Task Scheduler
+tasks, with their names held in private configuration. The deployed interactive
+principal requires that user to remain logged in. Verify an actual harmless task
+survives the remote command ending before enabling automatic acquisition.
+
 The wrapper watches executor lifetime and can invoke a release-only recovery lane
 after cancellation, timeout or a stale heartbeat. An uncertain acquisition or
 failed release remains held and cannot trigger another rental. This is

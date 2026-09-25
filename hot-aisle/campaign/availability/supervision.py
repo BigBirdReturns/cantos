@@ -40,6 +40,16 @@ def read_state(path):
         return {}
 
 
+def launch_task(cfg, role):
+    """The Windows SSH service kills ordinary detached children on disconnect."""
+    task = cfg[role + '_task']
+    run = subprocess.run(['schtasks.exe', '/Run', '/TN', task], capture_output=True,
+                         text=True, encoding='utf-8', errors='replace', timeout=20)
+    if run.returncode:
+        raise RuntimeError('Task Scheduler refused ' + task + ': ' + (run.stderr or run.stdout)[-1000:])
+    return {'task': task, 'launch_utc': now()}
+
+
 def recover(cfg):
     state = Path(cfg['state_dir'])
     try:
@@ -164,21 +174,34 @@ def tick(cfg, config_path):
         try:
             age = (dt.datetime.now(dt.timezone.utc)-dt.datetime.fromisoformat(heartbeat)).total_seconds()
         except (ValueError, TypeError):
-            age = 9999
+            # Another tick may see the exclusive file before its JSON is flushed.
+            # Give that writer the same startup grace as a complete fresh claim.
+            age = max(0, time.time() - claim.stat().st_mtime)
         if age > 180 and not (state/'recovery-claim.json').exists():
             # Recovery is allowed after STOP/expiry; acquisition is not.
             try:
                 with (state/'recovery-launch.json').open('x', encoding='utf-8') as receipt:
                     json.dump({'started_utc': now(), 'reason': 'executor heartbeat stale'}, receipt)
-                with (state/'recovery-launch.log').open('ab') as log:
-                    child = subprocess.Popen([sys.executable, '-B', str(Path(__file__).resolve()),
-                                              '--config', str(config_path), '--recover'],
-                                             cwd=cfg['project_checkout'], stdin=subprocess.DEVNULL,
-                                             stdout=log, stderr=log, close_fds=True,
-                                             creationflags=getattr(subprocess, 'CREATE_NO_WINDOW', 0))
-                return {'status': 'recovery_started', 'pid': child.pid, 'heartbeat_age_s': age}
+                try:
+                    launched = launch_task(cfg, 'recovery')
+                    return {'status': 'recovery_started', **launched, 'heartbeat_age_s': age}
+                except (OSError, RuntimeError, subprocess.SubprocessError) as exc:
+                    failure = {'status': 'release_unconfirmed', 'reason': str(exc), 'failed_utc': now()}
+                    write(state/'recovery-launch-failure.json', failure)
+                    return failure
             except FileExistsError:
                 pass
+        launch_failure = read_state(state/'recovery-launch-failure.json')
+        if launch_failure:
+            return launch_failure
+        recovery_launch = read_state(state/'recovery-launch.json')
+        if recovery_launch and not (state/'recovery-claim.json').exists():
+            try:
+                launch_age = (dt.datetime.now(dt.timezone.utc)-dt.datetime.fromisoformat(recovery_launch['started_utc'])).total_seconds()
+            except (KeyError, ValueError, TypeError):
+                launch_age = 9999
+            if launch_age > 60:
+                return {'status': 'release_unconfirmed', 'reason': 'Recovery task did not claim execution', 'claim': str(claim)}
         recovery = read_state(state/'recovery-process.json')
         if recovery and recovery.get('closure_confirmed_by_executor') is not True:
             return {'status': 'release_unconfirmed', 'recovery': recovery,
@@ -232,13 +255,8 @@ def tick(cfg, config_path):
         return {'status': 'acquisition_claimed', 'claim': str(claim)}
     if (state/'STOP').exists() or dt.datetime.now(dt.timezone.utc) >= dt.datetime.fromisoformat(cfg['expires_utc']):
         return {'status': 'stopped_or_expired_after_claim', 'claim': str(claim)}
-    with (state/'worker-launch.log').open('ab') as log:
-        process = subprocess.Popen([sys.executable, '-B', str(Path(__file__).resolve()),
-                                    '--config', str(config_path), '--worker'],
-                                   cwd=cfg['project_checkout'], stdin=subprocess.DEVNULL,
-                                   stdout=log, stderr=log, close_fds=True,
-                                   creationflags=getattr(subprocess, 'CREATE_NO_WINDOW', 0))
-    return {'status': 'executor_started', 'wrapper_pid': process.pid, 'claim': str(claim)}
+    launched = launch_task(cfg, 'executor')
+    return {'status': 'executor_started', **launched, 'claim': str(claim)}
 
 
 def main():
