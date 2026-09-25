@@ -1,12 +1,14 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "second-run/shop-fingerprint@1",
+  "$id": "second-run/shop-fingerprint@3",
   "title": "Shop fingerprint",
-  "description": "One rented machine's hardware/software fingerprint, as collected by fingerprint.sh. Every leaf value is either an observed string/number/array/object, the literal string \"unavailable\" (or an \"unavailable: <reason>\" string), \"unobserved\" (fixtures only: a field the next real run will fill in), or, for load_sample, the literal string \"skipped: no torch\". diff.py and test_probe.py rely on this shape; see README.md for the collection rules.",
+  "description": "One rented machine's hardware/software fingerprint. Inventory is read-only by default. No active network test is performed. GPU load is opt-in, requires a real matching CUDA/HIP GPU, is bounded to 30 seconds, and never falls back to CPU. Missing or failed measurements remain explicitly unknown.",
   "type": "object",
   "required": [
     "schema",
     "recorded_at",
+    "idle_verified",
+    "sample_context",
     "hostname",
     "requested_gpu_vendor",
     "kernel",
@@ -27,7 +29,7 @@
   ],
   "properties": {
     "schema": {
-      "const": "second-run/shop-fingerprint@1"
+      "const": "second-run/shop-fingerprint@3"
     },
     "schema_version": {
       "type": "string"
@@ -35,6 +37,14 @@
     "recorded_at": {
       "type": "string",
       "description": "UTC timestamp, e.g. 2026-09-25T18:37:49Z"
+    },
+    "idle_verified": {
+      "type": "boolean",
+      "description": "True only if workload isolation and an idle state were independently verified; this probe currently reports false."
+    },
+    "sample_context": {
+      "type": "string",
+      "description": "Context for clocks, temperatures and power. Ambient samples are not idle measurements unless idle_verified is true."
     },
     "hostname": { "type": "string" },
     "requested_gpu_vendor": {
@@ -99,7 +109,7 @@
         },
         "download_throughput_mb_s": {
           "type": "string",
-          "description": "Decimal MB/s (bytes/1e6), or an \"unavailable: <reason>\" string. A 30 s sample against a public well-known endpoint."
+          "description": "Decimal MB/s (bytes/1e6) if measured by a separate authorized network test; otherwise a not_measured reason string. This probe does not issue network requests."
         }
       }
     },
@@ -156,15 +166,20 @@
     "idle_power_state": { "type": "string" },
     "load_sample": {
       "oneOf": [
-        { "const": "skipped: no torch" },
+        { "const": "not_requested" },
         { "const": "unobserved" },
         {
           "type": "object",
-          "required": ["method", "duration_s", "interval_s", "samples"],
+          "required": ["status", "method", "duration_s", "nominal_interval_s", "samples"],
           "properties": {
-            "method": { "type": "string", "enum": ["local_torch", "vllm_container", "unobserved"] },
+            "status": { "type": "string", "enum": ["pass", "unknown"] },
+            "reason": { "type": "string" },
+            "method": { "type": "string", "enum": ["torch_gpu_matmul", "unobserved"] },
             "duration_s": { "type": "number" },
-            "interval_s": { "type": "number" },
+            "nominal_interval_s": {
+              "type": "number",
+              "description": "Requested sample period; actual offsets are measured in t_offset_s and may be later due to command overhead."
+            },
             "samples": {
               "type": "array",
               "items": {

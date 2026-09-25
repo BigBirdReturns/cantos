@@ -1,13 +1,15 @@
 {
   "schema_id": "second-run/counter-record@1",
+  "evidence_class": "derived",
   "provider_id": "hotaisle",
   "provider_name": "Hot Aisle",
   "provenance": {
     "evaluator": "Second Run campaign (compiled from Run 3 session notes, campaign/results/RUN3-HOTAISLE-SUMMARY.md and availability/observations.jsonl)",
     "evaluated_at": "2026-09-24T00:08:55Z",
     "account_used": "existing Hot Aisle team account from the Second Run campaign (Run 3)",
-    "money_spent_usd": 15.00,
-    "disclosure": "Hot Aisle gave Second Run a $200 credit for these arms; costs here are computed at undiscounted list price ($2.99/GPU-hr), not at the credit. Second Run is pitching Hot Aisle a paid engagement. See campaign/DISCLOSURES.md."
+    "money_spent_usd": "unobserved",
+    "modeled_cost_usd": 15.00,
+    "disclosure": "Hot Aisle gave Second Run a $200 credit for these arms. The retained $15 estimate is a historical compilation with no reconciled invoice or precise allocation scope; it is not measured spend. List rate was $2.99/GPU-hr. Prospective commercial relationship disclosed in campaign/DISCLOSURES.md."
   },
   "account_creation": {
     "kyc_required": "unobserved",

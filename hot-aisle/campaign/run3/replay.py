@@ -27,7 +27,7 @@ def timestamp(value):
 
 def schedule(trace, trace_sha, start, factor, duration=3600):
     verify(trace, trace_sha)
-    if not math.isfinite(factor) or factor <= 0 or duration <= 0:
+    if not math.isfinite(factor) or factor <= 0 or not math.isfinite(duration) or duration <= 0:
         raise ValueError('Positive finite rate factor and duration required')
     origin = timestamp(start)
     # Compress/expand interarrivals by factor, and retain [0,duration).
@@ -277,9 +277,12 @@ def main():
     for arg in ('tasks', 'trace', 'trace-sha256', 'start', 'out'):
         p.add_argument('--' + arg, required=True)
     p.add_argument('--rate-factor', required=True, type=float)
+    p.add_argument('--duration', type=float, default=3600,
+                   help='Arrival window in seconds; default 3600. A changed window is a distinct experimental condition.')
     p.add_argument('--fixture', action='store_true')
     a = p.parse_args()
-    replay(a.tasks, a.trace, a.trace_sha256, a.start, a.rate_factor, a.out, fixture=a.fixture)
+    replay(a.tasks, a.trace, a.trace_sha256, a.start, a.rate_factor, a.out,
+           duration=a.duration, fixture=a.fixture)
 
 
 if __name__ == '__main__':

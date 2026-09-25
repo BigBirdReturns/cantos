@@ -59,7 +59,7 @@
 
   "run1_best_cell": {
     "cell": "cell-c64",
-    "gate_ttft_p95_ms": 1000,
+    "gate_ttft_ms": 1000,
     "runs": 3,
     "completed": 600,
     "attempted": 600,
@@ -68,6 +68,96 @@
     "accepted_per_s": 11.579,
     "cost_per_1k_usd": 0.0717,
     "_source": "results/run1-engine/hotaisle-mi300x.ttft1000.json"
+  },
+
+  "comparison_scopes": {
+    "run1-cell-c64": {
+      "workload_id": "random-seed7-in2048-out256-n200-v1",
+      "model_revision": "dcaee4d4dfc5ee71ad501f01f530e5652438fde0",
+      "tokenizer_revision": "dcaee4d4dfc5ee71ad501f01f530e5652438fde0",
+      "precision": "FP8",
+      "cache_policy": "warm",
+      "load_profile_id": "seed7-2048-256-n200-inf-c64-3repeats",
+      "cost_scope": "cell_execution_window",
+      "observation_date": "2026-09-23",
+      "configuration_id": "hotaisle-mi300x-run1",
+      "configuration": {
+        "gpu_model": "AMD Instinct MI300X VF",
+        "gpu_count": 1,
+        "runtime_digest": "rocm/vllm@sha256:30761c2125ce150d556bef46406a0158446421886bf83a2e60154c6e4ca17a13",
+        "server_version": "0.27.1.dev5+gf46a9dfe2.d20260827.rocm100",
+        "backend": "unobserved",
+        "kernel": "unobserved",
+        "tensor_parallel": 1
+      },
+      "rate": 2.99,
+      "acceptance": {
+        "rule_id": "run1-latency-only-ttft1000",
+        "quality_rule": "completed under TTFT gate; correctness sidecar not run",
+        "ttft_ms": 1000,
+        "e2e_ms": null,
+        "evidence": "identity.json requirements and not_in_this_run; results/run1-engine/hotaisle-mi300x.ttft1000.json gates"
+      },
+      "evidence": "identity.json (model/workload/requirements/cache); results/hotaisle-mi300x/env.normalized.json (runtime/GPU); results/run1-engine/hotaisle-mi300x.ttft1000.json (C64 table, rate/gate/cost); source session notes explain no correctness sidecar"
+    },
+    "run3-own-window": {
+      "workload_id": "azure-code-2023-factor0.95-1h-8622-v1",
+      "model_revision": "dcaee4d4dfc5ee71ad501f01f530e5652438fde0",
+      "tokenizer_revision": "dcaee4d4dfc5ee71ad501f01f530e5652438fde0",
+      "precision": "FP8",
+      "cache_policy": "prefix_cache_disabled; warm_cold_state_unobserved",
+      "load_profile_id": "azure-code-2023-one-hour-factor0.95",
+      "cost_scope": "arm_own_window",
+      "observation_date": "2026-09-24",
+      "configuration_id": "hotaisle-mi300x-run3-a-t0",
+      "configuration": {
+        "gpu_model": "AMD Instinct MI300X",
+        "gpu_count": 1,
+        "runtime_digest": "vllm/vllm-openai-rocm:v0.30.0@sha256:2e7da1ad1c66836802072588adea75f9f4991da5f9545b4318e91d422c22ce6a",
+        "server_version": "0.30.0",
+        "backend": "ROCM_ATTN",
+        "kernel": "AiterFp8BlockScaledMMKernel",
+        "tensor_parallel": 1
+      },
+      "rate": 2.99,
+      "acceptance": {
+        "rule_id": "run3-evalplus-ttft1000-done60000-from-scheduled-arrival",
+        "quality_rule": "EvalPlus base and plus pass",
+        "ttft_ms": 1000,
+        "e2e_ms": 60000,
+        "evidence": "results/RUN3-RESULTS.md accepted definition"
+      },
+      "evidence": "results/RUN3-RESULTS.md accepted rule; results/run3-scored-a-t0/env.json backend/kernel/image/cache flags; results/RUN3-HOTAISLE-SUMMARY.md cost window"
+    },
+    "run3-whole-seat": {
+      "workload_id": "azure-code-2023-factor0.95-1h-8622-v1",
+      "model_revision": "dcaee4d4dfc5ee71ad501f01f530e5652438fde0",
+      "tokenizer_revision": "dcaee4d4dfc5ee71ad501f01f530e5652438fde0",
+      "precision": "FP8",
+      "cache_policy": "prefix_cache_disabled; warm_cold_state_unobserved",
+      "load_profile_id": "azure-code-2023-one-hour-factor0.95",
+      "cost_scope": "whole_seat_request_to_release",
+      "observation_date": "2026-09-24",
+      "configuration_id": "hotaisle-mi300x-run3-whole-seat",
+      "configuration": {
+        "gpu_model": "AMD Instinct MI300X",
+        "gpu_count": 1,
+        "runtime_digest": "vllm/vllm-openai-rocm:v0.30.0@sha256:2e7da1ad1c66836802072588adea75f9f4991da5f9545b4318e91d422c22ce6a",
+        "server_version": "0.30.0",
+        "backend": "ROCM_ATTN",
+        "kernel": "AiterFp8BlockScaledMMKernel",
+        "tensor_parallel": 1
+      },
+      "rate": 2.99,
+      "acceptance": {
+        "rule_id": "run3-evalplus-ttft1000-done60000-from-scheduled-arrival",
+        "quality_rule": "EvalPlus base and plus pass",
+        "ttft_ms": 1000,
+        "e2e_ms": 60000,
+        "evidence": "results/RUN3-RESULTS.md accepted definition"
+      },
+      "evidence": "results/RUN3-RESULTS.md accepted rule; results/run3-scored-a-t0/env.json backend/kernel/image/cache flags; results/RUN3-HOTAISLE-SUMMARY.md whole-seat request-to-release window including smoke, both arms, and idle gap"
+    }
   },
 
   "provisioning": {
@@ -81,6 +171,7 @@
   },
 
   "stack": {
+    "gpu_vendor": "amd",
     "kernel": "6.8.0-124-generic",
     "driver_or_rocm_version": "7.2.4",
     "gpu_model": "AMD Instinct MI300X VF",
@@ -89,7 +180,7 @@
     "runtime_digest": "sha256:30761c2125ce150d556bef46406a0158446421886bf83a2e60154c6e4ca17a13",
     "gpus_per_seat": 1,
     "tensor_parallel": 1,
-    "_source": "results/hotaisle-mi300x/env.normalized.json"
+    "_source": "results/hotaisle-mi300x/env.normalized.json (GPU model AMD Instinct MI300X VF establishes vendor AMD)"
   },
 
   "billing": {

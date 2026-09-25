@@ -10,6 +10,7 @@ SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, SCRIPT_DIR)
 
 import diagnose  # noqa: E402
+import adapt  # noqa: E402
 
 FIXTURES = os.path.join(SCRIPT_DIR, "fixtures")
 REFERENCE = os.path.join(SCRIPT_DIR, "reference", "hotaisle-2026-09.json")
@@ -61,30 +62,39 @@ class TestFixturesTriggerEveryRule(unittest.TestCase):
             with self.subTest(rule=rid):
                 self.assertIn(f"[{rid}]", self.report_md)
 
-    def test_every_rule_triggers_wrong(self):
+    def test_rules_distinguish_failures_from_signals_and_unknowns(self):
         statuses = {}
         for layer in self.report_json["layers"].values():
             for rid, res in layer["rules"].items():
                 statuses[rid] = res["status"]
         missing_ids = [rid for rid in diagnose.ALL_RULE_IDS if rid not in statuses]
         self.assertEqual(missing_ids, [], f"rule ids absent from JSON report: {missing_ids}")
-        not_wrong = {rid: st for rid, st in statuses.items() if st != "WRONG"}
-        self.assertEqual(
-            not_wrong, {},
-            f"fixtures were built to fail every rule; these did not evaluate to WRONG: {not_wrong}",
-        )
+        self.assertEqual(statuses["CNT-01"], "SIGNAL")
+        self.assertEqual(statuses["PRICE-02"], "UNKNOWN")  # no scope-bound table hash
+        self.assertEqual(statuses["PWR-01"], "SIGNAL")
+        self.assertEqual(statuses["HW-01"], "SIGNAL")
+        self.assertEqual(statuses["HW-03"], "SIGNAL")
+        self.assertEqual(statuses["STK-01"], "SIGNAL")
+        self.assertEqual(statuses["STK-02"], "UNKNOWN")
+        self.assertEqual(statuses["TEN-01"], "SIGNAL")
+        self.assertEqual(statuses["TEN-02"], "SIGNAL")
+        self.assertTrue(any(st == "WRONG" for st in statuses.values()))
 
-    def test_verdict_is_a_ratio_against_hot_aisle(self):
+    def test_verdict_refuses_ratio_without_scope_identity(self):
         self.assertIn("Hot Aisle", self.report_json["verdict"])
-        self.assertIn("x Hot Aisle", self.report_json["verdict"])
+        self.assertIn("Not comparable", self.report_json["verdict"])
+        self.assertNotIn("0.10x", self.report_json["verdict"])
 
     def test_top_three_ranked_by_weight_and_nonempty(self):
         top3 = self.report_json["top_three"]
         self.assertEqual(len(top3), 3)
         weights = [diagnose.RULE_WEIGHT[t["rule_id"]] for t in top3]
         self.assertEqual(weights, sorted(weights, reverse=True))
-        # PRICE-02 has the highest weight and is triggered by the fixtures -> must lead.
-        self.assertEqual(top3[0]["rule_id"], "PRICE-02")
+        self.assertNotEqual(top3[0]["rule_id"], "PRICE-02")
+        for finding in top3:
+            self.assertIn("competing_causes", finding["diagnostic"])
+            self.assertIn("discriminating_test", finding["diagnostic"])
+            self.assertIn("rollback", finding["diagnostic"])
 
     def test_provenance_block_present(self):
         self.assertIn("## Provenance", self.report_md)
@@ -122,7 +132,7 @@ class TestAllInputsMissing(unittest.TestCase):
     def test_every_layer_explains_what_to_run(self):
         for layer in self.report_json["layers"].values():
             for res in layer["rules"].values():
-                self.assertEqual(res["status"], "MISSING")
+                self.assertEqual(res["status"], "UNKNOWN")
         # every layer's "not evaluated" note must name a concrete command to run
         self.assertIn("counter_record.py validate", self.report_md)
         self.assertIn("fingerprint.sh", self.report_md)
@@ -213,7 +223,7 @@ class TestReferenceBundleMatchesSourceFiles(unittest.TestCase):
         r = self.ref["run1_best_cell"]
         self.assertEqual(c64["cost_per_1k"], r["cost_per_1k_usd"])
         self.assertEqual(c64["accepted_pct"], r["accepted_pct"])
-        self.assertEqual(data["gates"]["ttft_ms"], r["gate_ttft_p95_ms"])
+        self.assertEqual(data["gates"]["ttft_ms"], r["gate_ttft_ms"])
 
     def test_stack_matches_env_normalized(self):
         data = read_json("results", "hotaisle-mi300x", "env.normalized.json")
@@ -282,27 +292,150 @@ class TestSeamWithRealCounterAndProbeShapes(unittest.TestCase):
 
     def test_raw_counter_record_is_scored_and_read(self):
         md, js = self._run(self.BAD_PROBE)
-        self.assertIn("counter score 80", md)
-        self.assertEqual(self._status(js, "CNT-01"), "right")
+        self.assertIn("counter composite score", md)
+        self.assertEqual(self._status(js, "CNT-01"), "signal")
         self.assertEqual(self._status(js, "PRICE-01"), "right")   # per-minute from billing_quantum text
         self.assertEqual(self._status(js, "FLEET-01"), "right")   # 122 s to SSH, carried from the counter
-        self.assertEqual(self._status(js, "PRICE-03"), "right")   # listed available and provisioned agree
+        self.assertEqual(self._status(js, "PRICE-03"), "unknown") # listing/create pairing is not explicitly linked
 
     def test_probe_fingerprint_triggers_node_rules(self):
         md, js = self._run(self.BAD_PROBE)
-        for rule_id in ("HW-01", "HW-03", "PWR-01", "STK-01"):
-            self.assertEqual(self._status(js, rule_id), "wrong", rule_id)
-        self.assertEqual(self._status(js, "TEN-02"), "right")     # numa_nodes "1" coerced to 1
-        self.assertEqual(self._status(js, "HW-02"), "missing")    # firmware age is not node-observable
-        self.assertEqual(self._status(js, "STK-02"), "missing")   # backend not captured by the probe yet
-        self.assertEqual(self._status(js, "HEALTH-02"), "right")  # idle 45 W vs loaded ~291 W
+        for rule_id in ("HW-01", "HW-03", "PWR-01"):
+            self.assertEqual(self._status(js, rule_id), "signal", rule_id)
+        self.assertEqual(self._status(js, "STK-01"), "not_comparable")  # NVIDIA vs AMD version labels
+        self.assertEqual(self._status(js, "TEN-02"), "right")     # single NUMA node; pinning not applicable
+        self.assertEqual(self._status(js, "HW-02"), "unknown")    # firmware age is not node-observable
+        self.assertEqual(self._status(js, "STK-02"), "unknown")   # backend not captured by the probe yet
+        self.assertEqual(self._status(js, "HEALTH-02"), "unknown") # ambient reading is not a verified idle baseline
 
     def test_all_unobserved_probe_fixture_does_not_crash(self):
         md, js = self._run(self.HA_PROBE)
-        self.assertIn("counter score 80", md)
+        self.assertIn("counter composite score", md)
         for rule_id in ("HW-01", "HW-03", "PWR-01", "TEN-01", "TEN-02"):
-            self.assertEqual(self._status(js, rule_id), "missing", rule_id)
-        self.assertEqual(self._status(js, "STK-01"), "right")  # ROCm 7.2.4 is the reference stack
+            self.assertEqual(self._status(js, rule_id), "unknown", rule_id)
+        self.assertEqual(self._status(js, "STK-01"), "right")  # ROCm version on same-vendor MI300X
+
+    def test_ambient_power_never_counts_as_idle_evidence(self):
+        fp = {"gpus": [{"idle_power_w": 237, "idle_verified": False,
+                        "sample_context": "ambient", "sustained_60s": {"power_w_start": 290}}]}
+        self.assertEqual(diagnose.rule_health_02(None, fp, None, {})["status"], "UNKNOWN")
+
+    def test_probe_v3_unobserved_load_stays_unknown(self):
+        with open(self.HA_PROBE, encoding="utf-8") as f:
+            raw = json.load(f)
+        adapted = diagnose.adapt_fingerprint(raw)
+        self.assertIn(adapted["_adapted_from"], adapt.PROBE_SCHEMAS)
+        self.assertTrue(adapted["gpus"])
+        self.assertIsNone(adapted["gpus"][0]["sustained_load"])
+        self.assertEqual(diagnose.rule_pwr_01(None, adapted, None, {})["status"], "UNKNOWN")
+
+    def test_power_signal_reports_verified_sample_duration(self):
+        sample = adapt._sustained({"status": "pass", "duration_s": 30, "samples": [
+            {"sample": "2000, 1000, 60, 250 W, Not Active"},
+            {"sample": "1500, 1000, 70, 250 W, Not Active"},
+        ]}, "nvidia")
+        result = diagnose.rule_pwr_01(None, {"gpus": [{"sustained_load": sample}]}, None, {})
+        self.assertEqual(result["status"], "SIGNAL")
+        self.assertIn("over 30s", result["observation"])
+        self.assertNotIn("60s", result["observation"])
+
+    def test_mixed_sku_listing_and_create_cannot_prove_availability_agreement(self):
+        with open(self.COUNTER, encoding="utf-8") as f:
+            record = json.load(f)
+        record["availability_honesty"]["ledger_attempts"] = [
+            {"ts": "2026-09-25T10:00:00Z", "sku": "sku-a", "region": "region-a",
+             "method": "tui-provision-list", "outcome": "available", "provisioned": False,
+             "snapshot_id": "listing-a"},
+            {"ts": "2026-09-25T10:01:00Z", "sku": "sku-b", "region": "region-a",
+             "method": "tui-provision", "outcome": "available", "provisioned": True,
+             "listing_snapshot_id": "listing-a"},
+        ]
+        counter = diagnose.adapt_counter(record)
+        self.assertIsNone(counter["provisioning"]["listed_available"])
+        self.assertIsNone(counter["provisioning"]["provisioned"])
+        self.assertEqual(diagnose.rule_price_03(None, {"provisioning": counter["provisioning"]}, None, {})["status"], "UNKNOWN")
+        record["availability_honesty"]["ledger_attempts"][1].update({"sku": "sku-a", "listing_snapshot_id": "listing-a"})
+        paired = diagnose.adapt_counter(record)
+        self.assertEqual(paired["provisioning"]["matched_availability_attempts"], 1)
+        self.assertEqual(diagnose.rule_price_03(None, {"provisioning": paired["provisioning"]}, None, {})["status"], "RIGHT")
+
+
+class TestComparisonGate(unittest.TestCase):
+    def test_retained_run1_table_cannot_be_compared_to_run3_or_auto_scored(self):
+        retained = os.path.join(CAMPAIGN_ROOT, "results", "run1-engine", "hotaisle-mi300x.ttft1000.json")
+        td = tempfile.TemporaryDirectory()
+        self.addCleanup(td.cleanup)
+        report = os.path.join(td.name, "REPORT.md")
+        self.assertEqual(diagnose.main(["--bench", retained, "--out", report, "--json"]), 0)
+        with open(os.path.splitext(report)[0] + ".json", encoding="utf-8") as f:
+            emitted = json.load(f)
+        self.assertIn("Not comparable", emitted["verdict"])
+        self.assertNotIn("0.10x", emitted["verdict"])
+        bench, err = diagnose.load_bench(retained)
+        self.assertIsNone(err)
+        ref, err = diagnose.load_reference(REFERENCE)
+        self.assertIsNone(err)
+        verdict = diagnose.verdict_line(bench, ref)
+        self.assertIn("Not comparable", verdict)
+        self.assertNotIn("0.10x", verdict)
+        candidate = dict(ref["comparison_scopes"]["run1-cell-c64"])
+        candidate["bench_sha256"] = diagnose.sha256_file(retained)
+        candidate["evidence"] = "retained Run 1 source table and identity.json"
+        compared = diagnose.assess_comparison(bench, ref, candidate, "run3-own-window")
+        self.assertEqual(compared["economic_comparison"], "unavailable")
+        self.assertTrue(any("workload_id" in reason or "acceptance" in reason or "cost_scope" in reason
+                            for reason in compared["reasons"]))
+        scope = ref["comparison_scopes"]["run3-own-window"]
+        # Run 1 is latency-only random prompts; Run 3 is trace-replayed EvalPlus.
+        self.assertNotEqual(scope["workload_id"], "random-seed7-in2048-out256-n200-v1")
+
+    def test_scope_hash_and_acceptance_are_required_and_configuration_label_checked(self):
+        with open(os.path.join(FIXTURES, "bench-cells", "table.json"), "rb") as f:
+            payload = f.read()
+        td = tempfile.TemporaryDirectory()
+        self.addCleanup(td.cleanup)
+        table_path = os.path.join(td.name, "table.json")
+        with open(table_path, "wb") as f:
+            f.write(payload)
+        bench, err = diagnose.load_bench(table_path)
+        self.assertIsNone(err)
+        config = {"gpu_model": "Test GPU", "gpu_count": 1, "runtime_digest": "sha256:test",
+                  "server_version": "v1", "backend": "backend-a", "kernel": "kernel-a", "tensor_parallel": 1}
+        scope = {
+            "workload_id": "work-v1", "model_revision": "modelrev", "tokenizer_revision": "tokenrev",
+            "precision": "FP8", "cache_policy": "warm", "load_profile_id": "fixed-c1",
+            "cost_scope": "cell_execution_window", "observation_date": "2026-09-25",
+            "configuration_id": "config-a", "configuration": config, "rate": bench["rate"],
+            "acceptance": {"rule_id": "latency-only", "quality_rule": "completed under gates",
+                           "ttft_ms": 1000, "e2e_ms": None, "evidence": "test scope evidence"},
+            "evidence": "fixture scope", "bench_sha256": diagnose.sha256_file(table_path),
+        }
+        ref = {"comparison_scopes": {"test": dict(scope)}}
+        matched = diagnose.assess_comparison(bench, ref, dict(scope), "test", "matched")
+        self.assertEqual(matched["label"], "matched")
+        self.assertIn("not established", matched["operator_causality"])
+        other = dict(scope)
+        other["configuration_id"] = "config-b"
+        other["configuration"] = {**config, "gpu_model": "Other GPU"}
+        different = diagnose.assess_comparison(bench, ref, other, "test", "different complete configuration")
+        self.assertEqual(different["label"], "different complete configuration")
+        self.assertIn("allowed", different["economic_comparison"])
+        other["acceptance"] = {**scope["acceptance"], "quality_rule": "correctness graded"}
+        rejected = diagnose.assess_comparison(bench, ref, other, "test")
+        self.assertEqual(rejected["economic_comparison"], "unavailable")
+        self.assertTrue(any("acceptance mismatch" in x for x in rejected["reasons"]))
+        other["acceptance"] = scope["acceptance"]
+        other["bench_sha256"] = "0" * 64
+        rejected_hash = diagnose.assess_comparison(bench, ref, other, "test")
+        self.assertTrue(any("sha256" in x.lower() for x in rejected_hash["reasons"]))
+
+    def test_reference_cost_scopes_remain_distinct_and_run3_cache_is_unknown(self):
+        ref, err = diagnose.load_reference(REFERENCE)
+        self.assertIsNone(err)
+        scopes = ref["comparison_scopes"]
+        self.assertNotEqual(scopes["run3-own-window"]["cost_scope"], scopes["run3-whole-seat"]["cost_scope"])
+        self.assertIn("unobserved", scopes["run3-own-window"]["cache_policy"])
+        self.assertTrue(diagnose.is_unknown_value(scopes["run3-own-window"]["cache_policy"]))
 
 
 if __name__ == "__main__":

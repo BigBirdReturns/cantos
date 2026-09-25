@@ -17,6 +17,7 @@ what to run to get it, instead of a crash.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import glob
 import json
 import os
@@ -49,7 +50,7 @@ HOWTO = {
     ),
     "fingerprint": (
         "run `bash ../probe/fingerprint.sh auto <outdir>` on the rented machine "
-        "(with torch importable or the vllm container running for the 60 s load sample) "
+        "(with torch importable or the vllm container running for a verified load sample) "
         "and pass `--fingerprint <outdir>/fingerprint.json`."
     ),
     "bench": (
@@ -144,6 +145,7 @@ def normalize_engine_table(data, source):
     return {
         "kind": "engine_table",
         "source": source,
+        "rate": data.get("rate"),
         "gates": data.get("gates"),
         "engine": data.get("engine"),
         "cells": cells,
@@ -236,15 +238,25 @@ def g(d, *path, default=None):
 
 
 def missing(what):
-    return {"status": "MISSING", "reason": what}
+    return {"status": "UNKNOWN", "reason": what}
 
 
 def wrong(observation, action, effect):
     return {"status": "WRONG", "observation": observation, "action": action, "effect": effect}
 
 
+def signal(observation, reason):
+    return {"status": "SIGNAL", "observation": observation, "reason": reason}
+
+
 def right(observation):
     return {"status": "RIGHT", "observation": observation}
+
+
+def sustained_load(gpu):
+    # Read the old rule-facing fixture name for compatibility; new probe records use
+    # duration-neutral `sustained_load` because sample duration is not fixed at 60 s.
+    return gpu.get("sustained_load") or gpu.get("sustained_60s")
 
 
 # ---------------------------------------------------------------------------
@@ -258,14 +270,7 @@ def rule_cnt_01(counter, fp, bench, ref):
     score = counter.get("score")
     if score is None:
         return missing("counter.score field")
-    if score < 70:
-        return wrong(
-            f"counter score {score} (< 70)",
-            "fix the single lowest-scoring dimension first (see CNT-02), then "
-            "re-run `counter_record.py score`.",
-            "overall counter score rises",
-        )
-    return right(f"counter score {score} (>= 70)")
+    return signal(f"counter composite score {score}/100", "a composite counter score is a rubric heuristic, not a provider-quality verdict; inspect source-backed dimensions and evidence individually")
 
 
 def rule_cnt_02(counter, fp, bench, ref):
@@ -282,15 +287,7 @@ def rule_cnt_02(counter, fp, bench, ref):
     worst_name = min(scores, key=lambda k: scores[k])
     worst = scores[worst_name]
     spread = avg - worst
-    if spread > 30:
-        return wrong(
-            f"dimension spread {spread:.1f} pts (avg {avg:.1f} vs '{worst_name}' at {worst:.1f})",
-            f"put effort into the '{worst_name}' dimension specifically rather than "
-            "a broad pass; re-score and confirm the spread narrows.",
-            "overall counter score rises faster per unit of effort than an "
-            "across-the-board pass would",
-        )
-    return right(f"dimension spread {spread:.1f} pts (<= 30)")
+    return signal(f"counter dimension spread {spread:.1f} pts (avg {avg:.1f} vs '{worst_name}' at {worst:.1f})", "the spread can prioritize questions but does not prove compute quality; verify each dimension against its cited observation")
 
 
 def rule_pwr_01(counter, fp, bench, ref):
@@ -299,28 +296,26 @@ def rule_pwr_01(counter, fp, bench, ref):
     gpus = fp.get("gpus") or []
     if not gpus:
         return missing("fingerprint.gpus")
-    if not any(gpu.get("sustained_60s") for gpu in gpus):
-        return missing("fingerprint.gpus[].sustained_60s (60s sustained-load sample)")
+    if not all(isinstance(sustained_load(gpu), dict) for gpu in gpus):
+        return missing("fingerprint.gpus[].verified sustained_load sample; failed/unknown load is not a GPU result")
     bad = []
     for i, gpu in enumerate(gpus):
-        s = gpu.get("sustained_60s") or {}
+        s = sustained_load(gpu) or {}
+        c0, c1 = s.get("clock_mhz_start"), s.get("clock_mhz_end")
+        if s.get("throttled") is None or c0 is None or c1 is None:
+            return missing(f"gpu{i} sustained sample needs throttle state and both clock readings")
         if s.get("throttled") is True:
             bad.append(f"gpu{i}: throttled=true")
             continue
-        c0, c1 = s.get("clock_mhz_start"), s.get("clock_mhz_end")
-        if c0 and c1 is not None and c0 > 0:
+        if c0 > 0:
             drop = (c0 - c1) / c0
             if drop > 0.15:
-                bad.append(f"gpu{i}: clock dropped {drop * 100:.0f}% over 60s ({c0}->{c1} MHz)")
+                duration = s.get("actual_duration_s")
+                window = f"over {duration:g}s" if isinstance(duration, (int, float)) else "over the recorded sample"
+                bad.append(f"gpu{i}: clock dropped {drop * 100:.0f}% {window} ({c0}->{c1} MHz)")
     if bad:
-        return wrong(
-            "; ".join(bad),
-            "fix airflow/PSU headroom or raise the BIOS power/thermal limit; "
-            "re-run the 60s sustained sample and confirm clocks stay flat.",
-            "bench TTFT p99 and accepted_pct at high concurrency improve; "
-            "$/1k accepted falls",
-        )
-    return right("sustained clocks held within 15% across the 60s sample on all GPUs, not throttled")
+        return signal("; ".join(bad), "possible power/thermal limitation; clock slope and throttle flags do not identify host cooling, PSU, configured limits, sharing, or workload behavior. Repeat a bounded supported load, compare vendor throttle telemetry, and ask the operator to inspect host-side evidence before any reversible, approved change.")
+    return right("observed load-sample clocks held within 15%, with throttle state false on all GPUs")
 
 
 def rule_hw_01(counter, fp, bench, ref):
@@ -330,6 +325,8 @@ def rule_hw_01(counter, fp, bench, ref):
     if not gpus:
         return missing("fingerprint.gpus")
     bad = []
+    if any(any(gpu.get(k) is None for k in ("pcie_gen", "pcie_gen_max", "pcie_width", "pcie_width_max")) for gpu in gpus):
+        return missing("PCIe current and model-specific maximum generation/width are required for every GPU")
     for i, gpu in enumerate(gpus):
         gen, gen_max = gpu.get("pcie_gen"), gpu.get("pcie_gen_max")
         width, width_max = gpu.get("pcie_width"), gpu.get("pcie_width_max")
@@ -343,13 +340,7 @@ def rule_hw_01(counter, fp, bench, ref):
     ):
         return missing("fingerprint.gpus[].pcie_gen/pcie_gen_max/pcie_width/pcie_width_max")
     if bad:
-        return wrong(
-            "; ".join(bad),
-            "reseat the card, update host BIOS, check slot bifurcation; re-read "
-            "pcie_gen/pcie_width from a fresh fingerprint and re-run the "
-            "plateaued bench cell.",
-            "throughput ceiling and accepted_per_s rise at the same concurrency",
-        )
+        return signal("; ".join(bad), "possible PCIe/topology constraint; idle negotiated link alone does not establish impact. Compare supported model/platform specifications and a bounded transfer workload; host operator can inspect slot, riser, and NUMA topology records. Any change needs an approved rollback plan.")
     return right("all GPUs negotiated at full rated PCIe generation and width")
 
 
@@ -360,23 +351,14 @@ def rule_hw_02(counter, fp, bench, ref):
     if not gpus:
         return missing("fingerprint.gpus")
     bad = []
-    any_reported = False
     for i, gpu in enumerate(gpus):
         age = gpu.get("firmware_age_days")
         if age is None:
-            continue
-        any_reported = True
+            return missing(f"gpu{i} firmware age is unobserved; vendor release-date evidence is needed")
         if age > 270:
             bad.append(f"gpu{i}: firmware_age_days={age} (> 270)")
-    if not any_reported:
-        return missing("fingerprint.gpus[].firmware_age_days (VBIOS is in the fingerprint; the age needs the vendor release date, fill it by hand)")
     if bad:
-        return wrong(
-            "; ".join(bad),
-            "update to the vendor-qualified VBIOS/firmware matching the "
-            "driver/ROCm branch in use; re-read the fingerprint and soak-test.",
-            "RAS error counters and TTFT p99 drop; firmware age resets to near zero",
-        )
+        return signal("; ".join(bad), "firmware age alone does not establish a fault. Verify the exact GPU board, vendor release notes, supported driver branch, and RAS trend; firmware changes require host-operator authorization and a recovery plan.")
     return right("firmware age reported and within 270 days on all GPUs")
 
 
@@ -386,58 +368,50 @@ def rule_hw_03(counter, fp, bench, ref):
     gpus = fp.get("gpus") or []
     if not gpus:
         return missing("fingerprint.gpus")
-    if not any(
-        gpu.get("ras_errors_uncorrectable") is not None
-        or gpu.get("ras_errors_correctable") is not None
-        for gpu in gpus
-    ):
-        return missing("fingerprint.gpus[].ras_errors_correctable/ras_errors_uncorrectable")
     bad = []
     for i, gpu in enumerate(gpus):
-        unc = gpu.get("ras_errors_uncorrectable") or 0
-        cor = gpu.get("ras_errors_correctable") or 0
+        unc = gpu.get("ras_errors_uncorrectable")
+        cor = gpu.get("ras_errors_correctable")
+        if unc is None or cor is None:
+            return missing(f"gpu{i} requires both correctable and uncorrectable RAS counters")
         if unc > 0:
             bad.append(f"gpu{i}: {unc} uncorrectable RAS error(s)")
         elif cor > 100:
             bad.append(f"gpu{i}: {cor} correctable RAS errors (> 100)")
     if bad:
-        return wrong(
-            "; ".join(bad),
-            "RMA or reseat the card; re-sample RAS counters over a repeat 60s "
-            "window and confirm flat.",
-            "bench `failed` count converges to 0; accepted_pct rises",
-        )
+        return signal("; ".join(bad), "possible hardware health issue; inspect counter semantics, baseline/delta, and vendor RAS documentation, then correlate with a scoped repeat workload. Do not infer RMA or reseat from one snapshot.")
     return right("no uncorrectable RAS errors, correctable counts low on all GPUs")
 
 
 def rule_stk_01(counter, fp, bench, ref):
     if not fp:
         return missing("fingerprint")
+    ref_vendor = g(ref, "stack", "gpu_vendor")
     ref_version = g(ref, "stack", "driver_or_rocm_version")
     if not ref_version:
         return missing("reference.stack.driver_or_rocm_version")
     gpus = fp.get("gpus") or []
     if not gpus:
         return missing("fingerprint.gpus")
+    candidate_vendor = str(fp.get("requested_gpu_vendor") or fp.get("gpu_vendor") or "").lower()
+    if not candidate_vendor:
+        models = [str(g.get("model") or "").lower() for g in gpus]
+        if models and all("amd" in model or "mi300" in model or "mi325" in model for model in models):
+            candidate_vendor = "amd"
+        elif models and all(any(x in model for x in ("nvidia", "h100", "h200", "b200", "a100")) for model in models):
+            candidate_vendor = "nvidia"
+    if ref_vendor and candidate_vendor != str(ref_vendor).lower():
+        return {"status": "NOT_COMPARABLE", "reason": "driver/ROCm versions are vendor-specific and cannot be compared across GPU vendors"}
     bad = []
-    any_reported = False
     for i, gpu in enumerate(gpus):
         v = gpu.get("driver_or_rocm_version")
         if not v:
-            continue
-        any_reported = True
+            return missing(f"gpu{i} driver/runtime version is unobserved")
         if v != ref_version:
             bad.append(f"gpu{i}: {v} (qualified reference is {ref_version})")
-    if not any_reported:
-        return missing("fingerprint.gpus[].driver_or_rocm_version")
     if bad:
-        return wrong(
-            "; ".join(bad),
-            "upgrade to the qualified ROCm/CUDA + matching serving-image digest; "
-            "re-read the fingerprint driver version and re-run the same bench cell.",
-            "output_throughput/accepted_per_s rise, cost_per_1k falls",
-        )
-    return right(f"driver/ROCm version matches the qualified reference ({ref_version}) on all GPUs")
+        return signal("; ".join(bad), "version differences are not evidence of a defect; check vendor support matrices and test a matched workload before attributing performance")
+    return right(f"driver/runtime version matches the same-vendor reference ({ref_version}) on all GPUs")
 
 
 def rule_stk_02(counter, fp, bench, ref):
@@ -447,12 +421,7 @@ def rule_stk_02(counter, fp, bench, ref):
     if backend is None:
         return missing("fingerprint.observed_backend.attention_backend (record the serving backend, e.g. VLLM_ATTENTION_BACKEND, next to the fingerprint)")
     if str(backend).strip() == "" or str(backend).lower() == "unknown":
-        return wrong(
-            "fingerprint.observed_backend.attention_backend is missing/unknown",
-            "have the shop expose backend/runtime identity in a per-session "
-            "capture (own env.json-equivalent); diff it across runs.",
-            "reproducible TTFT tail; regressions become attributable instead of mysterious",
-        )
+        return missing("fingerprint.observed_backend.attention_backend is explicitly unknown")
     return right(f"observed attention backend reported: {backend}")
 
 
@@ -481,13 +450,10 @@ def rule_health_01(counter, fp, bench, ref):
     if not cells:
         return missing("bench cells")
     total_failed = 0
-    any_known = False
     for c in cells:
-        if c.get("failed") is not None:
-            any_known = True
-            total_failed += c["failed"]
-    if not any_known:
-        return missing("bench cell failed/attempted-completed counts")
+        if c.get("failed") is None or c.get("attempted") is None or c.get("completed") is None:
+            return missing(f"cell {c.get('cell')} requires attempted, completed, and failed counts")
+        total_failed += c["failed"]
     if total_failed > 0:
         return wrong(
             f"{total_failed} failed request(s) across bench cells",
@@ -508,19 +474,21 @@ def rule_health_02(counter, fp, bench, ref):
     any_checked = False
     for i, gpu in enumerate(gpus):
         idle_w = gpu.get("idle_power_w")
-        loaded_w = g(gpu, "sustained_60s", "power_w_end") or g(gpu, "sustained_60s", "power_w_start")
+        if gpu.get("idle_verified") is not True or str(gpu.get("sample_context") or "").lower() not in ("idle", "verified_idle"):
+            return missing(f"gpu{i} power sample is not verified idle; ambient or unknown power is not an idle baseline")
+        sample = sustained_load(gpu) or {}
+        loaded_w = sample.get("power_w_end") or sample.get("power_w_start")
         if idle_w is None or loaded_w is None or loaded_w <= 0:
-            continue
+            return missing(f"gpu{i} requires idle and sustained-load power readings")
         any_checked = True
         if idle_w > 0.6 * loaded_w:
             bad.append(f"gpu{i}: idle reading {idle_w}W is {idle_w / loaded_w * 100:.0f}% of the loaded reading {loaded_w}W (not idle before the sample)")
     if not any_checked:
-        return missing("fingerprint.gpus[].idle_power_w and sustained_60s.power_w_end")
+        return missing("fingerprint.gpus[].verified idle_power_w and sustained_load power")
     if bad:
         return wrong(
             "; ".join(bad),
-            "get the shop to confirm exclusive single-tenant allocation; "
-            "re-sample idle power after confirming nothing else is scheduled.",
+            "repeat the idle/load capture in an authorized, isolated window and compare with per-device utilization and scheduler/job records; ask the operator whether other work was scheduled before inferring sharing.",
             "std_ttft_ms on low-concurrency cells shrinks",
         )
     return right("each GPU was idle before the sustained-load sample (idle power well below loaded power)")
@@ -536,21 +504,10 @@ def rule_ten_01(counter, fp, bench, ref):
         return right(f"virtualization={virt} (ACS/hugepages check only applies to VMs)")
     acs = fp.get("acs_enabled")
     huge = fp.get("hugepages_enabled")
-    if acs is None and huge is None:
-        return missing("fingerprint.acs_enabled/hugepages_enabled")
-    if acs is False or huge is False:
-        bad = []
-        if acs is False:
-            bad.append("acs_enabled=false")
-        if huge is False:
-            bad.append("hugepages_enabled=false")
-        return wrong(
-            "virtualization=vm, " + ", ".join(bad),
-            "enable the ACS override patch and reserve hugepages at boot; "
-            "re-read the fingerprint flags.",
-            "std_itl_ms/std_tpot_ms drop",
-        )
-    return right("virtualization=vm with ACS override and hugepages both enabled")
+    if acs is None or huge is None:
+        return missing("VM ACS and hugepage state are incomplete; unavailable telemetry is unknown")
+    return signal(f"virtualization=vm, acs_enabled={acs}, hugepages_enabled={huge}",
+                  "these settings alone do not establish a performance or isolation defect; compare a scoped job-local memory/collective test and request host topology evidence. Do not use ACS override as a generic fix.")
 
 
 def rule_ten_02(counter, fp, bench, ref):
@@ -565,12 +522,8 @@ def rule_ten_02(counter, fp, bench, ref):
     if pinned is None:
         return missing("fingerprint.container_runtime.numa_pinning")
     if pinned is False:
-        return wrong(
-            f"numa_nodes={numa_nodes}, container_runtime.numa_pinning=false",
-            "pin the serving process/container to the local NUMA node and "
-            "enable cgroup limits; re-read container_runtime.numa_pinning.",
-            "p95/p99 TTFT and TPOT tail tighten",
-        )
+        return signal(f"numa_nodes={numa_nodes}, container_runtime.numa_pinning=false",
+                      "verify GPU-to-NUMA locality and compare a bounded job-local pinned/unpinned run before changing scheduler defaults")
     return right(f"numa_nodes={numa_nodes}, serving process pinned to local NUMA node")
 
 
@@ -580,26 +533,185 @@ def rule_price_01(counter, fp, bench, ref):
     billing = counter.get("billing_granularity")
     if not billing:
         return missing("counter.billing_granularity")
-    if billing in ("per-hour", "unknown"):
+    if billing == "unknown":
+        return missing("counter.billing_granularity is unknown")
+    if billing == "per-hour":
         return wrong(
             f"billing_granularity={billing}",
             "negotiate or enable sub-hour billing; check invoice line-item "
             "granularity after the change.",
             "whole-window $/1k accepted moves toward own-window $/1k accepted",
         )
-    return right(f"billing_granularity={billing} (sub-hour)")
+    if billing in ("per-minute", "per-second", "per-second-with-minimum"):
+        return right(f"billing_granularity={billing} (sub-hour)")
+    return missing(f"billing granularity {billing!r} is not recognized")
 
 
-def rule_price_02(counter, fp, bench, ref):
+def sha256_file(path):
+    digest = hashlib.sha256()
+    with open(path, "rb") as fh:
+        for block in iter(lambda: fh.read(1024 * 1024), b""):
+            digest.update(block)
+    return digest.hexdigest()
+
+
+def is_unknown_value(value):
+    if value is None or value == "":
+        return True
+    text = str(value).strip().lower()
+    return text in {"unknown", "unobserved", "unavailable"} or "_unobserved" in text or "unobserved_" in text
+
+
+SCOPE_IDENTITY_FIELDS = (
+    "workload_id", "model_revision", "tokenizer_revision", "precision",
+    "cache_policy", "load_profile_id", "cost_scope",
+)
+SCOPE_ACCEPTANCE_FIELDS = (
+    "rule_id", "quality_rule", "ttft_ms", "e2e_ms",
+)
+CONFIGURATION_FIELDS = (
+    "gpu_model", "gpu_count", "runtime_digest", "server_version",
+    "backend", "kernel", "tensor_parallel",
+)
+
+
+def assess_comparison(bench, ref, candidate_scope, reference_scope_id, requested_label=None):
+    """Fail closed unless the scored table is bound to an evidenced, like-scoped record."""
+    result = {
+        "label": "not comparable",
+        "economic_comparison": "unavailable",
+        "operator_causality": "not established",
+        "reasons": [],
+        "reference_scope_id": reference_scope_id,
+    }
+    if not bench:
+        result["reasons"].append("no scored benchmark input")
+        return result
+    if not isinstance(candidate_scope, dict):
+        result["reasons"].append("candidate scope evidence was not supplied")
+        return result
+    scopes = ref.get("comparison_scopes") if isinstance(ref, dict) else None
+    reference_scope = scopes.get(reference_scope_id) if isinstance(scopes, dict) else None
+    if not isinstance(reference_scope, dict):
+        result["reasons"].append(f"reference scope {reference_scope_id!r} is absent")
+        return result
+
+    for side, scope in (("candidate", candidate_scope), ("reference", reference_scope)):
+        missing_fields = [k for k in SCOPE_IDENTITY_FIELDS if is_unknown_value(scope.get(k))]
+        if not scope.get("observation_date"):
+            missing_fields.append("observation_date")
+        acceptance = scope.get("acceptance")
+        if not isinstance(acceptance, dict):
+            missing_fields.append("acceptance")
+        else:
+            missing_fields.extend(f"acceptance.{k}" for k in SCOPE_ACCEPTANCE_FIELDS
+                                  if acceptance.get(k) is None and k != "e2e_ms")
+            if "e2e_ms" not in acceptance:
+                missing_fields.append("acceptance.e2e_ms")
+            if is_unknown_value(acceptance.get("evidence")):
+                missing_fields.append("acceptance.evidence")
+        if not scope.get("evidence"):
+            missing_fields.append("evidence")
+        config_details = scope.get("configuration")
+        if not isinstance(config_details, dict):
+            missing_fields.append("configuration")
+        else:
+            missing_fields.extend(f"configuration.{k}" for k in CONFIGURATION_FIELDS
+                                  if is_unknown_value(config_details.get(k)))
+        if side == "candidate":
+            digest = scope.get("bench_sha256")
+            source = bench.get("source")
+            if not isinstance(digest, str) or len(digest) != 64:
+                missing_fields.append("bench_sha256")
+            elif not source or not os.path.isfile(source):
+                missing_fields.append("scored table file for digest verification")
+            else:
+                try:
+                    if sha256_file(source) != digest.lower():
+                        result["reasons"].append("candidate scope bench_sha256 does not match the scored table")
+                except OSError:
+                    missing_fields.append("readable scored table for digest verification")
+        if missing_fields:
+            result["reasons"].append(f"{side} scope is incomplete: {', '.join(missing_fields)}")
+
+    for key in SCOPE_IDENTITY_FIELDS:
+        if candidate_scope.get(key) != reference_scope.get(key):
+            result["reasons"].append(f"scope mismatch for {key}")
+    for key in SCOPE_ACCEPTANCE_FIELDS:
+        if candidate_scope.get("acceptance", {}).get(key) != reference_scope.get("acceptance", {}).get(key):
+            result["reasons"].append(f"acceptance mismatch for {key}")
+
+    gates = bench.get("gates") or {}
+    acceptance = candidate_scope.get("acceptance") or {}
+    if gates.get("ttft_ms") != acceptance.get("ttft_ms"):
+        result["reasons"].append("scored table TTFT gate does not match candidate scope")
+    if gates.get("e2e_ms") != acceptance.get("e2e_ms"):
+        result["reasons"].append("scored table E2E gate does not match candidate scope")
+    if not isinstance(bench.get("rate"), (int, float)) or bench.get("rate") <= 0:
+        result["reasons"].append("scored table does not contain a positive numeric rate")
+    if not isinstance(candidate_scope.get("rate"), (int, float)) or candidate_scope.get("rate") <= 0:
+        result["reasons"].append("candidate scope does not contain a positive numeric rate")
+    if candidate_scope.get("rate") != bench.get("rate"):
+        result["reasons"].append("candidate scope rate does not match the scored table")
+    if candidate_scope.get("configuration") != reference_scope.get("configuration"):
+        result["configuration_differs"] = True
+
+    config = candidate_scope.get("configuration_id")
+    ref_config = reference_scope.get("configuration_id")
+    if not config or not ref_config:
+        result["reasons"].append("candidate or reference configuration identity is absent")
+    if requested_label == "not comparable":
+        result["reasons"].append("comparison was explicitly marked not comparable")
+    if result["reasons"]:
+        return result
+
+    if requested_label == "historical":
+        if candidate_scope.get("observation_date") == reference_scope.get("observation_date"):
+            result["reasons"].append("historical label requires distinct dated observations")
+            return result
+        result["label"] = "historical"
+    elif requested_label == "matched":
+        if candidate_scope.get("configuration") != reference_scope.get("configuration"):
+            result["reasons"].append("matched label requires identical complete configuration fields")
+            return result
+        result["label"] = "matched"
+    elif requested_label == "different complete configuration":
+        if candidate_scope.get("configuration") == reference_scope.get("configuration"):
+            result["reasons"].append("different-complete-configuration label requires a documented configuration difference")
+            return result
+        result["label"] = "different complete configuration"
+    elif candidate_scope.get("configuration") == reference_scope.get("configuration"):
+        result["label"] = "matched"
+    else:
+        result["label"] = "different complete configuration"
+    result["economic_comparison"] = "allowed for this workload, acceptance rule, and cost scope"
+    result["operator_causality"] = "not established; configuration effects are not isolated"
+    return result
+
+
+def rule_price_02(counter, fp, bench, ref, comparison=None):
     if not bench:
         return missing("bench")
-    ref_val = g(ref, "run3_a_t0", "cost_per_1k_accepted_own_window_usd")
+    if not comparison or comparison.get("economic_comparison") != "allowed for this workload, acceptance rule, and cost scope":
+        why = "; ".join((comparison or {}).get("reasons") or ["scope comparison was not validated"])
+        return missing(f"economic comparison refused: {why}")
+    reference_scope_id = comparison["reference_scope_id"]
+    if reference_scope_id == "run1-cell-c64":
+        ref_val = g(ref, "run1_best_cell", "cost_per_1k_usd")
+    elif reference_scope_id == "run3-own-window":
+        ref_val = g(ref, "run3_a_t0", "cost_per_1k_accepted_own_window_usd")
+    elif reference_scope_id == "run3-whole-seat":
+        ref_val = g(ref, "run3_whole_seat", "cost_per_1k_accepted_usd")
+    else:
+        return missing(f"reference cost metric for scope {reference_scope_id!r} is not implemented")
     if ref_val is None:
-        return missing("reference.run3_a_t0.cost_per_1k_accepted_own_window_usd")
-    candidates = [
-        c for c in (bench.get("cells") or [])
-        if c.get("cost_per_1k") is not None and c.get("accepted_pct") is not None
-    ]
+        return missing(f"reference cost metric for scope {reference_scope_id!r} is absent")
+    if not bench.get("cells") or any(c.get("accepted_pct") is None or c.get("cost_per_1k") is None
+                                      for c in bench.get("cells", [])):
+        return missing("each scored cell needs accepted_pct and modeled cost under the declared acceptance rule")
+    candidates = [c for c in bench["cells"] if c.get("accepted_pct") > 0
+                  and c.get("accepted") is not None and c.get("attempted") is not None
+                  and c.get("attempted") > 0 and not c.get("holds")]
     if not candidates:
         return missing(
             "bench cell cost_per_1k/accepted_pct (raw cell-*.json files carry no "
@@ -610,9 +722,7 @@ def rule_price_02(counter, fp, bench, ref):
         return wrong(
             f"best-qualifying cell '{best.get('cell')}': cost_per_1k=${best['cost_per_1k']:.4f} "
             f"at {best['accepted_pct']}% accepted, vs reference ${ref_val:.2f}",
-            "attack this via the other WRONG findings ranked above it (rate, "
-            "known-good-stack tuning, fleet-automation provisioning waste) "
-            "rather than price alone; re-run engine_table.cjs after each fix.",
+            "inspect rate, accepted-work yield, workload mix, and the declared cost window; run matched repeated cells while changing one customer-visible serving parameter at a time.",
             "cost_per_1k falls directly and proportionally",
         )
     return right(
@@ -636,7 +746,11 @@ def rule_price_03(counter, fp, bench, ref):
             "provisioning attempt succeeds.",
             "uptime/availability rate on provisioning attempts rises",
         )
-    return right("listed availability and actual provisioning success agree")
+    if listed is False:
+        return missing("no listed offer means no provisioning attempt denominator; availability is unknown for this observation")
+    if provisioned is True:
+        return right("a listed offer provisioned successfully in this observation")
+    return missing("listing/provisioning state is insufficient to evaluate an attempt")
 
 
 def rule_proof_01(counter, fp, bench, ref):
@@ -650,7 +764,10 @@ def rule_proof_01(counter, fp, bench, ref):
         "has_disclosure": proof.get("has_disclosure"),
         "has_pinned_commit": proof.get("has_pinned_commit"),
     }
-    missing_or_false = [k for k, v in flags.items() if v is not True]
+    unavailable = [k for k, v in flags.items() if v is None]
+    if unavailable:
+        return missing(f"public proof fields unobserved: {', '.join(unavailable)}")
+    missing_or_false = [k for k, v in flags.items() if v is False]
     if missing_or_false:
         return wrong(
             f"not confirmed: {', '.join(missing_or_false)}",
@@ -714,30 +831,112 @@ LAYERS = [
 
 ALL_RULE_IDS = [rid for _, _, rules in LAYERS for rid, _ in rules]
 
+FINDING_METHOD = {
+    "FLEET-01": {
+        "competing_causes": "provider queue, image startup, control-plane delay, network readiness, or customer-side SSH timing",
+        "discriminating_test": "repeat request-to-SSH timing on several authorized fresh allocations and retain provider timestamps alongside client timestamps",
+        "bounded_change": "change one provisioning step or image cache setting in a canary; accept only if repeated readiness time improves without breaking health checks",
+        "acceptance": "repeated readiness time improves with unchanged health checks",
+        "rollback": "restore the prior image/provisioning setting and compare against the same readiness check",
+        "access_needed": "customer timestamps; provider control-plane and image logs to separate causes",
+    },
+    "HEALTH-01": {
+        "competing_causes": "server OOM/timeout, model/runtime fault, request cancellation, client/network loss, or benchmark accounting",
+        "discriminating_test": "join failed request IDs and timestamps to client output and server logs for one failing cell",
+        "bounded_change": "replay only the failing cases in an isolated job after identifying one configuration cause; require zero unexplained failures and unchanged accepted-work semantics",
+        "acceptance": "zero unexplained failures and unchanged accepted-work semantics",
+        "rollback": "restore the saved runtime/config and stop replay if error rate rises",
+        "access_needed": "client request IDs and provider server logs; hidden host/RAS data may require operator access",
+    },
+    "PRICE-03": {
+        "competing_causes": "stale listing, transient quota, region/SKU mismatch, account entitlement, or provisioning service fault",
+        "discriminating_test": "retain each listing snapshot and actual authorized provisioning attempt, outcome, SKU, region, timestamp, and denominator",
+        "bounded_change": "recheck the exact listed SKU/region and retry only within the customer's approved attempt budget",
+        "acceptance": "recorded attempt succeeds on the same listed SKU/region",
+        "rollback": "stop attempts and return to the last known provisionable SKU/region if failures repeat",
+        "access_needed": "customer listing and attempt evidence; provider inventory/quota logs to identify cause",
+    },
+    "PRICE-01": {
+        "competing_causes": "hourly billing, minimum duration, rounding, setup charges, or a mismatch between modeled and billed windows",
+        "discriminating_test": "compare dated plan terms with the actual invoice for one bounded seat window, including minimums and fees",
+        "bounded_change": "model the same accepted work under the documented finer billing option; change plans only through normal commercial authorization",
+        "acceptance": "invoice matches the documented billing quantum and total modeled cost does not rise",
+        "rollback": "retain prior plan terms and revert at the next permitted billing boundary if total cost worsens",
+        "access_needed": "customer contract/order and invoice; provider plan terms",
+    },
+    "PRICE-02": {
+        "competing_causes": "rate, utilization, accepted-work yield, window attribution, or incomplete cost inputs",
+        "discriminating_test": "verify the table hash and scope; recompute one cell from its accepted count, duration, rate, and declared cost window",
+        "bounded_change": "vary one serving or workload parameter in matched repeated cells; accept only if same-rule cost per accepted 1,000 falls without quality or reliability regression",
+        "acceptance": "same-rule cost falls without quality or reliability regression",
+        "rollback": "restore the recorded prior parameter and retain both results if acceptance or error rate worsens",
+        "access_needed": "scored table and cost evidence; provider invoice is required for actual billed cost",
+    },
+    "PROOF-01": {
+        "competing_causes": "manifest omission, inaccessible evidence, stale source revision, or incomplete disclosure",
+        "discriminating_test": "independently verify each artifact hash and resolve the cited revision/disclosure",
+        "bounded_change": "publish a corrected evidence manifest and disclosure for this run only",
+        "acceptance": "every referenced artifact hash and disclosure resolves and verifies",
+        "rollback": "withdraw the affected claim if any artifact fails verification; retain prior versions",
+        "access_needed": "result artifacts and public/private disclosure location",
+    },
+    "PROOF-02": {
+        "competing_causes": "best-cell-only reporting, missing setup clocks, unpriced idle gaps, or billing minimums",
+        "discriminating_test": "reconcile one complete request-to-release timeline with modeled rate and invoice lines",
+        "bounded_change": "add a labeled whole-seat estimate alongside the existing cell and arm-window figures",
+        "acceptance": "all cost views state distinct windows, denominator, and modeled/billed status",
+        "rollback": "withdraw any unreconciled figure and keep source-level windows separate",
+        "access_needed": "allocation/release timestamps, accepted counts, plan terms, invoice",
+    },
+}
+
 
 # ---------------------------------------------------------------------------
 # Evaluation
 # ---------------------------------------------------------------------------
 
-def evaluate(counter, fp, bench, ref):
+def evaluate(counter, fp, bench, ref, comparison=None):
     results = OrderedDict()
     for layer_id, title, rules in LAYERS:
         layer_results = OrderedDict()
         for rid, fn in rules:
             try:
-                layer_results[rid] = fn(counter, fp, bench, ref)
+                if rid == "PRICE-02":
+                    layer_results[rid] = fn(counter, fp, bench, ref, comparison)
+                else:
+                    layer_results[rid] = fn(counter, fp, bench, ref)
+                if layer_results[rid].get("status") == "WRONG":
+                    layer_results[rid]["diagnostic"] = FINDING_METHOD.get(rid, {
+                        "competing_causes": "multiple causes can produce this observation; the input alone does not establish root cause",
+                        "discriminating_test": "repeat a fixed, scoped observation and inspect the source evidence named by this rule",
+                        "bounded_change": layer_results[rid].get("action", "change one variable only after evidence identifies it"),
+                        "acceptance": "compare the same stated metric and scope before and after the change",
+                        "rollback": "restore the recorded prior setting if the acceptance metric regresses",
+                        "access_needed": "customer-visible evidence plus provider operator logs for hidden host state",
+                    })
             except Exception as e:  # keep one bad rule from sinking the report
                 layer_results[rid] = missing(f"internal error evaluating {rid}: {e}")
         results[layer_id] = {"title": title, "rules": layer_results}
     return results
 
 
-def verdict_line(bench, ref):
-    ref_val = g(ref, "run3_a_t0", "cost_per_1k_accepted_own_window_usd")
+def verdict_line(bench, ref, comparison=None):
     if not bench:
         return "Insufficient data for a $/1k accepted verdict -- no --bench provided."
+    if not comparison or comparison.get("economic_comparison") != "allowed for this workload, acceptance rule, and cost scope":
+        reasons = "; ".join((comparison or {}).get("reasons") or ["no validated comparison scope"])
+        return f"Not comparable to Hot Aisle -- no $/1k ratio. {reasons}"
+    scope_id = comparison["reference_scope_id"]
+    if scope_id == "run1-cell-c64":
+        ref_val = g(ref, "run1_best_cell", "cost_per_1k_usd")
+    elif scope_id == "run3-own-window":
+        ref_val = g(ref, "run3_a_t0", "cost_per_1k_accepted_own_window_usd")
+    elif scope_id == "run3-whole-seat":
+        ref_val = g(ref, "run3_whole_seat", "cost_per_1k_accepted_usd")
+    else:
+        ref_val = None
     if ref_val is None:
-        return "Insufficient data for a $/1k accepted verdict -- reference cost figure unobserved."
+        return f"Not comparable to Hot Aisle -- no supported cost metric for scope {scope_id!r}."
     candidates = [
         c for c in (bench.get("cells") or [])
         if c.get("cost_per_1k") is not None and c.get("accepted_pct") is not None
@@ -751,9 +950,10 @@ def verdict_line(bench, ref):
     ratio = best["cost_per_1k"] / ref_val
     direction = "more expensive than" if ratio > 1 else ("cheaper than" if ratio < 1 else "equal to")
     return (
-        f"{ratio:.2f}x Hot Aisle on $/1k accepted "
+        f"{comparison['label']}: {ratio:.2f}x Hot Aisle on $/1k accepted "
         f"(${best['cost_per_1k']:.4f} at {best['accepted_pct']}% accepted, "
-        f"cell '{best.get('cell')}', vs Hot Aisle's ${ref_val:.2f}) -- {direction} reference"
+        f"cell '{best.get('cell')}', vs Hot Aisle's ${ref_val:.4f}) -- {direction}; "
+        f"cost scope {comparison['reference_scope_id']}; operator causality not established"
     )
 
 
@@ -781,10 +981,10 @@ def render_markdown(results, verdict, top3, provenance):
         lines.append(f"## {layer['title']}")
         lines.append("")
         statuses = {rid: res["status"] for rid, res in layer["rules"].items()}
-        if all(s == "MISSING" for s in statuses.values()):
+        if all(s == "UNKNOWN" for s in statuses.values()):
             first = next(iter(layer["rules"].values()))
             what = first["reason"]
-            lines.append(f"Not evaluated -- missing {what}. {howto_for(what)}")
+            lines.append(f"UNKNOWN -- missing {what}. {howto_for(what)}")
             lines.append("")
             continue
         for rid, res in layer["rules"].items():
@@ -792,10 +992,21 @@ def render_markdown(results, verdict, top3, provenance):
                 lines.append(f"- **WRONG [{rid}]** {res['observation']}")
                 lines.append(f"  - COULD DO BETTER: {res['action']}")
                 lines.append(f"  - Expected effect: {res['effect']}")
+                diag = res.get("diagnostic", {})
+                for label, key in (("Competing causes", "competing_causes"), ("Discriminating test", "discriminating_test"),
+                                   ("Bounded change", "bounded_change"), ("Acceptance", "acceptance"), ("Rollback", "rollback"),
+                                   ("Access needed", "access_needed")):
+                    if diag.get(key):
+                        lines.append(f"  - {label}: {diag[key]}")
+            elif res["status"] == "SIGNAL":
+                lines.append(f"- **SIGNAL (hypothesis only) [{rid}]** {res.get('observation', '')}")
+                lines.append(f"  - Discriminating evidence: {res.get('reason', '')}")
             elif res["status"] == "RIGHT":
                 lines.append(f"- RIGHT [{rid}] {res['observation']}")
+            elif res["status"] == "NOT_COMPARABLE":
+                lines.append(f"- NOT COMPARABLE [{rid}] {res['reason']}")
             else:
-                lines.append(f"- not evaluated [{rid}] -- missing {res['reason']}. {howto_for(res['reason'])}")
+                lines.append(f"- UNKNOWN [{rid}] -- {res['reason']}. {howto_for(res['reason'])}")
         lines.append("")
 
     lines.append("## First three things to change")
@@ -808,6 +1019,11 @@ def render_markdown(results, verdict, top3, provenance):
             lines.append(f"{i}. **[{rid}]** {res['observation']}")
             lines.append(f"   - Change: {res['action']}")
             lines.append(f"   - Expected effect: {res['effect']}")
+            diag = res.get("diagnostic", {})
+            if diag:
+                lines.append(f"   - Test: {diag['discriminating_test']}")
+                lines.append(f"   - Bounded change: {diag['bounded_change']}")
+                lines.append(f"   - Acceptance / rollback: {diag['acceptance']} / {diag['rollback']}")
     lines.append("")
 
     lines.append("## Provenance")
@@ -818,9 +1034,10 @@ def render_markdown(results, verdict, top3, provenance):
     return "\n".join(lines)
 
 
-def build_json_report(results, verdict, top3, provenance):
+def build_json_report(results, verdict, top3, provenance, comparison):
     return {
         "verdict": verdict,
+        "comparison": comparison,
         "layers": results,
         "top_three": [
             {"rule_id": rid, "layer": layer_id, **res}
@@ -850,6 +1067,9 @@ def build_provenance(args, counter, counter_err, fp, fp_err, bench, bench_err, r
     elif ref:
         prov["reference_input"] += f" (assembled_at={ref.get('assembled_at', 'unknown')})"
     prov["rubric"] = "RUBRIC.md, same directory as this script"
+    prov["candidate_scope_input"] = args.scope or "(not provided; economic comparison refused)"
+    prov["reference_scope_id"] = args.reference_scope_id or "(not provided)"
+    prov["comparison_label_requested"] = args.comparison_label or "(derive only after scope validation)"
     return prov
 
 
@@ -865,6 +1085,10 @@ def build_arg_parser():
     p.add_argument("--fingerprint", default=None, help="path to a second-run/shop-fingerprint@1 JSON file")
     p.add_argument("--bench", default=None, help="path to an engine_table.cjs JSON table, or a directory of cell-*.json files (or a table.json inside one)")
     p.add_argument("--reference", default=DEFAULT_REFERENCE, help="path to the reference bundle JSON (default: shipped reference/hotaisle-2026-09.json)")
+    p.add_argument("--scope", default=None, help="candidate scope JSON (workload, acceptance, cost window, complete config, table SHA-256)")
+    p.add_argument("--reference-scope-id", default=None, help="scope id from reference comparison_scopes")
+    p.add_argument("--comparison-label", choices=("matched", "different complete configuration", "historical", "not comparable"), default=None,
+                   help="optional declared label; validated against scope identity before any ratio")
     p.add_argument("--out", default="REPORT.md", help="output report path (default: REPORT.md)")
     p.add_argument("--json", action="store_true", help="also write a JSON report next to --out (same stem, .json extension)")
     return p
@@ -877,9 +1101,15 @@ def main(argv=None):
     fp, fp_err = load_fingerprint(args.fingerprint, counter)
     bench, bench_err = load_bench(args.bench)
     ref, ref_err = load_reference(args.reference)
+    scope, scope_err = load_json_file(args.scope) if args.scope else (None, None)
 
-    results = evaluate(counter, fp, bench, ref)
-    verdict = verdict_line(bench, ref)
+    comparison = assess_comparison(bench, ref, scope, args.reference_scope_id, args.comparison_label)
+    if scope_err:
+        comparison["reasons"].append(f"candidate scope could not be loaded: {scope_err}")
+        comparison["economic_comparison"] = "unavailable"
+        comparison["label"] = "not comparable"
+    results = evaluate(counter, fp, bench, ref, comparison)
+    verdict = verdict_line(bench, ref, comparison)
     top3 = top_three(results)
     provenance = build_provenance(args, counter, counter_err, fp, fp_err, bench, bench_err, ref, ref_err)
 
@@ -890,7 +1120,7 @@ def main(argv=None):
     if args.json:
         json_path = os.path.splitext(args.out)[0] + ".json"
         with open(json_path, "w", encoding="utf-8") as f:
-            json.dump(build_json_report(results, verdict, top3, provenance), f, indent=2)
+            json.dump(build_json_report(results, verdict, top3, provenance, comparison), f, indent=2)
 
     print(f"wrote {args.out}" + (f" and {os.path.splitext(args.out)[0] + '.json'}" if args.json else ""))
     return 0

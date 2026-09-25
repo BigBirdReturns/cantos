@@ -1,188 +1,231 @@
 #!/usr/bin/env bash
 # evaluate.sh <shop> <amd|nvidia> <user@host> [ssh-key]
+# evaluate.sh --rescore <run-directory> <gpu-hour-rate>
 #
-# Thin orchestrator for one shop-eval run, driven from the operator's Linux box (or WSL).
-# It copies probe/fingerprint.sh and the campaign's arm.sh + cells.<kind>.sh to the rented
-# machine, runs fingerprint -> serve -> bench there over one ssh session under nohup, pulls
-# the results back with the campaign's own collect.sh, scores them with engine_table.cjs,
-# and runs diagnose.py against the Hot Aisle reference -- all into
-# shop-eval/runs/<shop>-<date>/.
-#
-# It never rents, provisions, or deletes a machine. Every stop -- success or failure --
-# ends by printing exactly what you, the human, still have to do (see on_exit below and
-# MANUAL.md's stop rules).
-set -euo pipefail
+# Live mode runs only on the already-rented, already-running machine supplied by
+# the operator. Rescore mode reads one retained local run and makes no SSH call.
+set -Eeuo pipefail
 
 usage() {
-  echo "usage: evaluate.sh <shop> <amd|nvidia> <user@host> [ssh-key]" >&2
-  echo "  shop      short slug, e.g. latitude, voltage-park, amd-devcloud" >&2
-  echo "  amd|nvidia which GPU vendor's cells and runtime image to use" >&2
-  echo "  user@host  ssh target for the already-rented, already-running machine" >&2
-  echo "  ssh-key    optional path to a private key (quote it if it has spaces)" >&2
+  cat >&2 <<'USAGE'
+usage: evaluate.sh <shop> <amd|nvidia> <user@host> [ssh-key]
+       evaluate.sh --rescore <run-directory> <gpu-hour-rate>
+  shop       lowercase provider slug [a-z0-9][a-z0-9-]*
+  user@host  SSH user plus DNS name, IPv4, or SSH-config alias; no options/paths
+  ssh-key    optional private key path
+  --rescore  local-only: rescore retained bench data at a new rate, no SSH
+USAGE
   exit 2
 }
 
-[[ $# -ge 3 ]] || usage
-shop="$1"
-kind="$2"
-host="$3"
-key="${4:-}"
-[[ "$kind" == "amd" || "$kind" == "nvidia" ]] || usage
+is_rate() { [[ "$1" =~ ^[0-9]+([.][0-9]+)?$ ]] && awk -v n="$1" 'BEGIN { exit !(n > 0) }'; }
+run_python() {
+  if command -v python3 >/dev/null 2>&1; then python3 "$@";
+  elif command -v python >/dev/null 2>&1; then python "$@";
+  else echo "Python 3 is required for local scoring/rescore" >&2; return 127; fi
+}
 
-here="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-campaign_dir="$(cd "$here/.." && pwd)"
-date_tag="$(date -u +%Y-%m-%d)"
-rundir="$here/runs/${shop}-${date_tag}"
-fp_dir="$rundir/fingerprint"
-bench_dir="$rundir/bench"
-log_file="$rundir/evaluate.log"
-remote_dir='shop-eval-run'   # relative to the ssh login's $HOME on the rented machine
+here="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+campaign_dir="$(cd "$here/.." && pwd -P)"
+project_root="$(cd "$here/../../.." && pwd -P)"
+diag="$here/diagnose/diagnose.py"
+ref="$here/diagnose/reference/hotaisle-2026-09.json"
+default_runs_root="${XDG_DATA_HOME:-$HOME/.local/share}/axm-tools/shop-eval/runs"
+runs_root="${SHOP_EVAL_RUNS_DIR:-$default_runs_root}"
 
-mkdir -p "$fp_dir" "$bench_dir"
+run_local_reports() {
+  local source="$1" rate="$2" outdir="$3" table="$3/engine_table.json" counter_rec="$here/counter/records/${shop:-local}-$(date -u +%Y-%m).json"
+  [[ -d "$source" ]] || { echo "source run directory does not exist: $source" >&2; return 1; }
+  [[ -d "$source/bench" ]] || { echo "source run has no bench/ data: $source" >&2; return 1; }
+  [[ -f "$source/fingerprint/fingerprint.json" ]] || { echo "source run has no fingerprint/fingerprint.json" >&2; return 1; }
+  mkdir -p "$outdir"
+  is_rate "$rate" || { echo "rate must be a positive decimal GPU-hour price" >&2; return 2; }
+  command -v node >/dev/null 2>&1 || { echo "node is required for local scoring" >&2; return 1; }
+  [[ -f "$campaign_dir/engine_table.cjs" && -f "$diag" && -f "$ref" ]] || { echo "scorer, diagnosis, or reference file is missing" >&2; return 1; }
 
-ssh_opts=(-o BatchMode=yes -o StrictHostKeyChecking=accept-new)
-scp_opts=(-o BatchMode=yes -o StrictHostKeyChecking=accept-new)
-if [[ -n "$key" ]]; then
-  ssh_opts+=(-i "$key")
-  scp_opts+=(-i "$key")
+  local tmp_table="$outdir/.engine_table.$$.tmp" tmp_report="$outdir/.REPORT.$$.tmp"
+  node "$campaign_dir/engine_table.cjs" "$source/bench" "$rate" 1000 15000 > "$tmp_table"
+  [[ -s "$tmp_table" ]] || { rm -f "$tmp_table"; echo "engine table is empty" >&2; return 1; }
+  mv "$tmp_table" "$table"
+  local args=(--fingerprint "$source/fingerprint/fingerprint.json" --bench "$table" --reference "$ref" --out "$tmp_report")
+  if [[ -f "$counter_rec" ]]; then args+=(--counter "$counter_rec"); fi
+  if ! run_python "$diag" "${args[@]}"; then rm -f "$tmp_report"; echo "diagnosis failed; retained score table is $table" >&2; return 1; fi
+  [[ -s "$tmp_report" ]] || { rm -f "$tmp_report"; echo "diagnosis produced no report" >&2; return 1; }
+  mv "$tmp_report" "$outdir/REPORT.md"
+  echo "Local score table and report written to $outdir"
+}
+
+if [[ "${1:-}" == "--rescore" ]]; then
+  [[ $# -eq 3 ]] || usage
+  run_dir="$(cd "$2" 2>/dev/null && pwd -P)" || { echo "run directory not found: $2" >&2; exit 1; }
+  runs_root="$(cd "$runs_root" 2>/dev/null && pwd -P)" || { echo "private runs directory does not exist: ${SHOP_EVAL_RUNS_DIR:-$default_runs_root}" >&2; exit 1; }
+  case "$runs_root/" in "$project_root/"*) echo "SHOP_EVAL_RUNS_DIR must be outside the checked-out project to keep run data private" >&2; exit 2 ;; esac
+  case "$run_dir/" in "$runs_root"/*/) ;; *) echo "rescore accepts only a run directory beneath $runs_root" >&2; exit 2 ;; esac
+  run_name="${run_dir##*/}"
+  if [[ "$run_name" =~ ^(.+)-[0-9]{4}-[0-9]{2}-[0-9]{2}- ]]; then shop="${BASH_REMATCH[1]}"; fi
+  [[ -s "$run_dir/MANIFEST.sha256" ]] || { echo "source run has no sealed MANIFEST.sha256" >&2; exit 1; }
+  ( cd "$run_dir" && sha256sum -c MANIFEST.sha256 ) || { echo "source run manifest does not verify; refusing rescore" >&2; exit 1; }
+  is_rate "$3" || { echo "rate must be a positive decimal GPU-hour price" >&2; exit 2; }
+  rescore_tag="${EVALUATE_RESCORE_TAG:-$(date -u +%H%M%S)-$$}"
+  [[ "$rescore_tag" =~ ^[a-zA-Z0-9][a-zA-Z0-9-]*$ ]] || { echo "invalid EVALUATE_RESCORE_TAG" >&2; exit 2; }
+  derived="$runs_root/${run_name}-rescore-${rescore_tag}"
+  [[ ! -e "$derived" ]] || { echo "refusing to overwrite existing rescore: $derived" >&2; exit 1; }
+  mkdir "$derived"
+  source_manifest_sha256="$(sha256sum "$run_dir/MANIFEST.sha256" | awk '{print $1}')"
+  run_python - "$derived/RESCORE.json" "$run_dir" "$source_manifest_sha256" "$3" <<'PY'
+import datetime,json,sys
+out,source,manifest,rate=sys.argv[1:]
+with open(out,"w",encoding="utf-8") as f:
+    json.dump({"kind":"local-rescore","source_run":source,"source_manifest_sha256":manifest,"modeled_gpu_hour_rate_usd":float(rate),"created_at_utc":datetime.datetime.now(datetime.timezone.utc).isoformat()},f,indent=2)
+    f.write("\n")
+PY
+  run_local_reports "$run_dir" "$3" "$derived"
+  tmp_manifest="$derived/.MANIFEST.$$.tmp"
+  ( cd "$derived" && find . -type f ! -name MANIFEST.sha256 ! -name '.MANIFEST.*.tmp' -exec sha256sum {} \; | LC_ALL=C sort -k2 > "$tmp_manifest" )
+  mv "$tmp_manifest" "$derived/MANIFEST.sha256"
+  echo "Source run remains unchanged; derived rescore: $derived"
+  exit 0
 fi
 
-log_line() { printf '%s %s\n' "$(date -u +%H:%M:%S)" "$*" | tee -a "$log_file"; }
+[[ $# -ge 3 && $# -le 4 ]] || usage
+shop="$1"; kind="$2"; host="$3"; key="${4:-}"
+[[ "$shop" =~ ^[a-z0-9][a-z0-9-]*$ ]] || { echo "invalid shop slug: use lowercase letters, digits, and hyphens" >&2; exit 2; }
+[[ "$kind" == amd || "$kind" == nvidia ]] || usage
+# SSH and SCP each parse the destination themselves. Restrict it to a plain
+# user@host token so shell metacharacters, options and scp path syntax cannot
+# be smuggled through either command. Use an SSH config alias for IPv6 hosts.
+[[ "$host" =~ ^[A-Za-z0-9._-]+@[A-Za-z0-9][A-Za-z0-9.-]*$ ]] || {
+  echo "invalid SSH target; use user@DNS-name, user@IPv4, or a safe SSH-config alias" >&2; exit 2;
+}
 
+date_tag="$(date -u +%Y-%m-%d)"
+run_tag="${EVALUATE_RUN_TAG:-$(date -u +%H%M%S)-$$}"
+[[ "$run_tag" =~ ^[a-zA-Z0-9][a-zA-Z0-9-]*$ ]] || { echo "invalid EVALUATE_RUN_TAG" >&2; exit 2; }
+mkdir -p "$runs_root"
+runs_root="$(cd "$runs_root" && pwd -P)"
+case "$runs_root/" in "$project_root/"*) echo "SHOP_EVAL_RUNS_DIR must be outside the checked-out project to keep run data private" >&2; exit 2 ;; esac
+rundir="$runs_root/${shop}-${date_tag}-${run_tag}"
+[[ ! -e "$rundir" ]] || { echo "refusing to overwrite existing run: $rundir" >&2; exit 1; }
+mkdir "$rundir" || { echo "could not reserve unique run directory: $rundir" >&2; exit 1; }
+fp_dir="$rundir/fingerprint"; bench_dir="$rundir/bench"; log_file="$rundir/evaluate.log"
+mkdir "$fp_dir" "$bench_dir"
+
+# Use a unique remote workspace and output directory for this run. The arm's
+# only local customization is its result path; workload cells remain pinned.
+remote_dir="shop-eval-${shop}-${date_tag}-${run_tag}"
+ssh_opts=(-o BatchMode=yes -o StrictHostKeyChecking=accept-new)
+scp_opts=(-o BatchMode=yes -o StrictHostKeyChecking=accept-new)
+if [[ -n "$key" ]]; then ssh_opts+=(-i "$key"); scp_opts+=(-i "$key"); fi
+
+log_line() { printf '%s %s\n' "$(date -u +%H:%M:%S)" "$*" | tee -a "$log_file"; }
 STAGE="start"
+seal_manifest() {
+  local tmp="$rundir/.MANIFEST.$$.tmp"
+  ( cd "$rundir" && find . -type f ! -name MANIFEST.sha256 ! -name '.MANIFEST.*.tmp' -exec sha256sum {} \; | LC_ALL=C sort -k2 > "$tmp" )
+  mv "$tmp" "$rundir/MANIFEST.sha256"
+}
 on_exit() {
   local ec=$?
+  trap - EXIT
   {
     echo
     echo "================================================================="
     echo "evaluate.sh stopped after stage '$STAGE' (exit code $ec) for $shop on $host"
     case "$STAGE" in
-      start|copy)
-        echo "Nothing ran on $host yet beyond copying files there."
-        ;;
-      running)
-        echo "The remote fingerprint/serve/bench job may still be running on $host."
-        echo "Check progress:"
-        echo "  ssh ${key:+-i \"$key\" }\"$host\" \"tail -n 40 $remote_dir/run.log\""
-        ;;
-      collected)
-        echo "Results were pulled back but scoring/diagnose did not finish."
-        ;;
-      scored)
-        echo "Scored, but diagnose.py did not finish; fill report_template.md by hand."
-        ;;
-      diagnosed|done)
-        echo "All local steps finished."
-        ;;
+      start|copy) echo "No remote workload was started." ;;
+      running) echo "Remote status is unresolved. Inspect $remote_dir/run.log and run.exit before retrying." ;;
+      collected) echo "Evidence was collected; local scoring/reporting did not finish." ;;
+      scored) echo "Scored, but the report step did not finish." ;;
+      diagnosed|done) echo "Local scoring, diagnosis and collection finished." ;;
     esac
-    echo
-    echo "You must still do this by hand -- evaluate.sh never provisions or deletes machines:"
-    echo "  1. Delete the $shop machine ($host) in its own console now. It keeps billing"
-    echo "     until you do, regardless of what this script did."
-    echo "  2. Open $rundir/REPORT.md if it exists; otherwise copy report_template.md into"
-    echo "     $rundir/REPORT.md and fill it from $fp_dir, $bench_dir, and the engine table."
-    echo "  3. Fill in the counter record for $shop this month if you have not already:"
-    echo "     $here/counter/records/${shop}-$(date -u +%Y-%m).json  (see counter/PROTOCOL.md)"
-    echo "     then: python3 \"$here/counter/counter_record.py\" score \"$here/counter/records/${shop}-$(date -u +%Y-%m).json\""
-    echo "  4. When the real invoice posts, add it to $rundir/REPORT.md's provenance line."
-    echo "  5. If $shop should join the roster: add it to providers/providers.jsonl and an"
-    echo "     observation to availability/README.md's ledger (see MANUAL.md)."
+    echo "This tool does not create or delete provider resources."
+    echo "Check the provider console now and release this test allocation by its documented control-plane action."
+    echo "Inspect $rundir and verify $rundir/MANIFEST.sha256 before handoff."
     echo "================================================================="
   } | tee -a "$log_file"
+  seal_manifest || echo "WARNING: could not seal final manifest for $rundir" >&2
+  if (( ec != 0 )); then echo "Run retained at $rundir (exit $ec)." >&2; fi
 }
 trap on_exit EXIT
-
 log_line "shop-eval: $shop ($kind) on $host -> $rundir"
 
-# 1. Copy the probe, the workload arm, and its cells to the remote machine.
-probe_script="$here/probe/fingerprint.sh"
+probe_script="$here/probe/fingerprint.sh"; arm_script="$campaign_dir/arm.sh"; cells_file="$campaign_dir/cells.$kind.sh"
 [[ -f "$probe_script" ]] || { echo "missing $probe_script" >&2; exit 1; }
-arm_script="$campaign_dir/arm.sh"
 [[ -f "$arm_script" ]] || { echo "missing $arm_script" >&2; exit 1; }
-cells_file="$campaign_dir/cells.$kind.sh"
-[[ -f "$cells_file" ]] || {
-  echo "missing $cells_file; generate it first with:" >&2
-  echo "  node \"$campaign_dir/gen-cells.cjs\"" >&2
-  exit 1
-}
+[[ -f "$cells_file" ]] || { echo "missing $cells_file; generate it first with node $campaign_dir/gen-cells.cjs" >&2; exit 1; }
 
 runner_local="$rundir/remote-run.sh"
 cat > "$runner_local" <<REMOTE
 #!/usr/bin/env bash
-set -uo pipefail
+set -Eeuo pipefail
+status=0
+finish() { status=\$?; printf '%s\\n' "\$status" > run.exit; exit "\$status"; }
+trap finish EXIT
 cd "\$(dirname "\$0")"
-bash fingerprint.sh "$kind" .
-bash arm.sh serve "$kind"
-bash arm.sh bench "$kind"
+# Keep arm.sh's pinned workload intact while isolating output to this run.
+sed "s|^RESULT_DIR=/tmp/workload-report\$|RESULT_DIR=\$PWD/workload-report|" arm.sh > arm-run.sh
+bash fingerprint.sh "$kind" fingerprint
+bash arm-run.sh serve "$kind"
+bash arm-run.sh bench "$kind"
+[[ -s workload-report/MANIFEST.sha256 ]]
 REMOTE
 chmod +x "$runner_local"
 
-ssh "${ssh_opts[@]}" "$host" "mkdir -p $remote_dir"
-scp "${scp_opts[@]}" "$probe_script" "$arm_script" "$cells_file" "$runner_local" "$host:$remote_dir/"
 STAGE="copy"
-log_line "copied fingerprint.sh, arm.sh, cells.$kind.sh, remote-run.sh to $host:$remote_dir/"
+ssh "${ssh_opts[@]}" -- "$host" "umask 077 && mkdir '$remote_dir'" || { echo "could not create unique remote workspace" >&2; exit 1; }
+scp "${scp_opts[@]}" -- "$probe_script" "$arm_script" "$cells_file" "$runner_local" "$host:$remote_dir/"
+log_line "copied pinned runner inputs into $remote_dir"
 
-# 2. Fingerprint, serve, and bench over one ssh session, under nohup so a dropped
-#    connection does not kill the run. Everything after this point bills the seat;
-#    the 25-minute health cap in arm.sh and the bench watchdog are the only automatic
-#    stops (see MANUAL.md's stop rules). This step normally takes 45-90 minutes.
-ssh "${ssh_opts[@]}" "$host" \
-  "cd $remote_dir && chmod +x remote-run.sh fingerprint.sh arm.sh && nohup bash remote-run.sh > run.log 2>&1 & echo \$! > run.pid; disown"
+# PID and exit status are written by the same remote shell that backgrounds
+# the job. A polling transport error is a failure, never a false completion.
+launch_cmd="cd '$remote_dir' && chmod +x remote-run.sh fingerprint.sh arm.sh && (nohup ./remote-run.sh >run.log 2>&1 < /dev/null & echo \$! >run.pid)"
+ssh "${ssh_opts[@]}" -- "$host" "$launch_cmd"
 STAGE="running"
-log_line "started fingerprint + serve + bench on $host under nohup; polling run.log"
-
-while ssh "${ssh_opts[@]}" "$host" "kill -0 \$(cat $remote_dir/run.pid 2>/dev/null) 2>/dev/null"; do
-  sleep 30
-  ssh "${ssh_opts[@]}" "$host" "tail -n 3 $remote_dir/run.log" 2>/dev/null | tee -a "$log_file" || true
+log_line "started remote workload; waiting for run.exit"
+poll_timeout="${EVALUATE_POLL_TIMEOUT_SECONDS:-7200}"
+poll_interval="${EVALUATE_POLL_INTERVAL_SECONDS:-10}"
+[[ "$poll_timeout" =~ ^[0-9]+$ && "$poll_timeout" -gt 0 ]] || { echo "EVALUATE_POLL_TIMEOUT_SECONDS must be a positive integer" >&2; exit 2; }
+[[ "$poll_interval" =~ ^[0-9]+$ && "$poll_interval" -gt 0 ]] || { echo "EVALUATE_POLL_INTERVAL_SECONDS must be a positive integer" >&2; exit 2; }
+poll_started=$SECONDS
+while true; do
+  poll_elapsed=$((SECONDS - poll_started))
+  (( poll_elapsed < poll_timeout )) || { echo "timed out waiting for remote exit status after ${poll_elapsed}s; remote job may still be running" >&2; exit 1; }
+  if ssh "${ssh_opts[@]}" -- "$host" "test -f '$remote_dir/run.exit'"; then break; else
+    rc=$?
+    (( rc == 1 )) || { echo "SSH failed while polling remote job (status $rc); stop and inspect manually" >&2; exit 1; }
+  fi
+  sleep "$poll_interval"
+  ssh "${ssh_opts[@]}" -- "$host" "tail -n 3 '$remote_dir/run.log'" 2>&1 | tee -a "$log_file"
 done
-log_line "remote run finished; last lines of run.log:"
-ssh "${ssh_opts[@]}" "$host" "tail -n 30 $remote_dir/run.log" 2>&1 | tee -a "$log_file" || true
-
-# 3. Pull back fingerprint.json (with its raw/ and MANIFEST.sha256) and the bench cells.
-scp "${scp_opts[@]}" -r "$host:$remote_dir/raw" "$host:$remote_dir/fingerprint.json" "$host:$remote_dir/MANIFEST.sha256" "$fp_dir/" 2>>"$log_file" \
-  || log_line "warning: could not collect the full fingerprint set; check $host:$remote_dir manually"
-
-if [[ -n "$key" ]]; then export SSH_KEY="$key"; fi
-bash "$campaign_dir/collect.sh" "$shop" "$host" >>"$log_file" 2>&1 \
-  || log_line "warning: collect.sh reported a problem; see $log_file"
-if [[ -d "$campaign_dir/results/$shop" ]]; then
-  cp -a "$campaign_dir/results/$shop/." "$bench_dir/"
-  log_line "bench results copied into $bench_dir (also left in $campaign_dir/results/$shop by collect.sh)"
+remote_status="$(ssh "${ssh_opts[@]}" -- "$host" "cat '$remote_dir/run.exit'")"
+[[ "$remote_status" =~ ^[0-9]+$ ]] || { echo "invalid remote exit status: $remote_status" >&2; exit 1; }
+if (( remote_status != 0 )); then
+  ssh "${ssh_opts[@]}" -- "$host" "tail -n 60 '$remote_dir/run.log'" 2>&1 | tee -a "$log_file" || true
+  echo "remote job failed with exit $remote_status; refusing to score partial collection as complete" >&2
+  exit 1
 fi
+
+log_line "remote job exited successfully; collecting into unique local run"
+scp "${scp_opts[@]}" -r -- "$host:$remote_dir/fingerprint/fingerprint.json" "$host:$remote_dir/fingerprint/raw" "$host:$remote_dir/fingerprint/MANIFEST.sha256" "$fp_dir/"
+( cd "$fp_dir" && sha256sum -c MANIFEST.sha256 ) >> "$log_file" 2>&1
+scp "${scp_opts[@]}" -r -- "$host:$remote_dir/workload-report/." "$bench_dir/"
+[[ -s "$bench_dir/MANIFEST.sha256" ]] || { echo "collected workload manifest is missing" >&2; exit 1; }
+( cd "$bench_dir" && sha256sum -c MANIFEST.sha256 ) >> "$log_file" 2>&1
 STAGE="collected"
 
-# 4. Score locally with the existing engine. Needs the rate this seat was actually billed
-#    at -- pass it as SHOP_RATE=<dollars-per-gpu-hour> in the environment, since evaluate.sh
-#    does not know your invoice.
-if [[ -n "${SHOP_RATE:-}" ]]; then
-  if command -v node >/dev/null 2>&1; then
-    node "$campaign_dir/engine_table.cjs" "$bench_dir" "$SHOP_RATE" 1000 15000 > "$rundir/engine_table.json" \
-      && log_line "engine table written to $rundir/engine_table.json (gates: p95 TTFT 1000ms, p95 E2E 15000ms)" \
-      || log_line "warning: engine_table.cjs failed; score manually"
-  else
-    log_line "warning: node not found; cannot run engine_table.cjs (see MANUAL.md prerequisites)"
-  fi
+# Cost remains an explicit operator input. Scores are modeled at this rate;
+# invoice and promotional-credit values belong in separate report fields.
+if [[ -n "${SHOP_RATE:-}" ]]; then rate="$SHOP_RATE"; else rate=""; fi
+if [[ -n "$rate" ]]; then
+  run_local_reports "$rundir" "$rate" "$rundir"
+  STAGE="scored"
 else
-  log_line "SHOP_RATE not set; skipping engine_table.cjs. Run it yourself once you know the billed rate:"
-  log_line "  node \"$campaign_dir/engine_table.cjs\" \"$bench_dir\" <rate> 1000 15000 > \"$rundir/engine_table.json\""
+  log_line "SHOP_RATE not set; local evidence collected, scoring deferred."
+  log_line "Rescore offline later: bash '$here/evaluate.sh' --rescore '$rundir' <modeled-GPU-hour-rate>"
 fi
-STAGE="scored"
 
-# 5. Diagnose against the Hot Aisle reference.
-diag="$here/diagnose/diagnose.py"
-ref="$here/diagnose/reference/hotaisle-2026-09.json"
-counter_rec="$here/counter/records/${shop}-$(date -u +%Y-%m).json"
-if [[ -f "$diag" && -f "$ref" ]]; then
-  python3 "$diag" --counter "$counter_rec" --fingerprint "$fp_dir/fingerprint.json" \
-    --bench "$bench_dir" --reference "$ref" --out "$rundir/REPORT.md" \
-    && log_line "REPORT.md written to $rundir/REPORT.md" \
-    || log_line "warning: diagnose.py failed; fill report_template.md by hand"
-else
-  log_line "warning: diagnose.py or the reference file is not in place yet; fill report_template.md by hand"
-fi
+# A counter score is only a disclosed, chosen convention. Its missing fields,
+# weights and capability scope must be reviewed; it is not a provider grade.
 STAGE="diagnosed"
-
-# 6. Manifest everything this run produced locally.
-( cd "$rundir" && find . -type f ! -name MANIFEST.sha256 -exec sha256sum {} \; | sort -k2 > MANIFEST.sha256 )
-log_line "MANIFEST.sha256 written for $rundir"
+log_line "run complete; review REPORT.md and evidence classes before drawing conclusions"
 STAGE="done"

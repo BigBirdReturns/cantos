@@ -9,9 +9,11 @@ dependency -- a small recursive walker reads fingerprint.schema.json's own
 from __future__ import annotations
 
 import json
+import os
 import shutil
 import subprocess
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -59,7 +61,7 @@ class SchemaValidationTests(unittest.TestCase):
         self.schema = load(SCHEMA_PATH)
 
     def test_schema_file_is_valid_json_with_required_list(self):
-        self.assertEqual(self.schema.get("$id"), "second-run/shop-fingerprint@1")
+        self.assertEqual(self.schema.get("$id"), "second-run/shop-fingerprint@3")
         self.assertIn("required", self.schema)
         self.assertGreater(len(self.schema["required"]), 5)
 
@@ -77,7 +79,9 @@ class SchemaValidationTests(unittest.TestCase):
 
     def test_reference_fixture_declares_its_own_schema_id(self):
         instance = load(REFERENCE_PATH)
-        self.assertEqual(instance.get("schema"), "second-run/shop-fingerprint@1")
+        self.assertEqual(instance.get("schema"), "second-run/shop-fingerprint@3")
+        self.assertIs(instance.get("idle_verified"), False)
+        self.assertIn("ambient", instance.get("sample_context", ""))
 
     def test_synthetic_fixture_is_clearly_marked_synthetic(self):
         instance = load(SYNTHETIC_PATH)
@@ -155,6 +159,21 @@ class DiffFlagTests(unittest.TestCase):
         missing = self.EXPECTED_TAGS - tags
         self.assertEqual(missing, set(), f"flags missing from diff.py output: {missing}")
 
+    def test_unverified_load_does_not_trigger_throttle_finding(self):
+        with tempfile.TemporaryDirectory(prefix=".probe-unknown-load-", dir=HERE) as temp:
+            candidate = load(SYNTHETIC_PATH)
+            candidate["load_sample"]["status"] = "unknown"
+            unknown_path = Path(temp) / "unknown.json"
+            unknown_path.write_text(json.dumps(candidate), encoding="utf-8")
+            proc = self.run_diff_path(unknown_path)
+            self.assertEqual(proc.returncode, 0, proc.stderr)
+            flags = {item["tag"] for item in json.loads(proc.stdout)["flags"]}
+            self.assertNotIn("thermal_throttle_under_load", flags)
+
+    def run_diff_path(self, candidate_path: Path):
+        cmd = [sys.executable, "-B", str(DIFF_PY), str(REFERENCE_PATH), str(candidate_path), "--json"]
+        return subprocess.run(cmd, capture_output=True, text=True, cwd=str(HERE))
+
     def test_every_flag_carries_a_why_it_matters_line(self):
         proc = self.run_diff("--json")
         payload = json.loads(proc.stdout)
@@ -183,8 +202,41 @@ class FingerprintShellTests(unittest.TestCase):
         bash = shutil.which("bash")
         if bash is None:
             self.skipTest("no bash on PATH to run `bash -n` with")
-        proc = subprocess.run([bash, "-n", str(FINGERPRINT_SH)], capture_output=True, text=True)
+        # A relative argument plus cwd works in Windows Git Bash and avoids passing a
+        # Windows drive path directly to Bash (which expects /d/... or a POSIX path).
+        proc = subprocess.run([bash, "-n", FINGERPRINT_SH.name], capture_output=True, text=True, cwd=str(HERE))
         self.assertEqual(proc.returncode, 0, proc.stderr)
+
+    def test_default_probe_is_inventory_only_and_does_not_overwrite(self):
+        bash = shutil.which("bash")
+        if bash is None:
+            self.skipTest("no bash on PATH for inventory smoke")
+        with tempfile.TemporaryDirectory(prefix=".probe-smoke-", dir=HERE) as temp:
+            out_name = Path(temp).name + "/capture"
+            proc = subprocess.run(
+                [bash, FINGERPRINT_SH.name, "auto", out_name],
+                capture_output=True, text=True, cwd=str(HERE), timeout=60,
+            )
+            self.assertEqual(proc.returncode, 0, proc.stderr + proc.stdout)
+            payload = load(Path(temp) / "capture" / "fingerprint.json")
+            self.assertEqual(payload["load_sample"], "not_requested")
+            self.assertTrue(payload["network"]["download_throughput_mb_s"].startswith("not_measured:"))
+            self.assertTrue((Path(temp) / "capture" / "MANIFEST.sha256").is_file())
+            again = subprocess.run(
+                [bash, FINGERPRINT_SH.name, "auto", out_name],
+                capture_output=True, text=True, cwd=str(HERE), timeout=10,
+            )
+            self.assertEqual(again.returncode, 3)
+
+    def test_gpu_load_is_explicit_gpu_backend_and_bounded(self):
+        text = FINGERPRINT_SH.read_text(encoding="utf-8")
+        self.assertIn("GPU_LOAD_REQUESTED=0", text)
+        self.assertIn("duration=30", text)
+        self.assertIn('torch.cuda.is_available()', text)
+        self.assertIn('torch.device("cuda:0")', text)
+        self.assertIn("no CPU fallback", text)
+        self.assertNotIn("bytes=1073741824", text)
+        self.assertNotIn("speed.cloudflare.com", text)
 
     def test_fingerprint_sh_exists_and_is_nonempty(self):
         self.assertTrue(FINGERPRINT_SH.is_file())
@@ -193,7 +245,84 @@ class FingerprintShellTests(unittest.TestCase):
     def test_fingerprint_sh_declares_expected_usage_and_safety_flags(self):
         text = FINGERPRINT_SH.read_text(encoding="utf-8")
         self.assertIn("set -uo pipefail", text)
-        self.assertIn("second-run/shop-fingerprint@1", text)
+        self.assertIn("second-run/shop-fingerprint@3", text)
+
+    @unittest.skipIf(os.name == "nt", "POSIX executable stubs required")
+    def test_nvidia_bus_id_maps_to_vendor_bdf_not_neighboring_intel_gpu(self):
+        bash = shutil.which("bash")
+        if bash is None or shutil.which("timeout") is None:
+            self.skipTest("bash and GNU timeout are required")
+        with tempfile.TemporaryDirectory(prefix=".probe-bdf-") as temp:
+            root = Path(temp)
+            pci = root / "pci"
+            for bdf, vendor, cls in (
+                ("0000:00:02.0", "0x8086", "0x030000"),
+                ("0000:09:00.0", "0x10de", "0x030200"),
+            ):
+                dev = pci / bdf
+                dev.mkdir(parents=True)
+                (dev / "vendor").write_text(vendor, encoding="ascii")
+                (dev / "class").write_text(cls, encoding="ascii")
+                (dev / "current_link_speed").write_text("16.0 GT/s", encoding="ascii")
+                (dev / "current_link_width").write_text("16", encoding="ascii")
+            bin_dir = root / "bin"
+            bin_dir.mkdir()
+            nvidia = bin_dir / "nvidia-smi"
+            nvidia.write_text(
+                "#!/bin/sh\n"
+                "case \"$*\" in\n"
+                "  -L) echo 'GPU 0: NVIDIA Test (UUID: GPU-test)' ;;\n"
+                "  '--query-gpu=driver_version --format=csv,noheader') echo 550.54 ;;\n"
+                "  '') echo 'CUDA Version: 12.4' ;;\n"
+                "  '-q') echo 'NVIDIA query output' ;;\n"
+                "  'topo -m') echo 'GPU0\tGPU0' ;;\n"
+                "  --query-gpu=index,pci.bus_id,name,*) echo '0, 00000000:09:00.0, NVIDIA Test, 95.00.00.00, 5, 16, 0, 0, 210, 1200, 50, 80, Not Active' ;;\n"
+                "  *) echo '0, 0, 0, 50, 80, Not Active' ;;\n"
+                "esac\n",
+                encoding="utf-8",
+            )
+            nvidia.chmod(0o755)
+            env = os.environ.copy()
+            env["PATH"] = str(bin_dir) + os.pathsep + env.get("PATH", "")
+            env["SHOP_PROBE_PCI_SYSFS_ROOT"] = str(pci)
+            out = root / "capture"
+            proc = subprocess.run(
+                [bash, FINGERPRINT_SH.name, "nvidia", str(out)],
+                capture_output=True, text=True, cwd=str(HERE), env=env, timeout=40,
+            )
+            self.assertEqual(proc.returncode, 0, proc.stderr + proc.stdout)
+            payload = json.loads((out / "fingerprint.json").read_text(encoding="utf-8"))
+            self.assertEqual(payload["gpu"]["count"], "1")
+            self.assertEqual(payload["gpu"]["devices"][0]["pci_addr"], "0000:09:00.0")
+            self.assertFalse(payload["idle_verified"])
+
+    @unittest.skipIf(os.name == "nt", "POSIX executable stubs required")
+    def test_requested_gpu_load_fails_unknown_without_cpu_fallback(self):
+        bash = shutil.which("bash")
+        if bash is None or shutil.which("timeout") is None:
+            self.skipTest("bash and GNU timeout are required")
+        with tempfile.TemporaryDirectory(prefix=".probe-no-torch-") as temp:
+            root = Path(temp)
+            bin_dir = root / "bin"
+            bin_dir.mkdir()
+            fake_python = bin_dir / "python3"
+            fake_python.write_text("#!/bin/sh\nexit 1\n", encoding="ascii")
+            fake_python.chmod(0o755)
+            env = os.environ.copy()
+            env["PATH"] = str(bin_dir) + os.pathsep + env.get("PATH", "")
+            env["SHOP_PROBE_PCI_SYSFS_ROOT"] = str(root / "empty-pci")
+            (root / "empty-pci").mkdir()
+            out = root / "capture"
+            proc = subprocess.run(
+                [bash, FINGERPRINT_SH.name, "nvidia", str(out), "--gpu-load"],
+                capture_output=True, text=True, cwd=str(HERE), env=env, timeout=60,
+            )
+            self.assertEqual(proc.returncode, 4, proc.stderr + proc.stdout)
+            payload = json.loads((out / "fingerprint.json").read_text(encoding="utf-8"))
+            self.assertEqual(payload["load_sample"]["status"], "unknown")
+            self.assertIn("no CPU fallback", payload["load_sample"]["reason"])
+            self.assertEqual((out / "raw" / "gpu-load.txt").read_text(encoding="utf-8").strip(),
+                             "unknown: host Python PyTorch unavailable; no CPU fallback")
 
 
 if __name__ == "__main__":

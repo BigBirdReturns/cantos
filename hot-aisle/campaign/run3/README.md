@@ -9,6 +9,20 @@ immutable evidence after sealing. Never put real raw output into the public site
 
 ## Offline qualification
 
+The replay CLI and `arm3.sh` accept `--duration SECONDS` (default 3600), using the
+existing bounded replay implementation. A different duration is a separately
+declared experimental condition, never an unchanged Run 3 repeat. Keeping
+`duration * rate-factor` constant preserves the selected source arrivals while
+compressing their spacing; the source must still cover the entire selected
+window. Plan files retain both values. See `../shop-eval/COMBINED-CAMPAIGN.md`
+for the proposed HA reference campaign. No new capacity observation follows
+from this CLI option or its offline checks.
+
+The on-seat arm permits windows up to 3600 seconds and keeps its existing
+110-minute outer watchdog. For the compressed conditions, pass both
+`--duration 1800 --rate-factor 1.9` or `--duration 900 --rate-factor 3.8`;
+the original baseline is `--duration 3600 --rate-factor 0.95`.
+
 From the repository root:
 
 ```text
@@ -105,6 +119,11 @@ Run the declared tuned arm with `amd T1` and fresh output `A-T1`; the comparator
 already approved this bounded invocation; it is not rental authorization by itself.
 No automatic restart/retry. Containers use unique names and are stopped, not deleted;
 image and checkpoint caches are retained. **Provider release and its timestamp are external.**
+
+Pass `--funding credit:hotaisle` for an HA credit-funded arm, or the appropriate
+declared funding for another seat. Omission records funding as unverified. This
+declaration never fills billed dollars, credits consumed or invoice evidence;
+those remain external closure fields.
 
 Outputs: invocation.json, ledger-times.json, ledger.json, pull.log, container-id.txt,
 serve.log, image-inspect.json, gpu.txt, env.json, three smoke JSONs, tasks.json,

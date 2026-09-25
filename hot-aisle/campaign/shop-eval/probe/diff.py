@@ -1,18 +1,19 @@
 #!/usr/bin/env python3
-"""Diff two shop-fingerprint@1 records and flag what matters for serving throughput.
+"""Diff two shop-fingerprint@3 records and flag what matters for serving throughput.
 
     diff.py reference.json candidate.json [--json]
 
 Prints every field that differs between the reference (usually the Hot Aisle fixture)
 and the candidate (the shop under evaluation), then a short list of flags for the
-differences that are known to move serving throughput or correctness: PCIe below
+differences that can matter to serving throughput or correctness: PCIe below
 Gen5 x16, VM instead of bare metal, a ROCm/driver major-version mismatch, thermal
-throttling observed during the 60 s load sample, nonzero ECC errors, download
+throttling observed during the 30 s load sample, nonzero ECC errors, download
 throughput under 200 MB/s, a sub-1500 MTU, and under 200 GB free on /.
 
-Stdlib only (Python 3.9+). Exits 0 on a normal run -- a shop failing every flag is
-the expected output of this tool, not a tool failure. Only a usage error (missing
-files, bad JSON) sets a nonzero code.
+These are prompts for matched, workload-specific checks, not a provider score or a
+finding that a shop fails its service requirements. Stdlib only (Python 3.9+). Exits
+0 on a normal comparison; only a usage error (missing files, bad JSON) sets a nonzero
+code.
 """
 from __future__ import annotations
 
@@ -169,7 +170,7 @@ def check_driver_mismatch(reference: dict, candidate: dict):
 
 def check_throttle(candidate: dict) -> list:
     ls = candidate.get("load_sample")
-    if not isinstance(ls, dict):
+    if not isinstance(ls, dict) or ls.get("status") != "pass":
         return []
     hits = []
     for sample in ls.get("samples") or []:
