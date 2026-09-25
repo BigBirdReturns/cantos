@@ -137,7 +137,7 @@ class Pull(unittest.TestCase):
         src = os.path.join(HERE, "fixtures", "card6-latitude-h100.json")
         with tempfile.TemporaryDirectory() as tmp:
             _, prov = shelf.pull(src, "first-stranger", staging=tmp)
-            self.assertEqual(len(prov["filings"][0]["errors"]), 3)
+            self.assertEqual(len(prov["filings"][0]["errors"]), 4)
 
     def test_pull_never_touches_the_shelf(self):
         before = open(shelf.CARDS, "rb").read()
@@ -152,14 +152,13 @@ class Cli(unittest.TestCase):
         self.assertEqual(shelf.main(["validate", os.path.join(HERE, "fixtures", "card6-latitude-h100.json")]), 1)
 
     def test_compose_exit_code(self):
-        run = os.path.join(HERE, "fixtures", "run3-at0.json")
-        with open(run, "w", encoding="utf-8") as f:
-            json.dump(BY_ID["run3-at0"], f)
-        try:
+        scratch = r"S:\Scratch\Temp" if os.name == "nt" else None
+        with tempfile.TemporaryDirectory(prefix="shelf-cli-", dir=scratch) as tmp:
+            run = os.path.join(tmp, "run3-at0.json")
+            with open(run, "w", encoding="utf-8") as f:
+                json.dump(BY_ID["run3-at0"], f)
             self.assertEqual(shelf.main(["compose", run, os.path.join(HERE, "fixtures", "card7-voltagepark.json"), "--for", "measured_cost"]), 2)
             self.assertEqual(shelf.main(["compose", run, run, "--for", "cost_per_accepted"]), 0)
-        finally:
-            os.remove(run)
 
 
 if __name__ == "__main__":

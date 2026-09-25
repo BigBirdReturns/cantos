@@ -45,7 +45,7 @@
     {"a": "run3-at0", "b": "run3-at0", "purpose": "cost_per_accepted", "expect": null}
   ],
   "validate": [
-    {"file": "fixtures/card6-latitude-h100.json", "expect_errors": 3, "contains": ["publication_date_basis", "observer_benefit", "USD/hour"]},
+    {"file": "fixtures/card6-latitude-h100.json", "expect_errors": 4, "contains": ["filing_version", "publication_date_basis", "observer_benefit", "USD/hour"]},
     {"file": "fixtures/card7-voltagepark.json", "expect_errors": 0},
     {"file": "../card.skeleton.json", "expect_errors": 0}
   ]

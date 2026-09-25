@@ -1,9 +1,14 @@
 hot-aisle/** text eol=lf
 compute/** text eol=lf
 integration/** text eol=lf
+shelf/** text eol=lf
 *.zip binary
 
 .github/workflows/hot-aisle-ci.yml text eol=lf
+.github/workflows/shelf-ci.yml text eol=lf
+shelf/data/cards.jsonl -text
+shelf/data/staging/** -text
+shelf/tests/fixtures/** -text
 
 # Campaign evidence and hashed fixtures must stay byte-identical (MANIFEST.sha256).
 hot-aisle/campaign/results/** -text

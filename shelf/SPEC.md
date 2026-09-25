@@ -106,13 +106,20 @@ refuses these compositions and names the rule:
 
 | purpose | refused when |
 |---|---|
-| `cost_per_accepted` | either side lacks a result whose unit contains `accepted` |
+| `cost_per_accepted` | either side lacks a known numeric result in an explicit accepted-request unit |
 | `accepted_work` | B has no accepted-request result (throughput or latency is not accepted work) |
 | `seat_property` | B is not `measured: true` (a rating is not a property of a seat) |
 | `measured_cost` | B is not `measured: true` (a list price is not a measured cost) |
 | `same_period` | either observation date is unknown, or they differ |
 
-Finding no refusal is not admission. A reviewer still checks the cited sources.
+Finding no refusal is not admission. Source checks remain separate and identify
+the person or procedure that performed them.
+
+Accepted-request units normalize to exactly `usd/1000acceptedrequests` or
+`acceptedrequests`, with a finite nonnegative value. Substrings such as `unaccepted`
+or `accepted bananas` do not establish that denominator. Both operands must pass the
+filing check. Directional purposes retain their stated A/B roles; this is not a
+general compatibility, configuration or admission engine.
 
 ## Which cards can support a question
 
@@ -122,17 +129,30 @@ sentence, or `CANNOT_USE` with the rule. A card supports a question only if it h
 result in exactly that unit, is `measured: true` when a measurement is required, and has
 a known observation date inside the period when one is asked. Nothing ranks.
 
+Invalid filings and duplicate IDs receive `CANNOT_USE`; independent valid cards still
+receive their own results. A null value does not supply a result. Date queries accept
+valid ISO years, months, days or inclusive day ranges; a partial or invalid source
+date cannot manufacture precision or fall through to a later publication date.
+
 ## Hubs, pulling and standing
 
 A hub is any URL that serves a `cards.jsonl` or a single card. `shelf.py pull LOCATION
 --hub NAME` writes `data/staging/<hub>/<time>/` with the exact bytes (`source.bytes`),
 their SHA-256, the retrieval time, the parsed cards and each card's filing errors
 (`provenance.json`, `standing: imported/candidate`). Pulling never writes to
-`data/cards.jsonl`. Moving a staged card onto a shelf is a recorded human decision,
-appended to `data/promotions.jsonl` as `{"id", "from", "sha256", "who", "when", "why"}`;
-CI refuses a staged card that appears on the shelf without one. Promotion carries no
-inspection, recomputation or repetition over from the source hub; those are recorded
-again, by whoever did them, on the promoted card.
+`data/cards.jsonl`. Moving a staged card onto a shelf is a recorded local decision by
+an authorized person or procedure,
+appended to `data/promotions.jsonl` as `{"id", "from", "sha256", "who", "when", "why"}`.
+`from` is the capture folder relative to staging (`hub/stamp`) and must exist; `sha256`
+must equal that capture's provenance hash; the card must appear in that capture exactly
+once and its content outside `e_checks` must equal the shelf's copy; `who` and `why` are nonempty;
+`when` is an ISO date or UTC timestamp. `check_staging.py` refuses a staged card on the
+shelf without such a record, and refuses forged or incomplete records. Shelf ids are unique. Promotion carries no
+inspection, recomputation or repetition into local authority. Source assertions remain
+in the capture; local checks are separately recorded in `e_checks`. A changed name or
+date does not mechanically prove independence. Staged canonical cards, filing diagnostics
+and counts must match the retained source bytes. Changed successor captures remain
+available without overwriting their predecessors.
 
 ## Versioning
 

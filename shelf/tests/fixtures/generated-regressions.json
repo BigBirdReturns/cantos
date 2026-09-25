@@ -1,0 +1,27 @@
+{
+  "schema": "shelf/minimized-regressions@1",
+  "baseline": "../../card.skeleton.json",
+  "recorded_before_correction": "2026-09-25",
+  "cases": [
+    {"name": "missing-version", "path": ["filing_version"], "delete": true, "error": "filing_version", "before": "validation returned no errors"},
+    {"name": "boolean-version", "path": ["filing_version"], "value": true, "error": "filing_version", "before": "validation returned no errors"},
+    {"name": "multiline-title", "path": ["title"], "value": "one\ntwo", "error": "title", "before": "validation returned no errors"},
+    {"name": "empty-spine", "path": ["spine"], "value": "", "error": "spine", "before": "validation returned no errors"},
+    {"name": "bare-number", "path": ["a_claim", "results", "example_result"], "value": 123, "error": "sourced value object", "before": "validation returned no errors"},
+    {"name": "results-array", "path": ["a_claim", "results"], "value": [{"value": 1, "unit": "USD / GPU-hour"}], "error": "results must be an object", "before": "Python query raised AttributeError; browser query did not"},
+    {"name": "numeric-unit", "path": ["a_claim", "results", "example_result", "unit"], "value": 42, "error": "unit must", "before": "validation returned no errors; both composition engines raised TypeError"},
+    {"name": "period-array", "path": ["a_claim", "period"], "value": ["2026-09-24"], "error": "period must be an object", "before": "Python query raised AttributeError; browser query did not"},
+    {"name": "impossible-date", "path": ["a_claim", "period", "experiment_date"], "value": "2026-09-99", "error": "complete valid ISO", "before": "validation passed and September query returned SUPPORTS"},
+    {"name": "trailing-newline-id", "path": ["id"], "value": "card-id\n", "error": "slug", "before": "JavaScript end anchor admitted the final newline; Python fullmatch refused it"},
+    {"name": "malformed-limits", "path": ["a_claim", "limits"], "value": "not a list", "error": "limits must", "before": "validation admitted a value that the page cannot render as a limits list"}
+  ],
+  "normalization_before": {
+    "U+001C..U+001F": "Python removed these separators inside units; JavaScript preserved them",
+    "U+0085": "Python removed NEL inside units; JavaScript preserved it",
+    "U+FEFF": "JavaScript removed BOM inside units; Python preserved it"
+  },
+  "boundaries": [
+    "These are software filing and query regressions, not verification of source truth.",
+    "Directional composition purposes stay directional; no general admission, config compatibility or current standing API is added."
+  ]
+}

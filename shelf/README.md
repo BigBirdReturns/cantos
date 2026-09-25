@@ -17,7 +17,7 @@ shelf/
 ├── card.skeleton.json     a passing empty card to start from
 ├── scripts/
 │   ├── shelf.py           validate · compose · which · pull · sync  (stdlib only)
-│   └── check_staging.py   CI: staged imports carry provenance and were never promoted silently
+│   └── check_staging.py   staged imports carry provenance; promotions are complete, cite a real capture, and match bytes
 ├── data/
 │   ├── cards.jsonl        this hub's shelf: five cards filed 2026-09-24 (byte-checked copy, see below)
 │   ├── hubs.json          hubs the page reads (human-owned)
@@ -61,7 +61,8 @@ failing filings; `compose` returns 2 on a refusal; `sync --check` returns 1 on d
   Nothing ranks.
 - **pull** copies another hub's cards into `data/staging/` with their exact bytes, hash,
   retrieval time and filing errors. Standing is `imported/candidate` and stays so until a
-  human records a promotion. Pulling never writes to `data/cards.jsonl`.
+  local admission decision names the exact captured input. An authorized person or
+  procedure may make that decision. Pulling never writes to `data/cards.jsonl`.
 - **sync --check** confirms `data/cards.jsonl` is byte-identical to the retained campaign
   record in `hot-aisle/campaign/shelf/cards.jsonl`, where the first five cards were filed
   and where the Run 3 recomputation, propagation and narrowing checks still run against
@@ -75,8 +76,53 @@ price index with a published method and withheld weights; and one provider's sta
 about itself. Two model strangers filed a sixth and a seventh card from public pricing
 pages with none of our context; their filings are retained unedited in `tests/fixtures/`
 and, for the second, pulled into `data/staging/second-stranger/` through the tool itself.
-The first stranger's card fails the version 2 filing check for three documented reasons.
-Independent human filing and use remain untested.
+The first stranger's unchanged card originally exposed three filing errors. Enforcing
+the already-documented version field now also identifies its missing `filing_version`:
+four current errors, with the original three retained. Human filing and usability remain
+separate, untested properties; they do not block mechanical qualification.
+
+## Generated engine and custody regressions
+
+The independent streaming corpus in `tests/generated.py` starts from the five retained
+archetypes. Its full profile drives 10,000 valid variations, 100,000 faults in 32
+families, 10,000 controlled changes and 1,000,000 distinct ordered pairs through the
+native Python and embedded browser engines. Each pair exercises one of the five
+declared purposes; it does not claim every purpose on every pair. Seeded rule cases
+check the expected result as well as parity, including the named refusal rule.
+
+From the repository root:
+
+```powershell
+python -B shelf/tests/generated.py --profile full --seed 20260924 --out S:/Scratch/Runs/shelf-generated-full
+python -B -m unittest discover -s shelf/tests -p "test_generated_*.py" -v
+python -B -m unittest discover -s shelf/tests -p test_federation_properties.py -v
+```
+
+Use a new output directory for each run. Only the report and up to twenty failure
+witnesses are retained. Reports bind generator, engines, source cards and catalog
+hashes; a source change during the run fails qualification. A differential failure
+receives bounded structural reduction and can be replayed with
+`python -B shelf/tests/generated.py --replay <failure.json>`. Single-fault and
+transition witnesses retain their hypotheses; removing a required field must not
+manufacture a different failure. `GENERATED-VERIFICATION.json` records the full local
+run. CI runs a smaller population and uploads its report and any counterexamples.
+
+The federation suite additionally performs 425 local captures across 376 generated
+scenarios: repeated bytes across hubs, changed metadata, tampering, admission records,
+duplicate IDs and successor captures. Historical bytes survive; imports retain
+candidate status; admission records name an exact capture, hash and filing. Those
+records do not authenticate an actor or prove source truth.
+
+Diagnostic consistency currently uses the installed validator. A capture made under
+older validation behavior can therefore be held for review even when its bytes are
+unchanged; the checker cannot yet distinguish rule drift from edited diagnostics.
+It preserves the capture instead of rewriting its history.
+
+This is a stratified test population, not an observed usage distribution or a claim
+of three-sigma coverage. The query API checks unit, observation period, measured
+status and valid filing. Configuration compatibility, general claim entailment and
+institutional standing require their own contracts; a million scoped checks do not
+silently add them. Evidence flags remain separate dimensions, not a trust ladder.
 
 ## Adding your hub, or a card
 

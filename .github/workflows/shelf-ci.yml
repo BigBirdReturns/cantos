@@ -33,6 +33,18 @@ jobs:
         run: python3 -B -m unittest discover -s shelf/tests -p 'test_shelf.py' -v
       - name: Browser engine agrees with the CLI on the shared fixture
         run: node --test shelf/tests/test_engine.cjs
+      - name: Generated rule boundaries, streaming parity and custody regressions
+        run: |
+          set -euo pipefail
+          python3 -B shelf/tests/generated.py --profile ci --seed 20260924 --out "$RUNNER_TEMP/shelf-generated"
+          python3 -B -m unittest discover -s shelf/tests -p 'test_generated_*.py' -v
+          python3 -B -m unittest discover -s shelf/tests -p 'test_federation_properties.py' -v
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: shelf-generated-${{ github.run_id }}
+          path: ${{ runner.temp }}/shelf-generated/
+          if-no-files-found: warn
       - name: No scratch files left in the tool
         run: |
           set -euo pipefail
