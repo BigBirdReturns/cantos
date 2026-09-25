@@ -159,3 +159,16 @@ available without overwriting their predecessors.
 `filing_version` identifies the rules a card was filed under. A change to a rule is a new
 filing version and a note here. Earlier cards are not edited to match; they are refiled
 or left with their version.
+
+## Acceptance: the forge
+
+The algebra above is small and explicit, so its acceptance authority is a generated
+population, not a person. `scripts/forge.py` derives, from one seed and a generator
+version, valid cards of six archetypes plus the five real cards, one-fault mutations of
+each (benign, boundary and illegal), queries, pairwise compositions and multi-hub pulls,
+drives them through the CLI and the browser engine, and keeps only failures with a
+minimized counterexample. With `--genesis` it also compiles sampled cards into signed
+Genesis shards to check identity, non-transfer of trust and succession through the
+kernel's own lineage. The ten invariants it holds are listed at the top of the script;
+`FORGE-VERIFICATION.json` records the last full run with the seed and the tested bytes.
+A human stranger remains the test of documentation and ergonomics, not of the algebra.

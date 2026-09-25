@@ -1,0 +1,59 @@
+{
+  "generator_version": "1",
+  "seed": 20260924,
+  "scale": "full",
+  "counts": {
+    "valid": 10000,
+    "one_fault": 100000,
+    "fault_regimes": {
+      "benign": 40074,
+      "boundary": 12398,
+      "illegal": 47528
+    },
+    "queries": 120,
+    "pairs": 1000000,
+    "hubs": 8,
+    "parity_cases": {
+      "validate": 110000,
+      "which": 120,
+      "compose": 1000000
+    },
+    "mutators": 24,
+    "archetypes": [
+      "measured-run",
+      "price-observation",
+      "index",
+      "latency-artifact",
+      "rating",
+      "self-statement",
+      "real"
+    ]
+  },
+  "invariants": {
+    "VALIDITY": "checked",
+    "LOCALITY": "checked",
+    "REFUSAL": "checked",
+    "NON-TRANSFER": "checked",
+    "IDENTITY": "checked",
+    "PARITY": "checked",
+    "MONOTONICITY": "checked",
+    "PROVENANCE": "checked",
+    "SUCCESSION": "checked through native Genesis lineage (supersedes + lineage@1)",
+    "QUERY SOUNDNESS": "checked"
+  },
+  "genesis": {
+    "bound": 120,
+    "cards": 120,
+    "genesis_commit": "74db57b"
+  },
+  "failures": 0,
+  "failure_records": [],
+  "elapsed_s": 419.0,
+  "python": "3.13.15",
+  "node": "v24.19.0",
+  "shelf_sha256": "2e99db74f433ed70fab7542fcf7ac1a93fb1a89798c6f09c1096053d8709eec1",
+  "engine_sha256": "548bb3147e430c6df2552af317f14934c31ebc4529bd200f5cf63f12c9fb4df7",
+  "cards_sha256": "635a207069270701d8c039998183c9587025b4199b3322cec259b8e96698d3a8",
+  "run_at": "2026-09-25T04:21:55Z",
+  "scope": "Generated cards are synthetic and seed-derived; the five real cards are included unchanged. Passing establishes that the implemented algebra keeps these invariants over this population. It does not establish source truth, human usability, or standing."
+}

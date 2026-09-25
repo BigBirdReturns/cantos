@@ -17,7 +17,10 @@ shelf/
 ├── card.skeleton.json     a passing empty card to start from
 ├── scripts/
 │   ├── shelf.py           validate · compose · which · pull · sync  (stdlib only)
-│   └── check_staging.py   staged imports carry provenance; promotions are complete, cite a real capture, and match bytes
+│   ├── check_staging.py   staged imports carry provenance; promotions are complete, cite a real capture, and match bytes
+│   ├── forge.py           seed-derived population through both engines; ten invariants; minimized failures
+│   └── forge_genesis.py   the kernel regime: sampled cards bound as signed Genesis shards (identity, non-transfer, succession)
+├── FORGE-VERIFICATION.json  the last recorded full-scale forge run (seed, counts, tested bytes, failures)
 ├── data/
 │   ├── cards.jsonl        this hub's shelf: five cards filed 2026-09-24 (byte-checked copy, see below)
 │   ├── hubs.json          hubs the page reads (human-owned)
@@ -27,6 +30,8 @@ shelf/
     ├── cases.json         one fixture both engines must satisfy
     ├── test_shelf.py      CLI regressions (python -m unittest)
     ├── test_engine.cjs    browser-engine regressions and byte-for-byte parity with the CLI (node --test)
+    ├── differential.cjs   forge harness: the embedded engine over a generated document, chunk digests
+    ├── test_forge.py      the small-scale forge as a regression, plus a planted bug that must be caught and minimized
     └── fixtures/          the two model-stranger filings, unedited
 ```
 
@@ -67,6 +72,27 @@ failing filings; `compose` returns 2 on a refusal; `sync --check` returns 1 on d
   record in `hot-aisle/campaign/shelf/cards.jsonl`, where the first five cards were filed
   and where the Run 3 recomputation, propagation and narrowing checks still run against
   the campaign bytes they need.
+
+## Acceptance by population, not by stranger
+
+```
+python scripts/forge.py --scale small                         # seconds; what CI runs
+python scripts/forge.py --scale full --record --genesis D:/Projects/Organs/AXM/axm-genesis/main
+```
+
+The forge generates, from one seed, valid cards of six archetypes alongside the five real
+ones, one-fault mutations of each (benign, boundary, illegal), queries, pairwise
+compositions and multi-hub pulls, and drives all of it through the CLI and the browser
+engine. It reports only failures, each with the invariant it broke, the seed, the case
+index and a minimized counterexample. The invariants: VALIDITY, LOCALITY, REFUSAL,
+NON-TRANSFER, IDENTITY, PARITY, MONOTONICITY, PROVENANCE, SUCCESSION, QUERY SOUNDNESS.
+With `--genesis` the identity, non-transfer and succession checks run through the estate
+kernel: each sampled card is compiled into a signed Genesis shard, must verify under its
+own key and not under another issuer's, must fail on one flipped byte, and a corrected
+successor must name its predecessor while the predecessor still verifies unchanged.
+`FORGE-VERIFICATION.json` is the last recorded full run. Passing establishes that the
+implemented algebra keeps these invariants over that population; it establishes nothing
+about source truth, human usability or standing.
 
 ## The first hub
 
