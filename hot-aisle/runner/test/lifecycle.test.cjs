@@ -229,3 +229,59 @@ test('revalidation refuses unsupported changes instead of reporting an empty suc
   assert.equal(revalidate(rec, { price: { rate: 1.68 } }).summary.recomputed, 1);
   assert.equal(JSON.stringify(rec), before, 'rejected changes preserve the original record');
 });
+
+test('residual plan carries simultaneous economics and acceptance changes into the native job', () => {
+  const rec = JSON.parse(fs.readFileSync(path.join(__dirname, '../../data/demo/record.json'), 'utf8'));
+  const before = JSON.stringify(rec);
+  const change = {
+    traffic: { concurrency: [1, 8, 32, 64] },
+    gates: { ttft: 150 },
+    requirements: { max_p95_ttft_ms: 200 },
+    price: { rate: 1.68 },
+  };
+  const result = revalidate(rec, change);
+  assert.deepEqual(result.minimal_plan.concurrency, [64]);
+  assert.equal(result.summary.requires_measurement, rec.declared.plan.repeats);
+  const jobs = new Jobs(new Store(tmp()));
+  const job = jobs.plan(result.minimal_plan);
+  assert.equal(job.plan.gates.ttft, 150, 'new measurement must use the requested gate');
+  assert.equal(job.plan.requirements.max_p95_ttft_ms, 200);
+  assert.equal(job.plan.price.rate, 1.68);
+  assert.equal(job.state, 'planned');
+  assert.equal(job.approval, null, 'revalidation does not grant execution authority');
+  assert.equal(JSON.stringify(rec), before, 'prior record and measured cells remain intact');
+});
+
+test('residual plan retains a requested quality gate and measures only requested runtime cells', () => {
+  const rec = JSON.parse(fs.readFileSync(path.join(__dirname, '../../data/demo/record.json'), 'utf8'));
+  const before = JSON.stringify(rec);
+  const quality = revalidate(rec, { gates: { quality: true } });
+  assert.equal(quality.minimal_plan.gates.quality, true, 'missing sidecars must not silently drop the new quality gate');
+  const result = revalidate(rec, {
+    traffic: { concurrency: [64] },
+    runtime: { runtime_digest: 'synthetic:changed-runtime' },
+    gates: { quality: true, ttft: 200 },
+  });
+  assert.deepEqual(result.minimal_plan.concurrency, [64], 'changed runtime does not resurrect unrequested historical cells');
+  assert.equal(result.summary.requires_measurement, rec.declared.plan.repeats);
+  const jobs = new Jobs(new Store(tmp()));
+  const job = jobs.plan(result.minimal_plan);
+  assert.equal(job.plan.gates.quality, true);
+  assert.equal(job.plan.gates.ttft, 200);
+  assert.equal(job.plan.identity.runtime_digest, 'synthetic:changed-runtime');
+  assert.equal(job.approval, null);
+  assert.equal(JSON.stringify(rec), before);
+});
+
+test('residual plan clears an original primary cell that is outside the required measurement', async () => {
+  const store = new Store(tmp());
+  const { rec } = await run(store, { concurrency: [1, 8], primary_concurrency: 8 });
+  const before = JSON.stringify(rec);
+  const result = revalidate(rec, { traffic: { concurrency: [1, 8, 64] } });
+  assert.deepEqual(result.minimal_plan.concurrency, [64]);
+  const job = new Jobs(store).plan(result.minimal_plan);
+  assert.equal(job.plan.primary_concurrency, null, 'the residual plan does not assign its primary to an absent old cell');
+  assert.equal(rec.declared.plan.primary_concurrency, 8);
+  assert.equal(job.approval, null);
+  assert.equal(JSON.stringify(rec), before);
+});

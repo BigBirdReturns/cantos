@@ -53,6 +53,7 @@ def gb(b):
 # ---------------------------------------------------------------- availability
 def availability_for(seat, observations, start_at):
     """Listed fraction from probes, delivered fraction from real attempts, never merged into one denominator.
+    With start_at, only observations timestamped at or before that instant count.
     Estate seats: operator declaration (busy_until), not a probe."""
     av = seat.get("availability") or {}
     busy = av.get("declared_busy_until")
@@ -63,7 +64,23 @@ def availability_for(seat, observations, start_at):
         return {"probability": None, "basis": "operator declaration only (not busy); no probe or attempt data for estate seats, so the probability is UNKNOWN",
                 "thin": True, "stale": None, "probes": 0, "attempts": 0, "busy_until": busy, "listed_fraction": None, "delivered_fraction": None}
     key = av.get("key") or {}
-    rows = [o for o in observations if all(o.get(k) == v for k, v in key.items())]
+    rows = [o for o in observations if isinstance(o, dict) and all(o.get(k) == v for k, v in key.items())]
+    future_excluded = undated_excluded = 0
+    if start_at:
+        eligible = []
+        for o in rows:
+            if classify_observation(o) is None:
+                continue
+            try:
+                observed_at = parse_iso(o["ts"])
+            except (KeyError, ValueError, TypeError, AttributeError):
+                undated_excluded += 1
+                continue
+            if observed_at > start_at:
+                future_excluded += 1
+                continue
+            eligible.append(o)
+        rows = eligible
     probes, unknown, attempts = [], 0, []
     for o in rows:
         layer = classify_observation(o)
@@ -90,18 +107,23 @@ def availability_for(seat, observations, start_at):
     age_h = None
     if start_at and newest:
         age_h = (start_at - newest).total_seconds() / 3600
-        stale = age_h > STALE_H or age_h < -STALE_H   # nothing recent before start, or start far before the data
+        stale = age_h > STALE_H
     listed_thin = len(probes) < THIN_PROBES
     deliv_thin = len(attempts) < THIN_ATTEMPTS
     parts = []
     parts.append(f"listed {listed}/{len(probes)} probes" + (f" ({unknown} unknown excluded)" if unknown else "") + (" -- TOO THIN" if listed_thin else ""))
     parts.append(f"delivered {delivered}/{len(attempts)} attempts" + (" -- NO ATTEMPTS: delivery probability UNKNOWN" if not attempts else (" -- TOO THIN" if deliv_thin else "")))
+    if future_excluded:
+        parts.append(f"{future_excluded} future observations excluded: timestamp after start_at {start_at.isoformat()}")
+    if undated_excluded:
+        parts.append(f"{undated_excluded} observations excluded: missing or invalid timestamp cannot establish evidence as of start_at")
     if stale:
         parts.append(f"STALE: newest observation {age_h:.0f} h from start_at (> {STALE_H} h)")
     if prob is None:
         parts.append("success probability UNKNOWN until both fractions exist")
     return {"probability": round(prob, 3) if prob is not None else None, "listed_fraction": p_listed, "delivered_fraction": p_deliv,
             "probes": len(probes), "unknown_probes": unknown, "listed": listed, "attempts": len(attempts), "delivered": delivered,
+            "future_observations_excluded": future_excluded, "undated_observations_excluded": undated_excluded,
             "thin": listed_thin or deliv_thin or prob is None, "listed_thin": listed_thin, "delivered_thin": deliv_thin,
             "stale": stale, "newest_observation_age_h": round(age_h, 1) if age_h is not None else None, "basis": "; ".join(parts)}
 
@@ -483,10 +505,21 @@ def selftest():
     unknown = dict(ten[0], outcome="unknown")
     av = availability_for(h100, ten + [unknown, failed_create], T)
     check(av["probes"] == 10 and av["unknown_probes"] == 1, "unknown-outcome probe excluded from the listed denominator and counted")
+    future_probe = dict(ten[0], ts="2026-09-24T18:00:01Z", outcome="out_of_capacity")
+    future_create = dict(failed_create, ts="2026-09-24T18:00:01Z", outcome="available", provisioned=True, ssh_reached=True)
+    retrospective = ten + [failed_create, future_probe, future_create]
+    av = availability_for(h100, retrospective, T)
+    check(av["probes"] == 10 and av["attempts"] == 1 and av["probability"] == 0.0 and av["future_observations_excluded"] == 2 and "future observations excluded" in av["basis"], "future listing and successful create cannot change an earlier plan's denominators or probability; both exclusions explained")
+    av = availability_for(h100, retrospective, None)
+    check(av["probes"] == 11 and av["attempts"] == 2 and av["future_observations_excluded"] == 0, "without an explicit start_at no implicit clock or cutoff is introduced")
+    av = availability_for(h100, [dict(ten[0], ts="2026-09-24T18:00:00Z"), dict(ten[0], ts=None), dict(failed_create, ts="bad")], T)
+    check(av["probes"] == 1 and av["attempts"] == 0 and av["undated_observations_excluded"] == 2 and "invalid timestamp" in av["basis"], "timestamp exactly at start_at counts; missing or invalid timestamps cannot establish as-of evidence")
     av = availability_for(h100, ten, parse_iso("2026-09-29T10:00:00Z"))
     check(av["stale"] is True and "STALE" in av["basis"], "no probe within 24 h of start_at flagged stale")
     real = availability_for(h100, obs, T)
     check(real["probes"] == 1 and real["attempts"] == 1 and real["listed_thin"] and real["delivered_thin"] and real["probability"] == 1.0, f"real 09-23 data for the H100 (one console listing, one create): {real['basis']}")
+    before = availability_for(h100, obs, parse_iso("2026-09-22T18:00:00Z"))
+    check(before["probes"] == 0 and before["attempts"] == 0 and before["probability"] is None and before["future_observations_excluded"] == 2, "retained 09-23 H100 observations cannot support a plan as of 09-22")
     ha = availability_for(seats["hotaisle-mi300x-1x-enc1"], obs, T)
     check(ha["probes"] == 0 and ha["attempts"] == 1 and ha["probability"] is None, f"real 09-23 data for Hot Aisle (a TUI provision that delivered, no listing probe): probability UNKNOWN -- {ha['basis']}")
 

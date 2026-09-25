@@ -19,6 +19,9 @@ function revalidate(rec, change) {
   const kinds = Object.keys(change).filter(k => change[k] !== undefined && change[k] !== null);
   if (!kinds.length) throw new Error('Nothing changed.');
   const plan = rec.declared.plan;
+  const wanted = change.traffic?.concurrency
+    ? [...new Set(change.traffic.concurrency.map(Number))].sort((a, b) => a - b)
+    : plan.concurrency;
   const conclusions = [];
   let candidate = null, scenario = null, requiredCells = new Set(), reevaluate = false;
 
@@ -37,7 +40,7 @@ function revalidate(rec, change) {
       scenario = gateScenario(rec, { ...plan.gates, ...change.gates }, scenario);
       conclusions.push(c('acceptance', 'recomputed', 'Accepted counts recomputed from retained per-request samples under the new gates.'));
     } else {
-      for (const cell of rec.derived.cells) requiredCells.add(cell.concurrency);
+      for (const cc of wanted) requiredCells.add(cc);
       conclusions.push(c('acceptance', 'requires_measurement', rows ? 'Evaluator-passed gating needs a sidecar for every trial; none retained.' : 'Retained trials have no per-request samples; gating needs a detailed rerun.'));
     }
   }
@@ -53,7 +56,6 @@ function revalidate(rec, change) {
   if (change.traffic) {
     const t = change.traffic;
     const shapeChanged = WORKLOAD_KEYS.some(k => t[k] !== undefined && t[k] !== plan.workload[k]);
-    const wanted = t.concurrency ? [...new Set(t.concurrency.map(Number))].sort((a, b) => a - b) : plan.concurrency;
     if (shapeChanged) {
       for (const cc of wanted) requiredCells.add(cc);
       conclusions.push(c('capacity', 'requires_measurement', 'Request shape changed (' + WORKLOAD_KEYS.filter(k => t[k] !== undefined && t[k] !== plan.workload[k]).join(', ') + '); every cell needs new evidence under the new workload identity.'));
@@ -73,9 +75,9 @@ function revalidate(rec, change) {
     const changed = RUNTIME_KEYS.filter(k => change.runtime[k] !== undefined && change.runtime[k] !== plan.identity[k]);
     if (changed.length) {
       candidate = { ...cloneInput(plan), identity: { ...plan.identity, ...pick(change.runtime, RUNTIME_KEYS) } };
-      for (const cc of plan.concurrency) requiredCells.add(cc);
+      for (const cc of wanted) requiredCells.add(cc);
       conclusions.push(c('qualification', 'superseded', 'Runtime identity changed (' + changed.join(', ') + '). This record stays as history; a new candidate qualification covers all cells.'));
-      conclusions.push(c('economics', 'stands', 'Price inputs are unchanged, but they will be applied to the candidate\'s new measurements.'));
+      conclusions.push(c('economics', 'stands', 'The retained economic inputs, with any requested price scenario, will be applied to the candidate\'s new measurements.'));
     } else conclusions.push(c('qualification', 'stands', 'Declared runtime identity is unchanged.'));
   }
 
@@ -91,7 +93,14 @@ function revalidate(rec, change) {
   if (required.length) {
     const base = candidate || cloneInput(plan);
     if (change.traffic) base.workload = { ...base.workload, ...pick(change.traffic, WORKLOAD_KEYS) };
-    minimal = { ...base, concurrency: required, note: (required.length === plan.concurrency.length && !change.traffic ? 'Full candidate qualification.' : 'Only the cells without valid evidence.') + ' Prior trials are retained in ' + rec.id + '.' };
+    // A residual is an executable plan for the requested conditions, not just a
+    // list of new cells under the old rule. Carry every simultaneous input change.
+    for (const key of ['price', 'gates', 'requirements']) {
+      if (change[key]) base[key] = { ...base[key], ...change[key] };
+    }
+    minimal = { ...base, concurrency: required,
+      primary_concurrency: required.includes(base.primary_concurrency) ? base.primary_concurrency : null,
+      note: (required.length === plan.concurrency.length && !change.traffic ? 'Full candidate qualification.' : 'Only the cells without valid evidence.') + ' Prior trials are retained in ' + rec.id + '.' };
   }
   const summary = { stands: conclusions.filter(x => x.status === 'stands').length, recomputed: conclusions.filter(x => x.status === 'recomputed').length, requires_measurement: required.length ? required.length * plan.repeats : 0, superseded: conclusions.some(x => x.status === 'superseded') };
   return { schema: 'hot-aisle/revalidation@1', record_id: rec.id, change, conclusions, scenario, minimal_plan: minimal, reevaluate, summary };

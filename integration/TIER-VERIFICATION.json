@@ -1,0 +1,432 @@
+{
+  "schema": "second-run/tier-join-verification@1",
+  "observed_at": "2026-09-25T04:44:34.861227+00:00",
+  "runtime": {
+    "python": "3.13.15",
+    "node": "v24.19.0"
+  },
+  "source_sha256": {
+    "hot-aisle/campaign/availability/observations.jsonl": "70b94218de435bbb0ae850975a632f9c7d6ef13de021b2d2ea0f86e50e5eee5a",
+    "hot-aisle/campaign/backfill/fixtures/inferencex-10716032664.json": "02be26ddb553d3bc992d257aab110e98c3dcd7cfc4ef685299c2bd9f6faea5fd",
+    "hot-aisle/campaign/backfill/fixtures/inferencex-10716378525.json": "a7c54f8d003ed05caf0223e799f705258333d179dba58c0240dae1b0c7e7b9f6",
+    "hot-aisle/campaign/backfill/fixtures/inferencex-10718795856.json": "ff59cfa055785c876b15d0a639e565193f86ecb5024645d449170472eca381e7",
+    "hot-aisle/campaign/backfill/fixtures/inferencex-10721648398.json": "d2f64cff4bc7c0337a987388c2aa7f3983e92adab2f1cee0d3c6379dbc290a63",
+    "hot-aisle/campaign/backfill/fixtures/inferencex-10780222898.json": "d079a3dfd4f80916e16b4f1509456111816739b6ab12823bf2eb265118546a0e",
+    "hot-aisle/campaign/backfill/fixtures/manifest.json": "bdda23707c8c4df2e0aae9314517b7162069f5f5e71013b43e347592ce1e94c0",
+    "hot-aisle/campaign/backfill/importer.py": "b2976dbb0e451fd606f70895fe412e8f050bcc053cf4ed5ad073df7df5fe78c8",
+    "hot-aisle/campaign/ledger/ledger_common.py": "7b04b98212130f96974acc2a476e37a174c4ecf178f9c4c8a7465c541525cae2",
+    "hot-aisle/campaign/ledger/seats.json": "c467074ef873a2d3f43b0ed118fbe2c991367be30729787a73293365996be5b4",
+    "hot-aisle/campaign/ledger/waterline.py": "ae1b3a622713590169d7231bf90cbcb63a8fb725bbd91fb0dca77145e4c2be31",
+    "hot-aisle/campaign/providers/SCHEMA.md": "7ca65de8de936233826c8333621cdd3e52d03f6da4289d79303480add8920549",
+    "hot-aisle/campaign/providers/merge_staging.py": "89eefa75ed890b48afd407bc3eeeacca2f80eb653f9b0088ea058c2dd422e924",
+    "hot-aisle/campaign/providers/providers.jsonl": "ccac2614eccdded6731ad48d99c6267c508b9f93e2f460b756113607a334bad8",
+    "hot-aisle/campaign/results/RUN3-RESULTS.md": "2f29c31a56c72100395af280efc04a682188e74bd760be554f5c0916868b5de2",
+    "hot-aisle/campaign/results/run3-scored-a-t0/detailed.json": "ef907e4cbe45832890109c4ca0d37851ad8e4f087beb70421506af897e6a67ab",
+    "hot-aisle/campaign/results/run3-scored-a-t0/grade/evaluation.json": "f5e2fe316996ac26d953fb5ebe6d0415b2debd9664c1bc74a309776748ff08ca",
+    "hot-aisle/campaign/results/run3-scored-a-t0/grade/humaneval-reference.jsonl": "42526ec0e7d5f3ee0b06d6ced98f8c8bae3d76519151bfb3d36f79010645bd7f",
+    "hot-aisle/campaign/results/run3-scored-a-t0/grade/humaneval.jsonl": "0acf60ff155b3e940a3e55e457b5a7cdf27d8d99e0435e467b9e00cb3f90db7f",
+    "hot-aisle/campaign/results/run3-scored-a-t0/grade/humaneval_eval_results.json": "1a95005dd6225ea3bd5802779d20353e8507ece343391d977b4c155f302a797b",
+    "hot-aisle/campaign/results/run3-scored-a-t0/grade/mapping.json": "7ada98a8ee5cfea39b93a85827785a54fed20fd37f3a04770c4d699bac9d4b95",
+    "hot-aisle/campaign/results/run3-scored-a-t0/grade/mbpp-reference.jsonl": "b54e762755248ca411b523c917fa9f93c07b5ff2966bf60b3917b853926a3dad",
+    "hot-aisle/campaign/results/run3-scored-a-t0/grade/mbpp.jsonl": "899d569c083e079299262c17bde9c99b5ba9a46d837743df24d430229ba921ce",
+    "hot-aisle/campaign/results/run3-scored-a-t0/grade/mbpp_eval_results.json": "2dfd04fadd9524492fe9b8fdea4aa108e7692e9429de25704cedfc832f4da0c9",
+    "hot-aisle/campaign/results/run3-scored-a-t0/replay/journal.jsonl": "eabd04bf9e057e026318cdb24f6c1b03a98154a1a6f8300b742339d4816217be",
+    "hot-aisle/campaign/results/run3-scored-a-t0/replay/plan.json": "9955f6f5776a222d10bbabbe784478ad9da0b1f6c016648bb6a0e62d9741c933",
+    "hot-aisle/campaign/results/run3-scored-a-t0/replay/requests.jsonl": "9b752b672dd148d0df9eead556188ec1e4b095db27c783c3988eb6eb30f071dd",
+    "hot-aisle/campaign/results/run3-scored-a-t0/tasks.json": "6c508237082261ac927b96825e2f097782389b1cebc3f78360f0665a8db3501f",
+    "hot-aisle/campaign/run3/common.py": "47e2c6108a631d71bc9ba27a693b271cf5c496b594eb0044bdafad9f23542e99",
+    "hot-aisle/campaign/run3/grade.py": "f6cd4155d688fde2dff8f927573fbd48d9869fb405e5cbc80f085fc26761eea1",
+    "hot-aisle/campaign/run3/replay.py": "5e22ae65714bb021187ce1f903cd66a836826d77e479a8cdb07faba2cf54dd0e",
+    "hot-aisle/campaign/shelf/validator.py": "764c85fb7f3002404dba094491063b5e74475a941bbaadf7bbfe2b91242293ce",
+    "hot-aisle/campaign/tierbench-bridge/fixtures/PROVENANCE.json": "47dcad5127fd1b34198164a676ee594e85fb4e6a3e69c1aee33e60bf79c3135f",
+    "hot-aisle/campaign/tierbench-bridge/fixtures/knots/knot-run3-evalplus-tierbench.json": "2897197f484436c1ce1ccce6fab376b337311879337b4d23e0a76f04d89622a4",
+    "hot-aisle/campaign/tierbench-bridge/import_tierbench.py": "b449d028a8758ff569a4e9135b00a07492be2fa8fbb2ca58d26e209ae7faa565",
+    "hot-aisle/campaign/tierbench-bridge/local_models.json": "f8b390b3fe1d5acd210d6aef5d8abf64351fdec15c976b9f93d325e231784657",
+    "hot-aisle/campaign/tierbench-bridge/tier_waterline.py": "167a9d8b733b7b0a45cf585aaafa6cafacc140b20fe6764b0c8f235273404d05",
+    "hot-aisle/data/demo/record.json": "7da63f0f597e9df36ba69fdec8244e42364594e57c34ce6c4f268b9e124b100d",
+    "hot-aisle/index.html": "e9eb55d851e774ca949032bd83723780b0f07c63b4d211a6dd7ad4c47e449f0d",
+    "hot-aisle/runner/lib/engine.cjs": "b1913f7d146644c15be7f962f9565dddc4eaddc1873c54977248ef596ecb1a6e",
+    "hot-aisle/runner/lib/record.cjs": "5df5da01c96ae3709bdf57b91fdf2f93b22a137f08064abefd57d4ee03e724c8",
+    "hot-aisle/runner/lib/revalidate.cjs": "2057e636538cff2795d204d532c6583ec258a05ea5f4ec02cf2e187121aa81f1",
+    "hot-aisle/runner/test/lifecycle.test.cjs": "722e16aa1309af7ca1d9f3f21afd3c64381f706f58d8b3e871a61a03012a3073",
+    "integration/change_owner.cjs": "0f77f86a915097e2246b80d1b26b4bfaa0da8607258cb29d686fdb8e959b6041",
+    "integration/task_changes.py": "8afcff4c0916858547a508cd79555af998bb61a764223b0ba62ec129e7628b91",
+    "integration/task_results.py": "1e082d85dfc5e7318c5d8ccc3a76195895254746336796144c755f46133ab7cc",
+    "integration/task_sources.py": "c6a6df121bdcdae2458e96d18c72a7f08f55d0f4288dcd07ed423de7c5715299",
+    "integration/task_tiers.py": "da917b8a7c5441d7bdbef46426b816f80bb7fb40a1402199fbc41715ab2c4ea9",
+    "integration/tests/test_task_tiers.py": "b6a3e0e4a67d4e026df2a332ebdc2d1777f57b743a6521e0403ad58aa8bbd717",
+    "integration/work.py": "ccec5882986e2293777c7f990aae18ce46a69591fdd97dd838e35ff31ee7409a",
+    "research-desk/app.html": "5951f7f3d994ec980d2958ae18246edc6dbe5b57db8d38e90c1c18956b96e470",
+    "research-desk/examples/worked-history.json": "93040f03653ba01a77fbb5a5bde5f71e6e93c66ed7cffa771968bef22966d940"
+  },
+  "store": "project home / sessions/shared-work; local durable custody outside published checkout",
+  "request_coordinates": {
+    "catalog": "python -B integration/work.py --catalog",
+    "durable_request": "../sessions/shared-work/requests/estate-20260925.json",
+    "run": "python -B integration/work.py --request ../sessions/shared-work/requests/estate-20260925.json --store ../sessions/shared-work"
+  },
+  "runs": {
+    "cold": {
+      "observed_at": "2026-09-25T04:43:13.841601+00:00",
+      "summary": {
+        "executed": 7,
+        "reused": 0,
+        "held": 0
+      },
+      "tasks": [
+        {
+          "id": "latitude-offer",
+          "actor": "estate-first-consumer",
+          "task_class": "provider-intake",
+          "status": "executed",
+          "key": "f4f038ce1cdc003968b2cae9dd0eb8c1d9aad984152ba74309f36ca50fa2dfd9",
+          "value_sha256": "896973cc4ae3ad94e66aa095f8be763f797c0f1b06f20bc4bdcefdf0d755a445",
+          "elapsed_seconds": 0.606209,
+          "model_calls": 0,
+          "gpu_runs": 0
+        },
+        {
+          "id": "voltagepark-offer",
+          "actor": "estate-first-consumer",
+          "task_class": "provider-intake",
+          "status": "executed",
+          "key": "b44157e6a99c547449e1a78c8baba55a84ddaec0eb60ae42ca73f1e54b5f1bf7",
+          "value_sha256": "2613c1c93470515ac5915fd0d152d29404cac2d503095f18319136312f58ef14",
+          "elapsed_seconds": 0.603029,
+          "model_calls": 0,
+          "gpu_runs": 0
+        },
+        {
+          "id": "outside-benchmarks",
+          "actor": "estate-first-consumer",
+          "task_class": "benchmark-import",
+          "status": "executed",
+          "key": "05135264b98dc40e9e89e517441e13c961d63d6633e79e3a2dbd614edff9c308",
+          "value_sha256": "3d1d5980156e396e644d78dbf8a7a0aac5f6e3a6d1570813eef0a04bb3b02ee1",
+          "elapsed_seconds": 0.97433,
+          "model_calls": 0,
+          "gpu_runs": 0
+        },
+        {
+          "id": "run3-accepted-work",
+          "actor": "estate-first-consumer",
+          "task_class": "run-recompute",
+          "status": "executed",
+          "key": "b177baeb7d8c896c44e3cca32e34263c4b0fb67906643eb996d960c3b460a837",
+          "value_sha256": "76b2ab32c253e4356d5a6985e606bbc0d5b0d53298223fa741bb1583c5f31d40",
+          "elapsed_seconds": 1.694095,
+          "model_calls": 0,
+          "gpu_runs": 0
+        },
+        {
+          "id": "source-correction-example",
+          "actor": "estate-first-consumer",
+          "task_class": "source-correction",
+          "status": "executed",
+          "key": "50e7b4f650239e13cc0b5404165b011a86b15773abb2fa8600b4aad43fe1e599",
+          "value_sha256": "7307335e7afe0abac9ee15c51af9a377fbc1dcb067fb6d1b97e1c7e681f7d20e",
+          "elapsed_seconds": 0.783159,
+          "model_calls": 0,
+          "gpu_runs": 0
+        },
+        {
+          "id": "price-change-example",
+          "actor": "estate-first-consumer",
+          "task_class": "record-change",
+          "status": "executed",
+          "key": "5c90435100e84b9a0b415bfa697d380e65657239a59db54c96ddd6dd85f408ad",
+          "value_sha256": "8380986e6a53b5fff9170130ab069063ad4c7f7ffd5304bf9291bb359692804a",
+          "elapsed_seconds": 0.72296,
+          "model_calls": 0,
+          "gpu_runs": 0
+        },
+        {
+          "id": "estate-run3-plan",
+          "actor": "estate-first-consumer",
+          "task_class": "tier-plan",
+          "status": "executed",
+          "key": "28f15e888164e693a5c7b275c545f99ce817afd908fad4d81fe926df4f07ed61",
+          "value_sha256": "034d4fa0c144aaf8d26c9c13a3d61d2191739a65f4245b1f9084a760d61b9ebb",
+          "elapsed_seconds": 0.680309,
+          "model_calls": 0,
+          "gpu_runs": 0
+        }
+      ],
+      "receipt": "sessions/shared-work/runs/d46a834c420b41ad885e0393debdfc8b.json"
+    },
+    "fresh_process": {
+      "observed_at": "2026-09-25T04:43:17.111955+00:00",
+      "summary": {
+        "executed": 0,
+        "reused": 7,
+        "held": 0
+      },
+      "tasks": [
+        {
+          "id": "next-latitude-offer",
+          "actor": "estate-next-process",
+          "task_class": "provider-intake",
+          "status": "reused",
+          "key": "f4f038ce1cdc003968b2cae9dd0eb8c1d9aad984152ba74309f36ca50fa2dfd9",
+          "value_sha256": "896973cc4ae3ad94e66aa095f8be763f797c0f1b06f20bc4bdcefdf0d755a445",
+          "elapsed_seconds": 0.399346,
+          "model_calls": 0,
+          "gpu_runs": 0
+        },
+        {
+          "id": "next-voltagepark-offer",
+          "actor": "estate-next-process",
+          "task_class": "provider-intake",
+          "status": "reused",
+          "key": "b44157e6a99c547449e1a78c8baba55a84ddaec0eb60ae42ca73f1e54b5f1bf7",
+          "value_sha256": "2613c1c93470515ac5915fd0d152d29404cac2d503095f18319136312f58ef14",
+          "elapsed_seconds": 0.413212,
+          "model_calls": 0,
+          "gpu_runs": 0
+        },
+        {
+          "id": "next-outside-benchmarks",
+          "actor": "estate-next-process",
+          "task_class": "benchmark-import",
+          "status": "reused",
+          "key": "05135264b98dc40e9e89e517441e13c961d63d6633e79e3a2dbd614edff9c308",
+          "value_sha256": "3d1d5980156e396e644d78dbf8a7a0aac5f6e3a6d1570813eef0a04bb3b02ee1",
+          "elapsed_seconds": 0.60529,
+          "model_calls": 0,
+          "gpu_runs": 0
+        },
+        {
+          "id": "next-run3-accepted-work",
+          "actor": "estate-next-process",
+          "task_class": "run-recompute",
+          "status": "reused",
+          "key": "b177baeb7d8c896c44e3cca32e34263c4b0fb67906643eb996d960c3b460a837",
+          "value_sha256": "76b2ab32c253e4356d5a6985e606bbc0d5b0d53298223fa741bb1583c5f31d40",
+          "elapsed_seconds": 0.50634,
+          "model_calls": 0,
+          "gpu_runs": 0
+        },
+        {
+          "id": "next-source-correction-example",
+          "actor": "estate-next-process",
+          "task_class": "source-correction",
+          "status": "reused",
+          "key": "50e7b4f650239e13cc0b5404165b011a86b15773abb2fa8600b4aad43fe1e599",
+          "value_sha256": "7307335e7afe0abac9ee15c51af9a377fbc1dcb067fb6d1b97e1c7e681f7d20e",
+          "elapsed_seconds": 0.410442,
+          "model_calls": 0,
+          "gpu_runs": 0
+        },
+        {
+          "id": "next-price-change-example",
+          "actor": "estate-next-process",
+          "task_class": "record-change",
+          "status": "reused",
+          "key": "5c90435100e84b9a0b415bfa697d380e65657239a59db54c96ddd6dd85f408ad",
+          "value_sha256": "8380986e6a53b5fff9170130ab069063ad4c7f7ffd5304bf9291bb359692804a",
+          "elapsed_seconds": 0.453956,
+          "model_calls": 0,
+          "gpu_runs": 0
+        },
+        {
+          "id": "next-estate-run3-plan",
+          "actor": "estate-next-process",
+          "task_class": "tier-plan",
+          "status": "reused",
+          "key": "28f15e888164e693a5c7b275c545f99ce817afd908fad4d81fe926df4f07ed61",
+          "value_sha256": "034d4fa0c144aaf8d26c9c13a3d61d2191739a65f4245b1f9084a760d61b9ebb",
+          "elapsed_seconds": 0.419852,
+          "model_calls": 0,
+          "gpu_runs": 0
+        }
+      ],
+      "receipt": "sessions/shared-work/runs/0fdba6d111bf40fb8c48056fb224ef81.json"
+    },
+    "seat_price_changed": {
+      "observed_at": "2026-09-25T04:43:20.832274+00:00",
+      "summary": {
+        "executed": 1,
+        "reused": 6,
+        "held": 0
+      },
+      "tasks": [
+        {
+          "id": "next-latitude-offer",
+          "actor": "estate-next-process",
+          "task_class": "provider-intake",
+          "status": "reused",
+          "key": "f4f038ce1cdc003968b2cae9dd0eb8c1d9aad984152ba74309f36ca50fa2dfd9",
+          "value_sha256": "896973cc4ae3ad94e66aa095f8be763f797c0f1b06f20bc4bdcefdf0d755a445",
+          "elapsed_seconds": 0.41217,
+          "model_calls": 0,
+          "gpu_runs": 0
+        },
+        {
+          "id": "next-voltagepark-offer",
+          "actor": "estate-next-process",
+          "task_class": "provider-intake",
+          "status": "reused",
+          "key": "b44157e6a99c547449e1a78c8baba55a84ddaec0eb60ae42ca73f1e54b5f1bf7",
+          "value_sha256": "2613c1c93470515ac5915fd0d152d29404cac2d503095f18319136312f58ef14",
+          "elapsed_seconds": 0.39672,
+          "model_calls": 0,
+          "gpu_runs": 0
+        },
+        {
+          "id": "next-outside-benchmarks",
+          "actor": "estate-next-process",
+          "task_class": "benchmark-import",
+          "status": "reused",
+          "key": "05135264b98dc40e9e89e517441e13c961d63d6633e79e3a2dbd614edff9c308",
+          "value_sha256": "3d1d5980156e396e644d78dbf8a7a0aac5f6e3a6d1570813eef0a04bb3b02ee1",
+          "elapsed_seconds": 0.678942,
+          "model_calls": 0,
+          "gpu_runs": 0
+        },
+        {
+          "id": "next-run3-accepted-work",
+          "actor": "estate-next-process",
+          "task_class": "run-recompute",
+          "status": "reused",
+          "key": "b177baeb7d8c896c44e3cca32e34263c4b0fb67906643eb996d960c3b460a837",
+          "value_sha256": "76b2ab32c253e4356d5a6985e606bbc0d5b0d53298223fa741bb1583c5f31d40",
+          "elapsed_seconds": 0.532428,
+          "model_calls": 0,
+          "gpu_runs": 0
+        },
+        {
+          "id": "next-source-correction-example",
+          "actor": "estate-next-process",
+          "task_class": "source-correction",
+          "status": "reused",
+          "key": "50e7b4f650239e13cc0b5404165b011a86b15773abb2fa8600b4aad43fe1e599",
+          "value_sha256": "7307335e7afe0abac9ee15c51af9a377fbc1dcb067fb6d1b97e1c7e681f7d20e",
+          "elapsed_seconds": 0.503346,
+          "model_calls": 0,
+          "gpu_runs": 0
+        },
+        {
+          "id": "next-price-change-example",
+          "actor": "estate-next-process",
+          "task_class": "record-change",
+          "status": "reused",
+          "key": "5c90435100e84b9a0b415bfa697d380e65657239a59db54c96ddd6dd85f408ad",
+          "value_sha256": "8380986e6a53b5fff9170130ab069063ad4c7f7ffd5304bf9291bb359692804a",
+          "elapsed_seconds": 0.44483,
+          "model_calls": 0,
+          "gpu_runs": 0
+        },
+        {
+          "id": "next-estate-run3-plan",
+          "actor": "estate-next-process",
+          "task_class": "tier-plan",
+          "status": "executed",
+          "key": "27d49623bcad3cc923e04354bc753e2d71dfa6ce992d4896a1b77922fe88ed2f",
+          "value_sha256": "481d96e885249cf1b98cb3689d2017ed9b4d98e4872d50e261e9effca986ba5b",
+          "elapsed_seconds": 0.681596,
+          "model_calls": 0,
+          "gpu_runs": 0
+        }
+      ],
+      "receipt": "sessions/shared-work/runs/9cc2d1ac757c47be9cb032f37bf2cb1c.json"
+    },
+    "combined_residual": {
+      "observed_at": "2026-09-25T04:43:21.620000+00:00",
+      "summary": {
+        "executed": 1,
+        "reused": 0,
+        "held": 0
+      },
+      "tasks": [
+        {
+          "id": "estate-residual-with-new-conditions",
+          "actor": "estate-first-consumer",
+          "task_class": "record-change",
+          "status": "executed",
+          "key": "0b366d0ec938790727eb88051c107fc8e9b76cbd4feeb772413e33b9f3bb1e6a",
+          "value_sha256": "a48e4cbc1e678b02b1d6b2ce38cdddaa7866f056047d09decf8d2a456bba4e1f",
+          "elapsed_seconds": 0.720251,
+          "model_calls": 0,
+          "gpu_runs": 0
+        }
+      ],
+      "receipt": "sessions/shared-work/runs/c9203bac5a804d5a9a2b8adf876ed84d.json"
+    }
+  },
+  "evidence": {
+    "tierbench_retained_call_rows": 52,
+    "operator_diagnostic_aggregates": 9,
+    "synthetic_route_receipts": 0,
+    "period": "historical July 2026; retained excerpts",
+    "raw_source_identity": "native import output retained under sessions/shared-work/inputs/tierbench-excerpts-20260925",
+    "summary_sha256": "c8e7d0acdde408773e32bf18ac36d13ccb9c37803b6ec960f3bb076b601ff72b",
+    "ladder_sha256": "30d75fc76ac499629204ed02e5c47e545a5659a70def5b332d1c8bdff0f990e5",
+    "new_model_measurement": false
+  },
+  "native_plan": {
+    "chosen_tier": "claude-haiku-4-5@harness",
+    "chosen_mode": "full",
+    "class_basis": "EvalPlus HumanEval+/MBPP+ is implement-from-docstring, the shape of Tier-Bench's t1_impl_from_docstring_001. This is an ANALOGY declared by the Knot, not a measured equivalence (RUN3-GRID.md).",
+    "projected_wall_s": 21570.5,
+    "deadline_s": 5400,
+    "cost_basis": "542 x recorded cost/trial $0.037761 (mean of 3 non-zero rows (shadow-estimated)); Tier-Bench trials, not this Knot's prompts",
+    "open_weight_tier_status": "unmeasured",
+    "execution_authorized": false
+  },
+  "preservation": {
+    "prior_results_byte_identical": true,
+    "run3_accepted": 4336,
+    "run3_computation_key_unchanged_on_seat_price_change": true,
+    "combined_residual": {
+      "concurrency": [
+        64
+      ],
+      "price": {
+        "extra": 0,
+        "gpus": 1,
+        "period": "synthetic",
+        "provider": "Hot Aisle",
+        "rate": 1.68,
+        "source": "local demo (fake API on-demand price)"
+      },
+      "gates": {
+        "e2e": null,
+        "quality": false,
+        "queue": false,
+        "ttft": 150
+      },
+      "requirements": {
+        "max_failure_rate": null,
+        "max_p95_e2e_ms": 15000,
+        "max_p95_ttft_ms": 200,
+        "min_accepted_per_s": null
+      }
+    },
+    "residual_source": "committed synthetic workload record; no new hardware execution"
+  },
+  "checks": {
+    "integration_task_tests": 24,
+    "existing_work_tests": 8,
+    "native_runner_compute_bridge_seam_tests": 100,
+    "instrument_calculation_checks": 80,
+    "native_tier_and_seat_owner_suite": "PASS",
+    "authority_projections": "PASS (6)",
+    "instrument_kit": "PASS (41 files)",
+    "compute_kit": "rebuilt from final native revalidation source",
+    "git_diff_check": "PASS"
+  },
+  "boundary_repairs": [
+    "Residual jobs preserve simultaneous gate, price and acceptance requirements, requested runtime cells and valid primary-cell choice.",
+    "Native full coverage uses exact task counts, never its rounded display ratio.",
+    "Missing or unusable paired list rates leave cost unestimated.",
+    "Explicit as-of planning excludes and counts future or undated availability observations.",
+    "Shadow cost is described as recorded, preserving its evidence basis."
+  ],
+  "live_tierbench_intake": {
+    "expected_commit": "9693cb99694338e72c15d0ffbb87b5a1c5bbf16a",
+    "observed_checkout_head": "27fbc0cb3d810b4d53ffb7370881b9bb1c77b5c5",
+    "state": "pin mismatch observed; no alternate authority selected",
+    "retained_router": "Estate-pinned code/policy matched; native no-call ordering inspected, no provider dispatched"
+  },
+  "scope": "Executed local deterministic operations on actual retained Run 3 data, historical Tier-Bench excerpts and clearly identified synthetic change examples. Tier selection is a planning result, not admission, live endpoint qualification, deadline guarantee, rolling frontier comparison or hybrid execution. No GPU run, model call, resource rental, remote CI, publication or push."
+}

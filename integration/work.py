@@ -26,7 +26,40 @@ ADAPTERS = {
     "run-recompute": "task_results",
     "record-change": "task_changes",
     "source-correction": "task_changes",
+    "tier-plan": "task_tiers",
 }
+
+# A cold caller can discover the existing operations without a conversation.
+# These descriptions are navigation; adapters and native owners enforce rules.
+TASK_HELP = {
+    "provider-intake": {"source": "provider JSONL", "optional": ["offer_id", "price_scenario"],
+                        "supports": "Retain offers and calculate conditional price scenarios."},
+    "benchmark-import": {"source": "native backfill manifest JSON", "optional": [],
+                         "supports": "Import retained benchmark artifacts with their provenance."},
+    "run-recompute": {"source": "retained Run 3 arm directory", "optional": [],
+                      "supports": "Rejoin retained grading and recompute deadline acceptance."},
+    "record-change": {"source": "qualified workload record JSON", "required": ["change"],
+                      "supports": "Recalculate, reassess or identify minimal new execution through the native owner."},
+    "source-correction": {"source": "Research Desk history JSON", "required": ["change"],
+                          "supports": "Apply a correction and preserve affected dependencies and historical reports."},
+    "tier-plan": {"source": "second-run/knot-spec@1 JSON", "required": ["evidence"],
+                  "optional": ["seats", "availability", "local_models"],
+                  "supports": "Join supplied native Tier-Bench evidence to model and seat plans; planning only."},
+}
+
+
+def catalog():
+    return {"schema": "second-run/work-catalog@1",
+            "operations": [{"task_class": name, "adapter": "integration/" + adapter + ".py",
+                            **TASK_HELP[name]} for name, adapter in ADAPTERS.items()],
+            "request": {"shape": {"tasks": [{"id": "caller-label", "task_class": "one listed class", "source": "artifact path"}]},
+                        "path_basis": "Input paths are relative to the request file; absolute paths also work.",
+                        "optional_metadata": ["actor"]},
+            "run": "python -B integration/work.py --request REQUEST.json --store RESULT_DIRECTORY",
+            "examples": ["integration/examples/work.json", "integration/WORK.md"],
+            "result": "Read tasks[].result for native output; task status executed/reused does not grant standing.",
+            "reuse": "The same declared inputs, procedure bytes and runtime reuse one verified computation across callers.",
+            "effects": {"model_calls": 0, "gpu_runs": 0, "resource_acquisition": False}}
 
 
 def encoded(value):
@@ -186,8 +219,14 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--request", type=Path)
     parser.add_argument("--store", type=Path)
+    parser.add_argument("--catalog", action="store_true", help="Print available task classes and artifact contracts; no execution")
     parser.add_argument("--worker", action="store_true", help=argparse.SUPPRESS)
     args = parser.parse_args()
+    if args.catalog:
+        if args.request or args.store or args.worker:
+            parser.error("--catalog is separate from --request, --store and --worker")
+        sys.stdout.buffer.write(json.dumps(catalog(), ensure_ascii=False, indent=2).encode("utf-8") + b"\n")
+        return 0
     if args.worker:
         try:
             with contextlib.redirect_stdout(io.StringIO()):

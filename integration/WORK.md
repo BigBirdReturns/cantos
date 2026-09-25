@@ -1,9 +1,27 @@
 # Shared operations, retained for the next request
 
 The floor improves by class, not by user. `work.py` supplies one execution and
-reuse path for five existing deterministic operations. A different operator or
+reuse path for six existing deterministic operations. A different operator or
 provider does not require another implementation. The source owners still decide
 what the evidence supports.
+
+## Start from the local record
+
+```powershell
+python -B integration/work.py --catalog
+```
+
+This prints the task classes, required artifact shapes, adapter coordinates and
+execution command. A new process needs the request file and result-store address;
+it does not need the earlier conversation. `tasks[].result` in each run receipt
+points to the native output. Inspect its limits and unresolved work as well as the
+outer `executed` or `reused` status.
+
+On this estate, ongoing results are retained under the project home at
+`../sessions/shared-work/`, outside the published checkout. Qualification uses
+`S:/Scratch/Runs/` or `S:/Scratch/Temp/`. Scratch qualification is not durable
+operating custody. A store is explicitly selected on each invocation; another
+operator can keep the same format under their own custody.
 
 From the repository root on this estate:
 
@@ -26,6 +44,7 @@ operators can use an appropriate writable result directory on their own machines
 | `run-recompute` | Run 3 recovery, grader join and deadline buckets | Retained A/T0 replay: 8,622 scheduled, 8,622 completed, 4,336 accepted. This rejoins retained EvalPlus results and recomputes acceptance; it does not execute EvalPlus or rent a GPU. |
 | `source-correction` | Research Desk event and dependency machinery | The shipped synthetic worked-history packet receives an explicitly illustrative correction. Its successor makes affected work stale and preserves historical reports. No human review or standing is granted. |
 | `record-change` | Workload runner revalidation | The shipped synthetic workload record gets a price scenario. The owner recalculates economics, leaves performance intact and requires no execution. |
+| `tier-plan` | Campaign Tier-Bench bridge and WATERLINE | A supplied Knot plus native evidence summary and ladder produce model/seat plans with source bases, wall clock, costs and missing measurements retained. This is a planning computation, not new model capability evidence or execution authority. |
 
 The larger local archive has a separate request:
 
@@ -61,6 +80,10 @@ The existing record-change owner also accepts `gates`, `requirements`, `traffic`
 `runtime` and `evaluator` changes. Its result distinguishes recalculation,
 reassessment of retained outputs and a minimal new execution plan. This runner
 returns that plan; execution and authorization remain with the workload runner.
+When a change requires execution, the proposed native job now retains simultaneous
+price, gate and acceptance-requirement changes, including a requested quality gate.
+It contains only the requested cells and clears a historical primary cell when
+that cell is absent from the proposed rerun.
 Source corrections use a record ID and a bounded patch through Research Desk.
 Their event actor identifies this deterministic procedure; the separate run
 receipt records the caller label. Reusing a calculation does not create a second
@@ -90,6 +113,48 @@ data; the original remains available for inspection.
 
 An `executed` task can still contain native unresolved fields or applicability
 holds. That status means the procedure ran, not that its conclusions were accepted.
+
+## Bring model and seat evidence into the same reuse path
+
+A `tier-plan` task names a retained Knot JSON and a directory produced by the
+existing `hot-aisle/campaign/tierbench-bridge/import_tierbench.py`:
+
+```json
+{
+  "tasks": [{
+    "id": "next-estate-plan",
+    "task_class": "tier-plan",
+    "source": "knot.json",
+    "evidence": "tier-evidence"
+  }]
+}
+```
+
+`tier-evidence` must contain native `tierbench-summary.json` and
+`tier-ladder.json`. Optional `seats`, `availability` and `local_models` paths
+replace the native owners' defaults. Every supplied file and both planners enter
+the computation identity. Changing one of those inputs recalculates that plan;
+it does not invalidate an independent retained-run recomputation. Missing files
+hold the task, and identical evidence copied to a new location can be reused.
+
+The adapter calls the native planner and retains its entire result. The native
+`chosen_tier` is an evidence-based model candidate; even `chosen_mode: full`
+does not mean its projected wall time meets the deadline. The retained Run 3
+example uses a declared analogy to one historical T1 task: its API projection
+takes 21,570.5 seconds against a 5,400-second deadline at concurrency one. The
+open-weight tier remains unmeasured. These are useful remaining measurement and
+placement questions, not an authorized route.
+
+`TIER-VERIFICATION.json` records this join using 52 retained Tier-Bench call rows
+and nine operator-diagnostic aggregates, excluding synthetic route receipts.
+It also records cold execution, reuse by another caller and a changed seat-price
+scenario beside the untouched 4,336 accepted requests. Dates and evidence bases
+remain historical; this does not run rolling frontier tests or refresh offers.
+
+Live Tier-Bench intake must resolve its current authority before use. During this
+join, the resolver's pinned commit and checkout HEAD differed. The already-retained
+excerpts remain usable as historical inputs; this adapter does not silently select
+another checkout or reclassify those excerpts as current measurements.
 
 ## Qualification
 

@@ -14,7 +14,7 @@ efficiently" (../ledger/waterline.py). This module joins them for one Knot:
      measured task (with coverage = measured tasks / class tasks), unstable, wall, or unmeasured.
   3. The cheapest sufficient tier by DIR/tier-ladder.json rank is chosen. Ties and partial coverage are written down.
   4. Seat side:
-       api / subscription tiers  -> a ZERO-SEAT plan: provider cost = count x measured cost per trial (basis carried),
+       api / subscription tiers  -> a ZERO-SEAT plan: provider cost = count x recorded cost per trial (basis carried),
                                     wall = count x median latency / concurrency (declared), grader seats from seats.json.
        local / open-weight tiers -> the Knot's model (or local_models.json's spec for that tier) goes through the fabric
                                     WATERLINE: fastest / cheapest / most-efficient seat plans with their assumptions.
@@ -110,7 +110,8 @@ def choose_tier(verdicts, ladder, classes):
     def rank(t):
         r = (ladder["tiers"].get(t) or {}).get("rank")
         return r if r is not None else 1e9
-    full = [t for t, v in verdicts.items() if v["status"] == "sufficient" and v["covers_all_classes"] and v["coverage"] == 1.0]
+    full = [t for t, v in verdicts.items() if v["status"] == "sufficient" and v["covers_all_classes"]
+            and v["class_tasks"] > 0 and v["measured_tasks"] == v["class_tasks"]]
     partial = [t for t, v in verdicts.items() if v["status"] in ("sufficient", "partly-sufficient") and t not in full]
     reasons = []
     if full:
@@ -134,19 +135,24 @@ def choose_tier(verdicts, ladder, classes):
 
 # ---------------------------------------------------------------- seat plans
 def api_plan(knot, tier, verdict, ladder, seats):
+    def usable_rate(rate):
+        try:
+            return type(rate) in (int, float) and math.isfinite(rate) and rate >= 0
+        except OverflowError:
+            return False
     lt = ladder["tiers"].get(tier) or {}
     count = knot["count"]
     conc = ((knot.get("policy") or {}).get("api_concurrency")) or 1
     cost = usd_basis = None
     if verdict.get("cost_per_trial_usd") is not None:
         cost = round(verdict["cost_per_trial_usd"] * count, 4)
-        usd_basis = f"{count} x measured cost/trial ${verdict['cost_per_trial_usd']} ({verdict['cost_per_trial_basis']}); Tier-Bench trials, not this Knot's prompts"
-    elif lt.get("price_in_per_1M") is not None:
+        usd_basis = f"{count} x recorded cost/trial ${verdict['cost_per_trial_usd']} ({verdict['cost_per_trial_basis']}); Tier-Bench trials, not this Knot's prompts"
+    elif all(usable_rate(lt.get(key)) for key in ("price_in_per_1M", "price_out_per_1M")):
         per = (knot.get("tokens_in_per_closure", 400) * lt["price_in_per_1M"] + knot.get("tokens_out_per_closure", 300) * lt["price_out_per_1M"]) / 1e6
         cost = round(per * count, 4)
-        usd_basis = f"LIST PROXY: {count} x ({knot.get('tokens_in_per_closure', 400)} in + {knot.get('tokens_out_per_closure', 300)} out tokens) at {lt.get('price_source')}; no measured cost/trial at this tier"
+        usd_basis = f"LIST PROXY: {count} x ({knot.get('tokens_in_per_closure', 400)} in + {knot.get('tokens_out_per_closure', 300)} out tokens) at {lt.get('price_source')}; no recorded cost/trial at this tier"
     else:
-        usd_basis = "unpriced tier and no measured cost: cost unestimated"
+        usd_basis = "tier lacks usable input/output list prices and has no recorded cost: cost unestimated"
     lat = verdict.get("latency_ms_median")
     wall = round(count * lat / 1000.0 / conc, 1) if lat else None
     wall_basis = (f"{count} x median Tier-Bench trial latency {lat} ms / concurrency {conc} (declared, not measured for this provider under load)" if lat
@@ -162,7 +168,7 @@ def api_plan(knot, tier, verdict, ladder, seats):
             "seat_id": None, "seat_reason": "API / subscription tier: no fabric seat is consumed for inference; the seat cost is $0 and the provider bill is the cost",
             "grader_seats": graders, "grader_note": "grading still needs a fabric seat with the grader role (evaluator.needs_seat_role)" if (knot.get("evaluator") or {}).get("needs_seat_role") else None,
             "assumptions": [a for a in [
-                "cost/trial is from Tier-Bench receipts on other prompts, not this Knot's" if verdict.get("cost_per_trial_usd") is not None else None,
+                "recorded cost/trial is from Tier-Bench receipts on other prompts, not this Knot's" if verdict.get("cost_per_trial_usd") is not None else None,
                 "latency is a Tier-Bench trial median, not a provider SLA" if lat else None,
                 f"concurrency {conc} declared; provider rate limits not modeled",
                 "subscription tiers (Codex) are list-priced for comparison; the plan's marginal cost is the subscription window" if lt.get("seat_kind") == "subscription" else None,
@@ -311,6 +317,7 @@ def selftest():
         check(p["chosen_tier"] == "claude-haiku-4-5@harness" and p["chosen_mode"] == "full", f"graded-coding -> tierbench-T1: cheapest sufficient tier is haiku@harness ({p['chosen_tier']}, {p['chosen_mode']})")
         ch = p["plans"]["chosen"]["plan"]
         check(ch["kind"] == "zero-seat" and ch["seat_id"] is None and ch["usd"] is not None and "shadow" in ch["cost_basis"], f"chosen plan is zero-seat, cost {_fmt_usd(ch['usd'])} carried as shadow-estimated")
+        check("recorded cost/trial" in ch["cost_basis"] and "measured cost/trial" not in ch["cost_basis"] and "shadow-estimated" in ch["cost_basis"], "historical shadow cost is labeled recorded, never measured; its evidence basis is retained")
         check(ch["wall_s"] > knot["deadline_s"] and ch["concurrency_needed_for_deadline"] >= 2 and "deadline_note" in ch, f"serial API wall {fabric.fmt_s(ch['wall_s'])} exceeds the deadline; concurrency {ch['concurrency_needed_for_deadline']} needed, written")
         check("estate-w01-cpu" in ch["grader_seats"], "zero-seat plan still names grader seats")
         ow = p["plans"]["open_weight"]
@@ -353,6 +360,29 @@ def selftest():
         # 8. render does not crash and names the chosen tier
         txt = render(p)
         check("CHOSEN: claude-haiku-4-5@harness" in txt and "OPEN_WEIGHT tier" in txt and "WATERLINE plan for" in txt, "render: chosen tier, open-weight row and the embedded fabric plan")
+        # 9. Rounded display coverage must not turn a missing task into full coverage.
+        sparse = {"classes": {"boundary": {"n_tasks": 2001, "tasks": {
+            str(i): {"tiers": {"candidate": {"status": "sufficient"}}} for i in range(2000)}}}}
+        boundary_ladder = {"tiers": {"candidate": {"rank": 0}}}
+        verdicts, _ = class_verdicts(sparse, ["boundary"])
+        chosen, mode, _ = choose_tier(verdicts, boundary_ladder, ["boundary"])
+        check(verdicts["candidate"]["coverage"] == 1.0 and mode == "partial", "2000/2001 tasks may display 1.0 coverage but remain partial")
+        sparse["classes"]["boundary"]["tasks"]["2000"] = {"tiers": {"candidate": {"status": "sufficient"}}}
+        verdicts, _ = class_verdicts(sparse, ["boundary"])
+        chosen, mode, _ = choose_tier(verdicts, boundary_ladder, ["boundary"])
+        check(chosen == "candidate" and mode == "full", "the final measured task, not display rounding, completes full coverage")
+        # 10. A partial or unusable list price is unknown; zero is a usable rate.
+        unknown_cost = {"cost_per_trial_usd": None, "latency_ms_median": None, "pass_rate": None}
+        bad_rates = (None, True, -1, "1", float("nan"), float("inf"))
+        null_prices = []
+        for bad in bad_rates:
+            for prices in ((1, bad), (bad, 1)):
+                prices_ladder = {"tiers": {"candidate": {"price_in_per_1M": prices[0], "price_out_per_1M": prices[1]}}}
+                pp = api_plan(knot, "candidate", unknown_cost, prices_ladder, seats)
+                null_prices.append(pp["usd"] is None and "unestimated" in pp["cost_basis"])
+        check(all(null_prices), "missing, boolean, negative, nonnumeric and nonfinite rates on either side leave cost unestimated")
+        zero_ladder = {"tiers": {"candidate": {"price_in_per_1M": 0, "price_out_per_1M": 0}}}
+        check(api_plan(knot, "candidate", unknown_cost, zero_ladder, seats)["usd"] == 0.0, "two explicit zero list rates remain a zero-cost proxy")
     print(f"tier_waterline selftest: {'all passed' if ok else 'FAILURES'}")
     return ok
 
