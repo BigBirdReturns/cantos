@@ -428,5 +428,20 @@
     "state": "pin mismatch observed; no alternate authority selected",
     "retained_router": "Estate-pinned code/policy matched; native no-call ordering inspected, no provider dispatched"
   },
-  "scope": "Executed local deterministic operations on actual retained Run 3 data, historical Tier-Bench excerpts and clearly identified synthetic change examples. Tier selection is a planning result, not admission, live endpoint qualification, deadline guarantee, rolling frontier comparison or hybrid execution. No GPU run, model call, resource rental, remote CI, publication or push."
+  "scope": "Executed local deterministic operations on actual retained Run 3 data, historical Tier-Bench excerpts and clearly identified synthetic change examples. Tier selection is a planning result, not admission, live endpoint qualification, deadline guarantee, rolling frontier comparison or hybrid execution. No GPU run, model call, resource rental, remote CI, publication or push.",
+  "source_sha256_basis": "Actual executed working-tree bytes. Code matches committed bytes. Text inputs with Git line-ending conversion are separately identified below; no cross-serialization reuse is asserted.",
+  "git_text_serialization": {
+    "hot-aisle/campaign/providers/providers.jsonl": {
+      "executed_sha256": "ccac2614eccdded6731ad48d99c6267c508b9f93e2f460b756113607a334bad8",
+      "git_blob_sha256": "87e97802fc2bf507f26ec87ab9a3dd8d685e09a817a63ed8c8f66fc951d8c20a",
+      "difference": "CRLF working input versus LF Git text blob; equal after newline normalization",
+      "reuse_consequence": "Different bytes have different computation identity and recompute. Original durable results remain retained."
+    },
+    "research-desk/examples/worked-history.json": {
+      "executed_sha256": "93040f03653ba01a77fbb5a5bde5f71e6e93c66ed7cffa771968bef22966d940",
+      "git_blob_sha256": "b5da5ae0e11080efdb02a98697680836ead0aa649135a15340d3708c6083c539",
+      "difference": "CRLF working input versus LF Git text blob; equal after newline normalization",
+      "reuse_consequence": "Different bytes have different computation identity and recompute. Original durable results remain retained."
+    }
+  }
 }

@@ -104,6 +104,11 @@ standing. Reuse is deliberately conservative: changing an unrelated row in a
 shared provider file invalidates that file's operations too. This implementation
 does not claim field-level dependency precision for every source format.
 
+Byte identity also includes text serialization. The local verification records two
+existing CRLF inputs whose Git blobs use LF. Both hashes are retained in its report;
+a differently serialized checkout recalculates those operations instead of reusing
+the old result. Neither the input files nor the earlier results were rewritten.
+
 Results and invocation receipts are append-only. A damaged cache entry is held
 with a reason; it is not silently repaired or overwritten. Missing evidence,
 unsupported task classes, misspelled change fields and disagreements between a
