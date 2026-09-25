@@ -33,7 +33,7 @@ jobs:
         run: python3 -B -m unittest discover -s shelf/tests -p 'test_shelf.py' -v
       - name: Browser engine agrees with the CLI on the shared fixture
         run: node --test shelf/tests/test_engine.cjs
-      - name: Forge, small scale: generated population through both engines, every invariant
+      - name: "Forge, small scale: generated population through both engines, every invariant"
         run: |
           set -euo pipefail
           python3 -B shelf/scripts/forge.py --scale small --seed 1
