@@ -1,0 +1,73 @@
+{
+  "schema": "second-run/shop-fingerprint@1",
+  "schema_version": "1",
+  "_fixture_note": "Reference fingerprint for Hot Aisle, built ONLY from facts already on record in campaign/results/hotaisle-mi300x/env.json and env.normalized.json (the arm-environment@1 record from the Sept 2026 run). Every field not present in those two files is the literal string \"unobserved\" - nothing here is invented. The next real Hot Aisle rental runs fingerprint.sh on the VM and this file is replaced with its output.",
+  "_fixture_sourced_from": {
+    "recorded_at": "campaign/results/hotaisle-mi300x/env.normalized.json recorded_at",
+    "hostname": "env.normalized.json host",
+    "kernel": "env.normalized.json kernel",
+    "gpu.count": "env.normalized.json gpus",
+    "gpu.rocm_or_cuda_version": "env.normalized.json driver_or_rocm (field name is ambiguous between driver and ROCm stack version in the source record; carried here as the ROCm figure since 7.2.4 matches ROCm's version scheme, not a driver package version)",
+    "gpu.devices[0].model": "env.normalized.json gpu, with the tabs env.json shipped raw stripped exactly as env.normalized.json already did",
+    "container_runtime.runtime": "arm.sh env_record()/serve() run vLLM through docker (the dk() wrapper); env.normalized.json image is a docker image digest, which is only meaningful if docker (or a docker-compatible CLI) pulled it"
+  },
+  "recorded_at": "2026-09-23T18:32:32Z",
+  "hostname": "enc1-gpuvm002",
+  "requested_gpu_vendor": "amd",
+  "kernel": "6.8.0-124-generic",
+  "distro": "unobserved",
+  "virtualization": "unobserved",
+  "dmidecode_system_product": "unobserved",
+  "cpu": {
+    "model": "unobserved",
+    "cores_logical": "unobserved",
+    "sockets": "unobserved",
+    "numa_nodes": "unobserved"
+  },
+  "memory": {
+    "total": "unobserved"
+  },
+  "storage": {
+    "devices": "unobserved",
+    "nvme_smart": []
+  },
+  "filesystems": "unobserved",
+  "network": {
+    "interfaces": [],
+    "download_throughput_mb_s": "unobserved"
+  },
+  "container_runtime": {
+    "runtime": "docker",
+    "version": "unobserved"
+  },
+  "gpu": {
+    "vendor": "amd",
+    "count": "1",
+    "driver_version": "unobserved",
+    "rocm_or_cuda_version": "7.2.4",
+    "devices": [
+      {
+        "index": "0",
+        "model": "AMD Instinct MI300X VF",
+        "vbios": "unobserved",
+        "firmware": "unobserved",
+        "driver": "unobserved",
+        "pci_addr": "unobserved",
+        "pcie_link_gen_current": "unobserved",
+        "pcie_link_width_current": "unobserved",
+        "ecc_corrected_total": "unobserved",
+        "ecc_uncorrected_total": "unobserved",
+        "clock_sm_mhz_idle": "unobserved",
+        "clock_mem_mhz_idle": "unobserved",
+        "temp_c_idle": "unobserved",
+        "power_w_idle": "unobserved",
+        "hw_slowdown_throttle": "unobserved"
+      }
+    ]
+  },
+  "gpu_topology": "unobserved",
+  "ecc": "unobserved",
+  "idle_power_state": "unobserved",
+  "load_sample": "unobserved",
+  "raw_dir": "unobserved"
+}

@@ -110,3 +110,7 @@ only in the declared runtime digest, and from the runner's cells only by the abs
 - DigitalOcean refuses a GPU Droplet: try Spheron for the H100 arm ($3.59/hr, 20-min
   minimum, self-serve) and record it as a custom comparator. Do not substitute the MI300X
   arm; the buyer's arm is arm A.
+
+## Evaluating another shop
+
+`shop-eval/MANUAL.md` is the turnkey version of this run sheet for any provider: counter protocol, node fingerprint, the same bench, and a diagnosis against the Hot Aisle reference. `shop-eval/SHORTLIST.md` names the first ten shops.

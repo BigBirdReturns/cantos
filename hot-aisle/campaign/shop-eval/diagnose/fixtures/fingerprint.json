@@ -1,0 +1,75 @@
+{
+  "schema": "second-run/shop-fingerprint@1",
+  "shop": "synthetic-badshop",
+  "generated_at": "2026-09-25T00:00:00Z",
+  "_synthetic": "fabricated fixture for shop-eval/diagnose test coverage, not a real shop",
+  "kernel": "5.15.0-91-generic",
+  "virtualization": "vm",
+  "acs_enabled": false,
+  "hugepages_enabled": false,
+  "iommu": "enabled",
+  "cpu": {
+    "model": "AMD EPYC 9354",
+    "sockets": 2,
+    "cores": 64,
+    "numa_nodes": 2
+  },
+  "ram": {
+    "total_gb": 768,
+    "ecc": true
+  },
+  "storage": {
+    "type": "nvme",
+    "read_mb_s": 3200,
+    "write_mb_s": 2100
+  },
+  "network": {
+    "throughput_gbps": 25
+  },
+  "container_runtime": {
+    "engine": "docker",
+    "cpu_pinning": false,
+    "numa_pinning": false
+  },
+  "provisioning": {
+    "requested_at": "2026-09-25T00:00:00Z",
+    "ssh_ready_at": "2026-09-25T00:15:00Z",
+    "seconds_to_ssh": 900,
+    "listed_available": true,
+    "provisioned": false
+  },
+  "observed_backend": {
+    "attention_backend": "unknown",
+    "moe_kernel": null
+  },
+  "gpus": [
+    {
+      "index": 0,
+      "model": "AMD Instinct MI300X VF",
+      "vbios": "unknown",
+      "firmware": "unknown",
+      "firmware_age_days": 410,
+      "driver_or_rocm_version": "6.1.2",
+      "pcie_gen": 4,
+      "pcie_gen_max": 5,
+      "pcie_width": 8,
+      "pcie_width_max": 16,
+      "topology": "single-root",
+      "ecc_enabled": true,
+      "ras_errors_correctable": 12,
+      "ras_errors_uncorrectable": 2,
+      "idle_temp_c": 42,
+      "idle_clock_mhz": 1200,
+      "idle_power_w": 220,
+      "sustained_60s": {
+        "clock_mhz_start": 2100,
+        "clock_mhz_end": 1550,
+        "temp_c_start": 55,
+        "temp_c_end": 96,
+        "power_w_start": 130,
+        "power_w_end": 300,
+        "throttled": true
+      }
+    }
+  ]
+}
