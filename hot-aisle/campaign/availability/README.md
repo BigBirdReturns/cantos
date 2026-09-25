@@ -1,5 +1,42 @@
 # Availability ledger
 
+## Authenticated TUI supervision
+
+`tui_watch.py --config <private-json> --once` supports the account's existing
+SSH-key login when no API token is available. It first probes Estate's configured
+front door, then routes the provider connection through that peer with pinned
+host keys. The key remains on its owning seat. Connection locations, team,
+private evidence directory, expiry and sampling interval belong in configuration.
+
+The monitor sends only the provisioning-menu key after identifying the expected,
+fully loaded, idle team dashboard, followed by Escape and Ctrl-C. A listing is
+never treated as a delivered VM. Unknown screens remain unknown. Sampling is
+serialized, at least 30 minutes apart, and stops on expiry or a private STOP file.
+Raw captures and append-only observations are private; do not put them in this
+published checkout.
+
+`n01_tick.py` is the scheduler-side delegate. `supervision.py` consumes the current
+monitor result and can wake one explicitly configured Fable executor on a fresh
+candidate. An exclusive persistent acquisition claim prevents another automated
+launch. The executor follows `EXECUTOR.md`: one exactly matched MI300X baseline,
+pre-create price/release checks, an $8 first-allocation ceiling within the existing
+$50 campaign cap, collection, deletion and N01 grading. Source hashes are checked
+before execution. It does not grant authority to publish or run the later trials.
+
+The wrapper watches executor lifetime and can invoke a release-only recovery lane
+after cancellation, timeout or a stale heartbeat. An uncertain acquisition or
+failed release remains held and cannot trigger another rental. This is
+model-supervised control, not a provider-side hard billing limit. Provider or
+key-seat outages can prevent release and remain visible failures. No claim of
+end-to-end rental qualification follows from offline tests or executor preparation.
+
+Validation: `python -B test_tui_watch.py` and `python -B test_supervision.py`.
+The deployed instance and its activation receipt belong in the private campaign
+session, outside this public source tree. Creating these files alone starts no
+timer, model session or rental.
+
+## Observation format
+
 One JSON line per observation of whether a provider would sell a given GPU SKU, in a given region, at a given moment. Every provisioning attempt the campaign makes writes here, including failures. This is the raw material for the availability heatmap: provider × SKU × region × hour. Nobody publishes this from the buyer's side.
 
 Fields: `ts` (UTC), `provider`, `region`, `sku`, `gpus`, `method`, `layer`,
