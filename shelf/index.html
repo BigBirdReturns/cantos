@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The shelf</title>
+<meta name="description" content="Claims about compute, filed side by side so a stranger can see what each supports and what it does not. A format, a validator and a federation rule. Nothing here ranks.">
+<style>
+:root{--bg:#fbfaf7;--fg:#1a1a1a;--mute:#5f5c56;--line:#d9d5cc;--panel:#f1eee7;--ok:#1f6f3f;--no:#8a2b1c;--warn:#7a5a00;--link:#1d4f91;--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;--sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#15161a;--fg:#e8e6e1;--mute:#a19d95;--line:#3a3c43;--panel:#1e2026;--ok:#6fcf8f;--no:#f08a75;--warn:#e2b84a;--link:#8ab4f8}}
+:root[data-theme="dark"]{--bg:#15161a;--fg:#e8e6e1;--mute:#a19d95;--line:#3a3c43;--panel:#1e2026;--ok:#6fcf8f;--no:#f08a75;--warn:#e2b84a;--link:#8ab4f8}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 var(--sans)}
+main{max-width:920px;margin:0 auto;padding:32px 16px 64px}
+h1{font-size:2rem;margin:0 0 .25rem;letter-spacing:-.01em}
+h2{font-size:1.25rem;margin:2.5rem 0 .75rem;padding-top:1rem;border-top:1px solid var(--line)}
+p{margin:.5rem 0}
+.lede{font-size:1.1rem;color:var(--mute)}
+a{color:var(--link)}
+code,pre{font-family:var(--mono);font-size:.9em}
+pre{background:var(--panel);border:1px solid var(--line);padding:12px;overflow:auto;border-radius:4px}
+table{border-collapse:collapse;width:100%;font-size:.92rem}
+th,td{text-align:left;vertical-align:top;padding:8px 8px;border-bottom:1px solid var(--line)}
+th{color:var(--mute);font-weight:600;white-space:nowrap}
+.flags{font-family:var(--mono);font-size:.85em;white-space:nowrap}
+.spine{color:var(--mute)}
+.wrap{overflow-x:auto}
+form{display:grid;gap:10px;grid-template-columns:1fr;background:var(--panel);border:1px solid var(--line);padding:14px;border-radius:4px}
+label{display:grid;gap:4px;font-size:.92rem;color:var(--mute)}
+input[type=text],select,textarea{font:inherit;color:var(--fg);background:var(--bg);border:1px solid var(--line);padding:8px;border-radius:3px;width:100%}
+textarea{font-family:var(--mono);font-size:.85em;min-height:200px}
+button{font:inherit;padding:8px 14px;border:1px solid var(--fg);background:var(--fg);color:var(--bg);border-radius:3px;cursor:pointer;justify-self:start}
+button.quiet{background:transparent;color:var(--fg)}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.result{border-left:4px solid var(--line);padding:8px 12px;margin:10px 0;background:var(--panel)}
+.result.ok{border-color:var(--ok)}.result.no{border-color:var(--no)}.result.warn{border-color:var(--warn)}
+.status{font-family:var(--mono);font-weight:700}
+.ok .status{color:var(--ok)}.no .status{color:var(--no)}.warn .status{color:var(--warn)}
+.small{font-size:.88rem;color:var(--mute)}
+ul{padding-left:1.2rem}
+li{margin:.25rem 0}
+.fail{border:2px solid var(--no);padding:12px;color:var(--no);background:var(--panel)}
+@media (min-width:640px){form.two{grid-template-columns:1fr 1fr}form.two .full{grid-column:1/-1}}
+</style>
+</head>
+<body>
+<main>
+<h1>The shelf</h1>
+<p class="lede">Claims about compute, filed side by side so that someone who was not there can see what each one supports and what it does not. A card format, a checker with no dependencies, and a rule for pulling other people's shelves into yours without granting them standing. Nothing here ranks.</p>
+<p class="small">Everything on this page runs in your browser from committed plain text. No account, no upload, no analytics. The same checks run from the command line with <code>python shelf.py</code>; the two engines are held to one shared test fixture.</p>
+
+<h2 id="on-it">What is on it</h2>
+<p>Each card answers five questions: <b>(a)</b> what exactly is claimed, under which conditions, over what period; <b>(b)</b> what population, denominator and acceptance rule produced the number; <b>(c)</b> who observed, who controlled the conditions, who granted access, who paid, and whether the observer benefits from the outcome; <b>(d)</b> what a reader can obtain; <b>(e)</b> whether anyone inspected the evidence, recomputed the result, or independently repeated the operation, kept as three separate facts. Measured, imported, modeled and attributed are four separate flags, never one grade. Unknown is null, never a guess.</p>
+<div id="load-fail" class="fail" hidden></div>
+<div class="wrap"><table id="cards"><thead><tr><th>hub</th><th>card</th><th>spine</th><th>M I Mo A</th><th>inspected / recomputed / repeated</th></tr></thead><tbody></tbody></table></div>
+<p class="small">M = measured, I = imported, Mo = modeled, A = attributed. <code>+</code> true, <code>-</code> false, <code>?</code> unknown. Flags describe the card's own evidence; they do not rate it.</p>
+
+<h2 id="which">Which cards can support a question?</h2>
+<p>State the unit the answer would need, the period it is about, and whether it must be a measurement. Each card either supports the question, bounded by its own limits and recorded checks, or cannot be used, with the rule that says why. This is the check a stranger performed by hand on 2026-09-24; here it is mechanical.</p>
+<form id="which-form" class="two">
+  <label>Unit the answer needs<select id="w-unit"></select></label>
+  <label>Period (YYYY, YYYY-MM, YYYY-MM-DD or START..END; blank for any)<input type="text" id="w-period" value="2026-09" placeholder="2026-09"></label>
+  <label class="row full"><span><input type="checkbox" id="w-measured" checked> Must be a measurement (not an imported, modeled or attributed statement)</span></label>
+  <div class="full"><button type="submit">Which cards</button></div>
+</form>
+<div id="which-out"></div>
+
+<h2 id="check">Check a filing</h2>
+<p>Paste a card. The check reports whether it carries the five answers, the four flags, the three checks, a publication-date basis, an observer-benefit record and explicit hourly units. It cannot establish that a cited source warrants a value, that a populated disclosure is complete, or that a claim is true.</p>
+<form id="check-form">
+  <textarea id="c-text" spellcheck="false" placeholder='{"id": "your-card-id", ...}'></textarea>
+  <div class="row"><button type="submit">Check</button><button type="button" class="quiet" id="c-skeleton">Load the skeleton</button></div>
+</form>
+<div id="check-out"></div>
+
+<h2 id="compose">Compose two cards</h2>
+<p>Records combine only when identities, periods, scopes and assumptions agree. Pick two cards and a purpose; the engine either refuses with the rule it comes from, or finds no refusal. Finding none is not admission.</p>
+<form id="compose-form" class="two">
+  <label>Card A<select id="p-a"></select></label>
+  <label>Card B<select id="p-b"></select></label>
+  <label class="full">Purpose<select id="p-purpose">
+    <option value="cost_per_accepted">cost per accepted request (both sides need an accepted-request denominator)</option>
+    <option value="accepted_work">treat B as accepted work</option>
+    <option value="seat_property">treat B as a property of a 1x self-serve seat</option>
+    <option value="measured_cost">treat B as a measured cost</option>
+    <option value="same_period">treat A and B as the same period</option>
+  </select></label>
+  <div class="full"><button type="submit">Compose</button></div>
+</form>
+<div id="compose-out"></div>
+
+<h2 id="file">File a card</h2>
+<p>Start from <a href="card.skeleton.json">card.skeleton.json</a> or copy the five sections from a relevant card, then cite the material that supports each populated value. The normative format is in <a href="SPEC.md">SPEC.md</a>. Three rules catch most first filings:</p>
+<ul>
+  <li><b>Dates.</b> <code>publication_date</code> is null unless the source establishes publication, and it needs a <code>publication_date_basis</code>. <code>retrieved_at</code> records when you obtained the source. Experiment, artifact, index and publication dates are separate; retrieval never fills one of them.</li>
+  <li><b>Price units.</b> <code>USD / GPU-hour</code> for one GPU's hourly price, <code>USD / seat-hour</code> for a whole configuration with its GPU count in <code>conditions.gpus</code>. <code>USD/hour</code> is ambiguous and refused. Accepted-work prices use <code>USD / 1000 accepted requests</code>. A starting price is a lower-bound offer, not an obtainable seat or a measured cost.</li>
+  <li><b>Observer benefit.</b> <code>c_parties.observer_benefit</code> records whether the observer benefits from the outcome (true, false or null), the relationship, and the basis. A known judgment needs a basis. Funding and benefit are different facts. A relationship does not establish misconduct.</li>
+</ul>
+<p>To put a card on this shelf, open a pull request that adds one line to <code>shelf/data/cards.jsonl</code> and passes <code>python shelf.py validate</code>. Review checks the cited sources; filing and machine validation do not grant standing.</p>
+
+<h2 id="run">Run it yourself</h2>
+<pre>git clone https://github.com/BigBirdReturns/axm-tools
+cd axm-tools/shelf/scripts
+python shelf.py validate ../data/cards.jsonl
+python shelf.py which --unit "USD / 1000 accepted requests" --period 2026-09 --measured
+python shelf.py compose a.json b.json --for same_period
+python shelf.py pull https://example.org/their/cards.jsonl --hub their-name
+python -m unittest discover -s ../tests -p 'test_shelf.py'</pre>
+<p class="small">Python 3.8 or later, standard library only. No package to install, no key, no service.</p>
+
+<h2 id="hubs">Hubs</h2>
+<p>A hub is any URL that serves a <code>cards.jsonl</code>. This page reads the hubs in <a href="data/hubs.json">data/hubs.json</a>. <code>shelf.py pull</code> copies a hub's cards into <code>data/staging/&lt;hub&gt;/&lt;time&gt;/</code> with the exact bytes, their hash, the time, and each card's filing errors. Imported cards stay candidates. Moving one onto your shelf is a recorded human decision, and it does not carry inspection, recomputation or repetition over from the source hub. To list your hub here, open a pull request adding it to <code>data/hubs.json</code>.</p>
+<ul id="hub-list"></ul>
+
+<h2 id="disclosure">Disclosure</h2>
+<p>On the first hub's run card, Hot Aisle's credit paid for the AMD arm and Hot Aisle is a sales prospect of the shelf's author. The H100 arm was paid in cash. One run per arm, no repeats. The card says so on its spine.</p>
+</main>
+
+<script id="shelf-engine">
+(function(root){
+'use strict';
+const DIMS=["measured","imported","modeled","attributed"],CHECKS=["inspected","recomputed","repeated"];
+const PURPOSES=["cost_per_accepted","accepted_work","seat_property","measured_cost","same_period"];
+const DATE_KEYS=["experiment_date","index_date","artifact_created_at","publication_date"];
+const isObj=v=>v!==null&&typeof v==='object'&&!Array.isArray(v);
+function q(card,...keys){let cur=card;for(const k of keys){if(!isObj(cur)||!(k in cur))return undefined;cur=cur[k];}return cur;}
+const textOrNull=v=>v===null||(typeof v==='string'&&v.trim().length>0);
+const isNumber=v=>typeof v==='number'&&Number.isFinite(v);
+const scalar=v=>isObj(v)?v.value:v;
+const normalizedUnit=v=>typeof v==='string'?v.replace(/\s+/g,'').toLowerCase():'';
+const repr=v=>v===null||v===undefined?'None':typeof v==='string'?"'"+v.replace(/\\/g,'\\\\').replace(/'/g,"\\'")+"'":String(v);
+
+function validateCard(card){
+ const errors=[];
+ if(!isObj(card))return["card must be an object"];
+ if(typeof card.id!=='string'||!/^[a-z0-9][a-z0-9._-]{0,63}$/.test(card.id))errors.push("id must be a short lowercase slug");
+ for(const sec of["a_claim","b_population","c_parties","d_materials","e_checks"])if(!isObj(card[sec]))errors.push(sec+" must be an object");
+ const dims=card.dimensions;
+ if(!isObj(dims)||Object.keys(dims).length!==DIMS.length||!DIMS.every(d=>d in dims))errors.push("dimensions must contain exactly ('measured', 'imported', 'modeled', 'attributed')");
+ else if(Object.values(dims).some(v=>v!==null&&typeof v!=='boolean'))errors.push("dimension values must be true/false/null, not integers");
+ for(const key of CHECKS){const check=q(card,"e_checks",key);
+  if(!isObj(check)||!('who' in check)||!('when' in check))errors.push("e_checks."+key+" needs who/when (null allowed)");
+  else if(!textOrNull(check.who)||!textOrNull(check.when))errors.push("e_checks."+key+".who/when must be nonempty strings or null");}
+ const period=q(card,"a_claim","period");
+ if(!isObj(period))errors.push("a_claim.period must be an object");
+ else{const dates=Object.entries(period).filter(([k])=>k.endsWith("_date")||k==="retrieved_at"||k==="artifact_created_at");
+  if(!dates.length||dates.some(([,v])=>!textOrNull(v)))errors.push("period needs dated fields containing strings or explicit nulls");
+  const basis=period.publication_date_basis;
+  if(!('publication_date_basis' in period)||!textOrNull(basis)||(period.publication_date!==null&&period.publication_date!==undefined&&!basis))errors.push("publication_date_basis must cite the dated source for a publication date; retrieval is not publication evidence; use null for an unknown publication date");}
+ const parties=card.c_parties;
+ if(!isObj(parties)||!('funding' in parties))errors.push("c_parties.funding is required (null is allowed)");
+ const benefit=q(card,"c_parties","observer_benefit");
+ if(!isObj(benefit)||!('benefits_from_outcome' in benefit)||!('relationship' in benefit)||!('basis' in benefit))errors.push("c_parties.observer_benefit needs benefits_from_outcome, relationship and basis (unknowns may be null)");
+ else{const outcome=benefit.benefits_from_outcome;
+  if(outcome!==null&&typeof outcome!=='boolean')errors.push("observer_benefit.benefits_from_outcome must be true/false/null, not an integer");
+  if(!textOrNull(benefit.relationship)||!textOrNull(benefit.basis))errors.push("observer_benefit.relationship/basis must be nonempty strings or null");
+  if(typeof outcome==='boolean'&&!benefit.basis)errors.push("observer_benefit needs a basis for a known benefit judgment");}
+ const results=q(card,"a_claim","results");
+ if(!isObj(results))errors.push("a_claim.results must be an object");
+ else for(const[key,result]of Object.entries(results)){if(!isObj(result))continue;
+  const unit=normalizedUnit(result.unit);
+  const hourly=unit.startsWith("usd")&&/(?:hour|hr|\/h$|\/gpu-h$|\/seat-h$)/.test(unit);
+  if(hourly){
+   if(unit!=="usd/gpu-hour"&&unit!=="usd/seat-hour")errors.push("results."+key+".unit: monetary hourly rate must be USD/GPU-hour or USD/seat-hour, not "+repr(result.unit));
+   if(result.value!==null&&result.value!==undefined&&(!isNumber(result.value)||result.value<0))errors.push("results."+key+".value must be a finite nonnegative number, not a boolean");
+   if(unit==="usd/seat-hour"&&result.value!==null&&result.value!==undefined){const gpus=scalar(q(card,"a_claim","conditions","gpus"));
+    if(!Number.isInteger(gpus)||gpus<=0)errors.push("results."+key+": USD/seat-hour requires a positive integer configuration GPU count in conditions.gpus");}}}
+ return errors;
+}
+
+function observationDate(card){const period=q(card,"a_claim","period")||{};
+ for(const key of DATE_KEYS){const v=scalar(period[key]);if(typeof v==='string'&&v.trim())return v.trim().slice(0,10);}return null;}
+function inPeriod(date,asked){if(asked.includes("..")){const i=asked.indexOf("..");const s=asked.slice(0,i),e=asked.slice(i+2);return s<=date&&date<=e;}return date.startsWith(asked);}
+const unitsOf=c=>new Set(Object.values(q(c,"a_claim","results")||{}).filter(isObj).map(v=>v.unit));
+const anyAccepted=set=>[...set].some(u=>u&&u.includes("accepted"));
+
+function compose(a,b,purpose){
+ if(!PURPOSES.includes(purpose))return"unknown purpose '"+purpose+"'; known: "+PURPOSES.join(", ");
+ if(!isObj(a)||!isObj(b))return"missing operand: both source cards are required";
+ const ua=unitsOf(a),ub=unitsOf(b);
+ if(purpose==="cost_per_accepted"&&(!anyAccepted(ua)||!anyAccepted(ub)))return"unit mismatch: cost per accepted request needs an accepted-request denominator on both sides (INVARIANTS 1)";
+ if(purpose==="accepted_work"&&!anyAccepted(ub))return"throughput or latency is not accepted work (INVARIANTS 4, corrected)";
+ if(purpose==="seat_property"&&q(b,"dimensions","measured")!==true)return"an attributed managed-cluster rating is not a property of a 1x self-serve seat (INVARIANTS 3)";
+ if(purpose==="measured_cost"&&q(b,"dimensions","measured")!==true)return"a party's list price statement is not a measured cost (INVARIANTS 5 / DISCLOSURES)";
+ if(purpose==="same_period"){const da=observationDate(a),db=observationDate(b);
+  if(da===null||db===null)return"comparable observation/publication period unknown; retrieval does not supply it (BRIEF2 item 3)";
+  if(da!==db)return"periods differ ("+da+" vs "+db+"); combine only with the period stated (BRIEF2 item 3)";}
+ return null;
+}
+
+function howFar(checks){const done=CHECKS.filter(k=>checks[k].who),missing=CHECKS.filter(k=>!checks[k].who),parts=[];
+ if(done.length)parts.push(done.map(k=>k+" by "+checks[k].who+(checks[k].when?" ("+checks[k].when+")":"")).join("; "));
+ if(missing.length)parts.push("not "+missing.join(", not "));
+ return parts.join(". ")+". Nothing here ranks it against another card.";}
+
+function which(cards,unit,period,measured){const want=normalizedUnit(unit),out=[];
+ for(const card of cards){const cid=isObj(card)&&'id' in card?card.id:"?";
+  const results=q(card,"a_claim","results")||{};
+  const hits={};for(const[k,v]of Object.entries(results))if(isObj(v)&&normalizedUnit(v.unit)===want)hits[k]=v;
+  if(!Object.keys(hits).length){out.push({id:cid,status:"CANNOT_USE",reason:"no result in the unit '"+unit+"'; a different unit is different evidence (INVARIANTS 1/4)"});continue;}
+  if(measured&&q(card,"dimensions","measured")!==true){out.push({id:cid,status:"CANNOT_USE",reason:"not measured; an imported, modeled or attributed statement is not a measurement (INVARIANTS 3/5)"});continue;}
+  const date=observationDate(card);
+  if(period!==null&&period!==undefined&&period!==""){
+   if(date===null){out.push({id:cid,status:"CANNOT_USE",reason:"observation period unknown; retrieval does not supply it (BRIEF2 item 3)"});continue;}
+   if(!inPeriod(date,period)){out.push({id:cid,status:"CANNOT_USE",reason:"observation date "+date+" is outside "+period+"; combine only with the period stated (BRIEF2 item 3)"});continue;}}
+  const checks={};for(const k of CHECKS)checks[k]={who:q(card,"e_checks",k,"who")??null,when:q(card,"e_checks",k,"when")??null};
+  const res={};for(const[k,v]of Object.entries(hits))res[k]={value:v.value??null,unit:v.unit??null,supports:v.supports??null};
+  out.push({id:cid,status:"SUPPORTS",date,dimensions:q(card,"dimensions")??null,results:res,limits:q(card,"a_claim","limits")||[],does_not_establish:q(card,"a_claim","does_not_establish")??null,checks,how_far:howFar(checks)});}
+ return out;}
+
+root.Shelf={DIMS,CHECKS,PURPOSES,validateCard,compose,which,observationDate,inPeriod,normalizedUnit,howFar};
+})(typeof globalThis!=='undefined'?globalThis:this);
+</script>
+
+<script>
+(async function(){
+'use strict';
+const S=window.Shelf,$=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const flag=v=>v===true?'+':v===false?'-':'?';
+let CARDS=[],HUBS=[];
+function fail(msg){const el=$('load-fail');el.hidden=false;el.textContent=msg;}
+async function loadText(url){const r=await fetch(url,{cache:'no-store'});if(!r.ok)throw new Error(r.status+' '+r.statusText+' for '+url);return r.text();}
+function parseCards(text){text=text.replace(/^﻿/,'');try{const v=JSON.parse(text);return Array.isArray(v)?v:[v];}catch(e){return text.split(/\r?\n/).filter(l=>l.trim()).map(l=>JSON.parse(l));}}
+try{
+ HUBS=JSON.parse(await loadText('data/hubs.json')).hubs;
+ for(const hub of HUBS){try{const cards=parseCards(await loadText(hub.cards));for(const c of cards){c.__hub=hub.name;CARDS.push(c);}hub.__loaded=cards.length;}catch(e){hub.__error=String(e.message||e);}}
+ if(!CARDS.length)throw new Error('no cards loaded from any hub');
+}catch(e){fail('Could not load the shelf: '+(e.message||e)+'. This page reads committed files over HTTP; open it from the deployed site or serve the directory with "python -m http.server".');}
+
+const tb=$('cards').querySelector('tbody');
+for(const c of CARDS){const d=c.dimensions||{},e=c.e_checks||{};const who=k=>(e[k]&&e[k].who)?esc(e[k].who):'<span class="small">not '+k+'</span>';
+ tb.insertAdjacentHTML('beforeend',`<tr><td>${esc(c.__hub)}</td><td><code>${esc(c.id)}</code><br><span class="small">${esc(c.title||'')}</span></td><td class="spine">${esc(c.spine||'')}</td><td class="flags">${flag(d.measured)} ${flag(d.imported)} ${flag(d.modeled)} ${flag(d.attributed)}</td><td class="small">${who('inspected')} / ${who('recomputed')} / ${who('repeated')}</td></tr>`);}
+const hl=$('hub-list');
+for(const h of HUBS)hl.insertAdjacentHTML('beforeend',`<li><b>${esc(h.name)}</b>: <a href="${esc(h.cards)}">${esc(h.cards)}</a>. ${esc(h.publisher||'')} ${h.__error?'<span class="status no">could not load: '+esc(h.__error)+'</span>':'<span class="small">'+h.__loaded+' card(s) loaded</span>'}</li>`);
+
+const units=[...new Set(CARDS.flatMap(c=>Object.values((c.a_claim||{}).results||{}).filter(v=>v&&typeof v==='object').map(v=>v.unit).filter(Boolean)))];
+const wu=$('w-unit');for(const u of units)wu.insertAdjacentHTML('beforeend',`<option${u==='USD / 1000 accepted requests'?' selected':''}>${esc(u)}</option>`);
+for(const sel of[$('p-a'),$('p-b')])for(const c of CARDS)sel.insertAdjacentHTML('beforeend',`<option value="${esc(c.id)}">${esc(c.id)}</option>`);
+$('p-b').selectedIndex=Math.min(1,CARDS.length-1);
+
+function renderWhich(rows){const out=$('which-out');out.innerHTML='';
+ for(const r of rows){if(r.status==='SUPPORTS'){
+  const res=Object.entries(r.results).map(([k,v])=>`<li><code>${esc(k)}</code>: ${esc(v.value)} ${esc(v.unit)}${v.supports?' <span class="small">supports: '+esc(v.supports)+'</span>':''}</li>`).join('');
+  const lim=r.limits.map(l=>`<li>limit: ${esc(l)}</li>`).join('');
+  out.insertAdjacentHTML('beforeend',`<div class="result ok"><span class="status">SUPPORTS</span> <code>${esc(r.id)}</code> <span class="small">(${esc(r.date||'date unknown')})</span><ul>${res}${lim}${r.does_not_establish?'<li>does not establish: '+esc(r.does_not_establish)+'</li>':''}</ul><p class="small">how far: ${esc(r.how_far)}</p></div>`);}
+  else out.insertAdjacentHTML('beforeend',`<div class="result no"><span class="status">CANNOT USE</span> <code>${esc(r.id)}</code>: ${esc(r.reason)}</div>`);}
+ const n=rows.filter(r=>r.status==='SUPPORTS').length;
+ out.insertAdjacentHTML('beforeend',`<p class="small">${n}/${rows.length} cards can support the question as stated. Support is bounded by each card's limits and recorded checks; nothing here ranks.</p>`);}
+$('which-form').addEventListener('submit',ev=>{ev.preventDefault();renderWhich(S.which(CARDS,wu.value,$('w-period').value.trim()||null,$('w-measured').checked));});
+if(CARDS.length)renderWhich(S.which(CARDS,wu.value,'2026-09',true));
+
+$('c-skeleton').addEventListener('click',async()=>{try{$('c-text').value=await loadText('card.skeleton.json');}catch(e){$('check-out').innerHTML=`<div class="result no"><span class="status">FAIL</span> ${esc(e.message||e)}</div>`;}});
+$('check-form').addEventListener('submit',ev=>{ev.preventDefault();const out=$('check-out');let card;
+ try{card=JSON.parse($('c-text').value);}catch(e){out.innerHTML=`<div class="result no"><span class="status">FAIL</span> not JSON: ${esc(e.message)}</div>`;return;}
+ const errors=S.validateCard(card);
+ out.innerHTML=errors.length?`<div class="result no"><span class="status">FAIL</span> <code>${esc(card.id||'?')}</code><ul>${errors.map(e=>'<li>'+esc(e)+'</li>').join('')}</ul></div>`:`<div class="result ok"><span class="status">PASS</span> <code>${esc(card.id)}</code> carries (a)-(e), four dimensions, three checks, publication-date basis, observer benefit and explicit hourly units. Structure only; source truth, recomputation and independent use are not established.</div>`;});
+
+$('compose-form').addEventListener('submit',ev=>{ev.preventDefault();const by=Object.fromEntries(CARDS.map(c=>[c.id,c]));
+ const reason=S.compose(by[$('p-a').value],by[$('p-b').value],$('p-purpose').value);
+ $('compose-out').innerHTML=reason?`<div class="result no"><span class="status">REFUSED</span> ${esc(reason)}</div>`:`<div class="result warn"><span class="status">NO REFUSAL FOUND</span> This is not admission; a reviewer still checks the cited sources.</div>`;});
+})();
+</script>
+</body>
+</html>

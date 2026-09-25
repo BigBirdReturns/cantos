@@ -1,0 +1,12 @@
+{
+  "note": "Human-owned. A hub is any URL that serves a cards.jsonl (or a single card .json). Add yours by pull request. Listing here grants nothing: this page renders a hub's cards with its name on the row, and shelf.py pull copies them into staging as candidates.",
+  "hubs": [
+    {
+      "name": "axm",
+      "cards": "data/cards.jsonl",
+      "absolute": "https://bigbirdreturns.github.io/axm-tools/shelf/data/cards.jsonl",
+      "publisher": "The shelf's author. Five cards filed 2026-09-24 from the Hot Aisle Run 3 campaign and four outside sources; the retained evidence record is hot-aisle/campaign/shelf/ in the same repository and the copy here is checked byte-for-byte in CI.",
+      "disclosure": "Hot Aisle credit paid for the AMD arm on the run card; Hot Aisle is a sales prospect of the publisher."
+    }
+  ]
+}

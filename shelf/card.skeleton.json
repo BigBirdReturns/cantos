@@ -1,0 +1,36 @@
+{
+  "id": "your-card-id",
+  "title": "One claim, in one sentence",
+  "spine": "who/what | when | the number and its unit | measured + imported + modeled + attributed, whichever apply | who paid | inspected / recomputed / repeated",
+  "dimensions": {"measured": null, "imported": null, "modeled": null, "attributed": null},
+  "a_claim": {
+    "statement": "What exactly is claimed, under which conditions, and what it does not establish.",
+    "period": {
+      "experiment_date": null,
+      "publication_date": null,
+      "publication_date_basis": null,
+      "retrieved_at": null
+    },
+    "conditions": {"provider": null, "hardware": null, "gpus": {"value": null, "unit": "GPU", "source": null, "source_date": null}},
+    "results": {
+      "example_result": {"value": null, "unit": "USD / GPU-hour", "source": null, "source_date": null, "supports": null}
+    },
+    "limits": [],
+    "does_not_establish": null
+  },
+  "b_population": {"population": null, "denominator": null, "acceptance_rule": null, "exclusions": null, "observation_window": null},
+  "c_parties": {
+    "observer": null,
+    "conditions_controller": null,
+    "access": {"provider": null, "mode": null, "account_class": null},
+    "funding": {"payer": null, "relationship": null},
+    "observer_benefit": {"benefits_from_outcome": null, "relationship": null, "basis": null}
+  },
+  "d_materials": {"sources": [], "primary_url": null, "obtainable": null, "procedure": null, "missing": []},
+  "e_checks": {
+    "inspected": {"who": null, "when": null, "scope": null},
+    "recomputed": {"who": null, "when": null, "scope": null},
+    "repeated": {"who": null, "when": null, "scope": null}
+  },
+  "filing_version": 2
+}

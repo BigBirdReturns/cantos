@@ -104,3 +104,13 @@ The Run 3 card now records the bounded local recomputation; independent repetiti
 
 Hot Aisle's credit paid for the AMD arm on the run card and Hot Aisle is a sales prospect. The H100
 arm was paid in cash. One run per arm, no repeats.
+
+## The public tool
+
+The format, the filing check, the composition refusals and a mechanical "which cards can
+support this question" check now live as a self-contained tool at [`/shelf/`](../../../shelf/),
+with a browser engine held to the CLI by one shared fixture and a `pull` command that imports
+other hubs' cards as candidates. This directory remains the retained evidence record for the
+first five cards and the two model handoffs; `shelf/data/cards.jsonl` is checked byte-for-byte
+against `cards.jsonl` here in CI. The Run 3 recomputation, propagation and narrowing checks
+stay here with the campaign bytes they need.

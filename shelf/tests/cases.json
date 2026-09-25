@@ -1,0 +1,52 @@
+{
+  "note": "Shared fixture. tests/test_shelf.py runs these through scripts/shelf.py; tests/test_engine.cjs runs them through the engine embedded in index.html. Both must agree exactly.",
+  "which": [
+    {
+      "name": "accepted-request cost, September 2026, measured only",
+      "unit": "USD / 1000 accepted requests", "period": "2026-09", "measured": true,
+      "expect": {"run3-at0": "SUPPORTS", "inferencex-artifact": "CANNOT_USE", "clustermax-coreweave": "CANNOT_USE", "mercatus-index": "CANNOT_USE", "hotaisle-blog": "CANNOT_USE"}
+    },
+    {
+      "name": "GPU-hour prices, any period, any dimension",
+      "unit": "USD / GPU-hour", "period": null, "measured": false,
+      "expect": {"run3-at0": "SUPPORTS", "inferencex-artifact": "CANNOT_USE", "clustermax-coreweave": "CANNOT_USE", "mercatus-index": "SUPPORTS", "hotaisle-blog": "SUPPORTS"}
+    },
+    {
+      "name": "GPU-hour prices in September 2026: the blog's period is unknown",
+      "unit": "USD / GPU-hour", "period": "2026-09", "measured": false,
+      "expect": {"run3-at0": "SUPPORTS", "inferencex-artifact": "CANNOT_USE", "clustermax-coreweave": "CANNOT_USE", "mercatus-index": "SUPPORTS", "hotaisle-blog": "CANNOT_USE"},
+      "reason_contains": {"hotaisle-blog": "period unknown"}
+    },
+    {
+      "name": "GPU-hour prices, measured only: an index is not a measurement",
+      "unit": "USD / GPU-hour", "period": null, "measured": true,
+      "expect": {"run3-at0": "SUPPORTS", "inferencex-artifact": "CANNOT_USE", "clustermax-coreweave": "CANNOT_USE", "mercatus-index": "CANNOT_USE", "hotaisle-blog": "CANNOT_USE"},
+      "reason_contains": {"mercatus-index": "not measured"}
+    },
+    {
+      "name": "a date range that excludes the run",
+      "unit": "USD / 1000 accepted requests", "period": "2026-09-01..2026-09-23", "measured": false,
+      "expect": {"run3-at0": "CANNOT_USE", "inferencex-artifact": "CANNOT_USE", "clustermax-coreweave": "CANNOT_USE", "mercatus-index": "CANNOT_USE", "hotaisle-blog": "CANNOT_USE"},
+      "reason_contains": {"run3-at0": "outside 2026-09-01..2026-09-23"}
+    },
+    {
+      "name": "latency in milliseconds: only the InferenceX artifact",
+      "unit": "milliseconds", "period": null, "measured": true,
+      "expect": {"run3-at0": "CANNOT_USE", "inferencex-artifact": "SUPPORTS", "clustermax-coreweave": "CANNOT_USE", "mercatus-index": "CANNOT_USE", "hotaisle-blog": "CANNOT_USE"}
+    }
+  ],
+  "compose": [
+    {"a": "run3-at0", "b": "mercatus-index", "purpose": "cost_per_accepted", "expect": "unit mismatch: cost per accepted request needs an accepted-request denominator on both sides (INVARIANTS 1)"},
+    {"a": "run3-at0", "b": "inferencex-artifact", "purpose": "accepted_work", "expect": "throughput or latency is not accepted work (INVARIANTS 4, corrected)"},
+    {"a": "run3-at0", "b": "clustermax-coreweave", "purpose": "seat_property", "expect": "an attributed managed-cluster rating is not a property of a 1x self-serve seat (INVARIANTS 3)"},
+    {"a": "run3-at0", "b": "hotaisle-blog", "purpose": "measured_cost", "expect": "a party's list price statement is not a measured cost (INVARIANTS 5 / DISCLOSURES)"},
+    {"a": "run3-at0", "b": "hotaisle-blog", "purpose": "same_period", "expect": "comparable observation/publication period unknown; retrieval does not supply it (BRIEF2 item 3)"},
+    {"a": "run3-at0", "b": "mercatus-index", "purpose": "same_period", "expect": "periods differ (2026-09-24 vs 2026-09-21); combine only with the period stated (BRIEF2 item 3)"},
+    {"a": "run3-at0", "b": "run3-at0", "purpose": "cost_per_accepted", "expect": null}
+  ],
+  "validate": [
+    {"file": "fixtures/card6-latitude-h100.json", "expect_errors": 3, "contains": ["publication_date_basis", "observer_benefit", "USD/hour"]},
+    {"file": "fixtures/card7-voltagepark.json", "expect_errors": 0},
+    {"file": "../card.skeleton.json", "expect_errors": 0}
+  ]
+}
