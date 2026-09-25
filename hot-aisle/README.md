@@ -89,3 +89,7 @@ Independent, MIT-licensed original code by Second Run. Provider, model and runti
 ## Decision desk handoff
 
 `Publish to connected desk` creates an immutable local `hot-aisle/publication@1` containing this record and its matching sealed packet. `/api/publications` exposes only those explicitly published snapshots. One catalogue is edited in `compute/data/catalog.json` and copied by `integration/build.py`; `node runner/bin/workload.cjs quote do-h100` retrieves the dated DigitalOcean quote. Tenant API prices and custom quotes remain separate evidence. See the combined source `integration/README.md`.
+
+## Published-origin dependency check, 24 September 2026
+
+The final online community walkthrough exposed a legacy Google Fonts bootstrap that ran only on the public hostname. It has been removed: public, local and offline views all use the same installed-font fallback stacks. A published-hostname bootstrap regression and the native public readback complement the localhost browser suites.

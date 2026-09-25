@@ -1,0 +1,679 @@
+{
+  "schema": "second-run/material-observations@1",
+  "registry_sha256": "cf98fc64f1ff6fcb07debb14edc6936c92fd33f588a1f3261114c4c68b5441e5",
+  "collected_at": "2026-09-24T20:44:46.239180+00:00",
+  "previous_compatible": false,
+  "observations": [
+    {
+      "id": "ha-price",
+      "url": "https://hotaisle.xyz/pricing",
+      "checked_at": "2026-09-24T20:44:46.239180+00:00",
+      "kind": "document",
+      "layer": "supply",
+      "status": "OBSERVED",
+      "change": "NEW",
+      "last_good": {
+        "content_sha256": "8ef71d83150534422d4cd9c83625e332bfe014c3bab571c080c2b284fb984048",
+        "semantic_identity": null,
+        "interpretation": "Bytes observed only. Page changes need review; no quote or capability extracted.",
+        "observed_at": "2026-09-24T20:44:46.239180+00:00",
+        "expires_at": "2026-09-25T20:44:46.239180+00:00",
+        "capture_kind": "DIRECT_PUBLIC_GET"
+      },
+      "next_action": "Review catalogue and minimum commitments; keep prior run evidence."
+    },
+    {
+      "id": "dstack-backends",
+      "url": "https://dstack.ai/docs/concepts/backends/",
+      "checked_at": "2026-09-24T20:44:46.239180+00:00",
+      "kind": "document",
+      "layer": "lifecycle",
+      "status": "OBSERVED",
+      "change": "NEW",
+      "last_good": {
+        "content_sha256": "4cce5163bc17c0621a6eed69802567e57b6ddc875aa471d9d816018d4886b500",
+        "semantic_identity": null,
+        "interpretation": "Bytes observed only. Page changes need review; no quote or capability extracted.",
+        "observed_at": "2026-09-24T20:44:46.239180+00:00",
+        "expires_at": "2026-09-25T20:44:46.239180+00:00",
+        "capture_kind": "DIRECT_PUBLIC_GET"
+      },
+      "next_action": "Check provider roles, minimum reservation, cleanup and ordinary-account lifecycle."
+    },
+    {
+      "id": "dstack-runtime",
+      "url": "https://dstack.ai/docs/reference/api/python/",
+      "checked_at": "2026-09-24T20:44:46.239180+00:00",
+      "kind": "document",
+      "layer": "lifecycle",
+      "status": "OBSERVED",
+      "change": "NEW",
+      "last_good": {
+        "content_sha256": "17acc50ae85cdc61ab6ab6de25b6a4fc9f6ebcb4162c7b07bc743d8615cb0587",
+        "semantic_identity": null,
+        "interpretation": "Bytes observed only. Page changes need review; no quote or capability extracted.",
+        "observed_at": "2026-09-24T20:44:46.239180+00:00",
+        "expires_at": "2026-09-25T20:44:46.239180+00:00",
+        "capture_kind": "DIRECT_PUBLIC_GET"
+      },
+      "next_action": "Recheck timeout coverage: max_duration excludes provisioning/pulling; fleet idle policy can dominate."
+    },
+    {
+      "id": "ha-client-code",
+      "url": "https://hotaisle.xyz/blog/opencode-vllm-hotaisle",
+      "checked_at": "2026-09-24T20:44:46.239180+00:00",
+      "kind": "document",
+      "layer": "client",
+      "status": "OBSERVED",
+      "change": "NEW",
+      "last_good": {
+        "content_sha256": "d3c9da3ac676c502a137fea186c7d955bcae5b1155dd7444d8ba72811956cf4e",
+        "semantic_identity": null,
+        "interpretation": "Bytes observed only. Page changes need review; no quote or capability extracted.",
+        "observed_at": "2026-09-24T20:44:46.239180+00:00",
+        "expires_at": "2026-10-01T20:44:46.239180+00:00",
+        "capture_kind": "DIRECT_PUBLIC_GET"
+      },
+      "next_action": "Requalify streaming, tool format, cancellation and context budget; do not deploy a blog command automatically."
+    },
+    {
+      "id": "ha-client-docs",
+      "url": "https://hotaisle.xyz/blog/chatxyz-openwebui-hotaisle",
+      "checked_at": "2026-09-24T20:44:46.239180+00:00",
+      "kind": "document",
+      "layer": "client",
+      "status": "OBSERVED",
+      "change": "NEW",
+      "last_good": {
+        "content_sha256": "ad18ec2cc437a180420eabd635da1c4ec7196dd148d724e65da0814ddde5e791",
+        "semantic_identity": null,
+        "interpretation": "Bytes observed only. Page changes need review; no quote or capability extracted.",
+        "observed_at": "2026-09-24T20:44:46.239180+00:00",
+        "expires_at": "2026-10-01T20:44:46.239180+00:00",
+        "capture_kind": "DIRECT_PUBLIC_GET"
+      },
+      "next_action": "Requalify connection, privacy boundary and prompt compatibility."
+    },
+    {
+      "id": "opencode-provider",
+      "url": "https://opencode.ai/docs/providers/",
+      "checked_at": "2026-09-24T20:44:46.239180+00:00",
+      "kind": "document",
+      "layer": "client",
+      "status": "OBSERVED",
+      "change": "NEW",
+      "last_good": {
+        "content_sha256": "df2514127b2c04fcc9f508ba2c976022e78fe89d65f1a5573585f4ce95b520bd",
+        "semantic_identity": null,
+        "interpretation": "Bytes observed only. Page changes need review; no quote or capability extracted.",
+        "observed_at": "2026-09-24T20:44:46.239180+00:00",
+        "expires_at": "2026-09-25T20:44:46.239180+00:00",
+        "capture_kind": "DIRECT_PUBLIC_GET"
+      },
+      "next_action": "Recheck client URL/model settings and streaming/tool contract."
+    },
+    {
+      "id": "lmcache-install",
+      "url": "https://docs.lmcache.ai/getting_started/installation.html",
+      "checked_at": "2026-09-24T20:44:46.239180+00:00",
+      "kind": "document",
+      "layer": "reuse",
+      "status": "OBSERVED",
+      "change": "NEW",
+      "last_good": {
+        "content_sha256": "905db018e19db3f01abaad0b2d7d1da35c81a967cc65f81f42410a0e73ae5fcf",
+        "semantic_identity": null,
+        "interpretation": "Bytes observed only. Page changes need review; no quote or capability extracted.",
+        "observed_at": "2026-09-24T20:44:46.239180+00:00",
+        "expires_at": "2026-09-25T20:44:46.239180+00:00",
+        "capture_kind": "DIRECT_PUBLIC_GET"
+      },
+      "next_action": "Check exact torch, Python, ROCm, model, tokenizer and cache layout before a canary."
+    },
+    {
+      "id": "lmcache-mp",
+      "url": "https://docs.lmcache.ai/mp/index.html",
+      "checked_at": "2026-09-24T20:44:46.239180+00:00",
+      "kind": "document",
+      "layer": "reuse",
+      "status": "OBSERVED",
+      "change": "NEW",
+      "last_good": {
+        "content_sha256": "06c9212099cd13afff80616ccdcaa2f080e40cab12b260e5a05a35f86b5c7919",
+        "semantic_identity": null,
+        "interpretation": "Bytes observed only. Page changes need review; no quote or capability extracted.",
+        "observed_at": "2026-09-24T20:44:46.239180+00:00",
+        "expires_at": "2026-09-25T20:44:46.239180+00:00",
+        "capture_kind": "DIRECT_PUBLIC_GET"
+      },
+      "next_action": "Requalify tenant namespaces, cache lifetime, corrupt-cache fallback and measured saved prefill."
+    },
+    {
+      "id": "sglang-gateway",
+      "url": "https://docs.sglang.io/docs/advanced_features/sgl_model_gateway",
+      "checked_at": "2026-09-24T20:44:46.239180+00:00",
+      "kind": "document",
+      "layer": "routing",
+      "status": "OBSERVED",
+      "change": "NEW",
+      "last_good": {
+        "content_sha256": "b629765773e403ab6b0b5ee2608d88c334eac6d0385d3e09e904fb2e2505303b",
+        "semantic_identity": null,
+        "interpretation": "Bytes observed only. Page changes need review; no quote or capability extracted.",
+        "observed_at": "2026-09-24T20:44:46.239180+00:00",
+        "expires_at": "2026-09-25T20:44:46.239180+00:00",
+        "capture_kind": "DIRECT_PUBLIC_GET"
+      },
+      "next_action": "Requalify queue-aware placement, streaming, health and duplicate-risk handling."
+    },
+    {
+      "id": "vllm-prefix",
+      "url": "https://docs.vllm.ai/en/latest/features/automatic_prefix_caching/",
+      "checked_at": "2026-09-24T20:44:46.239180+00:00",
+      "kind": "document",
+      "layer": "reuse",
+      "status": "OBSERVED",
+      "change": "NEW",
+      "last_good": {
+        "content_sha256": "bafd81b1024e44231315705e9bdd47d535424ff8ed1b2201b0617fa84fca0e92",
+        "semantic_identity": null,
+        "interpretation": "Bytes observed only. Page changes need review; no quote or capability extracted.",
+        "observed_at": "2026-09-24T20:44:46.239180+00:00",
+        "expires_at": "2026-09-25T20:44:46.239180+00:00",
+        "capture_kind": "DIRECT_PUBLIC_GET"
+      },
+      "next_action": "Check cache identity and count prefill savings separately from decode and accepted tasks."
+    },
+    {
+      "id": "skypilot-jobs",
+      "url": "https://docs.skypilot.ai/en/latest/reference/yaml-spec.html",
+      "checked_at": "2026-09-24T20:44:46.239180+00:00",
+      "kind": "document",
+      "layer": "lifecycle",
+      "status": "OBSERVED",
+      "change": "NEW",
+      "last_good": {
+        "content_sha256": "366eb892d28dab76256aae0f05cd549a52ee09b8bd0706f62a0699beae18b55f",
+        "semantic_identity": null,
+        "interpretation": "Bytes observed only. Page changes need review; no quote or capability extracted.",
+        "observed_at": "2026-09-24T20:44:46.239180+00:00",
+        "expires_at": "2026-09-25T20:44:46.239180+00:00",
+        "capture_kind": "DIRECT_PUBLIC_GET"
+      },
+      "next_action": "Check recovery, side-effect idempotency and resource release before enabling."
+    },
+    {
+      "id": "docling-contract",
+      "url": "https://github.com/docling-project/docling",
+      "checked_at": "2026-09-24T20:44:46.239180+00:00",
+      "kind": "document",
+      "layer": "workload",
+      "status": "OBSERVED",
+      "change": "NEW",
+      "last_good": {
+        "content_sha256": "13ebf3ac6037f5756c070a1175336b889d3220def69e787b1c1b7ca931b0bdba",
+        "semantic_identity": null,
+        "interpretation": "Bytes observed only. Page changes need review; no quote or capability extracted.",
+        "observed_at": "2026-09-24T20:44:46.239180+00:00",
+        "expires_at": "2026-10-01T20:44:46.239180+00:00",
+        "capture_kind": "DIRECT_PUBLIC_GET"
+      },
+      "next_action": "Revalidate extraction fidelity and model licences; send only permitted unresolved content."
+    },
+    {
+      "id": "beir-contract",
+      "url": "https://github.com/beir-cellar/beir",
+      "checked_at": "2026-09-24T20:44:46.239180+00:00",
+      "kind": "document",
+      "layer": "acceptance",
+      "status": "OBSERVED",
+      "change": "NEW",
+      "last_good": {
+        "content_sha256": "ae584e80d638b5745e1ed19072b765a46d3b66b6fb866f26c529c259877d8cec",
+        "semantic_identity": null,
+        "interpretation": "Bytes observed only. Page changes need review; no quote or capability extracted.",
+        "observed_at": "2026-09-24T20:44:46.239180+00:00",
+        "expires_at": "2026-10-01T20:44:46.239180+00:00",
+        "capture_kind": "DIRECT_PUBLIC_GET"
+      },
+      "next_action": "Pin selected corpus and split, check dataset-specific rights; re-evaluate retrieval not only vector speed."
+    },
+    {
+      "id": "evalplus-contract",
+      "url": "https://github.com/evalplus/evalplus",
+      "checked_at": "2026-09-24T20:44:46.239180+00:00",
+      "kind": "document",
+      "layer": "acceptance",
+      "status": "OBSERVED",
+      "change": "NEW",
+      "last_good": {
+        "content_sha256": "b2844a43844dfe4854ab7b0441215cee2e08836414cac7694dbdea2df24cd13d",
+        "semantic_identity": null,
+        "interpretation": "Bytes observed only. Page changes need review; no quote or capability extracted.",
+        "observed_at": "2026-09-24T20:44:46.239180+00:00",
+        "expires_at": "2026-10-01T20:44:46.239180+00:00",
+        "capture_kind": "DIRECT_PUBLIC_GET"
+      },
+      "next_action": "Regrade retained outputs under a new named evaluator; preserve the old judgments."
+    },
+    {
+      "id": "fluidx3d-contract",
+      "url": "https://github.com/ProjectPhysX/FluidX3D",
+      "checked_at": "2026-09-24T20:44:46.239180+00:00",
+      "kind": "document",
+      "layer": "workload",
+      "status": "OBSERVED",
+      "change": "NEW",
+      "last_good": {
+        "content_sha256": "c2e6a390e86493f89da40acb9d91ccb532f6e605d3f035bad8506b8875a3882b",
+        "semantic_identity": null,
+        "interpretation": "Bytes observed only. Page changes need review; no quote or capability extracted.",
+        "observed_at": "2026-09-24T20:44:46.239180+00:00",
+        "expires_at": "2026-10-01T20:44:46.239180+00:00",
+        "capture_kind": "DIRECT_PUBLIC_GET"
+      },
+      "next_action": "Commercial-use licence review required before commercial packaging; qualify device/runtime and numerical acceptance."
+    },
+    {
+      "id": "lemonade-contract",
+      "url": "https://github.com/lemonade-sdk/lemonade",
+      "checked_at": "2026-09-24T20:44:46.239180+00:00",
+      "kind": "document",
+      "layer": "local",
+      "status": "OBSERVED",
+      "change": "NEW",
+      "last_good": {
+        "content_sha256": "6bb073c2e47ba93a4145077e8cc1c974aafcfa79f49bd7c990b439c96bab3d2c",
+        "semantic_identity": null,
+        "interpretation": "Bytes observed only. Page changes need review; no quote or capability extracted.",
+        "observed_at": "2026-09-24T20:44:46.239180+00:00",
+        "expires_at": "2026-10-01T20:44:46.239180+00:00",
+        "capture_kind": "DIRECT_PUBLIC_GET"
+      },
+      "next_action": "Requalify endpoint compatibility, local memory fit and useful-work rate."
+    },
+    {
+      "id": "ha-templates",
+      "url": "https://github.com/hotaisle/cloud-init-templates",
+      "checked_at": "2026-09-24T20:44:46.239180+00:00",
+      "kind": "document",
+      "layer": "lifecycle",
+      "status": "OBSERVED",
+      "change": "NEW",
+      "last_good": {
+        "content_sha256": "2cf097ad98849a6df39a4672def8c987492b97e5ab5277828ee592b630737e92",
+        "semantic_identity": null,
+        "interpretation": "Bytes observed only. Page changes need review; no quote or capability extracted.",
+        "observed_at": "2026-09-24T20:44:46.239180+00:00",
+        "expires_at": "2026-10-01T20:44:46.239180+00:00",
+        "capture_kind": "DIRECT_PUBLIC_GET"
+      },
+      "next_action": "Pin template and image digests; isolate secrets and test boot/health/stop/release."
+    },
+    {
+      "id": "vllm-release",
+      "url": "https://api.github.com/repos/vllm-project/vllm/releases?per_page=5",
+      "checked_at": "2026-09-24T20:44:46.239180+00:00",
+      "kind": "github_releases",
+      "layer": "runtime",
+      "status": "OBSERVED",
+      "change": "NEW",
+      "last_good": {
+        "content_sha256": "857c501d0906ff7d723e6d4562136ac29a03b2a048fe3a7e0a2fb2fae13e1104",
+        "semantic_identity": "de47ffade02e9a6b72ef59083e1c3d95aa9b21d9b2bdb588912ea5573a55d646",
+        "releases": [
+          {
+            "tag": "v0.30.0",
+            "published_at": "2026-09-22T05:20:54Z",
+            "prerelease": false
+          },
+          {
+            "tag": "v0.29.0",
+            "published_at": "2026-09-09T08:54:49Z",
+            "prerelease": false
+          },
+          {
+            "tag": "v0.28.0",
+            "published_at": "2026-08-26T09:46:30Z",
+            "prerelease": false
+          },
+          {
+            "tag": "v0.27.1",
+            "published_at": "2026-08-11T10:47:49Z",
+            "prerelease": false
+          },
+          {
+            "tag": "v0.27.0",
+            "published_at": "2026-08-10T21:18:11Z",
+            "prerelease": false
+          }
+        ],
+        "interpretation": "Release metadata only; tags are not immutable binary or image digests.",
+        "observed_at": "2026-09-24T20:44:46.239180+00:00",
+        "expires_at": "2026-09-25T20:44:46.239180+00:00",
+        "capture_kind": "DIRECT_PUBLIC_GET"
+      },
+      "next_action": "Requalify runtime/model compatibility; retain old measured recipe."
+    },
+    {
+      "id": "aiter-release",
+      "url": "https://api.github.com/repos/ROCm/aiter/releases?per_page=5",
+      "checked_at": "2026-09-24T20:44:46.239180+00:00",
+      "kind": "github_releases",
+      "layer": "runtime",
+      "status": "OBSERVED",
+      "change": "NEW",
+      "last_good": {
+        "content_sha256": "bc1992b2fe96b4e0b7ac48819b8afbeb2c50d8fb76268b2155cde883910ee005",
+        "semantic_identity": "7024ca235c83ed34dc06f16652efc7041878a346fa5e7681420b817b03682716",
+        "releases": [
+          {
+            "tag": "v0.1.22.post1",
+            "published_at": "2026-09-17T21:12:46Z",
+            "prerelease": false
+          },
+          {
+            "tag": "v0.1.22",
+            "published_at": "2026-09-14T08:24:54Z",
+            "prerelease": false
+          },
+          {
+            "tag": "v0.1.21.post2",
+            "published_at": "2026-09-09T05:45:44Z",
+            "prerelease": false
+          },
+          {
+            "tag": "v0.1.21.post1",
+            "published_at": "2026-09-03T06:23:55Z",
+            "prerelease": false
+          },
+          {
+            "tag": "v0.1.21",
+            "published_at": "2026-09-02T09:48:58Z",
+            "prerelease": false
+          }
+        ],
+        "interpretation": "Release metadata only; tags are not immutable binary or image digests.",
+        "observed_at": "2026-09-24T20:44:46.239180+00:00",
+        "expires_at": "2026-09-25T20:44:46.239180+00:00",
+        "capture_kind": "DIRECT_PUBLIC_GET"
+      },
+      "next_action": "Run workload-specific canary; backend wins do not transfer automatically."
+    },
+    {
+      "id": "dstack-release",
+      "url": "https://api.github.com/repos/dstackai/dstack/releases?per_page=5",
+      "checked_at": "2026-09-24T20:44:46.239180+00:00",
+      "kind": "github_releases",
+      "layer": "lifecycle",
+      "status": "OBSERVED",
+      "change": "NEW",
+      "last_good": {
+        "content_sha256": "3c39033943cb277e0f91f17df6b071264a7203a8398735ea256f2a5c56bc10b2",
+        "semantic_identity": "672a64145c1c2b3aee2d06b2c72da927a204f7925e7a110c7279a8dab6ebf7ac",
+        "releases": [
+          {
+            "tag": "0.22.1",
+            "published_at": "2026-09-17T14:13:28Z",
+            "prerelease": false
+          },
+          {
+            "tag": "0.22.0",
+            "published_at": "2026-09-10T18:10:36Z",
+            "prerelease": false
+          },
+          {
+            "tag": "0.21.5",
+            "published_at": "2026-09-03T13:36:16Z",
+            "prerelease": false
+          },
+          {
+            "tag": "0.21.4",
+            "published_at": "2026-09-03T13:16:23Z",
+            "prerelease": false
+          },
+          {
+            "tag": "0.21.4rc1",
+            "published_at": "2026-09-02T22:35:30Z",
+            "prerelease": true
+          }
+        ],
+        "interpretation": "Release metadata only; tags are not immutable binary or image digests.",
+        "observed_at": "2026-09-24T20:44:46.239180+00:00",
+        "expires_at": "2026-09-25T20:44:46.239180+00:00",
+        "capture_kind": "DIRECT_PUBLIC_GET"
+      },
+      "next_action": "Recheck lifecycle contract and limits; no automatic upgrade."
+    },
+    {
+      "id": "lmcache-release",
+      "url": "https://api.github.com/repos/LMCache/LMCache/releases?per_page=5",
+      "checked_at": "2026-09-24T20:44:46.239180+00:00",
+      "kind": "github_releases",
+      "layer": "reuse",
+      "status": "OBSERVED",
+      "change": "NEW",
+      "last_good": {
+        "content_sha256": "08f7b115ca88f7353cdf902e9d7175e7ec515e3f3aa90cc53cb313aef77ea321",
+        "semantic_identity": "981e135cad73777002a80c0cc8205a232ecedbe3cd591f1e0e0ceab33a3ee748",
+        "releases": [
+          {
+            "tag": "nightly-rocm",
+            "published_at": "2026-09-24T08:03:28Z",
+            "prerelease": true
+          },
+          {
+            "tag": "nightly-musa",
+            "published_at": "2026-09-24T07:51:47Z",
+            "prerelease": true
+          },
+          {
+            "tag": "nightly-cu129",
+            "published_at": "2026-09-24T09:50:05Z",
+            "prerelease": true
+          },
+          {
+            "tag": "nightly",
+            "published_at": "2026-09-24T08:32:11Z",
+            "prerelease": true
+          },
+          {
+            "tag": "operator-v0.5.5",
+            "published_at": "2026-09-15T03:09:27Z",
+            "prerelease": false
+          }
+        ],
+        "interpretation": "Release metadata only; tags are not immutable binary or image digests.",
+        "observed_at": "2026-09-24T20:44:46.239180+00:00",
+        "expires_at": "2026-09-25T20:44:46.239180+00:00",
+        "capture_kind": "DIRECT_PUBLIC_GET"
+      },
+      "next_action": "Check ABI and namespace isolation before measuring reuse."
+    },
+    {
+      "id": "sglang-release",
+      "url": "https://api.github.com/repos/sgl-project/sglang/releases?per_page=5",
+      "checked_at": "2026-09-24T20:44:46.239180+00:00",
+      "kind": "github_releases",
+      "layer": "routing",
+      "status": "OBSERVED",
+      "change": "NEW",
+      "last_good": {
+        "content_sha256": "14eff34a9d5604f012f5963fc12142e1deb5c1943140e591409d6caba287b664",
+        "semantic_identity": "0fc5c291f9d5aa46002899f97c1a1ff007aa6b5c98cc264f01e4d25fc2f39a44",
+        "releases": [
+          {
+            "tag": "v0.5.20",
+            "published_at": "2026-09-18T22:41:33Z",
+            "prerelease": false
+          },
+          {
+            "tag": "v0.5.19",
+            "published_at": "2026-09-05T02:27:42Z",
+            "prerelease": false
+          },
+          {
+            "tag": "v0.5.18",
+            "published_at": "2026-08-22T00:09:15Z",
+            "prerelease": false
+          },
+          {
+            "tag": "v0.5.17",
+            "published_at": "2026-08-08T00:19:16Z",
+            "prerelease": false
+          },
+          {
+            "tag": "v0.5.16",
+            "published_at": "2026-07-25T00:13:18Z",
+            "prerelease": false
+          }
+        ],
+        "interpretation": "Release metadata only; tags are not immutable binary or image digests.",
+        "observed_at": "2026-09-24T20:44:46.239180+00:00",
+        "expires_at": "2026-09-25T20:44:46.239180+00:00",
+        "capture_kind": "DIRECT_PUBLIC_GET"
+      },
+      "next_action": "Requalify queue/cache/streaming behavior before deployment."
+    },
+    {
+      "id": "docling-release",
+      "url": "https://api.github.com/repos/docling-project/docling/releases?per_page=5",
+      "checked_at": "2026-09-24T20:44:46.239180+00:00",
+      "kind": "github_releases",
+      "layer": "workload",
+      "status": "OBSERVED",
+      "change": "NEW",
+      "last_good": {
+        "content_sha256": "e4628f8a014eda96f086909a83224e311047aecf8dfde0bb56222c22802c1e0c",
+        "semantic_identity": "fa0fed3be3c9206d1e25b83e027b2851987aa05b35943893e2244cbaaf9547bb",
+        "releases": [
+          {
+            "tag": "v2.130.0",
+            "published_at": "2026-09-22T15:33:48Z",
+            "prerelease": false
+          },
+          {
+            "tag": "v2.129.0",
+            "published_at": "2026-09-18T09:18:32Z",
+            "prerelease": false
+          },
+          {
+            "tag": "v2.128.0",
+            "published_at": "2026-09-16T15:12:42Z",
+            "prerelease": false
+          },
+          {
+            "tag": "v2.127.0",
+            "published_at": "2026-09-14T08:57:03Z",
+            "prerelease": false
+          },
+          {
+            "tag": "v2.126.0",
+            "published_at": "2026-09-04T15:47:33Z",
+            "prerelease": false
+          }
+        ],
+        "interpretation": "Release metadata only; tags are not immutable binary or image digests.",
+        "observed_at": "2026-09-24T20:44:46.239180+00:00",
+        "expires_at": "2026-09-25T20:44:46.239180+00:00",
+        "capture_kind": "DIRECT_PUBLIC_GET"
+      },
+      "next_action": "Retest extraction against a frozen corpus."
+    },
+    {
+      "id": "evalplus-release",
+      "url": "https://api.github.com/repos/evalplus/evalplus/releases?per_page=5",
+      "checked_at": "2026-09-24T20:44:46.239180+00:00",
+      "kind": "github_releases",
+      "layer": "acceptance",
+      "status": "OBSERVED",
+      "change": "NEW",
+      "last_good": {
+        "content_sha256": "d50ea23b1667f83a30d38d23a1ebab81115607ce2775c6cb451f2f0c757a4f17",
+        "semantic_identity": "f3de98bda3295b58028f5578d61e801f9b0505f1303236b09680c5ce5f640f6d",
+        "releases": [
+          {
+            "tag": "v0.3.1",
+            "published_at": "2024-10-20T21:59:03Z",
+            "prerelease": false
+          },
+          {
+            "tag": "v0.2.1",
+            "published_at": "2024-04-02T22:40:44Z",
+            "prerelease": false
+          },
+          {
+            "tag": "v0.2.0",
+            "published_at": "2023-11-24T22:12:33Z",
+            "prerelease": false
+          },
+          {
+            "tag": "v0.1.7",
+            "published_at": "2023-09-06T18:35:48Z",
+            "prerelease": false
+          },
+          {
+            "tag": "v0.1.6",
+            "published_at": "2023-06-26T06:57:42Z",
+            "prerelease": false
+          }
+        ],
+        "interpretation": "Release metadata only; tags are not immutable binary or image digests.",
+        "observed_at": "2026-09-24T20:44:46.239180+00:00",
+        "expires_at": "2026-09-25T20:44:46.239180+00:00",
+        "capture_kind": "DIRECT_PUBLIC_GET"
+      },
+      "next_action": "Regrade same retained outputs as a successor evaluation."
+    },
+    {
+      "id": "lemonade-release",
+      "url": "https://api.github.com/repos/lemonade-sdk/lemonade/releases?per_page=5",
+      "checked_at": "2026-09-24T20:44:46.239180+00:00",
+      "kind": "github_releases",
+      "layer": "local",
+      "status": "OBSERVED",
+      "change": "NEW",
+      "last_good": {
+        "content_sha256": "cde63d17b2a5ffd2372a9810d1059d72925993fe48aa532f75f56de4c861ac4f",
+        "semantic_identity": "85c04c80325c5076a6f59e470dd3a8ec29478916f418eca7f1a7a5d268b12e7a",
+        "releases": [
+          {
+            "tag": "v2026.39.1",
+            "published_at": "2026-09-23T16:04:42Z",
+            "prerelease": false
+          },
+          {
+            "tag": "candidate-v2026.40.0",
+            "published_at": "2026-09-23T18:13:22Z",
+            "prerelease": true
+          },
+          {
+            "tag": "candidate-v2026.39.1",
+            "published_at": "2026-09-16T17:25:17Z",
+            "prerelease": true
+          },
+          {
+            "tag": "v11.9.0",
+            "published_at": "2026-09-02T18:33:53Z",
+            "prerelease": false
+          },
+          {
+            "tag": "v11.8.1",
+            "published_at": "2026-08-28T04:34:03Z",
+            "prerelease": false
+          }
+        ],
+        "interpretation": "Release metadata only; tags are not immutable binary or image digests.",
+        "observed_at": "2026-09-24T20:44:46.239180+00:00",
+        "expires_at": "2026-09-25T20:44:46.239180+00:00",
+        "capture_kind": "DIRECT_PUBLIC_GET"
+      },
+      "next_action": "Requalify local candidate rather than presuming remote compute wins."
+    }
+  ],
+  "summary": {
+    "observed": 25,
+    "unavailable": 0
+  },
+  "boundary": "Public-source observation. No live inventory, tenant quote, licence approval, compatibility qualification or dispatch authority."
+}

@@ -1,0 +1,78 @@
+{
+  "schema": "second-run/result-packet@1",
+  "payload": {
+    "schema": "second-run/result@1",
+    "kind": "tierbench-trials",
+    "metadata": {
+      "title": "t4_plan_decomposition_001 · claude-haiku-4-5",
+      "provider": "TierBench historical model route",
+      "hardware": "Execution surface declared in original ledger",
+      "workload": "TierBench / t4_plan_decomposition_001",
+      "variant": "baseline",
+      "observed_at": "2026-07-08T02:20:07+00:00",
+      "contributor": "Second Run",
+      "funding": "Original TierBench experiments; accounting basis preserved per record.",
+      "relationship": "Original experiment operator; no independent replication asserted.",
+      "limitations": [
+        "Historical trial summary, not a fresh run on the current model label.",
+        "No cross-task hardware or provider ranking is inferred.",
+        "All recorded attempts are retained; unavailable cost or latency stays unknown. A historical zero without an explicit billing basis remains source_cost_usd=0 but contributes unknown cost, not free execution.",
+        "Token splits and dollar figures may be estimates; this is not invoice reconciliation.",
+        "Source names and hashes do not establish independent replication."
+      ],
+      "sources": [
+        {
+          "label": "experiments/breadth/run/ledger.jsonl",
+          "url": "https://github.com/BigBirdReturns/tier-bench/blob/f6137258ce3f0462ccbf09c6adee01454332f7ec/experiments/breadth/run/ledger.jsonl",
+          "sha256": "b8fe8844afc83319b6300cfca77097ac5987262443ffafad1f1bb254d2083a68",
+          "revision": "f6137258ce3f0462ccbf09c6adee01454332f7ec"
+        }
+      ],
+      "relation": null
+    },
+    "body": {
+      "task": "t4_plan_decomposition_001",
+      "model": "claude-haiku-4-5",
+      "effort": "unspecified",
+      "support": "baseline",
+      "cost_basis": "shadow-estimated",
+      "unit": "source-reported task passes",
+      "verifier": "Original TierBench validator reports; not independently rerun for this board.",
+      "claim_basis": "Historical source rows imported from an exact commit; task and grader epochs may be incomplete.",
+      "source_sha256": "b8fe8844afc83319b6300cfca77097ac5987262443ffafad1f1bb254d2083a68",
+      "trials": [
+        {
+          "line": 56,
+          "sha256": "0a6f4059c11d65c6d250c2a55e81307b9f980f62425bfded035e6fd5d44c8ac2",
+          "outcome": "pass",
+          "cost_usd": 0.036972,
+          "source_cost_usd": 0.036972,
+          "latency_ms": 29128,
+          "input_tokens": 23767,
+          "output_tokens": 2641
+        },
+        {
+          "line": 57,
+          "sha256": "60afda486a35ad7d23577e13fcbcadf898901c887a22f3a38c3d0a8dbf7c6931",
+          "outcome": "pass",
+          "cost_usd": 0.037914,
+          "source_cost_usd": 0.037914,
+          "latency_ms": 33457,
+          "input_tokens": 24374,
+          "output_tokens": 2708
+        },
+        {
+          "line": 58,
+          "sha256": "b45e56c97273ae836597b97515d715465dd23715ebfd8c04050e322e96bea6d1",
+          "outcome": "pass",
+          "cost_usd": 0.037924,
+          "source_cost_usd": 0.037924,
+          "latency_ms": 32370,
+          "input_tokens": 24379,
+          "output_tokens": 2709
+        }
+      ]
+    }
+  },
+  "sha256": "62f120e63cd99c48424a94a6c3c6474876d584bb1fd3969b90a4ae51a52e7a72"
+}

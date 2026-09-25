@@ -109,7 +109,7 @@ with tempfile.TemporaryDirectory(prefix='compute-browser-') as td:
           check('handoff presets the memory floor',hp.locator('#memory').input_value()=='192')
           check('handoff shortlists MI300X and both H100 offers','3 configurations' in hp.locator('#shortlist-title').inner_text())
           check('handoff headlines the comparison, not the cheapest card','MI300X' in hp.locator('#handoff-banner').inner_text() and 'H100' in hp.locator('#handoff-banner').inner_text() and hp.locator('#handoff-banner').is_visible())
-          check('header links back to the workload report',hp.locator('header a.navlink').get_attribute('href')=='../hot-aisle/')
+          check('header links back to the workload report',hp.get_by_role('banner').get_by_role('link',name='Workload report',exact=True).get_attribute('href')=='../hot-aisle/')
           hp.close()
         connected='HTTP and MCP independently tested by Node; browser connection requires native navigation'
         if mode=='NATIVE_LOCALHOST_NAVIGATION':

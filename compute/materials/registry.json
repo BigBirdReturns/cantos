@@ -1,0 +1,391 @@
+{
+  "schema": "second-run/material-registry@1",
+  "version": "0.1.1",
+  "reviewed_on": "2026-09-24",
+  "sources": [
+    {
+      "id": "ha-price",
+      "url": "https://hotaisle.xyz/pricing",
+      "kind": "document",
+      "layer": "supply",
+      "purpose": "Public offer terms; never live inventory or a tenant quote.",
+      "on_change": "Review catalogue and minimum commitments; keep prior run evidence.",
+      "ttl_seconds": 86400
+    },
+    {
+      "id": "dstack-backends",
+      "url": "https://dstack.ai/docs/concepts/backends/",
+      "kind": "document",
+      "layer": "lifecycle",
+      "purpose": "Hot Aisle and fallback backend authority, API and minimum-reservation semantics.",
+      "on_change": "Check provider roles, minimum reservation, cleanup and ordinary-account lifecycle.",
+      "ttl_seconds": 86400
+    },
+    {
+      "id": "dstack-runtime",
+      "url": "https://dstack.ai/docs/reference/api/python/",
+      "kind": "document",
+      "layer": "lifecycle",
+      "purpose": "Reuse policy, idle termination, startup and runtime timeout semantics.",
+      "on_change": "Recheck timeout coverage: max_duration excludes provisioning/pulling; fleet idle policy can dominate.",
+      "ttl_seconds": 86400
+    },
+    {
+      "id": "ha-client-code",
+      "url": "https://hotaisle.xyz/blog/opencode-vllm-hotaisle",
+      "kind": "document",
+      "layer": "client",
+      "purpose": "Existing private coding-agent connection using vLLM and SSH.",
+      "on_change": "Requalify streaming, tool format, cancellation and context budget; do not deploy a blog command automatically.",
+      "ttl_seconds": 604800
+    },
+    {
+      "id": "ha-client-docs",
+      "url": "https://hotaisle.xyz/blog/chatxyz-openwebui-hotaisle",
+      "kind": "document",
+      "layer": "client",
+      "purpose": "Existing private application connection with remote GPU and local UI.",
+      "on_change": "Requalify connection, privacy boundary and prompt compatibility.",
+      "ttl_seconds": 604800
+    },
+    {
+      "id": "opencode-provider",
+      "url": "https://opencode.ai/docs/providers/",
+      "kind": "document",
+      "layer": "client",
+      "purpose": "Current endpoint configuration contract, rather than an obsolete repository alias.",
+      "on_change": "Recheck client URL/model settings and streaming/tool contract.",
+      "ttl_seconds": 86400
+    },
+    {
+      "id": "lmcache-install",
+      "url": "https://docs.lmcache.ai/getting_started/installation.html",
+      "kind": "document",
+      "layer": "reuse",
+      "purpose": "ROCm wheel and image ABI requirements. Documentation is not proof our runtime matches.",
+      "on_change": "Check exact torch, Python, ROCm, model, tokenizer and cache layout before a canary.",
+      "ttl_seconds": 86400
+    },
+    {
+      "id": "lmcache-mp",
+      "url": "https://docs.lmcache.ai/mp/index.html",
+      "kind": "document",
+      "layer": "reuse",
+      "purpose": "Reusable cache service and CPU/NVMe storage architecture.",
+      "on_change": "Requalify tenant namespaces, cache lifetime, corrupt-cache fallback and measured saved prefill.",
+      "ttl_seconds": 86400
+    },
+    {
+      "id": "sglang-gateway",
+      "url": "https://docs.sglang.io/docs/advanced_features/sgl_model_gateway",
+      "kind": "document",
+      "layer": "routing",
+      "purpose": "Cache-aware routing plus congestion and worker lifecycle interfaces.",
+      "on_change": "Requalify queue-aware placement, streaming, health and duplicate-risk handling.",
+      "ttl_seconds": 86400
+    },
+    {
+      "id": "vllm-prefix",
+      "url": "https://docs.vllm.ai/en/latest/features/automatic_prefix_caching/",
+      "kind": "document",
+      "layer": "reuse",
+      "purpose": "Reference prefill reuse semantics; no reuse of output correctness implied.",
+      "on_change": "Check cache identity and count prefill savings separately from decode and accepted tasks.",
+      "ttl_seconds": 86400
+    },
+    {
+      "id": "skypilot-jobs",
+      "url": "https://docs.skypilot.ai/en/latest/reference/yaml-spec.html",
+      "kind": "document",
+      "layer": "lifecycle",
+      "purpose": "Alternative batch/recovery adapter, not a second execution owner.",
+      "on_change": "Check recovery, side-effect idempotency and resource release before enabling.",
+      "ttl_seconds": 86400
+    },
+    {
+      "id": "docling-contract",
+      "url": "https://github.com/docling-project/docling",
+      "kind": "document",
+      "layer": "workload",
+      "purpose": "Local parsing before remote extraction and structured export.",
+      "on_change": "Revalidate extraction fidelity and model licences; send only permitted unresolved content.",
+      "ttl_seconds": 604800
+    },
+    {
+      "id": "beir-contract",
+      "url": "https://github.com/beir-cellar/beir",
+      "kind": "document",
+      "layer": "acceptance",
+      "purpose": "Queries, relevance judgments and retrieval evaluation for meaningful search outcomes.",
+      "on_change": "Pin selected corpus and split, check dataset-specific rights; re-evaluate retrieval not only vector speed.",
+      "ttl_seconds": 604800
+    },
+    {
+      "id": "evalplus-contract",
+      "url": "https://github.com/evalplus/evalplus",
+      "kind": "document",
+      "layer": "acceptance",
+      "purpose": "Existing code acceptance authority and exact harness versions.",
+      "on_change": "Regrade retained outputs under a new named evaluator; preserve the old judgments.",
+      "ttl_seconds": 604800
+    },
+    {
+      "id": "fluidx3d-contract",
+      "url": "https://github.com/ProjectPhysX/FluidX3D",
+      "kind": "document",
+      "layer": "workload",
+      "purpose": "A numerical workload with convergence/error and completion-time endpoints.",
+      "on_change": "Commercial-use licence review required before commercial packaging; qualify device/runtime and numerical acceptance.",
+      "ttl_seconds": 604800
+    },
+    {
+      "id": "lemonade-contract",
+      "url": "https://github.com/lemonade-sdk/lemonade",
+      "kind": "document",
+      "layer": "local",
+      "purpose": "A real local execution alternative, not an artificial cloud-only comparison.",
+      "on_change": "Requalify endpoint compatibility, local memory fit and useful-work rate.",
+      "ttl_seconds": 604800
+    },
+    {
+      "id": "ha-templates",
+      "url": "https://github.com/hotaisle/cloud-init-templates",
+      "kind": "document",
+      "layer": "lifecycle",
+      "purpose": "Public deployment recipes; mutable templates are candidates, not pinned deployment images.",
+      "on_change": "Pin template and image digests; isolate secrets and test boot/health/stop/release.",
+      "ttl_seconds": 604800
+    },
+    {
+      "id": "vllm-release",
+      "url": "https://api.github.com/repos/vllm-project/vllm/releases?per_page=5",
+      "kind": "github_releases",
+      "layer": "runtime",
+      "purpose": "Serving releases for the retained vLLM workloads.",
+      "on_change": "Requalify runtime/model compatibility; retain old measured recipe.",
+      "ttl_seconds": 86400
+    },
+    {
+      "id": "aiter-release",
+      "url": "https://api.github.com/repos/ROCm/aiter/releases?per_page=5",
+      "kind": "github_releases",
+      "layer": "runtime",
+      "purpose": "AMD kernels used by the retained coding experiment.",
+      "on_change": "Run workload-specific canary; backend wins do not transfer automatically.",
+      "ttl_seconds": 86400
+    },
+    {
+      "id": "dstack-release",
+      "url": "https://api.github.com/repos/dstackai/dstack/releases?per_page=5",
+      "kind": "github_releases",
+      "layer": "lifecycle",
+      "purpose": "Native Hot Aisle provisioning and workload lifecycle implementation.",
+      "on_change": "Recheck lifecycle contract and limits; no automatic upgrade.",
+      "ttl_seconds": 86400
+    },
+    {
+      "id": "lmcache-release",
+      "url": "https://api.github.com/repos/LMCache/LMCache/releases?per_page=5",
+      "kind": "github_releases",
+      "layer": "reuse",
+      "purpose": "Cache implementation releases.",
+      "on_change": "Check ABI and namespace isolation before measuring reuse.",
+      "ttl_seconds": 86400
+    },
+    {
+      "id": "sglang-release",
+      "url": "https://api.github.com/repos/sgl-project/sglang/releases?per_page=5",
+      "kind": "github_releases",
+      "layer": "routing",
+      "purpose": "Serving and routing implementation releases.",
+      "on_change": "Requalify queue/cache/streaming behavior before deployment.",
+      "ttl_seconds": 86400
+    },
+    {
+      "id": "docling-release",
+      "url": "https://api.github.com/repos/docling-project/docling/releases?per_page=5",
+      "kind": "github_releases",
+      "layer": "workload",
+      "purpose": "Local document conversion implementation releases.",
+      "on_change": "Retest extraction against a frozen corpus.",
+      "ttl_seconds": 86400
+    },
+    {
+      "id": "evalplus-release",
+      "url": "https://api.github.com/repos/evalplus/evalplus/releases?per_page=5",
+      "kind": "github_releases",
+      "layer": "acceptance",
+      "purpose": "Code evaluation implementation releases.",
+      "on_change": "Regrade same retained outputs as a successor evaluation.",
+      "ttl_seconds": 86400
+    },
+    {
+      "id": "lemonade-release",
+      "url": "https://api.github.com/repos/lemonade-sdk/lemonade/releases?per_page=5",
+      "kind": "github_releases",
+      "layer": "local",
+      "purpose": "Local engine releases.",
+      "on_change": "Requalify local candidate rather than presuming remote compute wins.",
+      "ttl_seconds": 86400
+    }
+  ],
+  "operator_shapes": [
+    {
+      "id": "capacity-operator",
+      "name": "Hot Aisle",
+      "role": "API-addressable GPU capacity",
+      "materials": [
+        "ha-price",
+        "dstack-backends",
+        "ha-templates"
+      ],
+      "user_value": "Execution on an authorized allocation without an interactive sales process."
+    },
+    {
+      "id": "lifecycle-builder",
+      "name": "dstack maintainers",
+      "role": "Provisioning, fleet reuse and resource lifecycle",
+      "materials": [
+        "dstack-backends",
+        "dstack-runtime",
+        "dstack-release"
+      ],
+      "user_value": "Less setup and fewer abandoned billable allocations."
+    },
+    {
+      "id": "application-integrator",
+      "name": "Melissa Palmer / published HA client recipes",
+      "role": "Connect familiar applications to private endpoints",
+      "materials": [
+        "ha-client-code",
+        "ha-client-docs",
+        "opencode-provider"
+      ],
+      "user_value": "Keep the current coding/chat client instead of learning another cloud dashboard."
+    },
+    {
+      "id": "cache-maintainer",
+      "name": "LMCache and SGLang maintainers",
+      "role": "Cache persistence and locality-aware dispatch",
+      "materials": [
+        "lmcache-install",
+        "lmcache-mp",
+        "sglang-gateway"
+      ],
+      "user_value": "Pay for compatible repeated prefix work less often without mixing tenants."
+    },
+    {
+      "id": "domain-toolmaker",
+      "name": "Docling, BEIR and EvalPlus maintainers",
+      "role": "Preprocessing and testable user outcomes",
+      "materials": [
+        "docling-contract",
+        "beir-contract",
+        "evalplus-contract"
+      ],
+      "user_value": "Search finds the right source; extraction preserves fields; code passes tests."
+    },
+    {
+      "id": "numerical-operator",
+      "name": "ProjectPhysX / FluidX3D",
+      "role": "Memory-heavy numerical simulation",
+      "materials": [
+        "fluidx3d-contract"
+      ],
+      "user_value": "Finish a numerically accepted simulation; commercial rights are a separate admission gate."
+    },
+    {
+      "id": "local-executor",
+      "name": "Lemonade maintainers",
+      "role": "Local execution baseline",
+      "materials": [
+        "lemonade-contract",
+        "lemonade-release"
+      ],
+      "user_value": "Keep work local when transfer, privacy or startup makes it more efficient."
+    }
+  ],
+  "recipes": [
+    {
+      "id": "coding-burst",
+      "priority": 1,
+      "user_request": "Complete a batch of coding tasks and return only accepted outputs.",
+      "sources": [
+        "ha-client-code",
+        "opencode-provider",
+        "ha-price",
+        "dstack-backends",
+        "dstack-runtime",
+        "vllm-release",
+        "aiter-release",
+        "evalplus-contract",
+        "evalplus-release",
+        "lemonade-contract"
+      ],
+      "existing_evidence": "Retained Run 3: one-GPU coding replay and evaluator records, not an interactive coding-agent qualification.",
+      "next_test": "Ordinary client -> private endpoint -> supplied tests -> bounded repair -> return, cancel and release; check whole allocation bill.",
+      "metric": "Time and full-cost per accepted task, including failed attempts and verification.",
+      "authority": "Existing runner remains execution owner; lifecycle adapter requires separate authorization.",
+      "reuse": "Only matching model/tokenizer/template/cache identity, tenant and request prefix.",
+      "stage": "REAL_BATCH_EVIDENCE_CLIENT_PATH_UNQUALIFIED"
+    },
+    {
+      "id": "documents-and-search",
+      "priority": 2,
+      "user_request": "Turn a permitted document folder into searchable, source-grounded answers.",
+      "sources": [
+        "docling-contract",
+        "docling-release",
+        "beir-contract",
+        "ha-client-docs",
+        "lmcache-install",
+        "lmcache-mp",
+        "vllm-release"
+      ],
+      "existing_evidence": "Public components only. No claimed HA retrieval/extraction measurement.",
+      "next_test": "Local parse and lexical baseline; freeze relevance judgments; compare remote embedding/reranking only for unresolved work; inject document revisions.",
+      "metric": "Extraction field accuracy, retrieval recall/nDCG, citation support and total cost per accepted answer.",
+      "authority": "Local preprocessing first; remote input transfer requires explicit data policy.",
+      "reuse": "Source digest and parser version invalidate only dependent chunks/index/results; KV identity remains model-specific.",
+      "stage": "AUTHORED_QUALIFICATION_RECIPE"
+    },
+    {
+      "id": "repeated-context",
+      "priority": 3,
+      "user_request": "Reuse the same permitted long context across related requests.",
+      "sources": [
+        "lmcache-install",
+        "lmcache-mp",
+        "lmcache-release",
+        "vllm-prefix",
+        "sglang-gateway",
+        "sglang-release",
+        "dstack-runtime"
+      ],
+      "existing_evidence": "Cache mechanisms are documented upstream; no measured HA cache benefit is claimed.",
+      "next_test": "Cold, warm, evicted, changed-prefix, congested worker and different-tenant cases; compare data-transfer cost and actual cache hits.",
+      "metric": "Accepted-answer latency and cost with separately measured prefill/decode and retained-cache rent.",
+      "authority": "Same tenant and policy; no cross-tenant cache sharing or silent retention.",
+      "reuse": "KV cache is not validated answer memory and is not portable across arbitrary runtimes.",
+      "stage": "AUTHORED_QUALIFICATION_RECIPE"
+    },
+    {
+      "id": "numerical-batch",
+      "priority": 4,
+      "user_request": "Run an accepted fluid simulation without replacing the local workstation.",
+      "sources": [
+        "fluidx3d-contract",
+        "dstack-backends",
+        "ha-price",
+        "skypilot-jobs"
+      ],
+      "existing_evidence": "External workload lead, not a qualified commercial HA route.",
+      "next_test": "Commercial rights first, then matched input grid, convergence/error tolerance, durable checkpoint and release.",
+      "metric": "Full cost and wall time to a numerically accepted completed simulation.",
+      "authority": "Commercial packaging held until explicit licence rights; no job is dispatched.",
+      "reuse": "Mesh/checkpoint identity and solver version, not token or chat history.",
+      "stage": "RIGHTS_AND_RUNTIME_QUALIFICATION_REQUIRED"
+    }
+  ],
+  "boundary": "Upstream observations create review work, never automatic installation, provider selection, permission or performance claims."
+}
