@@ -1,0 +1,186 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "second-run/shop-fingerprint@1",
+  "title": "Shop fingerprint",
+  "description": "One rented machine's hardware/software fingerprint, as collected by fingerprint.sh. Every leaf value is either an observed string/number/array/object, the literal string \"unavailable\" (or an \"unavailable: <reason>\" string), \"unobserved\" (fixtures only: a field the next real run will fill in), or, for load_sample, the literal string \"skipped: no torch\". diff.py and test_probe.py rely on this shape; see README.md for the collection rules.",
+  "type": "object",
+  "required": [
+    "schema",
+    "recorded_at",
+    "hostname",
+    "requested_gpu_vendor",
+    "kernel",
+    "distro",
+    "virtualization",
+    "cpu",
+    "memory",
+    "storage",
+    "filesystems",
+    "network",
+    "container_runtime",
+    "gpu",
+    "gpu_topology",
+    "ecc",
+    "idle_power_state",
+    "load_sample",
+    "raw_dir"
+  ],
+  "properties": {
+    "schema": {
+      "const": "second-run/shop-fingerprint@1"
+    },
+    "schema_version": {
+      "type": "string"
+    },
+    "recorded_at": {
+      "type": "string",
+      "description": "UTC timestamp, e.g. 2026-09-25T18:37:49Z"
+    },
+    "hostname": { "type": "string" },
+    "requested_gpu_vendor": {
+      "type": "string",
+      "enum": ["amd", "nvidia", "auto"]
+    },
+    "kernel": { "type": "string" },
+    "distro": { "type": "string" },
+    "virtualization": { "type": "string" },
+    "dmidecode_system_product": { "type": "string" },
+    "cpu": {
+      "type": "object",
+      "required": ["model", "cores_logical", "sockets", "numa_nodes"],
+      "properties": {
+        "model": { "type": "string" },
+        "cores_logical": { "type": "string" },
+        "sockets": { "type": "string" },
+        "numa_nodes": { "type": "string" }
+      }
+    },
+    "memory": {
+      "type": "object",
+      "required": ["total"],
+      "properties": {
+        "total": { "type": "string" }
+      }
+    },
+    "storage": {
+      "type": "object",
+      "required": ["devices", "nvme_smart"],
+      "properties": {
+        "devices": { "type": "string" },
+        "nvme_smart": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["device", "smart_log"],
+            "properties": {
+              "device": { "type": "string" },
+              "smart_log": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "filesystems": { "type": "string" },
+    "network": {
+      "type": "object",
+      "required": ["interfaces", "download_throughput_mb_s"],
+      "properties": {
+        "interfaces": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "mtu", "state"],
+            "properties": {
+              "name": { "type": "string" },
+              "mtu": { "type": "string" },
+              "state": { "type": "string" }
+            }
+          }
+        },
+        "download_throughput_mb_s": {
+          "type": "string",
+          "description": "Decimal MB/s (bytes/1e6), or an \"unavailable: <reason>\" string. A 30 s sample against a public well-known endpoint."
+        }
+      }
+    },
+    "container_runtime": {
+      "type": "object",
+      "required": ["runtime", "version"],
+      "properties": {
+        "runtime": { "type": "string", "enum": ["docker", "podman", "unavailable"] },
+        "version": { "type": "string" }
+      }
+    },
+    "gpu": {
+      "type": "object",
+      "required": ["vendor", "count", "driver_version", "rocm_or_cuda_version", "devices"],
+      "properties": {
+        "vendor": { "type": "string", "enum": ["amd", "nvidia", "unknown"] },
+        "count": { "type": "string" },
+        "driver_version": { "type": "string" },
+        "rocm_or_cuda_version": { "type": "string" },
+        "devices": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "index", "model", "vbios", "firmware", "driver", "pci_addr",
+              "pcie_link_gen_current", "pcie_link_width_current",
+              "ecc_corrected_total", "ecc_uncorrected_total",
+              "clock_sm_mhz_idle", "clock_mem_mhz_idle", "temp_c_idle",
+              "power_w_idle", "hw_slowdown_throttle"
+            ],
+            "properties": {
+              "index": { "type": "string" },
+              "model": { "type": "string" },
+              "vbios": { "type": "string" },
+              "firmware": { "type": "string" },
+              "driver": { "type": "string" },
+              "pci_addr": { "type": "string" },
+              "pcie_link_gen_current": { "type": "string" },
+              "pcie_link_width_current": { "type": "string" },
+              "ecc_corrected_total": { "type": "string" },
+              "ecc_uncorrected_total": { "type": "string" },
+              "clock_sm_mhz_idle": { "type": "string" },
+              "clock_mem_mhz_idle": { "type": "string" },
+              "temp_c_idle": { "type": "string" },
+              "power_w_idle": { "type": "string" },
+              "hw_slowdown_throttle": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "gpu_topology": { "type": "string" },
+    "ecc": { "type": "string" },
+    "idle_power_state": { "type": "string" },
+    "load_sample": {
+      "oneOf": [
+        { "const": "skipped: no torch" },
+        { "const": "unobserved" },
+        {
+          "type": "object",
+          "required": ["method", "duration_s", "interval_s", "samples"],
+          "properties": {
+            "method": { "type": "string", "enum": ["local_torch", "vllm_container", "unobserved"] },
+            "duration_s": { "type": "number" },
+            "interval_s": { "type": "number" },
+            "samples": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["t_offset_s", "recorded_at", "sample"],
+                "properties": {
+                  "t_offset_s": { "type": "number" },
+                  "recorded_at": { "type": "string" },
+                  "sample": { "type": "string" }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "raw_dir": { "type": "string" }
+  }
+}

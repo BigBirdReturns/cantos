@@ -1,0 +1,93 @@
+{
+  "schema_id": "second-run/counter-record@1",
+  "provider_id": "digitalocean",
+  "provider_name": "DigitalOcean",
+  "provenance": {
+    "evaluator": "Second Run campaign (compiled from campaign/README.md Run 1 arm B, availability/observations.jsonl and availability/README.md API-source notes, 2026-09-23/24)",
+    "evaluated_at": "2026-09-23T17:49:00Z",
+    "account_used": "new DigitalOcean account created for the Second Run campaign; started Tier 2 with GPU Droplet limit 0",
+    "money_spent_usd": 4.05,
+    "disclosure": "DigitalOcean arm self-funded at list price ($4.41/GPU-hr H100); no credit, partnership or discount from DigitalOcean. money_spent_usd is the campaign's modeled estimate for Run 1 arm B (~55 min wall clock); the posted invoice line was not independently reconciled against it."
+  },
+  "account_creation": {
+    "kyc_required": "unobserved",
+    "card_required": true,
+    "quota_gate": "soft",
+    "sales_gate": false,
+    "signup_to_active_account_s": "unobserved",
+    "notes": "New accounts start Tier 2 with GPU Droplet limit 0; a support ticket raised the limit to 1 in under a day (known campaign fact). That matches quota_gate=soft: self-serve sign-up plus a ticket, not a sales conversation. Exact wall-clock time from starting sign-up to placing the ticket, and from account creation to the ticket being raised, were not recorded precisely (only 'under a day' for the ticket)."
+  },
+  "price_transparency": {
+    "published": true,
+    "per_gpu_hour_usd": 4.41,
+    "minimum_billing": "5 minutes (pricing page) vs 60 seconds (docs) -- the two DigitalOcean sources disagree",
+    "egress_rate": "unobserved",
+    "storage_rate": "unobserved",
+    "notes": "Primary reference SKU is gpu-h100x1-base at $4.41/GPU-hr, per-second billing, published on the public pricing page without login. MI300X (gpu-amd-base) was $2.59/GPU-hr in providers/PROVIDERS.md staging. Per-second billing is documented, but the minimum-billing window itself is inconsistent between the pricing page and the docs -- recorded, not resolved."
+  },
+  "provisioning": {
+    "attempts": [],
+    "measured_3x": false,
+    "total_cost_usd": 0,
+    "notes": "No timed request-to-SSH provisioning attempt for this shop-eval lane exists in prior sessions. Run 1 arm B did reach SSH (see availability_honesty: time_to_ssh_s 60 on 2026-09-23T17:49:00Z) but that figure lives in the ledger as an availability observation, not a dedicated 3x-timed provisioning attempt for this record; a fresh counter run should time 3 creates directly."
+  },
+  "availability_honesty": {
+    "ledger_attempts": [
+      {"ts": "2026-09-23T17:49:00Z", "sku": "gpu-h100x1-80gb", "region": "nyc2", "method": "console-create", "outcome": "available", "provisioned": true},
+      {"ts": "2026-09-23T17:49:00Z", "sku": "gpu-h100x8-640gb", "region": "nyc2", "method": "console-plan-list", "outcome": "out_of_capacity", "provisioned": false},
+      {"ts": "2026-09-23T18:55:00Z", "sku": "gpu-mi300x1-192gb", "region": "nyc2", "method": "console-plan-list", "outcome": "out_of_capacity", "provisioned": false},
+      {"ts": "2026-09-23T18:56:00Z", "sku": "gpu-mi300x1-192gb", "region": "tor1", "method": "console-plan-list", "outcome": "out_of_capacity", "provisioned": false},
+      {"ts": "2026-09-23T19:08:00Z", "sku": "gpu-h200x1-141gb", "region": "nyc2", "method": "console-plan-list", "outcome": "out_of_capacity", "provisioned": false},
+      {"ts": "2026-09-23T19:09:00Z", "sku": "gpu-h200x1-141gb", "region": "ric1", "method": "console-plan-list", "outcome": "out_of_capacity", "provisioned": false},
+      {"ts": "2026-09-23T19:10:00Z", "sku": "gpu-h200x1-141gb", "region": "tor1", "method": "console-plan-list", "outcome": "out_of_capacity", "provisioned": false},
+      {"ts": "2026-09-23T19:11:00Z", "sku": "gpu-h200x1-141gb", "region": "mkc1", "method": "console-plan-list", "outcome": "out_of_capacity", "provisioned": false},
+      {"ts": "2026-09-23T19:12:00Z", "sku": "gpu-h200x1-141gb", "region": "mem1", "method": "console-plan-list", "outcome": "out_of_capacity", "provisioned": false},
+      {"ts": "2026-09-23T19:13:00Z", "sku": "gpu-h200x1-141gb", "region": "ams3", "method": "console-plan-list", "outcome": "out_of_capacity", "provisioned": false},
+      {"ts": "2026-09-23T19:14:00Z", "sku": "gpu-h100x1-80gb", "region": "nyc2", "method": "console-plan-list", "outcome": "available", "provisioned": false},
+      {"ts": "2026-09-24T04:08:02Z", "sku": "gpu-h100x1-80gb", "region": "nyc2", "method": "api", "outcome": "available", "provisioned": false},
+      {"ts": "2026-09-24T04:08:02Z", "sku": "gpu-h100x1-80gb", "region": "ams3", "method": "api", "outcome": "available", "provisioned": false},
+      {"ts": "2026-09-24T04:08:02Z", "sku": "gpu-mi300x1-192gb", "region": "any", "method": "api", "outcome": "out_of_capacity", "provisioned": false}
+    ],
+    "notes": "All 14 digitalocean rows in availability/observations.jsonl as of 2026-09-24. Only the first (Run 1 arm B, droplet 603084148, nyc2 gpu-h100x1-80gb) is a real delivered create; the rest are console or API listings (console-plan-list, api). H200 was out of capacity in all 6 regions checked on 2026-09-23. MI300X was greyed out / out_of_capacity in NYC2 and TOR1 at plan-list time; the 2026-09-24 API sample also reported gpu-mi300x1-192gb out_of_capacity globally. The 2026-09-23T19:14:00Z row records a create that was never completed because the browser froze -- recorded as available/not-provisioned, arm skipped, not as a provider failure."
+  },
+  "api_cli_tui_quality": {
+    "token_issuance": "self-serve",
+    "list_op": true,
+    "create_op": true,
+    "delete_op": "unobserved",
+    "idempotent_create": "unobserved",
+    "idempotent_delete": "unobserved",
+    "notes": "doctl authenticated with a self-serve API token; `doctl compute size list` performs list_op. create_op observed true through the console (Run 1 arm B). Droplet deletion after Run 1 was instructed by the campaign runbook but no confirmation of the delete call itself was captured in these sessions, so delete_op is unobserved rather than assumed. The console needed a manual reload to reflect current state after a create/list action (known campaign fact) -- a UI-quality defect, not a data field in this schema, recorded here."
+  },
+  "billing_granularity": {
+    "billing_quantum": "per-second billing; minimum window disputed between the pricing page (5 minutes) and the docs (60 seconds)",
+    "stop_on_delete_verified": "unobserved",
+    "invoice_matches_balance": "unobserved",
+    "notes": "The billing quantum itself is known from public sources, but no prior session checked account balance or an invoice line before and after a delete to confirm billing actually stopped at delete time."
+  },
+  "tenant_hygiene": {
+    "fresh_disk": "unobserved",
+    "previous_tenant_residue": "unobserved",
+    "default_users_keys_present": "unobserved",
+    "notes": "Not checked in any prior session."
+  },
+  "network_path": {
+    "public_ip_assigned": "unobserved",
+    "firewall_default": "unobserved",
+    "open_ports_first_boot": "unobserved",
+    "notes": "Not checked in any prior session; Run 1 arm B's droplet IP was collected for the runner (`collect.sh do-h100 root@<ip-B>`) but firewall defaults and a first-boot port scan were never recorded."
+  },
+  "support_path": {
+    "channel": "support ticket",
+    "first_response_time_s": "unobserved",
+    "sales_required": false,
+    "notes": "A support ticket to raise the GPU Droplet quota from 0 to 1 took under a day (known campaign fact); the exact response time in seconds was not recorded. No sales conversation was required."
+  },
+  "termination": {
+    "method": "unobserved",
+    "billing_stopped_confirmed": "unobserved",
+    "time_to_confirm_s": "unobserved",
+    "notes": "The campaign runbook instructs deleting each droplet after its arm completes, but no prior session recorded the delete method used or confirmed billing stopped for the DigitalOcean side."
+  },
+  "disqualifying_observations": []
+}

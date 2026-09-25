@@ -1,0 +1,206 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "second-run/counter-record@1",
+  "title": "Second Run counter evaluation record",
+  "description": "One operator's customer-facing evaluation: everything observable from signing up through releasing the machine, without touching the GPU. Every field not actually observed during the run this record documents MUST be the string \"unobserved\" -- never a guess, never a value carried in from marketing copy or another operator's run. counter_record.py validates and scores this shape without a jsonschema dependency; this file is the human-readable reference and is not itself consumed by the script.",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "provider_id",
+    "provider_name",
+    "provenance",
+    "account_creation",
+    "price_transparency",
+    "provisioning",
+    "availability_honesty",
+    "api_cli_tui_quality",
+    "billing_granularity",
+    "tenant_hygiene",
+    "network_path",
+    "support_path",
+    "termination",
+    "disqualifying_observations"
+  ],
+  "properties": {
+    "schema_id": {
+      "const": "second-run/counter-record@1"
+    },
+    "provider_id": {
+      "type": "string",
+      "description": "lowercase slug, matches providers/SCHEMA.md's provider_id convention, e.g. hotaisle, digitalocean"
+    },
+    "provider_name": {
+      "type": "string",
+      "description": "as the provider writes it"
+    },
+    "provenance": {
+      "type": "object",
+      "description": "Who ran this evaluation, when, on what account, at what cost, and under what disclosure. Never 'unobserved' -- provenance is always known to the evaluator.",
+      "required": ["evaluator", "evaluated_at", "account_used", "money_spent_usd", "disclosure"],
+      "properties": {
+        "evaluator": { "type": "string", "description": "person or handle who ran the evaluation" },
+        "evaluated_at": { "type": "string", "description": "UTC ISO 8601 timestamp of the evaluation session's start" },
+        "account_used": { "type": "string", "description": "e.g. 'new account, sign-up this session' or 'existing campaign account'" },
+        "money_spent_usd": { "type": "number", "minimum": 0, "description": "total dollars actually charged during this evaluation" },
+        "disclosure": { "type": "string", "description": "one plain line: funding relationship, credits used, or 'none' -- see DISCLOSURES.md convention" }
+      }
+    },
+    "account_creation": {
+      "type": "object",
+      "description": "Sign-up friction: KYC, card, quota gates, sales gate.",
+      "required": ["kyc_required", "card_required", "quota_gate", "sales_gate", "signup_to_active_account_s", "notes"],
+      "properties": {
+        "kyc_required": { "$ref": "#/$defs/boolOrUnobserved", "description": "identity document or business verification beyond email + card" },
+        "card_required": { "$ref": "#/$defs/boolOrUnobserved", "description": "a payment card must be added before any compute can be rented" },
+        "quota_gate": { "$ref": "#/$defs/stringOrUnobserved", "description": "one of: none, soft (support ticket raises a default-zero limit), hard (must be approved before any create), sales" },
+        "sales_gate": { "$ref": "#/$defs/boolOrUnobserved", "description": "true if a sales conversation is required before self-serve access to the SKU under test" },
+        "signup_to_active_account_s": { "$ref": "#/$defs/numberOrUnobserved", "description": "wall-clock seconds from starting sign-up to being able to attempt a create", "minimum": 0 },
+        "notes": { "type": "string" }
+      }
+    },
+    "price_transparency": {
+      "type": "object",
+      "description": "Published pricing for the SKU under test.",
+      "required": ["published", "per_gpu_hour_usd", "minimum_billing", "egress_rate", "storage_rate", "notes"],
+      "properties": {
+        "published": { "$ref": "#/$defs/boolOrUnobserved", "description": "price is visible on a public page without login" },
+        "per_gpu_hour_usd": { "$ref": "#/$defs/numberOrUnobserved", "minimum": 0, "description": "list price per GPU-hour for the SKU under test, USD" },
+        "minimum_billing": { "$ref": "#/$defs/stringOrUnobserved", "description": "e.g. '1 minute', '5 minutes', '1 hour', '1 month'" },
+        "egress_rate": { "$ref": "#/$defs/stringOrUnobserved", "description": "e.g. '$0.01/GB' or 'not published' or 'none'" },
+        "storage_rate": { "$ref": "#/$defs/stringOrUnobserved", "description": "e.g. price per GB-month for retained disk, or 'none'" },
+        "notes": { "type": "string" }
+      }
+    },
+    "provisioning": {
+      "type": "object",
+      "description": "Time to SSH from request. Measure 3 times only if the total spend for all 3 stays under $3; otherwise record one measurement and say why.",
+      "required": ["attempts", "measured_3x", "total_cost_usd", "notes"],
+      "properties": {
+        "attempts": {
+          "type": "array",
+          "description": "one entry per timed provisioning attempt, in order",
+          "items": {
+            "type": "object",
+            "required": ["request_ts", "ssh_ready_ts", "time_to_ssh_s"],
+            "properties": {
+              "request_ts": { "$ref": "#/$defs/stringOrUnobserved", "description": "UTC ISO 8601, moment create was requested" },
+              "ssh_ready_ts": { "$ref": "#/$defs/stringOrUnobserved", "description": "UTC ISO 8601, moment SSH first succeeded, or 'unobserved' if it never did" },
+              "time_to_ssh_s": { "$ref": "#/$defs/numberOrUnobserved", "minimum": 0, "description": "ssh_ready_ts - request_ts in seconds" }
+            }
+          }
+        },
+        "measured_3x": { "$ref": "#/$defs/boolOrUnobserved", "description": "true only if 3 independent attempts are recorded in attempts[]" },
+        "total_cost_usd": { "$ref": "#/$defs/numberOrUnobserved", "minimum": 0, "description": "dollars spent across all provisioning attempts in this section" },
+        "notes": { "type": "string" }
+      }
+    },
+    "availability_honesty": {
+      "type": "object",
+      "description": "Does the listed SKU actually provision? Each attempt is also written to the campaign's availability/observations.jsonl ledger in its documented format (ts, provider, region, sku, gpus, method, layer, outcome, provisioned, ...); ledger_attempts below mirrors that shape so this record is self-contained.",
+      "required": ["ledger_attempts", "notes"],
+      "properties": {
+        "ledger_attempts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["ts", "sku", "region", "method", "outcome", "provisioned"],
+            "properties": {
+              "ts": { "$ref": "#/$defs/stringOrUnobserved" },
+              "sku": { "$ref": "#/$defs/stringOrUnobserved" },
+              "region": { "$ref": "#/$defs/stringOrUnobserved" },
+              "method": { "$ref": "#/$defs/stringOrUnobserved", "description": "api-create, console-create, or tui-provision, per availability/README.md" },
+              "outcome": { "$ref": "#/$defs/stringOrUnobserved", "description": "available, out_of_capacity, out_of_stock, create_failed, ssh_failed, or unknown" },
+              "provisioned": { "$ref": "#/$defs/boolOrUnobserved" }
+            }
+          }
+        },
+        "notes": { "type": "string" }
+      }
+    },
+    "api_cli_tui_quality": {
+      "type": "object",
+      "description": "Programmatic and terminal access quality.",
+      "required": ["token_issuance", "list_op", "create_op", "delete_op", "idempotent_create", "idempotent_delete", "notes"],
+      "properties": {
+        "token_issuance": { "$ref": "#/$defs/stringOrUnobserved", "description": "self-serve, manual/support-issued, or none" },
+        "list_op": { "$ref": "#/$defs/boolOrUnobserved", "description": "can list existing resources via API/CLI/TUI" },
+        "create_op": { "$ref": "#/$defs/boolOrUnobserved" },
+        "delete_op": { "$ref": "#/$defs/boolOrUnobserved" },
+        "idempotent_create": { "$ref": "#/$defs/boolOrUnobserved", "description": "repeating the same create call does not silently double-provision" },
+        "idempotent_delete": { "$ref": "#/$defs/boolOrUnobserved", "description": "repeating delete on an already-deleted resource errors cleanly rather than corrupting state" },
+        "notes": { "type": "string" }
+      }
+    },
+    "billing_granularity": {
+      "type": "object",
+      "description": "Billing quantum and stop-on-delete, verified against the invoice or account balance, not just the pricing page.",
+      "required": ["billing_quantum", "stop_on_delete_verified", "invoice_matches_balance", "notes"],
+      "properties": {
+        "billing_quantum": { "$ref": "#/$defs/stringOrUnobserved", "description": "e.g. 'per second, 60s minimum' -- record page vs docs discrepancies in notes" },
+        "stop_on_delete_verified": { "$ref": "#/$defs/boolOrUnobserved", "description": "true only if balance/invoice was checked before and after delete and showed billing stopped at delete time" },
+        "invoice_matches_balance": { "$ref": "#/$defs/boolOrUnobserved", "description": "the posted invoice/statement line matches the account balance deduction" },
+        "notes": { "type": "string" }
+      }
+    },
+    "tenant_hygiene": {
+      "type": "object",
+      "description": "Evidence the machine was actually reset between tenants.",
+      "required": ["fresh_disk", "previous_tenant_residue", "default_users_keys_present", "notes"],
+      "properties": {
+        "fresh_disk": { "$ref": "#/$defs/boolOrUnobserved", "description": "root disk shows no files/history from a prior tenant" },
+        "previous_tenant_residue": { "$ref": "#/$defs/boolOrUnobserved", "description": "true if any file, log, shell history, or credential from a previous tenant was found -- disqualifying if true" },
+        "default_users_keys_present": { "$ref": "#/$defs/boolOrUnobserved", "description": "unexpected default/shared user accounts or pre-installed SSH keys not supplied by this evaluator" },
+        "notes": { "type": "string" }
+      }
+    },
+    "network_path": {
+      "type": "object",
+      "description": "What the box looks like on the network on first boot, before any hardening.",
+      "required": ["public_ip_assigned", "firewall_default", "open_ports_first_boot", "notes"],
+      "properties": {
+        "public_ip_assigned": { "$ref": "#/$defs/boolOrUnobserved" },
+        "firewall_default": { "$ref": "#/$defs/stringOrUnobserved", "description": "open, closed (default-deny), or unknown" },
+        "open_ports_first_boot": {
+          "description": "list of open TCP/UDP port numbers observed on first boot, an empty list if a scan ran and found none, or the string 'unobserved' if no scan ran",
+          "oneOf": [
+            { "type": "array", "items": { "type": "integer" } },
+            { "const": "unobserved" }
+          ]
+        },
+        "notes": { "type": "string" }
+      }
+    },
+    "support_path": {
+      "type": "object",
+      "description": "Support channel and response time, exercised with one real question.",
+      "required": ["channel", "first_response_time_s", "sales_required", "notes"],
+      "properties": {
+        "channel": { "$ref": "#/$defs/stringOrUnobserved", "description": "e.g. 'chat', 'email', 'ticket', 'community/discord', 'none found'" },
+        "first_response_time_s": { "$ref": "#/$defs/numberOrUnobserved", "minimum": 0 },
+        "sales_required": { "$ref": "#/$defs/boolOrUnobserved", "description": "true if reaching support required going through a sales contact form" },
+        "notes": { "type": "string" }
+      }
+    },
+    "termination": {
+      "type": "object",
+      "description": "Releasing the machine and confirming billing stopped.",
+      "required": ["method", "billing_stopped_confirmed", "time_to_confirm_s", "notes"],
+      "properties": {
+        "method": { "$ref": "#/$defs/stringOrUnobserved", "description": "e.g. 'console delete', 'TUI delete', 'API delete', 'support ticket required'" },
+        "billing_stopped_confirmed": { "$ref": "#/$defs/boolOrUnobserved" },
+        "time_to_confirm_s": { "$ref": "#/$defs/numberOrUnobserved", "minimum": 0, "description": "seconds from delete request to the resource disappearing from the active list" },
+        "notes": { "type": "string" }
+      }
+    },
+    "disqualifying_observations": {
+      "type": "array",
+      "description": "Free-text list of observations that, if any are present, cap the counter score at 40 regardless of the weighted total (see counter_record.py DISQUALIFYING_CAP). Empty list means none observed. Examples: previous-tenant residue found, billing did not stop at delete, sales gate blocks self-serve access to the SKU under test.",
+      "items": { "type": "string" }
+    }
+  },
+  "$defs": {
+    "boolOrUnobserved": { "oneOf": [{ "type": "boolean" }, { "const": "unobserved" }] },
+    "numberOrUnobserved": { "oneOf": [{ "type": "number" }, { "const": "unobserved" }] },
+    "stringOrUnobserved": { "oneOf": [{ "type": "string" }, { "const": "unobserved" }] }
+  }
+}

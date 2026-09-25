@@ -30,6 +30,10 @@ jobs:
           node hot-aisle/scripts/test_workbench.cjs | tee instrument-engine.log
           node --test hot-aisle/runner/test/*.test.cjs compute/tests/test_core.cjs compute/tests/test_bridge.cjs integration/tests/seam.test.cjs compute/community/tests/test_core.cjs | tee software-tests.log
           python -m unittest discover -s hot-aisle/scripts -p 'test_price_math.py' -v
+          python -m unittest discover -s hot-aisle/campaign/shop-eval/probe -p 'test_probe.py' -v
+          python -m unittest discover -s hot-aisle/campaign/shop-eval/counter -p 'test_counter.py' -v
+          python -m unittest discover -s hot-aisle/campaign/shop-eval/diagnose -p 'test_diagnose.py' -v
+          bash -n hot-aisle/campaign/shop-eval/probe/fingerprint.sh && bash -n hot-aisle/campaign/shop-eval/evaluate.sh
           python -m unittest discover -s compute/tests -p 'test_prices.py' -v
           python -m unittest discover -s integration/tests -p 'test_release_gate.py' -v
           python -m unittest discover -s integration/tests -p 'test_task_*.py' -v

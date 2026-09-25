@@ -1,0 +1,33 @@
+{
+ "dir": "synthetic-badshop",
+ "rate": 3.10,
+ "gates": {
+  "ttft_ms": 1000,
+  "e2e_ms": null
+ },
+ "engine": "2.0.0",
+ "cells": [
+  {
+   "cell": "cell-c8",
+   "runs": 1,
+   "completed": 190,
+   "attempted": 200,
+   "accepted": 60,
+   "accepted_pct": 30.0,
+   "accepted_per_s": 1.2,
+   "holds": [],
+   "cost_per_1k": 5.5
+  },
+  {
+   "cell": "cell-c32",
+   "runs": 1,
+   "completed": 195,
+   "attempted": 200,
+   "accepted": 70,
+   "accepted_pct": 35.0,
+   "accepted_per_s": 3.0,
+   "holds": [],
+   "cost_per_1k": 4.8
+  }
+ ]
+}

@@ -1,0 +1,147 @@
+{
+  "schema": "second-run/shop-eval-reference@1",
+  "shop": "hotaisle",
+  "assembled_at": "2026-09-25",
+  "note": "Every leaf value below carries its own \"_source\" citing the exact repo file it was read from (paths relative to campaign/). A field with no supporting number in those files is the literal string \"unobserved\", never a guess. This bundle is read by diagnose.py as --reference; do not hand-tune numbers without updating the cited source file first.",
+
+  "workload": {
+    "model": "Qwen/Qwen3-Coder-30B-A3B-Instruct-FP8",
+    "tasks": "542 EvalPlus tasks (HumanEval+ 164, MBPP+ 378), cycled",
+    "arrival_trace": "Azure LLM inference CODE trace 2023, replayed 1h at factor 0.95 (8,622 requests)",
+    "accepted_definition": "EvalPlus base+plus tests pass, TTFT <= 1s, done <= 60s from scheduled arrival",
+    "_source": "results/RUN3-RESULTS.md"
+  },
+
+  "run3_a_t0": {
+    "arm": "Hot Aisle 1x MI300X, auto backend (ROCM_ATTN)",
+    "list_price_per_gpu_hour_usd": 2.99,
+    "backend": "ROCM_ATTN",
+    "moe_kernel": "AiterFp8BlockScaledMMKernel",
+    "completed": 8622,
+    "failed": 0,
+    "attempted": 8622,
+    "ttft_p50_ms": 53,
+    "ttft_p95_ms": 155,
+    "ttft_p99_ms": 571,
+    "accepted": 4336,
+    "accepted_pct": 50.3,
+    "cost_per_1k_accepted_own_window_usd": 0.72,
+    "cost_per_1k_accepted_own_seat_equivalent_whole_run_usd": 0.74,
+    "_source": "results/RUN3-HOTAISLE-SUMMARY.md (own-window $0.72, TTFT p50/p95/p99); results/RUN3-RESULTS.md (completed/failed, accepted, own-seat-equivalent whole-run $0.74)"
+  },
+
+  "run3_whole_seat": {
+    "description": "Whole Hot Aisle seat, request to release, including smoke + both arms + idle gap",
+    "duration_hours": 2.73,
+    "cost_usd": 8.15,
+    "accepted": 9086,
+    "cost_per_1k_accepted_usd": 0.90,
+    "_source": "results/RUN3-HOTAISLE-SUMMARY.md"
+  },
+
+  "run3_do_h100": {
+    "arm": "DigitalOcean 1x H100 (N/T0)",
+    "list_price_per_gpu_hour_usd": 4.41,
+    "backend": "FLASH_ATTN",
+    "moe_kernel": "TRITON",
+    "completed": 8622,
+    "failed": 0,
+    "attempted": 8622,
+    "ttft_p50_ms": 35,
+    "ttft_p95_ms": 76,
+    "ttft_p99_ms": 2254,
+    "accepted": 4280,
+    "accepted_pct": 49.6,
+    "cost_per_1k_accepted_whole_run_usd": 1.20,
+    "whole_run_minutes": 69.8,
+    "_source": "results/RUN3-RESULTS.md"
+  },
+
+  "run1_best_cell": {
+    "cell": "cell-c64",
+    "gate_ttft_p95_ms": 1000,
+    "runs": 3,
+    "completed": 600,
+    "attempted": 600,
+    "accepted": 600,
+    "accepted_pct": 100,
+    "accepted_per_s": 11.579,
+    "cost_per_1k_usd": 0.0717,
+    "_source": "results/run1-engine/hotaisle-mi300x.ttft1000.json"
+  },
+
+  "provisioning": {
+    "seat": "enc1-gpuvm004",
+    "requested_at": "2026-09-24T00:08:55Z",
+    "ssh_ready_at": "2026-09-24T00:10:57Z",
+    "seconds_to_ssh": 122,
+    "deleted_at": "2026-09-24T02:52:29Z",
+    "_note_on_date": "Body text gives only times (00:08:55Z etc); the date 2026-09-24 is the document's own dateline. Combined, not guessed.",
+    "_source": "results/RUN3-HOTAISLE-SUMMARY.md"
+  },
+
+  "stack": {
+    "kernel": "6.8.0-124-generic",
+    "driver_or_rocm_version": "7.2.4",
+    "gpu_model": "AMD Instinct MI300X VF",
+    "vllm_version": "0.27.1.dev5+gf46a9dfe2.d20260827.rocm100",
+    "runtime_image": "rocm/vllm",
+    "runtime_digest": "sha256:30761c2125ce150d556bef46406a0158446421886bf83a2e60154c6e4ca17a13",
+    "gpus_per_seat": 1,
+    "tensor_parallel": 1,
+    "_source": "results/hotaisle-mi300x/env.normalized.json"
+  },
+
+  "billing": {
+    "granularity": "per minute",
+    "list_rate_usd_per_gpu_hour": 2.99,
+    "price_source": "retrieved from the Hot Aisle API at plan time",
+    "_source": "identity.json (arms.hotaisle-mi300x.billing, .list_rate, .price_source)"
+  },
+
+  "comparators_billing": {
+    "do_h100": { "granularity": "per second, 5-minute minimum", "list_rate_usd_per_gpu_hour": 4.41 },
+    "do_mi300x": { "granularity": "per second, 5-minute minimum", "list_rate_usd_per_gpu_hour": 2.59 },
+    "_source": "identity.json (arms.do-h100, arms.do-mi300x)"
+  },
+
+  "proof": {
+    "manifest_hash_present": true,
+    "manifest_algorithm": "sha256",
+    "manifest_example": "results/hotaisle-mi300x/MANIFEST.sha256",
+    "disclosure_published": true,
+    "disclosure_covers": ["funding/relationship (Hot Aisle credit vs list-price costing)", "registered vs post-hoc scoring", "unequal software caveat", "not-measured list"],
+    "commit_pinned": "0b032ac (run3/freeze-2026-09-24/); DISCLOSURES.md notes commits are local/unpushed, so this is private pre-registration, not public timestamping",
+    "publishes_whole_window_cost": true,
+    "_source": "results/hotaisle-mi300x/MANIFEST.sha256; DISCLOSURES.md; results/RUN3-RESULTS.md (freeze commit); results/RUN3-HOTAISLE-SUMMARY.md (own-window vs whole-seat both published)"
+  },
+
+  "tenant_hygiene": {
+    "virtualization": "vm",
+    "seat_description": "1x MI300X VM (enc1-gpuvm004)",
+    "acs_enabled": "unobserved",
+    "hugepages_enabled": "unobserved",
+    "numa_pinning": "unobserved",
+    "_source": "results/RUN3-HOTAISLE-SUMMARY.md (virtualization/seat description); ACS/hugepages/NUMA pinning are not captured anywhere in the repo's results files"
+  },
+
+  "hardware_lifecycle": {
+    "pcie_gen": "unobserved",
+    "pcie_width": "unobserved",
+    "vbios": "unobserved",
+    "firmware": "unobserved",
+    "firmware_age_days": "unobserved",
+    "ras_errors_correctable": "unobserved",
+    "ras_errors_uncorrectable": "unobserved",
+    "idle_power_w": "unobserved",
+    "idle_clock_mhz": "unobserved",
+    "sustained_60s_throttle": "unobserved",
+    "_source": "no fingerprint-shaped capture exists yet in the repo's results files; env.json/env.normalized.json record software identity only, not link/firmware/RAS/thermal telemetry"
+  },
+
+  "availability_context": {
+    "observation": "1x MI300X VM available at request time; provisioner TUI banner read \"we're pretty full\"; DigitalOcean MI300X (arm C) and H200 listed zero capacity in every region checked that night (API regions=[])",
+    "_source": "availability/observations.jsonl (hotaisle enc1 vm-mi300x-1x, 2026-09-23T18:17:00Z entry); results/RUN3-RESULTS.md (\"Availability is part of the cost\")",
+    "_note": "Supplementary context only — diagnose.py's PRICE-03 rule reads a shop's own fingerprint.provisioning block, not this file."
+  }
+}

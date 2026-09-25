@@ -1,0 +1,22 @@
+{
+  "schema": "second-run/counter-record@1",
+  "shop": "synthetic-badshop",
+  "generated_at": "2026-09-25T00:00:00Z",
+  "_synthetic": "fabricated fixture for shop-eval/diagnose test coverage, not a real shop",
+  "score": 38.0,
+  "billing_granularity": "per-hour",
+  "dimensions": {
+    "pricing": {"score": 35.0, "weight": 0.2, "notes": "list price well above reference at comparable acceptance"},
+    "proof": {
+      "score": 5.0, "weight": 0.15, "notes": "no manifest hashes, no published disclosure, no pinned commit",
+      "has_manifest_hash": false,
+      "has_disclosure": false,
+      "has_pinned_commit": false,
+      "publishes_whole_window_cost": false
+    },
+    "hygiene": {"score": 45.0, "weight": 0.15, "notes": "VM without ACS/hugepages confirmed"},
+    "availability": {"score": 50.0, "weight": 0.15, "notes": "listed capacity did not match provisioning success"},
+    "stack": {"score": 40.0, "weight": 0.15, "notes": "driver/ROCm version behind qualified reference"},
+    "hardware": {"score": 80.0, "weight": 0.2, "notes": "GPUs otherwise healthy aside from PCIe link and firmware age"}
+  }
+}

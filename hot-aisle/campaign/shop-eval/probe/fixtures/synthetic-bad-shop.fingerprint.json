@@ -1,0 +1,77 @@
+{
+  "schema": "second-run/shop-fingerprint@1",
+  "schema_version": "1",
+  "_synthetic": true,
+  "_synthetic_note": "SYNTHETIC TEST FIXTURE. Not a real machine, not a real shop, and not any real vendor's numbers. Built by hand to trip every flag diff.py knows about (PCIe below Gen5 x16, VM not bare metal, driver/ROCm major mismatch, thermal throttle under load, nonzero ECC, download throughput under 200 MB/s, MTU under 1500, free disk under 200 GB) so test_probe.py has something deterministic to assert against.",
+  "recorded_at": "2026-09-24T00:00:00Z",
+  "hostname": "synthetic-bad-shop-01",
+  "requested_gpu_vendor": "nvidia",
+  "kernel": "5.15.0-91-generic",
+  "distro": "Ubuntu 22.04.3 LTS",
+  "virtualization": "kvm",
+  "dmidecode_system_product": "unavailable: sudo exited 1",
+  "cpu": {
+    "model": "Intel Xeon Platinum 8358 (virtualized)",
+    "cores_logical": "8",
+    "sockets": "1",
+    "numa_nodes": "1"
+  },
+  "memory": {
+    "total": "64Gi"
+  },
+  "storage": {
+    "devices": "vda 100G disk\n",
+    "nvme_smart": []
+  },
+  "filesystems": "Filesystem     Type  Size  Used Avail Use% Mounted on\n/dev/vda1      ext4  100G   95G    5G  95% /\n",
+  "network": {
+    "interfaces": [
+      { "name": "lo", "mtu": "65536", "state": "UNKNOWN" },
+      { "name": "eth0", "mtu": "1400", "state": "UP" }
+    ],
+    "download_throughput_mb_s": "45.30"
+  },
+  "container_runtime": {
+    "runtime": "docker",
+    "version": "unavailable: docker exited 1"
+  },
+  "gpu": {
+    "vendor": "nvidia",
+    "count": "1",
+    "driver_version": "470.199.02",
+    "rocm_or_cuda_version": "11.4",
+    "devices": [
+      {
+        "index": "0",
+        "model": "NVIDIA H100 PCIe",
+        "vbios": "96.00.74.00.1E",
+        "firmware": "unavailable",
+        "driver": "470.199.02",
+        "pci_addr": "0000:00:05.0",
+        "pcie_link_gen_current": "3",
+        "pcie_link_width_current": "8",
+        "ecc_corrected_total": "12",
+        "ecc_uncorrected_total": "2",
+        "clock_sm_mhz_idle": "210",
+        "clock_mem_mhz_idle": "405",
+        "temp_c_idle": "38",
+        "power_w_idle": "45.00",
+        "hw_slowdown_throttle": "Not Active"
+      }
+    ]
+  },
+  "gpu_topology": " GPU0\nGPU0  X\n",
+  "ecc": "ecc.errors.corrected.aggregate.total, ecc.errors.uncorrected.aggregate.total\n12, 2\n",
+  "idle_power_state": "index, clocks.current.sm [MHz], clocks.current.memory [MHz], temperature.gpu, power.draw [W]\n0, 210 MHz, 405 MHz, 38, 45.00 W\n",
+  "load_sample": {
+    "method": "local_torch",
+    "duration_s": 60,
+    "interval_s": 5,
+    "samples": [
+      { "t_offset_s": 0, "recorded_at": "2026-09-24T00:00:05Z", "sample": "1410, 1215, 62, 265.10 W, Not Active" },
+      { "t_offset_s": 30, "recorded_at": "2026-09-24T00:00:35Z", "sample": "1005, 1215, 89, 298.50 W, Active" },
+      { "t_offset_s": 55, "recorded_at": "2026-09-24T00:01:00Z", "sample": "1020, 1215, 87, 291.20 W, Not Active" }
+    ]
+  },
+  "raw_dir": "raw/"
+}

@@ -1,0 +1,125 @@
+{
+  "schema_id": "second-run/counter-record@1",
+  "provider_id": "hotaisle",
+  "provider_name": "Hot Aisle",
+  "provenance": {
+    "evaluator": "Second Run campaign (compiled from Run 3 session notes, campaign/results/RUN3-HOTAISLE-SUMMARY.md and availability/observations.jsonl)",
+    "evaluated_at": "2026-09-24T00:08:55Z",
+    "account_used": "existing Hot Aisle team account from the Second Run campaign (Run 3)",
+    "money_spent_usd": 15.00,
+    "disclosure": "Hot Aisle gave Second Run a $200 credit for these arms; costs here are computed at undiscounted list price ($2.99/GPU-hr), not at the credit. Second Run is pitching Hot Aisle a paid engagement. See campaign/DISCLOSURES.md."
+  },
+  "account_creation": {
+    "kyc_required": "unobserved",
+    "card_required": true,
+    "quota_gate": "unobserved",
+    "sales_gate": false,
+    "signup_to_active_account_s": "unobserved",
+    "notes": "self-serve, no sales team (known campaign fact). Login is email + one-time code through the admin TUI (ssh admin.hotaisle.app) or the embedded web terminal; a registered SSH key can log into the TUI directly. Prepaid Stripe credits, $20 minimum -- a card is required to fund the account. Whether any request quota gate exists was never tested (no create was ever refused), so quota_gate is unobserved rather than assumed none."
+  },
+  "price_transparency": {
+    "published": true,
+    "per_gpu_hour_usd": 2.99,
+    "minimum_billing": "1 minute",
+    "egress_rate": "unobserved",
+    "storage_rate": "unobserved",
+    "notes": "Public pricing page. 1x MI300X VM is $2.99/GPU-h with 1-minute minimum billing. 2x VM was $5.98/h with a 1-hour minimum observed on 2026-09-23. 8x bare metal is $3.39/GPU-h with a 1-month minimum. Egress and storage line items were never located on the pricing page or billed for."
+  },
+  "provisioning": {
+    "attempts": [
+      {
+        "request_ts": "2026-09-24T00:08:55Z",
+        "ssh_ready_ts": "2026-09-24T00:10:57Z",
+        "time_to_ssh_s": 122
+      }
+    ],
+    "measured_3x": false,
+    "total_cost_usd": "unobserved",
+    "notes": "Only one timed provisioning attempt exists in the campaign record (Run 3 seat enc1-gpuvm004: requested 00:08:55Z, SSH ready 00:10:57Z, 122s). It was not repeated 3 times in this session, so measured_3x is false; a dedicated counter run should time 3 creates at $2.99/GPU-hr with 1-minute minimum billing, well under the $3 budget for this step."
+  },
+  "availability_honesty": {
+    "ledger_attempts": [
+      {
+        "ts": "2026-09-23T18:17:00Z",
+        "sku": "vm-mi300x-1x",
+        "region": "enc1",
+        "method": "tui-provision-list",
+        "outcome": "available",
+        "provisioned": true
+      },
+      {
+        "ts": "2026-09-23T18:17:00Z",
+        "sku": "vm-mi300x-2x",
+        "region": "enc1",
+        "method": "tui-provision-list",
+        "outcome": "available",
+        "provisioned": false
+      },
+      {
+        "ts": "2026-09-23T18:17:00Z",
+        "sku": "bm-mi300x-8x",
+        "region": "enc1",
+        "method": "tui-provision-list",
+        "outcome": "available",
+        "provisioned": false
+      },
+      {
+        "ts": "2026-09-24T00:02:15Z",
+        "sku": "vm-mi300x-1x",
+        "region": "enc1",
+        "method": "tui-provision-list",
+        "outcome": "available",
+        "provisioned": false
+      },
+      {
+        "ts": "2026-09-24T00:10:45Z",
+        "sku": "vm-mi300x-1x",
+        "region": "enc1",
+        "method": "tui-provision",
+        "outcome": "available",
+        "provisioned": true
+      }
+    ],
+    "notes": "Mirrors availability/observations.jsonl rows with provider=hotaisle. Availability visibly changes: the TUI listing on 2026-09-23 showed only the 1x VM as available with a 'we're pretty full' banner (only 2x available on that weekday); more capacity was seen on weekends per prior campaign notes. Rows with method=tui-provision-list are listing observations, not create attempts -- only tui-provision (2026-09-24T00:10:45Z, seat enc1-gpuvm004) is a real delivered create. This ledger_attempts array mixes listed and delivered layers for a single honesty ratio; see availability/README.md for the two-layer distinction the canonical ledger keeps."
+  },
+  "api_cli_tui_quality": {
+    "token_issuance": "self-serve",
+    "list_op": true,
+    "create_op": true,
+    "delete_op": true,
+    "idempotent_create": "unobserved",
+    "idempotent_delete": "unobserved",
+    "notes": "API token created self-serve and used as HOTAISLE_API_TOKEN by the campaign runner. `workload.cjs inspect` lists team/VM/state/balance (list_op). VM create and delete both exercised in the TUI during Run 3 (create_op, delete_op). Idempotency of repeated create/delete calls was never deliberately tested."
+  },
+  "billing_granularity": {
+    "billing_quantum": "1 minute minimum, then per-minute (1x MI300X VM); 1-hour minimum observed on the 2x VM",
+    "stop_on_delete_verified": true,
+    "invoice_matches_balance": "unobserved",
+    "notes": "The VM was deleted from the TUI and billing stopped at delete (known campaign fact, per-run seat enc1-gpuvm004 deleted 2026-09-24T02:52:29Z per results/RUN3-HOTAISLE-SUMMARY.md). This was observed via account balance behavior around delete, not by reconciling a posted invoice line, so invoice_matches_balance stays unobserved."
+  },
+  "tenant_hygiene": {
+    "fresh_disk": "unobserved",
+    "previous_tenant_residue": "unobserved",
+    "default_users_keys_present": "unobserved",
+    "notes": "Not checked in any prior session; a dedicated counter run should ssh in immediately after create and look for non-empty home directories, shell history, or authorized_keys entries not supplied by this evaluator."
+  },
+  "network_path": {
+    "public_ip_assigned": true,
+    "firewall_default": "unobserved",
+    "open_ports_first_boot": "unobserved",
+    "notes": "Seat enc1-gpuvm004 was reachable at a public IP (23.183.40.69) immediately after create. Default firewall posture and a first-boot port scan were never recorded."
+  },
+  "support_path": {
+    "channel": "unobserved",
+    "first_response_time_s": "unobserved",
+    "sales_required": false,
+    "notes": "No support ticket was raised against Hot Aisle in any recorded session, so channel and response time are unobserved. sales_required is false on the strength of the repeated campaign fact 'self-serve, no sales team.'"
+  },
+  "termination": {
+    "method": "TUI delete",
+    "billing_stopped_confirmed": true,
+    "time_to_confirm_s": "unobserved",
+    "notes": "VM deleted from the TUI; billing stops at delete (known campaign fact). Exact seconds between the delete action and the VM disappearing from the active list were not timed."
+  },
+  "disqualifying_observations": []
+}
