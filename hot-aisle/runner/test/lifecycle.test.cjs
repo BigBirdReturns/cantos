@@ -218,3 +218,14 @@ test('revalidation: price recomputes without measurement; traffic adds only new 
   assert.equal(gates.scenario.cells[0].unit, 'latency-qualified requests');
   assert.throws(() => revalidate(rec, {}), /Nothing changed/);
 });
+
+test('revalidation refuses unsupported changes instead of reporting an empty successful plan', () => {
+  const rec = JSON.parse(fs.readFileSync(path.join(__dirname, '../../data/demo/record.json'), 'utf8'));
+  assert.equal(record.verify(rec).verified, true, 'retained synthetic record is valid');
+  const before = JSON.stringify(rec);
+  assert.throws(() => revalidate(rec, { source_correction: { reason: 'changed imported source' } }), /Unsupported change field.*source_correction/);
+  assert.throws(() => revalidate(rec, { price: { rate: 1.68 }, evaluatorr: {} }), /Unsupported change field.*evaluatorr/);
+  assert.throws(() => revalidate(rec, []), /change must be an object/);
+  assert.equal(revalidate(rec, { price: { rate: 1.68 } }).summary.recomputed, 1);
+  assert.equal(JSON.stringify(rec), before, 'rejected changes preserve the original record');
+});

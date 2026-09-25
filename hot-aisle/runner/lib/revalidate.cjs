@@ -10,9 +10,12 @@ const RUNTIME_KEYS = ['model_revision', 'precision', 'tokenizer_revision', 'runt
 const WORKLOAD_KEYS = ['model', 'dataset', 'input_len', 'output_len', 'num_prompts', 'request_rate', 'backend'];
 
 function revalidate(rec, change) {
+  if (!change || typeof change !== 'object' || Array.isArray(change)) throw new Error('change must be an object.');
+  const supported = ['price', 'gates', 'requirements', 'traffic', 'runtime', 'evaluator'];
+  const unsupported = Object.keys(change).filter(key => !supported.includes(key));
+  if (unsupported.length) throw new Error('Unsupported change field(s): ' + unsupported.join(', ') + '.');
   const verified=record.verify(rec);if(!verified.verified)throw Error('Revalidation requires a verified record: '+verified.problems.join(' '));
   if(change?.price?.gpus!==undefined&&change.price.gpus!==rec.declared.plan.price.gpus)throw Error('A different GPU allocation requires new performance qualification; change only its price here.');
-  if (!change || typeof change !== 'object') throw new Error('change must be an object.');
   const kinds = Object.keys(change).filter(k => change[k] !== undefined && change[k] !== null);
   if (!kinds.length) throw new Error('Nothing changed.');
   const plan = rec.declared.plan;

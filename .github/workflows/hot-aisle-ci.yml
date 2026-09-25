@@ -32,6 +32,8 @@ jobs:
           python -m unittest discover -s hot-aisle/scripts -p 'test_price_math.py' -v
           python -m unittest discover -s compute/tests -p 'test_prices.py' -v
           python -m unittest discover -s integration/tests -p 'test_release_gate.py' -v
+          python -m unittest discover -s integration/tests -p 'test_task_*.py' -v
+          python -m unittest discover -s integration/tests -p 'test_work.py' -v
       - name: Source-driven kits are reproducible
         run: |
           set -euo pipefail

@@ -1,0 +1,43 @@
+{
+  "tasks": [
+    {
+      "id": "latitude-offer",
+      "task_class": "provider-intake",
+      "source": "../../hot-aisle/campaign/providers/providers.jsonl",
+      "offer_id": "latitude-h100-1"
+    },
+    {
+      "id": "voltagepark-offer",
+      "task_class": "provider-intake",
+      "source": "../../hot-aisle/campaign/providers/providers.jsonl",
+      "offer_id": "voltagepark-h100-ondemand"
+    },
+    {
+      "id": "outside-benchmarks",
+      "task_class": "benchmark-import",
+      "source": "../../hot-aisle/campaign/backfill/fixtures/manifest.json"
+    },
+    {
+      "id": "run3-accepted-work",
+      "task_class": "run-recompute",
+      "source": "../../hot-aisle/campaign/results/run3-scored-a-t0"
+    },
+    {
+      "id": "source-correction-example",
+      "task_class": "source-correction",
+      "source": "../../research-desk/examples/worked-history.json",
+      "change": {
+        "record_id": "public-index",
+        "patch": {
+          "summary": "Synthetic correction example: this public index does not establish a presently obtainable rental or accepted-work cost."
+        }
+      }
+    },
+    {
+      "id": "price-change-example",
+      "task_class": "record-change",
+      "source": "../../hot-aisle/data/demo/record.json",
+      "change": {"price": {"rate": 1.68}}
+    }
+  ]
+}

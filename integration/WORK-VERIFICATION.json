@@ -1,0 +1,321 @@
+{
+  "schema": "second-run/work-verification@1",
+  "observed_at": "2026-09-25T03:24:20.342393+00:00",
+  "python": "3.13.15",
+  "node": "v24.19.0",
+  "source_sha256": {
+    "integration/work.py": "434a9e53adabd9d74767bf2b10d85355d606c5c374190a5a310eaab7dc15b953",
+    "integration/task_sources.py": "c6a6df121bdcdae2458e96d18c72a7f08f55d0f4288dcd07ed423de7c5715299",
+    "integration/task_results.py": "1e082d85dfc5e7318c5d8ccc3a76195895254746336796144c755f46133ab7cc",
+    "integration/task_changes.py": "8afcff4c0916858547a508cd79555af998bb61a764223b0ba62ec129e7628b91",
+    "integration/change_owner.cjs": "0f77f86a915097e2246b80d1b26b4bfaa0da8607258cb29d686fdb8e959b6041",
+    "integration/examples/work.json": "6e3dcc60bc9bd15b835b1805baf0178629b907242e5332edcba377af24928a26",
+    "integration/examples/archive-local.json": "fe577e6f246c47dbfe69d97e71e6d56de817bfecb715eab3945539806de9d007",
+    "integration/tests/test_work.py": "77d20be859d2a09eec754917ac0928aac544e47e6b4f2ac5b93e491e90733b15",
+    "integration/tests/test_task_sources.py": "3bbf76743b2902c05b68fa5d223906059e54c6d3f39c3c7c2d75e6e9eb8d062f",
+    "integration/tests/test_task_changes.py": "ef1f45842503e9345f40451be392be57aa13eaa892dd0e6a14871b59a817c37b",
+    "hot-aisle/runner/lib/revalidate.cjs": "e13c18dc48ebaa74b4c4facdb40ef834b868c5a6a2f9c5e2f694f4a4b0a40ee3",
+    "hot-aisle/runner/test/lifecycle.test.cjs": "e273a577f8a2e038395af3b9068d537019d89c5b323d7a9b082c2cf60ce3fa6d",
+    ".github/workflows/hot-aisle-ci.yml": "3d3ab73f0a451f2aba5eb6183fcc1fe6749aed824090904ffac5385561cd5c4f"
+  },
+  "runs": {
+    "empty_store": {
+      "observed_at": "2026-09-25T03:24:11.647960+00:00",
+      "summary": {
+        "executed": 6,
+        "reused": 0,
+        "held": 0
+      },
+      "tasks": [
+        {
+          "id": "latitude-offer",
+          "task_class": "provider-intake",
+          "status": "executed",
+          "key": "f9acde01f30c34bf2ffb815d1dc83b082efca7a402d5ed9f9e1e82dbef7eb304",
+          "value_sha256": "896973cc4ae3ad94e66aa095f8be763f797c0f1b06f20bc4bdcefdf0d755a445",
+          "model_calls": 0,
+          "gpu_runs": 0,
+          "dependency_set_sha256": "f9acde01f30c34bf2ffb815d1dc83b082efca7a402d5ed9f9e1e82dbef7eb304",
+          "dependency_count": 6
+        },
+        {
+          "id": "voltagepark-offer",
+          "task_class": "provider-intake",
+          "status": "executed",
+          "key": "7f24cf7f4cd593a6583be6bb92264ab1887606c14592204224a54b9b9b610334",
+          "value_sha256": "2613c1c93470515ac5915fd0d152d29404cac2d503095f18319136312f58ef14",
+          "model_calls": 0,
+          "gpu_runs": 0,
+          "dependency_set_sha256": "7f24cf7f4cd593a6583be6bb92264ab1887606c14592204224a54b9b9b610334",
+          "dependency_count": 6
+        },
+        {
+          "id": "outside-benchmarks",
+          "task_class": "benchmark-import",
+          "status": "executed",
+          "key": "f4a0d10bf8533881527268c349629fc4a3eb348b0ed4c850c7f7702b2f4cf472",
+          "value_sha256": "3d1d5980156e396e644d78dbf8a7a0aac5f6e3a6d1570813eef0a04bb3b02ee1",
+          "model_calls": 0,
+          "gpu_runs": 0,
+          "dependency_set_sha256": "f4a0d10bf8533881527268c349629fc4a3eb348b0ed4c850c7f7702b2f4cf472",
+          "dependency_count": 14
+        },
+        {
+          "id": "run3-accepted-work",
+          "task_class": "run-recompute",
+          "status": "executed",
+          "key": "5929d0c8c5984aaed564eb53e091cf92e39958003960ffc17cc44c95b49d06b7",
+          "value_sha256": "76b2ab32c253e4356d5a6985e606bbc0d5b0d53298223fa741bb1583c5f31d40",
+          "model_calls": 0,
+          "gpu_runs": 0,
+          "dependency_set_sha256": "5929d0c8c5984aaed564eb53e091cf92e39958003960ffc17cc44c95b49d06b7",
+          "dependency_count": 19
+        },
+        {
+          "id": "source-correction-example",
+          "task_class": "source-correction",
+          "status": "executed",
+          "key": "3ba3e4040582187bd0c5bdeb68dfac38486af9bffb523ad9c7360915277943d8",
+          "value_sha256": "7307335e7afe0abac9ee15c51af9a377fbc1dcb067fb6d1b97e1c7e681f7d20e",
+          "model_calls": 0,
+          "gpu_runs": 0,
+          "dependency_set_sha256": "3ba3e4040582187bd0c5bdeb68dfac38486af9bffb523ad9c7360915277943d8",
+          "dependency_count": 5
+        },
+        {
+          "id": "price-change-example",
+          "task_class": "record-change",
+          "status": "executed",
+          "key": "853cfea739ae47c2d346a89410755d586a4b2629f16e9ef8935c60fd48c4c4b2",
+          "value_sha256": "8380986e6a53b5fff9170130ab069063ad4c7f7ffd5304bf9291bb359692804a",
+          "model_calls": 0,
+          "gpu_runs": 0,
+          "dependency_set_sha256": "853cfea739ae47c2d346a89410755d586a4b2629f16e9ef8935c60fd48c4c4b2",
+          "dependency_count": 8
+        }
+      ],
+      "model_calls": 0,
+      "gpu_runs": 0
+    },
+    "another_operator": {
+      "observed_at": "2026-09-25T03:24:14.566898+00:00",
+      "summary": {
+        "executed": 0,
+        "reused": 6,
+        "held": 0
+      },
+      "tasks": [
+        {
+          "id": "next-latitude-offer",
+          "task_class": "provider-intake",
+          "status": "reused",
+          "key": "f9acde01f30c34bf2ffb815d1dc83b082efca7a402d5ed9f9e1e82dbef7eb304",
+          "value_sha256": "896973cc4ae3ad94e66aa095f8be763f797c0f1b06f20bc4bdcefdf0d755a445",
+          "model_calls": 0,
+          "gpu_runs": 0,
+          "dependency_set_sha256": "f9acde01f30c34bf2ffb815d1dc83b082efca7a402d5ed9f9e1e82dbef7eb304",
+          "dependency_count": 6
+        },
+        {
+          "id": "next-voltagepark-offer",
+          "task_class": "provider-intake",
+          "status": "reused",
+          "key": "7f24cf7f4cd593a6583be6bb92264ab1887606c14592204224a54b9b9b610334",
+          "value_sha256": "2613c1c93470515ac5915fd0d152d29404cac2d503095f18319136312f58ef14",
+          "model_calls": 0,
+          "gpu_runs": 0,
+          "dependency_set_sha256": "7f24cf7f4cd593a6583be6bb92264ab1887606c14592204224a54b9b9b610334",
+          "dependency_count": 6
+        },
+        {
+          "id": "next-outside-benchmarks",
+          "task_class": "benchmark-import",
+          "status": "reused",
+          "key": "f4a0d10bf8533881527268c349629fc4a3eb348b0ed4c850c7f7702b2f4cf472",
+          "value_sha256": "3d1d5980156e396e644d78dbf8a7a0aac5f6e3a6d1570813eef0a04bb3b02ee1",
+          "model_calls": 0,
+          "gpu_runs": 0,
+          "dependency_set_sha256": "f4a0d10bf8533881527268c349629fc4a3eb348b0ed4c850c7f7702b2f4cf472",
+          "dependency_count": 14
+        },
+        {
+          "id": "next-run3-accepted-work",
+          "task_class": "run-recompute",
+          "status": "reused",
+          "key": "5929d0c8c5984aaed564eb53e091cf92e39958003960ffc17cc44c95b49d06b7",
+          "value_sha256": "76b2ab32c253e4356d5a6985e606bbc0d5b0d53298223fa741bb1583c5f31d40",
+          "model_calls": 0,
+          "gpu_runs": 0,
+          "dependency_set_sha256": "5929d0c8c5984aaed564eb53e091cf92e39958003960ffc17cc44c95b49d06b7",
+          "dependency_count": 19
+        },
+        {
+          "id": "next-source-correction-example",
+          "task_class": "source-correction",
+          "status": "reused",
+          "key": "3ba3e4040582187bd0c5bdeb68dfac38486af9bffb523ad9c7360915277943d8",
+          "value_sha256": "7307335e7afe0abac9ee15c51af9a377fbc1dcb067fb6d1b97e1c7e681f7d20e",
+          "model_calls": 0,
+          "gpu_runs": 0,
+          "dependency_set_sha256": "3ba3e4040582187bd0c5bdeb68dfac38486af9bffb523ad9c7360915277943d8",
+          "dependency_count": 5
+        },
+        {
+          "id": "next-price-change-example",
+          "task_class": "record-change",
+          "status": "reused",
+          "key": "853cfea739ae47c2d346a89410755d586a4b2629f16e9ef8935c60fd48c4c4b2",
+          "value_sha256": "8380986e6a53b5fff9170130ab069063ad4c7f7ffd5304bf9291bb359692804a",
+          "model_calls": 0,
+          "gpu_runs": 0,
+          "dependency_set_sha256": "853cfea739ae47c2d346a89410755d586a4b2629f16e9ef8935c60fd48c4c4b2",
+          "dependency_count": 8
+        }
+      ],
+      "model_calls": 0,
+      "gpu_runs": 0
+    },
+    "one_modeled_price_changed": {
+      "observed_at": "2026-09-25T03:24:17.602073+00:00",
+      "summary": {
+        "executed": 1,
+        "reused": 5,
+        "held": 0
+      },
+      "tasks": [
+        {
+          "id": "next-latitude-offer",
+          "task_class": "provider-intake",
+          "status": "executed",
+          "key": "805c0b6558bd69fa7ad2deded236f04049a56f1869274d34cdcde8dfdd72560d",
+          "value_sha256": "61d35e3508cf9aa6cc52b01993eac8d0cece0a16754eaa111eabb6eeae2b66ca",
+          "model_calls": 0,
+          "gpu_runs": 0,
+          "dependency_set_sha256": "805c0b6558bd69fa7ad2deded236f04049a56f1869274d34cdcde8dfdd72560d",
+          "dependency_count": 6
+        },
+        {
+          "id": "next-voltagepark-offer",
+          "task_class": "provider-intake",
+          "status": "reused",
+          "key": "7f24cf7f4cd593a6583be6bb92264ab1887606c14592204224a54b9b9b610334",
+          "value_sha256": "2613c1c93470515ac5915fd0d152d29404cac2d503095f18319136312f58ef14",
+          "model_calls": 0,
+          "gpu_runs": 0,
+          "dependency_set_sha256": "7f24cf7f4cd593a6583be6bb92264ab1887606c14592204224a54b9b9b610334",
+          "dependency_count": 6
+        },
+        {
+          "id": "next-outside-benchmarks",
+          "task_class": "benchmark-import",
+          "status": "reused",
+          "key": "f4a0d10bf8533881527268c349629fc4a3eb348b0ed4c850c7f7702b2f4cf472",
+          "value_sha256": "3d1d5980156e396e644d78dbf8a7a0aac5f6e3a6d1570813eef0a04bb3b02ee1",
+          "model_calls": 0,
+          "gpu_runs": 0,
+          "dependency_set_sha256": "f4a0d10bf8533881527268c349629fc4a3eb348b0ed4c850c7f7702b2f4cf472",
+          "dependency_count": 14
+        },
+        {
+          "id": "next-run3-accepted-work",
+          "task_class": "run-recompute",
+          "status": "reused",
+          "key": "5929d0c8c5984aaed564eb53e091cf92e39958003960ffc17cc44c95b49d06b7",
+          "value_sha256": "76b2ab32c253e4356d5a6985e606bbc0d5b0d53298223fa741bb1583c5f31d40",
+          "model_calls": 0,
+          "gpu_runs": 0,
+          "dependency_set_sha256": "5929d0c8c5984aaed564eb53e091cf92e39958003960ffc17cc44c95b49d06b7",
+          "dependency_count": 19
+        },
+        {
+          "id": "next-source-correction-example",
+          "task_class": "source-correction",
+          "status": "reused",
+          "key": "3ba3e4040582187bd0c5bdeb68dfac38486af9bffb523ad9c7360915277943d8",
+          "value_sha256": "7307335e7afe0abac9ee15c51af9a377fbc1dcb067fb6d1b97e1c7e681f7d20e",
+          "model_calls": 0,
+          "gpu_runs": 0,
+          "dependency_set_sha256": "3ba3e4040582187bd0c5bdeb68dfac38486af9bffb523ad9c7360915277943d8",
+          "dependency_count": 5
+        },
+        {
+          "id": "next-price-change-example",
+          "task_class": "record-change",
+          "status": "reused",
+          "key": "853cfea739ae47c2d346a89410755d586a4b2629f16e9ef8935c60fd48c4c4b2",
+          "value_sha256": "8380986e6a53b5fff9170130ab069063ad4c7f7ffd5304bf9291bb359692804a",
+          "model_calls": 0,
+          "gpu_runs": 0,
+          "dependency_set_sha256": "853cfea739ae47c2d346a89410755d586a4b2629f16e9ef8935c60fd48c4c4b2",
+          "dependency_count": 8
+        }
+      ],
+      "model_calls": 0,
+      "gpu_runs": 0
+    },
+    "local_excluded_archive": {
+      "observed_at": "2026-09-25T03:24:20.197627+00:00",
+      "summary": {
+        "executed": 1,
+        "reused": 0,
+        "held": 0
+      },
+      "tasks": [
+        {
+          "id": "retained-outside-archive",
+          "task_class": "benchmark-import",
+          "status": "executed",
+          "key": "8beeb77d3f309a00a1df29ce09558a11d453bc9dd67fbc60362686b2efe438fe",
+          "value_sha256": "80860214c628a10c90c9d2b40c94078553a1fe1a38a330da26b37351c982cb4c",
+          "model_calls": 0,
+          "gpu_runs": 0,
+          "dependency_set_sha256": "8beeb77d3f309a00a1df29ce09558a11d453bc9dd67fbc60362686b2efe438fe",
+          "dependency_count": 204
+        }
+      ],
+      "model_calls": 0,
+      "gpu_runs": 0
+    }
+  },
+  "retained_evidence": {
+    "run3": {
+      "scheduled": 8622,
+      "completed": 8622,
+      "accepted": 4336,
+      "synthetic": false,
+      "fresh_evalplus_execution": false,
+      "new_gpu_run": false,
+      "authority_promoted": false
+    },
+    "committed_backfill_fixture": {
+      "source_file_count": 5,
+      "source_row_count": 6,
+      "observation_count": 80
+    },
+    "local_excluded_archive": {
+      "source_file_count": 100,
+      "source_row_count": 198,
+      "observation_count": 3620
+    }
+  },
+  "synthetic_change_examples": {
+    "source_correction_historical_reports_preserved": true,
+    "source_correction_affected_records": 1,
+    "record_change_synthetic": true,
+    "record_change_requires_measurement": 0
+  },
+  "checks": {
+    "source_adapter_tests": 9,
+    "native_change_adapter_tests": 8,
+    "work_handoff_tests": 8,
+    "native_runner_compute_bridge_seam_tests": 97,
+    "instrument_engine_checks": 80,
+    "release_gate_tests": 12,
+    "instrument_price_tests": 13,
+    "compute_price_tests": 7,
+    "authority_projections": "PASS (6)",
+    "instrument_kit_consistency": "PASS",
+    "compute_kit_rebuild": "PASS; page, manifest and ZIP byte-identical"
+  },
+  "scope": "Local deterministic operations; actual retained Run 3 bytes and imported artifacts, with explicitly synthetic source-correction and record-change examples. No fresh evaluator, GPU run, provider availability check, authority promotion, remote CI, publication or push. Source archive excluded from Git is an additional local check; shipped example uses committed fixtures."
+}

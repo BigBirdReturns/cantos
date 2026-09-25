@@ -1,0 +1,9 @@
+{
+  "tasks": [
+    {
+      "id": "retained-outside-archive",
+      "task_class": "benchmark-import",
+      "source": "../../hot-aisle/campaign/backfill/data-raw/import-manifest.json"
+    }
+  ]
+}

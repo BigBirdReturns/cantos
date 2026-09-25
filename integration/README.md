@@ -1,5 +1,10 @@
 # Compute desk / qualification instrument integration
 
+The [shared operation runner](WORK.md) joins existing source intake, retained-run
+recomputation and dependency-sensitive changes. Its six-operation example runs
+from this checkout, then reuses checked results across request IDs and operators.
+Each adapter keeps its native evidence and acceptance rules.
+
 `compute/` is the provider-neutral decision desk. `hot-aisle/` is the independently deployable qualification instrument. The desk links to the instrument and reads its explicitly published records. It neither imports the runner at runtime nor creates jobs, approvals, dispatchers or an alternate scheduler.
 
 ## Start both, then complete the handoff
