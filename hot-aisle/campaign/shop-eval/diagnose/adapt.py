@@ -22,7 +22,11 @@ import sys
 from typing import Any, Optional
 
 COUNTER_SCHEMA_ID = "second-run/counter-record@1"
-PROBE_SCHEMA = "second-run/shop-fingerprint@1"
+PROBE_SCHEMAS = {
+    "second-run/shop-fingerprint@1",
+    "second-run/shop-fingerprint@2",
+    "second-run/shop-fingerprint@3",
+}
 
 # PCIe ceiling per accelerator family, so a probe's *current* link can be judged against
 # what the part supports. Anything not listed stays None (rule HW-01 then reports missing).
@@ -108,8 +112,25 @@ def adapt_counter(record: dict) -> dict:
     prov = record.get("provenance") or {}
     ledger = ((record.get("availability_honesty") or {}).get("ledger_attempts")) or []
     ledger = [row for row in ledger if isinstance(row, dict)]
-    listed_available = any(row.get("outcome") == "available" for row in ledger) if ledger else None
-    provisioned = any(row.get("provisioned") is True for row in ledger) if ledger else None
+    # Do not pool a listing for one SKU/region/time with a create for another.
+    # Until the ledger carries explicit listing_snapshot_id -> snapshot_id linkage,
+    # availability agreement is unknown rather than inferred from unrelated rows.
+    snapshots = {row.get("snapshot_id"): row for row in ledger
+                 if row.get("method") == "tui-provision-list" and row.get("snapshot_id")}
+    matched = []
+    for row in ledger:
+        if row.get("method") not in {"api-create", "console-create", "tui-provision"}:
+            continue
+        snap = snapshots.get(row.get("listing_snapshot_id"))
+        if not snap or (snap.get("sku"), snap.get("region")) != (row.get("sku"), row.get("region")):
+            continue
+        if snap.get("outcome") not in {"available", "unavailable"} or not isinstance(row.get("provisioned"), bool):
+            continue
+        matched.append((snap.get("outcome") == "available", row.get("provisioned")))
+    if len(matched) == 1:
+        listed_available, provisioned = matched[0]
+    else:
+        listed_available = provisioned = None
     return {
         "schema": "second-run/counter-scored@1",
         "shop": record.get("provider_name") or record.get("provider_id"),
@@ -126,6 +147,7 @@ def adapt_counter(record: dict) -> dict:
             "measured_3x": (record.get("provisioning") or {}).get("measured_3x"),
             "listed_available": listed_available,
             "provisioned": provisioned,
+            "matched_availability_attempts": len(matched),
         },
         "disclosure": prov.get("disclosure"),
         "_adapted_from": record.get("schema_id"),
@@ -189,6 +211,8 @@ def _parse_amd_sample(blob: str):
 def _sustained(load_sample: Any, vendor: str):
     if not isinstance(load_sample, dict):
         return None
+    if str(load_sample.get("status", "")).lower() != "pass":
+        return None
     samples = load_sample.get("samples") or []
     parsed = []
     for s in samples:
@@ -211,12 +235,13 @@ def _sustained(load_sample: Any, vendor: str):
         "power_w_end": last["power_w"],
         "throttled": any(throttle_flags) if throttle_flags else None,
         "samples": len(parsed),
+        "actual_duration_s": _num(load_sample.get("duration_s")),
     }
 
 
 def adapt_fingerprint(fp: dict, counter_scored: Optional[dict] = None) -> dict:
     """Probe fingerprint -> rule-facing shape. Passes other shapes through unchanged."""
-    if not isinstance(fp, dict) or fp.get("schema") != PROBE_SCHEMA:
+    if not isinstance(fp, dict) or fp.get("schema") not in PROBE_SCHEMAS:
         return fp
     if isinstance(fp.get("gpus"), list) and not isinstance(fp.get("gpu"), dict):
         return fp  # already rule-facing (the fixtures under fixtures/ carry the same schema string)
@@ -233,6 +258,7 @@ def adapt_fingerprint(fp: dict, counter_scored: Optional[dict] = None) -> dict:
         gpus.append({
             "index": _num(dev.get("index")),
             "model": model,
+            "vendor": vendor,
             "vbios": None if _is_gap(dev.get("vbios")) else dev.get("vbios"),
             "firmware": None if _is_gap(dev.get("firmware")) else dev.get("firmware"),
             "firmware_age_days": None,  # not observable from the node; needs the vendor release date
@@ -246,12 +272,19 @@ def adapt_fingerprint(fp: dict, counter_scored: Optional[dict] = None) -> dict:
             "idle_temp_c": _num(dev.get("temp_c_idle")),
             "idle_clock_mhz": _num(dev.get("clock_sm_mhz_idle")),
             "idle_power_w": _num(dev.get("power_w_idle")),
-            "sustained_60s": sustained,
+            "idle_verified": fp.get("idle_verified") is True,
+            "sample_context": fp.get("sample_context") or fp.get("idle_power_state"),
+            "sustained_load": sustained,
         })
     cmdline = fp.get("kernel_cmdline")
     hugepages_total = _num(fp.get("hugepages_total"))
     out = dict(fp)
+    provisioning = dict(fp.get("provisioning") or {})
+    seconds_to_ssh = provisioning.get("seconds_to_ssh")
+    provisioning["seconds_to_ssh"] = None if _is_gap(seconds_to_ssh) else _num(seconds_to_ssh)
+    out["provisioning"] = provisioning
     out.update({
+        "gpu_vendor": vendor,
         "virtualization": _virt_label(fp.get("virtualization")),
         "virtualization_raw": fp.get("virtualization"),
         "cpu": {**(fp.get("cpu") or {}), "numa_nodes": _num((fp.get("cpu") or {}).get("numa_nodes"))},
@@ -262,11 +295,10 @@ def adapt_fingerprint(fp: dict, counter_scored: Optional[dict] = None) -> dict:
             if isinstance(cmdline, str) and not _is_gap(cmdline) else None
         ),
         "observed_backend": fp.get("observed_backend"),
-        "_adapted_from": PROBE_SCHEMA,
+        "_adapted_from": fp.get("schema"),
     })
     if counter_scored and isinstance(counter_scored.get("provisioning"), dict):
-        out.setdefault("provisioning", {})
         for key in ("seconds_to_ssh", "listed_available", "provisioned"):
-            if out["provisioning"].get(key) is None:
+            if out["provisioning"].get(key) is None or _is_gap(out["provisioning"].get(key)):
                 out["provisioning"][key] = counter_scored["provisioning"].get(key)
     return out

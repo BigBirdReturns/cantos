@@ -85,10 +85,16 @@ def main():
     for arg in ('tasks', 'tasks-sha256', 'trace', 'trace-sha256', 'start', 'out', 'hf-cache', 't-ssh'):
         p.add_argument('--' + arg, required=True)
     p.add_argument('--rate-factor', type=float, required=True)
+    p.add_argument('--duration', type=float, default=3600,
+                   help='Arrival window in seconds, at most 3600; shorter windows are separate conditions')
+    p.add_argument('--funding', default='unverified; external acquisition/closure evidence required',
+                   help='Declared funding, e.g. credit:hotaisle; not a reconciled charge')
     p.add_argument('--approved-run', action='store_true')
     a = p.parse_args()
     if not a.approved_run:
         p.error('An approved run is required; this build alone grants no rental authority')
+    if not 0 < a.duration <= 3600:
+        p.error('duration must be finite and between 0 and 3600 seconds')
     verify(a.tasks, a.tasks_sha256); verify(a.trace, a.trace_sha256)
     tasks = read_json(a.tasks)
     if tasks['synthetic'] or len(tasks['tasks']) != 542:
@@ -96,7 +102,7 @@ def main():
     ssh = dt.datetime.fromisoformat(a.t_ssh.replace('Z', '+00:00'))
     if ssh.tzinfo is None or ssh.timestamp() > time.time():
         p.error('t_ssh must be an observed timezone-qualified past timestamp')
-    schedule(a.trace, a.trace_sha256, a.start, a.rate_factor)
+    schedule(a.trace, a.trace_sha256, a.start, a.rate_factor, duration=a.duration)
     out = Path(a.out).resolve(); cache = Path(a.hf_cache).resolve()
     name = 'run3-' + a.kind + '-' + a.tier.lower() + '-' + str(os.getpid())
     command = serve_command(a.kind, a.tier, name, cache)
@@ -104,7 +110,8 @@ def main():
     shutil.copyfile(a.tasks, out / 'tasks.json')
     write_json(out / 'invocation.json', {'kind': a.kind, 'tier': a.tier, 'argv': command,
         'tasks_sha256': a.tasks_sha256, 'trace_sha256': a.trace_sha256,
-        'trace_start': a.start, 'rate_factor': a.rate_factor, 'watchdog_s': WATCHDOG})
+        'trace_start': a.start, 'rate_factor': a.rate_factor, 'duration_s': a.duration, 'watchdog_s': WATCHDOG,
+        'funding': a.funding})
     times = {k: None for k in ('t_request', 't_ssh', 't_ready', 't_work_start', 't_work_end', 't_released')}
     times.update(t_ssh=a.t_ssh, t_script_start=utc())
     write_json(out / 'ledger-times.json', times)
@@ -175,8 +182,8 @@ def main():
         times['t_work_start'] = utc(); write_json(out / 'ledger-times.json', times)
         child = subprocess.Popen([sys.executable, '-B', str(HERE / 'replay.py'), '--tasks', str(out/'tasks.json'),
             '--trace', a.trace, '--trace-sha256', a.trace_sha256, '--start', a.start,
-            '--rate-factor', str(a.rate_factor), '--out', str(out/'replay')])
-        if child.wait(timeout=REPLAY_TIMEOUT) != 0:
+            '--rate-factor', str(a.rate_factor), '--duration', str(a.duration), '--out', str(out/'replay')])
+        if child.wait(timeout=min(REPLAY_TIMEOUT, a.duration + 120)) != 0:
             raise RuntimeError('Replay failed')
         times['t_work_end'] = utc(); write_json(out / 'ledger-times.json', times)
         convert(out/'replay', out/'detailed.json', IMAGES[a.kind])
@@ -216,7 +223,7 @@ def main():
         write_json(out/'ledger.json', {'schema': 'second-run/run3-arm-summary@1', 'status': status,
             'arm': 'A' if a.kind == 'amd' else 'N', 'tier': a.tier, 'timestamps': times,
             'hourly_list_usd': 2.99 if a.kind == 'amd' else 4.41,
-            'funding': 'self-funded; operator must verify invoice', 'modeled_full_cost_usd': None,
+            'funding': a.funding, 'modeled_full_cost_usd': None,
             'billed_usd': None, 'credits_usd': None, 'acquisition_attempts': None,
             'restarts': 0, 'attempted': detail.get('num_prompts'), 'completed': detail.get('completed'),
             'failed': detail.get('failed'), 'lost': detail.get('metadata', {}).get('lost_requests'),

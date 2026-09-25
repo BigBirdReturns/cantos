@@ -1,94 +1,52 @@
-# <shop name> · shop evaluation report
+# <shop> workload evaluation
 
-`diagnose/diagnose.py` writes its output into this shape at `runs/<shop>-<date>/REPORT.md`.
-If `diagnose.py` was not available yet, copy this file there and fill it by hand from
-`fingerprint/fingerprint.json`, `bench/cell-*.json`, `engine_table.json`, and
-`counter/records/<shop>-<yyyy-mm>.json`. Every blank below must be filled or explicitly marked
-`unobserved` / `not run` -- never left blank and never guessed. Plain language, no marketing.
+Each comparison must bind the candidate benchmark table to a scope file using its SHA-256. Use `diagnose/diagnose.py --scope scope.json --reference-scope-id <id>`. The reference scope IDs and evidence are in `diagnose/reference/hotaisle-2026-09.json`. If workload identity, acceptance rule, cost window, rate, or complete configuration cannot be verified, report **not comparable** and omit the ratio. `UNKNOWN` means the field was not observed; it is not a shop failure.
 
-## Verdict
+## Comparison decision
 
-> One sentence: is <shop> better, worse, or a wash against Hot Aisle for this workload, at
-> this price, on this day -- and why in six words or fewer after the dash.
+- **Label:** <matched | different complete configuration | historical | not comparable>
+- **Scope and acceptance:** <workload id, model/tokenizer revisions, precision, cache policy, load profile, quality rule, latency/deadline gates>
+- **Configuration:** <GPU model/count, runtime image digest/version, backend/kernel, tensor parallelism, plus material host details>
+- **Evidence:** <paths/URLs and SHA-256 of scored table>
+- **Economic comparison:** <allowed for this exact workload, acceptance rule and cost scope | unavailable, with reason>
+- **Operator causality:** <not established unless a controlled intervention isolates one variable>
 
-## The one table
+## Cost views
 
-All bench figures from one evaluation window; `x Hot Aisle` compares directly to the reference
-in `diagnose/reference/hotaisle-2026-09.json`, so this table lines up against every other
-shop's report in `runs/`.
+| View | Candidate | Hot Aisle | Evidence and denominator |
+|---|---:|---:|---|
+| Best qualifying cell, modeled at list rate | | | Same acceptance rule; per-cell work only |
+| Arm own-window, modeled | | | Clearly stated arm request/start-to-end window |
+| Whole-seat, modeled | | | Request-to-release including setup and idle time |
+| Billed amount | | | Invoice/usage record; keep separate from modeled values |
+| Customer total cost for this work | | | Include compute, minimums, network/storage, engineering, and retry cost only when sourced; otherwise `UNKNOWN` |
+| Customer value from accepted work | | | Requires a customer value model; otherwise `UNKNOWN` |
+| Operator economics | | | Margin, energy, depreciation, support, and internal labor basis usually unobserved; otherwise `UNKNOWN` |
 
-| | <shop> | Hot Aisle (reference) | x Hot Aisle |
-|---|---|---|---|
-| GPU | <e.g. H100> | MI300X | -- |
-| rate ($/GPU-h) | | 2.99 | |
-| $/1k accepted (modeled, list rate) | | 0.74 | |
-| $/1k accepted (billed, if known) | | -- | |
-| TTFT p95 (ms) | | 155 | |
-| accepted (%) | | 50.3 | |
-| time-to-SSH (s) | | 122 | |
-| counter score (/100) | | -- | |
+Show a ratio only for matching workload identity, acceptance semantics, and cost scope after the tool validates both scopes. Keep cell, arm-window, whole-seat, billed, customer-total-cost, customer-value, and operator-cost views separate. A customer workload matched across GPUs can support an economic comparison for that workload; configuration differences still do not identify operator skill or cause. Do not infer customer value or operator margin from provider list rates.
 
-`modeled` = `engine_table.cjs` at list rate. `billed` = the actual invoice line, filled in
-once it posts (see `MANUAL.md`'s disclosure rules -- never average the two into one number).
+## Findings
 
-## Wrong
+For each **WRONG** finding, cite the observed value and source, competing plausible causes, the minimum discriminating test, a bounded reversible intervention, acceptance criteria, rollback, and the access needed. Treat hardware, clock, PCIe, firmware, RAS, NUMA, tenant, stack, and power readings as signals unless a scoped test establishes impact. Do not infer hidden host cooling, PSU, tenant, or topology causes from customer-visible output. Never recommend generic power-limit changes or ACS overrides.
 
-> What <shop> does worse than Hot Aisle, ranked by how much it costs the buyer (money, time,
-> or risk) -- not by how surprising it was. Cite the specific field (fingerprint diff, cell
-> file, counter dimension) behind each claim; a line with no evidence pointer is a guess, not
-> a finding.
+| Status | Observation and evidence | Competing causes / discriminating test | Bounded change, acceptance and rollback | Access |
+|---|---|---|---|---|
+| WRONG / SIGNAL / RIGHT / UNKNOWN / NOT COMPARABLE | | | | |
 
-1.
-2.
-3.
+## Reusable learning
 
-## Right
+- **Right:** <confirmed strengths, with the tested scope>
+- **Could improve:** <measured gap or explicit hypothesis>
+- **Unknown:** <important missing evidence and how to obtain it>
+- **Next controlled test:** <one variable, fixed workload, repeat count, pass/fail metric>
 
-> What <shop> does as well as or better than Hot Aisle. Include this even when the verdict is
-> negative overall -- a shop that loses on price but wins on time-to-SSH or support is still
-> giving useful information to whoever reads this next.
-
-1.
-2.
-3.
-
-## Could be better
-
-> Things that are not wrong, but are below what a buyer would expect at this price or from a
-> shop this size. Distinguish from "Wrong" by severity, not by feel.
-
-1.
-2.
-3.
-
-## First three changes
-
-> If <shop>'s team reads exactly one section of this report, it is this one. Concrete,
-> specific, ordered by expected impact per unit of effort -- not a wish list.
-
-1.
-2.
-3.
+Do not rank a composite counter score as provider quality. Report its observed dimensions and provenance. Availability outcomes need actual attempt counts; no offer or missing telemetry is not proof of failure. Label historical results with their date and limits.
 
 ## Provenance and disclosure
 
-- **Evaluated by:** <name/handle> on <UTC date>.
-- **Funding:** <self-funded at list price | $X credit from <shop> | other -- state plainly,
-  one line, per `MANUAL.md`>.
-- **Relationship:** <none | existing account | prior contact with their team | referral -- say
-  which>.
-- **Account used:** <new sign-up this session | existing account>.
-- **Money spent, this evaluation:** $<compute> compute + $<counter> counter-protocol
-  provisioning = $<total>, against a $10 target and a $15 stop-rule ceiling (`MANUAL.md`).
-- **Seat:** <SKU/instance type>, region <region or "not disclosed by shop">, requested
-  <UTC timestamp>, SSH ready <UTC timestamp>, deleted <UTC timestamp>.
-- **Software identity:** model `Qwen/Qwen3-Coder-30B-A3B-Instruct-FP8` @ `<revision>`,
-  runtime image `<digest>`, workload id `<workload_id>` -- must match
-  `../identity.json` exactly, or the bench numbers above are not comparable to Hot Aisle's and
-  this report must say so instead of presenting a table.
-- **What was not measured:** <carry forward anything from "What this does not measure" in
-  `MANUAL.md` that applies here, plus anything specific to this run -- a skipped cell, a
-  watchdog cutoff, a counter dimension left `unobserved`>.
-- **Files:** `runs/<shop>-<date>/` -- `fingerprint/`, `bench/`, `engine_table.json`,
-  `counter.json`, `MANIFEST.sha256` (verify with `sha256sum -c MANIFEST.sha256` before trusting
-  anything above).
+- **Evaluator/date:** <name or handle, UTC date>
+- **Funding and relationship:** <plain disclosure>
+- **Offer/seat:** <SKU, region if known, requested, ready, released times>
+- **Spend:** <modeled list-rate compute, invoice amount, other test cost; separate totals>
+- **Unmeasured limits:** <repetition variance, current capacity, support, recovery, host telemetry, etc.>
+- **Artifacts:** <scope JSON, raw cells, scored table, fingerprint, counter, logs, manifest>

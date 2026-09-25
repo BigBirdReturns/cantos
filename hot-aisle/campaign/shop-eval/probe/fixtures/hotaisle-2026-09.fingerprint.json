@@ -1,6 +1,6 @@
 {
-  "schema": "second-run/shop-fingerprint@1",
-  "schema_version": "1",
+  "schema": "second-run/shop-fingerprint@3",
+  "schema_version": "3",
   "_fixture_note": "Reference fingerprint for Hot Aisle, built ONLY from facts already on record in campaign/results/hotaisle-mi300x/env.json and env.normalized.json (the arm-environment@1 record from the Sept 2026 run). Every field not present in those two files is the literal string \"unobserved\" - nothing here is invented. The next real Hot Aisle rental runs fingerprint.sh on the VM and this file is replaced with its output.",
   "_fixture_sourced_from": {
     "recorded_at": "campaign/results/hotaisle-mi300x/env.normalized.json recorded_at",
@@ -69,5 +69,7 @@
   "ecc": "unobserved",
   "idle_power_state": "unobserved",
   "load_sample": "unobserved",
-  "raw_dir": "unobserved"
+  "raw_dir": "unobserved",
+  "idle_verified": false,
+  "sample_context": "ambient; workload isolation and idle state not verified"
 }

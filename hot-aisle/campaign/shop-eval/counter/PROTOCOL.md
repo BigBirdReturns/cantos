@@ -2,9 +2,11 @@
 
 The customer-facing side of a shop evaluation: everything observable from
 signing up through releasing the machine, without touching the GPU. Any
-operator can run this in under 2 hours and under $10. Hot Aisle is the
-reference operator (`records/hotaisle-2026-09.json`); this protocol is what
-produced that record and is what to repeat against a candidate shop.
+operator can use this checklist with a declared time and spending cap.
+Two hours and $10 are planning estimates, not field-qualified bounds. The
+historical Hot Aisle record (`records/hotaisle-2026-09.json`) was compiled from
+retained campaign evidence; it was not produced by an end-to-end run of this
+protocol. Its unknown fields remain work for a fresh evaluation.
 
 Fill `counter_record.schema.json` as you go (`second-run/counter-record@1`).
 **Every field you did not actually observe stays the literal string
@@ -17,8 +19,14 @@ Budget: **$20 sign-up minimum (if one exists) + up to $3 for three timed
 provisioning attempts + incidentals** should comfortably stay under $10 net
 spend once the machine is deleted (prepaid credit balances are not spend).
 Keep every receipt/invoice screenshot; `provenance.money_spent_usd` is the
-actual dollars charged, not a modeled estimate, unless you say so in
-`provenance.disclosure`.
+actual dollars charged, or `"unobserved"` until reconciled. Put modeled
+estimates in `provenance.modeled_cost_usd`, with their scope in the disclosure.
+Disclosure does not turn an estimate into an observed charge.
+
+The numeric checklist score is uncalibrated and cannot rank providers. Missing
+observations are not evidence that an operator meets the floor. The historical
+"Hot Aisle-grade" examples below identify particular observed behaviors, not
+a validated universal standard or a fleet guarantee.
 
 Each step below: what to do, what to record, what "Hot Aisle-grade" looks
 like, what disqualifies the shop outright (append the observation's own text
@@ -96,6 +104,12 @@ hour and day to day.
 self-contained. **Write the same rows to the real ledger too** if you are
 running this against a shop the campaign already tracks — this protocol
 does not replace that ledger, it feeds it.
+
+Keep listing observations separate from actual create attempts. A listing that
+was not requested is not a failed create. Report delivery counts per SKU and
+region, with the observation times; do not pool unrelated plans or regions into
+an availability percentage. The legacy `availability_honesty` field name does
+not establish a provider's intent or truthfulness.
 
 **Hot Aisle-grade:** a SKU shown as available in the TUI provisions when you
 actually request it (Run 3: listed 00:02:15Z, delivered 00:10:45Z, same SKU,

@@ -140,6 +140,31 @@ class ReplayTests(FixtureCase):
         self.assertEqual(sent['temperature'],.2);self.assertEqual(sent['seed'],7)
         self.assertNotIn('ignore_eos',sent);self.assertEqual(sent['prompt'],self.frozen['tasks'][0]['prompt'])
 
+    def test_compressed_window_preserves_arrival_cohort(self):
+        args=(FIX/'code-slice.csv',sha(FIX/'code-slice.csv'),'2023-11-16T00:00:00Z')
+        original=replay.schedule(*args,1,duration=.2)
+        compressed=replay.schedule(*args,2,duration=.1)
+        self.assertEqual(original,[x*2 for x in compressed])
+        for invalid in (float('nan'),float('inf'),0,-1):
+            with self.assertRaises(ValueError):
+                replay.schedule(*args,1,duration=invalid)
+
+    def test_cli_duration_reaches_real_replay_and_records_window(self):
+        output=self.root/'cli-window'
+        argv=['replay.py','--tasks',str(self.tasks),'--trace',str(FIX/'code-slice.csv'),
+              '--trace-sha256',sha(FIX/'code-slice.csv'),'--start','2023-11-16T00:00:00Z',
+              '--rate-factor','1','--duration','0.15','--out',str(output),'--fixture']
+        actual_replay=replay.replay
+        def on_test_server(*args,**kwargs):
+            return actual_replay(*args,endpoint=self.endpoint,timeout=1,**kwargs)
+        with mock.patch.object(sys,'argv',argv), mock.patch.object(replay,'replay',side_effect=on_test_server):
+            replay.main()
+        plan=read_json(output/'plan.json')
+        self.assertEqual(plan['duration_s'],.15)
+        self.assertEqual(plan['rate_factor'],1)
+        self.assertEqual(len(jsonl(output/'requests.jsonl')),6)
+        self.assertFalse(read_json(output/'replay-status.json')['interrupted'])
+
     def test_errors_truncation_usage_timeout(self):
         for mode in ('http-error','truncated','no-usage','slow'):
             self.server.mode=mode
@@ -302,6 +327,7 @@ class ArmTests(FixtureCase):
                 self.assertEqual(arm.main(),expected)
             self.assertTrue(read_json(out/'env.json')['holds'])
             self.assertEqual(read_json(out/'ledger.json')['schema'],'second-run/run3-arm-summary@1')
+            self.assertTrue(read_json(out/'ledger.json')['funding'].startswith('unverified'))
             if expected:
                 launch.assert_not_called()
             else:
@@ -314,12 +340,16 @@ class ArmTests(FixtureCase):
         argv=['arm.py','amd','T0','--approved-run','--tasks',str(full),'--tasks-sha256',sha(full),
               '--trace',str(FIX/'code-slice.csv'),'--trace-sha256',sha(FIX/'code-slice.csv'),
               '--start','2023-11-16T00:00:00Z','--rate-factor','0.1','--out',str(out),
-              '--hf-cache',str(self.root/'cache'),'--t-ssh','2023-11-16T00:00:00Z']
+              '--hf-cache',str(self.root/'cache'),'--t-ssh','2023-11-16T00:00:00Z',
+              '--funding','credit:hotaisle','--duration','1800']
         error=subprocess.CalledProcessError(1,['docker','pull'],output=b'fixture pull failed',stderr=b'')
         with mock.patch.object(sys,'argv',argv), mock.patch.object(arm.subprocess,'run',side_effect=error), \
              mock.patch.object(arm.signal,'signal'), mock.patch.object(arm.signal,'alarm',create=True):
             self.assertEqual(arm.main(),1)
         self.assertEqual(read_json(out/'ledger.json')['status'],'failed')
+        self.assertEqual(read_json(out/'ledger.json')['funding'],'credit:hotaisle')
+        self.assertEqual(read_json(out/'invocation.json')['funding'],'credit:hotaisle')
+        self.assertEqual(read_json(out/'invocation.json')['duration_s'],1800)
         self.assertIsNone(read_json(out/'ledger-times.json')['t_released'])
         self.assertEqual((out/'failed-command.log').read_bytes(),b'fixture pull failed')
         for line in (out/'MANIFEST.sha256').read_text().splitlines():

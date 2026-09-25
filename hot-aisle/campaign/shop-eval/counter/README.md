@@ -39,6 +39,17 @@ python -B test_counter.py
 
 ## Scoring
 
+The numeric output is an **uncalibrated checklist heuristic**, retained for
+compatibility. Its weights and unknown-value defaults have not been validated
+against customer outcomes. It must not rank providers or establish an operator
+standard; `provider_ranking_permitted` is always false. Compare the underlying
+observations, their sources and their coverage instead.
+
+Availability calculations include only resolved actual creates, and only within
+one known SKU/region group. Listing rows stay in the record but never count as
+failed creates. Even 1/1 delivered is an observed sample, not a reliability or
+truthfulness estimate. Unknown groups and mixed groups are not pooled.
+
 `counter_record.py` scores 10 weighted dimensions, weights and the exact
 arithmetic rule behind every number printed by `score`. A dimension with no
 observed fields at all scores a neutral 50/100 rather than being penalized
@@ -53,8 +64,11 @@ regardless of the weighted total -- see `DISQUALIFYING_CAP` in
 Every record's `provenance` block says who ran it, when, on which account,
 how much was actually spent, and carries a one-line disclosure of any
 funding relationship (or "none"), matching the convention in
-`../../DISCLOSURES.md`. `provenance` fields are never `"unobserved"` --
-the evaluator always knows their own session.
+`../../DISCLOSURES.md`. An unreconciled `money_spent_usd` remains `"unobserved"`;
+any historical estimate belongs in `modeled_cost_usd` with its scope stated.
+Compiled historical records are labeled `evidence_class: "derived"`; this does
+not promote every source note to a direct measurement. Other supported classes
+are published_claim, operator_report, measured and hypothesis.
 
 ## Scope
 

@@ -13,8 +13,10 @@ Usage:
 
 Every field the evaluator did not actually observe must hold the exact string
 "unobserved". validate() accepts that sentinel in place of the field's normal
-type everywhere except provenance (always known) and the notes fields
-(free text, may be empty string).
+type everywhere except provenance identity (always known) and the notes fields
+(free text, may be empty string). Unreconciled provenance.money_spent_usd
+also remains "unobserved". Scores are uncalibrated checklist indices and
+cannot establish a provider ranking.
 """
 
 from __future__ import annotations
@@ -48,6 +50,7 @@ WEIGHTS: dict[str, int] = {
 assert sum(WEIGHTS.values()) == 100, "WEIGHTS must sum to 100"
 
 DISQUALIFYING_CAP = 40
+EVIDENCE_CLASSES = {'published_claim', 'operator_report', 'measured', 'derived', 'hypothesis'}
 
 # ---------------------------------------------------------------------------
 # Field specs for validate(). Each dimension maps field name -> expected type
@@ -180,11 +183,15 @@ def validate(record: Any) -> list[str]:
                 errors.append(f"provenance missing field: {field}")
                 continue
             value = prov[field]
-            # provenance is never "unobserved" -- it describes the evaluation itself
+            # An unreconciled charge is unknown even when the evaluation identity is known.
+            if field == 'money_spent_usd' and value == UNOBSERVED:
+                continue
             if expected == "string" and not isinstance(value, str):
                 errors.append(f"provenance.{field} must be a string")
             elif expected == "number" and (isinstance(value, bool) or not isinstance(value, (int, float))):
                 errors.append(f"provenance.{field} must be a number")
+    if 'evidence_class' in record and record['evidence_class'] not in EVIDENCE_CLASSES:
+        errors.append('evidence_class must name a supported evidence class')
 
     for dim, fields in DIMENSION_FIELDS.items():
         block = record.get(dim)
@@ -347,13 +354,22 @@ def score_provisioning(d: dict) -> tuple[int, list[str]]:
 
 
 def score_availability_honesty(d: dict) -> tuple[int, list[str]]:
-    attempts = [a for a in d["ledger_attempts"] if a.get("outcome") != UNOBSERVED]
+    methods = {'api-create', 'console-create', 'tui-provision'}
+    failures = {'out_of_capacity', 'out_of_stock', 'create_failed', 'ssh_failed'}
+    attempts = [a for a in d['ledger_attempts'] if a.get('method') in methods and
+                ((a.get('outcome') == 'available' and a.get('provisioned') is True) or
+                 (a.get('outcome') in failures and a.get('provisioned') is False))]
     if not attempts:
-        return 50, ["no resolved ledger attempts: neutral 50"]
+        return 50, ['no resolved create attempts: unmeasured; legacy neutral index 50']
+    strata = {(a.get('sku'), a.get('region')) for a in attempts}
+    if len(strata) != 1 or any(UNOBSERVED in s or None in s for s in strata):
+        return 50, ['create attempts span different or unknown SKU/region groups; no pooled delivery rate; legacy neutral index 50']
     delivered = sum(1 for a in attempts if a.get("outcome") == "available" and a.get("provisioned") is True)
     rate = delivered / len(attempts)
     score = round(rate * 100)
-    reasons = [f"{delivered}/{len(attempts)} attempts delivered (outcome=available, provisioned=True): {score}/100"]
+    sku, region = next(iter(strata))
+    reasons = [f'{delivered}/{len(attempts)} resolved creates delivered for {sku} in {region}; listings excluded: {score}/100',
+               'Observed sample only; not a reliability estimate or a truthfulness rating']
     return score, reasons
 
 
@@ -526,6 +542,9 @@ def compute_score(record: dict) -> dict:
     capped = len(dq) > 0
     total = min(raw_total, DISQUALIFYING_CAP) if capped else raw_total
     return {
+        "score_kind": "uncalibrated_checklist_heuristic",
+        "provider_ranking_permitted": False,
+        "limitation": "Arbitrary weights and unknown-value defaults; use observations and coverage, not this index, to compare providers.",
         "total": total,
         "raw_total": raw_total,
         "capped": capped,
@@ -564,7 +583,8 @@ def cmd_score(path: str) -> int:
             print(f"  - {e}")
         return 1
     result = compute_score(record)
-    print(f"{record['provider_name']} ({record['provider_id']}) counter score: {result['total']}/100")
+    print(f"{record['provider_name']} ({record['provider_id']}) checklist heuristic: {result['total']}/100 (UNCALIBRATED)")
+    print(result['limitation'])
     if result["capped"]:
         print(
             f"  DISQUALIFYING: raw weighted score {result['raw_total']}/100 capped at {DISQUALIFYING_CAP}"
@@ -600,6 +620,7 @@ def cmd_compare(ref_path: str, cand_path: str) -> int:
         return 1
     ref_result = compute_score(ref)
     cand_result = compute_score(cand)
+    print('UNCALIBRATED checklist indices. Provider ranking is not permitted; sample and evidence coverage differ.')
     print(f"reference: {ref['provider_name']} = {ref_result['total']}/100")
     print(f"candidate: {cand['provider_name']} = {cand_result['total']}/100")
     delta = cand_result["total"] - ref_result["total"]

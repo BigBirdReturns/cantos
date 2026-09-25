@@ -35,13 +35,14 @@
     },
     "provenance": {
       "type": "object",
-      "description": "Who ran this evaluation, when, on what account, at what cost, and under what disclosure. Never 'unobserved' -- provenance is always known to the evaluator.",
+      "description": "Who ran this evaluation, when, on what account and under what disclosure. Actual charges remain unobserved until reconciled; a modeled cost is a separate field.",
       "required": ["evaluator", "evaluated_at", "account_used", "money_spent_usd", "disclosure"],
       "properties": {
         "evaluator": { "type": "string", "description": "person or handle who ran the evaluation" },
         "evaluated_at": { "type": "string", "description": "UTC ISO 8601 timestamp of the evaluation session's start" },
         "account_used": { "type": "string", "description": "e.g. 'new account, sign-up this session' or 'existing campaign account'" },
-        "money_spent_usd": { "type": "number", "minimum": 0, "description": "total dollars actually charged during this evaluation" },
+        "money_spent_usd": { "$ref": "#/$defs/numberOrUnobserved", "description": "total dollars actually charged during this evaluation, or unobserved until reconciled" },
+        "modeled_cost_usd": { "$ref": "#/$defs/numberOrUnobserved", "description": "optional historical modeled estimate; disclosure must state its scope, never an invoice" },
         "disclosure": { "type": "string", "description": "one plain line: funding relationship, credits used, or 'none' -- see DISCLOSURES.md convention" }
       }
     },

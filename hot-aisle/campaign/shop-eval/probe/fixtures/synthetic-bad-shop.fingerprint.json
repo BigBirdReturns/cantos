@@ -1,6 +1,6 @@
 {
-  "schema": "second-run/shop-fingerprint@1",
-  "schema_version": "1",
+  "schema": "second-run/shop-fingerprint@3",
+  "schema_version": "3",
   "_synthetic": true,
   "_synthetic_note": "SYNTHETIC TEST FIXTURE. Not a real machine, not a real shop, and not any real vendor's numbers. Built by hand to trip every flag diff.py knows about (PCIe below Gen5 x16, VM not bare metal, driver/ROCm major mismatch, thermal throttle under load, nonzero ECC, download throughput under 200 MB/s, MTU under 1500, free disk under 200 GB) so test_probe.py has something deterministic to assert against.",
   "recorded_at": "2026-09-24T00:00:00Z",
@@ -26,8 +26,16 @@
   "filesystems": "Filesystem     Type  Size  Used Avail Use% Mounted on\n/dev/vda1      ext4  100G   95G    5G  95% /\n",
   "network": {
     "interfaces": [
-      { "name": "lo", "mtu": "65536", "state": "UNKNOWN" },
-      { "name": "eth0", "mtu": "1400", "state": "UP" }
+      {
+        "name": "lo",
+        "mtu": "65536",
+        "state": "UNKNOWN"
+      },
+      {
+        "name": "eth0",
+        "mtu": "1400",
+        "state": "UP"
+      }
     ],
     "download_throughput_mb_s": "45.30"
   },
@@ -64,14 +72,29 @@
   "ecc": "ecc.errors.corrected.aggregate.total, ecc.errors.uncorrected.aggregate.total\n12, 2\n",
   "idle_power_state": "index, clocks.current.sm [MHz], clocks.current.memory [MHz], temperature.gpu, power.draw [W]\n0, 210 MHz, 405 MHz, 38, 45.00 W\n",
   "load_sample": {
-    "method": "local_torch",
-    "duration_s": 60,
-    "interval_s": 5,
+    "status": "pass",
+    "method": "torch_gpu_matmul",
+    "duration_s": 30,
     "samples": [
-      { "t_offset_s": 0, "recorded_at": "2026-09-24T00:00:05Z", "sample": "1410, 1215, 62, 265.10 W, Not Active" },
-      { "t_offset_s": 30, "recorded_at": "2026-09-24T00:00:35Z", "sample": "1005, 1215, 89, 298.50 W, Active" },
-      { "t_offset_s": 55, "recorded_at": "2026-09-24T00:01:00Z", "sample": "1020, 1215, 87, 291.20 W, Not Active" }
-    ]
+      {
+        "t_offset_s": 0,
+        "recorded_at": "2026-09-24T00:00:05Z",
+        "sample": "1410, 1215, 62, 265.10 W, Not Active"
+      },
+      {
+        "t_offset_s": 30,
+        "recorded_at": "2026-09-24T00:00:35Z",
+        "sample": "1005, 1215, 89, 298.50 W, Active"
+      },
+      {
+        "t_offset_s": 55,
+        "recorded_at": "2026-09-24T00:01:00Z",
+        "sample": "1020, 1215, 87, 291.20 W, Not Active"
+      }
+    ],
+    "nominal_interval_s": 5
   },
-  "raw_dir": "raw/"
+  "raw_dir": "raw/",
+  "idle_verified": false,
+  "sample_context": "ambient; workload isolation and idle state not verified"
 }

@@ -1,22 +1,51 @@
 #!/usr/bin/env bash
 # Fingerprint the machine a shop rented you: kernel, virtualization, CPU, RAM, storage,
-# network, container runtime, GPU hardware/driver/topology, and a 60-second load sample.
+# network inventory, container runtime, and GPU hardware/driver/topology. Inventory is
+# read-only by default; a bounded GPU-only load sample requires the explicit --gpu-load flag.
 # Run ON the rented machine as the normal user; sudo is used where it helps (dmidecode)
 # but is never required. Every raw command's output lands in outdir/raw/<name>.txt so a
 # human can check the parsing; outdir/fingerprint.json is the single structured record.
 #
-#   fingerprint.sh [amd|nvidia|auto] [outdir]
+#   fingerprint.sh [amd|nvidia|auto] [outdir] [--gpu-load]
 #
-# A missing tool is recorded as "unavailable" in the JSON and its raw file; it never
-# aborts the run. Nothing here provisions or deletes anything, and nothing is destructive.
+# A missing tool is recorded as "unavailable" in the JSON and its raw file. A requested,
+# unverified GPU load remains unknown and exits nonzero after preserving the fingerprint.
+# Existing output paths are refused; nothing provisions or deletes anything.
 set -uo pipefail
 
-VENDOR_ARG="${1:-auto}"
-OUTDIR="${2:-./shop-fingerprint}"
+VENDOR_ARG="auto"
+OUTDIR="./shop-fingerprint"
+GPU_LOAD_REQUESTED=0
+POSITIONAL=()
+for arg in "$@"; do
+  case "$arg" in
+    --gpu-load) GPU_LOAD_REQUESTED=1 ;;
+    -h|--help)
+      sed -n '2,12p' "$0"
+      printf '\nUsage: %s [amd|nvidia|auto] [outdir] [--gpu-load]\n' "$0"
+      exit 0
+      ;;
+    --*) printf 'unknown option: %s\n' "$arg" >&2; exit 2 ;;
+    *) POSITIONAL+=("$arg") ;;
+  esac
+done
+if ((${#POSITIONAL[@]} > 2)); then
+  printf 'usage: %s [amd|nvidia|auto] [outdir] [--gpu-load]\n' "$0" >&2
+  exit 2
+fi
+if ((${#POSITIONAL[@]} >= 1)); then VENDOR_ARG="${POSITIONAL[0]}"; fi
+if ((${#POSITIONAL[@]} >= 2)); then OUTDIR="${POSITIONAL[1]}"; fi
+case "$VENDOR_ARG" in amd|nvidia|auto) ;; *) printf 'invalid GPU vendor: %s\n' "$VENDOR_ARG" >&2; exit 2 ;; esac
+OUT_PARENT="$(dirname "$OUTDIR")"
+mkdir -p "$OUT_PARENT"
+if ! mkdir "$OUTDIR" 2>/dev/null; then
+  printf 'refusing to overwrite existing output path: %s\n' "$OUTDIR" >&2
+  exit 3
+fi
 RAWDIR="$OUTDIR/raw"
-SCRIPT_VERSION="1"
+SCRIPT_VERSION="3"
 
-mkdir -p "$RAWDIR"
+mkdir "$RAWDIR"
 
 log() { printf '%s %s\n' "$(date -u +%H:%M:%S)" "$*" >&2; }
 
@@ -27,7 +56,10 @@ esc() {
   local s="$1"
   s="${s//\\/\\\\}"
   s="${s//\"/\\\"}"
-  s="$(printf '%s' "$s" | tr -d '\r')"
+  s="${s//$'\t'/\\t}"
+  # Device tools sometimes emit ANSI controls and other non-JSON control bytes.
+  # Raw command output remains byte-for-byte in raw/; sanitize only this summary copy.
+  s="$(printf '%s' "$s" | tr -d '\r\000-\010\013\014\016-\037\177')"
   s="$(printf '%s' "$s" | awk 'BEGIN{ORS="\\n"} {print}')"
   # awk's ORS join leaves a trailing "\n" marker; strip it.
   s="${s%\\n}"
@@ -60,6 +92,18 @@ run_raw() {
   printf '%s' "$out"
 }
 
+# GPU management utilities can hang when the driver/provider stack is unhealthy.
+# Give each one a short ceiling; preserve timeout/error output rather than blocking
+# the inventory indefinitely.
+run_bounded_raw() {
+  local name="$1" seconds="$2"; shift 2
+  if ! have timeout; then
+    printf 'unavailable: GNU timeout is required to bound GPU telemetry\n' | tee "$RAWDIR/${name}.txt"
+    return 0
+  fi
+  run_raw "$name" timeout --signal=TERM --kill-after=2s "${seconds}s" "$@"
+}
+
 # save_raw <name> <content...>  -- write pre-collected text to raw/<name>.txt verbatim.
 save_raw() {
   local name="$1"; shift
@@ -77,11 +121,15 @@ detect_vendor() {
     printf '%s' "$req"
     return
   fi
-  if have nvidia-smi && nvidia-smi -L >/dev/null 2>&1; then
+  if have timeout && have nvidia-smi && timeout --signal=TERM --kill-after=1s 5s nvidia-smi -L >/dev/null 2>&1; then
     printf 'nvidia'
     return
   fi
-  if have rocm-smi && rocm-smi --showid >/dev/null 2>&1; then
+  if have timeout && have rocm-smi && timeout --signal=TERM --kill-after=1s 5s rocm-smi --showid >/dev/null 2>&1; then
+    printf 'amd'
+    return
+  fi
+  if have timeout && have amd-smi && timeout --signal=TERM --kill-after=1s 5s amd-smi list >/dev/null 2>&1; then
     printf 'amd'
     return
   fi
@@ -187,7 +235,7 @@ DF_RAW="$(run_raw df df -hT)"
 FILESYSTEMS_JSON="\"$(esc "$DF_RAW")\""
 
 # ---------------------------------------------------------------------------
-# Network: interfaces, MTU, 30-second download throughput sample
+# Network: inventory only. Active network tests require a separate, explicit campaign.
 # ---------------------------------------------------------------------------
 IP_RAW="$(run_raw ip-link ip -o link show)"
 IFACE_JSON="[]"
@@ -208,37 +256,8 @@ if [[ "$IP_RAW" != unavailable* ]]; then
   fi
 fi
 
-sample_download_throughput() {
-  local outfile="$RAWDIR/network-throughput.txt"
-  if ! have curl; then
-    printf 'unavailable: curl not found\n' > "$outfile"
-    printf 'unavailable: curl not found'
-    return
-  fi
-  if ! curl -sSf --max-time 5 -o /dev/null 'https://speed.cloudflare.com/__down?bytes=1000' 2>>"$outfile"; then
-    printf 'unavailable: no network reachability to speed.cloudflare.com\n' >> "$outfile"
-    printf 'unavailable: no network'
-    return
-  fi
-  local out speed_bytes http_code
-  out="$(curl -sS --max-time 30 -o /dev/null \
-    -w 'speed_download_bytes_per_s=%{speed_download}\ntime_total_s=%{time_total}\nhttp_code=%{http_code}\n' \
-    'https://speed.cloudflare.com/__down?bytes=1073741824' 2>>"$outfile")"
-  printf '%s\n' "$out" >> "$outfile"
-  http_code="$(printf '%s\n' "$out" | sed -n 's/^http_code=//p')"
-  speed_bytes="$(printf '%s\n' "$out" | sed -n 's/^speed_download_bytes_per_s=//p')"
-  if [[ "$http_code" != 2* ]]; then
-    printf 'unavailable: HTTP %s from speed.cloudflare.com' "${http_code:-unknown}"
-    return
-  fi
-  if [[ -z "$speed_bytes" ]]; then
-    printf 'unavailable: curl produced no throughput figure'
-    return
-  fi
-  awk -v b="$speed_bytes" 'BEGIN{printf "%.2f", b/1000000}'
-}
-DOWNLOAD_MB_S="$(sample_download_throughput)"
-
+DOWNLOAD_MB_S="not_measured: active network test not requested"
+save_raw network-throughput "$DOWNLOAD_MB_S"
 NETWORK_JSON=$(printf '{"interfaces":%s,"download_throughput_mb_s":"%s"}' \
   "$IFACE_JSON" "$(esc "$DOWNLOAD_MB_S")")
 
@@ -261,22 +280,39 @@ CONTAINER_JSON=$(printf '{"runtime":"%s","version":"%s"}' \
 
 # ---------------------------------------------------------------------------
 # GPU: count/model/vbios/firmware, driver, ROCm/CUDA version, per-device PCIe
-# link (from sysfs, vendor-agnostic), topology, ECC/RAS, idle clocks/temp/power
+# link (from vendor-filtered sysfs), topology, ECC/RAS and ambient clocks/temp/power
 # ---------------------------------------------------------------------------
 gpu_pci_addrs() {
-  local f cls
-  for f in /sys/bus/pci/devices/*/class; do
+  local f cls vendor expected root
+  root="${SHOP_PROBE_PCI_SYSFS_ROOT:-/sys/bus/pci/devices}"
+  case "$VENDOR" in
+    amd) expected="0x1002" ;;
+    nvidia) expected="0x10de" ;;
+    *) return 0 ;;
+  esac
+  for f in "$root"/*/class; do
     [[ -f "$f" ]] || continue
     cls="$(cat "$f" 2>/dev/null)"
-    case "$cls" in
-      0x030000*|0x030200*) basename "$(dirname "$f")" ;;
-    esac
+    case "$cls" in 0x030000*|0x030200*) ;; *) continue ;; esac
+    vendor="$(cat "$(dirname "$f")/vendor" 2>/dev/null || true)"
+    [[ "$vendor" == "$expected" ]] && basename "$(dirname "$f")"
   done
+}
+
+nvidia_bdf_to_sysfs() {
+  local bdf="$1"
+  if [[ "$bdf" =~ ^0000([[:xdigit:]]{4}):([[:xdigit:]]{2}):([[:xdigit:]]{2}\.[[:xdigit:]])$ ]]; then
+    printf '%s:%s:%s' "${BASH_REMATCH[1]}" "${BASH_REMATCH[2]}" "${BASH_REMATCH[3]}"
+  elif [[ "$bdf" =~ ^([[:xdigit:]]{4}):([[:xdigit:]]{2}):([[:xdigit:]]{2}\.[[:xdigit:]])$ ]]; then
+    printf '%s:%s:%s' "${BASH_REMATCH[1]}" "${BASH_REMATCH[2]}" "${BASH_REMATCH[3]}"
+  else
+    return 1
+  fi
 }
 
 pcie_link_for_addr() {
   local addr="$1" dir speed width
-  dir="/sys/bus/pci/devices/$addr"
+  dir="${SHOP_PROBE_PCI_SYSFS_ROOT:-/sys/bus/pci/devices}/$addr"
   speed="unavailable"; width="unavailable"
   [[ -r "$dir/current_link_speed" ]] && speed="$(cat "$dir/current_link_speed" 2>/dev/null || echo unavailable)"
   [[ -r "$dir/current_link_width" ]] && width="$(cat "$dir/current_link_width" 2>/dev/null || echo unavailable)"
@@ -290,24 +326,36 @@ GPU_DEVICES_JSON="[]"
 
 if [[ "$VENDOR" == "nvidia" ]]; then
   if have nvidia-smi; then
-    NVSMI_L="$(run_raw nvidia-smi-L nvidia-smi -L)"
+    NVSMI_L="$(run_bounded_raw nvidia-smi-L 5 nvidia-smi -L)"
     if [[ "$NVSMI_L" != unavailable* ]]; then
-      GPU_COUNT="$(printf '%s\n' "$NVSMI_L" | grep -c '^GPU ' || echo 0)"
+      matched_count="$(gpu_pci_addrs | wc -l | tr -d ' ')"
+      if [[ "$matched_count" == 0 ]] && grep -q '^GPU ' <<< "$NVSMI_L"; then
+        GPU_COUNT="unavailable: nvidia-smi devices had no NVIDIA sysfs match"
+      else
+        GPU_COUNT="$matched_count"
+      fi
     fi
-    GPU_DRIVER_VERSION="$(nvidia-smi --query-gpu=driver_version --format=csv,noheader 2>/dev/null | head -1)"
+    GPU_DRIVER_VERSION="$(run_bounded_raw nvidia-smi-driver 5 nvidia-smi --query-gpu=driver_version --format=csv,noheader | head -1)"
     [[ -z "$GPU_DRIVER_VERSION" ]] && GPU_DRIVER_VERSION="unavailable"
-    GPU_STACK_VERSION="$(nvidia-smi 2>/dev/null | grep -o 'CUDA Version: [0-9.]*' | awk '{print $3}')"
+    GPU_STACK_VERSION="$(run_bounded_raw nvidia-smi-banner 5 nvidia-smi | grep -o 'CUDA Version: [0-9.]*' | awk '{print $3}')"
     [[ -z "$GPU_STACK_VERSION" ]] && GPU_STACK_VERSION="unavailable"
-    run_raw nvidia-smi-q nvidia-smi -q >/dev/null
-    QUERY="index,name,vbios_version,pcie.link.gen.current,pcie.link.width.current,ecc.errors.corrected.volatile.total,ecc.errors.uncorrected.volatile.total,clocks.sm,clocks.mem,temperature.gpu,power.draw,clocks_throttle_reasons.hw_slowdown"
-    CSV_RAW="$(nvidia-smi --query-gpu="$QUERY" --format=csv,noheader,nounits 2>&1)"
-    save_raw nvidia-smi-query-gpu "$CSV_RAW"
+    if have timeout; then
+      timeout --signal=TERM --kill-after=2s 5s nvidia-smi -q > "$RAWDIR/nvidia-smi-q.txt" 2>&1 || true
+    else
+      save_raw nvidia-smi-q "unavailable: GNU timeout is required to bound vendor telemetry"
+    fi
+    QUERY="index,pci.bus_id,name,vbios_version,pcie.link.gen.current,pcie.link.width.current,ecc.errors.corrected.volatile.total,ecc.errors.uncorrected.volatile.total,clocks.sm,clocks.mem,temperature.gpu,power.draw,clocks_throttle_reasons.hw_slowdown"
+    CSV_RAW="$(run_bounded_raw nvidia-smi-query-gpu 10 nvidia-smi --query-gpu="$QUERY" --format=csv,noheader,nounits)"
     if [[ -n "$CSV_RAW" ]]; then
       dev_entries=()
-      while IFS=',' read -r idx name vbios pgen pwidth eccc eccu csm cmem temp power throttle; do
+      while IFS=',' read -r idx bus_id name vbios pgen pwidth eccc eccu csm cmem temp power throttle; do
         [[ -z "${idx// /}" ]] && continue
-        addr="$(gpu_pci_addrs | sed -n "$(( idx + 1 ))p")"
-        [[ -z "$addr" ]] && addr="unavailable"
+        bus_id="${bus_id// /}"
+        if addr="$(nvidia_bdf_to_sysfs "$bus_id")" && [[ -r "${SHOP_PROBE_PCI_SYSFS_ROOT:-/sys/bus/pci/devices}/$addr/vendor" ]] && [[ "$(cat "${SHOP_PROBE_PCI_SYSFS_ROOT:-/sys/bus/pci/devices}/$addr/vendor" 2>/dev/null)" == 0x10de ]]; then
+          :
+        else
+          addr="unavailable: no NVIDIA sysfs match for $bus_id"
+        fi
         dev_entries+=("{\"index\":\"$(esc "${idx// /}")\",\"model\":\"$(esc "${name# }")\",\"vbios\":\"$(esc "${vbios# }")\",\"firmware\":\"unavailable\",\"driver\":\"$(esc "$GPU_DRIVER_VERSION")\",\"pci_addr\":\"$(esc "$addr")\",\"pcie_link_gen_current\":\"$(esc "${pgen# }")\",\"pcie_link_width_current\":\"$(esc "${pwidth# }")\",\"ecc_corrected_total\":\"$(esc "${eccc# }")\",\"ecc_uncorrected_total\":\"$(esc "${eccu# }")\",\"clock_sm_mhz_idle\":\"$(esc "${csm# }")\",\"clock_mem_mhz_idle\":\"$(esc "${cmem# }")\",\"temp_c_idle\":\"$(esc "${temp# }")\",\"power_w_idle\":\"$(esc "${power# }")\",\"hw_slowdown_throttle\":\"$(esc "${throttle# }")\"}")
       done <<< "$CSV_RAW"
       if [[ ${#dev_entries[@]} -gt 0 ]]; then
@@ -317,52 +365,69 @@ if [[ "$VENDOR" == "nvidia" ]]; then
   else
     save_raw nvidia-smi-L "unavailable: nvidia-smi not found"
   fi
-  TOPO_RAW="$(run_raw nvidia-smi-topo nvidia-smi topo -m)"
-  ECC_RAW="$(run_raw nvidia-smi-ecc nvidia-smi --query-gpu=ecc.errors.corrected.aggregate.total,ecc.errors.uncorrected.aggregate.total --format=csv)"
-  IDLE_RAW="$(run_raw nvidia-smi-idle nvidia-smi --query-gpu=index,clocks.sm,clocks.mem,temperature.gpu,power.draw --format=csv)"
+  TOPO_RAW="$(run_bounded_raw nvidia-smi-topo 10 nvidia-smi topo -m)"
+  ECC_RAW="$(run_bounded_raw nvidia-smi-ecc 10 nvidia-smi --query-gpu=ecc.errors.corrected.aggregate.total,ecc.errors.uncorrected.aggregate.total --format=csv)"
+  IDLE_RAW="ambient observation; workload isolation not verified. $(run_bounded_raw nvidia-smi-ambient 10 nvidia-smi --query-gpu=index,clocks.sm,clocks.mem,temperature.gpu,power.draw --format=csv)"
 elif [[ "$VENDOR" == "amd" ]]; then
-  SMI_BIN=""
-  if have rocm-smi; then SMI_BIN="rocm-smi"; elif have amd-smi; then SMI_BIN="amd-smi"; fi
-  if [[ -n "$SMI_BIN" ]]; then
-    SHOWID_RAW="$(run_raw "$SMI_BIN-showid" "$SMI_BIN" --showid)"
-    if [[ "$SHOWID_RAW" != unavailable* ]]; then
-      GPU_COUNT="$(printf '%s\n' "$SHOWID_RAW" | grep -c '^GPU\[' || echo 0)"
-    fi
-    PRODUCT_RAW="$(run_raw "$SMI_BIN-showproductname" "$SMI_BIN" --showproductname)"
-    VBIOS_RAW="$(run_raw "$SMI_BIN-showvbios" "$SMI_BIN" --showvbios)"
-    DRIVER_RAW="$(run_raw "$SMI_BIN-showdriverversion" "$SMI_BIN" --showdriverversion)"
-    BUS_RAW="$(run_raw "$SMI_BIN-showbus" "$SMI_BIN" --showbus)"
+  if have timeout && have rocm-smi && timeout --signal=TERM --kill-after=1s 5s rocm-smi --showid >/dev/null 2>&1; then
+    AMD_TOOL="rocm-smi"
+    SHOWID_RAW="$(run_bounded_raw rocm-smi-showid 10 rocm-smi --showid)"
+    PRODUCT_RAW="$(run_bounded_raw rocm-smi-showproductname 10 rocm-smi --showproductname)"
+    VBIOS_RAW="$(run_bounded_raw rocm-smi-showvbios 10 rocm-smi --showvbios)"
+    DRIVER_RAW="$(run_bounded_raw rocm-smi-showdriverversion 10 rocm-smi --showdriverversion)"
+    TOPO_RAW="$(run_bounded_raw rocm-smi-showtopo 10 rocm-smi --showtopo)"
+    ECC_RAW="$(run_bounded_raw rocm-smi-showrasinfo 10 rocm-smi --showrasinfo all)"
+    IDLE_RAW="ambient observation; workload isolation not verified. $(run_bounded_raw rocm-smi-idle 10 rocm-smi --showclocks --showtemp --showpower)"
+    GPU_COUNT="$(gpu_pci_addrs | wc -l | tr -d ' ')"
     GPU_DRIVER_VERSION="$(printf '%s\n' "$DRIVER_RAW" | grep -m1 -oE '[0-9]+\.[0-9.]+' || echo unavailable)"
-    [[ -z "$GPU_DRIVER_VERSION" ]] && GPU_DRIVER_VERSION="unavailable"
-    if [[ -r /opt/rocm/.info/version ]]; then
-      GPU_STACK_VERSION="$(cat /opt/rocm/.info/version 2>/dev/null || echo unavailable)"
-    else
-      GPU_STACK_VERSION="unavailable"
-    fi
-    save_raw rocm-version "${GPU_STACK_VERSION}"
-    # Best-effort per-GPU device list: sysfs PCIe link is authoritative and vendor-agnostic;
-    # product name / vbios come from the *-smi text dumps above (see raw/ for the full text,
-    # since parsing per-index fields out of them varies by rocm-smi version).
-    idx=0
-    dev_entries=()
-    while IFS= read -r addr; do
-      [[ -z "$addr" ]] && continue
-      link="$(pcie_link_for_addr "$addr")"
-      speed="${link%%|*}"; width="${link##*|}"
-      model_line="$(printf '%s\n' "$PRODUCT_RAW" | grep -m1 -i 'card series\|product name' | sed 's/.*:[[:space:]]*//')"
-      [[ -z "$model_line" ]] && model_line="unavailable"
-      dev_entries+=("{\"index\":\"$idx\",\"model\":\"$(esc "$model_line")\",\"vbios\":\"$(esc "$VBIOS_RAW")\",\"firmware\":\"unavailable\",\"driver\":\"$(esc "$GPU_DRIVER_VERSION")\",\"pci_addr\":\"$(esc "$addr")\",\"pcie_link_gen_current\":\"$(esc "$speed")\",\"pcie_link_width_current\":\"$(esc "$width")\",\"ecc_corrected_total\":\"unavailable\",\"ecc_uncorrected_total\":\"unavailable\",\"clock_sm_mhz_idle\":\"unavailable\",\"clock_mem_mhz_idle\":\"unavailable\",\"temp_c_idle\":\"unavailable\",\"power_w_idle\":\"unavailable\",\"hw_slowdown_throttle\":\"unavailable\"}")
-      idx=$((idx + 1))
-    done < <(gpu_pci_addrs)
-    if [[ ${#dev_entries[@]} -gt 0 ]]; then
-      GPU_DEVICES_JSON="[$(IFS=,; echo "${dev_entries[*]}")]"
-    fi
+    model_source="$PRODUCT_RAW"
+    vbios_source="$VBIOS_RAW"
+    amd_model_ref="raw/rocm-smi-showproductname.txt"
+    amd_vbios_ref="raw/rocm-smi-showvbios.txt"
+  elif have timeout && have amd-smi && timeout --signal=TERM --kill-after=1s 5s amd-smi list >/dev/null 2>&1; then
+    AMD_TOOL="amd-smi"
+    SHOWID_RAW="$(run_bounded_raw amd-smi-list 10 amd-smi list)"
+    PRODUCT_RAW="$(run_bounded_raw amd-smi-static 10 amd-smi static)"
+    DRIVER_RAW="$(run_bounded_raw amd-smi-version 10 amd-smi version)"
+    TOPO_RAW="$(run_bounded_raw amd-smi-topology 10 amd-smi topology)"
+    ECC_RAW="$(run_bounded_raw amd-smi-bad-pages 10 amd-smi bad-pages)"
+    IDLE_RAW="ambient observation; workload isolation not verified. $(run_bounded_raw amd-smi-metric-idle 10 amd-smi metric)"
+    GPU_COUNT="$(printf '%s\n' "$(gpu_pci_addrs | wc -l)" | tr -d ' ')"
+    GPU_DRIVER_VERSION="unavailable: see raw/amd-smi-version.txt"
+    model_source="$PRODUCT_RAW"
+    vbios_source="unavailable: amd-smi static output retained in raw/amd-smi-static.txt"
+    amd_model_ref="raw/amd-smi-static.txt"
+    amd_vbios_ref="raw/amd-smi-static.txt"
   else
-    save_raw rocm-smi-showid "unavailable: neither rocm-smi nor amd-smi found"
+    AMD_TOOL="unavailable"
+    SHOWID_RAW="unavailable: neither supported AMD SMI command succeeded"
+    save_raw amd-smi-list "$SHOWID_RAW"
+    PRODUCT_RAW="$SHOWID_RAW"; model_source="$SHOWID_RAW"; vbios_source="$SHOWID_RAW"
+    amd_model_ref="raw/amd-smi-list.txt"
+    amd_vbios_ref="raw/amd-smi-list.txt"
+    TOPO_RAW="$SHOWID_RAW"; ECC_RAW="$SHOWID_RAW"; IDLE_RAW="$SHOWID_RAW"
   fi
-  TOPO_RAW="$(run_raw rocm-smi-showtopo "${SMI_BIN:-rocm-smi}" --showtopo)"
-  ECC_RAW="$(run_raw rocm-smi-showrasinfo "${SMI_BIN:-rocm-smi}" --showrasinfo all)"
-  IDLE_RAW="$(run_raw rocm-smi-idle "${SMI_BIN:-rocm-smi}" --showclocks --showtemp --showpower)"
+  save_raw amd-smi-selected "$AMD_TOOL"
+  if [[ "$SHOWID_RAW" == unavailable* ]]; then GPU_COUNT="unavailable"; fi
+  if [[ -r /opt/rocm/.info/version ]]; then
+    GPU_STACK_VERSION="$(cat /opt/rocm/.info/version 2>/dev/null || echo unavailable)"
+  else
+    GPU_STACK_VERSION="unavailable"
+  fi
+  save_raw rocm-version "$GPU_STACK_VERSION"
+  idx=0
+  dev_entries=()
+  while IFS= read -r addr; do
+    [[ -z "$addr" ]] && continue
+    link="$(pcie_link_for_addr "$addr")"
+    speed="${link%%|*}"; width="${link##*|}"
+    # SMI output formats vary; do not copy one device's first value onto every BDF.
+    model_line="unavailable: per-device mapping not established; see $amd_model_ref"
+    vbios_line="unavailable: per-device mapping not established; see $amd_vbios_ref"
+    dev_entries+=("{\"index\":\"$idx\",\"model\":\"$(esc "$model_line")\",\"vbios\":\"$(esc "$vbios_line")\",\"firmware\":\"unavailable\",\"driver\":\"$(esc "$GPU_DRIVER_VERSION")\",\"pci_addr\":\"$(esc "$addr")\",\"pcie_link_gen_current\":\"$(esc "$speed")\",\"pcie_link_width_current\":\"$(esc "$width")\",\"ecc_corrected_total\":\"unavailable: see raw AMD SMI output\",\"ecc_uncorrected_total\":\"unavailable: see raw AMD SMI output\",\"clock_sm_mhz_idle\":\"unavailable: ambient telemetry retained in raw AMD SMI files\",\"clock_mem_mhz_idle\":\"unavailable: ambient telemetry retained in raw AMD SMI files\",\"temp_c_idle\":\"unavailable: ambient telemetry retained in raw AMD SMI files\",\"power_w_idle\":\"unavailable: ambient telemetry retained in raw AMD SMI files\",\"hw_slowdown_throttle\":\"unavailable: see raw AMD SMI output\"}")
+    idx=$((idx + 1))
+  done < <(gpu_pci_addrs)
+  if [[ ${#dev_entries[@]} -gt 0 ]]; then GPU_DEVICES_JSON="[$(IFS=,; echo "${dev_entries[*]}")]"; fi
 else
   save_raw gpu-vendor "unavailable: no AMD or NVIDIA GPU detected"
   TOPO_RAW="unavailable: no GPU vendor detected"
@@ -374,81 +439,102 @@ GPU_JSON=$(printf '{"vendor":"%s","count":"%s","driver_version":"%s","rocm_or_cu
   "$(esc "$VENDOR")" "$(esc "$GPU_COUNT")" "$(esc "$GPU_DRIVER_VERSION")" "$(esc "$GPU_STACK_VERSION")" "$GPU_DEVICES_JSON")
 
 # ---------------------------------------------------------------------------
-# Sustained load sample (60 s), sampled every 5 s
+# Optional bounded GPU load sample (30 s), sampled every 5 s. GNU timeout is
+# mandatory; telemetry commands and the PyTorch process each have hard bounds.
 # ---------------------------------------------------------------------------
 run_load_sample() {
-  local torch_ok=0 vllm_running=0
-  if have python3 && python3 -c "import torch" >/dev/null 2>&1; then
-    torch_ok=1
+  if [[ $GPU_LOAD_REQUESTED -eq 0 ]]; then
+    printf '"not_requested"'
+    return 0
   fi
-  if have docker && docker ps --format '{{.Names}}' 2>/dev/null | grep -qx vllm; then
-    vllm_running=1
+  local duration=30 matmul_py="$RAWDIR/gpu-load.py" load_log="$RAWDIR/gpu-load.log"
+  if [[ "$VENDOR" != amd && "$VENDOR" != nvidia ]]; then
+    save_raw gpu-load "unknown: GPU vendor not detected; explicit GPU workload not run"
+    printf '{"status":"unknown","reason":"GPU vendor not detected","method":"torch_gpu_matmul","duration_s":%d,"nominal_interval_s":5,"samples":[]}' "$duration"
+    LOAD_FAILURE=1
+    return 0
   fi
-  if [[ $torch_ok -eq 0 && $vllm_running -eq 0 ]]; then
-    printf '"skipped: no torch"'
-    return
+  if ! have timeout; then
+    save_raw gpu-load "unknown: GNU timeout unavailable; bounded GPU load refused"
+    printf '{"status":"unknown","reason":"GNU timeout unavailable; bounded GPU load refused","method":"torch_gpu_matmul","duration_s":%d,"nominal_interval_s":5,"samples":[]}' "$duration"
+    LOAD_FAILURE=1
+    return 0
   fi
-
-  local matmul_py="$RAWDIR/load-sample-matmul.py"
+  if ! have python3 || ! timeout --signal=TERM --kill-after=2s 10s python3 -c 'import torch' >/dev/null 2>&1; then
+    save_raw gpu-load "unknown: host Python PyTorch unavailable; no CPU fallback"
+    printf '{"status":"unknown","reason":"host Python PyTorch unavailable; no CPU fallback","method":"torch_gpu_matmul","duration_s":%d,"nominal_interval_s":5,"samples":[]}' "$duration"
+    LOAD_FAILURE=1
+    return 0
+  fi
   cat > "$matmul_py" <<'PYEOF'
-import time
+import sys, time
 import torch
-dev = "cuda" if torch.cuda.is_available() else "cpu"
-a = torch.randn(4096, 4096, device=dev)
-b = torch.randn(4096, 4096, device=dev)
-t0 = time.time()
-while time.time() - t0 < 60:
+vendor, duration = sys.argv[1], int(sys.argv[2])
+if not torch.cuda.is_available() or torch.cuda.device_count() < 1:
+    raise SystemExit("no CUDA/HIP GPU device visible to PyTorch")
+if vendor == "amd" and not torch.version.hip:
+    raise SystemExit("AMD requested but PyTorch is not a HIP build")
+if vendor == "nvidia" and not torch.version.cuda:
+    raise SystemExit("NVIDIA requested but PyTorch is not a CUDA build")
+device = torch.device("cuda:0")
+name = torch.cuda.get_device_name(0)
+a = torch.randn((1024, 1024), device=device)
+b = torch.randn((1024, 1024), device=device)
+torch.cuda.synchronize()
+print(f"gpu={name} backend={'hip' if torch.version.hip else 'cuda'}", flush=True)
+until = time.monotonic() + duration
+iterations = 0
+while time.monotonic() < until:
     c = a @ b
-    if dev == "cuda":
-        torch.cuda.synchronize()
+    torch.cuda.synchronize()
+    iterations += 1
+print(f"status=pass gpu_iterations={iterations}", flush=True)
 PYEOF
-
-  local matmul_pid="" method
-  if [[ $torch_ok -eq 1 ]]; then
-    python3 "$matmul_py" > "$RAWDIR/load-sample-matmul.log" 2>&1 &
-    matmul_pid=$!
-    method="local_torch"
-  else
-    docker cp "$matmul_py" vllm:/tmp/load-sample-matmul.py >/dev/null 2>&1
-    docker exec vllm python3 /tmp/load-sample-matmul.py > "$RAWDIR/load-sample-matmul.log" 2>&1 &
-    matmul_pid=$!
-    method="vllm_container"
-  fi
-
-  local samples_file="$RAWDIR/load-sample-samples.txt"
-  : > "$samples_file"
-  local sample_entries=() i ts smi_out joined
-  for i in 0 5 10 15 20 25 30 35 40 45 50 55; do
+  local load_start=$SECONDS
+  timeout --signal=TERM --kill-after=5s 45s python3 "$matmul_py" "$VENDOR" "$duration" > "$load_log" 2>&1 &
+  local load_pid=$! sample_entries=() i ts smi_out joined load_rc=0 elapsed_s
+  for i in 0 5 10 15 20 25; do
     sleep 5
+    elapsed_s=$((SECONDS - load_start))
     ts="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
-    if [[ "$VENDOR" == "amd" ]]; then
-      smi_out="$( { "${SMI_BIN:-rocm-smi}" --showclocks --showtemp --showpower; } 2>&1 || echo unavailable)"
-    elif [[ "$VENDOR" == "nvidia" ]]; then
-      smi_out="$( { nvidia-smi --query-gpu=clocks.sm,clocks.mem,temperature.gpu,power.draw,clocks_throttle_reasons.hw_slowdown --format=csv,noheader; } 2>&1 || echo unavailable)"
+    if [[ "$VENDOR" == amd ]]; then
+      if [[ "$AMD_TOOL" == rocm-smi ]]; then
+        smi_out="$(timeout --signal=TERM --kill-after=1s 5s rocm-smi --showclocks --showtemp --showpower 2>&1 || echo unavailable: rocm-smi metric command failed or timed out)"
+      elif [[ "$AMD_TOOL" == amd-smi ]]; then
+        smi_out="$(timeout --signal=TERM --kill-after=1s 5s amd-smi metric --gpu all --usage --temperature --power --clock 2>&1 || echo unavailable: amd-smi metric command failed or timed out)"
+      else smi_out="unavailable: no supported AMD SMI utility"; fi
     else
-      smi_out="unavailable: no GPU vendor detected"
+      smi_out="$(timeout --signal=TERM --kill-after=1s 5s nvidia-smi --query-gpu=clocks.sm,clocks.mem,temperature.gpu,power.draw,clocks_throttle_reasons.hw_slowdown --format=csv,noheader 2>&1 || echo unavailable: nvidia-smi metric command failed or timed out)"
     fi
-    printf '=== t+%ss (%s) ===\n%s\n' "$i" "$ts" "$smi_out" >> "$samples_file"
-    sample_entries+=("{\"t_offset_s\":$i,\"recorded_at\":\"$(esc "$ts")\",\"sample\":\"$(esc "$smi_out")\"}")
+    printf '=== t+%ss (%s) ===\n%s\n' "$i" "$ts" "$smi_out" >> "$RAWDIR/gpu-load-samples.txt"
+    sample_entries+=("{\"t_offset_s\":$elapsed_s,\"recorded_at\":\"$(esc "$ts")\",\"sample\":\"$(esc "$smi_out")\"}")
   done
-  wait "$matmul_pid" 2>/dev/null || true
-
+  wait "$load_pid" || load_rc=$?
   joined="[]"
-  if [[ ${#sample_entries[@]} -gt 0 ]]; then
-    joined="[$(IFS=,; echo "${sample_entries[*]}")]"
+  if [[ ${#sample_entries[@]} -gt 0 ]]; then joined="[$(IFS=,; echo "${sample_entries[*]}")]"; fi
+  if [[ $load_rc -eq 0 ]] && grep -q '^status=pass gpu_iterations=[1-9][0-9]*$' "$load_log"; then
+    printf '{"status":"pass","method":"torch_gpu_matmul","duration_s":%d,"nominal_interval_s":5,"samples":%s}' "$duration" "$joined"
+  else
+    LOAD_FAILURE=1
+    save_raw gpu-load "unknown: GPU workload failed; see raw/gpu-load.log"
+    printf '{"status":"unknown","reason":"GPU workload failed; inspect raw/gpu-load.log","method":"torch_gpu_matmul","duration_s":%d,"nominal_interval_s":5,"samples":%s}' "$duration" "$joined"
   fi
-  printf '{"method":"%s","duration_s":60,"interval_s":5,"samples":%s}' "$method" "$joined"
 }
-LOAD_SAMPLE_JSON="$(run_load_sample)"
+LOAD_FAILURE=0
+LOAD_SAMPLE_JSON=""
+run_load_sample > "$RAWDIR/load-sample.json"
+LOAD_SAMPLE_JSON="$(cat "$RAWDIR/load-sample.json")"
 
 # ---------------------------------------------------------------------------
 # Assemble fingerprint.json
 # ---------------------------------------------------------------------------
 cat > "$OUTDIR/fingerprint.json" <<EOF
 {
-  "schema": "second-run/shop-fingerprint@1",
+  "schema": "second-run/shop-fingerprint@3",
   "schema_version": "$SCRIPT_VERSION",
   "recorded_at": "$RECORDED_AT",
+  "idle_verified": false,
+  "sample_context": "ambient; workload isolation and idle state were not verified",
   "hostname": "$(esc "$HOSTNAME_VAL")",
   "requested_gpu_vendor": "$(esc "$VENDOR_ARG")",
   "kernel": "$(esc "$KERNEL")",
@@ -480,7 +566,7 @@ log "fingerprint.json written to $OUTDIR/fingerprint.json"
 if have sha256sum; then
   (
     cd "$OUTDIR" || exit 0
-    sha256sum fingerprint.json raw/*.txt 2>/dev/null > MANIFEST.sha256
+    sha256sum fingerprint.json raw/* 2>/dev/null > MANIFEST.sha256
   )
   log "MANIFEST.sha256 written to $OUTDIR/MANIFEST.sha256"
 else
@@ -488,3 +574,7 @@ else
 fi
 
 log "done: $OUTDIR"
+if [[ $LOAD_FAILURE -ne 0 ]]; then
+  log "requested GPU load was not verified; fingerprint retained with load_sample unknown"
+  exit 4
+fi

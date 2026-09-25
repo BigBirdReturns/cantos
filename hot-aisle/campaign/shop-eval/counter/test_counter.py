@@ -55,26 +55,39 @@ class TestValidate(unittest.TestCase):
         errors = cr.validate(record)
         self.assertEqual(errors, [])
 
-    def test_provenance_rejects_unobserved(self):
+    def test_unreconciled_money_can_remain_unobserved(self):
         record = load(HOTAISLE_PATH)
         record["provenance"]["money_spent_usd"] = "unobserved"
         errors = cr.validate(record)
-        self.assertTrue(any("provenance.money_spent_usd" in e for e in errors))
+        self.assertEqual(errors, [])
 
 
 class TestScore(unittest.TestCase):
     def test_weights_sum_to_100(self):
         self.assertEqual(sum(cr.WEIGHTS.values()), 100)
 
-    def test_hotaisle_scores_above_digitalocean(self):
-        hotaisle = load(HOTAISLE_PATH)
-        digitalocean = load(DIGITALOCEAN_PATH)
-        ha_result = cr.compute_score(hotaisle)
-        do_result = cr.compute_score(digitalocean)
-        self.assertGreater(
-            ha_result["total"], do_result["total"],
-            f"Hot Aisle ({ha_result['total']}) should score above DigitalOcean ({do_result['total']})"
-        )
+    def test_checklist_never_establishes_provider_ranking(self):
+        for path in (HOTAISLE_PATH, DIGITALOCEAN_PATH):
+            result=cr.compute_score(load(path))
+            self.assertFalse(result['provider_ranking_permitted'])
+            self.assertEqual(result['score_kind'],'uncalibrated_checklist_heuristic')
+
+    def test_listing_observations_do_not_count_as_failed_creates(self):
+        record=load(DIGITALOCEAN_PATH)
+        block=record['availability_honesty']
+        before=cr.score_availability_honesty(block)
+        block['ledger_attempts'].extend([{'method':'api','outcome':'out_of_capacity',
+            'provisioned':False,'sku':'unrelated','region':'elsewhere'}]*20)
+        self.assertEqual(before,cr.score_availability_honesty(block))
+        self.assertEqual(before[0],100)
+        self.assertIn('1/1',before[1][0])
+
+    def test_unmatched_create_groups_are_not_pooled(self):
+        block=copy.deepcopy(load(DIGITALOCEAN_PATH)['availability_honesty'])
+        block['ledger_attempts'].append({'method':'api-create','outcome':'out_of_capacity',
+            'provisioned':False,'sku':'unrelated','region':'elsewhere'})
+        score,reasons=cr.score_availability_honesty(block)
+        self.assertIn('no pooled delivery rate',reasons[0])
 
     def test_score_is_bounded(self):
         for path in (HOTAISLE_PATH, DIGITALOCEAN_PATH):

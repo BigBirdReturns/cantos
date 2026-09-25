@@ -1,55 +1,32 @@
-# shop-eval / diagnose
+# Shop diagnosis
 
-Diagnoses a GPU compute shop against Hot Aisle as the reference operator: what it's
-doing wrong, right, and could do better, across nine layers (counter score, site/power,
-hardware lifecycle, known-good stack, fleet automation, health/availability, tenant
-hygiene, pricing/capacity, public proof).
+This standard-library Python tool summarizes observed compute-shop evidence against dated Hot Aisle observations. It does not identify hidden host or tenant causes from customer-side symptoms. Missing or unavailable fields are `UNKNOWN`, not failures. Heuristic readings appear as `SIGNAL` and cannot independently support a provider-quality verdict.
 
-## Inputs (all optional)
+## Inputs
 
-| Flag | Shape | Produced by |
-|---|---|---|
-| `--counter` | `second-run/counter-record@1` | `../counter/counter_record.py score` |
-| `--fingerprint` | `second-run/shop-fingerprint@1` | a shop-fingerprint collector |
-| `--bench` | `engine_table.cjs` JSON table, or a dir of raw `cell-*.json` (or a `table.json` inside one) | `node ../engine_table.cjs ...` |
-| `--reference` | reference bundle (default: shipped `reference/hotaisle-2026-09.json`) | this kit |
+| Flag | Input |
+|---|---|
+| `--counter` | `second-run/counter-record@1` record |
+| `--fingerprint` | `second-run/shop-fingerprint@1` customer-visible capture |
+| `--bench` | scored `engine_table.cjs` JSON, or raw `cell-*.json` files |
+| `--reference` | reference bundle (default: `reference/hotaisle-2026-09.json`) |
+| `--scope` | JSON describing workload, acceptance, cost window, complete configuration, evidence, and SHA-256 of the scored table |
+| `--reference-scope-id` | reference scope key from the bundle (`run1-cell-c64`, `run3-own-window`, or `run3-whole-seat`) |
 
-Every input is optional. A missing input produces, per layer, a note explaining what to
-run to get it, instead of a crash. Full field lists and the reasoning behind every rule
-are in `RUBRIC.md`.
+All inputs can be omitted. Without verified candidate and reference scopes, the report explicitly refuses an economic ratio. Scope identity includes model and tokenizer revisions, precision, cache policy, workload/load profile, acceptance rule, cost scope, table gates/rate, and configuration identity. An unobserved field or mismatched acceptance/cost window fails closed. Different complete configurations may support a same-workload economic comparison, but do not establish operator causality.
 
-## Run it
-
-```
-python diagnose.py --counter <file> --fingerprint <file> --bench <table.json or cells dir> \
-    --reference reference/hotaisle-2026-09.json --out REPORT.md --json
+```text
+python diagnose.py --counter <file> --fingerprint <file> --bench <table.json> \
+  --scope <scope.json> --reference-scope-id run3-own-window \
+  --reference reference/hotaisle-2026-09.json --out REPORT.md --json
 ```
 
-`REPORT.md` gets a one-line verdict (×Hot Aisle on $/1k accepted, if `--bench` and
-`--reference` both resolve), then per-layer WRONG / RIGHT / COULD-DO-BETTER findings
-with the observation that triggered each one, a ranked "first three things to change"
-with expected effect, and a provenance block. `--json` additionally writes
-`REPORT.json` (same stem) with the same data structured for programmatic use.
+The shipped Run 1 table uses a latency-only acceptance rule with no correctness sidecar, while Run 3 uses EvalPlus grading and a different arrival trace. They are distinct scopes. Run 1's serving backend is not established. Run 3 explicitly disables prefix caching, but its broader cache warm/cold state is unobserved. Their price fields remain observations, while automatic comparison needs complete scope evidence. Never use a composite counter score as a quality verdict.
 
 ## Files
 
-- `RUBRIC.md` — the full rubric: every rule id, its layer, the observation it reads,
-  what WRONG/RIGHT/COULD-DO-BETTER look like, and the impact-ranking weights.
-- `reference/hotaisle-2026-09.json` — Hot Aisle's own numbers, assembled only from
-  what's actually in this repo's results files; every field cites its source, and
-  anything not present in those files is the literal string `"unobserved"`.
-- `diagnose.py` — the tool. Python 3.9+, standard library only.
-- `fixtures/` — a synthetic bad-shop (counter record, fingerprint, bench cells)
-  built to fail every rule at least once. See `fixtures/SYNTHETIC.md`.
-- `test_diagnose.py` — `python -B test_diagnose.py`. Runs the fixtures through
-  `diagnose.py` and checks every rule id fires; runs with all inputs missing and
-  checks the report is still usable; re-reads the reference bundle's cited source
-  files and checks the numbers still match.
-
-## Path/shape contract with the other lanes
-
-This lane was built without waiting for `../counter/` or the fingerprint collector to
-exist. The shapes above are what this lane agrees to read; if the counter or
-fingerprint lanes land with a different shape, update the loaders in `diagnose.py`
-(`load_counter`, `load_fingerprint`) and the field references in `RUBRIC.md` rather
-than changing the on-disk paths.
+- `RUBRIC.md` documents evidence meanings, limits, and rule behavior.
+- `reference/hotaisle-2026-09.json` keeps cost views distinct and cites source evidence for each scope.
+- `diagnose.py` emits Markdown and optional structured JSON. Findings include cause-discriminating tests, bounded changes, acceptance, rollback, and access for WRONG results.
+- `fixtures/` contains synthetic inputs only. It is not provider evidence.
+- Run checks with `python -B test_diagnose.py` from this directory.
