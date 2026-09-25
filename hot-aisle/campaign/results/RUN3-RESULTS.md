@@ -29,7 +29,7 @@
    | 1.99 | $0.54 |
 
    Against Hot Aisle's $0.74 at $2.99/h, the price you rent at decides it, not the silicon.
-3. **Output format dominates correctness.** This is labelled post-hoc: A/T0 re-graded after `evalplus.sanitize` goes from HumanEval+ 24.4 % to **82.4 %**, and from 4,371 to 6,192 total correct. A client that strips fences and test scaffolding gets ~1.4× the accepted closures on the same hardware and bill.
+3. **Output format dominates correctness.** This is labelled post-hoc: A/T0 re-graded after `evalplus.sanitize` goes from HumanEval+ 24.4 % to **82.4 %**, and from 4,371 to 6,192 total correct. That is ~1.4× as many correct outputs from the same retained run. This post-hoc regrade counts correct outputs only; the intersection with the registered TTFT and completion deadlines has not been recomputed, so the change in accepted closures remains unmeasured.
 4. **Tuning is workload-specific.** Forcing ROCM_AITER_FA gave up to +46 % on 70B long-context work (Run 2 exploration). On this short-prompt MoE it gives no gain and doubles the p99 TTFT.
 5. **Availability is part of the cost.** The DigitalOcean MI300X (arm C) and H200 listed no capacity in any region all night (API `regions=[]`), so arm C did not run. Hot Aisle had one 1x VM. Logged in `availability/observations.jsonl`.
 
@@ -43,3 +43,5 @@
 - One run per arm, no repeats. HumanEval+ correct counts vary run to run (A 640, N 569) under temperature 0.2.
 - The A/T0 whole-run figure uses its own-seat equivalent: provisioning latency plus its arm window. Its actual seat was shared with the smoke and A/T1 (whole seat $0.90/1k across 9,086 accepted).
 - Invoices are not reconciled yet. Grader-blind tasks: HumanEval/32, Mbpp/255, Mbpp/392 (kept in the denominators).
+
+**Correction (2026-09-24).** Item 3 originally stated: “A client that strips fences and test scaffolding gets ~1.4× the accepted closures on the same hardware and bill.” The sanitizer regrade established a correctness increase, not the deadline-qualified acceptance increase required by the registered definition. The original measured counts above are unchanged.

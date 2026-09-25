@@ -1,0 +1,16 @@
+{
+  "model_requested": "gpt-6-luna",
+  "context": "fork_turns=none; packet only; no validator or prior stranger output supplied",
+  "created_at": "2026-09-25T02:18:23.481285+00:00",
+  "input_sha256": {
+    "cards.jsonl": "e0d789000caf2a000d0454c8e60514d0d82102f58bf5457ad7f4adb82b210541",
+    "README.md": "af669bd85ef0c1f710bd4c84487e117f6a81eb258c8af912d8b3aa89d88503aa",
+    "source.json": "55ed75052574c9be44f08842542b6c38d638715998f5b4ac1b8395204b4c4274",
+    "TASK.txt": "e6978e61d82859102bbadb20c5b4a24d3b330a7db629c81546e81830e6c91804"
+  },
+  "source_retention": "Raw HTML retained in excluded council research; source.json contains short excerpts and capture digest.",
+  "agent_task": "/root/second_stranger",
+  "response_sha256": "ba602a6276182451d62a79c06bb82aafac38ba0238e0b448262e0ba051ce62ec",
+  "output_note": "One attempt; original JSON/prose retained. Card and answer files are extracted views of response.md. Relative source.json in returned card refers to input/source.json.",
+  "currency_note": "Source FAQ uses dollar notation; card interprets it as USD, consistent with supplied shelf pricing convention. No currency conversion or invoice checked."
+}

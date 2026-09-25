@@ -1,0 +1,133 @@
+{
+  "observed_at": "2026-09-25T02:33:10.521558+00:00",
+  "record_kind": "Parent independent rerun; actual commands, stdout and stderr",
+  "checks": [
+    {
+      "name": "shelf",
+      "command": [
+        "C:\\Users\\Jonathan Sandhu\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
+        "-B",
+        "validator.py"
+      ],
+      "expected_exit": 0,
+      "exit_code": 0,
+      "expectation_met": true,
+      "stdout": "[PASS   ] representation: 5 cards carry (a)-(e), separate dimensions/checks, publication-date basis, observer benefit and explicit hourly units; source truth is not certified\n[PASS   ] propagation: H100 $4.41->$1.68/h moves modeled $/1k 1.2->0.46 (tie 2.72); accepted counts stay 4336 vs 4280\n[PASS   ] propagation: separate HumanEval regrade: 640->2161 correct of 2624; registered full-run correct 4371 and accepted 4336 remain separate. No post-hoc accepted count computed\n[PASS   ] recomputation: scheduled = 8622 from replay journal and rejoined retained EvalPlus results; card says 8622\n[PASS   ] recomputation: completed = 8622 from replay journal and rejoined retained EvalPlus results; card says 8622\n[PASS   ] recomputation: accepted = 4336 from replay journal and rejoined retained EvalPlus results; card says 4336\n[PASS   ] recomputation: $/1k own-seat = 2.99 x 64.7/60 / 4.336 = 0.74 (card says 0.74); duration and price are declared card inputs\n[PASS   ] recomputation: $/1k shared seat = 8.15 / 9.086 = 0.9 (card says 0.9); arithmetic from attributed shared totals, not a regrade of every shared arm\n[REFUSED] refusal: run $/1k accepted vs Mercatus $/GPU-h as one unit: unit mismatch: cost per accepted request needs an accepted-request denominator on both sides (INVARIANTS 1)\n[REFUSED] refusal: InferenceX TTFT as accepted work: throughput or latency is not accepted work (INVARIANTS 4, corrected)\n[REFUSED] refusal: CoreWeave Platinum as a 1x self-serve seat property: an attributed managed-cluster rating is not a property of a 1x self-serve seat (INVARIANTS 3)\n[REFUSED] refusal: Hot Aisle blog $2.99 as a measured cost: a party's list price statement is not a measured cost (INVARIANTS 5 / DISCLOSURES)\n[REFUSED] refusal: Sep 24 run price with blog publication unknown, no period stated: comparable observation/publication period unknown; retrieval does not supply it (BRIEF2 item 3)\n[REFUSED] refusal: retrieval copied into publication without a dated-source basis: publication_date_basis must cite the dated source for a publication date; retrieval is not publication evidence; use null for an unknown publication date\n[PASS   ] narrowing: run card carries $0.74 (own-seat equivalent) and $0.90 (shared seat) with what each supports, and the credit on the spine\n\n5/5 machine checks pass; the model-stranger handoff is assessed separately. Independent human use remains untested.\n",
+      "stderr": ""
+    },
+    {
+      "name": "regressions",
+      "command": [
+        "C:\\Users\\Jonathan Sandhu\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "test_validator",
+        "-v"
+      ],
+      "expected_exit": 0,
+      "exit_code": 0,
+      "expectation_met": true,
+      "stdout": "",
+      "stderr": "test_altered_accepted_card_count_fails_real_recomputation (test_validator.ShelfValidatorTests.test_altered_accepted_card_count_fails_real_recomputation) ... ok\ntest_boolean_dimension_and_benefit_are_not_integer_flags (test_validator.ShelfValidatorTests.test_boolean_dimension_and_benefit_are_not_integer_flags) ... ok\ntest_corrupt_journal_fails_native_recovery (test_validator.ShelfValidatorTests.test_corrupt_journal_fails_native_recovery) ... ok\ntest_current_cards_and_native_recomputation (test_validator.ShelfValidatorTests.test_current_cards_and_native_recomputation) ... ok\ntest_hourly_aliases_and_seat_gpu_denominator (test_validator.ShelfValidatorTests.test_hourly_aliases_and_seat_gpu_denominator) ... ok\ntest_missing_journal_fails_even_with_passing_summary (test_validator.ShelfValidatorTests.test_missing_journal_fails_even_with_passing_summary) ... ok\ntest_narrowing_requires_credit_provider_and_spine_disclosure (test_validator.ShelfValidatorTests.test_narrowing_requires_credit_provider_and_spine_disclosure) ... ok\ntest_original_stranger_has_exact_three_filing_errors (test_validator.ShelfValidatorTests.test_original_stranger_has_exact_three_filing_errors) ... ok\ntest_same_day_is_allowed_with_declared_publication_source (test_validator.ShelfValidatorTests.test_same_day_is_allowed_with_declared_publication_source) ... ok\ntest_six_refusals_require_their_actual_cards (test_validator.ShelfValidatorTests.test_six_refusals_require_their_actual_cards) ... ok\ntest_unknown_dates_do_not_establish_same_period (test_validator.ShelfValidatorTests.test_unknown_dates_do_not_establish_same_period) ... ok\ntest_unknowns_and_null_funding_are_valid (test_validator.ShelfValidatorTests.test_unknowns_and_null_funding_are_valid) ... ok\n\n----------------------------------------------------------------------\nRan 12 tests in 1.839s\n\nOK\n"
+    },
+    {
+      "name": "first-stranger",
+      "command": [
+        "C:\\Users\\Jonathan Sandhu\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
+        "-B",
+        "validator.py",
+        "--card",
+        "stranger-2026-09-24/card6-latitude-h100.json"
+      ],
+      "expected_exit": 1,
+      "exit_code": 1,
+      "expectation_met": true,
+      "stdout": "[FAIL   ] representation: latitude-h100: publication_date_basis must cite the dated source for a publication date; retrieval is not publication evidence; use null for an unknown publication date\n[FAIL   ] representation: latitude-h100: c_parties.observer_benefit needs benefits_from_outcome, relationship and basis (unknowns may be null)\n[FAIL   ] representation: latitude-h100: results.hourly_rate.unit: monetary hourly rate must be USD/GPU-hour or USD/seat-hour, not 'USD/hour'\nSingle-card filing check only; source truth, recomputation and independent use are not established.\n",
+      "stderr": ""
+    },
+    {
+      "name": "second-stranger",
+      "command": [
+        "C:\\Users\\Jonathan Sandhu\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
+        "-B",
+        "validator.py",
+        "--card",
+        "stranger-2-2026-09-24/card7-voltagepark.json"
+      ],
+      "expected_exit": 0,
+      "exit_code": 0,
+      "expectation_met": true,
+      "stdout": "[PASS   ] representation: 1 cards carry (a)-(e), separate dimensions/checks, publication-date basis, observer benefit and explicit hourly units; source truth is not certified\nSingle-card filing check only; source truth, recomputation and independent use are not established.\n",
+      "stderr": ""
+    },
+    {
+      "name": "native-join",
+      "command": [
+        "C:\\Users\\Jonathan Sandhu\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
+        "-B",
+        "join/join.py",
+        "check",
+        "--genesis",
+        "D:/Projects/Organs/AXM/axm-genesis/main",
+        "--canon",
+        "S:/Scratch/Runs/run3-shelf-join/canon-fec0ddc9a5697d465ac46e55b7e3cb7647221952"
+      ],
+      "expected_exit": 0,
+      "exit_code": 0,
+      "expectation_met": true,
+      "stdout": "{\"card_id\": \"run3-at0\", \"card_revision_sha256\": \"0b9d7c75a4bea9b431eadfb836e7a22634961ff425f92d9c0f0ad829a8da7fb7\", \"shard_id\": \"sh1_9ec37f2bd0ebe4e636dc1a2de1ff176fa07592084c8e75cbb918536a51e300df\", \"dependency_scope_sha256\": \"124eb6f39268df9fde5e773545e420e934a91213a930867ea79c77f7de8558b5\", \"checked_at\": \"2026-09-25T02:33:09.745429+00:00\", \"rules_location\": \"shard/content/dependency-scope.json\", \"snapshot_notice\": \"Dated check result; rerun join.py check for current applicability\", \"binding\": \"bound\", \"standing\": \"filed/candidate\", \"applicability\": \"PASS\", \"authorized_reuse\": false, \"reasons\": [], \"native_verifier\": {\"shard\": \"D:\\\\Projects\\\\Organs\\\\AXM\\\\axm-tools\\\\main\\\\hot-aisle\\\\campaign\\\\shelf\\\\join\\\\run3-v3\\\\shard\", \"status\": \"PASS\", \"error_count\": 0, \"errors\": [], \"profiles_checked\": [], \"profiles_unchecked\": []}, \"expected_scope\": {\"acceptance\": {\"completion\": {\"source\": \"D:/Projects/Organs/AXM/axm-tools/main/hot-aisle/campaign/results/RUN3-RESULTS.md\", \"source_date\": \"2026-09-24\", \"unit\": \"seconds maximum from scheduled arrival\", \"value\": 60}, \"correctness\": \"Raw registered output passes base AND plus tests\", \"first_token\": {\"source\": \"D:/Projects/Organs/AXM/axm-tools/main/hot-aisle/campaign/results/RUN3-RESULTS.md\", \"source_date\": \"2026-09-24\", \"unit\": \"second maximum from scheduled arrival\", \"value\": 1}}, \"card_id\": \"run3-at0\", \"conditions\": {\"attention\": \"ROCM_ATTN\", \"configuration_source\": {\"experiment_date\": \"2026-09-24\", \"local_inspection_date\": \"2026-09-24\", \"path_or_url\": \"D:/Projects/Organs/AXM/axm-tools/main/hot-aisle/campaign/results/run3-scored-a-t0/env.json\", \"publication_date\": null, \"retrieved_at\": null}, \"engine\": \"vLLM 0.30.0\", \"freeze\": \"run3/freeze-2026-09-24, commit 0b032ac; private registration, not independent timestamp\", \"gpus\": {\"source\": \"D:/Projects/Organs/AXM/axm-tools/main/hot-aisle/campaign/results/run3-scored-a-t0/env.json\", \"source_date\": \"2026-09-24\", \"unit\": \"GPU\", \"value\": 1}, \"hardware\": \"MI300X\", \"image_digest\": \"sha256:2e7da1ad1c66836802072588adea75f9f4991da5f9545b4318e91d422c22ce6a\", \"linear_kernel\": \"AiterFp8BlockScaledMMKernel\", \"model\": \"Qwen/Qwen3-Coder-30B-A3B-Instruct-FP8\", \"model_revision\": \"dcaee4d4dfc5ee71ad501f01f530e5652438fde0\", \"provider\": \"Hot Aisle\", \"region\": \"enc1\", \"replay_factor\": {\"source\": \"D:/Projects/Organs/AXM/axm-tools/main/hot-aisle/campaign/results/run3-scored-a-t0/invocation.json\", \"source_date\": \"2026-09-24\", \"unit\": \"factor\", \"value\": 0.95}, \"seat\": \"enc1-gpuvm004\", \"trace\": \"Azure LLM CODE trace\"}, \"exclusions\": \"Smoke excluded from scored A/T0, included in shared-seat aggregate. Grader-blind HumanEval/32, Mbpp/255, Mbpp/392 kept in denominators. Post-hoc sanitized regrade excluded.\", \"period\": {\"experiment_date\": \"2026-09-24\", \"publication_date\": null, \"publication_date_basis\": null, \"script_end\": {\"source\": \"D:/Projects/Organs/AXM/axm-tools/main/hot-aisle/campaign/results/run3-scored-a-t0/ledger-times.json\", \"source_date\": \"2026-09-24\", \"unit\": \"UTC\", \"value\": \"2026-09-24T01:45:22.642644+00:00\"}, \"script_start\": {\"source\": \"D:/Projects/Organs/AXM/axm-tools/main/hot-aisle/campaign/results/run3-scored-a-t0/ledger-times.json\", \"source_date\": \"2026-09-24\", \"unit\": \"UTC\", \"value\": \"2026-09-24T00:42:43.547291+00:00\"}}, \"purpose\": \"Inspect this historical filing under its exact recorded conditions\"}, \"native_canon_validation\": \"fresh-PASS\", \"native_canon_execution\": {\"command\": [\"node\", \"D:\\\\Projects\\\\Organs\\\\AXM\\\\axm-tools\\\\main\\\\hot-aisle\\\\campaign\\\\shelf\\\\join\\\\canon_check.mjs\", \"--source-root\", \"S:\\\\Scratch\\\\Runs\\\\run3-shelf-join\\\\canon-fec0ddc9a5697d465ac46e55b7e3cb7647221952\", \"--bundle\", \"D:\\\\Projects\\\\Organs\\\\AXM\\\\axm-tools\\\\main\\\\hot-aisle\\\\campaign\\\\shelf\\\\join\\\\run3-v3\"], \"exit_code\": 0, \"stdout\": \"{\\\"card_id\\\":\\\"run3-at0\\\",\\\"card_revision_sha256\\\":\\\"0b9d7c75a4bea9b431eadfb836e7a22634961ff425f92d9c0f0ad829a8da7fb7\\\",\\\"shard_id\\\":\\\"sh1_9ec37f2bd0ebe4e636dc1a2de1ff176fa07592084c8e75cbb918536a51e300df\\\",\\\"source_commit\\\":\\\"fec0ddc9a5697d465ac46e55b7e3cb7647221952\\\",\\\"source_files\\\":[{\\\"path\\\":\\\"src/canon/reconcile/types.ts\\\",\\\"sha256\\\":\\\"c8ad6a9b3dbeb8a6c773dd779a269466fb2648d77d984672e07e1ac29de76ba9\\\",\\\"url\\\":\\\"https://raw.githubusercontent.com/BigBirdReturns/axm-canon/fec0ddc9a5697d465ac46e55b7e3cb7647221952/src/canon/reconcile/types.ts\\\"},{\\\"path\\\":\\\"src/canon/reconcile/validate.ts\\\",\\\"sha256\\\":\\\"df86e85344d8c6071dfa38096fbfc8b09c5b759a66577b454b9fe2e2a7d9528c\\\",\\\"url\\\":\\\"https://raw.githubusercontent.com/BigBirdReturns/axm-canon/fec0ddc9a5697d465ac46e55b7e3cb7647221952/src/canon/reconcile/validate.ts\\\"},{\\\"path\\\":\\\"src/canon/reconcile/canonical.ts\\\",\\\"sha256\\\":\\\"a4ac6378a49a0491a1ee868367146aff331a685b386b395ff39e88dcd29bb440\\\",\\\"url\\\":\\\"https://raw.githubusercontent.com/BigBirdReturns/axm-canon/fec0ddc9a5697d465ac46e55b7e3cb7647221952/src/canon/reconcile/canonical.ts\\\"},{\\\"path\\\":\\\"src/runtime/determinism.ts\\\",\\\"sha256\\\":\\\"6e6f3f1e7866862085a33721b3ad85c79eab9efe3b2788f82069aa643693ef9a\\\",\\\"url\\\":\\\"https://raw.githubusercontent.com/BigBirdReturns/axm-canon/fec0ddc9a5697d465ac46e55b7e3cb7647221952/src/runtime/determinism.ts\\\"},{\\\"path\\\":\\\"src/runtime/fingerprint.ts\\\",\\\"sha256\\\":\\\"34fd69b25fd70a1ad4d798df1c7c6bb9e5324efda35c370fc0782a37c4572cbe\\\",\\\"url\\\":\\\"https://raw.githubusercontent.com/BigBirdReturns/axm-canon/fec0ddc9a5697d465ac46e55b7e3cb7647221952/src/runtime/fingerprint.ts\\\"}],\\\"validator\\\":\\\"validateCanonEvidenceBundle\\\",\\\"node\\\":\\\"v24.19.0\\\",\\\"execution\\\":\\\"Pinned native TypeScript, Node built-in type erasure; no replacement validator\\\",\\\"input\\\":{\\\"format\\\":\\\"axm-canon-evidence-bundle/1\\\",\\\"id\\\":\\\"run3:0b9d7c75a4bea9b431eadfb836e7a22634961ff425f92d9c0f0ad829a8da7fb7\\\",\\\"universeId\\\":\\\"compute-claims\\\",\\\"sources\\\":[{\\\"id\\\":\\\"run3-card-source\\\",\\\"title\\\":\\\"Run 3 A/T0: narrowed cost comparison\\\",\\\"version\\\":\\\"0b9d7c75a4bea9b431eadfb836e7a22634961ff425f92d9c0f0ad829a8da7fb7\\\",\\\"universeId\\\":\\\"compute-claims\\\",\\\"continuityId\\\":\\\"run3-at0:2026-09-24\\\",\\\"custody\\\":\\\"local-private\\\",\\\"sourceHintIds\\\":[\\\"run3-at0\\\"],\\\"digest\\\":\\\"35df91045410f7bd466b17c937a94fb888f3405de2d9e94f6f4bd773e7885675\\\",\\\"fileSizeBytes\\\":10883}],\\\"locators\\\":[{\\\"id\\\":\\\"s1_iluikwp2bz36dzw2stqtny5piblqc5bmuhjryber6f533nxmdwyq\\\",\\\"sourceId\\\":\\\"run3-card-source\\\",\\\"kind\\\":\\\"byte\\\",\\\"unit\\\":\\\"UTF-8 byte offset; end exclusive\\\",\\\"start\\\":4874,\\\"end\\\":5036,\\\"contentDigest\\\":\\\"899cf0a01e73a09255c1988b62901b7c9a0736af4fcf1488f0b42189b8f634f6\\\"},{\\\"id\\\":\\\"s1_seachhku7eqnelefxtca6ihlh33zcjwwkc3cnxs7j36e74d46q2q\\\",\\\"sourceId\\\":\\\"run3-card-source\\\",\\\"kind\\\":\\\"byte\\\",\\\"unit\\\":\\\"UTF-8 byte offset; end exclusive\\\",\\\"start\\\":4142,\\\"end\\\":4390,\\\"contentDigest\\\":\\\"d2317b00edb6274a30c7544c6b81c99cdf5723d22534d3f5ca5da596b18ae7b2\\\"},{\\\"id\\\":\\\"s1_dvuao2ketdbnlh2gbqmmedkac2hhmy64gtuxoil3td2y6y5fveua\\\",\\\"sourceId\\\":\\\"run3-card-source\\\",\\\"kind\\\":\\\"byte\\\",\\\"unit\\\":\\\"UTF-8 byte offset; end exclusive\\\",\\\"start\\\":5653,\\\"end\\\":5816,\\\"contentDigest\\\":\\\"7e374d9665c297926b838d1ea10a361e75268210bfb290cea1472864fc30fa81\\\"}],\\\"records\\\":[{\\\"id\\\":\\\"c1_g3hnneb67hddj4rqkzfugnp3g3e73juykl3s5xu76euciskl2pbq\\\",\\\"sourceId\\\":\\\"run3-card-source\\\",\\\"locatorIds\\\":[\\\"s1_iluikwp2bz36dzw2stqtny5piblqc5bmuhjryber6f533nxmdwyq\\\"],\\\"continuityId\\\":\\\"run3-at0:2026-09-24\\\",\\\"kind\\\":\\\"proposition\\\",\\\"label\\\":\\\"card_accepted_requests\\\",\\\"normalized\\\":{\\\"value\\\":\\\"4336\\\",\\\"shard_id\\\":\\\"sh1_9ec37f2bd0ebe4e636dc1a2de1ff176fa07592084c8e75cbb918536a51e300df\\\",\\\"card_id\\\":\\\"run3-at0\\\",\\\"card_revision_sha256\\\":\\\"0b9d7c75a4bea9b431eadfb836e7a22634961ff425f92d9c0f0ad829a8da7fb7\\\"},\\\"reconciliationKeys\\\":[\\\"run3-at0\\\",\\\"c1_g3hnneb67hddj4rqkzfugnp3g3e73juykl3s5xu76euciskl2pbq\\\"],\\\"producedBy\\\":\\\"extractor\\\",\\\"reviewStatus\\\":\\\"machine-extracted\\\"},{\\\"id\\\":\\\"c1_hpkm2ztbywghh6vphs3uaomyntwdpxqzyld35vgnjynn44ixxzsq\\\",\\\"sourceId\\\":\\\"run3-card-source\\\",\\\"locatorIds\\\":[\\\"s1_seachhku7eqnelefxtca6ihlh33zcjwwkc3cnxs7j36e74d46q2q\\\"],\\\"continuityId\\\":\\\"run3-at0:2026-09-24\\\",\\\"kind\\\":\\\"proposition\\\",\\\"label\\\":\\\"card_statement\\\",\\\"normalized\\\":{\\\"value\\\":\\\"This Hot Aisle MI300X configuration delivered accepted coding work at lower list-price cost than the reported DigitalOcean H100 comparator under the stated workload and accounting. This does not establish a hardware-wide or September-wide ordering.\\\",\\\"shard_id\\\":\\\"sh1_9ec37f2bd0ebe4e636dc1a2de1ff176fa07592084c8e75cbb918536a51e300df\\\",\\\"card_id\\\":\\\"run3-at0\\\",\\\"card_revision_sha256\\\":\\\"0b9d7c75a4bea9b431eadfb836e7a22634961ff425f92d9c0f0ad829a8da7fb7\\\"},\\\"reconciliationKeys\\\":[\\\"run3-at0\\\",\\\"c1_hpkm2ztbywghh6vphs3uaomyntwdpxqzyld35vgnjynn44ixxzsq\\\"],\\\"producedBy\\\":\\\"extractor\\\",\\\"reviewStatus\\\":\\\"machine-extracted\\\"},{\\\"id\\\":\\\"c1_kfkxxp2mcmulknpu54qintovougp6jodfeeiesmjh23sbf4qla3a\\\",\\\"sourceId\\\":\\\"run3-card-source\\\",\\\"locatorIds\\\":[\\\"s1_dvuao2ketdbnlh2gbqmmedkac2hhmy64gtuxoil3td2y6y5fveua\\\"],\\\"continuityId\\\":\\\"run3-at0:2026-09-24\\\",\\\"kind\\\":\\\"proposition\\\",\\\"label\\\":\\\"card_scheduled_requests\\\",\\\"normalized\\\":{\\\"value\\\":\\\"8622\\\",\\\"shard_id\\\":\\\"sh1_9ec37f2bd0ebe4e636dc1a2de1ff176fa07592084c8e75cbb918536a51e300df\\\",\\\"card_id\\\":\\\"run3-at0\\\",\\\"card_revision_sha256\\\":\\\"0b9d7c75a4bea9b431eadfb836e7a22634961ff425f92d9c0f0ad829a8da7fb7\\\"},\\\"reconciliationKeys\\\":[\\\"run3-at0\\\",\\\"c1_kfkxxp2mcmulknpu54qintovougp6jodfeeiesmjh23sbf4qla3a\\\"],\\\"producedBy\\\":\\\"extractor\\\",\\\"reviewStatus\\\":\\\"machine-extracted\\\"}]},\\\"input_sha256\\\":\\\"e791c6cbeac1f253f91321426f0f43df71bdd304bcbba47093caed51a6842ea4\\\",\\\"findings\\\":[],\\\"status\\\":\\\"PASS\\\",\\\"unsupported_review\\\":{\\\"findings\\\":[{\\\"code\\\":\\\"missing-evidence-reviewer\\\",\\\"severity\\\":\\\"error\\\",\\\"subjectId\\\":\\\"c1_g3hnneb67hddj4rqkzfugnp3g3e73juykl3s5xu76euciskl2pbq\\\",\\\"detail\\\":\\\"reviewed evidence must name reviewedBy\\\"},{\\\"code\\\":\\\"missing-evidence-reviewer\\\",\\\"severity\\\":\\\"error\\\",\\\"subjectId\\\":\\\"c1_hpkm2ztbywghh6vphs3uaomyntwdpxqzyld35vgnjynn44ixxzsq\\\",\\\"detail\\\":\\\"reviewed evidence must name reviewedBy\\\"},{\\\"code\\\":\\\"missing-evidence-reviewer\\\",\\\"severity\\\":\\\"error\\\",\\\"subjectId\\\":\\\"c1_kfkxxp2mcmulknpu54qintovougp6jodfeeiesmjh23sbf4qla3a\\\",\\\"detail\\\":\\\"reviewed evidence must name reviewedBy\\\"}],\\\"refused\\\":true},\\\"standing\\\":\\\"machine-extracted/candidate\\\",\\\"reviewer\\\":null,\\\"accepted\\\":false,\\\"boundary\\\":\\\"Evidence-bundle compatibility only. Recall packet and human reconciliation are not run; no fictional domain is assigned.\\\"}\\n\", \"stderr\": \"(node:7852) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time\\n(Use `node --trace-warnings ...` to show where the warning was created)\\n\"}, \"scope\": \"Exact historical filing and retained dependencies only; no present capacity, price, experiment repeat or authoritative reuse\"}\n",
+      "stderr": ""
+    },
+    {
+      "name": "join-boundaries",
+      "command": [
+        "C:\\Users\\Jonathan Sandhu\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
+        "-B",
+        "join/test_join.py"
+      ],
+      "expected_exit": 0,
+      "exit_code": 0,
+      "expectation_met": true,
+      "stdout": "",
+      "stderr": "test_binding_candidate_and_applicability_are_distinct (__main__.JoinChecks.test_binding_candidate_and_applicability_are_distinct) ... ok\ntest_changed_dependency_preserves_binding_but_refuses_applicability (__main__.JoinChecks.test_changed_dependency_preserves_binding_but_refuses_applicability) ... ok\ntest_changed_period_and_evaluator_context_are_refused (__main__.JoinChecks.test_changed_period_and_evaluator_context_are_refused) ... ok\ntest_editing_candidate_to_accepted_grants_no_authority (__main__.JoinChecks.test_editing_candidate_to_accepted_grants_no_authority) ... ok\ntest_invented_claim_id_is_refused (__main__.JoinChecks.test_invented_claim_id_is_refused) ... ok\ntest_missing_binding_is_refused (__main__.JoinChecks.test_missing_binding_is_refused) ... ok\ntest_native_source_byte_tamper_is_rejected (__main__.JoinChecks.test_native_source_byte_tamper_is_rejected) ... ok\n\n----------------------------------------------------------------------\nRan 7 tests in 0.382s\n\nOK\n"
+    },
+    {
+      "name": "superseded-card",
+      "command": [
+        "C:\\Users\\Jonathan Sandhu\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
+        "-B",
+        "join/join.py",
+        "check",
+        "--genesis",
+        "D:/Projects/Organs/AXM/axm-genesis/main",
+        "--output",
+        "join/run3-v1"
+      ],
+      "expected_exit": 1,
+      "exit_code": 1,
+      "expectation_met": true,
+      "stdout": "{\"card_id\": \"run3-at0\", \"card_revision_sha256\": \"2c2b34c7d99026860298380ab9f6b3410ca729ea0bee0d38a8885d7ecc840393\", \"shard_id\": \"sh1_ec8958d98f42ae6ebe6bc83b57f66f504a3124c3c89284f20decdb967f3ba42f\", \"dependency_scope_sha256\": \"aa0f3d2a5bb88d1ea15ff170f520ac4c7a6adcf4e44c59392e777aeee82db033\", \"checked_at\": \"2026-09-25T02:33:10.453391+00:00\", \"rules_location\": \"shard/content/dependency-scope.json\", \"snapshot_notice\": \"Dated check result; rerun join.py check for current applicability\", \"binding\": \"bound\", \"standing\": \"filed/candidate\", \"applicability\": \"REFUSE\", \"authorized_reuse\": false, \"reasons\": [\"Current Run 3 card is missing or has a different revision; revalidation required\"], \"native_verifier\": {\"shard\": \"join\\\\run3-v1\\\\shard\", \"status\": \"PASS\", \"error_count\": 0, \"errors\": [], \"profiles_checked\": [], \"profiles_unchecked\": []}, \"expected_scope\": {\"acceptance\": {\"completion\": {\"source\": \"D:/Projects/Organs/AXM/axm-tools/main/hot-aisle/campaign/results/RUN3-RESULTS.md\", \"source_date\": \"2026-09-24\", \"unit\": \"seconds maximum from scheduled arrival\", \"value\": 60}, \"correctness\": \"Raw registered output passes base AND plus tests\", \"first_token\": {\"source\": \"D:/Projects/Organs/AXM/axm-tools/main/hot-aisle/campaign/results/RUN3-RESULTS.md\", \"source_date\": \"2026-09-24\", \"unit\": \"second maximum from scheduled arrival\", \"value\": 1}}, \"card_id\": \"run3-at0\", \"conditions\": {\"attention\": \"ROCM_ATTN\", \"configuration_source\": {\"experiment_date\": \"2026-09-24\", \"local_inspection_date\": \"2026-09-24\", \"path_or_url\": \"D:/Projects/Organs/AXM/axm-tools/main/hot-aisle/campaign/results/run3-scored-a-t0/env.json\", \"publication_date\": null, \"retrieved_at\": null}, \"engine\": \"vLLM 0.30.0\", \"freeze\": \"run3/freeze-2026-09-24, commit 0b032ac; private registration, not independent timestamp\", \"gpus\": {\"source\": \"D:/Projects/Organs/AXM/axm-tools/main/hot-aisle/campaign/results/run3-scored-a-t0/env.json\", \"source_date\": \"2026-09-24\", \"unit\": \"GPU\", \"value\": 1}, \"hardware\": \"MI300X\", \"image_digest\": \"sha256:2e7da1ad1c66836802072588adea75f9f4991da5f9545b4318e91d422c22ce6a\", \"linear_kernel\": \"AiterFp8BlockScaledMMKernel\", \"model\": \"Qwen/Qwen3-Coder-30B-A3B-Instruct-FP8\", \"model_revision\": \"dcaee4d4dfc5ee71ad501f01f530e5652438fde0\", \"provider\": \"Hot Aisle\", \"region\": \"enc1\", \"replay_factor\": {\"source\": \"D:/Projects/Organs/AXM/axm-tools/main/hot-aisle/campaign/results/run3-scored-a-t0/invocation.json\", \"source_date\": \"2026-09-24\", \"unit\": \"factor\", \"value\": 0.95}, \"seat\": \"enc1-gpuvm004\", \"trace\": \"Azure LLM CODE trace\"}, \"exclusions\": \"Smoke excluded from scored A/T0, included in shared-seat aggregate. Grader-blind HumanEval/32, Mbpp/255, Mbpp/392 kept in denominators. Post-hoc sanitized regrade excluded.\", \"period\": {\"experiment_date\": \"2026-09-24\", \"publication_date\": null, \"publication_date_basis\": null, \"script_end\": {\"source\": \"D:/Projects/Organs/AXM/axm-tools/main/hot-aisle/campaign/results/run3-scored-a-t0/ledger-times.json\", \"source_date\": \"2026-09-24\", \"unit\": \"UTC\", \"value\": \"2026-09-24T01:45:22.642644+00:00\"}, \"script_start\": {\"source\": \"D:/Projects/Organs/AXM/axm-tools/main/hot-aisle/campaign/results/run3-scored-a-t0/ledger-times.json\", \"source_date\": \"2026-09-24\", \"unit\": \"UTC\", \"value\": \"2026-09-24T00:42:43.547291+00:00\"}}, \"purpose\": \"Inspect this historical filing under its exact recorded conditions\"}, \"scope\": \"Exact historical filing and retained dependencies only; no present capacity, price, experiment repeat or authoritative reuse\"}\n",
+      "stderr": ""
+    }
+  ],
+  "input_sha256": {
+    "cards.jsonl": "635a207069270701d8c039998183c9587025b4199b3322cec259b8e96698d3a8",
+    "validator.py": "764c85fb7f3002404dba094491063b5e74475a941bbaadf7bbfe2b91242293ce",
+    "test_validator.py": "69f496acb8419adaffa2d6d2b19a7fff18192f441f74f197f74874c43e6ac3ca",
+    "stranger-2026-09-24/card6-latitude-h100.json": "5de2222228574159c5bf5c287e682d4827640dc5da71d1f50be5825f89149fa8",
+    "stranger-2026-09-24/answer.md": "abc2f954ab91f3982f1f4ab43f476fd559a678c5ab85cc6014126e07bcd987b8",
+    "stranger-2-2026-09-24/response.md": "ba602a6276182451d62a79c06bb82aafac38ba0238e0b448262e0ba051ce62ec",
+    "join/join.py": "e59cb770b5d196e7e5914800df1fa56a0dbb20ce757ef7efa499f27174a83e04",
+    "join/canon_check.mjs": "f992e86fcf322d4f1d363511f79859fa2f1aae659d9be489834cff76fef3ab0d",
+    "join/test_join.py": "94bd73287d7885faa955c168e18969c79b85c0f83117931d64135b41800e519e"
+  },
+  "first_stranger_unchanged_against_git": true,
+  "scope": "Saved evidence recomputation, structural filing, byte binding, native Canon evidence compatibility and historical applicability; no human acceptance, repeat experiment or invoice reconciliation.",
+  "git_index_byte_check": {
+    "observed_at": "2026-09-25T02:34:16.472729+00:00",
+    "files_compared": 75,
+    "matched": true,
+    "method": "git cat-file blob :path bytes compared with each staged working file; includes all signed bundles and frozen handoff inputs"
+  }
+}

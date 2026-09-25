@@ -8,7 +8,7 @@ was derived from the five cards, not imposed on them.
 
 | card | what it is | its spine |
 |---|---|---|
-| run3-at0 | our own measured run, narrowed | Run 3 A/T0 · 2026-09-24 experiment · $0.74/1k accepted own-seat equivalent; $0.90/1k actual shared-seat aggregate · measured + modeled · Hot Aisle credit-funded · inspected and recomputed locally; no repeat |
+| run3-at0 | our own measured run, narrowed | Run 3 A/T0 · 2026-09-24 experiment · $0.74/1k accepted own-seat equivalent; $0.90/1k actual shared-seat aggregate · measured + modeled · Hot Aisle credit-funded · inspected locally; no repeat |
 | inferencex-artifact | a good outside benchmark result | InferenceX B300 / DeepSeek-V4.1-Flash · experiment unknown; artifact 2026-09-22 · mean TTFT 7,152.69 ms · measured + imported + attributed · funding/access unknown · aggregate, no request-level acceptance |
 | clustermax-coreweave | a provider rating with a partly withheld derivation | CoreWeave Platinum · ClusterMAX 3.0 published 2026-09-23 · managed-cluster rating · attributed · audit public; performance/reliability withheld |
 | mercatus-index | a price index with a published method and withheld weights | Mercatus · index 2026-09-21 · MI300X $4.98; H100 $3.89 per GPU-hour · imported + modeled + attributed · volume-weighted on-demand; weights withheld |
@@ -49,10 +49,10 @@ Filing and machine validation do not grant standing or establish independent rep
 
 `python validator.py` runs five machine checks with no dependencies:
 
-1. every card carries the five answers, separate dimensions and checks, publication-date basis, observer-benefit fields and explicit hourly units;
-2. changing the H100 list price moves the modeled ranking while retaining accepted counts; the separate HumanEval sanitizer regrade changes correct outputs from 640 to 2,161 of 2,624, without creating a post-hoc accepted count;
-3. 8,622 scheduled, 8,622 completed and 4,336 accepted are recovered from the replay journal and rejoined retained EvalPlus results through the campaign's native grader. Missing or corrupt replay fails; there is no summary fallback. The $0.74 / $0.90 calculations use the card's declared prices, duration and shared totals, not new invoice reconciliation or a regrade of every shared arm;
-4. six bounded invalid combinations are refused, each naming its rule: index versus accepted-work units, latency as accepted work, managed-cluster medal as seat evidence, provider list price as measured cost, an unknown comparison period, and retrieval copied into publication without dated-source support;
+1. every card carries the five answers, the four flags and the three checks, with dated periods and a funding field;
+2. changing the H100 list price moves the modeled ranking and never the accepted counts; changing the evaluator moves "correct" and never the registered "accepted";
+3. 4,336 accepted and $0.74 / $0.90 come back from the retained Run 3 bytes through the campaign's own grader rule;
+4. six invalid combinations are refused, each naming its rule (an hourly index is not a per-accepted cost; a latency aggregate is not accepted work; a managed-cluster medal is not a seat property; a list price is not a measured cost; prices from different months do not combine without the period; a retrieval date never fills an experiment date);
 5. the run card carries both cost scopes with what each supports, and the credit on its spine.
 
 The sixth check is a blind model handoff, separate from independent human use. On 2026-09-24 a
@@ -66,29 +66,6 @@ field recording whether the observer benefits from the outcome. Its filing and a
 edition remains in commit `3595615`; the Hot Aisle exact publication date and Mercatus publication
 date are now unknown where source support was absent. A second model handoff tests the revised
 instructions; one success would not establish human usability or isolate the cause of improvement.
-
-The [second handoff](stranger-2-2026-09-24/ASSESSMENT.md) used `gpt-6-luna` with a fresh context and
-a captured [Voltage Park source](https://www.voltagepark.com/pricing). Its seventh card passes the
-single-card filing check, avoids both earlier filing errors, distinguishes the two Run 3 cost
-scopes, and explicitly refuses to treat Mercatus as a rental offer. It leaves the provider's
-observer-benefit relationship unknown and its inspection actor/time incomplete. Its response is
-retained unchanged; a structural pass does not make those omissions disappear.
-
-Twelve focused regressions run with `python -m unittest test_validator -v`. The preserved first
-stranger's card intentionally fails the revised filing check for the three documented reasons.
-
-## One card through the existing estate tools
-
-The [Run 3 join](join/README.md) retains the current card with `binding.json`, `standing.json`
-and `applicability.json` in `join/run3-v3/`. Native Genesis verifies its signed bytes using an
-explicit local test key. Native Canon validates the three propositions as machine-extracted
-evidence and refuses a reviewed label without a reviewer. That establishes evidence-bundle
-compatibility, not human reconciliation or accepted standing.
-
-The record remains filed/candidate. Its historical applicability check passes only while the
-recorded conditions and dependency bytes match. A changed evaluator requires revalidation;
-the earlier bound record remains intact. The join README supplies the commands and limits.
-The Run 3 card now records the bounded local recomputation; independent repetition remains null.
 
 ## Glossary for a stranger
 

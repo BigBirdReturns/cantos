@@ -8,3 +8,7 @@ integration/** text eol=lf
 # Campaign evidence and hashed fixtures must stay byte-identical (MANIFEST.sha256).
 hot-aisle/campaign/results/** -text
 hot-aisle/campaign/**/fixtures/** -text
+
+# Signed shelf bundles and hashed blind-handoff packets are byte identities.
+hot-aisle/campaign/shelf/join/run3-*/** -text
+hot-aisle/campaign/shelf/stranger-2-2026-09-24/** -text whitespace=cr-at-eol

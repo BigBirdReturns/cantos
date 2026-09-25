@@ -86,7 +86,7 @@
   <div class="head">
     <div class="amber">
       <div class="num mono">$0.74</div>
-      <div class="lab">per 1,000 accepted · whole run, request to release</div>
+      <div class="lab">per 1,000 accepted · own-seat equivalent, request to release</div>
       <div class="seat">Hot Aisle · 1× MI300X · $2.99/h list</div>
     </div>
     <div>
@@ -102,7 +102,7 @@
       <tbody>
         <tr><td>Completed / failed (of 8,622)</td><td>8,622 / 0</td><td>8,622 / 0</td></tr>
         <tr><td>Accepted</td><td class="win">4,336 (50.3 %)</td><td>4,280 (49.6 %)</td></tr>
-        <tr><td>Time on seat, request to release</td><td>64.7 min</td><td>69.8 min</td></tr>
+        <tr><td>Accounting window, request to release</td><td>64.7 min · own-seat equivalent</td><td>69.8 min · closed rental interval</td></tr>
         <tr><td>First token, p50</td><td>53 ms</td><td class="win">35 ms</td></tr>
         <tr><td>First token, p99</td><td class="win">571 ms</td><td>2,254 ms</td></tr>
         <tr><td>Attention · FP8 kernel, from serve.log</td><td>ROCM_ATTN · AiterFp8BlockScaled</td><td>FLASH_ATTN · FlashInferFp8DeepGEMM</td></tr>
@@ -116,7 +116,7 @@
   <div class="tie">
     <div class="k">Tie line</div>
     <div><span class="big mono">$2.72 / h</span> <span class="note">is where a 1× H100 matches $0.74, if it delivers the same accepted work. 4.41 × 0.74 ÷ 1.20.</span></div>
-    <div class="k">Under it today</div>
+    <div class="k">Modeled H100 price examples</div>
     <div class="mono">Latitude.sh $1.68 → $0.46 · Voltage Park $1.99 → $0.54 · Massed Compute $2.73 → $0.74 <span class="note">List prices read 2026-09-24. Nobody has run them on this workload. That is the next run.</span></div>
     <div class="k">Post-hoc</div>
     <div class="note">Stripping code fences and test scaffolding before grading moved HumanEval+ from 24.4 % to 82.4 % correct on the same MI300X run and bill. Check your harness before you blame the GPU.</div>
