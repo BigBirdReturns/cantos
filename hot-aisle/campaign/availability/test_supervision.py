@@ -198,7 +198,7 @@ class SupervisionTests(unittest.TestCase):
         self.config_path.write_text(json.dumps(self.cfg))
         for status, monitor_code in [('unknown', 1), ('monitor_failed', 2),
                                      ('release_unconfirmed', None), ('candidate_monitor_hold', None),
-                                     ('configuration_error', 2)]:
+                                     ('configuration_error', 2), ('permission_refused', None)]:
             with self.subTest(status=status):
                 result = {'status': status}
                 if monitor_code is not None:
@@ -209,6 +209,27 @@ class SupervisionTests(unittest.TestCase):
                     self.assertEqual(s.main(), 1)
                 self.assertEqual(json.loads(output.getvalue())['status'], status)
                 self.assertEqual(json.loads((self.state/'supervision-latest.json').read_text())['status'], status)
+
+    def test_not_acquired_permission_refusal_is_not_successful_closure(self):
+        (self.state/'acquisition-claim.json').write_text(json.dumps({'created_utc': s.now()}))
+        (self.state/'allocation.json').write_text(json.dumps({'phase': 'not_acquired'}))
+        result = {'disposition': 'hold_permission_refused', 'reason': 'fixture automatic permission review'}
+        (self.state/'executor-result.json').write_text(json.dumps(result))
+        with patch.object(s.subprocess, 'run', side_effect=AssertionError('must not sample or dispatch')), \
+             patch.object(s, 'launch_task', side_effect=AssertionError('must not relaunch')):
+            state = s.tick(self.cfg, self.config_path)
+        self.assertEqual(state['status'], 'permission_refused')
+        self.assertEqual(state['allocation']['phase'], 'not_acquired')
+        self.assertEqual(state['executor_result'], result)
+
+    def test_permission_refusal_does_not_close_an_existing_allocation(self):
+        (self.state/'acquisition-claim.json').write_text(json.dumps({'created_utc': s.now()}))
+        (self.state/'allocation.json').write_text(json.dumps({'phase': 'acquired'}))
+        (self.state/'executor-result.json').write_text(json.dumps({'disposition': 'hold_permission_refused'}))
+        with patch.object(s.subprocess, 'run', side_effect=AssertionError('must not sample or dispatch')), \
+             patch.object(s, 'launch_task', side_effect=AssertionError('startup grace remains')):
+            state = s.tick(self.cfg, self.config_path)
+        self.assertEqual(state['status'], 'acquisition_claimed')
 
     def test_success_status_does_not_hide_nonzero_monitor_exit(self):
         self.cfg['runtime_sha256'] = {}

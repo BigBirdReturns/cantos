@@ -169,6 +169,10 @@ def tick(cfg, config_path):
         process = read_state(state/'executor-process.json')
         allocation = read_state(state/'allocation.json')
         if allocation.get('phase') in ('released', 'not_acquired'):
+            executor_result = read_state(state/'executor-result.json')
+            if executor_result.get('disposition') == 'hold_permission_refused':
+                return {'status': 'permission_refused', 'allocation': allocation,
+                        'executor': process, 'executor_result': executor_result}
             return {'status': 'allocation_closed', 'allocation': allocation, 'executor': process}
         heartbeat = process.get('heartbeat_utc', read_state(claim).get('created_utc'))
         try:
@@ -287,7 +291,7 @@ def main():
     print(json.dumps(result))
     failed = result.get('status') in (
         None, 'unknown', 'monitor_failed', 'candidate_monitor_hold',
-        'configuration_error', 'release_unconfirmed',
+        'configuration_error', 'release_unconfirmed', 'permission_refused',
     ) or result.get('returncode') not in (None, 0)
     return 1 if failed else 0
 

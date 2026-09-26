@@ -25,16 +25,18 @@ class TickFailureTests(unittest.TestCase):
             'timer_unit': 'fixture.timer',
         }))
 
-    def invoke(self, envelope):
+    def invoke(self, envelope, allow_timer_stop=False):
         estate = Mock()
         estate.write_artifacts.return_value = (self.root/'ssh_config', self.root/'known_hosts')
         estate.powershell_invocation.return_value = "& 'fixture-python' '-B' 'fixture-supervision.py'"
         estate.run_peer_script.return_value = dict(envelope)
         output = io.StringIO()
+        service = Mock(return_value=Mock(returncode=0)) if allow_timer_stop else Mock(side_effect=AssertionError('unexpected local service operation'))
+        self.last_service_call = service
         with patch.dict(n.sys.modules, {'estate_peer': estate}), \
              patch.object(n.sys, 'argv', ['n01_tick.py', '--config', str(self.config)]), \
              patch.object(n.sys, 'path', list(n.sys.path)), \
-             patch.object(n.subprocess, 'run', side_effect=AssertionError('unexpected local service operation')), \
+             patch.object(n.subprocess, 'run', service), \
              redirect_stdout(output):
             code = n.main()
         return code, json.loads(output.getvalue()), estate
@@ -80,6 +82,28 @@ class TickFailureTests(unittest.TestCase):
         self.assertEqual(code, 0)
         self.assertEqual(result['campaign']['status'], 'waiting_capacity')
         self.assertNotIn('campaign_response_error', result)
+
+    def test_permission_hold_stops_timer_only_after_no_allocation_confirmed(self):
+        campaign = {'status': 'permission_refused', 'allocation': {'phase': 'not_acquired'},
+                    'executor_result': {'disposition': 'hold_permission_refused'}}
+        code, result, _ = self.invoke({'ok': False, 'classification': 'COMMAND_FAILURE',
+                                      'exit_code': 1, 'stdout': json.dumps(campaign)}, allow_timer_stop=True)
+        self.assertEqual(code, 1)
+        self.assertEqual(result['classification'], 'COMMAND_FAILURE')
+        self.assertEqual(result['campaign'], campaign)
+        self.assertTrue(result['timer_stop_requested'])
+        self.last_service_call.assert_called_once_with(
+            ['systemctl', '--user', 'stop', 'fixture.timer'], capture_output=True, timeout=15)
+
+    def test_permission_hold_keeps_timer_for_paid_or_uncertain_allocation(self):
+        for allocation in ({'phase': 'acquired'}, {'phase': 'create_pending'}, {'phase': 'released'}, {}, None):
+            with self.subTest(allocation=allocation):
+                campaign = {'status': 'permission_refused', 'allocation': allocation}
+                code, result, _ = self.invoke({'ok': False, 'classification': 'COMMAND_FAILURE',
+                                              'exit_code': 1, 'stdout': json.dumps(campaign)})
+                self.assertEqual(code, 1)
+                self.assertNotIn('timer_stop_requested', result)
+                self.last_service_call.assert_not_called()
 
 
 if __name__ == '__main__':

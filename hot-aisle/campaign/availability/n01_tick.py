@@ -43,7 +43,12 @@ def main():
             result['ok'] = False
             result['campaign_response_error'] = 'INVALID_CAMPAIGN_RESPONSE: ' + str(exc)
     campaign = result.get('campaign', {})
-    if campaign.get('status') in ('expired', 'stopped') or (
+    permission_hold_without_allocation = (
+        campaign.get('status') == 'permission_refused' and
+        isinstance(campaign.get('allocation'), dict) and
+        campaign['allocation'].get('phase') == 'not_acquired'
+    )
+    if permission_hold_without_allocation or campaign.get('status') in ('expired', 'stopped') or (
         current >= dt.datetime.fromisoformat(cfg['expires_utc']) and
         campaign.get('status') == 'allocation_closed'
     ):

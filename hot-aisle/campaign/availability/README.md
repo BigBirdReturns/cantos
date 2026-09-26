@@ -39,6 +39,13 @@ team entry even when the root handle list was not drawn. Failed observations exi
 nonzero through the supervisor, remote PowerShell and N01 service, with their
 campaign JSON retained beside Estate's transport result.
 
+An executor's successful process exit is not workload success. A retained
+`hold_permission_refused` result becomes `permission_refused` and exits nonzero.
+N01 stops acquisition scheduling for that hold only when the allocation is
+confirmed `not_acquired`; possible paid resources keep their recovery path.
+Clearing a tool denial requires the appropriate explicit approval, not a retry
+through another tool or host.
+
 The wrapper watches executor lifetime and can invoke a release-only recovery lane
 after cancellation, timeout or a stale heartbeat. An uncertain acquisition or
 failed release remains held and cannot trigger another rental. This is
