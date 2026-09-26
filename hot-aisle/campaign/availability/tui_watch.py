@@ -2,7 +2,9 @@
 """One read-only Hot Aisle listing observation; scheduling belongs to the caller.
 
 Private JSON configuration owns all connection locations. This program can send
-only n (after proving the loaded, idle team dashboard), Escape, and Ctrl-C. It
+only n (after proving the loaded, idle team dashboard), one PageDown on the
+expected provisioning page when its resource list is below the viewport, Escape,
+and Ctrl-C. It
 never selects a resource, provisions, purchases, deletes, or invokes a model.
 Raw terminal captures contain account information: keep state_dir private.
 """
@@ -77,6 +79,9 @@ def clean_terminal(raw):
     # Kitty graphics, OSC, and other terminal control strings never carry rows.
     text = re.sub(r"\x1b_[\s\S]*?\x1b\\", "", text)
     text = re.sub(r"\x1b\][\s\S]*?(?:\x07|\x1b\\)", "", text)
+    # Colour/style transitions are inline, not new lines. Remote TERM settings
+    # can add SGR between every word of the same breadcrumb or key hint.
+    text = re.sub(r"\x1b\[[0-9;:]*m", "", text)
     text = re.sub(r"\x1b\[[0-?]*[ -/]*[@-~]", "\n", text)
     text = re.sub(r"\x1b[()][A-Za-z0-9]|\x1b.", "", text)
     lines = []
@@ -95,8 +100,9 @@ def dashboard_state(text, config):
         return "unknown"
     if "Provision" in headers[-1].group():
         return "unknown"
-    # The observed root view identifies the handle before automatic team entry.
-    if not re.search(r"@" + re.escape(config["team_handle"]) + r"(?=\W|$)", text):
+    # Auto-entry can skip the populated root view. When handles are displayed,
+    # require ours; otherwise the exact team breadcrumb gates this read-only key.
+    if re.search(r"@[A-Za-z0-9_-]+", text) and not re.search(r"@" + re.escape(config["team_handle"]) + r"(?=\W|$)", text):
         return "unknown"
     start = next((h.start() for h in headers if header.search(h.group())), len(text))
     dashboard = text[start:]
@@ -166,6 +172,18 @@ def abort_reason(config, now=None):
     return None
 
 
+def needs_page_down(text, config):
+    headers = list(re.finditer(r"Hot Aisle[^\n]*", text))
+    if not headers:
+        return False
+    expected = r"Provision Resources - " + re.escape(config['team_name']) + r"\s*[\u2800-\u28ff]*\s*$"
+    if not re.search(expected, headers[-1].group()):
+        return False
+    section = text[text.find('Provision Resources - '):]
+    return ('more below' in section and 'pgdn page down' in section and
+            classify_menu(text, config).get('reason') == 'resource list not loaded')
+
+
 @contextmanager
 def sample_lock(state):
     path = state / "sample.lock"
@@ -207,11 +225,22 @@ def ssh_arguments(config, estate, registry, ssh_config):
             "-tt", "-i", Path(config["ssh_identity"]).as_posix(), config["provider_host"]]
 
 
-def capture(config, argv, raw_path):
+def ssh_environment(estate):
+    env = estate._ssh_child_environment()
+    if env is not None:
+        # Git OpenSSH executes its implicit ProxyJump command using SHELL -c.
+        # sshd's cmd.exe setting is incompatible; use Git's default POSIX shell.
+        env = {k: v for k, v in env.items() if not (
+            k.casefold() == 'shell' and Path(v).name.lower() in
+            ('cmd.exe', 'powershell.exe', 'pwsh.exe'))}
+    return env
+
+
+def capture(config, argv, raw_path, child_env=None):
     chunks, reader_errors, guard = [], [], threading.Lock()
     kwargs = {"creationflags": subprocess.CREATE_NO_WINDOW} if os.name == "nt" else {}
     proc = subprocess.Popen(argv, stdin=subprocess.PIPE, stdout=subprocess.PIPE,
-                            stderr=subprocess.STDOUT, **kwargs)
+                            stderr=subprocess.STDOUT, env=child_env, **kwargs)
     def reader():
         try:
             with raw_path.open("xb") as saved:
@@ -234,12 +263,13 @@ def capture(config, argv, raw_path):
     thread = threading.Thread(target=reader, daemon=True)
     thread.start()
     sent_n = False
+    sent_page_down = False
     result = {"classification": "unknown", "reason": "terminal deadline elapsed"}
     stable = None
     stable_since = None
     started = time.monotonic()
     def send(keys):
-        if keys not in (b"n", b"\x1b", b"\x03"):
+        if keys not in (b"n", b"\x1b", b"\x03", b"\x1b[6~"):
             raise ValueError("read-only key boundary")
         if proc.poll() is None:
             try:
@@ -269,6 +299,9 @@ def capture(config, argv, raw_path):
                     sent_n = True
             else:
                 candidate = classify_menu(text, config)
+                if not sent_page_down and needs_page_down(text, config):
+                    send(b"\x1b[6~")
+                    sent_page_down = True
                 if candidate["classification"] != "unknown":
                     signature = json.dumps(candidate, sort_keys=True)
                     if signature != stable:
@@ -297,6 +330,7 @@ def capture(config, argv, raw_path):
         proc.stdin.close()
         proc.stdout.close()
     result["sent_provision_menu_key"] = sent_n
+    result["sent_page_down"] = sent_page_down
     if thread.is_alive() or reader_errors:
         result = {"classification": "unknown", "reason": "capture reader failed or did not close"}
     return result
@@ -333,7 +367,8 @@ def run_once(config, force=False):
                 elif abort_reason(config):
                     result = {"classification": abort_reason(config), "reason": "cancelled after front door probe"}
                 else:
-                    result = capture(config, ssh_arguments(config, estate, registry, ssh_config), raw_path)
+                    result = capture(config, ssh_arguments(config, estate, registry, ssh_config), raw_path,
+                                     ssh_environment(estate))
                 observation.update(result)
             except (OSError, ValueError, RuntimeError, subprocess.SubprocessError) as exc:
                 observation.update(classification="unknown", reason="observation failed", error=type(exc).__name__ + ": " + str(exc))

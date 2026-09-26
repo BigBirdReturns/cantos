@@ -227,11 +227,18 @@ def tick(cfg, config_path):
     except ValueError:
         return {'status': 'monitor_failed', 'returncode': r.returncode,
                 'stdout': r.stdout[-2000:], 'stderr': r.stderr[-2000:]}
+    return dispatch_observation(cfg, latest, r.returncode)
+
+
+def dispatch_observation(cfg, latest, returncode):
+    """Consume a real current sample, including an explicit operator recheck."""
+    state = Path(cfg['state_dir'])
+    claim = state/'acquisition-claim.json'
     status = latest.get('classification')
     if status not in ('candidate', 'candidate_review_required'):
         return {'status': 'waiting_capacity' if status == 'no_offer' else status,
-                'monitor': latest, 'returncode': r.returncode}
-    if r.returncode != 0:
+                'monitor': latest, 'returncode': returncode}
+    if returncode != 0:
         return {'status': 'candidate_monitor_hold', 'monitor': latest}
     observed = dt.datetime.fromisoformat(latest['started_utc'])
     if not 0 <= (dt.datetime.now(dt.timezone.utc)-observed).total_seconds() <= 120:
@@ -278,7 +285,11 @@ def main():
     result['tick_utc'] = now()
     write(Path(cfg['state_dir'])/'supervision-latest.json', result)
     print(json.dumps(result))
-    return 1 if result.get('status') in ('monitor_failed', 'candidate_monitor_hold') else 0
+    failed = result.get('status') in (
+        None, 'unknown', 'monitor_failed', 'candidate_monitor_hold',
+        'configuration_error', 'release_unconfirmed',
+    ) or result.get('returncode') not in (None, 0)
+    return 1 if failed else 0
 
 
 if __name__ == '__main__':

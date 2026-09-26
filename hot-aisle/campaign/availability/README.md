@@ -8,8 +8,9 @@ front door, then routes the provider connection through that peer with pinned
 host keys. The key remains on its owning seat. Connection locations, team,
 private evidence directory, expiry and sampling interval belong in configuration.
 
-The monitor sends only the provisioning-menu key after identifying the expected,
-fully loaded, idle team dashboard, followed by Escape and Ctrl-C. A listing is
+The monitor sends the provisioning-menu key after identifying the expected,
+fully loaded, idle team dashboard, at most one PageDown when the expected page
+explicitly says its list is below the viewport, then Escape and Ctrl-C. A listing is
 never treated as a delivered VM. Unknown screens remain unknown. Sampling is
 serialized, at least 30 minutes apart, and stops on expiry or a private STOP file.
 Raw captures and append-only observations are private; do not put them in this
@@ -28,6 +29,15 @@ children at disconnect. Launch workers through registered Windows Task Scheduler
 tasks, with their names held in private configuration. The deployed interactive
 principal requires that user to remain logged in. Verify an actual harmless task
 survives the remote command ending before enabling automatic acquisition.
+
+Qualify the provider connection inside the actual scheduled remote environment
+as well. Windows sshd can set `SHELL=cmd.exe`, which breaks Git SSH's implicit
+ProxyJump command. `ssh_environment()` applies Estate's child-environment cleanup
+and removes that incompatible shell override for the SSH child only. Styled TUI
+text preserves inline SGR words, and exact loaded team breadcrumbs allow automatic
+team entry even when the root handle list was not drawn. Failed observations exit
+nonzero through the supervisor, remote PowerShell and N01 service, with their
+campaign JSON retained beside Estate's transport result.
 
 The wrapper watches executor lifetime and can invoke a release-only recovery lane
 after cancellation, timeout or a stale heartbeat. An uncertain acquisition or

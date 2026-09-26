@@ -26,15 +26,22 @@ def main():
     if (state/'STOP').exists():
         stop = "from pathlib import Path; Path(" + repr(cfg['seat_state_dir']) + ").joinpath('STOP').touch()"
         script = ep.powershell_invocation([cfg['seat_python'], '-c', stop]) + '\n' + script
+    # Preserve the native Python status through the remote PowerShell carrier.
+    script += '\nexit $LASTEXITCODE'
     result = ep.run_peer_script(cfg['seat_peer'], script, registry, generated, timeout_seconds=135)
     result['observed_utc'] = current.isoformat()
-    if result.get('ok'):
+    # COMMAND_FAILURE can carry a complete, useful campaign result. Keep that
+    # result without replacing Estate's transport/ingress classification.
+    if result.get('stdout', '').strip() or result.get('ok'):
         try:
-            result['campaign'] = json.loads(result['stdout'])
+            campaign = json.loads(result.get('stdout', ''))
+            if not isinstance(campaign, dict):
+                raise ValueError('campaign response must be an object')
+            result['campaign'] = campaign
             del result['stdout']
-        except ValueError:
+        except (ValueError, KeyError) as exc:
             result['ok'] = False
-            result['classification'] = 'INVALID_CAMPAIGN_RESPONSE'
+            result['campaign_response_error'] = 'INVALID_CAMPAIGN_RESPONSE: ' + str(exc)
     campaign = result.get('campaign', {})
     if campaign.get('status') in ('expired', 'stopped') or (
         current >= dt.datetime.fromisoformat(cfg['expires_utc']) and

@@ -1,6 +1,8 @@
 """Offline regressions at cancellation, stale-observation and ownership boundaries."""
 import concurrent.futures
+from contextlib import redirect_stdout
 import datetime as dt
+import io
 import json
 import os
 from pathlib import Path
@@ -190,6 +192,39 @@ class SupervisionTests(unittest.TestCase):
         self.assertIn("uncertain ownership", prompt)
         self.assertFalse(result["closure_confirmed_by_executor"])
         self.assertEqual(second["recovery_status"], "already_claimed")
+
+    def test_operational_failures_are_nonzero_and_remain_parseable(self):
+        self.cfg['runtime_sha256'] = {}
+        self.config_path.write_text(json.dumps(self.cfg))
+        for status, monitor_code in [('unknown', 1), ('monitor_failed', 2),
+                                     ('release_unconfirmed', None), ('candidate_monitor_hold', None),
+                                     ('configuration_error', 2)]:
+            with self.subTest(status=status):
+                result = {'status': status}
+                if monitor_code is not None:
+                    result['returncode'] = monitor_code
+                output = io.StringIO()
+                with patch.object(s.sys, 'argv', ['supervision.py', '--config', str(self.config_path)]), \
+                     patch.object(s, 'tick', return_value=result), redirect_stdout(output):
+                    self.assertEqual(s.main(), 1)
+                self.assertEqual(json.loads(output.getvalue())['status'], status)
+                self.assertEqual(json.loads((self.state/'supervision-latest.json').read_text())['status'], status)
+
+    def test_success_status_does_not_hide_nonzero_monitor_exit(self):
+        self.cfg['runtime_sha256'] = {}
+        self.config_path.write_text(json.dumps(self.cfg))
+        with patch.object(s.sys, 'argv', ['supervision.py', '--config', str(self.config_path)]), \
+             patch.object(s, 'tick', return_value={'status': 'waiting_capacity', 'returncode': 1}), \
+             redirect_stdout(io.StringIO()):
+            self.assertEqual(s.main(), 1)
+
+    def test_normal_capacity_wait_returns_zero(self):
+        self.cfg['runtime_sha256'] = {}
+        self.config_path.write_text(json.dumps(self.cfg))
+        with patch.object(s.sys, 'argv', ['supervision.py', '--config', str(self.config_path)]), \
+             patch.object(s, 'tick', return_value={'status': 'waiting_capacity', 'returncode': 0}), \
+             redirect_stdout(io.StringIO()):
+            self.assertEqual(s.main(), 0)
 
 
 if __name__ == "__main__":

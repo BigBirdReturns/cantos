@@ -23,6 +23,11 @@ Use the configured Estate resolver and registry for N01/peer routes and pins.
 The provider connection goes through SSH ProxyJump to the registry's front door;
 the campaign private key stays on W01. The provider's existing known-host pin
 must match. Inspect the actual TUI screen before each consequential input.
+The deployed monitor's `ssh_environment(estate)` helper supplies the qualified
+child environment: use it for a Python-launched provider SSH process. Windows
+sshd's inherited SHELL=cmd.exe breaks Git SSH ProxyJump; Estate's descriptor
+cleanup alone does not fix that shell override. Do not change global shell or
+SSH settings. Preserve inline terminal styles when interpreting the live screen.
 At the root screen, `n` means create a team; it is a provisioning key only on
 the expected team's dashboard. Do not replay historical row positions blindly.
 

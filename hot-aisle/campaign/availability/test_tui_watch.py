@@ -78,6 +78,33 @@ class ParserTests(unittest.TestCase):
         raw = b"\x1b_Gbinary-secret\x1b\\\x1b]0;window\x07\x1b[2JNo items.\r\n"
         self.assertEqual(w.clean_terminal(raw), "No items.")
 
+    def test_coloured_auto_entry_preserves_exact_team_and_key_hint(self):
+        # Observed remote TUI: populated root was skipped, SGR split each label.
+        auto = DASHBOARD[DASHBOARD.index('Hot Aisle \u203a'):]
+        coloured = auto.replace(' ', '\x1b[0m \x1b[1;38;5;205m')
+        text = w.clean_terminal(coloured)
+        self.assertEqual(w.dashboard_state(text, CONFIG), 'ready')
+        self.assertEqual(w.dashboard_state(text.replace('Example Team', 'Other Team'), CONFIG), 'unknown')
+        self.assertEqual(w.dashboard_state(text.replace('$0.00/hour', '$2.99/hour'), CONFIG), 'active_resources')
+
+    def test_proxy_environment_uses_estate_cleanup_without_mutating_parent(self):
+        from unittest.mock import Mock
+        estate = Mock()
+        original = {'SHELL': 'cmd.exe', 'RETAIN': 'value'}
+        estate._ssh_child_environment.return_value = original
+        self.assertEqual(w.ssh_environment(estate), {'RETAIN': 'value'})
+        self.assertEqual(original['SHELL'], 'cmd.exe')
+        estate._ssh_child_environment.return_value = None
+        self.assertIsNone(w.ssh_environment(estate))
+
+    def test_scroll_only_expected_provision_page_with_hidden_resource_list(self):
+        page = ('Hot Aisle \u203a Example Team \u203a Provision Resources - Example Team\n'
+                'Capacity and Availability\nmore below - b/pgup page up / f/pgdn page down\n')
+        self.assertTrue(w.needs_page_down(page, CONFIG))
+        self.assertFalse(w.needs_page_down(page.replace('Example Team', 'Another Team'), CONFIG))
+        self.assertFalse(w.needs_page_down(page + 'Hot Aisle \u203a Example Team\n', CONFIG))
+        self.assertFalse(w.needs_page_down(page + 'Available Resources\nNo items.\n', CONFIG))
+
 
 class StateTests(unittest.TestCase):
     def setUp(self):
