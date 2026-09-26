@@ -198,6 +198,36 @@ class DiffFlagTests(unittest.TestCase):
 
 
 class FingerprintShellTests(unittest.TestCase):
+    def test_mi300x_processing_accelerator_is_counted_without_other_vendors(self):
+        bash = shutil.which("bash")
+        if bash is None:
+            self.skipTest("bash required for native PCI enumeration")
+        text = FINGERPRINT_SH.read_text(encoding="utf-8")
+        function = text.split("gpu_pci_addrs() {", 1)[1].split("\n}\n", 1)[0]
+        with tempfile.TemporaryDirectory(prefix=".probe-amd-pci-", dir=HERE) as temp:
+            pci = Path(temp) / "pci"
+            for bdf, vendor, cls in (
+                ("0000:ff:00.0", "0x1002", "0x120000"),
+                ("0000:00:02.0", "0x8086", "0x030000"),
+                ("0000:01:00.0", "0x1002", "0x020000"),
+                ("0000:09:00.0", "0x10de", "0x030200"),
+                ("0000:0a:00.0", "0x10de", "0x120000"),
+            ):
+                # Windows cannot create colon-named PCI fixture directories.
+                dev = pci / (bdf.replace(":", "_") if os.name == "nt" else bdf)
+                dev.mkdir(parents=True)
+                (dev / "vendor").write_text(vendor, encoding="ascii")
+                (dev / "class").write_text(cls, encoding="ascii")
+            for vendor, expected in (("amd", "0000:ff:00.0"), ("nvidia", "0000:09:00.0")):
+                if os.name == "nt":
+                    expected = expected.replace(":", "_")
+                script = ('SHOP_PROBE_PCI_SYSFS_ROOT="' + Path(temp).name + '/pci"\n'
+                          + "VENDOR=" + vendor + "\ngpu_pci_addrs() {" + function + "\n}\ngpu_pci_addrs\n")
+                proc = subprocess.run([bash, "-s"], input=script.encode("utf-8"),
+                                      capture_output=True, cwd=str(HERE), timeout=10)
+                self.assertEqual(proc.returncode, 0, proc.stderr)
+                self.assertEqual(proc.stdout.decode("utf-8").strip(), expected)
+
     def test_bash_minus_n_parses_cleanly(self):
         bash = shutil.which("bash")
         if bash is None:
