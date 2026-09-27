@@ -64,6 +64,39 @@ class SourceTasks(unittest.TestCase):
         self.assertEqual(task_sources.HERE, op["inputs"]["adapter_code"])
         self.assertEqual(task_sources.PROVIDER_OWNER, op["inputs"]["provider_owner_code"])
 
+    def test_availability_review_holds_stale_and_unavailable_offers(self):
+        task = self.offer_source()
+        task["availability_review"] = {"as_of": "2026-09-27T00:00:00Z", "max_age_hours": 24}
+        stale = task_sources.prepare(task, self.base)["execute"]()["offers"][0]
+        self.assertEqual("stale_observation", stale["availability_review"]["status"])
+        self.assertEqual(72, stale["availability_review"]["age_hours"])
+        self.assertFalse(stale["availability_review"]["rentable_now"])
+        self.assertIn("stale_observation", stale["holds"][0])
+        self.assertEqual(0.46, stale["modeled_targets"]["values"]["modeled_per_1k_accepted"])
+
+        task["availability_review"]["as_of"] = "2026-09-24T12:00:00Z"
+        current = task_sources.prepare(task, self.base)["execute"]()["offers"][0]
+        self.assertEqual("observed_available_within_window", current["availability_review"]["status"])
+        self.assertEqual([], current["holds"])
+        self.assertFalse(current["availability_review"]["rentable_now"])
+
+        row = copy.deepcopy(self.offer)
+        row["availability_observed"] = "out_of_stock"
+        task = self.offer_source(row)
+        task["availability_review"] = {"as_of": "2026-09-24T12:00:00Z", "max_age_hours": 24}
+        unavailable = task_sources.prepare(task, self.base)["execute"]()["offers"][0]
+        self.assertEqual("observed_unavailable", unavailable["availability_review"]["status"])
+        self.assertIn("observed_unavailable", unavailable["holds"][0])
+
+    def test_availability_review_refuses_invalid_time_order(self):
+        task = self.offer_source()
+        task["availability_review"] = {"as_of": "2026-09-23T00:00:00Z", "max_age_hours": 24}
+        with self.assertRaisesRegex(ValueError, "later than review"):
+            task_sources.prepare(task, self.base)["execute"]()
+        task["availability_review"]["as_of"] = "2026-09-27"
+        with self.assertRaisesRegex(ValueError, "timezone-aware"):
+            task_sources.prepare(task, self.base)
+
     def test_caller_identity_is_not_a_parameter_and_extra_keys_fail(self):
         task = self.offer_source()
         first = task_sources.prepare(task, self.base)["parameters"]

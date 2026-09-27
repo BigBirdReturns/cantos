@@ -37,6 +37,52 @@ def _positive(value):
     return type(value) in (int, float) and math.isfinite(value) and value > 0
 
 
+def _timestamp(value, label):
+    if not isinstance(value, str) or not value.strip():
+        raise ValueError(label + " must be a timezone-aware ISO timestamp")
+    try:
+        parsed = dt.datetime.fromisoformat(value.replace("Z", "+00:00"))
+    except ValueError as exc:
+        raise ValueError(label + " must be a timezone-aware ISO timestamp") from exc
+    if parsed.tzinfo is None:
+        raise ValueError(label + " must be a timezone-aware ISO timestamp")
+    return parsed.astimezone(dt.timezone.utc)
+
+
+def _availability(row, review):
+    observed = row["availability_observed"]
+    stamp = row.get("availability_ts")
+    if stamp is not None:
+        observed_at = _timestamp(stamp, "availability_ts")
+    else:
+        observed_at = None
+    if observed != "unknown" and observed_at is None:
+        raise ValueError("availability observation needs availability_ts")
+    age = None
+    if review is not None and observed_at is not None:
+        age = (review["as_of_dt"] - observed_at).total_seconds() / 3600
+        if age < 0:
+            raise ValueError("availability observation is later than review as_of")
+    if observed == "unknown":
+        status = "unobserved"
+    elif observed != "available":
+        status = "observed_unavailable"
+    elif review is None:
+        status = "age_not_assessed"
+    elif age > review["max_age_hours"]:
+        status = "stale_observation"
+    else:
+        status = "observed_available_within_window"
+    return {
+        "status": status, "observed": observed, "observed_at": stamp,
+        "as_of": review["as_of"] if review else None,
+        "max_age_hours": review["max_age_hours"] if review else None,
+        "age_hours": age,
+        "rentable_now": False,
+        "next_check": "Query the provider for a current offer and confirm account eligibility, allocation, full billing terms and successful provisioning before placement."
+    }
+
+
 def _source(task, base):
     source = task.get("source")
     if not isinstance(source, str) or not source.strip():
@@ -112,7 +158,17 @@ def _provider(task, source):
             raise ValueError("price_scenario needs only rate_usd_per_gpu_hour")
         if not _positive(scenario["rate_usd_per_gpu_hour"]):
             raise ValueError("price_scenario rate must be a positive finite number, not a boolean")
-    parameters = {"offer_id": offer_id, "price_scenario": copy.deepcopy(scenario)}
+    review = task.get("availability_review")
+    if review is not None:
+        if not isinstance(review, dict) or set(review) != {"as_of", "max_age_hours"}:
+            raise ValueError("availability_review needs as_of and max_age_hours")
+        if not _positive(review["max_age_hours"]):
+            raise ValueError("availability_review max_age_hours must be positive and finite")
+        as_of = _timestamp(review["as_of"], "availability_review as_of")
+        review = {"as_of": as_of.isoformat().replace("+00:00", "Z"),
+                  "as_of_dt": as_of, "max_age_hours": review["max_age_hours"]}
+    parameters = {"offer_id": offer_id, "price_scenario": copy.deepcopy(scenario),
+                  "availability_review": {k: v for k, v in review.items() if k != "as_of_dt"} if review else None}
     inputs = {"adapter_code": HERE, "provider_owner_code": PROVIDER_OWNER,
               "provider_source": source,
               "provider_schema": CAMPAIGN / "providers/SCHEMA.md",
@@ -141,6 +197,9 @@ def _provider(task, source):
             model_rate = scenario["rate_usd_per_gpu_hour"] if scenario else rate
             model_input["rate_usd_per_gpu_hour"] = model_rate
             holds = []
+            availability = _availability(row, review)
+            if availability["status"] != "observed_available_within_window":
+                holds.append("placement requires a current available offer; availability status: " + availability["status"])
             if rate is None:
                 holds.append("source price unknown")
             if row["gpus"] is None:
@@ -155,6 +214,7 @@ def _provider(task, source):
                                   "source_quote": row["source_quote"], "retrieved_at": row["retrieved_at"],
                                   "publication_date": None, "publication_date_basis": None,
                                   "semantic_source_validation": False},
+                "availability_review": availability,
                 "modeled_targets": {"rate_usd_per_gpu_hour": model_rate,
                                     "price_scenario": copy.deepcopy(scenario),
                                     "values": owner.targets(model_input),
@@ -223,7 +283,7 @@ def prepare(task, base):
     kind = task.get("task_class")
     allowed = {"task_class", "id", "source", "actor"}
     if kind == "provider-intake":
-        allowed |= {"offer_id", "price_scenario"}
+        allowed |= {"offer_id", "price_scenario", "availability_review"}
     elif kind != "benchmark-import":
         raise ValueError("unsupported source task_class")
     extra = set(task) - allowed

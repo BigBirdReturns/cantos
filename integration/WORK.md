@@ -89,6 +89,17 @@ reuses the other five, including the unchanged 4,336 accepted count. The origina
 quoted rate, native provider row and previous result file remain intact. Omitting
 `offer_id` files the whole supplied staging file; it does not qualify availability.
 
+For a reproducible supply check, add `"availability_review":
+{"as_of":"2026-09-27T00:00:00Z","max_age_hours":24}` to a provider-intake task.
+The timestamp and caller-selected window enter the computation key. A dated
+`available` observation outside that window, an unavailable observation or an
+unknown observation produces a placement hold; the conditional price target
+remains visible. Without an explicit review, availability age is not assessed
+and placement is held. Even an observation within the window is only a listing
+snapshot: `rentable_now` remains false until a current offer, account access,
+full billing and successful provisioning are checked. The runner does not fetch
+a new quote or infer a universal freshness window.
+
 The existing record-change owner also accepts `gates`, `requirements`, `traffic`,
 `runtime` and `evaluator` changes. Its result distinguishes recalculation,
 reassessment of retained outputs and a minimal new execution plan. This runner
