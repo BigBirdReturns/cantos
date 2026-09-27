@@ -1,7 +1,7 @@
 # Shared operations, retained for the next request
 
 The floor improves by class, not by user. `work.py` supplies one execution and
-reuse path for six existing deterministic operations. A different operator or
+reuse path for seven existing deterministic operations. A different operator or
 provider does not require another implementation. The source owners still decide
 what the evidence supports.
 
@@ -42,9 +42,22 @@ operators can use an appropriate writable result directory on their own machines
 | `provider-intake` | Campaign provider staging and target arithmetic | Two staged offers through the same adapter. Quotation, unit, retrieval date and unresolved fields survive. A modeled target is conditional on retained performance, not a provider measurement or verified rental. |
 | `benchmark-import` | Campaign offline backfill importer | Five committed InferenceX fixtures: six source rows, 80 observations. Native IDs, provenance and fixture flags survive. Importing does not repeat a benchmark. |
 | `run-recompute` | Run 3 recovery, grader join and deadline buckets | Retained A/T0 replay: 8,622 scheduled, 8,622 completed, 4,336 accepted. This rejoins retained EvalPlus results and recomputes acceptance; it does not execute EvalPlus or rent a GPU. |
+| `run-diagnose` | Run 3 recovery, grader join and shelf consistency checks, plus static inspection | Same retained arm: the owner's recomputation runs first, then correct-but-late requests are partitioned into dispatch (`send_ts - scheduled_ts`), send-to-first (`first_token_ts - send_ts`), both and combined segments against the same one-second rule, and every delivered solution is classified as correct, syntax-valid but grade-failing, syntax-invalid, or a never-sent placeholder, by dataset and `ast` error family. Nothing generated is executed, sanitized or repaired. Categories are observations of retained bytes, not proof of repairability or of a provider, GPU or client cause. |
 | `source-correction` | Research Desk event and dependency machinery | The shipped synthetic worked-history packet receives an explicitly illustrative correction. Its successor makes affected work stale and preserves historical reports. No human review or standing is granted. |
 | `record-change` | Workload runner revalidation | The shipped synthetic workload record gets a price scenario. The owner recalculates economics, leaves performance intact and requires no execution. |
 | `tier-plan` | Campaign Tier-Bench bridge and WATERLINE | A supplied Knot plus native evidence summary and ladder produce model/seat plans with source bases, wall clock, costs and missing measurements retained. This is a planning computation, not new model capability evidence or execution authority. |
+
+To diagnose the committed retained arm instead of only recomputing it:
+
+```powershell
+python -B integration/work.py --request integration/examples/diagnose.json --store S:/Scratch/Runs/shared-work
+```
+
+Point the same request shape at any other retained arm directory, from any provider,
+to obtain the same partition and classes with the same stated limits. The diagnosis of
+Hot Aisle baseline 1 (4,274 accepted) reproduced N01's retained figures exactly: 71 late
+= 42 send-to-first only, 9 dispatch only, 1 both, 19 combined; 2,437 syntax-invalid and
+1,836 syntax-valid grade failures; four never-sent MBPP placeholders excluded from parsing.
 
 The larger local archive has a separate request:
 
@@ -166,6 +179,7 @@ another checkout or reclassify those excerpts as current measurements.
 ```powershell
 python -B -m unittest discover -s integration/tests -p "test_task_*.py" -v
 python -B -m unittest discover -s integration/tests -p "test_work.py" -v
+python -B -m unittest discover -s integration/tests -p "test_task_diagnose.py" -v
 ```
 
 The tests cover cross-operator reuse, relocated evidence, selective price changes,
