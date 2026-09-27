@@ -2,6 +2,7 @@
 """Regressions for scripts/shelf.py. Run: python -m unittest discover -s shelf/tests -v"""
 from __future__ import annotations
 import copy
+from contextlib import contextmanager
 import datetime as dt
 import importlib.util
 import json
@@ -9,6 +10,7 @@ import os
 import sys
 import tempfile
 import unittest
+import uuid
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 TOOL = os.path.dirname(HERE)
@@ -18,8 +20,19 @@ spec.loader.exec_module(shelf)
 
 with open(os.path.join(HERE, "cases.json"), encoding="utf-8") as f:
     CASES = json.load(f)
-CARDS = shelf.read_cards(os.path.join(TOOL, "data", "cards.jsonl"))
+CARDS = shelf.read_cards(shelf.SEED)
 BY_ID = {c["id"]: c for c in CARDS}
+
+
+@contextmanager
+def sync_files():
+    stem = os.path.join(TOOL, "sync-test-" + uuid.uuid4().hex)
+    try:
+        yield stem
+    finally:
+        for suffix in (".seed", ".active", ".campaign"):
+            if os.path.exists(stem + suffix):
+                os.remove(stem + suffix)
 
 
 class Reading(unittest.TestCase):
@@ -29,14 +42,56 @@ class Reading(unittest.TestCase):
         self.assertEqual(len(shelf.parse_cards(json.dumps([card, card]))), 2)
         self.assertEqual(len(shelf.parse_cards("﻿" + "\n".join(json.dumps(c) for c in CARDS))), 5)
 
-    def test_shelf_copy_matches_retained_campaign_record(self):
+    def test_active_shelf_matches_retained_seed(self):
         same, a, b, _ = shelf.sync_check()
         self.assertTrue(same, f"{a} != {b}")
 
 
+class Sync(unittest.TestCase):
+    def test_local_addition_and_absent_campaign(self):
+        with sync_files() as tmp:
+            seed, active, absent = tmp + ".seed", tmp + ".active", tmp + ".absent"
+            with open(shelf.SEED, "rb") as f:
+                original = f.read()
+            addition = json.dumps(dict(CARDS[0], id="local-addition")).encode() + b"\n"
+            with open(seed, "wb") as f: f.write(original)
+            with open(active, "wb") as f: f.write(original + addition)
+            same, _, _, source = shelf.sync_check(active, absent, seed)
+            self.assertTrue(same)
+            self.assertIn("campaign source absent", source)
+
+    def test_modified_seed_prefix_is_held_with_and_without_campaign(self):
+        with sync_files() as tmp:
+            seed, active, campaign = tmp + ".seed", tmp + ".active", tmp + ".campaign"
+            with open(shelf.SEED, "rb") as f:
+                original = f.read()
+            with open(seed, "wb") as f: f.write(original)
+            with open(campaign, "wb") as f: f.write(original)
+            with open(active, "wb") as f: f.write(original)
+            self.assertTrue(shelf.sync_check(active, campaign, seed)[0])
+            with open(active, "wb") as f: f.write(original.replace(b'"run3-at0"', b'"run3-at1"', 1))
+            self.assertFalse(shelf.sync_check(active, tmp + ".absent", seed)[0])
+            self.assertFalse(shelf.sync_check(active, campaign, seed)[0])
+            changed = original.replace(b'"run3-at0"', b'"run3-at1"', 1)
+            with open(active, "wb") as f: f.write(changed)
+            with open(seed, "wb") as f: f.write(changed)
+            self.assertTrue(shelf.sync_check(active, tmp + ".absent", seed)[0])
+            self.assertFalse(shelf.sync_check(active, campaign, seed)[0])
+
+    def test_independent_one_card_seed_and_missing_seed(self):
+        with sync_files() as tmp:
+            seed, active = tmp + ".seed", tmp + ".active"
+            one = json.dumps(CARDS[0]).encode() + b"\n"
+            with open(seed, "wb") as f: f.write(one)
+            with open(active, "wb") as f: f.write(one + json.dumps(dict(CARDS[0], id="second-card")).encode() + b"\n")
+            self.assertTrue(shelf.sync_check(active, tmp + ".absent", seed)[0])
+            os.remove(seed)
+            self.assertFalse(shelf.sync_check(active, tmp + ".absent", seed)[0])
+
+
 class Validate(unittest.TestCase):
-    def test_five_shelf_cards_pass(self):
-        for c in CARDS:
+    def test_all_active_shelf_cards_pass(self):
+        for c in shelf.read_cards(shelf.CARDS):
             self.assertEqual(shelf.validate_card(c), [], c["id"])
 
     def test_fixture_cases(self):
@@ -160,6 +215,15 @@ class Cli(unittest.TestCase):
             self.assertEqual(shelf.main(["compose", run, os.path.join(HERE, "fixtures", "card7-voltagepark.json"), "--for", "measured_cost"]), 2)
             self.assertEqual(shelf.main(["compose", run, run, "--for", "cost_per_accepted"]), 0)
 
+
+
+class ScopePreservation(unittest.TestCase):
+    def test_result_and_check_scope_are_retained(self):
+        card = BY_ID['run3-at0']
+        row = shelf.which([card], 'USD / 1000 accepted requests', '2026-09', True)[0]
+        self.assertEqual(row['checks'], card['e_checks'])
+        self.assertEqual(row['results']['h100_comparator'], card['a_claim']['results']['h100_comparator'])
+        self.assertIs(row['checks']['recomputed']['independent_validation'], False)
 
 if __name__ == "__main__":
     unittest.main()

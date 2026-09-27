@@ -31,6 +31,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 TOOL = os.path.dirname(HERE)
 DATA = os.path.join(TOOL, "data")
 CARDS = os.path.join(DATA, "cards.jsonl")
+SEED = os.path.join(DATA, "seed.cards.jsonl")
 DIMS = ("measured", "imported", "modeled", "attributed")
 CHECKS = ("inspected", "recomputed", "repeated")
 PURPOSES = ("cost_per_accepted", "accepted_work", "seat_property", "measured_cost", "same_period")
@@ -346,11 +347,11 @@ def which(cards, unit, period=None, measured=False):
             if not in_period(date, period):
                 out.append({"id": cid, "status": "CANNOT_USE", "reason": f"observation date {date} is outside {period}; combine only with the period stated (BRIEF2 item 3)"})
                 continue
-        checks = {k: {"who": q(card, "e_checks", k, "who"), "when": q(card, "e_checks", k, "when")} for k in CHECKS}
+        checks = {k: dict(q(card, "e_checks", k)) for k in CHECKS}
         out.append({
             "id": cid, "status": "SUPPORTS", "date": date,
             "dimensions": q(card, "dimensions"),
-            "results": {k: {"value": v.get("value"), "unit": v.get("unit"), "supports": v.get("supports")} for k, v in hits.items()},
+            "results": {k: dict(v) for k, v in hits.items()},
             "limits": q(card, "a_claim", "limits", default=[]) or [],
             "does_not_establish": q(card, "a_claim", "does_not_establish"),
             "checks": checks,
@@ -405,14 +406,35 @@ def pull(location, hub, staging=None, now=None):
     return folder, provenance
 
 
-# -- 5 sync: this shelf's copy and the retained campaign record must not drift
-def sync_check(here=CARDS, upstream=None):
+# -- 5 sync: the retained seed is an explicit, byte-preserved boundary -------
+def sync_check(here=CARDS, upstream=None, seed=SEED):
     upstream = upstream or os.path.join(os.path.dirname(TOOL), "hot-aisle", "campaign", "shelf", "cards.jsonl")
     with open(here, "rb") as f:
         a = f.read()
-    with open(upstream, "rb") as f:
+    active_hash = hashlib.sha256(a).hexdigest()
+    if not os.path.isfile(seed):
+        return False, active_hash, "missing retained seed", seed
+    with open(seed, "rb") as f:
         b = f.read()
-    return a == b, hashlib.sha256(a).hexdigest(), hashlib.sha256(b).hexdigest(), upstream
+    seed_hash = hashlib.sha256(b).hexdigest()
+    # A seed is a complete JSONL file. Its own bytes determine its extent;
+    # the format does not prescribe a card count or a particular digest.
+    lines = b.splitlines(keepends=True)
+    try:
+        if not lines or not b.endswith(b"\n") or any(not line.strip() for line in lines):
+            raise ValueError("seed needs complete, nonempty JSONL lines")
+        seed_cards = [json.loads(line.decode("utf-8")) for line in lines]
+        if any(validate_cards(seed_cards)):
+            raise ValueError("retained seed has invalid filings")
+    except (UnicodeError, ValueError, TypeError):
+        return False, active_hash, seed_hash, f"invalid retained seed: {seed}"
+    prefix = b"".join(a.splitlines(keepends=True)[:len(lines)])
+    prefix_hash = hashlib.sha256(prefix).hexdigest()
+    if os.path.isfile(upstream):
+        with open(upstream, "rb") as f:
+            campaign = f.read()
+        return prefix == b == campaign, prefix_hash, hashlib.sha256(campaign).hexdigest(), upstream
+    return prefix == b, prefix_hash, seed_hash, f"local retained seed only: {seed}; campaign source absent"
 
 
 # -- CLI ---------------------------------------------------------------------
@@ -425,11 +447,17 @@ def print_which(rows):
                 if v.get("supports"):
                     line += f" | supports: {v['supports']}"
                 print(line)
+                for field in ("accounting", "source"):
+                    if v.get(field): print(f"           {field}: {v[field]}")
             for lim in r["limits"]:
                 print(f"           limit: {lim}")
             if r["does_not_establish"]:
                 print(f"           does not establish: {r['does_not_establish']}")
             print(f"           how far: {r['how_far']}")
+            for key, check in r["checks"].items():
+                if check.get("scope"): print(f"           {key} scope: {check['scope']}")
+                if check.get("record"): print(f"           {key} record: {check['record']}")
+                if check.get("independent_validation") is False: print(f"           {key} independent validation: false")
         else:
             print(f"[CANNOT ] {r['id']}: {r['reason']}")
     n = sum(r["status"] == "SUPPORTS" for r in rows)
@@ -495,7 +523,7 @@ def main(argv=None):
         return 0
     if args.cmd == "sync":
         same, ha, hb, upstream = sync_check()
-        print(("[PASS   ] " if same else "[FAIL   ] ") + f"data/cards.jsonl {ha[:12]} vs retained campaign record {hb[:12]} ({upstream})")
+        print(("[PASS   ] " if same else "[FAIL   ] ") + f"data/cards.jsonl seed prefix {ha[:12]} vs reference {hb[:12]} ({upstream})")
         return 0 if same else 1
     return 1
 

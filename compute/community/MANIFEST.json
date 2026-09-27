@@ -15,13 +15,13 @@
     },
     {
       "path": "compute/community/build.cjs",
-      "bytes": 4885,
-      "sha256": "822de106750f2f928d72ce7aa16c76bcab3c21ce991df3037818df0f0df10d53"
+      "bytes": 4911,
+      "sha256": "6d76c43d8523f2896a1e129545d7a24ed81eb8ee7dca58fb0b7cd5f36dc585c5"
     },
     {
       "path": "compute/community/cli.cjs",
-      "bytes": 20498,
-      "sha256": "76823af49e1d880ecfc851daebbf4df64d45fed23de5f79a3e04de482ea776af"
+      "bytes": 21440,
+      "sha256": "73c6d81736ae61e9a18f2a7fee60119f2e2579ee2f60cc922f5b3cbdd7fa0888"
     },
     {
       "path": "compute/community/core.cjs",
@@ -635,8 +635,8 @@
     },
     {
       "path": "compute/community/README.md",
-      "bytes": 8494,
-      "sha256": "ece7c672f9561f5f1875fb2037d20a726ab5e84cdb1dd2a55f1e995f5a5c1821"
+      "bytes": 9072,
+      "sha256": "c33b0e3d730bff4ed51a433ee49648c92e94fd816edf181d7bd80faedd85643f"
     },
     {
       "path": "compute/community/style.css",
@@ -660,8 +660,13 @@
     },
     {
       "path": "compute/community/tests/test_core.cjs",
-      "bytes": 14337,
-      "sha256": "4acf4f024308216dc4aa0eb915d1cef67abbd17427d8f4ab83ac1b2efea29e86"
+      "bytes": 14370,
+      "sha256": "7c01aa07f36bfe6a030b3f8c2b2b4d7ba478102da01a1af90bafc8723645d88b"
+    },
+    {
+      "path": "compute/community/tests/test_recovery.cjs",
+      "bytes": 2840,
+      "sha256": "5f8cb16c5e18e3820dfb45f18c757bb7a7c78dd6f2ee2366f25be14a88564f61"
     },
     {
       "path": "compute/community/workload-engine.cjs",

@@ -32,7 +32,7 @@ textarea{font-family:var(--mono);font-size:.85em;min-height:200px}
 button{font:inherit;padding:8px 14px;border:1px solid var(--fg);background:var(--fg);color:var(--bg);border-radius:3px;cursor:pointer;justify-self:start}
 button.quiet{background:transparent;color:var(--fg)}
 .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-.result{border-left:4px solid var(--line);padding:8px 12px;margin:10px 0;background:var(--panel)}
+.result{overflow-wrap:anywhere;border-left:4px solid var(--line);padding:8px 12px;margin:10px 0;background:var(--panel)}
 .result.ok{border-color:var(--ok)}.result.no{border-color:var(--no)}.result.warn{border-color:var(--warn)}
 .status{font-family:var(--mono);font-weight:700}
 .ok .status{color:var(--ok)}.no .status{color:var(--no)}.warn .status{color:var(--warn)}
@@ -96,7 +96,7 @@ li{margin:.25rem 0}
   <li><b>Price units.</b> <code>USD / GPU-hour</code> for one GPU's hourly price, <code>USD / seat-hour</code> for a whole configuration with its GPU count in <code>conditions.gpus</code>. <code>USD/hour</code> is ambiguous and refused. Accepted-work prices use <code>USD / 1000 accepted requests</code>. A starting price is a lower-bound offer, not an obtainable seat or a measured cost.</li>
   <li><b>Observer benefit.</b> <code>c_parties.observer_benefit</code> records whether the observer benefits from the outcome (true, false or null), the relationship, and the basis. A known judgment needs a basis. Funding and benefit are different facts. A relationship does not establish misconduct.</li>
 </ul>
-<p>To put a card on this shelf, open a pull request that adds one line to <code>shelf/data/cards.jsonl</code> and passes <code>python shelf.py validate</code>. Review checks the cited sources; filing and machine validation do not grant standing.</p>
+<p>To put a card on this shelf, open a pull request that appends a line after the retained seed in <code>shelf/data/cards.jsonl</code> and passes <code>python shelf.py validate</code>. Review checks the cited sources; filing and machine validation do not grant standing.</p>
 
 <h2 id="run">Run it yourself</h2>
 <pre>git clone https://github.com/BigBirdReturns/axm-tools
@@ -243,8 +243,8 @@ function which(cards,unit,period=null,measured=false){const want=normalizedUnit(
   if(period!==null){
    if(date===null){out.push({id:cid,status:"CANNOT_USE",reason:"observation period unknown; retrieval does not supply it (BRIEF2 item 3)"});continue;}
    if(!inPeriod(date,period)){out.push({id:cid,status:"CANNOT_USE",reason:"observation date "+date+" is outside "+period+"; combine only with the period stated (BRIEF2 item 3)"});continue;}}
-  const checks={};for(const k of CHECKS)checks[k]={who:q(card,"e_checks",k,"who")??null,when:q(card,"e_checks",k,"when")??null};
-  const res=Object.fromEntries(Object.entries(hits).map(([k,v])=>[k,{value:v.value??null,unit:v.unit??null,supports:v.supports??null}]));
+  const checks={};for(const k of CHECKS)checks[k]={...q(card,"e_checks",k)};
+  const res=Object.fromEntries(Object.entries(hits).map(([k,v])=>[k,{...v}]));
   out.push({id:cid,status:"SUPPORTS",date,dimensions:q(card,"dimensions")??null,results:res,limits:q(card,"a_claim","limits")||[],does_not_establish:q(card,"a_claim","does_not_establish")??null,checks,how_far:howFar(checks)});}
  return out;}
 
@@ -259,6 +259,9 @@ const S=window.Shelf,$=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const flag=v=>v===true?'+':v===false?'-':'?';
 let CARDS=[],HUBS=[];
+function queryHubs(cards,unit,period,measured){const groups=new Map();for(const card of cards){const hub=card.__hub||'local';if(!groups.has(hub))groups.set(hub,[]);groups.get(hub).push(card);}return [...groups].flatMap(([hub,items])=>S.which(items,unit,period,measured).map(row=>({...row,hub})));}
+function scopeDetails(r){const values=Object.entries(r.results||{}).map(([key,v])=>'<li><b>'+esc(key)+'</b>: '+esc(v.accounting||v.supports||'Scope only as recorded in the source')+'<br>Source: '+esc(v.source||'not recorded')+'</li>').join('');const checks=Object.entries(r.checks||{}).map(([key,c])=>'<li><b>'+esc(key)+'</b>: '+esc(c.who||'not recorded')+'; '+esc(c.scope||'scope not recorded')+(c.record?'; record: '+esc(c.record):'')+(c.independent_validation===false?'; independent validation: false':'')+'</li>').join('');return '<details><summary>Accounting, sources and check scope</summary><ul>'+values+checks+'</ul></details>';}
+
 function fail(msg){const el=$('load-fail');el.hidden=false;el.textContent=msg;}
 async function loadText(url){const r=await fetch(url,{cache:'no-store'});if(!r.ok)throw new Error(r.status+' '+r.statusText+' for '+url);return r.text();}
 function parseCards(text){text=text.replace(/^﻿/,'');try{const v=JSON.parse(text);return Array.isArray(v)?v:[v];}catch(e){return text.split(/\r?\n/).filter(l=>l.trim()).map(l=>JSON.parse(l));}}
@@ -283,12 +286,12 @@ function renderWhich(rows){const out=$('which-out');out.innerHTML='';
  for(const r of rows){if(r.status==='SUPPORTS'){
   const res=Object.entries(r.results).map(([k,v])=>`<li><code>${esc(k)}</code>: ${esc(v.value)} ${esc(v.unit)}${v.supports?' <span class="small">supports: '+esc(v.supports)+'</span>':''}</li>`).join('');
   const lim=r.limits.map(l=>`<li>limit: ${esc(l)}</li>`).join('');
-  out.insertAdjacentHTML('beforeend',`<div class="result ok"><span class="status">SUPPORTS</span> <code>${esc(r.id)}</code> <span class="small">(${esc(r.date||'date unknown')})</span><ul>${res}${lim}${r.does_not_establish?'<li>does not establish: '+esc(r.does_not_establish)+'</li>':''}</ul><p class="small">how far: ${esc(r.how_far)}</p></div>`);}
-  else out.insertAdjacentHTML('beforeend',`<div class="result no"><span class="status">CANNOT USE</span> <code>${esc(r.id)}</code>: ${esc(r.reason)}</div>`);}
+  out.insertAdjacentHTML('beforeend',`<div class="result ok"><span class="status">SUPPORTS</span> <code>${esc((r.hub?r.hub+": ":"")+r.id)}</code> <span class="small">(${esc(r.date||'date unknown')})</span><ul>${res}${lim}${r.does_not_establish?'<li>does not establish: '+esc(r.does_not_establish)+'</li>':''}</ul><p class="small">how far: ${esc(r.how_far)}</p>${scopeDetails(r)}</div>`);}
+  else out.insertAdjacentHTML('beforeend',`<div class="result no"><span class="status">CANNOT USE</span> <code>${esc((r.hub?r.hub+": ":"")+r.id)}</code>: ${esc(r.reason)}</div>`);}
  const n=rows.filter(r=>r.status==='SUPPORTS').length;
  out.insertAdjacentHTML('beforeend',`<p class="small">${n}/${rows.length} cards can support the question as stated. Support is bounded by each card's limits and recorded checks; nothing here ranks.</p>`);}
-$('which-form').addEventListener('submit',ev=>{ev.preventDefault();renderWhich(S.which(CARDS,wu.value,$('w-period').value.trim()||null,$('w-measured').checked));});
-if(CARDS.length)renderWhich(S.which(CARDS,wu.value,'2026-09',true));
+$('which-form').addEventListener('submit',ev=>{ev.preventDefault();renderWhich(queryHubs(CARDS,wu.value,$('w-period').value.trim()||null,$('w-measured').checked));});
+if(CARDS.length)renderWhich(queryHubs(CARDS,wu.value,'2026-09',true));
 
 $('c-skeleton').addEventListener('click',async()=>{try{$('c-text').value=await loadText('card.skeleton.json');}catch(e){$('check-out').innerHTML=`<div class="result no"><span class="status">FAIL</span> ${esc(e.message||e)}</div>`;}});
 $('check-form').addEventListener('submit',ev=>{ev.preventDefault();const out=$('check-out');let card;

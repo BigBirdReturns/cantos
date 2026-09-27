@@ -109,3 +109,7 @@ Native qualification: node compute/community/tests/browser.cjs (pinned Playwrigh
 ## Operating inputs, 24 September 2026
 
 `compute_materials` now exposes a reviewed source registry and captured feed observations through this same read-only MCP server. Ask for recipe `coding-burst`, `documents-and-search`, `repeated-context` or `numerical-batch`. [materials/README.md](materials/README.md) explains source freshness, public capture boundaries and the implementation choices. This adds no scheduler, provider preference, application telemetry or billable execution. The existing calculation engine, price catalogue and saved-decision contract are unchanged.
+
+## One exported-decision verifier
+
+`node compute/scripts/recompute.cjs decision.json` now dispatches community claim decisions as well as scenario and qualified-run decisions to their original verification authority. The desk kit includes the community verifier and its retained workload engine, without requiring the larger community dataset. The file limit is 16 MiB, matching community packet handling. Verification establishes the retained calculation, not source authenticity or execution authority.

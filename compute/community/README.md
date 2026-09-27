@@ -79,3 +79,7 @@ Current native qualification, external contribution and source coverage are reco
 The native rows are reprojected through the retained workload engine. Its documented quantile interpolation can differ slightly from a prose percentile in the original write-up. Raw source identities and acceptance masks remain intact. The list-rate Hot Aisle baseline is a dedicated-equivalent scenario; the tuned row is its own shared-seat script window; DigitalOcean uses the recorded request-to-release interval. Comparing unlike cost windows is a stated scenario, not an invoice comparison. The source collection includes every retained TierBench ledger row, grouped by exact task/model/effort/support/cost basis; none is upgraded from historical reporting to independently executed evidence.
 
 Original code in this directory is MIT licensed (LICENSE). Provider and benchmark-source rights remain with their owners. Source snapshots and their original repositories identify the relevant material.
+
+## Recovery corrections, 27 September 2026
+
+Initialization verifies a supplied seed feed before creating the destination, so a malformed seed can be repaired and retried at the same path. This is not a promise of transactional recovery from every disk failure. A rebuild moves withdrawn generated record/report files outside `site/` into retained local projection history; objects and admission events remain intact. Previously downloaded copies remain historical evidence and cannot be recalled. Existing hubs must explicitly update their app before adopting these behaviors.
