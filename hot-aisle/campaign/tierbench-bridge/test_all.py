@@ -14,6 +14,7 @@ sys.dont_write_bytecode = True
 TESTS = [
     ["import_tierbench.py", "--selftest"],
     ["tier_waterline.py", "--selftest"],
+    ["test_placement.py", "-v"],
 ]
 
 

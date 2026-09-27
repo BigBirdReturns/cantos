@@ -174,6 +174,18 @@ takes 21,570.5 seconds against a 5,400-second deadline at concurrency one. The
 open-weight tier remains unmeasured. These are useful remaining measurement and
 placement questions, not an authorized route.
 
+The native result now also contains `plan.placement` and a placement verdict on
+each grid row. These join full model-evidence coverage to projected deadline,
+budget and evaluator-role constraints. Read `plan.placement.chosen_tier` for the
+lowest ladder-ranked modeled-feasible candidate; it may be null while the
+historical evidence-only `chosen_tier` remains populated. Unknown cost/time,
+partial class coverage and unmeasured fabric timing remain unresolved. Native
+refusals and cost bases survive. An API concurrency scenario can change the
+projected verdict but does not measure parallel throughput or grant execution
+authority. The bridge's `--require-placement` CLI flag supplies a nonzero exit
+when a modeled placement is required and none exists. Shared work status still
+means the deterministic computation ran, not that placement passed.
+
 `TIER-VERIFICATION.json` records this join using 52 retained Tier-Bench call rows
 and nine operator-diagnostic aggregates, excluding synthetic route receipts.
 It also records cold execution, reuse by another caller and a changed seat-price

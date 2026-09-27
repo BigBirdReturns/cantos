@@ -41,6 +41,43 @@ python fixtures/make_synthetic.py    # rewrites the synthetic receipts and the K
 A Knot names its Tier-Bench classes in `tierbench.task_classes` (default map: `graded-coding -> tierbench-T1`, an analogy the plan prints)
 and its own open-weight tier in `tierbench.open_weight_tier`, which is always planned on the fabric so the grid row exists.
 
+## Buyer placement from retained evidence
+
+`chosen_tier` and `chosen_mode` continue to describe model evidence. They do not
+establish that a buyer's deadline or budget can be met. Each grid row now has a
+`placement` verdict: `modeled-feasible`, `refused` (a known constraint fails), or
+`unresolved` (a required projection or full class coverage is missing). When both
+apply, refusal takes precedence and the unresolved reasons remain visible.
+
+The top-level `placement.chosen_tier` selects the lowest evidence-ladder rank
+among full-coverage tiers whose projections meet `deadline_s`, `policy.max_usd`
+(if supplied), and the required evaluator seat role. It requires known cost and
+wall time; unmeasured fabric timing remains unresolved. This follows the existing
+ladder ordering, not a new minimum-dollar ranking. Native fabric arithmetic and
+refusals remain owned by `ledger/waterline.py`.
+The selected row is available directly at `plans.placement` and rendered with
+its projections when it differs from the evidence-only choice.
+
+For API/subscription tiers, `policy.api_concurrency` defaults to 1 and must be a
+positive integer. Concurrency is a scenario, not measured parallel throughput.
+Numeric comparisons use projections before display rounding. Budget must be
+finite and nonnegative, deadline finite and positive, and count a positive integer.
+Historical cost bases, task-class analogies and availability caveats remain in
+the output. Evaluator-role presence does not establish grader readiness.
+
+```sh
+python -B hot-aisle/campaign/tierbench-bridge/test_placement.py -v
+python -B hot-aisle/campaign/tierbench-bridge/tier_waterline.py plan KNOT.json --evidence EVIDENCE --require-placement --json PLAN.json
+```
+
+`--require-placement` returns exit 2 when no modeled-feasible candidate exists;
+the JSON and text still retain every tier and refusal reason. Without the flag,
+the historical CLI exit convention (whether a model tier was chosen) remains.
+Neither success status permits execution, rents a seat, performs inference,
+verifies current capacity, or introduces a reverse proxy. `integration/work.py`
+already retains this result through `tier-plan`; changing buyer inputs recomputes
+that task and leaves unrelated retained computations reusable.
+
 ## Conventions kept
 
 - Nothing here asserts a result. The importer carries Tier-Bench's own bases (`real-billed`, `shadow-estimated`, `unbilled-zero`) and never

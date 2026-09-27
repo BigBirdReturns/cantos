@@ -102,6 +102,23 @@ class TierPlanTasks(unittest.TestCase):
         self.assertEqual(open_weight["plan"]["start_at"].replace("+00:00", "Z"), self.knot["start_at"])
         self.assertEqual((self.base / "knot.json").read_bytes(), self.source_bytes)
 
+    def test_buyer_constraint_change_recomputes_then_reuses_placement(self):
+        before = self.value(self.plan_result)["plan"]
+        self.assertIsNone(before["placement"]["chosen_tier"])
+        self.assertEqual(before["plans"]["chosen"]["placement"]["status"], "refused")
+        changed = copy.deepcopy(self.knot)
+        changed["policy"]["api_concurrency"] = 4
+        (self.base / "buyer-concurrency.json").write_text(json.dumps(changed), encoding="utf-8")
+        task = dict(self.task, id="buyer-concurrency", source="buyer-concurrency.json")
+        result = self.execute(task, self.recompute)
+        self.assertEqual(result["summary"], {"executed": 1, "reused": 1, "held": 0})
+        after = self.value(result["tasks"][0])["plan"]
+        self.assertEqual(before["chosen_tier"], after["chosen_tier"])
+        self.assertEqual(after["placement"]["chosen_tier"], after["chosen_tier"])
+        self.assertFalse(after["placement"]["execution_authorized"])
+        self.assertEqual(self.execute(dict(task, actor="another-buyer"))["summary"],
+                         {"executed": 0, "reused": 1, "held": 0})
+
     def test_cli_catalog_drives_another_actor_reuse_without_catalog_side_effects(self):
         before = {p.relative_to(self.base) for p in self.base.rglob("*")}
         listing = subprocess.run([sys.executable, "-B", str(HERE / "work.py"), "--catalog"],

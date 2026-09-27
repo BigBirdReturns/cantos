@@ -2,7 +2,7 @@
 """TIER WATERLINE: model tier before seat. Stdlib only. Imports ../ledger/waterline.py (never edits it).
 
     python tier_waterline.py plan <knot.json> --evidence DIR [--seats seats.json] [--availability observations.jsonl]
-                                              [--local-models local_models.json] [--start-at 2026-09-29T10:00:00Z] [--json out.json]
+                                              [--local-models local_models.json] [--start-at 2026-09-29T10:00:00Z] [--json out.json] [--require-placement]
     python tier_waterline.py --selftest
 
 Two axes. Tier-Bench answers "which model tier is the cheapest that is SUFFICIENT for this task class" (K/K decisive passes
@@ -23,6 +23,8 @@ efficiently" (../ledger/waterline.py). This module joins them for one Knot:
 
 Every missing piece of evidence is a written reason, never a default. Exit 0 = a tier was chosen; 2 = no sufficient tier
 (fabric plans may still be listed for unmeasured tiers); 1 = error.
+With --require-placement, exit 2 also means no modeled-feasible placement. Neither exit 0 nor a
+modeled-feasible placement authorizes execution or establishes current availability.
 """
 import json
 import math
@@ -43,6 +45,62 @@ DEFAULT_LOCAL_MODELS = os.path.join(HERE, "local_models.json")
 DEFAULT_CLASS_MAP = {
     "graded-coding": (["tierbench-T1"], "default map: EvalPlus implement-from-docstring is the shape of Tier-Bench t1_*; an analogy, not a measured equivalence (RUN3-GRID.md)"),
 }
+
+
+def finite_nonnegative(value):
+    try:
+        return type(value) in (int, float) and math.isfinite(value) and value >= 0
+    except OverflowError:
+        return False
+
+
+def placement_constraints(knot, wall, cost, graders):
+    """Check projections, not execution readiness. Compare before display rounding."""
+    failed, unknown = [], []
+    if not finite_nonnegative(wall):
+        unknown.append("wall time is unestimated or invalid")
+    elif wall > knot["deadline_s"]:
+        failed.append(f"projected wall {wall:g} s exceeds deadline {knot['deadline_s']:g} s")
+    if not finite_nonnegative(cost):
+        unknown.append("cost is unestimated or invalid")
+    else:
+        budget = (knot.get("policy") or {}).get("max_usd")
+        if budget is not None and cost > budget:
+            failed.append(f"projected cost ${cost:g} exceeds max_usd ${budget:g}")
+    role = (knot.get("evaluator") or {}).get("needs_seat_role")
+    if role and not graders:
+        failed.append(f"no seat carries required evaluator role '{role}'")
+    return {"status": "refused" if failed else ("unresolved" if unknown else "modeled-feasible"),
+            "failures": failed, "unresolved": unknown}
+
+
+def placement_for(row, verdict, knot):
+    """Join full model evidence to the native seat owner's projected constraints."""
+    p = row.get("plan")
+    if p is None:
+        check = {"status": "unresolved", "failures": [], "unresolved": [row["plan_reason"]]}
+    elif p["kind"] == "zero-seat":
+        check = json.loads(json.dumps(p["placement_constraints"]))
+    elif p["refused"]:
+        check = {"status": "refused", "failures": list(p["refusal_reasons"]), "unresolved": []}
+    else:
+        candidate = p["plans"].get("cheapest") or p["plans"].get("fastest")
+        # The native owner already enforces deadline, budget and evaluator role
+        # before rounding its display fields. Do not rejudge rounded amounts.
+        check = {"status": "modeled-feasible", "failures": [], "unresolved": []}
+        if not finite_nonnegative(candidate["wall_s"]):
+            check["unresolved"].append("native wall time is unestimated or invalid")
+        if not finite_nonnegative(candidate["usd"]):
+            check["unresolved"].append("native cost is unestimated or invalid")
+        if not p["plans_measured"]:
+            check["unresolved"].append("native seat plan rests on assumed, extrapolated or lower-bound timing")
+    full = (verdict.get("status") == "sufficient" and verdict.get("covers_all_classes")
+            and verdict.get("class_tasks", 0) > 0
+            and verdict.get("measured_tasks") == verdict.get("class_tasks"))
+    if not full:
+        check["unresolved"].append("model sufficiency lacks full coverage of every requested evidence class")
+    check["status"] = "refused" if check["failures"] else ("unresolved" if check["unresolved"] else "modeled-feasible")
+    return check
 
 
 # ---------------------------------------------------------------- tier verdicts
@@ -96,10 +154,10 @@ def class_verdicts(summary, classes):
         t["status"] = "wall" if "wall" in st else ("unstable" if "unstable" in st else ("sufficient" if all(x == "sufficient" for x in st) else ("partly-sufficient" if "sufficient" in st else "insufficient-evidence")))
         t["coverage"] = round(t["measured_tasks"] / t["class_tasks"], 3) if t["class_tasks"] else None
         t["covers_all_classes"] = all(c in t["classes"] for c in classes)
-        t["cost_per_trial_usd"] = round(statistics.mean(t["costs"]), 6) if t["costs"] else None
+        t["cost_per_trial_usd"] = statistics.mean(t["costs"]) if t["costs"] else None
         t["cost_per_trial_basis"] = ("; ".join(sorted(set(b for b in t["cost_bases"] if b))) or "no basis") if t["costs"] else "no non-zero cost at this tier (shadow/unbilled rows or no rows)"
         t["pass_rate"] = round(statistics.mean([p for p in t["pass_rates"] if p is not None]), 4) if any(p is not None for p in t["pass_rates"]) else None
-        t["latency_ms_median"] = round(statistics.median(t["latencies"]), 1) if t["latencies"] else None
+        t["latency_ms_median"] = statistics.median(t["latencies"]) if t["latencies"] else None
         for k in ("statuses", "costs", "cost_bases", "pass_rates", "latencies"):
             del t[k]
     return tiers, missing
@@ -142,26 +200,28 @@ def api_plan(knot, tier, verdict, ladder, seats):
             return False
     lt = ladder["tiers"].get(tier) or {}
     count = knot["count"]
-    conc = ((knot.get("policy") or {}).get("api_concurrency")) or 1
+    conc = (knot.get("policy") or {}).get("api_concurrency", 1)
     cost = usd_basis = None
     if verdict.get("cost_per_trial_usd") is not None:
-        cost = round(verdict["cost_per_trial_usd"] * count, 4)
+        cost = verdict["cost_per_trial_usd"] * count
         usd_basis = f"{count} x recorded cost/trial ${verdict['cost_per_trial_usd']} ({verdict['cost_per_trial_basis']}); Tier-Bench trials, not this Knot's prompts"
     elif all(usable_rate(lt.get(key)) for key in ("price_in_per_1M", "price_out_per_1M")):
         per = (knot.get("tokens_in_per_closure", 400) * lt["price_in_per_1M"] + knot.get("tokens_out_per_closure", 300) * lt["price_out_per_1M"]) / 1e6
-        cost = round(per * count, 4)
+        cost = per * count
         usd_basis = f"LIST PROXY: {count} x ({knot.get('tokens_in_per_closure', 400)} in + {knot.get('tokens_out_per_closure', 300)} out tokens) at {lt.get('price_source')}; no recorded cost/trial at this tier"
     else:
         usd_basis = "tier lacks usable input/output list prices and has no recorded cost: cost unestimated"
     lat = verdict.get("latency_ms_median")
-    wall = round(count * lat / 1000.0 / conc, 1) if lat else None
-    wall_basis = (f"{count} x median Tier-Bench trial latency {lat} ms / concurrency {conc} (declared, not measured for this provider under load)" if lat
+    wall = count * lat / 1000.0 / conc if finite_nonnegative(lat) else None
+    wall_basis = (f"{count} x median Tier-Bench trial latency {lat} ms / concurrency {conc} (declared, not measured for this provider under load)" if finite_nonnegative(lat)
                   else "no latency in the receipts at this tier; wall unestimated")
     deadline = knot["deadline_s"]
-    need_conc = math.ceil(count * lat / 1000.0 / deadline) if lat else None
+    need_conc = max(1, math.ceil(count * lat / 1000.0 / deadline)) if finite_nonnegative(lat) else None
     graders = fabric.grader_seats(seats, knot)
     plan = {"kind": "zero-seat", "tier": tier, "seat_kind": lt.get("seat_kind"), "provider": lt.get("provider"),
-            "usd": cost, "cost_basis": usd_basis, "wall_s": wall, "wall_basis": wall_basis, "concurrency": conc,
+            "usd": round(cost, 4) if cost is not None else None, "cost_basis": usd_basis,
+            "wall_s": round(wall, 1) if wall is not None else None, "wall_basis": wall_basis, "concurrency": conc,
+            "placement_constraints": placement_constraints(knot, wall, cost, graders),
             "concurrency_needed_for_deadline": need_conc, "deadline_s": deadline, "deadline_margin_s": round(deadline - wall, 1) if wall is not None else None,
             "expected_accepted": round(count * verdict["pass_rate"], 1) if verdict.get("pass_rate") is not None else None,
             "accept_basis": f"Tier-Bench pass rate {verdict.get('pass_rate')} at this tier on the named classes" if verdict.get("pass_rate") is not None else "no pass rate",
@@ -190,8 +250,22 @@ def fabric_plan(knot, tier, model_spec, seats, obs, start_at, kwh_usd):
 
 # ---------------------------------------------------------------- plan
 def plan(knot, evidence_dir, seats, obs, local_models, start_at=None, kwh_usd=None):
-    summary = json.load(open(os.path.join(evidence_dir, "tierbench-summary.json"), encoding="utf-8"))
-    ladder = json.load(open(os.path.join(evidence_dir, "tier-ladder.json"), encoding="utf-8"))
+    if not finite_nonnegative(knot.get("deadline_s")) or knot["deadline_s"] == 0:
+        raise ValueError("deadline_s must be finite and positive")
+    if type(knot.get("count")) is not int or knot["count"] <= 0:
+        raise ValueError("count must be a positive integer")
+    policy = knot.get("policy", {})
+    if not isinstance(policy, dict):
+        raise ValueError("policy must be an object")
+    concurrency = policy.get("api_concurrency", 1)
+    if type(concurrency) is not int or concurrency <= 0:
+        raise ValueError("api_concurrency must be a positive integer")
+    if "max_usd" in policy and not finite_nonnegative(policy["max_usd"]):
+        raise ValueError("max_usd must be finite and nonnegative")
+    with open(os.path.join(evidence_dir, "tierbench-summary.json"), encoding="utf-8") as f:
+        summary = json.load(f)
+    with open(os.path.join(evidence_dir, "tier-ladder.json"), encoding="utf-8") as f:
+        ladder = json.load(f)
     tb = knot.get("tierbench") or {}
     reasons = []
     classes = tb.get("task_classes")
@@ -246,11 +320,25 @@ def plan(knot, evidence_dir, seats, obs, local_models, start_at=None, kwh_usd=No
         else:
             row["plan"] = None
             row["plan_reason"] = f"{t}: seat kind unknown (unpriced / unregistered tier); neither a zero-seat nor a fabric plan can be built"
+        row["placement"] = placement_for(row, v, knot)
         out["grid"].append(row)
     if chosen:
         out["plans"]["chosen"] = next(r for r in out["grid"] if r["tier"] == chosen)
     if ow:
         out["plans"]["open_weight"] = next(r for r in out["grid"] if r["tier"] == ow)
+    eligible = [r for r in out["grid"] if r["placement"]["status"] == "modeled-feasible"]
+    if eligible:
+        out["plans"]["placement"] = eligible[0]
+    out["placement"] = {
+        "status": "modeled-feasible" if eligible else "no-modeled-feasible-placement",
+        "chosen_tier": eligible[0]["tier"] if eligible else None,
+        "eligible_tiers": [r["tier"] for r in eligible],
+        "selection_basis": "lowest evidence-ladder rank among full-coverage tiers with known projected cost and time meeting deadline, budget and evaluator-role constraints; not minimum projected dollars",
+        "execution_authorized": False,
+        "limits": ["Projections retain their historical or assumed bases; this is not workload qualification or a provider SLA.",
+                   "Availability, quota, rate limits, grader readiness and concurrent throughput require execution-time checks.",
+                   "No model call, provisioning or reverse proxy is performed."],
+    }
     return out
 
 
@@ -275,10 +363,21 @@ def render(p):
     L.append(("CHOSEN: " + p["chosen_tier"] + f" ({p['chosen_mode']} coverage)") if p["chosen_tier"] else "NO TIER CHOSEN")
     for r in p["reasons"]:
         L.append(f"  - {r}")
-    for name in ("chosen", "open_weight"):
+    placement = p["placement"]
+    L.append(f"PLACEMENT: {placement['status']}; candidate {placement['chosen_tier'] or 'NONE'} (planning only)")
+    for row in p["grid"]:
+        check = row["placement"]
+        L.append(f"  - {row['tier']}: {check['status']}")
+        for reason in check["failures"] + check["unresolved"]:
+            L.append(f"      {reason}")
+    for limit in placement["limits"]:
+        L.append(f"  {limit}")
+    for name in ("chosen", "placement", "open_weight"):
         row = p["plans"].get(name)
         if not row:
             continue
+        if name == "placement" and row["tier"] == p["chosen_tier"]:
+            continue  # Same projection is already shown under the evidence choice.
         pl = row.get("plan")
         L.append("")
         L.append(f"{name.upper()} tier {row['tier']} ({row['tier_status']}):")
@@ -397,6 +496,7 @@ def main(argv):
     knot_path = argv[1]
     ev = seats_path = None; avail_path, lm_path, start_at, out_json = DEFAULT_AVAIL, DEFAULT_LOCAL_MODELS, None, None
     seats_path = DEFAULT_SEATS
+    require_placement = False
     i = 2
     try:
         while i < len(argv):
@@ -406,6 +506,7 @@ def main(argv):
             elif argv[i] == "--local-models": lm_path = argv[i + 1]; i += 2
             elif argv[i] == "--start-at": start_at = parse_iso(argv[i + 1]); i += 2
             elif argv[i] == "--json": out_json = argv[i + 1]; i += 2
+            elif argv[i] == "--require-placement": require_placement = True; i += 1
             else: print(f"unknown arg {argv[i]}"); return 1
         if not ev:
             print("--evidence DIR (import_tierbench.py output) is required"); return 1
@@ -420,7 +521,7 @@ def main(argv):
     if out_json:
         with open(out_json, "w", encoding="utf-8") as f:
             json.dump(p, f, indent=1)
-    return 2 if p["refused"] else 0
+    return 2 if p["refused"] or (require_placement and not p["placement"]["chosen_tier"]) else 0
 
 
 if __name__ == "__main__":
