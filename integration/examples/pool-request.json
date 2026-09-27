@@ -1,0 +1,12 @@
+{
+  "schema": "capital/pool-request@1",
+  "as_of": "2026-09-27T00:00:00Z",
+  "note": "Illustrative member demand for exercising the pooling arithmetic; not real buyers or commitments.",
+  "members": [
+    {"id": "member-a", "gpus": 1, "hours": 40, "window_hours": 168, "accept_gpu": ["MI300X"]},
+    {"id": "member-b", "gpus": 2, "hours": 24, "window_hours": 168, "accept_gpu": ["MI300X"]},
+    {"id": "member-c", "gpus": 1, "hours": 100, "window_hours": 168, "accept_gpu": ["MI300X", "H100"]},
+    {"id": "member-d", "gpus": 4, "hours": 12, "window_hours": 168, "accept_gpu": ["MI300X"]},
+    {"id": "member-e", "gpus": 1, "hours": 8, "window_hours": 168, "accept_gpu": ["MI300X", "H100", "H200"], "kinds": ["on-demand", "spot"]}
+  ]
+}

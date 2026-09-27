@@ -46,6 +46,7 @@ operators can use an appropriate writable result directory on their own machines
 | `source-correction` | Research Desk event and dependency machinery | The shipped synthetic worked-history packet receives an explicitly illustrative correction. Its successor makes affected work stale and preserves historical reports. No human review or standing is granted. |
 | `record-change` | Workload runner revalidation | The shipped synthetic workload record gets a price scenario. The owner recalculates economics, leaves performance intact and requires no execution. |
 | `tier-plan` | Campaign Tier-Bench bridge and WATERLINE | A supplied Knot plus native evidence summary and ladder produce model/seat plans with source bases, wall clock, costs and missing measurements retained. This is a planning computation, not new model capability evidence or execution authority. |
+| `pool-purchase` | Provider staging pool owner (`hot-aisle/campaign/providers/pool.py`) | `examples/pool.json`: five illustrative members against the staged offers. Whole-unit packing, stated minimums, idle split by GPU-hours, per-member standalone comparison, coalition and break-even utilization. List-price arithmetic; not a quote, availability check or co-op agreement. |
 
 To diagnose the committed retained arm instead of only recomputing it:
 

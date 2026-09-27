@@ -28,6 +28,7 @@ ADAPTERS = {
     "record-change": "task_changes",
     "source-correction": "task_changes",
     "tier-plan": "task_tiers",
+    "pool-purchase": "task_pool",
 }
 
 # A cold caller can discover the existing operations without a conversation.
@@ -48,6 +49,8 @@ TASK_HELP = {
     "tier-plan": {"source": "second-run/knot-spec@1 JSON", "required": ["evidence"],
                   "optional": ["seats", "availability", "local_models"],
                   "supports": "Join supplied native Tier-Bench evidence to model and seat plans; planning only."},
+    "pool-purchase": {"source": "capital/pool-request@1 JSON", "required": ["offers"],
+                      "supports": "Pool member GPU demand onto whole offer units at staged list price; arithmetic only, no quote or agreement."},
 }
 
 
