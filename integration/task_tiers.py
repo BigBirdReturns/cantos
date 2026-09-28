@@ -54,9 +54,9 @@ def prepare(task, base):
     parameters = {}
     if "supply" in task:
         supply = task["supply"]
-        if (not isinstance(supply, dict) or set(supply) - {"source", "availability_review", "bindings"}
+        if (not isinstance(supply, dict) or set(supply) - {"source", "availability_review", "marketplace_snapshot", "bindings"}
                 or not {"source", "bindings"} <= set(supply)):
-            raise ValueError("supply needs source, bindings and optional availability_review")
+            raise ValueError("supply needs source, bindings and optional availability_review/marketplace_snapshot")
         import task_sources
         supply_operation = task_sources.prepare(
             {"task_class": "provider-intake", **{k: v for k, v in supply.items() if k != "bindings"}}, base)

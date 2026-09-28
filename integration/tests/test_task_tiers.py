@@ -76,6 +76,25 @@ class TierPlanTasks(unittest.TestCase):
         self.assertEqual(result["gpu_runs"], 0)
         return result
 
+    def test_raw_marketplace_supply_uses_intake_and_preserves_sample_hold(self):
+        # Authored parser fixture only; no real offer or asserted capacity.
+        raw = {"offers": [{"id": 7, "num_gpus": 2, "gpu_name": "Fixture GPU",
+                "resource_type": "gpu", "search": {"gpuCostPerHour": 4.0}}]}
+        (self.base / "raw-market.json").write_text(json.dumps(raw), encoding="utf-8")
+        supply = {"source": "raw-market.json", "bindings": {}, "marketplace_snapshot": {
+            "source_url": "https://docs.vast.ai/api-reference/search/search-offers",
+            "captured_at": "2026-09-27T00:00:00Z", "evidence_class": "official_documentation_sample"}}
+        task = dict(self.task, id="raw-market-join", supply=supply)
+        first = self.execute(task, store=self.base / "raw-market-store")
+        self.assertEqual(first["summary"], {"executed": 1, "reused": 0, "held": 0})
+        plan = self.value(first["tasks"][0])["plan"]
+        offer = plan["supply"]["intake"]["offers"][0]
+        self.assertIsNone(offer["modeled_targets"]["rate_usd_per_gpu_hour"])
+        self.assertFalse(plan["supply"]["ready"])
+        self.assertTrue(offer["holds"])
+        again = self.execute(task, store=self.base / "raw-market-store")
+        self.assertEqual(again["summary"], {"executed": 0, "reused": 1, "held": 0})
+
     def test_historical_native_plan_keeps_analogy_deadline_and_authority_limits(self):
         self.assertEqual(collections.Counter(row["kind"] for row in self.records),
                          {"tierbench-ledger-call": 52, "race6-aggregate": 9})

@@ -1,7 +1,7 @@
 # Shared operations, retained for the next request
 
 The floor improves by class, not by user. `work.py` supplies one execution and
-reuse path for eight existing deterministic operations. A different operator or
+reuse path for nine existing deterministic operations. A different operator or
 provider does not require another implementation. The source owners still decide
 what the evidence supports.
 
@@ -43,6 +43,7 @@ operators can use an appropriate writable result directory on their own machines
 | `benchmark-import` | Campaign offline backfill importer | Five committed InferenceX fixtures: six source rows, 80 observations. Native IDs, provenance and fixture flags survive. Importing does not repeat a benchmark. |
 | `run-recompute` | Run 3 recovery, grader join and deadline buckets | Retained A/T0 replay: 8,622 scheduled, 8,622 completed, 4,336 accepted. This rejoins retained EvalPlus results and recomputes acceptance; it does not execute EvalPlus or rent a GPU. |
 | `run-diagnose` | Run 3 recovery, grader join and shelf consistency checks, plus static inspection | Same retained arm: the owner's recomputation runs first, then correct-but-late requests are partitioned into dispatch (`send_ts - scheduled_ts`), send-to-first (`first_token_ts - send_ts`), both and combined segments against the same one-second rule, and every delivered solution is classified as correct, syntax-valid but grade-failing, syntax-invalid, or a never-sent placeholder, by dataset and `ast` error family. Nothing generated is executed, sanitized or repaired. Categories are observations of retained bytes, not proof of repairability or of a provider, GPU or client cause. |
+| `output-contract` | Retained Run 3 input and native grading layout | Selects candidate substrings for syntax-invalid responses, preserves raw output and baseline grading, and emits separately materializable grader input. Parsing is not correctness; no generated code is executed and no new accepted count is asserted. |
 | `source-correction` | Research Desk event and dependency machinery | The shipped synthetic worked-history packet receives an explicitly illustrative correction. Its successor makes affected work stale and preserves historical reports. No human review or standing is granted. |
 | `record-change` | Workload runner revalidation | The shipped synthetic workload record gets a price scenario. The owner recalculates economics, leaves performance intact and requires no execution. |
 | `tier-plan` | Campaign Tier-Bench bridge and WATERLINE | A supplied Knot plus native evidence summary and ladder produce model/seat plans with source bases, wall clock, costs and missing measurements retained. This is a planning computation, not new model capability evidence or execution authority. |
@@ -294,3 +295,24 @@ remains false even for an apparently available source row: current supply,
 account eligibility, full billing terms, a reservation and purchase authority are
 not established by this operation. Historical and synthetic examples remain so.
 This integration is a local candidate; it activates no execution or publication.
+
+## Second four-lane integration
+
+The output-contract candidate has a separate task and materializer:
+`python -B integration/work.py --request integration/examples/contract.json --store <store>`.
+`python -B integration/task_contract.py materialize <result.json> <arm> <new-directory>`
+retains source mapping and candidate lineage in the existing grader-input layout. It
+performs no grading; original acceptance and deadlines remain unchanged. Some retained
+candidates are partial or comment-only, so syntax improvement never means useful completion.
+
+Provider intake also accepts explicit retained Vast Search Offers snapshots. Collection
+is separate and the documentation sample remains fictional: no available capacity or
+modeled price target follows from it. A tier-plan supply argument can pass the same
+marketplace_snapshot descriptor to that native intake; it preserves every hold and
+requires explicit seat/offer bindings before any listing-eligibility conclusion.
+
+Pool charges now release each modeled unit at its own last completion, reconcile integer
+cents across member shares, and preserve standalone-reference qualifications. Per-unit
+rounding differences are reported separately from usage and idle charges. Status words
+in pool conclusions concern arithmetic qualifications, never verified capacity or approval.
+This remains a locally qualified candidate, without production activation or a rental.
