@@ -80,6 +80,14 @@ that task and leaves unrelated retained computations reusable.
 
 ## Conventions kept
 
+Optional dated supply joins are available through `integration/work.py` tier-plan's
+`supply` argument (shape in `integration/WORK.md`). `tier_waterline.join_supply`
+retains the existing provider-intake output and checks explicit seat/offer
+correspondence. It adds separate listing eligibility without changing modeled
+placement, selecting another seat or granting execution readiness. The native
+planner CLI continues to report model/seat projections; use the shared operation
+for the dependency-tracked supply join.
+
 - Nothing here asserts a result. The importer carries Tier-Bench's own bases (`real-billed`, `shadow-estimated`, `unbilled-zero`) and never
   promotes an estimate to measured; a route.py cost is `DERIVED` from list prices and says so.
 - Every missing input is a written reason: no class evidence, no sufficient tier, no registry entry, no price, no latency.

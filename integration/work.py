@@ -50,7 +50,7 @@ TASK_HELP = {
     "source-correction": {"source": "Research Desk history JSON", "required": ["change"],
                           "supports": "Apply a correction and preserve affected dependencies and historical reports."},
     "tier-plan": {"source": "second-run/knot-spec@1 JSON", "required": ["evidence"],
-                  "optional": ["seats", "availability", "local_models"],
+                  "optional": ["seats", "availability", "local_models", "supply"],
                   "supports": "Join supplied native Tier-Bench evidence to model and seat plans; planning only."},
     "pool-purchase": {"source": "capital/pool-request@1 JSON", "required": ["offers"],
                       "supports": "Pool member GPU demand onto whole offer units at staged list price; arithmetic only, no quote or agreement."},

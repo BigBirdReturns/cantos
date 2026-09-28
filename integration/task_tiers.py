@@ -6,6 +6,7 @@ adapter only declares inputs and calls that existing path in the fresh worker.
 from __future__ import annotations
 
 import importlib.util
+import copy
 import json
 from pathlib import Path
 
@@ -15,7 +16,7 @@ CAMPAIGN = ROOT / "hot-aisle/campaign"
 BRIDGE = CAMPAIGN / "tierbench-bridge"
 LEDGER = CAMPAIGN / "ledger"
 ALLOWED = {"id", "task_class", "actor", "source", "evidence", "seats",
-           "availability", "local_models"}
+           "availability", "local_models", "supply"}
 
 
 def prepare(task, base):
@@ -48,6 +49,20 @@ def prepare(task, base):
         "availability": availability,
         "local_models": local_models,
     }
+    supply_operation = None
+    bindings = None
+    parameters = {}
+    if "supply" in task:
+        supply = task["supply"]
+        if (not isinstance(supply, dict) or set(supply) - {"source", "availability_review", "bindings"}
+                or not {"source", "bindings"} <= set(supply)):
+            raise ValueError("supply needs source, bindings and optional availability_review")
+        import task_sources
+        supply_operation = task_sources.prepare(
+            {"task_class": "provider-intake", **{k: v for k, v in supply.items() if k != "bindings"}}, base)
+        bindings = copy.deepcopy(supply["bindings"])
+        parameters["supply"] = {**supply_operation["parameters"], "bindings": bindings}
+        inputs.update({"supply_" + k: v for k, v in supply_operation["inputs"].items()})
     # Parse early so a malformed source cannot be mistaken for a reusable plan.
     knot = json.loads(source.read_bytes())
     if not isinstance(knot, dict) or knot.get("schema") != "second-run/knot-spec@1":
@@ -72,6 +87,8 @@ def prepare(task, base):
         observations = owner.load_jsonl(str(availability))
         models = json.loads(local_models.read_bytes())
         plan = owner.plan(knot, str(evidence), seats["seats"], observations, models)
+        if supply_operation is not None:
+            owner.join_supply(plan, seats["seats"], supply_operation["execute"](), bindings)
         # Paths belong in the invocation receipt. Copying identical evidence to
         # another directory must not make an otherwise identical result differ.
         plan["evidence_dir"] = "bound inputs: tier_summary and tier_ladder"
@@ -89,4 +106,4 @@ def prepare(task, base):
             ],
         }
 
-    return {"parameters": {}, "inputs": inputs, "execute": execute}
+    return {"parameters": parameters, "inputs": inputs, "execute": execute}

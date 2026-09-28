@@ -220,6 +220,46 @@ join, the resolver's pinned commit and checkout HEAD differed. The already-retai
 excerpts remain usable as historical inputs; this adapter does not silently select
 another checkout or reclassify those excerpts as current measurements.
 
+## Optional supply-to-placement join
+
+`tier-plan` accepts `supply` with a retained provider JSONL `source`, optional
+native `availability_review`, and exact `bindings` keyed by seat ID:
+
+```json
+"supply": {
+  "source": "live-hotaisle.jsonl",
+  "availability_review": {"as_of": "2026-09-27T00:00:00Z", "max_age_hours": 24},
+  "bindings": {
+    "hotaisle-mi300x-1x-enc1": {
+      "provider_id": "hotaisle", "offer_id": "hotaisle-mi300x-1",
+      "seat_sku": "vm-mi300x-1x", "seat_gpu": "AMD Instinct MI300X VF",
+      "offer_gpu": "MI300X"
+    }
+  }
+}
+```
+
+The adapter executes the existing offline provider-intake operation, retaining its
+full output and declaring its code, source and reference dependencies. The native
+tier owner checks exact IDs, explicit SKU/GPU labels, provider, GPU count, region
+and price agreement. Bindings declare correspondence; they do not authenticate
+hardware identity. Unknown IDs or mismatches remain held. No matching by display
+name or automatic GPU-name normalization occurs.
+
+`plan.supply.seat_reviews` carries native availability reviews and holds. Each grid
+row's `supply_eligibility` evaluates the same cheapest-or-fastest candidate used by
+modeled placement. `listing_eligible` means only that the declared correspondence,
+price and native intake checks pass at the explicit review time.
+`modeled_and_listing_eligible` additionally requires modeled feasibility. API,
+subscription and unmapped seats remain unassessed by this GPU-offer join. No
+alternative seat is selected. Existing `placement` facts and arithmetic are intact.
+
+Even a passing listing leaves `ready`, `reserved` and `execution_authorized` false.
+Account access, provisioning, complete billing terms and evaluator readiness are
+not established. Without `supply`, existing output is unchanged. Changing source
+bytes, review time/window or bindings invalidates this task's reuse; identical
+relocated bytes reuse the result. Reuse never fetches or renews an observation.
+
 ## Qualification
 
 ```powershell

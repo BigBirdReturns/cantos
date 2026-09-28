@@ -342,6 +342,93 @@ def plan(knot, evidence_dir, seats, obs, local_models, start_at=None, kwh_usd=No
     return out
 
 
+def join_supply(out, seats, intake, bindings):
+    """Join native intake verdicts; never reprice, refresh, reserve or reselect.
+
+    Bindings explicitly declare the correspondence between two owners' IDs and
+    differently named hardware. Exact assertions detect drift; they do not
+    authenticate the correspondence or prove physical hardware equivalence.
+    """
+    fields = {"provider_id", "offer_id", "seat_sku", "seat_gpu", "offer_gpu"}
+    if not isinstance(bindings, dict):
+        raise ValueError("supply bindings must be an object keyed by exact seat_id")
+    offers = {offer["offer_id"]: offer for offer in intake["offers"]}
+    if len(offers) != len(intake["offers"]):
+        raise ValueError("ambiguous supply offer_id")
+    reviews = {}
+    for sid, binding in bindings.items():
+        if (not isinstance(sid, str) or not sid.strip() or not isinstance(binding, dict)
+                or set(binding) != fields
+                or any(not isinstance(v, str) or not v.strip() for v in binding.values())):
+            raise ValueError("each supply binding needs exact provider_id, offer_id, seat_sku, seat_gpu, offer_gpu")
+        seat, offer = seats.get(sid), offers.get(binding["offer_id"])
+        mismatches, holds = [], []
+        if seat is None:
+            mismatches.append("seat_id absent from registry")
+        if offer is None:
+            mismatches.append("offer_id absent from supplied intake")
+        if seat is not None and offer is not None:
+            native = offer["native_row"]
+            checks = {
+                "provider_id": seat.get("provider") == binding["provider_id"] == native["provider_id"],
+                "seat_sku": seat.get("sku") == binding["seat_sku"],
+                "seat_gpu": seat.get("accelerator", {}).get("model") == binding["seat_gpu"],
+                "offer_gpu": native["gpu"] == binding["offer_gpu"],
+                "GPU allocation": seat.get("accelerator", {}).get("count") == native["gpus"] and native["gpus"] is not None,
+                "region": bool(seat.get("region")) and seat["region"] in native["regions"],
+            }
+            mismatches.extend(name + " mismatch" for name, valid in checks.items() if not valid)
+            holds.extend(offer["holds"])
+            if seat.get("price", {}).get("list_rate_per_gpu_hr") != offer["declared_rate"]["value"]:
+                holds.append("supply price differs from modeled seat price; replan explicitly")
+            if offer["availability_review"]["status"] != "observed_available_within_window" and not holds:
+                holds.append("native availability review does not pass")
+        eligible = not mismatches and not holds
+        reviews[sid] = {
+            "seat_id": sid, "binding": dict(binding),
+            "identity_status": "mismatch" if mismatches else "declared-correspondence-validated",
+            "status": "listing-eligible" if eligible else "held",
+            "listing_eligible": eligible, "holds": mismatches + holds,
+            "availability_review": offer["availability_review"] if offer else None,
+            "source_row_sha256": offer["source_row_sha256"] if offer else None,
+            "ready": False, "reserved": False, "execution_authorized": False,
+        }
+    eligible_tiers = []
+    for row in out["grid"]:
+        p = row.get("plan")
+        candidate = None
+        reason = "no fabric candidate"
+        if p and p["kind"] == "zero-seat":
+            reason = "API/subscription capacity is outside GPU offer intake; unassessed"
+        elif p:
+            candidate = p["plans"].get("cheapest") or p["plans"].get("fastest")
+            reason = "selected fabric seat has no explicit supply binding"
+        sid = candidate["seat_id"] if candidate else None
+        review = reviews.get(sid)
+        listing = bool(review and review["listing_eligible"])
+        qualified = listing and row["placement"]["status"] == "modeled-feasible"
+        row["supply_eligibility"] = {
+            "seat_id": sid, "status": review["status"] if review else "unassessed",
+            "holds": review["holds"] if review else [reason],
+            "listing_eligible": listing, "modeled_and_listing_eligible": qualified,
+            "ready": False, "execution_authorized": False,
+        }
+        if qualified:
+            eligible_tiers.append(row["tier"])
+    out["supply"] = {
+        "intake": intake, "seat_reviews": reviews,
+        "modeled_and_listing_eligible_tiers": eligible_tiers,
+        "ready": False, "reserved": False, "execution_authorized": False,
+        "limits": [
+            "Exact IDs and declared SKU/GPU correspondence are checked, not authenticated hardware identity.",
+            "Eligibility concerns only the native selected inference seat and the explicit dated review window; no alternative is selected.",
+            "Modeled time and cost remain based on their original evidence; supply does not refresh performance or billing terms.",
+            "A listing is not a reservation. Account access, quota, full billing, grader readiness and provisioning remain unchecked.",
+        ],
+    }
+    return out
+
+
 # ---------------------------------------------------------------- render
 def _fmt_usd(u):
     return f"${u:.2f}" if isinstance(u, (int, float)) else "unestimated"
@@ -364,6 +451,10 @@ def render(p):
     for r in p["reasons"]:
         L.append(f"  - {r}")
     placement = p["placement"]
+    if "supply" in p:
+        L.append("SUPPLY: listing review only; ready=false; modeled placement remains separate")
+        for sid, review in p["supply"]["seat_reviews"].items():
+            L.append(f"  {sid}: {review['status']} ({'; '.join(review['holds']) or 'unreserved listing'})")
     L.append(f"PLACEMENT: {placement['status']}; candidate {placement['chosen_tier'] or 'NONE'} (planning only)")
     for row in p["grid"]:
         check = row["placement"]

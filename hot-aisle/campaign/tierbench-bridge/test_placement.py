@@ -11,6 +11,38 @@ import tier_waterline as owner
 
 
 class PlacementTests(unittest.TestCase):
+    def test_supply_eligibility_is_separate_from_feasibility_and_readiness(self):
+        # Synthetic mechanical join: a passing listing never becomes a reservation.
+        seats = {"s": {"provider": "p", "sku": "sku", "region": "r",
+                        "accelerator": {"model": "device", "count": 1},
+                        "price": {"list_rate_per_gpu_hr": 2}}}
+        binding = {"s": {"provider_id": "p", "offer_id": "o", "seat_sku": "sku",
+                         "seat_gpu": "device", "offer_gpu": "GPU"}}
+        offer = {"offer_id": "o", "native_row": {"provider_id": "p", "gpu": "GPU", "gpus": 1, "regions": ["r"]},
+                 "holds": [], "declared_rate": {"value": 2}, "source_row_sha256": "synthetic",
+                 "availability_review": {"status": "observed_available_within_window", "rentable_now": False}}
+        for modeled in ("modeled-feasible", "unresolved", "refused"):
+            for status in ("observed_available_within_window", "stale_observation", "observed_unavailable"):
+                with self.subTest(modeled=modeled, status=status):
+                    item = copy.deepcopy(offer)
+                    item["availability_review"]["status"] = status
+                    if status != "observed_available_within_window":
+                        item["holds"] = ["native supply hold: " + status]
+                    row = {"tier": "t", "placement": {"status": modeled},
+                           "plan": {"kind": "fabric", "plans": {"cheapest": {"seat_id": "s"}}}}
+                    result = {"grid": [row]}
+                    owner.join_supply(result, seats, {"offers": [item]}, binding)
+                    check = row["supply_eligibility"]
+                    self.assertEqual(check["modeled_and_listing_eligible"],
+                                     modeled == "modeled-feasible" and status == "observed_available_within_window")
+                    self.assertEqual(row["placement"], {"status": modeled})
+                    self.assertFalse(check["ready"])
+                    self.assertFalse(result["supply"]["reserved"])
+                    self.assertEqual(result["supply"]["intake"]["offers"][0], item)
+        result = {"grid": [row]}
+        owner.join_supply(result, seats, {"offers": [offer]}, {})
+        self.assertEqual(row["supply_eligibility"]["status"], "unassessed")
+
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory(prefix="buyer-placement-")
         self.addCleanup(self.tmp.cleanup)
