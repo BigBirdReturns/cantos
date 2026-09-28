@@ -101,6 +101,28 @@ snapshot: `rentable_now` remains false until a current offer, account access,
 full billing and successful provisioning are checked. The runner does not fetch
 a new quote or infer a universal freshness window.
 
+To ingest an explicitly collected Vast.ai Search Offers response, retain its raw
+JSON body as a local file and supply that file as `source`. Add
+`"marketplace_snapshot": {"source_url":"https://console.vast.ai/api/v0/bundles",
+"captured_at":"<timezone-aware capture timestamp>",
+"evidence_class":"official_api_response"}`. The separate collection step uses
+Vast's documented authenticated POST; `work.py` never contacts the marketplace.
+The adapter accepts the documented `offers` array (or the documentation's
+single-object example), preserves the raw snapshot hash and exact provider offer
+ID, and maps `search.gpuCostPerHour` as USD compute per offer-hour divided by
+`num_gpus`. It keeps `storage_cost` in USD/GB/month and the separate bandwidth
+USD/TB fields; `search.totalHour` is retained as advertised metadata, not a
+qualified bill. Capture time is caller-declared and does not prove a provider
+quote or account access. A listing always carries a placement hold and
+`rentable_now: false`, including an apparently fresh available listing.
+
+For parser qualification, the official [Search Offers response example](https://docs.vast.ai/api-reference/search/search-offers)
+can use `evidence_class: "official_documentation_sample"` with that page as
+`source_url`. Its fictional machine, price and advertised availability remain a
+sample: availability is unobserved and no modeled target is produced. Neither
+source class is an obtained rental or a reservation. The API's Authorization
+header is mandatory; the sample cannot substitute for a live response.
+
 The existing record-change owner also accepts `gates`, `requirements`, `traffic`,
 `runtime` and `evaluator` changes. Its result distinguishes recalculation,
 reassessment of retained outputs and a minimal new execution plan. This runner

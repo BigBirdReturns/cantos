@@ -35,7 +35,7 @@ ADAPTERS = {
 # A cold caller can discover the existing operations without a conversation.
 # These descriptions are navigation; adapters and native owners enforce rules.
 TASK_HELP = {
-    "provider-intake": {"source": "provider JSONL", "optional": ["offer_id", "price_scenario", "availability_review"],
+    "provider-intake": {"source": "provider JSONL or retained Vast Search Offers JSON", "optional": ["offer_id", "price_scenario", "availability_review", "marketplace_snapshot"],
                         "supports": "Retain offers, calculate conditional price scenarios and review dated availability observations."},
     "benchmark-import": {"source": "native backfill manifest JSON", "optional": [],
                          "supports": "Import retained benchmark artifacts with their provenance."},
