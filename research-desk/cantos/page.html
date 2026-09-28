@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; base-uri 'none'; form-action 'none'; connect-src 'none'">
+<meta name="referrer" content="no-referrer">
+<title>Cantos · research that stays useful when an input changes</title>
+<style>{{cantos.style}}</style>
+</head>
+<body>
+<a class="skip" href="#work">Skip to the investigation</a>
+<header class="top">
+  <div class="brand">
+    <h1 class="wordmark">Cantos</h1>
+    <span class="program">Second Run · Research Desk</span>
+  </div>
+  <div class="tools" role="toolbar" aria-label="Workspace">
+    <button type="button" id="btn-export">Export packet</button>
+    <button type="button" id="btn-restore">Restore packet</button>
+    <input type="file" id="file-restore" accept=".json,application/json" class="sr" tabindex="-1" aria-hidden="true">
+    <button type="button" id="btn-arch" aria-controls="drawer" aria-expanded="false">How it works</button>
+  </div>
+</header>
+
+<main id="work" tabindex="-1">
+  <section class="lede" aria-labelledby="lede-h">
+    <h2 id="lede-h">Research that stays useful when an input changes.</h2>
+    <p>Each conclusion here is pinned to its sources and prices. Change one and the page shows exactly what went stale, recomputes through the original engine, asks for a fresh review and keeps every issued version.</p>
+    <p class="case-q"><span class="eyebrow">Investigation</span> <span id="case-line">Loading…</span></p>
+  </section>
+
+  <ol class="path" id="guide" aria-label="Three-minute path"></ol>
+
+  <div class="grid">
+    <div class="stack">
+      <section class="panel rec" id="rec" aria-labelledby="rec-h" aria-live="polite">
+        <h3 id="rec-h" class="sr">Current recommendation</h3>
+        <div id="rec-body"><p class="small">Loading…</p></div>
+      </section>
+
+      <section class="panel" aria-labelledby="ev-h">
+        <p class="eyebrow">Evidence</p>
+        <h3 id="ev-h">What was measured, and what it does not show</h3>
+        <p class="small" id="ev-note"></p>
+        <div class="table-scroll" tabindex="0" role="region" aria-label="Evidence table, scrolls horizontally">
+          <table id="ev-table"></table>
+        </div>
+        <div id="ev-limits"></div>
+      </section>
+
+      <section class="panel" aria-labelledby="hist-h">
+        <p class="eyebrow">History</p>
+        <h3 id="hist-h">Corrections and deliveries</h3>
+        <ol class="timeline" id="timeline"></ol>
+      </section>
+    </div>
+
+    <div class="stack">
+      <section class="panel" aria-labelledby="rv-h">
+        <p class="eyebrow">Review and delivery</p>
+        <h3 id="rv-h">Record a review, then issue</h3>
+        <div id="review-state"></div>
+        <form id="form-review" novalidate>
+          <label>Reviewer <input name="reviewer" autocomplete="name" required maxlength="120" placeholder="Your name"></label>
+          <label>Decision
+            <select name="decision"><option value="accept">Accept</option><option value="hold">Hold</option><option value="reject">Reject</option></select>
+          </label>
+          <label>Rationale <textarea name="rationale" required maxlength="2000" placeholder="What you checked and why it holds"></textarea></label>
+          <div class="actions">
+            <button type="submit" class="primary" id="btn-review">Record review</button>
+            <button type="button" id="btn-freeze">Issue this version</button>
+          </div>
+          <p class="small">A reviewer name is attributed, not identity-checked.</p>
+        </form>
+        <h4 style="margin-top:22px">Issued versions</h4>
+        <ul class="deliveries" id="deliveries"></ul>
+      </section>
+
+      <section class="panel" aria-labelledby="chg-h">
+        <p class="eyebrow">Change an input</p>
+        <h3 id="chg-h">Try a different price or source</h3>
+        <form id="form-change" novalidate></form>
+        <div id="change-out"></div>
+      </section>
+
+      <section class="panel" aria-labelledby="dep-h">
+        <p class="eyebrow">Dependency path</p>
+        <h3 id="dep-h">Why the recommendation holds</h3>
+        <ol class="chain" id="chain"></ol>
+      </section>
+    </div>
+  </div>
+</main>
+
+<aside class="drawer" id="drawer" data-open="false" aria-hidden="true">
+  <div class="scrim" data-close></div>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawer-h" tabindex="-1">
+    <header>
+      <div><p class="eyebrow">Architecture and evidence</p><h3 id="drawer-h">What does the work here, and what it does not claim</h3></div>
+      <button type="button" class="quiet" data-close aria-label="Close">Close ✕</button>
+    </header>
+    <div id="drawer-body"></div>
+  </div>
+</aside>
+
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<footer class="foot">
+  <p id="foot-boundary">Everything runs in this page. It makes no network requests; source links open only when you click them. Nothing is saved automatically — export a packet to keep your work.</p>
+  <p>Ben Pouladian and BEP have not commissioned, adopted or endorsed this independent build. Local reviews are attributed, not authenticated; a hash-consistent packet is not proof that its sources are true.</p>
+  <p id="foot-build" class="mono"></p>
+</footer>
+
+<script id="research-core">{{cantos.native_core}}</script>
+<script id="compute-engine">{{cantos.native_compute}}</script>
+<script id="cantos-foundation">{{cantos.foundation}}</script>
+<script id="cantos-seed" type="application/json">{{cantos.seed}}</script>
+<script id="cantos-build" type="application/json">{{cantos.build}}</script>
+<script id="cantos-page">{{cantos.page_script}}</script>
+</body>
+</html>
