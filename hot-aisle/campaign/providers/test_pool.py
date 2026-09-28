@@ -195,7 +195,7 @@ class Qualifications(unittest.TestCase):
         self.assertEqual(result["standalone_unqualified"]["m0"]["offer_id"], "ok-1")
         p = result["plans"][0]
         verdict = p["conclusion"]
-        self.assertEqual(verdict["status"], "qualified")
+        self.assertEqual(verdict["status"], "conditional")
         self.assertTrue(verdict["no_worse_vs_unqualified_references"])
         self.assertEqual({q["scope"] for q in verdict["qualifications"]}, {"reference:m%d" % i for i in range(8)})
         self.assertTrue(all("out_of_stock" in q["hold"] for q in verdict["qualifications"]))
@@ -207,13 +207,13 @@ class Qualifications(unittest.TestCase):
         verdict = pool.plan(request(*[member("m%d" % i) for i in range(8)]), rows)["plans"][0]["conclusion"]
         self.assertTrue(verdict["arithmetic_no_worse"])
         self.assertTrue(verdict["pool_bill_is_lower_bound"])
-        self.assertEqual(verdict["status"], "qualified")
+        self.assertEqual(verdict["status"], "conditional")
         self.assertEqual(verdict["qualifications"][0]["effect"], pool.POOL_SIDE)
 
     def test_unqualified_list_arithmetic_still_has_no_authority(self):
         rows = [offer("big-8", rate=1.0), offer("ok-1", gpus=1, rate=2.0)]
         p = pool.plan(request(*[member("m%d" % i) for i in range(8)]), rows)["plans"][0]
-        self.assertEqual(p["conclusion"]["status"], "unqualified_at_list")
+        self.assertEqual(p["conclusion"]["status"], "modeled_no_worse")
         self.assertEqual(p["conclusion"]["qualifications"], [])
         self.assertFalse(p["bindable_at_list"])
         self.assertFalse(p["execution_authority"])
@@ -237,7 +237,7 @@ class StagedCharges(unittest.TestCase):
             result = pool.plan(req, rows)
             for p in result["plans"]:
                 self.assertFalse(p["bindable_at_list"] or p["execution_authority"])
-                self.assertIn(p["conclusion"]["status"], ("no_coalition", "not_no_worse", "qualified", "unqualified_at_list"))
+                self.assertIn(p["conclusion"]["status"], ("no_coalition", "not_no_worse", "conditional", "modeled_no_worse"))
                 for part in (p["all_accepting"], p["coalition"]):
                     if part is not None:
                         reconciles(self, part)

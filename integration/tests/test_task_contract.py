@@ -137,6 +137,21 @@ class ContractHandoff(unittest.TestCase):
         with self.assertRaises(FileExistsError):
             task_contract.materialize(self.result_path, FIXTURE, out)
 
+    def test_export_rechecks_checksum_and_dependency_identity_before_writing(self):
+        for label, change in (
+            ("checksum", lambda e: e["value"].update(accepted=e["value"]["accepted"] + 1)),
+            ("dependency", lambda e: e["identity"]["dependencies"].update(tasks="0" * 64)),
+        ):
+            with self.subTest(label=label):
+                entry = json.loads(self.result_path.read_bytes())
+                change(entry)
+                altered = self.directory / (label + ".json")
+                altered.write_bytes(work.encoded(entry))
+                out = self.directory / (label + "-refused")
+                with self.assertRaises(ValueError):
+                    task_contract.materialize(altered, FIXTURE, out)
+                self.assertFalse(out.exists())
+
     def test_second_process_reuses_and_unknown_argument_is_refused(self):
         again = work.run(self.request, self.base, self.store)
         self.assertEqual(again["summary"], {"executed": 0, "reused": 1, "held": 0})

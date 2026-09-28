@@ -311,7 +311,7 @@ def conclusion(coalition, holds):
             missing_clean.append(s["member"])
     vs_clean = None if missing_clean else all(s["saving_vs_unqualified_usd"] >= 0 for s in coalition["shares"])
     status = ("not_no_worse" if not coalition["every_member_no_worse"]
-              else "qualified" if quals else "unqualified_at_list")
+              else "conditional" if quals else "modeled_no_worse")
     return {"status": status, "arithmetic_no_worse": coalition["every_member_no_worse"],
             "no_worse_vs_unqualified_references": vs_clean,
             "members_without_unqualified_reference": missing_clean,

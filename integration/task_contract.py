@@ -316,11 +316,14 @@ def contract(directory):
 
 def materialize(result_path, arm, out):
     """Write candidates in the exact grade.py:prepare layout for the isolated grader."""
-    entry = json.loads(Path(result_path).read_bytes())
-    value = entry.get("value", entry)
+    import work
+    arm = Path(arm).resolve()
+    task = {"task_class": "output-contract", "source": str(arm)}
+    description = work.snapshot(prepare(task, Path.cwd()), "output-contract")
+    entry = work.read_cache(Path(result_path), description)
+    value = entry["value"]
     if value.get("schema") != SCHEMA:
         raise ValueError("Not an output-contract result")
-    arm = Path(arm)
     grade = _load("_task_contract_run3_grade_m", RUN3 / "grade.py", RUN3)
     tasks, rows, detailed = grade.bound_inputs(arm / "tasks.json", arm / "replay" / "requests.jsonl",
                                                arm / "detailed.json")
@@ -369,6 +372,9 @@ def materialize(result_path, arm, out):
         "result_value_sha256": entry.get("value_sha256"),
         "retained_mapping_sha256": grade.sha(arm / "grade" / "mapping.json"),
         "candidates": lineage, "graded": False, "executed_generated_code": False})
+    after = work.snapshot(prepare(task, Path.cwd()), "output-contract")
+    if after["identity"] != description["identity"]:
+        raise ValueError("Dependencies changed during export; retain the partial export for review")
     return new_map
 
 

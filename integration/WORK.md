@@ -316,3 +316,7 @@ cents across member shares, and preserve standalone-reference qualifications. Pe
 rounding differences are reported separately from usage and idle charges. Status words
 in pool conclusions concern arithmetic qualifications, never verified capacity or approval.
 This remains a locally qualified candidate, without production activation or a rental.
+
+## Controller reconciliation, 28 September 2026 UTC
+
+Two local Round 2 candidates carried complementary controller repairs. The current r2-integration preserves per-unit rounding separately from idle cost and also inherits the earlier candidate-export checksum/dependency checks and conditional/modeled_no_worse labels. Both original candidate refs and their observations remain historical. Export verifies the current computation before writing grader input; candidate parsing remains distinct from correctness and deadlines.
