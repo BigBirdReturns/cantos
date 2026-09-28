@@ -1,7 +1,7 @@
 # Shared operations, retained for the next request
 
 The floor improves by class, not by user. `work.py` supplies one execution and
-reuse path for seven existing deterministic operations. A different operator or
+reuse path for eight existing deterministic operations. A different operator or
 provider does not require another implementation. The source owners still decide
 what the evidence supports.
 
@@ -220,3 +220,15 @@ evidence and synthetic change examples are identified separately. These operatio
 make no model calls and run no new GPU work. That establishes reuse of these
 deterministic procedures; it does not qualify general task decomposition, batching,
 warm placement, unattended provisioning or cross-domain adoption.
+
+
+## Four-lane local integration, 27 September 2026
+
+The shared catalog now includes run-diagnose and pool-purchase, plus explicit
+provider availability review and buyer placement constraints. Original source
+owners and evidence classes remain unchanged. Pooling is staged-price arithmetic;
+arithmetic_no_worse describes the modeled member comparison only. bindable_at_list
+remains false even for an apparently available source row: current supply,
+account eligibility, full billing terms, a reservation and purchase authority are
+not established by this operation. Historical and synthetic examples remain so.
+This integration is a local candidate; it activates no execution or publication.

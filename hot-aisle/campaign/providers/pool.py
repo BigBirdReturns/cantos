@@ -257,7 +257,10 @@ def plan(request, rows):
             "minimum_billing": row.get("minimum_billing"),
             "all_accepting": full, "coalition": current, "dropped_for_coalition": dropped,
             "coalition_saving_usd": current["total_saving_vs_standalone_usd"] if current else None,
-            "holds": holds, "bindable_at_list": bool(current) and not holds,
+            "holds": holds,
+            "arithmetic_no_worse": bool(current) and current["every_member_no_worse"],
+            "bindable_at_list": False,
+            "binding_status": "unverified: retained list arithmetic cannot establish a current offer, account eligibility, reservation or authority to purchase",
             "source": {"source_url": row.get("source_url"), "source_quote": row.get("source_quote"),
                        "retrieved_at": row.get("retrieved_at"), "age_days": age}})
     plans.sort(key=lambda p: (p["coalition"] is None, -(p["coalition_saving_usd"] or 0), p["offer_id"]))

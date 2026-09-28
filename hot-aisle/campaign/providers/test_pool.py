@@ -110,5 +110,19 @@ class StagedOffers(unittest.TestCase):
                 self.assertFalse(p["bindable_at_list"])
 
 
+class BindingBoundary(unittest.TestCase):
+    def test_profitable_list_scenario_never_grants_binding(self):
+        for stamp in (None, "2026-09-24T00:00:00Z", "2026-09-27T00:00:00Z"):
+            with self.subTest(availability_ts=stamp):
+                rows = [offer("big-8", rate=1.0, availability_ts=stamp),
+                        offer("small-1", gpus=1, rate=2.0, availability_ts=stamp)]
+                p = pool.plan(request(*[member("m%d" % i) for i in range(8)],
+                                      as_of="2026-09-27T00:00:00Z"), rows)["plans"][0]
+                self.assertTrue(p["arithmetic_no_worse"])
+                self.assertEqual(p["coalition"]["total_saving_vs_standalone_usd"], 80.0)
+                self.assertFalse(p["bindable_at_list"])
+                self.assertIn("reservation", p["binding_status"])
+
+
 if __name__ == "__main__":
     unittest.main()
