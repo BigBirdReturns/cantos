@@ -292,9 +292,21 @@ def _provider(task, source):
                 model_rate = None
             model_input["rate_usd_per_gpu_hour"] = model_rate
             holds = []
-            availability = _availability(row, review)
+            try:
+                availability = _availability(row, review)
+            except ValueError as exc:
+                availability = {
+                    "status": "invalid_observation", "observed": row["availability_observed"],
+                    "observed_at": row.get("availability_ts"),
+                    "as_of": review["as_of"] if review else None,
+                    "max_age_hours": review["max_age_hours"] if review else None,
+                    "age_hours": None, "rentable_now": False, "error": str(exc),
+                    "next_check": "Correct or obtain the dated source observation; retain this original row.",
+                }
             if availability["status"] != "observed_available_within_window":
                 holds.append("placement requires a current available offer; availability status: " + availability["status"])
+            if availability.get("error"):
+                holds.append("availability observation invalid: " + availability["error"])
             if evidence is not None:
                 holds.append("marketplace snapshot is a listing, not obtained capacity or an account-specific quote")
                 if evidence["evidence_class"] == "official_documentation_sample":

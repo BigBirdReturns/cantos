@@ -141,8 +141,11 @@ class SourceTasks(unittest.TestCase):
     def test_availability_review_refuses_invalid_time_order(self):
         task = self.offer_source()
         task["availability_review"] = {"as_of": "2026-09-23T00:00:00Z", "max_age_hours": 24}
-        with self.assertRaisesRegex(ValueError, "later than review"):
-            task_sources.prepare(task, self.base)["execute"]()
+        invalid = task_sources.prepare(task, self.base)["execute"]()["offers"][0]
+        self.assertEqual("invalid_observation", invalid["availability_review"]["status"])
+        self.assertIn("later than review", invalid["availability_review"]["error"])
+        self.assertFalse(invalid["availability_review"]["rentable_now"])
+        self.assertTrue(invalid["holds"])
         task["availability_review"]["as_of"] = "2026-09-27"
         with self.assertRaisesRegex(ValueError, "timezone-aware"):
             task_sources.prepare(task, self.base)

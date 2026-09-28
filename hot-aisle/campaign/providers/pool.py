@@ -179,8 +179,8 @@ def billed_hours(used, min_hours):
     return max(used, min_hours) if min_hours is not None else used
 
 
-def holds_for(row, min_note):
-    holds = []
+def holds_for(row, min_note, source_holds=None):
+    holds = list(source_holds[row["offer_id"]]) if source_holds is not None else []
     if min_note:
         holds.append(min_note)
     if row.get("availability_observed") != "available":
@@ -194,14 +194,14 @@ def holds_for(row, min_note):
     return holds
 
 
-def standalone(member, offers, clean_only=False):
+def standalone(member, offers, clean_only=False, source_holds=None):
     """Cheapest single-unit purchase for one member; clean_only skips offers carrying any hold."""
     best = None
     hours = exact(member["hours"])
     for row, per_unit, min_hours, min_note in offers:
         if not accepts(member, row) or member["gpus"] > row["gpus"]:
             continue
-        holds = holds_for(row, min_note)
+        holds = holds_for(row, min_note, source_holds)
         if clean_only and holds:
             continue
         billed = billed_hours(hours, min_hours)
@@ -319,8 +319,15 @@ def conclusion(coalition, holds):
             "qualifications": quals}
 
 
-def plan(request, rows):
+def plan(request, rows, *, source_holds=None):
     req = validate_request(request)
+    if source_holds is not None:
+        ids = [row.get("offer_id") for row in rows]
+        if (not isinstance(source_holds, dict) or len(ids) != len(set(ids))
+                or set(source_holds) != set(ids)
+                or any(not isinstance(v, list) or any(not isinstance(h, str) or not h for h in v)
+                       for v in source_holds.values())):
+            raise ValueError("source_holds must bind every exact unique offer_id to a list of reasons")
     as_of = req.get("as_of")
     as_of = as_of and datetime.datetime.fromisoformat(as_of.replace("Z", "+00:00"))
     members = req["members"]
@@ -334,7 +341,8 @@ def plan(request, rows):
             continue
         min_hours, min_note = minimum_exact(row.get("minimum_billing"))
         usable.append((row, unit_rate(row), min_hours, min_note))
-    refs = {m["id"]: (standalone(m, usable), standalone(m, usable, clean_only=True)) for m in members}
+    refs = {m["id"]: (standalone(m, usable, source_holds=source_holds),
+                      standalone(m, usable, clean_only=True, source_holds=source_holds)) for m in members}
     plans, no_effect = [], []
     shortest = min(exact(m["hours"]) for m in members)
     for row, per_unit, min_hours, min_note in usable:
@@ -356,7 +364,7 @@ def plan(request, rows):
             dropped.append(worst["member"])
             pool = [m for m in pool if m["id"] != worst["member"]]
             current = evaluate(pool, row, per_unit, min_hours, refs, req, cap) if len(pool) >= 2 else None
-        holds = holds_for(row, min_note)
+        holds = holds_for(row, min_note, source_holds)
         age = None
         if as_of and row.get("retrieved_at"):
             seen = datetime.datetime.fromisoformat(row["retrieved_at"].replace("Z", "+00:00"))
