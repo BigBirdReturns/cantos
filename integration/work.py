@@ -64,9 +64,12 @@ def catalog():
                             **TASK_HELP[name]} for name, adapter in ADAPTERS.items()],
             "request": {"shape": {"tasks": [{"id": "caller-label", "task_class": "one listed class", "source": "artifact path"}]},
                         "path_basis": "Input paths are relative to the request file; absolute paths also work.",
-                        "optional_metadata": ["actor"]},
+                        "optional_metadata": ["actor"],
+                        "from_record": {"id": "caller-label", "from_record": {
+                            "source": "Research Desk packet path", "record_id": "judgment-id", "revision": 1}},
+                        "binding": "The claim/conclusion data.work holds a native task without id/actor and its exact computation_key; the current native dependency closure must remain valid. Optional inputs relocate identical source bytes."},
             "run": "python -B integration/work.py --request REQUEST.json --store RESULT_DIRECTORY",
-            "examples": ["integration/examples/work.json", "integration/WORK.md"],
+            "examples": ["integration/examples/work.json", "integration/WORK.md", "integration/WORK.md#retained-judgment-procedure-handoff"],
             "result": "Read tasks[].result for native output; task status executed/reused does not grant standing.",
             "reuse": "The same declared inputs, procedure bytes and runtime reuse one verified computation across callers.",
             "effects": {"model_calls": 0, "gpu_runs": 0, "resource_acquisition": False}}
@@ -166,9 +169,17 @@ def read_cache(path, description):
     return entry
 
 
-def execute_task(task, base, store):
+def execute_task(task, base, store, expected_key=None):
+    if "from_record" in task:
+        import research_handoff
+        binding = research_handoff.resolve(task, base, ADAPTERS)
+        output = execute_task(binding["task"], binding["base"], store, binding["expected_key"])
+        research_handoff.verify_unchanged(binding, task, base, ADAPTERS)
+        return {**output, "knowledge": binding["knowledge"]}
     started = time.perf_counter()
     description = call_worker(task, base, "describe")
+    if expected_key is not None and description["key"] != expected_key:
+        raise ValueError("Retained procedure binding differs from current inputs, code or runtime; revise the judgment and binding explicitly")
     path = store / "results" / (description["key"] + ".json")
     if path.exists():
         entry = read_cache(path, description)

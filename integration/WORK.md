@@ -330,3 +330,61 @@ Malformed, absent or future availability timestamps are per-offer `invalid_obser
 Qualification exercised the complete retained catalog and a linked five-task request: intake, pool, placement, independent benchmark import, and the new 4,274-accepted baseline recomputation. A fresh process reused all five. Explicitly synthetic availability and price interventions changed the same source for intake/pool/placement, recalculated those three tasks and reused the two independent results. All three consumers returned identical native intake values. Availability changed listing eligibility; changing the offer price changed the standalone comparison and caused the planner to demand explicit repricing, preserving its original model arithmetic. No reservation or performance improvement followed from either intervention.
 
 Native regression: `python -B integration/tests/test_task_pool_supply.py -v`. Retained request files and controller assertions live in the project session's `continuation-20260928/pool-supply/linked-verification/`. Use a separate store for a new cold run. This is local software qualification over historical material and labeled scenarios, with zero inference, purchase or deployment.
+
+## Retained judgment procedure handoff
+
+A request can select a specific claim or conclusion in an existing Research Desk
+packet instead of reconstructing its native task arguments:
+
+```json
+{"tasks":[{"id":"this-invocation","from_record":{
+  "source":"workspace.json","record_id":"assess-retained-offer","revision":2
+}}]}
+```
+
+The record's `data.work` contains exactly `task` and `computation_key`. `task` is
+one of the nine existing deterministic operations, without caller `id` or `actor`.
+The key comes from that exact native operation's description or completed result;
+it pins declared input bytes, procedure code, semantic parameters and runtime.
+The record's summary/rationale and native dependency pins retain why this is the
+chosen operation. A caller explicitly selecting a draft record permits only the
+existing local investigation, not an accepted review or an external action.
+
+The existing `change_owner.cjs` bridge loads the unchanged ResearchCore script,
+verifies the original packet by native replay, checks the requested current
+revision and dependency closure, and retains the native review state. It creates
+no review event. A blocked or superseded judgment stops that task; unrelated tasks
+continue. No shelf card, narrative source, arbitrary shell command or nested
+record reference becomes an executable task through this entry.
+
+The worker checks the declared native computation key before executing or reading
+its cache. It checks the Research Desk packet and reader again after completion.
+The invocation retains the exact judgment, rationale, source packet hash, native
+dependency verdict and review state alongside the normal result. The calculation
+identity remains owned by its existing operation: the same task invoked directly
+or through a valid judgment reuses the same native result.
+
+Relative task paths inside a record resolve beside its packet. Optional caller
+`inputs` can relocate existing path arguments (`source`, `evidence`, `seats`,
+`availability`, `local_models`, `offers`); identical bytes still need the same
+computation key. This is not permission to change the task's meaning. Missing
+files, changed input bytes, changed procedure/runtime, stale record pins or a
+superseded target stop use of that binding. New inputs require an explicit
+successor judgment and newly described native computation. No automatic repinning
+or class-general capability inference is implemented.
+
+Native qualification runs three council-linked operations: retained provider
+intake, diagnosis of historical A/T0 and imported benchmark artifacts. A fresh
+process reuses all three. A controller exit after the first completed operation
+leaves its result usable; restart reuses that result and performs the remaining
+two. An explicitly synthetic source correction blocks only the dependent judgment
+while the other two procedures reuse their results. This tests process loss
+between operations, not failure during a write or an external transaction.
+
+Research Desk remains byte-identical. The packets contain draft candidate
+judgments and no fabricated accepted reviews. This new request entry does not
+implement natural-language intent matching, cloud execution or autonomous
+judgment renewal. `python -B -m unittest discover -s integration/tests -p
+"test_task_research_handoff.py" -v` covers the new native handoff and stale-source
+boundary. Expanded mutation/relocation test writing was refused; those additional
+assertions were not executed and no alternate write mechanism was used.
