@@ -253,6 +253,9 @@ def evaluate(pool, row, per_unit, min_hours, refs, req, cap):
     total_used = sum(used.values())
     share_cents = allocate(bill_cents, used)
     per_gpu = per_unit / row["gpus"]
+    usage_cents = to_cents(per_gpu * total_used)
+    idle_cents = to_cents(per_gpu * (bought - total_used))
+    rounding_cents = bill_cents - usage_cents - idle_cents
     shares, worse, saving, ref_total = [], [], 0, 0
     for m in served:
         listed, clean = refs[m["id"]]
@@ -276,7 +279,9 @@ def evaluate(pool, row, per_unit, min_hours, refs, req, cap):
             "billed_hours": max(u["billed_hours"] for u in schedule), "billed_gpu_hours": float(bought),
             "pool_cost_usd": dollars(bill_cents), "pool_cost_cents": bill_cents,
             "used_gpu_hours": float(total_used), "idle_gpu_hours": float(bought - total_used),
-            "idle_cost_usd": dollars(bill_cents - to_cents(per_gpu * total_used)),
+            "idle_cost_usd": dollars(idle_cents),
+            "cost_components_cents": {"usage": usage_cents, "idle": idle_cents,
+                                      "per_unit_rounding_adjustment": rounding_cents},
             "utilization": round(float(total_used / bought), 4),
             "break_even_utilization": round(float(per_gpu * total_used * 100 / ref_total), 4) if ref_total else None,
             "schedule": schedule, "shares": shares,

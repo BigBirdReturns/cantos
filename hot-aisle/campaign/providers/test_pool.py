@@ -140,6 +140,18 @@ class Charges(unittest.TestCase):
         self.assertEqual([s["share_cents"] for s in part["shares"]], [334, 333, 333])  # tie goes to lowest id
         reconciles(self, part)
 
+    def test_per_unit_rounding_is_not_negative_idle_cost(self):
+        rows = [offer("tiny-2", gpus=2, rate=1.0, minimum="1 second"),
+                offer("single-1", gpus=1, rate=2.0, minimum="1 second")]
+        req = request(*[member("m%d" % i, hours=0.002) for i in range(4)])
+        p = pool.plan(req, rows)["plans"][0]["all_accepting"]
+        self.assertEqual(p["idle_gpu_hours"], 0)
+        self.assertEqual(p["idle_cost_usd"], 0)
+        self.assertEqual(p["pool_cost_cents"], 0)
+        self.assertEqual(p["cost_components_cents"]["per_unit_rounding_adjustment"], -1)
+        self.assertEqual(sum(p["cost_components_cents"].values()), p["pool_cost_cents"])
+        reconciles(self, p)
+
     def test_money_is_exact_decimal_not_binary_float(self):
         rows = [offer("u-2", gpus=2, rate=1.99, minimum="1 hour"), offer("s-1", gpus=1, rate=2.49)]
         part = pool.plan(request(member("a", hours=7), member("b", hours=7)), rows)["plans"][0]["all_accepting"]
