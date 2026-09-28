@@ -46,6 +46,12 @@ class PoolTask(unittest.TestCase):
         self.assertEqual(result["schema"], "capital/pool-result@1")
         self.assertFalse(result["source_rewritten"])
         self.assertEqual((self.base / "offers.jsonl").read_bytes(), before)
+        for plan in result["plans"]:
+            self.assertFalse(plan["bindable_at_list"] or plan["execution_authority"])
+            self.assertIn("status", plan["conclusion"])
+            part = plan["all_accepting"]
+            self.assertEqual(sum(s["share_cents"] for s in part["shares"]), part["pool_cost_cents"])
+            self.assertEqual(sum(u["charge_cents"] for u in part["schedule"]), part["pool_cost_cents"])
 
     def test_rejects_unknown_keys_and_missing_offers(self):
         with self.assertRaises(ValueError):

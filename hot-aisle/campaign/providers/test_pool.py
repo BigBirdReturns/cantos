@@ -124,5 +124,112 @@ class BindingBoundary(unittest.TestCase):
                 self.assertIn("reservation", p["binding_status"])
 
 
+def reconciles(test, part):
+    test.assertEqual(sum(u["charge_cents"] for u in part["schedule"]), part["pool_cost_cents"])
+    test.assertEqual(sum(s["share_cents"] for s in part["shares"]), part["pool_cost_cents"])
+    test.assertEqual(round(part["pool_cost_cents"] / 100, 2), part["pool_cost_usd"])
+
+
+class Charges(unittest.TestCase):
+    """Boundary failures found on 43f42bf; see round2/opus/probe-before.json."""
+
+    def test_cents_reconcile_to_the_rounded_bill_by_largest_remainder(self):
+        rows = [offer("u-3", gpus=3, rate=0.3333333), offer("s-1", gpus=1, rate=2.0)]
+        part = pool.plan(request(member("a"), member("b"), member("c")), rows)["plans"][0]["all_accepting"]
+        self.assertEqual(part["pool_cost_cents"], 1000)  # 3 x 0.3333333 x 10 h = 9.999999
+        self.assertEqual([s["share_cents"] for s in part["shares"]], [334, 333, 333])  # tie goes to lowest id
+        reconciles(self, part)
+
+    def test_money_is_exact_decimal_not_binary_float(self):
+        rows = [offer("u-2", gpus=2, rate=1.99, minimum="1 hour"), offer("s-1", gpus=1, rate=2.49)]
+        part = pool.plan(request(member("a", hours=7), member("b", hours=7)), rows)["plans"][0]["all_accepting"]
+        self.assertEqual((part["pool_cost_cents"], [s["share_cents"] for s in part["shares"]]), (2786, [1393, 1393]))
+
+    def test_many_irregular_pools_always_reconcile(self):
+        for rate in (0.3333333, 1.11, 1.99, 2.59, 6.155):
+            for gpus in (2, 3, 8):
+                members = [member("m%d" % i, gpus=1 + i % 2, hours=1.7 + 3.3 * i, window_hours=40)
+                           for i in range(7)]
+                rows = [offer("u-%d" % gpus, gpus=gpus, rate=rate, minimum="20 minutes"),
+                        offer("s-1", gpus=1, rate=rate * 1.3), offer("s-2", gpus=2, rate=rate * 1.2)]
+                for p in pool.plan(request(*members), rows)["plans"]:
+                    for part in (p["all_accepting"], p["coalition"]):
+                        if part is not None:
+                            with self.subTest(rate=rate, gpus=gpus, offer=p["offer_id"]):
+                                reconciles(self, part)
+
+    def test_each_whole_unit_is_released_when_its_last_member_ends(self):
+        members = [*[member("long%d" % i, hours=100) for i in range(8)], *[member("s%d" % i) for i in range(8)]]
+        part = pool.plan(request(*members), [offer("big-8", rate=1.0), offer("s-1", gpus=1, rate=2.0)])["plans"][0]
+        part = part["all_accepting"]
+        self.assertEqual([u["charge_cents"] for u in part["schedule"]], [80000, 8000])  # was 2 x $800
+        self.assertEqual((part["pool_cost_usd"], part["utilization"]), (880.0, 1.0))
+
+    def test_tight_window_is_not_pushed_onto_a_second_minimum_billed_unit(self):
+        members = [member("tight", hours=10, window_hours=10), member("long", hours=20, window_hours=168)]
+        part = pool.plan(request(*members), [offer("mo-1", gpus=1, rate=1.0, minimum="1 month")])["plans"][0]
+        part = part["all_accepting"]
+        self.assertEqual((part["units"], part["pool_cost_usd"]), (1, 730.0))  # was 2 units, $1,460
+        self.assertEqual([(r["member"], r["start_hour"]) for r in part["schedule"][0]["runs"]],
+                         [("tight", 0.0), ("long", 10.0)])
+
+
+class Qualifications(unittest.TestCase):
+    def test_held_cheapest_reference_travels_into_the_conclusion(self):
+        rows = [offer("big-8", rate=1.0), offer("cheap-1", gpus=1, rate=1.2, availability_observed="out_of_stock"),
+                offer("ok-1", gpus=1, rate=2.0)]
+        result = pool.plan(request(*[member("m%d" % i) for i in range(8)]), rows)
+        self.assertEqual(result["standalone"]["m0"]["offer_id"], "cheap-1")
+        self.assertEqual(result["standalone_unqualified"]["m0"]["offer_id"], "ok-1")
+        p = result["plans"][0]
+        verdict = p["conclusion"]
+        self.assertEqual(verdict["status"], "qualified")
+        self.assertTrue(verdict["no_worse_vs_unqualified_references"])
+        self.assertEqual({q["scope"] for q in verdict["qualifications"]}, {"reference:m%d" % i for i in range(8)})
+        self.assertTrue(all("out_of_stock" in q["hold"] for q in verdict["qualifications"]))
+        share = p["coalition"]["shares"][0]
+        self.assertEqual((share["saving_vs_standalone_usd"], share["saving_vs_unqualified_usd"]), (2.0, 10.0))
+
+    def test_unknown_pool_minimum_makes_the_bill_a_lower_bound(self):
+        rows = [offer("mystery-8", rate=1.0, minimum="unknown"), offer("ok-1", gpus=1, rate=2.0)]
+        verdict = pool.plan(request(*[member("m%d" % i) for i in range(8)]), rows)["plans"][0]["conclusion"]
+        self.assertTrue(verdict["arithmetic_no_worse"])
+        self.assertTrue(verdict["pool_bill_is_lower_bound"])
+        self.assertEqual(verdict["status"], "qualified")
+        self.assertEqual(verdict["qualifications"][0]["effect"], pool.POOL_SIDE)
+
+    def test_unqualified_list_arithmetic_still_has_no_authority(self):
+        rows = [offer("big-8", rate=1.0), offer("ok-1", gpus=1, rate=2.0)]
+        p = pool.plan(request(*[member("m%d" % i) for i in range(8)]), rows)["plans"][0]
+        self.assertEqual(p["conclusion"]["status"], "unqualified_at_list")
+        self.assertEqual(p["conclusion"]["qualifications"], [])
+        self.assertFalse(p["bindable_at_list"])
+        self.assertFalse(p["execution_authority"])
+
+    def test_no_unqualified_alternative_leaves_the_comparison_open(self):
+        rows = [offer("spot-8", rate=0.5, kind="spot"), offer("spot-1", gpus=1, rate=1.0, kind="spot")]
+        members = [member("m%d" % i, kinds=["spot"]) for i in range(8)]
+        verdict = pool.plan(request(*members), rows)["plans"][0]["conclusion"]
+        self.assertIsNone(verdict["no_worse_vs_unqualified_references"])
+        self.assertEqual(len(verdict["members_without_unqualified_reference"]), 8)
+
+
+class StagedCharges(unittest.TestCase):
+    def test_committed_offers_reconcile_and_carry_conclusions(self):
+        rows = pool.load_rows(HERE / "providers.jsonl")
+        with open(HERE.parents[2] / "integration/examples/pool-request.json", encoding="utf-8") as stream:
+            import json
+            example = json.load(stream)
+        dense = request(*[member("m%d" % i, hours=168, kinds=["on-demand", "spot"]) for i in range(8)])
+        for req in (example, dense):
+            result = pool.plan(req, rows)
+            for p in result["plans"]:
+                self.assertFalse(p["bindable_at_list"] or p["execution_authority"])
+                self.assertIn(p["conclusion"]["status"], ("no_coalition", "not_no_worse", "qualified", "unqualified_at_list"))
+                for part in (p["all_accepting"], p["coalition"]):
+                    if part is not None:
+                        reconciles(self, part)
+
+
 if __name__ == "__main__":
     unittest.main()
