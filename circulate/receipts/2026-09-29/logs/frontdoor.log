@@ -1,0 +1,6 @@
+2026-09-29T23:36:14Z [frontdoor] $ node -e const r=require(process.argv[1]);const rec=JSON.parse(require('fs').readFileSync(process.argv[2],'utf8'));const v=r.verify(rec);console.log(JSON.stringify({verified:v.verified,problems:v.problems,engine:v.engine&&v.engine.version}));process.exit(v.verified?0:1) D:\Projects\Organs\AXM\axm-tools\main\hot-aisle\runner\lib\record.cjs D:\Projects\Organs\AXM\axm-tools\main\hot-aisle\data\run3\record.json
+2026-09-29T23:36:14Z [frontdoor]   | {"verified":true,"problems":[],"engine":"2.0.0"}
+2026-09-29T23:36:14Z [frontdoor]   exit 0
+2026-09-29T23:36:14Z [frontdoor] $ python -B scripts/build_kit.py --check
+2026-09-29T23:36:14Z [frontdoor]   | kit matches source: 42 files, 1864073 bytes
+2026-09-29T23:36:14Z [frontdoor]   exit 0

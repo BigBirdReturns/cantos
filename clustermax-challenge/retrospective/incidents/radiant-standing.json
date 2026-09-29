@@ -1,0 +1,121 @@
+{
+  "schema": "secondrun.status-incidents.v1",
+  "provider": "Radiant",
+  "status_page_url": "https://status.radiant.co",
+  "retrieved_utc": "2026-09-29T23:33:19Z",
+  "raw_files": [
+    {
+      "path": "circulate/retained/status/raw-root/raw/radiant-standing/history_2026-march.html",
+      "sha256": "49a256b4e6f67221a268cd8f249b37e365babc42594a4790a3b8bbeebd4d3c58",
+      "url": "https://status.radiant.co/history/2026/march"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/radiant-standing/history_2026-april.html",
+      "sha256": "4ceaa96e75773acb26a34d39493f9bc655457cd1a7595954d846762bc56b8f89",
+      "url": "https://status.radiant.co/history/2026/april"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/radiant-standing/history_2026-may.html",
+      "sha256": "f70660bb803ce06abe125859509cb73ae97e1ebd51471a96930e79b3ac4431f8",
+      "url": "https://status.radiant.co/history/2026/may"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/radiant-standing/history_2026-september.html",
+      "sha256": "23a13c5825ab8fa848aa65f9f0e6962bf8da2ad7f0504c4f88b159398d585ce1",
+      "url": "https://status.radiant.co/history/2026/september"
+    }
+  ],
+  "coverage_start": "2026-03-01",
+  "coverage_end": "2026-09-29",
+  "severity_map": {
+    "notice-complete": "none",
+    "notice-resolved": "none"
+  },
+  "incidents": [
+    {
+      "id": "488667",
+      "title": "Seattle - Site maintenance",
+      "impact_label": "notice-complete",
+      "severity": "none",
+      "started_utc": "2026-03-12T18:00:07Z",
+      "resolved_utc": "2026-03-12T18:00:07Z",
+      "is_maintenance": true,
+      "url": "https://status.radiant.co/history/2026/march/cr5tgbyi46n3z13m-seattle-site-maintenance"
+    },
+    {
+      "id": "489271",
+      "title": "Possible CLI Service Degradation Notice",
+      "impact_label": "notice-resolved",
+      "severity": "none",
+      "started_utc": "2026-03-17T19:30:07Z",
+      "resolved_utc": "2026-03-17T19:30:07Z",
+      "is_maintenance": false,
+      "url": "https://status.radiant.co/history/2026/march/x9x6vumo4b4tmi01-possible-cli-service-degradation-notice"
+    },
+    {
+      "id": "493811",
+      "title": "London – Site Maintenance",
+      "impact_label": "notice-complete",
+      "severity": "none",
+      "started_utc": "2026-04-29T22:30:00Z",
+      "resolved_utc": "2026-04-29T22:30:00Z",
+      "is_maintenance": true,
+      "url": "https://status.radiant.co/history/2026/april/2mdbxwyplspqbsqv-london-site-maintenance"
+    },
+    {
+      "id": "493883",
+      "title": "London – Site Maintenance",
+      "impact_label": "notice-complete",
+      "severity": "none",
+      "started_utc": "2026-05-05T22:30:07Z",
+      "resolved_utc": "2026-05-05T22:30:07Z",
+      "is_maintenance": true,
+      "url": "https://status.radiant.co/history/2026/may/cxighjesfyqsjqvw-london-site-maintenance"
+    },
+    {
+      "id": "494890",
+      "title": "London - Site Maintenance",
+      "impact_label": "notice-complete",
+      "severity": "none",
+      "started_utc": "2026-05-12T21:30:00Z",
+      "resolved_utc": "2026-05-12T21:30:00Z",
+      "is_maintenance": true,
+      "url": "https://status.radiant.co/history/2026/may/hxdw4uaciuoqdw7r-london-site-maintenance"
+    },
+    {
+      "id": "496401",
+      "title": "London - Site Maintenance",
+      "impact_label": "notice-complete",
+      "severity": "none",
+      "started_utc": "2026-05-18T21:30:07Z",
+      "resolved_utc": "2026-05-18T21:30:07Z",
+      "is_maintenance": true,
+      "url": "https://status.radiant.co/history/2026/may/oibijsnx4yyzkke9-london-site-maintenance"
+    },
+    {
+      "id": "496402",
+      "title": "London - Site Maintenance",
+      "impact_label": "notice-complete",
+      "severity": "none",
+      "started_utc": "2026-05-21T16:00:05Z",
+      "resolved_utc": "2026-05-21T16:00:05Z",
+      "is_maintenance": true,
+      "url": "https://status.radiant.co/history/2026/may/6thwqebfmgqdrhvl-london-site-maintenance"
+    },
+    {
+      "id": "508009",
+      "title": "London - Site Maintenance",
+      "impact_label": "notice-complete",
+      "severity": "none",
+      "started_utc": "2026-09-02T16:00:00Z",
+      "resolved_utc": "2026-09-02T16:00:00Z",
+      "is_maintenance": true,
+      "url": "https://status.radiant.co/history/2026/september/skndfygb86mzgiud-london-site-maintenance"
+    }
+  ],
+  "notes": [
+    "STANDING collection 2026-09-29 by circulate; not read by R1 or R2. Raw pages (with SHA-256 above) are kept in the CI artifact / retained/, not committed.",
+    "months returning 404 (the site lists no notices for them): 2026-06, 2026-07, 2026-08. A 404 is weaker evidence than an explicit \"no incidents\" page.",
+    "SorryApp platform; parsed /history/<year>/<month> notice cards. The card shows only the \"Ended\" time, so started_utc == resolved_utc == Ended. SorryApp exposes no severity: impact_label is the card state (Resolved / Complete ...), severity is none. Cards in the Complete state are treated as maintenance; a Resolved card is an incident."
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "name": "r2-standing",
+  "status": "OK",
+  "started_utc": "2026-09-29T23:34:40Z",
+  "finished_utc": "2026-09-29T23:36:13Z",
+  "seconds": 93.3,
+  "counts": {
+    "window_start": "2026-04-02",
+    "window_end": "2026-09-29",
+    "included_primary": 16,
+    "included_secondary": 22,
+    "reading": "inconclusive",
+    "seed": 20260929,
+    "spearman_rho": 0.41480895520125544
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "clustermax-challenge/retrospective/results/R2-standing-2026-09-29.json",
+      "sha256": "45dcdbe8f95dd244aa5f4601a91926906504d1baaf2e74e6bced1d75361aaac7",
+      "bytes": 70590,
+      "committed": true
+    },
+    {
+      "path": "clustermax-challenge/retrospective/results/R2-standing-2026-09-29.md",
+      "sha256": "1ec9b94ce55b39bf174e82497269d26118650a77c1108e955d05d6759366315b",
+      "bytes": 39160,
+      "committed": true
+    }
+  ],
+  "notes": "STANDING: window 2026-04-02..2026-09-29, 16 providers, Spearman rho 0.41480895520125544 on major_or_critical_incident_count, bootstrap 95% interval [-0.05983845468247857, 0.7685678408488934], permutation p 0.113; reading inconclusive.",
+  "error": null,
+  "log": "logs/r2-standing.log"
+}

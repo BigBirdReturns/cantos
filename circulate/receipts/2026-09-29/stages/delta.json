@@ -1,0 +1,51 @@
+{
+  "name": "delta",
+  "status": "OK",
+  "started_utc": "2026-09-29T23:33:20Z",
+  "finished_utc": "2026-09-29T23:34:39Z",
+  "seconds": 78.86,
+  "counts": {
+    "inputs": 3,
+    "observations": 293698,
+    "source_rows": 18040,
+    "chunks": 20,
+    "measured_cells": 45,
+    "comparable_observations": 0,
+    "gaps": 0,
+    "ranked": 293698
+  },
+  "sources": [
+    {
+      "url": "D:/Projects/Organs/AXM/axm-tools/sessions/public-tail-20260929/lanes/inferencex-history/imported-main/inferencex-2026-09-29.jsonl",
+      "sha256": "1eab076241673432f84802d83597161aeb31420c95a87b49ae4b64accf69bf2f",
+      "retrieved_utc": null
+    },
+    {
+      "url": "hot-aisle/campaign/backfill/imported/mlperf-2026-09-29.jsonl",
+      "sha256": "a68c9e81ade4ea1857fda5b9877c59aa5ba12ced1a426029eda16e23cf326e4a",
+      "retrieved_utc": null
+    },
+    {
+      "url": "hot-aisle/campaign/backfill/imported/daily/2026-09-29.jsonl.gz",
+      "sha256": "a978efa4882f74783fc4b05737889b2237777d0d093f171816a87c89699c8065",
+      "retrieved_utc": null
+    }
+  ],
+  "outputs": [
+    {
+      "path": "circulate/retained/delta/delta-standing.json.gz",
+      "sha256": "dc44c6a053ac86948f515bc3fa50066527019289064b6b03e0db7855ba57ba55",
+      "bytes": 52983764,
+      "committed": false
+    },
+    {
+      "path": "hot-aisle/campaign/backfill/DELTA-standing.md",
+      "sha256": "1dbc52158aacb581dc77a55306d3e15c90106479bb654e38aac01d858c2c660a",
+      "bytes": 24459,
+      "committed": true
+    }
+  ],
+  "notes": "293698 observations vs 45 measured cells: 0 comparable, 293698 ranked.",
+  "error": null,
+  "log": "logs/delta.log"
+}

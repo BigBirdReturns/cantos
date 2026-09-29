@@ -1,0 +1,184 @@
+2026-09-29T23:36:14Z [tests] $ node --test hot-aisle/runner/test/interfaces.test.cjs hot-aisle/runner/test/lifecycle.test.cjs hot-aisle/runner/test/run3-door.test.cjs
+2026-09-29T23:36:18Z [tests]   | ✔ Hot Aisle adapter reads allocations, state, balance and retrieved prices; rejects a bad token (74.0733ms)
+2026-09-29T23:36:18Z [tests]   | ✔ localhost server: status, plan, approve, start, events, record views, origin policy (430.7037ms)
+2026-09-29T23:36:18Z [tests]   | ✔ published page origin: preflight carries the private-network grant; loopback and GitHub Pages origins pass, others and "null" are refused (116.0611ms)
+2026-09-29T23:36:18Z [tests]   | ✔ MCP server: initialize, list, prepare/start/status/result/revalidate over stdio (267.1957ms)
+2026-09-29T23:36:18Z [tests]   | ✔ engine loads from the page and is the 2.0.0 authority (7.9375ms)
+2026-09-29T23:36:18Z [tests]   | ✔ plan freezes inputs, computes cells and a hash; approval binds that hash (9.9412ms)
+2026-09-29T23:36:18Z [tests]   | ✔ full lifecycle produces a verified qualified record whose projections match the engine (126.2731ms)
+2026-09-29T23:36:18Z [tests]   | ✔ cancel stops the owned benchmark and retains completed trials; reconnect resumes only the rest (2659.2639ms)
+2026-09-29T23:36:18Z [tests]   | ✔ a dead lease is recovered as interrupted, never as running (4.3046ms)
+2026-09-29T23:36:18Z [tests]   | ✔ corrupt evidence fails its trial; the record uses only admitted trials; all-corrupt fails the job (147.1519ms)
+2026-09-29T23:36:18Z [tests]   | ✔ plans and records carry the fake benchmark in portable form; the executor resolves it (55.0372ms)
+2026-09-29T23:36:18Z [tests]   | ✔ verification refuses a record whose concurrency is not a positive integer, even with a fresh checksum (121.9142ms)
+2026-09-29T23:36:18Z [tests]   | ✔ a non-local target refuses synthetic evidence (3.2033ms)
+2026-09-29T23:36:18Z [tests]   | ✔ spend limit stops the run early and keeps what completed (466.1527ms)
+2026-09-29T23:36:18Z [tests]   | ✔ requirements decide qualification; the primary cell is the cheapest that meets them (208.2208ms)
+2026-09-29T23:36:18Z [tests]   | ✔ revalidation: price recomputes without measurement; traffic adds only new cells; runtime supersedes; evaluator stands (118.3782ms)
+2026-09-29T23:36:18Z [tests]   | ✔ revalidation refuses unsupported changes instead of reporting an empty successful plan (8.0556ms)
+2026-09-29T23:36:18Z [tests]   | ✔ residual plan carries simultaneous economics and acceptance changes into the native job (10.2972ms)
+2026-09-29T23:36:18Z [tests]   | ✔ residual plan retains a requested quality gate and measures only requested runtime cells (9.0223ms)
+2026-09-29T23:36:18Z [tests]   | ✔ residual plan clears an original primary cell that is outside the required measurement (98.7293ms)
+2026-09-29T23:36:18Z [tests]   | ✔ the real Run 3 record verifies through the runner and the published pair recomputes (374.7404ms)
+2026-09-29T23:36:18Z [tests]   | ✔ the record is bound to the retained result bytes copied beside it (89.6833ms)
+2026-09-29T23:36:18Z [tests]   | ✔ SOURCES.json hashes match every shipped file (11.9358ms)
+2026-09-29T23:36:18Z [tests]   | ✔ the copy embedded in index.html is the shipped record (88.5227ms)
+2026-09-29T23:36:18Z [tests]   | ✔ the report engine identity in the record matches the page (6.9423ms)
+2026-09-29T23:36:18Z [tests]   | ✔ market strip data: the four GPUs, provider counts, source and manifest hash (0.9845ms)
+2026-09-29T23:36:18Z [tests]   | ℹ tests 26
+2026-09-29T23:36:18Z [tests]   | ℹ suites 0
+2026-09-29T23:36:18Z [tests]   | ℹ pass 26
+2026-09-29T23:36:18Z [tests]   | ℹ fail 0
+2026-09-29T23:36:18Z [tests]   | ℹ cancelled 0
+2026-09-29T23:36:18Z [tests]   | ℹ skipped 0
+2026-09-29T23:36:18Z [tests]   | ℹ todo 0
+2026-09-29T23:36:18Z [tests]   | ℹ duration_ms 4130.7493
+2026-09-29T23:36:18Z [tests]   exit 0
+2026-09-29T23:36:18Z [tests] $ node hot-aisle/scripts/test_workbench.cjs
+2026-09-29T23:36:18Z [tests]   | PASS summary-only gating held
+2026-09-29T23:36:18Z [tests]   | PASS latency cannot be reconstructed from ITL sums
+2026-09-29T23:36:18Z [tests]   | PASS absent evaluation holds quality metric
+2026-09-29T23:36:18Z [tests]   | PASS hash-bound evaluation joins original request order
+2026-09-29T23:36:18Z [tests]   | PASS quality + latency intersection, not product of rates
+2026-09-29T23:36:18Z [tests]   | PASS evaluation source mismatch refused
+2026-09-29T23:36:18Z [tests]   | PASS evaluation record mismatch refused
+2026-09-29T23:36:18Z [tests]   | PASS evaluation failed transport cannot pass
+2026-09-29T23:36:18Z [tests]   | PASS evaluation boolean strings rejected
+2026-09-29T23:36:18Z [tests]   | PASS all-failed test retains cost but no finite cost per outcome
+2026-09-29T23:36:18Z [tests]   | PASS billable count and hourly extras included
+2026-09-29T23:36:18Z [tests]   | PASS whole-bill override retains cost denominator
+2026-09-29T23:36:18Z [tests]   | PASS blank total does not become a zero bill
+2026-09-29T23:36:18Z [tests]   | PASS explicit zero supplied bill is retained
+2026-09-29T23:36:18Z [tests]   | PASS negative costs rejected
+2026-09-29T23:36:18Z [tests]   | PASS fractional GPUs rejected
+2026-09-29T23:36:18Z [tests]   | PASS overflow rejected
+2026-09-29T23:36:18Z [tests]   | PASS comparator required throughput direction is correct
+2026-09-29T23:36:18Z [tests]   | PASS zero Hot Aisle cost cannot produce a finite price threshold
+2026-09-29T23:36:18Z [tests]   | PASS matched supplied evidence yields bounded cost comparison
+2026-09-29T23:36:18Z [tests]   | PASS missing workload holds savings
+2026-09-29T23:36:18Z [tests]   | PASS different precision holds savings
+2026-09-29T23:36:18Z [tests]   | PASS different request gates hold savings
+2026-09-29T23:36:18Z [tests]   | PASS same raw source on both sides holds savings
+2026-09-29T23:36:18Z [tests]   | PASS competitor is allowed to win
+2026-09-29T23:36:18Z [tests]   | PASS billing bases must match
+2026-09-29T23:36:18Z [tests]   | PASS identical cost is a tie
+2026-09-29T23:36:18Z [tests]   | PASS sha256 portable fallback matches native for boundary lengths
+2026-09-29T23:36:18Z [tests]   | PASS sha256 handles binary and UTF-8
+2026-09-29T23:36:18Z [tests]   | PASS unknown metadata and raw text excluded from normalized output
+2026-09-29T23:36:18Z [tests]   | PASS exported report recomputes in a fresh invocation
+2026-09-29T23:36:18Z [tests]   | PASS changed checksum is rejected
+2026-09-29T23:36:18Z [tests]   | PASS changed headline with a new checksum still fails recomputation
+2026-09-29T23:36:18Z [tests]   | PASS synthetic marker cannot silently disappear
+2026-09-29T23:36:18Z [tests]   | PASS report HTML escapes model and quote markup
+2026-09-29T23:36:18Z [tests]   | PASS canonical serialization ignores object key order
+2026-09-29T23:36:18Z [tests]   | PASS nonmonotonic percentile summary rejected
+2026-09-29T23:36:18Z [tests]   | PASS raw arbitrary format field is not exported
+2026-09-29T23:36:18Z [tests]   | PASS overflowing derived throughput is rejected
+2026-09-29T23:36:18Z [tests]   | {"tests":80,"failed":false,"scope":"Software qualification with synthetic fixtures; no GPU performance measurement."}
+2026-09-29T23:36:18Z [tests]   exit 0
+2026-09-29T23:36:18Z [tests] $ C:\Users\Jonathan Sandhu\AppData\Local\Programs\Python\Python313\python.exe -B hot-aisle/campaign/backfill/importer.py --self-test
+2026-09-29T23:36:19Z [tests]   | test_path_escape (test_backfill.BackfillTests.test_path_escape) ... ok
+2026-09-29T23:36:19Z [tests]   | test_rank_gap_and_age (test_backfill.BackfillTests.test_rank_gap_and_age) ... ok
+2026-09-29T23:36:19Z [tests]   | test_repeat_import_stable (test_backfill.BackfillTests.test_repeat_import_stable) ... ok
+2026-09-29T23:36:19Z [tests]   | test_server_tokens_and_inferred_not_equated (test_backfill.BackfillTests.test_server_tokens_and_inferred_not_equated) ... ok
+2026-09-29T23:36:19Z [tests]   | test_tier_and_duplicates (test_backfill.BackfillTests.test_tier_and_duplicates) ... ok
+2026-09-29T23:36:19Z [tests]   | test_two_to_one_ratio (test_backfill.BackfillTests.test_two_to_one_ratio) ... ok
+2026-09-29T23:36:19Z [tests]   | test_unknown_or_different_shape_refused (test_backfill.BackfillTests.test_unknown_or_different_shape_refused) ... ok
+2026-09-29T23:36:19Z [tests]   | test_wrong_units (test_backfill.BackfillTests.test_wrong_units) ... ok
+2026-09-29T23:36:19Z [tests]   | test_zero_denominator (test_backfill.BackfillTests.test_zero_denominator) ... ok
+2026-09-29T23:36:19Z [tests]   | test_cap_resume_skip_expired_and_existing (test_history.FetchTests.test_cap_resume_skip_expired_and_existing) ... ok
+2026-09-29T23:36:19Z [tests]   | test_error_receipt_and_retry_after_interruption (test_history.FetchTests.test_error_receipt_and_retry_after_interruption) ... ok
+2026-09-29T23:36:19Z [tests]   | test_expired_after_listing_is_recorded (test_history.FetchTests.test_expired_after_listing_is_recorded) ... ok
+2026-09-29T23:36:19Z [tests]   | test_filters_preserve_whole_raw_file (test_history.FetchTests.test_filters_preserve_whole_raw_file) ... ok
+2026-09-29T23:36:19Z [tests]   | test_gh_headers (test_history.FetchTests.test_gh_headers) ... ok
+2026-09-29T23:36:19Z [tests]   | test_rate_limit_saved_at_cap (test_history.FetchTests.test_rate_limit_saved_at_cap) ... ok
+2026-09-29T23:36:19Z [tests]   | test_rate_limits_and_retry_budget (test_history.FetchTests.test_rate_limits_and_retry_budget) ... ok
+2026-09-29T23:36:19Z [tests]   | test_urllib_fallback_is_mocked_and_drops_redirect_auth (test_history.FetchTests.test_urllib_fallback_is_mocked_and_drops_redirect_auth) ... ok
+2026-09-29T23:36:19Z [tests]   | test_zip_paths_never_extracted (test_history.FetchTests.test_zip_paths_never_extracted) ... ok
+2026-09-29T23:36:19Z [tests]   | test_empty_and_invalid_schema (test_history.RealSchemaTests.test_empty_and_invalid_schema) ... ok
+2026-09-29T23:36:19Z [tests]   | test_failed_rows_survive (test_history.RealSchemaTests.test_failed_rows_survive) ... ok
+2026-09-29T23:36:19Z [tests]   | test_fixed_counts_and_topology (test_history.RealSchemaTests.test_fixed_counts_and_topology) ... ok
+2026-09-29T23:36:19Z [tests]   | test_gpu_rule_not_ep_or_dcp (test_history.RealSchemaTests.test_gpu_rule_not_ep_or_dcp) ... ok
+2026-09-29T23:36:19Z [tests]   | test_nested_metrics_and_shapes (test_history.RealSchemaTests.test_nested_metrics_and_shapes) ... ok
+2026-09-29T23:36:19Z [tests]   | test_original_bytes_and_identity (test_history.RealSchemaTests.test_original_bytes_and_identity) ... ok
+2026-09-29T23:36:19Z [tests]   | test_raw_manifest_binds_receipts_and_preserves_unknown_run (test_history.RealSchemaTests.test_raw_manifest_binds_receipts_and_preserves_unknown_run) ... ok
+2026-09-29T23:36:19Z [tests]   | test_summary_counts_source_rows_not_metrics (test_history.RealSchemaTests.test_summary_counts_source_rows_not_metrics) ... ok
+2026-09-29T23:36:19Z [tests]   | test_mlperf_rows_without_raw_sha_are_countable (tests.test_lane_2026_09_29.DeltaSourceKey.test_mlperf_rows_without_raw_sha_are_countable) ... ok
+2026-09-29T23:36:19Z [tests]   | test_flat_rows_import_with_mapped_metrics (tests.test_lane_2026_09_29.FlatAgenticSchema.test_flat_rows_import_with_mapped_metrics) ... ok
+2026-09-29T23:36:19Z [tests]   | test_nested_schema_unchanged (tests.test_lane_2026_09_29.FlatAgenticSchema.test_nested_schema_unchanged) ... ok
+2026-09-29T23:36:19Z [tests]   | test_missing_sidecar_retrieved_at_uses_declared (tests.test_lane_2026_09_29.RetrievedAt.test_missing_sidecar_retrieved_at_uses_declared) ... ok
+2026-09-29T23:36:19Z [tests]   | test_sidecar_hash_binds_raw (tests.test_lane_2026_09_29.RetrievedAt.test_sidecar_hash_binds_raw) ... ok
+2026-09-29T23:36:19Z [tests]   | test_sidecar_retrieved_at_wins (tests.test_lane_2026_09_29.RetrievedAt.test_sidecar_retrieved_at_wins) ... ok
+2026-09-29T23:36:19Z [tests]   | test_gpu_count_unit (tests.test_lane_2026_09_29.ZeroGpuCount.test_gpu_count_unit) ... ok
+2026-09-29T23:36:19Z [tests]   | test_invalid_counts_still_abort (tests.test_lane_2026_09_29.ZeroGpuCount.test_invalid_counts_still_abort) ... ok
+2026-09-29T23:36:19Z [tests]   | test_tp0_artifact_imports_with_null_gpus (tests.test_lane_2026_09_29.ZeroGpuCount.test_tp0_artifact_imports_with_null_gpus) ... ok
+2026-09-29T23:36:19Z [tests]   | 
+2026-09-29T23:36:19Z [tests]   | ----------------------------------------------------------------------
+2026-09-29T23:36:19Z [tests]   | Ran 49 tests in 0.261s
+2026-09-29T23:36:19Z [tests]   | 
+2026-09-29T23:36:19Z [tests]   | OK
+2026-09-29T23:36:19Z [tests]   exit 0
+2026-09-29T23:36:19Z [tests] $ node clustermax-challenge/tests/test_engine.cjs
+2026-09-29T23:36:22Z [tests]   | {
+2026-09-29T23:36:22Z [tests]   |   "checks_passed": 166,
+2026-09-29T23:36:22Z [tests]   |   "cases": 70,
+2026-09-29T23:36:22Z [tests]   |   "scope": "12 hash vectors; embedded registry/transform == design files; full bit-identical Python/JS results for 3 demo fixtures (informative positive/exact, shuffled inconclusive/exact, level-shift inconclusive/Monte Carlo) and 70 adversarial/parity cases (prototype names, integral floats, microsecond timestamps, canonical floats/astral keys/lone surrogates, transform lock, uniform gates, empty training, source registry, v1.3 HOLD rules); canonical JSON vectors"
+2026-09-29T23:36:22Z [tests]   | }
+2026-09-29T23:36:22Z [tests]   exit 0
+2026-09-29T23:36:22Z [tests] $ C:\Users\Jonathan Sandhu\AppData\Local\Programs\Python\Python313\python.exe -B -m unittest discover -s clustermax-challenge/tests -p test_*.py
+2026-09-29T23:36:51Z [tests]   | C:\Users\JONATH~1\AppData\Local\Temp\tmpppzayj9w\page.md:3: disclosure placeholder: ???
+2026-09-29T23:36:51Z [tests]   | release-readiness: 1 unresolved marker(s)
+2026-09-29T23:36:51Z [tests]   | release-readiness: clean
+2026-09-29T23:36:51Z [tests]   | C:\Users\JONATH~1\AppData\Local\Temp\tmpdhdhgs8n\page.md:3: CONFIRM marker: [CONFIRM: compensation received -- none / describe]
+2026-09-29T23:36:51Z [tests]   | release-readiness: 1 unresolved marker(s)
+2026-09-29T23:36:51Z [tests]   | C:\Users\JONATH~1\AppData\Local\Temp\tmptrq8hs8_\page.md:3: disclosure placeholder: [TBD]
+2026-09-29T23:36:51Z [tests]   | release-readiness: 1 unresolved marker(s)
+2026-09-29T23:36:51Z [tests]   | release-readiness: clean
+2026-09-29T23:36:51Z [tests]   | submission: example
+2026-09-29T23:36:51Z [tests]   |   plan.json: sha256=61be962fb5fd55d05a654a3d7419031d7ea2ef57ee2b32332e33787bdc158747
+2026-09-29T23:36:51Z [tests]   |   binding.json: sha256=3ed445092fc0cc181407d977422fad938d9dc4b4d7fd78228e31310a4ceb2637
+2026-09-29T23:36:51Z [tests]   |   outcomes.json: sha256=83524a299bf4c64c2e2f88fba4c0e678de00d7ba6f3ab7521cac17423c83b756
+2026-09-29T23:36:51Z [tests]   |   SUBMITTER.md: sha256=8443d96e46156dcc84af87ce45294c7947736fb996b4fa507f793ef2448749c0
+2026-09-29T23:36:51Z [tests]   | challenge status: PILOT_DESCRIPTIVE_RESULT
+2026-09-29T23:36:51Z [tests]   | evidence_status: SYNTHETIC_DEMO
+2026-09-29T23:36:51Z [tests]   | RESULT: OK
+2026-09-29T23:36:51Z [tests]   | submission: bad
+2026-09-29T23:36:51Z [tests]   |   plan.json: sha256=61be962fb5fd55d05a654a3d7419031d7ea2ef57ee2b32332e33787bdc158747
+2026-09-29T23:36:51Z [tests]   |   binding.json: sha256=3ed445092fc0cc181407d977422fad938d9dc4b4d7fd78228e31310a4ceb2637
+2026-09-29T23:36:51Z [tests]   |   outcomes.json: sha256=83524a299bf4c64c2e2f88fba4c0e678de00d7ba6f3ab7521cac17423c83b756
+2026-09-29T23:36:51Z [tests]   |   SUBMITTER.md: sha256=3e37a330845e2bf8e2c48bc6f876a2667bd3982f55f876c41db1f706af5d08e2
+2026-09-29T23:36:51Z [tests]   | problems:
+2026-09-29T23:36:51Z [tests]   |   - SUBMITTER.md has no disclosure section (expected a heading such as "Disclosure")
+2026-09-29T23:36:51Z [tests]   | challenge status: PILOT_DESCRIPTIVE_RESULT
+2026-09-29T23:36:51Z [tests]   | evidence_status: SYNTHETIC_DEMO
+2026-09-29T23:36:51Z [tests]   | RESULT: HOLD/FAIL
+2026-09-29T23:36:51Z [tests]   | 
+2026-09-29T23:36:51Z [tests]   | ........................................................................................................................................UNSUPPORTED: nope
+2026-09-29T23:36:51Z [tests]   | usage: python.exe -m unittest [-h] --slug SLUG --url URL
+2026-09-29T23:36:51Z [tests]   |                               [--mode {auto,atlassian-history,atlassian,betterstack,instatus,sorryapp,generic}]
+2026-09-29T23:36:51Z [tests]   |                               [--manual-json MANUAL_JSON]
+2026-09-29T23:36:51Z [tests]   |                               [--out-root OUT_ROOT] [--since SINCE]
+2026-09-29T23:36:51Z [tests]   | python.exe -m unittest: error: argument --mode: invalid choice: 'nonsense' (choose from 'auto', 'atlassian-history', 'atlassian', 'betterstack', 'instatus', 'sorryapp', 'generic')
+2026-09-29T23:36:51Z [tests]   | .........................Ledger invalid: Unsupported ledger schema
+2026-09-29T23:36:51Z [tests]   | .........................................................REFUSING TO RUN: PLAN.md sha256 (9da12925dba28e78233556512143b7f4f46167ed25375a6133876d3515a0ffae) does not match plan.json plan_md_sha256 (ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff); the plan is frozen pre-registration, refusing to run
+2026-09-29T23:36:51Z [tests]   | .............
+2026-09-29T23:36:51Z [tests]   | ----------------------------------------------------------------------
+2026-09-29T23:36:51Z [tests]   | Ran 231 tests in 28.726s
+2026-09-29T23:36:51Z [tests]   | 
+2026-09-29T23:36:51Z [tests]   | OK
+2026-09-29T23:36:51Z [tests]   exit 0
+2026-09-29T23:36:51Z [tests] $ C:\Users\Jonathan Sandhu\AppData\Local\Programs\Python\Python313\python.exe -c import pytest
+2026-09-29T23:36:51Z [tests]   exit 0
+2026-09-29T23:36:51Z [tests] $ C:\Users\Jonathan Sandhu\AppData\Local\Programs\Python\Python313\python.exe -B -m pytest -q -p no:cacheprovider integration/tests
+2026-09-29T23:37:50Z [tests]   | ................................................................ [ 81%]
+2026-09-29T23:37:50Z [tests]   | ...............                                              [100%]
+2026-09-29T23:37:50Z [tests]   | 79 passed, 20 subtests passed in 59.11s
+2026-09-29T23:37:50Z [tests]   exit 0
+2026-09-29T23:37:50Z [tests] $ node research-desk/packets/validate_packet.js
+2026-09-29T23:39:04Z [tests]   | app verifyPacket: OK, 1847 events replayed in 73.2 s
+2026-09-29T23:39:04Z [tests]   | app dependencyState: 433 records current, 1414 blocked (open dispositions block downstream acceptance by design)
+2026-09-29T23:39:04Z [tests]   | app.html sha256 5951f7f3d994ec980d2958ae18246edc6dbe5b57db8d38e90c1c18956b96e470
+2026-09-29T23:39:04Z [tests]   | by kind {"source":433,"claim":1414} by tier {"public_observation":1847} by disposition {"observed":433,"open":1414}
+2026-09-29T23:39:04Z [tests]   | elapsed 73.5 s
+2026-09-29T23:39:04Z [tests]   | PASS PUBLIC-TAIL-2026-09-29.research-packet.json (3707009 bytes, envelope sha256 3904ccb34ed263f309f2153d68902dee305d556630f93b7b967c9070d5fdc70d)
+2026-09-29T23:39:04Z [tests]   exit 0

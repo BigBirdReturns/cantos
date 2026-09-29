@@ -1,0 +1,65 @@
+{
+ "total_count": 3,
+ "artifacts": [
+  {
+   "id": 10010357619,
+   "node_id": "MDg6QXJ0aWZhY3QxMDAxMDM1NzYxOQ==",
+   "name": "results_bmk",
+   "size_in_bytes": 142,
+   "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/10010357619",
+   "archive_download_url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/10010357619/zip",
+   "expired": false,
+   "digest": "sha256:275c4d16b1d369f51dd31a6bd4a62cc7776ce716e049bb6dbe5cd456225fa9eb",
+   "created_at": "2026-09-07T08:28:17Z",
+   "updated_at": "2026-09-07T08:28:17Z",
+   "expires_at": "2026-12-06T07:02:36Z",
+   "workflow_run": {
+    "id": 34093540060,
+    "repository_id": 1018687398,
+    "head_repository_id": 1018687398,
+    "head_branch": "yichaozhu/k3-pd",
+    "head_sha": "72fe0d35cb814aec4c2ac0b57d0153d216b083cf"
+   }
+  },
+  {
+   "id": 8224497695,
+   "node_id": "MDg6QXJ0aWZhY3Q4MjI0NDk3Njk1",
+   "name": "results_bmk",
+   "size_in_bytes": 948,
+   "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/8224497695",
+   "archive_download_url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/8224497695/zip",
+   "expired": false,
+   "digest": "sha256:01c6c2fae807a11e2ba55ff68a9891e6ee7a271fe728e07ef1bb6d7cd8a26b1f",
+   "created_at": "2026-07-10T10:08:51Z",
+   "updated_at": "2026-07-10T10:08:51Z",
+   "expires_at": "2026-10-08T09:27:56Z",
+   "workflow_run": {
+    "id": 29083132169,
+    "repository_id": 1018687398,
+    "head_repository_id": 1018687398,
+    "head_branch": "codex/pr2138-b300-dep-c32-bisect",
+    "head_sha": "fa02158516cb61b8b67246ee06e45d076d660aca"
+   }
+  },
+  {
+   "id": 8180212243,
+   "node_id": "MDg6QXJ0aWZhY3Q4MTgwMjEyMjQz",
+   "name": "results_bmk",
+   "size_in_bytes": 762,
+   "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/8180212243",
+   "archive_download_url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/8180212243/zip",
+   "expired": false,
+   "digest": "sha256:c6c485a018706f92b212cac09ec6881c7fd3c68cf925b4ef5d1c8be12eafd7b6",
+   "created_at": "2026-07-08T19:53:55Z",
+   "updated_at": "2026-07-08T19:53:55Z",
+   "expires_at": "2026-10-06T19:15:48Z",
+   "workflow_run": {
+    "id": 28969115468,
+    "repository_id": 1018687398,
+    "head_repository_id": 1018687398,
+    "head_branch": "main",
+    "head_sha": "c57f1e6f92baa239509e1ceef55267ddd42ce81b"
+   }
+  }
+ ]
+}

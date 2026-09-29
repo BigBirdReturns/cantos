@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Distance to the floor</title>
+<meta name="description" content="Every ClusterMAX-reviewed GPU cloud rated against a written floor for a properly set up neocloud, from public evidence only, with the shortfalls named and the likely fix for each.">
+<style>
+:root{--bg:#fbfaf6;--fg:#1c1c1c;--muted:#5b5b5b;--line:#d9d6cc;--card:#fff;--meets:#1f7a3a;--short:#a3261f;--unk:#6b6b6b;--acc:#0b3d91}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#101214;--fg:#ececec;--muted:#a3a3a3;--line:#2c3138;--card:#171a1e;--meets:#4cc26f;--short:#ef6b62;--unk:#9a9a9a;--acc:#8ab4ff}}
+:root[data-theme="dark"]{--bg:#101214;--fg:#ececec;--muted:#a3a3a3;--line:#2c3138;--card:#171a1e;--meets:#4cc26f;--short:#ef6b62;--unk:#9a9a9a;--acc:#8ab4ff}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+main{max-width:1000px;margin:0 auto;padding:24px 16px 48px}
+h1{font-size:1.6rem;margin:0 0 4px}h2{font-size:1.15rem;margin:28px 0 8px}
+p{margin:.4rem 0}.muted{color:var(--muted)}
+.box{border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:14px 0;background:var(--card)}
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:.93rem}
+th,td{text-align:left;padding:7px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+th{cursor:pointer;white-space:nowrap}
+.chip{display:inline-block;padding:0 7px;border-radius:999px;font-size:.78rem;border:1px solid var(--line);margin:1px 2px 1px 0;white-space:nowrap}
+.MEETS{color:var(--meets);border-color:var(--meets)}.SHORT{color:var(--short);border-color:var(--short)}.UNKNOWN{color:var(--unk)}
+.thin{opacity:.6}
+.num{text-align:right;font-variant-numeric:tabular-nums}
+a{color:inherit}
+details{margin:12px 0}summary{cursor:pointer}
+input[type=search]{width:100%;max-width:360px;padding:6px 8px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--fg);font:inherit}
+@media (max-width:700px){.hide-sm{display:none}}
+</style>
+</head>
+<body>
+<main>
+<h1>Distance to the floor</h1>
+<p class="muted">Every GPU cloud with a ClusterMAX review page, rated against a written floor for a properly set up neocloud. Public evidence only. A shortfall is named with the sentence that shows it, and each shortfall has a likely fix. As of 2026-09-29.</p>
+
+<div class="box">
+<p><strong>How to read a row.</strong> Distance is the number of dimensions where public evidence shows the shop short of the floor. Unknown is the number of dimensions with no evidence either way; it never counts as short. Evidence is the number of distinct items behind the row, and rows under three are faded because a thin row is an artifact of a thin page, not a clean record. The ClusterMAX medal is shown as context and is never an input.</p>
+<p><strong>Three rules.</strong> No value is invented. Every row carries who produced it and under what conditions. Hot Aisle is the reference shop of this project and the project holds private measurements about it; none are used here, and its row is a third-party desk view with the disclosure attached.</p>
+<p><a href="FLOOR.md">The floor</a> · <a href="PRESCRIPTIONS.md">Prescriptions</a> · <a href="findings/TELEMETRY.md">What our telemetry shows</a> · <a href="findings/EFFICIENCY.md">Where the market wastes</a> · <a href="rate/RATINGS.md">Full ratings</a> · <a href="SOURCES.md">Sources</a></p>
+</div>
+
+<input type="search" id="q" placeholder="Filter by provider or shortfall">
+<div id="table"><p class="muted">Loading ratings…</p></div>
+
+<h2>Shortfalls, by providers affected</h2>
+<div id="rx"><p class="muted">Loading prescriptions…</p></div>
+
+<h2>Dimensions</h2>
+<table>
+<thead><tr><th>Dimension</th><th>What counts as evidence</th></tr></thead>
+<tbody>
+<tr><td>access</td><td>Self-serve pricing surface, acquisition friction sentences, account gates. Reviewer test-access trouble is recorded but never scored.</td></tr>
+<tr><td>delivery</td><td>Slurm and Kubernetes actually working, health checks, monitoring, shared storage, networking, base image.</td></tr>
+<tr><td>security</td><td>SOC 2 or ISO attestation, driver and CVE age, RBAC, trust page present.</td></tr>
+<tr><td>reliability</td><td>Status page with reachable history, major and critical incidents per 180 days. A page that reports zero incidents is unverifiable and stays unknown.</td></tr>
+<tr><td>pricing</td><td>Provider's July 2026 on-demand median against the market, billing during outages, undisclosed underlying provider.</td></tr>
+<tr><td>transparency</td><td>Status API, public pricing, public docs, provider disclosed. Overlaps the others by design; the JSON carries a distance that excludes it.</td></tr>
+</tbody>
+</table>
+</main>
+<script>
+(function(){
+  var rows=[],rx=[];
+  function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function render(filter){
+    var f=(filter||'').toLowerCase();
+    var list=rows.filter(function(r){return !f||(r.provider+' '+(r.short_labels||[]).join(' ')).toLowerCase().indexOf(f)>=0;});
+    list.sort(function(a,b){return (b.distance_to_floor-a.distance_to_floor)||(a.unknown_count-b.unknown_count)||(b.evidence_count-a.evidence_count);});
+    var h='<table><thead><tr><th>Provider</th><th class="num">Distance</th><th class="num">Unknown</th><th class="num">Evidence</th><th>Short on</th><th class="hide-sm">Dimensions</th><th class="hide-sm">ClusterMAX 3.0</th></tr></thead><tbody>';
+    list.forEach(function(r){
+      var dims=Object.keys(r.dimensions||{}).map(function(k){return '<span class="chip '+r.dimensions[k].status+'">'+k+'</span>';}).join('');
+      var medal=(r.imported_context||{}).clustermax_3_0_medal||'';
+      h+='<tr class="'+(r.evidence_count<3?'thin':'')+'"><td>'+esc(r.provider)+'</td><td class="num">'+r.distance_to_floor+'</td><td class="num">'+r.unknown_count+'</td><td class="num">'+r.evidence_count+'</td><td>'+(r.short_labels||[]).map(function(l){return '<span class="chip SHORT">'+esc(l.replace(/_/g,' '))+'</span>';}).join('')+'</td><td class="hide-sm">'+dims+'</td><td class="hide-sm muted">'+esc(medal)+'</td></tr>';
+    });
+    document.getElementById('table').innerHTML=h+'</tbody></table><p class="muted">'+list.length+' providers. Rows sort by distance, then fewest unknowns, then most evidence.</p>';
+  }
+  fetch('rate/RATINGS.jsonl',{cache:'no-store'}).then(function(r){return r.text();}).then(function(t){
+    rows=t.split(/\r?\n/).filter(Boolean).map(function(l){try{return JSON.parse(l);}catch(e){return null;}}).filter(Boolean);
+    render('');
+    document.getElementById('q').addEventListener('input',function(e){render(e.target.value);});
+  }).catch(function(){document.getElementById('table').innerHTML='<p class="muted">rate/RATINGS.jsonl is not readable from here.</p>';});
+  fetch('prescriptions.json',{cache:'no-store'}).then(function(r){return r.json();}).then(function(p){
+    rx=Array.isArray(p)?p:(p.rows||p.prescriptions||[]);
+    rx.sort(function(a,b){return (b.providers_affected||0)-(a.providers_affected||0);});
+    var h='<table><thead><tr><th class="num">Providers</th><th>Shortfall</th><th>What the customer sees</th><th class="hide-sm">Likely fix</th><th class="hide-sm">Effort</th></tr></thead><tbody>';
+    rx.forEach(function(x){h+='<tr><td class="num">'+esc(x.providers_affected)+'</td><td>'+esc(x.shortfall)+'</td><td>'+esc(x.what_customer_observes)+'</td><td class="hide-sm">'+esc(x.likely_fix)+'</td><td class="hide-sm">'+esc(x.effort_class)+'</td></tr>';});
+    document.getElementById('rx').innerHTML=h+'</tbody></table>';
+  }).catch(function(){document.getElementById('rx').innerHTML='<p class="muted">prescriptions.json is not readable from here.</p>';});
+})();
+</script>
+</body>
+</html>

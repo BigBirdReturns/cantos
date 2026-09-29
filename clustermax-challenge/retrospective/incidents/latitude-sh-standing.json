@@ -1,0 +1,757 @@
+{
+  "schema": "secondrun.status-incidents.v1",
+  "provider": "latitude.sh",
+  "status_page_url": "https://status.latitude.sh",
+  "retrieved_utc": "2026-09-29T23:30:35Z",
+  "raw_files": [
+    {
+      "path": "circulate/retained/status/raw-root/raw/latitude-sh-standing/history-page-1.json",
+      "sha256": "c78dd38b1be343ede76368f0f1d6c47fcddcf3cbaebe59ceb12891eb236a39d2",
+      "url": "https://status.latitude.sh/history.json?page=1"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/latitude-sh-standing/history-page-2.json",
+      "sha256": "212f50281a2902e688c5d728675b3f29057aecd8c8a151aed08a99378879a7f7",
+      "url": "https://status.latitude.sh/history.json?page=2"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/latitude-sh-standing/history-page-3.json",
+      "sha256": "3de61cfa6060c9a5b584e832b8456415efc6f116601d5cbcdd3eed7f73c4b064",
+      "url": "https://status.latitude.sh/history.json?page=3"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/latitude-sh-standing/incident-ttmvkkcdn55m.json",
+      "sha256": "6df1f5cd2f403291fabe1f162ac0343ddb0e9856c88c4a94057534826056362f",
+      "url": "https://status.latitude.sh/incidents/ttmvkkcdn55m.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/latitude-sh-standing/incident-3lrtbfb4wv01.json",
+      "sha256": "4b6da2c64e737fb40327349a24738419c840a4ee8c3eecaefc6835fd883e6e25",
+      "url": "https://status.latitude.sh/incidents/3lrtbfb4wv01.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/latitude-sh-standing/incident-zz0dmnw5jb7w.json",
+      "sha256": "c1fa07b944ef7ca3f7c5e7cb25be681aaed856ef0114bb6a434b77fe9970bc67",
+      "url": "https://status.latitude.sh/incidents/zz0dmnw5jb7w.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/latitude-sh-standing/incident-hw8pfp8bs4j2.json",
+      "sha256": "0195b02b3006286677bb6847e10ba7ec5261b8dd645de6c3fd6f6df80d68b82b",
+      "url": "https://status.latitude.sh/incidents/hw8pfp8bs4j2.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/latitude-sh-standing/incident-lh9txzl06079.json",
+      "sha256": "8c0c3194835d7c829c127898573e293c83f3adf1d46ddc5b91b1abf920586053",
+      "url": "https://status.latitude.sh/incidents/lh9txzl06079.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/latitude-sh-standing/incident-j3drtbctfznq.json",
+      "sha256": "b45bdd052d93c02a627dafcc0502d56e00626ae548a0894fa799ba6da1689a4e",
+      "url": "https://status.latitude.sh/incidents/j3drtbctfznq.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/latitude-sh-standing/incident-qp13kslxp6h5.json",
+      "sha256": "aa3e0faeea9519ad942d9dcb1bea4d9d182dba417614ca4199857df947a0caf8",
+      "url": "https://status.latitude.sh/incidents/qp13kslxp6h5.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/latitude-sh-standing/incident-7qxw1317jslc.json",
+      "sha256": "f4804ed5c1c79f5e42e01d73841bd6cd3fe2dadeb9fd03217a79fa9e6b35accb",
+      "url": "https://status.latitude.sh/incidents/7qxw1317jslc.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/latitude-sh-standing/incident-5dkdhvh8g08v.json",
+      "sha256": "b7e64c95333f1abff0bcf3c3ddd096fbae0c1ddf3434384f90a53be878d0e1c3",
+      "url": "https://status.latitude.sh/incidents/5dkdhvh8g08v.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/latitude-sh-standing/incident-y6kgln9c6nc8.json",
+      "sha256": "dba4165040bbc51fd453bed5a5cde2b11d4fcedc7000dee8f3018ed8cf94605d",
+      "url": "https://status.latitude.sh/incidents/y6kgln9c6nc8.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/latitude-sh-standing/incident-33c4bfqvypcs.json",
+      "sha256": "c5bba68eebb22066f2c856b500281cb19e5ae1dab39e74aee85a663863bf1469",
+      "url": "https://status.latitude.sh/incidents/33c4bfqvypcs.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/latitude-sh-standing/incident-zj4rkhry244m.json",
+      "sha256": "93c24c6b3d2ad6f3e3223c0cb5e10703e99819c2c4634c26cd2c799c099eaaca",
+      "url": "https://status.latitude.sh/incidents/zj4rkhry244m.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/latitude-sh-standing/incident-bqb03lhyk84h.json",
+      "sha256": "3852135cd2d622dc753b68976e637a3627ffe7ef13527cf1e9ba88a8e8f6db9b",
+      "url": "https://status.latitude.sh/incidents/bqb03lhyk84h.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/latitude-sh-standing/incident-4mz0sgrk8r93.json",
+      "sha256": "e08fa05a6b23aa12c5773e74c95134a5b9f8a809ed2ae4fea2ee76555e595e63",
+      "url": "https://status.latitude.sh/incidents/4mz0sgrk8r93.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/latitude-sh-standing/incident-t9tk4rnxdpbj.json",
+      "sha256": "faab00a9e03557b254b9f90bd85b3284f932cd4410b42e3621016e820e00c3bd",
+      "url": "https://status.latitude.sh/incidents/t9tk4rnxdpbj.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/latitude-sh-standing/incident-54bxl8g2vvwn.json",
+      "sha256": "5ee29a100ddf5fba08bf3f7a33dc4edbc09740e1816aafe6304c7acc5cf54886",
+      "url": "https://status.latitude.sh/incidents/54bxl8g2vvwn.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/latitude-sh-standing/incident-wsj79tnx6sx4.json",
+      "sha256": "5b9ede1a136130b655c902a992ebc82bc1c0ca6b50a46eaf88e17f1483fcfcaf",
+      "url": "https://status.latitude.sh/incidents/wsj79tnx6sx4.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/latitude-sh-standing/incident-m16sjvkryznb.json",
+      "sha256": "ce0dbd30926fc417d5ab5b92c57502d295e92f5c01948dc045763f17ac0e6909",
+      "url": "https://status.latitude.sh/incidents/m16sjvkryznb.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/latitude-sh-standing/incident-lm7hvf48smvc.json",
+      "sha256": "9560ac50c07a5cf5d876db1da8ed714d9149c4b8b098e91010168c62e08fba41",
+      "url": "https://status.latitude.sh/incidents/lm7hvf48smvc.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/latitude-sh-standing/incident-strvd1yqbl8j.json",
+      "sha256": "023fd364b5b7f56247381a8e1a9a04a2a70e8327e0280a93d07d255457d58909",
+      "url": "https://status.latitude.sh/incidents/strvd1yqbl8j.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/latitude-sh-standing/incident-vtzvgyhbqrzn.json",
+      "sha256": "2fc7c8010a7f2646e6b835a886e1f5039233a7f5e2022a00164d8a54ee99f430",
+      "url": "https://status.latitude.sh/incidents/vtzvgyhbqrzn.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/latitude-sh-standing/incident-swg0nftvm95t.json",
+      "sha256": "6e6c94d9518b8bdd6aaa23e38ea8df6b4d52ae2cf5787c5e41bb7bbc6315568c",
+      "url": "https://status.latitude.sh/incidents/swg0nftvm95t.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/latitude-sh-standing/incident-qwwrt1nf1g3g.json",
+      "sha256": "3fbcd6f9cc8a6207a4ba78c7ff57742d3175a7049781704af0d24e8443080b39",
+      "url": "https://status.latitude.sh/incidents/qwwrt1nf1g3g.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/latitude-sh-standing/incident-rfrgg2qfpvvt.json",
+      "sha256": "69d1d3f05278b0ac5adeb0db2540226a7aae20821fc21b63dff298d9b38e4af1",
+      "url": "https://status.latitude.sh/incidents/rfrgg2qfpvvt.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/latitude-sh-standing/incident-1tdv9137859w.json",
+      "sha256": "31227d0d3250582a174f6e5bb59648f356b5b4ff22b2c7b97e36c6bef9d5da55",
+      "url": "https://status.latitude.sh/incidents/1tdv9137859w.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/latitude-sh-standing/incident-b2f56f7mnwqj.json",
+      "sha256": "3a9c1fba7ed5705bbd999d24c496807ea0770331b45e0f38e209aea27dc0e3dd",
+      "url": "https://status.latitude.sh/incidents/b2f56f7mnwqj.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/latitude-sh-standing/incident-wfdq1wvpznsv.json",
+      "sha256": "d10fd0f72ee65b5eedf7f12cbe68d37733801df23f552be65b33f573262b9819",
+      "url": "https://status.latitude.sh/incidents/wfdq1wvpznsv.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/latitude-sh-standing/incident-hfgc7kg6b6br.json",
+      "sha256": "ba9e0adcceb6ce8b85c0089e64f51c4ae9fda58d0bd56aa7114bff179c9bd77a",
+      "url": "https://status.latitude.sh/incidents/hfgc7kg6b6br.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/latitude-sh-standing/incident-bb5rqmzbx3wc.json",
+      "sha256": "75b42a01f34a662347bb63c951c065f4c2658d1275f61222b4c5a6491bb3bed0",
+      "url": "https://status.latitude.sh/incidents/bb5rqmzbx3wc.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/latitude-sh-standing/incident-7w47qxhr6myb.json",
+      "sha256": "3aa161f2c31533e5147b3c983b2f19463d43362e36cd6cc1ecd165385db54043",
+      "url": "https://status.latitude.sh/incidents/7w47qxhr6myb.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/latitude-sh-standing/incident-gp2scpvx3cm4.json",
+      "sha256": "4975f3560540fe030c7f4231a2768c358e0823b46782321545912856020e1d27",
+      "url": "https://status.latitude.sh/incidents/gp2scpvx3cm4.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/latitude-sh-standing/incident-k77z1whz5l68.json",
+      "sha256": "d7d8d90a7cbffbffd7a57f555c96321ab3153f1e7a58344b4dc7e54d527ab2c0",
+      "url": "https://status.latitude.sh/incidents/k77z1whz5l68.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/latitude-sh-standing/incident-nnx4x07ytdp8.json",
+      "sha256": "c86d89d0cfab8c93a8fb9c5799e7828fad0d154b01fed8100a3e0d6e5636888e",
+      "url": "https://status.latitude.sh/incidents/nnx4x07ytdp8.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/latitude-sh-standing/incident-l82h4nzvx2pt.json",
+      "sha256": "ff27f7b989a31c6f596d483491cdcac6d30673ae4ca813caaadc93ba0d2a2ac2",
+      "url": "https://status.latitude.sh/incidents/l82h4nzvx2pt.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/latitude-sh-standing/incident-wq4h63x2929k.json",
+      "sha256": "641c177d0a701d28127d4615302a33dd331d2f602fed39ba96e608cc8786b6a4",
+      "url": "https://status.latitude.sh/incidents/wq4h63x2929k.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/latitude-sh-standing/incident-59y72pcngnbf.json",
+      "sha256": "6084788c3ca06ffeaed9358700a7fbe6593881b8326485223117e3aed02df0df",
+      "url": "https://status.latitude.sh/incidents/59y72pcngnbf.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/latitude-sh-standing/incident-btwftytrsy8k.json",
+      "sha256": "1b1fb7a65eb03e56986fa155ea53948f4532b52550194d7c547a1d615ba731f0",
+      "url": "https://status.latitude.sh/incidents/btwftytrsy8k.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/latitude-sh-standing/incident-c3bhthjmgdxv.json",
+      "sha256": "7a2f19ec0ef82ad0fa822af1fa9b829348b4533e204a0dc6441ded7af669ea43",
+      "url": "https://status.latitude.sh/incidents/c3bhthjmgdxv.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/latitude-sh-standing/incident-8cmgl99wlw65.json",
+      "sha256": "9bb5cb6689ddc532d371d14a80ac2854d392546980acac9c1d31ae536c26d56f",
+      "url": "https://status.latitude.sh/incidents/8cmgl99wlw65.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/latitude-sh-standing/incident-0xv65h8cm57w.json",
+      "sha256": "ad2d9c5f7a55f256a035397785a33e4889cc1dd23c72afb000bd9a4d39c9c2df",
+      "url": "https://status.latitude.sh/incidents/0xv65h8cm57w.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/latitude-sh-standing/incident-k6cg3bzpqrqp.json",
+      "sha256": "5016b5574d0f85e13c5bd5f66a45341f0f4a812ffbbc805da1d9c72a27e0035d",
+      "url": "https://status.latitude.sh/incidents/k6cg3bzpqrqp.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/latitude-sh-standing/incident-mg178g3g21p9.json",
+      "sha256": "0b8f5928f4240a0049642c65717d4725f48984f67007621c674a9f6a774dc8bd",
+      "url": "https://status.latitude.sh/incidents/mg178g3g21p9.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/latitude-sh-standing/incident-9zt047k5r74q.json",
+      "sha256": "be37459f98299f78afcc48082f80d3c0ea49e202f09744b440045613e2ac7295",
+      "url": "https://status.latitude.sh/incidents/9zt047k5r74q.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/latitude-sh-standing/incident-tx3b26v4vxc7.json",
+      "sha256": "55b1010d281eefe96ea39e08c649a9a9a0b69d36cb47ae8bcba59bc31cac7f11",
+      "url": "https://status.latitude.sh/incidents/tx3b26v4vxc7.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/latitude-sh-standing/incident-lhhkwfnssdm2.json",
+      "sha256": "b5fbbbccb74a3f044ae0c55193900b4de0dbabe6b8888b3d467a59323cdb346f",
+      "url": "https://status.latitude.sh/incidents/lhhkwfnssdm2.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/latitude-sh-standing/incident-h7d5kg77z8kw.json",
+      "sha256": "f6a44ed23311578ca46e7a85a31e3ac455ac21898809f8f174351abde8a618a4",
+      "url": "https://status.latitude.sh/incidents/h7d5kg77z8kw.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/latitude-sh-standing/incident-0b3gg6srwgnp.json",
+      "sha256": "240a81d95871df62d82f5d292b67bd341e9b9e315b278b46f0423b43aa64960b",
+      "url": "https://status.latitude.sh/incidents/0b3gg6srwgnp.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/latitude-sh-standing/incident-fsnrcytfby0d.json",
+      "sha256": "c2715510d836883fbd85649e0f03fc4e8025071e97c5cd29b16b2424072345eb",
+      "url": "https://status.latitude.sh/incidents/fsnrcytfby0d.json"
+    }
+  ],
+  "coverage_start": "2026-01-01",
+  "coverage_end": "2026-09-29",
+  "severity_map": {
+    "maintenance": "none",
+    "minor": "minor",
+    "major": "major",
+    "critical": "critical",
+    "none": "none"
+  },
+  "incidents": [
+    {
+      "id": "fsnrcytfby0d",
+      "title": "Scheduled Maintenance: Infrastructure Upgrade",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-01-16T23:24:32.352Z",
+      "resolved_utc": "2026-01-19T13:00:21.280Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/l1g4qzyq8df4"
+    },
+    {
+      "id": "0b3gg6srwgnp",
+      "title": "Emergency Maintenance - Singapore",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-01-27T23:16:13.595Z",
+      "resolved_utc": "2026-01-28T19:00:21.458Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/50j5t5jqk2zb"
+    },
+    {
+      "id": "h7d5kg77z8kw",
+      "title": "[Scheduled Maintenance] Bogota, Buenos Aires",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-01-30T19:00:11.199Z",
+      "resolved_utc": "2026-02-03T13:00:22.139Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/08fczgl2xfzh"
+    },
+    {
+      "id": "lhhkwfnssdm2",
+      "title": "[Scheduled Maintenance] Mexico City, Singapore, Buenos Aires - Feb 04, 2026",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-02-03T12:37:00.223Z",
+      "resolved_utc": "2026-02-04T13:00:21.562Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/st0nydgcqvw3"
+    },
+    {
+      "id": "tx3b26v4vxc7",
+      "title": "[Scheduled Maintenance] Amsterdam, Tokyo - Feb 05, 2026",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-02-03T12:43:35.321Z",
+      "resolved_utc": "2026-02-05T13:00:21.815Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/s045m6pqxfrs"
+    },
+    {
+      "id": "mg178g3g21p9",
+      "title": "[Scheduled Maintenance] Los Angeles, London - Feb 06, 2026",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-02-03T16:39:54.258Z",
+      "resolved_utc": "2026-02-06T13:00:21.374Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/84fxh3v75q6r"
+    },
+    {
+      "id": "9zt047k5r74q",
+      "title": "Increased error rate for deployments with Ubuntu 24.04",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-02-05T11:35:50.120Z",
+      "resolved_utc": "2026-02-05T23:55:19.028Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/6wx47fr274m0"
+    },
+    {
+      "id": "0xv65h8cm57w",
+      "title": "[Scheduled Maintenance] Sao-paulo2, Chicago - Feb 10, 2026",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-02-06T18:47:04.511Z",
+      "resolved_utc": "2026-02-10T13:00:07.352Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/56305qjf2j0g"
+    },
+    {
+      "id": "k6cg3bzpqrqp",
+      "title": "Emergency Maintenance - Bogota",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-02-06T18:52:55.002Z",
+      "resolved_utc": "2026-02-09T09:00:07.272Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/nsxgdxtg9j7h"
+    },
+    {
+      "id": "8cmgl99wlw65",
+      "title": "[Scheduled Maintenance] Santiago, Silicon Valley - Feb 11, 2026",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-02-06T19:08:09.764Z",
+      "resolved_utc": "2026-02-11T13:00:07.195Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/tm10005pmzhq"
+    },
+    {
+      "id": "btwftytrsy8k",
+      "title": "[Scheduled Maintenance] New York, Sydney - Feb 12, 2026",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-02-06T19:14:43.156Z",
+      "resolved_utc": "2026-02-12T13:00:07.311Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/3yp0vnn3mhhq"
+    },
+    {
+      "id": "c3bhthjmgdxv",
+      "title": "Intermittent deployments on US regions impacting Ubuntu 24/22 and Debian 12",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-02-11T14:41:33.000Z",
+      "resolved_utc": "2026-02-11T19:53:47.363Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/blvnpv4hlgzr"
+    },
+    {
+      "id": "wq4h63x2929k",
+      "title": "Bogota Maintenance - Network Engineering",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-02-12T15:42:16.253Z",
+      "resolved_utc": "2026-02-19T11:00:07.675Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/xqjdrpc0d23p"
+    },
+    {
+      "id": "59y72pcngnbf",
+      "title": "Network Connectivity Incident - SAO and SAO2",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-02-16T15:07:08.548Z",
+      "resolved_utc": "2026-02-16T21:49:53.048Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/yzjmdrsvq607"
+    },
+    {
+      "id": "l82h4nzvx2pt",
+      "title": "Increased error rate for deployments and Dallas connectivity",
+      "impact_label": "major",
+      "severity": "major",
+      "started_utc": "2026-03-04T18:05:20.566Z",
+      "resolved_utc": "2026-03-04T19:47:43.227Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/0kf5z82913pv"
+    },
+    {
+      "id": "nnx4x07ytdp8",
+      "title": "Network Connectivity Issues - SAO1",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-03-11T16:21:02.936Z",
+      "resolved_utc": "2026-03-11T19:32:17.437Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/5b7yjjs096l0"
+    },
+    {
+      "id": "hfgc7kg6b6br",
+      "title": "Mexico Maintenance - Network Engineering",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-03-12T20:21:54.854Z",
+      "resolved_utc": "2026-03-31T15:00:07.208Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/wmblq8c5prht"
+    },
+    {
+      "id": "k77z1whz5l68",
+      "title": "Increased error rate for provisinings",
+      "impact_label": "major",
+      "severity": "major",
+      "started_utc": "2026-03-17T14:23:26.000Z",
+      "resolved_utc": "2026-03-17T18:07:01.866Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/bc4ks9sskbkf"
+    },
+    {
+      "id": "7w47qxhr6myb",
+      "title": "Dallas Maintenance - Network Engineering",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-03-17T16:26:04.572Z",
+      "resolved_utc": "2026-03-25T13:00:08.361Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/7r5ncsh7qcm0"
+    },
+    {
+      "id": "gp2scpvx3cm4",
+      "title": "Increased error rate on provisioning actions and VMs",
+      "impact_label": "major",
+      "severity": "major",
+      "started_utc": "2026-03-18T19:03:43.046Z",
+      "resolved_utc": "2026-03-18T20:35:52.074Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/8wtbz7jpnqdz"
+    },
+    {
+      "id": "bb5rqmzbx3wc",
+      "title": "Cloud Gateway Connectivity Issues - Dallas",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-03-25T16:40:28.376Z",
+      "resolved_utc": "2026-03-25T19:27:32.297Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/38vykn5tj5sl"
+    },
+    {
+      "id": "wfdq1wvpznsv",
+      "title": "Emergency Maintenance: FRA – Recovery Network Protection",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-04-09T21:17:38.016Z",
+      "resolved_utc": "2026-04-11T03:41:03.182Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/lf67x9xr4y3j"
+    },
+    {
+      "id": "b2f56f7mnwqj",
+      "title": "Network Outage - Silicon Valley",
+      "impact_label": "critical",
+      "severity": "critical",
+      "started_utc": "2026-05-07T18:11:19.000Z",
+      "resolved_utc": "2026-05-07T19:18:51.381Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/4035fvnmn3wv"
+    },
+    {
+      "id": "rfrgg2qfpvvt",
+      "title": "Scheduled Maintenance - API and Dashboard",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-05-22T14:38:10.825Z",
+      "resolved_utc": "2026-05-26T11:00:08.835Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/d88cp4hbwyjd"
+    },
+    {
+      "id": "1tdv9137859w",
+      "title": "Intermittent 5xx errors on Dashboard and API",
+      "impact_label": "none",
+      "severity": "none",
+      "started_utc": "2026-05-22T17:00:00.000Z",
+      "resolved_utc": "2026-05-22T17:00:00.000Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/4tg5whmnh6y4"
+    },
+    {
+      "id": "qwwrt1nf1g3g",
+      "title": "Chicago Maintenance - Network Engineering",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-05-22T19:56:05.091Z",
+      "resolved_utc": "2026-05-31T11:38:06.054Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/6z3bzqwt7d11"
+    },
+    {
+      "id": "swg0nftvm95t",
+      "title": "Ashburn Maintenance - Network Engineering",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-05-22T20:16:39.040Z",
+      "resolved_utc": "2026-06-01T05:41:59.808Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/34lyvmpj2t0k"
+    },
+    {
+      "id": "vtzvgyhbqrzn",
+      "title": "Emergency Maintenance: AMS – Recovery Network Protection",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-06-02T16:21:28.522Z",
+      "resolved_utc": "2026-06-03T05:00:09.136Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/2hgq5snf1vr2"
+    },
+    {
+      "id": "lm7hvf48smvc",
+      "title": "Ashburn Maintenance - Network Engineering",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-06-05T14:00:43.785Z",
+      "resolved_utc": "2026-06-14T12:00:09.178Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/0zfsytmpz292"
+    },
+    {
+      "id": "strvd1yqbl8j",
+      "title": "Scheduled Maintenance — Background Processing",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-06-05T19:21:21.422Z",
+      "resolved_utc": "2026-06-09T08:15:07.795Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/j8cn9p779x6k"
+    },
+    {
+      "id": "m16sjvkryznb",
+      "title": "Scheduled Maintenance - API and Dashboard",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-06-10T18:59:29.441Z",
+      "resolved_utc": "2026-06-15T12:30:09.532Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/sqcm9l57zy0s"
+    },
+    {
+      "id": "wsj79tnx6sx4",
+      "title": "IPMI Access Errors Increasing - Dallas",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-06-18T21:43:08.965Z",
+      "resolved_utc": "2026-06-19T00:30:05.946Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/1fvmw2nw7ktg"
+    },
+    {
+      "id": "54bxl8g2vvwn",
+      "title": "Increased error rate for deployments in Dallas",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-06-19T17:58:45.874Z",
+      "resolved_utc": "2026-06-19T18:36:46.256Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/3ps1tvg06jwp"
+    },
+    {
+      "id": "t9tk4rnxdpbj",
+      "title": "Network Connectivity Incident - Miami",
+      "impact_label": "none",
+      "severity": "none",
+      "started_utc": "2026-06-23T22:23:21.000Z",
+      "resolved_utc": "2026-06-24T09:29:04.487Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/3vtp4fjzkvv2"
+    },
+    {
+      "id": "4mz0sgrk8r93",
+      "title": "Increased error rate for Reinstalling and Deploying",
+      "impact_label": "critical",
+      "severity": "critical",
+      "started_utc": "2026-06-25T09:16:40.597Z",
+      "resolved_utc": "2026-06-25T21:25:25.560Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/dlbml26d7cj0"
+    },
+    {
+      "id": "bqb03lhyk84h",
+      "title": "Network Connectivity Issues - New York",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-06-26T22:09:15.281Z",
+      "resolved_utc": "2026-06-26T23:26:13.045Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/hykfcffsl48w"
+    },
+    {
+      "id": "zj4rkhry244m",
+      "title": "Maintenance - API and Dashboard",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-06-29T12:48:02.601Z",
+      "resolved_utc": "2026-07-01T11:30:10.838Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/sdvw0z6c4b58"
+    },
+    {
+      "id": "y6kgln9c6nc8",
+      "title": "Sao Paulo Maintenance - Network Engineering",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-07-01T12:17:52.911Z",
+      "resolved_utc": "2026-07-19T11:00:08.574Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/034mz0bcjq26"
+    },
+    {
+      "id": "33c4bfqvypcs",
+      "title": "Maintenance - API and Dashboard",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-07-02T13:05:50.385Z",
+      "resolved_utc": "2026-07-06T11:00:08.086Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/p0z937ngg2r0"
+    },
+    {
+      "id": "7qxw1317jslc",
+      "title": "Sao Paulo Maintenance - Network Engineering",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-07-28T20:55:21.270Z",
+      "resolved_utc": "2026-08-12T10:00:08.076Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/9cn2h57m5ytt"
+    },
+    {
+      "id": "qp13kslxp6h5",
+      "title": "Bogota Maintenance - Network Engineering",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-07-30T15:49:58.853Z",
+      "resolved_utc": "2026-08-14T11:00:07.723Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/xdzg9dchr5qc"
+    },
+    {
+      "id": "5dkdhvh8g08v",
+      "title": "Power Issue - LON2",
+      "impact_label": "major",
+      "severity": "major",
+      "started_utc": "2026-08-08T00:17:40.786Z",
+      "resolved_utc": "2026-08-08T23:54:58.093Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/9rqprg3w3l72"
+    },
+    {
+      "id": "j3drtbctfznq",
+      "title": "Network Engineering - ASH DC Emergency Maintenance",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-08-31T22:18:11.193Z",
+      "resolved_utc": "2026-09-02T12:00:07.652Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/cctvcb5fw9dn"
+    },
+    {
+      "id": "lh9txzl06079",
+      "title": "Network Engineering - ASH DC Emergency Maintenance",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-09-02T18:26:47.945Z",
+      "resolved_utc": "2026-09-03T12:00:09.087Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/vgtrmmtbyy6q"
+    },
+    {
+      "id": "hw8pfp8bs4j2",
+      "title": "Network issue affecting services in Sao Paulo location",
+      "impact_label": "major",
+      "severity": "major",
+      "started_utc": "2026-09-10T22:03:00.997Z",
+      "resolved_utc": "2026-09-11T00:03:45.452Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/frf2plwwch4w"
+    },
+    {
+      "id": "zz0dmnw5jb7w",
+      "title": "Ashburn Electrical Maintenance Notice",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-09-14T14:29:00.311Z",
+      "resolved_utc": "2026-09-18T11:00:07.414Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/dyg2z2h3kzrr"
+    },
+    {
+      "id": "3lrtbfb4wv01",
+      "title": "[CHI] Urgent Scheduled Maintenance: ISP Circuit Maintenance",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-09-21T12:57:49.693Z",
+      "resolved_utc": "2026-09-21T19:59:31.515Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/n2h6njxmb9x0"
+    },
+    {
+      "id": "ttmvkkcdn55m",
+      "title": "[DAL] Maintenance Notice - Upgrade Firewall Topology",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-09-21T15:34:31.550Z",
+      "resolved_utc": "2026-09-29T09:30:11.783Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/gw8tx7qnnm39"
+    }
+  ],
+  "notes": [
+    "STANDING collection 2026-09-29 by circulate; not read by R1 or R2. Raw pages (with SHA-256 above) are kept in the CI artifact / retained/, not committed."
+  ]
+}

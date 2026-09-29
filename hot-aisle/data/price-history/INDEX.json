@@ -13317,5 +13317,52 @@
  "files_location": {
   "note": "Per-provider per-day snapshot files (143 MB, 2,201 files) are retained outside this repo; the index keeps every file sha256.",
   "path": "sessions/public-tail-20260929/lanes/opencomputeprices/price-history/<provider>/<YYYY-MM-DD>.json"
+ },
+ "release_assets": {
+  "observed_utc": "2026-09-29T23:21:18Z",
+  "basis": "bootstrap: every asset digest equals the lane sha256.txt captured 2026-09-29 (sessions/public-tail-20260929/lanes/opencomputeprices)",
+  "release_title": "GPU Pricing Data — 2026-07-29 14:36 UTC",
+  "assets": {
+   "archive_2025-12.csv.gz": {
+    "digest": "sha256:9c95c68383e9fcf0cff2beebde347934bada60d22593a86b7ec3dc74f6d7dbd5",
+    "size": 71918,
+    "updated_at": "2026-04-12T22:24:01Z"
+   },
+   "archive_2026-01.csv.gz": {
+    "digest": "sha256:be0f6cf1e882cce5a0efc2a4e3dd01349a45db1a270126f48887928a111fc198",
+    "size": 1604629,
+    "updated_at": "2026-05-02T02:35:51Z"
+   },
+   "archive_2026-02.csv.gz": {
+    "digest": "sha256:eee9a847edf86b394ed66ae9efc1972d731faac0f68d1bbfbb4eb1b7f5a24a2d",
+    "size": 4606562,
+    "updated_at": "2026-05-30T03:04:06Z"
+   },
+   "archive_2026-03.csv.gz": {
+    "digest": "sha256:f2d94854db5df05b88a950ad2a92bcf690ba5739013ffebe23d2db752807ee55",
+    "size": 9905590,
+    "updated_at": "2026-06-30T03:31:22Z"
+   },
+   "archive_2026-04.csv.gz": {
+    "digest": "sha256:b319940a359f954c9167602a56a79acff786fab2c51ac99b680f097c8e5207ef",
+    "size": 149000255,
+    "updated_at": "2026-08-18T13:34:56Z"
+   },
+   "archive_2026-05.csv.gz": {
+    "digest": "sha256:048c26007edfcfe83e0efc062837f7f021a4b8a996f23b454a1837449a9b0629",
+    "size": 103169067,
+    "updated_at": "2026-08-18T13:38:11Z"
+   },
+   "archive_historical.csv.gz": {
+    "digest": "sha256:c4ceddf400c608fd8a5f7a6a72d9cdda1720bcbb4dfaee572445703a5ed85b49",
+    "size": 25969396,
+    "updated_at": "2026-03-30T23:35:13Z"
+   },
+   "data.tar.gz": {
+    "digest": "sha256:ef087a8c36c86d46539cef8ee28c536480b182ff1b9546a64e5ee548d14815a6",
+    "size": 966735195,
+    "updated_at": "2026-07-29T14:37:08Z"
+   }
+  }
  }
 }

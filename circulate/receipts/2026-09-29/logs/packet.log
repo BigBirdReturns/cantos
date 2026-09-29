@@ -1,0 +1,27 @@
+2026-09-29T23:39:25Z [packet] $ node build_packet.js
+2026-09-29T23:39:25Z [packet]   | {
+2026-09-29T23:39:25Z [packet]   |  "packet": "PUBLIC-TAIL-2026-09-29.research-packet.json",
+2026-09-29T23:39:25Z [packet]   |  "packet_bytes": 3631565,
+2026-09-29T23:39:25Z [packet]   |  "packet_file_sha256": "f9179639747229afceded209e95532d95ff20ec7bd56f1aca4f0e15703c3ae8f",
+2026-09-29T23:39:25Z [packet]   |  "envelope_sha256": "3904ccb34ed263f309f2153d68902dee305d556630f93b7b967c9070d5fdc70d",
+2026-09-29T23:39:25Z [packet]   |  "built_for_app_sha256": "5951f7f3d994ec980d2958ae18246edc6dbe5b57db8d38e90c1c18956b96e470",
+2026-09-29T23:39:25Z [packet]   |  "built_at_fixed": "2026-09-29T22:00:00Z",
+2026-09-29T23:39:25Z [packet]   |  "events": 1847,
+2026-09-29T23:39:25Z [packet]   |  "records_by_kind": {
+2026-09-29T23:39:25Z [packet]   |   "source": 433,
+2026-09-29T23:39:25Z [packet]   |   "claim": 1414
+2026-09-29T23:39:25Z [packet]   |  },
+2026-09-29T23:39:25Z [packet]   |  "counts": {
+2026-09-29T23:39:25Z [packet]   |   "cmax_sources": 85,
+2026-09-29T23:39:25Z [packet]   |   "cmax_claims": 1273,
+2026-09-29T23:39:25Z [packet]   |   "newsletter_rows": 393,
+2026-09-29T23:39:25Z [packet]   |   "newsletter_distinct_urls": 343,
+2026-09-29T23:39:25Z [packet]   |   "newsletter_urls_with_duplicate_rows": 50,
+2026-09-29T23:39:25Z [packet]   |   "podcast_sources": 3,
+2026-09-29T23:39:25Z [packet]   |   "podcast_quotes": 74,
+2026-09-29T23:39:25Z [packet]   |   "tco_line_item_claims": 55,
+2026-09-29T23:39:25Z [packet]   |   "tco_mtbf_claims": 7,
+2026-09-29T23:39:25Z [packet]   |   "ocp_claims": 5
+2026-09-29T23:39:25Z [packet]   |  }
+2026-09-29T23:39:25Z [packet]   | }
+2026-09-29T23:39:25Z [packet]   exit 0

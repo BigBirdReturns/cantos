@@ -1,0 +1,156 @@
+{
+  "schema": "secondrun.status-incidents.v1",
+  "provider": "Mithril",
+  "status_page_url": "https://status.mithril.ai",
+  "retrieved_utc": "2026-09-29T23:33:15Z",
+  "raw_files": [
+    {
+      "path": "circulate/retained/status/raw-root/raw/mithril-standing/notices_2026-03_p1.json",
+      "sha256": "12b95581e1db19283565f39dbfb355d08e873ae9f224257e252428c9cee5014a",
+      "url": "https://api.instatus.com/public/status.mithril.ai/notices/monthly/1772323200000?page_no=1"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/mithril-standing/notices_2026-04_p1.json",
+      "sha256": "4a5d0b4f29fa4459a89d07cc392c4c65c01c9ce81b9454f4c7678b3f1cec76a5",
+      "url": "https://api.instatus.com/public/status.mithril.ai/notices/monthly/1775001600000?page_no=1"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/mithril-standing/notices_2026-05_p1.json",
+      "sha256": "70f1f2c97ffa9da4f19c31ee35def701f502938e8e7f54f3b9dcda046f80f921",
+      "url": "https://api.instatus.com/public/status.mithril.ai/notices/monthly/1777593600000?page_no=1"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/mithril-standing/notices_2026-06_p1.json",
+      "sha256": "0c2c4dfc8935e03f625bda62f39413b5e98893cd42e9782291bc19551ee69c31",
+      "url": "https://api.instatus.com/public/status.mithril.ai/notices/monthly/1780272000000?page_no=1"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/mithril-standing/notices_2026-07_p1.json",
+      "sha256": "cb980af8b91d5f1d12eb23d20ae155adac0420e19584ad22aa28140ed81fe9a6",
+      "url": "https://api.instatus.com/public/status.mithril.ai/notices/monthly/1782864000000?page_no=1"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/mithril-standing/notices_2026-08_p1.json",
+      "sha256": "d319f6789b1d73066e28416d94677ac154dfda8c38fc901613aebd727218fc21",
+      "url": "https://api.instatus.com/public/status.mithril.ai/notices/monthly/1785542400000?page_no=1"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/mithril-standing/notices_2026-09_p1.json",
+      "sha256": "3e4e04b8568c72de8989ea4dafa390c915e562eb7c234cc1ffc35cca6b67c2ca",
+      "url": "https://api.instatus.com/public/status.mithril.ai/notices/monthly/1788220800000?page_no=1"
+    }
+  ],
+  "coverage_start": "2026-03-01",
+  "coverage_end": "2026-09-29",
+  "severity_map": {
+    "MAJOROUTAGE": "critical",
+    "DEGRADEDPERFORMANCE": "minor",
+    "UNDERMAINTENANCE": "none"
+  },
+  "incidents": [
+    {
+      "id": "cmmksbamb0cprtc37veksq4pa",
+      "title": "Connectivity issue in us-central5-a",
+      "impact_label": "MAJOROUTAGE",
+      "severity": "critical",
+      "started_utc": "2026-03-10T15:19:00.000Z",
+      "resolved_utc": "2026-03-10T18:23:16.414Z",
+      "is_maintenance": false,
+      "url": "https://status.mithril.ai/cmmksbamb0cprtc37veksq4pa"
+    },
+    {
+      "id": "cmmnmhn9o080k5dpmjtr39fnn",
+      "title": "Instances slow to start",
+      "impact_label": "DEGRADEDPERFORMANCE",
+      "severity": "minor",
+      "started_utc": "2026-03-12T15:28:38.199Z",
+      "resolved_utc": "2026-03-12T16:48:05.467Z",
+      "is_maintenance": false,
+      "url": "https://status.mithril.ai/cmmnmhn9o080k5dpmjtr39fnn"
+    },
+    {
+      "id": "cmndzrodg05njsbf9q4vpyfqp",
+      "title": "Instances are currently unreachable in us-central2-a",
+      "impact_label": "MAJOROUTAGE",
+      "severity": "critical",
+      "started_utc": "2026-03-31T02:22:21.757Z",
+      "resolved_utc": "2026-03-31T23:30:36.364Z",
+      "is_maintenance": false,
+      "url": "https://status.mithril.ai/cmndzrodg05njsbf9q4vpyfqp"
+    },
+    {
+      "id": "cmnjue6cc03w3o7ep7eti630i",
+      "title": "Auction stalled",
+      "impact_label": "MAJOROUTAGE",
+      "severity": "critical",
+      "started_utc": "2026-04-04T04:38:30.871Z",
+      "resolved_utc": "2026-04-04T05:12:55.494Z",
+      "is_maintenance": false,
+      "url": "https://status.mithril.ai/cmnjue6cc03w3o7ep7eti630i"
+    },
+    {
+      "id": "cmno6pny7010lz9ehwbdj0i57",
+      "title": "Instances are currently unreachable in us-central2",
+      "impact_label": "MAJOROUTAGE",
+      "severity": "critical",
+      "started_utc": "2026-04-07T05:34:27.009Z",
+      "resolved_utc": "2026-04-07T13:45:02.645Z",
+      "is_maintenance": false,
+      "url": "https://status.mithril.ai/cmno6pny7010lz9ehwbdj0i57"
+    },
+    {
+      "id": "cmo988ohw004xnd0j1ij0z7jp",
+      "title": "[us-central2-a/b] Scheduled network maintenance",
+      "impact_label": "UNDERMAINTENANCE",
+      "severity": "none",
+      "started_utc": "2026-04-23T22:00:00.000Z",
+      "resolved_utc": "2026-04-23T23:10:00.000Z",
+      "is_maintenance": true,
+      "url": "https://status.mithril.ai/cmo988ohw004xnd0j1ij0z7jp"
+    },
+    {
+      "id": "cmp756k1d03wopfm52lma1nsj",
+      "title": "Failing to schedule new Bids",
+      "impact_label": "DEGRADEDPERFORMANCE",
+      "severity": "minor",
+      "started_utc": "2026-05-15T14:05:00.000Z",
+      "resolved_utc": "2026-05-15T16:54:24.222Z",
+      "is_maintenance": false,
+      "url": "https://status.mithril.ai/cmp756k1d03wopfm52lma1nsj"
+    },
+    {
+      "id": "cmpwtepqi01ppql3e6wpy8aou",
+      "title": "[us-central2-a] Region is experiencing an outage",
+      "impact_label": "MAJOROUTAGE",
+      "severity": "critical",
+      "started_utc": "2026-06-02T15:35:00.000Z",
+      "resolved_utc": "2026-06-02T19:00:00.000Z",
+      "is_maintenance": false,
+      "url": "https://status.mithril.ai/cmpwtepqi01ppql3e6wpy8aou"
+    },
+    {
+      "id": "cmrpaubqy0ezx0rlkfl9mzv64",
+      "title": "Failing to create/start/stop instances",
+      "impact_label": "DEGRADEDPERFORMANCE",
+      "severity": "minor",
+      "started_utc": "2026-07-17T18:56:38.430Z",
+      "resolved_utc": "2026-07-17T21:30:00.000Z",
+      "is_maintenance": false,
+      "url": "https://status.mithril.ai/cmrpaubqy0ezx0rlkfl9mzv64"
+    },
+    {
+      "id": "cmt2bdz0m05pj1aplc74j89ct",
+      "title": "[us-central2-a/b] Scheduled network maintenance",
+      "impact_label": "UNDERMAINTENANCE",
+      "severity": "none",
+      "started_utc": "2026-08-26T06:00:00.000Z",
+      "resolved_utc": "2026-08-26T11:00:00.000Z",
+      "is_maintenance": true,
+      "url": "https://status.mithril.ai/cmt2bdz0m05pj1aplc74j89ct"
+    }
+  ],
+  "notes": [
+    "STANDING collection 2026-09-29 by circulate; not read by R1 or R2. Raw pages (with SHA-256 above) are kept in the CI artifact / retained/, not committed.",
+    "instatus platform; collected via https://api.instatus.com/public/status.mithril.ai/notices/monthly/<monthKey>?page_no=N for every month 2026-03..2026-09, following pages until isLastPage. Notices with impact UNDERMAINTENANCE (or without a \"started\" field) are is_maintenance. MAJOROUTAGE->critical, PARTIALOUTAGE->major, DEGRADEDPERFORMANCE/MINOROUTAGE->minor."
+  ]
+}

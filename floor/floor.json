@@ -1,0 +1,3240 @@
+{
+ "schema": "axm/floor@1",
+ "generated": "2026-09-29",
+ "status": "local draft, not committed or pushed",
+ "path_root": "D:/Projects/Organs/AXM/axm-tools/",
+ "scope": "Reference floor for a properly set up single-seat-to-small-cluster neocloud, built from Second Run/Hot Aisle campaign evidence and imported public evidence. Hot Aisle is a dated reference observation, not a universal grade (MANUAL.md). The kit has not yet been qualified on a new Linux/GPU shop.",
+ "evidence_classes": [
+  "published_claim",
+  "operator_report",
+  "measured",
+  "derived",
+  "hypothesis"
+ ],
+ "origin_values": "origin says whose evidence it is: \"ours\" (Second Run/Hot Aisle campaign), \"imported\" (third-party data, not reproduced by us).",
+ "value_status_meaning": "set = a threshold or reference value is given with its source. UNKNOWN = the estate has no observation or no threshold for this item; unknown_would_be_established_by says what would establish it. Where evidence_class is null the threshold itself is UNKNOWN; where it is set the rule is stated but the reference shops were never observed against it.",
+ "sections": [
+  "1 Access and acquisition",
+  "2 Delivered performance per seat",
+  "3 Tail and gates",
+  "4 Reliability",
+  "5 Operations checklist",
+  "6 Price band",
+  "7 Evidence classes and claim limits"
+ ],
+ "items": [
+  {
+   "item_id": "A-01",
+   "section": "1 Access and acquisition",
+   "requirement": "The SKU under test can be rented with no sales conversation, and API-token issuance is self-serve.",
+   "threshold": "sales_gate = false (a sales conversation required before any create attempt disqualifies)",
+   "unit": "boolean",
+   "evidence_class": "derived",
+   "origin": "ours (compiled from retained campaign evidence, not an end-to-end counter run)",
+   "sources": [
+    "main/hot-aisle/campaign/shop-eval/counter/PROTOCOL.md :: step 1 and step 5",
+    "main/hot-aisle/campaign/shop-eval/SHORTLIST.md :: rule 1 (self-serve)",
+    "main/hot-aisle/campaign/shop-eval/counter/records/hotaisle-2026-09.json :: account_creation.sales_gate=false, api_cli_tui_quality.token_issuance=self-serve"
+   ],
+   "verified_by": [
+    "counter:step-1 (account_creation.sales_gate)",
+    "counter:step-5 (token_issuance, list/create/delete)"
+   ],
+   "anti_pattern_claim_ids": [
+    "cmcr-aethir-05",
+    "cmcr-stn-06",
+    "cmcr-lambda-09",
+    "cmcr-lambda-14",
+    "cmcr-exabits-06",
+    "cmcr-gcore-10",
+    "cmcr-gcore-11"
+   ],
+   "value_status": "set",
+   "note": "Hot Aisle record is class derived: it was compiled from Run 3 notes, not produced by running the counter protocol (PROTOCOL.md preamble)."
+  },
+  {
+   "item_id": "A-02",
+   "section": "1 Access and acquisition",
+   "requirement": "Time from submitting create to first successful SSH on a single-GPU seat.",
+   "threshold": "<= 300 s (kit target FLEET-01, a buyer-selected 5-minute target, not a Hot Aisle standard); Hot Aisle-grade reference < 180 s (counter PROTOCOL step 3)",
+   "unit": "seconds",
+   "evidence_class": "measured",
+   "origin": "ours",
+   "sources": [
+    "main/hot-aisle/campaign/shop-eval/counter/records/hotaisle-2026-09.json :: provisioning.attempts[0] = 122 s (2026-09-24T00:08:55Z to 00:10:57Z), n=1",
+    "main/hot-aisle/campaign/results/run3-scored-n-t0/closure.json + main/hot-aisle/campaign/results/run3-scored-n-t0/ledger-times.json :: DigitalOcean 1x H100, t_request 2026-09-24T04:08:03Z to t_ssh 04:09:26Z = 83 s, n=1",
+    "main/hot-aisle/campaign/availability/observations.jsonl :: DigitalOcean 1x H100 console create 2026-09-23T17:49:00Z time_to_ssh_s=60, n=1 (Run 1 arm B)",
+    "main/hot-aisle/campaign/shop-eval/diagnose/RUBRIC.md :: FLEET-01",
+    "main/hot-aisle/campaign/shop-eval/counter/PROTOCOL.md :: step 3",
+    "sessions/clustermax-cloudreview-20260929/claims.all.jsonl :: cmcr-gpunet-06 (about 2 minutes), cmcr-cudocompute-08 (under 4 minutes), cmcr-qubrid-06 (around 8 minutes), cmcr-dstacksky-20 (under 5 minutes to a connected 2x H100)"
+   ],
+   "verified_by": [
+    "counter:step-3 (three timed creates, delete each on SSH)",
+    "rubric:FLEET-01",
+    "evaluate.sh timestamps t_request/t_ssh"
+   ],
+   "anti_pattern_claim_ids": [
+    "cmcr-amazonwebservices-13",
+    "cmcr-gcore-12",
+    "cmcr-hyperstacknexgen-06",
+    "cmcr-hyperstacknexgen-10",
+    "cmcr-voltagepark-09"
+   ],
+   "value_status": "set",
+   "note": "Each of our figures is a single allocation. measured_3x is false for both shops. The four review figures are SemiAnalysis published claims, not ours."
+  },
+  {
+   "item_id": "A-03",
+   "section": "1 Access and acquisition",
+   "requirement": "Time from the first sign-up screen to the first create attempt (signup_to_active_account_s).",
+   "threshold": "UNKNOWN",
+   "unit": "seconds",
+   "evidence_class": null,
+   "origin": "ours (unobserved)",
+   "sources": [
+    "main/hot-aisle/campaign/shop-eval/counter/records/hotaisle-2026-09.json :: account_creation.signup_to_active_account_s = \"unobserved\"",
+    "main/hot-aisle/campaign/shop-eval/counter/records/digitalocean-2026-09.json :: account_creation.signup_to_active_account_s = \"unobserved\"; quota_gate = soft; GPU Droplet limit 0 on a new account, raised to 1 by support ticket in \"under a day\" (campaign fact, not timed)"
+   ],
+   "verified_by": [
+    "counter:step-1 (stopwatch from first sign-up screen to first create attempt)"
+   ],
+   "anti_pattern_claim_ids": [
+    "cmcr-gmi-05",
+    "cmcr-mithrilmlfoundry-12",
+    "cmcr-ibmcloud-07",
+    "cmcr-stn-06",
+    "cmcr-clore-05"
+   ],
+   "value_status": "UNKNOWN",
+   "note": "The only timed access delay in the estate is the DigitalOcean quota ticket, \"under a day\", an operator report that was not stopwatched.",
+   "unknown_would_be_established_by": "Run counter step 1 with a fresh email on at least the shortlisted shops and set the bound from the measured distribution. No source sets a signup-to-seat bound; the review corpus supplies only the anti-pattern (over a month at GMI, a 3-month wait at Mithril)."
+  },
+  {
+   "item_id": "A-04",
+   "section": "1 Access and acquisition",
+   "requirement": "No KYC beyond card plus prepaid balance; quota gate none or soft; no account deactivation after sign-up verification.",
+   "threshold": "kyc beyond card = none; quota_gate in {none, soft}; hard or sales gate fails",
+   "unit": "enum",
+   "evidence_class": "derived",
+   "origin": "ours (Hot Aisle-grade definition from the counter protocol)",
+   "sources": [
+    "main/hot-aisle/campaign/shop-eval/counter/PROTOCOL.md :: step 1 (Hot Aisle-grade: self-serve, no sales team, no KYC beyond a card, prepaid Stripe credit, $20 minimum)",
+    "main/hot-aisle/campaign/shop-eval/counter/records/hotaisle-2026-09.json :: kyc_required=unobserved, quota_gate=unobserved, card_required=true",
+    "main/hot-aisle/campaign/shop-eval/counter/records/digitalocean-2026-09.json :: quota_gate=soft, kyc_required=unobserved"
+   ],
+   "verified_by": [
+    "counter:step-1 (kyc_required, card_required, quota_gate, sales_gate)"
+   ],
+   "anti_pattern_claim_ids": [
+    "cmcr-ibmcloud-07",
+    "cmcr-ibmcloud-08",
+    "cmcr-ibmcloud-09",
+    "cmcr-ibmcloud-13",
+    "cmcr-bitdeer-06",
+    "cmcr-e2enetworks-06",
+    "cmcr-gmi-05",
+    "cmcr-mithrilmlfoundry-12",
+    "cmcr-clore-05",
+    "cmcr-arccompute-05",
+    "cmcr-megaspeed-04",
+    "cmcr-nscale-05",
+    "cmcr-denvrdataworks-06",
+    "cmcr-neevcloud-02",
+    "cmcr-backend-04"
+   ],
+   "value_status": "set",
+   "note": "For both reference shops KYC and (for Hot Aisle) quota gate are unobserved, not passed. No create was ever refused at Hot Aisle, so absence of a quota gate is untested."
+  },
+  {
+   "item_id": "A-05",
+   "section": "1 Access and acquisition",
+   "requirement": "Listed availability equals deliverable availability: a SKU shown as available provisions when a create is attempted.",
+   "threshold": "every create attempted on a listed-available SKU succeeds (rubric PRICE-03: a listed SKU with an unsuccessful attempt is WRONG for that attempt)",
+   "unit": "created / attempted",
+   "evidence_class": "measured",
+   "origin": "ours",
+   "sources": [
+    "main/hot-aisle/campaign/availability/observations.jsonl :: Hot Aisle 1x MI300X VM listed 2026-09-24T00:02:15Z, delivered 00:10:45Z; DigitalOcean 1x H100 delivered 2026-09-23T17:49:00Z and 2026-09-24T04:08:59Z; DigitalOcean MI300X and H200 out_of_capacity in every region checked (2026-09-23 18:55 to 19:13Z, 2026-09-24 04:08:02Z and 05:19:18Z)",
+    "main/hot-aisle/data/run3/source/RUN3-RESULTS.md :: What it says, item 5",
+    "main/hot-aisle/campaign/shop-eval/diagnose/RUBRIC.md :: PRICE-03",
+    "main/hot-aisle/campaign/shop-eval/counter/PROTOCOL.md :: step 4"
+   ],
+   "verified_by": [
+    "counter:step-4 (ledger_attempts, listed vs delivered layers)",
+    "rubric:PRICE-03",
+    "availability/observations.jsonl (campaign ledger)"
+   ],
+   "anti_pattern_claim_ids": [
+    "cmcr-akashnetwork-05",
+    "cmcr-akashnetwork-07",
+    "cmcr-deepinfra-05",
+    "cmcr-e2enetworks-09",
+    "cmcr-exabits-05",
+    "cmcr-gpunet-05",
+    "cmcr-hydrahost-04",
+    "cmcr-hydrahost-05",
+    "cmcr-hotaisle-11",
+    "cmcr-hotaisle-12",
+    "cmcr-irenirisenergy-09",
+    "cmcr-lambda-11",
+    "cmcr-lightningai-18",
+    "cmcr-corvex-03",
+    "cmcr-azure-04"
+   ],
+   "value_status": "set",
+   "note": "Delivered creates in the whole campaign ledger: 3 (Hot Aisle 1, DigitalOcean 2), 3 succeeded. A rate at n=3 is not a claim. Listing observations are not create attempts (PROTOCOL step 4)."
+  },
+  {
+   "item_id": "A-06",
+   "section": "1 Access and acquisition",
+   "requirement": "Billing granularity finer than one hour, minimum stated in one place, and billing stops at delete.",
+   "threshold": "per-minute or per-second billing (rubric PRICE-01: hourly-or-coarser is WRONG against a sub-hour requirement); billing stops at delete, confirmed by balance or invoice delta",
+   "unit": "granularity",
+   "evidence_class": "published_claim",
+   "origin": "ours (observed page and balance behaviour; invoice not reconciled)",
+   "sources": [
+    "main/hot-aisle/campaign/shop-eval/counter/records/hotaisle-2026-09.json :: billing_quantum: 1 minute minimum then per-minute for 1x MI300X VM; 1-hour minimum observed on the 2x VM 2026-09-23; stop_on_delete_verified=true via balance behaviour, invoice_matches_balance=unobserved",
+    "main/hot-aisle/campaign/shop-eval/counter/records/digitalocean-2026-09.json :: per-second billing; minimum disputed between pricing page (5 minutes) and docs (60 seconds); stop_on_delete_verified=unobserved",
+    "main/hot-aisle/campaign/shop-eval/diagnose/RUBRIC.md :: PRICE-01",
+    "main/hot-aisle/campaign/shop-eval/counter/PROTOCOL.md :: step 6",
+    "sessions/clustermax-cloudreview-20260929/raw/expectations_standalone.html :: Hardware Support, \"Flexible billing granularity (second, minute, hour, day)\"",
+    "sessions/clustermax-cloudreview-20260929/providers/hotaisle/pricing.html :: $2.99/GPU/hr, 1, 2 and 4x MI300X VMs, billed by the minute; 8x bare metal $3.39/GPU/hr"
+   ],
+   "verified_by": [
+    "counter:step-6 (balance before and after delete)",
+    "counter:step-2 (price transparency)",
+    "rubric:PRICE-01"
+   ],
+   "anti_pattern_claim_ids": [
+    "cmcr-hydrahost-07",
+    "cmcr-qubrid-12",
+    "cmcr-voltagepark-22",
+    "cmcr-e2enetworks-11",
+    "cmcr-qubrid-07"
+   ],
+   "value_status": "set",
+   "note": "DigitalOcean's pricing page and docs give two different minimums for the same SKU. Treat them as separate claims until an invoice line resolves them."
+  },
+  {
+   "item_id": "A-07",
+   "section": "1 Access and acquisition",
+   "requirement": "Public price per GPU-hour for the SKU, visible without login, with minimum billing stated.",
+   "threshold": "published = true; $/GPU-hr stated per SKU",
+   "unit": "boolean",
+   "evidence_class": "published_claim",
+   "origin": "ours (page reads)",
+   "sources": [
+    "main/hot-aisle/campaign/shop-eval/counter/PROTOCOL.md :: step 2",
+    "main/hot-aisle/campaign/shop-eval/counter/records/hotaisle-2026-09.json :: price_transparency.published=true, per_gpu_hour_usd=2.99",
+    "main/hot-aisle/campaign/shop-eval/counter/records/digitalocean-2026-09.json :: per_gpu_hour_usd=4.41 (gpu-h100x1-base)",
+    "main/hot-aisle/campaign/identity.json :: arms.hotaisle-mi300x.list_rate=2.99 (retrieved from the Hot Aisle API at plan time), arms.do-h100.list_rate=4.41"
+   ],
+   "verified_by": [
+    "counter:step-2",
+    "rubric:PRICE-01"
+   ],
+   "anti_pattern_claim_ids": [],
+   "value_status": "set",
+   "note": "Egress and storage rates were never located for either shop (egress_rate and storage_rate unobserved); see O-25."
+  },
+  {
+   "item_id": "A-08",
+   "section": "1 Access and acquisition",
+   "requirement": "Direct SSH to a public IP (or a documented equivalent) with no mandatory VPN and no short-lived console token in the path.",
+   "threshold": "public IP assigned; direct SSH works on first boot",
+   "unit": "boolean",
+   "evidence_class": "derived",
+   "origin": "ours",
+   "sources": [
+    "main/hot-aisle/campaign/shop-eval/counter/records/hotaisle-2026-09.json :: network_path.public_ip_assigned=true",
+    "main/hot-aisle/campaign/shop-eval/counter/PROTOCOL.md :: step 8",
+    "sessions/clustermax-cloudreview-20260929/raw/expectations_slurm.html :: Access, \"Head node provisioned and accessible via a simple SSH command\""
+   ],
+   "verified_by": [
+    "counter:step-8 (public_ip_assigned, firewall_default, open_ports_first_boot)",
+    "counter:step-3"
+   ],
+   "anti_pattern_claim_ids": [
+    "cmcr-firmussustainablemetalcloud-07",
+    "cmcr-firmussustainablemetalcloud-08",
+    "cmcr-firmussustainablemetalcloud-09",
+    "cmcr-amazonwebservices-20"
+   ],
+   "value_status": "set",
+   "note": "Default firewall posture and first-boot port scan were never recorded for Hot Aisle (unobserved)."
+  },
+  {
+   "item_id": "A-09",
+   "section": "1 Access and acquisition",
+   "requirement": "List, create and delete work through an API, CLI or TUI without a support ticket; SSH key upload and management exist.",
+   "threshold": "list, create, delete all true; idempotency recorded",
+   "unit": "boolean",
+   "evidence_class": "derived",
+   "origin": "ours",
+   "sources": [
+    "main/hot-aisle/campaign/shop-eval/counter/PROTOCOL.md :: step 5",
+    "main/hot-aisle/campaign/shop-eval/counter/records/hotaisle-2026-09.json :: list_op, create_op, delete_op true; idempotent_create and idempotent_delete unobserved",
+    "sessions/clustermax-cloudreview-20260929/raw/expectations_standalone.html :: Access, \"API automation support\", \"SSH key upload and management\""
+   ],
+   "verified_by": [
+    "counter:step-5"
+   ],
+   "anti_pattern_claim_ids": [
+    "cmcr-lambda-14",
+    "cmcr-oracle-13"
+   ],
+   "value_status": "set",
+   "note": "Idempotency was never deliberately tested at either shop."
+  },
+  {
+   "item_id": "P-00",
+   "section": "2 Delivered performance per seat",
+   "requirement": "All Section 2 delivery figures are for one pinned workload; any change is a new comparison scope.",
+   "threshold": "Qwen/Qwen3-Coder-30B-A3B-Instruct-FP8 (revision dcaee4d4dfc5ee71ad501f01f530e5652438fde0), vLLM 0.30.0, TP=1, max-model-len 16384, max-num-seqs 256, gpu-memory-utilization 0.90, prefix caching off; 542 EvalPlus tasks (HumanEval+ 164, MBPP+ 378) cycled; Azure LLM inference CODE trace 2023 at rate factor 0.95, 8,622 scheduled requests over 3,600 s; temperature 0.2, max_tokens 1024, seed 700000+index",
+   "unit": "workload identity",
+   "evidence_class": "measured",
+   "origin": "ours",
+   "sources": [
+    "main/hot-aisle/campaign/run3/PREREG.md :: Question, arms and identities; Workload and arrival freeze",
+    "main/hot-aisle/data/run3/source/invocation.json",
+    "main/hot-aisle/data/run3/source/env.json",
+    "main/hot-aisle/campaign/run3/freeze-2026-09-24/FREEZE.md",
+    "main/hot-aisle/data/run3/source/RUN3-RESULTS.md :: Workload"
+   ],
+   "verified_by": [
+    "run3:arm3.sh (invocation.json, env.json)",
+    "run3:grade.sh (EvalPlus 0.3.1 sidecar)"
+   ],
+   "anti_pattern_claim_ids": [],
+   "value_status": "set",
+   "note": "One run per arm, no repeats (RUN3-RESULTS Caveats). Grader-blind tasks HumanEval/32, Mbpp/255, Mbpp/392 stay in the denominators."
+  },
+  {
+   "item_id": "P-01",
+   "section": "2 Delivered performance per seat",
+   "requirement": "Accepted requests per GPU-hour on a 1x MI300X seat (Hot Aisle A/T0), Run 3 workload.",
+   "threshold": "reference 4022 (request-to-arm-end window 64.68 min); 4152 (arm script window 62.65 min); 4328 (replay window 60.11 min). 4,336 accepted of 8,622. n=1, not a tolerance",
+   "unit": "accepted requests per GPU-hour",
+   "evidence_class": "derived",
+   "origin": "ours (measured counts; per-hour figure derived by division)",
+   "sources": [
+    "main/hot-aisle/data/run3/source/RUN3-RESULTS.md :: A/T0 column",
+    "main/hot-aisle/data/run3/source/ledger-times.json :: t_script_start, t_script_end",
+    "main/hot-aisle/campaign/results/run3-scored-a-t0/detailed.json :: duration=3606.58 s",
+    "main/hot-aisle/campaign/shop-eval/counter/records/hotaisle-2026-09.json :: provisioning 122 s",
+    "main/hot-aisle/campaign/results/RUN3-HOTAISLE-SUMMARY.md"
+   ],
+   "verified_by": [
+    "run3:arm3.sh + grade.sh",
+    "diagnose PRICE-02 (scoped economic gate)"
+   ],
+   "anti_pattern_claim_ids": [],
+   "value_status": "set",
+   "note": "Windows differ on purpose and must not be averaged (MANUAL section 4). The 4,022 window adds the 122 s request-to-SSH to the arm script window. Load was bounded by the trace, not by capacity (FREEZE.md): these are not peak-throughput figures.",
+   "windows": [
+    {
+     "window": "request to arm end (122 s + arm script)",
+     "minutes": 64.68,
+     "accepted_per_gpu_hour": 4022.0
+    },
+    {
+     "window": "arm script t_script_start to t_script_end",
+     "minutes": 62.65,
+     "accepted_per_gpu_hour": 4152.5
+    },
+    {
+     "window": "replay duration only",
+     "minutes": 60.11,
+     "accepted_per_gpu_hour": 4328.1
+    }
+   ]
+  },
+  {
+   "item_id": "P-02",
+   "section": "2 Delivered performance per seat",
+   "requirement": "Accepted requests per GPU-hour on a 1x H100 seat (DigitalOcean N/T0), Run 3 workload.",
+   "threshold": "reference 3678 (request-to-release window 69.82 min); 3889 (arm script window 66.03 min); 4272 (replay window 60.11 min). 4,280 accepted of 8,622. n=1, not a tolerance",
+   "unit": "accepted requests per GPU-hour",
+   "evidence_class": "derived",
+   "origin": "ours (measured counts; per-hour figure derived by division)",
+   "sources": [
+    "main/hot-aisle/data/run3/source/RUN3-RESULTS.md :: N/T0 column",
+    "main/hot-aisle/campaign/results/run3-scored-n-t0/closure.json :: t_request, t_released",
+    "main/hot-aisle/campaign/results/run3-scored-n-t0/ledger-times.json",
+    "main/hot-aisle/campaign/results/run3-scored-n-t0/detailed.json :: duration=3606.39 s"
+   ],
+   "verified_by": [
+    "run3:arm3.sh + grade.sh"
+   ],
+   "anti_pattern_claim_ids": [],
+   "value_status": "set",
+   "note": "DigitalOcean window is request to release (69.82 min, fully closed ledger). The two shops' windows are not the same kind, see MANUAL section 4. Invoice not reconciled; DigitalOcean cash about $5.13 (RUN3-RESULTS Money actually spent).",
+   "windows": [
+    {
+     "window": "request to release",
+     "minutes": 69.82,
+     "accepted_per_gpu_hour": 3678.2
+    },
+    {
+     "window": "arm script t_script_start to t_script_end",
+     "minutes": 66.03,
+     "accepted_per_gpu_hour": 3889.2
+    },
+    {
+     "window": "replay duration only",
+     "minutes": 60.11,
+     "accepted_per_gpu_hour": 4272.4
+    }
+   ]
+  },
+  {
+   "item_id": "P-03",
+   "section": "2 Delivered performance per seat",
+   "requirement": "Cost per 1,000 accepted requests at list price, 1x MI300X, Run 3 workload.",
+   "threshold": "$0.7434 (own-seat equivalent, 64.68 min, rate $2.99/h; published as $0.74); $0.7201 (arm window; published $0.72); $0.6908 (replay window only); $0.90 (whole seat 2.73 h incl. smoke, A/T1 and idle, 9,086 accepted, mixed window, invoice unreconciled)",
+   "unit": "USD per 1,000 accepted",
+   "evidence_class": "derived",
+   "origin": "ours",
+   "sources": [
+    "main/hot-aisle/data/run3/source/RUN3-RESULTS.md :: $/1k accepted row; Money actually spent",
+    "main/hot-aisle/campaign/results/RUN3-HOTAISLE-SUMMARY.md :: cost correction, whole seat $0.90",
+    "main/hot-aisle/data/run3/headline.json :: sides[0].cost_per_1000=0.6908",
+    "main/hot-aisle/campaign/shop-eval/MANUAL.md :: section 4 (cost bases stay separate)",
+    "main/hot-aisle/campaign/DISCLOSURES.md :: Funding and relationship (undiscounted list; run paid from a $200 Hot Aisle credit; Second Run is pitching Hot Aisle)"
+   ],
+   "verified_by": [
+    "diagnose PRICE-02 and PROOF-02",
+    "run3 ledger closure (billed_usd stays null until invoice)"
+   ],
+   "anti_pattern_claim_ids": [],
+   "value_status": "set",
+   "note": "Four windows, four figures, none an invoice. The whole-seat $0.90 is 20.7% above $0.743 and is the measured price of smoke, setup and idle time on a shared seat. Not steady-state. Funding disclosure applies."
+  },
+  {
+   "item_id": "P-04",
+   "section": "2 Delivered performance per seat",
+   "requirement": "Cost per 1,000 accepted requests at list price, 1x H100, Run 3 workload.",
+   "threshold": "$1.1990 (request to release, 69.82 min, $4.41/h; published as $1.20); $1.1339 (arm window); $1.0322 (replay window only)",
+   "unit": "USD per 1,000 accepted",
+   "evidence_class": "derived",
+   "origin": "ours",
+   "sources": [
+    "main/hot-aisle/data/run3/source/RUN3-RESULTS.md :: N/T0 column",
+    "main/hot-aisle/campaign/results/run3-scored-n-t0/closure.json",
+    "main/hot-aisle/campaign/results/run3-scored-n-t0/ledger-times.json",
+    "main/hot-aisle/campaign/DISCLOSURES.md :: DigitalOcean arm self-funded at list"
+   ],
+   "verified_by": [
+    "diagnose PRICE-02",
+    "run3 ledger closure"
+   ],
+   "anti_pattern_claim_ids": [],
+   "value_status": "set",
+   "note": "$4.41 is the DigitalOcean list rate on 2026-09-24 (self-funded). DigitalOcean changed its price on 2026-08-01 per MARKET.md; the public series carries $3.39 for the same SKU. See Section 6."
+  },
+  {
+   "item_id": "P-05",
+   "section": "2 Delivered performance per seat",
+   "requirement": "Cost per 1,000 accepted must not exceed the reference by more than 5% on validated same-scope evidence.",
+   "threshold": "<= $0.7806 per 1,000 accepted (1.05 x $0.7434); PRICE-02 is WRONG only above this and only when workload, model and tokenizer revisions, precision, cache policy, load profile, acceptance rule, latency gates, cost scope and rate all match",
+   "unit": "USD per 1,000 accepted",
+   "evidence_class": "derived",
+   "origin": "ours (kit rule)",
+   "sources": [
+    "main/hot-aisle/campaign/shop-eval/diagnose/RUBRIC.md :: Economic comparison gate; PRICE-02"
+   ],
+   "verified_by": [
+    "diagnose PRICE-02 (needs scope JSON bound to the scored table by SHA-256)"
+   ],
+   "anti_pattern_claim_ids": [],
+   "value_status": "set",
+   "note": "A different GPU, runtime, backend or kernel does not establish operator causality (RUBRIC)."
+  },
+  {
+   "item_id": "P-06",
+   "section": "2 Delivered performance per seat",
+   "requirement": "Selected attention backend and FP8 linear kernel are recorded from the serve log, not from requested flags, before any performance claim.",
+   "threshold": "env.json holds = [] and selected backends named; T1 requires ROCM_AITER_FA as the sole attention selection",
+   "unit": "record present",
+   "evidence_class": "measured",
+   "origin": "ours",
+   "sources": [
+    "main/hot-aisle/data/run3/source/env.json :: attention_backend [ROCM_ATTN], linear_kernel [AiterFp8BlockScaledMMKernel], holds []",
+    "main/hot-aisle/data/run3/source/RUN3-RESULTS.md :: table row Backends (N/T0: FLASH_ATTN, FlashInferFp8DeepGEMMDynamicBlockScaledKernel, MoE TRITON)",
+    "main/hot-aisle/campaign/backfill/RERUN-POLICY.md :: Carry lessons forward (verify backend selection)",
+    "main/hot-aisle/campaign/run3/README.md :: env.json holds semantics",
+    "sessions/public-tail-20260929/lanes/github-issues-deep/summary/coverage.md :: vllm-project/vllm issues per month 2026-09: 841 (regex heuristic, issues only)"
+   ],
+   "verified_by": [
+    "run3:arm3.sh env.json",
+    "diagnose STK-02"
+   ],
+   "anti_pattern_claim_ids": [],
+   "value_status": "set",
+   "note": "vLLM issue volume is context for why versions and backends must be pinned and read back; it is a title/body regex count, not a defect rate."
+  },
+  {
+   "item_id": "P-07",
+   "section": "2 Delivered performance per seat",
+   "requirement": "Cost of an unverified backend selection (documented uplift when the shop-side default was overridden).",
+   "threshold": "Llama-3.3-70B FP8 on 1x Hot Aisle MI300X, forced ROCM_AITER_FA vs auto-selected ROCM_ATTN, one repeat, post-hoc: long c8 +28.3% req/s, long c32 +45.7% (p95 TTFT 57 s to 37 s), short c32 +9.1%, short c64 +11.3%, c1 unchanged. On the Run 3 MoE workload: no gain (accepted 4,336 to 4,292) and p99 TTFT 571 to 1,119 ms",
+   "unit": "percent req/s",
+   "evidence_class": "measured",
+   "origin": "ours (post-hoc exploration, never a headline)",
+   "sources": [
+    "main/hot-aisle/campaign/DISCLOSURES.md :: Added 2026-09-23 late (28% and 46%)",
+    "main/hot-aisle/campaign/run2/EXPLORE.md",
+    "main/hot-aisle/campaign/results/run2-hotaisle-mi300x/cell-*-r0.json vs main/hot-aisle/campaign/results/run2-explore-hotaisle-mi300x/cell-*-r0.json (request_throughput ratios recomputed here)",
+    "main/hot-aisle/data/run3/source/RUN3-RESULTS.md :: What it says, item 4"
+   ],
+   "verified_by": [
+    "run3:arm3.sh T1 tier (declared tuned arm)",
+    "rerun policy: backend/kernel change triggers sentinel rerun"
+   ],
+   "anti_pattern_claim_ids": [],
+   "value_status": "set",
+   "note": "Transferable lesson is to verify backend selection. The uplift does not transfer to MoE, another precision or another version without a targeted confirmation (RERUN-POLICY). Not pre-registered."
+  },
+  {
+   "item_id": "P-08",
+   "section": "2 Delivered performance per seat",
+   "requirement": "Software-config ceiling, InferenceX (imported): best published output tokens/s per GPU on the closest matched single-GPU dense-model pair on H100 and MI300X.",
+   "threshold": "H100 Qwen/Qwen3.8-27B-FP8 vllm 1024/1024 1 GPU: 3070.5 tok/s/GPU at c64 (max of 33 rows); MI300X Qwen/Qwen3.8-27B-FP8 vllm 1024/1024 1 GPU: 2248.2 tok/s/GPU at c128 (max of 32 rows); H100 Qwen/Qwen3.8-27B vllm 1024/1024 1 GPU: 1803.8 tok/s/GPU at c32 (max of 44 rows); MI300X Qwen/Qwen3.8-27B vllm 1024/1024 1 GPU: 2483.9 tok/s/GPU at c128 (max of 42 rows)",
+   "unit": "output tokens/s/GPU",
+   "evidence_class": "published_claim",
+   "origin": "imported (InferenceX results_bmk aggregates via GitHub Actions artifacts; not our measurement, not reproduced)",
+   "sources": [
+    "sessions/public-tail-20260929/lanes/inferencex-history/REPORT.md",
+    "main/hot-aisle/campaign/backfill/IMPORT-SUMMARY.md :: Full history 2026-09-29",
+    "sessions/public-tail-20260929/lanes/inferencex-history/rows/inferencex.jsonl :: rows hardware in {H100, MI300X}, metric output_throughput_per_gpu (recomputed here, maximum per group)"
+   ],
+   "verified_by": [
+    "none: imported prior. A rerun would follow RERUN-POLICY (comparable raw gap > 20 percent, three frozen repeats)"
+   ],
+   "anti_pattern_claim_ids": [],
+   "value_status": "set",
+   "note": "Maximum over concurrency with no latency gate applied: a throughput ceiling, not a gated frontier. No H100 or MI300X InferenceX row carries Qwen3-Coder-30B-A3B, so nothing here is comparable to Run 3 (delta report: 0 comparable observations, backfill/DELTA-2026-09-29.md). Model names are as the producer wrote them. The ordering flips between FP8 (H100 higher) and BF16 (MI300X higher) on this pair, so no hardware ranking follows. Latency-gated frontier for our workload: UNKNOWN.",
+   "imported_rows": [
+    {
+     "hardware": "H100",
+     "model": "Qwen/Qwen3.8-27B-FP8",
+     "precision": "FP8",
+     "framework": "vllm",
+     "scenario": "fixed-sequence",
+     "isl": 1024,
+     "osl": 1024,
+     "gpus": 1,
+     "best_output_tok_s_per_gpu": 3070.5,
+     "at_concurrency": 64,
+     "rows_in_group": 33,
+     "artifact_id": 10591762755,
+     "artifact_created": "2026-09-19",
+     "row_id": "158274deb6c68d032284ad4666d33b3754d5a9901d8dc23dc86a42e42bb7eb7a"
+    },
+    {
+     "hardware": "MI300X",
+     "model": "Qwen/Qwen3.8-27B-FP8",
+     "precision": "FP8",
+     "framework": "vllm",
+     "scenario": "fixed-sequence",
+     "isl": 1024,
+     "osl": 1024,
+     "gpus": 1,
+     "best_output_tok_s_per_gpu": 2248.2,
+     "at_concurrency": 128,
+     "rows_in_group": 32,
+     "artifact_id": 10591384039,
+     "artifact_created": "2026-09-19",
+     "row_id": "ef3e64bfa86ecaca6e6138d27540164efe9231d2e9c6287c9305c1404570e297"
+    },
+    {
+     "hardware": "H100",
+     "model": "Qwen/Qwen3.8-27B",
+     "precision": "BF16",
+     "framework": "vllm",
+     "scenario": "fixed-sequence",
+     "isl": 1024,
+     "osl": 1024,
+     "gpus": 1,
+     "best_output_tok_s_per_gpu": 1803.8,
+     "at_concurrency": 32,
+     "rows_in_group": 44,
+     "artifact_id": 10599917642,
+     "artifact_created": "2026-09-20",
+     "row_id": "11de66fbec72032ab1e44505f305af670cd5d2b6c7e3e05e93bc0636d3f3d370"
+    },
+    {
+     "hardware": "MI300X",
+     "model": "Qwen/Qwen3.8-27B",
+     "precision": "BF16",
+     "framework": "vllm",
+     "scenario": "fixed-sequence",
+     "isl": 1024,
+     "osl": 1024,
+     "gpus": 1,
+     "best_output_tok_s_per_gpu": 2483.9,
+     "at_concurrency": 128,
+     "rows_in_group": 42,
+     "artifact_id": 10599987525,
+     "artifact_created": "2026-09-20",
+     "row_id": "bf0a30d4c71ac9ac75006336be8cf6674170148a6f7aaa1b81937fb5a4a0988d"
+    }
+   ]
+  },
+  {
+   "item_id": "P-09",
+   "section": "2 Delivered performance per seat",
+   "requirement": "Software-config ceiling, MLPerf Inference (imported): per-accelerator output tokens/s on the closest published LLM benchmarks for H100 and MI300X.",
+   "threshold": "v5.1 H100 llama2-70b-99 Offline: 3902.5 tok/s/accel (HGX-H100_H100-SXM-80GBx32_TRT, 32 accel); v5.1 H100 llama2-70b-99 Server: 3821.1 tok/s/accel (HGX-H100_H100-SXM-80GBx32_TRT, 32 accel); v5.0 H100 mixtral-8x7b Offline: 6590.6 tok/s/accel (C885A_H100_SXMx8_TRT, 8 accel); v5.0 H100 mixtral-8x7b Server: 6662.4 tok/s/accel (C885A_H100_SXMx8_TRT, 8 accel); v5.1 MI300X llama2-70b-99 Offline: 3524.9 tok/s/accel (32xMI300X_2xEPYC_9534_16xMI325X_2xEPYC_9655, 48 accel); v5.1 MI300X llama2-70b-99 Server: 3189.1 tok/s/accel (32xMI300X_2xEPYC_9534_16xMI325X_2xEPYC_9655, 48 accel); v5.1 MI300X mixtral-8x7b Offline: 6666.7 tok/s/accel (XE9680_MI300X_192GBx8, 8 accel); v5.1 MI300X mixtral-8x7b Server: 5975.5 tok/s/accel (8xMI300X_2xEPYC_9575F, 8 accel)",
+   "unit": "output tokens/s/accelerator (derived)",
+   "evidence_class": "published_claim",
+   "origin": "imported (MLCommons submissions; per-accelerator value derived by us as total / explicit accelerator count)",
+   "sources": [
+    "sessions/public-tail-20260929/lanes/mlperf/summary/coverage.md :: Per-accelerator normalized output throughput (DERIVED), closed division, status available, max over systems",
+    "sessions/public-tail-20260929/lanes/mlperf/REPORT.md",
+    "main/hot-aisle/campaign/backfill/IMPORT-SUMMARY.md :: MLPerf section"
+   ],
+   "verified_by": [
+    "none: imported prior. MLPerf reproduction would need accuracy and compliance evidence (RERUN-POLICY)"
+   ],
+   "anti_pattern_claim_ids": [],
+   "value_status": "set",
+   "note": "Latest release with data per group, from the full table in the source. Not a producer field; multi-node, framework and quantization differ; VALID is LoadGen validity only, accuracy not evaluated. The v5.1 MI300X llama2-70b system is a 48-accelerator mixed MI300X/MI325X system (32xMI300X + 16xMI325X), so that per-accelerator figure is not a clean MI300X number; the v5.0 32xMI300X and v4.1 1xMI300X rows are cleaner. Neither benchmark is our model.",
+   "imported_rows": [
+    {
+     "release": "v5.1",
+     "sku": "H100",
+     "benchmark": "llama2-70b-99",
+     "scenario": "Offline",
+     "submissions_in_group": 2,
+     "max_derived_tok_s_per_accelerator": 3902.5,
+     "system_id": "HGX-H100_H100-SXM-80GBx32_TRT",
+     "accelerators": 32,
+     "total_tok_s": 124879.0
+    },
+    {
+     "release": "v5.1",
+     "sku": "H100",
+     "benchmark": "llama2-70b-99",
+     "scenario": "Server",
+     "submissions_in_group": 2,
+     "max_derived_tok_s_per_accelerator": 3821.1,
+     "system_id": "HGX-H100_H100-SXM-80GBx32_TRT",
+     "accelerators": 32,
+     "total_tok_s": 122273.7
+    },
+    {
+     "release": "v5.0",
+     "sku": "H100",
+     "benchmark": "mixtral-8x7b",
+     "scenario": "Offline",
+     "submissions_in_group": 6,
+     "max_derived_tok_s_per_accelerator": 6590.6,
+     "system_id": "C885A_H100_SXMx8_TRT",
+     "accelerators": 8,
+     "total_tok_s": 52724.4
+    },
+    {
+     "release": "v5.0",
+     "sku": "H100",
+     "benchmark": "mixtral-8x7b",
+     "scenario": "Server",
+     "submissions_in_group": 6,
+     "max_derived_tok_s_per_accelerator": 6662.4,
+     "system_id": "C885A_H100_SXMx8_TRT",
+     "accelerators": 8,
+     "total_tok_s": 53299.3
+    },
+    {
+     "release": "v5.1",
+     "sku": "MI300X",
+     "benchmark": "llama2-70b-99",
+     "scenario": "Offline",
+     "submissions_in_group": 6,
+     "max_derived_tok_s_per_accelerator": 3524.9,
+     "system_id": "32xMI300X_2xEPYC_9534_16xMI325X_2xEPYC_9655",
+     "accelerators": 48,
+     "total_tok_s": 169197.0
+    },
+    {
+     "release": "v5.1",
+     "sku": "MI300X",
+     "benchmark": "llama2-70b-99",
+     "scenario": "Server",
+     "submissions_in_group": 8,
+     "max_derived_tok_s_per_accelerator": 3189.1,
+     "system_id": "32xMI300X_2xEPYC_9534_16xMI325X_2xEPYC_9655",
+     "accelerators": 48,
+     "total_tok_s": 153076.3
+    },
+    {
+     "release": "v5.1",
+     "sku": "MI300X",
+     "benchmark": "mixtral-8x7b",
+     "scenario": "Offline",
+     "submissions_in_group": 2,
+     "max_derived_tok_s_per_accelerator": 6666.7,
+     "system_id": "XE9680_MI300X_192GBx8",
+     "accelerators": 8,
+     "total_tok_s": 53333.9
+    },
+    {
+     "release": "v5.1",
+     "sku": "MI300X",
+     "benchmark": "mixtral-8x7b",
+     "scenario": "Server",
+     "submissions_in_group": 2,
+     "max_derived_tok_s_per_accelerator": 5975.5,
+     "system_id": "8xMI300X_2xEPYC_9575F",
+     "accelerators": 8,
+     "total_tok_s": 47804.3
+    }
+   ],
+   "all_rows_in_source": [
+    {
+     "release": "v4.0",
+     "sku": "H100",
+     "benchmark": "llama2-70b-99.9",
+     "scenario": "Offline",
+     "submissions_in_group": 17,
+     "max_derived_tok_s_per_accelerator": 2786.2,
+     "system_id": "GIGABYTE-G593-SD1_DGX-H100_H100-SXM-80GBx8_TRT",
+     "accelerators": 8,
+     "total_tok_s": 22289.7
+    },
+    {
+     "release": "v4.0",
+     "sku": "H100",
+     "benchmark": "llama2-70b-99.9",
+     "scenario": "Server",
+     "submissions_in_group": 17,
+     "max_derived_tok_s_per_accelerator": 2688.0,
+     "system_id": "SYS_821GE_TNHR_H100_SXM_80GBx8_TRT",
+     "accelerators": 8,
+     "total_tok_s": 21504.1
+    },
+    {
+     "release": "v4.1",
+     "sku": "H100",
+     "benchmark": "llama2-70b-99",
+     "scenario": "Offline",
+     "submissions_in_group": 19,
+     "max_derived_tok_s_per_accelerator": 3066.0,
+     "system_id": "HPE_Cray_XD670_H100_SXM_80GBx8_TRT",
+     "accelerators": 8,
+     "total_tok_s": 24528.3
+    },
+    {
+     "release": "v4.1",
+     "sku": "H100",
+     "benchmark": "llama2-70b-99",
+     "scenario": "Server",
+     "submissions_in_group": 19,
+     "max_derived_tok_s_per_accelerator": 2962.5,
+     "system_id": "AS_4125GS_TNHR2_LCC_H100_SXM_80GBx8_TRT",
+     "accelerators": 8,
+     "total_tok_s": 23699.7
+    },
+    {
+     "release": "v4.1",
+     "sku": "H100",
+     "benchmark": "llama2-70b-99.9",
+     "scenario": "Offline",
+     "submissions_in_group": 19,
+     "max_derived_tok_s_per_accelerator": 3065.6,
+     "system_id": "DGX-H100_H100-SXM-80GBx8_TRT",
+     "accelerators": 8,
+     "total_tok_s": 24524.9
+    },
+    {
+     "release": "v4.1",
+     "sku": "H100",
+     "benchmark": "llama2-70b-99.9",
+     "scenario": "Server",
+     "submissions_in_group": 19,
+     "max_derived_tok_s_per_accelerator": 2962.5,
+     "system_id": "AS_4125GS_TNHR2_LCC_H100_SXM_80GBx8_TRT",
+     "accelerators": 8,
+     "total_tok_s": 23699.7
+    },
+    {
+     "release": "v4.1",
+     "sku": "H100",
+     "benchmark": "mixtral-8x7b",
+     "scenario": "Offline",
+     "submissions_in_group": 10,
+     "max_derived_tok_s_per_accelerator": 6706.1,
+     "system_id": "XE8640_H100_SXM_80GBx4_TRT",
+     "accelerators": 4,
+     "total_tok_s": 26824.4
+    },
+    {
+     "release": "v4.1",
+     "sku": "H100",
+     "benchmark": "mixtral-8x7b",
+     "scenario": "Server",
+     "submissions_in_group": 10,
+     "max_derived_tok_s_per_accelerator": 6426.7,
+     "system_id": "XE8640_H100_SXM_80GBx4_TRT",
+     "accelerators": 4,
+     "total_tok_s": 25707.0
+    },
+    {
+     "release": "v4.1",
+     "sku": "MI300X",
+     "benchmark": "llama2-70b-99",
+     "scenario": "Offline",
+     "submissions_in_group": 3,
+     "max_derived_tok_s_per_accelerator": 3062.7,
+     "system_id": "1xMI300X_2xEPYC-9374F",
+     "accelerators": 1,
+     "total_tok_s": 3062.7
+    },
+    {
+     "release": "v4.1",
+     "sku": "MI300X",
+     "benchmark": "llama2-70b-99",
+     "scenario": "Server",
+     "submissions_in_group": 3,
+     "max_derived_tok_s_per_accelerator": 2628.5,
+     "system_id": "8xMI300X_2xEPYC-9374F",
+     "accelerators": 8,
+     "total_tok_s": 21028.2
+    },
+    {
+     "release": "v4.1",
+     "sku": "MI300X",
+     "benchmark": "llama2-70b-99.9",
+     "scenario": "Offline",
+     "submissions_in_group": 3,
+     "max_derived_tok_s_per_accelerator": 3062.7,
+     "system_id": "1xMI300X_2xEPYC-9374F",
+     "accelerators": 1,
+     "total_tok_s": 3062.7
+    },
+    {
+     "release": "v4.1",
+     "sku": "MI300X",
+     "benchmark": "llama2-70b-99.9",
+     "scenario": "Server",
+     "submissions_in_group": 3,
+     "max_derived_tok_s_per_accelerator": 2628.5,
+     "system_id": "8xMI300X_2xEPYC-9374F",
+     "accelerators": 8,
+     "total_tok_s": 21028.2
+    },
+    {
+     "release": "v5.0",
+     "sku": "H100",
+     "benchmark": "llama2-70b-99",
+     "scenario": "Offline",
+     "submissions_in_group": 10,
+     "max_derived_tok_s_per_accelerator": 3913.3,
+     "system_id": "DGX-H100_H100-SXM-80GBx8_TRT",
+     "accelerators": 8,
+     "total_tok_s": 31306.8
+    },
+    {
+     "release": "v5.0",
+     "sku": "H100",
+     "benchmark": "llama2-70b-99",
+     "scenario": "Server",
+     "submissions_in_group": 10,
+     "max_derived_tok_s_per_accelerator": 3888.3,
+     "system_id": "DGX-H100_H100-SXM-80GBx8_TRT",
+     "accelerators": 8,
+     "total_tok_s": 31106.3
+    },
+    {
+     "release": "v5.0",
+     "sku": "H100",
+     "benchmark": "llama2-70b-99.9",
+     "scenario": "Offline",
+     "submissions_in_group": 8,
+     "max_derived_tok_s_per_accelerator": 3913.3,
+     "system_id": "DGX-H100_H100-SXM-80GBx8_TRT",
+     "accelerators": 8,
+     "total_tok_s": 31306.8
+    },
+    {
+     "release": "v5.0",
+     "sku": "H100",
+     "benchmark": "llama2-70b-99.9",
+     "scenario": "Server",
+     "submissions_in_group": 8,
+     "max_derived_tok_s_per_accelerator": 3888.3,
+     "system_id": "DGX-H100_H100-SXM-80GBx8_TRT",
+     "accelerators": 8,
+     "total_tok_s": 31106.3
+    },
+    {
+     "release": "v5.0",
+     "sku": "H100",
+     "benchmark": "llama2-70b-interactive-99",
+     "scenario": "Offline",
+     "submissions_in_group": 4,
+     "max_derived_tok_s_per_accelerator": 3873.7,
+     "system_id": "XE9680_H100_SXM_80GBx8_TRT",
+     "accelerators": 8,
+     "total_tok_s": 30989.5
+    },
+    {
+     "release": "v5.0",
+     "sku": "H100",
+     "benchmark": "llama2-70b-interactive-99",
+     "scenario": "Server",
+     "submissions_in_group": 4,
+     "max_derived_tok_s_per_accelerator": 1751.1,
+     "system_id": "HPE_Cray_XD670_H100_SXM_80GBx8_HPE_VAST_TRT",
+     "accelerators": 8,
+     "total_tok_s": 14008.5
+    },
+    {
+     "release": "v5.0",
+     "sku": "H100",
+     "benchmark": "llama2-70b-interactive-99.9",
+     "scenario": "Offline",
+     "submissions_in_group": 4,
+     "max_derived_tok_s_per_accelerator": 3873.7,
+     "system_id": "XE9680_H100_SXM_80GBx8_TRT",
+     "accelerators": 8,
+     "total_tok_s": 30989.5
+    },
+    {
+     "release": "v5.0",
+     "sku": "H100",
+     "benchmark": "llama2-70b-interactive-99.9",
+     "scenario": "Server",
+     "submissions_in_group": 4,
+     "max_derived_tok_s_per_accelerator": 1751.8,
+     "system_id": "HPE_Cray_XD670_H100_SXM_80GBx8_TRT",
+     "accelerators": 8,
+     "total_tok_s": 14014.1
+    },
+    {
+     "release": "v5.0",
+     "sku": "H100",
+     "benchmark": "llama3_1-405b",
+     "scenario": "Offline",
+     "submissions_in_group": 2,
+     "max_derived_tok_s_per_accelerator": 54.5,
+     "system_id": "D74U_7U_H100_SXM_80GBx8_TRT",
+     "accelerators": 8,
+     "total_tok_s": 436.2
+    },
+    {
+     "release": "v5.0",
+     "sku": "H100",
+     "benchmark": "llama3_1-405b",
+     "scenario": "Server",
+     "submissions_in_group": 2,
+     "max_derived_tok_s_per_accelerator": 34.6,
+     "system_id": "XE9680_H100_SXM_80GBx8_TRT",
+     "accelerators": 8,
+     "total_tok_s": 277.1
+    },
+    {
+     "release": "v5.0",
+     "sku": "H100",
+     "benchmark": "mixtral-8x7b",
+     "scenario": "Offline",
+     "submissions_in_group": 6,
+     "max_derived_tok_s_per_accelerator": 6590.6,
+     "system_id": "C885A_H100_SXMx8_TRT",
+     "accelerators": 8,
+     "total_tok_s": 52724.4
+    },
+    {
+     "release": "v5.0",
+     "sku": "H100",
+     "benchmark": "mixtral-8x7b",
+     "scenario": "Server",
+     "submissions_in_group": 6,
+     "max_derived_tok_s_per_accelerator": 6662.4,
+     "system_id": "C885A_H100_SXMx8_TRT",
+     "accelerators": 8,
+     "total_tok_s": 53299.3
+    },
+    {
+     "release": "v5.0",
+     "sku": "MI300X",
+     "benchmark": "llama2-70b-99",
+     "scenario": "Offline",
+     "submissions_in_group": 1,
+     "max_derived_tok_s_per_accelerator": 3224.4,
+     "system_id": "32xMI300X_2xEPYC_9534",
+     "accelerators": 32,
+     "total_tok_s": 103182.0
+    },
+    {
+     "release": "v5.0",
+     "sku": "MI300X",
+     "benchmark": "llama2-70b-99",
+     "scenario": "Server",
+     "submissions_in_group": 1,
+     "max_derived_tok_s_per_accelerator": 2907.5,
+     "system_id": "32xMI300X_2xEPYC_9534",
+     "accelerators": 32,
+     "total_tok_s": 93039.9
+    },
+    {
+     "release": "v5.0",
+     "sku": "MI300X",
+     "benchmark": "llama2-70b-99.9",
+     "scenario": "Offline",
+     "submissions_in_group": 1,
+     "max_derived_tok_s_per_accelerator": 3224.4,
+     "system_id": "32xMI300X_2xEPYC_9534",
+     "accelerators": 32,
+     "total_tok_s": 103182.0
+    },
+    {
+     "release": "v5.0",
+     "sku": "MI300X",
+     "benchmark": "llama2-70b-99.9",
+     "scenario": "Server",
+     "submissions_in_group": 1,
+     "max_derived_tok_s_per_accelerator": 2907.5,
+     "system_id": "32xMI300X_2xEPYC_9534",
+     "accelerators": 32,
+     "total_tok_s": 93039.9
+    },
+    {
+     "release": "v5.1",
+     "sku": "H100",
+     "benchmark": "llama2-70b-99",
+     "scenario": "Offline",
+     "submissions_in_group": 2,
+     "max_derived_tok_s_per_accelerator": 3902.5,
+     "system_id": "HGX-H100_H100-SXM-80GBx32_TRT",
+     "accelerators": 32,
+     "total_tok_s": 124879.0
+    },
+    {
+     "release": "v5.1",
+     "sku": "H100",
+     "benchmark": "llama2-70b-99",
+     "scenario": "Server",
+     "submissions_in_group": 2,
+     "max_derived_tok_s_per_accelerator": 3821.1,
+     "system_id": "HGX-H100_H100-SXM-80GBx32_TRT",
+     "accelerators": 32,
+     "total_tok_s": 122273.7
+    },
+    {
+     "release": "v5.1",
+     "sku": "H100",
+     "benchmark": "llama2-70b-99.9",
+     "scenario": "Offline",
+     "submissions_in_group": 2,
+     "max_derived_tok_s_per_accelerator": 3902.5,
+     "system_id": "HGX-H100_H100-SXM-80GBx32_TRT",
+     "accelerators": 32,
+     "total_tok_s": 124879.0
+    },
+    {
+     "release": "v5.1",
+     "sku": "H100",
+     "benchmark": "llama2-70b-99.9",
+     "scenario": "Server",
+     "submissions_in_group": 2,
+     "max_derived_tok_s_per_accelerator": 3821.1,
+     "system_id": "HGX-H100_H100-SXM-80GBx32_TRT",
+     "accelerators": 32,
+     "total_tok_s": 122273.7
+    },
+    {
+     "release": "v5.1",
+     "sku": "H100",
+     "benchmark": "llama3.1-8b",
+     "scenario": "Offline",
+     "submissions_in_group": 1,
+     "max_derived_tok_s_per_accelerator": 5777.1,
+     "system_id": "XE8640_4xH100_vLLM",
+     "accelerators": 1,
+     "total_tok_s": 5777.1
+    },
+    {
+     "release": "v5.1",
+     "sku": "H100",
+     "benchmark": "llama3.1-8b",
+     "scenario": "Server",
+     "submissions_in_group": 1,
+     "max_derived_tok_s_per_accelerator": 5104.0,
+     "system_id": "XE8640_4xH100_vLLM",
+     "accelerators": 1,
+     "total_tok_s": 5104.0
+    },
+    {
+     "release": "v5.1",
+     "sku": "H100",
+     "benchmark": "llama3_1-405b",
+     "scenario": "Offline",
+     "submissions_in_group": 2,
+     "max_derived_tok_s_per_accelerator": 48.9,
+     "system_id": "HGX-H100_H100-SXM-80GBx16_TRT",
+     "accelerators": 16,
+     "total_tok_s": 783.1
+    },
+    {
+     "release": "v5.1",
+     "sku": "H100",
+     "benchmark": "llama3_1-405b",
+     "scenario": "Server",
+     "submissions_in_group": 2,
+     "max_derived_tok_s_per_accelerator": 35.2,
+     "system_id": "HGX-H100_H100-SXM-80GBx32_TRT",
+     "accelerators": 32,
+     "total_tok_s": 1126.9
+    },
+    {
+     "release": "v5.1",
+     "sku": "MI300X",
+     "benchmark": "llama2-70b-99",
+     "scenario": "Offline",
+     "submissions_in_group": 6,
+     "max_derived_tok_s_per_accelerator": 3524.9,
+     "system_id": "32xMI300X_2xEPYC_9534_16xMI325X_2xEPYC_9655",
+     "accelerators": 48,
+     "total_tok_s": 169197.0
+    },
+    {
+     "release": "v5.1",
+     "sku": "MI300X",
+     "benchmark": "llama2-70b-99",
+     "scenario": "Server",
+     "submissions_in_group": 8,
+     "max_derived_tok_s_per_accelerator": 3189.1,
+     "system_id": "32xMI300X_2xEPYC_9534_16xMI325X_2xEPYC_9655",
+     "accelerators": 48,
+     "total_tok_s": 153076.3
+    },
+    {
+     "release": "v5.1",
+     "sku": "MI300X",
+     "benchmark": "llama2-70b-99.9",
+     "scenario": "Offline",
+     "submissions_in_group": 6,
+     "max_derived_tok_s_per_accelerator": 3524.9,
+     "system_id": "32xMI300X_2xEPYC_9534_16xMI325X_2xEPYC_9655",
+     "accelerators": 48,
+     "total_tok_s": 169197.0
+    },
+    {
+     "release": "v5.1",
+     "sku": "MI300X",
+     "benchmark": "llama2-70b-99.9",
+     "scenario": "Server",
+     "submissions_in_group": 8,
+     "max_derived_tok_s_per_accelerator": 3189.1,
+     "system_id": "32xMI300X_2xEPYC_9534_16xMI325X_2xEPYC_9655",
+     "accelerators": 48,
+     "total_tok_s": 153076.3
+    },
+    {
+     "release": "v5.1",
+     "sku": "MI300X",
+     "benchmark": "mixtral-8x7b",
+     "scenario": "Offline",
+     "submissions_in_group": 2,
+     "max_derived_tok_s_per_accelerator": 6666.7,
+     "system_id": "XE9680_MI300X_192GBx8",
+     "accelerators": 8,
+     "total_tok_s": 53333.9
+    },
+    {
+     "release": "v5.1",
+     "sku": "MI300X",
+     "benchmark": "mixtral-8x7b",
+     "scenario": "Server",
+     "submissions_in_group": 2,
+     "max_derived_tok_s_per_accelerator": 5975.5,
+     "system_id": "8xMI300X_2xEPYC_9575F",
+     "accelerators": 8,
+     "total_tok_s": 47804.3
+    }
+   ]
+  },
+  {
+   "item_id": "P-10",
+   "section": "2 Delivered performance per seat",
+   "requirement": "Peak sustainable accepted rate at the latency gates on a seat.",
+   "threshold": "UNKNOWN",
+   "unit": "accepted requests per second",
+   "evidence_class": null,
+   "origin": "ours (not measured)",
+   "sources": [
+    "main/hot-aisle/campaign/run3/freeze-2026-09-24/FREEZE.md :: Calibration outcome: load bounded by the trace, not calibrated to 70% of capacity",
+    "main/hot-aisle/campaign/run3/PREREG.md :: capacity calibration procedure"
+   ],
+   "verified_by": [
+    "run3:PREREG calibration (backlog, at most 256 outstanding, up to 5 minutes)"
+   ],
+   "anti_pattern_claim_ids": [],
+   "value_status": "UNKNOWN",
+   "note": "",
+   "unknown_would_be_established_by": "Run the PREREG calibration on each arm: continuous backlog, at most 256 outstanding requests, up to five minutes after readiness; capacity C is valid only if throughput was stable. Run 3 offered 8,622 requests in 3,600 s (2.395 req/s average, peak 531 arrivals in one minute) with 0 transport failures on A/T0 and N/T0, so capacity is above that but unmeasured."
+  },
+  {
+   "item_id": "P-11",
+   "section": "2 Delivered performance per seat",
+   "requirement": "Image pull, model download and health-ready time on a fresh seat with working Docker and GPU runtime.",
+   "threshold": "<= 2,400 s (PREREG phase budget); stop rule at 40 minutes",
+   "unit": "seconds",
+   "evidence_class": "measured",
+   "origin": "ours",
+   "sources": [
+    "main/hot-aisle/data/run3/source/ledger-times.json :: t_script_start to t_ready = 143.5 s (A/T0)",
+    "main/hot-aisle/campaign/results/run3-scored-n-t0/ledger-times.json :: t_script_start to t_ready = 349.1 s (N/T0)",
+    "main/hot-aisle/campaign/run3/PREREG.md :: Schedule, watchdog and cash; Stop rules"
+   ],
+   "verified_by": [
+    "run3:arm3.sh ledger-times.json"
+   ],
+   "anti_pattern_claim_ids": [
+    "cmcr-amazonwebservices-18",
+    "cmcr-cudocompute-12",
+    "cmcr-latitudesh-10",
+    "cmcr-buzzhpc-08"
+   ],
+   "value_status": "set",
+   "note": "Both seats already had Docker and a working GPU runtime. Time to install a missing driver or toolkit is not in these numbers (UNKNOWN for image-poor shops)."
+  },
+  {
+   "item_id": "T-01",
+   "section": "3 Tail and gates",
+   "requirement": "Run 3 acceptance definition: completed, EvalPlus base and plus pass, first token <= 1 s, done <= 60 s from the scheduled arrival.",
+   "threshold": "ttft <= 1,000 ms per request; e2e <= 60,000 ms from scheduled arrival; engine settings ttft=1000, e2e=60000, queue=true, quality=true",
+   "unit": "ms",
+   "evidence_class": "measured",
+   "origin": "ours (registered pre-run in PREREG; frozen 2026-09-24, commit 0b032ac)",
+   "sources": [
+    "main/hot-aisle/campaign/run3/PREREG.md :: Gates and metrics",
+    "main/hot-aisle/data/run3/source/RUN3-RESULTS.md :: Workload"
+   ],
+   "verified_by": [
+    "run3:grade.sh + engine_check.cjs"
+   ],
+   "anti_pattern_claim_ids": [],
+   "value_status": "set",
+   "note": "\"Pre-registered\" here means privately recorded before the data, not publicly timestamped (DISCLOSURES.md Timestamps)."
+  },
+  {
+   "item_id": "T-02",
+   "section": "3 Tail and gates",
+   "requirement": "Registered Run 1 cell gates from identity.json (random 2048/256, warm, latency-only, no correctness sidecar).",
+   "threshold": "p95 TTFT <= 1,000 ms; p95 E2E <= 15,000 ms; failed <= 1%",
+   "unit": "ms / ms / fraction",
+   "evidence_class": "measured",
+   "origin": "ours (scope run1-cell-c64)",
+   "sources": [
+    "main/hot-aisle/campaign/identity.json :: requirements {max_p95_ttft_ms:1000, max_p95_e2e_ms:15000, max_failure_rate:0.01}, pinned_on 2026-09-23",
+    "main/hot-aisle/campaign/DISCLOSURES.md :: Run 1 (H100 c64 fails p95 TTFT 1.9 s; MI300X qualifies at c64; ROCm image did not write per-request latencies so the AMD E2E gate was held)",
+    "main/hot-aisle/campaign/shop-eval/diagnose/RUBRIC.md :: scope IDs run1-cell-c64"
+   ],
+   "verified_by": [
+    "engine gate check against the scoped table",
+    "diagnose PRICE-02 scope JSON"
+   ],
+   "anti_pattern_claim_ids": [],
+   "value_status": "set",
+   "note": "Run 1 and Run 3 are not comparable (RUBRIC). These gates do not apply to Run 3 numbers. In Run 1 the AMD E2E gate was never restored; derived AMD E2E peaked at 5.34 s."
+  },
+  {
+   "item_id": "T-03",
+   "section": "3 Tail and gates",
+   "requirement": "TTFT percentiles on the Run 3 stream, reported as outcomes with the window they came from.",
+   "threshold": "A/T0 MI300X p50/p95/p99 = 53/155/571 ms; A/T1 = 60/202/1119 ms; N/T0 H100 = 35/76/2254 ms. Reference values, no pass/fail gate on p95 or p99 was registered for Run 3",
+   "unit": "ms",
+   "evidence_class": "measured",
+   "origin": "ours",
+   "sources": [
+    "main/hot-aisle/data/run3/source/RUN3-RESULTS.md :: table",
+    "main/hot-aisle/campaign/results/run3-scored-a-t0/detailed.json :: ttfts (nearest-rank recomputation here)",
+    "main/hot-aisle/campaign/results/run3-scored-a-t1/detailed.json",
+    "main/hot-aisle/campaign/results/run3-scored-n-t0/detailed.json"
+   ],
+   "verified_by": [
+    "run3:replay.py requests.jsonl",
+    "engine_check.cjs"
+   ],
+   "anti_pattern_claim_ids": [],
+   "value_status": "set",
+   "note": "One run per arm on one allocation on one day; no repeat variance is available. A tail difference alone does not invalidate a comparison (MANUAL section 2)."
+  },
+  {
+   "item_id": "T-04",
+   "section": "3 Tail and gates",
+   "requirement": "p95 end-to-end request latency on the Run 3 stream.",
+   "threshold": "A/T0 12354 ms (headline.json); A/T1 12805 ms and N/T0 12069 ms (nearest-rank, recomputed from detailed.json latencies); against the 60,000 ms deadline",
+   "unit": "ms",
+   "evidence_class": "measured",
+   "origin": "ours",
+   "sources": [
+    "main/hot-aisle/data/run3/headline.json :: sides[0].p95_e2e_ms",
+    "main/hot-aisle/campaign/results/run3-scored-a-t0/detailed.json :: latencies",
+    "main/hot-aisle/campaign/results/run3-scored-n-t0/detailed.json :: latencies"
+   ],
+   "verified_by": [
+    "run3:replay.py",
+    "engine_check.cjs"
+   ],
+   "anti_pattern_claim_ids": [],
+   "value_status": "set",
+   "note": "Latency here is per-request latency from detailed.json; the acceptance deadline is measured from the scheduled arrival."
+  },
+  {
+   "item_id": "T-05",
+   "section": "3 Tail and gates",
+   "requirement": "Failed transport across all scheduled arrivals, including never-sent client-limit rejections.",
+   "threshold": "<= 1% of scheduled arrivals (exactly 1% passes); measured 0/8,622 (A/T0), 7/8,622 = 0.081% (A/T1, client-limit rejections), 0/8,622 (N/T0)",
+   "unit": "fraction",
+   "evidence_class": "measured",
+   "origin": "ours",
+   "sources": [
+    "main/hot-aisle/campaign/run3/PREREG.md :: Serving-host loopback client",
+    "main/hot-aisle/data/run3/source/RUN3-RESULTS.md :: Completed / failed",
+    "main/hot-aisle/campaign/results/run3-scored-a-t1/grade/quality-buckets.json :: bucket 4 failed=7"
+   ],
+   "verified_by": [
+    "run3:convert.py + summary"
+   ],
+   "anti_pattern_claim_ids": [],
+   "value_status": "set",
+   "note": "More than 1% blocks useful-throughput qualification. Do not discard overloads."
+  },
+  {
+   "item_id": "T-06",
+   "section": "3 Tail and gates",
+   "requirement": "Accepted-rate expectation on the Run 3 workload.",
+   "threshold": "reference band for this exact freeze: 49.6% (N/T0, 4,280) to 50.3% (A/T0, 4,336) of scheduled arrivals, n=1 each; weakest 5-minute bucket 39.3% (N/T0) to 40.9% (A/T0); median bucket 49.7% to 50.8%; 99.2% (A/T0) and 98.9% (N/T0) of correct outputs also met the deadlines",
+   "unit": "fraction of scheduled arrivals",
+   "evidence_class": "derived",
+   "origin": "ours",
+   "sources": [
+    "main/hot-aisle/campaign/results/run3-scored-a-t0/grade/quality-buckets.json",
+    "main/hot-aisle/campaign/results/run3-scored-n-t0/grade/quality-buckets.json",
+    "main/hot-aisle/campaign/results/run3-scored-a-t1/grade/quality-buckets.json",
+    "main/hot-aisle/data/run3/source/RUN3-RESULTS.md :: Correct (raw, registered) 4,371 / 4,334 / 4,329 and item 3 (post-hoc sanitizer regrade 4,371 to 6,192 correct, deadline intersection not recomputed)",
+    "main/hot-aisle/campaign/run3/PREREG.md :: useful-throughput requirements"
+   ],
+   "verified_by": [
+    "run3:grade.sh buckets (12 five-minute buckets, min, median, last/first quarter)"
+   ],
+   "anti_pattern_claim_ids": [],
+   "value_status": "set",
+   "note": "The accepted rate is set by correctness under the raw-completion output contract, not by shop latency: latency removed 35 of 4,371 correct outputs on A/T0 and 49 of 4,329 on N/T0. A post-hoc sanitizer regrade lifted total correct from 4,371 to 6,192 on the same retained run; the accepted count under that regrade is unmeasured. So an accepted rate below the band on the same freeze is a signal to check the contract and the backend before blaming the shop."
+  },
+  {
+   "item_id": "T-07",
+   "section": "3 Tail and gates",
+   "requirement": "p99 TTFT ceiling for burst traffic.",
+   "threshold": "UNKNOWN",
+   "unit": "ms",
+   "evidence_class": null,
+   "origin": "ours (not registered)",
+   "sources": [
+    "main/hot-aisle/data/run3/source/RUN3-RESULTS.md :: p99 571 ms (MI300X) vs 2,254 ms (H100), a 3.9x difference on the same trace",
+    "main/hot-aisle/campaign/shop-eval/MANUAL.md :: section 2 (tail latency is an outcome)"
+   ],
+   "verified_by": [
+    "run3 replay + engine_check"
+   ],
+   "anti_pattern_claim_ids": [],
+   "value_status": "UNKNOWN",
+   "note": "",
+   "unknown_would_be_established_by": "Register a p99 TTFT gate before the next arm from the intended customer SLO, then freeze it with the other gates. No source sets one."
+  },
+  {
+   "item_id": "R-01",
+   "section": "4 Reliability",
+   "requirement": "Public status page with a machine-readable incident history reaching back at least 180 days.",
+   "threshold": "history reachable back to the start of a 180-day window (R2 eligibility rule: coverage_start <= window start, or an accepted capped-feed rule)",
+   "unit": "days",
+   "evidence_class": "derived",
+   "origin": "ours (collection over provider status pages)",
+   "sources": [
+    "main/clustermax-challenge/retrospective/results/R2-result.md :: Primary release, Eligible providers (17) and Excluded providers",
+    "main/clustermax-challenge/retrospective/PLAN-R2.md :: Window and eligibility",
+    "main/clustermax-challenge/retrospective/incidents/SCHEMA.md",
+    "sessions/clustermax-cloudreview-20260929/reports/batch-A.md :: status column (Hot Aisle: status.hotaisle.xyz does not resolve; batch B row hotaisle)",
+    "sessions/clustermax-cloudreview-20260929/reports/batch-B.md",
+    "sessions/clustermax-cloudreview-20260929/reports/batch-C.md",
+    "sessions/clustermax-cloudreview-20260929/reports/batch-D.md"
+   ],
+   "verified_by": [
+    "clustermax-challenge/scripts/collect_status.py (Atlassian, status.io, Better Stack, Instatus modes vary)",
+    "R2 eligibility check"
+   ],
+   "anti_pattern_claim_ids": [],
+   "value_status": "set",
+   "note": "Of 45 providers with a rated (not Unavailable) tier in the R2 3.0 table, 17 were eligible; 2 had a status feed that could not reach the window (CoreWeave, OVHcloud); 26 had no incident file collected (the study did not distinguish no status page from not collected). 32 Unavailable-tier providers were excluded by plan. Across the four batch reports (by my parse of their tables), 55 providers have a recorded status-surface outcome: 34 reachable (32 plus 2 JS-shell stubs), 21 not reachable (DNS failure, 403/404 and similar). A failed fetch is not proof there is no page. Hot Aisle: no status page found in the 2026-09-29 capture."
+  },
+  {
+   "item_id": "R-02",
+   "section": "4 Reliability",
+   "requirement": "Incident counts on the provider's own status page per 180 days (2026-03-27 to 2026-09-23), scheduled maintenance excluded. Reference distribution only.",
+   "threshold": "no ceiling is set by any source. 17 eligible providers: major or critical count min 0, median 4, max 58; all non-maintenance count min 0, median 10, max 85; incident hours min 0, median 139.2, max 2706.2",
+   "unit": "incidents per 180 days",
+   "evidence_class": "derived",
+   "origin": "ours (status pages are provider self-reports)",
+   "sources": [
+    "main/clustermax-challenge/retrospective/results/R2-result.md :: Analysis (Spearman rho 0.44, bootstrap 95% [-0.007, 0.749], permutation p 0.0762, reading inconclusive)",
+    "main/clustermax-challenge/retrospective/incidents/*.json (17 eligible files; counts recomputed here for 14 of them and match)",
+    "main/clustermax-challenge/retrospective/PLAN-R2.md :: Known limits"
+   ],
+   "verified_by": [
+    "R2 pipeline: clustermax-challenge/retrospective/run_r2.py"
+   ],
+   "anti_pattern_claim_ids": [],
+   "value_status": "set",
+   "note": "Higher medals do not mean fewer reported incidents: rho is positive (0.44) between 3.0 tier ordinal and major/critical count, inconclusive at p = 0.0762 with n = 17. Status pages are self-reported, severity vocabularies differ, and the medal is dated at the window end, so this is concurrent, not predictive.",
+   "reference_rows": [
+    {
+     "provider": "Nebius",
+     "tier": "Platinum",
+     "major_critical": 17,
+     "all": 39,
+     "hours": 179.8016,
+     "capped": false,
+     "rule": "declared_coverage"
+    },
+    {
+     "provider": "Google Cloud",
+     "tier": "Gold",
+     "major_critical": 5,
+     "all": 5,
+     "hours": 546.9333,
+     "capped": false,
+     "rule": "capped_feed_rule (oldest record 2026-02-27 < window start 2026-03-27)"
+    },
+    {
+     "provider": "Lambda",
+     "tier": "Silver",
+     "major_critical": 2,
+     "all": 16,
+     "hours": 1442.9692,
+     "capped": false,
+     "rule": "capped_feed_rule (oldest record 2026-02-13 < window start 2026-03-27)"
+    },
+    {
+     "provider": "GCore",
+     "tier": "Bronze",
+     "major_critical": 58,
+     "all": 85,
+     "hours": 1027.9349,
+     "capped": false,
+     "rule": "declared_coverage"
+    },
+    {
+     "provider": "Verda",
+     "tier": "Bronze",
+     "major_critical": 0,
+     "all": 6,
+     "hours": 17.4833,
+     "capped": false,
+     "rule": "declared_coverage"
+    },
+    {
+     "provider": "Prime Intellect",
+     "tier": "Bronze",
+     "major_critical": 2,
+     "all": 10,
+     "hours": 1689.0167,
+     "capped": false,
+     "rule": "declared_coverage"
+    },
+    {
+     "provider": "together.ai",
+     "tier": "Bronze",
+     "major_critical": 0,
+     "all": 0,
+     "hours": 0.0,
+     "capped": false,
+     "rule": "declared_coverage"
+    },
+    {
+     "provider": "Crusoe",
+     "tier": "Bronze",
+     "major_critical": 5,
+     "all": 21,
+     "hours": 139.2309,
+     "capped": false,
+     "rule": "declared_coverage"
+    },
+    {
+     "provider": "DigitalOcean",
+     "tier": "Bronze",
+     "major_critical": 8,
+     "all": 59,
+     "hours": 332.9301,
+     "capped": false,
+     "rule": "declared_coverage"
+    },
+    {
+     "provider": "Hyperstack",
+     "tier": "Bronze",
+     "major_critical": 9,
+     "all": 10,
+     "hours": 57.2871,
+     "capped": false,
+     "rule": "declared_coverage"
+    },
+    {
+     "provider": "RunPod",
+     "tier": "Participation Ribbon",
+     "major_critical": 11,
+     "all": 33,
+     "hours": 439.1833,
+     "capped": false,
+     "rule": "declared_coverage"
+    },
+    {
+     "provider": "Radiant",
+     "tier": "Participation Ribbon",
+     "major_critical": 0,
+     "all": 0,
+     "hours": 0.0,
+     "capped": false,
+     "rule": "declared_coverage"
+    },
+    {
+     "provider": "latitude.sh",
+     "tier": "Participation Ribbon",
+     "major_critical": 4,
+     "all": 9,
+     "hours": 54.6994,
+     "capped": false,
+     "rule": "declared_coverage"
+    },
+    {
+     "provider": "Sharon AI",
+     "tier": "Underperforming",
+     "major_critical": 1,
+     "all": 1,
+     "hours": 0.4569,
+     "capped": false,
+     "rule": "declared_coverage"
+    },
+    {
+     "provider": "Hydra",
+     "tier": "Underperforming",
+     "major_critical": 0,
+     "all": 0,
+     "hours": 0.0,
+     "capped": false,
+     "rule": "declared_coverage"
+    },
+    {
+     "provider": "Akamai",
+     "tier": "Underperforming",
+     "major_critical": 0,
+     "all": 59,
+     "hours": 2706.1629,
+     "capped": true,
+     "rule": "declared_coverage"
+    },
+    {
+     "provider": "Mithril",
+     "tier": "Underperforming",
+     "major_critical": 4,
+     "all": 6,
+     "hours": 38.6835,
+     "capped": false,
+     "rule": "declared_coverage"
+    }
+   ]
+  },
+  {
+   "item_id": "R-03",
+   "section": "4 Reliability",
+   "requirement": "A page that reports zero incidents is treated as a reporting-policy fact, not an availability fact.",
+   "threshold": "n/a (interpretation rule)",
+   "unit": "n/a",
+   "evidence_class": "derived",
+   "origin": "ours",
+   "sources": [
+    "main/clustermax-challenge/retrospective/incidents/together-ai.json, hydra.json, cudo-compute.json, fluidstack.json (Better Stack, 0 incidents 2026-01 to 2026-09)",
+    "main/clustermax-challenge/retrospective/incidents/radiant.json (4 notices, all maintenance; months without notices return 404 rather than an explicit \"no incidents\" page)",
+    "main/clustermax-challenge/retrospective/results/R2-result.md :: together.ai 0/0/0.0 h",
+    "sessions/clustermax-cloudreview-20260929/claims.all.jsonl :: cmcr-together-05"
+   ],
+   "verified_by": [
+    "R2 eligibility: an explicit archive boundary or paginated-to-start evidence is required for coverage_start"
+   ],
+   "anti_pattern_claim_ids": [
+    "cmcr-together-05"
+   ],
+   "value_status": "set",
+   "note": "Together AI shows 0 incidents in the window while SemiAnalysis (cmcr-together-05) says Together is among the providers with the most reliability complaints from users operating 64+ GPU clusters. Akamai shows 59 incidents and 2,706 h (capped, open incidents). Zero and very large numbers are both policy outputs until the incident definition and coverage are published."
+  },
+  {
+   "item_id": "R-04",
+   "section": "4 Reliability",
+   "requirement": "MTBF must be quoted in GPU-hours with the cluster size and window behind it; SemiAnalysis TCO presets are the reference points.",
+   "threshold": "Maximum (Nebius blog) = 169800 GPU-hr; Round number (high) = 64000 GPU-hr; Meta paper claim = 50677 GPU-hr; Round number (mid) = 32000 GPU-hr; Nebius blog sample = 26446 GPU-hr; Round number (low) = 16000 GPU-hr; ClusterMAX 2.0 real = 10000 GPU-hr. The \"ClusterMAX 2.0 real\" preset is 10,000 GPU-hr",
+   "unit": "GPU-hours",
+   "evidence_class": "published_claim",
+   "origin": "imported (SemiAnalysis AI Cloud TCO model, embedded in the clustermax.ai JS bundle, captured 2026-09-29)",
+   "sources": [
+    "sessions/clustermax-cloudreview-20260929/tco-model.json :: goodput_presets",
+    "sessions/clustermax-cloudreview-20260929/README.md :: Findings, item 3",
+    "sessions/clustermax-cloudreview-20260929/claims.all.jsonl :: cmcr-nebius-32 (26,446), cmcr-nebius-33 (50,677), cmcr-nebius-34 (less than 10,000 for gold and silver tier customers), cmcr-nebius-36 (169,800 called cherry-picked), cmcr-coreweave-48/49 (466 interruptions in 54 days, 2,111 H100-days)"
+   ],
+   "verified_by": [
+    "none in kit: fleet MTBF is not measurable from one seat"
+   ],
+   "anti_pattern_claim_ids": [
+    "cmcr-nebius-36"
+   ],
+   "value_status": "set",
+   "note": "Derived here: at 10,000 GPU-hr a 1,024-GPU job sees a failure about every 9.8 h (10,000 / 1,024). The 10,000 preset carries source label \"ClusterMAX\" with the site root URL; the closest review sentence is cmcr-nebius-34 (customers at 1k to 2k GPUs report \"as much as 5+ failures per day\", which is 4,800 to 9,600 GPU-hr by our arithmetic, customer hearsay); the preset itself carries no derivation. The TCO model turns this into goodput loss as percent of GPU spend: example 2.05% gold/hyperscaler vs 3.43% silver; pretrain 2.80% vs 4.98%; RL 0.24% vs 0.75%; inference (H200) 0.02% vs 0.49% (tco-model.json scenario rows). Model assumptions, not measurements.",
+   "presets": [
+    {
+     "label": "Maximum (Nebius blog)",
+     "mtbf_gpu_hours": 169800
+    },
+    {
+     "label": "Round number (high)",
+     "mtbf_gpu_hours": 64000.0
+    },
+    {
+     "label": "Meta paper claim",
+     "mtbf_gpu_hours": 50677
+    },
+    {
+     "label": "Round number (mid)",
+     "mtbf_gpu_hours": 32000.0
+    },
+    {
+     "label": "Nebius blog sample",
+     "mtbf_gpu_hours": 26446
+    },
+    {
+     "label": "Round number (low)",
+     "mtbf_gpu_hours": 16000.0
+    },
+    {
+     "label": "ClusterMAX 2.0 real",
+     "mtbf_gpu_hours": 10000.0
+    }
+   ]
+  },
+  {
+   "item_id": "R-05",
+   "section": "4 Reliability",
+   "requirement": "No charge for time the instance is unusable; written compensation for downtime; refunds on a stated clock.",
+   "threshold": "billing stops when the instance is not usable; Verda reference commitment: credit of at least 2x the cost of affected instances, refunds within 24 h on weekdays (next Monday for weekend downtime)",
+   "unit": "policy",
+   "evidence_class": "published_claim",
+   "origin": "imported (SemiAnalysis review sentences)",
+   "sources": [
+    "sessions/clustermax-cloudreview-20260929/claims.all.jsonl :: cmcr-verdadatacrunch-21, -23 (commitment); cmcr-verdadatacrunch-16, -17, -19 (charged during outages, SLA not upheld); cmcr-e2enetworks-11, -13, -15 ($7,061.05 owed for a cluster stuck in creating); cmcr-voltagepark-22 (Shutdown halts instances but still bills); cmcr-qubrid-07",
+    "sessions/clustermax-cloudreview-20260929/raw/criteria_reliability.html :: MSA SLA evaluation (99%, 99.9%, etc.)"
+   ],
+   "verified_by": [
+    "counter:step-6 (billing stops at delete)",
+    "counter:step-10",
+    "desk review of SLA/credit terms"
+   ],
+   "anti_pattern_claim_ids": [
+    "cmcr-e2enetworks-11",
+    "cmcr-e2enetworks-13",
+    "cmcr-e2enetworks-15",
+    "cmcr-qubrid-07",
+    "cmcr-verdadatacrunch-16",
+    "cmcr-verdadatacrunch-17",
+    "cmcr-verdadatacrunch-19",
+    "cmcr-voltagepark-21",
+    "cmcr-voltagepark-22"
+   ],
+   "value_status": "set",
+   "note": "Hot Aisle was observed stopping billing at delete by balance behaviour; billing during an outage or a stuck create was never tested at either reference shop (UNKNOWN)."
+  },
+  {
+   "item_id": "R-06",
+   "section": "4 Reliability",
+   "requirement": "Numeric SLA floor (monthly uptime percentage and credit schedule).",
+   "threshold": "UNKNOWN",
+   "unit": "percent",
+   "evidence_class": null,
+   "origin": "n/a",
+   "sources": [
+    "sessions/clustermax-cloudreview-20260929/raw/criteria_reliability.html :: MSA SLA evaluation (99%, 99.9%, etc.), no floor stated",
+    "sessions/clustermax-cloudreview-20260929/claims.all.jsonl :: cmcr-firmussustainablemetalcloud-16 (a claimed 99.94% SLA), cmcr-stn-13, cmcr-googlecloud-42"
+   ],
+   "verified_by": [
+    "desk review of the MSA"
+   ],
+   "anti_pattern_claim_ids": [
+    "cmcr-stn-13",
+    "cmcr-verdadatacrunch-19",
+    "cmcr-googlecloud-42",
+    "cmcr-amazonwebservices-37"
+   ],
+   "value_status": "UNKNOWN",
+   "note": "",
+   "unknown_would_be_established_by": "No source states a minimum. Establish from the intended buyer's outage cost: a floor needs the buyer's own downtime cost per hour and the shop's credit schedule, neither of which the estate has."
+  },
+  {
+   "item_id": "R-07",
+   "section": "4 Reliability",
+   "requirement": "Recovery: detection, acknowledgement, repair, readiness, resumed useful work, rework, operator minutes after a controlled failure of a disposable job.",
+   "threshold": "UNKNOWN",
+   "unit": "minutes",
+   "evidence_class": null,
+   "origin": "ours (never run on a real shop)",
+   "sources": [
+    "main/hot-aisle/campaign/shop-eval/MANUAL.md :: section 5 (recovery drill), section 2 (failure tests need host authority)",
+    "MANUAL.md preamble: the kit has not yet been qualified on a new Linux/GPU shop"
+   ],
+   "verified_by": [
+    "MANUAL section 5 recovery drill"
+   ],
+   "anti_pattern_claim_ids": [
+    "cmcr-radiantori-07",
+    "cmcr-stn-10",
+    "cmcr-stn-11"
+   ],
+   "value_status": "UNKNOWN",
+   "note": "",
+   "unknown_would_be_established_by": "Run the section 5 drill on a disposable supervised process on each shortlisted shop, and record every timestamp named there. Fleet MTBF cannot be measured from one seat; it needs an agreed fleet sample from the operator (Cooperative host mode)."
+  },
+  {
+   "item_id": "O-01",
+   "section": "5 Operations checklist",
+   "requirement": "DCGM background health checks enabled and plugged into the Slurm HealthCheckProgram (or vendor equivalent).",
+   "threshold": "enabled and integrated (scontrol show config | grep HealthCheckProgram non-empty)",
+   "unit": "boolean",
+   "evidence_class": "published_claim",
+   "origin": "imported (SemiAnalysis expectation)",
+   "sources": [
+    "sessions/clustermax-cloudreview-20260929/raw/expectations_slurm.html :: Monitoring and Health Checks",
+    "sessions/clustermax-cloudreview-20260929/raw/expectations_health-checks.html :: Passive: GPU Health Monitoring"
+   ],
+   "verified_by": [
+    "audit:healthChecks.dcgmInstalled",
+    "audit:healthChecks.dcgmSlurm",
+    "audit:healthChecks.nhcInstalled"
+   ],
+   "anti_pattern_claim_ids": [
+    "cmcr-fluidstack-22",
+    "cmcr-stn-12",
+    "cmcr-radiantori-06",
+    "cmcr-tensorwave-13",
+    "cmcr-azure-09",
+    "cmcr-azure-10",
+    "cmcr-buzzhpc-11",
+    "cmcr-buzzhpc-12",
+    "cmcr-whitefiber-14",
+    "cmcr-primeintellect-10"
+   ],
+   "value_status": "set",
+   "note": "Audit checks are Slurm-harness only and NVIDIA-oriented; a standalone VM cannot establish this item. Hot Aisle: the SemiAnalysis 2.0 review says no health checks (cmcr-hotaisle-09)."
+  },
+  {
+   "item_id": "O-02",
+   "section": "5 Operations checklist",
+   "requirement": "Passive and active health coverage: XID/SXID, ECC, PCIe errors, link flaps, GPU temperature; active dcgmi diag r3, nvbandwidth, local NCCL and ib_write_bw tests.",
+   "threshold": "passive set present; active tests run on idle nodes weekly",
+   "unit": "checklist",
+   "evidence_class": "published_claim",
+   "origin": "imported (SemiAnalysis expectation)",
+   "sources": [
+    "sessions/clustermax-cloudreview-20260929/raw/expectations_health-checks.html :: Passive and Active sections; Automation, \"Weekly scheduled active health checks on idle nodes\"",
+    "sessions/clustermax-cloudreview-20260929/raw/criteria_reliability.html :: Key Requirements",
+    "main/hot-aisle/campaign/shop-eval/diagnose/RUBRIC.md :: HW-01, HW-02, HW-03, PWR-01"
+   ],
+   "verified_by": [
+    "catalog:xid-monitoring (partial, no graded check)",
+    "probe/fingerprint.sh (PCIe link, RAS counters, firmware age, clocks)",
+    "rubric:HW-01",
+    "rubric:HW-02",
+    "rubric:HW-03",
+    "rubric:PWR-01"
+   ],
+   "anti_pattern_claim_ids": [
+    "cmcr-azure-09",
+    "cmcr-azure-10",
+    "cmcr-buzzhpc-11",
+    "cmcr-buzzhpc-12",
+    "cmcr-cudocompute-16",
+    "cmcr-digitalocean-06",
+    "cmcr-fluidstack-22",
+    "cmcr-gcore-18",
+    "cmcr-gmi-12",
+    "cmcr-gmocloud-23",
+    "cmcr-googlecloud-33",
+    "cmcr-googlecloud-34",
+    "cmcr-googlecloud-36",
+    "cmcr-hotaisle-09",
+    "cmcr-latitudesh-11",
+    "cmcr-neysa-12",
+    "cmcr-oracle-26",
+    "cmcr-primeintellect-10",
+    "cmcr-radiantori-06",
+    "cmcr-runpod-04",
+    "cmcr-sesterce-12",
+    "cmcr-shadeform-11",
+    "cmcr-stn-12",
+    "cmcr-tensorwave-13",
+    "cmcr-together-41",
+    "cmcr-together-54",
+    "cmcr-vastai-14",
+    "cmcr-vultr-13",
+    "cmcr-vultr-21",
+    "cmcr-whitefiber-14",
+    "cmcr-atlascloud-10"
+   ],
+   "value_status": "set",
+   "note": "Rubric thresholds are SIGNALs, not defects: PCIe below supported max, any uncorrectable or over 100 correctable RAS counters, firmware older than 270 days, throttle or clock slope over 15%."
+  },
+  {
+   "item_id": "O-03",
+   "section": "5 Operations checklist",
+   "requirement": "Automatic node drain and replacement after a detected fault.",
+   "threshold": "fault injected on a disposable node leads to drain without customer action",
+   "unit": "boolean",
+   "evidence_class": "published_claim",
+   "origin": "imported (SemiAnalysis expectation)",
+   "sources": [
+    "sessions/clustermax-cloudreview-20260929/raw/expectations_health-checks.html :: Automation, \"GPU/node health detection ... with automated cordon/drain and repair/replace\"",
+    "sessions/clustermax-cloudreview-20260929/claims.all.jsonl :: cmcr-fluidstack-23 (dcgmi test --inject --gpuid 0 -f 202 did not drain), cmcr-radiantori-07 (18 h with no alert or replacement)"
+   ],
+   "verified_by": [
+    "catalog:auto-remediation (partial, no graded check)",
+    "MANUAL section 5 recovery drill (needs host operator authority)"
+   ],
+   "anti_pattern_claim_ids": [
+    "cmcr-fluidstack-23",
+    "cmcr-googlecloud-33",
+    "cmcr-googlecloud-36",
+    "cmcr-oracle-32",
+    "cmcr-radiantori-07",
+    "cmcr-stn-11",
+    "cmcr-tensorwave-13",
+    "cmcr-together-49",
+    "cmcr-together-50",
+    "cmcr-together-61",
+    "cmcr-voltagepark-24",
+    "cmcr-vultr-13"
+   ],
+   "value_status": "set",
+   "note": ""
+  },
+  {
+   "item_id": "O-04",
+   "section": "5 Operations checklist",
+   "requirement": "Prolog and epilog lightweight.",
+   "threshold": "< 30 s to get on a node via srun",
+   "unit": "seconds",
+   "evidence_class": "published_claim",
+   "origin": "imported (SemiAnalysis expectation)",
+   "sources": [
+    "sessions/clustermax-cloudreview-20260929/raw/expectations_slurm.html :: Monitoring and Health Checks, \"time srun -N1 hostname\"",
+    "sessions/clustermax-cloudreview-20260929/claims.all.jsonl :: cmcr-firmussustainablemetalcloud-10 and cmcr-fluidstack-11 (over a minute), cmcr-amazonwebservices-25 (deep health checks 60-120 minutes)"
+   ],
+   "verified_by": [
+    "catalog:prolog-fast (no graded check)",
+    "manual: time srun -N1 hostname"
+   ],
+   "anti_pattern_claim_ids": [
+    "cmcr-firmussustainablemetalcloud-10",
+    "cmcr-firmussustainablemetalcloud-11",
+    "cmcr-fluidstack-11",
+    "cmcr-fluidstack-12",
+    "cmcr-amazonwebservices-25"
+   ],
+   "value_status": "set",
+   "note": ""
+  },
+  {
+   "item_id": "O-05",
+   "section": "5 Operations checklist",
+   "requirement": "Monitoring stack: Grafana/kube-prometheus-stack, DCGM exporter, alerting, job accounting integration.",
+   "threshold": "dashboard present with GPU health and Slurm/K8s job views",
+   "unit": "boolean",
+   "evidence_class": "published_claim",
+   "origin": "imported (SemiAnalysis expectation)",
+   "sources": [
+    "sessions/clustermax-cloudreview-20260929/raw/expectations_monitoring.html :: Cluster Overview through Resource Management",
+    "sessions/clustermax-cloudreview-20260929/raw/criteria_monitoring.html :: Out-of-the-box detailed managed Grafana",
+    "sessions/clustermax-cloudreview-20260929/raw/expectations_kubernetes.html :: Other"
+   ],
+   "verified_by": [
+    "audit:healthChecks.monitoringStack.dcgmExporter (partial; no dashboard-quality proof)",
+    "audit:securityVersions.dcgmExporter.status"
+   ],
+   "anti_pattern_claim_ids": [
+    "cmcr-amazonwebservices-26",
+    "cmcr-azure-11",
+    "cmcr-buzzhpc-13",
+    "cmcr-cudocompute-16",
+    "cmcr-digitalocean-06",
+    "cmcr-gcore-17",
+    "cmcr-gcore-18",
+    "cmcr-gmi-05",
+    "cmcr-gmi-12",
+    "cmcr-gmocloud-21",
+    "cmcr-gmocloud-22",
+    "cmcr-hotaisle-09",
+    "cmcr-lambda-19",
+    "cmcr-lambda-20",
+    "cmcr-latitudesh-11",
+    "cmcr-neysa-12",
+    "cmcr-neysa-13",
+    "cmcr-primeintellect-10",
+    "cmcr-sesterce-12",
+    "cmcr-shadeform-11",
+    "cmcr-stn-17",
+    "cmcr-vultr-13",
+    "cmcr-vultr-21",
+    "cmcr-whitefiber-13",
+    "cmcr-whitefiber-15",
+    "cmcr-fluidstack-16",
+    "cmcr-together-43",
+    "cmcr-tensorwave-13",
+    "cmcr-vastai-14",
+    "cmcr-atlascloud-10"
+   ],
+   "value_status": "set",
+   "note": "Hot Aisle: no monitoring dashboards per the 2.0 review (cmcr-hotaisle-09)."
+  },
+  {
+   "item_id": "O-06",
+   "section": "5 Operations checklist",
+   "requirement": "Shared filesystem at the default home directory, RWX StorageClass, storage mounts stay mounted, performance measured.",
+   "threshold": "findmnt -T $HOME shows a shared mount; default StorageClass provisions PVCs without hanging; fio result documented",
+   "unit": "boolean",
+   "evidence_class": "published_claim",
+   "origin": "imported (SemiAnalysis expectation)",
+   "sources": [
+    "sessions/clustermax-cloudreview-20260929/raw/expectations_slurm.html :: Access, shared filesystem",
+    "sessions/clustermax-cloudreview-20260929/raw/expectations_kubernetes.html :: Configuration, CSI provider with ReadWriteMany",
+    "sessions/clustermax-cloudreview-20260929/raw/criteria_storage.html :: Key Requirements"
+   ],
+   "verified_by": [
+    "audit:storage.rwxStatus (k8s harness only)",
+    "catalog:shared-fs (partial, no graded check)",
+    "catalog:default-storage-class (no graded check)",
+    "manual: fio per expectations page"
+   ],
+   "anti_pattern_claim_ids": [
+    "cmcr-buzzhpc-06",
+    "cmcr-cudocompute-10",
+    "cmcr-cudocompute-16",
+    "cmcr-crusoe-24",
+    "cmcr-crusoe-30",
+    "cmcr-digitalocean-06",
+    "cmcr-e2enetworks-10",
+    "cmcr-gmi-07",
+    "cmcr-hotaisle-09",
+    "cmcr-lambda-22",
+    "cmcr-latitudesh-11",
+    "cmcr-primeintellect-08",
+    "cmcr-runpod-10",
+    "cmcr-vultr-07",
+    "cmcr-amazonwebservices-11",
+    "cmcr-amazonwebservices-15"
+   ],
+   "value_status": "set",
+   "note": "Our single-GPU arms never exercised shared storage (UNKNOWN)."
+  },
+  {
+   "item_id": "O-07",
+   "section": "5 Operations checklist",
+   "requirement": "Slurm commands functional and job accounting available.",
+   "threshold": "sinfo, squeue, scontrol, salloc, sbatch, srun work for users; sacct returns jobs",
+   "unit": "boolean",
+   "evidence_class": "published_claim",
+   "origin": "imported (SemiAnalysis expectation)",
+   "sources": [
+    "sessions/clustermax-cloudreview-20260929/raw/expectations_slurm.html :: Access"
+   ],
+   "verified_by": [
+    "audit:access.slurmCommandsOk",
+    "audit:slurm.accounting.sacctAvailable"
+   ],
+   "anti_pattern_claim_ids": [
+    "cmcr-gmocloud-05",
+    "cmcr-gmocloud-06",
+    "cmcr-gmocloud-07",
+    "cmcr-azure-13"
+   ],
+   "value_status": "set",
+   "note": ""
+  },
+  {
+   "item_id": "O-08",
+   "section": "5 Operations checklist",
+   "requirement": "Slurm and Kubernetes actually working at handover: head node reachable, kubeconfig downloadable, GPU Operator, Network Operator, MPI Operator, load balancer.",
+   "threshold": "first-use test passes without vendor engineer intervention",
+   "unit": "boolean",
+   "evidence_class": "published_claim",
+   "origin": "imported (SemiAnalysis expectation)",
+   "sources": [
+    "sessions/clustermax-cloudreview-20260929/raw/expectations_kubernetes.html :: Access and Configuration",
+    "sessions/clustermax-cloudreview-20260929/raw/expectations_slurm.html :: Access",
+    "sessions/clustermax-cloudreview-20260929/raw/criteria_orchestration.html :: Slurm and Kubernetes requirements"
+   ],
+   "verified_by": [
+    "audit:storage.rwxStatus",
+    "audit:kubelet_cpu_manager_policy.status",
+    "catalog:gpu-operator (no graded check)",
+    "catalog:network-operator (no graded check)",
+    "catalog:load-balancer (no graded check)"
+   ],
+   "anti_pattern_claim_ids": [
+    "cmcr-amazonwebservices-05",
+    "cmcr-amazonwebservices-06",
+    "cmcr-amazonwebservices-07",
+    "cmcr-amazonwebservices-11",
+    "cmcr-amazonwebservices-12",
+    "cmcr-buzzhpc-04",
+    "cmcr-crusoe-19",
+    "cmcr-gcore-12",
+    "cmcr-gcore-15",
+    "cmcr-gmi-04",
+    "cmcr-hyperstacknexgen-05",
+    "cmcr-hyperstacknexgen-06",
+    "cmcr-hyperstacknexgen-10",
+    "cmcr-lambda-21",
+    "cmcr-neysa-08",
+    "cmcr-neysa-09",
+    "cmcr-primeintellect-09",
+    "cmcr-tensorwave-05",
+    "cmcr-voltagepark-09",
+    "cmcr-voltagepark-10",
+    "cmcr-vultr-05",
+    "cmcr-whitefiber-09",
+    "cmcr-whitefiber-10",
+    "cmcr-whitefiber-11",
+    "cmcr-e2enetworks-07",
+    "cmcr-azure-04",
+    "cmcr-gmocloud-05",
+    "cmcr-gmocloud-06",
+    "cmcr-akamailinode-05",
+    "cmcr-cudocompute-16",
+    "cmcr-digitalocean-04",
+    "cmcr-digitalocean-06",
+    "cmcr-latitudesh-11",
+    "cmcr-sesterce-12",
+    "cmcr-shadeform-11",
+    "cmcr-neevcloud-06",
+    "cmcr-neysa-15",
+    "cmcr-vastai-10",
+    "cmcr-runpod-04",
+    "cmcr-gcore-07",
+    "cmcr-hotaisle-10",
+    "cmcr-oracle-23",
+    "cmcr-together-25",
+    "cmcr-tensorwave-07",
+    "cmcr-tensorwave-08",
+    "cmcr-gcore-15",
+    "cmcr-vultr-10",
+    "cmcr-fluidstack-30",
+    "cmcr-radiantori-05"
+   ],
+   "value_status": "set",
+   "note": ""
+  },
+  {
+   "item_id": "O-09",
+   "section": "5 Operations checklist",
+   "requirement": "Topology-aware scheduling configured (topology.yaml or topology.conf, topology/block or topology/tree).",
+   "threshold": "configured",
+   "unit": "boolean",
+   "evidence_class": "published_claim",
+   "origin": "imported (SemiAnalysis expectation)",
+   "sources": [
+    "sessions/clustermax-cloudreview-20260929/raw/expectations_slurm.html :: Configuration"
+   ],
+   "verified_by": [
+    "audit:networking.topologyConfigured"
+   ],
+   "anti_pattern_claim_ids": [
+    "cmcr-firmussustainablemetalcloud-10",
+    "cmcr-gmocloud-09",
+    "cmcr-neysa-10",
+    "cmcr-stn-09",
+    "cmcr-vultr-06",
+    "cmcr-tensorwave-13"
+   ],
+   "value_status": "set",
+   "note": ""
+  },
+  {
+   "item_id": "O-10",
+   "section": "5 Operations checklist",
+   "requirement": "Container runtimes for Slurm: Pyxis, Enroot, Docker on workers with a current NVIDIA Container Toolkit, Apptainer/Singularity.",
+   "threshold": "Pyxis --container-image present; enroot works; docker run --gpus all nvidia-smi works",
+   "unit": "boolean",
+   "evidence_class": "published_claim",
+   "origin": "imported (SemiAnalysis expectation)",
+   "sources": [
+    "sessions/clustermax-cloudreview-20260929/raw/expectations_slurm.html :: Containers",
+    "sessions/clustermax-cloudreview-20260929/raw/expectations_standalone.html :: Configuration (NVIDIA Container Toolkit with Docker; ROCm container toolkit with --device=/dev/kfd --device=/dev/dri for AMD)"
+   ],
+   "verified_by": [
+    "audit:containers.pyxisRuntimeWorks",
+    "audit:containers.enroot",
+    "audit:containers.enrootImportWorks",
+    "audit:containers.dockerOnWorkers",
+    "audit:containers.nvidiaContainerToolkit",
+    "audit:containers.singularity"
+   ],
+   "anti_pattern_claim_ids": [
+    "cmcr-buzzhpc-10",
+    "cmcr-gmocloud-11",
+    "cmcr-gmocloud-12",
+    "cmcr-primeintellect-08",
+    "cmcr-vultr-06",
+    "cmcr-runpod-04"
+   ],
+   "value_status": "set",
+   "note": ""
+  },
+  {
+   "item_id": "O-11",
+   "section": "5 Operations checklist",
+   "requirement": "HPC toolchain present without hunting: nvcc, HPC-X or equivalent MPI, NCCL up to date, Lmod.",
+   "threshold": "present; NVHPC on a current-or-previous release: copy table minimum 26.3 with current 26.5 (generated 2026-08-30); upstream table minimum 26.5 with current 26.9 (generated 2026-09-25)",
+   "unit": "boolean",
+   "evidence_class": "published_claim",
+   "origin": "imported (SemiAnalysis expectation)",
+   "sources": [
+    "sessions/clustermax-cloudreview-20260929/raw/expectations_slurm.html :: Configuration",
+    "sessions/public-tail-20260929/lanes/cmax-audit/repo/cmax/scripts/1-audit/minimum-versions.json :: components.nvhpc",
+    "sessions/public-tail-20260929/lanes/cmax-audit/raw/upstream-minimum-versions.json :: components.nvhpc"
+   ],
+   "verified_by": [
+    "audit:software.nvhpc.status",
+    "audit:software.lmod.modulesStatus",
+    "audit:software.nccl.installed"
+   ],
+   "anti_pattern_claim_ids": [
+    "cmcr-buzzhpc-09",
+    "cmcr-fluidstack-14",
+    "cmcr-gmi-06",
+    "cmcr-primeintellect-08",
+    "cmcr-runpod-11",
+    "cmcr-stn-09",
+    "cmcr-stn-14",
+    "cmcr-vultr-06"
+   ],
+   "value_status": "set",
+   "note": ""
+  },
+  {
+   "item_id": "O-12",
+   "section": "5 Operations checklist",
+   "requirement": "GPUDirect RDMA via dma_buf enabled; PCIe ACS disabled on the GPU-to-NIC path; two-node NCCL AllReduce at reference bandwidth.",
+   "threshold": ">= 300 GB/s bus bandwidth, two-node AllReduce, 128 MiB message (SemiAnalysis reference for top-tier neoclouds, cmcr-irenirisenergy-06); IREN measured 129.27 GB/s",
+   "unit": "GB/s",
+   "evidence_class": "published_claim",
+   "origin": "imported (SemiAnalysis measurement of IREN, March 2025; reference figure stated in the same sentence)",
+   "sources": [
+    "sessions/clustermax-cloudreview-20260929/raw/expectations_slurm.html :: Configuration, GPUDirect RDMA via dma_buf",
+    "sessions/clustermax-cloudreview-20260929/claims.all.jsonl :: cmcr-irenirisenergy-05..08, cmcr-buzzhpc-14 (about 10x lower than expected), cmcr-buzzhpc-16"
+   ],
+   "verified_by": [
+    "audit:gpus.gpuDirectRdmaPath",
+    "audit:gpus.gpuDirectRdmaPath.nvidiaPeermemLegacy",
+    "audit:gpus.pcieAcs.enabled",
+    "audit:gpus.gdrcopy.installed"
+   ],
+   "anti_pattern_claim_ids": [
+    "cmcr-buzzhpc-14",
+    "cmcr-buzzhpc-16",
+    "cmcr-irenirisenergy-05",
+    "cmcr-irenirisenergy-06",
+    "cmcr-irenirisenergy-07",
+    "cmcr-irenirisenergy-08",
+    "cmcr-stn-09",
+    "cmcr-stn-14",
+    "cmcr-radiantori-05"
+   ],
+   "value_status": "set",
+   "note": "NVIDIA and multi-node specific. The MI300X analogue is UNKNOWN in the estate; standalone harness cannot establish RDMA readiness (audit REPORT)."
+  },
+  {
+   "item_id": "O-13",
+   "section": "5 Operations checklist",
+   "requirement": "Base image AI-ready out of the box: GPU driver, Docker, container toolkit (or ROCm equivalent), python, pip, venv, current PyTorch.",
+   "threshold": "nvidia-smi && nvcc --version work; python3 -c \"import torch; print(torch.cuda.is_available(), torch.cuda.device_count())\" prints True and the GPU count; AMD: rocm/pytorch container runs with /dev/kfd and /dev/dri",
+   "unit": "boolean",
+   "evidence_class": "published_claim",
+   "origin": "imported (SemiAnalysis expectation)",
+   "sources": [
+    "sessions/clustermax-cloudreview-20260929/raw/expectations_standalone.html :: Configuration"
+   ],
+   "verified_by": [
+    "audit:containers.nvidiaContainerToolkit",
+    "audit:securityVersions.nvidiaDriver.status",
+    "audit:software.nccl.installed",
+    "catalog:gpu-drivers (no graded check)",
+    "probe/fingerprint.sh"
+   ],
+   "anti_pattern_claim_ids": [
+    "cmcr-amazonwebservices-17",
+    "cmcr-amazonwebservices-18",
+    "cmcr-buzzhpc-08",
+    "cmcr-cudocompute-12",
+    "cmcr-cudocompute-13",
+    "cmcr-gmi-06",
+    "cmcr-gpunet-07",
+    "cmcr-gpunet-08",
+    "cmcr-hyperbolic-05",
+    "cmcr-ibmcloud-12",
+    "cmcr-latitudesh-10",
+    "cmcr-qubrid-09",
+    "cmcr-qubrid-10",
+    "cmcr-crusoe-22",
+    "cmcr-tensorwave-11",
+    "cmcr-voltagepark-10",
+    "cmcr-voltagepark-11",
+    "cmcr-voltagepark-14",
+    "cmcr-whitefiber-12",
+    "cmcr-together-26"
+   ],
+   "value_status": "set",
+   "note": ""
+  },
+  {
+   "item_id": "O-14a",
+   "section": "5 Operations checklist",
+   "requirement": "NVIDIA GPU driver at or above the minimum for its branch.",
+   "threshold": "branch minima: 535: 535.309.01, 570: 570.211.01, 580: 580.159.03, 590: 590.48.01, 595: 595.71.05 (bulletin: GPU Display Driver, May 2026)",
+   "unit": "version",
+   "evidence_class": "published_claim",
+   "origin": "imported (SemiAnalysis ClusterMAX audit table; underlying vendor bulletins cited in the file)",
+   "sources": [
+    "sessions/public-tail-20260929/lanes/cmax-audit/repo/cmax/scripts/1-audit/minimum-versions.json :: minimum-versions.json generated 2026-08-30T07:24:57Z, maxAgeDays 10, gracePeriodDays 3, schemaVersion 1 (the audit tool policy allows a table 10 days old plus 3 days grace; this copy is 30 days old on 2026-09-29)",
+    "sessions/public-tail-20260929/lanes/cmax-audit/raw/upstream-minimum-versions.json :: upstream master table generated 2026-09-25T04:03:23Z (UTF-16 file); compared component by component with the copy: identical minima for every component except NVHPC",
+    "sessions/public-tail-20260929/lanes/cmax-audit/REPORT.md :: copied checkout is HEAD 97865af, four commits behind fetched master",
+    "sessions/clustermax-cloudreview-20260929/raw/criteria_security.html :: Every component patched to at least the published ClusterMAX minimum version"
+   ],
+   "verified_by": [
+    "audit:securityVersions.nvidiaDriver.status",
+    "rubric:STK-01"
+   ],
+   "anti_pattern_claim_ids": [
+    "cmcr-cudocompute-12"
+   ],
+   "value_status": "set",
+   "note": ""
+  },
+  {
+   "item_id": "O-14b",
+   "section": "5 Operations checklist",
+   "requirement": "NVIDIA Container Toolkit at or above minimum.",
+   "threshold": ">= 1.19.1 (June 2026 bulletin); criteria security also names CVE-2024-0132, CVE-2025-23359, CVE-2025-23266",
+   "unit": "version",
+   "evidence_class": "published_claim",
+   "origin": "imported (SemiAnalysis ClusterMAX audit table; underlying vendor bulletins cited in the file)",
+   "sources": [
+    "sessions/public-tail-20260929/lanes/cmax-audit/repo/cmax/scripts/1-audit/minimum-versions.json :: minimum-versions.json generated 2026-08-30T07:24:57Z, maxAgeDays 10, gracePeriodDays 3, schemaVersion 1 (the audit tool policy allows a table 10 days old plus 3 days grace; this copy is 30 days old on 2026-09-29)",
+    "sessions/public-tail-20260929/lanes/cmax-audit/raw/upstream-minimum-versions.json :: upstream master table generated 2026-09-25T04:03:23Z (UTF-16 file); compared component by component with the copy: identical minima for every component except NVHPC",
+    "sessions/public-tail-20260929/lanes/cmax-audit/REPORT.md :: copied checkout is HEAD 97865af, four commits behind fetched master",
+    "sessions/clustermax-cloudreview-20260929/raw/criteria_security.html :: Every component patched to at least the published ClusterMAX minimum version"
+   ],
+   "verified_by": [
+    "audit:securityVersions.nvidiaContainerToolkit.status"
+   ],
+   "anti_pattern_claim_ids": [
+    "cmcr-cudocompute-12",
+    "cmcr-fluidstack-19",
+    "cmcr-gmocloud-14",
+    "cmcr-gmocloud-15",
+    "cmcr-voltagepark-26",
+    "cmcr-voltagepark-27"
+   ],
+   "value_status": "set",
+   "note": ""
+  },
+  {
+   "item_id": "O-14c",
+   "section": "5 Operations checklist",
+   "requirement": "CUDA Toolkit at or above minimum.",
+   "threshold": ">= 13.1 (January 2026 bulletin)",
+   "unit": "version",
+   "evidence_class": "published_claim",
+   "origin": "imported (SemiAnalysis ClusterMAX audit table; underlying vendor bulletins cited in the file)",
+   "sources": [
+    "sessions/public-tail-20260929/lanes/cmax-audit/repo/cmax/scripts/1-audit/minimum-versions.json :: minimum-versions.json generated 2026-08-30T07:24:57Z, maxAgeDays 10, gracePeriodDays 3, schemaVersion 1 (the audit tool policy allows a table 10 days old plus 3 days grace; this copy is 30 days old on 2026-09-29)",
+    "sessions/public-tail-20260929/lanes/cmax-audit/raw/upstream-minimum-versions.json :: upstream master table generated 2026-09-25T04:03:23Z (UTF-16 file); compared component by component with the copy: identical minima for every component except NVHPC",
+    "sessions/public-tail-20260929/lanes/cmax-audit/REPORT.md :: copied checkout is HEAD 97865af, four commits behind fetched master",
+    "sessions/clustermax-cloudreview-20260929/raw/criteria_security.html :: Every component patched to at least the published ClusterMAX minimum version"
+   ],
+   "verified_by": [
+    "audit:securityVersions.cudaToolkit.status"
+   ],
+   "anti_pattern_claim_ids": [],
+   "value_status": "set",
+   "note": ""
+  },
+  {
+   "item_id": "O-14d",
+   "section": "5 Operations checklist",
+   "requirement": "DCGM and DCGM exporter at or above minimum.",
+   "threshold": "DCGM >= 4.5.3; dcgm-exporter >= 4.8.2 (July 2026 bulletin)",
+   "unit": "version",
+   "evidence_class": "published_claim",
+   "origin": "imported (SemiAnalysis ClusterMAX audit table; underlying vendor bulletins cited in the file)",
+   "sources": [
+    "sessions/public-tail-20260929/lanes/cmax-audit/repo/cmax/scripts/1-audit/minimum-versions.json :: minimum-versions.json generated 2026-08-30T07:24:57Z, maxAgeDays 10, gracePeriodDays 3, schemaVersion 1 (the audit tool policy allows a table 10 days old plus 3 days grace; this copy is 30 days old on 2026-09-29)",
+    "sessions/public-tail-20260929/lanes/cmax-audit/raw/upstream-minimum-versions.json :: upstream master table generated 2026-09-25T04:03:23Z (UTF-16 file); compared component by component with the copy: identical minima for every component except NVHPC",
+    "sessions/public-tail-20260929/lanes/cmax-audit/REPORT.md :: copied checkout is HEAD 97865af, four commits behind fetched master",
+    "sessions/clustermax-cloudreview-20260929/raw/criteria_security.html :: Every component patched to at least the published ClusterMAX minimum version"
+   ],
+   "verified_by": [
+    "audit:securityVersions.dcgm.status",
+    "audit:securityVersions.dcgmExporter.status"
+   ],
+   "anti_pattern_claim_ids": [],
+   "value_status": "set",
+   "note": ""
+  },
+  {
+   "item_id": "O-14e",
+   "section": "5 Operations checklist",
+   "requirement": "Docker Engine at or above minimum.",
+   "threshold": ">= 29.7.0 (2026-07-30 release notes)",
+   "unit": "version",
+   "evidence_class": "published_claim",
+   "origin": "imported (SemiAnalysis ClusterMAX audit table; underlying vendor bulletins cited in the file)",
+   "sources": [
+    "sessions/public-tail-20260929/lanes/cmax-audit/repo/cmax/scripts/1-audit/minimum-versions.json :: minimum-versions.json generated 2026-08-30T07:24:57Z, maxAgeDays 10, gracePeriodDays 3, schemaVersion 1 (the audit tool policy allows a table 10 days old plus 3 days grace; this copy is 30 days old on 2026-09-29)",
+    "sessions/public-tail-20260929/lanes/cmax-audit/raw/upstream-minimum-versions.json :: upstream master table generated 2026-09-25T04:03:23Z (UTF-16 file); compared component by component with the copy: identical minima for every component except NVHPC",
+    "sessions/public-tail-20260929/lanes/cmax-audit/REPORT.md :: copied checkout is HEAD 97865af, four commits behind fetched master",
+    "sessions/clustermax-cloudreview-20260929/raw/criteria_security.html :: Every component patched to at least the published ClusterMAX minimum version"
+   ],
+   "verified_by": [
+    "audit:securityVersions.docker.status"
+   ],
+   "anti_pattern_claim_ids": [],
+   "value_status": "set",
+   "note": ""
+  },
+  {
+   "item_id": "O-14f",
+   "section": "5 Operations checklist",
+   "requirement": "runc at or above the fixed version for its minor line.",
+   "threshold": "minima: 0.1: 0.1.0, 1.0: 1.0.3, 1.1: 1.1.14, 1.2: 1.2.8, 1.3: 1.3.6, 1.4: 1.4.3, 1.5: 1.5.0-rc.3",
+   "unit": "version",
+   "evidence_class": "published_claim",
+   "origin": "imported (SemiAnalysis ClusterMAX audit table; underlying vendor bulletins cited in the file)",
+   "sources": [
+    "sessions/public-tail-20260929/lanes/cmax-audit/repo/cmax/scripts/1-audit/minimum-versions.json :: minimum-versions.json generated 2026-08-30T07:24:57Z, maxAgeDays 10, gracePeriodDays 3, schemaVersion 1 (the audit tool policy allows a table 10 days old plus 3 days grace; this copy is 30 days old on 2026-09-29)",
+    "sessions/public-tail-20260929/lanes/cmax-audit/raw/upstream-minimum-versions.json :: upstream master table generated 2026-09-25T04:03:23Z (UTF-16 file); compared component by component with the copy: identical minima for every component except NVHPC",
+    "sessions/public-tail-20260929/lanes/cmax-audit/REPORT.md :: copied checkout is HEAD 97865af, four commits behind fetched master",
+    "sessions/clustermax-cloudreview-20260929/raw/criteria_security.html :: Every component patched to at least the published ClusterMAX minimum version"
+   ],
+   "verified_by": [
+    "audit:securityVersions.runc.status"
+   ],
+   "anti_pattern_claim_ids": [],
+   "value_status": "set",
+   "note": ""
+  },
+  {
+   "item_id": "O-14g",
+   "section": "5 Operations checklist",
+   "requirement": "ConnectX/BlueField firmware at or above the fixed build for its train.",
+   "threshold": "trains: 28: 28.4702, 32: 32.1908, 35: 35.8002, 39: 39.8002, 43: 43.8002, 46: 46.3008 (June 2026 bulletin)",
+   "unit": "version",
+   "evidence_class": "published_claim",
+   "origin": "imported (SemiAnalysis ClusterMAX audit table; underlying vendor bulletins cited in the file)",
+   "sources": [
+    "sessions/public-tail-20260929/lanes/cmax-audit/repo/cmax/scripts/1-audit/minimum-versions.json :: minimum-versions.json generated 2026-08-30T07:24:57Z, maxAgeDays 10, gracePeriodDays 3, schemaVersion 1 (the audit tool policy allows a table 10 days old plus 3 days grace; this copy is 30 days old on 2026-09-29)",
+    "sessions/public-tail-20260929/lanes/cmax-audit/raw/upstream-minimum-versions.json :: upstream master table generated 2026-09-25T04:03:23Z (UTF-16 file); compared component by component with the copy: identical minima for every component except NVHPC",
+    "sessions/public-tail-20260929/lanes/cmax-audit/REPORT.md :: copied checkout is HEAD 97865af, four commits behind fetched master",
+    "sessions/clustermax-cloudreview-20260929/raw/criteria_security.html :: Every component patched to at least the published ClusterMAX minimum version"
+   ],
+   "verified_by": [
+    "audit:securityVersions.connectxFirmware.status"
+   ],
+   "anti_pattern_claim_ids": [],
+   "value_status": "set",
+   "note": "Scale-out harness only; standalone excluded. Not applicable to a single VM."
+  },
+  {
+   "item_id": "O-14h",
+   "section": "5 Operations checklist",
+   "requirement": "BlueField VIRTIO-Net controller firmware at or above the fixed release line.",
+   "threshold": "lines: GA: 25.10.6, LTS23: 23.10.23, LTS24: 24.10.50, LTS25: 25.10.2",
+   "unit": "version",
+   "evidence_class": "published_claim",
+   "origin": "imported (SemiAnalysis ClusterMAX audit table; underlying vendor bulletins cited in the file)",
+   "sources": [
+    "sessions/public-tail-20260929/lanes/cmax-audit/repo/cmax/scripts/1-audit/minimum-versions.json :: minimum-versions.json generated 2026-08-30T07:24:57Z, maxAgeDays 10, gracePeriodDays 3, schemaVersion 1 (the audit tool policy allows a table 10 days old plus 3 days grace; this copy is 30 days old on 2026-09-29)",
+    "sessions/public-tail-20260929/lanes/cmax-audit/raw/upstream-minimum-versions.json :: upstream master table generated 2026-09-25T04:03:23Z (UTF-16 file); compared component by component with the copy: identical minima for every component except NVHPC",
+    "sessions/public-tail-20260929/lanes/cmax-audit/REPORT.md :: copied checkout is HEAD 97865af, four commits behind fetched master",
+    "sessions/clustermax-cloudreview-20260929/raw/criteria_security.html :: Every component patched to at least the published ClusterMAX minimum version"
+   ],
+   "verified_by": [
+    "audit:securityVersions.virtioNetBluefield.status",
+    "audit:securityVersions.virtioNetBluefield.exposure",
+    "audit:securityVersions.dpuHostIsolation.status"
+   ],
+   "anti_pattern_claim_ids": [],
+   "value_status": "set",
+   "note": "Only where BlueField DPUs are deployed."
+  },
+  {
+   "item_id": "O-14i",
+   "section": "5 Operations checklist",
+   "requirement": "ROCm at or above the minimum for the Instinct program (AMD seats).",
+   "threshold": "MI300X: 6.4.2; MI308X: 6.4.2; MI325X: 6.4.2; MI210, MI250, MI300A: 7.0.1",
+   "unit": "version",
+   "evidence_class": "published_claim",
+   "origin": "imported (SemiAnalysis ClusterMAX audit table; underlying vendor bulletins cited in the file)",
+   "sources": [
+    "sessions/public-tail-20260929/lanes/cmax-audit/repo/cmax/scripts/1-audit/minimum-versions.json :: minimum-versions.json generated 2026-08-30T07:24:57Z, maxAgeDays 10, gracePeriodDays 3, schemaVersion 1 (the audit tool policy allows a table 10 days old plus 3 days grace; this copy is 30 days old on 2026-09-29)",
+    "sessions/public-tail-20260929/lanes/cmax-audit/raw/upstream-minimum-versions.json :: upstream master table generated 2026-09-25T04:03:23Z (UTF-16 file); compared component by component with the copy: identical minima for every component except NVHPC",
+    "sessions/public-tail-20260929/lanes/cmax-audit/REPORT.md :: copied checkout is HEAD 97865af, four commits behind fetched master",
+    "sessions/clustermax-cloudreview-20260929/raw/criteria_security.html :: Every component patched to at least the published ClusterMAX minimum version"
+   ],
+   "verified_by": [
+    "audit:securityVersions.* has no ROCm-specific graded id in the 59-check inventory; rocm entry is in the table (programMap)",
+    "rubric:STK-01"
+   ],
+   "anti_pattern_claim_ids": [],
+   "value_status": "set",
+   "note": "The Run 3 A/T0 image was vllm/vllm-openai-rocm:v0.30.0; the host ROCm version on the Hot Aisle seat was not captured in the sources read here (UNKNOWN). The fingerprint probe is the place to capture it."
+  },
+  {
+   "item_id": "O-14j",
+   "section": "5 Operations checklist",
+   "requirement": "Ubuntu noble kernel at or above the fixed package for Fragnesia, Januscape and VMSCAPE.",
+   "threshold": "linux fixed builds: Fragnesia 6.8.0-124.124 (USN-8373-1, CVE-2026-46300); Januscape 6.8.0-137.137 (USN-8630-1, CVE-2026-53359); VMSCAPE 6.8.0-87.88 (USN-7861-1, CVE-2025-40300)",
+   "unit": "version",
+   "evidence_class": "published_claim",
+   "origin": "imported (SemiAnalysis ClusterMAX audit table; underlying vendor bulletins cited in the file)",
+   "sources": [
+    "sessions/public-tail-20260929/lanes/cmax-audit/repo/cmax/scripts/1-audit/minimum-versions.json :: minimum-versions.json generated 2026-08-30T07:24:57Z, maxAgeDays 10, gracePeriodDays 3, schemaVersion 1 (the audit tool policy allows a table 10 days old plus 3 days grace; this copy is 30 days old on 2026-09-29)",
+    "sessions/public-tail-20260929/lanes/cmax-audit/raw/upstream-minimum-versions.json :: upstream master table generated 2026-09-25T04:03:23Z (UTF-16 file); compared component by component with the copy: identical minima for every component except NVHPC",
+    "sessions/public-tail-20260929/lanes/cmax-audit/REPORT.md :: copied checkout is HEAD 97865af, four commits behind fetched master",
+    "sessions/clustermax-cloudreview-20260929/raw/criteria_security.html :: Every component patched to at least the published ClusterMAX minimum version"
+   ],
+   "verified_by": [
+    "audit:security.fragnesia.status",
+    "audit:security.januscape.status",
+    "audit:security.guestKernel.newerInstalled",
+    "catalog:security-vmscape (no graded check)"
+   ],
+   "anti_pattern_claim_ids": [],
+   "value_status": "set",
+   "note": ""
+  },
+  {
+   "item_id": "O-15",
+   "section": "5 Operations checklist",
+   "requirement": "RBAC, user and group management, external IdP/SSO, sudo on the head node, passwordless SSH between nodes.",
+   "threshold": "user add via CLI or console; RBAC on cluster and storage; OIDC/OAuth IdP integration; sudo -n true; ssh node works without a password",
+   "unit": "boolean",
+   "evidence_class": "published_claim",
+   "origin": "imported (SemiAnalysis expectation)",
+   "sources": [
+    "sessions/clustermax-cloudreview-20260929/raw/expectations_slurm.html :: Access",
+    "sessions/clustermax-cloudreview-20260929/raw/expectations_kubernetes.html :: Access, RBAC options with remote SSO",
+    "sessions/clustermax-cloudreview-20260929/raw/criteria_orchestration.html :: RBAC and SSO implementation"
+   ],
+   "verified_by": [
+    "audit:access.sudoAvailable",
+    "audit:access.userManagement",
+    "audit:access.externalIdp.detected",
+    "audit:access.sshToComputeNodes",
+    "catalog:rbac-access (k8s, no graded check)"
+   ],
+   "anti_pattern_claim_ids": [
+    "cmcr-cudocompute-11",
+    "cmcr-crusoe-23",
+    "cmcr-dstacksky-14",
+    "cmcr-hotaisle-09",
+    "cmcr-neysa-06",
+    "cmcr-neysa-07",
+    "cmcr-runpod-09",
+    "cmcr-sesterce-13",
+    "cmcr-tensorwave-09",
+    "cmcr-tensorwave-10",
+    "cmcr-verdadatacrunch-11",
+    "cmcr-vultr-06",
+    "cmcr-buzzhpc-07",
+    "cmcr-primeintellect-08",
+    "cmcr-lambda-22"
+   ],
+   "value_status": "set",
+   "note": ""
+  },
+  {
+   "item_id": "O-16",
+   "section": "5 Operations checklist",
+   "requirement": "Third-party security attestation: SOC 1/SOC 2 Type I or II, or ISO 27001.",
+   "threshold": "at least one published; SemiAnalysis labels its absence a Critical Failure",
+   "unit": "boolean",
+   "evidence_class": "published_claim",
+   "origin": "imported (SemiAnalysis criterion); provider trust pages are provider claims",
+   "sources": [
+    "sessions/clustermax-cloudreview-20260929/raw/criteria_security.html :: Critical Failure: no SOC 2, ISO 27001 or any other bare minimum security attestation",
+    "sessions/clustermax-cloudreview-20260929/claims.all.jsonl :: cmcr-hotaisle-04 (SOC 2 Type I, HIPAA, 2.0 page)",
+    "sessions/clustermax-cloudreview-20260929/providers/hotaisle/trust.html :: Hot Aisle states SOC 2 Type 2 and HIPAA (provider claim, fetched 2026-09-29)"
+   ],
+   "verified_by": [
+    "desk review of trust page (MANUAL Public desk review mode)",
+    "no graded audit check"
+   ],
+   "anti_pattern_claim_ids": [
+    "cmcr-aethir-07",
+    "cmcr-deepinfra-05",
+    "cmcr-farmgpu-06",
+    "cmcr-gpunet-11",
+    "cmcr-hydrahost-02",
+    "cmcr-hyperbolic-08",
+    "cmcr-palebluedot-02",
+    "cmcr-sesterce-19",
+    "cmcr-whitefiber-17",
+    "cmcr-dstacksky-23"
+   ],
+   "value_status": "set",
+   "note": "Provider trust-page statements are published claims until an auditor letter is seen."
+  },
+  {
+   "item_id": "O-17",
+   "section": "5 Operations checklist",
+   "requirement": "Tenant and host isolation: BMC/IPMI restricted, IOMMU passthrough correct, PCIe passthrough boundary, NVLink boundary, InfiniBand PKeys and UFM secured profile, no tenant visibility of other endpoints.",
+   "threshold": "each isolation fact holds or is attested",
+   "unit": "checklist",
+   "evidence_class": "published_claim",
+   "origin": "imported (SemiAnalysis criteria and audit)",
+   "sources": [
+    "sessions/clustermax-cloudreview-20260929/raw/criteria_security.html :: PKeys, SMKey/SAKey, UFM Secured Bare Metal Cloud profile",
+    "sessions/clustermax-cloudreview-20260929/raw/expectations_standalone.html :: Security, \"BMC/IPMI restriction and security validation\""
+   ],
+   "verified_by": [
+    "audit:bmc-ipmi",
+    "audit:pcie-passthrough",
+    "audit:vm_iommu.status",
+    "audit:nvlink-boundary",
+    "audit:ufm-profile",
+    "audit:security.januscape.status",
+    "catalog:ib-tenant-isolation (no graded check)",
+    "rubric:TEN-01"
+   ],
+   "anti_pattern_claim_ids": [
+    "cmcr-fptcloud-10",
+    "cmcr-radiantori-04"
+   ],
+   "value_status": "set",
+   "note": "Several of these need provider attestation because a tenant cannot see the host (audit REPORT: hidden-host limitations)."
+  },
+  {
+   "item_id": "O-18",
+   "section": "5 Operations checklist",
+   "requirement": "Security patch process: proactive notification, NVIDIA embargo program membership, automated rollout of new Container Toolkit on CVE discovery.",
+   "threshold": "process exists; fixes land within hours of a report",
+   "unit": "hours",
+   "evidence_class": "published_claim",
+   "origin": "imported (SemiAnalysis criterion; two review sentences as anchors)",
+   "sources": [
+    "sessions/clustermax-cloudreview-20260929/raw/criteria_security.html :: Part of NVIDIA security program; Automated rollout of new NVIDIA Container Toolkit versions",
+    "sessions/clustermax-cloudreview-20260929/claims.all.jsonl :: cmcr-fluidstack-20 (patched within minutes), cmcr-fluidstack-32 (under an hour) as positive anchors"
+   ],
+   "verified_by": [
+    "audit:securityVersions.* (versions only, not process)"
+   ],
+   "anti_pattern_claim_ids": [
+    "cmcr-cudocompute-12",
+    "cmcr-fluidstack-19",
+    "cmcr-fluidstack-30",
+    "cmcr-fluidstack-31",
+    "cmcr-gmocloud-14",
+    "cmcr-gmocloud-15",
+    "cmcr-voltagepark-26",
+    "cmcr-voltagepark-27",
+    "cmcr-vultr-10",
+    "cmcr-vultr-11"
+   ],
+   "value_status": "set",
+   "note": ""
+  },
+  {
+   "item_id": "O-19",
+   "section": "5 Operations checklist",
+   "requirement": "Profiling access for non-root users: Nsight Compute counters and perf.",
+   "threshold": "NVreg_RestrictProfilingToAdminUsers=0; perf_event_paranoid <= 1 and kptr_restrict = 0",
+   "unit": "sysctl values",
+   "evidence_class": "published_claim",
+   "origin": "imported (SemiAnalysis expectation)",
+   "sources": [
+    "sessions/clustermax-cloudreview-20260929/raw/expectations_slurm.html :: Monitoring and Health Checks",
+    "sessions/clustermax-cloudreview-20260929/raw/expectations_standalone.html :: Monitoring and Health Checks",
+    "sessions/clustermax-cloudreview-20260929/raw/expectations_monitoring.html :: Performance Monitoring"
+   ],
+   "verified_by": [
+    "audit:software.ncu.installed",
+    "audit:software.ncu.profilingEnabled",
+    "audit:software.perf.installed",
+    "audit:software.perf.perfEventParanoid",
+    "audit:software.perf.kptrRestrict"
+   ],
+   "anti_pattern_claim_ids": [
+    "cmcr-coreweave-40",
+    "cmcr-coreweave-41",
+    "cmcr-gmocloud-05",
+    "cmcr-gmocloud-06",
+    "cmcr-gmocloud-07",
+    "cmcr-firmussustainablemetalcloud-07",
+    "cmcr-firmussustainablemetalcloud-08",
+    "cmcr-firmussustainablemetalcloud-09"
+   ],
+   "value_status": "set",
+   "note": "ncu is NVIDIA-only; the AMD profiling analogue is UNKNOWN in these sources."
+  },
+  {
+   "item_id": "O-20",
+   "section": "5 Operations checklist",
+   "requirement": "Status page with a machine-readable incident history API.",
+   "threshold": "reachable status page; history back >= 180 days",
+   "unit": "boolean",
+   "evidence_class": "derived",
+   "origin": "ours (R2 collection)",
+   "sources": [
+    "main/clustermax-challenge/retrospective/results/R2-result.md",
+    "main/clustermax-challenge/retrospective/incidents/SCHEMA.md"
+   ],
+   "verified_by": [
+    "clustermax-challenge/scripts/collect_status.py"
+   ],
+   "anti_pattern_claim_ids": [],
+   "value_status": "set",
+   "note": "See R-01. Hot Aisle: none found."
+  },
+  {
+   "item_id": "O-21",
+   "section": "5 Operations checklist",
+   "requirement": "Honest billing on outages and stuck creates (no charge while unusable).",
+   "threshold": "see R-05",
+   "unit": "policy",
+   "evidence_class": "published_claim",
+   "origin": "imported",
+   "sources": [
+    "sessions/clustermax-cloudreview-20260929/claims.all.jsonl :: see R-05"
+   ],
+   "verified_by": [
+    "counter:step-6",
+    "counter:step-10"
+   ],
+   "anti_pattern_claim_ids": [
+    "cmcr-e2enetworks-11",
+    "cmcr-e2enetworks-13",
+    "cmcr-e2enetworks-15",
+    "cmcr-qubrid-07",
+    "cmcr-verdadatacrunch-16",
+    "cmcr-verdadatacrunch-17",
+    "cmcr-verdadatacrunch-19",
+    "cmcr-voltagepark-21",
+    "cmcr-voltagepark-22"
+   ],
+   "value_status": "set",
+   "note": ""
+  },
+  {
+   "item_id": "O-22",
+   "section": "5 Operations checklist",
+   "requirement": "Underlying provider disclosed (who runs the machine).",
+   "threshold": "datacenter operator named in console or docs",
+   "unit": "boolean",
+   "evidence_class": "published_claim",
+   "origin": "imported (SemiAnalysis)",
+   "sources": [
+    "sessions/clustermax-cloudreview-20260929/claims.all.jsonl :: cmcr-sesterce-19, cmcr-qubrid-13 (ask providers to disclose); IP lookup used by reviewers in cmcr-qubrid-08 and cmcr-vastai-12"
+   ],
+   "verified_by": [
+    "desk review + IP/whois lookup on the delivered seat"
+   ],
+   "anti_pattern_claim_ids": [
+    "cmcr-dstacksky-11",
+    "cmcr-dstacksky-12",
+    "cmcr-dstacksky-13",
+    "cmcr-dstacksky-19",
+    "cmcr-runpod-15",
+    "cmcr-runpod-16",
+    "cmcr-sesterce-07",
+    "cmcr-sesterce-10",
+    "cmcr-sesterce-19",
+    "cmcr-qubrid-08",
+    "cmcr-qubrid-13",
+    "cmcr-vastai-04",
+    "cmcr-vastai-05",
+    "cmcr-vastai-11",
+    "cmcr-vastai-12",
+    "cmcr-vastai-13",
+    "cmcr-mithrilmlfoundry-09",
+    "cmcr-mithrilmlfoundry-10",
+    "cmcr-hyperbolic-09",
+    "cmcr-together-06",
+    "cmcr-shadeform-11"
+   ],
+   "value_status": "set",
+   "note": "The underlying-provider disclosure status of the two reference shops was not checked here (UNKNOWN)."
+  },
+  {
+   "item_id": "O-23",
+   "section": "5 Operations checklist",
+   "requirement": "Support: 24x7 availability and a direct-to-engineer path not routed through sales.",
+   "threshold": "channel exists and first human response time recorded",
+   "unit": "boolean",
+   "evidence_class": "published_claim",
+   "origin": "imported (SemiAnalysis expectation)",
+   "sources": [
+    "sessions/clustermax-cloudreview-20260929/raw/expectations_standalone.html :: General Expectations",
+    "main/hot-aisle/campaign/shop-eval/counter/PROTOCOL.md :: step 9"
+   ],
+   "verified_by": [
+    "counter:step-9 (channel, first_response_time_s, sales_required)"
+   ],
+   "anti_pattern_claim_ids": [
+    "cmcr-cudocompute-16",
+    "cmcr-hotaisle-09",
+    "cmcr-neysa-17",
+    "cmcr-googlecloud-39",
+    "cmcr-amazonwebservices-40"
+   ],
+   "value_status": "set",
+   "note": "first_response_time_s was never measured for Hot Aisle (unobserved)."
+  },
+  {
+   "item_id": "O-24",
+   "section": "5 Operations checklist",
+   "requirement": "Audit logs of resource actions with actor identity, API query, 90-day retention with export, admin-only access at no extra charge.",
+   "threshold": "minimum 90-day retention",
+   "unit": "days",
+   "evidence_class": "published_claim",
+   "origin": "imported (SemiAnalysis criterion)",
+   "sources": [
+    "sessions/clustermax-cloudreview-20260929/raw/criteria_lifecycle.html :: Key Requirements, audit logs"
+   ],
+   "verified_by": [
+    "no audit check, no counter step"
+   ],
+   "anti_pattern_claim_ids": [],
+   "value_status": "set",
+   "note": "No review sentence in the 1,273-row corpus penalizes absence of audit logs. Criterion only."
+  },
+  {
+   "item_id": "O-25",
+   "section": "5 Operations checklist",
+   "requirement": "Egress and storage price transparency; no punitive egress or offboarding fees.",
+   "threshold": "egress and storage rates published",
+   "unit": "boolean",
+   "evidence_class": "published_claim",
+   "origin": "ours (unobserved) and imported (criterion)",
+   "sources": [
+    "sessions/clustermax-cloudreview-20260929/raw/criteria_lifecycle.html :: No punitive data egress / offboarding fees",
+    "sessions/clustermax-cloudreview-20260929/raw/expectations_standalone.html :: External storage and network egress cost transparency",
+    "main/hot-aisle/campaign/shop-eval/counter/records/hotaisle-2026-09.json :: egress_rate, storage_rate unobserved",
+    "main/hot-aisle/campaign/shop-eval/counter/records/digitalocean-2026-09.json"
+   ],
+   "verified_by": [
+    "counter:step-2 (egress_rate, storage_rate)"
+   ],
+   "anti_pattern_claim_ids": [],
+   "value_status": "UNKNOWN",
+   "note": "",
+   "unknown_would_be_established_by": "Read the egress and storage lines on the pricing page and one invoice for each shop."
+  },
+  {
+   "item_id": "O-26",
+   "section": "5 Operations checklist",
+   "requirement": "Current-generation GPU roadmap.",
+   "threshold": "plans or signals to deploy B200, B300 or MI355X by the ClusterMAX 3.0 deadline of Aug 1; absence is a Critical Failure in SemiAnalysis criteria",
+   "unit": "boolean",
+   "evidence_class": "published_claim",
+   "origin": "imported (SemiAnalysis criterion)",
+   "sources": [
+    "sessions/clustermax-cloudreview-20260929/raw/criteria_availability.html :: Critical Failure"
+   ],
+   "verified_by": [
+    "desk review"
+   ],
+   "anti_pattern_claim_ids": [
+    "cmcr-akamailinode-04",
+    "cmcr-hetzner-03",
+    "cmcr-saladcloud-03",
+    "cmcr-ovhcloud-05",
+    "cmcr-alibabacloud-08",
+    "cmcr-hotaisle-14"
+   ],
+   "value_status": "set",
+   "note": "Hot Aisle 2.0 review: MI355X may not come until end of year or early next (cmcr-hotaisle-14). Relevant to fit, not to Run 3 economics."
+  },
+  {
+   "item_id": "O-27",
+   "section": "5 Operations checklist",
+   "requirement": "Fresh tenant state on first login: no previous-tenant files, keys or history.",
+   "threshold": "empty home directories, empty shell history, only your key",
+   "unit": "boolean",
+   "evidence_class": "derived",
+   "origin": "ours (unobserved)",
+   "sources": [
+    "main/hot-aisle/campaign/shop-eval/counter/PROTOCOL.md :: step 7",
+    "main/hot-aisle/campaign/shop-eval/counter/records/hotaisle-2026-09.json :: tenant_hygiene fields unobserved"
+   ],
+   "verified_by": [
+    "counter:step-7"
+   ],
+   "anti_pattern_claim_ids": [],
+   "value_status": "UNKNOWN",
+   "note": "",
+   "unknown_would_be_established_by": "Run counter step 7 immediately after first SSH on each shop."
+  },
+  {
+   "item_id": "O-28",
+   "section": "5 Operations checklist",
+   "requirement": "Default network exposure on first boot.",
+   "threshold": "only SSH open, or documented default-deny firewall",
+   "unit": "ports",
+   "evidence_class": "derived",
+   "origin": "ours (unobserved)",
+   "sources": [
+    "main/hot-aisle/campaign/shop-eval/counter/PROTOCOL.md :: step 8",
+    "main/hot-aisle/campaign/shop-eval/counter/records/hotaisle-2026-09.json :: firewall_default, open_ports_first_boot unobserved"
+   ],
+   "verified_by": [
+    "counter:step-8"
+   ],
+   "anti_pattern_claim_ids": [],
+   "value_status": "UNKNOWN",
+   "note": "",
+   "unknown_would_be_established_by": "Run a first-boot port scan on each shop."
+  },
+  {
+   "item_id": "O-29",
+   "section": "5 Operations checklist",
+   "requirement": "Self-serve termination with billing confirmed stopped.",
+   "threshold": "delete via console/TUI/API; time_to_confirm_s recorded; billing_stopped_confirmed true",
+   "unit": "boolean",
+   "evidence_class": "derived",
+   "origin": "ours",
+   "sources": [
+    "main/hot-aisle/campaign/shop-eval/counter/PROTOCOL.md :: step 10",
+    "main/hot-aisle/campaign/shop-eval/counter/records/hotaisle-2026-09.json :: stop_on_delete_verified=true (balance behaviour)",
+    "main/hot-aisle/campaign/shop-eval/MANUAL.md :: section 6 (never claim billing stopped solely because a VM disappeared)"
+   ],
+   "verified_by": [
+    "counter:step-10",
+    "counter:step-6"
+   ],
+   "anti_pattern_claim_ids": [],
+   "value_status": "set",
+   "note": ""
+  },
+  {
+   "item_id": "O-30",
+   "section": "5 Operations checklist",
+   "requirement": "Hardware fingerprint within kit rules: PCIe link at supported maximum, RAS counters clean, firmware not older than 270 days, no throttle or clock slope over 15%, idle/load power ratio not above 1.5, same-vendor stack versions consistent.",
+   "threshold": "HW-01, HW-02, HW-03, PWR-01, HEALTH-02, STK-01 not WRONG or SIGNAL",
+   "unit": "rule ids",
+   "evidence_class": "derived",
+   "origin": "ours (kit rules; SIGNAL is not a defect)",
+   "sources": [
+    "main/hot-aisle/campaign/shop-eval/diagnose/RUBRIC.md :: HW-01 to HW-03, PWR-01, HEALTH-02, STK-01, TEN-01, TEN-02"
+   ],
+   "verified_by": [
+    "probe/fingerprint.sh",
+    "diagnose/diagnose.py"
+   ],
+   "anti_pattern_claim_ids": [],
+   "value_status": "set",
+   "note": "Snapshot and short-load evidence is diagnostic only, not proof of sustained performance or physical root cause (MANUAL section 3)."
+  },
+  {
+   "item_id": "PB-01",
+   "section": "6 Price band",
+   "requirement": "H100 tie line: the list $/GPU-hour at which a 1x H100 with DigitalOcean's measured delivery ties Hot Aisle's $0.74/1k on Run 3.",
+   "threshold": "$2.72/GPU-h as published (4.41 x 0.74 / 1.20, rounded inputs); $2.734 from unrounded figures (Hot Aisle $0.7434 per 1k, 4,280 accepted, 69.82-minute window)",
+   "unit": "USD per GPU-hour",
+   "evidence_class": "derived",
+   "origin": "ours",
+   "sources": [
+    "main/hot-aisle/data/run3/source/RUN3-RESULTS.md :: What it says, item 2",
+    "main/hot-aisle/campaign/shop-eval/SHORTLIST.md :: The rule, rule 3",
+    "main/hot-aisle/campaign/market/MARKET.md :: Run 3 economics by date"
+   ],
+   "verified_by": [
+    "diagnose PRICE-02",
+    "SHORTLIST rule 3"
+   ],
+   "anti_pattern_claim_ids": [],
+   "value_status": "set",
+   "note": "Tie holds only if the candidate delivers 4,280 accepted per 69.82-minute request-to-release window and Hot Aisle delivers 4,336 per 64.68 minutes. The published $2.72 and the unrounded 2.734 differ by one cent; SHORTLIST calls Massed Compute at $2.73 a one-cent miss, and on unrounded figures it is a tie.",
+   "cost_per_1k_at": [
+    {
+     "rate": 4.41,
+     "usd_per_1k": 1.199
+    },
+    {
+     "rate": 2.99,
+     "usd_per_1k": 0.8129
+    },
+    {
+     "rate": 2.73,
+     "usd_per_1k": 0.7422
+    },
+    {
+     "rate": 2.72,
+     "usd_per_1k": 0.7395
+    },
+    {
+     "rate": 2.49,
+     "usd_per_1k": 0.677
+    },
+    {
+     "rate": 1.99,
+     "usd_per_1k": 0.541
+    }
+   ]
+  },
+  {
+   "item_id": "PB-02",
+   "section": "6 Price band",
+   "requirement": "MI300X tie line: the list $/GPU-hour at which a second MI300X shop delivering Hot Aisle's accepted rate ties $0.74/1k.",
+   "threshold": "$2.99/GPU-h (Hot Aisle's own rate)",
+   "unit": "USD per GPU-hour",
+   "evidence_class": "derived",
+   "origin": "ours",
+   "sources": [
+    "main/hot-aisle/campaign/shop-eval/SHORTLIST.md :: rule 3",
+    "main/hot-aisle/data/run3/source/RUN3-RESULTS.md"
+   ],
+   "verified_by": [
+    "SHORTLIST rule 3",
+    "diagnose PRICE-02"
+   ],
+   "anti_pattern_claim_ids": [],
+   "value_status": "set",
+   "note": "A same-silicon shop answers operator quality, not hardware economics (SHORTLIST). Cost per 1k for an MI300X-equivalent delivery at other rates: $1.99: 0.495, $2.19: 0.545, $2.39: 0.594, $2.59: 0.644, $3.04: 0.756, $3.45: 0.858, $3.99: 0.992.",
+   "cost_per_1k_at": [
+    {
+     "rate": 1.99,
+     "usd_per_1k": 0.4948
+    },
+    {
+     "rate": 2.19,
+     "usd_per_1k": 0.5445
+    },
+    {
+     "rate": 2.39,
+     "usd_per_1k": 0.5942
+    },
+    {
+     "rate": 2.59,
+     "usd_per_1k": 0.644
+    },
+    {
+     "rate": 2.99,
+     "usd_per_1k": 0.7434
+    },
+    {
+     "rate": 3.04,
+     "usd_per_1k": 0.7559
+    },
+    {
+     "rate": 3.45,
+     "usd_per_1k": 0.8578
+    },
+    {
+     "rate": 3.99,
+     "usd_per_1k": 0.9921
+    }
+   ]
+  },
+  {
+   "item_id": "PB-03",
+   "section": "6 Price band",
+   "requirement": "July 2026 per-provider median on-demand $/GPU-hour, MI300X.",
+   "threshold": "median of 7 provider medians = $3.04; digitalocean $1.99, hot_aisle $1.99, runpod $2.19, cyfuture_ai $3.04, crusoe $3.45, oracle $6.0, azure $7.86",
+   "unit": "USD per GPU-hour",
+   "evidence_class": "published_claim",
+   "origin": "imported (OpenComputePrices aggregator listings; not quotes, not measured)",
+   "sources": [
+    "main/hot-aisle/campaign/market/MARKET.md",
+    "main/hot-aisle/campaign/market/market-stats.json :: monthly.2026-07.MI300X",
+    "sessions/public-tail-20260929/lanes/opencomputeprices/REPORT.md"
+   ],
+   "verified_by": [
+    "market/build_price_history.py"
+   ],
+   "anti_pattern_claim_ids": [],
+   "value_status": "set",
+   "note": "Series ends 2026-07-29. Hot Aisle's July median is $1.99 because its 1x/2x/4x VM price moved from $1.99 to $2.99 on 2026-07-27/28; $2.99 is the run price. 3 of 7 providers are at or below $2.99."
+  },
+  {
+   "item_id": "PB-04",
+   "section": "6 Price band",
+   "requirement": "July 2026 per-provider median on-demand $/GPU-hour, H100.",
+   "threshold": "median of 42 provider medians = $2.99; 17 of 42 at or below $2.72; lowest five: gpuai $1.5, gcore $1.64, latitude $1.7925, cudo $1.8528, horizon $1.95; digitalocean $5.95; together $100 (outlier row)",
+   "unit": "USD per GPU-hour",
+   "evidence_class": "published_claim",
+   "origin": "imported (OpenComputePrices; sources disagree)",
+   "sources": [
+    "main/hot-aisle/campaign/market/MARKET.md :: Limits (getdeploying $3.39 vs skypilot $6.74 for DigitalOcean H100)",
+    "main/hot-aisle/campaign/market/market-stats.json :: monthly.2026-07.H100"
+   ],
+   "verified_by": [
+    "market/build_price_history.py"
+   ],
+   "anti_pattern_claim_ids": [],
+   "value_status": "set",
+   "note": "Row-weighted medians are misleading (about $9.0 vs $3.0 provider-median for H100). The full 42-provider table is in floor.json.",
+   "july_2026_provider_medians": {
+    "H100": {
+     "akash": 2.71,
+     "aws": 9.4944,
+     "azure": 12.842,
+     "civo": 2.49,
+     "cloreai": 6.25,
+     "coreweave": 6.155,
+     "crusoe": 3.9,
+     "cudo": 1.8528,
+     "denvr": 2.3,
+     "digitalocean": 5.95,
+     "e2e": 3.77,
+     "fluidstack": 2.99,
+     "gcore": 1.64,
+     "gcp": 4.570091,
+     "gmicloud": 2.0,
+     "gpuai": 1.5,
+     "horizon": 1.95,
+     "hyperstack": 2.5,
+     "imwt": 2.48,
+     "koyeb": 2.5,
+     "lambda": 4.09,
+     "latitude": 1.7925,
+     "lightningai": 4.5,
+     "massedcompute": 5.84,
+     "nebius": 3.85,
+     "novita": 3.39,
+     "oracle": 10.0,
+     "ovh": 2.99,
+     "paperspace": 5.95,
+     "primeintellect": 3.27,
+     "qubrid": 4.71,
+     "runpod": 2.99,
+     "scaleway": 2.52,
+     "sesterce": 2.75,
+     "theta_edgecloud": 2.29,
+     "thundercompute": 11.055000000000001,
+     "together": 100.0,
+     "upcloud": 2.04,
+     "vastai": 2.200148,
+     "verda": 3.31,
+     "voltagepark": 1.99,
+     "vultr": 2.99
+    },
+    "MI300X": {
+     "azure": 7.86,
+     "crusoe": 3.45,
+     "cyfuture_ai": 3.04,
+     "digitalocean": 1.99,
+     "hot_aisle": 1.99,
+     "oracle": 6.0,
+     "runpod": 2.19
+    }
+   }
+  },
+  {
+   "item_id": "PB-05",
+   "section": "6 Price band",
+   "requirement": "\"Above band\" means list price above the tie line for that silicon.",
+   "threshold": "H100: list > $2.72 (published) puts cost per 1,000 accepted above $0.74 at DigitalOcean's measured delivery; MI300X: list > $2.99 puts it above at Hot Aisle's delivery. A PRICE-02 finding requires more than 5% above ($0.78)",
+   "unit": "USD per GPU-hour",
+   "evidence_class": "derived",
+   "origin": "ours",
+   "sources": [
+    "main/hot-aisle/campaign/shop-eval/SHORTLIST.md",
+    "main/hot-aisle/campaign/shop-eval/diagnose/RUBRIC.md :: PRICE-02",
+    "main/hot-aisle/data/run3/source/RUN3-RESULTS.md"
+   ],
+   "verified_by": [
+    "SHORTLIST rule 3",
+    "diagnose PRICE-02"
+   ],
+   "anti_pattern_claim_ids": [],
+   "value_status": "set",
+   "note": "\"Band\" is defined here by the tie lines because no source defines a price band. Market medians ($2.99 H100, $3.04 MI300X, July 2026) are context, not a threshold. Price only moves cost when delivery holds; a shop with worse accepted-per-hour has a lower tie line."
+  },
+  {
+   "item_id": "PB-06",
+   "section": "6 Price band",
+   "requirement": "Dated price sensitivity of the Run 3 comparison.",
+   "threshold": "Hot Aisle at $1.99 (2026-03-22 to 2026-07-26): $0.49 per 1k; at $2.99: $0.74. DigitalOcean H100 at $3.39 (public series): $0.92; at $4.41 as run: $1.20",
+   "unit": "USD per 1,000 accepted",
+   "evidence_class": "derived",
+   "origin": "ours",
+   "sources": [
+    "main/hot-aisle/campaign/market/MARKET.md :: Run 3 economics by date",
+    "main/hot-aisle/campaign/market/RUN3-ECONOMICS-BY-DATE.jsonl"
+   ],
+   "verified_by": [
+    "market/economics_by_date.cjs"
+   ],
+   "anti_pattern_claim_ids": [],
+   "value_status": "set",
+   "note": "At listed public prices Hot Aisle is 46% cheaper at $1.99 and 19% cheaper at $2.99; the as-run 38% used DigitalOcean's $4.41, which is not in the public series."
+  },
+  {
+   "item_id": "E-01",
+   "section": "7 Evidence classes and claim limits",
+   "requirement": "Every figure carries a source path; measurements carry whose measurement and under what conditions.",
+   "threshold": "no bare numbers",
+   "unit": "n/a",
+   "evidence_class": "derived",
+   "origin": "ours",
+   "sources": [
+    "main/hot-aisle/campaign/shop-eval/MANUAL.md :: section 1"
+   ],
+   "verified_by": [
+    "review of this document"
+   ],
+   "anti_pattern_claim_ids": [],
+   "value_status": "set",
+   "note": ""
+  },
+  {
+   "item_id": "E-02",
+   "section": "7 Evidence classes and claim limits",
+   "requirement": "Evidence class labels stay visible: published_claim, operator_report, measured, derived, hypothesis.",
+   "threshold": "a provider page is a published claim until measured; an operator report is self-reported; a ticket acknowledgement is not a resolution; a hash preserves identity, not truth",
+   "unit": "n/a",
+   "evidence_class": "derived",
+   "origin": "ours",
+   "sources": [
+    "main/hot-aisle/campaign/shop-eval/MANUAL.md :: section 1"
+   ],
+   "verified_by": [
+    "report status rules"
+   ],
+   "anti_pattern_claim_ids": [],
+   "value_status": "set",
+   "note": ""
+  },
+  {
+   "item_id": "E-03",
+   "section": "7 Evidence classes and claim limits",
+   "requirement": "A failure row and an unknown row never collapse into one result.",
+   "threshold": "PASS, FAIL, UNKNOWN, N/A with reason",
+   "unit": "n/a",
+   "evidence_class": "derived",
+   "origin": "ours",
+   "sources": [
+    "main/hot-aisle/campaign/shop-eval/MANUAL.md :: section 5",
+    "main/hot-aisle/campaign/shop-eval/diagnose/RUBRIC.md :: statuses WRONG, SIGNAL, RIGHT, UNKNOWN, NOT_COMPARABLE"
+   ],
+   "verified_by": [
+    "report status rules"
+   ],
+   "anti_pattern_claim_ids": [],
+   "value_status": "set",
+   "note": ""
+  },
+  {
+   "item_id": "E-04",
+   "section": "7 Evidence classes and claim limits",
+   "requirement": "Hot Aisle is a dated reference observation, not a universal grade or fleet capability; one allocation does not characterize a fleet.",
+   "threshold": "n/a",
+   "unit": "n/a",
+   "evidence_class": "derived",
+   "origin": "ours",
+   "sources": [
+    "main/hot-aisle/campaign/shop-eval/MANUAL.md :: preamble, section 1, section 4",
+    "main/hot-aisle/campaign/shop-eval/counter/PROTOCOL.md :: preamble"
+   ],
+   "verified_by": [
+    "review of this document"
+   ],
+   "anti_pattern_claim_ids": [],
+   "value_status": "set",
+   "note": ""
+  },
+  {
+   "item_id": "E-05",
+   "section": "7 Evidence classes and claim limits",
+   "requirement": "Cost bases stay separate (steady-state, modeled allocation, invoice, customer total); never average windows; provider operator economics stay unknown.",
+   "threshold": "n/a",
+   "unit": "n/a",
+   "evidence_class": "derived",
+   "origin": "ours",
+   "sources": [
+    "main/hot-aisle/campaign/shop-eval/MANUAL.md :: section 4"
+   ],
+   "verified_by": [
+    "review of this document"
+   ],
+   "anti_pattern_claim_ids": [],
+   "value_status": "set",
+   "note": ""
+  },
+  {
+   "item_id": "E-06",
+   "section": "7 Evidence classes and claim limits",
+   "requirement": "The counter checklist score is uncalibrated and cannot rank providers; missing observations are not evidence a shop meets the floor.",
+   "threshold": "n/a",
+   "unit": "n/a",
+   "evidence_class": "derived",
+   "origin": "ours",
+   "sources": [
+    "main/hot-aisle/campaign/shop-eval/counter/PROTOCOL.md :: preamble"
+   ],
+   "verified_by": [
+    "review of this document"
+   ],
+   "anti_pattern_claim_ids": [],
+   "value_status": "set",
+   "note": ""
+  }
+ ],
+ "unknown_register": [
+  {
+   "item_id": "A-03",
+   "requirement": "Time from the first sign-up screen to the first create attempt (signup_to_active_account_s).",
+   "would_be_established_by": "Run counter step 1 with a fresh email on at least the shortlisted shops and set the bound from the measured distribution. No source sets a signup-to-seat bound; the review corpus supplies only the anti-pattern (over a month at GMI, a 3-month wait at Mithril)."
+  },
+  {
+   "item_id": "P-10",
+   "requirement": "Peak sustainable accepted rate at the latency gates on a seat.",
+   "would_be_established_by": "Run the PREREG calibration on each arm: continuous backlog, at most 256 outstanding requests, up to five minutes after readiness; capacity C is valid only if throughput was stable. Run 3 offered 8,622 requests in 3,600 s (2.395 req/s average, peak 531 arrivals in one minute) with 0 transport failures on A/T0 and N/T0, so capacity is above that but unmeasured."
+  },
+  {
+   "item_id": "T-07",
+   "requirement": "p99 TTFT ceiling for burst traffic.",
+   "would_be_established_by": "Register a p99 TTFT gate before the next arm from the intended customer SLO, then freeze it with the other gates. No source sets one."
+  },
+  {
+   "item_id": "R-06",
+   "requirement": "Numeric SLA floor (monthly uptime percentage and credit schedule).",
+   "would_be_established_by": "No source states a minimum. Establish from the intended buyer's outage cost: a floor needs the buyer's own downtime cost per hour and the shop's credit schedule, neither of which the estate has."
+  },
+  {
+   "item_id": "R-07",
+   "requirement": "Recovery: detection, acknowledgement, repair, readiness, resumed useful work, rework, operator minutes after a controlled failure of a disposable job.",
+   "would_be_established_by": "Run the section 5 drill on a disposable supervised process on each shortlisted shop, and record every timestamp named there. Fleet MTBF cannot be measured from one seat; it needs an agreed fleet sample from the operator (Cooperative host mode)."
+  },
+  {
+   "item_id": "O-25",
+   "requirement": "Egress and storage price transparency; no punitive egress or offboarding fees.",
+   "would_be_established_by": "Read the egress and storage lines on the pricing page and one invoice for each shop."
+  },
+  {
+   "item_id": "O-27",
+   "requirement": "Fresh tenant state on first login: no previous-tenant files, keys or history.",
+   "would_be_established_by": "Run counter step 7 immediately after first SSH on each shop."
+  },
+  {
+   "item_id": "O-28",
+   "requirement": "Default network exposure on first boot.",
+   "would_be_established_by": "Run a first-boot port scan on each shop."
+  }
+ ]
+}

@@ -1,0 +1,750 @@
+{
+  "schema": "circulate/receipt@1",
+  "date": "2026-09-29",
+  "mode": "online",
+  "complete": true,
+  "overall": "OK",
+  "started_utc": "2026-09-29T23:21:04Z",
+  "finished_utc": "2026-09-29T23:39:25Z",
+  "seconds": 1079.1,
+  "host": {
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.13.15",
+    "node": "24.19.0",
+    "gh": "gh version 2.97.0 (2026-07-31)"
+  },
+  "git": {
+    "head": "6d818de74ea7"
+  },
+  "driver": {
+    "path": "circulate/circulate.py",
+    "sha256": "95e85525f6b1db533d5e0e684e507bd18386e20d3ff9965c237aeb022af45719"
+  },
+  "stages": [
+    {
+      "name": "inferencex",
+      "status": "OK",
+      "started_utc": "2026-09-29T23:21:04Z",
+      "finished_utc": "2026-09-29T23:21:18Z",
+      "seconds": 14.07,
+      "counts": {
+        "index_before": 4161,
+        "listing_pages": 2,
+        "new_artifacts_found": 7,
+        "downloaded": 7,
+        "imported": 7,
+        "empty": 3,
+        "refused": 0,
+        "source_rows": 28,
+        "metric_observations": 526,
+        "capped_at": null
+      },
+      "sources": [
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts?name=results_bmk&per_page=100&page=1",
+          "sha256": "5639ffceab4f54ce18fa966a2672fb02b1e9eb1fab06eb3c11cf2f89e2a060a5",
+          "retrieved_utc": "2026-09-29T23:21:08Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts?name=results_bmk&per_page=100&page=2",
+          "sha256": "795442f36f39e07f5464965758337e22fb8c7ff7907d890d7e7a75230c70b44c",
+          "retrieved_utc": "2026-09-29T23:21:13Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11060712265",
+          "sha256": "2ea846c7487039911344fae4c0e0f647842e956faf7c8e23c143ed4bf76a58d9",
+          "retrieved_utc": "2026-09-29T23:21:13Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11062338904",
+          "sha256": "d77aa8f7337ef144aa01fbfec4ad4bd57ced0754fc38314c8bb6a8d93289e1a8",
+          "retrieved_utc": "2026-09-29T23:21:14Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11063357076",
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "retrieved_utc": "2026-09-29T23:21:15Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11063913292",
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "retrieved_utc": "2026-09-29T23:21:16Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11064176575",
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "retrieved_utc": "2026-09-29T23:21:16Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11066195487",
+          "sha256": "8f4a053a78207a4e68b6cc2fc5848ed62f7e209bb0746534ba9ee5c2ee811c9e",
+          "retrieved_utc": "2026-09-29T23:21:17Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11066957525",
+          "sha256": "9d47e6ea58463a3b32c4f581248f6ef438e4f43574be7eb523ab10c853e2a473",
+          "retrieved_utc": "2026-09-29T23:21:18Z"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "hot-aisle/campaign/backfill/imported/daily/2026-09-29.jsonl.gz",
+          "sha256": "a978efa4882f74783fc4b05737889b2237777d0d093f171816a87c89699c8065",
+          "bytes": 78788,
+          "committed": true
+        },
+        {
+          "path": "hot-aisle/campaign/backfill/imported/history-index.json",
+          "sha256": "04a00905136dfe525bd337917ccc7902c28ec419348db8ef23abeca940c50fff",
+          "bytes": 2034071,
+          "committed": true
+        },
+        {
+          "path": "hot-aisle/campaign/backfill/IMPORT-SUMMARY.md",
+          "sha256": "efeee7dc0eebec2af932f0108cf090041a83e4182e9faa15c1aed56f9991a921",
+          "bytes": 19646,
+          "committed": true
+        }
+      ],
+      "notes": "7 artifacts imported (28 source rows, 526 metric observations, 3 empty), 0 refused.",
+      "error": null,
+      "log": "logs/inferencex.log"
+    },
+    {
+      "name": "prices",
+      "status": "OK",
+      "started_utc": "2026-09-29T23:21:18Z",
+      "finished_utc": "2026-09-29T23:21:18Z",
+      "seconds": 0.29,
+      "counts": {
+        "assets": 8,
+        "days_before": 2201
+      },
+      "sources": [
+        {
+          "url": "https://api.github.com/repos/thatkavish/OpenComputePrices/releases/tags/latest-data",
+          "sha256": "56b5f72cae0ae4d701277d5a46ef4106b7b02c8dbf23819717cea21f0e231b75",
+          "retrieved_utc": "2026-09-29T23:21:18Z"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "hot-aisle/data/price-history/INDEX.json",
+          "sha256": "86f7b9aa5a0a187438b13f06521712571032b0e25c9ac9db3401416ca1a5c0e5",
+          "bytes": 364586,
+          "committed": true
+        }
+      ],
+      "notes": "baseline asset digests recorded; release unchanged since the INDEX build (GPU Pricing Data \u2014 2026-07-29 14:36 UTC).",
+      "error": null,
+      "log": "logs/prices.log"
+    },
+    {
+      "name": "status",
+      "status": "OK",
+      "started_utc": "2026-09-29T23:21:18Z",
+      "finished_utc": "2026-09-29T23:33:19Z",
+      "seconds": 721.13,
+      "counts": {
+        "providers_in_file": 63,
+        "collected": 23,
+        "hold": 0,
+        "unsupported": 0,
+        "failed": 0,
+        "no_collector": 40,
+        "incidents": 1542
+      },
+      "sources": [
+        {
+          "url": "https://status.nebius.com",
+          "sha256": "690bb3a5cc3aac02a7d072440b7bccb548c77ca34029cf995e81c8e8359c76dd",
+          "retrieved_utc": "2026-09-29T23:21:54Z",
+          "pages": 70
+        },
+        {
+          "url": "https://status.crusoecloud.com",
+          "sha256": "cf827862fb28bd2b7ca1f6ec06b8e2c06c245debe927c59ad75f104b072c031f",
+          "retrieved_utc": "2026-09-29T23:22:31Z",
+          "pages": 75
+        },
+        {
+          "url": "https://status.fluidstack.io",
+          "sha256": "5bc1647d391b9201cb9c71caa651429347a63b17ec83b496b698998ddfdd777c",
+          "retrieved_utc": "2026-09-29T23:22:35Z",
+          "pages": 3
+        },
+        {
+          "url": "https://status.together.ai",
+          "sha256": "a63bdbf812dfb137020947b4787bc1020193822fb8f4d3759ea4cc1c3b395980",
+          "retrieved_utc": "2026-09-29T23:22:38Z",
+          "pages": 3
+        },
+        {
+          "url": "https://status.lambda.ai",
+          "sha256": "62301cd1d69843762f51daec0a9834b88a603761eb0eb7fc717c6bfcc7b6def0",
+          "retrieved_utc": "2026-09-29T23:22:40Z",
+          "pages": 1
+        },
+        {
+          "url": "https://status.scaleway.com",
+          "sha256": "52cdac51f465d4c3b893b0c597aa2eeb7d315e445be93259be7290368177ef2a",
+          "retrieved_utc": "2026-09-29T23:27:00Z",
+          "pages": 504
+        },
+        {
+          "url": "https://status.cirrascale.com",
+          "sha256": "5a6bbb057b38f76e6366a702c29e054f1250dfdd7ae43ea86cfccf9d024d6ad1",
+          "retrieved_utc": "2026-09-29T23:27:53Z",
+          "pages": 105
+        },
+        {
+          "url": "https://status.gcore.com",
+          "sha256": "b4854714b2aeb944d8d74e1b03d3e6bd813fa10fced393ff80bf8ada81340af0",
+          "retrieved_utc": "2026-09-29T23:28:04Z",
+          "pages": 23
+        },
+        {
+          "url": "https://status.hyperstack.cloud",
+          "sha256": "d82b9e4035a78f95d5ba290ea17871cbeee704e15e6e82a7861475fac4cf9890",
+          "retrieved_utc": "2026-09-29T23:28:36Z",
+          "pages": 63
+        },
+        {
+          "url": "https://uptime.runpod.io",
+          "sha256": "cdeda551943d8ec92aa02d558a538c5af3f2b8efeafee6550ea402dbb0074e31",
+          "retrieved_utc": "2026-09-29T23:29:37Z",
+          "pages": 54
+        },
+        {
+          "url": "https://atlascloud.instatus.com",
+          "sha256": "855be0dfdc223d44dee0b1e03c0e81e67af85ef3bb89b1579339055a83a26105",
+          "retrieved_utc": "2026-09-29T23:29:41Z",
+          "pages": 9
+        },
+        {
+          "url": "https://status.primeintellect.ai",
+          "sha256": "3982f926e8d03393ba9c9d50c7f68d9be0b712427a2cad9ce389290b29df3b1b",
+          "retrieved_utc": "2026-09-29T23:29:56Z",
+          "pages": 13
+        },
+        {
+          "url": "https://status.cudocompute.com",
+          "sha256": "8aa21f9e67f35c434970b3ec8b3dcc7289e9f7f5c4c16bb42b8331bb04ae0be6",
+          "retrieved_utc": "2026-09-29T23:29:59Z",
+          "pages": 3
+        },
+        {
+          "url": "https://status.latitude.sh",
+          "sha256": "0d297d8ef273f48e80a3cd7eb242036870ed8e79c631f6300dd6ab7e956fbe25",
+          "retrieved_utc": "2026-09-29T23:30:35Z",
+          "pages": 51
+        },
+        {
+          "url": "https://status.lightning.ai",
+          "sha256": "7f1ad53bd7186486761588b5b412ce4f202107653edf401db6ddbb2a33c9c3e5",
+          "retrieved_utc": "2026-09-29T23:30:42Z",
+          "pages": 14
+        },
+        {
+          "url": "https://status.verda.com",
+          "sha256": "6c85e66fb04ee203e6b61e7fd9edda1a9df984adb9e405a996c7023e7ee6e74e",
+          "retrieved_utc": "2026-09-29T23:31:02Z",
+          "pages": 17
+        },
+        {
+          "url": "https://status.digitalocean.com",
+          "sha256": "009ea1b62d4ba4f10bb00a07cd6458380fcb9221d7c32d861beb2d0be2ba696c",
+          "retrieved_utc": "2026-09-29T23:32:03Z",
+          "pages": 123
+        },
+        {
+          "url": "https://sharonai.statuspage.io",
+          "sha256": "db5f4949bc5cbe5ab0516f1cae1e7b400970477879a927b2033bf1289d2dcaf0",
+          "retrieved_utc": "2026-09-29T23:32:20Z",
+          "pages": 35
+        },
+        {
+          "url": "https://status.hydrahost.com",
+          "sha256": "494888e8ae7b7fbf125b78400e26b81a7766f741b3b656062b9b3c35b36cd5ed",
+          "retrieved_utc": "2026-09-29T23:32:24Z",
+          "pages": 3
+        },
+        {
+          "url": "https://status.gpu.net",
+          "sha256": "30a633c8d48b3a643417560ea338f709ca20d25da97ca01571b3322388c025ae",
+          "retrieved_utc": "2026-09-29T23:32:27Z",
+          "pages": 3
+        },
+        {
+          "url": "https://www.akamaistatus.com",
+          "sha256": "227915fe9cddc335c2dcfadec67998790e750425794603cd2a379db76a6c9009",
+          "retrieved_utc": "2026-09-29T23:33:12Z",
+          "pages": 90
+        },
+        {
+          "url": "https://status.mithril.ai",
+          "sha256": "becafdb492c990bf278f143cb3da4990f46cb2def04a70d6de54b23bbab9231e",
+          "retrieved_utc": "2026-09-29T23:33:15Z",
+          "pages": 7
+        },
+        {
+          "url": "https://status.radiant.co",
+          "sha256": "6227661259698be3fcf76f485046eed37eebc81231907a0b33d6f588b05e719d",
+          "retrieved_utc": "2026-09-29T23:33:19Z",
+          "pages": 4
+        }
+      ],
+      "outputs": [
+        {
+          "path": "clustermax-challenge/retrospective/incidents/nebius-standing.json",
+          "sha256": "cf3e4b3b30a7206a52fafa3b780491e4c40b4de1c9da1e9480308b5f9303715e",
+          "bytes": 41970,
+          "committed": true
+        },
+        {
+          "path": "clustermax-challenge/retrospective/incidents/crusoe-r2-standing.json",
+          "sha256": "5c6602b381f59a7474b811afd2a807e736a3b1de3bf3f05bc0bc489ed4c06e2d",
+          "bytes": 46355,
+          "committed": true
+        },
+        {
+          "path": "clustermax-challenge/retrospective/incidents/fluidstack-standing.json",
+          "sha256": "0bfeeaad2d846f4d5a0bb8839a3ac36b011ff217eb54764a3f06310b3f882439",
+          "bytes": 1808,
+          "committed": true
+        },
+        {
+          "path": "clustermax-challenge/retrospective/incidents/together-ai-standing.json",
+          "sha256": "4e7c9c312f8cc3d6c9368bb34ad5dffe974377e4d1aceb582ec71dc8d6e6486d",
+          "bytes": 1804,
+          "committed": true
+        },
+        {
+          "path": "clustermax-challenge/retrospective/incidents/lambda-standing.json",
+          "sha256": "b3fe6f82919a446e97ae951c461b087f40cb477887c92385d28f3dbbe1419026",
+          "bytes": 10920,
+          "committed": true
+        },
+        {
+          "path": "clustermax-challenge/retrospective/incidents/scaleway-standing.json",
+          "sha256": "89c857e88a0055c75e117963cd9592bd86b3ddde29b3c330bb771b19cd2c290a",
+          "bytes": 317009,
+          "committed": true
+        },
+        {
+          "path": "clustermax-challenge/retrospective/incidents/cirrascale-standing.json",
+          "sha256": "c1e2cbb308f79629d1e175b8b30dbcfc219bc297743b25fb8ad318dc9e5d7b03",
+          "bytes": 72877,
+          "committed": true
+        },
+        {
+          "path": "clustermax-challenge/retrospective/incidents/gcore-standing.json",
+          "sha256": "dd3325a51d7d0b1c491a8ba40c9e32c6bf869d3c712d98c3e73775d4f0a864ce",
+          "bytes": 114988,
+          "committed": true
+        },
+        {
+          "path": "clustermax-challenge/retrospective/incidents/hyperstack-standing.json",
+          "sha256": "35f2952feb31f1ec49718f487ae62a5eee7879271318581de619e587a21ecd66",
+          "bytes": 37768,
+          "committed": true
+        },
+        {
+          "path": "clustermax-challenge/retrospective/incidents/runpod-standing.json",
+          "sha256": "6facf2e7297fecd42101fe462006859edb11dbe54c111d97a897dffafdd426e2",
+          "bytes": 31710,
+          "committed": true
+        },
+        {
+          "path": "clustermax-challenge/retrospective/incidents/atlas-cloud-standing.json",
+          "sha256": "b8165d0187149c3eed0de350fdc1a44e5f40546153dfbc0d46bf3f16d1f5d7b9",
+          "bytes": 18384,
+          "committed": true
+        },
+        {
+          "path": "clustermax-challenge/retrospective/incidents/prime-intellect-standing.json",
+          "sha256": "ce6db610a38c058a601e4de708ad5fb45676739460cfa81bef2a0b2c08ae7f28",
+          "bytes": 8124,
+          "committed": true
+        },
+        {
+          "path": "clustermax-challenge/retrospective/incidents/cudo-compute-standing.json",
+          "sha256": "e82fb2c4444e81150f6ea31f950f2b7ca33b28dc12276b6963a372c872789928",
+          "bytes": 1824,
+          "committed": true
+        },
+        {
+          "path": "clustermax-challenge/retrospective/incidents/latitude-sh-standing.json",
+          "sha256": "ab8ab147190c12400256a39175f3fa376762beb309b53cb612afa98c9e2db071",
+          "bytes": 30767,
+          "committed": true
+        },
+        {
+          "path": "clustermax-challenge/retrospective/incidents/lightning-ai-standing.json",
+          "sha256": "9fd7a62e858968277e698ce26c7b80ab661e0bcfac83ca63a7e9a76f528898cf",
+          "bytes": 7900,
+          "committed": true
+        },
+        {
+          "path": "clustermax-challenge/retrospective/incidents/verda-standing.json",
+          "sha256": "6e175fe5dac4281e6a8020090a2e07c0bea5d1e1a1506fb76c3ca7df027109fd",
+          "bytes": 10323,
+          "committed": true
+        },
+        {
+          "path": "clustermax-challenge/retrospective/incidents/digitalocean-standing.json",
+          "sha256": "0cc06ff5cc933ceb5451478d9fce7f9a11b793602db76d0eabc61941745cf089",
+          "bytes": 74565,
+          "committed": true
+        },
+        {
+          "path": "clustermax-challenge/retrospective/incidents/sharon-ai-standing.json",
+          "sha256": "46fb1afca195af7fe20e140b0be71de67b6a59b13cdaed05aee6d599b50a1a0d",
+          "bytes": 20830,
+          "committed": true
+        },
+        {
+          "path": "clustermax-challenge/retrospective/incidents/hydra-standing.json",
+          "sha256": "a66cfd9392fe67c1c34b64aa49eb1983f5bcf40e117c34050a34439ded399c57",
+          "bytes": 1788,
+          "committed": true
+        },
+        {
+          "path": "clustermax-challenge/retrospective/incidents/gpu-net-standing.json",
+          "sha256": "17492e0e35427d26c11bc85deacb2ac018142a5804ec09ae254c5934f44e626c",
+          "bytes": 1772,
+          "committed": true
+        },
+        {
+          "path": "clustermax-challenge/retrospective/incidents/akamai-standing.json",
+          "sha256": "9cd614df13939fb3e4e436e5d0e844af554982a980ed0653f0fcc24ba77501d9",
+          "bytes": 53812,
+          "committed": true
+        },
+        {
+          "path": "clustermax-challenge/retrospective/incidents/mithril-standing.json",
+          "sha256": "28e61e0b0756904803f8dbdcaf66a64a31ed011a6fc8f9211771113b5c85c0c9",
+          "bytes": 6806,
+          "committed": true
+        },
+        {
+          "path": "clustermax-challenge/retrospective/incidents/radiant-standing.json",
+          "sha256": "af1bd934d16addf62f3bf55ece7eb54b77a0b0637d43c2aeeff7368c02ed4501",
+          "bytes": 5039,
+          "committed": true
+        },
+        {
+          "path": "clustermax-challenge/retrospective/incidents/COLLECTION-LOG-standing.md",
+          "sha256": "ed5d6c4f3793cab0427ceeaccf24b8bf58ed50956167d157569c4dd041cc9991",
+          "bytes": 6928,
+          "committed": true
+        }
+      ],
+      "notes": "23 providers collected (1542 incident records); 0 unreachable (HOLD), 0 unsupported, 40 without a collector.",
+      "error": null,
+      "log": "logs/status.log"
+    },
+    {
+      "name": "economics",
+      "status": "OK",
+      "started_utc": "2026-09-29T23:33:19Z",
+      "finished_utc": "2026-09-29T23:33:20Z",
+      "seconds": 0.85,
+      "counts": {
+        "index_days": 120,
+        "days_with_verified_files": 120,
+        "committed_rows": 121,
+        "rows_computed": 121,
+        "dated_priced": 120
+      },
+      "sources": [],
+      "outputs": [
+        {
+          "path": "hot-aisle/campaign/market/MARKET.md",
+          "sha256": "a746d8694b654d3712c02e12d0f192e60c41c5ee55418f91279aeea867325688",
+          "bytes": 5290,
+          "committed": true
+        }
+      ],
+      "notes": "recomputed 121 rows through the page engine; byte-identical to the committed file.",
+      "error": null,
+      "log": "logs/economics.log"
+    },
+    {
+      "name": "delta",
+      "status": "OK",
+      "started_utc": "2026-09-29T23:33:20Z",
+      "finished_utc": "2026-09-29T23:34:39Z",
+      "seconds": 78.86,
+      "counts": {
+        "inputs": 3,
+        "observations": 293698,
+        "source_rows": 18040,
+        "chunks": 20,
+        "measured_cells": 45,
+        "comparable_observations": 0,
+        "gaps": 0,
+        "ranked": 293698
+      },
+      "sources": [
+        {
+          "url": "D:/Projects/Organs/AXM/axm-tools/sessions/public-tail-20260929/lanes/inferencex-history/imported-main/inferencex-2026-09-29.jsonl",
+          "sha256": "1eab076241673432f84802d83597161aeb31420c95a87b49ae4b64accf69bf2f",
+          "retrieved_utc": null
+        },
+        {
+          "url": "hot-aisle/campaign/backfill/imported/mlperf-2026-09-29.jsonl",
+          "sha256": "a68c9e81ade4ea1857fda5b9877c59aa5ba12ced1a426029eda16e23cf326e4a",
+          "retrieved_utc": null
+        },
+        {
+          "url": "hot-aisle/campaign/backfill/imported/daily/2026-09-29.jsonl.gz",
+          "sha256": "a978efa4882f74783fc4b05737889b2237777d0d093f171816a87c89699c8065",
+          "retrieved_utc": null
+        }
+      ],
+      "outputs": [
+        {
+          "path": "circulate/retained/delta/delta-standing.json.gz",
+          "sha256": "dc44c6a053ac86948f515bc3fa50066527019289064b6b03e0db7855ba57ba55",
+          "bytes": 52983764,
+          "committed": false
+        },
+        {
+          "path": "hot-aisle/campaign/backfill/DELTA-standing.md",
+          "sha256": "1dbc52158aacb581dc77a55306d3e15c90106479bb654e38aac01d858c2c660a",
+          "bytes": 24459,
+          "committed": true
+        }
+      ],
+      "notes": "293698 observations vs 45 measured cells: 0 comparable, 293698 ranked.",
+      "error": null,
+      "log": "logs/delta.log"
+    },
+    {
+      "name": "r2-standing",
+      "status": "OK",
+      "started_utc": "2026-09-29T23:34:40Z",
+      "finished_utc": "2026-09-29T23:36:13Z",
+      "seconds": 93.3,
+      "counts": {
+        "window_start": "2026-04-02",
+        "window_end": "2026-09-29",
+        "included_primary": 16,
+        "included_secondary": 22,
+        "reading": "inconclusive",
+        "seed": 20260929,
+        "spearman_rho": 0.41480895520125544
+      },
+      "sources": [],
+      "outputs": [
+        {
+          "path": "clustermax-challenge/retrospective/results/R2-standing-2026-09-29.json",
+          "sha256": "45dcdbe8f95dd244aa5f4601a91926906504d1baaf2e74e6bced1d75361aaac7",
+          "bytes": 70590,
+          "committed": true
+        },
+        {
+          "path": "clustermax-challenge/retrospective/results/R2-standing-2026-09-29.md",
+          "sha256": "1ec9b94ce55b39bf174e82497269d26118650a77c1108e955d05d6759366315b",
+          "bytes": 39160,
+          "committed": true
+        }
+      ],
+      "notes": "STANDING: window 2026-04-02..2026-09-29, 16 providers, Spearman rho 0.41480895520125544 on major_or_critical_incident_count, bootstrap 95% interval [-0.05983845468247857, 0.7685678408488934], permutation p 0.113; reading inconclusive.",
+      "error": null,
+      "log": "logs/r2-standing.log"
+    },
+    {
+      "name": "newsletter",
+      "status": "SKIP",
+      "started_utc": "2026-09-29T23:36:13Z",
+      "finished_utc": "2026-09-29T23:36:13Z",
+      "seconds": 0.16,
+      "counts": {
+        "sitemap_posts": 343,
+        "known": 343,
+        "new_found": 0,
+        "fetched": 0,
+        "appended": 0,
+        "paywalled": 0,
+        "no_body": 0,
+        "failed": 0,
+        "capped_at": null
+      },
+      "sources": [
+        {
+          "url": "https://newsletter.semianalysis.com/sitemap.xml",
+          "sha256": "b20950794d12b73a0fdb4c0ef201b30b00363223643fbebc1428e1f2ea020f41",
+          "retrieved_utc": "2026-09-29T23:36:13Z"
+        }
+      ],
+      "outputs": [],
+      "notes": "no post in the sitemap (343) is missing from the packet or the standing rows (343 known).",
+      "error": null,
+      "log": "logs/newsletter.log"
+    },
+    {
+      "name": "packet",
+      "status": "SKIP",
+      "started_utc": "2026-09-29T23:39:25Z",
+      "finished_utc": "2026-09-29T23:39:25Z",
+      "seconds": 0.31,
+      "counts": {
+        "base_rebuild_identical": true,
+        "base_rebuild_matches_build_notes": true,
+        "standing_rows": 0
+      },
+      "sources": [],
+      "outputs": [],
+      "notes": "no standing newsletter rows; the committed packet stands (rebuilt from the lane inputs: identical=True).",
+      "error": null,
+      "log": "logs/packet.log"
+    },
+    {
+      "name": "frontdoor",
+      "status": "SKIP",
+      "started_utc": "2026-09-29T23:36:14Z",
+      "finished_utc": "2026-09-29T23:36:14Z",
+      "seconds": 0.25,
+      "counts": {
+        "market_embed_in_sync": true,
+        "record_embed_in_sync": true,
+        "record_verified": true,
+        "record_sha256": "57e21870e378259d",
+        "kit": "kit matches source: 42 files, 1864073 bytes"
+      },
+      "sources": [],
+      "outputs": [],
+      "notes": "nothing to rebuild: embeds equal data/market.json and data/run3/record.json, Run 3 record verified, kit matches source.",
+      "error": null,
+      "log": "logs/frontdoor.log"
+    },
+    {
+      "name": "tests",
+      "status": "OK",
+      "started_utc": "2026-09-29T23:36:14Z",
+      "finished_utc": "2026-09-29T23:39:04Z",
+      "seconds": 169.9,
+      "counts": {
+        "suites": 7,
+        "passed": 7,
+        "failed": 0,
+        "skipped": 0,
+        "detail": [
+          {
+            "suite": "hot-aisle runner (node --test)",
+            "status": "pass",
+            "exit": 0,
+            "seconds": 4.2,
+            "last_line": "\u2139 duration_ms 4130.7493"
+          },
+          {
+            "suite": "hot-aisle workbench engine",
+            "status": "pass",
+            "exit": 0,
+            "seconds": 0.1,
+            "last_line": "{\"tests\":80,\"failed\":false,\"scope\":\"Software qualification with synthetic fixtures; no GPU performance measurement.\"}"
+          },
+          {
+            "suite": "backfill importer --self-test",
+            "status": "pass",
+            "exit": 0,
+            "seconds": 0.4,
+            "last_line": "OK"
+          },
+          {
+            "suite": "clustermax engine parity (node)",
+            "status": "pass",
+            "exit": 0,
+            "seconds": 3.3,
+            "last_line": "}"
+          },
+          {
+            "suite": "clustermax-challenge unittest (all)",
+            "status": "pass",
+            "exit": 0,
+            "seconds": 28.9,
+            "last_line": "OK"
+          },
+          {
+            "suite": "integration pytest",
+            "status": "pass",
+            "exit": 0,
+            "seconds": 59.5,
+            "last_line": "79 passed, 20 subtests passed in 59.11s"
+          },
+          {
+            "suite": "validate_packet on the committed packet",
+            "status": "pass",
+            "exit": 0,
+            "seconds": 73.6,
+            "last_line": "PASS PUBLIC-TAIL-2026-09-29.research-packet.json (3707009 bytes, envelope sha256 3904ccb34ed263f309f2153d68902dee305d556630f93b7b967c9070d5fdc70d)"
+          }
+        ]
+      },
+      "sources": [],
+      "outputs": [],
+      "notes": "7 suites passed.",
+      "error": null,
+      "log": "logs/tests.log"
+    }
+  ],
+  "frozen": {
+    "checked": 8,
+    "pin_created": false,
+    "moved": [],
+    "sha256": {
+      "clustermax-challenge/retrospective/plan-R2.json": "5efa99728e6cce2fc462f1073e446e5bdfdccec16508145509d2182402f55ab7",
+      "clustermax-challenge/retrospective/PLAN-R2.md": "a8c93b65041ca8144a21cf4890d2f2724b58a9d91df260e364ec2d3ffc163bdd",
+      "clustermax-challenge/retrospective/plan.json": "2ffe38d650bd7ef5fe1512b3e3f85b89d237a5b07101da9c212556925011b950",
+      "clustermax-challenge/retrospective/results/R2-result.json": "e7cfd62fce4200a1579a999e56f1e63995008ab053007a93386ef0ab19027cfb",
+      "clustermax-challenge/retrospective/results/R2-result.md": "e3c257f437fc73d2f99e90b8fc7b85192107f835d02834a03e2f9f23f583569c",
+      "clustermax-challenge/retrospective/results/R1-result.html": "2091b66014ac3c577d0eddca191cfb515fffa95cb1ba57f692315313aa03d1d3",
+      "clustermax-challenge/retrospective/results/R1-result.json": "f0c311af44f45ef83b9d828f93df8e077a8d1437e54b181e92ca693911101abb",
+      "clustermax-challenge/retrospective/results/R1-result.md": "0c544497424fa519658052a99a6d99bd53f3c1148ea80cf35e9b2f273700e465"
+    }
+  },
+  "probes": {
+    "overall": "PASS",
+    "counts": {
+      "PASS": 11
+    }
+  },
+  "committed_paths": [
+    "clustermax-challenge/retrospective/incidents/COLLECTION-LOG-standing.md",
+    "clustermax-challenge/retrospective/incidents/akamai-standing.json",
+    "clustermax-challenge/retrospective/incidents/atlas-cloud-standing.json",
+    "clustermax-challenge/retrospective/incidents/cirrascale-standing.json",
+    "clustermax-challenge/retrospective/incidents/crusoe-r2-standing.json",
+    "clustermax-challenge/retrospective/incidents/cudo-compute-standing.json",
+    "clustermax-challenge/retrospective/incidents/digitalocean-standing.json",
+    "clustermax-challenge/retrospective/incidents/fluidstack-standing.json",
+    "clustermax-challenge/retrospective/incidents/gcore-standing.json",
+    "clustermax-challenge/retrospective/incidents/gpu-net-standing.json",
+    "clustermax-challenge/retrospective/incidents/hydra-standing.json",
+    "clustermax-challenge/retrospective/incidents/hyperstack-standing.json",
+    "clustermax-challenge/retrospective/incidents/lambda-standing.json",
+    "clustermax-challenge/retrospective/incidents/latitude-sh-standing.json",
+    "clustermax-challenge/retrospective/incidents/lightning-ai-standing.json",
+    "clustermax-challenge/retrospective/incidents/mithril-standing.json",
+    "clustermax-challenge/retrospective/incidents/nebius-standing.json",
+    "clustermax-challenge/retrospective/incidents/prime-intellect-standing.json",
+    "clustermax-challenge/retrospective/incidents/radiant-standing.json",
+    "clustermax-challenge/retrospective/incidents/runpod-standing.json",
+    "clustermax-challenge/retrospective/incidents/scaleway-standing.json",
+    "clustermax-challenge/retrospective/incidents/sharon-ai-standing.json",
+    "clustermax-challenge/retrospective/incidents/together-ai-standing.json",
+    "clustermax-challenge/retrospective/incidents/verda-standing.json",
+    "clustermax-challenge/retrospective/results/R2-standing-2026-09-29.json",
+    "clustermax-challenge/retrospective/results/R2-standing-2026-09-29.md",
+    "hot-aisle/campaign/backfill/DELTA-standing.md",
+    "hot-aisle/campaign/backfill/IMPORT-SUMMARY.md",
+    "hot-aisle/campaign/backfill/imported/daily/2026-09-29.jsonl.gz",
+    "hot-aisle/campaign/backfill/imported/history-index.json",
+    "hot-aisle/campaign/market/MARKET.md",
+    "hot-aisle/data/price-history/INDEX.json"
+  ],
+  "retained_artifact": "circulate-retained-2026-09-29",
+  "disclosure": "The Hot Aisle arms ran on a **$200 credit given by Hot Aisle** to the Second Run team. Second Run is pitching Hot Aisle a paid engagement. Costs are computed at **undiscounted list price** ($2.99/GPU-hr), not at the credit. The DigitalOcean arm was self-funded at list price ($4.41/GPU-hr). Imported external observations (InferenceX, MLPerf, OpenComputePrices, provider status pages, SemiAnalysis newsletter) are third-party data, not our measurements. Nothing in this receipt invents a value: a gated or unreachable source is HOLD with its HTTP code."
+}

@@ -1,0 +1,29 @@
+{
+ "note": "Three real SemiAnalysis newsletter post pages from the sa-newsletter lane (two paywalled, one free). HTML changed only by emptying <style> and non-JSON-LD <script> bodies to keep the files small; source_sha256 is the original lane file hash. sitemap.xml lists them plus one already-known post (known-urls.txt).",
+ "files": [
+  {
+   "slug": "openai-chip-team-is-now-serious",
+   "url": "https://newsletter.semianalysis.com/p/openai-chip-team-is-now-serious",
+   "paywalled": true,
+   "source_sha256": "44afa3f332556af37cfd4cd5e3df8d4ce51b7456dff575a495ccd2ef17d3f4cb",
+   "sha256": "9636d0fb3272b59b1902ee555be97a7cac6276ad420fe0960a292c29b8d85eac",
+   "bytes": 36710
+  },
+  {
+   "slug": "short-report-nvidia-supplier-cut",
+   "url": "https://newsletter.semianalysis.com/p/short-report-nvidia-supplier-cut",
+   "paywalled": true,
+   "source_sha256": "b1a4ffd7a2f708d3445fbcc0c9ff46421389f75b582d3459b4447ec2d2c80382",
+   "sha256": "8fcacf4c129d31a91ef54e056a6e8116a13c4e600498929f0829ce87a8b47e04",
+   "bytes": 44937
+  },
+  {
+   "slug": "semianalysis-compliance-policies",
+   "url": "https://newsletter.semianalysis.com/p/semianalysis-compliance-policies",
+   "paywalled": false,
+   "source_sha256": "a9f6ef5aa8340ca73f5f640ee91f0804e4055a73eaf27fcf5e466516cb821e64",
+   "sha256": "1abf2cf39da9611ce7f1a8b35ff1f93d5369fdd62a9f65e712732c9006eb1975",
+   "bytes": 34868
+  }
+ ]
+}

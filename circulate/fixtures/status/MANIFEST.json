@@ -1,0 +1,202 @@
+{
+ "schema": "secondrun.test-fixtures@1",
+ "note": "Saved provider pages copied from the R2 raw lane (Atlassian history page and its incident details, one Better Stack quarter and its incident pages, three Instatus months, one SorryApp month). JSON is byte-identical. HTML has two mechanical changes: the Better Stack subscribe-form webhook placeholder and its validation pattern are replaced by the literal REDACTED-WEBHOOK-PLACEHOLDER (push protection refuses the original), and <style>/<script> bodies are emptied to keep files small. source_sha256 is the hash of the original lane file.",
+ "files": [
+  {
+   "path": "crusoe/history-page-1.json",
+   "source": "sessions/public-tail-20260929/lanes/clustermax-r2-raw/crusoe/history-page-1.json",
+   "source_sha256": "b9db7e985bc9c1a3f05843ec172cba3d8a06094d94fa0c49a620d9570191a0cc",
+   "sha256": "b9db7e985bc9c1a3f05843ec172cba3d8a06094d94fa0c49a620d9570191a0cc",
+   "transform": "none"
+  },
+  {
+   "path": "crusoe/incident-hp3xb537kdwy.json",
+   "source": "sessions/public-tail-20260929/lanes/clustermax-r2-raw/crusoe/incident-hp3xb537kdwy.json",
+   "source_sha256": "9ed14d586755b9e1ffae426dd03c02056804fa623ce6389419d7a283313df4e7",
+   "sha256": "9ed14d586755b9e1ffae426dd03c02056804fa623ce6389419d7a283313df4e7",
+   "transform": "none"
+  },
+  {
+   "path": "crusoe/incident-6v47ydkb51vb.json",
+   "source": "sessions/public-tail-20260929/lanes/clustermax-r2-raw/crusoe/incident-6v47ydkb51vb.json",
+   "source_sha256": "af2c1263aa0ced2ed884f7853c938af5aef37314d29d8d090150572f2c7f1459",
+   "sha256": "af2c1263aa0ced2ed884f7853c938af5aef37314d29d8d090150572f2c7f1459",
+   "transform": "none"
+  },
+  {
+   "path": "crusoe/incident-vt68s4257thf.json",
+   "source": "sessions/public-tail-20260929/lanes/clustermax-r2-raw/crusoe/incident-vt68s4257thf.json",
+   "source_sha256": "30a5fae7a610056faf463795f5b1e075442aca2b21541b5c5415a9ffc0a37596",
+   "sha256": "30a5fae7a610056faf463795f5b1e075442aca2b21541b5c5415a9ffc0a37596",
+   "transform": "none"
+  },
+  {
+   "path": "crusoe/incident-2y0ry4z39vws.json",
+   "source": "sessions/public-tail-20260929/lanes/clustermax-r2-raw/crusoe/incident-2y0ry4z39vws.json",
+   "source_sha256": "d4bfc6219cb19547d97fa0e8760ce4819c7af1aed2f93837472d743fd8286ca6",
+   "sha256": "d4bfc6219cb19547d97fa0e8760ce4819c7af1aed2f93837472d743fd8286ca6",
+   "transform": "none"
+  },
+  {
+   "path": "crusoe/incident-36nsx98m5dvb.json",
+   "source": "sessions/public-tail-20260929/lanes/clustermax-r2-raw/crusoe/incident-36nsx98m5dvb.json",
+   "source_sha256": "6ab1805029739fe166b7db231af535e14147c454ff8b51c22c20080d103cadde",
+   "sha256": "6ab1805029739fe166b7db231af535e14147c454ff8b51c22c20080d103cadde",
+   "transform": "none"
+  },
+  {
+   "path": "crusoe/incident-zh45vw5x4q9b.json",
+   "source": "sessions/public-tail-20260929/lanes/clustermax-r2-raw/crusoe/incident-zh45vw5x4q9b.json",
+   "source_sha256": "fd3f2f3f9e077982cfc4006f4e701bede40161dbc57efac1681e18f7a3d7e5e3",
+   "sha256": "fd3f2f3f9e077982cfc4006f4e701bede40161dbc57efac1681e18f7a3d7e5e3",
+   "transform": "none"
+  },
+  {
+   "path": "crusoe/incident-l514h0nnzw0m.json",
+   "source": "sessions/public-tail-20260929/lanes/clustermax-r2-raw/crusoe/incident-l514h0nnzw0m.json",
+   "source_sha256": "7cf314318453736cc2a75a7045a5d8095104b59b62caac9c00cef07e9ae2d283",
+   "sha256": "7cf314318453736cc2a75a7045a5d8095104b59b62caac9c00cef07e9ae2d283",
+   "transform": "none"
+  },
+  {
+   "path": "crusoe/incident-wpqn8z37z6dv.json",
+   "source": "sessions/public-tail-20260929/lanes/clustermax-r2-raw/crusoe/incident-wpqn8z37z6dv.json",
+   "source_sha256": "2b427ae30ee39d18b4e80410fd935bd6ebf40dd83abc73d1957b3c5745154091",
+   "sha256": "2b427ae30ee39d18b4e80410fd935bd6ebf40dd83abc73d1957b3c5745154091",
+   "transform": "none"
+  },
+  {
+   "path": "crusoe/incident-d2rw412xl5qn.json",
+   "source": "sessions/public-tail-20260929/lanes/clustermax-r2-raw/crusoe/incident-d2rw412xl5qn.json",
+   "source_sha256": "bb2a73ee13fb05ad08a57c0ea3d1e857a80d4a91f633611c413346e4ce49f3d5",
+   "sha256": "bb2a73ee13fb05ad08a57c0ea3d1e857a80d4a91f633611c413346e4ce49f3d5",
+   "transform": "none"
+  },
+  {
+   "path": "crusoe/incident-35p8fp16r0v8.json",
+   "source": "sessions/public-tail-20260929/lanes/clustermax-r2-raw/crusoe/incident-35p8fp16r0v8.json",
+   "source_sha256": "ff8eda0cabcbc943a9b4d342d4ebb3eafa08147b7b180a5358dd47a5f51ebf01",
+   "sha256": "ff8eda0cabcbc943a9b4d342d4ebb3eafa08147b7b180a5358dd47a5f51ebf01",
+   "transform": "none"
+  },
+  {
+   "path": "crusoe/incident-blwtqlgqy2dl.json",
+   "source": "sessions/public-tail-20260929/lanes/clustermax-r2-raw/crusoe/incident-blwtqlgqy2dl.json",
+   "source_sha256": "c269301f496b4c528b3d96215ef09dd1f46ad888f4433f24faea40186668ecde",
+   "sha256": "c269301f496b4c528b3d96215ef09dd1f46ad888f4433f24faea40186668ecde",
+   "transform": "none"
+  },
+  {
+   "path": "crusoe/incident-nvbpwzkzvs53.json",
+   "source": "sessions/public-tail-20260929/lanes/clustermax-r2-raw/crusoe/incident-nvbpwzkzvs53.json",
+   "source_sha256": "8ca17b1b5038fa0ca9dbc64e62a615c376b4a56d5ef0ef9017db68186e09476b",
+   "sha256": "8ca17b1b5038fa0ca9dbc64e62a615c376b4a56d5ef0ef9017db68186e09476b",
+   "transform": "none"
+  },
+  {
+   "path": "crusoe/incident-fp15n50ldt26.json",
+   "source": "sessions/public-tail-20260929/lanes/clustermax-r2-raw/crusoe/incident-fp15n50ldt26.json",
+   "source_sha256": "59905efa61bbec1e858915b9767dfc0a1339d5479416c8292daed0e658d90ea4",
+   "sha256": "59905efa61bbec1e858915b9767dfc0a1339d5479416c8292daed0e658d90ea4",
+   "transform": "none"
+  },
+  {
+   "path": "crusoe/incident-8xld1j8nl2dt.json",
+   "source": "sessions/public-tail-20260929/lanes/clustermax-r2-raw/crusoe/incident-8xld1j8nl2dt.json",
+   "source_sha256": "499d3e2fb0d181b0661d1961b1cc6a4a6e7feb04f5b648d4c8dde3d9191b39d4",
+   "sha256": "499d3e2fb0d181b0661d1961b1cc6a4a6e7feb04f5b648d4c8dde3d9191b39d4",
+   "transform": "none"
+  },
+  {
+   "path": "crusoe/incident-z031x52kzl23.json",
+   "source": "sessions/public-tail-20260929/lanes/clustermax-r2-raw/crusoe/incident-z031x52kzl23.json",
+   "source_sha256": "3ec1240eedd74b741658782090647b406cef3753bad87e0c597e5907e5a87d96",
+   "sha256": "3ec1240eedd74b741658782090647b406cef3753bad87e0c597e5907e5a87d96",
+   "transform": "none"
+  },
+  {
+   "path": "crusoe/incident-v0w7mghqj25m.json",
+   "source": "sessions/public-tail-20260929/lanes/clustermax-r2-raw/crusoe/incident-v0w7mghqj25m.json",
+   "source_sha256": "bc9f584a47b7bf71a7cc18f473081a468604bd598883da7260afcad43c5ece62",
+   "sha256": "bc9f584a47b7bf71a7cc18f473081a468604bd598883da7260afcad43c5ece62",
+   "transform": "none"
+  },
+  {
+   "path": "crusoe/incident-q46mxq86933n.json",
+   "source": "sessions/public-tail-20260929/lanes/clustermax-r2-raw/crusoe/incident-q46mxq86933n.json",
+   "source_sha256": "3fe82f6d4c9ee7b6e374e5d49f848bb98be570aeb52251cf0dde73d67fed34f8",
+   "sha256": "3fe82f6d4c9ee7b6e374e5d49f848bb98be570aeb52251cf0dde73d67fed34f8",
+   "transform": "none"
+  },
+  {
+   "path": "crusoe/incident-kgsybd8tk13d.json",
+   "source": "sessions/public-tail-20260929/lanes/clustermax-r2-raw/crusoe/incident-kgsybd8tk13d.json",
+   "source_sha256": "a7182179631e9aec1782d9c7f93b8e5d1b4499ad76df9297f02aab94d577087e",
+   "sha256": "a7182179631e9aec1782d9c7f93b8e5d1b4499ad76df9297f02aab94d577087e",
+   "transform": "none"
+  },
+  {
+   "path": "verda/incidents_2026-07_2026-09.html",
+   "source": "sessions/public-tail-20260929/lanes/clustermax-r2-raw/verda/incidents_2026-07_2026-09.html",
+   "source_sha256": "f90efbf17255340cd29ae34443aa31afe42c7fb62f10a2f980b2d3f757520b31",
+   "sha256": "bce2b90f44e8240acc5ab652ad36e592fc85baf5333655963a3f56dcc8cc06ac",
+   "transform": "scrub+strip"
+  },
+  {
+   "path": "verda/incident_1010924.html",
+   "source": "sessions/public-tail-20260929/lanes/clustermax-r2-raw/verda/incident_1010924.html",
+   "source_sha256": "86a8aadec20417451dff3ef43aecbad9b0234768bb09d44d028f5c55a4874f65",
+   "sha256": "1d2d700c1871af00c59c9b03787282104444263994edc31ffc8938239e7068bb",
+   "transform": "scrub+strip"
+  },
+  {
+   "path": "verda/incident_1050614.html",
+   "source": "sessions/public-tail-20260929/lanes/clustermax-r2-raw/verda/incident_1050614.html",
+   "source_sha256": "a7a7ef4f5c6e540fb95abfa4310075aa05745faaa377538709fabf90deb85ab6",
+   "sha256": "180ac61b35a0f86a0db9f94268750234307ef1ca4dbb9031006de0deee2281d7",
+   "transform": "scrub+strip"
+  },
+  {
+   "path": "verda/incident_1069624.html",
+   "source": "sessions/public-tail-20260929/lanes/clustermax-r2-raw/verda/incident_1069624.html",
+   "source_sha256": "7c690c400bd7e296d25716f8c58818c5ee032f9dfe1ea86b58981875ae784412",
+   "sha256": "35f9513d2f9c617580229c917cb3ee84ee4c1536d905374af1ec47c49ad9553b",
+   "transform": "scrub+strip"
+  },
+  {
+   "path": "verda/incident_1073923.html",
+   "source": "sessions/public-tail-20260929/lanes/clustermax-r2-raw/verda/incident_1073923.html",
+   "source_sha256": "7e323b03e6cbe6d5644baa442a04c1e673b3c744e7f254bd009598bbb86dde68",
+   "sha256": "95b1d49dc5b868100a736f2a45ad403a18d02b61a26088c4d32a271aae78ad66",
+   "transform": "scrub+strip"
+  },
+  {
+   "path": "mithril/notices_2026-07_p1.json",
+   "source": "sessions/public-tail-20260929/lanes/clustermax-r2-raw/mithril/notices_2026-07_p1.json",
+   "source_sha256": "cb980af8b91d5f1d12eb23d20ae155adac0420e19584ad22aa28140ed81fe9a6",
+   "sha256": "cb980af8b91d5f1d12eb23d20ae155adac0420e19584ad22aa28140ed81fe9a6",
+   "transform": "none"
+  },
+  {
+   "path": "mithril/notices_2026-08_p1.json",
+   "source": "sessions/public-tail-20260929/lanes/clustermax-r2-raw/mithril/notices_2026-08_p1.json",
+   "source_sha256": "d319f6789b1d73066e28416d94677ac154dfda8c38fc901613aebd727218fc21",
+   "sha256": "d319f6789b1d73066e28416d94677ac154dfda8c38fc901613aebd727218fc21",
+   "transform": "none"
+  },
+  {
+   "path": "mithril/notices_2026-09_p1.json",
+   "source": "sessions/public-tail-20260929/lanes/clustermax-r2-raw/mithril/notices_2026-09_p1.json",
+   "source_sha256": "3e4e04b8568c72de8989ea4dafa390c915e562eb7c234cc1ffc35cca6b67c2ca",
+   "sha256": "3e4e04b8568c72de8989ea4dafa390c915e562eb7c234cc1ffc35cca6b67c2ca",
+   "transform": "none"
+  },
+  {
+   "path": "radiant/history_2026-september.html",
+   "source": "sessions/public-tail-20260929/lanes/clustermax-r2-raw/radiant/history_2026-september.html",
+   "source_sha256": "5ca2d4b5ce02590b0f3f07234772d1803d860ff3640824ce871369c37d097099",
+   "sha256": "45d8508435c41010020d93bdcef5eefcf3180d9798f5f6dbdfc5b289e40d8329",
+   "transform": "scrub+strip"
+  }
+ ]
+}

@@ -1,0 +1,160 @@
+{
+ "schema": "second-run/price-history-index@1",
+ "generated_on": "2026-09-29",
+ "currency": "USD",
+ "generated_from": {
+  "path": "sessions/public-tail-20260929/lanes/opencomputeprices/rows/prices.jsonl",
+  "sha256": "390b25b1b25d59631166dae6273ba7b04c4a8645191002eafafe865afaa73bd0",
+  "release": {
+   "repo": "github.com/thatkavish/OpenComputePrices",
+   "license": "MIT",
+   "release_tag": "latest-data",
+   "release_title": "GPU Pricing Data - 2026-07-29 14:36 UTC",
+   "release_updated": "2026-07-29",
+   "retrieved_utc": "2026-09-29"
+  }
+ },
+ "series_range": {
+  "first": "2024-01-01",
+  "last": "2026-07-29"
+ },
+ "rule": "one file per provider per snapshot day present in the public series; a day the series lacks has no file (no interpolation)",
+ "not_in_series": [
+  "tensorwave",
+  "datacrunch"
+ ],
+ "aliases": {
+  "do": "digitalocean (series id used 2025-09-02..2026-01-13, merged)"
+ },
+ "files_location": {
+  "note": "Per-provider per-day snapshot files (143 MB, 2,201 files) are retained outside this repo; the index keeps every file sha256.",
+  "path": "sessions/public-tail-20260929/lanes/opencomputeprices/price-history/<provider>/<YYYY-MM-DD>.json"
+ },
+ "providers": {
+  "hot_aisle": {
+   "name": "Hot Aisle",
+   "first": "2026-07-23",
+   "last": "2026-07-27",
+   "days": 5,
+   "files": [
+    {
+     "date": "2026-07-23",
+     "products": 5,
+     "snapshots": 2,
+     "sha256": "a298adb9a0057cfa5362a9693b563f33141f90a2554025bd32934f5c65794295"
+    },
+    {
+     "date": "2026-07-24",
+     "products": 5,
+     "snapshots": 2,
+     "sha256": "57a4106d5ffb13c1adc9c90634e80a45cb37856a4f601478ae16e043a3b2f5c4"
+    },
+    {
+     "date": "2026-07-25",
+     "products": 5,
+     "snapshots": 2,
+     "sha256": "933e4de2e14b89d6de29cfad3d73e9147d159f81f7d61aa1f68e621be333c394"
+    },
+    {
+     "date": "2026-07-26",
+     "products": 5,
+     "snapshots": 2,
+     "sha256": "fb38283960caa14596879cfcdcaa642838fbd93e42c15ff5420b4cee52abcebd"
+    },
+    {
+     "date": "2026-07-27",
+     "products": 5,
+     "snapshots": 2,
+     "sha256": "ce4d1014f6b28a45ab1e4f98ea64d124d65a265f3f5e626105d15f4f5935dddf"
+    }
+   ]
+  },
+  "digitalocean": {
+   "name": "DigitalOcean",
+   "first": "2026-07-23",
+   "last": "2026-07-27",
+   "days": 5,
+   "files": [
+    {
+     "date": "2026-07-23",
+     "products": 8,
+     "snapshots": 2,
+     "sha256": "96492c34447d0b5c97abc4f98e21c2de1d9c7c65aee04df99484818dd1fb51da"
+    },
+    {
+     "date": "2026-07-24",
+     "products": 8,
+     "snapshots": 2,
+     "sha256": "6248284abb775e1a8b87f48a9d71ba1ca4ed2d8f0416fbaf8568622aa082a928"
+    },
+    {
+     "date": "2026-07-25",
+     "products": 8,
+     "snapshots": 2,
+     "sha256": "ab686f923d0b8efd09ed0a0679fd0cc5666c9a863e767e9dfda240efbefb7ea0"
+    },
+    {
+     "date": "2026-07-26",
+     "products": 8,
+     "snapshots": 2,
+     "sha256": "94e02ed0b2ad0daa980d37248233408d3d97cfb91fb5110810ce214b2f51bbd4"
+    },
+    {
+     "date": "2026-07-27",
+     "products": 8,
+     "snapshots": 2,
+     "sha256": "b9330f4c4bf50b19f37fc09a1a7e10aefbf71ce928af33c27ef137cb945a016e"
+    }
+   ]
+  },
+  "runpod": {
+   "name": "RunPod",
+   "first": "2026-07-23",
+   "last": "2026-07-27",
+   "days": 5,
+   "files": [
+    {
+     "date": "2026-07-23",
+     "products": 173,
+     "snapshots": 2,
+     "sha256": "b6d7612e4d1ef6a3144b80db04ce3e616f175ce54febc915d57ace9106ebf22f"
+    },
+    {
+     "date": "2026-07-24",
+     "products": 177,
+     "snapshots": 2,
+     "sha256": "1aed9f2b198ea4de809aae9268fc214f0c1533b17b61d200fab250deb57b7df9"
+    },
+    {
+     "date": "2026-07-25",
+     "products": 170,
+     "snapshots": 2,
+     "sha256": "264fb150ed9a035764003c271d7c6d867e75e1149510c9fb10c0d7b3df2daf60"
+    },
+    {
+     "date": "2026-07-26",
+     "products": 166,
+     "snapshots": 2,
+     "sha256": "50e40b92476abb97847ff5f1ac50d882c33db493b164a94b8abba195c630574a"
+    },
+    {
+     "date": "2026-07-27",
+     "products": 163,
+     "snapshots": 2,
+     "sha256": "8bed7d1255b244c11a78b0e9152aabc556cb62d9b2bae8dffabfdc90b20a3806"
+    }
+   ]
+  }
+ },
+ "release_assets": {
+  "observed_utc": "2026-09-01T00:00:00Z",
+  "basis": "fixture: synthetic prior digest so the offline run sees a change",
+  "assets": {
+   "data.tar.gz": {
+    "digest": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+    "size": 1,
+    "updated_at": "2026-07-01T00:00:00Z"
+   }
+  }
+ }
+}

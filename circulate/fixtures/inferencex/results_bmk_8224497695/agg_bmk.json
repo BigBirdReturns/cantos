@@ -1,0 +1,103 @@
+[
+  {
+    "hw": "cluster:b300-nv",
+    "conc": 32,
+    "image": "vllm/vllm-openai:v0.24.0",
+    "model": "deepseek-ai/DeepSeek-V4-Pro",
+    "infmax_model_prefix": "dsv4",
+    "framework": "vllm",
+    "precision": "fp4",
+    "spec_decoding": "none",
+    "disagg": false,
+    "scenario_type": "agentic-coding",
+    "is_multinode": false,
+    "tp": 4,
+    "ep": 4,
+    "dp_attention": "true",
+    "kv_offloading": "none",
+    "kv_offload_backend": "",
+    "allocated_cpu_dram_gb": 0,
+    "num_requests_total": 698,
+    "num_requests_successful": 0,
+    "request_accounting": {
+      "records_total": 698,
+      "records_profiled": 0,
+      "records_dropped_total": 698,
+      "records_warmup_dropped": 698,
+      "records_error_dropped": 0,
+      "error_categories": {}
+    },
+    "dcp_size": 1,
+    "pcp_size": 1,
+    "request_metrics": {
+      "qps": {},
+      "latency": {
+        "ttft": {},
+        "e2el": {},
+        "itl": {},
+        "tpot": {},
+        "intvty": {}
+      },
+      "tokens": {
+        "input": {},
+        "output_actual": {},
+        "output_expected": {}
+      },
+      "throughput": {},
+      "cache": {
+        "theoretical_cache_hit_rate": null
+      }
+    },
+    "server_metrics": {
+      "present": false,
+      "adapter": "none",
+      "metric_count": 0,
+      "cache": {
+        "gpu_cache_hit_rate": null,
+        "cpu_cache_hit_rate": null,
+        "external_cache_hit_rate": null,
+        "overall_cache_hit_rate": null,
+        "prefix_cache_hits": null,
+        "prefix_cache_queries": null,
+        "external_prefix_cache_hits": null,
+        "external_prefix_cache_queries": null,
+        "cached_tokens_by_source": {},
+        "frontend_cache_hit_rate": null,
+        "router_kv_hit_rate": null,
+        "router_shared_cache_hit_rate": null,
+        "frontend_cached_tokens": null,
+        "frontend_input_tokens": null
+      },
+      "kv_cache": {
+        "gpu_usage_pct": null,
+        "gpu_total_tokens": 7612296,
+        "cpu_usage_pct": null,
+        "cpu_used_tokens": null,
+        "cpu_total_tokens": null
+      },
+      "kv_offload": {
+        "bytes_gpu_to_cpu": null,
+        "bytes_cpu_to_gpu": null,
+        "time_gpu_to_cpu": null,
+        "time_cpu_to_gpu": null,
+        "bandwidth_gpu_to_cpu_bytes_per_second": null,
+        "bandwidth_cpu_to_gpu_bytes_per_second": null
+      },
+      "tokens": {
+        "prompt_total": null,
+        "generation_total": null,
+        "requests_completed": 0,
+        "prompt_by_source": {
+          "gpu_cache_hit": null,
+          "cpu_or_external_cache_hit": null,
+          "computed": null,
+          "raw": {}
+        }
+      },
+      "sources": []
+    },
+    "warnings": [
+      "server_metrics_export.json missing or empty"
+    ]
+  }
+]

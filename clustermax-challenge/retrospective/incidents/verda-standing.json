@@ -1,0 +1,247 @@
+{
+  "schema": "secondrun.status-incidents.v1",
+  "provider": "Verda (formerly DataCrunch)",
+  "status_page_url": "https://status.verda.com",
+  "retrieved_utc": "2026-09-29T23:31:02Z",
+  "raw_files": [
+    {
+      "path": "circulate/retained/status/raw-root/raw/verda-standing/incidents_2026-01_2026-03.html",
+      "sha256": "f171fc55d9d3e1db3547df0360ee336286a8a7ac90399d543abcdf6a1cd2f6ba",
+      "url": "https://status.verda.com/incidents/2026-01/2026-03"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/verda-standing/incidents_2026-04_2026-06.html",
+      "sha256": "a60e0975f06277c0c3254459db8cefe31e63e00fe1738cf9d77f8fedb39fd856",
+      "url": "https://status.verda.com/incidents/2026-04/2026-06"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/verda-standing/incidents_2026-07_2026-09.html",
+      "sha256": "21ec380daa0a1a6a1a4435a3bbe98c7e754e56b63e568b9527e7bc6d55fba00d",
+      "url": "https://status.verda.com/incidents/2026-07/2026-09"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/verda-standing/incident_853107.html",
+      "sha256": "793318200a13c395d6371301df860acf06bad839382efdc98b44ba38adf9a2f0",
+      "url": "https://status.verda.com/incident/853107"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/verda-standing/incident_850487.html",
+      "sha256": "2b2f5513771f65aadc825e91d190485fa3e97ad8f0d05b721488cc415db6b4a6",
+      "url": "https://status.verda.com/incident/850487"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/verda-standing/incident_845196.html",
+      "sha256": "b324e42b12e2cb4e17200bdaef0c01f2bfc0ae9909e33b1bca50b7c448e55d91",
+      "url": "https://status.verda.com/incident/845196"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/verda-standing/incident_831464.html",
+      "sha256": "7c27ca35a0fb13b726b8b72a5a73fd49722813b53dc933535067025952f54658",
+      "url": "https://status.verda.com/incident/831464"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/verda-standing/incident_829701.html",
+      "sha256": "c5804a1d68e9823df3db8592f6e180285a0512fe9143cb30697bf489fc42cf82",
+      "url": "https://status.verda.com/incident/829701"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/verda-standing/incident_824256.html",
+      "sha256": "45991c126b103b189c040cc5d80fec03bd7c685d22f6c0915e7b1232da6d1719",
+      "url": "https://status.verda.com/incident/824256"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/verda-standing/incident_800520.html",
+      "sha256": "ff332199ef2050d211e9d8892185fd8e52d2b539a6f7e1e01760afd9a5d1e87c",
+      "url": "https://status.verda.com/incident/800520"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/verda-standing/incident_909828.html",
+      "sha256": "5e444993b9fca4f1ddd2d918d33358dc8cf80b9e0514eb758eaf4d315a4f8e4a",
+      "url": "https://status.verda.com/incident/909828"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/verda-standing/incident_905600.html",
+      "sha256": "b4ad55b95b20dc0030ee8e98ac98cb502732b7d5c72ec308b63b22daad3a2974",
+      "url": "https://status.verda.com/incident/905600"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/verda-standing/incident_901666.html",
+      "sha256": "9266cb675a314a59f5f63ab9cf8605cfb8951c6031f7dab713c7864ebd4ac2be",
+      "url": "https://status.verda.com/incident/901666"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/verda-standing/incident_1073923.html",
+      "sha256": "3e40482ce03bbb00e0851ff3370acc1f81072ac68bb8bdf9c2b7db6ab9017fd4",
+      "url": "https://status.verda.com/incident/1073923"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/verda-standing/incident_1069624.html",
+      "sha256": "95ae98b1fcadb60ea6b0de18a57321edd79ea465dc2e0c4126c4ff0cd3e166c1",
+      "url": "https://status.verda.com/incident/1069624"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/verda-standing/incident_1050614.html",
+      "sha256": "067e507b91210b828127e45ff1cd021d4c0cf37bedf582918e5685862049c201",
+      "url": "https://status.verda.com/incident/1050614"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/verda-standing/incident_1010924.html",
+      "sha256": "5641becdfdcc27a538c9c463523e2b18264acab0c5c96be582dfabf492e44696",
+      "url": "https://status.verda.com/incident/1010924"
+    }
+  ],
+  "coverage_start": "2026-01-01",
+  "coverage_end": "2026-09-29",
+  "severity_map": {
+    "(no affected-component state recorded)": "none",
+    "Degraded performance": "minor",
+    "Downtime": "critical"
+  },
+  "incidents": [
+    {
+      "id": "800520",
+      "title": "Service degradation serverless containers",
+      "impact_label": "(no affected-component state recorded)",
+      "severity": "none",
+      "started_utc": "2026-01-07T07:30:00Z",
+      "resolved_utc": "2026-01-07T09:05:00Z",
+      "is_maintenance": false,
+      "url": "https://status.verda.com/incident/800520"
+    },
+    {
+      "id": "824256",
+      "title": "Network Impact — FIN03 DataCenter",
+      "impact_label": "Degraded performance",
+      "severity": "minor",
+      "started_utc": "2026-02-12T17:04:00Z",
+      "resolved_utc": "2026-02-12T17:13:00Z",
+      "is_maintenance": false,
+      "url": "https://status.verda.com/incident/824256"
+    },
+    {
+      "id": "829701",
+      "title": "Network Incident – FIN03 & FIN02 Datacenter Impact",
+      "impact_label": "Downtime",
+      "severity": "critical",
+      "started_utc": "2026-02-20T18:00:00Z",
+      "resolved_utc": "2026-02-20T19:40:00Z",
+      "is_maintenance": false,
+      "url": "https://status.verda.com/incident/829701"
+    },
+    {
+      "id": "831464",
+      "title": "Serverless Container Service Disruption",
+      "impact_label": "(no affected-component state recorded)",
+      "severity": "none",
+      "started_utc": "2026-02-23T15:59:00Z",
+      "resolved_utc": "2026-02-23T16:05:00Z",
+      "is_maintenance": false,
+      "url": "https://status.verda.com/incident/831464"
+    },
+    {
+      "id": "845196",
+      "title": "Deployment workflow degreaded",
+      "impact_label": "Degraded performance",
+      "severity": "minor",
+      "started_utc": "2026-03-06T16:04:00Z",
+      "resolved_utc": "2026-03-06T16:21:00Z",
+      "is_maintenance": false,
+      "url": "https://status.verda.com/incident/845196"
+    },
+    {
+      "id": "850487",
+      "title": "We have detected an issue impacting the FIN01 datacenter",
+      "impact_label": "Downtime",
+      "severity": "critical",
+      "started_utc": "2026-03-15T23:49:00Z",
+      "resolved_utc": "2026-03-16T03:18:00Z",
+      "is_maintenance": false,
+      "url": "https://status.verda.com/incident/850487"
+    },
+    {
+      "id": "853107",
+      "title": "Degraded performance on a h200 server on demand instance",
+      "impact_label": "(no affected-component state recorded)",
+      "severity": "none",
+      "started_utc": "2026-03-19T16:54:00Z",
+      "resolved_utc": "2026-03-19T17:42:00Z",
+      "is_maintenance": false,
+      "url": "https://status.verda.com/incident/853107"
+    },
+    {
+      "id": "901666",
+      "title": "Serverless Container Service Disruption",
+      "impact_label": "(no affected-component state recorded)",
+      "severity": "none",
+      "started_utc": "2026-05-21T11:15:00Z",
+      "resolved_utc": "2026-05-21T12:03:00Z",
+      "is_maintenance": false,
+      "url": "https://status.verda.com/incident/901666"
+    },
+    {
+      "id": "905600",
+      "title": "Storage volume reachability degraded in FIN-03",
+      "impact_label": "Degraded performance",
+      "severity": "minor",
+      "started_utc": "2026-05-26T12:49:00Z",
+      "resolved_utc": "2026-05-26T13:19:00Z",
+      "is_maintenance": false,
+      "url": "https://status.verda.com/incident/905600"
+    },
+    {
+      "id": "909828",
+      "title": "Instance provisioning degraded in FIN-02",
+      "impact_label": "Degraded performance",
+      "severity": "minor",
+      "started_utc": "2026-06-01T07:46:00Z",
+      "resolved_utc": "2026-06-01T13:34:00Z",
+      "is_maintenance": false,
+      "url": "https://status.verda.com/incident/909828"
+    },
+    {
+      "id": "1010924",
+      "title": "An issue is affecting our Serverless Containers",
+      "impact_label": "Degraded performance",
+      "severity": "minor",
+      "started_utc": "2026-08-13T06:15:00Z",
+      "resolved_utc": "2026-08-13T15:48:00Z",
+      "is_maintenance": false,
+      "url": "https://status.verda.com/incident/1010924"
+    },
+    {
+      "id": "1050614",
+      "title": "Serverless container gateway errors",
+      "impact_label": "Degraded performance",
+      "severity": "minor",
+      "started_utc": "2026-09-04T12:00:00Z",
+      "resolved_utc": "2026-09-04T12:50:00Z",
+      "is_maintenance": false,
+      "url": "https://status.verda.com/incident/1050614"
+    },
+    {
+      "id": "1069624",
+      "title": "Serverless container upload issue",
+      "impact_label": "(no affected-component state recorded)",
+      "severity": "none",
+      "started_utc": "2026-09-20T18:05:00Z",
+      "resolved_utc": "2026-09-20T18:05:00Z",
+      "is_maintenance": false,
+      "url": "https://status.verda.com/incident/1069624"
+    },
+    {
+      "id": "1073923",
+      "title": "Service Disruption Affecting Some Instances, Storage Volumes, and Billing",
+      "impact_label": "Degraded performance",
+      "severity": "minor",
+      "started_utc": "2026-09-25T13:08:00Z",
+      "resolved_utc": "2026-09-25T16:02:00Z",
+      "is_maintenance": false,
+      "url": "https://status.verda.com/incident/1073923"
+    }
+  ],
+  "notes": [
+    "STANDING collection 2026-09-29 by circulate; not read by R1 or R2. Raw pages (with SHA-256 above) are kept in the CI artifact / retained/, not committed.",
+    "better-stack platform; collected by paging /incidents/<quarter> and fetching every /incident/<id> detail page. impact_label is the worst per-update affected-service state colour shown by Better Stack (red=Downtime->critical, yellow=Degraded performance->minor, blue=Maintenance->none and is_maintenance, green or no affected component->none). Better Stack has no separate impact field.",
+    "quarter pages fetched: 3; incidents listed: 14; recorded: 14; \"No incidents reported\" month markers seen: 2"
+  ]
+}

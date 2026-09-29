@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Circulation receipts</title>
+<meta name="description" content="Nightly receipts from the driver that pulls public GPU-market, benchmark and status data through every joint of the Second Run instruments, plus the probes that try to break them.">
+<style>
+:root{--bg:#fbfaf6;--fg:#1c1c1c;--muted:#5b5b5b;--line:#d9d6cc;--ok:#1f7a3a;--hold:#8a6d00;--fail:#a3261f;--skip:#6b6b6b;--card:#ffffff}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#101214;--fg:#ececec;--muted:#a3a3a3;--line:#2c3138;--ok:#4cc26f;--hold:#e0b83a;--fail:#ef6b62;--skip:#9a9a9a;--card:#171a1e}}
+:root[data-theme="dark"]{--bg:#101214;--fg:#ececec;--muted:#a3a3a3;--line:#2c3138;--ok:#4cc26f;--hold:#e0b83a;--fail:#ef6b62;--skip:#9a9a9a;--card:#171a1e}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+main{max-width:920px;margin:0 auto;padding:24px 16px 48px}
+h1{font-size:1.6rem;margin:0 0 4px}
+p{margin:.4rem 0}
+.muted{color:var(--muted)}
+.rules{border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:16px 0;background:var(--card)}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.95rem}
+th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+.chip{display:inline-block;padding:1px 8px;border-radius:999px;font-size:.8rem;border:1px solid var(--line);margin:1px 2px 1px 0;white-space:nowrap}
+.OK{color:var(--ok);border-color:var(--ok)}
+.HOLD{color:var(--hold);border-color:var(--hold)}
+.FAIL{color:var(--fail);border-color:var(--fail)}
+.SKIP,.PASS{color:var(--skip)}
+.PASS{color:var(--ok)}
+.overall{font-weight:600}
+a{color:inherit}
+details{margin:14px 0}
+summary{cursor:pointer}
+@media (max-width:600px){table,thead,tbody,tr,td,th{display:block}thead{display:none}tr{border:1px solid var(--line);border-radius:8px;padding:8px;margin:8px 0;background:var(--card)}td{border:0;padding:4px 0}}
+</style>
+</head>
+<body>
+<main>
+<h1>Circulation receipts</h1>
+<p class="muted">Each cycle the driver pulls new public rows through every joint of the Second Run instruments and the probes try to break each joint. One receipt per cycle. Newest first.</p>
+
+<div class="rules">
+<p><strong>Three rules travel with everything here.</strong> No value is invented: a missing or gated source records HOLD, never a number. Every row carries who produced it and under what conditions, and an imported row stays labelled imported. The sponsor disclosure travels with anything published: the Hot Aisle arms of the qualified campaign ran on a $200 credit given by Hot Aisle to the Second Run team, which is pitching Hot Aisle a paid engagement; costs are computed at undiscounted list price, and the DigitalOcean arm was self-funded at list price.</p>
+</div>
+
+<div id="receipts"><p class="muted">Loading receipts…</p></div>
+
+<details>
+<summary>What each stage does</summary>
+<table>
+<thead><tr><th>Stage</th><th>Source</th><th>Leaves behind</th></tr></thead>
+<tbody>
+<tr><td>inferencex</td><td>SemiAnalysis InferenceX results_bmk artifacts, newest since the last index</td><td>daily imported-observation rows, index, standing summary</td></tr>
+<tr><td>prices</td><td>OpenComputePrices release, only when an asset digest changed</td><td>price-history index, market medians</td></tr>
+<tr><td>status</td><td>provider status pages with a supported platform</td><td>standing incident files, collection log</td></tr>
+<tr><td>economics</td><td>page engine over the Run 3 record and dated price snapshots</td><td>Run 3 cost per 1k accepted by date</td></tr>
+<tr><td>delta</td><td>all imported rows against the 45 retained cells</td><td>ranked triage, match counts</td></tr>
+<tr><td>r2-standing</td><td>3.0 medals against incidents, rolling 180-day window, unfrozen</td><td>standing result next to the frozen R2</td></tr>
+<tr><td>newsletter</td><td>SemiAnalysis newsletter sitemap, new posts only</td><td>standing post rows</td></tr>
+<tr><td>packet</td><td>all claim files plus standing rows</td><td>validated Research Desk packet</td></tr>
+<tr><td>frontdoor</td><td>market data and kit sources</td><td>refreshed page and kit</td></tr>
+<tr><td>tests</td><td>the fast suites of every instrument</td><td>pass and fail counts</td></tr>
+</tbody>
+</table>
+<p class="muted">Bulk outputs (raw artifacts, per-day price files, raw HTML, full delta) are kept as run artifacts, not committed. Frozen studies are hash-checked at the end of every run; the run fails if they moved.</p>
+</details>
+
+<details>
+<summary>What the probes break</summary>
+<table>
+<thead><tr><th>Probe</th><th>Break</th><th>Must observe</th></tr></thead>
+<tbody>
+<tr><td>packet tamper</td><td>one flipped byte in a packet copy</td><td>validator refuses and names the check</td></tr>
+<tr><td>evidence tamper</td><td>one flipped byte in a Run 3 evidence copy</td><td>checksum mismatch, no number rendered</td></tr>
+<tr><td>price shift</td><td>+10% Hot Aisle price in a snapshot copy</td><td>cost per 1k moves by exactly the ratio</td></tr>
+<tr><td>bad artifact</td><td>truncated, empty, or zero-GPU artifact</td><td>loud refusal or null with a rule, never a made-up count</td></tr>
+<tr><td>gated source</td><td>fetch a gated dataset shard</td><td>401 recorded as HOLD, no credentialed retry</td></tr>
+<tr><td>stale kit</td><td>edit a kit source in a copy</td><td>kit check fails, rebuild passes</td></tr>
+<tr><td>R2 perturb</td><td>double one provider's incidents in a copy</td><td>rho moves, frozen files unchanged</td></tr>
+<tr><td>platform mislabel</td><td>wrong platform in a status-pages copy</td><td>detected or recorded unsupported, never a silent zero</td></tr>
+<tr><td>kill and resume</td><td>kill the driver mid-run</td><td>completed stages reused by hash, killed stage rerun</td></tr>
+<tr><td>duplicate artifact</td><td>same bytes under two ids</td><td>two provenance rows, deduped only by exact key</td></tr>
+<tr><td>secret scan</td><td>grep committed outputs for credential patterns</td><td>zero hits</td></tr>
+</tbody>
+</table>
+</details>
+</main>
+<script>
+(function(){
+  var el=document.getElementById('receipts');
+  function chip(t,s){return '<span class="chip '+s+'">'+t+' '+s+'</span>';}
+  fetch('receipts/index.json',{cache:'no-store'}).then(function(r){return r.json();}).then(function(list){
+    if(!Array.isArray(list)||!list.length){el.innerHTML='<p class="muted">No receipts yet. The first cycle writes one.</p>';return;}
+    list.sort(function(a,b){return (b.date||'').localeCompare(a.date||'');});
+    var h='<table><thead><tr><th>Date</th><th>Overall</th><th>Stages</th><th>Probes</th><th>Files</th></tr></thead><tbody>';
+    list.forEach(function(r){
+      var stages=(r.stages||[]).map(function(s){return chip(s.name,s.status);}).join('');
+      var pr=r.probes||{};var probes=(pr.pass!=null)?(pr.pass+' pass'+(pr.fail?', '+pr.fail+' fail':'')+(pr.skip?', '+pr.skip+' skip':'')):'—';
+      var d=r.date||'';
+      h+='<tr><td>'+d+'</td><td class="overall '+(r.overall||'')+'">'+(r.overall||'')+'</td><td>'+stages+'</td><td>'+probes+'</td><td><a href="receipts/'+d+'/RECEIPT.md">receipt</a> · <a href="receipts/'+d+'/PROBES.json">probes</a></td></tr>';
+    });
+    el.innerHTML=h+'</tbody></table>';
+  }).catch(function(){el.innerHTML='<p class="muted">receipts/index.json is not readable from here.</p>';});
+})();
+</script>
+</body>
+</html>

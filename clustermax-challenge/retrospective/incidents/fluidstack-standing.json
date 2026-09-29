@@ -1,0 +1,32 @@
+{
+  "schema": "secondrun.status-incidents.v1",
+  "provider": "FluidStack",
+  "status_page_url": "https://status.fluidstack.io",
+  "retrieved_utc": "2026-09-29T23:22:35Z",
+  "raw_files": [
+    {
+      "path": "circulate/retained/status/raw-root/raw/fluidstack-standing/incidents_2026-01_2026-03.html",
+      "sha256": "a90c4f1d8edcec3f680f04a1cc702c98403b50c64782a6dc8933046edbc0885e",
+      "url": "https://status.fluidstack.io/incidents/2026-01/2026-03"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/fluidstack-standing/incidents_2026-04_2026-06.html",
+      "sha256": "3def2cd582c1c35e5e08697296d0b85d69d9d784b9cc298f7d9ab5bfbefb388d",
+      "url": "https://status.fluidstack.io/incidents/2026-04/2026-06"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/fluidstack-standing/incidents_2026-07_2026-09.html",
+      "sha256": "cd924f75a6ba8090d15e41e3e745a45b34f1139f2674dc6fed7583a25017691d",
+      "url": "https://status.fluidstack.io/incidents/2026-07/2026-09"
+    }
+  ],
+  "coverage_start": "2026-01-01",
+  "coverage_end": "2026-09-29",
+  "severity_map": {},
+  "incidents": [],
+  "notes": [
+    "STANDING collection 2026-09-29 by circulate; not read by R1 or R2. Raw pages (with SHA-256 above) are kept in the CI artifact / retained/, not committed.",
+    "better-stack platform; collected by paging /incidents/<quarter> and fetching every /incident/<id> detail page. impact_label is the worst per-update affected-service state colour shown by Better Stack (red=Downtime->critical, yellow=Degraded performance->minor, blue=Maintenance->none and is_maintenance, green or no affected component->none). Better Stack has no separate impact field.",
+    "quarter pages fetched: 3; incidents listed: 0; recorded: 0; \"No incidents reported\" month markers seen: 9"
+  ]
+}

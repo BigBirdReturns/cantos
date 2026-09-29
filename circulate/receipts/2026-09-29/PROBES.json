@@ -1,0 +1,490 @@
+{
+  "schema": "circulate/probes@1",
+  "date": "2026-09-29",
+  "started_utc": "2026-09-29T23:41:34Z",
+  "finished_utc": "2026-09-29T23:41:51Z",
+  "seconds": 17.556,
+  "overall": "PASS",
+  "counts": {
+    "PASS": 11
+  },
+  "frozen_files": {
+    "checked": 11,
+    "moved": [],
+    "sha256": {
+      "clustermax-challenge/retrospective/plan.json": "2ffe38d650bd7ef5fe1512b3e3f85b89d237a5b07101da9c212556925011b950",
+      "clustermax-challenge/retrospective/PLAN.md": "6ba62fe9e0cd1ce13cc51c8215e33bdf375ae5fb77a7e4f603722085dce1b364",
+      "clustermax-challenge/retrospective/results/R1-result.json": "f0c311af44f45ef83b9d828f93df8e077a8d1437e54b181e92ca693911101abb",
+      "clustermax-challenge/retrospective/results/R1-result.md": "0c544497424fa519658052a99a6d99bd53f3c1148ea80cf35e9b2f273700e465",
+      "clustermax-challenge/retrospective/plan-R2.json": "5efa99728e6cce2fc462f1073e446e5bdfdccec16508145509d2182402f55ab7",
+      "clustermax-challenge/retrospective/PLAN-R2.md": "a8c93b65041ca8144a21cf4890d2f2724b58a9d91df260e364ec2d3ffc163bdd",
+      "clustermax-challenge/retrospective/results/R2-result.json": "e7cfd62fce4200a1579a999e56f1e63995008ab053007a93386ef0ab19027cfb",
+      "clustermax-challenge/retrospective/results/R2-result.md": "e3c257f437fc73d2f99e90b8fc7b85192107f835d02834a03e2f9f23f583569c",
+      "research-desk/app.html": "5951f7f3d994ec980d2958ae18246edc6dbe5b57db8d38e90c1c18956b96e470",
+      "hot-aisle/data/run3/record.json": "57e21870e378259d58b8383e5b664b68bce4d1f6e57d63ac9bdb89249af9bf46",
+      "hot-aisle/data/run3/evidence.json": "d0b1967472d43a70424dbc5cab21019246c6591ce4466415db085f1ecc6b37e8"
+    }
+  },
+  "probes": [
+    {
+      "name": "p01_packet_tamper",
+      "status": "PASS",
+      "started_utc": "2026-09-29T23:41:34Z",
+      "finished_utc": "2026-09-29T23:41:34Z",
+      "seconds": 0.339,
+      "observed": {
+        "exit_code": 1,
+        "failed_checks": [
+          "- Workspace checksum failed.",
+          "- event 1: Event hash failed."
+        ],
+        "flipped_byte_offset": 533,
+        "tampered_sha256": "549327b0ad8d2f837828cbe9c520f7015e2034ef2dd8c17f4189a45e525f9e18",
+        "original_sha256": "21ebc948a243b72c70451f65e95a8cbd08855ec3761240462eca1c0e30eaa468",
+        "stderr_first_line": "FAIL tampered.research-packet.json",
+        "frozen_files_checked": 11,
+        "frozen_files_moved": []
+      },
+      "expected": "validate_packet.js exits nonzero and names the failed check (workspace checksum)",
+      "notes": "Tamper lands inside a source record's html_sha256 string so the JSON still parses and the failure must come from the integrity check. The untampered packet is not re-validated here (a full validate is ~75 s because it replays 1847 events through the app's own verifyPacket); the standing 'tests' stage does that.",
+      "error": null
+    },
+    {
+      "name": "p02_evidence_tamper",
+      "status": "PASS",
+      "started_utc": "2026-09-29T23:41:34Z",
+      "finished_utc": "2026-09-29T23:41:35Z",
+      "seconds": 0.831,
+      "observed": {
+        "untampered": {
+          "verified": true,
+          "cost_per_1000": 0.690835976637457
+        },
+        "tampered": {
+          "verified": false,
+          "error": "Report checksum mismatch.",
+          "failed_at": "recompute",
+          "cost_per_1000": null
+        },
+        "record_still_verifies_alone": true,
+        "tampered_sha256": "5aab53652f96f45c5802b5ea947bfcb23e2b8e26b899e25be2a34557b996e00a",
+        "frozen_files_checked": 11,
+        "frozen_files_moved": []
+      },
+      "expected": "page engine reports a checksum mismatch on the tampered copy and yields no cost figure; the untampered pair verifies",
+      "notes": "Verifier is runner/lib publication.verify (the check runner/test/run3-door.test.cjs makes). The card renders a number only after it passes, so no number is emitted on failure.",
+      "error": null
+    },
+    {
+      "name": "p03_price_shift",
+      "status": "PASS",
+      "started_utc": "2026-09-29T23:41:35Z",
+      "finished_utc": "2026-09-29T23:41:35Z",
+      "seconds": 0.308,
+      "observed": {
+        "day": "2026-07-29",
+        "hot_aisle_gpu_hour": [
+          2.99,
+          3.289
+        ],
+        "cost_per_1k_hot_aisle": [
+          0.7434,
+          0.8178
+        ],
+        "cost_ratio_from_rounded_4dp": 1.100081,
+        "rate_ratio": 1.1,
+        "comparator_gpu_hour": [
+          3.39,
+          3.39
+        ],
+        "cost_per_1k_comparator": [
+          0.9216,
+          0.9216
+        ],
+        "products_shifted": 4,
+        "days_in_temp_tree": [
+          "2026-07-29",
+          "2026-07-28",
+          "2026-07-27",
+          "2026-07-26",
+          "2026-07-25",
+          "2026-07-24"
+        ],
+        "snapshot_bytes_match_INDEX_sha256": true,
+        "snapshot_source": "retained per-day files: D:\\Projects\\Organs\\AXM\\axm-tools\\sessions\\public-tail-20260929\\lanes\\opencomputeprices\\price-history",
+        "constructed_from_index": false,
+        "frozen_files_checked": 11,
+        "frozen_files_moved": []
+      },
+      "expected": "Hot Aisle cost per 1k = baseline x 1.1 (to the script's 4-decimal rounding); comparator fields byte-identical",
+      "notes": "economics_by_date.cjs run unmodified inside a temp copy of the tree it expects (index.html engine, the two Run 3 arms' result files, one price-history day). The script rounds costs to 4 decimals, so the cost ratio is exact only to that rounding (tolerance 1.1e-4); the rate ratio is exact.",
+      "error": null
+    },
+    {
+      "name": "p04_bad_artifact",
+      "status": "PASS",
+      "started_utc": "2026-09-29T23:41:35Z",
+      "finished_utc": "2026-09-29T23:41:36Z",
+      "seconds": 0.614,
+      "observed": {
+        "control": {
+          "exit": 0,
+          "rows": 6,
+          "gpus": 1,
+          "gpu_count_rule": "tp * pp * pcp_size (single-node)"
+        },
+        "truncated_json": {
+          "exit": 1,
+          "stderr": "import failed: Unterminated string starting at: line 1 column 382 (char 381)",
+          "rows": 0
+        },
+        "empty_list": {
+          "exit": 0,
+          "stderr": "",
+          "rows_emitted": 0,
+          "behaviour": "accepted with zero rows (no observations, no counts)"
+        },
+        "tp0": {
+          "exit": 0,
+          "rows": 4,
+          "gpus": null,
+          "gpu_count_rule": "UNVERIFIED (tp/pp zero or absent)",
+          "behaviour": "null count with rule"
+        },
+        "num_gpus0": {
+          "exit": 0,
+          "rows": 4,
+          "gpus": null,
+          "gpu_count_rule": "UNVERIFIED (zero GPU count in num_gpus)",
+          "behaviour": "null count with rule"
+        },
+        "successful_gt_total": {
+          "exit": 1,
+          "stderr": "import failed: successful exceeds total requests"
+        },
+        "negative_measurement": {
+          "exit": 1,
+          "stderr": "import failed: measurement must be finite and nonnegative (positive denominator)"
+        },
+        "nan_measurement": {
+          "exit": 1,
+          "stderr": "import failed: measurement must be finite and nonnegative (positive denominator)"
+        },
+        "frozen_files_checked": 11,
+        "frozen_files_moved": []
+      },
+      "expected": "importer refuses (nonzero exit, 'import failed') or emits a null GPU count carrying the UNVERIFIED rule; no fabricated count in any case",
+      "notes": "Runs hot-aisle/campaign/backfill/importer.py as a subprocess against temp manifests (offline, fixture=true) so the real imported/ files are untouched. Every bad artifact's sha256 is recomputed so provenance checks pass and only the artifact content is on trial. Finding: an empty [] artifact exits 0 with zero rows and no message (quiet, not loud); it invents nothing, and summarize.py lists such artifacts as 'empty aggregate files' from the manifest.",
+      "error": null
+    },
+    {
+      "name": "p05_gated_source",
+      "status": "PASS",
+      "started_utc": "2026-09-29T23:41:36Z",
+      "finished_utc": "2026-09-29T23:41:36Z",
+      "seconds": 0.145,
+      "observed": {
+        "url": "https://huggingface.co/api/datasets/lmsys/lmsys-chat-1m/parquet/default/train/0.parquet",
+        "http": 401,
+        "recorded_as": "HOLD",
+        "attempts": 1,
+        "credentials_sent": false,
+        "hf_token_env_present_but_unused": false,
+        "recorded_401s_in_lane_manifest": [
+          {
+            "url": "https://huggingface.co/datasets/lmsys/lmsys-chat-1m/raw/main/README.md",
+            "http": 401
+          },
+          {
+            "url": "https://huggingface.co/api/datasets/lmsys/lmsys-chat-1m/parquet/default/train/0.parquet",
+            "http": 401
+          }
+        ],
+        "frozen_files_checked": 11,
+        "frozen_files_moved": []
+      },
+      "expected": "HTTP 401 on the first anonymous request, recorded as HOLD; a single attempt, no credentials",
+      "notes": "Shard URL is the first entry of the retained parquet listing (lanes/chat-corpora-meta/raw). The request asks for one byte with no Authorization header and does not follow redirects. HOLD = the source correctly refused; the probe itself PASSes.",
+      "error": null
+    },
+    {
+      "name": "p06_stale_kit",
+      "status": "PASS",
+      "started_utc": "2026-09-29T23:41:36Z",
+      "finished_utc": "2026-09-29T23:41:37Z",
+      "seconds": 0.344,
+      "observed": {
+        "baseline_check": {
+          "exit": 0,
+          "message": "kit matches source: 42 files, 1864073 bytes"
+        },
+        "after_edit_check": {
+          "exit": 1,
+          "message": "KIT STALE: MANIFEST.json differs from source; workload-report.zip differs from source. Run python scripts/build_kit.py and commit."
+        },
+        "rebuild": {
+          "exit": 0,
+          "message": "wrote MANIFEST.json (42 files) and workload-report.zip (1864133 bytes)"
+        },
+        "after_rebuild_check": {
+          "exit": 0,
+          "message": "kit matches source: 42 files, 1864133 bytes"
+        },
+        "real_kit_check_exit": 0,
+        "real_kit_files_unchanged": true,
+        "frozen_files_checked": 11,
+        "frozen_files_moved": []
+      },
+      "expected": "--check exits 1 with 'KIT STALE' naming MANIFEST.json and workload-report.zip after the edit; rebuild then --check exits 0",
+      "notes": "temp copy matches its source. The edit appends one comment line to README.md (an INCLUDE file) in a temp copy that excludes hot-aisle/campaign; the real kit was checked read-only.",
+      "error": null
+    },
+    {
+      "name": "p07_r2_perturb",
+      "status": "PASS",
+      "started_utc": "2026-09-29T23:41:37Z",
+      "finished_utc": "2026-09-29T23:41:39Z",
+      "seconds": 2.165,
+      "observed": {
+        "perturbed_provider": "RunPod",
+        "rho_before": 0.44010131440379385,
+        "rho_after": 0.41149797934653104,
+        "rho_delta": -0.028603,
+        "classification_before": "inconclusive",
+        "classification_after": "inconclusive",
+        "classification_changed": false,
+        "bootstrap_95ci_before": [
+          -0.006624921342637869,
+          0.7488838726248624
+        ],
+        "bootstrap_95ci_after": [
+          -0.03493672903917561,
+          0.7375976830734725
+        ],
+        "permutation_p_before": 0.0762,
+        "permutation_p_after": 0.09845,
+        "included_providers": 17,
+        "candidates_tried": [
+          {
+            "provider": "GCore",
+            "slug": "gcore",
+            "major_or_critical_before": 58,
+            "incidents_before": 323,
+            "rho_after": 0.44010131440379385,
+            "reading_after": "inconclusive",
+            "rho_changed": false,
+            "reading_changed": false
+          },
+          {
+            "provider": "Nebius",
+            "slug": "nebius",
+            "major_or_critical_before": 17,
+            "incidents_before": 159,
+            "rho_after": 0.44010131440379385,
+            "reading_after": "inconclusive",
+            "rho_changed": false,
+            "reading_changed": false
+          },
+          {
+            "provider": "RunPod",
+            "slug": "runpod",
+            "major_or_critical_before": 11,
+            "incidents_before": 51,
+            "rho_after": 0.41149797934653104,
+            "reading_after": "inconclusive",
+            "rho_changed": true,
+            "reading_changed": false
+          }
+        ],
+        "measure": "major_or_critical_incident_count",
+        "release": "3.0",
+        "frozen_files_checked": 11,
+        "frozen_files_moved": []
+      },
+      "expected": "rho differs after one provider's incident list is doubled; the reading is recorded; frozen R2 files are byte-identical",
+      "notes": "run_r2.load_provider and run_r2.analyse (the frozen runner's own functions, imported, not executed; the sensitivity block is skipped) run against a temp copy of retrospective/incidents/*.json; duplicates get a '-probe-dup' id suffix. Providers are tried in descending major/critical count until rho moves. Nothing is written to results/.",
+      "error": null
+    },
+    {
+      "name": "p08_platform_mislabel",
+      "status": "PASS",
+      "started_utc": "2026-09-29T23:41:39Z",
+      "finished_utc": "2026-09-29T23:41:41Z",
+      "seconds": 1.928,
+      "observed": {
+        "case_A_atlassian_labelled_betterstack": {
+          "labelled_platform": "betterstack",
+          "detected_mode": "atlassian-history",
+          "exit": 0,
+          "incidents": 186,
+          "coverage": [
+            "2025-01-01",
+            "2026-09-29"
+          ],
+          "notes": []
+        },
+        "case_B_statusio_labelled_atlassian": {
+          "labelled_platform": "atlassian",
+          "true_platform": "status.io",
+          "detected_mode": "generic",
+          "exit": 0,
+          "incidents": 0,
+          "coverage_end": null,
+          "notes": [
+            "generic fallback: no automated incident/history parser for this status page. Author a manual incidents JSON against SCHEMA.md (cite the saved raw HTML above by its sha256 as evidence) and re-run with --manual-json to merge it in."
+          ],
+          "recorded_as": "UNSUPPORTED (generic fallback: no incidents, coverage_end null, note says no automated parser)"
+        },
+        "frozen_files_checked": 11,
+        "frozen_files_moved": []
+      },
+      "expected": "auto mode ignores the mislabelled platform: detects the real one (case A) or leaves an explicit UNSUPPORTED-style record with null coverage and a note (case B); never an empty incident file that looks like a clean history",
+      "notes": "collect_status.main() called in-process against a local http.server on 127.0.0.1 serving saved pages from lanes/clustermax-r2-raw (Crusoe's Atlassian history.json + incident files; CoreWeave's status.io page). Output goes to temp dirs. collect_status.py does not itself read status-pages.json; the temp entry supplies the URL and the wrong 'platform' label, which is the input the driver's status stage will read. The current script has three modes (atlassian-history, atlassian, generic); it has no betterstack/instatus/sorryapp mode yet, so 'UNSUPPORTED' is expressed as the generic fallback record.",
+      "error": null
+    },
+    {
+      "name": "p09_kill_resume",
+      "status": "PASS",
+      "started_utc": "2026-09-29T23:41:41Z",
+      "finished_utc": "2026-09-29T23:41:50Z",
+      "seconds": 9.619,
+      "observed": {
+        "driver": "D:\\Projects\\Organs\\AXM\\axm-tools\\main\\circulate\\circulate.py",
+        "date": "2026-09-29",
+        "driver_output_tail_before_kill": [
+          "2026-09-29T23:41:41Z [economics]   | dated 2026-07-28 2.99 3.39 0.7434 0.9216 0.1934",
+          "2026-09-29T23:41:41Z [economics]   | dated 2026-07-28 2.99 3.39 0.7434 0.9216 0.1934",
+          "2026-09-29T23:41:41Z [economics]   | dated 2026-07-29 2.99 3.39 0.7434 0.9216 0.1934",
+          "2026-09-29T23:41:41Z [economics]   exit 0",
+          "2026-09-29T23:41:41Z == stage economics: OK in 0.17 s. 3 rows written.",
+          "2026-09-29T23:41:41Z == stage delta ==",
+          "2026-09-29T23:41:42Z == stage delta: OK in 0.74 s. 41 observations vs 45 measured cells: 0 comparable, 41 ranked.",
+          "2026-09-29T23:41:42Z == stage r2-standing =="
+        ],
+        "stages_recorded_at_kill": {
+          "delta": "OK",
+          "economics": "OK",
+          "inferencex": "OK",
+          "prices": "OK",
+          "status": "OK"
+        },
+        "receipt_json_present_at_kill": true,
+        "resume_exit": 2,
+        "resume_output_tail": [
+          "",
+          "2026-09-29T23:41:50Z == stage tests: FAIL in 4.06 s. stage raised UnicodeEncodeError",
+          "2026-09-29T23:41:50Z == stage probe_sleep ==",
+          "2026-09-29T23:41:50Z [probe_sleep] injected stage probe_sleep: sleeping 0.0s",
+          "2026-09-29T23:41:50Z == stage probe_sleep: OK in 0.0 s. injected sleep stage (CIRCULATE_INJECT_SLEEP_STAGE)",
+          "2026-09-29T23:41:50Z overall FAIL; stages inferencex OK, prices OK, status OK, economics OK, delta OK, r2-standing OK, newsletter OK, packet OK, frontdoor SKIP, tests FAIL, probe_sleep OK"
+        ],
+        "receipt_stage_names": [
+          "delta",
+          "economics",
+          "frontdoor",
+          "inferencex",
+          "newsletter",
+          "packet",
+          "prices",
+          "probe_sleep",
+          "r2-standing",
+          "status",
+          "tests"
+        ],
+        "reused_by_hash": [
+          "delta",
+          "economics",
+          "inferencex",
+          "prices",
+          "status"
+        ],
+        "completed_stages_rerun": [],
+        "completed_stage_files_changed": [],
+        "killed_stage_after_resume": {
+          "status": "OK",
+          "finished_utc": "2026-09-29T23:41:50Z"
+        },
+        "receipt_overall": "FAIL",
+        "other_paths_changed_under_circulate": [
+          "?? circulate/receipts/2026-09-29/RECEIPT-driver.log",
+          "?? circulate/receipts/2026-09-29/RECEIPT.json",
+          "?? circulate/receipts/2026-09-29/RECEIPT.md",
+          "?? circulate/receipts/2026-09-29/logs/delta.log",
+          "?? circulate/receipts/2026-09-29/logs/economics.log",
+          "?? circulate/receipts/2026-09-29/logs/frontdoor.log",
+          "?? circulate/receipts/2026-09-29/logs/inferencex.log",
+          "?? circulate/receipts/2026-09-29/logs/newsletter.log",
+          "?? circulate/receipts/2026-09-29/logs/packet.log",
+          "?? circulate/receipts/2026-09-29/logs/prices.log"
+        ],
+        "frozen_files_checked": 11,
+        "frozen_files_moved": []
+      },
+      "expected": "after kill: completed stages recorded; after --resume: those stages reused (finished_utc and files unchanged), killed stage re-run to completion, RECEIPT.json lists every stage",
+      "notes": "Driver run with cwd=circulate/ and --retained in a temp dir; receipts/2026-09-29, receipts/index.json and LATEST.md are snapshotted first and restored afterwards. Assumed contract with the driver: CIRCULATE_INJECT_SLEEP_STAGE=probe_sleep:<seconds> adds a last stage that sleeps; per-stage StageResult JSON lands under receipts/<date>/ as it completes; RECEIPT.json has a 'stages' list or map.",
+      "error": null
+    },
+    {
+      "name": "p10_dup_artifact",
+      "status": "PASS",
+      "started_utc": "2026-09-29T23:41:50Z",
+      "finished_utc": "2026-09-29T23:41:50Z",
+      "seconds": 0.03,
+      "observed": {
+        "source_rows_per_artifact": 2,
+        "provenance_artifact_ids": [
+          7001,
+          7002
+        ],
+        "observations_total": 12,
+        "distinct_observation_ids": 12,
+        "source_rows_by_artifact_sha_row": 4,
+        "source_rows_by_sha_only_(control)": 2,
+        "summarize_line": "2 artifacts; 4 source rows; 12 metric observations. 0 empty aggregate files are retained in the manifest. 0 zero-success/failure rows retained.",
+        "same_id_same_bytes_source_rows": 2,
+        "frozen_files_checked": 11,
+        "frozen_files_moved": []
+      },
+      "expected": "two artifact ids over identical bytes keep two provenance rows (2 x 2 source rows); only an identical (artifact_id, sha256, row_index) collapses",
+      "notes": "importer.import_manifest and summarize.summarize called in-process on a temp manifest. The sha256-only count is reported as a control to show the key matters.",
+      "error": null
+    },
+    {
+      "name": "p11_secret_scan",
+      "status": "PASS",
+      "started_utc": "2026-09-29T23:41:50Z",
+      "finished_utc": "2026-09-29T23:41:51Z",
+      "seconds": 1.178,
+      "observed": {
+        "tracked_files_scanned": 868,
+        "tracked_bytes": 420054324,
+        "untracked_not_ignored_files_scanned": 151,
+        "untracked_bytes": 6130400,
+        "directories": [
+          "circulate",
+          "hot-aisle",
+          "clustermax-challenge",
+          "research-desk"
+        ],
+        "patterns": [
+          "aws_access_key_id",
+          "betterstack_webhook_token",
+          "github_pat",
+          "private_key_block",
+          "slack_token",
+          "slack_webhook_host",
+          "stripe_live_key"
+        ],
+        "hits": 0,
+        "tracked_hits": 0,
+        "untracked_hits": 0,
+        "hit_locations": [],
+        "frozen_files_checked": 11,
+        "frozen_files_moved": []
+      },
+      "expected": "zero hits in every tracked file (push protection would otherwise refuse the push)",
+      "notes": "Binary files are scanned as raw bytes (the kit zip is stored, not compressed). Untracked-but-not-ignored files are scanned too, because circulate/ is new and not yet tracked; a hit there is treated the same as a tracked hit. Hit reports carry file, line and pattern name only, never the matched text.",
+      "error": null
+    }
+  ]
+}

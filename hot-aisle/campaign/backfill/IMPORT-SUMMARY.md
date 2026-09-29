@@ -2,6 +2,26 @@
 
 Current state: Sept 29 full public InferenceX history and MLPerf LLM rounds. The Sept 23 100-artifact sample section follows unchanged as history. Delta against retained campaign cells: DELTA-2026-09-29.md (0 comparable observations).
 
+
+<!-- circulate:standing:begin -->
+### Standing additions (circulate)
+
+**Imported external observations; not our measurements or qualified results.** Written by `circulate/stages/inferencex.py`; rows are `imported-observation@1` from the same adapter as the full-history import, appended under `imported/daily/`.
+
+Updated 2026-09-29. `history-index.json` holds 4168 artifacts (4161 in the 2026-09-29 baseline, 7 added since, 0 refused by the importer and kept with the reason).
+
+| Day file | New artifacts | Source rows | Metric observations | Empty aggregates |
+|---|---:|---:|---:|---:|
+| 2026-09-29 | 7 | 28 | 526 | 3 |
+
+| Hardware | Framework | Scenario | Rows | Successful / total |
+|---|---|---|---:|---:|
+| B200 | sglang | agentic-coding | 11 | 40855 / 44584 |
+| GB200 | dynamo-vllm | agentic-coding | 8 | 18314 / 19882 |
+| MI355X | sglang-disagg | fixed-sequence | 1 | 80 / 80 |
+| MI355X | vllm | agentic-coding | 8 | 3586 / 4614 |
+<!-- circulate:standing:end -->
+
 ## Full history, 2026-09-29 (InferenceX results_bmk)
 
 **Imported external observations; not our measurements or qualified results.**

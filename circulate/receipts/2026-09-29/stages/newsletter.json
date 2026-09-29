@@ -1,0 +1,29 @@
+{
+  "name": "newsletter",
+  "status": "SKIP",
+  "started_utc": "2026-09-29T23:36:13Z",
+  "finished_utc": "2026-09-29T23:36:13Z",
+  "seconds": 0.16,
+  "counts": {
+    "sitemap_posts": 343,
+    "known": 343,
+    "new_found": 0,
+    "fetched": 0,
+    "appended": 0,
+    "paywalled": 0,
+    "no_body": 0,
+    "failed": 0,
+    "capped_at": null
+  },
+  "sources": [
+    {
+      "url": "https://newsletter.semianalysis.com/sitemap.xml",
+      "sha256": "b20950794d12b73a0fdb4c0ef201b30b00363223643fbebc1428e1f2ea020f41",
+      "retrieved_utc": "2026-09-29T23:36:13Z"
+    }
+  ],
+  "outputs": [],
+  "notes": "no post in the sitemap (343) is missing from the packet or the standing rows (343 known).",
+  "error": null,
+  "log": "logs/newsletter.log"
+}

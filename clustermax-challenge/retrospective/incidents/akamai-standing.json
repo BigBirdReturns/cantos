@@ -1,0 +1,1340 @@
+{
+  "schema": "secondrun.status-incidents.v1",
+  "provider": "Akamai",
+  "status_page_url": "https://www.akamaistatus.com",
+  "retrieved_utc": "2026-09-29T23:33:12Z",
+  "raw_files": [
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/history-page-1.json",
+      "sha256": "35402e50d4306136e4428e2f6c413c1e640267ad0492145dfc2cd38e297f2ae8",
+      "url": "https://www.akamaistatus.com/history.json?page=1"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/history-page-2.json",
+      "sha256": "37cdc3def751aa4842987427412fd90eaa21cd15de455e124c8a20945dfc66ee",
+      "url": "https://www.akamaistatus.com/history.json?page=2"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/history-page-3.json",
+      "sha256": "4b9b73b4733fd4e30ef6eca45e8d7420214451098faebbc7910f3fb3b3b55440",
+      "url": "https://www.akamaistatus.com/history.json?page=3"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-5qqq8jksvcr2.json",
+      "sha256": "d8c4d08d377f1c5f798be287d54097579031ff41907cec89c22bcd10a96a8e46",
+      "url": "https://www.akamaistatus.com/incidents/5qqq8jksvcr2.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-vhv4bt2gvb2s.json",
+      "sha256": "71a00a0327adf04b5e1711e95e3e062b96053892209e7b1236d0f439caa72f86",
+      "url": "https://www.akamaistatus.com/incidents/vhv4bt2gvb2s.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-0tlzxmh800dd.json",
+      "sha256": "9403cac536443d10186c5726e0c65db5ff5c5f09504cf7a66dfc52e632d95472",
+      "url": "https://www.akamaistatus.com/incidents/0tlzxmh800dd.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-fmpdhlpkr4jp.json",
+      "sha256": "c93e5180d5d49b82d43ab58866c38739b5e248caf690941e4b98101ed428fd61",
+      "url": "https://www.akamaistatus.com/incidents/fmpdhlpkr4jp.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-hn14km8cxmc7.json",
+      "sha256": "aa7b04a629b9e73d1c49a5c34611369cc20685e99600096609782b11c262c1cb",
+      "url": "https://www.akamaistatus.com/incidents/hn14km8cxmc7.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-grsptb646r9c.json",
+      "sha256": "0b15a3a6e90ca8a5d80358921d71394d55e6f3b0f3fe96036c6b91ea9e0491d3",
+      "url": "https://www.akamaistatus.com/incidents/grsptb646r9c.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-hw3qtgjjg34y.json",
+      "sha256": "1917d88a4560cade7b5f84670cc9b321e3e5e13474deb5e58423d2891377cd20",
+      "url": "https://www.akamaistatus.com/incidents/hw3qtgjjg34y.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-j7bf3085pwgd.json",
+      "sha256": "8f2be3a68abb2646e1f9adcfbb55069ca974da001ee19f5a0bd9170a9ad62ef8",
+      "url": "https://www.akamaistatus.com/incidents/j7bf3085pwgd.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-b3jph39plmh9.json",
+      "sha256": "cd78f0621782750f6fcebc17b462ce6f33515268485068b86442b9971034599e",
+      "url": "https://www.akamaistatus.com/incidents/b3jph39plmh9.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-g519p09z0ysx.json",
+      "sha256": "0fd711f78d6e360e636f4e5f10aaad20ed39acca9ab759f3e2482a33ee60ea18",
+      "url": "https://www.akamaistatus.com/incidents/g519p09z0ysx.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-spqmcq2dqckr.json",
+      "sha256": "167ada8415702a5cbb6629e6598eeb2afb509f6f80fecf6f58c308ccef36a440",
+      "url": "https://www.akamaistatus.com/incidents/spqmcq2dqckr.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-0byr6t7zd0nm.json",
+      "sha256": "ec7925f4b309f3ce0551703405eecc2a6887fff897ba81995e3eca22cf14dbc8",
+      "url": "https://www.akamaistatus.com/incidents/0byr6t7zd0nm.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-jc0n6zbf7p7y.json",
+      "sha256": "f9da0c8d75024680bb69a22622602d7d6dd325f85afde335f670ff96a1991c04",
+      "url": "https://www.akamaistatus.com/incidents/jc0n6zbf7p7y.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-cmlzltp4vfpq.json",
+      "sha256": "8ee20ed7147df946491ae2bc5356d8e13edda5233855aa23cd51f78d51508f03",
+      "url": "https://www.akamaistatus.com/incidents/cmlzltp4vfpq.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-r5tgk6f3qpg1.json",
+      "sha256": "82fe9fc5af5d2517a664933c11ecc3ba45f8e8c1a3f60c4f0d0e5adf317ec5fe",
+      "url": "https://www.akamaistatus.com/incidents/r5tgk6f3qpg1.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-7dvncd99ptdx.json",
+      "sha256": "40b80567f6f1776292c7292711226d560661b8ef259619dfa651066d35fdc4f4",
+      "url": "https://www.akamaistatus.com/incidents/7dvncd99ptdx.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-1rtrk63g1y28.json",
+      "sha256": "7bea37615ec3d8c6414db55c7d62884f59ccb4032e8722d8f1f09d77c56b9d2c",
+      "url": "https://www.akamaistatus.com/incidents/1rtrk63g1y28.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-rbr9qdbckxmz.json",
+      "sha256": "b3f1866c5bdd4bd1e8298eeb4bb24a43cbfbb117dd5deb95bf6c7139dd964e3d",
+      "url": "https://www.akamaistatus.com/incidents/rbr9qdbckxmz.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-p3n7cw3p3v19.json",
+      "sha256": "0d347468222a25b4ac7d91580e59674ee51472e7244066ccdf48af89c6d7f0ab",
+      "url": "https://www.akamaistatus.com/incidents/p3n7cw3p3v19.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-hjx689h06bmz.json",
+      "sha256": "55aec87e05c97b3d10f1baccfc853fcda76d3e785262d7c5bebd2a08f2c30e5f",
+      "url": "https://www.akamaistatus.com/incidents/hjx689h06bmz.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-zh7bjb5dszlj.json",
+      "sha256": "9e181346f6f173aed5bf36b35ee05614541ab8b9f13aa1df3bfde8ca48eea9cc",
+      "url": "https://www.akamaistatus.com/incidents/zh7bjb5dszlj.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-ttvwbx3n0n5k.json",
+      "sha256": "72c1e7db2f3ab7a8aebd355bb14602af0c81604643df7aa583ec43cd2572b477",
+      "url": "https://www.akamaistatus.com/incidents/ttvwbx3n0n5k.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-s1y6ynlkv550.json",
+      "sha256": "7f52408b5e1e7c0d31b4170f8b06f5590baf9fe29c4065378a5c9a5a7332fa09",
+      "url": "https://www.akamaistatus.com/incidents/s1y6ynlkv550.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-qf73yh2p60pv.json",
+      "sha256": "6483124ed8cf6c14d611b1fb51730b57c73c41e3987188136824f4b256669034",
+      "url": "https://www.akamaistatus.com/incidents/qf73yh2p60pv.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-pybwthcc41q1.json",
+      "sha256": "54cb8005ef27ee385263b1a5bab5c2820a169c6de3774bc24958eb1cebcfc1c4",
+      "url": "https://www.akamaistatus.com/incidents/pybwthcc41q1.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-1qngzhw8477w.json",
+      "sha256": "3d5a8ae4bbb0ea103ad187f11a40688df9676faa01de6686333e12426949f72b",
+      "url": "https://www.akamaistatus.com/incidents/1qngzhw8477w.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-vwppgkky3358.json",
+      "sha256": "650b0b7587864642d49fb977ff12b29cf8bad50e23f1f01298739e5f31c65c31",
+      "url": "https://www.akamaistatus.com/incidents/vwppgkky3358.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-n5z8d8fcx9gk.json",
+      "sha256": "9bad64a6a40b9624138d6b57fa24a1ae6a457fc83c40cee39fb09cc3fbd268b8",
+      "url": "https://www.akamaistatus.com/incidents/n5z8d8fcx9gk.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-yc72rgybrx39.json",
+      "sha256": "26580d5143bec3c45b908bf1ed15fb8c81287a8724d4b22916cee78f5c5fa63a",
+      "url": "https://www.akamaistatus.com/incidents/yc72rgybrx39.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-r9khqdkfwtsk.json",
+      "sha256": "7fa627e8f6b19cdd93f34499a79417bf1dc5360107433cc142d792ac2da38e9f",
+      "url": "https://www.akamaistatus.com/incidents/r9khqdkfwtsk.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-gvh3kdcqg3cq.json",
+      "sha256": "d9db0c72792c540ad2618542b136d19d6da084e25286a77f4b1b6a003065785b",
+      "url": "https://www.akamaistatus.com/incidents/gvh3kdcqg3cq.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-q02p4pj68685.json",
+      "sha256": "ee5991d8718b26bd857e61894884a1da50b988a3b3afa8d8244d3ffc6047e10d",
+      "url": "https://www.akamaistatus.com/incidents/q02p4pj68685.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-khclsvrq74b0.json",
+      "sha256": "2bc0984633a353f403487f24e634b46dd52d2eb50b1c3ba3991d797c93c73dcc",
+      "url": "https://www.akamaistatus.com/incidents/khclsvrq74b0.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-yjb8cd93znh7.json",
+      "sha256": "4fcaa170cf39f186655cc51278f2de68421c39dc610b5795e95c939e5c8fbca9",
+      "url": "https://www.akamaistatus.com/incidents/yjb8cd93znh7.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-f5q43lln5qb9.json",
+      "sha256": "dc4b060584b97597ac76df5fa0a1015c3603b933a4a6d7bb0c8bb56c32c55ad3",
+      "url": "https://www.akamaistatus.com/incidents/f5q43lln5qb9.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-4m6rkclbhdx6.json",
+      "sha256": "d8f78d1e1eacc13ea938198911761c7b177025f5f14a86802176511204e35c3c",
+      "url": "https://www.akamaistatus.com/incidents/4m6rkclbhdx6.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-g07g6bx6br1m.json",
+      "sha256": "b6af4346ad57ff32bfe10f9dc7f1e35af7ca477b798401229bb897ffac2ae1f2",
+      "url": "https://www.akamaistatus.com/incidents/g07g6bx6br1m.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-qzzsbxh9z6mq.json",
+      "sha256": "2f30bbb854c13da65de566779ac61fdbd4d3e6f9694abbae084e154f6b071e74",
+      "url": "https://www.akamaistatus.com/incidents/qzzsbxh9z6mq.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-zxl3hls14qwg.json",
+      "sha256": "cc1df122359f6ca1423167b13a5ab7241d4fe6e5e56cc27fadabeffe95e264f8",
+      "url": "https://www.akamaistatus.com/incidents/zxl3hls14qwg.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-w6cf745jm3cg.json",
+      "sha256": "512c092f7875177c4867e09ce80be4b897effa8ce7fbc3768988520a0e6d8426",
+      "url": "https://www.akamaistatus.com/incidents/w6cf745jm3cg.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-6hd1vzmly5pl.json",
+      "sha256": "669fbfff010b72e1a31bc0b72bdeb588afd4f6df90415196594645cbb4ed9465",
+      "url": "https://www.akamaistatus.com/incidents/6hd1vzmly5pl.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-4psbcj72qknm.json",
+      "sha256": "24c525f6667db16d0a2ef7a4802b62b6923398b288531367324241036ac233e3",
+      "url": "https://www.akamaistatus.com/incidents/4psbcj72qknm.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-z1qzjzzbfsw3.json",
+      "sha256": "c64ece1e4c83788e56451cd2b2fa33c3a9b071b325abcdff94f4f80bc1d7932f",
+      "url": "https://www.akamaistatus.com/incidents/z1qzjzzbfsw3.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-v8bj9csdpdz7.json",
+      "sha256": "e879a11da934b3b6d7acf6df5e5ed074dc57d022c8e07c376a11fd2ef4358106",
+      "url": "https://www.akamaistatus.com/incidents/v8bj9csdpdz7.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-k61mr27115nx.json",
+      "sha256": "579e6fe3a208ea0fab48230c6217ab377af6035e88ccf77b74a3008dca4fe83d",
+      "url": "https://www.akamaistatus.com/incidents/k61mr27115nx.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-sh5f62qkqzg2.json",
+      "sha256": "da9ee3d3bfb45fa697bb5d30ac1890ad2d5d55cb7be14f202c50217ee62edcec",
+      "url": "https://www.akamaistatus.com/incidents/sh5f62qkqzg2.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-jnghvwhbjbkl.json",
+      "sha256": "4cdd9032cafd0fe0c348e30b8b8d858763d497c7d6483ac95b9ff2e8a8a2d027",
+      "url": "https://www.akamaistatus.com/incidents/jnghvwhbjbkl.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-0ky9v4q3cbrq.json",
+      "sha256": "28990c427d2f00025736ce3321399bb4017f9e1c15e6171ecba7c63777e2b1b5",
+      "url": "https://www.akamaistatus.com/incidents/0ky9v4q3cbrq.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-nxwt5pz35k0c.json",
+      "sha256": "44aeaa88ed34f91e2b2e5cdbe4076daef07624d068b265123e92d8bc935860ff",
+      "url": "https://www.akamaistatus.com/incidents/nxwt5pz35k0c.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-cf0bf6x28nfv.json",
+      "sha256": "849d5888869e0fb3df11dad82c02a32cace2df1e54d4840b263ca466134e01db",
+      "url": "https://www.akamaistatus.com/incidents/cf0bf6x28nfv.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-4skhdzwjc7q1.json",
+      "sha256": "b894244c522d73fb00f93c317d4cde7f68cd4b3c4714b0c2442973e6329da11e",
+      "url": "https://www.akamaistatus.com/incidents/4skhdzwjc7q1.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-rhvw5zw1s8sd.json",
+      "sha256": "e7451f60091562ebd31b06fbbe16060e3d1490c0aa041cb53048ce9793ff982e",
+      "url": "https://www.akamaistatus.com/incidents/rhvw5zw1s8sd.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-vtcc19l6gmyy.json",
+      "sha256": "f4fbf9f1785965a4ea80cc066b6a6165b4ab96e129d613681426dc684d322f86",
+      "url": "https://www.akamaistatus.com/incidents/vtcc19l6gmyy.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-7s8ygqtvm1dd.json",
+      "sha256": "8c42f3285f4a46f4a33d27b5137bd6e2661bd7cd5c56770c185a1cf67e787d66",
+      "url": "https://www.akamaistatus.com/incidents/7s8ygqtvm1dd.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-49nznp8hxrmd.json",
+      "sha256": "bfb3823908f31b5bf7773a8d10ed6e2862a4fd891c08a22e2a6718c2337a44a1",
+      "url": "https://www.akamaistatus.com/incidents/49nznp8hxrmd.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-4tfmmclxn9z2.json",
+      "sha256": "35b107353ba48f9bc6702267f01a9348c697562b15de49897d169aa83ef7fed1",
+      "url": "https://www.akamaistatus.com/incidents/4tfmmclxn9z2.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-tw3kj709r9lb.json",
+      "sha256": "0a45096e14d97ad83068c3a8e2f6928fd93f8cffd933350f5e10622928556529",
+      "url": "https://www.akamaistatus.com/incidents/tw3kj709r9lb.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-cgpx10b4j872.json",
+      "sha256": "719f1a7c246dce3969ea9165d26d0a5b361c5bfbc43d6fe8e9d1996c64d913c7",
+      "url": "https://www.akamaistatus.com/incidents/cgpx10b4j872.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-3zy7w3nbp9w2.json",
+      "sha256": "49067c9dfa6a00d3064580996a07f376014d53ff63b6f973a50dd08388a2c64c",
+      "url": "https://www.akamaistatus.com/incidents/3zy7w3nbp9w2.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-m77sr719k5rx.json",
+      "sha256": "76b19a7dec62815a0216c8f3adf13b0a40fd19121df43766be01c1a8b31dbaa2",
+      "url": "https://www.akamaistatus.com/incidents/m77sr719k5rx.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-l9z3t1q8qgzd.json",
+      "sha256": "be78e2eb3e02ba8d0a5f412b2d705967967476dbcf56d34d9ea227ba12ff0465",
+      "url": "https://www.akamaistatus.com/incidents/l9z3t1q8qgzd.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-y4mf15r4knxx.json",
+      "sha256": "66327e1d813394002969d11d7e3f10883ab94b117f58cee096de7f8726cb6f4b",
+      "url": "https://www.akamaistatus.com/incidents/y4mf15r4knxx.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-k7bwtffh4390.json",
+      "sha256": "9f5fddc9a62af9ed19a4bd4b6a6457a6d1f67a1c308ea24f7d2c0660d295e1c1",
+      "url": "https://www.akamaistatus.com/incidents/k7bwtffh4390.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-bwgzx8vd23by.json",
+      "sha256": "060fe695796a4f99667732bd2bf4399ad2234e7c9065be15586ea494899ce629",
+      "url": "https://www.akamaistatus.com/incidents/bwgzx8vd23by.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-68vg9pbbvp0l.json",
+      "sha256": "ec11b34c528a894c37d0fa57f4c5d97052eab3ffb72633c284813f2ae1303db6",
+      "url": "https://www.akamaistatus.com/incidents/68vg9pbbvp0l.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-23fbn79n9b8h.json",
+      "sha256": "ed45187a80ae1a917597395b77a09a5926d0a87bb71cd99f0183a939b4320a46",
+      "url": "https://www.akamaistatus.com/incidents/23fbn79n9b8h.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-gfym3fbcnx82.json",
+      "sha256": "c2592475457ca748a81792fdf21a1db90e75a79990114501f96188022b542747",
+      "url": "https://www.akamaistatus.com/incidents/gfym3fbcnx82.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-w6klrr4mzzjw.json",
+      "sha256": "15f947a903f437a45e7a60eb03962841786c89570e923ba3b8d20d951561cb80",
+      "url": "https://www.akamaistatus.com/incidents/w6klrr4mzzjw.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-4x26mr63rd46.json",
+      "sha256": "f151613c9b58b7c829422ac1fa888eccdabb3b8ff4577adc83a7b42c0ea27f64",
+      "url": "https://www.akamaistatus.com/incidents/4x26mr63rd46.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-d5g4885bvl5y.json",
+      "sha256": "20d7eb2c2b9c31c739353fccd1bde61e54b285c55ea542df52891d29b65e64aa",
+      "url": "https://www.akamaistatus.com/incidents/d5g4885bvl5y.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-xxxq1dmz9cfb.json",
+      "sha256": "2573bdbeeb28eaec6760a6c37898cb1b2e215c00b9fb5ea1ae19e67dd8977b52",
+      "url": "https://www.akamaistatus.com/incidents/xxxq1dmz9cfb.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-bllkdl5rbv1f.json",
+      "sha256": "db8f1941626ebde546678c402e379b136b1d7c2e079f66daf79a5117d77eef17",
+      "url": "https://www.akamaistatus.com/incidents/bllkdl5rbv1f.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-q40950mz6km5.json",
+      "sha256": "47f65444fb154108dcad9adee60bd33637b383f43c4ef08c2a08d2f9a04e8a15",
+      "url": "https://www.akamaistatus.com/incidents/q40950mz6km5.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-2pg0fgnzv9q8.json",
+      "sha256": "a3794b4021a119f6155d6856e7dc089c5569f9b2961e3fff1fa8db648316bad8",
+      "url": "https://www.akamaistatus.com/incidents/2pg0fgnzv9q8.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-zbcy26169jr3.json",
+      "sha256": "95f5ab8155d2298f42919e2678acf2e50a7b39dc691fda903d3a9142ea96e184",
+      "url": "https://www.akamaistatus.com/incidents/zbcy26169jr3.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-sxm08n1nzh5y.json",
+      "sha256": "c95bae1fa2c4892f0d2656a267fc9474c292a978d5f14083456007032b687914",
+      "url": "https://www.akamaistatus.com/incidents/sxm08n1nzh5y.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-m5z1b82n5h0z.json",
+      "sha256": "0d339e84cc899a726512e7e3166112761a1d9e5607cfaa94b36d46f0b70ac9d4",
+      "url": "https://www.akamaistatus.com/incidents/m5z1b82n5h0z.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-kfww9m0t5h4x.json",
+      "sha256": "b225e1400b33ccecc14167afa01531bb2ce1ab845ad3395e3d995d4215073f77",
+      "url": "https://www.akamaistatus.com/incidents/kfww9m0t5h4x.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-ypbgqwb2v333.json",
+      "sha256": "7dcb77f6c734d5052a6bff64b254e7f8633b6bd379134b5c6a13f20e1904d3a2",
+      "url": "https://www.akamaistatus.com/incidents/ypbgqwb2v333.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-81jmmv9sj4x7.json",
+      "sha256": "bfe0ac975bc4dd5e0f53fb0d0a9bc7b1f94408a1f2976ab79d410ef171ba47be",
+      "url": "https://www.akamaistatus.com/incidents/81jmmv9sj4x7.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-jdx310qt4fg0.json",
+      "sha256": "0c2ff6e114b339aa62ecd0aea6ec6409f1a5aa81cb7381ad00ffabf5d41a0d32",
+      "url": "https://www.akamaistatus.com/incidents/jdx310qt4fg0.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-xnv4tw981fwn.json",
+      "sha256": "404de044f305cf5e191bd2ce68670bfcc74e0a87d6144817239af54185d3f3bf",
+      "url": "https://www.akamaistatus.com/incidents/xnv4tw981fwn.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-2pzwdhjz93v0.json",
+      "sha256": "b50a03416d87719510eaaca09be1ef0da62a10eca1f8c2dfad4468ac646a8766",
+      "url": "https://www.akamaistatus.com/incidents/2pzwdhjz93v0.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-d83vr7f7jl27.json",
+      "sha256": "5680735c4d4cb34fad7e2b88ac1eeef4d82d9c1c5e04e45d8b9725cf101610a1",
+      "url": "https://www.akamaistatus.com/incidents/d83vr7f7jl27.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-n59ckffffwr5.json",
+      "sha256": "378fe58fd7cf88f55271c3043d4326ad48cf443ff90eb9807e3bdec68d2c6b37",
+      "url": "https://www.akamaistatus.com/incidents/n59ckffffwr5.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-8gxhvd0xrgb9.json",
+      "sha256": "a1db95e42218ae10fb29300908bdd13676ccf5a96e04114dec2a98f4f6d9fa54",
+      "url": "https://www.akamaistatus.com/incidents/8gxhvd0xrgb9.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-jtnwrtwv78sb.json",
+      "sha256": "131e05895977eab52846c448cadae98e9149baaa768b3c9f7dc553118066f958",
+      "url": "https://www.akamaistatus.com/incidents/jtnwrtwv78sb.json"
+    }
+  ],
+  "coverage_start": "2026-01-01",
+  "coverage_end": "2026-09-29",
+  "severity_map": {
+    "minor": "minor",
+    "none": "none",
+    "major": "major"
+  },
+  "incidents": [
+    {
+      "id": "jtnwrtwv78sb",
+      "title": "Enterprise Security - SIA impact in India",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-01-08T12:54:20.122Z",
+      "resolved_utc": "2026-01-09T19:05:37.824Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/4hdq4b2klhvt"
+    },
+    {
+      "id": "n59ckffffwr5",
+      "title": "Reporting Issues",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-01-12T20:04:49.000Z",
+      "resolved_utc": "2026-01-13T09:45:14.715Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/syrv4g9z38q9"
+    },
+    {
+      "id": "8gxhvd0xrgb9",
+      "title": "Edge Delivery Issues in Paris, France and Bogota",
+      "impact_label": "none",
+      "severity": "none",
+      "started_utc": "2026-01-13T08:52:28.000Z",
+      "resolved_utc": "2026-01-13T08:52:28.000Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/k2548xdrq3qs"
+    },
+    {
+      "id": "2pzwdhjz93v0",
+      "title": "Upcoming winter storm notification",
+      "impact_label": "none",
+      "severity": "none",
+      "started_utc": "2026-01-23T19:14:02.541Z",
+      "resolved_utc": "2026-01-27T18:56:16.610Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/t45g2jlzh6kb"
+    },
+    {
+      "id": "xnv4tw981fwn",
+      "title": "Edge Delivery Issues",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-01-26T03:46:16.128Z",
+      "resolved_utc": "2026-01-28T09:10:48.000Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/38z1pq2wcx7d"
+    },
+    {
+      "id": "d83vr7f7jl27",
+      "title": "Certificate Provisioning System (CPS) Errors in Akamai Control Center (ACC)",
+      "impact_label": "none",
+      "severity": "none",
+      "started_utc": "2026-01-26T13:00:00.000Z",
+      "resolved_utc": "2026-01-26T13:00:00.000Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/9nfy91r8x7kx"
+    },
+    {
+      "id": "jdx310qt4fg0",
+      "title": "Enterprise Center Issues",
+      "impact_label": "none",
+      "severity": "none",
+      "started_utc": "2026-01-30T14:14:01.850Z",
+      "resolved_utc": "2026-02-04T01:33:13.600Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/n03t26hk05ds"
+    },
+    {
+      "id": "81jmmv9sj4x7",
+      "title": "Certificate Provisioning System (CPS) issues in Akamai Control Center Portal",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-02-10T00:23:43.248Z",
+      "resolved_utc": "2026-02-10T17:41:08.906Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/sz74hc39cnyt"
+    },
+    {
+      "id": "ypbgqwb2v333",
+      "title": "Issues accessing Akamai Control Center",
+      "impact_label": "major",
+      "severity": "major",
+      "started_utc": "2026-02-10T22:24:59.573Z",
+      "resolved_utc": "2026-02-11T00:13:06.776Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/l8chtdt48v1v"
+    },
+    {
+      "id": "23fbn79n9b8h",
+      "title": "Certificate Provisioning System (CPS) recurrence of issues in Akamai Control Center Portal",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-02-11T21:09:32.937Z",
+      "resolved_utc": "2026-03-20T19:17:21.595Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/h3ts47254k79"
+    },
+    {
+      "id": "kfww9m0t5h4x",
+      "title": "Content Purge API Issues",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-02-19T20:22:45.190Z",
+      "resolved_utc": "2026-02-19T21:50:38.090Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/l4fdvltlbt46"
+    },
+    {
+      "id": "m5z1b82n5h0z",
+      "title": "Multiple Compute and Edge Delivery Services Experiencing Packet Loss in India Region",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-02-27T13:28:12.663Z",
+      "resolved_utc": "2026-02-27T19:48:45.742Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/q6kvchk6bv6t"
+    },
+    {
+      "id": "sxm08n1nzh5y",
+      "title": "Multiple Compute and Edge Delivery Services Experiencing Packet Loss in India Region",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-02-27T21:32:11.314Z",
+      "resolved_utc": "2026-03-03T17:32:56.728Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/xsb74sjh8v2z"
+    },
+    {
+      "id": "zbcy26169jr3",
+      "title": "Enterprise Application Access (EAA) Issues",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-03-05T21:00:12.078Z",
+      "resolved_utc": "2026-03-05T22:25:19.562Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/wbd5g42tzj7l"
+    },
+    {
+      "id": "2pg0fgnzv9q8",
+      "title": "Bot Manager Premier (BMP) Issues",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-03-07T19:00:05.796Z",
+      "resolved_utc": "2026-03-07T22:06:33.824Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/dlqp87b3p4jh"
+    },
+    {
+      "id": "q40950mz6km5",
+      "title": "Compute Connectivity Issues Impacting EAA, BMP, APR, and ETP/SIA",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-03-09T19:28:47.961Z",
+      "resolved_utc": "2026-03-09T22:36:28.363Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/dt2l1xp55ml5"
+    },
+    {
+      "id": "xxxq1dmz9cfb",
+      "title": "DNS Malicious Filtering Issues",
+      "impact_label": "none",
+      "severity": "none",
+      "started_utc": "2026-03-10T17:38:06.519Z",
+      "resolved_utc": "2026-03-10T22:00:01.532Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/7d8t9s3gy1m8"
+    },
+    {
+      "id": "bllkdl5rbv1f",
+      "title": "Edge Delivery Issues in Dallas, US",
+      "impact_label": "none",
+      "severity": "none",
+      "started_utc": "2026-03-10T17:49:44.742Z",
+      "resolved_utc": "2026-03-10T17:49:44.788Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/l36q0q12rcz7"
+    },
+    {
+      "id": "d5g4885bvl5y",
+      "title": "Edge Delivery Issues",
+      "impact_label": "none",
+      "severity": "none",
+      "started_utc": "2026-03-11T08:14:01.468Z",
+      "resolved_utc": "2026-03-11T08:14:01.513Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/h4wx5slvs3p9"
+    },
+    {
+      "id": "4x26mr63rd46",
+      "title": "Akamai Control Center Issues",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-03-13T03:36:58.489Z",
+      "resolved_utc": "2026-03-13T06:30:45.000Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/xk71kjtpbxvz"
+    },
+    {
+      "id": "w6klrr4mzzjw",
+      "title": "Connectivity Issues Impacting EAA, BMP, APR, and ETP/SIA",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-03-13T18:39:19.811Z",
+      "resolved_utc": "2026-03-13T19:57:51.451Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/hfc36jnkjlbd"
+    },
+    {
+      "id": "gfym3fbcnx82",
+      "title": "Enterprise Application Access (EAA) Issues",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-03-17T09:57:28.913Z",
+      "resolved_utc": "2026-03-17T12:19:37.821Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/713r7z5h1c0l"
+    },
+    {
+      "id": "68vg9pbbvp0l",
+      "title": "Edge Delivery Issues With OpenJDK",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-03-19T16:38:32.840Z",
+      "resolved_utc": "2026-03-23T17:59:29.038Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/9sbk906c8b9x"
+    },
+    {
+      "id": "bwgzx8vd23by",
+      "title": "Certificate Provisioning System (CPS) issues",
+      "impact_label": "none",
+      "severity": "none",
+      "started_utc": "2026-03-24T22:34:16.000Z",
+      "resolved_utc": "2026-03-25T00:30:08.702Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/227dkssjn3js"
+    },
+    {
+      "id": "k7bwtffh4390",
+      "title": "Edge Delivery Issues",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-03-24T22:37:25.928Z",
+      "resolved_utc": "2026-03-25T17:29:06.752Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/zffn872t5ld0"
+    },
+    {
+      "id": "y4mf15r4knxx",
+      "title": "Content Purge and Edge Delivery Issues for Customers Using Enforced mTLS settings",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-03-31T07:03:28.419Z",
+      "resolved_utc": "2026-04-02T14:13:56.834Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/9cvyvlft94s8"
+    },
+    {
+      "id": "l9z3t1q8qgzd",
+      "title": "Cloudlets and NetStorage upload Issues",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-04-03T04:54:44.137Z",
+      "resolved_utc": "2026-04-06T09:55:31.445Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/wrtm6ml0d7g9"
+    },
+    {
+      "id": "tw3kj709r9lb",
+      "title": "Edge Delivery Issues in Chicago, Illinois",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-04-06T18:22:58.211Z",
+      "resolved_utc": "2026-04-15T16:02:59.494Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/bccsx5r9p4rb"
+    },
+    {
+      "id": "m77sr719k5rx",
+      "title": "Certificate Provisioning System Issues",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-04-07T10:02:03.309Z",
+      "resolved_utc": "2026-04-07T13:31:40.874Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/5gvjhlbkk2m8"
+    },
+    {
+      "id": "cgpx10b4j872",
+      "title": "Data Services- Reporting Issues",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-04-07T12:11:07.442Z",
+      "resolved_utc": "2026-04-14T19:47:46.021Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/xpzrg3s87bf1"
+    },
+    {
+      "id": "3zy7w3nbp9w2",
+      "title": "Configuration Deployment Issues in Property Manager",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-04-07T18:43:51.686Z",
+      "resolved_utc": "2026-04-08T13:02:20.777Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/vb4djvjkk7mj"
+    },
+    {
+      "id": "4tfmmclxn9z2",
+      "title": "NetStorage Issues",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-04-16T03:17:27.921Z",
+      "resolved_utc": "2026-04-16T06:44:20.283Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/q85xdm9r20kj"
+    },
+    {
+      "id": "49nznp8hxrmd",
+      "title": "Edge Delivery Issues in Frankfurt(DE-FRA-2)",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-04-20T12:25:21.935Z",
+      "resolved_utc": "2026-04-21T01:07:38.369Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/9fp8sjdkjssv"
+    },
+    {
+      "id": "7s8ygqtvm1dd",
+      "title": "Akamai Control Center Issues",
+      "impact_label": "none",
+      "severity": "none",
+      "started_utc": "2026-04-23T09:44:30.000Z",
+      "resolved_utc": "2026-04-23T09:44:30.000Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/kc576qvpjhfl"
+    },
+    {
+      "id": "cf0bf6x28nfv",
+      "title": "WSA reporting incomplete or missing data when filtering by TLS v3 Fingerprint",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-04-23T14:11:12.339Z",
+      "resolved_utc": "2026-04-28T17:39:18.528Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/2q28z3lfty8h"
+    },
+    {
+      "id": "vtcc19l6gmyy",
+      "title": "TrafficPeak Issues",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-04-24T20:07:51.874Z",
+      "resolved_utc": "2026-04-24T23:52:45.134Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/75gn3s7fdp10"
+    },
+    {
+      "id": "rhvw5zw1s8sd",
+      "title": "Secure Internet Access Issues",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-04-27T03:20:42.690Z",
+      "resolved_utc": "2026-04-27T13:27:25.583Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/36dkj4pfzyk9"
+    },
+    {
+      "id": "4skhdzwjc7q1",
+      "title": "Delay in Traffic by Hostname reports",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-04-28T02:50:21.736Z",
+      "resolved_utc": "2026-04-28T17:02:49.219Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/vptk52dj0m1w"
+    },
+    {
+      "id": "nxwt5pz35k0c",
+      "title": "Edge Delivery - HTTP Content Delivery in Europe",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-04-28T15:40:33.808Z",
+      "resolved_utc": "2026-04-28T23:37:50.470Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/dkpwdrwxdwsn"
+    },
+    {
+      "id": "jnghvwhbjbkl",
+      "title": "Intermittent Edge Delivery Delays in Chennai, IN (MAA) Region",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-04-28T16:42:43.247Z",
+      "resolved_utc": "2026-05-04T03:05:38.891Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/sw6l254w5py2"
+    },
+    {
+      "id": "sh5f62qkqzg2",
+      "title": "Reporting Issues affecting URL Traffic and URL Responses reports",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-04-29T05:19:52.480Z",
+      "resolved_utc": "2026-05-04T12:24:25.340Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/m6b7j2mhc1j7"
+    },
+    {
+      "id": "0ky9v4q3cbrq",
+      "title": "Bot Manager Elevated False Positives Issues",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-04-30T18:41:53.530Z",
+      "resolved_utc": "2026-04-30T20:00:19.679Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/4324sd3xzj1d"
+    },
+    {
+      "id": "k61mr27115nx",
+      "title": "Certificate Provisioning System (CPS) issues",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-05-06T11:21:27.308Z",
+      "resolved_utc": "2026-05-06T12:01:06.153Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/mw4k0tzw76sd"
+    },
+    {
+      "id": "v8bj9csdpdz7",
+      "title": "Bot Manager Premier Issues",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-05-11T16:03:03.105Z",
+      "resolved_utc": "2026-05-12T19:18:56.055Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/7c5ld61698jg"
+    },
+    {
+      "id": "z1qzjzzbfsw3",
+      "title": "Edge Delivery Issues between India and Europe",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-05-12T17:08:25.136Z",
+      "resolved_utc": "2026-05-13T01:08:51.634Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/8t872xy5y1fl"
+    },
+    {
+      "id": "4psbcj72qknm",
+      "title": "Edge Delivery Issues in Amsterdam, Netherlands",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-05-13T09:33:04.568Z",
+      "resolved_utc": "2026-05-13T10:25:03.179Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/2bdxdtjz5tdy"
+    },
+    {
+      "id": "6hd1vzmly5pl",
+      "title": "Cloudlets Policy Updates Issues",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-05-14T18:08:25.615Z",
+      "resolved_utc": "2026-05-14T18:45:51.890Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/zxtvld5xnsrg"
+    },
+    {
+      "id": "g07g6bx6br1m",
+      "title": "Reporting Issues affecting URL Traffic and URL Responses reports",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-05-19T10:13:33.000Z",
+      "resolved_utc": "2026-06-01T07:46:02.442Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/snmncm6rp7jn"
+    },
+    {
+      "id": "w6cf745jm3cg",
+      "title": "Configuration Deployment issues with EdgeWorkers and mPulse configuration activations",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-05-20T14:29:36.858Z",
+      "resolved_utc": "2026-05-21T12:36:41.094Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/qj726rqcw4xg"
+    },
+    {
+      "id": "zxl3hls14qwg",
+      "title": "Delay in External Email Delivery",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-05-21T13:58:05.340Z",
+      "resolved_utc": "2026-05-21T16:52:10.334Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/2lzrlyyrqcxv"
+    },
+    {
+      "id": "qzzsbxh9z6mq",
+      "title": "Edge Delivery Issues",
+      "impact_label": "none",
+      "severity": "none",
+      "started_utc": "2026-05-27T13:28:12.019Z",
+      "resolved_utc": "2026-05-27T13:28:12.247Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/7knndfs4mssw"
+    },
+    {
+      "id": "q02p4pj68685",
+      "title": "Edge Delivery - HTTP Content Delivery in Europe",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-06-05T16:16:27.279Z",
+      "resolved_utc": "2026-06-19T11:07:17.400Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/b1sqg6b2c771"
+    },
+    {
+      "id": "4m6rkclbhdx6",
+      "title": "Edge Delivery Issues in NASA (North America and South America)",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-06-06T04:29:26.000Z",
+      "resolved_utc": "2026-06-06T07:21:13.014Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/h450tj4t8jng"
+    },
+    {
+      "id": "f5q43lln5qb9",
+      "title": "Bot Manager Premier Issues",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-06-10T18:38:27.837Z",
+      "resolved_utc": "2026-06-11T16:41:41.011Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/gnf22f7kflfn"
+    },
+    {
+      "id": "yjb8cd93znh7",
+      "title": "DataStream Log Delivery Issues",
+      "impact_label": "none",
+      "severity": "none",
+      "started_utc": "2026-06-12T14:58:05.505Z",
+      "resolved_utc": "2026-06-12T14:58:05.609Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/zd6ykd01ntwf"
+    },
+    {
+      "id": "khclsvrq74b0",
+      "title": "Edge Delivery Issues in Miami, US",
+      "impact_label": "none",
+      "severity": "none",
+      "started_utc": "2026-06-16T15:45:24.572Z",
+      "resolved_utc": "2026-06-16T15:45:24.635Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/5zby3l6s74g0"
+    },
+    {
+      "id": "gvh3kdcqg3cq",
+      "title": "DataStream Configuration Issues",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-06-25T18:14:17.634Z",
+      "resolved_utc": "2026-06-26T23:35:06.212Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/s7n52jn6wpx1"
+    },
+    {
+      "id": "r9khqdkfwtsk",
+      "title": "Cloudlets issues while activating Application Load Balancing configurations",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-06-28T14:45:34.035Z",
+      "resolved_utc": "2026-06-29T15:42:59.184Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/s7yp70pbsz6y"
+    },
+    {
+      "id": "yc72rgybrx39",
+      "title": "Configuration Deployment Issues in Property Manager",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-06-30T21:15:05.493Z",
+      "resolved_utc": "2026-06-30T22:02:40.317Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/qlhdb21kdjq4"
+    },
+    {
+      "id": "n5z8d8fcx9gk",
+      "title": "Edge Delivery - Content Delivery in Pakistan",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-07-02T14:40:01.861Z",
+      "resolved_utc": "2026-07-06T04:11:26.005Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/zk82m29rb29b"
+    },
+    {
+      "id": "1qngzhw8477w",
+      "title": "Application Load Balancer reporting availability issues",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-07-16T04:21:58.828Z",
+      "resolved_utc": "2026-07-23T02:06:06.179Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/cb3qj9wz5790"
+    },
+    {
+      "id": "vwppgkky3358",
+      "title": "Edge delivery Issues in India",
+      "impact_label": "none",
+      "severity": "none",
+      "started_utc": "2026-07-19T07:40:27.560Z",
+      "resolved_utc": "2026-07-20T14:46:38.457Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/hkzx9rfmd03k"
+    },
+    {
+      "id": "pybwthcc41q1",
+      "title": "Edge Delivery Issues",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-07-24T12:21:37.517Z",
+      "resolved_utc": "2026-07-24T18:45:31.126Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/xznp9djptdkv"
+    },
+    {
+      "id": "qf73yh2p60pv",
+      "title": "Bot Manager false positive issues",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-07-27T01:46:47.329Z",
+      "resolved_utc": "2026-07-27T06:07:31.956Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/dh2kz0hg367l"
+    },
+    {
+      "id": "s1y6ynlkv550",
+      "title": "NetStorage Issues in Europe",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-07-29T14:48:18.227Z",
+      "resolved_utc": "2026-07-29T17:06:22.854Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/q0lztkjr3qtz"
+    },
+    {
+      "id": "ttvwbx3n0n5k",
+      "title": "Edge Delivery Issues",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-08-01T10:54:20.448Z",
+      "resolved_utc": "2026-08-01T12:14:33.276Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/pmckd0fvxdc6"
+    },
+    {
+      "id": "hjx689h06bmz",
+      "title": "Reporting data availability issues in 'Traffic by Hostname' report",
+      "impact_label": "none",
+      "severity": "none",
+      "started_utc": "2026-08-04T07:54:30.387Z",
+      "resolved_utc": "2026-08-05T14:33:05.909Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/4mv2z0ry0lzw"
+    },
+    {
+      "id": "zh7bjb5dszlj",
+      "title": "Web Security Analytics Issues",
+      "impact_label": "none",
+      "severity": "none",
+      "started_utc": "2026-08-04T14:00:00.000Z",
+      "resolved_utc": "2026-08-04T14:00:00.000Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/54dp1ft3q052"
+    },
+    {
+      "id": "rbr9qdbckxmz",
+      "title": "Certificate Provisioning System (CPS) Issues",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-08-11T10:11:57.929Z",
+      "resolved_utc": "2026-08-14T17:08:09.838Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/79v4vcgswmwl"
+    },
+    {
+      "id": "p3n7cw3p3v19",
+      "title": "Edge Delivery Issues in India",
+      "impact_label": "none",
+      "severity": "none",
+      "started_utc": "2026-08-12T13:02:24.232Z",
+      "resolved_utc": "2026-08-13T13:52:57.111Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/98mmqfdshl9w"
+    },
+    {
+      "id": "7dvncd99ptdx",
+      "title": "Connection drops and increased latency in Miami",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-08-13T19:31:27.629Z",
+      "resolved_utc": "2026-08-18T21:29:49.005Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/fl6gc32hqjk4"
+    },
+    {
+      "id": "1rtrk63g1y28",
+      "title": "Inbound Email Service Issues",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-08-14T14:53:36.527Z",
+      "resolved_utc": "2026-08-14T19:40:32.855Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/9nkrf5r3zckq"
+    },
+    {
+      "id": "r5tgk6f3qpg1",
+      "title": "Certificate Provisioning System (CPS) issues",
+      "impact_label": "none",
+      "severity": "none",
+      "started_utc": "2026-08-19T16:10:55.895Z",
+      "resolved_utc": "2026-08-20T14:46:53.877Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/c68h05gxfdxr"
+    },
+    {
+      "id": "spqmcq2dqckr",
+      "title": "Reporting data availability issues in 'Traffic by Hostname' report",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-08-20T16:43:42.326Z",
+      "resolved_utc": "2026-08-28T21:59:26.418Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/hj1xqrv6v50m"
+    },
+    {
+      "id": "cmlzltp4vfpq",
+      "title": "Edge Delivery Issues in India",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-08-22T11:21:42.123Z",
+      "resolved_utc": "2026-08-24T18:50:49.215Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/pgcf76mr3xk0"
+    },
+    {
+      "id": "jc0n6zbf7p7y",
+      "title": "Media Services Live 4 (MSL4) Issues",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-08-25T16:52:37.293Z",
+      "resolved_utc": "2026-08-26T10:16:18.115Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/8sck90r4zmyj"
+    },
+    {
+      "id": "0byr6t7zd0nm",
+      "title": "Reporting Issues",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-08-28T01:33:18.801Z",
+      "resolved_utc": "2026-08-28T04:52:29.929Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/cf1hjryv9jfs"
+    },
+    {
+      "id": "b3jph39plmh9",
+      "title": "Application Load Balancer reporting availability issues",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-09-04T06:14:59.971Z",
+      "resolved_utc": "2026-09-04T21:34:01.696Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/xf22980wgs0z"
+    },
+    {
+      "id": "g519p09z0ysx",
+      "title": "Certificate Provisioning System (CPS) Issues and Network Connectivity Issues in Atlanta Region",
+      "impact_label": "none",
+      "severity": "none",
+      "started_utc": "2026-09-04T16:06:25.081Z",
+      "resolved_utc": "2026-09-04T16:06:25.132Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/0ycr02n9f4gq"
+    },
+    {
+      "id": "j7bf3085pwgd",
+      "title": "Edge Delivery Increased Latency in US East (IAD)",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-09-10T17:37:02.118Z",
+      "resolved_utc": "2026-09-11T10:24:21.408Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/g7vjcn9ymg4z"
+    },
+    {
+      "id": "hw3qtgjjg34y",
+      "title": "Performance issues in HTTPS edge delivery network",
+      "impact_label": "none",
+      "severity": "none",
+      "started_utc": "2026-09-15T03:21:14.012Z",
+      "resolved_utc": "2026-09-16T01:36:48.000Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/7787kq44wzrq"
+    },
+    {
+      "id": "grsptb646r9c",
+      "title": "Case Ticketing Issue",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-09-16T10:51:49.394Z",
+      "resolved_utc": "2026-09-16T13:58:51.734Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/vmz8yzf4bxhy"
+    },
+    {
+      "id": "hn14km8cxmc7",
+      "title": "Increased latency during upstream provider maintenance in Singapore, Hong Kong, and Japan",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-09-22T00:30:17.015Z",
+      "resolved_utc": null,
+      "is_maintenance": false,
+      "url": "https://stspg.io/dqxjf24pcwwp"
+    },
+    {
+      "id": "fmpdhlpkr4jp",
+      "title": "Origin Server Connectivity Issues with Elevated Errors in APAC Region",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-09-22T13:19:04.324Z",
+      "resolved_utc": null,
+      "is_maintenance": false,
+      "url": "https://stspg.io/f7zkmr21gbfh"
+    },
+    {
+      "id": "0tlzxmh800dd",
+      "title": "Account Protector Issues",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-09-23T21:30:03.744Z",
+      "resolved_utc": "2026-09-24T09:44:32.453Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/skdxgnpg6hqh"
+    },
+    {
+      "id": "vhv4bt2gvb2s",
+      "title": "Edge Delivery issues in Canada",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-09-28T16:22:33.107Z",
+      "resolved_utc": "2026-09-29T15:43:56.114Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/dxxwb88tbpz6"
+    },
+    {
+      "id": "5qqq8jksvcr2",
+      "title": "Akamai Control Center and Configuration Deployment Issues",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-09-29T20:28:55.872Z",
+      "resolved_utc": "2026-09-29T21:22:32.664Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/z21cpxftrhhm"
+    }
+  ],
+  "notes": [
+    "STANDING collection 2026-09-29 by circulate; not read by R1 or R2. Raw pages (with SHA-256 above) are kept in the CI artifact / retained/, not committed."
+  ]
+}

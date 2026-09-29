@@ -1,0 +1,17 @@
+{
+  "name": "packet",
+  "status": "SKIP",
+  "started_utc": "2026-09-29T23:39:25Z",
+  "finished_utc": "2026-09-29T23:39:25Z",
+  "seconds": 0.31,
+  "counts": {
+    "base_rebuild_identical": true,
+    "base_rebuild_matches_build_notes": true,
+    "standing_rows": 0
+  },
+  "sources": [],
+  "outputs": [],
+  "notes": "no standing newsletter rows; the committed packet stands (rebuilt from the lane inputs: identical=True).",
+  "error": null,
+  "log": "logs/packet.log"
+}

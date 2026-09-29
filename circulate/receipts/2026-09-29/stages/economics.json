@@ -1,0 +1,26 @@
+{
+  "name": "economics",
+  "status": "OK",
+  "started_utc": "2026-09-29T23:33:19Z",
+  "finished_utc": "2026-09-29T23:33:20Z",
+  "seconds": 0.85,
+  "counts": {
+    "index_days": 120,
+    "days_with_verified_files": 120,
+    "committed_rows": 121,
+    "rows_computed": 121,
+    "dated_priced": 120
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "hot-aisle/campaign/market/MARKET.md",
+      "sha256": "a746d8694b654d3712c02e12d0f192e60c41c5ee55418f91279aeea867325688",
+      "bytes": 5290,
+      "committed": true
+    }
+  ],
+  "notes": "recomputed 121 rows through the page engine; byte-identical to the committed file.",
+  "error": null,
+  "log": "logs/economics.log"
+}

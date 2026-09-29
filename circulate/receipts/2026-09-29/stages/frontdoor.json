@@ -1,0 +1,19 @@
+{
+  "name": "frontdoor",
+  "status": "SKIP",
+  "started_utc": "2026-09-29T23:36:14Z",
+  "finished_utc": "2026-09-29T23:36:14Z",
+  "seconds": 0.25,
+  "counts": {
+    "market_embed_in_sync": true,
+    "record_embed_in_sync": true,
+    "record_verified": true,
+    "record_sha256": "57e21870e378259d",
+    "kit": "kit matches source: 42 files, 1864073 bytes"
+  },
+  "sources": [],
+  "outputs": [],
+  "notes": "nothing to rebuild: embeds equal data/market.json and data/run3/record.json, Run 3 record verified, kit matches source.",
+  "error": null,
+  "log": "logs/frontdoor.log"
+}

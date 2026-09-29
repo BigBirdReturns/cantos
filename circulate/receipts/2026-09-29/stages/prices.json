@@ -1,0 +1,29 @@
+{
+  "name": "prices",
+  "status": "OK",
+  "started_utc": "2026-09-29T23:21:18Z",
+  "finished_utc": "2026-09-29T23:21:18Z",
+  "seconds": 0.29,
+  "counts": {
+    "assets": 8,
+    "days_before": 2201
+  },
+  "sources": [
+    {
+      "url": "https://api.github.com/repos/thatkavish/OpenComputePrices/releases/tags/latest-data",
+      "sha256": "56b5f72cae0ae4d701277d5a46ef4106b7b02c8dbf23819717cea21f0e231b75",
+      "retrieved_utc": "2026-09-29T23:21:18Z"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "hot-aisle/data/price-history/INDEX.json",
+      "sha256": "86f7b9aa5a0a187438b13f06521712571032b0e25c9ac9db3401416ca1a5c0e5",
+      "bytes": 364586,
+      "committed": true
+    }
+  ],
+  "notes": "baseline asset digests recorded; release unchanged since the INDEX build (GPU Pricing Data \u2014 2026-07-29 14:36 UTC).",
+  "error": null,
+  "log": "logs/prices.log"
+}

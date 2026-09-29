@@ -1,0 +1,187 @@
+{
+  "schema": "secondrun.status-incidents.v1",
+  "provider": "Prime Intellect",
+  "status_page_url": "https://status.primeintellect.ai",
+  "retrieved_utc": "2026-09-29T23:29:56Z",
+  "raw_files": [
+    {
+      "path": "circulate/retained/status/raw-root/raw/prime-intellect-standing/incidents_2026-01_2026-03.html",
+      "sha256": "5c4b34fa7a4019055a15d234263369a7ccb534d6005f9119f500fff27cef8736",
+      "url": "https://status.primeintellect.ai/incidents/2026-01/2026-03"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/prime-intellect-standing/incidents_2026-04_2026-06.html",
+      "sha256": "6801222767f9b9d8dd048df43b6bef07d2e6170ca87a3608cc5149a56169b758",
+      "url": "https://status.primeintellect.ai/incidents/2026-04/2026-06"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/prime-intellect-standing/incidents_2026-07_2026-09.html",
+      "sha256": "61b40572d3a526c314491163499ea793f3909395d6fbb17886be69915d11e7d0",
+      "url": "https://status.primeintellect.ai/incidents/2026-07/2026-09"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/prime-intellect-standing/incident_926221.html",
+      "sha256": "beb18da6cd2d85aa3645655b191fb5cbedb3242fa8374388f0bc97c4b6237e76",
+      "url": "https://status.primeintellect.ai/incident/926221"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/prime-intellect-standing/incident_925766.html",
+      "sha256": "10d946bcc69616c73a56f4c5781a5b60ed74884c4e6e7942099f02db536afda9",
+      "url": "https://status.primeintellect.ai/incident/925766"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/prime-intellect-standing/incident_907569.html",
+      "sha256": "ea889fb535aa3f94532a62ee3f35cdccbd6445e8cf9f3c0ecf5a5ab267feef87",
+      "url": "https://status.primeintellect.ai/incident/907569"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/prime-intellect-standing/incident_905856.html",
+      "sha256": "392b83040d96a1e1c349983a6a172e23e3ea1d7ab3b0246223b55d87d0bfa0e0",
+      "url": "https://status.primeintellect.ai/incident/905856"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/prime-intellect-standing/incident_1071614.html",
+      "sha256": "ea4fcc24378ec18047176ed70d87c3772533588b8cc5748819e1d05ef011bb43",
+      "url": "https://status.primeintellect.ai/incident/1071614"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/prime-intellect-standing/incident_1071484.html",
+      "sha256": "f82f98b849dace7e427393b1fbddc9f7372b0d69fa67df3d3a2aca7dcda51dfc",
+      "url": "https://status.primeintellect.ai/incident/1071484"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/prime-intellect-standing/incident_1071254.html",
+      "sha256": "7e992760971bedd638d3203f49d3bd0b08fbd8282c9f1bca1ad9e2370858a8f3",
+      "url": "https://status.primeintellect.ai/incident/1071254"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/prime-intellect-standing/incident_1068597.html",
+      "sha256": "9149dbdbebd7cdefa4de97e92f2c19ec065d826e16f24d22af95e85c4f900e05",
+      "url": "https://status.primeintellect.ai/incident/1068597"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/prime-intellect-standing/incident_1068030.html",
+      "sha256": "592a6ae07ce5f960b26170974abc756e69eda934191bc716a906ff2e7b29ef37",
+      "url": "https://status.primeintellect.ai/incident/1068030"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/prime-intellect-standing/incident_1005180.html",
+      "sha256": "40106f06c30c3198200b22c82255ee562b00d8aad781dc67257d7dcb215aa8de",
+      "url": "https://status.primeintellect.ai/incident/1005180"
+    }
+  ],
+  "coverage_start": "2026-01-01",
+  "coverage_end": "2026-09-29",
+  "severity_map": {
+    "Degraded performance": "minor",
+    "Downtime": "critical",
+    "(no affected-component state recorded)": "none"
+  },
+  "incidents": [
+    {
+      "id": "905856",
+      "title": "Sandbox Service - Elevated Latency and Errors",
+      "impact_label": "Degraded performance",
+      "severity": "minor",
+      "started_utc": "2026-05-26T17:45:00Z",
+      "resolved_utc": "2026-05-26T23:34:00Z",
+      "is_maintenance": false,
+      "url": "https://status.primeintellect.ai/incident/905856"
+    },
+    {
+      "id": "907569",
+      "title": "Hosted Training - Temporary unavailable",
+      "impact_label": "Downtime",
+      "severity": "critical",
+      "started_utc": "2026-05-28T21:31:00Z",
+      "resolved_utc": "2026-08-06T20:24:00Z",
+      "is_maintenance": false,
+      "url": "https://status.primeintellect.ai/incident/907569"
+    },
+    {
+      "id": "925766",
+      "title": "Investigating - API degradation",
+      "impact_label": "Degraded performance",
+      "severity": "minor",
+      "started_utc": "2026-06-16T16:48:00Z",
+      "resolved_utc": "2026-06-16T19:20:00Z",
+      "is_maintenance": false,
+      "url": "https://status.primeintellect.ai/incident/925766"
+    },
+    {
+      "id": "926221",
+      "title": "Sandbox Service Degraded",
+      "impact_label": "Degraded performance",
+      "severity": "minor",
+      "started_utc": "2026-06-17T02:24:00Z",
+      "resolved_utc": "2026-06-17T02:58:00Z",
+      "is_maintenance": false,
+      "url": "https://status.primeintellect.ai/incident/926221"
+    },
+    {
+      "id": "1005180",
+      "title": "Hosted Training - Temporary unavailable",
+      "impact_label": "Downtime",
+      "severity": "critical",
+      "started_utc": "2026-08-08T03:19:00Z",
+      "resolved_utc": "2026-08-08T03:52:00Z",
+      "is_maintenance": false,
+      "url": "https://status.primeintellect.ai/incident/1005180"
+    },
+    {
+      "id": "1068030",
+      "title": "Sandbox Service Degraded",
+      "impact_label": "Degraded performance",
+      "severity": "minor",
+      "started_utc": "2026-09-18T08:58:00Z",
+      "resolved_utc": "2026-09-18T09:38:00Z",
+      "is_maintenance": false,
+      "url": "https://status.primeintellect.ai/incident/1068030"
+    },
+    {
+      "id": "1068597",
+      "title": "Sandboxes are Inaccessible",
+      "impact_label": "(no affected-component state recorded)",
+      "severity": "none",
+      "started_utc": "2026-09-19T01:11:00Z",
+      "resolved_utc": "2026-09-19T01:11:00Z",
+      "is_maintenance": false,
+      "url": "https://status.primeintellect.ai/incident/1068597"
+    },
+    {
+      "id": "1071254",
+      "title": "New Sandbox Creation Degraded",
+      "impact_label": "(no affected-component state recorded)",
+      "severity": "none",
+      "started_utc": "2026-09-22T13:04:00Z",
+      "resolved_utc": "2026-09-22T13:04:00Z",
+      "is_maintenance": false,
+      "url": "https://status.primeintellect.ai/incident/1071254"
+    },
+    {
+      "id": "1071484",
+      "title": "Frontend is Unresponsive",
+      "impact_label": "(no affected-component state recorded)",
+      "severity": "none",
+      "started_utc": "2026-09-22T18:28:00Z",
+      "resolved_utc": "2026-09-22T18:28:00Z",
+      "is_maintenance": false,
+      "url": "https://status.primeintellect.ai/incident/1071484"
+    },
+    {
+      "id": "1071614",
+      "title": "Image building maintenance window active",
+      "impact_label": "(no affected-component state recorded)",
+      "severity": "none",
+      "started_utc": "2026-09-22T23:51:00Z",
+      "resolved_utc": "2026-09-22T23:51:00Z",
+      "is_maintenance": false,
+      "url": "https://status.primeintellect.ai/incident/1071614"
+    }
+  ],
+  "notes": [
+    "STANDING collection 2026-09-29 by circulate; not read by R1 or R2. Raw pages (with SHA-256 above) are kept in the CI artifact / retained/, not committed.",
+    "better-stack platform; collected by paging /incidents/<quarter> and fetching every /incident/<id> detail page. impact_label is the worst per-update affected-service state colour shown by Better Stack (red=Downtime->critical, yellow=Degraded performance->minor, blue=Maintenance->none and is_maintenance, green or no affected component->none). Better Stack has no separate impact field.",
+    "quarter pages fetched: 3; incidents listed: 10; recorded: 10; \"No incidents reported\" month markers seen: 5"
+  ]
+}

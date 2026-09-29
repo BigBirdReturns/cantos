@@ -1,0 +1,3380 @@
+{
+ "schema": "axm/floor-prescriptions@1",
+ "generated": "2026-09-29",
+ "method": "Each row is one recurring shortfall found in the 1,273 verbatim ClusterMAX review sentences (clustermax.ai cloudreview pages, mostly ClusterMAX 2.0 text published 2025-11-06, 28 rows from 2.1 updates dated 2026-04-20). Claims were read one by one and assigned by hand to a shortfall; providers_affected counts distinct review pages (slugs) with at least one assigned sentence. A claim can sit in more than one row. Absence from a row means not reported, not compliant.",
+ "corpus": {
+  "claims": 1273,
+  "review_pages": 85,
+  "negative_stance_claims": 483,
+  "negative_claims_assigned": 292,
+  "non_negative_claims_assigned": 5,
+  "review_pages_with_a_negative_claim": 72
+ },
+ "topic_by_stance": {
+  "criticism": {
+   "negative": 354,
+   "neutral": 38,
+   "positive": 0
+  },
+  "praise": {
+   "negative": 0,
+   "neutral": 4,
+   "positive": 226
+  },
+  "business": {
+   "negative": 10,
+   "neutral": 167,
+   "positive": 22
+  },
+  "rating": {
+   "negative": 29,
+   "neutral": 65,
+   "positive": 7
+  },
+  "hardware": {
+   "negative": 13,
+   "neutral": 73,
+   "positive": 15
+  },
+  "access": {
+   "negative": 46,
+   "neutral": 45,
+   "positive": 6
+  },
+  "prediction": {
+   "negative": 13,
+   "neutral": 22,
+   "positive": 16
+  },
+  "methodology": {
+   "negative": 2,
+   "neutral": 36,
+   "positive": 0
+  },
+  "pricing": {
+   "negative": 14,
+   "neutral": 9,
+   "positive": 11
+  },
+  "financing": {
+   "negative": 0,
+   "neutral": 17,
+   "positive": 2
+  },
+  "disclosure": {
+   "negative": 2,
+   "neutral": 6,
+   "positive": 3
+  }
+ },
+ "caveat": "Review text predates ClusterMAX 3.0 and providers may have fixed items (for example cmcr-tensorwave-08 and -10 say the item is now fixed; cmcr-hotaisle-10 is not reproducible against the live site).",
+ "rows": [
+  {
+   "shortfall_id": "S-HEALTH",
+   "shortfall": "No active or passive GPU health checks, or checks not wired into the scheduler",
+   "providers_affected": 25,
+   "claims": 31,
+   "providers": [
+    {
+     "slug": "atlascloud",
+     "name": "Atlas Cloud",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Unavailable"
+    },
+    {
+     "slug": "azure",
+     "name": "Azure",
+     "page_tier_2_0": "Gold",
+     "tier_3_0": "Silver"
+    },
+    {
+     "slug": "buzzhpc",
+     "name": "BuzzHPC",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Participation Ribbon"
+    },
+    {
+     "slug": "cudocompute",
+     "name": "CUDO Compute",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Unavailable"
+    },
+    {
+     "slug": "digitalocean",
+     "name": "Digital Ocean",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Bronze"
+    },
+    {
+     "slug": "fluidstack",
+     "name": "Fluidstack",
+     "page_tier_2_0": "Gold",
+     "tier_3_0": "Unavailable"
+    },
+    {
+     "slug": "gcore",
+     "name": "GCORE",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Bronze"
+    },
+    {
+     "slug": "gmi",
+     "name": "GMI",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Silver"
+    },
+    {
+     "slug": "gmocloud",
+     "name": "GMO Cloud",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Bronze"
+    },
+    {
+     "slug": "googlecloud",
+     "name": "Google Cloud (GCP)",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Gold"
+    },
+    {
+     "slug": "hotaisle",
+     "name": "Hot Aisle",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "NOT IN 3.0 TABLE"
+    },
+    {
+     "slug": "latitudesh",
+     "name": "Latitude.sh",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Participation Ribbon"
+    },
+    {
+     "slug": "neysa",
+     "name": "Neysa",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Participation Ribbon"
+    },
+    {
+     "slug": "oracle",
+     "name": "Oracle",
+     "page_tier_2_0": "Gold",
+     "tier_3_0": "Gold"
+    },
+    {
+     "slug": "primeintellect",
+     "name": "Prime Intellect",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Bronze"
+    },
+    {
+     "slug": "radiantori",
+     "name": "Radiant/Ori",
+     "page_tier_2_0": "Unavailable",
+     "tier_3_0": "Participation Ribbon"
+    },
+    {
+     "slug": "runpod",
+     "name": "Runpod",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Participation Ribbon"
+    },
+    {
+     "slug": "sesterce",
+     "name": "Sesterce",
+     "page_tier_2_0": "Underperforming",
+     "tier_3_0": "Unavailable"
+    },
+    {
+     "slug": "shadeform",
+     "name": "Shadeform",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Participation Ribbon"
+    },
+    {
+     "slug": "stn",
+     "name": "STN",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Participation Ribbon"
+    },
+    {
+     "slug": "tensorwave",
+     "name": "Tensorwave",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Silver"
+    },
+    {
+     "slug": "together",
+     "name": "Together",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Bronze"
+    },
+    {
+     "slug": "vastai",
+     "name": "Vast.ai",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Participation Ribbon"
+    },
+    {
+     "slug": "vultr",
+     "name": "Vultr",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Participation Ribbon"
+    },
+    {
+     "slug": "whitefiber",
+     "name": "Whitefiber",
+     "page_tier_2_0": "Underperforming",
+     "tier_3_0": "Underperforming"
+    }
+   ],
+   "claim_ids": [
+    "cmcr-azure-09",
+    "cmcr-azure-10",
+    "cmcr-buzzhpc-11",
+    "cmcr-buzzhpc-12",
+    "cmcr-cudocompute-16",
+    "cmcr-digitalocean-06",
+    "cmcr-fluidstack-22",
+    "cmcr-gcore-18",
+    "cmcr-gmi-12",
+    "cmcr-gmocloud-23",
+    "cmcr-googlecloud-33",
+    "cmcr-googlecloud-34",
+    "cmcr-googlecloud-36",
+    "cmcr-hotaisle-09",
+    "cmcr-latitudesh-11",
+    "cmcr-neysa-12",
+    "cmcr-oracle-26",
+    "cmcr-primeintellect-10",
+    "cmcr-radiantori-06",
+    "cmcr-runpod-04",
+    "cmcr-sesterce-12",
+    "cmcr-shadeform-11",
+    "cmcr-stn-12",
+    "cmcr-tensorwave-13",
+    "cmcr-together-41",
+    "cmcr-together-54",
+    "cmcr-vastai-14",
+    "cmcr-vultr-13",
+    "cmcr-vultr-21",
+    "cmcr-whitefiber-14",
+    "cmcr-atlascloud-10"
+   ],
+   "what_customer_observes": "Nodes with failing GPUs stay in the scheduler; the customer discovers a bad node by losing a job. Some shops have DCGM installed but not plugged into the scheduler.",
+   "cost_to_customer": {
+    "text": "Lost job time on the failed node plus restart from checkpoint. SemiAnalysis's TCO model puts goodput loss at 0.02% (gold, inference H200) to 4.98% (silver, pretrain GB300) of GPU spend, an assumption not a measurement.",
+    "tie_to_estate_measurement": "Our three 1-hour Run 3 arms saw 0, 7 and 0 failed of 8,622 requests, so single-seat health-check value is not visible in our data. Multi-node loss: UNKNOWN (no estate measurement)."
+   },
+   "likely_fix": {
+    "text": "Enable DCGM background health checks (dcgmi health -c), run them as Slurm HealthCheckProgram or NHC, add Node Problem Detector/GPUd with automated cordon and drain (Draino, NVSentinel or equivalent), and run weekly active checks (dcgmi diag -r 3, nvbandwidth, nccl-tests) on idle nodes.",
+    "sources": [
+     "sessions/clustermax-cloudreview-20260929/raw/expectations_slurm.html :: Monitoring and Health Checks",
+     "sessions/clustermax-cloudreview-20260929/raw/expectations_health-checks.html :: Passive, Active, Automation (links: DCGM diagnostics docs.nvidia.com/datacenter/dcgm/latest/user-guide/dcgm-diagnostics.html; Node Problem Detector github.com/kubernetes/node-problem-detector; GPUd github.com/leptonai/gpud; Draino github.com/planetlabs/draino; NVSentinel github.com/NVIDIA/NVSentinel)",
+     "sessions/clustermax-cloudreview-20260929/raw/criteria_monitoring.html :: Automated Active and Passive Health Checks"
+    ]
+   },
+   "effort_class": "software",
+   "kit_verification": {
+    "audit_check_ids": [
+     "healthChecks.dcgmInstalled",
+     "healthChecks.dcgmSlurm",
+     "healthChecks.nhcInstalled"
+    ],
+    "kit_steps": [
+     "probe/fingerprint.sh (rubric HW-01, HW-03)",
+     "MANUAL section 5 recovery drill"
+    ],
+    "manual_commands": [
+     "scontrol show config | grep HealthCheckProgram",
+     "dcgmi health -c -j"
+    ]
+   },
+   "floor_item_ids": [
+    "O-01",
+    "O-02",
+    "O-03"
+   ],
+   "rank": 1
+  },
+  {
+   "shortfall_id": "S-MONITOR",
+   "shortfall": "No monitoring dashboard, or a dashboard that is broken or missing GPU/job metrics",
+   "providers_affected": 23,
+   "claims": 30,
+   "providers": [
+    {
+     "slug": "amazonwebservices",
+     "name": "Amazon Web Services (AWS)",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Bronze"
+    },
+    {
+     "slug": "atlascloud",
+     "name": "Atlas Cloud",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Unavailable"
+    },
+    {
+     "slug": "azure",
+     "name": "Azure",
+     "page_tier_2_0": "Gold",
+     "tier_3_0": "Silver"
+    },
+    {
+     "slug": "buzzhpc",
+     "name": "BuzzHPC",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Participation Ribbon"
+    },
+    {
+     "slug": "cudocompute",
+     "name": "CUDO Compute",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Unavailable"
+    },
+    {
+     "slug": "digitalocean",
+     "name": "Digital Ocean",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Bronze"
+    },
+    {
+     "slug": "fluidstack",
+     "name": "Fluidstack",
+     "page_tier_2_0": "Gold",
+     "tier_3_0": "Unavailable"
+    },
+    {
+     "slug": "gcore",
+     "name": "GCORE",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Bronze"
+    },
+    {
+     "slug": "gmi",
+     "name": "GMI",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Silver"
+    },
+    {
+     "slug": "gmocloud",
+     "name": "GMO Cloud",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Bronze"
+    },
+    {
+     "slug": "hotaisle",
+     "name": "Hot Aisle",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "NOT IN 3.0 TABLE"
+    },
+    {
+     "slug": "lambda",
+     "name": "Lambda",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Silver"
+    },
+    {
+     "slug": "latitudesh",
+     "name": "Latitude.sh",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Participation Ribbon"
+    },
+    {
+     "slug": "neysa",
+     "name": "Neysa",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Participation Ribbon"
+    },
+    {
+     "slug": "primeintellect",
+     "name": "Prime Intellect",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Bronze"
+    },
+    {
+     "slug": "sesterce",
+     "name": "Sesterce",
+     "page_tier_2_0": "Underperforming",
+     "tier_3_0": "Unavailable"
+    },
+    {
+     "slug": "shadeform",
+     "name": "Shadeform",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Participation Ribbon"
+    },
+    {
+     "slug": "stn",
+     "name": "STN",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Participation Ribbon"
+    },
+    {
+     "slug": "tensorwave",
+     "name": "Tensorwave",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Silver"
+    },
+    {
+     "slug": "together",
+     "name": "Together",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Bronze"
+    },
+    {
+     "slug": "vastai",
+     "name": "Vast.ai",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Participation Ribbon"
+    },
+    {
+     "slug": "vultr",
+     "name": "Vultr",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Participation Ribbon"
+    },
+    {
+     "slug": "whitefiber",
+     "name": "Whitefiber",
+     "page_tier_2_0": "Underperforming",
+     "tier_3_0": "Underperforming"
+    }
+   ],
+   "claim_ids": [
+    "cmcr-amazonwebservices-26",
+    "cmcr-azure-11",
+    "cmcr-buzzhpc-13",
+    "cmcr-cudocompute-16",
+    "cmcr-digitalocean-06",
+    "cmcr-gcore-17",
+    "cmcr-gcore-18",
+    "cmcr-gmi-05",
+    "cmcr-gmi-12",
+    "cmcr-gmocloud-21",
+    "cmcr-gmocloud-22",
+    "cmcr-hotaisle-09",
+    "cmcr-lambda-19",
+    "cmcr-lambda-20",
+    "cmcr-latitudesh-11",
+    "cmcr-neysa-12",
+    "cmcr-neysa-13",
+    "cmcr-primeintellect-10",
+    "cmcr-sesterce-12",
+    "cmcr-shadeform-11",
+    "cmcr-stn-17",
+    "cmcr-vultr-13",
+    "cmcr-vultr-21",
+    "cmcr-whitefiber-13",
+    "cmcr-whitefiber-15",
+    "cmcr-fluidstack-16",
+    "cmcr-together-43",
+    "cmcr-tensorwave-13",
+    "cmcr-vastai-14",
+    "cmcr-atlascloud-10"
+   ],
+   "what_customer_observes": "No dashboard, or a Grafana that is non-functional, missing NVLink/tensor-core/job metrics, or showing wrong numbers (for example InfiniBand at 1.14 Tbit/s).",
+   "cost_to_customer": {
+    "text": "Customer builds its own DCGM/Grafana or runs blind; link flaps and throttling go unnoticed (cmcr-vultr-13: flaps with no proactive notification).",
+    "tie_to_estate_measurement": "Run 3 used no shop dashboard; the kit captured GPU state itself via the fingerprint probe. Cost of building monitoring: UNKNOWN (no estate measurement)."
+   },
+   "likely_fix": {
+    "text": "Deploy kube-prometheus-stack plus dcgm-exporter (at or above 4.8.2 per the audit table), Promtail for dmesg, alert routing, and Slurm sacct-based job views.",
+    "sources": [
+     "sessions/clustermax-cloudreview-20260929/raw/expectations_monitoring.html :: Monitoring Stack, Hardware Monitoring (dcgm-exporter github.com/NVIDIA/dcgm-exporter; kube-prometheus-stack github.com/prometheus-community/helm-charts)",
+     "sessions/clustermax-cloudreview-20260929/raw/criteria_monitoring.html",
+     "sessions/public-tail-20260929/lanes/cmax-audit/repo/cmax/scripts/1-audit/minimum-versions.json :: dcgmExporter minimum 4.8.2"
+    ]
+   },
+   "effort_class": "software",
+   "kit_verification": {
+    "audit_check_ids": [
+     "healthChecks.monitoringStack.dcgmExporter",
+     "securityVersions.dcgmExporter.status"
+    ],
+    "kit_steps": [
+     "counter step 9 (support path)"
+    ],
+    "manual_commands": [
+     "kubectl get pods -n monitoring",
+     "dcgmi discovery -l"
+    ]
+   },
+   "floor_item_ids": [
+    "O-05"
+   ],
+   "rank": 2
+  },
+  {
+   "shortfall_id": "S-ORCH-BROKEN",
+   "shortfall": "Slurm or Kubernetes delivered but broken, misconfigured, or stuck at first use",
+   "providers_affected": 16,
+   "claims": 28,
+   "providers": [
+    {
+     "slug": "amazonwebservices",
+     "name": "Amazon Web Services (AWS)",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Bronze"
+    },
+    {
+     "slug": "azure",
+     "name": "Azure",
+     "page_tier_2_0": "Gold",
+     "tier_3_0": "Silver"
+    },
+    {
+     "slug": "buzzhpc",
+     "name": "BuzzHPC",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Participation Ribbon"
+    },
+    {
+     "slug": "crusoe",
+     "name": "Crusoe",
+     "page_tier_2_0": "Gold",
+     "tier_3_0": "Bronze"
+    },
+    {
+     "slug": "e2enetworks",
+     "name": "E2E Networks",
+     "page_tier_2_0": "Underperforming",
+     "tier_3_0": "NOT IN 3.0 TABLE"
+    },
+    {
+     "slug": "gcore",
+     "name": "GCORE",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Bronze"
+    },
+    {
+     "slug": "gmi",
+     "name": "GMI",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Silver"
+    },
+    {
+     "slug": "gmocloud",
+     "name": "GMO Cloud",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Bronze"
+    },
+    {
+     "slug": "hyperstacknexgen",
+     "name": "Hyperstack/NexGen",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Bronze"
+    },
+    {
+     "slug": "lambda",
+     "name": "Lambda",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Silver"
+    },
+    {
+     "slug": "neysa",
+     "name": "Neysa",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Participation Ribbon"
+    },
+    {
+     "slug": "primeintellect",
+     "name": "Prime Intellect",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Bronze"
+    },
+    {
+     "slug": "tensorwave",
+     "name": "Tensorwave",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Silver"
+    },
+    {
+     "slug": "voltagepark",
+     "name": "Voltage Park",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "NOT IN 3.0 TABLE"
+    },
+    {
+     "slug": "vultr",
+     "name": "Vultr",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Participation Ribbon"
+    },
+    {
+     "slug": "whitefiber",
+     "name": "Whitefiber",
+     "page_tier_2_0": "Underperforming",
+     "tier_3_0": "Underperforming"
+    }
+   ],
+   "claim_ids": [
+    "cmcr-amazonwebservices-05",
+    "cmcr-amazonwebservices-06",
+    "cmcr-amazonwebservices-07",
+    "cmcr-amazonwebservices-11",
+    "cmcr-amazonwebservices-12",
+    "cmcr-buzzhpc-04",
+    "cmcr-crusoe-19",
+    "cmcr-gcore-12",
+    "cmcr-gcore-15",
+    "cmcr-gmi-04",
+    "cmcr-hyperstacknexgen-05",
+    "cmcr-hyperstacknexgen-06",
+    "cmcr-hyperstacknexgen-10",
+    "cmcr-lambda-21",
+    "cmcr-neysa-08",
+    "cmcr-neysa-09",
+    "cmcr-primeintellect-09",
+    "cmcr-tensorwave-05",
+    "cmcr-voltagepark-09",
+    "cmcr-voltagepark-10",
+    "cmcr-vultr-05",
+    "cmcr-whitefiber-09",
+    "cmcr-whitefiber-10",
+    "cmcr-whitefiber-11",
+    "cmcr-e2enetworks-07",
+    "cmcr-azure-04",
+    "cmcr-gmocloud-05",
+    "cmcr-gmocloud-06"
+   ],
+   "what_customer_observes": "Slurm or Kubernetes exists but fails first use: clusters stuck provisioning, rollbacks, sinfo/scontrol disabled, no shared home, slurm-bridge unconfigured, engineers on calls to make it work.",
+   "cost_to_customer": {
+    "text": "Engineer days before the first job. SemiAnalysis logged 14 straight hours and five AWS engineers for one HyperPod cluster (cmcr-amazonwebservices-14), and 2 hours to a failed K8s cluster at Gcore (cmcr-gcore-12).",
+    "tie_to_estate_measurement": "Our Run 3 kit went from SSH to workload-ready in 144 s on Hot Aisle and 349 s on DigitalOcean with a working Docker image (ledger-times.json); orchestration handover cost: UNKNOWN (no estate measurement)."
+   },
+   "likely_fix": {
+    "text": "Add an automated handover acceptance test that runs the expectations-page commands (sinfo, srun -N4 hostname, findmnt -T $HOME, kubectl get storageclass, a two-node nccl-test) before delivery, and fix defaults found (shared home, passwordless SSH, Pyxis/Enroot, topology).",
+    "sources": [
+     "sessions/clustermax-cloudreview-20260929/raw/expectations_slurm.html :: Access, Configuration, Containers",
+     "sessions/clustermax-cloudreview-20260929/raw/expectations_kubernetes.html :: Access, Configuration",
+     "sessions/clustermax-cloudreview-20260929/raw/criteria_orchestration.html"
+    ]
+   },
+   "effort_class": "process",
+   "kit_verification": {
+    "audit_check_ids": [
+     "access.slurmCommandsOk",
+     "access.sshToComputeNodes",
+     "containers.pyxisRuntimeWorks",
+     "networking.topologyConfigured",
+     "storage.rwxStatus"
+    ],
+    "kit_steps": [
+     "counter step 3 (time to SSH) only covers the VM; cluster handover has no kit step yet"
+    ],
+    "manual_commands": [
+     "srun -N4 hostname",
+     "sbatch --wrap hostname",
+     "kubectl get storageclass -o wide"
+    ]
+   },
+   "floor_item_ids": [
+    "O-08",
+    "A-02"
+   ],
+   "rank": 3
+  },
+  {
+   "shortfall_id": "S-STORAGE",
+   "shortfall": "No usable shared filesystem at delivery (no shared home, RWX class missing, mounts flake, volume not mounted)",
+   "providers_affected": 13,
+   "claims": 16,
+   "providers": [
+    {
+     "slug": "amazonwebservices",
+     "name": "Amazon Web Services (AWS)",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Bronze"
+    },
+    {
+     "slug": "buzzhpc",
+     "name": "BuzzHPC",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Participation Ribbon"
+    },
+    {
+     "slug": "crusoe",
+     "name": "Crusoe",
+     "page_tier_2_0": "Gold",
+     "tier_3_0": "Bronze"
+    },
+    {
+     "slug": "cudocompute",
+     "name": "CUDO Compute",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Unavailable"
+    },
+    {
+     "slug": "digitalocean",
+     "name": "Digital Ocean",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Bronze"
+    },
+    {
+     "slug": "e2enetworks",
+     "name": "E2E Networks",
+     "page_tier_2_0": "Underperforming",
+     "tier_3_0": "NOT IN 3.0 TABLE"
+    },
+    {
+     "slug": "gmi",
+     "name": "GMI",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Silver"
+    },
+    {
+     "slug": "hotaisle",
+     "name": "Hot Aisle",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "NOT IN 3.0 TABLE"
+    },
+    {
+     "slug": "lambda",
+     "name": "Lambda",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Silver"
+    },
+    {
+     "slug": "latitudesh",
+     "name": "Latitude.sh",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Participation Ribbon"
+    },
+    {
+     "slug": "primeintellect",
+     "name": "Prime Intellect",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Bronze"
+    },
+    {
+     "slug": "runpod",
+     "name": "Runpod",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Participation Ribbon"
+    },
+    {
+     "slug": "vultr",
+     "name": "Vultr",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Participation Ribbon"
+    }
+   ],
+   "claim_ids": [
+    "cmcr-buzzhpc-06",
+    "cmcr-cudocompute-10",
+    "cmcr-cudocompute-16",
+    "cmcr-crusoe-24",
+    "cmcr-crusoe-30",
+    "cmcr-digitalocean-06",
+    "cmcr-e2enetworks-10",
+    "cmcr-gmi-07",
+    "cmcr-hotaisle-09",
+    "cmcr-lambda-22",
+    "cmcr-latitudesh-11",
+    "cmcr-primeintellect-08",
+    "cmcr-runpod-10",
+    "cmcr-vultr-07",
+    "cmcr-amazonwebservices-11",
+    "cmcr-amazonwebservices-15"
+   ],
+   "what_customer_observes": "Home directory is node-local, so data must be copied by hand; RWX StorageClass missing so PVCs cannot deploy; filesystems randomly unmount; a 200 GB disk attached but not mounted.",
+   "cost_to_customer": {
+    "text": "Multi-node jobs cannot start or lose data on unmounts; hours of manual setup per user.",
+    "tie_to_estate_measurement": "The Hot Aisle Run 3 arm used a local HF cache (/home/hotaisle/hf-cache, invocation.json); neither Run 3 arm exercised shared storage. Cost: UNKNOWN (no estate measurement)."
+   },
+   "likely_fix": {
+    "text": "Provision a parallel or NFS shared filesystem mounted at the default home with a stated quota, a default RWX StorageClass, and keep it mounted (health-check mounts).",
+    "sources": [
+     "sessions/clustermax-cloudreview-20260929/raw/expectations_slurm.html :: Access, shared filesystem (findmnt -T $HOME; quota -s || lfs quota -h -u $USER $HOME; srun -N4 df -h $HOME)",
+     "sessions/clustermax-cloudreview-20260929/raw/expectations_kubernetes.html :: Configuration, CSI provider with ReadWriteMany (K8s PV access modes kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes)",
+     "sessions/clustermax-cloudreview-20260929/raw/criteria_storage.html"
+    ]
+   },
+   "effort_class": "config",
+   "kit_verification": {
+    "audit_check_ids": [
+     "storage.rwxStatus"
+    ],
+    "kit_steps": [
+     "fio per expectations page (not yet a kit step)"
+    ],
+    "manual_commands": [
+     "findmnt -T $HOME",
+     "kubectl get storageclass",
+     "fio --name=seqread --rw=read --bs=1M --size=1G --numjobs=4 --direct=1"
+    ]
+   },
+   "floor_item_ids": [
+    "O-06"
+   ],
+   "rank": 4
+  },
+  {
+   "shortfall_id": "S-ACCESS-BLOCK",
+   "shortfall": "Access blocked or delayed by KYC, account deactivation, invitation-only beta, or waits of weeks to months",
+   "providers_affected": 12,
+   "claims": 15,
+   "providers": [
+    {
+     "slug": "arccompute",
+     "name": "ARC Compute",
+     "page_tier_2_0": "Unavailable",
+     "tier_3_0": "NOT IN 3.0 TABLE"
+    },
+    {
+     "slug": "backend",
+     "name": "Backend",
+     "page_tier_2_0": "Unavailable",
+     "tier_3_0": "NOT IN 3.0 TABLE"
+    },
+    {
+     "slug": "bitdeer",
+     "name": "Bitdeer",
+     "page_tier_2_0": "Unavailable",
+     "tier_3_0": "Participation Ribbon"
+    },
+    {
+     "slug": "clore",
+     "name": "Clore",
+     "page_tier_2_0": "Underperforming",
+     "tier_3_0": "NOT IN 3.0 TABLE"
+    },
+    {
+     "slug": "denvrdataworks",
+     "name": "Denvr Dataworks",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Unavailable"
+    },
+    {
+     "slug": "e2enetworks",
+     "name": "E2E Networks",
+     "page_tier_2_0": "Underperforming",
+     "tier_3_0": "NOT IN 3.0 TABLE"
+    },
+    {
+     "slug": "gmi",
+     "name": "GMI",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Silver"
+    },
+    {
+     "slug": "ibmcloud",
+     "name": "IBM Cloud",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Participation Ribbon"
+    },
+    {
+     "slug": "megaspeed",
+     "name": "MegaSpeed",
+     "page_tier_2_0": "Unavailable",
+     "tier_3_0": "Unavailable"
+    },
+    {
+     "slug": "mithrilmlfoundry",
+     "name": "Mithril/ML Foundry",
+     "page_tier_2_0": "Underperforming",
+     "tier_3_0": "Underperforming"
+    },
+    {
+     "slug": "neevcloud",
+     "name": "Neev Cloud",
+     "page_tier_2_0": "Unavailable",
+     "tier_3_0": "NOT IN 3.0 TABLE"
+    },
+    {
+     "slug": "nscale",
+     "name": "NScale",
+     "page_tier_2_0": "Unavailable",
+     "tier_3_0": "Unavailable"
+    }
+   ],
+   "claim_ids": [
+    "cmcr-ibmcloud-07",
+    "cmcr-ibmcloud-08",
+    "cmcr-ibmcloud-09",
+    "cmcr-ibmcloud-13",
+    "cmcr-bitdeer-06",
+    "cmcr-e2enetworks-06",
+    "cmcr-gmi-05",
+    "cmcr-mithrilmlfoundry-12",
+    "cmcr-clore-05",
+    "cmcr-arccompute-05",
+    "cmcr-megaspeed-04",
+    "cmcr-nscale-05",
+    "cmcr-denvrdataworks-06",
+    "cmcr-neevcloud-02",
+    "cmcr-backend-04"
+   ],
+   "what_customer_observes": "KYC blocks a first test, accounts are deactivated mid-test, verification calls demand use-case explanations, invitation-only betas, or waits of weeks to months.",
+   "cost_to_customer": {
+    "text": "Weeks of calendar time before any GPU-hour; for IBM the account was shut down twice during a simple docker download test (cmcr-ibmcloud-13).",
+    "tie_to_estate_measurement": "Our reference seats took 122 s (Hot Aisle) and 83 s (DigitalOcean) from create to SSH once an account existed; DigitalOcean's zero GPU limit took a support ticket ('under a day', untimed). Signup-to-first-create time: UNKNOWN (both records 'unobserved')."
+   },
+   "likely_fix": {
+    "text": "Publish KYC requirements up front, verify at signup rather than mid-use, set a service-level target for review (hours), and provide a small pre-approved self-serve tier.",
+    "sources": [
+     "main/hot-aisle/campaign/shop-eval/counter/PROTOCOL.md :: step 1",
+     "sessions/clustermax-cloudreview-20260929/claims.all.jsonl :: cmcr-ibmcloud-07..13, cmcr-gmi-05, cmcr-mithrilmlfoundry-12",
+     "sessions/clustermax-cloudreview-20260929/raw/criteria_lifecycle.html :: Easy onboarding, Transparent onboarding costs and delivery timelines that are met"
+    ]
+   },
+   "effort_class": "process",
+   "kit_verification": {
+    "audit_check_ids": [],
+    "kit_steps": [
+     "counter step 1 (kyc_required, card_required, quota_gate, signup_to_active_account_s)"
+    ],
+    "manual_commands": [
+     "stopwatch from first sign-up screen to first create attempt"
+    ]
+   },
+   "floor_item_ids": [
+    "A-03",
+    "A-04"
+   ],
+   "rank": 5
+  },
+  {
+   "shortfall_id": "S-CAPACITY",
+   "shortfall": "Capacity shown sold out, unavailable, or no bids when the reviewers tried to rent",
+   "providers_affected": 12,
+   "claims": 15,
+   "providers": [
+    {
+     "slug": "akashnetwork",
+     "name": "Akash Network",
+     "page_tier_2_0": "Underperforming",
+     "tier_3_0": "NOT IN 3.0 TABLE"
+    },
+    {
+     "slug": "azure",
+     "name": "Azure",
+     "page_tier_2_0": "Gold",
+     "tier_3_0": "Silver"
+    },
+    {
+     "slug": "corvex",
+     "name": "Corvex",
+     "page_tier_2_0": "Unavailable",
+     "tier_3_0": "Unavailable"
+    },
+    {
+     "slug": "deepinfra",
+     "name": "DeepInfra",
+     "page_tier_2_0": "Underperforming",
+     "tier_3_0": "NOT IN 3.0 TABLE"
+    },
+    {
+     "slug": "e2enetworks",
+     "name": "E2E Networks",
+     "page_tier_2_0": "Underperforming",
+     "tier_3_0": "NOT IN 3.0 TABLE"
+    },
+    {
+     "slug": "exabits",
+     "name": "Exabits",
+     "page_tier_2_0": "Underperforming",
+     "tier_3_0": "NOT IN 3.0 TABLE"
+    },
+    {
+     "slug": "gpunet",
+     "name": "GPU.net",
+     "page_tier_2_0": "Underperforming",
+     "tier_3_0": "NOT IN 3.0 TABLE"
+    },
+    {
+     "slug": "hotaisle",
+     "name": "Hot Aisle",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "NOT IN 3.0 TABLE"
+    },
+    {
+     "slug": "hydrahost",
+     "name": "Hydra Host",
+     "page_tier_2_0": "Underperforming",
+     "tier_3_0": "Underperforming"
+    },
+    {
+     "slug": "irenirisenergy",
+     "name": "IREN/Iris Energy",
+     "page_tier_2_0": "Underperforming",
+     "tier_3_0": "Underperforming"
+    },
+    {
+     "slug": "lambda",
+     "name": "Lambda",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Silver"
+    },
+    {
+     "slug": "lightningai",
+     "name": "Lightning.ai",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Unavailable"
+    }
+   ],
+   "claim_ids": [
+    "cmcr-akashnetwork-05",
+    "cmcr-akashnetwork-07",
+    "cmcr-deepinfra-05",
+    "cmcr-e2enetworks-09",
+    "cmcr-exabits-05",
+    "cmcr-gpunet-05",
+    "cmcr-hydrahost-04",
+    "cmcr-hydrahost-05",
+    "cmcr-hotaisle-11",
+    "cmcr-hotaisle-12",
+    "cmcr-irenirisenergy-09",
+    "cmcr-lambda-11",
+    "cmcr-lightningai-18",
+    "cmcr-corvex-03",
+    "cmcr-azure-04"
+   ],
+   "what_customer_observes": "The console shows sold out, a booking error, or no bids; or a listing that does not provision.",
+   "cost_to_customer": {
+    "text": "No seat means no accepted work: cost per accepted is undefined, and the whole evaluation stalls.",
+    "tie_to_estate_measurement": "Run 3: DigitalOcean MI300X and H200 listed no capacity in any region all night (arm C did not run); Hot Aisle had one 1x VM (RUN3-RESULTS item 5; availability ledger 2026-09-23 and 2026-09-24). Dollar value of missed work: UNKNOWN (no estate measurement)."
+   },
+   "likely_fix": {
+    "text": "More stock (capital), or an honest capacity signal and waitlist so listed equals deliverable.",
+    "sources": [
+     "sessions/clustermax-cloudreview-20260929/raw/criteria_availability.html",
+     "main/hot-aisle/campaign/shop-eval/diagnose/RUBRIC.md :: PRICE-03",
+     "main/hot-aisle/campaign/shop-eval/counter/PROTOCOL.md :: step 4"
+    ]
+   },
+   "effort_class": "capital",
+   "kit_verification": {
+    "audit_check_ids": [],
+    "kit_steps": [
+     "counter step 4 (ledger_attempts)",
+     "rubric PRICE-03",
+     "availability/observations.jsonl"
+    ],
+    "manual_commands": [
+     "repeat creates at more than one time of day"
+    ]
+   },
+   "floor_item_ids": [
+    "A-05"
+   ],
+   "rank": 6
+  },
+  {
+   "shortfall_id": "S-ORCH-ABSENT",
+   "shortfall": "Slurm and/or Kubernetes not offered, not available to test, or advertised but not set up",
+   "providers_affected": 12,
+   "claims": 13,
+   "providers": [
+    {
+     "slug": "akamailinode",
+     "name": "Akamai/Linode",
+     "page_tier_2_0": "Underperforming",
+     "tier_3_0": "Underperforming"
+    },
+    {
+     "slug": "cudocompute",
+     "name": "CUDO Compute",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Unavailable"
+    },
+    {
+     "slug": "digitalocean",
+     "name": "Digital Ocean",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Bronze"
+    },
+    {
+     "slug": "gcore",
+     "name": "GCORE",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Bronze"
+    },
+    {
+     "slug": "hotaisle",
+     "name": "Hot Aisle",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "NOT IN 3.0 TABLE"
+    },
+    {
+     "slug": "latitudesh",
+     "name": "Latitude.sh",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Participation Ribbon"
+    },
+    {
+     "slug": "neevcloud",
+     "name": "Neev Cloud",
+     "page_tier_2_0": "Unavailable",
+     "tier_3_0": "NOT IN 3.0 TABLE"
+    },
+    {
+     "slug": "neysa",
+     "name": "Neysa",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Participation Ribbon"
+    },
+    {
+     "slug": "runpod",
+     "name": "Runpod",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Participation Ribbon"
+    },
+    {
+     "slug": "sesterce",
+     "name": "Sesterce",
+     "page_tier_2_0": "Underperforming",
+     "tier_3_0": "Unavailable"
+    },
+    {
+     "slug": "shadeform",
+     "name": "Shadeform",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Participation Ribbon"
+    },
+    {
+     "slug": "vastai",
+     "name": "Vast.ai",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Participation Ribbon"
+    }
+   ],
+   "claim_ids": [
+    "cmcr-akamailinode-05",
+    "cmcr-cudocompute-16",
+    "cmcr-digitalocean-04",
+    "cmcr-digitalocean-06",
+    "cmcr-latitudesh-11",
+    "cmcr-sesterce-12",
+    "cmcr-shadeform-11",
+    "cmcr-neevcloud-06",
+    "cmcr-neysa-15",
+    "cmcr-vastai-10",
+    "cmcr-runpod-04",
+    "cmcr-gcore-07",
+    "cmcr-hotaisle-10"
+   ],
+   "what_customer_observes": "No managed Slurm or Kubernetes, or the website advertises one that was not set up when help was requested.",
+   "cost_to_customer": {
+    "text": "Buyer needing a cluster cannot use the shop; single-node buyers are unaffected.",
+    "tie_to_estate_measurement": "Not relevant to the 1-GPU Run 3 seat. Hot Aisle is in this row on its own 2.0 review (cmcr-hotaisle-10), not reproducible against today's site (README: no Slurm mention). Cost: UNKNOWN (no estate measurement)."
+   },
+   "likely_fix": {
+    "text": "Offer an automated Slurm and/or Kubernetes path (self-service), or state plainly that the product is single-node. Advertised features must be deployable.",
+    "sources": [
+     "sessions/clustermax-cloudreview-20260929/raw/criteria_orchestration.html :: Slurm, Kubernetes requirements",
+     "sessions/clustermax-cloudreview-20260929/raw/expectations_slurm.html",
+     "sessions/clustermax-cloudreview-20260929/raw/expectations_kubernetes.html"
+    ]
+   },
+   "effort_class": "software",
+   "kit_verification": {
+    "audit_check_ids": [
+     "access.slurmCommandsOk"
+    ],
+    "kit_steps": [
+     "desk review of docs (MANUAL public desk review)"
+    ],
+    "manual_commands": []
+   },
+   "floor_item_ids": [
+    "O-08"
+   ],
+   "rank": 7
+  },
+  {
+   "shortfall_id": "S-RELIAB",
+   "shortfall": "Instability, outages or unexplained failures seen in testing or reported by users",
+   "providers_affected": 11,
+   "claims": 18,
+   "providers": [
+    {
+     "slug": "crusoe",
+     "name": "Crusoe",
+     "page_tier_2_0": "Gold",
+     "tier_3_0": "Bronze"
+    },
+    {
+     "slug": "gpunet",
+     "name": "GPU.net",
+     "page_tier_2_0": "Underperforming",
+     "tier_3_0": "NOT IN 3.0 TABLE"
+    },
+    {
+     "slug": "hyperbolic",
+     "name": "Hyperbolic",
+     "page_tier_2_0": "Underperforming",
+     "tier_3_0": "Participation Ribbon"
+    },
+    {
+     "slug": "lambda",
+     "name": "Lambda",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Silver"
+    },
+    {
+     "slug": "latitudesh",
+     "name": "Latitude.sh",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Participation Ribbon"
+    },
+    {
+     "slug": "stn",
+     "name": "STN",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Participation Ribbon"
+    },
+    {
+     "slug": "tensorwave",
+     "name": "Tensorwave",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Silver"
+    },
+    {
+     "slug": "together",
+     "name": "Together",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Bronze"
+    },
+    {
+     "slug": "vastai",
+     "name": "Vast.ai",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Participation Ribbon"
+    },
+    {
+     "slug": "verdadatacrunch",
+     "name": "Verda/DataCrunch",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Bronze"
+    },
+    {
+     "slug": "vultr",
+     "name": "Vultr",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Participation Ribbon"
+    }
+   ],
+   "claim_ids": [
+    "cmcr-crusoe-26",
+    "cmcr-crusoe-30",
+    "cmcr-crusoe-31",
+    "cmcr-crusoe-32",
+    "cmcr-hyperbolic-06",
+    "cmcr-hyperbolic-07",
+    "cmcr-latitudesh-07",
+    "cmcr-latitudesh-08",
+    "cmcr-lambda-29",
+    "cmcr-stn-10",
+    "cmcr-tensorwave-15",
+    "cmcr-tensorwave-16",
+    "cmcr-verdadatacrunch-14",
+    "cmcr-verdadatacrunch-15",
+    "cmcr-together-05",
+    "cmcr-vultr-12",
+    "cmcr-vastai-11",
+    "cmcr-gpunet-11"
+   ],
+   "what_customer_observes": "Connection drops, instances in 'Unknown status', NVML mismatches, link flaps, multi-hour or multi-day outages, sites going dark with no explanation, and 7 distinct interruptions in two months at one AMD shop.",
+   "cost_to_customer": {
+    "text": "Interrupted jobs and lost hours; SemiAnalysis's public TCO presets for GPU MTBF run from 10,000 to 169,800 GPU-hr.",
+    "tie_to_estate_measurement": "Our arms: 0 / 7 / 0 failed of 8,622 in 1 hour each; fleet MTBF and outage frequency: UNKNOWN (single seats cannot measure it)."
+   },
+   "likely_fix": {
+    "text": "Reduce root causes (link cleaning and monitoring, driver/image management), add automated remediation and disclose an incident history.",
+    "sources": [
+     "sessions/clustermax-cloudreview-20260929/raw/criteria_reliability.html :: Key Requirements",
+     "sessions/clustermax-cloudreview-20260929/raw/expectations_health-checks.html",
+     "sessions/clustermax-cloudreview-20260929/tco-model.json :: goodput_presets"
+    ]
+   },
+   "effort_class": "process",
+   "kit_verification": {
+    "audit_check_ids": [],
+    "kit_steps": [
+     "MANUAL section 5 recovery drill",
+     "R2 status collection"
+    ],
+    "manual_commands": []
+   },
+   "floor_item_ids": [
+    "R-01",
+    "R-02",
+    "R-04",
+    "R-07"
+   ],
+   "rank": 8
+  },
+  {
+   "shortfall_id": "S-RBAC",
+   "shortfall": "No RBAC, SSO or user management; shared root login only",
+   "providers_affected": 10,
+   "claims": 12,
+   "providers": [
+    {
+     "slug": "crusoe",
+     "name": "Crusoe",
+     "page_tier_2_0": "Gold",
+     "tier_3_0": "Bronze"
+    },
+    {
+     "slug": "cudocompute",
+     "name": "CUDO Compute",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Unavailable"
+    },
+    {
+     "slug": "dstacksky",
+     "name": "Dstack Sky",
+     "page_tier_2_0": "Underperforming",
+     "tier_3_0": "NOT IN 3.0 TABLE"
+    },
+    {
+     "slug": "hotaisle",
+     "name": "Hot Aisle",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "NOT IN 3.0 TABLE"
+    },
+    {
+     "slug": "neysa",
+     "name": "Neysa",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Participation Ribbon"
+    },
+    {
+     "slug": "runpod",
+     "name": "Runpod",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Participation Ribbon"
+    },
+    {
+     "slug": "sesterce",
+     "name": "Sesterce",
+     "page_tier_2_0": "Underperforming",
+     "tier_3_0": "Unavailable"
+    },
+    {
+     "slug": "tensorwave",
+     "name": "Tensorwave",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Silver"
+    },
+    {
+     "slug": "verdadatacrunch",
+     "name": "Verda/DataCrunch",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Bronze"
+    },
+    {
+     "slug": "vultr",
+     "name": "Vultr",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Participation Ribbon"
+    }
+   ],
+   "claim_ids": [
+    "cmcr-cudocompute-11",
+    "cmcr-crusoe-23",
+    "cmcr-dstacksky-14",
+    "cmcr-hotaisle-09",
+    "cmcr-neysa-06",
+    "cmcr-neysa-07",
+    "cmcr-runpod-09",
+    "cmcr-sesterce-13",
+    "cmcr-tensorwave-09",
+    "cmcr-tensorwave-10",
+    "cmcr-verdadatacrunch-11",
+    "cmcr-vultr-06"
+   ],
+   "what_customer_observes": "Everyone logs in as root; no way to add teammates; user/group sync fails between jump box and login nodes; no external IdP.",
+   "cost_to_customer": {
+    "text": "Team onboarding by shared credentials; audit and offboarding impossible.",
+    "tie_to_estate_measurement": "UNKNOWN (no estate measurement). Single-operator runs never needed it."
+   },
+   "likely_fix": {
+    "text": "Add user and group management by CLI/console, RBAC on cluster and storage, and OIDC/OAuth IdP integration.",
+    "sources": [
+     "sessions/clustermax-cloudreview-20260929/raw/expectations_slurm.html :: Access (Easy to add new users, RBAC, external IDPs)",
+     "sessions/clustermax-cloudreview-20260929/raw/expectations_kubernetes.html :: Access (K8s RBAC docs kubernetes.io/docs/reference/access-authn-authz/rbac/)",
+     "sessions/clustermax-cloudreview-20260929/raw/criteria_orchestration.html"
+    ]
+   },
+   "effort_class": "software",
+   "kit_verification": {
+    "audit_check_ids": [
+     "access.userManagement",
+     "access.externalIdp.detected",
+     "access.sudoAvailable"
+    ],
+    "kit_steps": [],
+    "manual_commands": []
+   },
+   "floor_item_ids": [
+    "O-15"
+   ],
+   "rank": 9
+  },
+  {
+   "shortfall_id": "S-ATTEST",
+   "shortfall": "No third-party security attestation (SOC 2 or ISO 27001) in place",
+   "providers_affected": 10,
+   "claims": 10,
+   "providers": [
+    {
+     "slug": "aethir",
+     "name": "Aethir",
+     "page_tier_2_0": "Underperforming",
+     "tier_3_0": "NOT IN 3.0 TABLE"
+    },
+    {
+     "slug": "deepinfra",
+     "name": "DeepInfra",
+     "page_tier_2_0": "Underperforming",
+     "tier_3_0": "NOT IN 3.0 TABLE"
+    },
+    {
+     "slug": "dstacksky",
+     "name": "Dstack Sky",
+     "page_tier_2_0": "Underperforming",
+     "tier_3_0": "NOT IN 3.0 TABLE"
+    },
+    {
+     "slug": "farmgpu",
+     "name": "FarmGPU",
+     "page_tier_2_0": "Underperforming",
+     "tier_3_0": "Underperforming"
+    },
+    {
+     "slug": "gpunet",
+     "name": "GPU.net",
+     "page_tier_2_0": "Underperforming",
+     "tier_3_0": "NOT IN 3.0 TABLE"
+    },
+    {
+     "slug": "hydrahost",
+     "name": "Hydra Host",
+     "page_tier_2_0": "Underperforming",
+     "tier_3_0": "Underperforming"
+    },
+    {
+     "slug": "hyperbolic",
+     "name": "Hyperbolic",
+     "page_tier_2_0": "Underperforming",
+     "tier_3_0": "Participation Ribbon"
+    },
+    {
+     "slug": "palebluedot",
+     "name": "PaleBlueDot",
+     "page_tier_2_0": "Underperforming",
+     "tier_3_0": "Underperforming"
+    },
+    {
+     "slug": "sesterce",
+     "name": "Sesterce",
+     "page_tier_2_0": "Underperforming",
+     "tier_3_0": "Unavailable"
+    },
+    {
+     "slug": "whitefiber",
+     "name": "Whitefiber",
+     "page_tier_2_0": "Underperforming",
+     "tier_3_0": "Underperforming"
+    }
+   ],
+   "claim_ids": [
+    "cmcr-aethir-07",
+    "cmcr-deepinfra-05",
+    "cmcr-farmgpu-06",
+    "cmcr-gpunet-11",
+    "cmcr-hydrahost-02",
+    "cmcr-hyperbolic-08",
+    "cmcr-palebluedot-02",
+    "cmcr-sesterce-19",
+    "cmcr-whitefiber-17",
+    "cmcr-dstacksky-23"
+   ],
+   "what_customer_observes": "No SOC 2 or ISO 27001 attestation; marketplaces reported as losing Fortune 500 deals because of it.",
+   "cost_to_customer": {
+    "text": "Cannot sell to the primary market; buyers with compliance gates cannot use the shop (cmcr-hydrahost-02).",
+    "tie_to_estate_measurement": "UNKNOWN (no estate measurement)."
+   },
+   "likely_fix": {
+    "text": "Complete SOC 2 Type I then Type II and/or ISO 27001 with an independent auditor; scope to include the fabric.",
+    "sources": [
+     "sessions/clustermax-cloudreview-20260929/raw/criteria_security.html :: Critical Failure; SOC 1 or SOC 2 Type II; SOC 2 and pentesting cover InfiniBand/RoCEv2",
+     "sessions/clustermax-cloudreview-20260929/claims.all.jsonl :: cmcr-sesterce-19, cmcr-whitefiber-17"
+    ]
+   },
+   "effort_class": "process",
+   "kit_verification": {
+    "audit_check_ids": [],
+    "kit_steps": [
+     "desk review of trust page"
+    ],
+    "manual_commands": []
+   },
+   "floor_item_ids": [
+    "O-16"
+   ],
+   "rank": 10
+  },
+  {
+   "shortfall_id": "S-PROVIDER",
+   "shortfall": "Underlying provider undisclosed, or hardware quality a roll of the dice (aggregators)",
+   "providers_affected": 9,
+   "claims": 21,
+   "providers": [
+    {
+     "slug": "dstacksky",
+     "name": "Dstack Sky",
+     "page_tier_2_0": "Underperforming",
+     "tier_3_0": "NOT IN 3.0 TABLE"
+    },
+    {
+     "slug": "hyperbolic",
+     "name": "Hyperbolic",
+     "page_tier_2_0": "Underperforming",
+     "tier_3_0": "Participation Ribbon"
+    },
+    {
+     "slug": "mithrilmlfoundry",
+     "name": "Mithril/ML Foundry",
+     "page_tier_2_0": "Underperforming",
+     "tier_3_0": "Underperforming"
+    },
+    {
+     "slug": "qubrid",
+     "name": "Qubrid",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "NOT IN 3.0 TABLE"
+    },
+    {
+     "slug": "runpod",
+     "name": "Runpod",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Participation Ribbon"
+    },
+    {
+     "slug": "sesterce",
+     "name": "Sesterce",
+     "page_tier_2_0": "Underperforming",
+     "tier_3_0": "Unavailable"
+    },
+    {
+     "slug": "shadeform",
+     "name": "Shadeform",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Participation Ribbon"
+    },
+    {
+     "slug": "together",
+     "name": "Together",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Bronze"
+    },
+    {
+     "slug": "vastai",
+     "name": "Vast.ai",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Participation Ribbon"
+    }
+   ],
+   "claim_ids": [
+    "cmcr-dstacksky-11",
+    "cmcr-dstacksky-12",
+    "cmcr-dstacksky-13",
+    "cmcr-dstacksky-19",
+    "cmcr-runpod-15",
+    "cmcr-runpod-16",
+    "cmcr-sesterce-07",
+    "cmcr-sesterce-10",
+    "cmcr-sesterce-19",
+    "cmcr-qubrid-08",
+    "cmcr-qubrid-13",
+    "cmcr-vastai-04",
+    "cmcr-vastai-05",
+    "cmcr-vastai-11",
+    "cmcr-vastai-12",
+    "cmcr-vastai-13",
+    "cmcr-mithrilmlfoundry-09",
+    "cmcr-mithrilmlfoundry-10",
+    "cmcr-hyperbolic-09",
+    "cmcr-together-06",
+    "cmcr-shadeform-11"
+   ],
+   "what_customer_observes": "Customer lands on hardware from an unnamed datacenter (Sesterce on Verda's Helsinki hardware, Qubrid on AWS Ashburn), sees PCIe vs SXM chosen by chance, and cannot see who patches or secures it.",
+   "cost_to_customer": {
+    "text": "Roll-of-the-dice performance and unclear responsibility; users waste time spinning pods up and down to test quality (cmcr-runpod-16).",
+    "tie_to_estate_measurement": "Between two disclosed providers running the same freeze, Run 3 p99 TTFT differed 3.9x (571 ms vs 2,254 ms) while accepted counts differed 1.3%; whether an undisclosed mix widens that is a hypothesis, not a measurement."
+   },
+   "likely_fix": {
+    "text": "Name the underlying operator in the console/docs, expose SXM vs PCIe, and publish region and provider per instance.",
+    "sources": [
+     "sessions/clustermax-cloudreview-20260929/claims.all.jsonl :: cmcr-sesterce-19, cmcr-qubrid-13, cmcr-dstacksky-12",
+     "sessions/clustermax-cloudreview-20260929/raw/criteria_pricing.html"
+    ]
+   },
+   "effort_class": "process",
+   "kit_verification": {
+    "audit_check_ids": [
+     "vm_iommu.status",
+     "pcie-passthrough"
+    ],
+    "kit_steps": [
+     "desk review + IP/whois lookup on the delivered seat",
+     "probe/fingerprint.sh (gpu model, PCIe link)"
+    ],
+    "manual_commands": [
+     "whois on the public IP"
+    ]
+   },
+   "floor_item_ids": [
+    "O-22"
+   ],
+   "rank": 11
+  },
+  {
+   "shortfall_id": "S-IMAGE",
+   "shortfall": "Base image not AI-ready: no GPU driver, Docker or container toolkit, or outdated PyTorch/CUDA",
+   "providers_affected": 9,
+   "claims": 13,
+   "providers": [
+    {
+     "slug": "amazonwebservices",
+     "name": "Amazon Web Services (AWS)",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Bronze"
+    },
+    {
+     "slug": "buzzhpc",
+     "name": "BuzzHPC",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Participation Ribbon"
+    },
+    {
+     "slug": "cudocompute",
+     "name": "CUDO Compute",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Unavailable"
+    },
+    {
+     "slug": "gmi",
+     "name": "GMI",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Silver"
+    },
+    {
+     "slug": "gpunet",
+     "name": "GPU.net",
+     "page_tier_2_0": "Underperforming",
+     "tier_3_0": "NOT IN 3.0 TABLE"
+    },
+    {
+     "slug": "hyperbolic",
+     "name": "Hyperbolic",
+     "page_tier_2_0": "Underperforming",
+     "tier_3_0": "Participation Ribbon"
+    },
+    {
+     "slug": "ibmcloud",
+     "name": "IBM Cloud",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Participation Ribbon"
+    },
+    {
+     "slug": "latitudesh",
+     "name": "Latitude.sh",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Participation Ribbon"
+    },
+    {
+     "slug": "qubrid",
+     "name": "Qubrid",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "NOT IN 3.0 TABLE"
+    }
+   ],
+   "claim_ids": [
+    "cmcr-amazonwebservices-17",
+    "cmcr-amazonwebservices-18",
+    "cmcr-buzzhpc-08",
+    "cmcr-cudocompute-12",
+    "cmcr-cudocompute-13",
+    "cmcr-gmi-06",
+    "cmcr-gpunet-07",
+    "cmcr-gpunet-08",
+    "cmcr-hyperbolic-05",
+    "cmcr-ibmcloud-12",
+    "cmcr-latitudesh-10",
+    "cmcr-qubrid-09",
+    "cmcr-qubrid-10"
+   ],
+   "what_customer_observes": "Default image has no GPU driver or Docker or container toolkit, an 8 GB root volume too small to install drivers, outdated PyTorch, CUDA 12.4 toolkit on Blackwell, or drivers on one machine but Docker on another.",
+   "cost_to_customer": {
+    "text": "Setup hours before the first job; insecure or non-working stack.",
+    "tie_to_estate_measurement": "On images that already had Docker and GPU runtime our kit reached workload-ready in 144 s (Hot Aisle) and 349 s (DigitalOcean); install time on a bare image: UNKNOWN (no estate measurement)."
+   },
+   "likely_fix": {
+    "text": "Curate one AI-ready image per GPU vendor: driver, Docker with NVIDIA/ROCm runtime, Python with pip/venv, current PyTorch, CUDA at or above the Blackwell minimum.",
+    "sources": [
+     "sessions/clustermax-cloudreview-20260929/raw/expectations_standalone.html :: Configuration (nvidia-smi && nvcc --version; docker run --rm --gpus all nvidia/cuda:12.8.0-base-ubuntu24.04 nvidia-smi; docker run --device=/dev/kfd --device=/dev/dri rocm/pytorch rocm-smi)",
+     "sessions/public-tail-20260929/lanes/cmax-audit/repo/cmax/scripts/1-audit/minimum-versions.json :: nvidiaDriver branches, rocm programs"
+    ]
+   },
+   "effort_class": "config",
+   "kit_verification": {
+    "audit_check_ids": [
+     "containers.nvidiaContainerToolkit",
+     "securityVersions.nvidiaDriver.status",
+     "software.nccl.installed"
+    ],
+    "kit_steps": [
+     "probe/fingerprint.sh",
+     "evaluate.sh / arm.sh (arm.sh installs docker.io through apt when Docker is absent but installs no GPU driver or NVIDIA container toolkit, so a missing NVIDIA runtime would show up at docker run --gpus all)"
+    ],
+    "manual_commands": [
+     "nvidia-smi && nvcc --version",
+     "python3 -c \"import torch; print(torch.cuda.is_available(), torch.cuda.device_count())\""
+    ]
+   },
+   "floor_item_ids": [
+    "O-13",
+    "P-11"
+   ],
+   "rank": 12
+  },
+  {
+   "shortfall_id": "S-REMEDIATE",
+   "shortfall": "Failed nodes are not drained or replaced automatically; repair is manual or customer-detected",
+   "providers_affected": 9,
+   "claims": 12,
+   "providers": [
+    {
+     "slug": "fluidstack",
+     "name": "Fluidstack",
+     "page_tier_2_0": "Gold",
+     "tier_3_0": "Unavailable"
+    },
+    {
+     "slug": "googlecloud",
+     "name": "Google Cloud (GCP)",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Gold"
+    },
+    {
+     "slug": "oracle",
+     "name": "Oracle",
+     "page_tier_2_0": "Gold",
+     "tier_3_0": "Gold"
+    },
+    {
+     "slug": "radiantori",
+     "name": "Radiant/Ori",
+     "page_tier_2_0": "Unavailable",
+     "tier_3_0": "Participation Ribbon"
+    },
+    {
+     "slug": "stn",
+     "name": "STN",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Participation Ribbon"
+    },
+    {
+     "slug": "tensorwave",
+     "name": "Tensorwave",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Silver"
+    },
+    {
+     "slug": "together",
+     "name": "Together",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Bronze"
+    },
+    {
+     "slug": "voltagepark",
+     "name": "Voltage Park",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "NOT IN 3.0 TABLE"
+    },
+    {
+     "slug": "vultr",
+     "name": "Vultr",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Participation Ribbon"
+    }
+   ],
+   "claim_ids": [
+    "cmcr-fluidstack-23",
+    "cmcr-googlecloud-33",
+    "cmcr-googlecloud-36",
+    "cmcr-oracle-32",
+    "cmcr-radiantori-07",
+    "cmcr-stn-11",
+    "cmcr-tensorwave-13",
+    "cmcr-together-49",
+    "cmcr-together-50",
+    "cmcr-together-61",
+    "cmcr-voltagepark-24",
+    "cmcr-vultr-13"
+   ],
+   "what_customer_observes": "An injected PCIe replay error did not drain the node; hardware failure with no alert over 18 hours; a node down two days; customers must notice and report; automated drain 'still on the roadmap'.",
+   "cost_to_customer": {
+    "text": "Downtime measured in days; SemiAnalysis credits automated detection-plus-remediation as the differentiator of gold-tier providers.",
+    "tie_to_estate_measurement": "UNKNOWN (no estate measurement). No recovery drill has been run on a real shop (MANUAL preamble)."
+   },
+   "likely_fix": {
+    "text": "Wire detection to automatic cordon/drain and replace: DCGM health plus NHC HealthCheckProgram in Slurm, Node Problem Detector plus Draino/NVSentinel in Kubernetes.",
+    "sources": [
+     "sessions/clustermax-cloudreview-20260929/raw/expectations_health-checks.html :: Automation",
+     "sessions/clustermax-cloudreview-20260929/claims.all.jsonl :: cmcr-fluidstack-24 (recommended thresholds >8 PCIe replays per minute or >100 NVLink CRC errors per second)"
+    ]
+   },
+   "effort_class": "software",
+   "kit_verification": {
+    "audit_check_ids": [
+     "healthChecks.dcgmSlurm"
+    ],
+    "kit_steps": [
+     "MANUAL section 5 recovery drill (host operator authority required)"
+    ],
+    "manual_commands": [
+     "dcgmi test --inject --gpuid 0 -f 202 on a disposable node, then observe drain"
+    ]
+   },
+   "floor_item_ids": [
+    "O-03",
+    "R-07"
+   ],
+   "rank": 13
+  },
+  {
+   "shortfall_id": "S-PROVISION",
+   "shortfall": "Provisioning stuck, repeatedly failed, or very slow",
+   "providers_affected": 7,
+   "claims": 11,
+   "providers": [
+    {
+     "slug": "amazonwebservices",
+     "name": "Amazon Web Services (AWS)",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Bronze"
+    },
+    {
+     "slug": "atlascloud",
+     "name": "Atlas Cloud",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Unavailable"
+    },
+    {
+     "slug": "e2enetworks",
+     "name": "E2E Networks",
+     "page_tier_2_0": "Underperforming",
+     "tier_3_0": "NOT IN 3.0 TABLE"
+    },
+    {
+     "slug": "gcore",
+     "name": "GCORE",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Bronze"
+    },
+    {
+     "slug": "hyperbolic",
+     "name": "Hyperbolic",
+     "page_tier_2_0": "Underperforming",
+     "tier_3_0": "Participation Ribbon"
+    },
+    {
+     "slug": "hyperstacknexgen",
+     "name": "Hyperstack/NexGen",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Bronze"
+    },
+    {
+     "slug": "voltagepark",
+     "name": "Voltage Park",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "NOT IN 3.0 TABLE"
+    }
+   ],
+   "claim_ids": [
+    "cmcr-amazonwebservices-11",
+    "cmcr-amazonwebservices-12",
+    "cmcr-amazonwebservices-13",
+    "cmcr-amazonwebservices-14",
+    "cmcr-gcore-12",
+    "cmcr-hyperstacknexgen-06",
+    "cmcr-hyperstacknexgen-10",
+    "cmcr-e2enetworks-11",
+    "cmcr-hyperbolic-07",
+    "cmcr-atlascloud-07",
+    "cmcr-voltagepark-09"
+   ],
+   "what_customer_observes": "Clusters stuck 'creating' for hours, vague 'reconcile failed' with no logs, 14 hours across five engineers, or a failed provisioning system.",
+   "cost_to_customer": {
+    "text": "Billable seat-hours with no work; the 122 s of Hot Aisle provisioning in Run 3 was 3.1% of the 64.68-minute costed window ($0.10 of $3.22).",
+    "tie_to_estate_measurement": "Measured: 122 s and 83 s request-to-SSH. Failure and retry cost: UNKNOWN (no estate measurement)."
+   },
+   "likely_fix": {
+    "text": "Make provisioning idempotent with visible logs and timeouts that fail fast and stop billing; automate the documented workshop path.",
+    "sources": [
+     "sessions/clustermax-cloudreview-20260929/claims.all.jsonl :: cmcr-amazonwebservices-06 (workshop CloudFormation route worked), cmcr-hyperstacknexgen-07",
+     "main/hot-aisle/campaign/shop-eval/diagnose/RUBRIC.md :: FLEET-01"
+    ]
+   },
+   "effort_class": "software",
+   "kit_verification": {
+    "audit_check_ids": [],
+    "kit_steps": [
+     "counter step 3 (three timed creates)",
+     "rubric FLEET-01"
+    ],
+    "manual_commands": []
+   },
+   "floor_item_ids": [
+    "A-02"
+   ],
+   "rank": 14
+  },
+  {
+   "shortfall_id": "S-PERF",
+   "shortfall": "Shared storage or network slower than expected (slow filesystem, laggy SSH, traffic shaping, collectives below reference)",
+   "providers_affected": 7,
+   "claims": 10,
+   "providers": [
+    {
+     "slug": "amazonwebservices",
+     "name": "Amazon Web Services (AWS)",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Bronze"
+    },
+    {
+     "slug": "dstacksky",
+     "name": "Dstack Sky",
+     "page_tier_2_0": "Underperforming",
+     "tier_3_0": "NOT IN 3.0 TABLE"
+    },
+    {
+     "slug": "fptcloud",
+     "name": "FPT CLOUD",
+     "page_tier_2_0": "Unavailable",
+     "tier_3_0": "Participation Ribbon"
+    },
+    {
+     "slug": "gmi",
+     "name": "GMI",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Silver"
+    },
+    {
+     "slug": "googlecloud",
+     "name": "Google Cloud (GCP)",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Gold"
+    },
+    {
+     "slug": "stn",
+     "name": "STN",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Participation Ribbon"
+    },
+    {
+     "slug": "together",
+     "name": "Together",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Bronze"
+    }
+   ],
+   "claim_ids": [
+    "cmcr-gmi-08",
+    "cmcr-fptcloud-07",
+    "cmcr-dstacksky-15",
+    "cmcr-together-22",
+    "cmcr-together-23",
+    "cmcr-stn-15",
+    "cmcr-googlecloud-17",
+    "cmcr-googlecloud-18",
+    "cmcr-amazonwebservices-28",
+    "cmcr-amazonwebservices-41"
+   ],
+   "what_customer_observes": "Shared filesystem where file saves take multiple seconds, VS Code remote SSH lag, upload speed tests that look good while downloads are shaped, EFA collectives disliked at scale.",
+   "cost_to_customer": {
+    "text": "Slow storage or network throttles multi-node jobs; measured only by the reviewers.",
+    "tie_to_estate_measurement": "UNKNOWN (no estate measurement). Our runs are single-GPU with local cache."
+   },
+   "likely_fix": {
+    "text": "Benchmark fio and nccl-tests at handover and publish them; fix the shared-fs tier or WAN shaping.",
+    "sources": [
+     "sessions/clustermax-cloudreview-20260929/raw/expectations_slurm.html :: Performance Testing (fio; nccl-tests github.com/NVIDIA/nccl-tests)",
+     "sessions/clustermax-cloudreview-20260929/raw/expectations_kubernetes.html :: Performance Testing"
+    ]
+   },
+   "effort_class": "config",
+   "kit_verification": {
+    "audit_check_ids": [],
+    "kit_steps": [],
+    "manual_commands": [
+     "fio",
+     "nccl-tests"
+    ]
+   },
+   "floor_item_ids": [
+    "O-06",
+    "O-12"
+   ],
+   "rank": 15
+  },
+  {
+   "shortfall_id": "S-HPCSW",
+   "shortfall": "HPC software missing on Slurm nodes: no HPC-X, MPI, NCCL, nvcc or lmod modules",
+   "providers_affected": 7,
+   "claims": 8,
+   "providers": [
+    {
+     "slug": "buzzhpc",
+     "name": "BuzzHPC",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Participation Ribbon"
+    },
+    {
+     "slug": "fluidstack",
+     "name": "Fluidstack",
+     "page_tier_2_0": "Gold",
+     "tier_3_0": "Unavailable"
+    },
+    {
+     "slug": "gmi",
+     "name": "GMI",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Silver"
+    },
+    {
+     "slug": "primeintellect",
+     "name": "Prime Intellect",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Bronze"
+    },
+    {
+     "slug": "runpod",
+     "name": "Runpod",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Participation Ribbon"
+    },
+    {
+     "slug": "stn",
+     "name": "STN",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Participation Ribbon"
+    },
+    {
+     "slug": "vultr",
+     "name": "Vultr",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Participation Ribbon"
+    }
+   ],
+   "claim_ids": [
+    "cmcr-buzzhpc-09",
+    "cmcr-fluidstack-14",
+    "cmcr-gmi-06",
+    "cmcr-primeintellect-08",
+    "cmcr-runpod-11",
+    "cmcr-stn-09",
+    "cmcr-stn-14",
+    "cmcr-vultr-06"
+   ],
+   "what_customer_observes": "No HPC-X, no MPI, no nvcc, no lmod, NCCL absent from the image.",
+   "cost_to_customer": {
+    "text": "Each user reinstalls the toolchain; NCCL medium-message performance suffers without HPC-X.",
+    "tie_to_estate_measurement": "UNKNOWN (no estate measurement)."
+   },
+   "likely_fix": {
+    "text": "Preinstall HPC-X (or equivalent MPI), nvcc, NCCL and Lmod in the base image and on compute nodes.",
+    "sources": [
+     "sessions/clustermax-cloudreview-20260929/raw/expectations_slurm.html :: Configuration (NVIDIA HPC-X developer.nvidia.com/networking/hpc-x; Lmod lmod.readthedocs.io)"
+    ]
+   },
+   "effort_class": "config",
+   "kit_verification": {
+    "audit_check_ids": [
+     "software.nvhpc.status",
+     "software.lmod.modulesStatus",
+     "software.nccl.installed"
+    ],
+    "kit_steps": [],
+    "manual_commands": [
+     "module avail hpcx || ls /opt/hpcx*/",
+     "nvcc --version"
+    ]
+   },
+   "floor_item_ids": [
+    "O-11"
+   ],
+   "rank": 16
+  },
+  {
+   "shortfall_id": "S-GPUGEN",
+   "shortfall": "Current-generation datacenter GPUs not offered",
+   "providers_affected": 6,
+   "claims": 6,
+   "providers": [
+    {
+     "slug": "akamailinode",
+     "name": "Akamai/Linode",
+     "page_tier_2_0": "Underperforming",
+     "tier_3_0": "Underperforming"
+    },
+    {
+     "slug": "alibabacloud",
+     "name": "Alibaba Cloud",
+     "page_tier_2_0": "Unavailable",
+     "tier_3_0": "Unavailable"
+    },
+    {
+     "slug": "hetzner",
+     "name": "HETZNER",
+     "page_tier_2_0": "Underperforming",
+     "tier_3_0": "Underperforming"
+    },
+    {
+     "slug": "hotaisle",
+     "name": "Hot Aisle",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "NOT IN 3.0 TABLE"
+    },
+    {
+     "slug": "ovhcloud",
+     "name": "OVHcloud",
+     "page_tier_2_0": "Underperforming",
+     "tier_3_0": "Underperforming"
+    },
+    {
+     "slug": "saladcloud",
+     "name": "Salad Cloud",
+     "page_tier_2_0": "Underperforming",
+     "tier_3_0": "NOT IN 3.0 TABLE"
+    }
+   ],
+   "claim_ids": [
+    "cmcr-akamailinode-04",
+    "cmcr-hetzner-03",
+    "cmcr-saladcloud-03",
+    "cmcr-ovhcloud-05",
+    "cmcr-alibabacloud-08",
+    "cmcr-hotaisle-14"
+   ],
+   "what_customer_observes": "Only RTX-class, PCIe H100 or no current datacenter GPUs; MI355X arrives late.",
+   "cost_to_customer": {
+    "text": "Buyers needing current silicon leave.",
+    "tie_to_estate_measurement": "Hot Aisle MI300X vs H100 economics in Run 3 are unaffected. Cost: UNKNOWN (no estate measurement)."
+   },
+   "likely_fix": {
+    "text": "Acquire current-generation GPUs (capital).",
+    "sources": [
+     "sessions/clustermax-cloudreview-20260929/raw/criteria_availability.html :: Critical Failure"
+    ]
+   },
+   "effort_class": "capital",
+   "kit_verification": {
+    "audit_check_ids": [],
+    "kit_steps": [
+     "desk review"
+    ],
+    "manual_commands": []
+   },
+   "floor_item_ids": [
+    "O-26"
+   ],
+   "rank": 17
+  },
+  {
+   "shortfall_id": "S-TOPO",
+   "shortfall": "Slurm topology.conf / topology-aware scheduling not configured",
+   "providers_affected": 6,
+   "claims": 6,
+   "providers": [
+    {
+     "slug": "firmussustainablemetalcloud",
+     "name": "Firmus / Sustainable Metal Cloud (SMC)",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Silver"
+    },
+    {
+     "slug": "gmocloud",
+     "name": "GMO Cloud",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Bronze"
+    },
+    {
+     "slug": "neysa",
+     "name": "Neysa",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Participation Ribbon"
+    },
+    {
+     "slug": "stn",
+     "name": "STN",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Participation Ribbon"
+    },
+    {
+     "slug": "tensorwave",
+     "name": "Tensorwave",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Silver"
+    },
+    {
+     "slug": "vultr",
+     "name": "Vultr",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Participation Ribbon"
+    }
+   ],
+   "claim_ids": [
+    "cmcr-firmussustainablemetalcloud-10",
+    "cmcr-gmocloud-09",
+    "cmcr-neysa-10",
+    "cmcr-stn-09",
+    "cmcr-vultr-06",
+    "cmcr-tensorwave-13"
+   ],
+   "what_customer_observes": "No topology.conf; topology-aware scheduling absent or judged redundant by hand allocation.",
+   "cost_to_customer": {
+    "text": "Jobs can span leaf switches, hurting collectives.",
+    "tie_to_estate_measurement": "UNKNOWN (no estate measurement)."
+   },
+   "likely_fix": {
+    "text": "Configure topology/block or topology/tree in topology.yaml or topology.conf.",
+    "sources": [
+     "sessions/clustermax-cloudreview-20260929/raw/expectations_slurm.html :: Configuration (Slurm topology.yaml slurm.schedmd.com/topology.yaml.html)"
+    ]
+   },
+   "effort_class": "config",
+   "kit_verification": {
+    "audit_check_ids": [
+     "networking.topologyConfigured"
+    ],
+    "kit_steps": [],
+    "manual_commands": [
+     "scontrol show topology"
+    ]
+   },
+   "floor_item_ids": [
+    "O-09"
+   ],
+   "rank": 18
+  },
+  {
+   "shortfall_id": "S-PATCH",
+   "shortfall": "Vulnerable or outdated security stack on delivery (container toolkit / operators with critical CVEs), no proactive patch process",
+   "providers_affected": 5,
+   "claims": 10,
+   "providers": [
+    {
+     "slug": "cudocompute",
+     "name": "CUDO Compute",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Unavailable"
+    },
+    {
+     "slug": "fluidstack",
+     "name": "Fluidstack",
+     "page_tier_2_0": "Gold",
+     "tier_3_0": "Unavailable"
+    },
+    {
+     "slug": "gmocloud",
+     "name": "GMO Cloud",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Bronze"
+    },
+    {
+     "slug": "voltagepark",
+     "name": "Voltage Park",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "NOT IN 3.0 TABLE"
+    },
+    {
+     "slug": "vultr",
+     "name": "Vultr",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Participation Ribbon"
+    }
+   ],
+   "claim_ids": [
+    "cmcr-cudocompute-12",
+    "cmcr-fluidstack-19",
+    "cmcr-fluidstack-30",
+    "cmcr-fluidstack-31",
+    "cmcr-gmocloud-14",
+    "cmcr-gmocloud-15",
+    "cmcr-voltagepark-26",
+    "cmcr-voltagepark-27",
+    "cmcr-vultr-10",
+    "cmcr-vultr-11"
+   ],
+   "what_customer_observes": "Container toolkit 1.16.2/1.17.4 or operators over a year old on a new cluster, vulnerable to NVIDIAScape (CVE-2025-23266, CVSS 9.0) and CVE-2025-23267 (8.5).",
+   "cost_to_customer": {
+    "text": "Tenant escape risk; fix took minutes to under an hour once reported at Fluidstack.",
+    "tie_to_estate_measurement": "Host toolkit versions on our Hot Aisle and DigitalOcean seats were not captured in the sources: UNKNOWN. Current minimum is nvidia-container-toolkit 1.19.1."
+   },
+   "likely_fix": {
+    "text": "Track NVIDIA advisories, join the embargo program, automate container-toolkit and operator rollouts.",
+    "sources": [
+     "sessions/clustermax-cloudreview-20260929/raw/criteria_security.html :: NVIDIA security program; Automated rollout of new NVIDIA Container Toolkit",
+     "sessions/public-tail-20260929/lanes/cmax-audit/repo/cmax/scripts/1-audit/minimum-versions.json"
+    ]
+   },
+   "effort_class": "process",
+   "kit_verification": {
+    "audit_check_ids": [
+     "securityVersions.nvidiaContainerToolkit.status",
+     "securityVersions.nvidiaDriver.status",
+     "securityVersions.runc.status",
+     "securityVersions.docker.status"
+    ],
+    "kit_steps": [
+     "probe/fingerprint.sh (STK-01 same-vendor versions)"
+    ],
+    "manual_commands": [
+     "nvidia-container-cli --version"
+    ]
+   },
+   "floor_item_ids": [
+    "O-14a",
+    "O-14b",
+    "O-18"
+   ],
+   "rank": 19
+  },
+  {
+   "shortfall_id": "S-DOCS",
+   "shortfall": "Documented setup path does not produce a working result",
+   "providers_affected": 5,
+   "claims": 7,
+   "providers": [
+    {
+     "slug": "amazonwebservices",
+     "name": "Amazon Web Services (AWS)",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Bronze"
+    },
+    {
+     "slug": "azure",
+     "name": "Azure",
+     "page_tier_2_0": "Gold",
+     "tier_3_0": "Silver"
+    },
+    {
+     "slug": "gcore",
+     "name": "GCORE",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Bronze"
+    },
+    {
+     "slug": "lambda",
+     "name": "Lambda",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Silver"
+    },
+    {
+     "slug": "runpod",
+     "name": "Runpod",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Participation Ribbon"
+    }
+   ],
+   "claim_ids": [
+    "cmcr-amazonwebservices-05",
+    "cmcr-amazonwebservices-06",
+    "cmcr-amazonwebservices-44",
+    "cmcr-lambda-16",
+    "cmcr-azure-12",
+    "cmcr-gcore-08",
+    "cmcr-runpod-13"
+   ],
+   "what_customer_observes": "The console guide yields a non-working instance; docs split between old and new; setup buried in an API reference.",
+   "cost_to_customer": {
+    "text": "Multi-attempt setup and support tickets.",
+    "tie_to_estate_measurement": "UNKNOWN (no estate measurement)."
+   },
+   "likely_fix": {
+    "text": "Make the primary documentation path the tested path.",
+    "sources": [
+     "sessions/clustermax-cloudreview-20260929/raw/criteria_lifecycle.html :: Easy onboarding well-documented"
+    ]
+   },
+   "effort_class": "process",
+   "kit_verification": {
+    "audit_check_ids": [],
+    "kit_steps": [
+     "handoff test (MANUAL section 5: second operator reproduces from sanitized procedure)"
+    ],
+    "manual_commands": []
+   },
+   "floor_item_ids": [
+    "A-02"
+   ],
+   "rank": 20
+  },
+  {
+   "shortfall_id": "S-LOGIN",
+   "shortfall": "Login/head node lacks basic tools or sudo (git, vim, nano, python, sudo, helm); login pods stateless",
+   "providers_affected": 5,
+   "claims": 7,
+   "providers": [
+    {
+     "slug": "crusoe",
+     "name": "Crusoe",
+     "page_tier_2_0": "Gold",
+     "tier_3_0": "Bronze"
+    },
+    {
+     "slug": "tensorwave",
+     "name": "Tensorwave",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Silver"
+    },
+    {
+     "slug": "together",
+     "name": "Together",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Bronze"
+    },
+    {
+     "slug": "voltagepark",
+     "name": "Voltage Park",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "NOT IN 3.0 TABLE"
+    },
+    {
+     "slug": "whitefiber",
+     "name": "Whitefiber",
+     "page_tier_2_0": "Underperforming",
+     "tier_3_0": "Underperforming"
+    }
+   ],
+   "claim_ids": [
+    "cmcr-crusoe-22",
+    "cmcr-tensorwave-11",
+    "cmcr-voltagepark-10",
+    "cmcr-voltagepark-11",
+    "cmcr-voltagepark-14",
+    "cmcr-whitefiber-12",
+    "cmcr-together-26"
+   ],
+   "what_customer_observes": "Login pod missing vim, nano, git, python or sudo; login pods are stateless so installs vanish on reconnect; Helm missing.",
+   "cost_to_customer": {
+    "text": "Every session begins with package setup that resets on reconnect.",
+    "tie_to_estate_measurement": "UNKNOWN (no estate measurement)."
+   },
+   "likely_fix": {
+    "text": "Ship a fuller login image, sudo, and persistent home.",
+    "sources": [
+     "sessions/clustermax-cloudreview-20260929/raw/expectations_slurm.html :: Access (essential packages, sudo)",
+     "sessions/clustermax-cloudreview-20260929/raw/expectations_kubernetes.html :: Access (Helm)"
+    ]
+   },
+   "effort_class": "config",
+   "kit_verification": {
+    "audit_check_ids": [
+     "access.sudoAvailable"
+    ],
+    "kit_steps": [],
+    "manual_commands": [
+     "which python3 git curl wget apt vim nano"
+    ]
+   },
+   "floor_item_ids": [
+    "O-13"
+   ],
+   "rank": 21
+  },
+  {
+   "shortfall_id": "S-NOT-SELFSERVE",
+   "shortfall": "Not self-serve: purchase form, phone call, approval queue, quota request, or an engineer must set up the cluster",
+   "providers_affected": 5,
+   "claims": 7,
+   "providers": [
+    {
+     "slug": "aethir",
+     "name": "Aethir",
+     "page_tier_2_0": "Underperforming",
+     "tier_3_0": "NOT IN 3.0 TABLE"
+    },
+    {
+     "slug": "exabits",
+     "name": "Exabits",
+     "page_tier_2_0": "Underperforming",
+     "tier_3_0": "NOT IN 3.0 TABLE"
+    },
+    {
+     "slug": "gcore",
+     "name": "GCORE",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Bronze"
+    },
+    {
+     "slug": "lambda",
+     "name": "Lambda",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Silver"
+    },
+    {
+     "slug": "stn",
+     "name": "STN",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Participation Ribbon"
+    }
+   ],
+   "claim_ids": [
+    "cmcr-aethir-05",
+    "cmcr-stn-06",
+    "cmcr-lambda-09",
+    "cmcr-lambda-14",
+    "cmcr-gcore-10",
+    "cmcr-gcore-11",
+    "cmcr-exabits-06"
+   ],
+   "what_customer_observes": "A purchase form, phone calls to review PDFs, approval before a '1-Click' cluster, quota requests taking three attempts over two working days, or an engineer building the cluster.",
+   "cost_to_customer": {
+    "text": "Days of delay; not a self-serve product.",
+    "tie_to_estate_measurement": "Run 3 seats were self-serve on both shops; DigitalOcean's initial GPU limit of 0 needed a ticket (under a day)."
+   },
+   "likely_fix": {
+    "text": "Make the path API/console driven with automatic default quota.",
+    "sources": [
+     "main/hot-aisle/campaign/shop-eval/counter/PROTOCOL.md :: step 1",
+     "main/hot-aisle/campaign/shop-eval/SHORTLIST.md :: rule 1"
+    ]
+   },
+   "effort_class": "process",
+   "kit_verification": {
+    "audit_check_ids": [],
+    "kit_steps": [
+     "counter step 1"
+    ],
+    "manual_commands": []
+   },
+   "floor_item_ids": [
+    "A-01",
+    "A-03"
+   ],
+   "rank": 22
+  },
+  {
+   "shortfall_id": "S-PYXIS",
+   "shortfall": "No Pyxis/Enroot container support for Slurm",
+   "providers_affected": 5,
+   "claims": 6,
+   "providers": [
+    {
+     "slug": "buzzhpc",
+     "name": "BuzzHPC",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Participation Ribbon"
+    },
+    {
+     "slug": "gmocloud",
+     "name": "GMO Cloud",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Bronze"
+    },
+    {
+     "slug": "primeintellect",
+     "name": "Prime Intellect",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Bronze"
+    },
+    {
+     "slug": "runpod",
+     "name": "Runpod",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Participation Ribbon"
+    },
+    {
+     "slug": "vultr",
+     "name": "Vultr",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Participation Ribbon"
+    }
+   ],
+   "claim_ids": [
+    "cmcr-buzzhpc-10",
+    "cmcr-gmocloud-11",
+    "cmcr-gmocloud-12",
+    "cmcr-primeintellect-08",
+    "cmcr-vultr-06",
+    "cmcr-runpod-04"
+   ],
+   "what_customer_observes": "Pyxis and Enroot absent, forcing Singularity rewrites of Docker workflows.",
+   "cost_to_customer": {
+    "text": "Workflow rebuild per team.",
+    "tie_to_estate_measurement": "UNKNOWN (no estate measurement)."
+   },
+   "likely_fix": {
+    "text": "Install Pyxis and Enroot; keep Docker/Apptainer available.",
+    "sources": [
+     "sessions/clustermax-cloudreview-20260929/raw/expectations_slurm.html :: Containers (NVIDIA Pyxis github.com/NVIDIA/pyxis; Enroot github.com/NVIDIA/enroot)"
+    ]
+   },
+   "effort_class": "config",
+   "kit_verification": {
+    "audit_check_ids": [
+     "containers.pyxisRuntimeWorks",
+     "containers.enroot",
+     "containers.enrootImportWorks"
+    ],
+    "kit_steps": [],
+    "manual_commands": [
+     "srun --help | grep -A4 -- --container-image",
+     "enroot version"
+    ]
+   },
+   "floor_item_ids": [
+    "O-10"
+   ],
+   "rank": 23
+  },
+  {
+   "shortfall_id": "S-COMMIT",
+   "shortfall": "No true on-demand: prepay, minimum commitment, or whole-cluster contract required",
+   "providers_affected": 5,
+   "claims": 5,
+   "providers": [
+    {
+     "slug": "coreweave",
+     "name": "CoreWeave",
+     "page_tier_2_0": "Platinum",
+     "tier_3_0": "Platinum"
+    },
+    {
+     "slug": "hydrahost",
+     "name": "Hydra Host",
+     "page_tier_2_0": "Underperforming",
+     "tier_3_0": "Underperforming"
+    },
+    {
+     "slug": "lightningai",
+     "name": "Lightning.ai",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Unavailable"
+    },
+    {
+     "slug": "qubrid",
+     "name": "Qubrid",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "NOT IN 3.0 TABLE"
+    },
+    {
+     "slug": "scaleway",
+     "name": "Scaleway",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Unavailable"
+    }
+   ],
+   "claim_ids": [
+    "cmcr-hydrahost-07",
+    "cmcr-qubrid-12",
+    "cmcr-coreweave-68",
+    "cmcr-scaleway-16",
+    "cmcr-lightningai-12"
+   ],
+   "what_customer_observes": "Weekly prepay with later refund, 1-week/1-month/3-month minimums, whole-cluster contract for large jobs, multi-GPU studios behind paid tiers.",
+   "cost_to_customer": {
+    "text": "Cash locked up; not on-demand.",
+    "tie_to_estate_measurement": "Hot Aisle 1x VM: 1-minute minimum; 2x VM: 1-hour minimum observed; 8x bare metal: 1-month minimum. Run 3 overhead of shared seat raised cost/1k from $0.74 to $0.90."
+   },
+   "likely_fix": {
+    "text": "Offer true on-demand at minute granularity.",
+    "sources": [
+     "sessions/clustermax-cloudreview-20260929/raw/expectations_standalone.html :: Hardware Support (flexible billing granularity)",
+     "sessions/clustermax-cloudreview-20260929/raw/criteria_pricing.html"
+    ]
+   },
+   "effort_class": "process",
+   "kit_verification": {
+    "audit_check_ids": [],
+    "kit_steps": [
+     "counter steps 2 and 6",
+     "rubric PRICE-01"
+    ],
+    "manual_commands": []
+   },
+   "floor_item_ids": [
+    "A-06"
+   ],
+   "rank": 24
+  },
+  {
+   "shortfall_id": "S-SUPPORT",
+   "shortfall": "No 24x7 or proactive support; premium support gated by contract size",
+   "providers_affected": 5,
+   "claims": 5,
+   "providers": [
+    {
+     "slug": "amazonwebservices",
+     "name": "Amazon Web Services (AWS)",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Bronze"
+    },
+    {
+     "slug": "cudocompute",
+     "name": "CUDO Compute",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Unavailable"
+    },
+    {
+     "slug": "googlecloud",
+     "name": "Google Cloud (GCP)",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Gold"
+    },
+    {
+     "slug": "hotaisle",
+     "name": "Hot Aisle",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "NOT IN 3.0 TABLE"
+    },
+    {
+     "slug": "neysa",
+     "name": "Neysa",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Participation Ribbon"
+    }
+   ],
+   "claim_ids": [
+    "cmcr-cudocompute-16",
+    "cmcr-hotaisle-09",
+    "cmcr-neysa-17",
+    "cmcr-googlecloud-39",
+    "cmcr-amazonwebservices-40"
+   ],
+   "what_customer_observes": "No proactive or vertically integrated support; premium support requires a multi-million dollar contract and a 3% premium; debugging by ticket.",
+   "cost_to_customer": {
+    "text": "Slow resolution; SemiAnalysis quotes fixes in hours at gold tier vs weeks or months in a hyperscaler ticket queue (cmcr-fluidstack-35).",
+    "tie_to_estate_measurement": "First human response time for Hot Aisle: UNKNOWN (unobserved)."
+   },
+   "likely_fix": {
+    "text": "Provide 24x7 engineer-level support without a contract floor.",
+    "sources": [
+     "sessions/clustermax-cloudreview-20260929/raw/expectations_standalone.html :: General Expectations",
+     "main/hot-aisle/campaign/shop-eval/counter/PROTOCOL.md :: step 9"
+    ]
+   },
+   "effort_class": "process",
+   "kit_verification": {
+    "audit_check_ids": [],
+    "kit_steps": [
+     "counter step 9"
+    ],
+    "manual_commands": []
+   },
+   "floor_item_ids": [
+    "O-23"
+   ],
+   "rank": 25
+  },
+  {
+   "shortfall_id": "S-BILLOUT",
+   "shortfall": "Billed while the instance is not usable (stuck creating, down, or halted but reserved)",
+   "providers_affected": 4,
+   "claims": 9,
+   "providers": [
+    {
+     "slug": "e2enetworks",
+     "name": "E2E Networks",
+     "page_tier_2_0": "Underperforming",
+     "tier_3_0": "NOT IN 3.0 TABLE"
+    },
+    {
+     "slug": "qubrid",
+     "name": "Qubrid",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "NOT IN 3.0 TABLE"
+    },
+    {
+     "slug": "verdadatacrunch",
+     "name": "Verda/DataCrunch",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Bronze"
+    },
+    {
+     "slug": "voltagepark",
+     "name": "Voltage Park",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "NOT IN 3.0 TABLE"
+    }
+   ],
+   "claim_ids": [
+    "cmcr-e2enetworks-11",
+    "cmcr-e2enetworks-13",
+    "cmcr-e2enetworks-15",
+    "cmcr-qubrid-07",
+    "cmcr-verdadatacrunch-16",
+    "cmcr-verdadatacrunch-17",
+    "cmcr-verdadatacrunch-19",
+    "cmcr-voltagepark-21",
+    "cmcr-voltagepark-22"
+   ],
+   "what_customer_observes": "Credit balance drained to negative while a cluster was stuck creating ($7,061.05 owed); charged while instances or whole sites are down; 'Shutdown' halts instances but keeps billing.",
+   "cost_to_customer": {
+    "text": "Direct dollars; SemiAnalysis calls it the most offensive business practice it has seen.",
+    "tie_to_estate_measurement": "Measured Run 3 overhead of billed but non-productive seat time: whole seat $0.90/1k vs $0.74 own-window (+20.7%), all honest billing. Outage billing itself: UNKNOWN."
+   },
+   "likely_fix": {
+    "text": "Bill only from usable-ready; auto-credit downtime (Verda: at least 2x, refunds in 24 h weekdays).",
+    "sources": [
+     "sessions/clustermax-cloudreview-20260929/claims.all.jsonl :: cmcr-verdadatacrunch-21, -23",
+     "main/hot-aisle/campaign/shop-eval/counter/PROTOCOL.md :: step 6"
+    ]
+   },
+   "effort_class": "software",
+   "kit_verification": {
+    "audit_check_ids": [],
+    "kit_steps": [
+     "counter steps 6 and 10"
+    ],
+    "manual_commands": [
+     "balance before and after delete"
+    ]
+   },
+   "floor_item_ids": [
+    "R-05",
+    "A-06"
+   ],
+   "rank": 26
+  },
+  {
+   "shortfall_id": "S-RDMA",
+   "shortfall": "GPUDirect RDMA off or ACS not disabled; NCCL bandwidth far below reference",
+   "providers_affected": 4,
+   "claims": 9,
+   "providers": [
+    {
+     "slug": "buzzhpc",
+     "name": "BuzzHPC",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Participation Ribbon"
+    },
+    {
+     "slug": "irenirisenergy",
+     "name": "IREN/Iris Energy",
+     "page_tier_2_0": "Underperforming",
+     "tier_3_0": "Underperforming"
+    },
+    {
+     "slug": "radiantori",
+     "name": "Radiant/Ori",
+     "page_tier_2_0": "Unavailable",
+     "tier_3_0": "Participation Ribbon"
+    },
+    {
+     "slug": "stn",
+     "name": "STN",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Participation Ribbon"
+    }
+   ],
+   "claim_ids": [
+    "cmcr-buzzhpc-14",
+    "cmcr-buzzhpc-16",
+    "cmcr-irenirisenergy-05",
+    "cmcr-irenirisenergy-06",
+    "cmcr-irenirisenergy-07",
+    "cmcr-irenirisenergy-08",
+    "cmcr-stn-09",
+    "cmcr-stn-14",
+    "cmcr-radiantori-05"
+   ],
+   "what_customer_observes": "GPUDirect RDMA not installed, ACS not disabled, NCCL AllReduce at 129.27 GB/s vs at least 300 GB/s reference (IREN), or about 10x lower than expected (BuzzHPC).",
+   "cost_to_customer": {
+    "text": "Multi-node training throughput cut by 2.3x (300/129.27) to 10x on collectives.",
+    "tie_to_estate_measurement": "Single-GPU Run 3: none. Multi-node: UNKNOWN (no estate measurement)."
+   },
+   "likely_fix": {
+    "text": "Load dma_buf/nvidia-open, disable ACS on the GPU-NIC switches, install GDRCopy, and verify with nccl-tests.",
+    "sources": [
+     "sessions/clustermax-cloudreview-20260929/raw/expectations_slurm.html :: Configuration (GPUDirect RDMA docs docs.nvidia.com/cuda/gpudirect-rdma/)",
+     "sessions/clustermax-cloudreview-20260929/claims.all.jsonl :: cmcr-irenirisenergy-05..08"
+    ]
+   },
+   "effort_class": "config",
+   "kit_verification": {
+    "audit_check_ids": [
+     "gpus.gpuDirectRdmaPath",
+     "gpus.pcieAcs.enabled",
+     "gpus.gdrcopy.installed"
+    ],
+    "kit_steps": [
+     "probe/fingerprint.sh"
+    ],
+    "manual_commands": [
+     "nccl-tests two-node"
+    ]
+   },
+   "floor_item_ids": [
+    "O-12"
+   ],
+   "rank": 27
+  },
+  {
+   "shortfall_id": "S-K8SOPS",
+   "shortfall": "Kubernetes GPU Operator or Network Operator missing or outdated at delivery",
+   "providers_affected": 4,
+   "claims": 4,
+   "providers": [
+    {
+     "slug": "fluidstack",
+     "name": "Fluidstack",
+     "page_tier_2_0": "Gold",
+     "tier_3_0": "Unavailable"
+    },
+    {
+     "slug": "gcore",
+     "name": "GCORE",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Bronze"
+    },
+    {
+     "slug": "radiantori",
+     "name": "Radiant/Ori",
+     "page_tier_2_0": "Unavailable",
+     "tier_3_0": "Participation Ribbon"
+    },
+    {
+     "slug": "vultr",
+     "name": "Vultr",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Participation Ribbon"
+    }
+   ],
+   "claim_ids": [
+    "cmcr-gcore-15",
+    "cmcr-vultr-10",
+    "cmcr-fluidstack-30",
+    "cmcr-radiantori-05"
+   ],
+   "what_customer_observes": "No GPU Operator or Network Operator at delivery, or versions more than a year old.",
+   "cost_to_customer": {
+    "text": "GPUs invisible to Kubernetes; unpatched drivers.",
+    "tie_to_estate_measurement": "UNKNOWN (no estate measurement)."
+   },
+   "likely_fix": {
+    "text": "Install and maintain the GPU and Network Operators at current versions.",
+    "sources": [
+     "sessions/clustermax-cloudreview-20260929/raw/expectations_kubernetes.html :: Configuration, Other (GPU Operator docs docs.nvidia.com/datacenter/cloud-native/gpu-operator/latest/getting-started.html)"
+    ]
+   },
+   "effort_class": "config",
+   "kit_verification": {
+    "audit_check_ids": [
+     "securityVersions.nvidiaContainerToolkit.status"
+    ],
+    "kit_steps": [],
+    "manual_commands": [
+     "kubectl get pods -n gpu-operator"
+    ]
+   },
+   "floor_item_ids": [
+    "O-08"
+   ],
+   "rank": 28
+  },
+  {
+   "shortfall_id": "S-SLA",
+   "shortfall": "SLA absent, unclear, or not honored",
+   "providers_affected": 4,
+   "claims": 4,
+   "providers": [
+    {
+     "slug": "amazonwebservices",
+     "name": "Amazon Web Services (AWS)",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Bronze"
+    },
+    {
+     "slug": "googlecloud",
+     "name": "Google Cloud (GCP)",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Gold"
+    },
+    {
+     "slug": "stn",
+     "name": "STN",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Participation Ribbon"
+    },
+    {
+     "slug": "verdadatacrunch",
+     "name": "Verda/DataCrunch",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Bronze"
+    }
+   ],
+   "claim_ids": [
+    "cmcr-stn-13",
+    "cmcr-verdadatacrunch-19",
+    "cmcr-googlecloud-42",
+    "cmcr-amazonwebservices-37"
+   ],
+   "what_customer_observes": "SLA figures that are not upheld, unclear, or mis-reported ('fake Uptime SLA' metrics in Grafana).",
+   "cost_to_customer": {
+    "text": "Compensation not received.",
+    "tie_to_estate_measurement": "UNKNOWN (no estate measurement)."
+   },
+   "likely_fix": {
+    "text": "Publish an MSA SLA with credits and honor it.",
+    "sources": [
+     "sessions/clustermax-cloudreview-20260929/raw/criteria_reliability.html :: MSA SLA evaluation"
+    ]
+   },
+   "effort_class": "process",
+   "kit_verification": {
+    "audit_check_ids": [],
+    "kit_steps": [
+     "desk review"
+    ],
+    "manual_commands": []
+   },
+   "floor_item_ids": [
+    "R-05",
+    "R-06"
+   ],
+   "rank": 29
+  },
+  {
+   "shortfall_id": "S-TOOLING",
+   "shortfall": "Restrictive defaults block standard tooling (profiling, systemd, sinfo/scontrol, VPN-only access)",
+   "providers_affected": 3,
+   "claims": 8,
+   "providers": [
+    {
+     "slug": "coreweave",
+     "name": "CoreWeave",
+     "page_tier_2_0": "Platinum",
+     "tier_3_0": "Platinum"
+    },
+    {
+     "slug": "firmussustainablemetalcloud",
+     "name": "Firmus / Sustainable Metal Cloud (SMC)",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Silver"
+    },
+    {
+     "slug": "gmocloud",
+     "name": "GMO Cloud",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Bronze"
+    }
+   ],
+   "claim_ids": [
+    "cmcr-coreweave-40",
+    "cmcr-coreweave-41",
+    "cmcr-gmocloud-05",
+    "cmcr-gmocloud-06",
+    "cmcr-gmocloud-07",
+    "cmcr-firmussustainablemetalcloud-07",
+    "cmcr-firmussustainablemetalcloud-08",
+    "cmcr-firmussustainablemetalcloud-09"
+   ],
+   "what_customer_observes": "No systemd or profiling tools by default; sinfo/scontrol disabled for users; mandatory VPN with no alternative.",
+   "cost_to_customer": {
+    "text": "Standard debugging and profiling workflows break.",
+    "tie_to_estate_measurement": "UNKNOWN (no estate measurement)."
+   },
+   "likely_fix": {
+    "text": "Enable non-root profiling (NVreg_RestrictProfilingToAdminUsers=0; perf_event_paranoid <= 1; kptr_restrict = 0) and restore standard Slurm commands.",
+    "sources": [
+     "sessions/clustermax-cloudreview-20260929/raw/expectations_slurm.html :: Monitoring and Health Checks (perf security docs kernel.org/doc/html/latest/admin-guide/perf-security.html)"
+    ]
+   },
+   "effort_class": "config",
+   "kit_verification": {
+    "audit_check_ids": [
+     "software.ncu.profilingEnabled",
+     "software.perf.perfEventParanoid",
+     "software.perf.kptrRestrict",
+     "access.slurmCommandsOk"
+    ],
+    "kit_steps": [],
+    "manual_commands": [
+     "cat /proc/sys/kernel/perf_event_paranoid /proc/sys/kernel/kptr_restrict"
+    ]
+   },
+   "floor_item_ids": [
+    "O-19",
+    "A-08"
+   ],
+   "rank": 30
+  },
+  {
+   "shortfall_id": "S-PROLOG",
+   "shortfall": "Health-check prolog so heavy that a job takes over a minute to start (or checks take 60-120 minutes)",
+   "providers_affected": 3,
+   "claims": 5,
+   "providers": [
+    {
+     "slug": "amazonwebservices",
+     "name": "Amazon Web Services (AWS)",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Bronze"
+    },
+    {
+     "slug": "firmussustainablemetalcloud",
+     "name": "Firmus / Sustainable Metal Cloud (SMC)",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Silver"
+    },
+    {
+     "slug": "fluidstack",
+     "name": "Fluidstack",
+     "page_tier_2_0": "Gold",
+     "tier_3_0": "Unavailable"
+    }
+   ],
+   "claim_ids": [
+    "cmcr-firmussustainablemetalcloud-10",
+    "cmcr-firmussustainablemetalcloud-11",
+    "cmcr-fluidstack-11",
+    "cmcr-fluidstack-12",
+    "cmcr-amazonwebservices-25"
+   ],
+   "what_customer_observes": "Interactive srun on one node takes over a minute because the prolog runs full NCCL and bandwidth tests every job.",
+   "cost_to_customer": {
+    "text": "Over 60 s per job start vs the 30 s expectation.",
+    "tie_to_estate_measurement": "UNKNOWN (no estate measurement)."
+   },
+   "likely_fix": {
+    "text": "Move deep checks to weekly idle-node runs; keep prolog to DCGM level 1 or 2, use epilog HealthCheckProgram.",
+    "sources": [
+     "sessions/clustermax-cloudreview-20260929/raw/expectations_slurm.html :: Prolog and Epilog scripts lightweight (<30s)",
+     "sessions/clustermax-cloudreview-20260929/claims.all.jsonl :: cmcr-firmussustainablemetalcloud-11"
+    ]
+   },
+   "effort_class": "config",
+   "kit_verification": {
+    "audit_check_ids": [],
+    "kit_steps": [],
+    "manual_commands": [
+     "time srun -N1 hostname"
+    ]
+   },
+   "floor_item_ids": [
+    "O-04"
+   ],
+   "rank": 31
+  },
+  {
+   "shortfall_id": "S-KUBECONFIG",
+   "shortfall": "No downloadable kubeconfig; cluster reached only by SSH into a jump host",
+   "providers_affected": 3,
+   "claims": 4,
+   "providers": [
+    {
+     "slug": "oracle",
+     "name": "Oracle",
+     "page_tier_2_0": "Gold",
+     "tier_3_0": "Gold"
+    },
+    {
+     "slug": "tensorwave",
+     "name": "Tensorwave",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Silver"
+    },
+    {
+     "slug": "together",
+     "name": "Together",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Bronze"
+    }
+   ],
+   "claim_ids": [
+    "cmcr-oracle-23",
+    "cmcr-together-25",
+    "cmcr-tensorwave-07",
+    "cmcr-tensorwave-08"
+   ],
+   "what_customer_observes": "Must SSH into a jump host to use kubectl; no kubeconfig download.",
+   "cost_to_customer": {
+    "text": "Extra setup; no remote tooling.",
+    "tie_to_estate_measurement": "UNKNOWN (no estate measurement)."
+   },
+   "likely_fix": {
+    "text": "Provide a downloadable kubeconfig.",
+    "sources": [
+     "sessions/clustermax-cloudreview-20260929/raw/expectations_kubernetes.html :: Access, Kubeconfig simple download"
+    ]
+   },
+   "effort_class": "config",
+   "kit_verification": {
+    "audit_check_ids": [],
+    "kit_steps": [],
+    "manual_commands": [
+     "kubectl cluster-info"
+    ]
+   },
+   "floor_item_ids": [
+    "O-08"
+   ],
+   "rank": 32
+  },
+  {
+   "shortfall_id": "S-SSH",
+   "shortfall": "Passwordless SSH between nodes or SSH keys not provisioned on the cluster",
+   "providers_affected": 3,
+   "claims": 3,
+   "providers": [
+    {
+     "slug": "buzzhpc",
+     "name": "BuzzHPC",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Participation Ribbon"
+    },
+    {
+     "slug": "lambda",
+     "name": "Lambda",
+     "page_tier_2_0": "Silver",
+     "tier_3_0": "Silver"
+    },
+    {
+     "slug": "primeintellect",
+     "name": "Prime Intellect",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Bronze"
+    }
+   ],
+   "claim_ids": [
+    "cmcr-buzzhpc-07",
+    "cmcr-primeintellect-08",
+    "cmcr-lambda-22"
+   ],
+   "what_customer_observes": "No passwordless SSH between nodes or keys not provisioned.",
+   "cost_to_customer": {
+    "text": "MPI and multi-node launch fail.",
+    "tie_to_estate_measurement": "UNKNOWN (no estate measurement)."
+   },
+   "likely_fix": {
+    "text": "Provision keys and passwordless SSH at cluster creation.",
+    "sources": [
+     "sessions/clustermax-cloudreview-20260929/raw/expectations_slurm.html :: Access, Passwordless SSH connectivity between nodes"
+    ]
+   },
+   "effort_class": "config",
+   "kit_verification": {
+    "audit_check_ids": [
+     "access.sshToComputeNodes"
+    ],
+    "kit_steps": [],
+    "manual_commands": [
+     "srun -N4 hostname"
+    ]
+   },
+   "floor_item_ids": [
+    "O-15"
+   ],
+   "rank": 33
+  },
+  {
+   "shortfall_id": "S-ISOLATION",
+   "shortfall": "InfiniBand tenant isolation misconfigured (PKey/SAKey): tenant could see every other endpoint",
+   "providers_affected": 2,
+   "claims": 2,
+   "providers": [
+    {
+     "slug": "fptcloud",
+     "name": "FPT CLOUD",
+     "page_tier_2_0": "Unavailable",
+     "tier_3_0": "Participation Ribbon"
+    },
+    {
+     "slug": "radiantori",
+     "name": "Radiant/Ori",
+     "page_tier_2_0": "Unavailable",
+     "tier_3_0": "Participation Ribbon"
+    }
+   ],
+   "claim_ids": [
+    "cmcr-fptcloud-10",
+    "cmcr-radiantori-04"
+   ],
+   "what_customer_observes": "Tenant could see every other endpoint on the InfiniBand network.",
+   "cost_to_customer": {
+    "text": "Cross-tenant data exposure risk; blocks the Silver tier at FPT.",
+    "tie_to_estate_measurement": "UNKNOWN (no estate measurement)."
+   },
+   "likely_fix": {
+    "text": "Configure PKeys and SAKey, enable UFM secured profile.",
+    "sources": [
+     "sessions/clustermax-cloudreview-20260929/raw/criteria_security.html :: PKeys, InfiniBand Security Keys, UFM Secured Bare Metal Cloud profile"
+    ]
+   },
+   "effort_class": "config",
+   "kit_verification": {
+    "audit_check_ids": [
+     "ufm-profile"
+    ],
+    "kit_steps": [],
+    "manual_commands": []
+   },
+   "floor_item_ids": [
+    "O-17"
+   ],
+   "rank": 34
+  },
+  {
+   "shortfall_id": "S-NVML",
+   "shortfall": "NVML driver/library mismatch or driver provisioning failure on a delivered instance",
+   "providers_affected": 2,
+   "claims": 2,
+   "providers": [
+    {
+     "slug": "crusoe",
+     "name": "Crusoe",
+     "page_tier_2_0": "Gold",
+     "tier_3_0": "Bronze"
+    },
+    {
+     "slug": "latitudesh",
+     "name": "Latitude.sh",
+     "page_tier_2_0": "Bronze",
+     "tier_3_0": "Participation Ribbon"
+    }
+   ],
+   "claim_ids": [
+    "cmcr-crusoe-27",
+    "cmcr-latitudesh-07"
+   ],
+   "what_customer_observes": "NVML driver/library mismatch errors inside containers; H100 VM driver provisioning failed.",
+   "cost_to_customer": {
+    "text": "Instance unusable until fixed.",
+    "tie_to_estate_measurement": "UNKNOWN (no estate measurement)."
+   },
+   "likely_fix": {
+    "text": "Pin and validate driver and library together at image build; monitor with a post-boot nvidia-smi check.",
+    "sources": [
+     "sessions/clustermax-cloudreview-20260929/raw/expectations_standalone.html :: Configuration (nvidia-smi && nvcc --version)",
+     "main/hot-aisle/campaign/shop-eval/diagnose/RUBRIC.md :: STK-01"
+    ]
+   },
+   "effort_class": "software",
+   "kit_verification": {
+    "audit_check_ids": [
+     "securityVersions.nvidiaDriver.status"
+    ],
+    "kit_steps": [
+     "probe/fingerprint.sh",
+     "rubric STK-01"
+    ],
+    "manual_commands": [
+     "nvidia-smi"
+    ]
+   },
+   "floor_item_ids": [
+    "O-13"
+   ],
+   "rank": 35
+  }
+ ]
+}

@@ -1,0 +1,55 @@
+[
+ {
+  "date": "2026-09-29",
+  "overall": "OK",
+  "mode": "online",
+  "stages": [
+   {
+    "name": "inferencex",
+    "status": "OK"
+   },
+   {
+    "name": "prices",
+    "status": "OK"
+   },
+   {
+    "name": "status",
+    "status": "OK"
+   },
+   {
+    "name": "economics",
+    "status": "OK"
+   },
+   {
+    "name": "delta",
+    "status": "OK"
+   },
+   {
+    "name": "r2-standing",
+    "status": "OK"
+   },
+   {
+    "name": "newsletter",
+    "status": "SKIP"
+   },
+   {
+    "name": "packet",
+    "status": "SKIP"
+   },
+   {
+    "name": "frontdoor",
+    "status": "SKIP"
+   },
+   {
+    "name": "tests",
+    "status": "OK"
+   }
+  ],
+  "probes": {
+   "pass": 11,
+   "fail": 0,
+   "skip": 0,
+   "hold": 0
+  }
+ }
+]

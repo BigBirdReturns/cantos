@@ -1,0 +1,26 @@
+2026-09-29T23:21:04Z circulate online run for 2026-09-29; receipt dir receipts\2026-09-29; retained D:\Projects\Organs\AXM\axm-tools\main\circulate\retained; stages ['inferencex', 'prices', 'status', 'economics', 'delta', 'r2-standing', 'newsletter', 'packet', 'frontdoor', 'tests']
+2026-09-29T23:21:04Z == stage inferencex ==
+2026-09-29T23:21:18Z == stage inferencex: OK in 14.07 s. 7 artifacts imported (28 source rows, 526 metric observations, 3 empty), 0 refused.
+2026-09-29T23:21:18Z == stage prices ==
+2026-09-29T23:21:18Z == stage prices: OK in 0.29 s. baseline asset digests recorded; release unchanged since the INDEX build (GPU Pricing Data — 2026-07-29 14:36 UTC).
+2026-09-29T23:21:18Z == stage status ==
+2026-09-29T23:33:19Z == stage status: OK in 721.13 s. 23 providers collected (1542 incident records); 0 unreachable (HOLD), 0 unsupported, 40 without a collector.
+2026-09-29T23:33:19Z == stage economics ==
+2026-09-29T23:33:20Z == stage economics: OK in 0.85 s. recomputed 121 rows through the page engine; byte-identical to the committed file.
+2026-09-29T23:33:20Z == stage delta ==
+2026-09-29T23:34:40Z == stage delta: OK in 78.86 s. 293698 observations vs 45 measured cells: 0 comparable, 293698 ranked.
+2026-09-29T23:34:40Z == stage r2-standing ==
+2026-09-29T23:36:13Z == stage r2-standing: OK in 93.3 s. STANDING: window 2026-04-02..2026-09-29, 16 providers, Spearman rho 0.41480895520125544 on major_or_critical_incident_count, bootstrap 95% interval [-0.05983845468247857, 0.7685678408488934], permutat
+2026-09-29T23:36:13Z == stage newsletter ==
+2026-09-29T23:36:13Z == stage newsletter: SKIP in 0.16 s. no post in the sitemap (343) is missing from the packet or the standing rows (343 known).
+2026-09-29T23:36:13Z == stage packet ==
+2026-09-29T23:36:14Z == stage packet: HOLD in 0.41 s. the committed base packet is not reproduced by build_packet.js from the current lane inputs (byte difference); standing packet not built on it.
+2026-09-29T23:36:14Z == stage frontdoor ==
+2026-09-29T23:36:14Z == stage frontdoor: SKIP in 0.25 s. nothing to rebuild: embeds equal data/market.json and data/run3/record.json, Run 3 record verified, kit matches source.
+2026-09-29T23:36:14Z == stage tests ==
+2026-09-29T23:39:04Z == stage tests: OK in 169.9 s. 7 suites passed.
+2026-09-29T23:39:04Z overall OK; stages inferencex OK, prices OK, status OK, economics OK, delta OK, r2-standing OK, newsletter SKIP, packet HOLD, frontdoor SKIP, tests OK
+2026-09-29T23:39:25Z circulate online run for 2026-09-29; receipt dir receipts\2026-09-29; retained D:\Projects\Organs\AXM\axm-tools\main\circulate\retained; stages ['packet']
+2026-09-29T23:39:25Z == stage packet ==
+2026-09-29T23:39:25Z == stage packet: SKIP in 0.31 s. no standing newsletter rows; the committed packet stands (rebuilt from the lane inputs: identical=True).
+2026-09-29T23:39:25Z overall OK; stages inferencex OK, prices OK, status OK, economics OK, delta OK, r2-standing OK, newsletter SKIP, packet SKIP, frontdoor SKIP, tests OK

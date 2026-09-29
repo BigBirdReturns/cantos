@@ -1,0 +1,90 @@
+{
+ "schema": "secondrun.test-fixtures@1",
+ "note": "Saved provider pages copied from the R2 raw lane. JSON files are byte-identical. HTML files have two changes only: the Better Stack subscribe-form placeholder for an incoming-webhook URL (and its validation pattern) is replaced by the literal string REDACTED-WEBHOOK-PLACEHOLDER (GitHub push protection refuses the original placeholder), and <style>/<script> bodies are emptied to keep the files small. Neither change touches incident data. source_sha256 is the hash of the original lane file.",
+ "files": [
+  {
+   "path": "verda/incidents_2026-04_2026-06.html",
+   "source": "sessions/public-tail-20260929/lanes/clustermax-r2-raw/verda/incidents_2026-04_2026-06.html",
+   "source_sha256": "1ac001c6ef16a310782d1bb70dab0ac93a1cc70ef33d828caa8a7a1fd9a639f2",
+   "sha256": "7cb6ee5a23a57e08bfa356e3fa27aacb4db3fbb5d4abc5849e3af1d3cdb2da5a",
+   "transform": "scrub+strip"
+  },
+  {
+   "path": "verda/incident_901666.html",
+   "source": "sessions/public-tail-20260929/lanes/clustermax-r2-raw/verda/incident_901666.html",
+   "source_sha256": "8c8a85c235c9eb5728b4764d833863c11eeade986f413d77f2a07cd7161d360a",
+   "sha256": "924e7fe2a14bdf3dab4e7ecfc36cf3f3077064c5344a45edf868aa5f7de14abe",
+   "transform": "scrub+strip"
+  },
+  {
+   "path": "verda/incident_905600.html",
+   "source": "sessions/public-tail-20260929/lanes/clustermax-r2-raw/verda/incident_905600.html",
+   "source_sha256": "8fe74e4012020cfd805d5dfc0d22e41829dc234df5cc4f0cda164441ca0ef90b",
+   "sha256": "e8cf534fcdda45ab993ef1690bd937338a30c3089bd78fc0554151a82c7ef305",
+   "transform": "scrub+strip"
+  },
+  {
+   "path": "verda/incident_909828.html",
+   "source": "sessions/public-tail-20260929/lanes/clustermax-r2-raw/verda/incident_909828.html",
+   "source_sha256": "431ba73e1b4f4ced1f2817c2ba881950133b6ba2f2b67277fe11cc7193a9cdd7",
+   "sha256": "7d72fc36136f6896db14b0b0d029a0828ca7f298813dd2c2140297ac955b59f4",
+   "transform": "scrub+strip"
+  },
+  {
+   "path": "together-ai/incidents_2026-07_2026-09.html",
+   "source": "sessions/public-tail-20260929/lanes/clustermax-r2-raw/together-ai/incidents_2026-07_2026-09.html",
+   "source_sha256": "67a73dc68cade3ec0741c002b4d329e7efaed15c774c3183fec550ab95df7a7e",
+   "sha256": "819d6df69c7e546f8477858ef7494f7b2be65dd7f487adae48c6d30c2d4de4ec",
+   "transform": "scrub+strip"
+  },
+  {
+   "path": "mithril/notices_2026-05_p1.json",
+   "source": "sessions/public-tail-20260929/lanes/clustermax-r2-raw/mithril/notices_2026-05_p1.json",
+   "source_sha256": "70f1f2c97ffa9da4f19c31ee35def701f502938e8e7f54f3b9dcda046f80f921",
+   "sha256": "70f1f2c97ffa9da4f19c31ee35def701f502938e8e7f54f3b9dcda046f80f921",
+   "transform": "none"
+  },
+  {
+   "path": "mithril/notices_2026-06_p1.json",
+   "source": "sessions/public-tail-20260929/lanes/clustermax-r2-raw/mithril/notices_2026-06_p1.json",
+   "source_sha256": "0c2c4dfc8935e03f625bda62f39413b5e98893cd42e9782291bc19551ee69c31",
+   "sha256": "0c2c4dfc8935e03f625bda62f39413b5e98893cd42e9782291bc19551ee69c31",
+   "transform": "none"
+  },
+  {
+   "path": "mithril/notices_2026-07_p1.json",
+   "source": "sessions/public-tail-20260929/lanes/clustermax-r2-raw/mithril/notices_2026-07_p1.json",
+   "source_sha256": "cb980af8b91d5f1d12eb23d20ae155adac0420e19584ad22aa28140ed81fe9a6",
+   "sha256": "cb980af8b91d5f1d12eb23d20ae155adac0420e19584ad22aa28140ed81fe9a6",
+   "transform": "none"
+  },
+  {
+   "path": "mithril/notices_2026-08_p1.json",
+   "source": "sessions/public-tail-20260929/lanes/clustermax-r2-raw/mithril/notices_2026-08_p1.json",
+   "source_sha256": "d319f6789b1d73066e28416d94677ac154dfda8c38fc901613aebd727218fc21",
+   "sha256": "d319f6789b1d73066e28416d94677ac154dfda8c38fc901613aebd727218fc21",
+   "transform": "none"
+  },
+  {
+   "path": "mithril/notices_2026-09_p1.json",
+   "source": "sessions/public-tail-20260929/lanes/clustermax-r2-raw/mithril/notices_2026-09_p1.json",
+   "source_sha256": "3e4e04b8568c72de8989ea4dafa390c915e562eb7c234cc1ffc35cca6b67c2ca",
+   "sha256": "3e4e04b8568c72de8989ea4dafa390c915e562eb7c234cc1ffc35cca6b67c2ca",
+   "transform": "none"
+  },
+  {
+   "path": "radiant/history_2026-january.html",
+   "source": "sessions/public-tail-20260929/lanes/clustermax-r2-raw/radiant/history_2026-january.html",
+   "source_sha256": "89dfc00653bc9f234fc7000ef1918e79425d9a44de5c9d15547ce64186eaa298",
+   "sha256": "e8f9612af67eb2ea4cccf6fa4e0bbfa56924f7fc43523384f8d1a2ce7763b3f3",
+   "transform": "scrub+strip"
+  },
+  {
+   "path": "radiant/history_2026-march.html",
+   "source": "sessions/public-tail-20260929/lanes/clustermax-r2-raw/radiant/history_2026-march.html",
+   "source_sha256": "e1645d7466daa864a5777c59a00a0dc534210b5713eda5de9889c40400334d35",
+   "sha256": "50ad369f903f96512e026c09c9073d44b7f52322549a73800db1cdaf9061283b",
+   "transform": "scrub+strip"
+  }
+ ]
+}

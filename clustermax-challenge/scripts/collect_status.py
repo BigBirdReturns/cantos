@@ -3,7 +3,8 @@
 retrospective/incidents/<slug>.json (schema secondrun.status-incidents.v1; see
 retrospective/incidents/SCHEMA.md). Stdlib only.
 
-Three collection modes:
+Collection modes (atlassian-history, atlassian, and the newer betterstack, instatus, sorryapp; see
+the block before `generic fallback` for those three):
 
   atlassian-history  Talks to Atlassian Statuspage's `history.json?page=N`
              endpoint, which -- unlike /api/v2/incidents.json -- is NOT capped
@@ -499,6 +500,381 @@ def collect_atlassian_history(slug: str, base_url: str, out_root: Path, fetch=de
 
 
 # --------------------------------------------------------------------------- #
+# Better Stack, Instatus and SorryApp collectors (added 2026-09-29)
+#
+# These match what retrospective/incidents/COLLECTION-LOG-2026-09-29.md
+# describes as hand-parsed. Each one fetches the platform's own public pages,
+# saves every page under raw/<slug>/ with its SHA-256, and returns the same
+# secondrun.status-incidents.v1 document as the Atlassian collectors. None of
+# them invents a value: a field the page does not carry stays null / 'none'
+# and the rule is written into `notes`.
+# --------------------------------------------------------------------------- #
+
+MONTH_NAMES = ('january', 'february', 'march', 'april', 'may', 'june', 'july',
+               'august', 'september', 'october', 'november', 'december')
+
+
+class UnsupportedPlatform(CollectorError):
+    """The URL did not answer like the platform this mode expects."""
+
+
+def _strip_markup(body: bytes) -> str:
+    text = body.decode('utf-8', 'replace')
+    text = re.sub(r'<style.*?</style>', '', text, flags=re.S)
+    text = re.sub(r'<script.*?</script>', '', text, flags=re.S)
+    # Keep svg tags (Better Stack encodes the affected-service state in the svg class); drop only their
+    # drawing paths. Removing whole <svg>..</svg> spans is wrong: a self-closed <svg/> makes a lazy
+    # match swallow the next real svg.
+    return re.sub(r'<path[^>]*>(?:</path>)?', '', text)
+
+
+def _month_range(start: date, today: date):
+    y, m = start.year, start.month
+    while (y, m) <= (today.year, today.month):
+        yield y, m
+        m += 1
+        if m == 13:
+            y, m = y + 1, 1
+
+
+def _html_text(fragment: str) -> str:
+    import html as _html
+    return re.sub(r'\s+', ' ', _html.unescape(re.sub(r'<[^>]+>', ' ', fragment))).strip()
+
+
+# ---- Better Stack (status pages served from /incidents/<quarter>) ---------- #
+
+BETTERSTACK_STATE = {  # svg colour class on the per-update affected-service tooltip
+    'red': ('Downtime', 'critical'),
+    'yellow': ('Degraded performance', 'minor'),
+    'blue': ('Maintenance', 'none'),
+}
+BETTERSTACK_STATE_ORDER = ('red', 'yellow', 'blue')  # worst first
+BETTERSTACK_NO_STATE = '(no affected-component state recorded)'
+_BS_INCIDENT_HREF = re.compile(r"href='/incident/(\d+)'")
+_BS_TIME = re.compile(r"local-time-datetime-value='([^']+)'")
+_BS_UPDATE = re.compile(
+    r"<span class='font-medium[^']*'>\s*([^<]+?)\s*</span>\s*(?:<br[^>]*>\s*)?"
+    r"<span[^>]*local-time-datetime-value='([^']+)'")
+_BS_TOOLTIP = re.compile(r"id='update-states-tooltip-\d+'>(.*?)</div>\s*</div>", re.S)
+
+
+def betterstack_quarter_url(base_url: str, year: int, quarter: int) -> str:
+    first, last = 3 * quarter - 2, 3 * quarter
+    return f'{base_url}/incidents/{year}-{first:02d}/{year}-{last:02d}'
+
+
+def parse_betterstack_quarter(body: bytes) -> dict:
+    """Quarter page -> {'incidents': [{'id','title'}], 'empty_months': n, 'is_betterstack': bool}."""
+    text = _strip_markup(body)
+    is_bs = 'betterstack.com' in text and ("status-report" in text or 'incidents-content' in text
+                                            or '/incidents/' in text)
+    incidents, seen = [], set()
+    for m in re.finditer(r"<a [^>]*href='/incident/(\d+)'[^>]*>(.*?)</a>", text, re.S):
+        ident = m.group(1)
+        if ident in seen:
+            continue
+        seen.add(ident)
+        pm = re.search(r"<p class='grow[^']*'[^>]*>(.*?)</p>", m.group(2), re.S) \
+            or re.search(r"<p[^>]*font-medium[^>]*>(.*?)</p>", m.group(2), re.S)
+        incidents.append({'id': ident, 'title': _html_text(pm.group(1)) if pm else ''})
+    return {'incidents': incidents, 'empty_months': text.count('No incidents reported'),
+            'is_betterstack': bool(is_bs)}
+
+
+def parse_betterstack_incident(body: bytes, base_url: str, ident: str):
+    """Detail page -> normalized incident, or None when the page has no report container."""
+    text = _strip_markup(body)
+    box = text.find("id='status-report-container'")
+    if box < 0:
+        return None
+    seg = text[box:]
+    h2 = re.search(r'<h2[^>]*>(.*?)</h2>', seg, re.S)
+    title = _html_text(h2.group(1)) if h2 else ''
+    head_time = _BS_TIME.search(seg[h2.end():] if h2 else seg)
+    started = head_time.group(1) if head_time else None
+    resolved = None
+    for label, ts in _BS_UPDATE.findall(seg):  # newest update first on the page
+        if label.strip().lower() == 'resolved':
+            if resolved is None or ts > resolved:
+                resolved = ts
+    states = set()
+    for tip in _BS_TOOLTIP.findall(seg):
+        states.update(re.findall(r'text-statuspage-(red|yellow|blue|green)', tip))
+    worst = next((c for c in BETTERSTACK_STATE_ORDER if c in states), None)
+    label, severity = BETTERSTACK_STATE.get(worst, (BETTERSTACK_NO_STATE, 'none'))
+    if not started:
+        return None
+    return {'id': ident, 'title': title, 'impact_label': label, 'severity': severity,
+            'started_utc': started, 'resolved_utc': resolved,
+            'is_maintenance': worst == 'blue', 'url': f'{base_url}/incident/{ident}'}
+
+
+def collect_betterstack(slug: str, base_url: str, out_root: Path, fetch=default_fetch_paced,
+                        start: date = date(2026, 1, 1), today: date | None = None,
+                        retries: int = 3, sleep_fn=time.sleep):
+    base_url = base_url.rstrip('/')
+    today = today or datetime.now(timezone.utc).date()
+    raw_dir = out_root / 'raw' / slug
+    raw_files: list = []
+    notes: list = []
+    quarters = []
+    for y, m in _month_range(start, today):
+        q = (m - 1) // 3 + 1
+        if (y, q) not in quarters:
+            quarters.append((y, q))
+    listed: dict = {}
+    fetched_quarters = []
+    empty_months = 0
+    for y, q in quarters:
+        url = betterstack_quarter_url(base_url, y, q)
+        try:
+            body = fetch_with_retry(fetch, url, retries=retries, sleep_fn=sleep_fn)
+        except Exception as exc:  # noqa: BLE001
+            if not fetched_quarters:
+                raise CollectorError(f'{url}: {exc}') from exc
+            notes.append(f'{url}: quarter page failed ({exc}); not counted as coverage')
+            continue
+        page = parse_betterstack_quarter(body)
+        if not page['is_betterstack']:
+            raise UnsupportedPlatform(f'{url}: page does not look like a Better Stack status page')
+        save_raw(raw_dir, f'incidents_{y}-{3 * q - 2:02d}_{y}-{3 * q:02d}.html', body, url, raw_files)
+        fetched_quarters.append((y, q))
+        empty_months += page['empty_months']
+        for inc in page['incidents']:
+            listed.setdefault(inc['id'], inc)
+    incidents = []
+    for ident in listed:
+        durl = f'{base_url}/incident/{ident}'
+        try:
+            dbody = fetch_with_retry(fetch, durl, retries=retries, sleep_fn=sleep_fn)
+        except Exception as exc:  # noqa: BLE001
+            notes.append(f'{durl}: detail fetch failed ({exc}); incident not recorded (no fabricated times)')
+            continue
+        save_raw(raw_dir, f'incident_{ident}.html', dbody, durl, raw_files)
+        norm = parse_betterstack_incident(dbody, base_url, ident)
+        if norm is None:
+            notes.append(f'{durl}: detail page had no parsable report; incident not recorded')
+            continue
+        incidents.append(norm)
+    incidents.sort(key=lambda i: i['started_utc'])
+    severity_map = {}
+    for i in incidents:
+        severity_map[i['impact_label']] = i['severity']
+    coverage_start = None
+    if fetched_quarters:
+        y, q = fetched_quarters[0]
+        coverage_start = date(y, 3 * q - 2, 1).isoformat()
+    else:
+        notes.append('coverage_start left null: no quarter page was fetched')
+    notes.append('better-stack platform; collected by paging /incidents/<quarter> and fetching every /incident/<id> detail page. '
+                 'impact_label is the worst per-update affected-service state colour shown by Better Stack '
+                 '(red=Downtime->critical, yellow=Degraded performance->minor, blue=Maintenance->none and is_maintenance, '
+                 'green or no affected component->none). Better Stack has no separate impact field.')
+    notes.append(f'quarter pages fetched: {len(fetched_quarters)}; incidents listed: {len(listed)}; recorded: {len(incidents)}; '
+                 f'"No incidents reported" month markers seen: {empty_months}')
+    return {
+        'schema': INCIDENTS_SCHEMA, 'provider': slug, 'status_page_url': base_url,
+        'retrieved_utc': now_utc_iso(), 'raw_files': raw_files,
+        'coverage_start': coverage_start, 'coverage_end': today.isoformat(),
+        'severity_map': severity_map, 'incidents': incidents, 'notes': notes,
+    }
+
+
+# ---- Instatus (paged JSON the status page itself calls) --------------------- #
+
+INSTATUS_API = 'https://api.instatus.com/public'
+INSTATUS_SEVERITY = {
+    'MAJOROUTAGE': 'critical', 'PARTIALOUTAGE': 'major',
+    'DEGRADEDPERFORMANCE': 'minor', 'MINOROUTAGE': 'minor',
+    'OPERATIONAL': 'none', 'UNDERMAINTENANCE': 'none',
+}
+INSTATUS_PAGE_CAP = 60
+
+
+def instatus_page_key(base_url: str) -> str:
+    from urllib.parse import urlparse
+    host = urlparse(base_url if '//' in base_url else '//' + base_url).hostname or base_url
+    if host.endswith('.instatus.com'):
+        return host[:-len('.instatus.com')]  # the host form 404s on the API for *.instatus.com pages
+    return host
+
+
+def _instatus_text(value) -> str:
+    if isinstance(value, dict):
+        return value.get('default') or value.get('en') or next(iter(value.values()), '') or ''
+    return value or ''
+
+
+def normalize_instatus_notice(raw: dict, base_url: str):
+    ident = raw.get('id')
+    started = raw.get('started') or raw.get('start')
+    if not ident or not started:
+        return None
+    impact = raw.get('impact') or 'UNKNOWN'
+    maintenance = impact == 'UNDERMAINTENANCE' or not raw.get('started')
+    return {
+        'id': ident, 'title': _instatus_text(raw.get('name')), 'impact_label': impact,
+        'severity': INSTATUS_SEVERITY.get(impact, 'none'), 'started_utc': started,
+        'resolved_utc': raw.get('resolved'), 'is_maintenance': maintenance,
+        'url': f'{base_url}/{ident}',
+    }
+
+
+def collect_instatus(slug: str, base_url: str, out_root: Path, fetch=default_fetch_paced,
+                     start: date = date(2026, 1, 1), today: date | None = None,
+                     retries: int = 3, sleep_fn=time.sleep):
+    base_url = base_url.rstrip('/')
+    today = today or datetime.now(timezone.utc).date()
+    key = instatus_page_key(base_url)
+    raw_dir = out_root / 'raw' / slug
+    raw_files: list = []
+    notes: list = []
+    by_id: dict = {}
+    months_fetched = []
+    unknown_impacts = set()
+    for y, m in _month_range(start, today):
+        month_key = int(datetime(y, m, 1, tzinfo=timezone.utc).timestamp() * 1000)
+        page_no, ok = 1, False
+        while page_no <= INSTATUS_PAGE_CAP:
+            url = f'{INSTATUS_API}/{key}/notices/monthly/{month_key}?page_no={page_no}'
+            try:
+                body = fetch_with_retry(fetch, url, retries=retries, sleep_fn=sleep_fn)
+                data = json.loads(body)
+            except Exception as exc:  # noqa: BLE001
+                if not months_fetched and page_no == 1:
+                    raise UnsupportedPlatform(f'{url}: {exc}') from exc
+                notes.append(f'{url}: failed ({exc}); month {y}-{m:02d} coverage not claimed')
+                break
+            if not isinstance(data, dict) or not isinstance(data.get('month'), dict):
+                if not months_fetched and page_no == 1:
+                    raise UnsupportedPlatform(f'{url}: response has no "month" object')
+                notes.append(f'{url}: unexpected payload; month {y}-{m:02d} coverage not claimed')
+                break
+            save_raw(raw_dir, f'notices_{y}-{m:02d}_p{page_no}.json', body, url, raw_files)
+            ok = True
+            for n in data['month'].get('notices') or []:
+                norm = normalize_instatus_notice(n, base_url)
+                if norm:
+                    by_id[norm['id']] = norm
+                    if norm['impact_label'] not in INSTATUS_SEVERITY:
+                        unknown_impacts.add(norm['impact_label'])
+            if data['month'].get('isLastPage') is not False:
+                break
+            page_no += 1
+        else:
+            notes.append(f'month {y}-{m:02d}: stopped at the {INSTATUS_PAGE_CAP}-page safety cap')
+        if ok:
+            months_fetched.append((y, m))
+    incidents = sorted(by_id.values(), key=lambda i: i['started_utc'])
+    severity_map = {}
+    for i in incidents:
+        severity_map[i['impact_label']] = i['severity']
+    if unknown_impacts:
+        notes.append('impact labels not in the declared mapping (severity none): ' + ', '.join(sorted(unknown_impacts)))
+    coverage_start = date(*months_fetched[0], 1).isoformat() if months_fetched else None
+    if coverage_start is None:
+        notes.append('coverage_start left null: no month fetched')
+    notes.append(f'instatus platform; collected via {INSTATUS_API}/{key}/notices/monthly/<monthKey>?page_no=N for every month '
+                 f'{start.isoformat()[:7]}..{today.isoformat()[:7]}, following pages until isLastPage. '
+                 'Notices with impact UNDERMAINTENANCE (or without a "started" field) are is_maintenance. '
+                 'MAJOROUTAGE->critical, PARTIALOUTAGE->major, DEGRADEDPERFORMANCE/MINOROUTAGE->minor.')
+    return {
+        'schema': INCIDENTS_SCHEMA, 'provider': slug, 'status_page_url': base_url,
+        'retrieved_utc': now_utc_iso(), 'raw_files': raw_files,
+        'coverage_start': coverage_start, 'coverage_end': today.isoformat(),
+        'severity_map': severity_map, 'incidents': incidents, 'notes': notes,
+    }
+
+
+# ---- SorryApp (monthly history pages of notice cards) ----------------------- #
+
+_SORRY_CARD = re.compile(r'id="notice-card-(\d+)"(.*?)(?=id="notice-card-\d+"|<div[^>]*id="history_pagination"|\Z)', re.S)
+_SORRY_LABEL_MAINTENANCE = ('complete', 'completed', 'scheduled', 'in progress', 'upcoming', 'maintenance')
+
+
+def parse_sorryapp_month(body: bytes, base_url: str) -> list:
+    text = _strip_markup(body)
+    out = []
+    for m in _SORRY_CARD.finditer(text):
+        ident, seg = m.group(1), m.group(2)
+        label_m = re.search(r'<p class="text-gray-900/80[^"]*">\s*([A-Za-z ]+?)\s*<small', seg, re.S)
+        label = label_m.group(1).strip() if label_m else ''
+        time_m = re.search(r'Ended:\s*<time datetime="([^"]+)"', seg)
+        title_m = re.search(r'<p class="text-lg[^"]*font-semibold[^"]*">(.*?)</p>', seg, re.S)
+        href_m = re.search(r'<a href="(/history/[^"]+)"', seg)
+        if not (label and time_m and title_m and href_m):
+            continue
+        ended = datetime.strptime(time_m.group(1), '%Y-%m-%dT%H:%M:%S%z').astimezone(timezone.utc)
+        ts = ended.strftime('%Y-%m-%dT%H:%M:%SZ')
+        out.append({
+            'id': ident, 'title': _html_text(title_m.group(1)),
+            'impact_label': 'notice-' + label.lower().replace(' ', '-'), 'severity': 'none',
+            'started_utc': ts, 'resolved_utc': ts,
+            'is_maintenance': label.lower() in _SORRY_LABEL_MAINTENANCE,
+            'url': base_url + href_m.group(1),
+        })
+    return out
+
+
+def collect_sorryapp(slug: str, base_url: str, out_root: Path, fetch=default_fetch_paced,
+                     start: date = date(2026, 1, 1), today: date | None = None,
+                     retries: int = 3, sleep_fn=time.sleep):
+    base_url = base_url.rstrip('/')
+    today = today or datetime.now(timezone.utc).date()
+    raw_dir = out_root / 'raw' / slug
+    raw_files: list = []
+    notes: list = []
+    by_id: dict = {}
+    fetched, missing = [], []
+    for y, m in _month_range(start, today):
+        url = f'{base_url}/history/{y}/{MONTH_NAMES[m - 1]}'
+        try:
+            body = fetch_with_retry(fetch, url, retries=retries, sleep_fn=sleep_fn)
+        except urllib.error.HTTPError as exc:
+            if exc.code == 404:
+                if not fetched and not missing and (y, m) == (start.year, start.month):
+                    pass  # a 404 on the very first month is ambiguous; keep going and judge at the end
+                missing.append((y, m))
+                continue
+            if not fetched:
+                raise UnsupportedPlatform(f'{url}: HTTP {exc.code}') from exc
+            notes.append(f'{url}: HTTP {exc.code}; month not counted')
+            continue
+        except Exception as exc:  # noqa: BLE001
+            if not fetched:
+                raise UnsupportedPlatform(f'{url}: {exc}') from exc
+            notes.append(f'{url}: {exc}; month not counted')
+            continue
+        if b'sorryapp.com' not in body and b'notice-card' not in body:
+            raise UnsupportedPlatform(f'{url}: page does not look like a SorryApp status page')
+        save_raw(raw_dir, f'history_{y}-{MONTH_NAMES[m - 1]}.html', body, url, raw_files)
+        fetched.append((y, m))
+        for n in parse_sorryapp_month(body, base_url):
+            by_id[n['id']] = n
+    if not fetched:
+        raise UnsupportedPlatform(f'{base_url}: no history month page returned 200')
+    incidents = sorted(by_id.values(), key=lambda i: i['started_utc'])
+    severity_map = {}
+    for i in incidents:
+        severity_map[i['impact_label']] = i['severity']
+    if missing:
+        notes.append('months returning 404 (the site lists no notices for them): '
+                     + ', '.join(f'{y}-{m:02d}' for y, m in missing)
+                     + '. A 404 is weaker evidence than an explicit "no incidents" page.')
+    notes.append('SorryApp platform; parsed /history/<year>/<month> notice cards. The card shows only the "Ended" time, '
+                 'so started_utc == resolved_utc == Ended. SorryApp exposes no severity: impact_label is the card state '
+                 '(Resolved / Complete ...), severity is none. Cards in the Complete state are treated as maintenance; '
+                 'a Resolved card is an incident.')
+    return {
+        'schema': INCIDENTS_SCHEMA, 'provider': slug, 'status_page_url': base_url,
+        'retrieved_utc': now_utc_iso(), 'raw_files': raw_files,
+        'coverage_start': date(start.year, start.month, 1).isoformat(), 'coverage_end': today.isoformat(),
+        'severity_map': severity_map, 'incidents': incidents, 'notes': notes,
+    }
+
+
+# --------------------------------------------------------------------------- #
 # generic fallback
 # --------------------------------------------------------------------------- #
 
@@ -564,7 +940,37 @@ def detect_mode(url: str, fetch=default_fetch) -> str:
             return 'atlassian'
     except Exception:  # noqa: BLE001
         pass
-    return 'generic'
+    return detect_extra_mode(url, fetch) or 'generic'
+
+
+def detect_extra_mode(url: str, fetch=default_fetch):
+    """Platforms added after the Atlassian modes. Only consulted when both Atlassian
+    probes failed, so existing detection results are unchanged. Returns a mode
+    name or None."""
+    base = url.rstrip('/')
+    try:
+        body = fetch(base + '/incidents')
+        if b'betterstack.com' in body and b'/incidents/' in body:
+            return 'betterstack'
+    except Exception:  # noqa: BLE001
+        pass
+    try:
+        key = instatus_page_key(base)
+        month_key = int(datetime(datetime.now(timezone.utc).year, datetime.now(timezone.utc).month, 1,
+                                 tzinfo=timezone.utc).timestamp() * 1000)
+        data = json.loads(fetch(f'{INSTATUS_API}/{key}/notices/monthly/{month_key}?page_no=1'))
+        if isinstance(data, dict) and isinstance(data.get('month'), dict):
+            return 'instatus'
+    except Exception:  # noqa: BLE001
+        pass
+    try:
+        now = datetime.now(timezone.utc)
+        body = fetch(f'{base}/history/{now.year}/{MONTH_NAMES[now.month - 1]}')
+        if b'sorryapp.com' in body or b'notice-card' in body:
+            return 'sorryapp'
+    except Exception:  # noqa: BLE001
+        pass
+    return None
 
 
 # --------------------------------------------------------------------------- #
@@ -576,13 +982,18 @@ def main(argv=None) -> int:
                                   formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument('--slug', required=True, help='provider slug, e.g. lambda')
     ap.add_argument('--url', required=True, help='status page base URL, e.g. https://status.example.com')
-    ap.add_argument('--mode', choices=('auto', 'atlassian-history', 'atlassian', 'generic'), default='auto')
+    ap.add_argument('--mode', choices=('auto', 'atlassian-history', 'atlassian', 'betterstack', 'instatus', 'sorryapp',
+                                                  'generic'), default='auto')
     ap.add_argument('--manual-json', type=Path, default=None,
                      help='hand-authored incidents JSON to merge in (generic mode, or to correct '
                           'an atlassian-mode run)')
     ap.add_argument('--out-root', type=Path,
                      default=Path(__file__).resolve().parents[1] / 'retrospective' / 'incidents')
+    ap.add_argument('--since', default='2026-01-01',
+                     help='betterstack/instatus/sorryapp: first month to fetch (YYYY-MM-DD; coverage_start is that '
+                          'month/quarter, never inferred from incidents)')
     args = ap.parse_args(argv)
+    since = date.fromisoformat(args.since)
 
     mode = args.mode if args.mode != 'auto' else detect_mode(args.url)
 
@@ -591,8 +1002,17 @@ def main(argv=None) -> int:
             doc = collect_atlassian_history(args.slug, args.url, args.out_root, fetch=default_fetch_paced)
         elif mode == 'atlassian':
             doc = collect_atlassian(args.slug, args.url, args.out_root)
+        elif mode == 'betterstack':
+            doc = collect_betterstack(args.slug, args.url, args.out_root, start=since)
+        elif mode == 'instatus':
+            doc = collect_instatus(args.slug, args.url, args.out_root, start=since)
+        elif mode == 'sorryapp':
+            doc = collect_sorryapp(args.slug, args.url, args.out_root, start=since)
         else:
             doc = collect_generic(args.slug, args.url, args.out_root)
+    except UnsupportedPlatform as exc:
+        print(f'UNSUPPORTED: {exc}', file=sys.stderr)
+        return 3
     except CollectorError as exc:
         print(f'FETCH FAILED: {exc}', file=sys.stderr)
         return 2

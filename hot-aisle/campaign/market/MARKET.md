@@ -45,3 +45,13 @@ At the listed public prices Hot Aisle is 46% cheaper per accepted request at $1.
 - Public series: one snapshot source per row; different aggregators disagree for the same provider (DigitalOcean H100 x1: getdeploying $3.39 and skypilot $6.74 on every Hot Aisle snapshot day; shadeform lists $3.34 on other days). The comparator price uses the source priority getdeploying, shadeform, skypilot and every value is retained in the by-date rows.
 - Days the series lacks have no file in `data/price-history/`; nothing is interpolated. TensorWave and DataCrunch are not in the series; Verda is the DataCrunch successor and is present.
 - MI355X has one provider and MI300X seven, so the MI300X percentile rests on six comparators.
+
+<!-- circulate:market:begin -->
+## Standing refresh (2026-09-29, circulate)
+
+Computed by `circulate/stages/economics.py` from `RUN3-ECONOMICS-BY-DATE.jsonl` and `data/price-history/INDEX.json`; nothing here is typed by hand. Recomputed in this run and identical to the committed rows.
+
+- Rows: 120 dated (120 priced for both providers, 0 with a missing price day left blank, never interpolated).
+- Public series last day in INDEX.json: 2026-07-29 (source `latest-data`, retrieved 2026-09-29).
+- Latest priced day 2026-07-29: Hot Aisle $2.99/GPU-hr gives $0.7434 per 1k accepted; DigitalOcean H100 $3.39/GPU-hr gives $0.9216 (Hot Aisle cheaper by 19.3%). Accepted counts 4336 and 4280 (engine 2.0.0).
+<!-- circulate:market:end -->
