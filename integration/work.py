@@ -24,27 +24,37 @@ ADAPTERS = {
     "provider-intake": "task_sources",
     "benchmark-import": "task_sources",
     "run-recompute": "task_results",
+    "run-diagnose": "task_diagnose",
+    "output-contract": "task_contract",
     "record-change": "task_changes",
     "source-correction": "task_changes",
     "tier-plan": "task_tiers",
+    "pool-purchase": "task_pool",
 }
 
 # A cold caller can discover the existing operations without a conversation.
 # These descriptions are navigation; adapters and native owners enforce rules.
 TASK_HELP = {
-    "provider-intake": {"source": "provider JSONL", "optional": ["offer_id", "price_scenario"],
-                        "supports": "Retain offers and calculate conditional price scenarios."},
+    "provider-intake": {"source": "provider JSONL or retained Vast Search Offers JSON", "optional": ["offer_id", "price_scenario", "availability_review", "marketplace_snapshot"],
+                        "supports": "Retain offers, calculate conditional price scenarios and review dated availability observations."},
     "benchmark-import": {"source": "native backfill manifest JSON", "optional": [],
                          "supports": "Import retained benchmark artifacts with their provenance."},
     "run-recompute": {"source": "retained Run 3 arm directory", "optional": [],
                       "supports": "Rejoin retained grading and recompute deadline acceptance."},
+    "run-diagnose": {"source": "retained Run 3 arm directory", "optional": [],
+                     "supports": "Partition correct-but-late requests and classify delivered solutions statically; no generated code runs."},
+    "output-contract": {"source": "retained Run 3 arm directory", "optional": [],
+                        "supports": "Propose substring repair candidates for syntax-invalid raw outputs and pin the grader input; no grading, no execution."},
     "record-change": {"source": "qualified workload record JSON", "required": ["change"],
                       "supports": "Recalculate, reassess or identify minimal new execution through the native owner."},
     "source-correction": {"source": "Research Desk history JSON", "required": ["change"],
                           "supports": "Apply a correction and preserve affected dependencies and historical reports."},
     "tier-plan": {"source": "second-run/knot-spec@1 JSON", "required": ["evidence"],
-                  "optional": ["seats", "availability", "local_models"],
+                  "optional": ["seats", "availability", "local_models", "supply"],
                   "supports": "Join supplied native Tier-Bench evidence to model and seat plans; planning only."},
+    "pool-purchase": {"source": "capital/pool-request@1 JSON", "required": ["offers"],
+                      "optional": ["availability_review", "marketplace_snapshot"],
+                      "supports": "Pool member GPU demand onto whole offer units at staged list price; arithmetic only, no quote or agreement."},
 }
 
 
@@ -54,9 +64,12 @@ def catalog():
                             **TASK_HELP[name]} for name, adapter in ADAPTERS.items()],
             "request": {"shape": {"tasks": [{"id": "caller-label", "task_class": "one listed class", "source": "artifact path"}]},
                         "path_basis": "Input paths are relative to the request file; absolute paths also work.",
-                        "optional_metadata": ["actor"]},
+                        "optional_metadata": ["actor"],
+                        "from_record": {"id": "caller-label", "from_record": {
+                            "source": "Research Desk packet path", "record_id": "judgment-id", "revision": 1}},
+                        "binding": "The claim/conclusion data.work holds a native task without id/actor and its exact computation_key; the current native dependency closure must remain valid. Optional inputs relocate identical source bytes."},
             "run": "python -B integration/work.py --request REQUEST.json --store RESULT_DIRECTORY",
-            "examples": ["integration/examples/work.json", "integration/WORK.md"],
+            "examples": ["integration/examples/work.json", "integration/WORK.md", "integration/WORK.md#retained-judgment-procedure-handoff"],
             "result": "Read tasks[].result for native output; task status executed/reused does not grant standing.",
             "reuse": "The same declared inputs, procedure bytes and runtime reuse one verified computation across callers.",
             "effects": {"model_calls": 0, "gpu_runs": 0, "resource_acquisition": False}}
@@ -156,9 +169,17 @@ def read_cache(path, description):
     return entry
 
 
-def execute_task(task, base, store):
+def execute_task(task, base, store, expected_key=None):
+    if "from_record" in task:
+        import research_handoff
+        binding = research_handoff.resolve(task, base, ADAPTERS)
+        output = execute_task(binding["task"], binding["base"], store, binding["expected_key"])
+        research_handoff.verify_unchanged(binding, task, base, ADAPTERS)
+        return {**output, "knowledge": binding["knowledge"]}
     started = time.perf_counter()
     description = call_worker(task, base, "describe")
+    if expected_key is not None and description["key"] != expected_key:
+        raise ValueError("Retained procedure binding differs from current inputs, code or runtime; revise the judgment and binding explicitly")
     path = store / "results" / (description["key"] + ".json")
     if path.exists():
         entry = read_cache(path, description)

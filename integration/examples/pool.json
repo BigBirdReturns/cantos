@@ -1,0 +1,10 @@
+{
+  "tasks": [
+    {
+      "id": "coop-pool-example",
+      "task_class": "pool-purchase",
+      "source": "pool-request.json",
+      "offers": "../../hot-aisle/campaign/providers/providers.jsonl"
+    }
+  ]
+}

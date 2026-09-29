@@ -76,6 +76,25 @@ class TierPlanTasks(unittest.TestCase):
         self.assertEqual(result["gpu_runs"], 0)
         return result
 
+    def test_raw_marketplace_supply_uses_intake_and_preserves_sample_hold(self):
+        # Authored parser fixture only; no real offer or asserted capacity.
+        raw = {"offers": [{"id": 7, "num_gpus": 2, "gpu_name": "Fixture GPU",
+                "resource_type": "gpu", "search": {"gpuCostPerHour": 4.0}}]}
+        (self.base / "raw-market.json").write_text(json.dumps(raw), encoding="utf-8")
+        supply = {"source": "raw-market.json", "bindings": {}, "marketplace_snapshot": {
+            "source_url": "https://docs.vast.ai/api-reference/search/search-offers",
+            "captured_at": "2026-09-27T00:00:00Z", "evidence_class": "official_documentation_sample"}}
+        task = dict(self.task, id="raw-market-join", supply=supply)
+        first = self.execute(task, store=self.base / "raw-market-store")
+        self.assertEqual(first["summary"], {"executed": 1, "reused": 0, "held": 0})
+        plan = self.value(first["tasks"][0])["plan"]
+        offer = plan["supply"]["intake"]["offers"][0]
+        self.assertIsNone(offer["modeled_targets"]["rate_usd_per_gpu_hour"])
+        self.assertFalse(plan["supply"]["ready"])
+        self.assertTrue(offer["holds"])
+        again = self.execute(task, store=self.base / "raw-market-store")
+        self.assertEqual(again["summary"], {"executed": 0, "reused": 1, "held": 0})
+
     def test_historical_native_plan_keeps_analogy_deadline_and_authority_limits(self):
         self.assertEqual(collections.Counter(row["kind"] for row in self.records),
                          {"tierbench-ledger-call": 52, "race6-aggregate": 9})
@@ -101,6 +120,23 @@ class TierPlanTasks(unittest.TestCase):
         self.assertIn("sufficiency is UNMEASURED", open_weight["tier_reason"])
         self.assertEqual(open_weight["plan"]["start_at"].replace("+00:00", "Z"), self.knot["start_at"])
         self.assertEqual((self.base / "knot.json").read_bytes(), self.source_bytes)
+
+    def test_buyer_constraint_change_recomputes_then_reuses_placement(self):
+        before = self.value(self.plan_result)["plan"]
+        self.assertIsNone(before["placement"]["chosen_tier"])
+        self.assertEqual(before["plans"]["chosen"]["placement"]["status"], "refused")
+        changed = copy.deepcopy(self.knot)
+        changed["policy"]["api_concurrency"] = 4
+        (self.base / "buyer-concurrency.json").write_text(json.dumps(changed), encoding="utf-8")
+        task = dict(self.task, id="buyer-concurrency", source="buyer-concurrency.json")
+        result = self.execute(task, self.recompute)
+        self.assertEqual(result["summary"], {"executed": 1, "reused": 1, "held": 0})
+        after = self.value(result["tasks"][0])["plan"]
+        self.assertEqual(before["chosen_tier"], after["chosen_tier"])
+        self.assertEqual(after["placement"]["chosen_tier"], after["chosen_tier"])
+        self.assertFalse(after["placement"]["execution_authorized"])
+        self.assertEqual(self.execute(dict(task, actor="another-buyer"))["summary"],
+                         {"executed": 0, "reused": 1, "held": 0})
 
     def test_cli_catalog_drives_another_actor_reuse_without_catalog_side_effects(self):
         before = {p.relative_to(self.base) for p in self.base.rglob("*")}
@@ -199,6 +235,103 @@ class TierPlanTasks(unittest.TestCase):
         self.assertNotEqual(result["key"], self.plan_result["key"])
         self.assertEqual(self.value(result), self.value(self.plan_result))
         self.assertEqual(json.loads(changed.read_bytes())["start_at"], self.knot["start_at"])
+
+    def supply_task(self, name, rows=None, binding_patch=None, review=True):
+        source = ROOT / "hot-aisle/campaign/providers/staging/live-hotaisle.jsonl"
+        if rows is not None:
+            source = self.base / (name + ".jsonl")
+            source.write_text("".join(json.dumps(r) + "\n" for r in rows), encoding="utf-8")
+        binding = {"provider_id": "hotaisle", "offer_id": "hotaisle-mi300x-1",
+                   "seat_sku": "vm-mi300x-1x", "seat_gpu": "AMD Instinct MI300X VF", "offer_gpu": "MI300X"}
+        binding.update(binding_patch or {})
+        supply = {"source": str(source), "bindings": {"hotaisle-mi300x-1x-enc1": binding}}
+        if review:
+            supply["availability_review"] = {"as_of": "2026-09-27T00:00:00Z", "max_age_hours": 24}
+        return dict(self.task, id=name, supply=supply)
+
+    def test_supply_join_actual_inputs_reuse_and_changed_listing(self):
+        task = self.supply_task("supply-actual")
+        result = self.execute(task, self.task)
+        self.assertEqual(result["summary"], {"executed": 1, "reused": 1, "held": 0})
+        joined = self.value(result["tasks"][0])["plan"]
+        original = self.value(self.plan_result)["plan"]
+        self.assertEqual(joined["placement"], original["placement"])
+        review = joined["supply"]["seat_reviews"]["hotaisle-mi300x-1x-enc1"]
+        self.assertEqual(review["identity_status"], "declared-correspondence-validated")
+        self.assertEqual(review["availability_review"]["status"], "observed_unavailable")
+        self.assertFalse(review["listing_eligible"])
+        self.assertEqual(self.execute(task)["summary"], {"executed": 0, "reused": 1, "held": 0})
+        row = copy.deepcopy(joined["supply"]["intake"]["offers"][0]["native_row"])
+        row.update(availability_observed="available", availability_ts="2026-09-27T00:00:00Z",
+                   notes="SYNTHETIC changed supply case; no new provider observation")
+        changed = self.supply_task("supply-synthetic-fresh", [row])
+        result = self.execute(changed, task)
+        self.assertEqual(result["summary"], {"executed": 1, "reused": 1, "held": 0})
+        after = self.value(result["tasks"][0])["plan"]
+        self.assertEqual(after["placement"], joined["placement"])
+        self.assertTrue(after["supply"]["seat_reviews"]["hotaisle-mi300x-1x-enc1"]["listing_eligible"])
+        self.assertFalse(after["supply"]["ready"])
+        self.assertEqual(after["plans"]["chosen"]["supply_eligibility"]["status"], "unassessed")
+        self.assertFalse(after["plans"]["open_weight"]["supply_eligibility"]["modeled_and_listing_eligible"])
+        self.assertEqual(after["plans"]["open_weight"]["plan"], original["plans"]["open_weight"]["plan"])
+
+    def test_supply_stale_unknown_review_and_identity_mismatches_hold(self):
+        source = ROOT / "hot-aisle/campaign/providers/staging/live-hotaisle.jsonl"
+        row = json.loads(source.read_text(encoding="utf-8").splitlines()[0])
+        row["availability_observed"] = "available"
+        cases = [("stale", {}, {}, True), ("no-review", {}, {}, False),
+                 ("wrong-provider", {}, {"provider_id": "Hot Aisle"}, True),
+                 ("wrong-offer", {}, {"offer_id": "missing"}, True),
+                 ("wrong-sku", {}, {"seat_sku": "other"}, True),
+                 ("wrong-gpu", {}, {"offer_gpu": "H100"}, True),
+                 ("wrong-count", {"gpus": 8}, {}, True),
+                 ("wrong-region", {"regions": ["elsewhere"]}, {}, True),
+                 ("price-change", {"rate_usd_per_gpu_hour": 100}, {}, True)]
+        for name, patch, binding, review in cases:
+            with self.subTest(name=name):
+                r = dict(row, **patch)
+                if name != "stale":
+                    r["availability_ts"] = "2026-09-27T00:00:00Z"
+                task = self.supply_task(name, [r], binding, review)
+                value = self.value(self.execute(task)["tasks"][0])["plan"]
+                check = value["supply"]["seat_reviews"]["hotaisle-mi300x-1x-enc1"]
+                self.assertFalse(check["listing_eligible"])
+                self.assertTrue(check["holds"])
+                self.assertFalse(check["ready"])
+
+    def test_supply_malformed_bindings_are_held(self):
+        task = self.supply_task("bad-binding")
+        task["supply"]["bindings"] = []
+        result = self.execute(task)["tasks"][0]
+        self.assertEqual(result["status"], "held")
+        self.assertIn("bindings", result["reason"])
+
+    def test_supply_dependencies_and_review_parameters_control_reuse(self):
+        store = self.base / "supply-dependency-store"
+        task = self.supply_task("supply-dependency-original")
+        first = self.execute(task, store=store)["tasks"][0]
+        copied = self.base / "relocated-supply.jsonl"
+        shutil.copy2(task["supply"]["source"], copied)
+        relocated = copy.deepcopy(task)
+        relocated["supply"]["source"] = str(copied)
+        self.assertEqual(self.execute(relocated, store=store)["tasks"][0]["key"], first["key"])
+        changed = copy.deepcopy(relocated)
+        changed["supply"]["availability_review"]["max_age_hours"] = 48
+        second = self.execute(changed, store=store)["tasks"][0]
+        self.assertEqual(second["status"], "executed")
+        self.assertNotEqual(second["key"], first["key"])
+        copied.write_bytes(copied.read_bytes() + b"\n")
+        third = self.execute(relocated, store=store)["tasks"][0]
+        self.assertEqual(third["status"], "executed")
+        self.assertNotEqual(third["key"], first["key"])
+        self.assertEqual(self.value(third), self.value(first))
+        missing = copy.deepcopy(task)
+        binding = next(iter(missing["supply"]["bindings"].values()))
+        missing["supply"]["bindings"] = {"unknown-seat": binding}
+        value = self.value(self.execute(missing, store=store)["tasks"][0])
+        review = value["plan"]["supply"]["seat_reviews"]["unknown-seat"]
+        self.assertEqual(review["identity_status"], "mismatch")
+        self.assertFalse(review["listing_eligible"])
 
 
 if __name__ == "__main__":

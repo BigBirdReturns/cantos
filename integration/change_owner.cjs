@@ -18,7 +18,7 @@ async function execute(input) {
       source_record_id: source.id, synthetic: source.synthetic, result,
       boundary: 'Native revalidation of supplied retained evidence. Plans and evaluator requests are proposed operations; no benchmark, evaluator, resource allocation, approval or publication was executed.' };
   }
-  if (input.task_class !== 'source-correction') throw Error('Unsupported change task class.');
+  if (!['source-correction', 'research-procedure'].includes(input.task_class)) throw Error('Unsupported change task class.');
   const app = fs.readFileSync(path.join(root, 'research-desk/app.html'));
   if (digest(app) !== input.expected_app_sha256) throw Error('Research Desk source changed after preparation.');
   const scripts = [...app.toString('utf8').matchAll(/<script id="research-core">([\s\S]*?)<\/script>/g)];
@@ -27,6 +27,21 @@ async function execute(input) {
   const C = globalThis.ResearchCore;
   const ws = await C.verifyPacket(source);
   const before = C.state(ws);
+  if (input.task_class === 'research-procedure') {
+    const record = C.latest(before, input.record_id);
+    if (!record || record.revision !== input.revision) throw Error('Requested procedure record is missing or superseded.');
+    if (!['claim', 'conclusion'].includes(record.kind)) throw Error('Procedure must be an explicit claim or conclusion.');
+    const dependency = C.dependencyState(before, record.id);
+    if (!dependency.current) throw Error('Procedure judgment is stale or blocked: ' + dependency.blockers.join('; '));
+    const work = record.data.work;
+    if (!work || Object.keys(work).sort().join(',') !== 'computation_key,task' ||
+        !work.task || Array.isArray(work.task) || typeof work.task !== 'object' ||
+        !/^[0-9a-f]{64}$/.test(work.computation_key)) throw Error('Record needs an explicit native work task and computation_key.');
+    const review = await C.reviewState(before, record.id);
+    return {task_class: input.task_class, source_sha256: digest(raw),
+      research_core_sha256: digest(app), record: C.clone(record), dependency, review,
+      work: C.clone(work), boundary: 'Operator-selected deterministic investigation. Current dependency pins do not confer review acceptance, source truth, or external execution authority.'};
+  }
   const previous = C.latest(before, input.change.record_id);
   if (!previous) throw Error('Correction target is absent from the research packet.');
   const affectedIds = C.impact(before, previous.id);

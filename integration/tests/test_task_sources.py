@@ -29,6 +29,56 @@ class SourceTasks(unittest.TestCase):
         return {"id": "caller-one", "task_class": "provider-intake", "source": source.name,
                 "offer_id": "latitude-h100-1"}
 
+    def vast_source(self, evidence_class="official_api_response"):
+        source = self.base / "vast.json"
+        offer = {"id": 123, "num_gpus": 4, "gpu_name": "H100", "gpu_arch": "nvidia",
+                 "resource_type": "gpu", "rentable": True, "rented": False,
+                 "search": {"gpuCostPerHour": 2.4, "totalHour": 3.1},
+                 "storage_cost": 0.1, "internet_up_cost_per_tb": 2.0,
+                 "internet_down_cost_per_tb": 1.5}
+        source.write_text(json.dumps({"offers": [offer]}) + "\n", encoding="utf-8")
+        url = ("https://console.vast.ai/api/v0/bundles" if evidence_class == "official_api_response"
+               else "https://docs.vast.ai/api-reference/search/search-offers")
+        task = {"task_class": "provider-intake", "source": source.name,
+                "marketplace_snapshot": {"source_url": url, "captured_at": "2026-09-27T12:00:00Z",
+                                         "evidence_class": evidence_class},
+                "availability_review": {"as_of": "2026-09-27T13:00:00Z", "max_age_hours": 24}}
+        return task, offer
+
+    def test_vast_snapshot_maps_compute_and_separate_charges_without_capacity_claim(self):
+        task, raw_offer = self.vast_source()
+        output = task_sources.prepare(task, self.base)["execute"]()
+        offer = output["offers"][0]
+        self.assertEqual("marketplace_snapshot", output["status"])
+        self.assertEqual("vast-offer-123", offer["offer_id"])
+        self.assertEqual(4, offer["native_row"]["gpus"])
+        self.assertEqual(0.6, offer["declared_rate"]["value"])
+        self.assertEqual(2.4, offer["marketplace_evidence"]["charges"]["compute_instance_usd_per_hour"])
+        self.assertEqual(0.1, offer["marketplace_evidence"]["charges"]["storage_usd_per_gb_month"])
+        self.assertEqual(2.0, offer["marketplace_evidence"]["charges"]["bandwidth_up_usd_per_tb"])
+        self.assertEqual(1.5, offer["marketplace_evidence"]["charges"]["bandwidth_down_usd_per_tb"])
+        self.assertEqual(raw_offer, offer["marketplace_evidence"]["raw_offer"])
+        self.assertFalse(offer["availability_review"]["rentable_now"])
+        self.assertTrue(any("not obtained capacity" in hold for hold in offer["holds"]))
+
+    def test_vast_documentation_sample_is_not_a_live_price_or_observation(self):
+        task, _ = self.vast_source("official_documentation_sample")
+        offer = task_sources.prepare(task, self.base)["execute"]()["offers"][0]
+        self.assertEqual("unobserved", offer["availability_review"]["status"])
+        self.assertIsNone(offer["modeled_targets"]["rate_usd_per_gpu_hour"])
+        self.assertTrue(any("fictional" in hold for hold in offer["holds"]))
+
+    def test_vast_refuses_wrong_source_identity_and_cost_scope(self):
+        task, offer = self.vast_source()
+        task["marketplace_snapshot"]["source_url"] = "https://example.com/offers"
+        with self.assertRaisesRegex(ValueError, "official evidence class"):
+            task_sources.prepare(task, self.base)["execute"]()
+        task["marketplace_snapshot"]["source_url"] = "https://console.vast.ai/api/v0/bundles"
+        offer["search"]["gpuCostPerHour"] = None
+        (self.base / task["source"]).write_text(json.dumps({"offers": [offer]}), encoding="utf-8")
+        with self.assertRaisesRegex(ValueError, "gpuCostPerHour"):
+            task_sources.prepare(task, self.base)["execute"]()
+
     def benchmark_source(self, empty=False):
         fixtures = task_sources.CAMPAIGN / "backfill/fixtures"
         manifest = json.loads((fixtures / "manifest.json").read_bytes())
@@ -63,6 +113,42 @@ class SourceTasks(unittest.TestCase):
         self.assertEqual(before, (self.base / task["source"]).read_bytes())
         self.assertEqual(task_sources.HERE, op["inputs"]["adapter_code"])
         self.assertEqual(task_sources.PROVIDER_OWNER, op["inputs"]["provider_owner_code"])
+
+    def test_availability_review_holds_stale_and_unavailable_offers(self):
+        task = self.offer_source()
+        task["availability_review"] = {"as_of": "2026-09-27T00:00:00Z", "max_age_hours": 24}
+        stale = task_sources.prepare(task, self.base)["execute"]()["offers"][0]
+        self.assertEqual("stale_observation", stale["availability_review"]["status"])
+        self.assertEqual(72, stale["availability_review"]["age_hours"])
+        self.assertFalse(stale["availability_review"]["rentable_now"])
+        self.assertIn("stale_observation", stale["holds"][0])
+        self.assertEqual(0.46, stale["modeled_targets"]["values"]["modeled_per_1k_accepted"])
+
+        task["availability_review"]["as_of"] = "2026-09-24T12:00:00Z"
+        current = task_sources.prepare(task, self.base)["execute"]()["offers"][0]
+        self.assertEqual("observed_available_within_window", current["availability_review"]["status"])
+        self.assertEqual([], current["holds"])
+        self.assertFalse(current["availability_review"]["rentable_now"])
+
+        row = copy.deepcopy(self.offer)
+        row["availability_observed"] = "out_of_stock"
+        task = self.offer_source(row)
+        task["availability_review"] = {"as_of": "2026-09-24T12:00:00Z", "max_age_hours": 24}
+        unavailable = task_sources.prepare(task, self.base)["execute"]()["offers"][0]
+        self.assertEqual("observed_unavailable", unavailable["availability_review"]["status"])
+        self.assertIn("observed_unavailable", unavailable["holds"][0])
+
+    def test_availability_review_refuses_invalid_time_order(self):
+        task = self.offer_source()
+        task["availability_review"] = {"as_of": "2026-09-23T00:00:00Z", "max_age_hours": 24}
+        invalid = task_sources.prepare(task, self.base)["execute"]()["offers"][0]
+        self.assertEqual("invalid_observation", invalid["availability_review"]["status"])
+        self.assertIn("later than review", invalid["availability_review"]["error"])
+        self.assertFalse(invalid["availability_review"]["rentable_now"])
+        self.assertTrue(invalid["holds"])
+        task["availability_review"]["as_of"] = "2026-09-27"
+        with self.assertRaisesRegex(ValueError, "timezone-aware"):
+            task_sources.prepare(task, self.base)
 
     def test_caller_identity_is_not_a_parameter_and_extra_keys_fail(self):
         task = self.offer_source()
