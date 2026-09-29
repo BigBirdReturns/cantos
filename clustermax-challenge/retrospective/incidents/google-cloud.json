@@ -1,0 +1,87 @@
+{
+  "schema": "secondrun.status-incidents.v1",
+  "provider": "Google Cloud",
+  "status_page_url": "https://status.cloud.google.com",
+  "retrieved_utc": "2026-09-29T18:37:58Z",
+  "raw_files": [
+    {
+      "path": "retrospective/incidents/raw/google-cloud/incidents.json",
+      "sha256": "201d34fc0af9af7732e96d14c63042afedd7da0e5ae41a512425a8a6a9bb4258",
+      "url": "https://status.cloud.google.com/incidents.json"
+    }
+  ],
+  "coverage_start": null,
+  "coverage_end": "2026-09-29",
+  "severity_map": {
+    "SERVICE_OUTAGE": "critical",
+    "SERVICE_DISRUPTION": "major",
+    "SERVICE_INFORMATION": "minor"
+  },
+  "incidents": [
+    {
+      "id": "41E5S3mkTGDfkZuJZH5k",
+      "title": "Vertex AI Gemini API customers experienced increased error rates when accessing the global endpoint.",
+      "impact_label": "SERVICE_INFORMATION",
+      "severity": "minor",
+      "started_utc": "2026-02-27T12:37:00+00:00",
+      "resolved_utc": "2026-02-27T14:35:00+00:00",
+      "is_maintenance": false,
+      "url": "https://status.cloud.google.com/incidents/41E5S3mkTGDfkZuJZH5k"
+    },
+    {
+      "id": "5fGQt4VbkDnr3Yp8PXPr",
+      "title": "Network traffic to Google Cloud originating from Delhi, Chennai, Mumbai and surrounding areas is experiencing intermittent periods of elevated latency and possible packet loss.",
+      "impact_label": "SERVICE_DISRUPTION",
+      "severity": "major",
+      "started_utc": "2026-06-05T07:00:00+00:00",
+      "resolved_utc": "2026-06-26T19:00:00+00:00",
+      "is_maintenance": false,
+      "url": "https://status.cloud.google.com/incidents/5fGQt4VbkDnr3Yp8PXPr"
+    },
+    {
+      "id": "T8gmtofFSTGT5tbhyciF",
+      "title": "Google Cloud VMware Engine (GCVE) Stretched Cluster customers are experiencing zonal outages impacting network connectivity across multiple regions.",
+      "impact_label": "SERVICE_DISRUPTION",
+      "severity": "major",
+      "started_utc": "2026-07-14T17:00:00+00:00",
+      "resolved_utc": "2026-07-15T03:40:00+00:00",
+      "is_maintenance": false,
+      "url": "https://status.cloud.google.com/incidents/T8gmtofFSTGT5tbhyciF"
+    },
+    {
+      "id": "3BvH3LVGcupoYqV6F4Nw",
+      "title": "Google Cloud VMware Engine (GCVE), Google Cloud NetApp Volumes, and Bare Metal Solutions (BMS) services are experiencing a service outage in europe-west4-a due to a cooling failure.",
+      "impact_label": "SERVICE_DISRUPTION",
+      "severity": "major",
+      "started_utc": "2026-07-15T23:57:00+00:00",
+      "resolved_utc": "2026-07-16T12:25:00+00:00",
+      "is_maintenance": false,
+      "url": "https://status.cloud.google.com/incidents/3BvH3LVGcupoYqV6F4Nw"
+    },
+    {
+      "id": "utF3FMFdQfwBzJcGG6vf",
+      "title": "We are investigating an issue where customers may experience timeouts, service degradations, errors, and elevated latencies across multiple products in the us-west1 region.",
+      "impact_label": "SERVICE_OUTAGE",
+      "severity": "critical",
+      "started_utc": "2026-08-20T15:40:00+00:00",
+      "resolved_utc": "2026-08-20T19:20:00+00:00",
+      "is_maintenance": false,
+      "url": "https://status.cloud.google.com/incidents/utF3FMFdQfwBzJcGG6vf"
+    },
+    {
+      "id": "J5ia5t9p3g9Q5Wi7r8Ev",
+      "title": "Multiple products in us-central1-b are experiencing network service degradation.",
+      "impact_label": "SERVICE_DISRUPTION",
+      "severity": "major",
+      "started_utc": "2026-09-01T14:44:00+00:00",
+      "resolved_utc": "2026-09-01T18:52:00+00:00",
+      "is_maintenance": false,
+      "url": "https://status.cloud.google.com/incidents/J5ia5t9p3g9Q5Wi7r8Ev"
+    }
+  ],
+  "notes": [
+    "hand-parsed from the incidents.json saved in the 2026-09-29 cloud-review capture (sessions/clustermax-cloudreview-20260929/providers/googlecloud/status_incidents.json, byte-identical to a live refetch at collection time). collect_status.py has no Google Cloud mode.",
+    "the feed lists 6 incidents, oldest begin 2026-02-27T12:37:00+00:00. It is a short recent-incident feed with no archive endpoint (/2025.json, /history.json 404 in the 2026-09-23 probe), so coverage_start is left null: the feed does not demonstrate that nothing older exists. plan-R2 pre-declares a capped-feed rule (oldest record predates window start) under which this feed is accepted; it is flagged as such in R2-result and a strict-rule sensitivity is reported.",
+    "severity_map is a plan-R2 decision on Google status_impact: SERVICE_OUTAGE -> critical, SERVICE_DISRUPTION -> major, SERVICE_INFORMATION -> minor."
+  ]
+}

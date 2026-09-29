@@ -1,0 +1,911 @@
+{
+ "src_sha256": "390b25b1b25d59631166dae6273ba7b04c4a8645191002eafafe865afaa73bd0",
+ "monthly": {
+  "2026-04": {
+   "MI300X": {
+    "n_providers": 6,
+    "median_of_provider_medians": 2.72,
+    "provider_medians": {
+     "azure": 7.86,
+     "crusoe": 3.45,
+     "digitalocean": 1.99,
+     "hot_aisle": 1.99,
+     "oracle": 6.0,
+     "runpod": 1.99
+    }
+   },
+   "H100": {
+    "n_providers": 41,
+    "median_of_provider_medians": 2.59,
+    "provider_medians": {
+     "akash": 1.48,
+     "aws": 9.4264,
+     "azure": 11.961,
+     "civo": 2.49,
+     "coreweave": 6.155,
+     "crusoe": 3.9,
+     "cudo": 1.9784,
+     "denvr": 2.2,
+     "digitalocean": 3.34,
+     "e2e": 2.9,
+     "fluidstack": 2.99,
+     "gcore": 2.0,
+     "gcp": 4.841121,
+     "gmicloud": 2.0,
+     "horizon": 1.95,
+     "hyperstack": 1.9,
+     "imwt": 2.48,
+     "jarvislabs": 2.69,
+     "koyeb": 2.5,
+     "lambda": 3.29,
+     "latitude": 1.68,
+     "lightningai": 1.99,
+     "massedcompute": 2.98,
+     "nebius": 2.95,
+     "novita": 2.59,
+     "oracle": 10.0,
+     "ovh": 2.99,
+     "paperspace": 5.95,
+     "primeintellect": 2.29,
+     "qubrid": 3.83,
+     "runpod": 2.99,
+     "scaleway": 3.04,
+     "sesterce": 2.09,
+     "tensordock": 1.99,
+     "theta_edgecloud": 2.29,
+     "thundercompute": 1.38,
+     "together": 3.36,
+     "vastai": 1.935,
+     "verda": 2.26,
+     "voltagepark": 1.99,
+     "vultr": 2.99
+    }
+   },
+   "H200": {
+    "n_providers": 36,
+    "median_of_provider_medians": 3.49,
+    "provider_medians": {
+     "akash": 2.72,
+     "amaya": 2.25,
+     "aws": 9.89,
+     "azure": 13.78,
+     "boostrun": 2.45,
+     "civo": 3.49,
+     "cloreai": 20.0,
+     "coreweave": 6.31,
+     "crusoe": 4.29,
+     "denvr": 3.87,
+     "digitalocean": 3.44,
+     "e2e": 3.49,
+     "excesssupply": 2.4825,
+     "fluidstack": 2.3,
+     "gcore": 2.5,
+     "gcp": 6.474453,
+     "gmicloud": 2.0,
+     "horizon": 3.0,
+     "hyperstack": 3.5,
+     "jarvislabs": 3.8,
+     "koyeb": 3.0,
+     "lightningai": 3.5,
+     "lyceum": 3.19,
+     "massedcompute": 2.83,
+     "nebius": 3.5,
+     "oblivus": 3.99,
+     "oracle": 10.0,
+     "packet\u00b7ai": 1.5,
+     "primeintellect": 1.99,
+     "qubrid": 4.55,
+     "runpod": 3.99,
+     "sesterce": 3.78,
+     "theta_edgecloud": 2.29,
+     "together": 4.99,
+     "vastai": 2.935556,
+     "verda": 3.39
+    }
+   },
+   "B200": {
+    "n_providers": 18,
+    "median_of_provider_medians": 5.195,
+    "provider_medians": {
+     "aws": 14.724,
+     "beyondpl": 4.5,
+     "boostrun": 3.74,
+     "coreweave": 8.6,
+     "e2e": 4.9,
+     "excesssupply": 4.51375,
+     "gcp": 8.055,
+     "koyeb": 5.5,
+     "lambda": 6.79,
+     "lyceum": 4.29,
+     "nebius": 5.5,
+     "oracle": 14.0,
+     "packet\u00b7ai": 2.25,
+     "primeintellect": 3.30075,
+     "runpod": 5.49,
+     "sesterce": 6.19,
+     "vastai": 4.063889,
+     "verda": 4.81
+    }
+   }
+  },
+  "2026-05": {
+   "MI300X": {
+    "n_providers": 6,
+    "median_of_provider_medians": 2.72,
+    "provider_medians": {
+     "azure": 7.86,
+     "crusoe": 3.45,
+     "digitalocean": 1.99,
+     "hot_aisle": 1.99,
+     "oracle": 6.0,
+     "runpod": 1.99
+    }
+   },
+   "H100": {
+    "n_providers": 43,
+    "median_of_provider_medians": 2.59,
+    "provider_medians": {
+     "akash": 1.48,
+     "aws": 9.4944,
+     "azure": 12.29,
+     "civo": 2.49,
+     "cloreai": 30.0,
+     "coreweave": 6.155,
+     "crusoe": 3.9,
+     "cudo": 1.9156,
+     "denvr": 2.3,
+     "digitalocean": 5.95,
+     "e2e": 2.9,
+     "fluidstack": 2.99,
+     "gcore": 2.0,
+     "gcp": 4.841121,
+     "gmicloud": 2.0,
+     "horizon": 1.95,
+     "hyperstack": 1.9,
+     "imwt": 2.48,
+     "jarvislabs": 2.69,
+     "koyeb": 2.5,
+     "lambda": 4.09,
+     "latitude": 1.68,
+     "lightningai": 1.99,
+     "massedcompute": 2.75,
+     "nebius": 2.95,
+     "novita": 2.59,
+     "oracle": 10.0,
+     "ovh": 2.99,
+     "paperspace": 5.95,
+     "primeintellect": 2.35,
+     "qubrid": 3.83,
+     "runpod": 2.99,
+     "scaleway": 2.52,
+     "sesterce": 2.09,
+     "tensordock": 1.99,
+     "theta_edgecloud": 2.29,
+     "thundercompute": 1.935,
+     "together": 3.36,
+     "upcloud": 2.08,
+     "vastai": 2.646296,
+     "verda": 2.36,
+     "voltagepark": 1.99,
+     "vultr": 2.99
+    }
+   },
+   "H200": {
+    "n_providers": 34,
+    "median_of_provider_medians": 3.5,
+    "provider_medians": {
+     "akash": 2.65,
+     "amaya": 2.25,
+     "aws": 9.89,
+     "azure": 13.78,
+     "boostrun": 2.45,
+     "civo": 3.49,
+     "cloreai": 3.5,
+     "coreweave": 6.4025,
+     "crusoe": 4.29,
+     "denvr": 3.87,
+     "digitalocean": 3.44,
+     "e2e": 3.49,
+     "excesssupply": 2.4825,
+     "fluidstack": 2.3,
+     "gcore": 2.5,
+     "gcp": 6.474453,
+     "horizon": 3.0,
+     "hyperstack": 3.5,
+     "jarvislabs": 3.8,
+     "koyeb": 3.0,
+     "lightningai": 3.5,
+     "lyceum": 3.19,
+     "massedcompute": 2.83,
+     "nebius": 3.5,
+     "oblivus": 3.99,
+     "oracle": 10.0,
+     "primeintellect": 2.29,
+     "qubrid": 4.55,
+     "runpod": 3.99,
+     "sesterce": 4.18,
+     "theta_edgecloud": 2.29,
+     "together": 4.99,
+     "vastai": 3.949519,
+     "verda": 3.59625
+    }
+   },
+   "B200": {
+    "n_providers": 19,
+    "median_of_provider_medians": 5.49,
+    "provider_medians": {
+     "aws": 14.724,
+     "beyondpl": 5.1,
+     "boostrun": 3.74,
+     "coreweave": 8.6,
+     "e2e": 4.9,
+     "excesssupply": 4.51375,
+     "gcp": 8.055,
+     "koyeb": 5.5,
+     "lambda": 6.89,
+     "lyceum": 4.29,
+     "nebius": 5.5,
+     "oracle": 14.0,
+     "packet\u00b7ai": 3.75,
+     "primeintellect": 4.89,
+     "runpod": 5.49,
+     "sesterce": 5.83,
+     "upcloud": 5.23,
+     "vastai": 5.636111,
+     "verda": 5.3
+    }
+   }
+  },
+  "2026-06": {
+   "MI300X": {
+    "n_providers": 7,
+    "median_of_provider_medians": 3.025,
+    "provider_medians": {
+     "azure": 7.86,
+     "crusoe": 3.45,
+     "cyfuture_ai": 3.025,
+     "digitalocean": 1.99,
+     "hot_aisle": 1.99,
+     "oracle": 6.0,
+     "runpod": 1.99
+    }
+   },
+   "H100": {
+    "n_providers": 42,
+    "median_of_provider_medians": 2.9450000000000003,
+    "provider_medians": {
+     "akash": 2.47,
+     "aws": 9.4944,
+     "azure": 12.29,
+     "civo": 2.49,
+     "cloreai": 6.25,
+     "coreweave": 6.155,
+     "crusoe": 3.9,
+     "cudo": 1.8528,
+     "denvr": 2.3,
+     "digitalocean": 5.95,
+     "e2e": 2.9,
+     "fluidstack": 2.99,
+     "gcore": 1.64,
+     "gcp": 4.570091,
+     "gmicloud": 2.0,
+     "horizon": 1.95,
+     "hyperstack": 1.9,
+     "imwt": 2.48,
+     "koyeb": 2.5,
+     "lambda": 4.09,
+     "latitude": 1.68,
+     "lightningai": 3.5,
+     "lyceum": 2.79,
+     "massedcompute": 5.84,
+     "nebius": 3.85,
+     "novita": 2.59,
+     "oracle": 10.0,
+     "ovh": 2.99,
+     "paperspace": 5.95,
+     "primeintellect": 3.25,
+     "qubrid": 3.83,
+     "runpod": 3.19,
+     "scaleway": 2.52,
+     "sesterce": 2.09,
+     "theta_edgecloud": 2.29,
+     "thundercompute": 1.935,
+     "together": 3.36,
+     "upcloud": 2.07,
+     "vastai": 2.335556,
+     "verda": 3.31,
+     "voltagepark": 1.99,
+     "vultr": 2.99
+    }
+   },
+   "H200": {
+    "n_providers": 34,
+    "median_of_provider_medians": 4.0975,
+    "provider_medians": {
+     "akash": 3.64,
+     "amaya": 2.25,
+     "aws": 9.8978125,
+     "azure": 13.78,
+     "boostrun": 2.45,
+     "civo": 3.49,
+     "cloreai": 40.0,
+     "coreweave": 6.4025,
+     "crusoe": 4.29,
+     "denvr": 3.87,
+     "digitalocean": 3.44,
+     "e2e": 3.49,
+     "excesssupply": 4.51625,
+     "fluidstack": 2.3,
+     "gcore": 2.27,
+     "gcp": 6.474453,
+     "horizon": 3.0,
+     "hyperstack": 3.5,
+     "koyeb": 3.0,
+     "lightningai": 6.53,
+     "lyceum": 4.29,
+     "massedcompute": 14.48,
+     "nebius": 4.5,
+     "oblivus": 3.99,
+     "oracle": 10.0,
+     "primeintellect": 2.99,
+     "qubrid": 4.55,
+     "runcrate": 1.16,
+     "runpod": 4.39,
+     "sesterce": 4.85,
+     "theta_edgecloud": 2.49,
+     "together": 4.99,
+     "vastai": 3.684759,
+     "verda": 4.205
+    }
+   },
+   "B200": {
+    "n_providers": 21,
+    "median_of_provider_medians": 6.11,
+    "provider_medians": {
+     "aws": 15.096096,
+     "beyondpl": 5.1,
+     "boostrun": 3.74,
+     "coreweave": 8.6,
+     "e2e": 6.5,
+     "excesssupply": 4.51375,
+     "gcp": 11.277,
+     "impossible_cloud": 3.67,
+     "koyeb": 5.5,
+     "lambda": 6.89,
+     "lyceum": 6.49,
+     "nebius": 7.15,
+     "oracle": 14.0,
+     "packet\u00b7ai": 3.75,
+     "primeintellect": 6.11,
+     "runcrate": 3.58,
+     "runpod": 5.89,
+     "sesterce": 7.17,
+     "upcloud": 5.205,
+     "vastai": 4.575868,
+     "verda": 6.4175
+    }
+   }
+  },
+  "2026-07": {
+   "MI300X": {
+    "n_providers": 7,
+    "median_of_provider_medians": 3.04,
+    "provider_medians": {
+     "azure": 7.86,
+     "crusoe": 3.45,
+     "cyfuture_ai": 3.04,
+     "digitalocean": 1.99,
+     "hot_aisle": 1.99,
+     "oracle": 6.0,
+     "runpod": 2.19
+    }
+   },
+   "H100": {
+    "n_providers": 42,
+    "median_of_provider_medians": 2.99,
+    "provider_medians": {
+     "akash": 2.71,
+     "aws": 9.4944,
+     "azure": 12.842,
+     "civo": 2.49,
+     "cloreai": 6.25,
+     "coreweave": 6.155,
+     "crusoe": 3.9,
+     "cudo": 1.8528,
+     "denvr": 2.3,
+     "digitalocean": 5.95,
+     "e2e": 3.77,
+     "fluidstack": 2.99,
+     "gcore": 1.64,
+     "gcp": 4.570091,
+     "gmicloud": 2.0,
+     "gpuai": 1.5,
+     "horizon": 1.95,
+     "hyperstack": 2.5,
+     "imwt": 2.48,
+     "koyeb": 2.5,
+     "lambda": 4.09,
+     "latitude": 1.7925,
+     "lightningai": 4.5,
+     "massedcompute": 5.84,
+     "nebius": 3.85,
+     "novita": 3.39,
+     "oracle": 10.0,
+     "ovh": 2.99,
+     "paperspace": 5.95,
+     "primeintellect": 3.27,
+     "qubrid": 4.71,
+     "runpod": 2.99,
+     "scaleway": 2.52,
+     "sesterce": 2.75,
+     "theta_edgecloud": 2.29,
+     "thundercompute": 11.055000000000001,
+     "together": 100.0,
+     "upcloud": 2.04,
+     "vastai": 2.200148,
+     "verda": 3.31,
+     "voltagepark": 1.99,
+     "vultr": 2.99
+    }
+   },
+   "H200": {
+    "n_providers": 33,
+    "median_of_provider_medians": 4.29,
+    "provider_medians": {
+     "akash": 4.49,
+     "amaya": 2.25,
+     "aws": 9.8978125,
+     "azure": 13.78,
+     "boostrun": 2.45,
+     "civo": 3.49,
+     "cloreai": 8.75,
+     "coreweave": 6.4025,
+     "crusoe": 4.29,
+     "denvr": 3.87,
+     "digitalocean": 3.44,
+     "e2e": 4.54,
+     "excesssupply": 4.51625,
+     "fluidstack": 2.3,
+     "gcore": 2.27,
+     "gcp": 6.474453,
+     "horizon": 3.0,
+     "hyperstack": 3.99,
+     "koyeb": 3.0,
+     "lightningai": 6.53,
+     "lyceum": 4.29,
+     "massedcompute": 14.879999999999999,
+     "nebius": 4.5,
+     "oblivus": 3.99,
+     "oracle": 10.0,
+     "primeintellect": 4.0,
+     "qubrid": 5.49,
+     "runpod": 4.39,
+     "sesterce": 3.78,
+     "theta_edgecloud": 2.49,
+     "together": 200.0,
+     "vastai": 3.926,
+     "verda": 4.205
+    }
+   },
+   "B200": {
+    "n_providers": 23,
+    "median_of_provider_medians": 6.49,
+    "provider_medians": {
+     "aws": 15.111721,
+     "beyondpl": 5.1,
+     "boostrun": 3.74,
+     "cloreai": 12.5,
+     "coreweave": 8.6,
+     "e2e": 6.99,
+     "excesssupply": 4.51375,
+     "gcp": 11.277,
+     "hyperstack": 6.0,
+     "koyeb": 5.5,
+     "lambda": 6.89,
+     "lyceum": 6.49,
+     "massedcompute": 42.2,
+     "nebius": 7.15,
+     "oracle": 14.0,
+     "packet\u00b7ai": 3.75,
+     "primeintellect": 4.1245,
+     "runpod": 5.89,
+     "sesterce": 7.17,
+     "together": 200.0,
+     "upcloud": 5.15,
+     "vastai": 6.252083,
+     "verda": 6.4175
+    }
+   }
+  }
+ },
+ "latest_day": {
+  "MI300X": {
+   "azure": {
+    "8": 7.86
+   },
+   "crusoe": {
+    "8": 3.45,
+    "1": 3.45
+   },
+   "cyfuture_ai": {
+    "1": 3.04,
+    "2": 3.01
+   },
+   "digitalocean": {
+    "1": 1.99
+   },
+   "hot_aisle": {
+    "1": 2.99,
+    "2": 2.99,
+    "4": 2.99
+   },
+   "oracle": {
+    "8": 6.0,
+    "1": 6.0
+   },
+   "runpod": {
+    "1": 2.39,
+    "2": 2.39,
+    "3": 2.39,
+    "4": 2.39,
+    "5": 2.39,
+    "6": 2.39,
+    "7": 2.39,
+    "8": 2.39
+   }
+  },
+  "H100": {
+   "akash": {
+    "1": 2.71
+   },
+   "aws": {
+    "8": 8.959625,
+    "1": 10.2352
+   },
+   "azure": {
+    "1": 9.08,
+    "2": 9.08,
+    "8": 14.37925
+   },
+   "civo": {
+    "1": 2.99
+   },
+   "coreweave": {
+    "8": 6.155
+   },
+   "crusoe": {
+    "8": 3.9,
+    "1": 3.9
+   },
+   "cudo": {
+    "2": 1.8528,
+    "4": 1.9156,
+    "8": 1.9156,
+    "1": 1.79
+   },
+   "denvr": {
+    "1": 2.0,
+    "8": 2.35
+   },
+   "digitalocean": {
+    "1": 6.74,
+    "8": 5.95
+   },
+   "e2e": {
+    "1": 3.77
+   },
+   "fluidstack": {
+    "8": 2.99
+   },
+   "gcore": {
+    "1": 1.64
+   },
+   "gcp": {
+    "1": 4.570091
+   },
+   "gmicloud": {
+    "1": 2.0
+   },
+   "horizon": {
+    "8": 1.95
+   },
+   "hyperstack": {
+    "1": 2.55,
+    "2": 1.9,
+    "4": 1.9,
+    "8": 2.4
+   },
+   "imwt": {
+    "1": 2.48,
+    "2": 2.48,
+    "4": 2.48,
+    "8": 2.48
+   },
+   "koyeb": {
+    "1": 2.5
+   },
+   "lambda": {
+    "1": 3.29,
+    "2": 4.19,
+    "4": 4.09,
+    "8": 3.99
+   },
+   "latitude": {
+    "1": 1.68,
+    "8": 1.7925,
+    "4": 2.2425
+   },
+   "lightningai": {
+    "1": 4.5
+   },
+   "massedcompute": {
+    "4": 2.94375,
+    "8": 3.14,
+    "1": 10.92,
+    "2": 2.9450000000000003
+   },
+   "nebius": {
+    "1": 3.85,
+    "8": 3.85
+   },
+   "novita": {
+    "1": 3.39
+   },
+   "oracle": {
+    "8": 10.0,
+    "1": 10.0
+   },
+   "ovh": {
+    "1": 2.99
+   },
+   "paperspace": {
+    "8": 5.95,
+    "1": 5.95
+   },
+   "qubrid": {
+    "1": 4.78,
+    "8": 4.64
+   },
+   "runpod": {
+    "1": 2.89,
+    "2": 2.99,
+    "3": 2.99,
+    "4": 2.99,
+    "5": 2.99,
+    "6": 2.99,
+    "7": 2.99,
+    "8": 2.99,
+    "10": 3.19,
+    "9": 3.19
+   },
+   "scaleway": {
+    "1": 2.52,
+    "2": 2.52
+   },
+   "sesterce": {
+    "1": 3.19
+   },
+   "theta_edgecloud": {
+    "1": 2.29,
+    "2": 2.29
+   },
+   "thundercompute": {
+    "1": 12.655000000000001
+   },
+   "together": {
+    "1": 100.0
+   },
+   "upcloud": {
+    "1": 1.89
+   },
+   "vastai": {
+    "1": 2.3508889999999996,
+    "2": 2.268074,
+    "4": 2.133889,
+    "8": 2.967139
+   },
+   "verda": {
+    "1": 3.31
+   },
+   "voltagepark": {
+    "8": 1.99,
+    "1": 1.99
+   }
+  },
+  "H200": {
+   "akash": {
+    "1": 4.45
+   },
+   "amaya": {
+    "8": 2.25
+   },
+   "aws": {
+    "8": 9.8978125
+   },
+   "azure": {
+    "8": 13.78
+   },
+   "boostrun": {
+    "8": 2.45
+   },
+   "civo": {
+    "1": 3.49,
+    "8": 3.49
+   },
+   "coreweave": {
+    "1": 6.5,
+    "8": 6.305
+   },
+   "crusoe": {
+    "8": 4.29,
+    "1": 4.29
+   },
+   "digitalocean": {
+    "1": 3.44,
+    "8": 3.44
+   },
+   "e2e": {
+    "1": 4.54
+   },
+   "excesssupply": {
+    "8": 4.51625,
+    "1": 4.63
+   },
+   "fluidstack": {
+    "1": 2.3
+   },
+   "gcore": {
+    "1": 2.27
+   },
+   "gcp": {
+    "1": 6.474453
+   },
+   "horizon": {
+    "8": 3.0
+   },
+   "hyperstack": {
+    "1": 3.99
+   },
+   "koyeb": {
+    "1": 3.0,
+    "2": 3.0
+   },
+   "lightningai": {
+    "1": 6.53
+   },
+   "lyceum": {
+    "1": 4.29
+   },
+   "massedcompute": {
+    "1": 14.879999999999999
+   },
+   "nebius": {
+    "1": 4.5,
+    "8": 4.5
+   },
+   "oblivus": {
+    "1": 3.99
+   },
+   "oracle": {
+    "8": 10.0,
+    "1": 6.25
+   },
+   "qubrid": {
+    "1": 5.56,
+    "8": 5.42
+   },
+   "runpod": {
+    "1": 3.69,
+    "2": 4.39,
+    "3": 4.39,
+    "4": 4.39,
+    "5": 4.39,
+    "6": 4.39,
+    "7": 4.39,
+    "8": 4.39
+   },
+   "theta_edgecloud": {
+    "1": 2.49,
+    "2": 2.49,
+    "4": 2.49
+   },
+   "together": {
+    "1": 200.0
+   },
+   "vastai": {
+    "2": 4.080044,
+    "4": 4.211075,
+    "1": 3.9511700000000003,
+    "8": 4.2108
+   },
+   "verda": {
+    "1": 4.41,
+    "2": 4.615,
+    "4": 4.205,
+    "8": 4.205
+   }
+  },
+  "B200": {
+   "aws": {
+    "8": 15.111721
+   },
+   "beyondpl": {
+    "8": 5.1
+   },
+   "boostrun": {
+    "8": 3.74
+   },
+   "coreweave": {
+    "8": 8.6
+   },
+   "e2e": {
+    "1": 6.99
+   },
+   "excesssupply": {
+    "8": 4.51375
+   },
+   "gcp": {
+    "1": 11.277
+   },
+   "hyperstack": {
+    "1": 6.0
+   },
+   "koyeb": {
+    "1": 5.5
+   },
+   "lambda": {
+    "1": 6.99,
+    "2": 6.89,
+    "8": 6.69,
+    "4": 6.79
+   },
+   "lyceum": {
+    "1": 6.49,
+    "2": 6.49
+   },
+   "massedcompute": {
+    "1": 42.2
+   },
+   "nebius": {
+    "1": 7.15,
+    "8": 7.15
+   },
+   "oracle": {
+    "1": 8.75
+   },
+   "packet\u00b7ai": {
+    "1": 3.75
+   },
+   "runpod": {
+    "1": 5.89,
+    "2": 5.89,
+    "3": 5.89,
+    "4": 5.89,
+    "5": 5.89,
+    "6": 5.89,
+    "7": 5.89,
+    "8": 5.89
+   },
+   "together": {
+    "1": 200.0
+   },
+   "upcloud": {
+    "1": 5.2,
+    "2": 5.2,
+    "4": 5.2
+   },
+   "vastai": {
+    "2": 6.492708,
+    "4": 6.190104,
+    "8": 5.937674,
+    "1": 7.314583
+   },
+   "verda": {
+    "1": 6.52,
+    "2": 6.52,
+    "4": 6.4175,
+    "8": 6.305
+   }
+  }
+ }
+}

@@ -1,0 +1,804 @@
+{
+  "schema": "secondrun.status-incidents.v1",
+  "provider": "RunPod",
+  "status_page_url": "https://uptime.runpod.io",
+  "retrieved_utc": "2026-09-29T21:43:44Z",
+  "raw_files": [
+    {
+      "path": "retrospective/incidents/raw/runpod/incidents_2026-01_2026-03.html",
+      "sha256": "69b6caa01ff3d2b12aea248b6b9d31ac19945a2d6f16bc4619d35bfc8a635752",
+      "url": "https://uptime.runpod.io/incidents/2026-01/2026-03"
+    },
+    {
+      "path": "retrospective/incidents/raw/runpod/incidents_2026-04_2026-06.html",
+      "sha256": "5912f13a357109c51000539fb3fa4be13d0a8384e67f15c5b7d2c00cf2238134",
+      "url": "https://uptime.runpod.io/incidents/2026-04/2026-06"
+    },
+    {
+      "path": "retrospective/incidents/raw/runpod/incidents_2026-07_2026-09.html",
+      "sha256": "da6fd2b995aec4ec0425e2cab624438d53437b7acf888c9a238f9345fd1ddfe7",
+      "url": "https://uptime.runpod.io/incidents/2026-07/2026-09"
+    },
+    {
+      "path": "retrospective/incidents/raw/runpod/incident_861238.html",
+      "sha256": "f38ee8e5d4c049da3cb0d3984c09e6229655cb7c9cd6ea2b19c06a54e9120789",
+      "url": "https://uptime.runpod.io/incident/861238"
+    },
+    {
+      "path": "retrospective/incidents/raw/runpod/incident_856975.html",
+      "sha256": "f1ee29a3969e67a8e3e67eb1633c2834a36af30fd183c93968a20cc41b7459d9",
+      "url": "https://uptime.runpod.io/incident/856975"
+    },
+    {
+      "path": "retrospective/incidents/raw/runpod/incident_851510.html",
+      "sha256": "330d216b8ad96f6dec144cd97b9d44b6b317f281e26c6a9bd55a7ac418bdb61e",
+      "url": "https://uptime.runpod.io/incident/851510"
+    },
+    {
+      "path": "retrospective/incidents/raw/runpod/incident_850737.html",
+      "sha256": "b2265ce5715b4442ecdad8e7f196f1015b2a11918cc630347ec4b5d10b08b376",
+      "url": "https://uptime.runpod.io/incident/850737"
+    },
+    {
+      "path": "retrospective/incidents/raw/runpod/incident_848891.html",
+      "sha256": "172ee746bd0e68ce321825605e04ac7c68aa8c37e0a77b62131187bcf69d7518",
+      "url": "https://uptime.runpod.io/incident/848891"
+    },
+    {
+      "path": "retrospective/incidents/raw/runpod/incident_847169.html",
+      "sha256": "7065744d475bda0db5b310abbd9f51accdc221981083bbaf63905171808bea05",
+      "url": "https://uptime.runpod.io/incident/847169"
+    },
+    {
+      "path": "retrospective/incidents/raw/runpod/incident_846415.html",
+      "sha256": "0f4cd224d975ba61bafef7b6432af19ca0cb9d6e63f70811c61f35b3f107d54a",
+      "url": "https://uptime.runpod.io/incident/846415"
+    },
+    {
+      "path": "retrospective/incidents/raw/runpod/incident_846186.html",
+      "sha256": "9faa85edefe3f87a917351a879e4f9a5cdb7e76b13d20aacca8e76bffc3089a3",
+      "url": "https://uptime.runpod.io/incident/846186"
+    },
+    {
+      "path": "retrospective/incidents/raw/runpod/incident_843306.html",
+      "sha256": "438812b5b97278d77c35895146b69b2864a67a088d8d6582fdc8be0cc72205cc",
+      "url": "https://uptime.runpod.io/incident/843306"
+    },
+    {
+      "path": "retrospective/incidents/raw/runpod/incident_839215.html",
+      "sha256": "bedc08732a5d5abcbc35402dde1f3a001d20f99f24f0c05a3d3b0836569058e8",
+      "url": "https://uptime.runpod.io/incident/839215"
+    },
+    {
+      "path": "retrospective/incidents/raw/runpod/incident_831608.html",
+      "sha256": "41f6c2872da3e0d26e16ad9213c6002a1ba5cb06ab4be08c5f60efe8154307b0",
+      "url": "https://uptime.runpod.io/incident/831608"
+    },
+    {
+      "path": "retrospective/incidents/raw/runpod/incident_829948.html",
+      "sha256": "f344999b8d21f85ddaa3a48a0e236e82c81fcb183584412f90f881500b61f61a",
+      "url": "https://uptime.runpod.io/incident/829948"
+    },
+    {
+      "path": "retrospective/incidents/raw/runpod/incident_828911.html",
+      "sha256": "72c100eccafd976125cc57bb25eda775908c355ede54a10cb3eb33fc6cec0e5a",
+      "url": "https://uptime.runpod.io/incident/828911"
+    },
+    {
+      "path": "retrospective/incidents/raw/runpod/incident_818712.html",
+      "sha256": "d3908455cdf4eff57e2abeecf2a197d1b75617e915feeaeea09401be36df123f",
+      "url": "https://uptime.runpod.io/incident/818712"
+    },
+    {
+      "path": "retrospective/incidents/raw/runpod/incident_805291.html",
+      "sha256": "c88e5cddc72aea8b518d5cccace870f38859ef0ac2deeadf7c606101894a148f",
+      "url": "https://uptime.runpod.io/incident/805291"
+    },
+    {
+      "path": "retrospective/incidents/raw/runpod/incident_801573.html",
+      "sha256": "284c0f1e27f5567867d86473edfab76e3618368d58691a21d6d4ea8508f85050",
+      "url": "https://uptime.runpod.io/incident/801573"
+    },
+    {
+      "path": "retrospective/incidents/raw/runpod/incident_800754.html",
+      "sha256": "57fb519df9481647a28f5fb77b8c219871305221ddd817d6fcaecb5c38ac234b",
+      "url": "https://uptime.runpod.io/incident/800754"
+    },
+    {
+      "path": "retrospective/incidents/raw/runpod/incident_936143.html",
+      "sha256": "ad1a41c51b54360de75a02a9c24eb9019c786d1519b7a5fb80c601124650cf5e",
+      "url": "https://uptime.runpod.io/incident/936143"
+    },
+    {
+      "path": "retrospective/incidents/raw/runpod/incident_928974.html",
+      "sha256": "1dedb3772d1426c4bca1b4a2b8614dd0c6444b2a6421434eefdc8a4e5af66f5b",
+      "url": "https://uptime.runpod.io/incident/928974"
+    },
+    {
+      "path": "retrospective/incidents/raw/runpod/incident_912410.html",
+      "sha256": "98f6270993904df299e7a2743728813411a9925cb901a9bc4108ad1a0c723dca",
+      "url": "https://uptime.runpod.io/incident/912410"
+    },
+    {
+      "path": "retrospective/incidents/raw/runpod/incident_905955.html",
+      "sha256": "9953a3b43ad363663373c43bba96f0548ed493062076794cac4d267936ff3a97",
+      "url": "https://uptime.runpod.io/incident/905955"
+    },
+    {
+      "path": "retrospective/incidents/raw/runpod/incident_896191.html",
+      "sha256": "5780b45a2f4c6b109b7ae2de9902e128b8a778dc8ffedcced8521de0f6f23cb4",
+      "url": "https://uptime.runpod.io/incident/896191"
+    },
+    {
+      "path": "retrospective/incidents/raw/runpod/incident_891339.html",
+      "sha256": "82137f0d841579c942c50652fdc45ddd84b305254880f308a624349df2eb3486",
+      "url": "https://uptime.runpod.io/incident/891339"
+    },
+    {
+      "path": "retrospective/incidents/raw/runpod/incident_881530.html",
+      "sha256": "2b81ea84eabcf67e96dfcfe2c0ea9dfad4d081fd37f64f154a918a0024d718dd",
+      "url": "https://uptime.runpod.io/incident/881530"
+    },
+    {
+      "path": "retrospective/incidents/raw/runpod/incident_871625.html",
+      "sha256": "9bd4dc5482da3933b7aad2a206f17585a880ffa9b3efd91a5ed0035458851b36",
+      "url": "https://uptime.runpod.io/incident/871625"
+    },
+    {
+      "path": "retrospective/incidents/raw/runpod/incident_864771.html",
+      "sha256": "99a0b2be8b374c9d4c8488dcd02e33cd8f3c384d6d28b5832b30a1cdebeb8d88",
+      "url": "https://uptime.runpod.io/incident/864771"
+    },
+    {
+      "path": "retrospective/incidents/raw/runpod/incident_1077408.html",
+      "sha256": "b5c9f0e386c015474efa0894cf1c3bff6262f3ea2bb6bb9c3c2c452b2176c3e2",
+      "url": "https://uptime.runpod.io/incident/1077408"
+    },
+    {
+      "path": "retrospective/incidents/raw/runpod/incident_1073343.html",
+      "sha256": "84104cc62205b81542d0c0349b345a969bd584264c861eb46088c4e0cd53f829",
+      "url": "https://uptime.runpod.io/incident/1073343"
+    },
+    {
+      "path": "retrospective/incidents/raw/runpod/incident_1071420.html",
+      "sha256": "1abac413a2085d534553eb2e99be84839b379ad7058cea311cd13a75feeff263",
+      "url": "https://uptime.runpod.io/incident/1071420"
+    },
+    {
+      "path": "retrospective/incidents/raw/runpod/incident_1069679.html",
+      "sha256": "9d417b45624d7d02b0e04c3802008e83674c364e59e4e871f8f056174dbfa539",
+      "url": "https://uptime.runpod.io/incident/1069679"
+    },
+    {
+      "path": "retrospective/incidents/raw/runpod/incident_1068267.html",
+      "sha256": "597ebf1df2659f8186e139531236bcc592f98b4569a20063d599486e849333ee",
+      "url": "https://uptime.runpod.io/incident/1068267"
+    },
+    {
+      "path": "retrospective/incidents/raw/runpod/incident_1066922.html",
+      "sha256": "ce8acf20d7e864f118ea7947119a008eb3fbcbf350702273996efe838245c45a",
+      "url": "https://uptime.runpod.io/incident/1066922"
+    },
+    {
+      "path": "retrospective/incidents/raw/runpod/incident_1066369.html",
+      "sha256": "340086baaf87902bc6704a6a8f5f4951d654b7210175789c4258ea424e7514ae",
+      "url": "https://uptime.runpod.io/incident/1066369"
+    },
+    {
+      "path": "retrospective/incidents/raw/runpod/incident_1065888.html",
+      "sha256": "2aa00432c0a35ba47505393b4f8f973990c5978ee9370941f51063ff7cfaba91",
+      "url": "https://uptime.runpod.io/incident/1065888"
+    },
+    {
+      "path": "retrospective/incidents/raw/runpod/incident_1061123.html",
+      "sha256": "fcfd52afdaf9953b15c402207f963a6d16c625dbf5ed73ba90759dbbf663eeff",
+      "url": "https://uptime.runpod.io/incident/1061123"
+    },
+    {
+      "path": "retrospective/incidents/raw/runpod/incident_1058109.html",
+      "sha256": "ac028a4d058e4b959dccaa1257545d564d5d06a13b55533b249cd7e0b65e994e",
+      "url": "https://uptime.runpod.io/incident/1058109"
+    },
+    {
+      "path": "retrospective/incidents/raw/runpod/incident_1054135.html",
+      "sha256": "1f58811ec0119d0d8dd4bafea43635891a6a9e0d8b3300617f04e0b81407c2bb",
+      "url": "https://uptime.runpod.io/incident/1054135"
+    },
+    {
+      "path": "retrospective/incidents/raw/runpod/incident_1044387.html",
+      "sha256": "edc977e01a7f93de900692624d986d8001284b83e71a188f745447f33801363c",
+      "url": "https://uptime.runpod.io/incident/1044387"
+    },
+    {
+      "path": "retrospective/incidents/raw/runpod/incident_1021847.html",
+      "sha256": "dcefb684ff9983f3ee53f7d11746a8c94eda88417e9c6b9c3ea13496cd032cfa",
+      "url": "https://uptime.runpod.io/incident/1021847"
+    },
+    {
+      "path": "retrospective/incidents/raw/runpod/incident_1021780.html",
+      "sha256": "a323f5837cd4f4041beb3108260cef1e8241437b15a84354a245984a875496b9",
+      "url": "https://uptime.runpod.io/incident/1021780"
+    },
+    {
+      "path": "retrospective/incidents/raw/runpod/incident_1017607.html",
+      "sha256": "e678d55d2d3999164c648ad52bd5beb1ab67ed1852e7ef72127279970e1f7292",
+      "url": "https://uptime.runpod.io/incident/1017607"
+    },
+    {
+      "path": "retrospective/incidents/raw/runpod/incident_1012886.html",
+      "sha256": "421f6da34a52db4bf2680d580a3f3e91b65f91fb56b7480cb6a4ee45668387f2",
+      "url": "https://uptime.runpod.io/incident/1012886"
+    },
+    {
+      "path": "retrospective/incidents/raw/runpod/incident_1011068.html",
+      "sha256": "56a04cf63fc7688ac69729a5e6825b7e52a09f4844b6f68f7aef0b9348a60cc7",
+      "url": "https://uptime.runpod.io/incident/1011068"
+    },
+    {
+      "path": "retrospective/incidents/raw/runpod/incident_998244.html",
+      "sha256": "1271cd2909a61cf07d1d38fb9c09ae8af224471273eea0c58c50ab4de644b3a6",
+      "url": "https://uptime.runpod.io/incident/998244"
+    },
+    {
+      "path": "retrospective/incidents/raw/runpod/incident_972123.html",
+      "sha256": "199f7382418e3aec4591826c74dba5234c96df866c8eb47a696e71cb57d06d30",
+      "url": "https://uptime.runpod.io/incident/972123"
+    },
+    {
+      "path": "retrospective/incidents/raw/runpod/incident_950643.html",
+      "sha256": "ad5e2d1e53d542bddef6c17f4378beb119bcd8655c48cfd96dff5141dba46261",
+      "url": "https://uptime.runpod.io/incident/950643"
+    },
+    {
+      "path": "retrospective/incidents/raw/runpod/incident_950573.html",
+      "sha256": "684f71395efb6e409ec70539277d072bf04ebc71a7210b5af54cbbcdc65668e8",
+      "url": "https://uptime.runpod.io/incident/950573"
+    },
+    {
+      "path": "retrospective/incidents/raw/runpod/incident_948243.html",
+      "sha256": "39769fe6ea54d7e8c19b6af2b19abaa79df4a7b2fa20e950da8aa55a8ff7ea66",
+      "url": "https://uptime.runpod.io/incident/948243"
+    },
+    {
+      "path": "retrospective/incidents/raw/runpod/incident_947563.html",
+      "sha256": "ccf179db9b25e84ff4af3ecdac2efb926ff65bba9c6fbcee5d77516c161618ef",
+      "url": "https://uptime.runpod.io/incident/947563"
+    },
+    {
+      "path": "retrospective/incidents/raw/runpod/incident_947068.html",
+      "sha256": "b33b71bf7981cfbe5af71ca2f2ab1e784b16f24ef7288fed439b2ae4aeea4327",
+      "url": "https://uptime.runpod.io/incident/947068"
+    },
+    {
+      "path": "retrospective/incidents/raw/runpod/incident_947015.html",
+      "sha256": "6b339deeda7e2550716ac0cbbcb5b2a9c7f519f92b49212d76909c1d2f83af36",
+      "url": "https://uptime.runpod.io/incident/947015"
+    }
+  ],
+  "coverage_start": "2026-01-01",
+  "coverage_end": "2026-09-29",
+  "severity_map": {
+    "Downtime": "critical",
+    "Degraded performance": "minor",
+    "Maintenance": "none",
+    "(no affected-component state recorded)": "none"
+  },
+  "incidents": [
+    {
+      "id": "800754",
+      "title": "The public endpoint is experiencing intermittent issues.",
+      "impact_label": "(no affected-component state recorded)",
+      "severity": "none",
+      "started_utc": "2026-01-08T15:19:00Z",
+      "resolved_utc": "2026-01-08T15:19:00Z",
+      "is_maintenance": false,
+      "url": "https://uptime.runpod.io/incident/800754"
+    },
+    {
+      "id": "801573",
+      "title": "US-IL-1 data center is currently experiencing a network issue",
+      "impact_label": "(no affected-component state recorded)",
+      "severity": "none",
+      "started_utc": "2026-01-09T21:23:00Z",
+      "resolved_utc": "2026-01-09T21:23:00Z",
+      "is_maintenance": false,
+      "url": "https://uptime.runpod.io/incident/801573"
+    },
+    {
+      "id": "805291",
+      "title": "US-WA-1 Network Issue",
+      "impact_label": "Downtime",
+      "severity": "critical",
+      "started_utc": "2026-01-15T19:02:00Z",
+      "resolved_utc": "2026-01-15T19:36:00Z",
+      "is_maintenance": false,
+      "url": "https://uptime.runpod.io/incident/805291"
+    },
+    {
+      "id": "818712",
+      "title": "EUR-IS-1 Network Issue",
+      "impact_label": "Downtime",
+      "severity": "critical",
+      "started_utc": "2026-02-04T20:09:00Z",
+      "resolved_utc": "2026-02-04T21:01:00Z",
+      "is_maintenance": false,
+      "url": "https://uptime.runpod.io/incident/818712"
+    },
+    {
+      "id": "828911",
+      "title": "Console login is slow or failing",
+      "impact_label": "Degraded performance",
+      "severity": "minor",
+      "started_utc": "2026-02-19T16:29:00Z",
+      "resolved_utc": "2026-02-19T19:09:00Z",
+      "is_maintenance": false,
+      "url": "https://uptime.runpod.io/incident/828911"
+    },
+    {
+      "id": "829948",
+      "title": "US-TX-4 Network Outage",
+      "impact_label": "(no affected-component state recorded)",
+      "severity": "none",
+      "started_utc": "2026-02-21T04:14:00Z",
+      "resolved_utc": "2026-02-21T04:14:00Z",
+      "is_maintenance": false,
+      "url": "https://uptime.runpod.io/incident/829948"
+    },
+    {
+      "id": "831608",
+      "title": "EU-FR-1 Network Issue",
+      "impact_label": "Downtime",
+      "severity": "critical",
+      "started_utc": "2026-02-23T22:21:00Z",
+      "resolved_utc": "2026-02-24T20:57:00Z",
+      "is_maintenance": false,
+      "url": "https://uptime.runpod.io/incident/831608"
+    },
+    {
+      "id": "839215",
+      "title": "Billing Explorer experiencing issue.",
+      "impact_label": "(no affected-component state recorded)",
+      "severity": "none",
+      "started_utc": "2026-03-03T18:01:00Z",
+      "resolved_utc": "2026-03-03T18:01:00Z",
+      "is_maintenance": false,
+      "url": "https://uptime.runpod.io/incident/839215"
+    },
+    {
+      "id": "843306",
+      "title": "US-CA-2 networking is degraded",
+      "impact_label": "Downtime",
+      "severity": "critical",
+      "started_utc": "2026-03-07T08:08:00Z",
+      "resolved_utc": "2026-03-07T11:06:00Z",
+      "is_maintenance": false,
+      "url": "https://uptime.runpod.io/incident/843306"
+    },
+    {
+      "id": "846186",
+      "title": "Console Login Issues",
+      "impact_label": "(no affected-component state recorded)",
+      "severity": "none",
+      "started_utc": "2026-03-10T16:21:00Z",
+      "resolved_utc": "2026-03-10T16:21:00Z",
+      "is_maintenance": false,
+      "url": "https://uptime.runpod.io/incident/846186"
+    },
+    {
+      "id": "846415",
+      "title": "US-CA-2 Network Storage connectivity issues",
+      "impact_label": "Degraded performance",
+      "severity": "minor",
+      "started_utc": "2026-03-10T22:40:00Z",
+      "resolved_utc": "2026-03-10T23:24:00Z",
+      "is_maintenance": false,
+      "url": "https://uptime.runpod.io/incident/846415"
+    },
+    {
+      "id": "847169",
+      "title": "EUR-NO-1 - Network storage performance is degraded",
+      "impact_label": "Degraded performance",
+      "severity": "minor",
+      "started_utc": "2026-03-11T15:45:00Z",
+      "resolved_utc": "2026-03-11T19:15:00Z",
+      "is_maintenance": false,
+      "url": "https://uptime.runpod.io/incident/847169"
+    },
+    {
+      "id": "848891",
+      "title": "Issue with creating new storage volumes in EU-RO-1 DC",
+      "impact_label": "Degraded performance",
+      "severity": "minor",
+      "started_utc": "2026-03-14T01:36:00Z",
+      "resolved_utc": "2026-03-14T02:21:00Z",
+      "is_maintenance": false,
+      "url": "https://uptime.runpod.io/incident/848891"
+    },
+    {
+      "id": "850737",
+      "title": "CA-MTL-1 Connectivity issue to network and network storage",
+      "impact_label": "Downtime",
+      "severity": "critical",
+      "started_utc": "2026-03-16T21:43:00Z",
+      "resolved_utc": "2026-03-17T01:45:00Z",
+      "is_maintenance": false,
+      "url": "https://uptime.runpod.io/incident/850737"
+    },
+    {
+      "id": "851510",
+      "title": "US-NE-1 internet network speeds is degraded",
+      "impact_label": "Degraded performance",
+      "severity": "minor",
+      "started_utc": "2026-03-17T16:23:00Z",
+      "resolved_utc": "2026-03-18T11:55:00Z",
+      "is_maintenance": false,
+      "url": "https://uptime.runpod.io/incident/851510"
+    },
+    {
+      "id": "856975",
+      "title": "US-NC-1 Network Issue",
+      "impact_label": "Downtime",
+      "severity": "critical",
+      "started_utc": "2026-03-25T04:18:00Z",
+      "resolved_utc": "2026-03-25T04:48:00Z",
+      "is_maintenance": false,
+      "url": "https://uptime.runpod.io/incident/856975"
+    },
+    {
+      "id": "861238",
+      "title": "EU-FR-1 Network Issue",
+      "impact_label": "Downtime",
+      "severity": "critical",
+      "started_utc": "2026-03-31T01:11:00Z",
+      "resolved_utc": "2026-03-31T08:39:00Z",
+      "is_maintenance": false,
+      "url": "https://uptime.runpod.io/incident/861238"
+    },
+    {
+      "id": "864771",
+      "title": "Incident Notice: Power Service Interruption \u2013 US-NC-1",
+      "impact_label": "(no affected-component state recorded)",
+      "severity": "none",
+      "started_utc": "2026-04-04T17:58:00Z",
+      "resolved_utc": "2026-04-04T17:58:00Z",
+      "is_maintenance": false,
+      "url": "https://uptime.runpod.io/incident/864771"
+    },
+    {
+      "id": "871625",
+      "title": "Runpod.io website is unavailable",
+      "impact_label": "Degraded performance",
+      "severity": "minor",
+      "started_utc": "2026-04-14T20:09:00Z",
+      "resolved_utc": "2026-04-14T20:41:00Z",
+      "is_maintenance": false,
+      "url": "https://uptime.runpod.io/incident/871625"
+    },
+    {
+      "id": "881530",
+      "title": "CA-MTL-1 and CA-MTL-3 Network Issue",
+      "impact_label": "Downtime",
+      "severity": "critical",
+      "started_utc": "2026-04-28T04:52:00Z",
+      "resolved_utc": "2026-04-28T08:12:00Z",
+      "is_maintenance": false,
+      "url": "https://uptime.runpod.io/incident/881530"
+    },
+    {
+      "id": "891339",
+      "title": "Console: Delayed Pod starts and Empty Console Logs",
+      "impact_label": "Degraded performance",
+      "severity": "minor",
+      "started_utc": "2026-05-08T17:08:00Z",
+      "resolved_utc": "2026-05-08T21:49:00Z",
+      "is_maintenance": false,
+      "url": "https://uptime.runpod.io/incident/891339"
+    },
+    {
+      "id": "896191",
+      "title": "CA-MTL-3 Network Issue",
+      "impact_label": "Downtime",
+      "severity": "critical",
+      "started_utc": "2026-05-14T20:24:00Z",
+      "resolved_utc": "2026-05-14T21:49:00Z",
+      "is_maintenance": false,
+      "url": "https://uptime.runpod.io/incident/896191"
+    },
+    {
+      "id": "912410",
+      "title": "Upstream issue - Elevated image pull error rates from DockerHub Cloudfront",
+      "impact_label": "Degraded performance",
+      "severity": "minor",
+      "started_utc": "2026-05-26T12:00:00Z",
+      "resolved_utc": "2026-06-08T19:52:00Z",
+      "is_maintenance": false,
+      "url": "https://uptime.runpod.io/incident/912410"
+    },
+    {
+      "id": "905955",
+      "title": "Upstream authentication provider is experiencing an issue.",
+      "impact_label": "(no affected-component state recorded)",
+      "severity": "none",
+      "started_utc": "2026-05-26T21:57:00Z",
+      "resolved_utc": "2026-05-26T21:57:00Z",
+      "is_maintenance": false,
+      "url": "https://uptime.runpod.io/incident/905955"
+    },
+    {
+      "id": "928974",
+      "title": "EUR-IS-1 Network Issue",
+      "impact_label": "Degraded performance",
+      "severity": "minor",
+      "started_utc": "2026-06-19T13:46:00Z",
+      "resolved_utc": "2026-06-19T14:26:00Z",
+      "is_maintenance": false,
+      "url": "https://uptime.runpod.io/incident/928974"
+    },
+    {
+      "id": "936143",
+      "title": "US-PA-1 Network Inbound Issue",
+      "impact_label": "(no affected-component state recorded)",
+      "severity": "none",
+      "started_utc": "2026-06-26T14:00:00Z",
+      "resolved_utc": "2026-06-26T14:00:00Z",
+      "is_maintenance": false,
+      "url": "https://uptime.runpod.io/incident/936143"
+    },
+    {
+      "id": "947015",
+      "title": "CA-MTL-3 Network Storage Issue",
+      "impact_label": "Degraded performance",
+      "severity": "minor",
+      "started_utc": "2026-07-07T21:20:00Z",
+      "resolved_utc": "2026-07-08T09:56:00Z",
+      "is_maintenance": false,
+      "url": "https://uptime.runpod.io/incident/947015"
+    },
+    {
+      "id": "947068",
+      "title": "EUR-NO-1 Network Storage Issue",
+      "impact_label": "Degraded performance",
+      "severity": "minor",
+      "started_utc": "2026-07-08T09:52:00Z",
+      "resolved_utc": "2026-07-08T10:27:00Z",
+      "is_maintenance": false,
+      "url": "https://uptime.runpod.io/incident/947068"
+    },
+    {
+      "id": "947563",
+      "title": "US-GA-2 Networking is Degraded",
+      "impact_label": "Degraded performance",
+      "severity": "minor",
+      "started_utc": "2026-07-08T20:16:00Z",
+      "resolved_utc": "2026-07-08T22:12:00Z",
+      "is_maintenance": false,
+      "url": "https://uptime.runpod.io/incident/947563"
+    },
+    {
+      "id": "948243",
+      "title": "US-TX-3 Network Storage Issue",
+      "impact_label": "Downtime",
+      "severity": "critical",
+      "started_utc": "2026-07-09T06:24:00Z",
+      "resolved_utc": "2026-07-09T16:50:00Z",
+      "is_maintenance": false,
+      "url": "https://uptime.runpod.io/incident/948243"
+    },
+    {
+      "id": "950573",
+      "title": "EUR-IS-1 Networking is Degraded",
+      "impact_label": "Degraded performance",
+      "severity": "minor",
+      "started_utc": "2026-07-10T10:00:00Z",
+      "resolved_utc": "2026-07-10T19:00:00Z",
+      "is_maintenance": false,
+      "url": "https://uptime.runpod.io/incident/950573"
+    },
+    {
+      "id": "950643",
+      "title": "EUR-IS-4 Network Issue",
+      "impact_label": "Downtime",
+      "severity": "critical",
+      "started_utc": "2026-07-10T20:24:00Z",
+      "resolved_utc": "2026-07-10T21:02:00Z",
+      "is_maintenance": false,
+      "url": "https://uptime.runpod.io/incident/950643"
+    },
+    {
+      "id": "972123",
+      "title": "EUR-IS-1 Network Issue",
+      "impact_label": "Degraded performance",
+      "severity": "minor",
+      "started_utc": "2026-07-21T22:35:00Z",
+      "resolved_utc": "2026-07-21T23:45:00Z",
+      "is_maintenance": false,
+      "url": "https://uptime.runpod.io/incident/972123"
+    },
+    {
+      "id": "998244",
+      "title": "EUR-NO-1 Network Storage Issue",
+      "impact_label": "Downtime",
+      "severity": "critical",
+      "started_utc": "2026-08-06T13:47:00Z",
+      "resolved_utc": "2026-08-06T15:38:00Z",
+      "is_maintenance": false,
+      "url": "https://uptime.runpod.io/incident/998244"
+    },
+    {
+      "id": "1011068",
+      "title": "EUR-IS-1 Network Issue",
+      "impact_label": "Degraded performance",
+      "severity": "minor",
+      "started_utc": "2026-08-13T10:47:00Z",
+      "resolved_utc": "2026-08-14T09:50:00Z",
+      "is_maintenance": false,
+      "url": "https://uptime.runpod.io/incident/1011068"
+    },
+    {
+      "id": "1012886",
+      "title": "US-IL-1 DC is Unavailable",
+      "impact_label": "Downtime",
+      "severity": "critical",
+      "started_utc": "2026-08-14T21:30:00Z",
+      "resolved_utc": "2026-08-15T03:40:00Z",
+      "is_maintenance": false,
+      "url": "https://uptime.runpod.io/incident/1012886"
+    },
+    {
+      "id": "1017607",
+      "title": "EUR-IS-1 Network Issue",
+      "impact_label": "Degraded performance",
+      "severity": "minor",
+      "started_utc": "2026-08-17T15:30:00Z",
+      "resolved_utc": "2026-08-17T18:30:00Z",
+      "is_maintenance": false,
+      "url": "https://uptime.runpod.io/incident/1017607"
+    },
+    {
+      "id": "1021780",
+      "title": "EUR-NO-2 Network Issue",
+      "impact_label": "Downtime",
+      "severity": "critical",
+      "started_utc": "2026-08-19T19:06:00Z",
+      "resolved_utc": "2026-08-19T19:54:00Z",
+      "is_maintenance": false,
+      "url": "https://uptime.runpod.io/incident/1021780"
+    },
+    {
+      "id": "1021847",
+      "title": "EU-CZ-1 Network Issue",
+      "impact_label": "Degraded performance",
+      "severity": "minor",
+      "started_utc": "2026-08-19T20:09:00Z",
+      "resolved_utc": "2026-08-19T21:21:00Z",
+      "is_maintenance": false,
+      "url": "https://uptime.runpod.io/incident/1021847"
+    },
+    {
+      "id": "1044387",
+      "title": "US-NC-2 Networking is Degraded",
+      "impact_label": "Degraded performance",
+      "severity": "minor",
+      "started_utc": "2026-09-01T04:40:00Z",
+      "resolved_utc": "2026-09-01T06:26:00Z",
+      "is_maintenance": false,
+      "url": "https://uptime.runpod.io/incident/1044387"
+    },
+    {
+      "id": "1054135",
+      "title": "SSH Proxy and Serverless are experiencing elevated error rates",
+      "impact_label": "Degraded performance",
+      "severity": "minor",
+      "started_utc": "2026-09-06T19:05:00Z",
+      "resolved_utc": "2026-09-06T20:30:00Z",
+      "is_maintenance": false,
+      "url": "https://uptime.runpod.io/incident/1054135"
+    },
+    {
+      "id": "1058109",
+      "title": "CA-MTL-4 Network Issue",
+      "impact_label": "Downtime",
+      "severity": "critical",
+      "started_utc": "2026-09-09T20:56:00Z",
+      "resolved_utc": "2026-09-09T21:24:00Z",
+      "is_maintenance": false,
+      "url": "https://uptime.runpod.io/incident/1058109"
+    },
+    {
+      "id": "1061123",
+      "title": "EUR-IS-1 Network Issue",
+      "impact_label": "Degraded performance",
+      "severity": "minor",
+      "started_utc": "2026-09-12T16:08:00Z",
+      "resolved_utc": "2026-09-13T05:33:00Z",
+      "is_maintenance": false,
+      "url": "https://uptime.runpod.io/incident/1061123"
+    },
+    {
+      "id": "1065888",
+      "title": "EUR-IS-2 Network Issue",
+      "impact_label": "Degraded performance",
+      "severity": "minor",
+      "started_utc": "2026-09-16T17:26:00Z",
+      "resolved_utc": "2026-09-16T18:34:00Z",
+      "is_maintenance": false,
+      "url": "https://uptime.runpod.io/incident/1065888"
+    },
+    {
+      "id": "1066369",
+      "title": "EU-NL-1 Network Issue",
+      "impact_label": "Downtime",
+      "severity": "critical",
+      "started_utc": "2026-09-17T03:41:00Z",
+      "resolved_utc": "2026-09-17T05:40:00Z",
+      "is_maintenance": false,
+      "url": "https://uptime.runpod.io/incident/1066369"
+    },
+    {
+      "id": "1066922",
+      "title": "Elevated errors on the GraphQL and REST v2 APIs",
+      "impact_label": "Degraded performance",
+      "severity": "minor",
+      "started_utc": "2026-09-17T14:04:00Z",
+      "resolved_utc": "2026-09-17T15:04:00Z",
+      "is_maintenance": false,
+      "url": "https://uptime.runpod.io/incident/1066922"
+    },
+    {
+      "id": "1068267",
+      "title": "EUR-IS-2 Network Issue",
+      "impact_label": "Degraded performance",
+      "severity": "minor",
+      "started_utc": "2026-09-18T12:50:00Z",
+      "resolved_utc": "2026-09-18T14:50:00Z",
+      "is_maintenance": false,
+      "url": "https://uptime.runpod.io/incident/1068267"
+    },
+    {
+      "id": "1069679",
+      "title": "US-IL-1 Network Issue",
+      "impact_label": "Downtime",
+      "severity": "critical",
+      "started_utc": "2026-09-20T20:04:00Z",
+      "resolved_utc": "2026-09-20T20:18:00Z",
+      "is_maintenance": false,
+      "url": "https://uptime.runpod.io/incident/1069679"
+    },
+    {
+      "id": "1071420",
+      "title": "EUR-IS-2 DC is Degraded",
+      "impact_label": "Degraded performance",
+      "severity": "minor",
+      "started_utc": "2026-09-22T16:06:00Z",
+      "resolved_utc": "2026-09-22T21:29:00Z",
+      "is_maintenance": false,
+      "url": "https://uptime.runpod.io/incident/1071420"
+    },
+    {
+      "id": "1073343",
+      "title": "EU-SE-1 Network Issue",
+      "impact_label": "Downtime",
+      "severity": "critical",
+      "started_utc": "2026-09-24T21:12:00Z",
+      "resolved_utc": "2026-09-24T21:45:00Z",
+      "is_maintenance": false,
+      "url": "https://uptime.runpod.io/incident/1073343"
+    },
+    {
+      "id": "1077408",
+      "title": "EUR-NO-2 Network Storage Issue",
+      "impact_label": "Degraded performance",
+      "severity": "minor",
+      "started_utc": "2026-09-29T17:00:00Z",
+      "resolved_utc": "2026-09-29T20:30:00Z",
+      "is_maintenance": false,
+      "url": "https://uptime.runpod.io/incident/1077408"
+    }
+  ],
+  "notes": [
+    "better-stack platform; collected by paging https://uptime.runpod.io/incidents/<quarter> for 2026-01/03, 2026-04/06, 2026-07/09 and fetching every /incident/<id> detail page (hand-parsed; collect_status.py has no Better Stack mode)",
+    "quarter-page incident counts summed to 51; 51 distinct incident pages fetched",
+    "impact_label is the worst per-update affected-service state colour shown by Better Stack (red=Downtime, yellow=Degraded performance, blue=Maintenance, green=none/resolved). Better Stack has no separate impact field; Downtime is mapped to critical, Degraded performance to minor, and incidents with no affected component recorded to none. This mapping was declared in plan-R2 before any analysis.",
+    "coverage_start is the first day of the oldest quarter page fetched (that page listed Jan-Mar 2026 month sections); older quarters were not fetched."
+  ]
+}

@@ -1,0 +1,92 @@
+{
+ "packet": "PUBLIC-TAIL-2026-09-29.research-packet.json",
+ "packet_bytes": 3631565,
+ "packet_file_sha256": "f9179639747229afceded209e95532d95ff20ec7bd56f1aca4f0e15703c3ae8f",
+ "envelope_sha256": "3904ccb34ed263f309f2153d68902dee305d556630f93b7b967c9070d5fdc70d",
+ "built_for_app_sha256": "5951f7f3d994ec980d2958ae18246edc6dbe5b57db8d38e90c1c18956b96e470",
+ "built_at_fixed": "2026-09-29T22:00:00Z",
+ "events": 1847,
+ "records_by_kind": {
+  "source": 433,
+  "claim": 1414
+ },
+ "counts": {
+  "cmax_sources": 85,
+  "cmax_claims": 1273,
+  "newsletter_rows": 393,
+  "newsletter_distinct_urls": 343,
+  "newsletter_urls_with_duplicate_rows": 50,
+  "podcast_sources": 3,
+  "podcast_quotes": 74,
+  "tco_line_item_claims": 55,
+  "tco_mtbf_claims": 7,
+  "ocp_claims": 5
+ },
+ "inputs": {
+  "claims.all.jsonl": {
+   "path": "D:/Projects/Organs/AXM/axm-tools/sessions/clustermax-cloudreview-20260929/claims.all.jsonl",
+   "bytes": 763248,
+   "sha256": "2c61f975a28dd7793f4900517e342a82d6d648c00a8ff670717cf6d75eac016f"
+  },
+  "headers.all.json": {
+   "path": "D:/Projects/Organs/AXM/axm-tools/sessions/clustermax-cloudreview-20260929/headers.all.json",
+   "bytes": 93195,
+   "sha256": "9072a45443ad8e1655e0ad07137d672d96fd564087cc633821b7a6bd82debcf8"
+  },
+  "capture-manifest.json": {
+   "path": "D:/Projects/Organs/AXM/axm-tools/sessions/clustermax-cloudreview-20260929/capture-manifest.json",
+   "bytes": 57622,
+   "sha256": "98536fc3e0de267cd51d2ab6d856ae6ed7cab243e12d754b767086b8439ef13f"
+  },
+  "sa-newsletter/rows/posts.jsonl": {
+   "path": "D:/Projects/Organs/AXM/axm-tools/sessions/public-tail-20260929/lanes/sa-newsletter/rows/posts.jsonl",
+   "bytes": 3329434,
+   "sha256": "a7b65892ce9cf2e9e03b42e4578f34c0085ba14d45c1ee9b8965e27e45c30523"
+  },
+  "sa-newsletter/manifest.json": {
+   "path": "D:/Projects/Organs/AXM/axm-tools/sessions/public-tail-20260929/lanes/sa-newsletter/manifest.json",
+   "bytes": 131025,
+   "sha256": "87afcaf767026b371a5ffd88997cb442d7707f6590e96581a3ab407c1dfaace4"
+  },
+  "sa-podcasts/rows/quotes.jsonl": {
+   "path": "D:/Projects/Organs/AXM/axm-tools/sessions/public-tail-20260929/lanes/sa-podcasts/rows/quotes.jsonl",
+   "bytes": 36559,
+   "sha256": "6ea76dba798203b53e4cd2918a67470d5dbc39a04b4e69f8fbaf077d03368cae"
+  },
+  "sa-podcasts/manifest.json": {
+   "path": "D:/Projects/Organs/AXM/axm-tools/sessions/public-tail-20260929/lanes/sa-podcasts/manifest.json",
+   "bytes": 3249,
+   "sha256": "6b7d70efc706118bdded6f8ec5c36e08c7547c38605e1758b48faf7ec5d3f4b9"
+  },
+  "tco-model.json": {
+   "path": "D:/Projects/Organs/AXM/axm-tools/sessions/clustermax-cloudreview-20260929/tco-model.json",
+   "bytes": 21707,
+   "sha256": "273bcd0a8434554de8cb0c535a1211c394d279e29a04adb8344f4d4edd8cbdc1"
+  },
+  "tco_chunks/1bj4l-d6k82v1.js": {
+   "path": "D:/Projects/Organs/AXM/axm-tools/sessions/clustermax-cloudreview-20260929/tco_chunks/1bj4l-d6k82v1.js",
+   "bytes": 555002,
+   "sha256": "e54ecff3cdd5856a012718a0a351488a94a2e97536906bd02fd87a6569e4b5d1"
+  },
+  "parse_tco.py": {
+   "path": "D:/Projects/Organs/AXM/axm-tools/sessions/clustermax-cloudreview-20260929/parse_tco.py",
+   "bytes": 2023,
+   "sha256": "76ebcdc5b3e597fc5e962bbfca7929334141523a195bc09df053969839a5a6be"
+  },
+  "opencomputeprices/REPORT.md": {
+   "path": "D:/Projects/Organs/AXM/axm-tools/sessions/public-tail-20260929/lanes/opencomputeprices/REPORT.md",
+   "bytes": 3312,
+   "sha256": "c88b2afbbb5c3bc1a6e77fba12012ac93f2c62ee173c5069f55db94436786ff8"
+  },
+  "opencomputeprices/summary/coverage.md": {
+   "path": "D:/Projects/Organs/AXM/axm-tools/sessions/public-tail-20260929/lanes/opencomputeprices/summary/coverage.md",
+   "bytes": 99599,
+   "sha256": "f8853594cacecd24b703bcb62fa45c4309432ded8fb4f7ae5fbd308410601099"
+  },
+  "opencomputeprices/manifest.json": {
+   "path": "D:/Projects/Organs/AXM/axm-tools/sessions/public-tail-20260929/lanes/opencomputeprices/manifest.json",
+   "bytes": 17661,
+   "sha256": "0c102b3064bb181faf4dab94c6b015eb23a2968923ecf5f7b36becc3096a70ef"
+  }
+ }
+}

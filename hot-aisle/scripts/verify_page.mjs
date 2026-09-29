@@ -39,6 +39,18 @@ async function staticPass(browser) {
   check('static', 'six_breakeven_tiles', (await page.locator('#breaktable .tile').count()) === 6);
   // front door: an empty drop target first; the fixture and the workbench stay folded until asked
   check('static', 'front_door_is_empty_state', (await page.locator('#stage-empty').isVisible()) && (await page.locator('#hero-card').isHidden()));
+  // 2.4: the door opens on the real Run 3 record, recomputed here; the empty drop target sits directly below it
+  check('static', 'real_card_first_and_visible', (await page.locator('#real-card').isVisible()) && (await page.locator('#real-card .money').innerText()).trim() === '$0.6908');
+  check('static', 'real_card_recomputed_and_qualified', /RECOMPUTED HERE · MATCHES/i.test(await page.locator('#real-card .bar .chip').first().innerText()) && /^QUALIFIED$/i.test((await page.locator('#real-card .bar .chip').last().innerText()).trim()));
+  check('static', 'real_card_not_synthetic', !/synthetic/i.test(await page.locator('#real-card').innerText()) && /MEASURED SEPTEMBER 24, 2026/i.test(await page.locator('#real-card .bar .eyebrow').innerText()));
+  { const t = await page.locator('#real-card').innerText();
+    check('static', 'real_card_has_the_five_figures', /155 ms/.test(t) && /49\.7%/.test(t) && /1\.2\s/.test(t) && /4,336 of 8,622/.test(t) && /147\.5%/.test(t) && /per 1,000/.test(t), t.slice(0, 200));
+    check('static', 'real_card_names_allocation_date_and_disclosure', /1× MI300X VM/i.test(t) && /September 24, 2026/i.test(t) && /\$200 credit given by Hot Aisle/.test(t) && /pitching Hot Aisle a paid engagement/.test(t) && /list price/i.test(t));
+    check('static', 'real_card_breakeven_is_price_ratio', /price ratio only/i.test(t) && /Price ratio, not a measurement/i.test(t)); }
+  check('static', 'drop_target_directly_below_real_card', await page.evaluate(() => { const c = document.getElementById('real-card'), s = document.getElementById('stage'); const seq = [...document.querySelectorAll('#door > *, #drop-lead, #stage')].map(e => e.id); return c.compareDocumentPosition(s) & Node.DOCUMENT_POSITION_FOLLOWING && seq.indexOf('market-strip') < seq.indexOf('stage'); }));
+  { const t = await page.locator('#market-strip').innerText();
+    check('static', 'market_strip_shows_counts_and_disclaimer', /public on-demand list prices, not the priced allocation/.test(t) && /MI300X \$3\.04 \(7 providers\)/.test(t) && /H100 \$2\.99 \(42 providers\)/.test(t) && /H200 \$4\.29 \(33 providers\)/.test(t) && /B200 \$6\.49 \(23 providers\)/.test(t) && /OpenComputePrices latest-data release 2026-07-29/.test(t) && /July 2026/.test(t), t);
+    check('static', 'market_strip_sits_between_card_and_drop', await page.evaluate(() => { const m = document.getElementById('market-strip'), c = document.getElementById('real-card'), s = document.getElementById('stage'); return !!(c.compareDocumentPosition(m) & Node.DOCUMENT_POSITION_FOLLOWING) && !!(m.compareDocumentPosition(s) & Node.DOCUMENT_POSITION_FOLLOWING); })); }
   check('static', 'front_door_names_price_and_snapshot', /\$2\.99 \/ GPU-hr.*reviewed 2026-09-22/.test(await page.locator('#hero-price').innerText()));
   check('static', 'assumptions_folded_by_default', !(await page.evaluate(() => document.getElementById('inspect').open)));
   check('static', 'sample_record_folded_by_default', !(await page.evaluate(() => document.getElementById('record-details').open)));

@@ -1,0 +1,485 @@
+{
+  "schema": "secondrun.status-incidents.v1",
+  "provider": "Atlas Cloud",
+  "status_page_url": "https://atlascloud.instatus.com",
+  "retrieved_utc": "2026-09-29T21:48:06Z",
+  "raw_files": [
+    {
+      "path": "retrospective/incidents/raw/atlas-cloud/notices_2026-01_p1.json",
+      "sha256": "d49da2ea789ecad44fd254384ef47cc49b180bd78aaf0c51d4e4cf6f587f79ba",
+      "url": "https://api.instatus.com/public/atlascloud/notices/monthly/1767225600000?page_no=1"
+    },
+    {
+      "path": "retrospective/incidents/raw/atlas-cloud/notices_2026-02_p1.json",
+      "sha256": "2520da7eadd62c7a9e50de4ca325295c3387bf6162eec814dd7e64dd464271fd",
+      "url": "https://api.instatus.com/public/atlascloud/notices/monthly/1769904000000?page_no=1"
+    },
+    {
+      "path": "retrospective/incidents/raw/atlas-cloud/notices_2026-03_p1.json",
+      "sha256": "264a96933388f4c4c02c5bb72db638bbd058277fe2f8db7a8213ad6020808b96",
+      "url": "https://api.instatus.com/public/atlascloud/notices/monthly/1772323200000?page_no=1"
+    },
+    {
+      "path": "retrospective/incidents/raw/atlas-cloud/notices_2026-04_p1.json",
+      "sha256": "b185acef5d37e591d3889fafa72eead435855e37d4920c6e7b5d1d56e0c68393",
+      "url": "https://api.instatus.com/public/atlascloud/notices/monthly/1775001600000?page_no=1"
+    },
+    {
+      "path": "retrospective/incidents/raw/atlas-cloud/notices_2026-05_p1.json",
+      "sha256": "a426ab2397e80e53a562d4165d2de85f55e34c296289cf6b4fbffe7a29fd267d",
+      "url": "https://api.instatus.com/public/atlascloud/notices/monthly/1777593600000?page_no=1"
+    },
+    {
+      "path": "retrospective/incidents/raw/atlas-cloud/notices_2026-06_p1.json",
+      "sha256": "3e5b9717fb5843f5bf4668400555efd6e378e348f4890034df29dd65fdb26a8f",
+      "url": "https://api.instatus.com/public/atlascloud/notices/monthly/1780272000000?page_no=1"
+    },
+    {
+      "path": "retrospective/incidents/raw/atlas-cloud/notices_2026-06_p2.json",
+      "sha256": "3306637a3e1ae97924744de1459db5be5db58cd76e1bc4734442739bb877f357",
+      "url": "https://api.instatus.com/public/atlascloud/notices/monthly/1780272000000?page_no=2"
+    },
+    {
+      "path": "retrospective/incidents/raw/atlas-cloud/notices_2026-06_p3.json",
+      "sha256": "0f9bd957a6529ff8f9fdc3c49cfcd96cfb5c06eed776b46241253ef83e4101ce",
+      "url": "https://api.instatus.com/public/atlascloud/notices/monthly/1780272000000?page_no=3"
+    },
+    {
+      "path": "retrospective/incidents/raw/atlas-cloud/notices_2026-07_p1.json",
+      "sha256": "e9d551f4834b0600516495763a9c03f26fdeee1ae920717f38bb2811a8ff6685",
+      "url": "https://api.instatus.com/public/atlascloud/notices/monthly/1782864000000?page_no=1"
+    },
+    {
+      "path": "retrospective/incidents/raw/atlas-cloud/notices_2026-08_p1.json",
+      "sha256": "bc9523e37fdca525f823e0b62962068bb6775709c7818d5b4ea2b4fbd30250b7",
+      "url": "https://api.instatus.com/public/atlascloud/notices/monthly/1785542400000?page_no=1"
+    },
+    {
+      "path": "retrospective/incidents/raw/atlas-cloud/notices_2026-09_p1.json",
+      "sha256": "c6866c3462639c1db47b3af3c072fcaaf5d42747f3a55ea6e6832d497b433da4",
+      "url": "https://api.instatus.com/public/atlascloud/notices/monthly/1788220800000?page_no=1"
+    }
+  ],
+  "coverage_start": "2026-01-01",
+  "coverage_end": "2026-09-29",
+  "severity_map": {
+    "MAJOROUTAGE": "critical"
+  },
+  "incidents": [
+    {
+      "id": "cmkbkgdlp000a119jsqruhufo",
+      "title": "www.atlascloud.ai is down",
+      "impact_label": "MAJOROUTAGE",
+      "severity": "critical",
+      "started_utc": "2026-01-12T19:39:01.212Z",
+      "resolved_utc": "2026-01-12T19:41:00.643Z",
+      "is_maintenance": false,
+      "url": "https://atlascloud.instatus.com/cmkbkgdlp000a119jsqruhufo"
+    },
+    {
+      "id": "cmom6yfv200jf501vju2uhrp0",
+      "title": "www.atlascloud.ai is back up",
+      "impact_label": "MAJOROUTAGE",
+      "severity": "critical",
+      "started_utc": "2026-05-01T00:45:26.604Z",
+      "resolved_utc": "2026-05-01T00:47:21.649Z",
+      "is_maintenance": false,
+      "url": "https://atlascloud.instatus.com/cmom6yfv200jf501vju2uhrp0"
+    },
+    {
+      "id": "cmqeee555000a0ko77s63gb6f",
+      "title": "www.atlascloud.ai is back up",
+      "impact_label": "MAJOROUTAGE",
+      "severity": "critical",
+      "started_utc": "2026-06-14T23:10:51.763Z",
+      "resolved_utc": "2026-06-14T23:17:04.776Z",
+      "is_maintenance": false,
+      "url": "https://atlascloud.instatus.com/cmqeee555000a0ko77s63gb6f"
+    },
+    {
+      "id": "cmqilvd2u032u0ko2nzd0xqzt",
+      "title": "www.atlascloud.ai is back up",
+      "impact_label": "MAJOROUTAGE",
+      "severity": "critical",
+      "started_utc": "2026-06-17T21:51:17.124Z",
+      "resolved_utc": "2026-06-17T21:53:00.516Z",
+      "is_maintenance": false,
+      "url": "https://atlascloud.instatus.com/cmqilvd2u032u0ko2nzd0xqzt"
+    },
+    {
+      "id": "cmqim18hd001fujo26vx1bjvg",
+      "title": "www.atlascloud.ai is back up",
+      "impact_label": "MAJOROUTAGE",
+      "severity": "critical",
+      "started_utc": "2026-06-17T21:55:51.191Z",
+      "resolved_utc": "2026-06-17T21:59:33.318Z",
+      "is_maintenance": false,
+      "url": "https://atlascloud.instatus.com/cmqim18hd001fujo26vx1bjvg"
+    },
+    {
+      "id": "cmqimcxwh000fmfqqlrxq9k60",
+      "title": "www.atlascloud.ai is back up",
+      "impact_label": "MAJOROUTAGE",
+      "severity": "critical",
+      "started_utc": "2026-06-17T22:04:57.357Z",
+      "resolved_utc": "2026-06-17T22:10:46.474Z",
+      "is_maintenance": false,
+      "url": "https://atlascloud.instatus.com/cmqimcxwh000fmfqqlrxq9k60"
+    },
+    {
+      "id": "cmqin51hq00cp0kmyw281kjd2",
+      "title": "www.atlascloud.ai is back up",
+      "impact_label": "MAJOROUTAGE",
+      "severity": "critical",
+      "started_utc": "2026-06-17T22:26:48.284Z",
+      "resolved_utc": "2026-06-17T22:28:29.240Z",
+      "is_maintenance": false,
+      "url": "https://atlascloud.instatus.com/cmqin51hq00cp0kmyw281kjd2"
+    },
+    {
+      "id": "cmqinau6d0019mfqqgmjf620c",
+      "title": "www.atlascloud.ai is back up",
+      "impact_label": "MAJOROUTAGE",
+      "severity": "critical",
+      "started_utc": "2026-06-17T22:31:18.832Z",
+      "resolved_utc": "2026-06-17T22:33:06.766Z",
+      "is_maintenance": false,
+      "url": "https://atlascloud.instatus.com/cmqinau6d0019mfqqgmjf620c"
+    },
+    {
+      "id": "cmqinjbi4000zh2qqxlaywjjc",
+      "title": "www.atlascloud.ai is back up",
+      "impact_label": "MAJOROUTAGE",
+      "severity": "critical",
+      "started_utc": "2026-06-17T22:37:54.532Z",
+      "resolved_utc": "2026-06-17T22:39:40.595Z",
+      "is_maintenance": false,
+      "url": "https://atlascloud.instatus.com/cmqinjbi4000zh2qqxlaywjjc"
+    },
+    {
+      "id": "cmqinrqnf000u7ro2h9045tcp",
+      "title": "www.atlascloud.ai is back up",
+      "impact_label": "MAJOROUTAGE",
+      "severity": "critical",
+      "started_utc": "2026-06-17T22:44:27.416Z",
+      "resolved_utc": "2026-06-17T22:46:24.788Z",
+      "is_maintenance": false,
+      "url": "https://atlascloud.instatus.com/cmqinrqnf000u7ro2h9045tcp"
+    },
+    {
+      "id": "cmqlf7ils007h0kp8s1kgs6fq",
+      "title": "www.atlascloud.ai is back up",
+      "impact_label": "MAJOROUTAGE",
+      "severity": "critical",
+      "started_utc": "2026-06-19T21:08:05.374Z",
+      "resolved_utc": "2026-06-19T21:40:36.000Z",
+      "is_maintenance": false,
+      "url": "https://atlascloud.instatus.com/cmqlf7ils007h0kp8s1kgs6fq"
+    },
+    {
+      "id": "cmqlgsbwx05430ko27q3d3ghl",
+      "title": "www.atlascloud.ai is back up",
+      "impact_label": "MAJOROUTAGE",
+      "severity": "critical",
+      "started_utc": "2026-06-19T21:52:16.095Z",
+      "resolved_utc": "2026-06-19T21:57:59.355Z",
+      "is_maintenance": false,
+      "url": "https://atlascloud.instatus.com/cmqlgsbwx05430ko27q3d3ghl"
+    },
+    {
+      "id": "cmqlh3c7i003jftqmx2kr0lco",
+      "title": "www.atlascloud.ai is back up",
+      "impact_label": "MAJOROUTAGE",
+      "severity": "critical",
+      "started_utc": "2026-06-19T22:00:49.783Z",
+      "resolved_utc": "2026-06-19T22:02:39.228Z",
+      "is_maintenance": false,
+      "url": "https://atlascloud.instatus.com/cmqlh3c7i003jftqmx2kr0lco"
+    },
+    {
+      "id": "cmqn8k0m6009q0koak3k1lfq4",
+      "title": "www.atlascloud.ai is back up",
+      "impact_label": "MAJOROUTAGE",
+      "severity": "critical",
+      "started_utc": "2026-06-21T03:37:23.592Z",
+      "resolved_utc": "2026-06-21T03:49:21.387Z",
+      "is_maintenance": false,
+      "url": "https://atlascloud.instatus.com/cmqn8k0m6009q0koak3k1lfq4"
+    },
+    {
+      "id": "cmqncfre3000idinwaernbo26",
+      "title": "www.atlascloud.ai is back up",
+      "impact_label": "MAJOROUTAGE",
+      "severity": "critical",
+      "started_utc": "2026-06-21T05:26:03.605Z",
+      "resolved_utc": "2026-06-21T05:29:51.505Z",
+      "is_maintenance": false,
+      "url": "https://atlascloud.instatus.com/cmqncfre3000idinwaernbo26"
+    },
+    {
+      "id": "cmqncrgo6000wpgpm6iwfzaji",
+      "title": "www.atlascloud.ai is back up",
+      "impact_label": "MAJOROUTAGE",
+      "severity": "critical",
+      "started_utc": "2026-06-21T05:35:09.589Z",
+      "resolved_utc": "2026-06-21T05:36:53.268Z",
+      "is_maintenance": false,
+      "url": "https://atlascloud.instatus.com/cmqncrgo6000wpgpm6iwfzaji"
+    },
+    {
+      "id": "cmqnekslp001653qkspiqt17d",
+      "title": "www.atlascloud.ai is back up",
+      "impact_label": "MAJOROUTAGE",
+      "severity": "critical",
+      "started_utc": "2026-06-21T06:25:57.687Z",
+      "resolved_utc": "2026-06-21T06:35:55.584Z",
+      "is_maintenance": false,
+      "url": "https://atlascloud.instatus.com/cmqnekslp001653qkspiqt17d"
+    },
+    {
+      "id": "cmqnf3j4h001m79tnx758gsu5",
+      "title": "www.atlascloud.ai is back up",
+      "impact_label": "MAJOROUTAGE",
+      "severity": "critical",
+      "started_utc": "2026-06-21T06:40:31.867Z",
+      "resolved_utc": "2026-06-21T06:42:16.503Z",
+      "is_maintenance": false,
+      "url": "https://atlascloud.instatus.com/cmqnf3j4h001m79tnx758gsu5"
+    },
+    {
+      "id": "cmqnfqcgg06gi0ko208gskc9w",
+      "title": "www.atlascloud.ai is back up",
+      "impact_label": "MAJOROUTAGE",
+      "severity": "critical",
+      "started_utc": "2026-06-21T06:58:16.217Z",
+      "resolved_utc": "2026-06-21T07:00:13.783Z",
+      "is_maintenance": false,
+      "url": "https://atlascloud.instatus.com/cmqnfqcgg06gi0ko208gskc9w"
+    },
+    {
+      "id": "cmqng1gpu0013nhpmyq0hodsb",
+      "title": "www.atlascloud.ai is back up",
+      "impact_label": "MAJOROUTAGE",
+      "severity": "critical",
+      "started_utc": "2026-06-21T07:06:55.053Z",
+      "resolved_utc": "2026-06-21T07:08:39.348Z",
+      "is_maintenance": false,
+      "url": "https://atlascloud.instatus.com/cmqng1gpu0013nhpmyq0hodsb"
+    },
+    {
+      "id": "cmqo5hn1f000m0kqzqieb4kzd",
+      "title": "www.atlascloud.ai is back up",
+      "impact_label": "MAJOROUTAGE",
+      "severity": "critical",
+      "started_utc": "2026-06-21T18:59:20.048Z",
+      "resolved_utc": "2026-06-21T19:09:17.452Z",
+      "is_maintenance": false,
+      "url": "https://atlascloud.instatus.com/cmqo5hn1f000m0kqzqieb4kzd"
+    },
+    {
+      "id": "cmqo6juv0000w0kp1eblpl8mn",
+      "title": "www.atlascloud.ai is back up",
+      "impact_label": "MAJOROUTAGE",
+      "severity": "critical",
+      "started_utc": "2026-06-21T19:29:03.211Z",
+      "resolved_utc": "2026-06-21T19:30:49.798Z",
+      "is_maintenance": false,
+      "url": "https://atlascloud.instatus.com/cmqo6juv0000w0kp1eblpl8mn"
+    },
+    {
+      "id": "cmqoa1kdy003t0kqzht2ki5pt",
+      "title": "www.atlascloud.ai is back up",
+      "impact_label": "MAJOROUTAGE",
+      "severity": "critical",
+      "started_utc": "2026-06-21T21:06:48.193Z",
+      "resolved_utc": "2026-06-21T21:10:39.338Z",
+      "is_maintenance": false,
+      "url": "https://atlascloud.instatus.com/cmqoa1kdy003t0kqzht2ki5pt"
+    },
+    {
+      "id": "cmqogqsaw002ppunm9m7mt9l9",
+      "title": "www.atlascloud.ai is back up",
+      "impact_label": "MAJOROUTAGE",
+      "severity": "critical",
+      "started_utc": "2026-06-22T00:14:22.645Z",
+      "resolved_utc": "2026-06-22T00:16:20.231Z",
+      "is_maintenance": false,
+      "url": "https://atlascloud.instatus.com/cmqogqsaw002ppunm9m7mt9l9"
+    },
+    {
+      "id": "cmqoh1lkp009q0kqvpwficsgq",
+      "title": "www.atlascloud.ai is back up",
+      "impact_label": "MAJOROUTAGE",
+      "severity": "critical",
+      "started_utc": "2026-06-22T00:22:47.046Z",
+      "resolved_utc": "2026-06-22T00:24:28.696Z",
+      "is_maintenance": false,
+      "url": "https://atlascloud.instatus.com/cmqoh1lkp009q0kqvpwficsgq"
+    },
+    {
+      "id": "cmqoh7f0h0028kzp1jui2sa0h",
+      "title": "www.atlascloud.ai is back up",
+      "impact_label": "MAJOROUTAGE",
+      "severity": "critical",
+      "started_utc": "2026-06-22T00:27:18.575Z",
+      "resolved_utc": "2026-06-22T00:29:09.901Z",
+      "is_maintenance": false,
+      "url": "https://atlascloud.instatus.com/cmqoh7f0h0028kzp1jui2sa0h"
+    },
+    {
+      "id": "cmqohddzm00ar0ko3i0chkft9",
+      "title": "www.atlascloud.ai is back up",
+      "impact_label": "MAJOROUTAGE",
+      "severity": "critical",
+      "started_utc": "2026-06-22T00:31:57.091Z",
+      "resolved_utc": "2026-06-22T00:35:57.166Z",
+      "is_maintenance": false,
+      "url": "https://atlascloud.instatus.com/cmqohddzm00ar0ko3i0chkft9"
+    },
+    {
+      "id": "cmqonp999004e0kuo0nz5vlas",
+      "title": "www.atlascloud.ai is back up",
+      "impact_label": "MAJOROUTAGE",
+      "severity": "critical",
+      "started_utc": "2026-06-22T03:29:08.522Z",
+      "resolved_utc": "2026-06-22T03:45:38.352Z",
+      "is_maintenance": false,
+      "url": "https://atlascloud.instatus.com/cmqonp999004e0kuo0nz5vlas"
+    },
+    {
+      "id": "cmqrfkwhq00074gnjrxze2n46",
+      "title": "www.atlascloud.ai is back up",
+      "impact_label": "MAJOROUTAGE",
+      "severity": "critical",
+      "started_utc": "2026-06-24T02:05:07.049Z",
+      "resolved_utc": "2026-06-24T02:23:16.798Z",
+      "is_maintenance": false,
+      "url": "https://atlascloud.instatus.com/cmqrfkwhq00074gnjrxze2n46"
+    },
+    {
+      "id": "cmr8gkwol009n0kp8nigfc6ij",
+      "title": "www.atlascloud.ai is back up",
+      "impact_label": "MAJOROUTAGE",
+      "severity": "critical",
+      "started_utc": "2026-07-06T00:05:11.815Z",
+      "resolved_utc": "2026-07-06T00:06:51.929Z",
+      "is_maintenance": false,
+      "url": "https://atlascloud.instatus.com/cmr8gkwol009n0kp8nigfc6ij"
+    },
+    {
+      "id": "cmrborwtv00ar0kqiohu9e75z",
+      "title": "www.atlascloud.ai is back up",
+      "impact_label": "MAJOROUTAGE",
+      "severity": "critical",
+      "started_utc": "2026-07-08T06:17:54.053Z",
+      "resolved_utc": "2026-07-08T06:19:34.863Z",
+      "is_maintenance": false,
+      "url": "https://atlascloud.instatus.com/cmrborwtv00ar0kqiohu9e75z"
+    },
+    {
+      "id": "cmrbrg71h00es0ko6atzjpp7o",
+      "title": "www.atlascloud.ai is back up",
+      "impact_label": "MAJOROUTAGE",
+      "severity": "critical",
+      "started_utc": "2026-07-08T07:32:46.263Z",
+      "resolved_utc": "2026-07-08T07:34:38.853Z",
+      "is_maintenance": false,
+      "url": "https://atlascloud.instatus.com/cmrbrg71h00es0ko6atzjpp7o"
+    },
+    {
+      "id": "cmrvig9h300ac0kmz7yu6irba",
+      "title": "www.atlascloud.ai is back up",
+      "impact_label": "MAJOROUTAGE",
+      "severity": "critical",
+      "started_utc": "2026-07-22T03:16:16.056Z",
+      "resolved_utc": "2026-07-22T03:18:24.833Z",
+      "is_maintenance": false,
+      "url": "https://atlascloud.instatus.com/cmrvig9h300ac0kmz7yu6irba"
+    },
+    {
+      "id": "cmrvrqbpr00b20kmubyeya482",
+      "title": "www.atlascloud.ai is back up",
+      "impact_label": "MAJOROUTAGE",
+      "severity": "critical",
+      "started_utc": "2026-07-22T07:36:01.948Z",
+      "resolved_utc": "2026-07-22T07:38:12.615Z",
+      "is_maintenance": false,
+      "url": "https://atlascloud.instatus.com/cmrvrqbpr00b20kmubyeya482"
+    },
+    {
+      "id": "cmse2g8vt02860rtjuspms8yw",
+      "title": "www.atlascloud.ai is back up",
+      "impact_label": "MAJOROUTAGE",
+      "severity": "critical",
+      "started_utc": "2026-08-04T02:55:56.809Z",
+      "resolved_utc": "2026-08-04T02:59:59.743Z",
+      "is_maintenance": false,
+      "url": "https://atlascloud.instatus.com/cmse2g8vt02860rtjuspms8yw"
+    },
+    {
+      "id": "cmsfei9ns004m07s1vvvskwju",
+      "title": "www.atlascloud.ai is back up",
+      "impact_label": "MAJOROUTAGE",
+      "severity": "critical",
+      "started_utc": "2026-08-05T01:21:13.451Z",
+      "resolved_utc": "2026-08-05T01:25:19.311Z",
+      "is_maintenance": false,
+      "url": "https://atlascloud.instatus.com/cmsfei9ns004m07s1vvvskwju"
+    },
+    {
+      "id": "cmsjcgknh01gy07qoubeiduz7",
+      "title": "www.atlascloud.ai is back up",
+      "impact_label": "MAJOROUTAGE",
+      "severity": "critical",
+      "started_utc": "2026-08-07T19:34:59.843Z",
+      "resolved_utc": "2026-08-07T19:37:00.050Z",
+      "is_maintenance": false,
+      "url": "https://atlascloud.instatus.com/cmsjcgknh01gy07qoubeiduz7"
+    },
+    {
+      "id": "cmtut2gg6017907t0k0iymp0q",
+      "title": "www.atlascloud.ai is back up",
+      "impact_label": "MAJOROUTAGE",
+      "severity": "critical",
+      "started_utc": "2026-09-10T00:45:06.417Z",
+      "resolved_utc": "2026-09-10T00:48:47.482Z",
+      "is_maintenance": false,
+      "url": "https://atlascloud.instatus.com/cmtut2gg6017907t0k0iymp0q"
+    },
+    {
+      "id": "cmtzkw613004107nzn8ai41ft",
+      "title": "www.atlascloud.ai is back up",
+      "impact_label": "MAJOROUTAGE",
+      "severity": "critical",
+      "started_utc": "2026-09-13T08:55:06.933Z",
+      "resolved_utc": "2026-09-13T09:03:16.415Z",
+      "is_maintenance": false,
+      "url": "https://atlascloud.instatus.com/cmtzkw613004107nzn8ai41ft"
+    },
+    {
+      "id": "cmtzl9pnm004207qbc9hlhrpi",
+      "title": "www.atlascloud.ai is back up",
+      "impact_label": "MAJOROUTAGE",
+      "severity": "critical",
+      "started_utc": "2026-09-13T09:05:38.896Z",
+      "resolved_utc": "2026-09-13T09:09:45.530Z",
+      "is_maintenance": false,
+      "url": "https://atlascloud.instatus.com/cmtzl9pnm004207qbc9hlhrpi"
+    },
+    {
+      "id": "cmtzlhxkc004907nzgkfamaog",
+      "title": "www.atlascloud.ai is back up",
+      "impact_label": "MAJOROUTAGE",
+      "severity": "critical",
+      "started_utc": "2026-09-13T09:12:02.263Z",
+      "resolved_utc": "2026-09-13T09:16:06.166Z",
+      "is_maintenance": false,
+      "url": "https://atlascloud.instatus.com/cmtzlhxkc004907nzgkfamaog"
+    }
+  ],
+  "notes": [
+    "instatus platform; hand-collected via https://api.instatus.com/public/atlascloud/notices/monthly/<monthKey>?page_no=N for every month 2026-01..2026-09 (the endpoint the status page itself calls for Load more), following pages until isLastPage=true. collect_status.py has no Instatus mode.",
+    "Instatus notices with impact UNDERMAINTENANCE (or without a \"started\" field) are scheduled maintenance and flagged is_maintenance. Mapping declared in plan-R2 before analysis: MAJOROUTAGE->critical, PARTIALOUTAGE->major, DEGRADEDPERFORMANCE/MINOROUTAGE->minor.",
+    "coverage_start is the first day of the oldest month requested; older months were not fetched."
+  ]
+}

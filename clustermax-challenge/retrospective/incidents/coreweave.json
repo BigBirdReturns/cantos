@@ -1,0 +1,129 @@
+{
+  "schema": "secondrun.status-incidents.v1",
+  "provider": "CoreWeave",
+  "status_page_url": "https://status.coreweave.com",
+  "retrieved_utc": "2026-09-29T21:50:22Z",
+  "raw_files": [
+    {
+      "path": "retrospective/incidents/raw/coreweave/history_2026-09.html",
+      "sha256": "23ceb7a0eb245485f2075d5d279b6073a28e5001693dd00e7e787a165b4fc884",
+      "url": "https://status.coreweave.com/pages/history/5e126e998f2f032e1f8f0f4b?date=2026-09"
+    },
+    {
+      "path": "retrospective/incidents/raw/coreweave/rss.xml",
+      "sha256": "f9954cc1509e5936a46807200e83da78b38522cd19433a03b76253bc77a80745",
+      "url": "https://status.coreweave.com/pages/5e126e998f2f032e1f8f0f4b/rss"
+    }
+  ],
+  "coverage_start": null,
+  "coverage_end": "2026-09-29",
+  "severity_map": {
+    "not exposed by status.io RSS": "none"
+  },
+  "incidents": [
+    {
+      "id": "6a98ccb0495e3647627df34f",
+      "title": "Scheduled CoreWeave Maintenance - US-EAST-06A",
+      "impact_label": "not exposed by status.io RSS",
+      "severity": "none",
+      "started_utc": "2026-09-03T01:26:00Z",
+      "resolved_utc": null,
+      "is_maintenance": true,
+      "url": "https://status.io/pages/maintenance/5e126e998f2f032e1f8f0f4b/6a98ccb0495e3647627df34f"
+    },
+    {
+      "id": "6aa2c97e495e3647627df5de",
+      "title": "Scheduled CoreWeave Maintenance - US-WEST-04A",
+      "impact_label": "not exposed by status.io RSS",
+      "severity": "none",
+      "started_utc": "2026-09-10T15:15:00Z",
+      "resolved_utc": null,
+      "is_maintenance": true,
+      "url": "https://status.io/pages/maintenance/5e126e998f2f032e1f8f0f4b/6aa2c97e495e3647627df5de"
+    },
+    {
+      "id": "6aa2ed1a9dcc14478b612fc3",
+      "title": "Scheduled CoreWeave Network Maintenance - EU-NORTH-05A",
+      "impact_label": "not exposed by status.io RSS",
+      "severity": "none",
+      "started_utc": "2026-09-10T17:47:00Z",
+      "resolved_utc": null,
+      "is_maintenance": true,
+      "url": "https://status.io/pages/maintenance/5e126e998f2f032e1f8f0f4b/6aa2ed1a9dcc14478b612fc3"
+    },
+    {
+      "id": "6aa3d40719fb1a04da432b32",
+      "title": "OIDC Authentication issue to CoreWeave AI Object Storage (CAIOS)",
+      "impact_label": "not exposed by status.io RSS",
+      "severity": "none",
+      "started_utc": "2026-09-11T10:12:00Z",
+      "resolved_utc": null,
+      "is_maintenance": false,
+      "url": "https://status.io/pages/incident/5e126e998f2f032e1f8f0f4b/6aa3d40719fb1a04da432b32"
+    },
+    {
+      "id": "6aa84072448794056d0c3669",
+      "title": "Scheduled CoreWeave Power Maintenance - US-EAST-15A",
+      "impact_label": "not exposed by status.io RSS",
+      "severity": "none",
+      "started_utc": "2026-09-14T18:44:00Z",
+      "resolved_utc": null,
+      "is_maintenance": true,
+      "url": "https://status.io/pages/maintenance/5e126e998f2f032e1f8f0f4b/6aa84072448794056d0c3669"
+    },
+    {
+      "id": "6aa9d711d88a450599f66155",
+      "title": "Dedicated Inference: errors creating and updating deployments",
+      "impact_label": "not exposed by status.io RSS",
+      "severity": "none",
+      "started_utc": "2026-09-15T23:38:00Z",
+      "resolved_utc": null,
+      "is_maintenance": false,
+      "url": "https://status.io/pages/incident/5e126e998f2f032e1f8f0f4b/6aa9d711d88a450599f66155"
+    },
+    {
+      "id": "6ab2cafca87f56057ceec2e7",
+      "title": "Scheduled CoreWeave Maintenance - US-WEST-01A",
+      "impact_label": "not exposed by status.io RSS",
+      "severity": "none",
+      "started_utc": "2026-09-22T18:37:00Z",
+      "resolved_utc": null,
+      "is_maintenance": true,
+      "url": "https://status.io/pages/maintenance/5e126e998f2f032e1f8f0f4b/6ab2cafca87f56057ceec2e7"
+    },
+    {
+      "id": "6ab53a3fa87f56057ceec36b",
+      "title": "Scheduled Critical Dedicated Inference Maintenance - GLOBAL",
+      "impact_label": "not exposed by status.io RSS",
+      "severity": "none",
+      "started_utc": "2026-09-24T14:57:00Z",
+      "resolved_utc": null,
+      "is_maintenance": true,
+      "url": "https://status.io/pages/maintenance/5e126e998f2f032e1f8f0f4b/6ab53a3fa87f56057ceec36b"
+    },
+    {
+      "id": "6ab7b9490150df05730811dd",
+      "title": "Object Storage Performance Degradation in US-CENTRAL-09A",
+      "impact_label": "not exposed by status.io RSS",
+      "severity": "none",
+      "started_utc": "2026-09-26T12:23:00Z",
+      "resolved_utc": null,
+      "is_maintenance": false,
+      "url": "https://status.io/pages/incident/5e126e998f2f032e1f8f0f4b/6ab7b9490150df05730811dd"
+    },
+    {
+      "id": "6aba8577448794056d0c3bee",
+      "title": "Scheduled CoreWeave Facilities Maintenance - US-CENTRAL-09A",
+      "impact_label": "not exposed by status.io RSS",
+      "severity": "none",
+      "started_utc": "2026-09-28T15:19:00Z",
+      "resolved_utc": null,
+      "is_maintenance": true,
+      "url": "https://status.io/pages/maintenance/5e126e998f2f032e1f8f0f4b/6aba8577448794056d0c3bee"
+    }
+  ],
+  "notes": [
+    "status.io: the only reachable surfaces are the current-window history page (the date query parameter is ignored; byte-identical for date=2026-04 and 2026-09) and a 10-item RSS feed; api.status.io incidents/history return 403. No route to the 2026-03-27..2026-09-23 window exists.",
+    "coverage_start left null: not demonstrable. Items listed are only the 10 most recent RSS entries with no severity, and are recorded for audit only; this file is expected to be excluded from R2."
+  ]
+}

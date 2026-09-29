@@ -1,0 +1,9 @@
+{
+ "schema": "second-run/retained-file-pointer@1",
+ "file": "inferencex-2026-09-29.jsonl",
+ "bytes": 1268669867,
+ "sha256": "1eab076241673432f84802d83597161aeb31420c95a87b49ae4b64accf69bf2f",
+ "rows": 288891,
+ "retained_at": "sessions/public-tail-20260929/lanes/inferencex-history/imported-main/inferencex-2026-09-29.jsonl",
+ "reason": "exceeds GitHub file size; every row is reproducible with rebuild_2026_09_29.py from data-raw/ (gitignored) or the public artifacts listed in history-index.json"
+}

@@ -1,0 +1,80 @@
+{
+  "schema": "hot-aisle/run3-sources@1",
+  "note": "Origin paths are relative to the parent of the axm-tools checkout copy (main/). sha256 is of the bytes copied here; each copy is byte-identical to its origin at build time.",
+  "built_by": "data/run3/build-run3.cjs",
+  "record": {
+    "id": "rec-20260924T004243Z-run3at0",
+    "sha256": "254a77bee3c49473fbe64574c3ef6697bf2b24d0e98aba93c35f5cffce455362",
+    "engine_sha256": "78600d009f43ca37a81fa15231dfb5be307d8b0a01cfcfe42d94ed8015061593",
+    "primary_concurrency": 256
+  },
+  "derived": [
+    {
+      "file": "record.json",
+      "sha256": "57e21870e378259d58b8383e5b664b68bce4d1f6e57d63ac9bdb89249af9bf46"
+    },
+    {
+      "file": "evidence.json",
+      "sha256": "d0b1967472d43a70424dbc5cab21019246c6591ce4466415db085f1ecc6b37e8"
+    },
+    {
+      "file": "headline.json",
+      "sha256": "33e43f9a89aeeac666646e008c78f767d3c3d00d953ff8da246efa70183595bd"
+    },
+    {
+      "file": "report.html",
+      "sha256": "4c186914ffb95ef16c6072b91a7f6af0f84689bac0356d5f5cd9c4c8b13238ba"
+    }
+  ],
+  "copies": [
+    {
+      "file": "source/detailed.json",
+      "origin": "hot-aisle/campaign/results/run3-scored-a-t0/detailed.json",
+      "sha256": "ef907e4cbe45832890109c4ca0d37851ad8e4f087beb70421506af897e6a67ab",
+      "bytes": 605631
+    },
+    {
+      "file": "source/evaluation.json",
+      "origin": "hot-aisle/campaign/results/run3-scored-a-t0/grade/evaluation.json",
+      "sha256": "f5e2fe316996ac26d953fb5ebe6d0415b2debd9664c1bc74a309776748ff08ca",
+      "bytes": 47908
+    },
+    {
+      "file": "source/ledger-times.json",
+      "origin": "hot-aisle/campaign/results/run3-scored-a-t0/ledger-times.json",
+      "sha256": "bda7da5d7c7a9fae395da7212299450df3c8a16f6352ebe7653d63c93ab89307",
+      "bytes": 313
+    },
+    {
+      "file": "source/env.json",
+      "origin": "hot-aisle/campaign/results/run3-scored-a-t0/env.json",
+      "sha256": "4749075dbf594555d76a66af6e3b0db655d95739158f0b963001d7965a3bc0b0",
+      "bytes": 1285
+    },
+    {
+      "file": "source/invocation.json",
+      "origin": "hot-aisle/campaign/results/run3-scored-a-t0/invocation.json",
+      "sha256": "34e65448616090eb10b4cdcf67bc63ea1b56dff16c05cf8e3a2112e9543b8467",
+      "bytes": 1099
+    },
+    {
+      "file": "source/MANIFEST.sha256",
+      "origin": "hot-aisle/campaign/results/run3-scored-a-t0/MANIFEST.sha256",
+      "sha256": "30ec713035190d96207bf7c9aa5b41ee60e5bc625eeff59ae00d3420622ecb32",
+      "bytes": 1627
+    },
+    {
+      "file": "source/RUN3-RESULTS.md",
+      "origin": "hot-aisle/campaign/results/RUN3-RESULTS.md",
+      "sha256": "2f29c31a56c72100395af280efc04a682188e74bd760be554f5c0916868b5de2",
+      "bytes": 3995
+    },
+    {
+      "file": "source/DISCLOSURES.md",
+      "origin": "hot-aisle/campaign/DISCLOSURES.md",
+      "sha256": "327114957bbeda4b24eb79af60fcd0a32f8fdf21a64fc5bd9d30af717866714f",
+      "bytes": 5496
+    }
+  ],
+  "not_copied": "The graded completions (tasks.json, replay/) stay in campaign/results/run3-scored-a-t0 and are named in MANIFEST.sha256."
+}

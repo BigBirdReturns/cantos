@@ -1,0 +1,2287 @@
+{
+  "schema": "secondrun.retrospective-result.v1",
+  "study_id": "R2-3.0-medals-vs-status-incidents",
+  "generated_at": "2026-09-29T22:01:18.888186+00:00",
+  "plan_hash_verified": true,
+  "plan_md_sha256": "a8c93b65041ca8144a21cf4890d2f2724b58a9d91df260e364ec2d3ffc163bdd",
+  "runner_sha256": "5520aee90e2d675abf73c654aa5d78d2ab757f109cb8bcfd238031d5c8e182bd",
+  "input_hashes": {
+    "PLAN-R2.md": "a8c93b65041ca8144a21cf4890d2f2724b58a9d91df260e364ec2d3ffc163bdd",
+    "plan-R2.json": "5efa99728e6cce2fc462f1073e446e5bdfdccec16508145509d2182402f55ab7",
+    "run_r2.py": "5520aee90e2d675abf73c654aa5d78d2ab757f109cb8bcfd238031d5c8e182bd",
+    "provider_map.json": "473e46513c3a081e436e1bad1b9c00c51dd2684ccf4716b0d67a428c6e1f0e62",
+    "provider_map_R2.json": "da4b0f14e8a1cdc06631479fe08ec655d8a2f078e61ad51e47f16b540baa9953",
+    "clustermax-3.0.json": "2be56fa1c95cec7491eb92777a97e772595d294eb24d865dba824a71facf32c4",
+    "incidents/coreweave.json": "c9750f3e6f20d3ad442f5ea672267f01dd2de10ee20bd992b65cc3810cc7262b",
+    "incidents/nebius.json": "beeec36b1b24b89dc18351c9b8e0795d8ff74f703740ef971a4694bd6be10776",
+    "incidents/google-cloud.json": "9edbf1059071ae608f6d2833ce6c91eaf67bd58b63cfbbffadeb22f07c13cf4d",
+    "incidents/lambda.json": "70faa611f7ad0c5a163c8396622cc45ad2278ba9d7b5cec5629cef903d355c77",
+    "incidents/gcore.json": "08a4e3763a22e1b0d6e1cc5e9015b942178a0816e45f6b433a9a9db325825227",
+    "incidents/verda.json": "8f5f889a124b776f205e520e1f9db05fb19e2c751c0626ba2d83350919c33c6c",
+    "incidents/prime-intellect.json": "15557b653fea8e0d90de3727d4dc1a819da76136584facd0bde6982413f47eff",
+    "incidents/together-ai.json": "1d4c3d36a5b5d4fef08b815010b8c879ee1a35072511d19461413a713ae22b6c",
+    "incidents/crusoe-r2.json": "1e45be562b57b8e650c24ee407ea879248b93285d9407342a3f3188fca4fed3c",
+    "incidents/digitalocean.json": "0ee139bd5d4379740ca3daeea738d77a4965122d625e965744e80f326d9aeb01",
+    "incidents/hyperstack.json": "b9e7e73317adf4fb12e26f3f4e08aabf9fb1ed0a3feb57bbc7b296a3c102bfc1",
+    "incidents/runpod.json": "c0400327178458de02a53f13ac733994e6bbea4c6b5b54c80a7993bc3b7f8959",
+    "incidents/radiant.json": "56b990637a1f5031a745a38b25306874a7681e21e9c8f1b258bf56262b3ee212",
+    "incidents/latitude-sh.json": "9173f3c27efa737f6cac2853cbb4e7870268b7290b04a5b5b87c9265d3649743",
+    "incidents/sharon-ai.json": "5a6e0d8ca19a91dbfe6b28c1f204304ac71db041c6727265cd84f524736c22f9",
+    "incidents/hydra.json": "d78e10e6ecfbc200c0dcd362ff450296217077b86e8be94ac0b615ef1332b90c",
+    "incidents/akamai.json": "5901e1b3929c38028f8a4bea97bf16d1bdf5fa017bd8c6248efd6799f94648d9",
+    "incidents/mithril.json": "22f030e07556e8c4b06f2c9602a677bb4cc8e077e69bec2c6491127fad04f595",
+    "incidents/ovhcloud.json": "ecea9b91f048e00184af91667a385f87dc65503430b498f187578401cff1e151",
+    "ratings/clustermax-2.0.json": "9b980bb111f0cb457b6fbe9e8158879e08c98489e33665453a96986cb3c6366c",
+    "incidents/fluidstack.json": "2884fb3bbed7a76426be89c5d07304f18c448ca0a8399d412dd2e8d713dc6eba",
+    "incidents/scaleway.json": "59bbbc2c0ec900d773fb69605c9e579cd7f90120c6fa4a24930c9bbb1c91cf2a",
+    "incidents/cirrascale.json": "7d872050683f362071bd8c213ff4885eac96f9ab665c84fe93013ac09988d60c",
+    "incidents/atlas-cloud.json": "b990a784b732f926a68164435c420ec8fdf2b9604d5e8e1757016fb020116632",
+    "incidents/cudo-compute.json": "d28dd0b02f4962060f94f0f093db37c7fa1d31dfabbef980abff1c1310e4f20c",
+    "incidents/lightning-ai.json": "c2852fec9975c66abbd381cad69ed5870ea3ef9b14856644b3ec00d31b7c162b"
+  },
+  "deviations": [
+    "After the first R2 run, retrospective/incidents/crusoe.json was renamed crusoe-r2.json, provider_map_R2.json now maps Crusoe to crusoe-r2, run_r2.py was changed only to print these amendments as deviations, and R2 was re-run. (The first run left a file named crusoe.json in incidents/, which scripts/retrospective.py (R1) reads by that name; a rerun of R1 would have admitted Crusoe and changed R1's frozen numbers (n 9 to 10) and failed tests/test_r1_sensitivity.py.) Effect: None on R2 numbers: the file bytes are unchanged and the R2 output was diffed against the first run (only the file path in input_hashes and this deviation entry differ). PLAN-R2.md is unchanged."
+  ],
+  "primary": {
+    "release": "3.0",
+    "published_date": "2026-09-23",
+    "window": {
+      "start": "2026-03-27",
+      "end": "2026-09-23",
+      "days": 180
+    },
+    "providers": [
+      {
+        "name": "CoreWeave",
+        "tier": "Platinum",
+        "slug": "coreweave",
+        "status": "excluded",
+        "reason": "coverage_start not recorded and the feed does not reach back past the window start (oldest non-maintenance record 2026-09-11; coverage_end 2026-09-29)"
+      },
+      {
+        "name": "Nebius",
+        "tier": "Platinum",
+        "slug": "nebius",
+        "status": "eligible",
+        "ordinal": 6,
+        "coverage_basis": "declared_coverage",
+        "coverage": [
+          "2025-01-01",
+          "2026-09-23"
+        ],
+        "major_or_critical_incident_count": 17,
+        "all_incident_count": 39,
+        "incident_hours": 179.8016,
+        "incident_hours_capped": false,
+        "included_in_correlation": true
+      },
+      {
+        "name": "Oracle",
+        "tier": "Gold",
+        "slug": "oracle",
+        "status": "excluded",
+        "reason": "no incident data file found (expected oracle.json)"
+      },
+      {
+        "name": "Google Cloud",
+        "tier": "Gold",
+        "slug": "google-cloud",
+        "status": "eligible",
+        "ordinal": 5,
+        "coverage_basis": "capped_feed_rule (oldest record 2026-02-27 < window start 2026-03-27)",
+        "coverage": [
+          null,
+          "2026-09-29"
+        ],
+        "major_or_critical_incident_count": 5,
+        "all_incident_count": 5,
+        "incident_hours": 546.9333,
+        "incident_hours_capped": false,
+        "included_in_correlation": true
+      },
+      {
+        "name": "Azure",
+        "tier": "Silver",
+        "slug": "azure",
+        "status": "excluded",
+        "reason": "no incident data file found (expected azure.json)"
+      },
+      {
+        "name": "Firmus",
+        "tier": "Silver",
+        "slug": "firmus",
+        "status": "excluded",
+        "reason": "no incident data file found (expected firmus.json)"
+      },
+      {
+        "name": "Lambda",
+        "tier": "Silver",
+        "slug": "lambda",
+        "status": "eligible",
+        "ordinal": 4,
+        "coverage_basis": "capped_feed_rule (oldest record 2026-02-13 < window start 2026-03-27)",
+        "coverage": [
+          null,
+          "2026-09-23"
+        ],
+        "major_or_critical_incident_count": 2,
+        "all_incident_count": 16,
+        "incident_hours": 1442.9692,
+        "incident_hours_capped": false,
+        "included_in_correlation": true
+      },
+      {
+        "name": "GMI",
+        "tier": "Silver",
+        "slug": "gmi",
+        "status": "excluded",
+        "reason": "no incident data file found (expected gmi.json)"
+      },
+      {
+        "name": "TensorWave",
+        "tier": "Silver",
+        "slug": "tensorwave",
+        "status": "excluded",
+        "reason": "no incident data file found (expected tensorwave.json)"
+      },
+      {
+        "name": "AWS",
+        "tier": "Bronze",
+        "slug": "aws",
+        "status": "excluded",
+        "reason": "no incident data file found (expected aws.json)"
+      },
+      {
+        "name": "GCore",
+        "tier": "Bronze",
+        "slug": "gcore",
+        "status": "eligible",
+        "ordinal": 3,
+        "coverage_basis": "declared_coverage",
+        "coverage": [
+          "2026-01-01",
+          "2026-09-29"
+        ],
+        "major_or_critical_incident_count": 58,
+        "all_incident_count": 85,
+        "incident_hours": 1027.9349,
+        "incident_hours_capped": false,
+        "included_in_correlation": true
+      },
+      {
+        "name": "Verda",
+        "tier": "Bronze",
+        "slug": "verda",
+        "status": "eligible",
+        "ordinal": 3,
+        "coverage_basis": "declared_coverage",
+        "coverage": [
+          "2026-01-01",
+          "2026-09-29"
+        ],
+        "major_or_critical_incident_count": 0,
+        "all_incident_count": 6,
+        "incident_hours": 17.4833,
+        "incident_hours_capped": false,
+        "included_in_correlation": true
+      },
+      {
+        "name": "moonlite",
+        "tier": "Bronze",
+        "slug": "moonlite",
+        "status": "excluded",
+        "reason": "no incident data file found (expected moonlite.json)"
+      },
+      {
+        "name": "Prime Intellect",
+        "tier": "Bronze",
+        "slug": "prime-intellect",
+        "status": "eligible",
+        "ordinal": 3,
+        "coverage_basis": "declared_coverage",
+        "coverage": [
+          "2026-01-01",
+          "2026-09-29"
+        ],
+        "major_or_critical_incident_count": 2,
+        "all_incident_count": 10,
+        "incident_hours": 1689.0167,
+        "incident_hours_capped": false,
+        "included_in_correlation": true
+      },
+      {
+        "name": "together.ai",
+        "tier": "Bronze",
+        "slug": "together-ai",
+        "status": "eligible",
+        "ordinal": 3,
+        "coverage_basis": "declared_coverage",
+        "coverage": [
+          "2026-01-01",
+          "2026-09-29"
+        ],
+        "major_or_critical_incident_count": 0,
+        "all_incident_count": 0,
+        "incident_hours": 0.0,
+        "incident_hours_capped": false,
+        "included_in_correlation": true
+      },
+      {
+        "name": "Crusoe",
+        "tier": "Bronze",
+        "slug": "crusoe-r2",
+        "status": "eligible",
+        "ordinal": 3,
+        "coverage_basis": "declared_coverage",
+        "coverage": [
+          "2025-01-01",
+          "2026-09-29"
+        ],
+        "major_or_critical_incident_count": 5,
+        "all_incident_count": 21,
+        "incident_hours": 139.2309,
+        "incident_hours_capped": false,
+        "included_in_correlation": true
+      },
+      {
+        "name": "DigitalOcean",
+        "tier": "Bronze",
+        "slug": "digitalocean",
+        "status": "eligible",
+        "ordinal": 3,
+        "coverage_basis": "declared_coverage",
+        "coverage": [
+          "2025-01-01",
+          "2026-09-23"
+        ],
+        "major_or_critical_incident_count": 8,
+        "all_incident_count": 59,
+        "incident_hours": 332.9301,
+        "incident_hours_capped": false,
+        "included_in_correlation": true
+      },
+      {
+        "name": "GMO GPU Cloud",
+        "tier": "Bronze",
+        "slug": "gmo-gpu-cloud",
+        "status": "excluded",
+        "reason": "no incident data file found (expected gmo-gpu-cloud.json)"
+      },
+      {
+        "name": "Hyperstack",
+        "tier": "Bronze",
+        "slug": "hyperstack",
+        "status": "eligible",
+        "ordinal": 3,
+        "coverage_basis": "declared_coverage",
+        "coverage": [
+          "2025-01-01",
+          "2026-09-23"
+        ],
+        "major_or_critical_incident_count": 9,
+        "all_incident_count": 10,
+        "incident_hours": 57.2871,
+        "incident_hours_capped": false,
+        "included_in_correlation": true
+      },
+      {
+        "name": "Vultr",
+        "tier": "Participation Ribbon",
+        "slug": "vultr",
+        "status": "excluded",
+        "reason": "no incident data file found (expected vultr.json)"
+      },
+      {
+        "name": "neysa",
+        "tier": "Participation Ribbon",
+        "slug": "neysa",
+        "status": "excluded",
+        "reason": "no incident data file found (expected neysa.json)"
+      },
+      {
+        "name": "VESSL AI",
+        "tier": "Participation Ribbon",
+        "slug": "vessl-ai",
+        "status": "excluded",
+        "reason": "no incident data file found (expected vessl-ai.json)"
+      },
+      {
+        "name": "Shadeform",
+        "tier": "Participation Ribbon",
+        "slug": "shadeform",
+        "status": "excluded",
+        "reason": "no incident data file found (expected shadeform.json)"
+      },
+      {
+        "name": "RunPod",
+        "tier": "Participation Ribbon",
+        "slug": "runpod",
+        "status": "eligible",
+        "ordinal": 2,
+        "coverage_basis": "declared_coverage",
+        "coverage": [
+          "2026-01-01",
+          "2026-09-29"
+        ],
+        "major_or_critical_incident_count": 11,
+        "all_incident_count": 33,
+        "incident_hours": 439.1833,
+        "incident_hours_capped": false,
+        "included_in_correlation": true
+      },
+      {
+        "name": "Radiant",
+        "tier": "Participation Ribbon",
+        "slug": "radiant",
+        "status": "eligible",
+        "ordinal": 2,
+        "coverage_basis": "declared_coverage",
+        "coverage": [
+          "2026-01-01",
+          "2026-09-29"
+        ],
+        "major_or_critical_incident_count": 0,
+        "all_incident_count": 0,
+        "incident_hours": 0.0,
+        "incident_hours_capped": false,
+        "included_in_correlation": true
+      },
+      {
+        "name": "FPT AI Factory",
+        "tier": "Participation Ribbon",
+        "slug": "fpt-ai-factory",
+        "status": "excluded",
+        "reason": "no incident data file found (expected fpt-ai-factory.json)"
+      },
+      {
+        "name": "Core42",
+        "tier": "Participation Ribbon",
+        "slug": "core42",
+        "status": "excluded",
+        "reason": "no incident data file found (expected core42.json)"
+      },
+      {
+        "name": "latitude.sh",
+        "tier": "Participation Ribbon",
+        "slug": "latitude-sh",
+        "status": "eligible",
+        "ordinal": 2,
+        "coverage_basis": "declared_coverage",
+        "coverage": [
+          "2025-01-01",
+          "2026-09-23"
+        ],
+        "major_or_critical_incident_count": 4,
+        "all_incident_count": 9,
+        "incident_hours": 54.6994,
+        "incident_hours_capped": false,
+        "included_in_correlation": true
+      },
+      {
+        "name": "IBM Cloud",
+        "tier": "Participation Ribbon",
+        "slug": "ibm-cloud",
+        "status": "excluded",
+        "reason": "no incident data file found (expected ibm-cloud.json)"
+      },
+      {
+        "name": "Buzz HPC",
+        "tier": "Participation Ribbon",
+        "slug": "buzz-hpc",
+        "status": "excluded",
+        "reason": "no incident data file found (expected buzz-hpc.json)"
+      },
+      {
+        "name": "Vast.ai",
+        "tier": "Participation Ribbon",
+        "slug": "vast-ai",
+        "status": "excluded",
+        "reason": "no incident data file found (expected vast-ai.json)"
+      },
+      {
+        "name": "BitDeer",
+        "tier": "Participation Ribbon",
+        "slug": "bitdeer",
+        "status": "excluded",
+        "reason": "no incident data file found (expected bitdeer.json)"
+      },
+      {
+        "name": "Hyperbolic",
+        "tier": "Participation Ribbon",
+        "slug": "hyperbolic",
+        "status": "excluded",
+        "reason": "no incident data file found (expected hyperbolic.json)"
+      },
+      {
+        "name": "STN",
+        "tier": "Participation Ribbon",
+        "slug": "stn",
+        "status": "excluded",
+        "reason": "no incident data file found (expected stn.json)"
+      },
+      {
+        "name": "Sharon AI",
+        "tier": "Underperforming",
+        "slug": "sharon-ai",
+        "status": "eligible",
+        "ordinal": 1,
+        "coverage_basis": "declared_coverage",
+        "coverage": [
+          "2025-10-10",
+          "2026-09-23"
+        ],
+        "major_or_critical_incident_count": 1,
+        "all_incident_count": 1,
+        "incident_hours": 0.4569,
+        "incident_hours_capped": false,
+        "included_in_correlation": true
+      },
+      {
+        "name": "IREN",
+        "tier": "Underperforming",
+        "slug": "iren",
+        "status": "excluded",
+        "reason": "no incident data file found (expected iren.json)"
+      },
+      {
+        "name": "Hydra",
+        "tier": "Underperforming",
+        "slug": "hydra",
+        "status": "eligible",
+        "ordinal": 1,
+        "coverage_basis": "declared_coverage",
+        "coverage": [
+          "2026-01-01",
+          "2026-09-29"
+        ],
+        "major_or_critical_incident_count": 0,
+        "all_incident_count": 0,
+        "incident_hours": 0.0,
+        "incident_hours_capped": false,
+        "included_in_correlation": true
+      },
+      {
+        "name": "FarmGPU",
+        "tier": "Underperforming",
+        "slug": "farmgpu",
+        "status": "excluded",
+        "reason": "no incident data file found (expected farmgpu.json)"
+      },
+      {
+        "name": "Whitefiber",
+        "tier": "Underperforming",
+        "slug": "whitefiber",
+        "status": "excluded",
+        "reason": "no incident data file found (expected whitefiber.json)"
+      },
+      {
+        "name": "PaleBlueDot.AI",
+        "tier": "Underperforming",
+        "slug": "palebluedot-ai",
+        "status": "excluded",
+        "reason": "no incident data file found (expected palebluedot-ai.json)"
+      },
+      {
+        "name": "Akamai",
+        "tier": "Underperforming",
+        "slug": "akamai",
+        "status": "eligible",
+        "ordinal": 1,
+        "coverage_basis": "declared_coverage",
+        "coverage": [
+          "2025-01-01",
+          "2026-09-23"
+        ],
+        "major_or_critical_incident_count": 0,
+        "all_incident_count": 59,
+        "incident_hours": 2706.1629,
+        "incident_hours_capped": true,
+        "included_in_correlation": true
+      },
+      {
+        "name": "Hetzner",
+        "tier": "Underperforming",
+        "slug": "hetzner",
+        "status": "excluded",
+        "reason": "no incident data file found (expected hetzner.json)"
+      },
+      {
+        "name": "Mithril",
+        "tier": "Underperforming",
+        "slug": "mithril",
+        "status": "eligible",
+        "ordinal": 1,
+        "coverage_basis": "declared_coverage",
+        "coverage": [
+          "2026-01-01",
+          "2026-09-29"
+        ],
+        "major_or_critical_incident_count": 4,
+        "all_incident_count": 6,
+        "incident_hours": 38.6835,
+        "incident_hours_capped": false,
+        "included_in_correlation": true
+      },
+      {
+        "name": "OVHcloud",
+        "tier": "Underperforming",
+        "slug": "ovhcloud",
+        "status": "excluded",
+        "reason": "coverage_start not recorded and the feed does not reach back past the window start (oldest non-maintenance record 2026-09-25; coverage_end 2026-09-29)"
+      },
+      {
+        "name": "Massed Compute",
+        "tier": "Underperforming",
+        "slug": "massed-compute",
+        "status": "excluded",
+        "reason": "no incident data file found (expected massed-compute.json)"
+      },
+      {
+        "name": "FluidStack",
+        "tier": "Unavailable",
+        "status": "excluded",
+        "reason": "tier 'Unavailable' is not rated in this analysis (excluded by plan)"
+      },
+      {
+        "name": "Cirrascale",
+        "tier": "Unavailable",
+        "status": "excluded",
+        "reason": "tier 'Unavailable' is not rated in this analysis (excluded by plan)"
+      },
+      {
+        "name": "Lightning AI",
+        "tier": "Unavailable",
+        "status": "excluded",
+        "reason": "tier 'Unavailable' is not rated in this analysis (excluded by plan)"
+      },
+      {
+        "name": "Scaleway",
+        "tier": "Unavailable",
+        "status": "excluded",
+        "reason": "tier 'Unavailable' is not rated in this analysis (excluded by plan)"
+      },
+      {
+        "name": "Cudo Compute",
+        "tier": "Unavailable",
+        "status": "excluded",
+        "reason": "tier 'Unavailable' is not rated in this analysis (excluded by plan)"
+      },
+      {
+        "name": "DENVR Dataworks",
+        "tier": "Unavailable",
+        "status": "excluded",
+        "reason": "tier 'Unavailable' is not rated in this analysis (excluded by plan)"
+      },
+      {
+        "name": "Atlas Cloud",
+        "tier": "Unavailable",
+        "status": "excluded",
+        "reason": "tier 'Unavailable' is not rated in this analysis (excluded by plan)"
+      },
+      {
+        "name": "SpaceX",
+        "tier": "Unavailable",
+        "status": "excluded",
+        "reason": "tier 'Unavailable' is not rated in this analysis (excluded by plan)"
+      },
+      {
+        "name": "Mistral AI",
+        "tier": "Unavailable",
+        "status": "excluded",
+        "reason": "tier 'Unavailable' is not rated in this analysis (excluded by plan)"
+      },
+      {
+        "name": "PIC",
+        "tier": "Unavailable",
+        "status": "excluded",
+        "reason": "tier 'Unavailable' is not rated in this analysis (excluded by plan)"
+      },
+      {
+        "name": "NScale",
+        "tier": "Unavailable",
+        "status": "excluded",
+        "reason": "tier 'Unavailable' is not rated in this analysis (excluded by plan)"
+      },
+      {
+        "name": "Highrise",
+        "tier": "Unavailable",
+        "status": "excluded",
+        "reason": "tier 'Unavailable' is not rated in this analysis (excluded by plan)"
+      },
+      {
+        "name": "Corvex",
+        "tier": "Unavailable",
+        "status": "excluded",
+        "reason": "tier 'Unavailable' is not rated in this analysis (excluded by plan)"
+      },
+      {
+        "name": "Andromeda",
+        "tier": "Unavailable",
+        "status": "excluded",
+        "reason": "tier 'Unavailable' is not rated in this analysis (excluded by plan)"
+      },
+      {
+        "name": "Volta",
+        "tier": "Unavailable",
+        "status": "excluded",
+        "reason": "tier 'Unavailable' is not rated in this analysis (excluded by plan)"
+      },
+      {
+        "name": "firebird",
+        "tier": "Unavailable",
+        "status": "excluded",
+        "reason": "tier 'Unavailable' is not rated in this analysis (excluded by plan)"
+      },
+      {
+        "name": "Tatra SuperCompute",
+        "tier": "Unavailable",
+        "status": "excluded",
+        "reason": "tier 'Unavailable' is not rated in this analysis (excluded by plan)"
+      },
+      {
+        "name": "Sesterce",
+        "tier": "Unavailable",
+        "status": "excluded",
+        "reason": "tier 'Unavailable' is not rated in this analysis (excluded by plan)"
+      },
+      {
+        "name": "groq",
+        "tier": "Unavailable",
+        "status": "excluded",
+        "reason": "tier 'Unavailable' is not rated in this analysis (excluded by plan)"
+      },
+      {
+        "name": "Yotta",
+        "tier": "Unavailable",
+        "status": "excluded",
+        "reason": "tier 'Unavailable' is not rated in this analysis (excluded by plan)"
+      },
+      {
+        "name": "darya.ai",
+        "tier": "Unavailable",
+        "status": "excluded",
+        "reason": "tier 'Unavailable' is not rated in this analysis (excluded by plan)"
+      },
+      {
+        "name": "boostrun",
+        "tier": "Unavailable",
+        "status": "excluded",
+        "reason": "tier 'Unavailable' is not rated in this analysis (excluded by plan)"
+      },
+      {
+        "name": "GLOBAL AI",
+        "tier": "Unavailable",
+        "status": "excluded",
+        "reason": "tier 'Unavailable' is not rated in this analysis (excluded by plan)"
+      },
+      {
+        "name": "Argentum",
+        "tier": "Unavailable",
+        "status": "excluded",
+        "reason": "tier 'Unavailable' is not rated in this analysis (excluded by plan)"
+      },
+      {
+        "name": "QumulusAI",
+        "tier": "Unavailable",
+        "status": "excluded",
+        "reason": "tier 'Unavailable' is not rated in this analysis (excluded by plan)"
+      },
+      {
+        "name": "Alibaba Cloud",
+        "tier": "Unavailable",
+        "status": "excluded",
+        "reason": "tier 'Unavailable' is not rated in this analysis (excluded by plan)"
+      },
+      {
+        "name": "MegaSpeed International",
+        "tier": "Unavailable",
+        "status": "excluded",
+        "reason": "tier 'Unavailable' is not rated in this analysis (excluded by plan)"
+      },
+      {
+        "name": "BytePlus",
+        "tier": "Unavailable",
+        "status": "excluded",
+        "reason": "tier 'Unavailable' is not rated in this analysis (excluded by plan)"
+      },
+      {
+        "name": "Humain",
+        "tier": "Unavailable",
+        "status": "excluded",
+        "reason": "tier 'Unavailable' is not rated in this analysis (excluded by plan)"
+      },
+      {
+        "name": "SK telecom",
+        "tier": "Unavailable",
+        "status": "excluded",
+        "reason": "tier 'Unavailable' is not rated in this analysis (excluded by plan)"
+      },
+      {
+        "name": "NAVER",
+        "tier": "Unavailable",
+        "status": "excluded",
+        "reason": "tier 'Unavailable' is not rated in this analysis (excluded by plan)"
+      },
+      {
+        "name": "Indosat Ooredoo Hutchison",
+        "tier": "Unavailable",
+        "status": "excluded",
+        "reason": "tier 'Unavailable' is not rated in this analysis (excluded by plan)"
+      }
+    ],
+    "included_count": 17,
+    "minimum_providers": 8,
+    "sufficient": true,
+    "hot_aisle": null,
+    "analysis": {
+      "major_or_critical_incident_count": {
+        "spearman_rho": 0.44010131440379385,
+        "bootstrap_95ci": {
+          "interval": [
+            -0.006624921342637869,
+            0.7488838726248624
+          ],
+          "draws": 5000,
+          "valid_draws": 5000,
+          "skipped_zero_variance_draws": 0,
+          "seed": 20260929
+        },
+        "permutation": {
+          "p_value": 0.0762,
+          "method": "random_20000",
+          "observed_rho": 0.44010131440379385,
+          "permutations_used": 20000,
+          "skipped_zero_variance": 0,
+          "seed": 20260929
+        },
+        "reading": "inconclusive"
+      },
+      "all_incident_count": {
+        "spearman_rho": 0.27289286848173583,
+        "bootstrap_95ci": {
+          "interval": [
+            -0.24497620900850944,
+            0.6996989534243511
+          ],
+          "draws": 5000,
+          "valid_draws": 5000,
+          "skipped_zero_variance_draws": 0,
+          "seed": 20260929
+        },
+        "permutation": {
+          "p_value": 0.28455,
+          "method": "random_20000",
+          "observed_rho": 0.27289286848173583,
+          "permutations_used": 20000,
+          "skipped_zero_variance": 0,
+          "seed": 20260929
+        },
+        "reading": null
+      },
+      "incident_hours": {
+        "spearman_rho": 0.35847326786003975,
+        "bootstrap_95ci": {
+          "interval": [
+            -0.1731478528596335,
+            0.7686369625725608
+          ],
+          "draws": 5000,
+          "valid_draws": 5000,
+          "skipped_zero_variance_draws": 0,
+          "seed": 20260929
+        },
+        "permutation": {
+          "p_value": 0.157,
+          "method": "random_20000",
+          "observed_rho": 0.35847326786003975,
+          "permutations_used": 20000,
+          "skipped_zero_variance": 0,
+          "seed": 20260929
+        },
+        "reading": null
+      }
+    },
+    "reading": "inconclusive",
+    "sensitivities": {
+      "S1_leave_one_out": {
+        "runs": [
+          {
+            "dropped": "Nebius",
+            "n": 16,
+            "rho": 0.33882831359667626,
+            "bootstrap_95ci": [
+              -0.10445642710983763,
+              0.6908756065541629
+            ],
+            "permutation_p": 0.20085,
+            "permutation_method": "random_20000",
+            "reading": "inconclusive"
+          },
+          {
+            "dropped": "Google Cloud",
+            "n": 16,
+            "rho": 0.409599575497516,
+            "bootstrap_95ci": [
+              -0.06936868166337846,
+              0.7610303428380517
+            ],
+            "permutation_p": 0.11635,
+            "permutation_method": "random_20000",
+            "reading": "inconclusive"
+          },
+          {
+            "dropped": "Lambda",
+            "n": 16,
+            "rho": 0.4900989140346001,
+            "bootstrap_95ci": [
+              0.036906922738736615,
+              0.7963693444671506
+            ],
+            "permutation_p": 0.057,
+            "permutation_method": "random_20000",
+            "reading": "inconsistent"
+          },
+          {
+            "dropped": "GCore",
+            "n": 16,
+            "rho": 0.4418602219077721,
+            "bootstrap_95ci": [
+              -0.05339476582023529,
+              0.7833283304257358
+            ],
+            "permutation_p": 0.08575,
+            "permutation_method": "random_20000",
+            "reading": "inconclusive"
+          },
+          {
+            "dropped": "Verda",
+            "n": 16,
+            "rho": 0.5055874058151759,
+            "bootstrap_95ci": [
+              0.045449857199701134,
+              0.8077531738642963
+            ],
+            "permutation_p": 0.04595,
+            "permutation_method": "random_20000",
+            "reading": "inconsistent"
+          },
+          {
+            "dropped": "Prime Intellect",
+            "n": 16,
+            "rho": 0.45781960839230845,
+            "bootstrap_95ci": [
+              0.0064741228694181726,
+              0.7778872594423153
+            ],
+            "permutation_p": 0.07545,
+            "permutation_method": "random_20000",
+            "reading": "inconsistent"
+          },
+          {
+            "dropped": "together.ai",
+            "n": 16,
+            "rho": 0.5055874058151759,
+            "bootstrap_95ci": [
+              0.04085058456414856,
+              0.8015616894801402
+            ],
+            "permutation_p": 0.0457,
+            "permutation_method": "random_20000",
+            "reading": "inconsistent"
+          },
+          {
+            "dropped": "Crusoe",
+            "n": 16,
+            "rho": 0.43143678350190423,
+            "bootstrap_95ci": [
+              -0.026236980697037338,
+              0.7492442427943781
+            ],
+            "permutation_p": 0.0943,
+            "permutation_method": "random_20000",
+            "reading": "inconclusive"
+          },
+          {
+            "dropped": "DigitalOcean",
+            "n": 16,
+            "rho": 0.43875399890666295,
+            "bootstrap_95ci": [
+              -0.014292970687568438,
+              0.7584005042423645
+            ],
+            "permutation_p": 0.089,
+            "permutation_method": "random_20000",
+            "reading": "inconclusive"
+          },
+          {
+            "dropped": "Hyperstack",
+            "n": 16,
+            "rho": 0.43875399890666295,
+            "bootstrap_95ci": [
+              -0.014292970687568438,
+              0.7584005042423645
+            ],
+            "permutation_p": 0.089,
+            "permutation_method": "random_20000",
+            "reading": "inconclusive"
+          },
+          {
+            "dropped": "RunPod",
+            "n": 16,
+            "rho": 0.5168457169548667,
+            "bootstrap_95ci": [
+              0.10911364858911071,
+              0.7878129992424826
+            ],
+            "permutation_p": 0.0407,
+            "permutation_method": "random_20000",
+            "reading": "inconsistent"
+          },
+          {
+            "dropped": "Radiant",
+            "n": 16,
+            "rho": 0.4144314637258632,
+            "bootstrap_95ci": [
+              -0.06209174398528617,
+              0.7591269534230485
+            ],
+            "permutation_p": 0.10765,
+            "permutation_method": "random_20000",
+            "reading": "inconclusive"
+          },
+          {
+            "dropped": "latitude.sh",
+            "n": 16,
+            "rho": 0.4487471216448498,
+            "bootstrap_95ci": [
+              0.0,
+              0.751000073707729
+            ],
+            "permutation_p": 0.0794,
+            "permutation_method": "random_20000",
+            "reading": "inconclusive"
+          },
+          {
+            "dropped": "Sharon AI",
+            "n": 16,
+            "rho": 0.405552109830022,
+            "bootstrap_95ci": [
+              -0.07080415685968744,
+              0.746531073325282
+            ],
+            "permutation_p": 0.11475,
+            "permutation_method": "random_20000",
+            "reading": "inconclusive"
+          },
+          {
+            "dropped": "Hydra",
+            "n": 16,
+            "rho": 0.3728589977990665,
+            "bootstrap_95ci": [
+              -0.1034136612864654,
+              0.7156425298741611
+            ],
+            "permutation_p": 0.14935,
+            "permutation_method": "random_20000",
+            "reading": "inconclusive"
+          },
+          {
+            "dropped": "Akamai",
+            "n": 16,
+            "rho": 0.3728589977990665,
+            "bootstrap_95ci": [
+              -0.1034136612864654,
+              0.7156425298741611
+            ],
+            "permutation_p": 0.14935,
+            "permutation_method": "random_20000",
+            "reading": "inconclusive"
+          },
+          {
+            "dropped": "Mithril",
+            "n": 16,
+            "rho": 0.4727844594185581,
+            "bootstrap_95ci": [
+              -0.0036694130371822163,
+              0.7827848387566597
+            ],
+            "permutation_p": 0.066,
+            "permutation_method": "random_20000",
+            "reading": "inconclusive"
+          }
+        ],
+        "rho_min": 0.33882831359667626,
+        "rho_max": 0.5168457169548667,
+        "readings": {
+          "consistent": 0,
+          "inconclusive": 12,
+          "inconsistent": 5
+        }
+      },
+      "S2_permutation": {
+        "note": "n! = 355687428096000 > 500000: main p uses 20000 random draws; stability check with 200000 draws, seed 20260930",
+        "main_p": 0.0762,
+        "stability_p": 0.07845
+      },
+      "S3_maintenance_mislabel": {
+        "regex": "\\b(maintenance|planned|scheduled|upgrade)\\b",
+        "providers_affected": [
+          {
+            "provider": "GCore",
+            "major_or_critical_titles_matching_maintenance_regex": 1
+          },
+          {
+            "provider": "Hyperstack",
+            "major_or_critical_titles_matching_maintenance_regex": 2
+          }
+        ],
+        "rho": 0.44010131440379385,
+        "bootstrap_95ci": [
+          -0.006624921342637869,
+          0.7488838726248624
+        ],
+        "permutation_p": 0.076,
+        "reading": "inconclusive"
+      },
+      "S4_bootstrap_seed_robustness": {
+        "seeds": "1..200",
+        "draws": 5000,
+        "readings": {
+          "consistent": 0,
+          "inconclusive": 142,
+          "inconsistent": 58
+        },
+        "lower_bound_min": -0.03430821606407587,
+        "lower_bound_max": 0.02297217816293665,
+        "upper_bound_min": 0.7360953419911146,
+        "upper_bound_max": 0.7661532683217395
+      },
+      "S5_strict_coverage": {
+        "n": 15,
+        "dropped": [
+          "Google Cloud",
+          "Lambda"
+        ],
+        "rho": 0.4640833215001505,
+        "bootstrap_95ci": [
+          -0.04553445130592149,
+          0.8041849863590823
+        ],
+        "permutation_p": 0.0815,
+        "permutation_method": "random_20000",
+        "reading": "inconclusive"
+      },
+      "S6_critical_only": {
+        "rho": -0.04596269680428604,
+        "bootstrap_95ci": [
+          -0.5265123716169108,
+          0.4423528664586551
+        ],
+        "permutation_p": 0.85655,
+        "reading": "inconclusive"
+      }
+    },
+    "plan_release_label": "ClusterMAX 3.0"
+  },
+  "secondary": {
+    "release": "2.0",
+    "published_date": "2025-11-06",
+    "window": {
+      "start": "2026-03-27",
+      "end": "2026-09-23",
+      "days": 180
+    },
+    "providers": [
+      {
+        "name": "CoreWeave",
+        "tier": "Platinum",
+        "slug": "coreweave",
+        "status": "excluded",
+        "reason": "coverage_start not recorded and the feed does not reach back past the window start (oldest non-maintenance record 2026-09-11; coverage_end 2026-09-29)"
+      },
+      {
+        "name": "Oracle",
+        "tier": "Gold",
+        "slug": "oracle",
+        "status": "excluded",
+        "reason": "no incident data file found (expected oracle.json)"
+      },
+      {
+        "name": "Nebius",
+        "tier": "Gold",
+        "slug": "nebius",
+        "status": "eligible",
+        "ordinal": 5,
+        "coverage_basis": "declared_coverage",
+        "coverage": [
+          "2025-01-01",
+          "2026-09-23"
+        ],
+        "major_or_critical_incident_count": 17,
+        "all_incident_count": 39,
+        "incident_hours": 179.8016,
+        "incident_hours_capped": false,
+        "included_in_correlation": true
+      },
+      {
+        "name": "Azure",
+        "tier": "Gold",
+        "slug": "azure",
+        "status": "excluded",
+        "reason": "no incident data file found (expected azure.json)"
+      },
+      {
+        "name": "Crusoe",
+        "tier": "Gold",
+        "slug": "crusoe-r2",
+        "status": "eligible",
+        "ordinal": 5,
+        "coverage_basis": "declared_coverage",
+        "coverage": [
+          "2025-01-01",
+          "2026-09-29"
+        ],
+        "major_or_critical_incident_count": 5,
+        "all_incident_count": 21,
+        "incident_hours": 139.2309,
+        "incident_hours_capped": false,
+        "included_in_correlation": true
+      },
+      {
+        "name": "FluidStack",
+        "tier": "Gold",
+        "slug": "fluidstack",
+        "status": "eligible",
+        "ordinal": 5,
+        "coverage_basis": "declared_coverage",
+        "coverage": [
+          "2026-01-01",
+          "2026-09-29"
+        ],
+        "major_or_critical_incident_count": 0,
+        "all_incident_count": 0,
+        "incident_hours": 0.0,
+        "incident_hours_capped": false,
+        "included_in_correlation": true
+      },
+      {
+        "name": "Together.ai",
+        "tier": "Silver",
+        "slug": "together-ai",
+        "status": "eligible",
+        "ordinal": 4,
+        "coverage_basis": "declared_coverage",
+        "coverage": [
+          "2026-01-01",
+          "2026-09-29"
+        ],
+        "major_or_critical_incident_count": 0,
+        "all_incident_count": 0,
+        "incident_hours": 0.0,
+        "incident_hours_capped": false,
+        "included_in_correlation": true
+      },
+      {
+        "name": "Lambda",
+        "tier": "Silver",
+        "slug": "lambda",
+        "status": "eligible",
+        "ordinal": 4,
+        "coverage_basis": "capped_feed_rule (oldest record 2026-02-13 < window start 2026-03-27)",
+        "coverage": [
+          null,
+          "2026-09-23"
+        ],
+        "major_or_critical_incident_count": 2,
+        "all_incident_count": 16,
+        "incident_hours": 1442.9692,
+        "incident_hours_capped": false,
+        "included_in_correlation": true
+      },
+      {
+        "name": "Google Cloud",
+        "tier": "Silver",
+        "slug": "google-cloud",
+        "status": "eligible",
+        "ordinal": 4,
+        "coverage_basis": "capped_feed_rule (oldest record 2026-02-27 < window start 2026-03-27)",
+        "coverage": [
+          null,
+          "2026-09-29"
+        ],
+        "major_or_critical_incident_count": 5,
+        "all_incident_count": 5,
+        "incident_hours": 546.9333,
+        "incident_hours_capped": false,
+        "included_in_correlation": true
+      },
+      {
+        "name": "AWS",
+        "tier": "Silver",
+        "slug": "aws",
+        "status": "excluded",
+        "reason": "no incident data file found (expected aws.json)"
+      },
+      {
+        "name": "Scaleway",
+        "tier": "Silver",
+        "slug": "scaleway",
+        "status": "eligible",
+        "ordinal": 4,
+        "coverage_basis": "declared_coverage",
+        "coverage": [
+          "2025-01-01",
+          "2026-09-23"
+        ],
+        "major_or_critical_incident_count": 32,
+        "all_incident_count": 268,
+        "incident_hours": 14392.892,
+        "incident_hours_capped": true,
+        "included_in_correlation": true
+      },
+      {
+        "name": "Cirrascale",
+        "tier": "Silver",
+        "slug": "cirrascale",
+        "status": "eligible",
+        "ordinal": 4,
+        "coverage_basis": "declared_coverage",
+        "coverage": [
+          "2025-01-01",
+          "2026-09-23"
+        ],
+        "major_or_critical_incident_count": 0,
+        "all_incident_count": 0,
+        "incident_hours": 0.0,
+        "incident_hours_capped": false,
+        "included_in_correlation": true
+      },
+      {
+        "name": "Vultr",
+        "tier": "Silver",
+        "slug": "vultr",
+        "status": "excluded",
+        "reason": "no incident data file found (expected vultr.json)"
+      },
+      {
+        "name": "Voltage Park",
+        "tier": "Silver",
+        "slug": "voltage-park",
+        "status": "excluded",
+        "reason": "no incident data file found (expected voltage-park.json)"
+      },
+      {
+        "name": "GCore",
+        "tier": "Silver",
+        "slug": "gcore",
+        "status": "eligible",
+        "ordinal": 4,
+        "coverage_basis": "declared_coverage",
+        "coverage": [
+          "2026-01-01",
+          "2026-09-29"
+        ],
+        "major_or_critical_incident_count": 58,
+        "all_incident_count": 85,
+        "incident_hours": 1027.9349,
+        "incident_hours_capped": false,
+        "included_in_correlation": true
+      },
+      {
+        "name": "Firmus",
+        "tier": "Silver",
+        "slug": "firmus",
+        "status": "excluded",
+        "reason": "no incident data file found (expected firmus.json)"
+      },
+      {
+        "name": "GMO GPU Cloud",
+        "tier": "Silver",
+        "slug": "gmo-gpu-cloud",
+        "status": "excluded",
+        "reason": "no incident data file found (expected gmo-gpu-cloud.json)"
+      },
+      {
+        "name": "TensorWave",
+        "tier": "Silver",
+        "slug": "tensorwave",
+        "status": "excluded",
+        "reason": "no incident data file found (expected tensorwave.json)"
+      },
+      {
+        "name": "Hyperstack",
+        "tier": "Bronze",
+        "slug": "hyperstack",
+        "status": "eligible",
+        "ordinal": 3,
+        "coverage_basis": "declared_coverage",
+        "coverage": [
+          "2025-01-01",
+          "2026-09-23"
+        ],
+        "major_or_critical_incident_count": 9,
+        "all_incident_count": 10,
+        "incident_hours": 57.2871,
+        "incident_hours_capped": false,
+        "included_in_correlation": true
+      },
+      {
+        "name": "Shadeform",
+        "tier": "Bronze",
+        "slug": "shadeform",
+        "status": "excluded",
+        "reason": "no incident data file found (expected shadeform.json)"
+      },
+      {
+        "name": "Neysa",
+        "tier": "Bronze",
+        "slug": "neysa",
+        "status": "excluded",
+        "reason": "no incident data file found (expected neysa.json)"
+      },
+      {
+        "name": "STN",
+        "tier": "Bronze",
+        "slug": "stn",
+        "status": "excluded",
+        "reason": "no incident data file found (expected stn.json)"
+      },
+      {
+        "name": "GMI",
+        "tier": "Bronze",
+        "slug": "gmi",
+        "status": "excluded",
+        "reason": "no incident data file found (expected gmi.json)"
+      },
+      {
+        "name": "RunPod",
+        "tier": "Bronze",
+        "slug": "runpod",
+        "status": "eligible",
+        "ordinal": 3,
+        "coverage_basis": "declared_coverage",
+        "coverage": [
+          "2026-01-01",
+          "2026-09-29"
+        ],
+        "major_or_critical_incident_count": 11,
+        "all_incident_count": 33,
+        "incident_hours": 439.1833,
+        "incident_hours_capped": false,
+        "included_in_correlation": true
+      },
+      {
+        "name": "Atlas Cloud",
+        "tier": "Bronze",
+        "slug": "atlas-cloud",
+        "status": "eligible",
+        "ordinal": 3,
+        "coverage_basis": "declared_coverage",
+        "coverage": [
+          "2026-01-01",
+          "2026-09-29"
+        ],
+        "major_or_critical_incident_count": 40,
+        "all_incident_count": 40,
+        "incident_hours": 3.3168,
+        "incident_hours_capped": false,
+        "included_in_correlation": true
+      },
+      {
+        "name": "Prime Intellect",
+        "tier": "Bronze",
+        "slug": "prime-intellect",
+        "status": "eligible",
+        "ordinal": 3,
+        "coverage_basis": "declared_coverage",
+        "coverage": [
+          "2026-01-01",
+          "2026-09-29"
+        ],
+        "major_or_critical_incident_count": 2,
+        "all_incident_count": 10,
+        "incident_hours": 1689.0167,
+        "incident_hours_capped": false,
+        "included_in_correlation": true
+      },
+      {
+        "name": "Cudo Compute",
+        "tier": "Bronze",
+        "slug": "cudo-compute",
+        "status": "eligible",
+        "ordinal": 3,
+        "coverage_basis": "declared_coverage",
+        "coverage": [
+          "2026-01-01",
+          "2026-09-29"
+        ],
+        "major_or_critical_incident_count": 0,
+        "all_incident_count": 0,
+        "incident_hours": 0.0,
+        "incident_hours_capped": false,
+        "included_in_correlation": true
+      },
+      {
+        "name": "Qubrid",
+        "tier": "Bronze",
+        "slug": "qubrid",
+        "status": "excluded",
+        "reason": "no incident data file found (expected qubrid.json)"
+      },
+      {
+        "name": "latitude.sh",
+        "tier": "Bronze",
+        "slug": "latitude-sh",
+        "status": "eligible",
+        "ordinal": 3,
+        "coverage_basis": "declared_coverage",
+        "coverage": [
+          "2025-01-01",
+          "2026-09-23"
+        ],
+        "major_or_critical_incident_count": 4,
+        "all_incident_count": 9,
+        "incident_hours": 54.6994,
+        "incident_hours_capped": false,
+        "included_in_correlation": true
+      },
+      {
+        "name": "Lightning AI",
+        "tier": "Bronze",
+        "slug": "lightning-ai",
+        "status": "eligible",
+        "ordinal": 3,
+        "coverage_basis": "declared_coverage",
+        "coverage": [
+          "2025-01-01",
+          "2026-09-23"
+        ],
+        "major_or_critical_incident_count": 2,
+        "all_incident_count": 10,
+        "incident_hours": 68.6461,
+        "incident_hours_capped": false,
+        "included_in_correlation": true
+      },
+      {
+        "name": "Verda",
+        "tier": "Bronze",
+        "slug": "verda",
+        "status": "eligible",
+        "ordinal": 3,
+        "coverage_basis": "declared_coverage",
+        "coverage": [
+          "2026-01-01",
+          "2026-09-29"
+        ],
+        "major_or_critical_incident_count": 0,
+        "all_incident_count": 6,
+        "incident_hours": 17.4833,
+        "incident_hours_capped": false,
+        "included_in_correlation": true
+      },
+      {
+        "name": "DENVR Dataworks",
+        "tier": "Bronze",
+        "slug": "denvr-dataworks",
+        "status": "excluded",
+        "reason": "no incident data file found (expected denvr-dataworks.json)"
+      },
+      {
+        "name": "IBM Cloud",
+        "tier": "Bronze",
+        "slug": "ibm-cloud",
+        "status": "excluded",
+        "reason": "no incident data file found (expected ibm-cloud.json)"
+      },
+      {
+        "name": "DigitalOcean",
+        "tier": "Bronze",
+        "slug": "digitalocean",
+        "status": "eligible",
+        "ordinal": 3,
+        "coverage_basis": "declared_coverage",
+        "coverage": [
+          "2025-01-01",
+          "2026-09-23"
+        ],
+        "major_or_critical_incident_count": 8,
+        "all_incident_count": 59,
+        "incident_hours": 332.9301,
+        "incident_hours_capped": false,
+        "included_in_correlation": true
+      },
+      {
+        "name": "Hot Aisle",
+        "tier": "Bronze",
+        "slug": "hot-aisle",
+        "status": "excluded",
+        "reason": "no incident data file found (expected hot-aisle.json)"
+      },
+      {
+        "name": "Buzz HPC",
+        "tier": "Bronze",
+        "slug": "buzz-hpc",
+        "status": "excluded",
+        "reason": "no incident data file found (expected buzz-hpc.json)"
+      },
+      {
+        "name": "Vast.ai",
+        "tier": "Bronze",
+        "slug": "vast-ai",
+        "status": "excluded",
+        "reason": "no incident data file found (expected vast-ai.json)"
+      },
+      {
+        "name": "Sharon AI",
+        "tier": "Underperforming",
+        "slug": "sharon-ai",
+        "status": "eligible",
+        "ordinal": 1,
+        "coverage_basis": "declared_coverage",
+        "coverage": [
+          "2025-10-10",
+          "2026-09-23"
+        ],
+        "major_or_critical_incident_count": 1,
+        "all_incident_count": 1,
+        "incident_hours": 0.4569,
+        "incident_hours_capped": false,
+        "included_in_correlation": true
+      },
+      {
+        "name": "IREN",
+        "tier": "Underperforming",
+        "slug": "iren",
+        "status": "excluded",
+        "reason": "no incident data file found (expected iren.json)"
+      },
+      {
+        "name": "Hydra",
+        "tier": "Underperforming",
+        "slug": "hydra",
+        "status": "eligible",
+        "ordinal": 1,
+        "coverage_basis": "declared_coverage",
+        "coverage": [
+          "2026-01-01",
+          "2026-09-29"
+        ],
+        "major_or_critical_incident_count": 0,
+        "all_incident_count": 0,
+        "incident_hours": 0.0,
+        "incident_hours_capped": false,
+        "included_in_correlation": true
+      },
+      {
+        "name": "FarmGPU",
+        "tier": "Underperforming",
+        "slug": "farmgpu",
+        "status": "excluded",
+        "reason": "no incident data file found (expected farmgpu.json)"
+      },
+      {
+        "name": "Whitefiber",
+        "tier": "Underperforming",
+        "slug": "whitefiber",
+        "status": "excluded",
+        "reason": "no incident data file found (expected whitefiber.json)"
+      },
+      {
+        "name": "deepinfra",
+        "tier": "Underperforming",
+        "slug": "deepinfra",
+        "status": "excluded",
+        "reason": "no incident data file found (expected deepinfra.json)"
+      },
+      {
+        "name": "dstack",
+        "tier": "Underperforming",
+        "slug": "dstack",
+        "status": "excluded",
+        "reason": "no incident data file found (expected dstack.json)"
+      },
+      {
+        "name": "PaleBlueDot.AI",
+        "tier": "Underperforming",
+        "slug": "palebluedot-ai",
+        "status": "excluded",
+        "reason": "no incident data file found (expected palebluedot-ai.json)"
+      },
+      {
+        "name": "Hyperbolic",
+        "tier": "Underperforming",
+        "slug": "hyperbolic",
+        "status": "excluded",
+        "reason": "no incident data file found (expected hyperbolic.json)"
+      },
+      {
+        "name": "GPU.NET",
+        "tier": "Underperforming",
+        "slug": "gpu-net",
+        "status": "excluded",
+        "reason": "no incident data file found (expected gpu-net.json)"
+      },
+      {
+        "name": "Akamai",
+        "tier": "Underperforming",
+        "slug": "akamai",
+        "status": "eligible",
+        "ordinal": 1,
+        "coverage_basis": "declared_coverage",
+        "coverage": [
+          "2025-01-01",
+          "2026-09-23"
+        ],
+        "major_or_critical_incident_count": 0,
+        "all_incident_count": 59,
+        "incident_hours": 2706.1629,
+        "incident_hours_capped": true,
+        "included_in_correlation": true
+      },
+      {
+        "name": "Hetzner",
+        "tier": "Underperforming",
+        "slug": "hetzner",
+        "status": "excluded",
+        "reason": "no incident data file found (expected hetzner.json)"
+      },
+      {
+        "name": "Clore.ai",
+        "tier": "Underperforming",
+        "slug": "clore-ai",
+        "status": "excluded",
+        "reason": "no incident data file found (expected clore-ai.json)"
+      },
+      {
+        "name": "Massed Compute",
+        "tier": "Underperforming",
+        "slug": "massed-compute",
+        "status": "excluded",
+        "reason": "no incident data file found (expected massed-compute.json)"
+      },
+      {
+        "name": "Exabits",
+        "tier": "Underperforming",
+        "slug": "exabits",
+        "status": "excluded",
+        "reason": "no incident data file found (expected exabits.json)"
+      },
+      {
+        "name": "Sesterce",
+        "tier": "Underperforming",
+        "slug": "sesterce",
+        "status": "excluded",
+        "reason": "no incident data file found (expected sesterce.json)"
+      },
+      {
+        "name": "E2E Cloud",
+        "tier": "Underperforming",
+        "slug": "e2e-cloud",
+        "status": "excluded",
+        "reason": "no incident data file found (expected e2e-cloud.json)"
+      },
+      {
+        "name": "OVHcloud",
+        "tier": "Underperforming",
+        "slug": "ovhcloud",
+        "status": "excluded",
+        "reason": "coverage_start not recorded and the feed does not reach back past the window start (oldest non-maintenance record 2026-09-25; coverage_end 2026-09-29)"
+      },
+      {
+        "name": "Aethir",
+        "tier": "Underperforming",
+        "slug": "aethir",
+        "status": "excluded",
+        "reason": "no incident data file found (expected aethir.json)"
+      },
+      {
+        "name": "Akash",
+        "tier": "Underperforming",
+        "slug": "akash",
+        "status": "excluded",
+        "reason": "no incident data file found (expected akash.json)"
+      },
+      {
+        "name": "Salad",
+        "tier": "Underperforming",
+        "slug": "salad",
+        "status": "excluded",
+        "reason": "no incident data file found (expected salad.json)"
+      },
+      {
+        "name": "Mithril",
+        "tier": "Underperforming",
+        "slug": "mithril",
+        "status": "eligible",
+        "ordinal": 1,
+        "coverage_basis": "declared_coverage",
+        "coverage": [
+          "2026-01-01",
+          "2026-09-29"
+        ],
+        "major_or_critical_incident_count": 4,
+        "all_incident_count": 6,
+        "incident_hours": 38.6835,
+        "incident_hours_capped": false,
+        "included_in_correlation": true
+      },
+      {
+        "name": "Nscale",
+        "tier": "Unavailable",
+        "status": "excluded",
+        "reason": "tier 'Unavailable' is not rated in this analysis (excluded by plan)"
+      },
+      {
+        "name": "Core42",
+        "tier": "Unavailable",
+        "status": "excluded",
+        "reason": "tier 'Unavailable' is not rated in this analysis (excluded by plan)"
+      },
+      {
+        "name": "Humain",
+        "tier": "Unavailable",
+        "status": "excluded",
+        "reason": "tier 'Unavailable' is not rated in this analysis (excluded by plan)"
+      },
+      {
+        "name": "Corvex",
+        "tier": "Unavailable",
+        "status": "excluded",
+        "reason": "tier 'Unavailable' is not rated in this analysis (excluded by plan)"
+      },
+      {
+        "name": "Highrise",
+        "tier": "Unavailable",
+        "status": "excluded",
+        "reason": "tier 'Unavailable' is not rated in this analysis (excluded by plan)"
+      },
+      {
+        "name": "BluSky AI",
+        "tier": "Unavailable",
+        "status": "excluded",
+        "reason": "tier 'Unavailable' is not rated in this analysis (excluded by plan)"
+      },
+      {
+        "name": "Arc Compute",
+        "tier": "Unavailable",
+        "status": "excluded",
+        "reason": "tier 'Unavailable' is not rated in this analysis (excluded by plan)"
+      },
+      {
+        "name": "Telus",
+        "tier": "Unavailable",
+        "status": "excluded",
+        "reason": "tier 'Unavailable' is not rated in this analysis (excluded by plan)"
+      },
+      {
+        "name": "Telenor",
+        "tier": "Unavailable",
+        "status": "excluded",
+        "reason": "tier 'Unavailable' is not rated in this analysis (excluded by plan)"
+      },
+      {
+        "name": "Mistral AI",
+        "tier": "Unavailable",
+        "status": "excluded",
+        "reason": "tier 'Unavailable' is not rated in this analysis (excluded by plan)"
+      },
+      {
+        "name": "Firebird",
+        "tier": "Unavailable",
+        "status": "excluded",
+        "reason": "tier 'Unavailable' is not rated in this analysis (excluded by plan)"
+      },
+      {
+        "name": "Alibaba Cloud",
+        "tier": "Unavailable",
+        "status": "excluded",
+        "reason": "tier 'Unavailable' is not rated in this analysis (excluded by plan)"
+      },
+      {
+        "name": "MegaSpeed International",
+        "tier": "Unavailable",
+        "status": "excluded",
+        "reason": "tier 'Unavailable' is not rated in this analysis (excluded by plan)"
+      },
+      {
+        "name": "BitDeer",
+        "tier": "Unavailable",
+        "status": "excluded",
+        "reason": "tier 'Unavailable' is not rated in this analysis (excluded by plan)"
+      },
+      {
+        "name": "RunSun Cloud",
+        "tier": "Unavailable",
+        "status": "excluded",
+        "reason": "tier 'Unavailable' is not rated in this analysis (excluded by plan)"
+      },
+      {
+        "name": "FPT Cloud",
+        "tier": "Unavailable",
+        "status": "excluded",
+        "reason": "tier 'Unavailable' is not rated in this analysis (excluded by plan)"
+      },
+      {
+        "name": "backend AI",
+        "tier": "Unavailable",
+        "status": "excluded",
+        "reason": "tier 'Unavailable' is not rated in this analysis (excluded by plan)"
+      },
+      {
+        "name": "NAVER",
+        "tier": "Unavailable",
+        "status": "excluded",
+        "reason": "tier 'Unavailable' is not rated in this analysis (excluded by plan)"
+      },
+      {
+        "name": "Indosat Ooredoo Hutchison",
+        "tier": "Unavailable",
+        "status": "excluded",
+        "reason": "tier 'Unavailable' is not rated in this analysis (excluded by plan)"
+      },
+      {
+        "name": "Sakura",
+        "tier": "Unavailable",
+        "status": "excluded",
+        "reason": "tier 'Unavailable' is not rated in this analysis (excluded by plan)"
+      },
+      {
+        "name": "Yotta",
+        "tier": "Unavailable",
+        "status": "excluded",
+        "reason": "tier 'Unavailable' is not rated in this analysis (excluded by plan)"
+      },
+      {
+        "name": "neevcloud",
+        "tier": "Unavailable",
+        "status": "excluded",
+        "reason": "tier 'Unavailable' is not rated in this analysis (excluded by plan)"
+      },
+      {
+        "name": "evroc",
+        "tier": "Unavailable",
+        "status": "excluded",
+        "reason": "tier 'Unavailable' is not rated in this analysis (excluded by plan)"
+      },
+      {
+        "name": "greenai.cloud",
+        "tier": "Unavailable",
+        "status": "excluded",
+        "reason": "tier 'Unavailable' is not rated in this analysis (excluded by plan)"
+      }
+    ],
+    "included_count": 22,
+    "minimum_providers": 8,
+    "sufficient": true,
+    "hot_aisle": null,
+    "analysis": {
+      "major_or_critical_incident_count": {
+        "spearman_rho": 0.23086658330454984,
+        "bootstrap_95ci": {
+          "interval": [
+            -0.20034227988152564,
+            0.6187366819111348
+          ],
+          "draws": 5000,
+          "valid_draws": 5000,
+          "skipped_zero_variance_draws": 0,
+          "seed": 20260929
+        },
+        "permutation": {
+          "p_value": 0.2959,
+          "method": "random_20000",
+          "observed_rho": 0.23086658330454984,
+          "permutations_used": 20000,
+          "skipped_zero_variance": 0,
+          "seed": 20260929
+        },
+        "reading": "inconclusive"
+      },
+      "all_incident_count": {
+        "spearman_rho": 0.0861258498936082,
+        "bootstrap_95ci": {
+          "interval": [
+            -0.38878802733975554,
+            0.5238285768824379
+          ],
+          "draws": 5000,
+          "valid_draws": 5000,
+          "skipped_zero_variance_draws": 0,
+          "seed": 20260929
+        },
+        "permutation": {
+          "p_value": 0.69615,
+          "method": "random_20000",
+          "observed_rho": 0.0861258498936082,
+          "permutations_used": 20000,
+          "skipped_zero_variance": 0,
+          "seed": 20260929
+        },
+        "reading": null
+      },
+      "incident_hours": {
+        "spearman_rho": 0.10627856293678117,
+        "bootstrap_95ci": {
+          "interval": [
+            -0.34660393470755263,
+            0.5636977756474592
+          ],
+          "draws": 5000,
+          "valid_draws": 5000,
+          "skipped_zero_variance_draws": 0,
+          "seed": 20260929
+        },
+        "permutation": {
+          "p_value": 0.63675,
+          "method": "random_20000",
+          "observed_rho": 0.10627856293678117,
+          "permutations_used": 20000,
+          "skipped_zero_variance": 0,
+          "seed": 20260929
+        },
+        "reading": null
+      }
+    },
+    "reading": "inconclusive",
+    "sensitivities": {
+      "S1_leave_one_out": {
+        "runs": [
+          {
+            "dropped": "Nebius",
+            "n": 21,
+            "rho": 0.15332778361925628,
+            "bootstrap_95ci": [
+              -0.28633267307511623,
+              0.562661273950926
+            ],
+            "permutation_p": 0.4986,
+            "permutation_method": "random_20000",
+            "reading": "inconclusive"
+          },
+          {
+            "dropped": "Crusoe",
+            "n": 21,
+            "rho": 0.20448483515790844,
+            "bootstrap_95ci": [
+              -0.2509280349023866,
+              0.624825169069892
+            ],
+            "permutation_p": 0.3677,
+            "permutation_method": "random_20000",
+            "reading": "inconclusive"
+          },
+          {
+            "dropped": "FluidStack",
+            "n": 21,
+            "rho": 0.3564112921193785,
+            "bootstrap_95ci": [
+              -0.06354463243969166,
+              0.6766758520455325
+            ],
+            "permutation_p": 0.1137,
+            "permutation_method": "random_20000",
+            "reading": "inconclusive"
+          },
+          {
+            "dropped": "Together.ai",
+            "n": 21,
+            "rho": 0.3042195826057476,
+            "bootstrap_95ci": [
+              -0.12813912723127055,
+              0.6692304500703258
+            ],
+            "permutation_p": 0.17705,
+            "permutation_method": "random_20000",
+            "reading": "inconclusive"
+          },
+          {
+            "dropped": "Lambda",
+            "n": 21,
+            "rho": 0.2516205600502124,
+            "bootstrap_95ci": [
+              -0.18855238603232174,
+              0.639741509045089
+            ],
+            "permutation_p": 0.2673,
+            "permutation_method": "random_20000",
+            "reading": "inconclusive"
+          },
+          {
+            "dropped": "Google Cloud",
+            "n": 21,
+            "rho": 0.2161697653922319,
+            "bootstrap_95ci": [
+              -0.23436870194041534,
+              0.6095755421890815
+            ],
+            "permutation_p": 0.34325,
+            "permutation_method": "random_20000",
+            "reading": "inconclusive"
+          },
+          {
+            "dropped": "Scaleway",
+            "n": 21,
+            "rho": 0.19528234432383315,
+            "bootstrap_95ci": [
+              -0.2565237608676249,
+              0.5861122054548229
+            ],
+            "permutation_p": 0.3913,
+            "permutation_method": "random_20000",
+            "reading": "inconclusive"
+          },
+          {
+            "dropped": "Cirrascale",
+            "n": 21,
+            "rho": 0.3042195826057476,
+            "bootstrap_95ci": [
+              -0.12982954396206914,
+              0.6731541304445231
+            ],
+            "permutation_p": 0.17925,
+            "permutation_method": "random_20000",
+            "reading": "inconclusive"
+          },
+          {
+            "dropped": "GCore",
+            "n": 21,
+            "rho": 0.1855007599927646,
+            "bootstrap_95ci": [
+              -0.25676263168397156,
+              0.5864393712311061
+            ],
+            "permutation_p": 0.42,
+            "permutation_method": "random_20000",
+            "reading": "inconclusive"
+          },
+          {
+            "dropped": "Hyperstack",
+            "n": 21,
+            "rho": 0.24790870708605023,
+            "bootstrap_95ci": [
+              -0.185263609671288,
+              0.6279570780096394
+            ],
+            "permutation_p": 0.27735,
+            "permutation_method": "random_20000",
+            "reading": "inconclusive"
+          },
+          {
+            "dropped": "RunPod",
+            "n": 21,
+            "rho": 0.24790870708605023,
+            "bootstrap_95ci": [
+              -0.185263609671288,
+              0.6279570780096394
+            ],
+            "permutation_p": 0.27735,
+            "permutation_method": "random_20000",
+            "reading": "inconclusive"
+          },
+          {
+            "dropped": "Atlas Cloud",
+            "n": 21,
+            "rho": 0.27356639145579525,
+            "bootstrap_95ci": [
+              -0.16460829916870037,
+              0.6516386279581741
+            ],
+            "permutation_p": 0.2292,
+            "permutation_method": "random_20000",
+            "reading": "inconclusive"
+          },
+          {
+            "dropped": "Prime Intellect",
+            "n": 21,
+            "rho": 0.22548954741457009,
+            "bootstrap_95ci": [
+              -0.21594695351756057,
+              0.614879144338691
+            ],
+            "permutation_p": 0.3278,
+            "permutation_method": "random_20000",
+            "reading": "inconclusive"
+          },
+          {
+            "dropped": "Cudo Compute",
+            "n": 21,
+            "rho": 0.21827871934034876,
+            "bootstrap_95ci": [
+              -0.23575152277264444,
+              0.630391359923369
+            ],
+            "permutation_p": 0.3415,
+            "permutation_method": "random_20000",
+            "reading": "inconclusive"
+          },
+          {
+            "dropped": "latitude.sh",
+            "n": 21,
+            "rho": 0.22633517318081295,
+            "bootstrap_95ci": [
+              -0.2047809825760318,
+              0.6113243486559655
+            ],
+            "permutation_p": 0.3223,
+            "permutation_method": "random_20000",
+            "reading": "inconclusive"
+          },
+          {
+            "dropped": "Lightning AI",
+            "n": 21,
+            "rho": 0.22548954741457009,
+            "bootstrap_95ci": [
+              -0.2076976998987915,
+              0.6098076560790693
+            ],
+            "permutation_p": 0.32325,
+            "permutation_method": "random_20000",
+            "reading": "inconclusive"
+          },
+          {
+            "dropped": "Verda",
+            "n": 21,
+            "rho": 0.21827871934034876,
+            "bootstrap_95ci": [
+              -0.23179979886310131,
+              0.630382726232861
+            ],
+            "permutation_p": 0.34275,
+            "permutation_method": "random_20000",
+            "reading": "inconclusive"
+          },
+          {
+            "dropped": "DigitalOcean",
+            "n": 21,
+            "rho": 0.24790870708605023,
+            "bootstrap_95ci": [
+              -0.18364015161868877,
+              0.6354651695362825
+            ],
+            "permutation_p": 0.27685,
+            "permutation_method": "random_20000",
+            "reading": "inconclusive"
+          },
+          {
+            "dropped": "Sharon AI",
+            "n": 21,
+            "rho": 0.20292912413326344,
+            "bootstrap_95ci": [
+              -0.2357601131168215,
+              0.6000897310377111
+            ],
+            "permutation_p": 0.3739,
+            "permutation_method": "random_20000",
+            "reading": "inconclusive"
+          },
+          {
+            "dropped": "Hydra",
+            "n": 21,
+            "rho": 0.16182856037726304,
+            "bootstrap_95ci": [
+              -0.27225642908646164,
+              0.5658266134522691
+            ],
+            "permutation_p": 0.48115,
+            "permutation_method": "random_20000",
+            "reading": "inconclusive"
+          },
+          {
+            "dropped": "Akamai",
+            "n": 21,
+            "rho": 0.16182856037726304,
+            "bootstrap_95ci": [
+              -0.27225642908646164,
+              0.5658266134522691
+            ],
+            "permutation_p": 0.48115,
+            "permutation_method": "random_20000",
+            "reading": "inconclusive"
+          },
+          {
+            "dropped": "Mithril",
+            "n": 21,
+            "rho": 0.24280195641914765,
+            "bootstrap_95ci": [
+              -0.2008479689991682,
+              0.6359843752893444
+            ],
+            "permutation_p": 0.2898,
+            "permutation_method": "random_20000",
+            "reading": "inconclusive"
+          }
+        ],
+        "rho_min": 0.15332778361925628,
+        "rho_max": 0.3564112921193785,
+        "readings": {
+          "consistent": 0,
+          "inconclusive": 22,
+          "inconsistent": 0
+        }
+      },
+      "S2_permutation": {
+        "note": "n! = 1124000727777607680000 > 500000: main p uses 20000 random draws; stability check with 200000 draws, seed 20260930",
+        "main_p": 0.2959,
+        "stability_p": 0.29877
+      },
+      "S3_maintenance_mislabel": {
+        "regex": "\\b(maintenance|planned|scheduled|upgrade)\\b",
+        "providers_affected": [
+          {
+            "provider": "GCore",
+            "major_or_critical_titles_matching_maintenance_regex": 1
+          },
+          {
+            "provider": "Hyperstack",
+            "major_or_critical_titles_matching_maintenance_regex": 2
+          }
+        ],
+        "rho": 0.23086658330454984,
+        "bootstrap_95ci": [
+          -0.20034227988152564,
+          0.6187366819111348
+        ],
+        "permutation_p": 0.29585,
+        "reading": "inconclusive"
+      },
+      "S4_bootstrap_seed_robustness": {
+        "seeds": "1..200",
+        "draws": 5000,
+        "readings": {
+          "consistent": 0,
+          "inconclusive": 200,
+          "inconsistent": 0
+        },
+        "lower_bound_min": -0.23702196070615866,
+        "lower_bound_max": -0.18017887569798902,
+        "upper_bound_min": 0.5940216817700527,
+        "upper_bound_max": 0.6263426739598797
+      },
+      "S5_strict_coverage": {
+        "n": 20,
+        "dropped": [
+          "Lambda",
+          "Google Cloud"
+        ],
+        "rho": 0.23651584262814088,
+        "bootstrap_95ci": [
+          -0.22596725632213066,
+          0.6425339358186556
+        ],
+        "permutation_p": 0.31325,
+        "permutation_method": "random_20000",
+        "reading": "inconclusive"
+      },
+      "S6_critical_only": {
+        "rho": -0.0432508546623793,
+        "bootstrap_95ci": [
+          -0.46730444597451937,
+          0.3821831235722228
+        ],
+        "permutation_p": 0.85135,
+        "reading": "inconclusive"
+      }
+    },
+    "plan_release_label": "ClusterMAX 2.0"
+  }
+}

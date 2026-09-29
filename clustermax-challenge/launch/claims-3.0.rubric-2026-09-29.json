@@ -1,0 +1,997 @@
+{
+  "schema": "secondrun.launch-claims.v2",
+  "release_name": "ClusterMAX 3.0",
+  "rating_version": "3.0",
+  "release_url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+  "retrieved_utc": "2026-09-23T22:02:17.785538+00:00",
+  "medal_table_source": {
+    "url": "https://substack-post-media.s3.amazonaws.com/public/images/b2130ed4-61b4-49a8-98e5-03408801831c_1432x880.png",
+    "sha256": "79dc81e4cf7a503632c631b69f011f2a7af109e719cc32253344820cda402e02",
+    "retrieved_utc": "2026-09-23T21:38:10Z"
+  },
+  "review_scope": "Announcement and supplied ranking graphic; article Results, Scope, testing methodology, reliability and agentic-coding sections. Selected tier transcription only: 17 providers, not all 77. Provider appendix entries are not individually adjudicated in this ledger. No release-wide absence claim.",
+  "counts_as_announced": {
+    "reviewed": 77,
+    "market_view": 323,
+    "medallions": 19,
+    "participation_ribbons": 15
+  },
+  "medals": {
+    "CoreWeave": {
+      "medal": "Platinum",
+      "transcription_basis": "Supplied release graphic, cross-checked with announcement where named.",
+      "scope": {
+        "status": "PARTIAL",
+        "value": "Managed clusters; excludes standalone bare-metal offers and managed inference endpoints.",
+        "limitation": "Global scope is supplied. This ledger has not normalized the exact service, region and SKU for this provider.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      },
+      "observation_conditions": {
+        "status": "PARTIAL",
+        "value": "The published protocol requests multi-node allocations, testing time and monitoring, and describes coordination with providers.",
+        "limitation": "This records the general test protocol, not ordinary-account/support equivalence for this provider.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      },
+      "evidence": {
+        "status": "PARTIAL",
+        "value": "The article describes audit, workload-performance, burn-in and fault-recovery testing plus customer interviews.",
+        "limitation": "A reproducible provider-specific evidence-to-medal calculation has not been established by this scoped review; actual testing is not denied.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      },
+      "test_dates": {
+        "status": "NOT_REVIEWED",
+        "limitation": "Exact provider-specific start/end dates were not extracted or verified for this ledger.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      },
+      "predictive_check": {
+        "status": "NOT_IN_REVIEWED_SOURCES",
+        "limitation": "The reviewed sections do not supply the frozen baseline, rating augmentation and held-out customer outcomes required by this incremental-prediction test. This is not a claim about all unpublished or linked material.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      }
+    },
+    "Nebius": {
+      "medal": "Platinum",
+      "transcription_basis": "Supplied release graphic, cross-checked with announcement where named.",
+      "scope": {
+        "status": "PARTIAL",
+        "value": "Managed clusters; excludes standalone bare-metal offers and managed inference endpoints.",
+        "limitation": "Global scope is supplied. This ledger has not normalized the exact service, region and SKU for this provider.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      },
+      "observation_conditions": {
+        "status": "PARTIAL",
+        "value": "The published protocol requests multi-node allocations, testing time and monitoring, and describes coordination with providers.",
+        "limitation": "This records the general test protocol, not ordinary-account/support equivalence for this provider.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      },
+      "evidence": {
+        "status": "PARTIAL",
+        "value": "The article describes audit, workload-performance, burn-in and fault-recovery testing plus customer interviews.",
+        "limitation": "A reproducible provider-specific evidence-to-medal calculation has not been established by this scoped review; actual testing is not denied.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      },
+      "test_dates": {
+        "status": "NOT_REVIEWED",
+        "limitation": "Exact provider-specific start/end dates were not extracted or verified for this ledger.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      },
+      "predictive_check": {
+        "status": "NOT_IN_REVIEWED_SOURCES",
+        "limitation": "The reviewed sections do not supply the frozen baseline, rating augmentation and held-out customer outcomes required by this incremental-prediction test. This is not a claim about all unpublished or linked material.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      }
+    },
+    "Oracle": {
+      "medal": "Gold",
+      "transcription_basis": "Supplied release graphic, cross-checked with announcement where named.",
+      "scope": {
+        "status": "PARTIAL",
+        "value": "Managed clusters; excludes standalone bare-metal offers and managed inference endpoints.",
+        "limitation": "Global scope is supplied. This ledger has not normalized the exact service, region and SKU for this provider.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      },
+      "observation_conditions": {
+        "status": "PARTIAL",
+        "value": "The published protocol requests multi-node allocations, testing time and monitoring, and describes coordination with providers.",
+        "limitation": "This records the general test protocol, not ordinary-account/support equivalence for this provider.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      },
+      "evidence": {
+        "status": "PARTIAL",
+        "value": "The article describes audit, workload-performance, burn-in and fault-recovery testing plus customer interviews.",
+        "limitation": "A reproducible provider-specific evidence-to-medal calculation has not been established by this scoped review; actual testing is not denied.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      },
+      "test_dates": {
+        "status": "NOT_REVIEWED",
+        "limitation": "Exact provider-specific start/end dates were not extracted or verified for this ledger.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      },
+      "predictive_check": {
+        "status": "NOT_IN_REVIEWED_SOURCES",
+        "limitation": "The reviewed sections do not supply the frozen baseline, rating augmentation and held-out customer outcomes required by this incremental-prediction test. This is not a claim about all unpublished or linked material.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      }
+    },
+    "Google Cloud": {
+      "medal": "Gold",
+      "transcription_basis": "Supplied release graphic, cross-checked with announcement where named.",
+      "scope": {
+        "status": "PARTIAL",
+        "value": "Managed clusters; excludes standalone bare-metal offers and managed inference endpoints.",
+        "limitation": "Global scope is supplied. This ledger has not normalized the exact service, region and SKU for this provider.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      },
+      "observation_conditions": {
+        "status": "PARTIAL",
+        "value": "The published protocol requests multi-node allocations, testing time and monitoring, and describes coordination with providers.",
+        "limitation": "This records the general test protocol, not ordinary-account/support equivalence for this provider.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      },
+      "evidence": {
+        "status": "PARTIAL",
+        "value": "The article describes audit, workload-performance, burn-in and fault-recovery testing plus customer interviews.",
+        "limitation": "A reproducible provider-specific evidence-to-medal calculation has not been established by this scoped review; actual testing is not denied.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      },
+      "test_dates": {
+        "status": "NOT_REVIEWED",
+        "limitation": "Exact provider-specific start/end dates were not extracted or verified for this ledger.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      },
+      "predictive_check": {
+        "status": "NOT_IN_REVIEWED_SOURCES",
+        "limitation": "The reviewed sections do not supply the frozen baseline, rating augmentation and held-out customer outcomes required by this incremental-prediction test. This is not a claim about all unpublished or linked material.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      }
+    },
+    "Azure": {
+      "medal": "Silver",
+      "transcription_basis": "Supplied release graphic, cross-checked with announcement where named.",
+      "scope": {
+        "status": "PARTIAL",
+        "value": "Managed clusters; excludes standalone bare-metal offers and managed inference endpoints.",
+        "limitation": "Global scope is supplied. This ledger has not normalized the exact service, region and SKU for this provider.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      },
+      "observation_conditions": {
+        "status": "PARTIAL",
+        "value": "The published protocol requests multi-node allocations, testing time and monitoring, and describes coordination with providers.",
+        "limitation": "This records the general test protocol, not ordinary-account/support equivalence for this provider.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      },
+      "evidence": {
+        "status": "PARTIAL",
+        "value": "The article describes audit, workload-performance, burn-in and fault-recovery testing plus customer interviews.",
+        "limitation": "A reproducible provider-specific evidence-to-medal calculation has not been established by this scoped review; actual testing is not denied.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      },
+      "test_dates": {
+        "status": "NOT_REVIEWED",
+        "limitation": "Exact provider-specific start/end dates were not extracted or verified for this ledger.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      },
+      "predictive_check": {
+        "status": "NOT_IN_REVIEWED_SOURCES",
+        "limitation": "The reviewed sections do not supply the frozen baseline, rating augmentation and held-out customer outcomes required by this incremental-prediction test. This is not a claim about all unpublished or linked material.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      }
+    },
+    "Lambda": {
+      "medal": "Silver",
+      "transcription_basis": "Supplied release graphic, cross-checked with announcement where named.",
+      "scope": {
+        "status": "PARTIAL",
+        "value": "Managed clusters; excludes standalone bare-metal offers and managed inference endpoints.",
+        "limitation": "Global scope is supplied. This ledger has not normalized the exact service, region and SKU for this provider.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      },
+      "observation_conditions": {
+        "status": "PARTIAL",
+        "value": "The published protocol requests multi-node allocations, testing time and monitoring, and describes coordination with providers.",
+        "limitation": "This records the general test protocol, not ordinary-account/support equivalence for this provider.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      },
+      "evidence": {
+        "status": "PARTIAL",
+        "value": "The article describes audit, workload-performance, burn-in and fault-recovery testing plus customer interviews.",
+        "limitation": "A reproducible provider-specific evidence-to-medal calculation has not been established by this scoped review; actual testing is not denied.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      },
+      "test_dates": {
+        "status": "NOT_REVIEWED",
+        "limitation": "Exact provider-specific start/end dates were not extracted or verified for this ledger.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      },
+      "predictive_check": {
+        "status": "NOT_IN_REVIEWED_SOURCES",
+        "limitation": "The reviewed sections do not supply the frozen baseline, rating augmentation and held-out customer outcomes required by this incremental-prediction test. This is not a claim about all unpublished or linked material.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      }
+    },
+    "Firmus": {
+      "medal": "Silver",
+      "transcription_basis": "Supplied release graphic, cross-checked with announcement where named.",
+      "scope": {
+        "status": "PARTIAL",
+        "value": "Managed clusters; excludes standalone bare-metal offers and managed inference endpoints.",
+        "limitation": "Global scope is supplied. This ledger has not normalized the exact service, region and SKU for this provider.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      },
+      "observation_conditions": {
+        "status": "PARTIAL",
+        "value": "The published protocol requests multi-node allocations, testing time and monitoring, and describes coordination with providers.",
+        "limitation": "This records the general test protocol, not ordinary-account/support equivalence for this provider.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      },
+      "evidence": {
+        "status": "PARTIAL",
+        "value": "The article describes audit, workload-performance, burn-in and fault-recovery testing plus customer interviews.",
+        "limitation": "A reproducible provider-specific evidence-to-medal calculation has not been established by this scoped review; actual testing is not denied.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      },
+      "test_dates": {
+        "status": "NOT_REVIEWED",
+        "limitation": "Exact provider-specific start/end dates were not extracted or verified for this ledger.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      },
+      "predictive_check": {
+        "status": "NOT_IN_REVIEWED_SOURCES",
+        "limitation": "The reviewed sections do not supply the frozen baseline, rating augmentation and held-out customer outcomes required by this incremental-prediction test. This is not a claim about all unpublished or linked material.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      }
+    },
+    "TensorWave": {
+      "medal": "Silver",
+      "transcription_basis": "Supplied release graphic, cross-checked with announcement where named.",
+      "scope": {
+        "status": "PARTIAL",
+        "value": "Managed clusters; excludes standalone bare-metal offers and managed inference endpoints.",
+        "limitation": "Global scope is supplied. This ledger has not normalized the exact service, region and SKU for this provider.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      },
+      "observation_conditions": {
+        "status": "PARTIAL",
+        "value": "The published protocol requests multi-node allocations, testing time and monitoring, and describes coordination with providers.",
+        "limitation": "This records the general test protocol, not ordinary-account/support equivalence for this provider.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      },
+      "evidence": {
+        "status": "PARTIAL",
+        "value": "The article describes audit, workload-performance, burn-in and fault-recovery testing plus customer interviews.",
+        "limitation": "A reproducible provider-specific evidence-to-medal calculation has not been established by this scoped review; actual testing is not denied.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      },
+      "test_dates": {
+        "status": "NOT_REVIEWED",
+        "limitation": "Exact provider-specific start/end dates were not extracted or verified for this ledger.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      },
+      "predictive_check": {
+        "status": "NOT_IN_REVIEWED_SOURCES",
+        "limitation": "The reviewed sections do not supply the frozen baseline, rating augmentation and held-out customer outcomes required by this incremental-prediction test. This is not a claim about all unpublished or linked material.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      }
+    },
+    "GMI": {
+      "medal": "Silver",
+      "transcription_basis": "Supplied release graphic, cross-checked with announcement where named.",
+      "scope": {
+        "status": "PARTIAL",
+        "value": "Managed clusters; excludes standalone bare-metal offers and managed inference endpoints.",
+        "limitation": "Global scope is supplied. This ledger has not normalized the exact service, region and SKU for this provider.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      },
+      "observation_conditions": {
+        "status": "PARTIAL",
+        "value": "The published protocol requests multi-node allocations, testing time and monitoring, and describes coordination with providers.",
+        "limitation": "This records the general test protocol, not ordinary-account/support equivalence for this provider.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      },
+      "evidence": {
+        "status": "PARTIAL",
+        "value": "The article describes audit, workload-performance, burn-in and fault-recovery testing plus customer interviews.",
+        "limitation": "A reproducible provider-specific evidence-to-medal calculation has not been established by this scoped review; actual testing is not denied.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      },
+      "test_dates": {
+        "status": "NOT_REVIEWED",
+        "limitation": "Exact provider-specific start/end dates were not extracted or verified for this ledger.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      },
+      "predictive_check": {
+        "status": "NOT_IN_REVIEWED_SOURCES",
+        "limitation": "The reviewed sections do not supply the frozen baseline, rating augmentation and held-out customer outcomes required by this incremental-prediction test. This is not a claim about all unpublished or linked material.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      }
+    },
+    "Crusoe": {
+      "medal": "Bronze",
+      "transcription_basis": "Supplied release graphic, cross-checked with announcement where named.",
+      "scope": {
+        "status": "PARTIAL",
+        "value": "Managed clusters; excludes standalone bare-metal offers and managed inference endpoints.",
+        "limitation": "Global scope is supplied. This ledger has not normalized the exact service, region and SKU for this provider.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      },
+      "observation_conditions": {
+        "status": "PARTIAL",
+        "value": "The published protocol requests multi-node allocations, testing time and monitoring, and describes coordination with providers.",
+        "limitation": "This records the general test protocol, not ordinary-account/support equivalence for this provider.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      },
+      "evidence": {
+        "status": "PARTIAL",
+        "value": "The article describes audit, workload-performance, burn-in and fault-recovery testing plus customer interviews.",
+        "limitation": "A reproducible provider-specific evidence-to-medal calculation has not been established by this scoped review; actual testing is not denied.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      },
+      "test_dates": {
+        "status": "NOT_REVIEWED",
+        "limitation": "Exact provider-specific start/end dates were not extracted or verified for this ledger.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      },
+      "predictive_check": {
+        "status": "NOT_IN_REVIEWED_SOURCES",
+        "limitation": "The reviewed sections do not supply the frozen baseline, rating augmentation and held-out customer outcomes required by this incremental-prediction test. This is not a claim about all unpublished or linked material.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      }
+    },
+    "Hyperstack": {
+      "medal": "Bronze",
+      "transcription_basis": "Supplied release graphic, cross-checked with announcement where named.",
+      "scope": {
+        "status": "PARTIAL",
+        "value": "Managed clusters; excludes standalone bare-metal offers and managed inference endpoints.",
+        "limitation": "Global scope is supplied. This ledger has not normalized the exact service, region and SKU for this provider.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      },
+      "observation_conditions": {
+        "status": "PARTIAL",
+        "value": "The published protocol requests multi-node allocations, testing time and monitoring, and describes coordination with providers.",
+        "limitation": "This records the general test protocol, not ordinary-account/support equivalence for this provider.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      },
+      "evidence": {
+        "status": "PARTIAL",
+        "value": "The article describes audit, workload-performance, burn-in and fault-recovery testing plus customer interviews.",
+        "limitation": "A reproducible provider-specific evidence-to-medal calculation has not been established by this scoped review; actual testing is not denied.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      },
+      "test_dates": {
+        "status": "NOT_REVIEWED",
+        "limitation": "Exact provider-specific start/end dates were not extracted or verified for this ledger.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      },
+      "predictive_check": {
+        "status": "NOT_IN_REVIEWED_SOURCES",
+        "limitation": "The reviewed sections do not supply the frozen baseline, rating augmentation and held-out customer outcomes required by this incremental-prediction test. This is not a claim about all unpublished or linked material.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      }
+    },
+    "DigitalOcean": {
+      "medal": "Bronze",
+      "transcription_basis": "Supplied release graphic, cross-checked with announcement where named.",
+      "scope": {
+        "status": "PARTIAL",
+        "value": "Managed clusters; excludes standalone bare-metal offers and managed inference endpoints.",
+        "limitation": "Global scope is supplied. This ledger has not normalized the exact service, region and SKU for this provider.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      },
+      "observation_conditions": {
+        "status": "PARTIAL",
+        "value": "The published protocol requests multi-node allocations, testing time and monitoring, and describes coordination with providers.",
+        "limitation": "This records the general test protocol, not ordinary-account/support equivalence for this provider.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      },
+      "evidence": {
+        "status": "PARTIAL",
+        "value": "The article describes audit, workload-performance, burn-in and fault-recovery testing plus customer interviews.",
+        "limitation": "A reproducible provider-specific evidence-to-medal calculation has not been established by this scoped review; actual testing is not denied.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      },
+      "test_dates": {
+        "status": "NOT_REVIEWED",
+        "limitation": "Exact provider-specific start/end dates were not extracted or verified for this ledger.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      },
+      "predictive_check": {
+        "status": "NOT_IN_REVIEWED_SOURCES",
+        "limitation": "The reviewed sections do not supply the frozen baseline, rating augmentation and held-out customer outcomes required by this incremental-prediction test. This is not a claim about all unpublished or linked material.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      }
+    },
+    "Vultr": {
+      "medal": "Participation Ribbon",
+      "transcription_basis": "Supplied release graphic, cross-checked with announcement where named.",
+      "scope": {
+        "status": "PARTIAL",
+        "value": "Managed clusters; excludes standalone bare-metal offers and managed inference endpoints.",
+        "limitation": "Global scope is supplied. This ledger has not normalized the exact service, region and SKU for this provider.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      },
+      "observation_conditions": {
+        "status": "PARTIAL",
+        "value": "The published protocol requests multi-node allocations, testing time and monitoring, and describes coordination with providers.",
+        "limitation": "This records the general test protocol, not ordinary-account/support equivalence for this provider.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      },
+      "evidence": {
+        "status": "PARTIAL",
+        "value": "The article describes audit, workload-performance, burn-in and fault-recovery testing plus customer interviews.",
+        "limitation": "A reproducible provider-specific evidence-to-medal calculation has not been established by this scoped review; actual testing is not denied.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      },
+      "test_dates": {
+        "status": "NOT_REVIEWED",
+        "limitation": "Exact provider-specific start/end dates were not extracted or verified for this ledger.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      },
+      "predictive_check": {
+        "status": "NOT_IN_REVIEWED_SOURCES",
+        "limitation": "The reviewed sections do not supply the frozen baseline, rating augmentation and held-out customer outcomes required by this incremental-prediction test. This is not a claim about all unpublished or linked material.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      }
+    },
+    "Runpod": {
+      "medal": "Participation Ribbon",
+      "transcription_basis": "Supplied release graphic, cross-checked with announcement where named.",
+      "scope": {
+        "status": "PARTIAL",
+        "value": "Managed clusters; excludes standalone bare-metal offers and managed inference endpoints.",
+        "limitation": "Global scope is supplied. This ledger has not normalized the exact service, region and SKU for this provider.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      },
+      "observation_conditions": {
+        "status": "PARTIAL",
+        "value": "The published protocol requests multi-node allocations, testing time and monitoring, and describes coordination with providers.",
+        "limitation": "This records the general test protocol, not ordinary-account/support equivalence for this provider.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      },
+      "evidence": {
+        "status": "PARTIAL",
+        "value": "The article describes audit, workload-performance, burn-in and fault-recovery testing plus customer interviews.",
+        "limitation": "A reproducible provider-specific evidence-to-medal calculation has not been established by this scoped review; actual testing is not denied.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      },
+      "test_dates": {
+        "status": "NOT_REVIEWED",
+        "limitation": "Exact provider-specific start/end dates were not extracted or verified for this ledger.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      },
+      "predictive_check": {
+        "status": "NOT_IN_REVIEWED_SOURCES",
+        "limitation": "The reviewed sections do not supply the frozen baseline, rating augmentation and held-out customer outcomes required by this incremental-prediction test. This is not a claim about all unpublished or linked material.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      }
+    },
+    "Fluidstack": {
+      "medal": "Unavailable",
+      "transcription_basis": "Supplied release graphic, cross-checked with announcement where named.",
+      "scope": {
+        "status": "PARTIAL",
+        "value": "Unavailable is a reported assessment/availability state.",
+        "limitation": "No ordinal quality score or failed customer job is inferred from this label.",
+        "source": {
+          "url": "https://x.com/JordanNanos/status/2102871532267847699",
+          "sha256": "482d21c1ce41d4b4dc855700e2f82bc7bcd19d4cbf9b51a1c219c6a09bf3ee21",
+          "retrieved_utc": "2026-09-23T21:54:17.177068+00:00"
+        }
+      },
+      "observation_conditions": {
+        "status": "PARTIAL",
+        "value": "The published protocol requests multi-node allocations, testing time and monitoring, and describes coordination with providers.",
+        "limitation": "This records the general test protocol, not ordinary-account/support equivalence for this provider.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      },
+      "evidence": {
+        "status": "PARTIAL",
+        "value": "The article describes audit, workload-performance, burn-in and fault-recovery testing plus customer interviews.",
+        "limitation": "A reproducible provider-specific evidence-to-medal calculation has not been established by this scoped review; actual testing is not denied.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      },
+      "test_dates": {
+        "status": "NOT_REVIEWED",
+        "limitation": "Exact provider-specific start/end dates were not extracted or verified for this ledger.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      },
+      "predictive_check": {
+        "status": "NOT_IN_REVIEWED_SOURCES",
+        "limitation": "The reviewed sections do not supply the frozen baseline, rating augmentation and held-out customer outcomes required by this incremental-prediction test. This is not a claim about all unpublished or linked material.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      }
+    },
+    "Scaleway": {
+      "medal": "Unavailable",
+      "transcription_basis": "Supplied release graphic, cross-checked with announcement where named.",
+      "scope": {
+        "status": "PARTIAL",
+        "value": "Unavailable is a reported assessment/availability state.",
+        "limitation": "No ordinal quality score or failed customer job is inferred from this label.",
+        "source": {
+          "url": "https://x.com/JordanNanos/status/2102871532267847699",
+          "sha256": "482d21c1ce41d4b4dc855700e2f82bc7bcd19d4cbf9b51a1c219c6a09bf3ee21",
+          "retrieved_utc": "2026-09-23T21:54:17.177068+00:00"
+        }
+      },
+      "observation_conditions": {
+        "status": "PARTIAL",
+        "value": "The published protocol requests multi-node allocations, testing time and monitoring, and describes coordination with providers.",
+        "limitation": "This records the general test protocol, not ordinary-account/support equivalence for this provider.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      },
+      "evidence": {
+        "status": "PARTIAL",
+        "value": "The article describes audit, workload-performance, burn-in and fault-recovery testing plus customer interviews.",
+        "limitation": "A reproducible provider-specific evidence-to-medal calculation has not been established by this scoped review; actual testing is not denied.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      },
+      "test_dates": {
+        "status": "NOT_REVIEWED",
+        "limitation": "Exact provider-specific start/end dates were not extracted or verified for this ledger.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      },
+      "predictive_check": {
+        "status": "NOT_IN_REVIEWED_SOURCES",
+        "limitation": "The reviewed sections do not supply the frozen baseline, rating augmentation and held-out customer outcomes required by this incremental-prediction test. This is not a claim about all unpublished or linked material.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      }
+    },
+    "OVHcloud": {
+      "medal": "Underperforming",
+      "transcription_basis": "Supplied release graphic, cross-checked with announcement where named.",
+      "scope": {
+        "status": "PARTIAL",
+        "value": "Managed clusters; excludes standalone bare-metal offers and managed inference endpoints.",
+        "limitation": "Global scope is supplied. This ledger has not normalized the exact service, region and SKU for this provider.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      },
+      "observation_conditions": {
+        "status": "PARTIAL",
+        "value": "The published protocol requests multi-node allocations, testing time and monitoring, and describes coordination with providers.",
+        "limitation": "This records the general test protocol, not ordinary-account/support equivalence for this provider.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      },
+      "evidence": {
+        "status": "PARTIAL",
+        "value": "The article describes audit, workload-performance, burn-in and fault-recovery testing plus customer interviews.",
+        "limitation": "A reproducible provider-specific evidence-to-medal calculation has not been established by this scoped review; actual testing is not denied.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      },
+      "test_dates": {
+        "status": "NOT_REVIEWED",
+        "limitation": "Exact provider-specific start/end dates were not extracted or verified for this ledger.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      },
+      "predictive_check": {
+        "status": "NOT_IN_REVIEWED_SOURCES",
+        "limitation": "The reviewed sections do not supply the frozen baseline, rating augmentation and held-out customer outcomes required by this incremental-prediction test. This is not a claim about all unpublished or linked material.",
+        "source": {
+          "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+          "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+          "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+        }
+      }
+    }
+  },
+  "supplied_graphic_sha256": "f082cdb91a7662c1493e9b9e1f78d4eba2955c26c47af6ef034d19475ab46777",
+  "methodology_source": {
+    "url": "https://newsletter.semianalysis.com/p/clustermax-30-the-industry-standard",
+    "sha256": "e3f5f2188d98f4ed8ef0b3721e1b7921e49221f992f4dc415ac417b1e16141e5",
+    "retrieved_utc": "2026-09-23T21:54:18.241245+00:00"
+  },
+  "rubric_source": {
+    "url": "https://www.clustermax.ai/criteria",
+    "sha256": "fa8f19c82d6faca1b6f9c9c10e652dbde45a431166bb47c231a7ba5650bb281a",
+    "retrieved_utc": "2026-09-29T18:29:02Z",
+    "pages": [
+      {
+        "url": "https://www.clustermax.ai/criteria",
+        "sha256": "fa8f19c82d6faca1b6f9c9c10e652dbde45a431166bb47c231a7ba5650bb281a",
+        "retrieved_utc": "2026-09-29T18:29:02Z",
+        "bytes": 47405,
+        "capture_file": "sessions/clustermax-cloudreview-20260929/raw/criteria.html"
+      },
+      {
+        "url": "https://www.clustermax.ai/criteria/security",
+        "sha256": "a54ec4bc293d8082657c4846ecec22cc9546828d0bbc0f8835baf8c6396bf566",
+        "retrieved_utc": "2026-09-29T18:30:57Z",
+        "bytes": 74283,
+        "capture_file": "sessions/clustermax-cloudreview-20260929/raw/criteria_security.html"
+      },
+      {
+        "url": "https://www.clustermax.ai/criteria/lifecycle",
+        "sha256": "406757db1d0d3a7df1168980d219c705b600dcf29cfa76256708dd29a15c0bb2",
+        "retrieved_utc": "2026-09-29T18:30:58Z",
+        "bytes": 56559,
+        "capture_file": "sessions/clustermax-cloudreview-20260929/raw/criteria_lifecycle.html"
+      },
+      {
+        "url": "https://www.clustermax.ai/criteria/orchestration",
+        "sha256": "786b7a7c47236c3ae2d0f50072c6e5b2588208bf408613a402dc5d279924a84c",
+        "retrieved_utc": "2026-09-29T18:30:59Z",
+        "bytes": 58059,
+        "capture_file": "sessions/clustermax-cloudreview-20260929/raw/criteria_orchestration.html"
+      },
+      {
+        "url": "https://www.clustermax.ai/criteria/storage",
+        "sha256": "004d9955bdbdfa20fb46d83050b448cccb4d704707d0c58de9ea3c00e6f0cb92",
+        "retrieved_utc": "2026-09-29T18:30:59Z",
+        "bytes": 57638,
+        "capture_file": "sessions/clustermax-cloudreview-20260929/raw/criteria_storage.html"
+      },
+      {
+        "url": "https://www.clustermax.ai/criteria/networking",
+        "sha256": "0aff08d945e8d968829922dabccec698ef49eaf32d3f767f6d29f1d432e0c48d",
+        "retrieved_utc": "2026-09-29T18:31:00Z",
+        "bytes": 55427,
+        "capture_file": "sessions/clustermax-cloudreview-20260929/raw/criteria_networking.html"
+      },
+      {
+        "url": "https://www.clustermax.ai/criteria/reliability",
+        "sha256": "7cef18d9776c4d3c92881a89701a5cdc022e85cfb073dd21b5c2db5611c0f1a7",
+        "retrieved_utc": "2026-09-29T18:31:01Z",
+        "bytes": 58503,
+        "capture_file": "sessions/clustermax-cloudreview-20260929/raw/criteria_reliability.html"
+      },
+      {
+        "url": "https://www.clustermax.ai/criteria/monitoring",
+        "sha256": "4d03e7c9c13940b4e6bcce7c68df60fd3e836ca0b22683ee7bfe2ef109eceddc",
+        "retrieved_utc": "2026-09-29T18:31:02Z",
+        "bytes": 58630,
+        "capture_file": "sessions/clustermax-cloudreview-20260929/raw/criteria_monitoring.html"
+      },
+      {
+        "url": "https://www.clustermax.ai/criteria/pricing",
+        "sha256": "f319859a53b68b527325c8443fa07516aa1ca4e446e975bb111071f5579e6382",
+        "retrieved_utc": "2026-09-29T18:31:03Z",
+        "bytes": 53788,
+        "capture_file": "sessions/clustermax-cloudreview-20260929/raw/criteria_pricing.html"
+      },
+      {
+        "url": "https://www.clustermax.ai/criteria/partnerships",
+        "sha256": "602bb34fdce1f30370b82d8ba444e42d474fc4543d774e1e05f37a08d7dbc969",
+        "retrieved_utc": "2026-09-29T18:31:04Z",
+        "bytes": 53751,
+        "capture_file": "sessions/clustermax-cloudreview-20260929/raw/criteria_partnerships.html"
+      },
+      {
+        "url": "https://www.clustermax.ai/criteria/availability",
+        "sha256": "58e04c5f7bd041b0eea5e6921ab73adb773900a5210d15fa8834786d54274c5d",
+        "retrieved_utc": "2026-09-29T18:31:05Z",
+        "bytes": 54386,
+        "capture_file": "sessions/clustermax-cloudreview-20260929/raw/criteria_availability.html"
+      }
+    ],
+    "note": "Live clustermax.ai criteria pages (index plus the ten criterion pages) captured 2026-09-29. The site navigation marks 3.0 (Sep, 2026) as current, but the pages carry no rubric version of their own, and the 2026-09-23 copy of /criteria (sha256 20ecb458e7a8...) differs from this one. They are the site rubric as of the capture, not a version-stamped 3.0 rubric."
+  },
+  "binding_status": "RUBRIC_CAPTURED_2026-09-29: live criteria pages recorded; no plan exists yet, so no binding is bound to plan bytes and nothing is scored."
+}

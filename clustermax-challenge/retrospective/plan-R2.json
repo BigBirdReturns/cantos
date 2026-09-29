@@ -1,0 +1,78 @@
+{
+  "schema": "secondrun.retrospective-plan.v1",
+  "study_id": "R2-3.0-medals-vs-status-incidents",
+  "plan_md_sha256": "a8c93b65041ca8144a21cf4890d2f2724b58a9d91df260e364ec2d3ffc163bdd",
+  "runner_sha256": "5520aee90e2d675abf73c654aa5d78d2ab757f109cb8bcfd238031d5c8e182bd",
+  "provider_map_r2_file": "provider_map_R2.json",
+  "provider_map_r2_sha256": "da4b0f14e8a1cdc06631479fe08ec655d8a2f078e61ad51e47f16b540baa9953",
+  "frozen_at": "2026-09-29",
+  "ordinal": {
+    "Platinum": 6,
+    "Gold": 5,
+    "Silver": 4,
+    "Bronze": 3,
+    "Participation Ribbon": 2,
+    "Underperforming": 1
+  },
+  "excluded_tiers": [
+    "Unavailable",
+    "Not Present"
+  ],
+  "primary_release": "ClusterMAX 3.0",
+  "secondary_release": "ClusterMAX 2.0",
+  "ratings_files": {
+    "primary": "launch/release-3.0/clustermax-3.0.json",
+    "secondary": "retrospective/ratings/clustermax-2.0.json"
+  },
+  "ratings_sha256": {
+    "primary": "2be56fa1c95cec7491eb92777a97e772595d294eb24d865dba824a71facf32c4",
+    "secondary": "9b980bb111f0cb457b6fbe9e8158879e08c98489e33665453a96986cb3c6366c"
+  },
+  "window_days": 180,
+  "window_end_date": "2026-09-23",
+  "window_convention": "[window_end_date - window_days, window_end_date), UTC, start inclusive, end exclusive; same window for both rating sets",
+  "primary_measure": "major_or_critical_incident_count",
+  "secondary_measures": [
+    "all_incident_count",
+    "incident_hours"
+  ],
+  "bootstrap": {
+    "draws": 5000,
+    "seed": 20260929
+  },
+  "permutation": {
+    "exact_max_permutations": 500000,
+    "random_draws": 20000,
+    "stability_random_draws": 200000
+  },
+  "seed_robustness": {
+    "seeds": 200
+  },
+  "capped_feed_rule": {
+    "enabled": true,
+    "applies_to": "incident files whose coverage_start is null"
+  },
+  "minimum_providers": 8,
+  "excluded_by_design": [
+    "Hot Aisle"
+  ],
+  "sensitivities": [
+    "S1_leave_one_out",
+    "S2_permutation_exactness",
+    "S3_maintenance_mislabel",
+    "S4_bootstrap_seed_robustness",
+    "S5_strict_coverage",
+    "S6_critical_only"
+  ],
+  "incident_data_collected": true,
+  "analysis_run": false,
+  "ordering_disclosure": "Incident files were collected 2026-09-29 before this plan was written; per-provider counts were printed during collection. No correlation, interval or p-value was computed before the plan hash was recorded.",
+  "post_freeze_amendments": [
+    {
+      "date": "2026-09-29",
+      "what": "After the first R2 run, retrospective/incidents/crusoe.json was renamed crusoe-r2.json, provider_map_R2.json now maps Crusoe to crusoe-r2, run_r2.py was changed only to print these amendments as deviations, and R2 was re-run.",
+      "why": "The first run left a file named crusoe.json in incidents/, which scripts/retrospective.py (R1) reads by that name; a rerun of R1 would have admitted Crusoe and changed R1's frozen numbers (n 9 to 10) and failed tests/test_r1_sensitivity.py.",
+      "effect": "None on R2 numbers: the file bytes are unchanged and the R2 output was diffed against the first run (only the file path in input_hashes and this deviation entry differ). PLAN-R2.md is unchanged."
+    }
+  ]
+}

@@ -1,0 +1,2845 @@
+{
+  "schema": "secondrun.status-incidents.v1",
+  "provider": "crusoe",
+  "status_page_url": "https://status.crusoecloud.com",
+  "retrieved_utc": "2026-09-29T21:35:46Z",
+  "raw_files": [
+    {
+      "path": "retrospective/incidents/raw/crusoe/history-page-1.json",
+      "sha256": "b9db7e985bc9c1a3f05843ec172cba3d8a06094d94fa0c49a620d9570191a0cc",
+      "url": "https://status.crusoecloud.com/history.json?page=1"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/history-page-2.json",
+      "sha256": "b0172c15be6673a96b71417aa4d57ad4c6e2506e664e0d456e52f68a8a75ced7",
+      "url": "https://status.crusoecloud.com/history.json?page=2"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/history-page-3.json",
+      "sha256": "4663e7b246ed63232b7095c746de5c2bbe88292e9096082a91ad8e2af0f0725c",
+      "url": "https://status.crusoecloud.com/history.json?page=3"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/history-page-4.json",
+      "sha256": "0f0db02fcd55f935a14c5410f92a0217a79d9c4750908e5fec1fc5143e2d1631",
+      "url": "https://status.crusoecloud.com/history.json?page=4"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/history-page-5.json",
+      "sha256": "575bf6346963193caabc7382a591eec2bc57002598ed41d355c8323d63f7bbe7",
+      "url": "https://status.crusoecloud.com/history.json?page=5"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/history-page-6.json",
+      "sha256": "9b5f3a2a033f40901777cbedd643ee0c7cada063d8a2a55d0cdabb436e734a21",
+      "url": "https://status.crusoecloud.com/history.json?page=6"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/history-page-7.json",
+      "sha256": "8fbacb69e4c2d8827cb5ddcc2089cf08ba0aaed7bf847e50df3307983df08ea5",
+      "url": "https://status.crusoecloud.com/history.json?page=7"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-hp3xb537kdwy.json",
+      "sha256": "9ed14d586755b9e1ffae426dd03c02056804fa623ce6389419d7a283313df4e7",
+      "url": "https://status.crusoecloud.com/incidents/hp3xb537kdwy.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-6v47ydkb51vb.json",
+      "sha256": "af2c1263aa0ced2ed884f7853c938af5aef37314d29d8d090150572f2c7f1459",
+      "url": "https://status.crusoecloud.com/incidents/6v47ydkb51vb.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-vt68s4257thf.json",
+      "sha256": "30a5fae7a610056faf463795f5b1e075442aca2b21541b5c5415a9ffc0a37596",
+      "url": "https://status.crusoecloud.com/incidents/vt68s4257thf.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-2y0ry4z39vws.json",
+      "sha256": "d4bfc6219cb19547d97fa0e8760ce4819c7af1aed2f93837472d743fd8286ca6",
+      "url": "https://status.crusoecloud.com/incidents/2y0ry4z39vws.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-36nsx98m5dvb.json",
+      "sha256": "6ab1805029739fe166b7db231af535e14147c454ff8b51c22c20080d103cadde",
+      "url": "https://status.crusoecloud.com/incidents/36nsx98m5dvb.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-zh45vw5x4q9b.json",
+      "sha256": "fd3f2f3f9e077982cfc4006f4e701bede40161dbc57efac1681e18f7a3d7e5e3",
+      "url": "https://status.crusoecloud.com/incidents/zh45vw5x4q9b.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-l514h0nnzw0m.json",
+      "sha256": "7cf314318453736cc2a75a7045a5d8095104b59b62caac9c00cef07e9ae2d283",
+      "url": "https://status.crusoecloud.com/incidents/l514h0nnzw0m.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-wpqn8z37z6dv.json",
+      "sha256": "2b427ae30ee39d18b4e80410fd935bd6ebf40dd83abc73d1957b3c5745154091",
+      "url": "https://status.crusoecloud.com/incidents/wpqn8z37z6dv.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-d2rw412xl5qn.json",
+      "sha256": "bb2a73ee13fb05ad08a57c0ea3d1e857a80d4a91f633611c413346e4ce49f3d5",
+      "url": "https://status.crusoecloud.com/incidents/d2rw412xl5qn.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-35p8fp16r0v8.json",
+      "sha256": "ff8eda0cabcbc943a9b4d342d4ebb3eafa08147b7b180a5358dd47a5f51ebf01",
+      "url": "https://status.crusoecloud.com/incidents/35p8fp16r0v8.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-blwtqlgqy2dl.json",
+      "sha256": "c269301f496b4c528b3d96215ef09dd1f46ad888f4433f24faea40186668ecde",
+      "url": "https://status.crusoecloud.com/incidents/blwtqlgqy2dl.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-nvbpwzkzvs53.json",
+      "sha256": "8ca17b1b5038fa0ca9dbc64e62a615c376b4a56d5ef0ef9017db68186e09476b",
+      "url": "https://status.crusoecloud.com/incidents/nvbpwzkzvs53.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-fp15n50ldt26.json",
+      "sha256": "59905efa61bbec1e858915b9767dfc0a1339d5479416c8292daed0e658d90ea4",
+      "url": "https://status.crusoecloud.com/incidents/fp15n50ldt26.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-8xld1j8nl2dt.json",
+      "sha256": "499d3e2fb0d181b0661d1961b1cc6a4a6e7feb04f5b648d4c8dde3d9191b39d4",
+      "url": "https://status.crusoecloud.com/incidents/8xld1j8nl2dt.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-z031x52kzl23.json",
+      "sha256": "3ec1240eedd74b741658782090647b406cef3753bad87e0c597e5907e5a87d96",
+      "url": "https://status.crusoecloud.com/incidents/z031x52kzl23.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-v0w7mghqj25m.json",
+      "sha256": "bc9f584a47b7bf71a7cc18f473081a468604bd598883da7260afcad43c5ece62",
+      "url": "https://status.crusoecloud.com/incidents/v0w7mghqj25m.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-q46mxq86933n.json",
+      "sha256": "3fe82f6d4c9ee7b6e374e5d49f848bb98be570aeb52251cf0dde73d67fed34f8",
+      "url": "https://status.crusoecloud.com/incidents/q46mxq86933n.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-kgsybd8tk13d.json",
+      "sha256": "a7182179631e9aec1782d9c7f93b8e5d1b4499ad76df9297f02aab94d577087e",
+      "url": "https://status.crusoecloud.com/incidents/kgsybd8tk13d.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-sscmddz0t2x6.json",
+      "sha256": "97c62e086269a636a1517fbf88ebeab4386c713154626f1b71241e0894b4459b",
+      "url": "https://status.crusoecloud.com/incidents/sscmddz0t2x6.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-5r8s3qdhtj5k.json",
+      "sha256": "010cc348e61612e165cc7e2bec956befa326e56901f8e1a88f409efd783161b5",
+      "url": "https://status.crusoecloud.com/incidents/5r8s3qdhtj5k.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-6qbl3q7pq80d.json",
+      "sha256": "6b5b005386d95103dbeb2cc1da0c3cf0137f9cef01f166f2414280eeb5ed9272",
+      "url": "https://status.crusoecloud.com/incidents/6qbl3q7pq80d.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-dw3tjw2w0ljf.json",
+      "sha256": "336fb98ef7f1c9c0e1b7f78a4bd7610ecf4fe6dd52de04d09aca37a8910fe988",
+      "url": "https://status.crusoecloud.com/incidents/dw3tjw2w0ljf.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-vxhhvxkb53qq.json",
+      "sha256": "eef92cdc79987d88f661507fe345f7a61ee50826dac0a84d1de9f9a38a89dd20",
+      "url": "https://status.crusoecloud.com/incidents/vxhhvxkb53qq.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-d9rnlzn5y6hl.json",
+      "sha256": "aee8b3f1028d8bfb5f6610bd8d7b6df25a1464a02b8f1bb4b9464fba8f3f092c",
+      "url": "https://status.crusoecloud.com/incidents/d9rnlzn5y6hl.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-38r8n1h43sqq.json",
+      "sha256": "7d5cbe11cc60b8d8595e260b9d23d1f403cfc21f2d887aa83622f81b3841aa1f",
+      "url": "https://status.crusoecloud.com/incidents/38r8n1h43sqq.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-699mkxnlk9hh.json",
+      "sha256": "c9db492a6fff1699750819f4bcc25ed36dcb979f40255d73afcdd33d7d0deff0",
+      "url": "https://status.crusoecloud.com/incidents/699mkxnlk9hh.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-25nsq7p3vhwq.json",
+      "sha256": "c1d41196a2573a538e368aa3302b3cf026606ff5ac2b91ca950af460872d6255",
+      "url": "https://status.crusoecloud.com/incidents/25nsq7p3vhwq.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-y4q9kg9031vp.json",
+      "sha256": "30672c20a0ff89fbd3ed4bce3e457f0ed229c1e9fa2afde2624af57b980a3cca",
+      "url": "https://status.crusoecloud.com/incidents/y4q9kg9031vp.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-ttbq53vkkzs0.json",
+      "sha256": "78c3107b36240b6f85096c4cd53f745c91eebe19ec1319d0d2984b1bb21299c3",
+      "url": "https://status.crusoecloud.com/incidents/ttbq53vkkzs0.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-xmsd9bn2ms0c.json",
+      "sha256": "ea2ed9f08a4ba3927a9a6bed5c1431e3e1283cb6b3f3ea164780551e1012794b",
+      "url": "https://status.crusoecloud.com/incidents/xmsd9bn2ms0c.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-d71m8vc4lmyd.json",
+      "sha256": "488b5d772dc724b2644749dbb79028964343db30e357413c2a436f1683e54a63",
+      "url": "https://status.crusoecloud.com/incidents/d71m8vc4lmyd.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-yqvc4v9yg07n.json",
+      "sha256": "6d7b1c3dedb481c929a5f3138572dae507b622ca06c69c45a571e4bd00997a86",
+      "url": "https://status.crusoecloud.com/incidents/yqvc4v9yg07n.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-lq1hws63ljf2.json",
+      "sha256": "16f40f5c5bba7bdc20eb4f7742a4ed8d047b0bdafdcfb56fda0f701774ddfb58",
+      "url": "https://status.crusoecloud.com/incidents/lq1hws63ljf2.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-r6glsqngybq3.json",
+      "sha256": "cb28d34170ebd4551b4ae1ce2b688a6a7065c52bd9b3f334b5475bca9597f0fa",
+      "url": "https://status.crusoecloud.com/incidents/r6glsqngybq3.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-tpx9bs95yxgt.json",
+      "sha256": "489ec21aca1305197b9eedd627ee8c5e00467c2517744bc98c67a07f1b338ac1",
+      "url": "https://status.crusoecloud.com/incidents/tpx9bs95yxgt.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-bljl8hm9xlcv.json",
+      "sha256": "6f6ee9c0eab3e9fbc74ebd2cf1e0298b1ca7dc59ceef30e929e5fc4de9864675",
+      "url": "https://status.crusoecloud.com/incidents/bljl8hm9xlcv.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-nchmzt610kb8.json",
+      "sha256": "6b08dca3a581105961251f3b30c45410650b0219b534f97f55b217c5834e0347",
+      "url": "https://status.crusoecloud.com/incidents/nchmzt610kb8.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-9pry9yynx7fp.json",
+      "sha256": "a8dcae433641a7d91ca0696dfee334e6cd156c9baa8271d8d1f216dd4d2d024b",
+      "url": "https://status.crusoecloud.com/incidents/9pry9yynx7fp.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-7t0j6fqd95bk.json",
+      "sha256": "df8bbc098993df7370da46ad44b787302f612a877ee3384b529177e7d8cf879a",
+      "url": "https://status.crusoecloud.com/incidents/7t0j6fqd95bk.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-9lp1h5q585jn.json",
+      "sha256": "ad2d14510fc6906ece1f522e9ad76f828e95d2322719f82f1051c10d22460fd1",
+      "url": "https://status.crusoecloud.com/incidents/9lp1h5q585jn.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-qs2z9jq2bxf7.json",
+      "sha256": "ebf2ec8236b67d7515247540fc7abd4d341da41cb43e621acd1d027881a1bc56",
+      "url": "https://status.crusoecloud.com/incidents/qs2z9jq2bxf7.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-h206kctdkknj.json",
+      "sha256": "e89350a407b8e9bbc65e384d21d1056eb95e9784c5d1d9b3289b6097369f2506",
+      "url": "https://status.crusoecloud.com/incidents/h206kctdkknj.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-46f1z8bbmjhx.json",
+      "sha256": "297f8b9a656040990734dc7cdbd6c03633166e771bd8cf959dc83638a7fcd0fb",
+      "url": "https://status.crusoecloud.com/incidents/46f1z8bbmjhx.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-62lzhf9lxmk8.json",
+      "sha256": "bb8a98d58843a521173428f7c98dfd4447b27bb94bcefcac14792788aa138358",
+      "url": "https://status.crusoecloud.com/incidents/62lzhf9lxmk8.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-xc2nybpm0kct.json",
+      "sha256": "58e913dc0a84e53ac7ceac89a8ac4434f734f57c36dc32a99a1ae04d4ab1f30a",
+      "url": "https://status.crusoecloud.com/incidents/xc2nybpm0kct.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-4rm9vr8lsj8h.json",
+      "sha256": "0347f41f047434223ceea30db6ada1269580d2e72d4340b2f65f17d1fc4df0b8",
+      "url": "https://status.crusoecloud.com/incidents/4rm9vr8lsj8h.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-bj6l20bfrpts.json",
+      "sha256": "922677ef6ba4bfee2d1121e68b2dd21d38da58f8d8f9de5c26ad57b8ab70cbe7",
+      "url": "https://status.crusoecloud.com/incidents/bj6l20bfrpts.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-ysr201gghnm0.json",
+      "sha256": "9ffbe2b9715ae25a121acc4def8db74cd4313f07f84fae6ca7292661bc95e18b",
+      "url": "https://status.crusoecloud.com/incidents/ysr201gghnm0.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-7l053kx5tmnh.json",
+      "sha256": "e51eca01b18102efda02a4abcdd0f69a636e3d6a5e292fd4064dcdc6b6ca8477",
+      "url": "https://status.crusoecloud.com/incidents/7l053kx5tmnh.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-ndtxyjjb2bd8.json",
+      "sha256": "54b2fa20ab91cf1ed17fcbd4b184087cd269119c76eb45a3b04515f0617659e1",
+      "url": "https://status.crusoecloud.com/incidents/ndtxyjjb2bd8.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-qsffb6gp8q80.json",
+      "sha256": "6268ff5acc49b666116be2458d5eaf7321309c7f713a999db279e97ed2dd6ae6",
+      "url": "https://status.crusoecloud.com/incidents/qsffb6gp8q80.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-tlkl24kwv8vt.json",
+      "sha256": "a1e22f289978a68843a6c23169a43d4b448994b01c7e78b472962d132078f448",
+      "url": "https://status.crusoecloud.com/incidents/tlkl24kwv8vt.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-3x4hhd9k744v.json",
+      "sha256": "5e63d404e9a93cb5c8d9b457fa220a5ab06ddd19144e687fb73fbafb97a59898",
+      "url": "https://status.crusoecloud.com/incidents/3x4hhd9k744v.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-5tdjqz963wkc.json",
+      "sha256": "9c03b9064e6f30639436b33f7c85e114fc715a74511f9fe2c9f8d263713d1e76",
+      "url": "https://status.crusoecloud.com/incidents/5tdjqz963wkc.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-ghpytqxpcp5n.json",
+      "sha256": "3278872d6a940aede0b0035a7bd8fa9106da384ea488d9f987ab777c99826522",
+      "url": "https://status.crusoecloud.com/incidents/ghpytqxpcp5n.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-bzt957445jfh.json",
+      "sha256": "1300a3c1aada6dad581ef40f2fc39a0d41e3b5ee68fc0ffbc63ed249e08370f4",
+      "url": "https://status.crusoecloud.com/incidents/bzt957445jfh.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-v9spn1rnl26q.json",
+      "sha256": "40a5c8286eec33666eaf6f09e2c370678ae85ca519249b7e05d26bcc92b552b0",
+      "url": "https://status.crusoecloud.com/incidents/v9spn1rnl26q.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-rmz6j87y7ddg.json",
+      "sha256": "0733ab634ef4cc6e2183c8f7e72a9186e38a1c9aed748987031bd42bd0839d29",
+      "url": "https://status.crusoecloud.com/incidents/rmz6j87y7ddg.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-z5lxkcnf431y.json",
+      "sha256": "bb0dcc27afe4e3913ba6509dc45b56da8355028122345b6ae7dbe5aa6333cb5e",
+      "url": "https://status.crusoecloud.com/incidents/z5lxkcnf431y.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-yn8dz4m1sjn7.json",
+      "sha256": "98a2f293a655f8e6f7c45b8f9034e6e3288d05e733c972cff8b9f8bd12dd39ff",
+      "url": "https://status.crusoecloud.com/incidents/yn8dz4m1sjn7.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-z6lplmqhc29f.json",
+      "sha256": "1f0895856996a270fa3a87cd800de7065e69f8a770dc9b5a77848641d77892c0",
+      "url": "https://status.crusoecloud.com/incidents/z6lplmqhc29f.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-j1n3rtc8bx1c.json",
+      "sha256": "543e62ad65d91e5db1741fe399d5380208e092164d3f8b3d7cd70d32be80e098",
+      "url": "https://status.crusoecloud.com/incidents/j1n3rtc8bx1c.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-zxb9zv8r6jyd.json",
+      "sha256": "243524c15cfcc65c2b32f280b39988977aa4fc2e0e815de28332d732a6adacd5",
+      "url": "https://status.crusoecloud.com/incidents/zxb9zv8r6jyd.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-m68by79yhd9b.json",
+      "sha256": "926a1218c2c7f479d056707b181fbf4cb46c36c38180d3eb9971c80e51f0372c",
+      "url": "https://status.crusoecloud.com/incidents/m68by79yhd9b.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-0k1pr34czv8r.json",
+      "sha256": "83bce3a3325e318308a43f10758560a8c9d465dc7588be6139e4b1debeb5ff7d",
+      "url": "https://status.crusoecloud.com/incidents/0k1pr34czv8r.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-8whhwpgyl06x.json",
+      "sha256": "aba9ba22db23748e5c073f9e00607781942e022b5056fd675ae8dde4be8ee6af",
+      "url": "https://status.crusoecloud.com/incidents/8whhwpgyl06x.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-1tng5nh63b1l.json",
+      "sha256": "369760669861e135b64930ba553a7240522bb2ddf4209a420aaa8a3b5e9d9937",
+      "url": "https://status.crusoecloud.com/incidents/1tng5nh63b1l.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-gbv8kv6tgy59.json",
+      "sha256": "bc83a39087bd91f5b7cbfa925a32fd6c5144a2a0ee98aa941f2761ef1298f7dc",
+      "url": "https://status.crusoecloud.com/incidents/gbv8kv6tgy59.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-3sfq00qtz4w1.json",
+      "sha256": "e11c33d8939963e6a9527368bb3492fd881d02cf5fd1ef2308e00afed168568d",
+      "url": "https://status.crusoecloud.com/incidents/3sfq00qtz4w1.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-t1wzyllk408h.json",
+      "sha256": "79a25787169502a0794e269947acb0a663aff7412f34df9ba66682327fc324a4",
+      "url": "https://status.crusoecloud.com/incidents/t1wzyllk408h.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-3zp27ztvb4x3.json",
+      "sha256": "7b15cae8e9f5a09a068fe1f5d0f9881044c4f88eacae44a9223dd1cc712dbfac",
+      "url": "https://status.crusoecloud.com/incidents/3zp27ztvb4x3.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-hnkt8cf6j910.json",
+      "sha256": "7a3785f3e39ced21c3c358f67fd01cdd6f7c8eb0273cbe5eb8233e6eef572af7",
+      "url": "https://status.crusoecloud.com/incidents/hnkt8cf6j910.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-rzjrgd2p7zph.json",
+      "sha256": "df71b3495fab343c8f7033ee7579d668fe22d36c79340445fbf396a5b3df73c9",
+      "url": "https://status.crusoecloud.com/incidents/rzjrgd2p7zph.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-hr7lnptrhhkr.json",
+      "sha256": "7a519d5a3f8b34c2e965535c5b293223168c0ba715408b8d56c0edbc8134c31b",
+      "url": "https://status.crusoecloud.com/incidents/hr7lnptrhhkr.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-j1gctj6gdn7q.json",
+      "sha256": "1259c449f68317e7c15cfb399b58fc9f9b24a3d2cacf02ea045b6d725788a0da",
+      "url": "https://status.crusoecloud.com/incidents/j1gctj6gdn7q.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-4gfzf75zfdzm.json",
+      "sha256": "bfae37810163d6a87403e72860a32f6d14c9e2c77636e41f774969a72633344a",
+      "url": "https://status.crusoecloud.com/incidents/4gfzf75zfdzm.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-58m98zbhkdlv.json",
+      "sha256": "923ca67079f6634f8c05559287855316e93d12017459af3c2f015932f5185495",
+      "url": "https://status.crusoecloud.com/incidents/58m98zbhkdlv.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-n8m1xc1mml0s.json",
+      "sha256": "ead5d0c400bdc494da409722593239c95403c150161f5a79f5740ece2921d30f",
+      "url": "https://status.crusoecloud.com/incidents/n8m1xc1mml0s.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-29kw5frp6by7.json",
+      "sha256": "c34201533bf0f4d7f8ae7e1747f5bd4f0479ff7e55673b5819904b7ef1441d4e",
+      "url": "https://status.crusoecloud.com/incidents/29kw5frp6by7.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-whxwgdf5p042.json",
+      "sha256": "e2e7c30bf535f0c0a2139a76087efe0d1d3270200ffeb148706e09288d11c4a2",
+      "url": "https://status.crusoecloud.com/incidents/whxwgdf5p042.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-hdgwrwzmgtx2.json",
+      "sha256": "8d675cc36d1a83ee3734ebddec75149fc924bcf3814b9f4a19dc30932aebf6d3",
+      "url": "https://status.crusoecloud.com/incidents/hdgwrwzmgtx2.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-vv174hvx8lkh.json",
+      "sha256": "6bc4e21f706c40165cd2da25f1ca5d06b1d790f8cb4d9e0a22364612fd01ec63",
+      "url": "https://status.crusoecloud.com/incidents/vv174hvx8lkh.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-kdjkknjw9p8j.json",
+      "sha256": "0ed19b757051140a15d0db5c6c2771cbc76e5fe79dc0b2c939529922dc01e7c1",
+      "url": "https://status.crusoecloud.com/incidents/kdjkknjw9p8j.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-9c15n4bx4s8p.json",
+      "sha256": "28ea3104ac190d54085682ffe2d8260f7333d4d4c9fe55b387387182d16aadfe",
+      "url": "https://status.crusoecloud.com/incidents/9c15n4bx4s8p.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-fxw4q7kpzdlg.json",
+      "sha256": "5d9ec73d89549fe39ec958ce71b47782e2f3c05fd0897fe6c135eb7abb10343b",
+      "url": "https://status.crusoecloud.com/incidents/fxw4q7kpzdlg.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-b4qr0k9y4h78.json",
+      "sha256": "1d4b5eaf4470b3deb22927e975059e3a519de900b2ebe1ad77c95810568342c1",
+      "url": "https://status.crusoecloud.com/incidents/b4qr0k9y4h78.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-0qc84q20cmm9.json",
+      "sha256": "f1427ef7e3d3b590947cbf2c40e26ef823bc9190bebcbed9812191381dcc07eb",
+      "url": "https://status.crusoecloud.com/incidents/0qc84q20cmm9.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-h1hwgt1vbx4r.json",
+      "sha256": "15ac09efdbc954d98ce7d44f41e5a4e33fb1e69c0ef08963de8f9e060f82d678",
+      "url": "https://status.crusoecloud.com/incidents/h1hwgt1vbx4r.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-s8hkkwxzhq8w.json",
+      "sha256": "e028ec4819bc2ef93840adf4ec01b546a5a5d5f4e4c8821aec1160e4f4e40313",
+      "url": "https://status.crusoecloud.com/incidents/s8hkkwxzhq8w.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-l5rdybq8czhz.json",
+      "sha256": "4eed0711431977218764232545162af8a74e7a76fb8a9c816a50ba3c1fa6165b",
+      "url": "https://status.crusoecloud.com/incidents/l5rdybq8czhz.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-vphl3k0b9j8d.json",
+      "sha256": "526c411a76b9ea20be3a68751520c88df4c14f54bdb28bcf359c52b8671dbbee",
+      "url": "https://status.crusoecloud.com/incidents/vphl3k0b9j8d.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-t3rtthz2zvtt.json",
+      "sha256": "36ba65521ab2ca2ae64d522ae90c2368f94e0eda96b63fd9949cb9d6366dd450",
+      "url": "https://status.crusoecloud.com/incidents/t3rtthz2zvtt.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-byy3jr22493p.json",
+      "sha256": "fa95c157c1b67495a7113b77de613746bd5579ae6123b6a4e4c7d29eec7d2bce",
+      "url": "https://status.crusoecloud.com/incidents/byy3jr22493p.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-qrqt6rgqh9jm.json",
+      "sha256": "8af3f12ce150f1bdbf36360dc66a5c44a727adfcaf5710d8302cdacab83d104f",
+      "url": "https://status.crusoecloud.com/incidents/qrqt6rgqh9jm.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-p0syht4mdj68.json",
+      "sha256": "17b6033d80d9b4c80845502d4b1579789bf7e6f466595297f7e7ce05b0e47367",
+      "url": "https://status.crusoecloud.com/incidents/p0syht4mdj68.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-4w8t6glf5xj1.json",
+      "sha256": "6a6f599ecb197b011f28f30544fb690a398af138ba8615f5fce2fe563bb8b6bc",
+      "url": "https://status.crusoecloud.com/incidents/4w8t6glf5xj1.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-60l0lkvfb8x5.json",
+      "sha256": "ec7ae28adcd07032cddfe04bfeed40f918bc569951a2b10ab6864e79b619b47f",
+      "url": "https://status.crusoecloud.com/incidents/60l0lkvfb8x5.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-n14cr5mqpy16.json",
+      "sha256": "cfea706359a7283a19ca0b9f3d5c5de067473c231c39f3805e57379c36943b84",
+      "url": "https://status.crusoecloud.com/incidents/n14cr5mqpy16.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-krmd5l0rsw4h.json",
+      "sha256": "8d38e369a925a32608a2fa9cd18c82235914e61ce129c1405965743b658c84bc",
+      "url": "https://status.crusoecloud.com/incidents/krmd5l0rsw4h.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-y8m15tm2wbs2.json",
+      "sha256": "79f330236351cf72e949258beefdb5e58a1f473eac74e4ec11f4f3401f84ed79",
+      "url": "https://status.crusoecloud.com/incidents/y8m15tm2wbs2.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-ly940gbf6ncz.json",
+      "sha256": "6581bfd815d762b99876f693c8e63a0139060096f2f5616b4cfd2bf68571c067",
+      "url": "https://status.crusoecloud.com/incidents/ly940gbf6ncz.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-5v3xw16dgm0h.json",
+      "sha256": "3879af1701c3812ea991773090a627c70aeca1777a2254f0b50cbb33bbb92ca9",
+      "url": "https://status.crusoecloud.com/incidents/5v3xw16dgm0h.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-d4b3tmgx3crl.json",
+      "sha256": "c4d8a98357ea38381b6f60c16073c5fd99d1ce433a0073f30ca96cbee7ddf10d",
+      "url": "https://status.crusoecloud.com/incidents/d4b3tmgx3crl.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-x7v17227v82f.json",
+      "sha256": "604678cb2bebb53dda6d4d61cc4b9c7ff83579f9fd15a21240f29cddbb689abe",
+      "url": "https://status.crusoecloud.com/incidents/x7v17227v82f.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-drd8g5dwp5ly.json",
+      "sha256": "d11aa60a1c7f817732188d58774421a1464f682bb2d4fe95f6ae11f561e6f570",
+      "url": "https://status.crusoecloud.com/incidents/drd8g5dwp5ly.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-ky1mq3kjps6t.json",
+      "sha256": "2a186aa38606c73f4a4089d3c2dcfd4a8e1101702a97d33bac804d01ea57cba9",
+      "url": "https://status.crusoecloud.com/incidents/ky1mq3kjps6t.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-r58lnn88fpyk.json",
+      "sha256": "98a008ea7c3eb4996367716de84adf0b8bf4413cfd270e08178c103e9f7e49ac",
+      "url": "https://status.crusoecloud.com/incidents/r58lnn88fpyk.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-wgj07syd8jf8.json",
+      "sha256": "b8e378e6364da6d1ae0ca0d5526b7721b62b942fb2a0690659528b42fa335d76",
+      "url": "https://status.crusoecloud.com/incidents/wgj07syd8jf8.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-nm5r6txctfby.json",
+      "sha256": "6d2f539746f62dc7ea6912e4c6485af81c761da0f7002aee6b4ceb74f150535e",
+      "url": "https://status.crusoecloud.com/incidents/nm5r6txctfby.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-jpjjw62spv47.json",
+      "sha256": "0053b818c5ab8fe7b737fff8656f645f2b2e856e1f33d58205fe78b783dd35fb",
+      "url": "https://status.crusoecloud.com/incidents/jpjjw62spv47.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-26c7bl97x8x3.json",
+      "sha256": "d46a942d9b837d20968a6c35a2b8f96eadec6cfe5a5cc04e2735b177069ef1c5",
+      "url": "https://status.crusoecloud.com/incidents/26c7bl97x8x3.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-myc88y3gmnp5.json",
+      "sha256": "032135260e217a2a108b12b5420f4460e7afa9c3fd61b117419cefde8ed492cd",
+      "url": "https://status.crusoecloud.com/incidents/myc88y3gmnp5.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-rtgjlm8gbnwk.json",
+      "sha256": "905370e49c04daf46849bd5610e3ab2ceb42ad894522873fb55b0aab69da7e9a",
+      "url": "https://status.crusoecloud.com/incidents/rtgjlm8gbnwk.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-p14jv16ltkwd.json",
+      "sha256": "3c99cc4197ceb5b6054de7ea5c13ed363cef829b72c687e752df49c88d7e572a",
+      "url": "https://status.crusoecloud.com/incidents/p14jv16ltkwd.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-kx0j6x015q0t.json",
+      "sha256": "0717b3370b0a4b40da80acda2e3e5632796800f7522be0ec4da182dcc6fda990",
+      "url": "https://status.crusoecloud.com/incidents/kx0j6x015q0t.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-m7j1rx783s1w.json",
+      "sha256": "dcafdf08346f63e286084e2b728fe7a2ec03fcc794284a5f0002a5568902ce70",
+      "url": "https://status.crusoecloud.com/incidents/m7j1rx783s1w.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-6zpyjrl5d0wf.json",
+      "sha256": "7adf57ff2c20d51e004e3c7586eb7306e425969645d3a587f308d3b479b79a1f",
+      "url": "https://status.crusoecloud.com/incidents/6zpyjrl5d0wf.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-gx3pf31ydr9y.json",
+      "sha256": "d727f164acad5161c1250a4c643672ffa1a3ae37d68775a03c4b10173387614b",
+      "url": "https://status.crusoecloud.com/incidents/gx3pf31ydr9y.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-j9rf0yk76lv0.json",
+      "sha256": "324440194c384323da70696c624700712c9580edd38ed29641efdbab2fce34ae",
+      "url": "https://status.crusoecloud.com/incidents/j9rf0yk76lv0.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-hmxkm1ph7wqb.json",
+      "sha256": "96f05857b8ee7bbdf30d84134a4cd33f05e4a9b19762acec3479da57a0725554",
+      "url": "https://status.crusoecloud.com/incidents/hmxkm1ph7wqb.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-nbk24f5lkpn3.json",
+      "sha256": "ce10b8906c81965f124531e2d0cf17b0aa08fcf012dc635872730cb2ed87fd06",
+      "url": "https://status.crusoecloud.com/incidents/nbk24f5lkpn3.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-f74s4t5y6vnt.json",
+      "sha256": "717bd2354f4a7302acf79d71d26dd8d10e6aebff0233408d457d29aafe93ae97",
+      "url": "https://status.crusoecloud.com/incidents/f74s4t5y6vnt.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-4dnqn1cjm75q.json",
+      "sha256": "9faf9f7853f0f68e6abc683edeb06439598acfa0d79857fe42f4674f637844c2",
+      "url": "https://status.crusoecloud.com/incidents/4dnqn1cjm75q.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-8sjd4dtkhdwl.json",
+      "sha256": "e5ff2bfb2cdb9871c7c7141d6c1bb102099041d0075203e5091bad90cf70fd1a",
+      "url": "https://status.crusoecloud.com/incidents/8sjd4dtkhdwl.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-l1c2w6vj1gny.json",
+      "sha256": "0dbdd90e8e9e9acd2cd02305ec1dfac7e4e87ddf35b690de1d3ba84a9a156c59",
+      "url": "https://status.crusoecloud.com/incidents/l1c2w6vj1gny.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-3z6ycldydhk2.json",
+      "sha256": "8531d806ece9fc0577adae0b5c0c948be0bf78f0f0525443b3baa1b584b33238",
+      "url": "https://status.crusoecloud.com/incidents/3z6ycldydhk2.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-q637xj1pf56m.json",
+      "sha256": "2274c80970cce250e87019bab5ea06c45542b05dd5e089886a249fdb2d3387a7",
+      "url": "https://status.crusoecloud.com/incidents/q637xj1pf56m.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-gljv5qb36y55.json",
+      "sha256": "b2c5e5c30c6f700cccd5fcbf114a65a4b29180cad6f9c0b5fd835254e5965703",
+      "url": "https://status.crusoecloud.com/incidents/gljv5qb36y55.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-4h3r5nxx8qgs.json",
+      "sha256": "b108944d716a6a04587bb100e5af05b4054c04d35845c903d99c8aeeaa408c61",
+      "url": "https://status.crusoecloud.com/incidents/4h3r5nxx8qgs.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-7nlj798hbyhr.json",
+      "sha256": "e81d25f5c09fae5a28800302c5f3a2dbfdd13cd7fd424b73fd90467ad7092ea0",
+      "url": "https://status.crusoecloud.com/incidents/7nlj798hbyhr.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-gt445j6gtn12.json",
+      "sha256": "81bde2d0305971dc212eeb6bbabe0b726f12acbe545d6dc80e02867a9feeaa21",
+      "url": "https://status.crusoecloud.com/incidents/gt445j6gtn12.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-2dft6wnk7pr8.json",
+      "sha256": "7ea00b3565ebe46687bfa68850ad03046482cd60e70e0e8a771c98af0f45a17c",
+      "url": "https://status.crusoecloud.com/incidents/2dft6wnk7pr8.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-ns73y3v0cdvw.json",
+      "sha256": "558e0fd7f4400a028f4058e2cde20c5152b2bc423d50ecb60ec6e3713535d28a",
+      "url": "https://status.crusoecloud.com/incidents/ns73y3v0cdvw.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-1znr9w4spzfk.json",
+      "sha256": "7a839dc7718ab9a7d4bb86fb3fafc4b044d5ccbcd8714135c93dd1d36a021784",
+      "url": "https://status.crusoecloud.com/incidents/1znr9w4spzfk.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-kfy9949j2z6w.json",
+      "sha256": "a337a8082b15aec2ae6918a3a51bb8db984783e6d17dfdde7b56a8594d805e4e",
+      "url": "https://status.crusoecloud.com/incidents/kfy9949j2z6w.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-krptdrr5mtkj.json",
+      "sha256": "6c737283eb68e068e5f3d2ad880d3bfeed369090eab4913c9bec2c252139e719",
+      "url": "https://status.crusoecloud.com/incidents/krptdrr5mtkj.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-x3myh7wpt2df.json",
+      "sha256": "a372d30fed1cd46b3c5bfbcc5b488c2f952fba8307ada2fe38e946f2222a72c7",
+      "url": "https://status.crusoecloud.com/incidents/x3myh7wpt2df.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-6r4ljpsvk9l9.json",
+      "sha256": "5093b4baac2b12243030ac58dfe878870e96d795090a721fb05fca2d980f99f8",
+      "url": "https://status.crusoecloud.com/incidents/6r4ljpsvk9l9.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-qkt6q61v4lbp.json",
+      "sha256": "7aea64612e2b9ce168d14991710a7a31f5ecfba338686f7b3e756e9267414bb1",
+      "url": "https://status.crusoecloud.com/incidents/qkt6q61v4lbp.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-v854lnrtc08r.json",
+      "sha256": "ad49505cc64f0669be02322393166a9ff6c4ca39361b3806288dc69b7bde3bf6",
+      "url": "https://status.crusoecloud.com/incidents/v854lnrtc08r.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-84g5ybspb7qj.json",
+      "sha256": "3706e6ab85c48cda3a091c0d1e828ccc77cf49bb762ad32c71adbb5fe0f0b721",
+      "url": "https://status.crusoecloud.com/incidents/84g5ybspb7qj.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-wxfnd52q3cr8.json",
+      "sha256": "41f285c0f28ddca633d381c63723848fa9c48024d529bb205ed7c9b355eda6ff",
+      "url": "https://status.crusoecloud.com/incidents/wxfnd52q3cr8.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-6841zb4zh4mw.json",
+      "sha256": "3c77f2e6377050193c17ac2ead89bac200ab443f5fa1ff3689cd689031fbc607",
+      "url": "https://status.crusoecloud.com/incidents/6841zb4zh4mw.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-ckkl0ldb9tqy.json",
+      "sha256": "f7300edfed8f5f69f5a4062db2b4a1bdec66e7afce9b4a86de00b04b2565e18e",
+      "url": "https://status.crusoecloud.com/incidents/ckkl0ldb9tqy.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-07dsmgqh6m1l.json",
+      "sha256": "1ca0f5f230248fe45a2a08779900a5339253f7826dcca2c27a6c4a7f3a5fe48c",
+      "url": "https://status.crusoecloud.com/incidents/07dsmgqh6m1l.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-s29pkgppxqmq.json",
+      "sha256": "ce7e15358c0316484b998e72f70a152faeb1f3c36148e965eb046e1e46a1e77e",
+      "url": "https://status.crusoecloud.com/incidents/s29pkgppxqmq.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-4xkddq74h2zs.json",
+      "sha256": "b91edc5862d0cb8b10791a460568e8b8b2d60c10878d1b342859a2220ab911a8",
+      "url": "https://status.crusoecloud.com/incidents/4xkddq74h2zs.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-p2njgjtqnw6d.json",
+      "sha256": "d6800f5c054d051a037c25909fc3b4459438d0654eb5cd07b10dc1994b7ad7f2",
+      "url": "https://status.crusoecloud.com/incidents/p2njgjtqnw6d.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-zq2sp7jr5fg0.json",
+      "sha256": "6b397d90b8b552895f52f1a27173f3b58b8dd1d1215a98adb5bcf16d0379e00e",
+      "url": "https://status.crusoecloud.com/incidents/zq2sp7jr5fg0.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-6h2t7h2zgm80.json",
+      "sha256": "c450539990345c51e67542ab57de61319b741fa86c9b4242d887d32affc9b021",
+      "url": "https://status.crusoecloud.com/incidents/6h2t7h2zgm80.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-j96jbxrw8nfh.json",
+      "sha256": "24fba9d1b7e9035425e2eb8baacd4f6a6d38f02253a72808e05a2e7a70047cb7",
+      "url": "https://status.crusoecloud.com/incidents/j96jbxrw8nfh.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-bxlc8dlf8lm3.json",
+      "sha256": "6c3e3c2055a141ca21079925b491e2aa7ffbf5dd7b81ef1760844533bf68ba01",
+      "url": "https://status.crusoecloud.com/incidents/bxlc8dlf8lm3.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-6wpb6nn3wptl.json",
+      "sha256": "986d8280a6e2eccdb24a1b417445b6f74f4d45f4ceae3c6444fe89a8fa763b46",
+      "url": "https://status.crusoecloud.com/incidents/6wpb6nn3wptl.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-zfxvk4tnk94t.json",
+      "sha256": "8952939ab001e989adcc2fdfb2b457cc0db2f383c9990e152a562b4cea2de5ac",
+      "url": "https://status.crusoecloud.com/incidents/zfxvk4tnk94t.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-5s4yfssl6xmz.json",
+      "sha256": "ad13704c65a780b334b36ba94c60511acaa6cbf742f556428ddce441ed2f928b",
+      "url": "https://status.crusoecloud.com/incidents/5s4yfssl6xmz.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-g2pwjz9n46f7.json",
+      "sha256": "616cd180966015379a94197eb83aa1b06530a11bfca82d3cbec3c34fce2759b1",
+      "url": "https://status.crusoecloud.com/incidents/g2pwjz9n46f7.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-pcdwrfxt140w.json",
+      "sha256": "6f2afb2d5350b722e15339b36a23759251858515b386d8ffeb2a8a1c903d6bf6",
+      "url": "https://status.crusoecloud.com/incidents/pcdwrfxt140w.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-fk5ygwb05ktx.json",
+      "sha256": "d7be4f078cb9ae1b521dd956775854a5c4d47a5418879e43349570d460f24acc",
+      "url": "https://status.crusoecloud.com/incidents/fk5ygwb05ktx.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-j78ht009k89c.json",
+      "sha256": "7b7a4cc6b1100d7c004bf43975db31dcedb1ee46464580474d747046a112c9ed",
+      "url": "https://status.crusoecloud.com/incidents/j78ht009k89c.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-lcgbgtcmdjb3.json",
+      "sha256": "4c4eabd7bb592676ec1d19658b64f3b536cb97bd989cf59d612d1bd9a9384734",
+      "url": "https://status.crusoecloud.com/incidents/lcgbgtcmdjb3.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-7wc0h0lwtyd5.json",
+      "sha256": "ff5a290c51dcf59afaeb25a4be1b63e0f5a4778514bac0ea7c732a85273aaac9",
+      "url": "https://status.crusoecloud.com/incidents/7wc0h0lwtyd5.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-xkfrndtp1p8d.json",
+      "sha256": "cb3d8f59ecf8f65bbab7837444456d4fe5033708f83c55f2a0058d80db5d0911",
+      "url": "https://status.crusoecloud.com/incidents/xkfrndtp1p8d.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-jjy0bvxntghs.json",
+      "sha256": "10a60372288bf12b3a22262aa1d510e25173c1f0cdc290258615dc18993265e1",
+      "url": "https://status.crusoecloud.com/incidents/jjy0bvxntghs.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-ws7vctnkwwhs.json",
+      "sha256": "d69310a94dc2f592a009f9d30922f08a263d01cddd03efb31908b7ab224c4188",
+      "url": "https://status.crusoecloud.com/incidents/ws7vctnkwwhs.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-410w0n50bvwv.json",
+      "sha256": "9aac749b647ca73111499913ae76380e004f6ac6358734f1c06dc612828ed8ea",
+      "url": "https://status.crusoecloud.com/incidents/410w0n50bvwv.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-3nn2k9hg1s83.json",
+      "sha256": "c07b7af64878fa2479dbd6230f77566af31778dc474adf206db13954b4f25878",
+      "url": "https://status.crusoecloud.com/incidents/3nn2k9hg1s83.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-10ypj5lxmjt7.json",
+      "sha256": "ba4ab80153b5990bd444357ffcaeba3ae82a315270b7f2bb69fe0d2d733d672a",
+      "url": "https://status.crusoecloud.com/incidents/10ypj5lxmjt7.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-4n5hl4zr9z1n.json",
+      "sha256": "6e6e7cbacc3910be6c54d910a7d758b5093472ecb7c10c4ddfb066f660c3e6eb",
+      "url": "https://status.crusoecloud.com/incidents/4n5hl4zr9z1n.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-9qhmhzpklfmh.json",
+      "sha256": "c6a364449e88abed245734016992e2461564df2f621eb43aadb8eacb9f003763",
+      "url": "https://status.crusoecloud.com/incidents/9qhmhzpklfmh.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-scvc8zlbnqnq.json",
+      "sha256": "6f225e510aaf09a0537429f20dd7ee2f9e9dd1857cf21dd0831ce9e1ec96c04a",
+      "url": "https://status.crusoecloud.com/incidents/scvc8zlbnqnq.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-bg3hxzjcwvl1.json",
+      "sha256": "496b35ef7a1111c1e8245ee84a28f31a1cf03948cba84a79c59a9ba94668b45b",
+      "url": "https://status.crusoecloud.com/incidents/bg3hxzjcwvl1.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-jnstbq1s2wgz.json",
+      "sha256": "f61e566dc9085e031ff2b553d28d4e56f32fe9bfaaefbb8afa7220c6de8a52ba",
+      "url": "https://status.crusoecloud.com/incidents/jnstbq1s2wgz.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-p5vf971n54nk.json",
+      "sha256": "871dbed3d7fda73eea881ca02c64beb70208240ab52ea394f6ca088f7f8cbb43",
+      "url": "https://status.crusoecloud.com/incidents/p5vf971n54nk.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-4d6dqtcbpkwk.json",
+      "sha256": "a9cf697dc4dcac770d47baaec96e453ec7e289177611751a854d121484896c61",
+      "url": "https://status.crusoecloud.com/incidents/4d6dqtcbpkwk.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-p6j9d7q987gd.json",
+      "sha256": "e7d53a18c57f1ef88824cb68375834adbec91468cb3bf9470a9bbf013b191511",
+      "url": "https://status.crusoecloud.com/incidents/p6j9d7q987gd.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-f0dt2r8y4s30.json",
+      "sha256": "2442d499183b0d4210990e90fd97a7edc156a09fb9f4fe900228fc92d48b240d",
+      "url": "https://status.crusoecloud.com/incidents/f0dt2r8y4s30.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-5z2qp3517gnt.json",
+      "sha256": "5a5f31f0488452cd5cc6e08a1ab6c453a3262da788fa1cd0a2f51c0a9f383baf",
+      "url": "https://status.crusoecloud.com/incidents/5z2qp3517gnt.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-x1s4ckpr1ywq.json",
+      "sha256": "0c7dafff0c6de43c9b86bd76a28a9f25d8963c63d0aa6edb8f83d6d937bb8d6e",
+      "url": "https://status.crusoecloud.com/incidents/x1s4ckpr1ywq.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-wmhsb428slgx.json",
+      "sha256": "3ea38c87bb587dd1daa13ddc8c9dbfe449078add140482f8069ee459424996b5",
+      "url": "https://status.crusoecloud.com/incidents/wmhsb428slgx.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-jh95m4fr7vcz.json",
+      "sha256": "eaf809187bc018ce976ed8f8433640382f6e8cfc88f1dee759a2ccb4d526d7b3",
+      "url": "https://status.crusoecloud.com/incidents/jh95m4fr7vcz.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-9xp8lg1lhqnw.json",
+      "sha256": "ca8a0975a794c94a9687751e41e633e6e3f8a847745f2f8e42c874ceb04ea7ef",
+      "url": "https://status.crusoecloud.com/incidents/9xp8lg1lhqnw.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-mw71g4tj8y6h.json",
+      "sha256": "ce9e38ca59b6c3285e8ace6ade465e4b4a06a0f2f2073bfd9e3deeead258f9e4",
+      "url": "https://status.crusoecloud.com/incidents/mw71g4tj8y6h.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-ykq2n1x9g3qq.json",
+      "sha256": "2c69d22cd65b825bc64080c18ec438d443f837f98e029d84ab0c57b6313a1833",
+      "url": "https://status.crusoecloud.com/incidents/ykq2n1x9g3qq.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-mn18v2m9tbvl.json",
+      "sha256": "34050b53a5797a2cb503c6a67d8eb21229ea6ddd20ccbeb2e9025b82996b673f",
+      "url": "https://status.crusoecloud.com/incidents/mn18v2m9tbvl.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-w6c8bgd7d2mw.json",
+      "sha256": "0bad2bd4bc4144bf35b032e1ad57fb6ab22a3aae0f8b8eaff84eff8a6f8d40ee",
+      "url": "https://status.crusoecloud.com/incidents/w6c8bgd7d2mw.json"
+    },
+    {
+      "path": "retrospective/incidents/raw/crusoe/incident-lyfj7wy00ypt.json",
+      "sha256": "77dcaddb73532839c11b46bfaacc1da19c085d9802b234438bd9fad52f814a09",
+      "url": "https://status.crusoecloud.com/incidents/lyfj7wy00ypt.json"
+    }
+  ],
+  "coverage_start": "2025-01-01",
+  "coverage_end": "2026-09-29",
+  "severity_map": {
+    "maintenance": "none",
+    "minor": "minor",
+    "major": "major",
+    "critical": "critical",
+    "none": "none"
+  },
+  "incidents": [
+    {
+      "id": "lyfj7wy00ypt",
+      "title": "WAN Network Maintenance",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-01-08T21:53:06.860Z",
+      "resolved_utc": "2025-01-10T06:00:21.443Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/0dcds2jdtls0"
+    },
+    {
+      "id": "w6c8bgd7d2mw",
+      "title": "WAN Network Maintenance in us-southcentral",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-01-13T18:54:12.713Z",
+      "resolved_utc": "2025-01-15T02:00:21.486Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/c7psdhbzx13n"
+    },
+    {
+      "id": "mn18v2m9tbvl",
+      "title": "WAN Network Maintenance in eu-iceland1",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-01-13T21:18:50.322Z",
+      "resolved_utc": "2025-01-15T06:00:21.440Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/fbvkptctvxgg"
+    },
+    {
+      "id": "ykq2n1x9g3qq",
+      "title": "Shared Disk Unreachable in eu-iceland1",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2025-01-17T18:03:42.810Z",
+      "resolved_utc": "2025-01-18T03:56:55.178Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/tw2smrpc3vyb"
+    },
+    {
+      "id": "mw71g4tj8y6h",
+      "title": "Degraded Infiniband Performance in us-southcentral",
+      "impact_label": "major",
+      "severity": "major",
+      "started_utc": "2025-01-23T21:53:46.168Z",
+      "resolved_utc": "2025-01-24T04:01:15.035Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/855qbnlv2jhk"
+    },
+    {
+      "id": "9xp8lg1lhqnw",
+      "title": "[us-northcentral] API Outage",
+      "impact_label": "critical",
+      "severity": "critical",
+      "started_utc": "2025-01-27T05:14:14.273Z",
+      "resolved_utc": "2025-01-27T06:24:35.000Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/ryl2x6nr3rs2"
+    },
+    {
+      "id": "jh95m4fr7vcz",
+      "title": "Datacenter Network Maintenance in us-southcentral",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-01-28T23:03:30.230Z",
+      "resolved_utc": "2025-01-29T05:00:21.393Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/hz5nkxv118x4"
+    },
+    {
+      "id": "wmhsb428slgx",
+      "title": "WAN/Datacenter Network Maintenance in US-Southcentral",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-01-30T00:49:26.920Z",
+      "resolved_utc": "2025-01-31T05:00:21.492Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/27mk8mntxmph"
+    },
+    {
+      "id": "x1s4ckpr1ywq",
+      "title": "Control Plane Maintenance in US-Northcentral",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-02-01T00:49:41.603Z",
+      "resolved_utc": "2025-02-05T17:48:06.867Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/llj7fyb2h68l"
+    },
+    {
+      "id": "5z2qp3517gnt",
+      "title": "Crusoe Cloud WAN Network Maintenance",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-02-06T23:55:41.531Z",
+      "resolved_utc": "2025-02-07T05:30:21.211Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/fptlcbrgxr3r"
+    },
+    {
+      "id": "f0dt2r8y4s30",
+      "title": "Crusoe Cloud Network Maintenance",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-02-10T18:23:13.144Z",
+      "resolved_utc": "2025-02-11T10:30:23.225Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/79hxlx5gv10y"
+    },
+    {
+      "id": "p6j9d7q987gd",
+      "title": "Persistent Storage Degradation in eu-iceland",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2025-02-10T21:55:25.760Z",
+      "resolved_utc": "2025-02-12T19:43:00.794Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/mr25jmj3pwg8"
+    },
+    {
+      "id": "p5vf971n54nk",
+      "title": "Crusoe Cloud Infiniband Maintenance",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-02-13T23:57:09.798Z",
+      "resolved_utc": "2025-02-20T12:00:21.505Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/86y5zwhmrwwj"
+    },
+    {
+      "id": "4d6dqtcbpkwk",
+      "title": "WAN network maintenance in the eu-iceland1 region",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-02-18T19:07:56.768Z",
+      "resolved_utc": "2025-02-19T03:00:25.106Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/2jzdc0tfgg1s"
+    },
+    {
+      "id": "jnstbq1s2wgz",
+      "title": "Extension of Crusoe Cloud Infiniband Maintenance - EU-Iceland",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-02-20T20:00:49.909Z",
+      "resolved_utc": "2025-02-20T22:01:21.203Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/jmsbhydg1s2b"
+    },
+    {
+      "id": "scvc8zlbnqnq",
+      "title": "Crusoe Cloud Network Maintenance",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-02-20T21:48:33.127Z",
+      "resolved_utc": "2025-02-26T10:30:21.190Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/l9w1nf62sgpp"
+    },
+    {
+      "id": "bg3hxzjcwvl1",
+      "title": "Unable to Create New Projects",
+      "impact_label": "none",
+      "severity": "none",
+      "started_utc": "2025-02-25T22:20:20.000Z",
+      "resolved_utc": "2025-02-26T01:23:33.214Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/lsmh1njwz98v"
+    },
+    {
+      "id": "9qhmhzpklfmh",
+      "title": "[US-East] Transient Disconnection of Network Disks Impacting Compute and GPU Instances",
+      "impact_label": "major",
+      "severity": "major",
+      "started_utc": "2025-03-01T12:26:48.451Z",
+      "resolved_utc": "2025-03-04T15:33:23.520Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/zh6548ryr1vv"
+    },
+    {
+      "id": "4n5hl4zr9z1n",
+      "title": "Crusoe Cloud Block Storage Maintenance in eu-iceland",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-03-17T18:37:17.932Z",
+      "resolved_utc": "2025-03-17T23:00:25.088Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/7hlbn24rqvwg"
+    },
+    {
+      "id": "10ypj5lxmjt7",
+      "title": "Crusoe Cloud Network Maintenance",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-03-20T17:49:55.714Z",
+      "resolved_utc": "2025-03-21T05:30:21.227Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/514ztg9zqkg9"
+    },
+    {
+      "id": "fk5ygwb05ktx",
+      "title": "Crusoe Cloud Network Maintenance",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-03-25T21:53:47.989Z",
+      "resolved_utc": "2025-04-09T07:30:21.206Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/jz4cgxk3b8g0"
+    },
+    {
+      "id": "3nn2k9hg1s83",
+      "title": "Crusoe Managed Kubernetes Outage",
+      "impact_label": "major",
+      "severity": "major",
+      "started_utc": "2025-03-27T20:14:44.516Z",
+      "resolved_utc": "2025-03-27T23:04:29.225Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/fydvl560fkfn"
+    },
+    {
+      "id": "410w0n50bvwv",
+      "title": "Crusoe Cloud Storage Network Maintenance",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-03-28T22:43:21.943Z",
+      "resolved_utc": "2025-04-01T16:00:21.463Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/ybqs34cnjt2t"
+    },
+    {
+      "id": "ws7vctnkwwhs",
+      "title": "Crusoe Cloud Network Maintenance",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-03-29T00:08:52.574Z",
+      "resolved_utc": "2025-04-02T10:00:22.736Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/q6qbh90nckcf"
+    },
+    {
+      "id": "jjy0bvxntghs",
+      "title": "WAN Network Maintenance in the eu-iceland1 region",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-04-01T23:02:27.615Z",
+      "resolved_utc": "2025-04-04T04:00:21.885Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/pzq5bx948022"
+    },
+    {
+      "id": "xkfrndtp1p8d",
+      "title": "Shared Storage Maintenance in us-southcentral1",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-04-02T20:51:48.526Z",
+      "resolved_utc": "2025-04-04T05:00:21.186Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/t7gjbf632ntd"
+    },
+    {
+      "id": "j78ht009k89c",
+      "title": "Crusoe Cloud Network Maintenance in us-east1",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-04-04T21:03:22.556Z",
+      "resolved_utc": "2025-04-09T04:00:21.364Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/k89gkhk3dmh5"
+    },
+    {
+      "id": "7wc0h0lwtyd5",
+      "title": "Crusoe Managed Kubernetes maintenance",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-04-04T22:18:56.955Z",
+      "resolved_utc": "2025-04-07T00:41:45.014Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/qy67n970g1x7"
+    },
+    {
+      "id": "lcgbgtcmdjb3",
+      "title": "Crusoe Cloud Storage Maintenance in us-northcentral1 region",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-04-07T21:10:54.899Z",
+      "resolved_utc": "2025-04-09T00:00:21.343Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/y4lfjcbdsfc6"
+    },
+    {
+      "id": "pcdwrfxt140w",
+      "title": "Shared Storage Maintenance in us-southcentral1",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-04-09T18:50:20.957Z",
+      "resolved_utc": "2025-04-11T06:00:23.641Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/cmqbqy56jpky"
+    },
+    {
+      "id": "zfxvk4tnk94t",
+      "title": "Shared Storage Maintenance in eu-iceland1",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-04-09T18:52:36.010Z",
+      "resolved_utc": "2025-04-16T12:00:21.175Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/7z7vfbbjrf0r"
+    },
+    {
+      "id": "g2pwjz9n46f7",
+      "title": "Crusoe Cloud Network Maintenance in us-east",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-04-14T18:04:13.571Z",
+      "resolved_utc": "2025-04-15T03:00:21.304Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/jbc6wvt2kbqk"
+    },
+    {
+      "id": "bxlc8dlf8lm3",
+      "title": "Crusoe Cloud Network Maintenance in us-east (Part 1/2)",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-04-14T21:20:32.114Z",
+      "resolved_utc": "2025-04-23T04:00:21.287Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/fw5893xgj9pz"
+    },
+    {
+      "id": "6h2t7h2zgm80",
+      "title": "Crusoe Cloud Network Maintenance in us-east (Part 2/2)",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-04-14T21:22:01.390Z",
+      "resolved_utc": "2025-04-25T04:00:21.189Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/sq59m5wv7qkx"
+    },
+    {
+      "id": "5s4yfssl6xmz",
+      "title": "Shared Disks Unreachable in eu-iceland1 region",
+      "impact_label": "major",
+      "severity": "major",
+      "started_utc": "2025-04-16T00:30:00.000Z",
+      "resolved_utc": "2025-04-16T00:30:00.000Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/gknxyt613qhq"
+    },
+    {
+      "id": "6wpb6nn3wptl",
+      "title": "Shared disk performance issues in eu-iceland region",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2025-04-16T15:52:31.356Z",
+      "resolved_utc": "2025-04-17T15:33:55.484Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/l4jfdtjdxxvs"
+    },
+    {
+      "id": "j96jbxrw8nfh",
+      "title": "Partial outage in us-east1",
+      "impact_label": "major",
+      "severity": "major",
+      "started_utc": "2025-04-24T18:19:43.771Z",
+      "resolved_utc": "2025-04-24T21:30:18.402Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/7cnkxwg52j5k"
+    },
+    {
+      "id": "s29pkgppxqmq",
+      "title": "Shared Storage Maintenance in eu-iceland",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-04-25T23:20:20.167Z",
+      "resolved_utc": "2025-04-30T15:00:21.343Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/v6vdf8gdp4sj"
+    },
+    {
+      "id": "6841zb4zh4mw",
+      "title": "Shared Storage Maintenance in us-east",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-04-25T23:22:05.212Z",
+      "resolved_utc": "2025-05-02T13:00:21.169Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/wx6wz5k8bcd3"
+    },
+    {
+      "id": "zq2sp7jr5fg0",
+      "title": "Certain VMs in us-northcentral1-a are unavailable",
+      "impact_label": "major",
+      "severity": "major",
+      "started_utc": "2025-04-28T15:01:23.836Z",
+      "resolved_utc": "2025-04-28T23:27:54.681Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/49cppxncnq26"
+    },
+    {
+      "id": "p2njgjtqnw6d",
+      "title": "Crusoe Cloud Network Maintenance in us-east (Part 1/2)",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-04-28T21:45:42.757Z",
+      "resolved_utc": "2025-04-30T04:00:21.351Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/2mljdp87p141"
+    },
+    {
+      "id": "84g5ybspb7qj",
+      "title": "Crusoe Cloud Network Maintenance in us-east (Part 2/2)",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-04-28T21:46:40.389Z",
+      "resolved_utc": "2025-05-07T04:00:21.152Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/v9z5fk82g50t"
+    },
+    {
+      "id": "4xkddq74h2zs",
+      "title": "Crusoe Cloud Network Maintenance in us-southcentral",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-04-28T23:12:28.603Z",
+      "resolved_utc": "2025-04-30T05:00:23.476Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/r031nw24r491"
+    },
+    {
+      "id": "ckkl0ldb9tqy",
+      "title": "Crusoe Cloud Network Maintenance in us-east",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-04-29T20:30:14.308Z",
+      "resolved_utc": "2025-05-01T05:00:21.431Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/t6yb2qk5bklj"
+    },
+    {
+      "id": "07dsmgqh6m1l",
+      "title": "[eu-iceland] Shared Storage Maintenance Extension",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-04-30T15:14:44.334Z",
+      "resolved_utc": "2025-04-30T21:18:21.139Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/756jw7z53jb8"
+    },
+    {
+      "id": "wxfnd52q3cr8",
+      "title": "[us-east] Shared Storage Maintenance Extension",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-05-02T13:26:58.526Z",
+      "resolved_utc": "2025-05-02T14:56:39.028Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/fp3qxz3ld9t3"
+    },
+    {
+      "id": "v854lnrtc08r",
+      "title": "Shared Storage Maintenance in us-southcentral",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-05-03T01:54:42.438Z",
+      "resolved_utc": "2025-05-07T05:30:22.747Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/9jq9279pgnn4"
+    },
+    {
+      "id": "6r4ljpsvk9l9",
+      "title": "Crusoe Cloud Storage Maintenance in us-east1 region",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-05-08T19:33:25.648Z",
+      "resolved_utc": "2025-05-14T02:00:21.178Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/3nd88p7z20c9"
+    },
+    {
+      "id": "qkt6q61v4lbp",
+      "title": "Degraded network performance in eu-iceland1",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2025-05-10T13:58:59.215Z",
+      "resolved_utc": "2025-05-11T16:08:03.142Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/k3jqgfn27zmd"
+    },
+    {
+      "id": "x3myh7wpt2df",
+      "title": "Crusoe Cloud Network Maintenance in eu-iceland1 region",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-05-14T20:40:39.659Z",
+      "resolved_utc": "2025-05-15T05:00:21.429Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/w7p0t9xhsnlw"
+    },
+    {
+      "id": "krptdrr5mtkj",
+      "title": "Crusoe Cloud Network Maintenance in eu-iceland1 region",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-05-15T17:18:22.388Z",
+      "resolved_utc": "2025-05-15T19:23:54.834Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/635gx1fkxrky"
+    },
+    {
+      "id": "kfy9949j2z6w",
+      "title": "Crusoe Cloud Network Maintenance in us-northcentral1 region",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-05-16T21:16:19.658Z",
+      "resolved_utc": "2025-05-21T02:07:13.528Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/2qy9rry2rjj4"
+    },
+    {
+      "id": "2dft6wnk7pr8",
+      "title": "Crusoe Cloud Network Maintenance in eu-iceland1 region",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-05-16T21:20:26.716Z",
+      "resolved_utc": "2025-05-28T02:30:21.154Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/88vzf44thjqz"
+    },
+    {
+      "id": "1znr9w4spzfk",
+      "title": "Crusoe Cloud Shared Storage Networking Maintenance in eu-iceland1 region",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-05-16T22:34:58.324Z",
+      "resolved_utc": "2025-05-21T05:00:21.408Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/mzxjgfb9q670"
+    },
+    {
+      "id": "ns73y3v0cdvw",
+      "title": "Crusoe Cloud Network Maintenance in us-northcentral1 region",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-05-21T02:13:57.090Z",
+      "resolved_utc": "2025-05-23T02:13:31.910Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/y0sq88qr8v35"
+    },
+    {
+      "id": "4h3r5nxx8qgs",
+      "title": "Crusoe Cloud Network Maintenance in eu-iceland1 (Part 1/2)",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-05-23T22:50:16.558Z",
+      "resolved_utc": "2025-06-04T04:00:21.191Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/kd90wxp6mcjp"
+    },
+    {
+      "id": "gljv5qb36y55",
+      "title": "Crusoe Cloud Network Maintenance in eu-iceland1 (Part 2/2)",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-05-23T22:52:09.099Z",
+      "resolved_utc": "2025-06-06T00:41:32.552Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/jvbtklb7lvdg"
+    },
+    {
+      "id": "gt445j6gtn12",
+      "title": "Crusoe Cloud Network Maintenance in us-southcentral1 region",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-05-28T20:11:16.894Z",
+      "resolved_utc": "2025-05-30T05:00:21.738Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/9n7xl7ccq8z1"
+    },
+    {
+      "id": "f74s4t5y6vnt",
+      "title": "End of Life for Ubuntu 20.04 Curated Images",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-05-30T00:43:25.294Z",
+      "resolved_utc": "2025-06-17T15:05:13.870Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/h4dd3cggcszv"
+    },
+    {
+      "id": "7nlj798hbyhr",
+      "title": "Certain VM's in us-east1-a region are unavailable",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2025-05-30T13:05:50.709Z",
+      "resolved_utc": "2025-05-30T16:52:37.634Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/vwx6q0hmjklz"
+    },
+    {
+      "id": "3z6ycldydhk2",
+      "title": "Crusoe Cloud Network Maintenance in eu-iceland1 (Part 1/2)",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-06-10T02:23:53.273Z",
+      "resolved_utc": "2025-06-11T05:00:21.332Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/xd1zzq34gcjh"
+    },
+    {
+      "id": "8sjd4dtkhdwl",
+      "title": "Crusoe Cloud Network Maintenance in eu-iceland1 (Part 2/2)",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-06-10T02:26:46.162Z",
+      "resolved_utc": "2025-06-13T05:00:21.159Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/bgyqj038h43c"
+    },
+    {
+      "id": "nbk24f5lkpn3",
+      "title": "Crusoe Cloud Network Maintenance in us-southcentral1 region",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-06-10T23:40:12.442Z",
+      "resolved_utc": "2025-06-18T05:00:21.251Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/t72ng1pbhwyf"
+    },
+    {
+      "id": "q637xj1pf56m",
+      "title": "Partial outage in us-east1",
+      "impact_label": "none",
+      "severity": "none",
+      "started_utc": "2025-06-11T03:10:48.280Z",
+      "resolved_utc": "2025-06-11T03:36:23.129Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/2hw41fgt7ycd"
+    },
+    {
+      "id": "4dnqn1cjm75q",
+      "title": "Crusoe Cloud Network Maintenance in eu-iceland1",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-06-11T23:35:39.833Z",
+      "resolved_utc": "2025-06-16T21:00:21.380Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/w4h1lwnxr12n"
+    },
+    {
+      "id": "l1c2w6vj1gny",
+      "title": "Control Plane Service Outage",
+      "impact_label": "major",
+      "severity": "major",
+      "started_utc": "2025-06-12T19:55:24.939Z",
+      "resolved_utc": "2025-06-12T21:35:30.082Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/pptgqfqtsvm2"
+    },
+    {
+      "id": "hmxkm1ph7wqb",
+      "title": "Crusoe Cloud Network Maintenance in us-southcentral1 region (Continue)",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-06-18T05:05:22.216Z",
+      "resolved_utc": "2025-06-18T07:06:21.150Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/k0fm6yspykvh"
+    },
+    {
+      "id": "j9rf0yk76lv0",
+      "title": "Crusoe Cloud Network Maintenance in us-east1",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-06-19T04:49:42.096Z",
+      "resolved_utc": "2025-06-25T06:03:56.086Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/gn17pcj1cbv8"
+    },
+    {
+      "id": "6zpyjrl5d0wf",
+      "title": "Crusoe Cloud Network Maintenance in us-east",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-06-27T20:59:05.747Z",
+      "resolved_utc": "2025-07-09T05:00:21.210Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/qncc7mk48hd3"
+    },
+    {
+      "id": "gx3pf31ydr9y",
+      "title": "Certain VM's in us-northcentral1-a are unavailable",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2025-06-30T18:05:42.515Z",
+      "resolved_utc": "2025-07-02T17:21:39.162Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/kk8g99fr93tr"
+    },
+    {
+      "id": "kx0j6x015q0t",
+      "title": "Crusoe Cloud Storage Maintenance in eu-iceland1 region",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-07-02T21:31:41.775Z",
+      "resolved_utc": "2025-07-11T05:00:21.162Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/6s2gvyzcldxk"
+    },
+    {
+      "id": "m7j1rx783s1w",
+      "title": "Crusoe Cloud Storage Network Maintenance in us-southcentral1 region",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-07-02T22:25:07.345Z",
+      "resolved_utc": "2025-07-09T11:00:22.830Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/9020bmmrw6xf"
+    },
+    {
+      "id": "p14jv16ltkwd",
+      "title": "Investigating Control Plane Failures in US-Southcentral",
+      "impact_label": "major",
+      "severity": "major",
+      "started_utc": "2025-07-11T14:28:37.408Z",
+      "resolved_utc": "2025-07-11T16:21:32.439Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/rk2w13l35dt8"
+    },
+    {
+      "id": "rtgjlm8gbnwk",
+      "title": "Crusoe Cloud Storage Maintenance in eu-iceland1 region",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-07-15T18:27:33.877Z",
+      "resolved_utc": "2025-07-17T10:00:21.478Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/h3l247158lvj"
+    },
+    {
+      "id": "myc88y3gmnp5",
+      "title": "Issues affecting persistent storage in eu-iceland1",
+      "impact_label": "major",
+      "severity": "major",
+      "started_utc": "2025-07-24T08:30:07.763Z",
+      "resolved_utc": "2025-07-24T11:36:17.022Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/fdkgc5l1f9yp"
+    },
+    {
+      "id": "jpjjw62spv47",
+      "title": "Database Upgrade Activity",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-07-26T00:23:01.481Z",
+      "resolved_utc": "2025-08-08T02:51:35.516Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/1prg6zl94sl0"
+    },
+    {
+      "id": "26c7bl97x8x3",
+      "title": "VM creation and networking failure for A100 Infiniband type VMs in us-east region",
+      "impact_label": "major",
+      "severity": "major",
+      "started_utc": "2025-08-01T03:18:32.180Z",
+      "resolved_utc": "2025-08-01T06:21:11.139Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/tzcrv8rph39s"
+    },
+    {
+      "id": "ky1mq3kjps6t",
+      "title": "Crusoe Cloud Network Maintenance in us-east1 region",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-08-18T17:55:00.183Z",
+      "resolved_utc": "2025-09-12T08:00:21.193Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/z1q431tqv7xs"
+    },
+    {
+      "id": "wgj07syd8jf8",
+      "title": "Crusoe Cloud Network Maintenance in us-southcentral1 region",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-08-18T18:07:20.000Z",
+      "resolved_utc": "2025-09-03T03:55:41.488Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/r70fr93sc7q3"
+    },
+    {
+      "id": "nm5r6txctfby",
+      "title": "Service Degradation in us-east1-a Region due to Power Disruption",
+      "impact_label": "major",
+      "severity": "major",
+      "started_utc": "2025-08-20T17:09:52.146Z",
+      "resolved_utc": "2025-08-21T23:35:07.565Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/gf1tsgr0rtjt"
+    },
+    {
+      "id": "r58lnn88fpyk",
+      "title": "Crusoe Cloud Network Maintenance in us-east1 region",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-08-26T22:22:16.311Z",
+      "resolved_utc": "2025-09-10T05:00:21.166Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/fs2pgnq6cty5"
+    },
+    {
+      "id": "drd8g5dwp5ly",
+      "title": "Crusoe Cloud Network Maintenance in eu-iceland1 region",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-09-08T18:06:39.130Z",
+      "resolved_utc": "2025-09-17T08:00:21.167Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/s62jpfx755kj"
+    },
+    {
+      "id": "x7v17227v82f",
+      "title": "VMs in us-southcentral1-a region failing to start with Internal Server Error",
+      "impact_label": "major",
+      "severity": "major",
+      "started_utc": "2025-09-19T07:33:48.322Z",
+      "resolved_utc": "2025-09-19T13:20:28.547Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/86qq116p80n1"
+    },
+    {
+      "id": "d4b3tmgx3crl",
+      "title": "CMK Nodepool Quota Not Visible in UI",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2025-09-19T21:53:43.388Z",
+      "resolved_utc": "2025-09-20T01:14:38.225Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/rxm75wykxc5l"
+    },
+    {
+      "id": "4w8t6glf5xj1",
+      "title": "Crusoe Cloud Infiniband Network Maintenance in us-east1 region",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-09-23T16:49:04.536Z",
+      "resolved_utc": "2025-10-22T04:00:21.140Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/37k6j2x2lvth"
+    },
+    {
+      "id": "5v3xw16dgm0h",
+      "title": "Partial outage in us-southcentral",
+      "impact_label": "major",
+      "severity": "major",
+      "started_utc": "2025-09-30T10:22:42.326Z",
+      "resolved_utc": "2025-09-30T10:49:57.128Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/t2hz8jp1glhf"
+    },
+    {
+      "id": "ly940gbf6ncz",
+      "title": "Partial Outage in eu-iceland1-a",
+      "impact_label": "major",
+      "severity": "major",
+      "started_utc": "2025-09-30T18:45:54.490Z",
+      "resolved_utc": "2025-10-01T00:00:48.672Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/vh074vyfy0qq"
+    },
+    {
+      "id": "n14cr5mqpy16",
+      "title": "Crusoe Cloud Shared Storage Maintenance in All Regions",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-10-01T17:56:16.128Z",
+      "resolved_utc": "2025-10-04T01:00:21.237Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/t78zwh8jhbtk"
+    },
+    {
+      "id": "y8m15tm2wbs2",
+      "title": "VM Creation Failure for A100 Infiniband Type VMs in us-east1-a Region",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2025-10-02T04:00:27.094Z",
+      "resolved_utc": "2025-10-02T20:50:06.935Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/rcswwg29nvc9"
+    },
+    {
+      "id": "krmd5l0rsw4h",
+      "title": "VM Creation Failure",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2025-10-03T01:10:13.703Z",
+      "resolved_utc": "2025-10-03T07:09:30.194Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/cjl2jnwwjhkg"
+    },
+    {
+      "id": "60l0lkvfb8x5",
+      "title": "VM Creation Failure",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2025-10-09T21:37:02.298Z",
+      "resolved_utc": "2025-10-14T23:43:43.553Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/zs1x6zlfwg2d"
+    },
+    {
+      "id": "qrqt6rgqh9jm",
+      "title": "Crusoe Cloud Network Maintenance in us-southcentral1 region",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-10-10T23:46:06.796Z",
+      "resolved_utc": "2025-10-25T07:00:21.519Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/jywtrchng952"
+    },
+    {
+      "id": "byy3jr22493p",
+      "title": "Crusoe Cloud Network Maintenance in eu-iceland1 region",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-10-10T23:46:11.304Z",
+      "resolved_utc": "2025-11-01T07:00:21.185Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/sscffpj4g22x"
+    },
+    {
+      "id": "l5rdybq8czhz",
+      "title": "Crusoe Cloud Network Maintenance in us-east1 region",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-10-10T23:46:15.037Z",
+      "resolved_utc": "2025-11-15T07:00:21.184Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/qjffv8z3fqhf"
+    },
+    {
+      "id": "p0syht4mdj68",
+      "title": "Crusoe Cloud Network Maintenance in All Regions",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-10-17T18:14:58.899Z",
+      "resolved_utc": "2025-10-23T03:00:21.379Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/45x2vwlz6drd"
+    },
+    {
+      "id": "b4qr0k9y4h78",
+      "title": "Crusoe Cloud Network Maintenance in eu-iceland1 region (Continued)",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-10-24T22:18:28.188Z",
+      "resolved_utc": "2025-11-20T19:07:40.001Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/dtx0rgrskyzz"
+    },
+    {
+      "id": "t3rtthz2zvtt",
+      "title": "VM Connectivity and Performance Degradation in the Iceland Region",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2025-10-30T00:46:46.000Z",
+      "resolved_utc": "2025-11-04T19:46:49.702Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/8sfbdr4lpgjg"
+    },
+    {
+      "id": "vphl3k0b9j8d",
+      "title": "Crusoe Container Registry Maintenance in All Regions",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-10-30T17:25:46.203Z",
+      "resolved_utc": "2025-11-05T03:30:21.264Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/bvghsdq5lk82"
+    },
+    {
+      "id": "h1hwgt1vbx4r",
+      "title": "Crusoe Cloud Shared Storage Maintenance in us-southcentral1-a region",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-11-06T19:28:42.260Z",
+      "resolved_utc": "2025-11-19T04:40:10.860Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/6grvxq23dygk"
+    },
+    {
+      "id": "0qc84q20cmm9",
+      "title": "Crusoe Cloud Shared Storage Maintenance in us-east1-a region",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-11-06T19:30:27.157Z",
+      "resolved_utc": "2025-11-20T15:00:22.211Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/74gwbmd8vtbn"
+    },
+    {
+      "id": "kdjkknjw9p8j",
+      "title": "Crusoe Cloud Shared Storage Maintenance in eu-iceland1-a region",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-11-06T19:31:26.179Z",
+      "resolved_utc": "2025-11-26T09:00:21.280Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/mrl89htl4zjq"
+    },
+    {
+      "id": "s8hkkwxzhq8w",
+      "title": "Crusoe Cloud Console Intermittently Inaccessible",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2025-11-18T12:48:39.000Z",
+      "resolved_utc": "2025-11-18T16:38:41.115Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/r3zl1qhww3zd"
+    },
+    {
+      "id": "fxw4q7kpzdlg",
+      "title": "Crusoe Container Registry Maintenance in eu-iceland1-a region",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-11-21T20:05:55.569Z",
+      "resolved_utc": "2025-11-25T04:00:21.202Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/4cdvdvq513cp"
+    },
+    {
+      "id": "9c15n4bx4s8p",
+      "title": "Crusoe Cloud Infiniband Network Maintenance in us-southcentral1-a region (Part 1/2)",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-11-21T21:53:08.678Z",
+      "resolved_utc": "2025-11-26T06:00:21.377Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/r7vlz2nfs46x"
+    },
+    {
+      "id": "hdgwrwzmgtx2",
+      "title": "Crusoe Cloud Infiniband Network Maintenance in us-southcentral1-a region (Part 2/2)",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-11-21T21:54:55.479Z",
+      "resolved_utc": "2025-12-03T06:00:21.233Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/6tylx4wp6ps2"
+    },
+    {
+      "id": "vv174hvx8lkh",
+      "title": "Crusoe Container Registry Maintenance in us-east1-a region",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-11-22T01:58:11.431Z",
+      "resolved_utc": "2025-12-02T04:00:21.215Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/7mds8bzgqcpq"
+    },
+    {
+      "id": "29kw5frp6by7",
+      "title": "Crusoe Container Registry Maintenance in us-southcentral1-a region",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-11-22T01:59:38.053Z",
+      "resolved_utc": "2025-12-09T05:00:23.608Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/rd9fb1spbl3c"
+    },
+    {
+      "id": "3sfq00qtz4w1",
+      "title": "Crusoe Cloud Database Migration Maintenance (All Regions)",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-11-24T23:04:12.974Z",
+      "resolved_utc": "2026-01-09T02:30:21.168Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/r91p7w5djv2h"
+    },
+    {
+      "id": "whxwgdf5p042",
+      "title": "[Emergency] us-west1-a Power Supply Maintenance Update",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-12-04T01:13:35.633Z",
+      "resolved_utc": "2025-12-08T08:00:21.266Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/h4x7s4vn6rkz"
+    },
+    {
+      "id": "4gfzf75zfdzm",
+      "title": "Crusoe Cloud Network Maintenance in eu-iceland-1a region",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-12-08T17:22:22.540Z",
+      "resolved_utc": "2025-12-11T12:00:23.181Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/rr5vgkyd2zct"
+    },
+    {
+      "id": "58m98zbhkdlv",
+      "title": "Crusoe Cloud Storage Expansion in eu-iceland-1a region",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-12-08T17:24:36.828Z",
+      "resolved_utc": "2025-12-11T12:00:21.292Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/nmgm12vldbky"
+    },
+    {
+      "id": "j1gctj6gdn7q",
+      "title": "Crusoe Cloud Infiniband Network Maintenance in us-east1-a region",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-12-08T18:07:03.325Z",
+      "resolved_utc": "2025-12-12T17:00:21.245Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/2fn45gyyfgt8"
+    },
+    {
+      "id": "n8m1xc1mml0s",
+      "title": "Crusoe Container Registry Maintenance in us-southcentral1-a region (Continued)",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-12-09T05:08:34.840Z",
+      "resolved_utc": "2025-12-09T06:19:20.072Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/tykqhnjpv1p5"
+    },
+    {
+      "id": "t1wzyllk408h",
+      "title": "Storage accessibility issues in eu-iceland1-a",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2025-12-16T17:13:34.311Z",
+      "resolved_utc": "2026-01-07T17:25:23.786Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/qdqvqln88lt6"
+    },
+    {
+      "id": "hr7lnptrhhkr",
+      "title": "VMs throwing Device Not Ready errors in eu-iceland1-a",
+      "impact_label": "major",
+      "severity": "major",
+      "started_utc": "2025-12-16T18:19:21.000Z",
+      "resolved_utc": "2025-12-17T09:12:44.711Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/z64znvpb0rqj"
+    },
+    {
+      "id": "rzjrgd2p7zph",
+      "title": "Crusoe Cloud Networking Maintenance",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2025-12-22T07:41:23.316Z",
+      "resolved_utc": "2025-12-22T08:15:21.167Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/xv9j7q6bz9lw"
+    },
+    {
+      "id": "hnkt8cf6j910",
+      "title": "Direct NFS mounts unavailable in eu-iceland1",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2025-12-29T09:28:22.072Z",
+      "resolved_utc": "2026-01-02T20:47:52.082Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/p39nbfg8vdjw"
+    },
+    {
+      "id": "gbv8kv6tgy59",
+      "title": "Crusoe Cloud Shared Storage Maintenance in eu-iceland1-a region (Part 1/3)",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-01-07T01:01:35.633Z",
+      "resolved_utc": "2026-01-12T12:00:21.322Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/mqy7b776xn1n"
+    },
+    {
+      "id": "1tng5nh63b1l",
+      "title": "Crusoe Cloud Shared Storage Maintenance in eu-iceland1-a region (Part 2/3)",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-01-07T01:01:44.444Z",
+      "resolved_utc": "2026-01-13T12:00:21.464Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/hd0yw4c9v3jk"
+    },
+    {
+      "id": "3zp27ztvb4x3",
+      "title": "[Emergency] Crusoe Cloud Shared Storage Maintenance in eu-iceland1-a region",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-01-07T06:33:06.120Z",
+      "resolved_utc": "2026-01-07T12:30:21.164Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/2g21ptv7ms3g"
+    },
+    {
+      "id": "8whhwpgyl06x",
+      "title": "Crusoe Cloud Shared Storage Maintenance in eu-iceland1-a region (Part 3/3)",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-01-12T22:30:28.761Z",
+      "resolved_utc": "2026-01-14T12:00:21.401Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/06yp6x4lt7dc"
+    },
+    {
+      "id": "j1n3rtc8bx1c",
+      "title": "Crusoe Cloud Network Maintenance in us-east1 region",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-01-29T23:32:42.428Z",
+      "resolved_utc": "2026-02-06T03:00:21.785Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/v53xj59d6t2h"
+    },
+    {
+      "id": "0k1pr34czv8r",
+      "title": "CCR Push/Pull Outage Unavailable in Multiple Regions",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-02-01T21:42:33.234Z",
+      "resolved_utc": "2026-02-02T04:38:55.000Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/y9597bfwnzkx"
+    },
+    {
+      "id": "m68by79yhd9b",
+      "title": "Custom Image Creation Issues in EU-Iceland",
+      "impact_label": "none",
+      "severity": "none",
+      "started_utc": "2026-02-03T21:42:23.190Z",
+      "resolved_utc": "2026-02-04T00:12:01.321Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/vlk0vj281l70"
+    },
+    {
+      "id": "zxb9zv8r6jyd",
+      "title": "Shared Volume Creation/Deletion Unavailable in eu-iceland1-a region",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-02-04T00:19:46.342Z",
+      "resolved_utc": "2026-02-04T05:07:32.788Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/xf9lvgm1grd0"
+    },
+    {
+      "id": "z6lplmqhc29f",
+      "title": "Crusoe Cloud Network Maintenance in us-southcentral1 region",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-02-06T06:01:28.751Z",
+      "resolved_utc": "2026-02-11T02:39:33.144Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/hj2h609xq9rs"
+    },
+    {
+      "id": "yn8dz4m1sjn7",
+      "title": "Crusoe Cloud Network Maintenance in eu-iceland1 region",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-02-06T06:01:40.330Z",
+      "resolved_utc": "2026-02-13T02:41:05.847Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/wz9cxknvmb59"
+    },
+    {
+      "id": "z5lxkcnf431y",
+      "title": "Crusoe Cloud Network Maintenance on \"us-east1-a A100-80GB SXM IB Network 0\"",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-02-13T03:04:15.643Z",
+      "resolved_utc": "2026-02-19T10:26:55.381Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/y4lkbcfp2mt6"
+    },
+    {
+      "id": "rmz6j87y7ddg",
+      "title": "Shared Disks API operations issue in eu-iceland1-a region",
+      "impact_label": "major",
+      "severity": "major",
+      "started_utc": "2026-02-20T12:59:19.986Z",
+      "resolved_utc": "2026-02-20T15:21:41.874Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/m53gn9kbhzyx"
+    },
+    {
+      "id": "v9spn1rnl26q",
+      "title": "Crusoe Cloud Network Maintenance in us-west1-a",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-02-21T20:40:02.157Z",
+      "resolved_utc": "2026-02-26T04:00:08.845Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/zs75b1zglmct"
+    },
+    {
+      "id": "bzt957445jfh",
+      "title": "Crusoe Cloud Network Maintenance in us-southcentral1-a",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-02-21T20:41:47.080Z",
+      "resolved_utc": "2026-02-27T04:00:07.170Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/59rsvwzb5lks"
+    },
+    {
+      "id": "ghpytqxpcp5n",
+      "title": "Crusoe Cloud Network Maintenance in us-east1-a",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-02-21T20:42:59.415Z",
+      "resolved_utc": "2026-03-04T04:00:07.169Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/18nl0r8gxcm5"
+    },
+    {
+      "id": "tlkl24kwv8vt",
+      "title": "Crusoe Cloud Shared Storage Maintenance in us-east1-a region",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-02-27T04:01:07.018Z",
+      "resolved_utc": "2026-03-06T04:38:11.903Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/zx4rrbmbgn0w"
+    },
+    {
+      "id": "5tdjqz963wkc",
+      "title": "Shared Disks Unreachable in eu-iceland1 region",
+      "impact_label": "major",
+      "severity": "major",
+      "started_utc": "2026-02-27T04:58:22.101Z",
+      "resolved_utc": "2026-03-04T21:05:24.246Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/z8mt6zbdzswb"
+    },
+    {
+      "id": "qsffb6gp8q80",
+      "title": "Crusoe Container Registry Maintenance in eu-iceland1-a",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-03-04T03:06:40.087Z",
+      "resolved_utc": "2026-03-13T06:00:07.158Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/bs2l2sqrj4cp"
+    },
+    {
+      "id": "3x4hhd9k744v",
+      "title": "Disruption to Cluster Management Services in us-southcentral Region",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-03-04T19:36:35.033Z",
+      "resolved_utc": "2026-03-04T21:25:58.898Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/bz8vflm0c84c"
+    },
+    {
+      "id": "7l053kx5tmnh",
+      "title": "Crusoe Cloud Shared Storage Maintenance in us-southcentral1-a region",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-03-06T18:51:15.254Z",
+      "resolved_utc": "2026-03-20T05:00:07.441Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/gnc7t9crb8vj"
+    },
+    {
+      "id": "ysr201gghnm0",
+      "title": "Crusoe Cloud Shared Storage Maintenance in eu-iceland1-a region",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-03-06T18:52:26.834Z",
+      "resolved_utc": "2026-03-25T03:51:22.794Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/rx2qn3gysxq3"
+    },
+    {
+      "id": "bj6l20bfrpts",
+      "title": "Crusoe Cloud Shared Storage Maintenance in us-east1-a region",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-03-11T23:49:10.201Z",
+      "resolved_utc": "2026-03-27T03:10:57.215Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/jd71k6vz4fsq"
+    },
+    {
+      "id": "ndtxyjjb2bd8",
+      "title": "Kubernetes Cluster Authentication and Provisioning Degradation",
+      "impact_label": "major",
+      "severity": "major",
+      "started_utc": "2026-03-18T20:21:25.341Z",
+      "resolved_utc": "2026-03-18T23:30:17.066Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/x2jsnmpcbqhn"
+    },
+    {
+      "id": "46f1z8bbmjhx",
+      "title": "Crusoe Cloud Network Maintenance in eu-iceland1-a",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-03-25T20:11:27.241Z",
+      "resolved_utc": "2026-04-03T05:00:07.363Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/y1jkk45ywtz3"
+    },
+    {
+      "id": "4rm9vr8lsj8h",
+      "title": "[Emergency] Crusoe Cloud Shared Storage Maintenance in eu-iceland1-a region",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-03-27T18:27:57.213Z",
+      "resolved_utc": "2026-03-28T00:54:29.727Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/f3mqthx6r0nw"
+    },
+    {
+      "id": "xc2nybpm0kct",
+      "title": "Degraded Experience \u2013 New CMK (Crusoe Managed Kubernetes)  Node Pool Expansion",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-03-30T21:12:12.328Z",
+      "resolved_utc": "2026-03-30T23:14:33.290Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/fn2msm738lg6"
+    },
+    {
+      "id": "62lzhf9lxmk8",
+      "title": "Degraded Resource Management Experience in eu-iceland1",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-04-01T13:29:43.001Z",
+      "resolved_utc": "2026-04-01T14:05:23.502Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/mz8s7gpyswlr"
+    },
+    {
+      "id": "h206kctdkknj",
+      "title": "Crusoe Cloud Shared Storage Maintenance in us-east1-a region",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-04-14T00:08:27.290Z",
+      "resolved_utc": "2026-04-15T04:00:07.281Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/vc509zvz7wqk"
+    },
+    {
+      "id": "qs2z9jq2bxf7",
+      "title": "CMK Customers unable to provision new block storage volumes",
+      "impact_label": "major",
+      "severity": "major",
+      "started_utc": "2026-04-17T01:30:41.000Z",
+      "resolved_utc": "2026-04-17T02:52:12.899Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/l36v4twdlzb5"
+    },
+    {
+      "id": "7t0j6fqd95bk",
+      "title": "Crusoe Cloud Shared Storage Maintenance in us-southcentral1-a region",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-04-24T19:59:43.178Z",
+      "resolved_utc": "2026-04-30T04:00:07.159Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/9llnzzbnxlmf"
+    },
+    {
+      "id": "9lp1h5q585jn",
+      "title": "Crusoe Cloud Shared Storage Maintenance in us-east1-a region",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-04-24T20:01:16.989Z",
+      "resolved_utc": "2026-04-29T04:00:07.607Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/h35t58gskmdx"
+    },
+    {
+      "id": "9pry9yynx7fp",
+      "title": "Crusoe Cloud Shared Storage Maintenance in eu-iceland1-a region",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-04-27T21:44:32.046Z",
+      "resolved_utc": "2026-05-01T04:00:07.489Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/gb1jfmg685gr"
+    },
+    {
+      "id": "bljl8hm9xlcv",
+      "title": "Crusoe Cloud Shared Storage Maintenance in eu-iceland1-a region",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-05-01T02:08:42.648Z",
+      "resolved_utc": "2026-05-01T22:00:07.189Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/qs7h0r59hb99"
+    },
+    {
+      "id": "nchmzt610kb8",
+      "title": "Crusoe Cloud Shared Storage Maintenance in eu-iceland1-a region (Continued)",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-05-01T05:16:36.881Z",
+      "resolved_utc": "2026-05-01T07:02:35.117Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/2mwp7g8kff7p"
+    },
+    {
+      "id": "tpx9bs95yxgt",
+      "title": "503 errors when accessing the Crusoe Compute Console and API",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-05-04T22:26:38.494Z",
+      "resolved_utc": "2026-05-04T23:29:58.943Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/p9wzcc05kbwj"
+    },
+    {
+      "id": "r6glsqngybq3",
+      "title": "Storage Metrics Reporting Issue in the eu-iceland1 Region",
+      "impact_label": "none",
+      "severity": "none",
+      "started_utc": "2026-05-06T22:19:28.733Z",
+      "resolved_utc": "2026-05-06T23:41:12.741Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/v2p0ldxn4ll5"
+    },
+    {
+      "id": "lq1hws63ljf2",
+      "title": "Project Creation Delays",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-05-08T20:04:50.000Z",
+      "resolved_utc": "2026-05-09T03:09:20.401Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/3f8rs4xkvl6f"
+    },
+    {
+      "id": "yqvc4v9yg07n",
+      "title": "Managed Inference Services Inaccessible - Foundry and BYOM",
+      "impact_label": "major",
+      "severity": "major",
+      "started_utc": "2026-05-10T14:41:04.896Z",
+      "resolved_utc": "2026-05-10T18:19:26.961Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/l58vhj2mlhk5"
+    },
+    {
+      "id": "d71m8vc4lmyd",
+      "title": "CCR Push/Pull Outage - Unavailable in Multiple Regions",
+      "impact_label": "critical",
+      "severity": "critical",
+      "started_utc": "2026-05-13T21:34:41.970Z",
+      "resolved_utc": "2026-05-14T00:09:21.349Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/khhk6m3265p0"
+    },
+    {
+      "id": "xmsd9bn2ms0c",
+      "title": "CMK/Slurm Vault migration",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-05-15T23:31:18.358Z",
+      "resolved_utc": "2026-05-16T01:02:41.804Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/7w1dm6nnqt70"
+    },
+    {
+      "id": "ttbq53vkkzs0",
+      "title": "VM Creation and Start Issues in us-southcentral1-a and eu-iceland1-a",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-05-18T08:24:18.082Z",
+      "resolved_utc": "2026-05-19T01:19:44.554Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/987575mcnvxr"
+    },
+    {
+      "id": "y4q9kg9031vp",
+      "title": "Compute instance availability degraded in us-east1-a",
+      "impact_label": "major",
+      "severity": "major",
+      "started_utc": "2026-05-20T01:37:04.000Z",
+      "resolved_utc": "2026-05-20T21:09:07.037Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/7zx8t5ddn739"
+    },
+    {
+      "id": "25nsq7p3vhwq",
+      "title": "Crusoe Cloud Network Maintenance across all the regions",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-05-20T02:43:05.584Z",
+      "resolved_utc": "2026-05-21T06:00:07.650Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/39nmdtst4w0j"
+    },
+    {
+      "id": "699mkxnlk9hh",
+      "title": "Iceland - Elevated Shared Disk Write Latency",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-05-25T12:32:13.601Z",
+      "resolved_utc": "2026-05-26T00:26:52.990Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/p11rms3s0h2w"
+    },
+    {
+      "id": "38r8n1h43sqq",
+      "title": "Crusoe Cloud Shared Storage Maintenance in us-southcentral1-a region",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-06-02T20:54:07.689Z",
+      "resolved_utc": "2026-06-03T05:00:07.505Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/xwfhntbngqcc"
+    },
+    {
+      "id": "d9rnlzn5y6hl",
+      "title": "Crusoe Cloud Shared Storage Maintenance in us-southcentral1-a region (Continued)",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-06-03T17:19:00.967Z",
+      "resolved_utc": "2026-06-04T04:00:31.879Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/9zszn668cnzs"
+    },
+    {
+      "id": "vxhhvxkb53qq",
+      "title": "Degraded network performance in eu-iceland1",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-06-04T02:10:10.353Z",
+      "resolved_utc": "2026-06-04T04:27:09.843Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/n8y168vqmq5w"
+    },
+    {
+      "id": "dw3tjw2w0ljf",
+      "title": "Network Outage in eu-norway1",
+      "impact_label": "none",
+      "severity": "none",
+      "started_utc": "2026-06-08T22:12:26.197Z",
+      "resolved_utc": "2026-06-09T14:56:08.921Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/x8dv1hzrwcdp"
+    },
+    {
+      "id": "6qbl3q7pq80d",
+      "title": "Custom Image Creation Impacted in Select Regions",
+      "impact_label": "none",
+      "severity": "none",
+      "started_utc": "2026-06-11T16:50:47.332Z",
+      "resolved_utc": "2026-06-11T19:47:00.410Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/cfbly9vxsxy3"
+    },
+    {
+      "id": "5r8s3qdhtj5k",
+      "title": "Load Balancer Connectivity Degradation \u2014 Iceland Region",
+      "impact_label": "major",
+      "severity": "major",
+      "started_utc": "2026-06-16T21:15:36.828Z",
+      "resolved_utc": "2026-06-17T01:17:50.180Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/3w0tkx8wscwt"
+    },
+    {
+      "id": "sscmddz0t2x6",
+      "title": "Intermittent internet connectivity disruption in us-east1-a",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-06-25T09:30:00.000Z",
+      "resolved_utc": "2026-06-25T09:30:00.000Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/sdpb6pkz9114"
+    },
+    {
+      "id": "z031x52kzl23",
+      "title": "Crusoe Cloud Network Maintenance in us-east1-a",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-06-27T04:14:30.732Z",
+      "resolved_utc": "2026-07-16T18:54:33.823Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/qqmf3gnwtl8f"
+    },
+    {
+      "id": "nvbpwzkzvs53",
+      "title": "Crusoe Cloud Network Maintenance in eu-iceland1-a",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-06-27T04:18:12.659Z",
+      "resolved_utc": "2026-08-18T11:01:34.896Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/531795d0xmjg"
+    },
+    {
+      "id": "kgsybd8tk13d",
+      "title": "Crusoe Container Registry Maintenance in us-east1-a",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-06-30T21:10:27.829Z",
+      "resolved_utc": "2026-07-01T06:00:20.737Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/yv072drtly98"
+    },
+    {
+      "id": "q46mxq86933n",
+      "title": "Crusoe Container Registry (CCR) Outage \u2013 TLS/Auth Errors in US South Central(us-southcentral1-a)",
+      "impact_label": "none",
+      "severity": "none",
+      "started_utc": "2026-07-08T05:23:20.013Z",
+      "resolved_utc": "2026-07-09T15:23:24.476Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/lkmwj6j6nmzy"
+    },
+    {
+      "id": "v0w7mghqj25m",
+      "title": "Degraded Network Connectivity in us-east-1-a region",
+      "impact_label": "none",
+      "severity": "none",
+      "started_utc": "2026-07-09T14:45:45.117Z",
+      "resolved_utc": "2026-07-09T16:58:34.680Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/qc5tjbhz4kd8"
+    },
+    {
+      "id": "fp15n50ldt26",
+      "title": "Crusoe Cloud Network Maintenance in us-southcentral1-a",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-07-16T16:05:33.280Z",
+      "resolved_utc": "2026-07-30T13:00:33.336Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/91vfd5pdfs9d"
+    },
+    {
+      "id": "8xld1j8nl2dt",
+      "title": "Crusoe Container Registry Maintenance in eu-norway1-a",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-07-20T16:25:20.379Z",
+      "resolved_utc": "2026-07-30T03:00:08.277Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/slm89v8ckfgk"
+    },
+    {
+      "id": "zh45vw5x4q9b",
+      "title": "Planned CMK Maintenance on September 10, 2026",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-08-27T00:30:50.104Z",
+      "resolved_utc": "2026-09-10T17:30:08.224Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/zdr00szv6r56"
+    },
+    {
+      "id": "35p8fp16r0v8",
+      "title": "Crusoe Container Registry Maintenance in us-east1-a",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-08-29T00:01:47.273Z",
+      "resolved_utc": "2026-09-03T03:00:10.239Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/jdc8jzn6r1yt"
+    },
+    {
+      "id": "wpqn8z37z6dv",
+      "title": "Crusoe Container Registry Maintenance in us-southcentral1-a",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-08-29T00:12:47.034Z",
+      "resolved_utc": "2026-09-04T01:30:08.003Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/wck1837jj8fy"
+    },
+    {
+      "id": "blwtqlgqy2dl",
+      "title": "VM and CMK cluster creation issue in us-east2 region",
+      "impact_label": "minor",
+      "severity": "minor",
+      "started_utc": "2026-09-02T08:22:29.000Z",
+      "resolved_utc": "2026-09-02T15:57:38.561Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/rnl3b8hj6xpb"
+    },
+    {
+      "id": "d2rw412xl5qn",
+      "title": "Networking issue affecting service connectivity",
+      "impact_label": "none",
+      "severity": "none",
+      "started_utc": "2026-09-03T12:30:00.000Z",
+      "resolved_utc": "2026-09-03T12:30:00.000Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/m06h108yb3k6"
+    },
+    {
+      "id": "l514h0nnzw0m",
+      "title": "A subset of VMs are showing as UNSPECIFIED in our us-east2 region",
+      "impact_label": "none",
+      "severity": "none",
+      "started_utc": "2026-09-09T09:56:54.000Z",
+      "resolved_utc": "2026-09-09T11:19:14.615Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/xq24t7lb6ys7"
+    },
+    {
+      "id": "36nsx98m5dvb",
+      "title": "Crusoe Container Registry Maintenance in us-east2-a",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-09-09T16:55:09.562Z",
+      "resolved_utc": "2026-09-11T00:32:07.208Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/49ph6npmvttf"
+    },
+    {
+      "id": "6v47ydkb51vb",
+      "title": "Crusoe Cloud Compute Upgrade on IB network eu-iceland1-a H200-141GB SXM IB Network 3",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-09-17T14:42:42.233Z",
+      "resolved_utc": "2026-10-06T21:30:00.000Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/vdlpxv6xfnr7"
+    },
+    {
+      "id": "vt68s4257thf",
+      "title": "Crusoe Cloud Control Plane Maintenance",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-09-18T00:33:43.377Z",
+      "resolved_utc": "2026-09-24T19:30:08.832Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/xr95vwfrn15v"
+    },
+    {
+      "id": "2y0ry4z39vws",
+      "title": "Crusoe Container Registry (CCR) Maintenance",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-09-21T17:45:30.537Z",
+      "resolved_utc": "2026-09-23T02:30:07.540Z",
+      "is_maintenance": true,
+      "url": "https://stspg.io/wr4qjb278fqt"
+    },
+    {
+      "id": "hp3xb537kdwy",
+      "title": "Storage accessibility issues in eu-norway1",
+      "impact_label": "critical",
+      "severity": "critical",
+      "started_utc": "2026-09-29T20:38:31.808Z",
+      "resolved_utc": null,
+      "is_maintenance": false,
+      "url": "https://stspg.io/5d2twt85lz8m"
+    }
+  ],
+  "notes": []
+}

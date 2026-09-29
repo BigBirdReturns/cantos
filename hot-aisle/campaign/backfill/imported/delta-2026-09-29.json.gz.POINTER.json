@@ -1,0 +1,9 @@
+{
+ "schema": "second-run/retained-file-pointer@1",
+ "file": "delta-2026-09-29.json.gz",
+ "bytes": 54912045,
+ "sha256": "a4a26f23321ba82df3880da96174b4354d0b419468701e8fc18821783b3579e0",
+ "rows": null,
+ "retained_at": "sessions/public-tail-20260929/lanes/inferencex-history/imported-main/delta-2026-09-29.json.gz",
+ "reason": "exceeds GitHub file size; every row is reproducible with rebuild_2026_09_29.py from data-raw/ (gitignored) or the public artifacts listed in history-index.json"
+}

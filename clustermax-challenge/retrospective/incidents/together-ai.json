@@ -1,0 +1,38 @@
+{
+  "schema": "secondrun.status-incidents.v1",
+  "provider": "Together AI",
+  "status_page_url": "https://status.together.ai",
+  "retrieved_utc": "2026-09-29T21:42:32Z",
+  "raw_files": [
+    {
+      "path": "retrospective/incidents/raw/together-ai/incidents_2026-01_2026-03.html",
+      "sha256": "fecccd51a2cd606ceff877493960316408806fefaed30e8d0e3c206b3b42a527",
+      "url": "https://status.together.ai/incidents/2026-01/2026-03"
+    },
+    {
+      "path": "retrospective/incidents/raw/together-ai/incidents_2026-04_2026-06.html",
+      "sha256": "c2f4cd656d2b3885c4766dcca71edc444e5a004b5cfc2fb51559e5cfe551c0e1",
+      "url": "https://status.together.ai/incidents/2026-04/2026-06"
+    },
+    {
+      "path": "retrospective/incidents/raw/together-ai/incidents_2026-07_2026-09.html",
+      "sha256": "67a73dc68cade3ec0741c002b4d329e7efaed15c774c3183fec550ab95df7a7e",
+      "url": "https://status.together.ai/incidents/2026-07/2026-09"
+    }
+  ],
+  "coverage_start": "2026-01-01",
+  "coverage_end": "2026-09-29",
+  "severity_map": {
+    "Downtime": "critical",
+    "Degraded performance": "minor",
+    "Maintenance": "none",
+    "(no affected-component state recorded)": "none"
+  },
+  "incidents": [],
+  "notes": [
+    "better-stack platform; collected by paging https://status.together.ai/incidents/<quarter> for 2026-01/03, 2026-04/06, 2026-07/09 and fetching every /incident/<id> detail page (hand-parsed; collect_status.py has no Better Stack mode)",
+    "quarter-page incident counts summed to 0; 0 distinct incident pages fetched",
+    "impact_label is the worst per-update affected-service state colour shown by Better Stack (red=Downtime, yellow=Degraded performance, blue=Maintenance, green=none/resolved). Better Stack has no separate impact field; Downtime is mapped to critical, Degraded performance to minor, and incidents with no affected component recorded to none. This mapping was declared in plan-R2 before any analysis.",
+    "coverage_start is the first day of the oldest quarter page fetched (that page listed Jan-Mar 2026 month sections); older quarters were not fetched."
+  ]
+}

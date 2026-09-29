@@ -1,0 +1,107 @@
+{
+  "schema": "secondrun.rating-binding.v2",
+  "plan_sha256": null,
+  "rating_name": "ClusterMAX",
+  "rating_version": "3.0",
+  "source": {
+    "url": "https://substack-post-media.s3.amazonaws.com/public/images/b2130ed4-61b4-49a8-98e5-03408801831c_1432x880.png",
+    "sha256": "79dc81e4cf7a503632c631b69f011f2a7af109e719cc32253344820cda402e02",
+    "retrieved_utc": "2026-09-23T21:38:10Z",
+    "kind": "medal_table_image",
+    "note": "Medal source is release-3.0/clustermax-3.0.json's recorded primary transcription source (newsletter PNG). It is the same file (sha256 79dc81e4...) that design/registry.json registers."
+  },
+  "rubric": {
+    "url": "https://www.clustermax.ai/criteria",
+    "sha256": "fa8f19c82d6faca1b6f9c9c10e652dbde45a431166bb47c231a7ba5650bb281a",
+    "retrieved_utc": "2026-09-29T18:29:02Z",
+    "pages": [
+      {
+        "url": "https://www.clustermax.ai/criteria",
+        "sha256": "fa8f19c82d6faca1b6f9c9c10e652dbde45a431166bb47c231a7ba5650bb281a",
+        "retrieved_utc": "2026-09-29T18:29:02Z"
+      },
+      {
+        "url": "https://www.clustermax.ai/criteria/security",
+        "sha256": "a54ec4bc293d8082657c4846ecec22cc9546828d0bbc0f8835baf8c6396bf566",
+        "retrieved_utc": "2026-09-29T18:30:57Z"
+      },
+      {
+        "url": "https://www.clustermax.ai/criteria/lifecycle",
+        "sha256": "406757db1d0d3a7df1168980d219c705b600dcf29cfa76256708dd29a15c0bb2",
+        "retrieved_utc": "2026-09-29T18:30:58Z"
+      },
+      {
+        "url": "https://www.clustermax.ai/criteria/orchestration",
+        "sha256": "786b7a7c47236c3ae2d0f50072c6e5b2588208bf408613a402dc5d279924a84c",
+        "retrieved_utc": "2026-09-29T18:30:59Z"
+      },
+      {
+        "url": "https://www.clustermax.ai/criteria/storage",
+        "sha256": "004d9955bdbdfa20fb46d83050b448cccb4d704707d0c58de9ea3c00e6f0cb92",
+        "retrieved_utc": "2026-09-29T18:30:59Z"
+      },
+      {
+        "url": "https://www.clustermax.ai/criteria/networking",
+        "sha256": "0aff08d945e8d968829922dabccec698ef49eaf32d3f767f6d29f1d432e0c48d",
+        "retrieved_utc": "2026-09-29T18:31:00Z"
+      },
+      {
+        "url": "https://www.clustermax.ai/criteria/reliability",
+        "sha256": "7cef18d9776c4d3c92881a89701a5cdc022e85cfb073dd21b5c2db5611c0f1a7",
+        "retrieved_utc": "2026-09-29T18:31:01Z"
+      },
+      {
+        "url": "https://www.clustermax.ai/criteria/monitoring",
+        "sha256": "4d03e7c9c13940b4e6bcce7c68df60fd3e836ca0b22683ee7bfe2ef109eceddc",
+        "retrieved_utc": "2026-09-29T18:31:02Z"
+      },
+      {
+        "url": "https://www.clustermax.ai/criteria/pricing",
+        "sha256": "f319859a53b68b527325c8443fa07516aa1ca4e446e975bb111071f5579e6382",
+        "retrieved_utc": "2026-09-29T18:31:03Z"
+      },
+      {
+        "url": "https://www.clustermax.ai/criteria/partnerships",
+        "sha256": "602bb34fdce1f30370b82d8ba444e42d474fc4543d774e1e05f37a08d7dbc969",
+        "retrieved_utc": "2026-09-29T18:31:04Z"
+      },
+      {
+        "url": "https://www.clustermax.ai/criteria/availability",
+        "sha256": "58e04c5f7bd041b0eea5e6921ab73adb773900a5210d15fa8834786d54274c5d",
+        "retrieved_utc": "2026-09-29T18:31:05Z"
+      }
+    ],
+    "note": "Live clustermax.ai criteria pages (index plus the ten criterion pages) captured 2026-09-29. The site navigation marks 3.0 (Sep, 2026) as current, but the pages carry no rubric version of their own, and the 2026-09-23 copy of /criteria (sha256 20ecb458e7a8...) differs from this one. They are the site rubric as of the capture, not a version-stamped 3.0 rubric."
+  },
+  "bound_at": "2026-09-29T21:56:13.709839+00:00",
+  "medals": {
+    "Azure": "Silver",
+    "CoreWeave": "Platinum",
+    "Crusoe": "Bronze",
+    "DigitalOcean": "Bronze",
+    "Firmus": "Silver",
+    "GMI": "Silver",
+    "Google Cloud": "Gold",
+    "Hyperstack": "Bronze",
+    "Lambda": "Silver",
+    "Nebius": "Platinum",
+    "OVHcloud": "Underperforming",
+    "Oracle": "Gold",
+    "TensorWave": "Silver"
+  },
+  "binding_status": "UNBOUND_NO_PLAN",
+  "binding_status_note": "plan_sha256 is null because no plan exists yet. This file records the medal and rubric sources and the 13 scorable-tier medals from the ledger; it is not a binding for scoring until a plan is frozen and a binding is emitted against its exact bytes (bound_at must precede every trial started_at). The launch_ledger draft was generated against a scratch stub plan, whose hash is not carried here.",
+  "observed_not_scorable": {
+    "Vultr": "Participation Ribbon",
+    "Runpod": "Participation Ribbon",
+    "Fluidstack": "Unavailable",
+    "Scaleway": "Unavailable"
+  },
+  "observed_not_scorable_note": "Participation Ribbon and Unavailable are observed tiers that the frozen five-tier scorer does not accept; they are listed for the record and excluded from medals.",
+  "ledger": {
+    "path": "launch/claims-3.0.rubric-2026-09-29.json",
+    "sha256": "b3115354b4bbbdbeb1b6e7ff2e2fc8387645d151e25532ce71557a9e47f3ae12",
+    "derived_from": "launch/claims-3.0.observed.json",
+    "derived_from_sha256": "9c31d98f1d0903997e83072095043399a0ab01a226e164718571a18f508027b6"
+  }
+}

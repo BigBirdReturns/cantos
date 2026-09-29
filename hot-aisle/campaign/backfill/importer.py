@@ -138,12 +138,19 @@ def count(value, positive=False):
 
 
 def gpu_count(src):
-    """Physical allocation, never TP multiplied by overlapping EP/DCP."""
+    """Physical allocation, never TP multiplied by overlapping EP/DCP.
+
+    A zero allocation (tp:0, or 0 prefill + 0 decode) is a placeholder and degrades to unknown;
+    non-integral or negative counts still raise."""
     for key in ("num_gpus", "num_aggregate_gpu"):
         if src.get(key) is not None:
-            return count(src[key], True), key
+            n = count(src[key])
+            return (n, key) if n > 0 else (None, UNKNOWN + " (zero GPU count in " + key + ")")
     if all(src.get(k) is not None for k in ("num_prefill_gpu", "num_decode_gpu")):
-        return count(count(src["num_prefill_gpu"]) + count(src["num_decode_gpu"]), True), "num_prefill_gpu + num_decode_gpu"
+        n = count(src["num_prefill_gpu"]) + count(src["num_decode_gpu"])
+        return (n, "num_prefill_gpu + num_decode_gpu") if n > 0 else (None, UNKNOWN + " (zero prefill + decode GPUs)")
+    if (src.get("tp") or 0) <= 0 or (src.get("pp", 1) or 0) <= 0:
+        return None, UNKNOWN + " (tp/pp zero or absent)"
     if not src.get("is_multinode") and not src.get("disagg") and all(k in src for k in ("tp", "pp")):
         return count(src["tp"], True) * count(src["pp"], True) * count(src.get("pcp_size", 1), True), "tp * pp * pcp_size (single-node)"
     return None, UNKNOWN
@@ -209,7 +216,18 @@ def inferencemax(entry, raw, manifest_hash, fixture):
                 for stat in ("mean", "median", "p90", "p95", "p99"):
                     add(stat + "_" + metric + "_ms", src.get(stat + "_" + metric), "ms", 1000)
         else:
-            rm = src["request_metrics"]
+            rm = src.get("request_metrics")
+            if rm is None:
+                # Early-July 2026 flat agentic rows: no request_metrics; latency in seconds (assumed), no p50.
+                r["warnings"].append("Flat agentic schema (no request_metrics); latency seconds->ms assumed; no p50 available.")
+                for metric in ("ttft", "e2el", "itl", "tpot"):
+                    for stat in ("mean", "p90", "p95"):
+                        add(stat + "_" + metric + "_ms", src.get(stat + "_" + metric), "ms", 1000)
+                add("output_throughput", src.get("output_tput_tps"), "tokens/s")
+                add("output_throughput_per_gpu", src.get("output_tput_per_gpu"), "tokens/s/GPU")
+                add("total_token_throughput_per_gpu", src.get("tput_per_gpu"), "tokens/s/GPU")
+                add("window_mean_qps", src.get("mean_qps"), "requests/s")
+                rm = {}
             for metric in ("ttft", "e2el", "itl", "tpot"):
                 for stat in ("mean", "p50", "p90", "p95", "p99"):
                     add(("median" if stat == "p50" else stat) + "_" + metric + "_ms",
@@ -227,7 +245,7 @@ def inferencemax(entry, raw, manifest_hash, fixture):
     return out
 
 
-def raw_manifest(root, retrieved_at):
+def raw_manifest(root, retrieved_at, ids=None):
     """Build provenance from operator-supplied index and fetch_history sidecars."""
     root = Path(root)
     index = {}
@@ -244,6 +262,8 @@ def raw_manifest(root, retrieved_at):
     files = []
     for path in sorted(root.glob("results_bmk_*/agg_bmk.json")):
         ident = path.parent.name.removeprefix("results_bmk_")
+        if ids is not None and ident not in ids:
+            continue
         meta = dict(index.get(ident, {}))
         sidecar = path.parent / "artifact.json"
         if sidecar.exists():

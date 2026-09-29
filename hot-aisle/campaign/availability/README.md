@@ -226,3 +226,7 @@ third-party packages; the systemd host needs Python 3.9+ and CA certificates.
 Live credentials and systemd behavior remain UNVERIFIED: no provider API calls
 with credentials, provisioning, installs, commits, pushes or branches were made.
 See BUILD-REPORT.md for exact tests, the N01 contact failure and cleanup status.
+
+## Listed-layer market rows (2026-09-29)
+
+`listed-opencomputeprices.jsonl.gz` holds 73,331 `layer: listed`, `method: api` rows built from the OpenComputePrices public series (one per provider × day × GPU family × count × region, on-demand only, `reason: opencomputeprices:available=<flag>`), kept separate so this ledger's delivered rows stay the buyer-side record. Build script: `../market/build_price_history.py`. The per-day price snapshots behind them are indexed in `../../data/price-history/INDEX.json`.

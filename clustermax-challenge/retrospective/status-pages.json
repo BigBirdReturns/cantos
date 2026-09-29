@@ -83,14 +83,20 @@
       "tier_1_0": "Gold",
       "tier_2_0": "Gold",
       "homepage": "https://www.crusoe.ai/",
-      "status_url": "https://trust.crusoe.ai",
-      "platform": "trust-center (vanta, not an incident status page)",
+      "status_url": "https://status.crusoecloud.com",
+      "platform": "atlassian-statuspage",
       "api_summary_ok": null,
       "history_url_pattern": null,
       "oldest_incident_seen": null,
       "covers_2025_11_to_2026_05": "unknown",
       "covers_2025_03_to_2025_09": "unknown",
-      "notes": "only a Vanta-style security trust center found (https://trust.crusoe.ai); no public incident/status page located; "
+      "notes": "only a Vanta-style security trust center found (https://trust.crusoe.ai); no public incident/status page located; ",
+      "source": "sessions/clustermax-cloudreview-20260929/reports/batch-B.md; providers/crusoe/manifest.json (status_api_incidents.json HTTP 200, 204006 bytes); prior value was the Vanta trust centre trust.crusoe.ai",
+      "updated_utc": "2026-09-29T19:30:00Z",
+      "previous": {
+        "status_url": "https://trust.crusoe.ai",
+        "platform": "trust-center (vanta, not an incident status page)"
+      }
     },
     {
       "rating_name": "FluidStack",
@@ -137,13 +143,18 @@
       "tier_2_0": "Silver",
       "homepage": "https://lambda.ai",
       "status_url": "https://status.lambda.ai",
-      "platform": "atlassian-statuspage",
+      "platform": "incident.io (Atlassian-compatible /api/v2 surface)",
       "api_summary_ok": true,
       "history_url_pattern": "https://status.lambda.ai/api/v2/incidents.json (history?page=N UI is JS-rendered, not scraped)",
       "oldest_incident_seen": "2026-02",
       "covers_2025_11_to_2026_05": false,
       "covers_2025_03_to_2025_09": false,
-      "notes": "history?page=1 loads=False; incidents.json returned 25 incidents; "
+      "notes": "history?page=1 loads=False; incidents.json returned 25 incidents; ",
+      "source": "sessions/clustermax-cloudreview-20260929/providers/lambda/status.html (incident.io markup); matches incidents/INELIGIBLE.md note from 2026-09-23; prior value atlassian-statuspage",
+      "updated_utc": "2026-09-29T19:30:00Z",
+      "previous": {
+        "platform": "atlassian-statuspage"
+      }
     },
     {
       "rating_name": "Google Cloud",
@@ -259,13 +270,18 @@
       "tier_2_0": "Silver",
       "homepage": "https://gcore.com",
       "status_url": "https://status.gcore.com",
-      "platform": "atlassian-statuspage",
+      "platform": "instatus",
       "api_summary_ok": true,
       "history_url_pattern": "https://status.gcore.com/api/v2/incidents.json (history?page=N UI is JS-rendered, not scraped)",
       "oldest_incident_seen": null,
       "covers_2025_11_to_2026_05": "unknown",
       "covers_2025_03_to_2025_09": "unknown",
-      "notes": "history?page=1 loads=True; incidents.json returned 0 incidents; "
+      "notes": "history?page=1 loads=True; incidents.json returned 0 incidents; ",
+      "source": "sessions/clustermax-cloudreview-20260929/reports/batch-A.md; providers/gcore/status.html (Instatus, /api/v2/incidents.json 404); prior value atlassian-statuspage",
+      "updated_utc": "2026-09-29T19:30:00Z",
+      "previous": {
+        "platform": "atlassian-statuspage"
+      }
     },
     {
       "rating_name": "Firmus",
@@ -432,14 +448,20 @@
       "tier_1_0": null,
       "tier_2_0": "Bronze",
       "homepage": "https://www.atlascloud.ai/",
-      "status_url": null,
-      "platform": "none",
+      "status_url": "https://atlascloud.instatus.com",
+      "platform": "instatus",
       "api_summary_ok": null,
       "history_url_pattern": null,
       "oldest_incident_seen": null,
       "covers_2025_11_to_2026_05": "unknown",
       "covers_2025_03_to_2025_09": "unknown",
-      "notes": "no reachable status page among candidates: ['https://status.atlascloud.ai', 'https://atlascloud.statuspage.io', 'https://trust.atlascloud.ai']"
+      "notes": "no reachable status page among candidates: ['https://status.atlascloud.ai', 'https://atlascloud.statuspage.io', 'https://trust.atlascloud.ai']",
+      "source": "sessions/clustermax-cloudreview-20260929/reports/batch-C.md; providers/atlascloud/status.html (title \"AtlasCloud Status\"); prior value none",
+      "updated_utc": "2026-09-29T19:30:00Z",
+      "previous": {
+        "status_url": null,
+        "platform": "none"
+      }
     },
     {
       "rating_name": "Prime Intellect",
@@ -536,14 +558,20 @@
       "tier_1_0": "Bronze",
       "tier_2_0": "Bronze",
       "homepage": "https://verda.ai",
-      "status_url": null,
-      "platform": "none",
+      "status_url": "https://status.verda.com",
+      "platform": "betterstack",
       "api_summary_ok": null,
       "history_url_pattern": null,
       "oldest_incident_seen": null,
       "covers_2025_11_to_2026_05": "unknown",
       "covers_2025_03_to_2025_09": "unknown",
-      "notes": "no reachable status page among candidates: ['https://status.verda.ai', 'https://verdaformerlydatacrunch.statuspage.io', 'https://trust.verda.ai']"
+      "notes": "no reachable status page among candidates: ['https://status.verda.ai', 'https://verdaformerlydatacrunch.statuspage.io', 'https://trust.verda.ai']",
+      "source": "sessions/clustermax-cloudreview-20260929/reports/batch-B.md; providers/verdadatacrunch/status.html (Better Stack markup); prior value was none",
+      "updated_utc": "2026-09-29T19:30:00Z",
+      "previous": {
+        "status_url": null,
+        "platform": "none"
+      }
     },
     {
       "rating_name": "DENVR Dataworks",
@@ -777,14 +805,20 @@
       "tier_1_0": null,
       "tier_2_0": "Underperforming",
       "homepage": "https://www.palebluedot.ai/",
-      "status_url": null,
-      "platform": "none",
+      "status_url": "https://palebluedot.instatus.com",
+      "platform": "none (palebluedot.instatus.com serves the Instatus marketing home page, title \"Instatus - Get ready for downtime\"; no PaleBlueDot status page or notices exist there)",
       "api_summary_ok": null,
       "history_url_pattern": null,
       "oldest_incident_seen": null,
       "covers_2025_11_to_2026_05": "unknown",
       "covers_2025_03_to_2025_09": "unknown",
-      "notes": "no reachable status page among candidates: ['https://status.palebluedot.ai', 'https://palebluedot.statuspage.io', 'https://trust.palebluedot.ai']"
+      "notes": "no reachable status page among candidates: ['https://status.palebluedot.ai', 'https://palebluedot.statuspage.io', 'https://trust.palebluedot.ai']",
+      "source": "sessions/clustermax-cloudreview-20260929/reports/batch-D.md (reported it as a live Instatus page); providers/palebluedot/palebluedot.instatus.com re-read 2026-09-29 and live-fetched /history: marketing page only. Prior value was none",
+      "updated_utc": "2026-09-29T19:30:00Z",
+      "previous": {
+        "status_url": null,
+        "platform": "none"
+      }
     },
     {
       "rating_name": "Hyperbolic",
@@ -795,13 +829,18 @@
       "tier_2_0": "Underperforming",
       "homepage": "https://www.hyperbolic.ai/",
       "status_url": "https://status.hyperbolic.ai",
-      "platform": "custom",
+      "platform": "uptimerobot",
       "api_summary_ok": false,
       "history_url_pattern": "https://status.hyperbolic.ai",
       "oldest_incident_seen": null,
       "covers_2025_11_to_2026_05": "unknown",
       "covers_2025_03_to_2025_09": "unknown",
-      "notes": "non-atlassian/non-status.io platform; manual history depth not probed within budget; "
+      "notes": "non-atlassian/non-status.io platform; manual history depth not probed within budget; ",
+      "source": "sessions/clustermax-cloudreview-20260929/providers/hyperbolic/status.html (UptimeRobot status-page markup, no incident archive); prior value custom",
+      "updated_utc": "2026-09-29T19:30:00Z",
+      "previous": {
+        "platform": "custom"
+      }
     },
     {
       "rating_name": "GPU.NET",
@@ -882,13 +921,18 @@
       "tier_2_0": "Underperforming",
       "homepage": "https://massedcompute.com",
       "status_url": "https://status.massedcompute.com",
-      "platform": "custom",
+      "platform": "statiq (dead: \"No status page found with this domain mapping\")",
       "api_summary_ok": false,
       "history_url_pattern": "https://status.massedcompute.com",
       "oldest_incident_seen": null,
       "covers_2025_11_to_2026_05": "unknown",
       "covers_2025_03_to_2025_09": "unknown",
-      "notes": "non-atlassian/non-status.io platform; manual history depth not probed within budget; "
+      "notes": "non-atlassian/non-status.io platform; manual history depth not probed within budget; ",
+      "source": "sessions/clustermax-cloudreview-20260929/reports/batch-D.md; providers/massedcompute/status.massedcompute.com (1,300-byte StatusIQ error); prior value custom",
+      "updated_utc": "2026-09-29T19:30:00Z",
+      "previous": {
+        "platform": "custom"
+      }
     },
     {
       "rating_name": "Exabits",
@@ -1020,13 +1064,18 @@
       "tier_2_0": "Underperforming",
       "homepage": "https://mithril.ai",
       "status_url": "https://status.mithril.ai",
-      "platform": "atlassian-statuspage",
+      "platform": "instatus",
       "api_summary_ok": true,
       "history_url_pattern": "https://status.mithril.ai/api/v2/incidents.json (history?page=N UI is JS-rendered, not scraped)",
       "oldest_incident_seen": null,
       "covers_2025_11_to_2026_05": "unknown",
       "covers_2025_03_to_2025_09": "unknown",
-      "notes": "history?page=1 loads=True; incidents.json returned 0 incidents; "
+      "notes": "history?page=1 loads=True; incidents.json returned 0 incidents; ",
+      "source": "sessions/clustermax-cloudreview-20260929/reports/batch-D.md; providers/mithrilmlfoundry/status.mithril.ai (Instatus markup), api/v2/incidents.json 404; prior value atlassian-statuspage",
+      "updated_utc": "2026-09-29T19:30:00Z",
+      "previous": {
+        "platform": "atlassian-statuspage"
+      }
     },
     {
       "rating_name": "Lepton AI",
@@ -1078,6 +1127,27 @@
       "covers_2025_11_to_2026_05": "unknown",
       "covers_2025_03_to_2025_09": "unknown",
       "notes": "no reachable status page among candidates: ['https://status.iren.com', 'https://irisenergy.statuspage.io', 'https://trust.iren.com']"
+    },
+    {
+      "rating_name": "Radiant",
+      "releases": [
+        "2.1",
+        "3.0"
+      ],
+      "tier_1_0": null,
+      "tier_2_0": null,
+      "homepage": "https://radiant.co",
+      "status_url": "https://status.radiant.co",
+      "platform": "sorryapp",
+      "api_summary_ok": null,
+      "history_url_pattern": "https://status.radiant.co/history/YYYY/month",
+      "oldest_incident_seen": null,
+      "covers_2025_11_to_2026_05": "unknown",
+      "covers_2025_03_to_2025_09": "unknown",
+      "notes": "added 2026-09-29: SorryApp status page (formerly status.ori.co); 2026 notices are maintenance only",
+      "updated_utc": "2026-09-29T19:30:00Z",
+      "source": "sessions/clustermax-cloudreview-20260929/reports/batch-C.md; providers/radiantori/status_history.html (row added; not present in 2026-09-23 discovery)"
     }
-  ]
+  ],
+  "updated_utc": "2026-09-29T19:30:00Z"
 }

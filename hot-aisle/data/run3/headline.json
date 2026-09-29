@@ -1,0 +1,42 @@
+{
+  "schema": "hot-aisle/headline@2",
+  "status": "published",
+  "record_id": "rec-20260924T004243Z-run3at0",
+  "record_sha256": "254a77bee3c49473fbe64574c3ef6697bf2b24d0e98aba93c35f5cffce455362",
+  "generated": true,
+  "unit": "evaluator-passed, latency-qualified requests",
+  "workload": "Qwen/Qwen3-Coder-30B-A3B-Instruct-FP8 · 55 in / 188 out · concurrency 256",
+  "primary_concurrency": 256,
+  "qualified": true,
+  "reasons": [
+    "Primary cell (concurrency 256) meets every stated requirement."
+  ],
+  "sides": [
+    {
+      "label": "Hot Aisle",
+      "allocation": "1× MI300X VM",
+      "rate": "$2.99 / GPU-hr",
+      "cost_per_1000": 0.690835976637457,
+      "p95_ttft_ms": 155.0379991531372,
+      "p95_e2e_ms": 12353.63903045654,
+      "runs": 1,
+      "accepted_per_s": 1.2022471087828448,
+      "unit": "evaluator-passed, latency-qualified requests"
+    },
+    {
+      "label": "DigitalOcean H100",
+      "allocation": "1× DigitalOcean H100",
+      "rate": "$4.41 / GPU-hr",
+      "cost_per_1000": null,
+      "p95_ttft_ms": null,
+      "p95_e2e_ms": null,
+      "runs": 0,
+      "price_only": true,
+      "required_rate_to_tie": 1.7732139631211858
+    }
+  ],
+  "saving": null,
+  "published_on": null,
+  "evidence_url": "evidence.json",
+  "report_url": "report.html"
+}

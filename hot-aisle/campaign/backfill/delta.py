@@ -165,9 +165,9 @@ def report(imports, cells, as_of, allow_fixtures=False):
     for i, checkpoint in enumerate(checkpoints, 1):
         checkpoint["rank"] = i
     return {"schema": "backfill-delta@1", "as_of": as_of.isoformat(), "measured_cells": len(cells),
-            "imported_source_rows": len({(r["provenance"]["sha256"], r["provenance"].get("artifact_id"), r["row_index"]) for r in imports}),
+            "imported_source_rows": len({(r["provenance"].get("sha256", r["provenance"].get("path")), r["provenance"].get("artifact_id"), r["row_index"]) for r in imports}),
             "comparable_observations": len({g["imported_id"] for g in gaps}),
-            "comparable_source_rows": len({(r["provenance"]["sha256"], r["provenance"].get("artifact_id"), r["row_index"])
+            "comparable_source_rows": len({(r["provenance"].get("sha256", r["provenance"].get("path")), r["provenance"].get("artifact_id"), r["row_index"])
                                             for r in imports if r["id"] in {g["imported_id"] for g in gaps}}),
             "imported_observations": len(imports), "fixture": any(r.get("fixture", False) for r in imports),
             "notice": "Contextual raw gaps and rerun candidates only. No imported checkpoint is certified reproduced by these campaign cells.",

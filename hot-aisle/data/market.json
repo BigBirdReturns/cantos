@@ -1,0 +1,35 @@
+{
+  "schema": "hot-aisle/market-strip@1",
+  "label": "Public on-demand list prices, not the priced allocation",
+  "period": "2026-07",
+  "period_label": "July 2026",
+  "statistic": "median across providers of each provider's median on-demand $/GPU-hr",
+  "unit": "USD / GPU-hr",
+  "source": "OpenComputePrices latest-data release 2026-07-29",
+  "source_url": "https://github.com/thatkavish/OpenComputePrices/releases/tag/latest-data",
+  "license": "MIT (repo)",
+  "master_csv_sha256": "2fba6d003e8fb5824f962162411241d7cdb6fab0311b1680149e7968ea175774",
+  "master_csv_bytes": 10579648604,
+  "master_csv_note": "sha256 recorded in the lane manifest.json for _master.csv (member of data.tar.gz). The file is not stored here; it was streamed and hashed.",
+  "retrieved_utc": "2026-09-29",
+  "gpus": [
+    { "gpu": "MI300X", "median_usd_per_gpu_hr": 3.04, "providers": 7 },
+    { "gpu": "H100", "median_usd_per_gpu_hr": 2.99, "providers": 42 },
+    { "gpu": "H200", "median_usd_per_gpu_hr": 4.29, "providers": 33 },
+    { "gpu": "B200", "median_usd_per_gpu_hr": 6.49, "providers": 23 }
+  ],
+  "origin": {
+    "report": "D:/Projects/Organs/AXM/axm-tools/sessions/public-tail-20260929/lanes/opencomputeprices/REPORT.md",
+    "report_sha256": "c88b2afbbb5c3bc1a6e77fba12012ac93f2c62ee173c5069f55db94436786ff8",
+    "coverage": "D:/Projects/Organs/AXM/axm-tools/sessions/public-tail-20260929/lanes/opencomputeprices/summary/coverage.md",
+    "coverage_sha256": "f8853594cacecd24b703bcb62fa45c4309432ded8fb4f7ae5fbd308410601099",
+    "manifest": "D:/Projects/Organs/AXM/axm-tools/sessions/public-tail-20260929/lanes/opencomputeprices/manifest.json",
+    "manifest_sha256": "0c102b3064bb181faf4dab94c6b015eb23a2968923ecf5f7b36becc3096a70ef",
+    "table": "coverage.md, 'Median on-demand $/GPU-hr by month (all providers)', row 2026-07, prov-med column"
+  },
+  "limits": [
+    "Public on-demand list and marketplace prices, not the allocation this report priced and not a quote.",
+    "Provider count is the number of providers listing that GPU in July 2026; MI300X has 7, so its median is a thin sample.",
+    "Row-weighted medians are not used: they are dominated by providers with many instance shapes."
+  ]
+}

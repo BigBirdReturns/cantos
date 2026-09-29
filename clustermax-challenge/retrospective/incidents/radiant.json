@@ -1,0 +1,90 @@
+{
+  "schema": "secondrun.status-incidents.v1",
+  "provider": "Radiant (Ori)",
+  "status_page_url": "https://status.radiant.co",
+  "retrieved_utc": "2026-09-29T21:50:27Z",
+  "raw_files": [
+    {
+      "path": "retrospective/incidents/raw/radiant/history_2026-january.html",
+      "sha256": "89dfc00653bc9f234fc7000ef1918e79425d9a44de5c9d15547ce64186eaa298",
+      "url": "https://status.radiant.co/history/2026/january"
+    },
+    {
+      "path": "retrospective/incidents/raw/radiant/history_2026-february.html",
+      "sha256": "dfeb89127905f69ab55017ef0560ea3b9f56c8c01e0f96e874a99e944c6257b8",
+      "url": "https://status.radiant.co/history/2026/february"
+    },
+    {
+      "path": "retrospective/incidents/raw/radiant/history_2026-march.html",
+      "sha256": "e1645d7466daa864a5777c59a00a0dc534210b5713eda5de9889c40400334d35",
+      "url": "https://status.radiant.co/history/2026/march"
+    },
+    {
+      "path": "retrospective/incidents/raw/radiant/history_2026-april.html",
+      "sha256": "662c353b59b6b516db5dae79e0023096c34609f5b0daf2a8be2b37374173cd0d",
+      "url": "https://status.radiant.co/history/2026/april"
+    },
+    {
+      "path": "retrospective/incidents/raw/radiant/history_2026-may.html",
+      "sha256": "512175b44234e669006d9fd02dc658ced5e42c44566086ff55ecb8efa29823fb",
+      "url": "https://status.radiant.co/history/2026/may"
+    },
+    {
+      "path": "retrospective/incidents/raw/radiant/history_2026-september.html",
+      "sha256": "5ca2d4b5ce02590b0f3f07234772d1803d860ff3640824ce871369c37d097099",
+      "url": "https://status.radiant.co/history/2026/september"
+    }
+  ],
+  "coverage_start": "2026-01-01",
+  "coverage_end": "2026-09-29",
+  "severity_map": {
+    "notice-complete": "none"
+  },
+  "incidents": [
+    {
+      "id": "485443",
+      "title": "London Site Maintenance \u2013 No Impact to Running Workloads, Potential Disruption to Incoming and Outgoing Traffic",
+      "impact_label": "notice-complete",
+      "severity": "none",
+      "started_utc": "2026-02-06T06:00:05Z",
+      "resolved_utc": "2026-02-06T06:00:05Z",
+      "is_maintenance": true,
+      "url": "https://status.radiant.co/history/2026/february/lf7u1x0cesu1eh26-london-site-maintenance-no-impact-to-running-workloads-potential-disruption-to-incoming-and-outgoing-traffic"
+    },
+    {
+      "id": "489271",
+      "title": "Seattle - Site maintenance",
+      "impact_label": "notice-complete",
+      "severity": "none",
+      "started_utc": "2026-03-12T18:00:07Z",
+      "resolved_utc": "2026-03-12T18:00:07Z",
+      "is_maintenance": true,
+      "url": "https://status.radiant.co/history/2026/march/cr5tgbyi46n3z13m-seattle-site-maintenance"
+    },
+    {
+      "id": "494890",
+      "title": "London \u2013 Site Maintenance",
+      "impact_label": "notice-complete",
+      "severity": "none",
+      "started_utc": "2026-05-05T22:30:07Z",
+      "resolved_utc": "2026-05-05T22:30:07Z",
+      "is_maintenance": true,
+      "url": "https://status.radiant.co/history/2026/may/cxighjesfyqsjqvw-london-site-maintenance"
+    },
+    {
+      "id": "496402",
+      "title": "London - Site Maintenance",
+      "impact_label": "notice-complete",
+      "severity": "none",
+      "started_utc": "2026-05-18T21:30:07Z",
+      "resolved_utc": "2026-05-18T21:30:07Z",
+      "is_maintenance": true,
+      "url": "https://status.radiant.co/history/2026/may/oibijsnx4yyzkke9-london-site-maintenance"
+    }
+  ],
+  "notes": [
+    "SorryApp platform (no collect_status.py mode); hand-collected from https://status.radiant.co/history/2026/<month> for January-September 2026. June, July and August return 404 (the history month picker lists no notices for those months).",
+    "SorryApp notices carry no severity. Every notice in 2026 is a titled maintenance notice, flagged is_maintenance. started_utc/resolved_utc are the \"Ended\" timestamp shown on the card (start not shown in the list).",
+    "coverage_start is the first day of the oldest month requested (January 2026); a month with no notices returns 404 rather than an explicit \"no incidents\" page, which is weaker than an archive boundary."
+  ]
+}

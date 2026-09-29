@@ -4,6 +4,25 @@
 
 Live: https://bigbirdreturns.github.io/axm-tools/hot-aisle/
 
+2.4 (29 September 2026) opens the front door on real data. The first card is the retained
+Run 3 record from 24 September 2026: one Hot Aisle 1x MI300X VM, 4,336 of 8,622 graded coding
+requests accepted, $0.6908 per 1,000 accepted at the $2.99 list price over the benchmark window,
+with the accepted rate, p95 first token, rejected share and the H100 price-ratio break-even. The page
+recomputes the record through its own engine and checks its checksum before showing a number, and the
+card carries its measurement date, allocation and the campaign disclosure (Hot Aisle credit, a
+pending paid engagement, one run, no invoice). The whole-run figures from the campaign record ($0.74
+against $1.20 for the DigitalOcean H100 arm) are shown as imported, not recomputed. A one-line market strip
+under the card gives July 2026 public on-demand list prices, median across providers (MI300X 7
+providers, H100 42, H200 33, B200 23) from the OpenComputePrices latest-data release of
+2026-07-29, labelled as public on-demand list prices, not the priced allocation. The empty drop
+target sits directly below; the synthetic demonstration record stays folded under its own heading,
+unchanged. New files: `data/run3/` (record, evidence, headline, receipt, `SOURCES.json` with origin
+paths and sha256, the retained result bytes, and `build-run3.cjs`, which rebuilds them and embeds the
+record in the page) and `data/market.json`. The report engine and the runner are unchanged.
+Checks added: `runner/test/run3-door.test.cjs` and front-door journeys in `scripts/verify_page.mjs`.
+The kit (`MANIFEST.json`, `workload-report.zip`) needs `python scripts/build_kit.py` to pick up the
+new page.
+
 2.3 (22 September 2026) puts the front door first. The page opens on an empty drop
 target. A `vllm bench serve` result becomes one card: cost per 1,000 accepted requests
 on the allocation you priced, the accepted-request rate, p95 first token, the rejected

@@ -1,0 +1,38 @@
+{
+  "schema": "secondrun.status-incidents.v1",
+  "provider": "Hydra",
+  "status_page_url": "https://status.hydrahost.com",
+  "retrieved_utc": "2026-09-29T21:43:51Z",
+  "raw_files": [
+    {
+      "path": "retrospective/incidents/raw/hydra/incidents_2026-01_2026-03.html",
+      "sha256": "353aecb879c7ce92e1efa47fa400dc8b32db7379b92a403634f89fab56a21ce7",
+      "url": "https://status.hydrahost.com/incidents/2026-01/2026-03"
+    },
+    {
+      "path": "retrospective/incidents/raw/hydra/incidents_2026-04_2026-06.html",
+      "sha256": "b93fef7ef931c53797a00bb573657fe2dc7f74bba61c10115ce3482c82993983",
+      "url": "https://status.hydrahost.com/incidents/2026-04/2026-06"
+    },
+    {
+      "path": "retrospective/incidents/raw/hydra/incidents_2026-07_2026-09.html",
+      "sha256": "785b59ba01c02a4ba106b218b94e2c6c45c9589c9824f9f602e7b92974c70fa2",
+      "url": "https://status.hydrahost.com/incidents/2026-07/2026-09"
+    }
+  ],
+  "coverage_start": "2026-01-01",
+  "coverage_end": "2026-09-29",
+  "severity_map": {
+    "Downtime": "critical",
+    "Degraded performance": "minor",
+    "Maintenance": "none",
+    "(no affected-component state recorded)": "none"
+  },
+  "incidents": [],
+  "notes": [
+    "better-stack platform; collected by paging https://status.hydrahost.com/incidents/<quarter> for 2026-01/03, 2026-04/06, 2026-07/09 and fetching every /incident/<id> detail page (hand-parsed; collect_status.py has no Better Stack mode)",
+    "quarter-page incident counts summed to 0; 0 distinct incident pages fetched",
+    "impact_label is the worst per-update affected-service state colour shown by Better Stack (red=Downtime, yellow=Degraded performance, blue=Maintenance, green=none/resolved). Better Stack has no separate impact field; Downtime is mapped to critical, Degraded performance to minor, and incidents with no affected component recorded to none. This mapping was declared in plan-R2 before any analysis.",
+    "coverage_start is the first day of the oldest quarter page fetched (that page listed Jan-Mar 2026 month sections); older quarters were not fetched."
+  ]
+}
