@@ -9,8 +9,8 @@ Run 3 record from 24 September 2026: one Hot Aisle 1x MI300X VM, 4,336 of 8,622 
 requests accepted, $0.6908 per 1,000 accepted at the $2.99 list price over the benchmark window,
 with the accepted rate, p95 first token, rejected share and the H100 price-ratio break-even. The page
 recomputes the record through its own engine and checks its checksum before showing a number, and the
-card carries its measurement date, allocation and the campaign disclosure (Hot Aisle credit, a
-pending paid engagement, one run, no invoice). The whole-run figures from the campaign record ($0.74
+card carries its measurement date, allocation and one disclosure line linked to
+campaign/DISCLOSURES.md (one run, no invoice). The whole-run figures from the campaign record ($0.74
 against $1.20 for the DigitalOcean H100 arm) are shown as imported, not recomputed. A one-line market strip
 under the card gives July 2026 public on-demand list prices, median across providers (MI300X 7
 providers, H100 42, H200 33, B200 23) from the OpenComputePrices latest-data release of

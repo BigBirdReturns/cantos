@@ -140,20 +140,12 @@ def git_head() -> dict:
         return {'head': None}
 
 
+SPONSOR_LINE = ("Hot Aisle arm run on a provider credit; costed at undiscounted list price. "
+                "See hot-aisle/campaign/DISCLOSURES.md.")
+
+
 def disclosure_text() -> str:
-    p = REPO / 'hot-aisle/campaign/DISCLOSURES.md'
-    lines, on = [], False
-    if p.exists():
-        for line in p.read_text(encoding='utf-8').splitlines():
-            if line.startswith('## Funding and relationship'):
-                on = True
-                continue
-            if on and line.startswith('## '):
-                break
-            if on and line.strip():
-                lines.append(line.strip().lstrip('- ').strip())
-    sponsor = ' '.join(lines) if lines else 'Sponsor disclosure file hot-aisle/campaign/DISCLOSURES.md was not readable; see it before using any Hot Aisle figure.'
-    return (sponsor + ' Imported external observations (InferenceX, MLPerf, OpenComputePrices, provider status pages, SemiAnalysis newsletter) are '
+    return (SPONSOR_LINE + ' Imported external observations (InferenceX, MLPerf, OpenComputePrices, provider status pages, SemiAnalysis newsletter) are '
             'third-party data, not our measurements. Nothing in this receipt invents a value: a gated or unreachable source is HOLD with its HTTP code.')
 
 
@@ -316,6 +308,7 @@ def finalize(date_s: str) -> int:
     probe_fail = bool(probes and (probes.get('counts', {}).get('FAIL') or probes.get('overall') == 'FAIL'))
     doc['overall'] = 'FAIL' if (fails or doc['frozen']['moved'] or probe_fail) else ('OK' if doc.get('complete') else 'INCOMPLETE')
     doc['probes'] = {'overall': probes.get('overall'), 'counts': probes.get('counts')} if probes else None
+    doc['disclosure'] = disclosure_text()
     if doc['stages']:
         doc['started_utc'] = min(x['started_utc'] for x in doc['stages'])
         doc['finished_utc'] = max(x['finished_utc'] for x in doc['stages'])

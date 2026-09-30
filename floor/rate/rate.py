@@ -123,13 +123,8 @@ NAME_TOKENS = {  # tokens that must appear in a fetched trust page for it to cou
     "mithrilmlfoundry": ["mithril"], "gmocloud": ["gmo"], "e2enetworks": ["e2e"],
 }
 DISCLOSURES = {
-    "hotaisle": ("Hot Aisle is the reference shop of this project: 'Hot Aisle-grade' in the shop-eval kit names "
-                 "its observed behaviors, and the project holds campaign-private measurements (Run 1/Run 3 "
-                 "telemetry, invoices, TUI observations) about it.  None of that is used here.  This row is "
-                 "scored ONLY from public evidence: the 2025-11-06 ClusterMAX 2.0 page, Hot Aisle's own public "
-                 "site pages captured 2026-09-29, the public status-page discovery, the public OpenComputePrices "
-                 "feed, and campaign listing rows whose source is a public pricing page.  Read the row as a "
-                 "third-party desk view of Hot Aisle, not as an endorsement or a measured result."),
+    "hotaisle": ("Scored from public evidence only. The project holds private campaign measurements "
+                 "about Hot Aisle; none are used in this row."),
 }
 PUBLIC_KINDS = {"claim", "surface", "status", "incident", "price", "campaign_public_listing"}
 

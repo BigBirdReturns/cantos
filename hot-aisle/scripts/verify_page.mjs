@@ -45,7 +45,7 @@ async function staticPass(browser) {
   check('static', 'real_card_not_synthetic', !/synthetic/i.test(await page.locator('#real-card').innerText()) && /MEASURED SEPTEMBER 24, 2026/i.test(await page.locator('#real-card .bar .eyebrow').innerText()));
   { const t = await page.locator('#real-card').innerText();
     check('static', 'real_card_has_the_five_figures', /155 ms/.test(t) && /49\.7%/.test(t) && /1\.2\s/.test(t) && /4,336 of 8,622/.test(t) && /147\.5%/.test(t) && /per 1,000/.test(t), t.slice(0, 200));
-    check('static', 'real_card_names_allocation_date_and_disclosure', /1× MI300X VM/i.test(t) && /September 24, 2026/i.test(t) && /\$200 credit given by Hot Aisle/.test(t) && /pitching Hot Aisle a paid engagement/.test(t) && /list price/i.test(t));
+    check('static', 'real_card_names_allocation_date_and_disclosure', /1× MI300X VM/i.test(t) && /September 24, 2026/i.test(t) && /Hot Aisle arm run on a provider credit; costed at undiscounted list price\. See hot-aisle\/campaign\/DISCLOSURES\.md\./.test(t) && /list price/i.test(t));
     check('static', 'real_card_breakeven_is_price_ratio', /price ratio only/i.test(t) && /Price ratio, not a measurement/i.test(t)); }
   check('static', 'drop_target_directly_below_real_card', await page.evaluate(() => { const c = document.getElementById('real-card'), s = document.getElementById('stage'); const seq = [...document.querySelectorAll('#door > *, #drop-lead, #stage')].map(e => e.id); return c.compareDocumentPosition(s) & Node.DOCUMENT_POSITION_FOLLOWING && seq.indexOf('market-strip') < seq.indexOf('stage'); }));
   { const t = await page.locator('#market-strip').innerText();

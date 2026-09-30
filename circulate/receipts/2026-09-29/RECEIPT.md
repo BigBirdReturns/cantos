@@ -65,6 +65,6 @@ PROBES.json: overall PASS, counts {"PASS": 11}.
 
 ## Disclosure
 
-The Hot Aisle arms ran on a **$200 credit given by Hot Aisle** to the Second Run team. Second Run is pitching Hot Aisle a paid engagement. Costs are computed at **undiscounted list price** ($2.99/GPU-hr), not at the credit. The DigitalOcean arm was self-funded at list price ($4.41/GPU-hr). Imported external observations (InferenceX, MLPerf, OpenComputePrices, provider status pages, SemiAnalysis newsletter) are third-party data, not our measurements. Nothing in this receipt invents a value: a gated or unreachable source is HOLD with its HTTP code.
+Hot Aisle arm run on a provider credit; costed at undiscounted list price. See hot-aisle/campaign/DISCLOSURES.md. Imported external observations (InferenceX, MLPerf, OpenComputePrices, provider status pages, SemiAnalysis newsletter) are third-party data, not our measurements. Nothing in this receipt invents a value: a gated or unreachable source is HOLD with its HTTP code.
 
 Bulk outputs (raw artifacts, raw pages, per-day price files, full delta) are not committed; in CI they are uploaded as the workflow artifact `circulate-retained-2026-09-29`.

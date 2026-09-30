@@ -111,8 +111,7 @@ class HotAisle(unittest.TestCase):
     def test_disclosure_present(self):
         r = self.row()
         self.assertIn("disclosure", r)
-        self.assertIn("Hot Aisle", r["disclosure"])
-        self.assertIn("ONLY from public evidence", r["disclosure"])
+        self.assertEqual(r["disclosure"], "Scored from public evidence only. The project holds private campaign measurements about Hot Aisle; none are used in this row.")
         for other in ROWS:
             if other["slug"] != "hotaisle":
                 self.assertNotIn("disclosure", other)

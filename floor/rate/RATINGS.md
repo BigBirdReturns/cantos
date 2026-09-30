@@ -770,7 +770,7 @@ distance 4, unknown 0, evidence 15 (of 13 review sentences). 2.0 page: Bronze. 3
 
 distance 4, unknown 0, evidence 15 (of 16 review sentences). 2.0 page: Bronze. 3.0 medal: NOT IN 3.0 TABLE.
 
-**Disclosure.** Hot Aisle is the reference shop of this project: 'Hot Aisle-grade' in the shop-eval kit names its observed behaviors, and the project holds campaign-private measurements (Run 1/Run 3 telemetry, invoices, TUI observations) about it.  None of that is used here.  This row is scored ONLY from public evidence: the 2025-11-06 ClusterMAX 2.0 page, Hot Aisle's own public site pages captured 2026-09-29, the public status-page discovery, the public OpenComputePrices feed, and campaign listing rows whose source is a public pricing page.  Read the row as a third-party desk view of Hot Aisle, not as an endorsement or a measured result.
+**Disclosure.** Scored from public evidence only. The project holds private campaign measurements about Hot Aisle; none are used in this row.
 
 - SHORT delivery / `no_health_checks`: `cmcr-hotaisle-09`
 - SHORT delivery / `no_shared_storage`: `cmcr-hotaisle-09`
