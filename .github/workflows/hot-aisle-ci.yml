@@ -1,9 +1,9 @@
 name: Cantos workspace and execution instruments
 on:
   push:
-    paths: ['README.md', 'app/**', 'index.html', 'assets/**', 'hot-aisle/**', 'compute/**', 'integration/**', '.gitattributes', '.github/workflows/pages.yml', '.github/workflows/hot-aisle-ci.yml']
+    paths: ['README.md', 'app/**', 'index.html', 'assets/**', 'hot-aisle/**', 'compute/**', 'integration/**', 'corpus/**', 'research-desk/**', '.gitattributes', '.github/workflows/pages.yml', '.github/workflows/hot-aisle-ci.yml']
   pull_request:
-    paths: ['README.md', 'app/**', 'index.html', 'assets/**', 'hot-aisle/**', 'compute/**', 'integration/**', '.gitattributes', '.github/workflows/pages.yml', '.github/workflows/hot-aisle-ci.yml']
+    paths: ['README.md', 'app/**', 'index.html', 'assets/**', 'hot-aisle/**', 'compute/**', 'integration/**', 'corpus/**', 'research-desk/**', '.gitattributes', '.github/workflows/pages.yml', '.github/workflows/hot-aisle-ci.yml']
   workflow_dispatch: {}
 permissions:
   contents: read
@@ -44,6 +44,10 @@ jobs:
           python -m unittest discover -s integration/tests -p 'test_release_gate.py' -v
           python -m unittest discover -s integration/tests -p 'test_task_*.py' -v
           python -m unittest discover -s integration/tests -p 'test_work.py' -v
+      - name: Local corpus source replay and native history continuity
+        run: |
+          python -B -m unittest discover -s corpus/tests -p 'test_*.py' -v
+          node --test corpus/tests/batch_stream.test.cjs
       - name: Source-driven kits are reproducible
         run: |
           set -euo pipefail

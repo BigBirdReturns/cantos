@@ -11,6 +11,27 @@ tools and examples. Run 3 is one historical compute experiment. Preserve its
 measurements and limitations without making it the default identity of Cantos.
 Do not invent functioning workspaces for areas without public implementations.
 
+The product is a body of work people can find, understand, reproduce, change and
+extend. Preserve bulk discovery and comparison, work histories, and Second Run's
+execution as connected parts. Build toward an indexed observation opening its
+history, that history exposing an applicable next attempt, and the actual returned
+attempt extending the record through existing owners. Preserve collection scale;
+resolve available relationships programmatically rather than hand-authoring a
+catalog of stories.
+
+Keep recorded rationale, configuration changes and later outcomes distinct.
+Missing rationale stays missing. Retain failed and inconclusive attempts with
+their conditions; do not manufacture a replication outcome. Calibration selection,
+recomputation, checked reuse and a fresh measurement keep their actual meanings.
+Independent collections retain their own criteria and accumulated state.
+
+The estate's evidence mostly lives outside this repository: capture lanes under
+`axm-tools/sessions/<session>/lanes/<lane>/` (rows in the estate's own
+`imported-observation@1` schema with per-file manifests), retained bundles under
+`S:\Scratch\Builds\`, and other organs' evidence folders. Before declaring
+material missing, look there. `corpus/estate_bundle.py` turns capture lanes into
+a Cantos collection without re-fetching; use it rather than re-pulling sources.
+
 Before proposing the next step, inspect the current owner and tests.
 `integration/WORK.md` documents the already implemented retained-judgment
 handoff. Historical dispositions are context; reconcile them with later work.
