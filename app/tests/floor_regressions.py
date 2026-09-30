@@ -191,7 +191,14 @@ try:
         assert page.locator("#overview-view").is_visible() and page.locator("#decision-view").is_hidden(), "cold entry is not the overview"
         assert page.evaluate("D.decisionClass(workspace)") == "hardware", "verified Run 3 workspace was not retained behind the overview"
         assert page.locator(".task-cell").count() == 0, "synthetic invoice cells leaked into the overview"
-        assert page.locator("#overview-view .program-card").count() == 3 and page.locator("#overview-view .catalog-card").count() == 7, "program or implemented-work catalog is incomplete"
+        assert page.locator("#overview-view .program-card").count() == 3, "Second Run program areas are incomplete"
+        required_catalog = {'hot-aisle/index.html', 'floor/index.html',
+                            'clustermax-challenge/index.html', 'circulate/index.html',
+                            'shelf/index.html', 'compute/index.html', 'compute/results.html',
+                            'corpus/app.html',
+                            'https://github.com/BigBirdReturns/cantos/blob/main/integration/WORK.md'}
+        catalog = set(page.locator('#overview-view .catalog-card').evaluate_all('(cards)=>cards.map(c=>c.getAttribute("href"))'))
+        assert required_catalog <= catalog, f"missing implemented work: {required_catalog - catalog}"
         assert page.locator("#home-open-btn").is_visible(), "packet entry is not available from the overview"
         return "Cantos overview visible; verified Run 3 packet remains in memory without changing saved state"
     check("cold entry is a Cantos overview while the verified Run 3 packet remains in memory", cold_overview)

@@ -49,6 +49,9 @@ alongside the execution instruments. The filename is retained for release-gate
 continuity. Changes to `README.md`, `app/`, `index.html`, `assets/`, either relevant workflow,
 or the existing compute/integration source require matching qualification.
 `pages.yml` stages and deploys only after the release gate passes.
+The staging size filter retains `compute/community-kit.zip` as an intentional
+public download and compares its staged bytes with the qualified source kit.
+The community results page links to that independently runnable collection.
 
 `app/verification/` contains historical receipts and captures. New checks must
 name the actual build they exercised; a previous green receipt is not acceptance

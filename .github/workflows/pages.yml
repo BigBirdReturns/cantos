@@ -57,8 +57,11 @@ jobs:
             --exclude '**/__pycache__' \
             --exclude '**/.pytest_cache' \
             ./ _site/
-          echo "files over 25 MB removed from the site artifact (they remain in the repository):"
-          find _site -type f -size +25M -print -delete
+          # The independently runnable community kit is an intentional public
+          # download linked by compute/results.html, even above the bulk cutoff.
+          echo "bulk files over 25 MB omitted; the public community kit is retained:"
+          find _site -type f -size +25M ! -path '_site/compute/community-kit.zip' -print -delete
+          cmp compute/community-kit.zip _site/compute/community-kit.zip
           du -sh _site
 
       - uses: actions/configure-pages@v5

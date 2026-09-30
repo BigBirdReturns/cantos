@@ -599,6 +599,15 @@ html.cascade .task-cell{view-transition-name:var(--vt)!important}
 .overview-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:25px}
 .overview-shortcut{white-space:nowrap}
 .overview-primary{text-decoration:none}
+.overview-hero>.overview-ownership{font-size:12px;color:var(--gold);margin-top:16px}
+.trail-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.trail-card{display:flex;flex-direction:column;align-items:flex-start;gap:12px;min-width:0;padding:22px 20px;border:1px solid #48434a;border-radius:4px;background:linear-gradient(145deg,#222126,#17181a);text-align:left;text-decoration:none;transition:background var(--fast) var(--ease),border-color var(--fast) var(--ease)}
+.trail-card:hover{background:#29272d;border-color:var(--gold)}
+.trail-card>span{font-size:10px;letter-spacing:.1em;color:var(--gold)}
+.trail-card>strong{font-size:18px;line-height:1.35;font-weight:550;color:var(--ink)}
+.trail-card>small{font-size:12px;line-height:1.65;color:var(--muted)}
+.trail-card>b{margin-top:auto;padding-top:8px;font-size:11px;font-weight:500;color:var(--gold)}
+@media(max-width:900px){.trail-grid{grid-template-columns:minmax(0,1fr)}}
 .overview-section{margin-top:42px}
 .overview-section-head{margin-bottom:17px}
 .overview-section-head .eyebrow{display:block;margin-bottom:8px}
@@ -659,12 +668,21 @@ html.cascade .task-cell{view-transition-name:var(--vt)!important}
       <span class="eyebrow">CANTOS / WORK THAT CAN CONTINUE</span>
       <h1>Knowledge and judgment that compound.</h1>
       <p>Cantos connects evidence, decisions, execution and consequences so work can be understood, corrected and continued. Second Run makes applicable judgment repeatable; AXM foundations give records durable identity and continuity.</p>
+      <p class="overview-ownership">Browse without an account. Export your records. Keep different criteria and run an independent collection.</p>
       <div class="overview-actions">
         <a class="primary overview-primary" data-site-path="research-desk/index.html" href="research-desk/index.html">Start with the Research Desk <span aria-hidden="true">↗</span></a>
         <button id="home-open-btn" class="outline-button" type="button">Open a decision packet</button>
         <button id="home-return-btn" class="text-button" type="button" data-view="decision">Return to open workspace</button>
       </div>
     </header>
+    <section class="overview-section" aria-labelledby="trail-title">
+      <div class="overview-section-head"><span class="eyebrow">START WITH A REAL TRAIL</span><h2 id="trail-title">See the work. Follow the choices. Take it further.</h2><p>One compute investigation shows the connection. The same ambition spans software, production and technical investigation.</p></div>
+      <div class="trail-grid">
+        <a class="trail-card" data-site-path="hot-aisle/index.html" href="hot-aisle/index.html"><span>01 / INSPECT THE EVIDENCE</span><strong>What did the work actually deliver?</strong><small>Measured requests, failures and competing cost bases. Follow the surprising result back to its conditions.</small><b>Explore the workload report ↗</b></a>
+        <button class="trail-card" type="button" data-open-workspace="run3"><span>02 / FOLLOW A DECISION</span><strong>Change an assumption. Keep the history.</strong><small>Open the retained Run 3 decision, change a price assumption and recompute. Earlier editions and source limits remain visible.</small><b>Explore one real decision →</b></button>
+        <a class="trail-card" data-site-path="compute/results.html" href="compute/results.html"><span>03 / CONTINUE INDEPENDENTLY</span><strong>Take the result and the tools.</strong><small>Compare retained results, check a claim and export the decision. The community kit lets you operate your own collection.</small><b>Open the results and community kit ↗</b></a>
+      </div>
+    </section>
     <section class="overview-section" aria-labelledby="program-title">
       <div class="overview-section-head"><span class="eyebrow">HOW WORK CONTINUES</span><h2 id="program-title">Second Run carries resolved judgment into execution and reuse</h2></div>
       <div class="program-grid">
@@ -683,7 +701,8 @@ html.cascade .task-cell{view-transition-name:var(--vt)!important}
         <a class="catalog-card" data-site-path="circulate/index.html" href="circulate/index.html"><span>MANUAL DATA CYCLE</span><strong>Circulation receipts</strong><small>Manually invoked public-data cycles, receipts, retained-study checks and probes.</small><b>Open receipts ↗</b></a>
         <a class="catalog-card" data-site-path="shelf/index.html" href="shelf/index.html"><span>BOUNDED CLAIMS</span><strong>Public shelf</strong><small>A public shelf of bounded claims with their evidence limits.</small><b>Open shelf ↗</b></a>
         <a class="catalog-card" data-site-path="compute/index.html" href="compute/index.html"><span>ECONOMICS / INSTRUMENT</span><strong>Compute desk</strong><small>Provider-neutral price and material inputs for bounded decisions.</small><b>Open Compute desk</b></a>
-        <a class="catalog-card" data-site-path="corpus/app.html" href="corpus/app.html"><span>RETAINED COLLECTION</span><strong>Estate collection</strong><small>318,472 imported observations with producing commits, runs and issues; the page explains how to serve the collection locally.</small><b>Open collection ↗</b></a>
+        <a class="catalog-card" data-site-path="compute/results.html" href="compute/results.html"><span>RESULTS / INDEPENDENT COLLECTIONS</span><strong>Compare, challenge and continue</strong><small>Retained results, claim checks, portable decisions and a downloadable kit for running your own collection.</small><b>Open the community board ↗</b></a>
+        <a class="catalog-card" data-site-path="corpus/app.html" href="corpus/app.html"><span>RETAINED COLLECTION</span><strong>Estate collection</strong><small>318,472 retained records, including benchmark observations and producer issues/PRs; the page explains how to serve the collection locally.</small><b>Open collection ↗</b></a>
         <a class="catalog-card" href="https://github.com/BigBirdReturns/cantos/blob/main/integration/WORK.md"><span>EXECUTION / QUALIFIED CANDIDATE</span><strong>Integration work</strong><small>Local execution and reuse documentation; qualification does not imply production activation.</small><b>Read work and qualification</b></a>
       </div>
     </section>
