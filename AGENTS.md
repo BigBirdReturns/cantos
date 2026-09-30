@@ -25,6 +25,13 @@ their conditions; do not manufacture a replication outcome. Calibration selectio
 recomputation, checked reuse and a fresh measurement keep their actual meanings.
 Independent collections retain their own criteria and accumulated state.
 
+The estate's evidence mostly lives outside this repository: capture lanes under
+`axm-tools/sessions/<session>/lanes/<lane>/` (rows in the estate's own
+`imported-observation@1` schema with per-file manifests), retained bundles under
+`S:\Scratch\Builds\`, and other organs' evidence folders. Before declaring
+material missing, look there. `corpus/estate_bundle.py` turns capture lanes into
+a Cantos collection without re-fetching; use it rather than re-pulling sources.
+
 Before proposing the next step, inspect the current owner and tests.
 `integration/WORK.md` documents the already implemented retained-judgment
 handoff. Historical dispositions are context; reconcile them with later work.

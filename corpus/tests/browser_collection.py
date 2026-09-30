@@ -44,7 +44,7 @@ def main():
             page.locator("#next").click()
             expect(page.locator("#page")).to_have_text("26–50")
             check("pagination advances", page.locator(".result").first.get_attribute("data-row") != first_page)
-            page.locator("select[name=unit]").select_option("Latency (ms)")
+            page.locator("input[name=unit]").fill("Latency (ms)")
             page.locator("#search button").click()
             expect(page.locator("#status")).to_contain_text("571 matching")
             row_id = page.locator(".result").first.get_attribute("data-row")

@@ -117,7 +117,65 @@ def community(s,raw):
         r['scope']={'post_id':n['id'],'crosspost_parent':n.get('crosspost_parent'),'needs_config_join':True,'matches':[{'value':float(m.group(1)),'unit':'reported tokens/s','start':m.start(),'end':m.end()} for m in pattern.finditer(text)]}
         yield r
 
-ADAPTERS={'mlperf-summary':mlperf,'azure-trace-csv':traces,'mooncake-trace-jsonl':traces,'openrouter-rankings':openrouter,'openrouter-models':openrouter,'azure-prices':prices,'aws-prices':prices,'gcp-prices':prices,'reddit-listing':community,'llama-bench-json':community}
+def jsonl(raw):
+    """Non-empty lines in file order. Each yielded row's position is its stable source index."""
+    for line in io.BytesIO(raw):
+        if line.strip(): yield json.loads(line)
+
+def finite(x):
+    if x is None: return None
+    if isinstance(x,bool) or not isinstance(x,(int,float)) or not math.isfinite(x): raise ValueError('Invalid measurement')
+    return x
+
+LATENCY_UNITS={'ns','us','ms','s'}
+def imported_observation(s,raw):
+    """Estate capture lanes: rows the estate's own adapters already wrote as imported-observation@1.
+
+    The lane row is retained whole as `native`, including its producer provenance
+    (artifact or file URL, revision, retrieval time, hash) and the producer's configuration.
+    """
+    for i,n in enumerate(jsonl(raw)):
+        if n.get('schema')!='imported-observation@1': raise ValueError('Expected imported-observation@1 rows')
+        r=base(s,i,n,'benchmark')
+        m=n.get('metric') if isinstance(n.get('metric'),dict) else {}
+        measurement={'value':finite(m.get('value')),'unit':m.get('units'),'metric':m.get('name')}
+        r['measurement']=measurement
+        unit=str(m.get('units') or '')
+        if '/s' in unit: r['throughput']=measurement
+        elif unit in LATENCY_UNITS: r['latency']=measurement
+        else: r['scope']['unmapped_metric_unit']=m.get('units')
+        gpus=n.get('gpus')
+        r.update(hardware=n.get('hardware'),hardware_count=gpus if isinstance(gpus,int) and not isinstance(gpus,bool) else None,
+                 model=n.get('model'),quant=n.get('precision'),engine=engine(n.get('framework')) or n.get('framework'))
+        config=n.get('config') if isinstance(n.get('config'),dict) else {}
+        loadgen=config.get('loadgen') if isinstance(config.get('loadgen'),dict) else {}
+        provenance=n.get('provenance') if isinstance(n.get('provenance'),dict) else {}
+        r['scope'].update({'workload':n.get('workload'),'Scenario':loadgen.get('Scenario') or config.get('scenario_type'),
+            'source':n.get('source'),'data_kind':n.get('data_kind'),'observed_at':n.get('observed_at'),'model_class':n.get('model_class'),
+            'framework':n.get('framework'),'framework_version':n.get('framework_version'),'precision_detail':n.get('precision_detail'),
+            'comparison_hold':n.get('comparison_hold'),'warnings':len(n.get('warnings') or []),
+            'producer_revision':provenance.get('revision') or provenance.get('head_sha'),'producer_release':provenance.get('release'),
+            'accepted_equivalence':None})
+        r['outcome']={'success_rate':n.get('success_rate'),'requests_successful':n.get('num_requests_successful'),
+            'requests_total':n.get('num_requests_total'),'source_outcome':n.get('outcome'),'gates':n.get('gates'),
+            'contract':('MLPerf '+str(provenance.get('release') or '')).strip() if n.get('source')=='mlperf' else str(n.get('source'))+' producer aggregate'}
+        yield r
+
+def producer_issues(s,raw):
+    """Estate capture lane of producer repositories' issues and pull requests (metadata rows only)."""
+    for i,n in enumerate(jsonl(raw)):
+        if n.get('source')!='github-issues' or not isinstance(n.get('repo'),str): raise ValueError('Expected github-issues rows')
+        r=base(s,i,n,'producer_issue')
+        mentions=[x for x in (n.get('hardware') or []) if isinstance(x,str)]
+        r.update(hardware=', '.join(mentions) or None,engine=engine(n.get('repo')))
+        r['scope']={'repo':n['repo'],'number':n.get('number'),'title':n.get('title'),'is_pull_request':n.get('is_pull_request'),
+            'labels':n.get('labels'),'hardware_mentions':mentions,'model_family':n.get('model_family'),'error_class':n.get('error_class'),
+            'created_at':n.get('created_at'),'updated_at':n.get('updated_at'),'url':n.get('url'),'accepted_equivalence':None}
+        r['outcome']={'state':n.get('state'),'state_reason':n.get('state_reason'),'closed_at':n.get('closed_at'),'fix_reference':n.get('fix_reference')}
+        yield r
+
+ADAPTERS={'mlperf-summary':mlperf,'azure-trace-csv':traces,'mooncake-trace-jsonl':traces,'openrouter-rankings':openrouter,'openrouter-models':openrouter,'azure-prices':prices,'aws-prices':prices,'gcp-prices':prices,'reddit-listing':community,'llama-bench-json':community,
+         'imported-observation-jsonl':imported_observation,'github-issues-jsonl':producer_issues}
 
 def ingest(manifest_path,destination):
     manifest=json.loads(manifest_path.read_text());destination.mkdir(parents=True,exist_ok=True)
@@ -125,6 +183,9 @@ def ingest(manifest_path,destination):
     db.execute('CREATE TABLE IF NOT EXISTS rows (row_id TEXT PRIMARY KEY,kind TEXT,origin TEXT,hardware TEXT,model TEXT,quant TEXT,engine TEXT,json TEXT NOT NULL)')
     db.execute('CREATE TABLE IF NOT EXISTS sightings (row_id TEXT,snapshot TEXT,source_url TEXT,retrieved_at TEXT,PRIMARY KEY(row_id,snapshot,source_url))')
     db.execute('CREATE INDEX IF NOT EXISTS cell_lookup ON rows(kind,hardware,model,quant,engine)')
+    # The selection filters (kind, unit, scenario, hardware, model) are answered from this index
+    # without reading each row's retained JSON; only the returned page touches the rows.
+    db.execute("CREATE INDEX IF NOT EXISTS selection_lookup ON rows(kind,json_extract(json,'$.measurement.unit'),json_extract(json,'$.scope.Scenario'),hardware,model,origin,row_id)")
     stats=[]
     for s in manifest['sources']:
         p=(manifest_path.parent/s['path']).resolve()

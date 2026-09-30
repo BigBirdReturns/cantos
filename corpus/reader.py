@@ -25,6 +25,50 @@ def row_key(value):
     return value
 
 
+GITHUB_REPO = re.compile(r"https://(?:api\.github\.com/repos|raw\.githubusercontent\.com|github\.com)/([^/\s]+/[^/\s]+)")
+
+
+def _github_repo(url):
+    match = GITHUB_REPO.match(url) if isinstance(url, str) else None
+    return match.group(1).removesuffix(".git") if match else None
+
+
+def _http(url):
+    return isinstance(url, str) and url.startswith(("https://", "http://")) and not re.search(r"\s", url)
+
+
+def producer_links(row):
+    """Links from an observation to the work that produced it, in the order a reader follows them.
+
+    Only URLs present in the retained row are exposed. A commit link is derived when the
+    row's provenance names a repository and a revision; nothing is fetched.
+    """
+    native = row.get("native") if isinstance(row.get("native"), dict) else {}
+    provenance = native.get("provenance") if isinstance(native.get("provenance"), dict) else {}
+    scope = row.get("scope") if isinstance(row.get("scope"), dict) else {}
+    links = []
+
+    def add(label, url):
+        if _http(url) and all(link["url"] != url for link in links):
+            links.append({"label": label, "url": url})
+
+    add("Acquired source", row.get("source", {}).get("url"))
+    add("Producer record", provenance.get("url"))
+    add("Producer results and configuration", native.get("Details"))
+    add("Producer implementation", native.get("Code"))
+    add("Producer system description", provenance.get("systems_json_url"))
+    add("Producer measurement description", provenance.get("measurement_json_url"))
+    repo = _github_repo(provenance.get("url")) or provenance.get("repo")
+    revision = provenance.get("revision") or provenance.get("head_sha")
+    if isinstance(repo, str) and isinstance(revision, str) and re.fullmatch(r"[0-9a-f]{7,40}", revision):
+        add("Producing commit", f"https://github.com/{repo}/commit/{revision}")
+    run_id = provenance.get("workflow_run_id")
+    if isinstance(repo, str) and isinstance(run_id, int) and not isinstance(run_id, bool):
+        add("Producing workflow run", f"https://github.com/{repo}/actions/runs/{run_id}")
+    add("Issue or pull request", scope.get("url"))
+    return links
+
+
 def write_fresh(path, data):
     with Path(path).open("xb") as stream:
         stream.write(data)
@@ -46,32 +90,49 @@ class Collection:
 
     def overview(self):
         report = read_json(self.bundle / "corpus/IMPORT.json")
+        calibration = self.bundle / "verification/CALIBRATION-SHAPES.json"
+        estate = self.bundle / "ESTATE.json"
         return {"rows": report["rows"], "by_kind": report["by_kind"],
                 "sources": report["sources"], "bundle": str(self.bundle),
                 "state": str(self.state),
-                "calibration": read_json(self.bundle / "verification/CALIBRATION-SHAPES.json")}
+                "calibration": read_json(calibration) if calibration.is_file() else None,
+                "estate": read_json(estate) if estate.is_file() else None}
 
     def batch(self, row, historical=False):
         base = self.bundle / "history/initial-projection" if historical else self.bundle
         folder = base / "research-packets"
         index = read_json(folder / "INDEX.json")
         origin = row["source"]["origin"]
+        row_id = row["row_id"]
         key = (str(base), origin)
-        if key not in self.batch_maps:
-            mapping = {}
-            for entry in index["batches"]:
-                if origin not in entry["origins"]:
-                    continue
-                path = (folder / entry["file"]).resolve(strict=True)
-                if path.parent != folder.resolve() or digest(path) != entry["sha256"]:
-                    raise ValueError("Retained batch differs from its index")
-                packet = read_json(path)
-                for event in packet["workspace"]["events"]:
-                    record = event.get("payload", {})
-                    for item in record.get("data", {}).get("rows", []):
-                        mapping[item["row_id"]] = (path, entry)
-            self.batch_maps[key] = mapping
-        path, entry = self.batch_maps[key][row["row_id"]]
+        ranged = [entry for entry in index["batches"]
+                  if origin in entry["origins"] and "first_row_id" in entry and "last_row_id" in entry]
+        if ranged and len(ranged) == sum(origin in entry["origins"] for entry in index["batches"]):
+            # Batches written in row order carry their row identity range, so one
+            # packet can be located and verified without loading the whole origin.
+            hits = [entry for entry in ranged if entry["first_row_id"] <= row_id <= entry["last_row_id"]]
+            if len(hits) != 1:
+                raise KeyError(row_id)
+            entry = hits[0]
+            path = (folder / entry["file"]).resolve(strict=True)
+            if path.parent != folder.resolve():
+                raise ValueError("Retained batch differs from its index")
+        else:
+            if key not in self.batch_maps:
+                mapping = {}
+                for entry in index["batches"]:
+                    if origin not in entry["origins"]:
+                        continue
+                    path = (folder / entry["file"]).resolve(strict=True)
+                    if path.parent != folder.resolve() or digest(path) != entry["sha256"]:
+                        raise ValueError("Retained batch differs from its index")
+                    packet = read_json(path)
+                    for event in packet["workspace"]["events"]:
+                        record = event.get("payload", {})
+                        for item in record.get("data", {}).get("rows", []):
+                            mapping[item["row_id"]] = (path, entry)
+                self.batch_maps[key] = mapping
+            path, entry = self.batch_maps[key][row_id]
         # Recheck the bytes when opened; the in-memory map is only an accelerator.
         if digest(path) != entry["sha256"]:
             raise ValueError("Retained batch has changed")
@@ -139,12 +200,7 @@ class Collection:
                 _, initial_batch = self.batch(initial, historical=True)
                 changes = [{"field": key, "before": initial.get(key), "after": row.get(key)}
                            for key in sorted(set(initial) | set(row)) if initial.get(key) != row.get(key)]
-        links = []
-        for label, url in [("Acquired source", row["source"].get("url")),
-                           ("Producer results and configuration", row["native"].get("Details")),
-                           ("Producer implementation", row["native"].get("Code"))]:
-            if isinstance(url, str) and url.startswith(("https://", "http://")):
-                links.append({"label": label, "url": url})
+        links = producer_links(row)
         correction = self.bundle / "correct_metric_projection.py"
         return {"row": row, "batch": batch, "initial_batch": initial_batch,
                 "changes": changes, "attempts": self.attempts(row_id),

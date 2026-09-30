@@ -1,8 +1,38 @@
 # Observation corpus
 
-These readers use the supplied bulk bundle in place. They do not copy or mutate
-its 701 MB payload and do not create another index. The bundle's existing
-SQLite database remains the selection index.
+These readers use a retained bundle in place. They do not mutate its payload and
+do not create another index. The bundle's SQLite database remains the selection
+index.
+
+## The estate practices on itself
+
+The estate's capture lanes already write observations in its own
+`imported-observation@1` schema, each row carrying the producer's URL, revision,
+retrieval time and hash, plus the producer's configuration. `estate_bundle.py`
+turns those lanes into a Cantos collection without re-fetching anything:
+
+```powershell
+python -B -m corpus.estate_bundle --lane <session>\lanes\inferencex-history --lane <session>\lanes\mlperf --lane <session>\lanes\github-issues --out <new-collection>
+```
+
+The lane rows files are copied and hash-bound as the pinned raw inputs. The
+importer projects them with the `imported-observation-jsonl` and
+`github-issues-jsonl` adapters, `batch_owner.cjs` retains the rows as native
+Research Desk packets through the same pinned ResearchCore owner used for
+attempts, and `verification/VERIFY.json` records the checks: every lane line
+retained, no duplicate identities, packets covering every row with ordered
+identity ranges, an exact re-import of one row per origin, its history opening
+through its packet with producer links exposed, and a full deterministic
+re-import. `ESTATE.json` names the lanes, their manifests and reports by hash.
+An existing output folder is never overwritten.
+
+An opened observation from such a collection links to the producer record, the
+producing commit and workflow run (InferenceX), the system and measurement
+descriptions (MLPerf), or the issue or pull request itself. Producer issues and
+pull requests are a separate kind, `producer_issue`, searchable by hardware
+mention and engine. Packets written by `batch_owner.cjs` carry `first_row_id`
+and `last_row_id`, so opening one observation verifies one packet rather than
+loading an origin's every packet.
 
 Open the collection interface from the repository root (Python 3.11+ and Node):
 
