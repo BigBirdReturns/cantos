@@ -1,0 +1,71 @@
+name: Publish Cantos to GitHub Pages
+
+# One workflow gates and deploys. The release gate holds publication until the exact
+# product sources at this SHA have passed the native CI workflow; only then is the site
+# staged and deployed. When the nightly circulation workflow is added, it must deploy in
+# its own run the same way, because pushes made with GITHUB_TOKEN never trigger this one.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+permissions:
+  actions: read
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  gate-and-deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # Holds until hot-aisle-ci.yml has a passing run for these exact source trees.
+      - name: Release gate
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python integration/release_gate.py --receipt _release-gate.json
+
+      # The site is the repository minus bulk data, scratch and caches. Bulk stays in git
+      # (with hashed pointers where it exceeds GitHub's size limit); the pages read only the
+      # committed summaries, records and indexes.
+      - name: Stage site
+        run: |
+          rsync -a --delete \
+            --exclude '.git' \
+            --exclude '.github' \
+            --exclude '_site' \
+            --exclude '_release-gate.json' \
+            --exclude 'circulate/retained' \
+            --exclude 'hot-aisle/campaign/backfill/imported/*.jsonl' \
+            --exclude 'hot-aisle/campaign/backfill/data-raw' \
+            --exclude '**/node_modules' \
+            --exclude '**/__pycache__' \
+            --exclude '**/.pytest_cache' \
+            ./ _site/
+          echo "files over 25 MB removed from the site artifact (they remain in the repository):"
+          find _site -type f -size +25M -print -delete
+          du -sh _site
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - id: deploy
+        uses: actions/deploy-pages@v4

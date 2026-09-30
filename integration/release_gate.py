@@ -16,7 +16,7 @@ from urllib.request import Request, urlopen
 
 ROOT = Path(__file__).resolve().parent.parent
 WORKFLOW = '.github/workflows/hot-aisle-ci.yml'
-PUBLISHERS = ('pta-fetch.yml', 'organ-evolution-observe.yml', 'axm-witness-0.9.2.yml', 'axm-witness-live-readback-0.9.2.yml')
+PUBLISHERS = ('pages.yml',)
 SCOPES = ('hot-aisle', 'compute', 'integration', '.gitattributes', WORKFLOW) + tuple('.github/workflows/' + p for p in PUBLISHERS)
 
 def git(*args: str) -> str:
