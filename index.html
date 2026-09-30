@@ -648,7 +648,7 @@ html.cascade .task-cell{view-transition-name:var(--vt)!important}
 <button class="nav active case-link" data-view="decision"><span><small class="ws-eyebrow">Worked example · synthetic</small><strong>Invoice extraction</strong></span><span class="nav-dot"></span></button>
 </nav>
 <div class="rail-section"><div class="rail-title">IN THIS DECISION</div><button class="rail-record source-card" data-inspect="source">24 original invoices </button><button class="rail-record" data-inspect="policy">Acceptance contract </button><button class="rail-record" data-inspect="calculation">Native calculation </button></div>
-<div class="rail-section"><div class="rail-title">ALSO ON THIS SITE</div><a class="rail-record" data-site-path="floor/index.html" href="floor/index.html">Distance to the floor</a><a class="rail-record" data-site-path="circulate/index.html" href="circulate/index.html">Circulation receipts</a></div>
+<div class="rail-section"><div class="rail-title">ALSO ON THIS SITE</div><a class="rail-record" data-site-path="floor/index.html" href="floor/index.html">Distance to the floor</a><a class="rail-record" data-site-path="circulate/index.html" href="circulate/index.html">Circulation receipts</a><a class="rail-record" data-site-path="hot-aisle/index.html" href="hot-aisle/index.html">Workload report</a><a class="rail-record" data-site-path="compute/index.html" href="compute/index.html">Compute desk</a><a class="rail-record" data-site-path="clustermax-challenge/index.html" href="clustermax-challenge/index.html">ClusterMAX challenge</a><a class="rail-record" data-site-path="shelf/index.html" href="shelf/index.html">Public shelf</a><a class="rail-record" data-site-path="corpus/app.html" href="corpus/app.html">Retained collection</a><a class="rail-record" data-site-path="research-desk/index.html" href="research-desk/index.html">Research Desk</a></div>
 <div class="rail-bottom"><button class="nav" data-view="evidence">Evidence</button><button class="nav" data-view="architecture">System map</button><button id="reset-btn" class="text-button">Reset worked example</button><div class="rail-signature">CANTOS / SECOND RUN<span>Evidence, decision, next run</span></div></div>
 </aside>
 <div class="desk">
@@ -683,6 +683,7 @@ html.cascade .task-cell{view-transition-name:var(--vt)!important}
         <a class="catalog-card" data-site-path="circulate/index.html" href="circulate/index.html"><span>MANUAL DATA CYCLE</span><strong>Circulation receipts</strong><small>Manually invoked public-data cycles, receipts, retained-study checks and probes.</small><b>Open receipts ↗</b></a>
         <a class="catalog-card" data-site-path="shelf/index.html" href="shelf/index.html"><span>BOUNDED CLAIMS</span><strong>Public shelf</strong><small>A public shelf of bounded claims with their evidence limits.</small><b>Open shelf ↗</b></a>
         <a class="catalog-card" data-site-path="compute/index.html" href="compute/index.html"><span>ECONOMICS / INSTRUMENT</span><strong>Compute desk</strong><small>Provider-neutral price and material inputs for bounded decisions.</small><b>Open Compute desk</b></a>
+        <a class="catalog-card" data-site-path="corpus/app.html" href="corpus/app.html"><span>RETAINED COLLECTION</span><strong>Estate collection</strong><small>318,472 imported observations with producing commits, runs and issues; the page explains how to serve the collection locally.</small><b>Open collection ↗</b></a>
         <a class="catalog-card" href="https://github.com/BigBirdReturns/cantos/blob/main/integration/WORK.md"><span>EXECUTION / QUALIFIED CANDIDATE</span><strong>Integration work</strong><small>Local execution and reuse documentation; qualification does not imply production activation.</small><b>Read work and qualification</b></a>
       </div>
     </section>
@@ -1389,6 +1390,12 @@ function commands(){
   {label:'Go to System map',hint:'view',run:()=>view('architecture'),on:true},
   {label:'Distance to the floor',hint:'page',run:()=>{location.href='floor/index.html';},on:true},
   {label:'Circulation receipts',hint:'page',run:()=>{location.href='circulate/index.html';},on:true},
+  {label:'Workload report',hint:'page',run:()=>{location.href='hot-aisle/index.html';},on:true},
+  {label:'Compute desk',hint:'page',run:()=>{location.href='compute/index.html';},on:true},
+  {label:'ClusterMAX challenge',hint:'page',run:()=>{location.href='clustermax-challenge/index.html';},on:true},
+  {label:'Public shelf',hint:'page',run:()=>{location.href='shelf/index.html';},on:true},
+  {label:'Retained collection',hint:'page',run:()=>{location.href='corpus/app.html';},on:true},
+  {label:'Research Desk',hint:'page',run:()=>{location.href='research-desk/index.html';},on:true},
   {label:'Inspect the 24 original invoices',hint:'record',run:()=>inspect('source'),on:true},
   {label:'Inspect the acceptance contract',hint:'record',run:()=>inspect('policy'),on:true},
   {label:'Inspect the native calculation',hint:'record',run:()=>inspect('calculation'),on:true},
