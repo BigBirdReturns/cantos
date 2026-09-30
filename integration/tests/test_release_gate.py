@@ -39,22 +39,26 @@ class ReleaseGateTests(unittest.TestCase):
     def test_dirty_sources_are_rejected(self):
         with patch.object(gate, 'git', return_value=' M compute/index.html'):
             with self.assertRaises(RuntimeError): gate.local_signature()
-    def test_all_full_site_publishers_have_gate_before_upload(self):
-        publishers=[]
-        for p in (gate.ROOT/'.github/workflows').glob('*.yml'):
-            text=p.read_text(encoding='utf-8')
-            if 'uses: actions/upload-pages-artifact@' not in text: continue
-            publishers.append(p.name)
-            self.assertIn('python integration/release_gate.py',text,p.name)
-            self.assertLess(text.index('python integration/release_gate.py'), text.index('uses: actions/upload-pages-artifact@'),p.name)
-            self.assertIn('actions: read',text,p.name)
-        self.assertEqual(len(publishers),4)
+    @staticmethod
+    def publishers():
+        """Workflows that publish a Pages artifact. Zero is allowed: Pages may be served from the branch."""
+        out = []
+        for p in sorted((gate.ROOT/'.github/workflows').glob('*.yml')):
+            text = p.read_text(encoding='utf-8')
+            if 'uses: actions/upload-pages-artifact@' in text:
+                out.append((p.name, text))
+        return out
+    def test_every_pages_publisher_has_gate_before_upload(self):
+        for name, text in self.publishers():
+            self.assertIn('python integration/release_gate.py', text, name)
+            self.assertLess(text.index('python integration/release_gate.py'), text.index('uses: actions/upload-pages-artifact@'), name)
+            self.assertIn('actions: read', text, name)
     def test_gate_cannot_be_soft_failed(self):
-        for name in gate.PUBLISHERS:
-            text=(gate.ROOT/'.github/workflows'/name).read_text(encoding='utf-8')
-            segment=text[text.index('      - name: Require qualified compute sources'):]
-            segment=segment.split('\n      - ',1)[0]
-            self.assertNotIn('continue-on-error',segment)
-            self.assertNotIn('|| true',segment)
+        for name, text in self.publishers():
+            i = text.index('python integration/release_gate.py')
+            start = text.rfind('      - name:', 0, i)
+            segment = text[start if start >= 0 else i:].split(chr(10) + '      - ', 1)[0]
+            self.assertNotIn('continue-on-error', segment, name)
+            self.assertNotIn('|| true', segment, name)
 
 if __name__=='__main__': unittest.main()

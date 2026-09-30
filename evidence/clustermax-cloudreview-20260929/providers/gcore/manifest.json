@@ -1,0 +1,161 @@
+[
+ {
+  "label": "homepage",
+  "url": "https://gcore.com/",
+  "file": "providers/gcore/home.html",
+  "http": 200,
+  "bytes": 547384,
+  "sha256": "2f976842ad6e97e07a0308f11a7baa91a209ef8cce344bc15834446e4ab4be69",
+  "retrieved_utc": "2026-09-29T18:38:22Z"
+ },
+ {
+  "label": "pricing",
+  "url": "https://gcore.com/pricing/ai",
+  "file": "providers/gcore/pricing.html",
+  "http": 200,
+  "bytes": 463866,
+  "sha256": "bed9ba479db2b4561b0575578d27929c8155f9864a422219a5212e25e432940d",
+  "retrieved_utc": "2026-09-29T18:38:23Z"
+ },
+ {
+  "label": "pricing_alt",
+  "url": "https://gcore.com/cloud/ai-gpu",
+  "file": "providers/gcore/pricing_alt.html",
+  "http": 200,
+  "bytes": 484716,
+  "sha256": "e7dcd577034de52d2301339e605f46603ac2c0b394cb791d2aae307abadab6d6",
+  "retrieved_utc": "2026-09-29T18:38:25Z",
+  "url_effective": "https://gcore.com/gpu-cloud"
+ },
+ {
+  "label": "status",
+  "url": "https://status.gcore.com/",
+  "file": "providers/gcore/status.html",
+  "http": 200,
+  "bytes": 2155484,
+  "sha256": "8a229ec0b8855eba2847262dd51711b70c201687be191f700f482d085b808eb0",
+  "retrieved_utc": "2026-09-29T18:38:26Z"
+ },
+ {
+  "label": "status_api",
+  "url": "https://status.gcore.com/api/v2/incidents.json",
+  "file": "providers/gcore/status_incidents.json",
+  "http": 404,
+  "bytes": 7094,
+  "sha256": "de0f545fc45e4b14c1977ed7745d7bf9e09562c5937fd764acb3eeb92bafd934",
+  "retrieved_utc": "2026-09-29T18:38:26Z"
+ },
+ {
+  "label": "status_summary",
+  "url": "https://status.gcore.com/api/v2/summary.json",
+  "file": "providers/gcore/status_summary.json",
+  "http": 200,
+  "bytes": 3201,
+  "sha256": "d5be48467a9bdff7f24cfb271a6c54e0a265fa67c799cdeba83f9eb417b33e52",
+  "retrieved_utc": "2026-09-29T18:38:26Z"
+ },
+ {
+  "label": "docs_index",
+  "url": "https://gcore.com/docs",
+  "file": "providers/gcore/docs_index.html",
+  "http": 200,
+  "bytes": 338738,
+  "sha256": "6e1911a75ccc40be0989fe4290db60022e5290800d38a864d6707710d6b0d935",
+  "retrieved_utc": "2026-09-29T18:38:26Z",
+  "url_effective": "https://docs.gcore.com/home"
+ },
+ {
+  "label": "docs_slurm",
+  "url": "https://gcore.com/docs/api-reference/cloud/managed-kubernetes/create-k8s-cluster",
+  "file": "providers/gcore/docs_slurm.html",
+  "http": 200,
+  "bytes": 1376828,
+  "sha256": "809aa05ad6b093432147005bfc768631917549a777d99d2f955801e0241e8961",
+  "retrieved_utc": "2026-09-29T18:38:27Z",
+  "url_effective": "https://docs.gcore.com/api-reference/cloud/managed-kubernetes/create-k8s-cluster"
+ },
+ {
+  "label": "docs_k8s",
+  "url": "https://gcore.com/docs/cloud/managed-kubernetes",
+  "file": "providers/gcore/docs_k8s.html",
+  "http": 404,
+  "bytes": 117829,
+  "sha256": "79ba024bf01eda7fcf840b7e0e4030e90d11200602dd8f89176144e1e845e6ba",
+  "retrieved_utc": "2026-09-29T18:38:28Z",
+  "url_effective": "https://docs.gcore.com/cloud/managed-kubernetes"
+ },
+ {
+  "label": "trust",
+  "url": "https://gcore.com/legal/compliance",
+  "file": "providers/gcore/trust.html",
+  "http": 404,
+  "bytes": 361910,
+  "sha256": "55fc8c44f210005980a5d4d2a0465bd23e9eb0741323349a55caab5636fc92a2",
+  "retrieved_utc": "2026-09-29T18:38:29Z"
+ },
+ {
+  "label": "trust_alt",
+  "url": "https://gcore.com/trust-center",
+  "file": "providers/gcore/trust_alt.html",
+  "http": 404,
+  "bytes": 361911,
+  "sha256": "75ec60ca14905a1a93195583736636c1603daa1c9e43eec07ec95c2e451c2097",
+  "retrieved_utc": "2026-09-29T18:38:30Z"
+ },
+ {
+  "label": "status_history",
+  "url": "https://status.gcore.com/history",
+  "file": "providers/gcore/status_history.html",
+  "http": 200,
+  "bytes": 2786001,
+  "sha256": "e374b1e72f8623935c35a11fefbcc814918ef8830dfea35ccc52a548732df014",
+  "retrieved_utc": "2026-09-29T18:39:29Z",
+  "url_effective": "https://status.gcore.com/history/1"
+ },
+ {
+  "label": "status_rss",
+  "url": "https://status.gcore.com/history.rss",
+  "file": "providers/gcore/status_history.rss",
+  "http": 200,
+  "bytes": 174986,
+  "sha256": "8413c07985550c5118db2d7054e24ac5507e4e08b1d02daa5b9bfc00eecb42bf",
+  "retrieved_utc": "2026-09-29T18:39:30Z"
+ },
+ {
+  "label": "docs_k8s",
+  "url": "https://gcore.com/docs/cloud/kubernetes/about-gcore-kubernetes",
+  "file": "providers/gcore/docs_k8s.html",
+  "http": 200,
+  "bytes": 684052,
+  "sha256": "88de9dade1c9d93439e519b9d5648a471b9c1f9482fe6fe39cfb65544ac3ecfe",
+  "retrieved_utc": "2026-09-29T18:39:30Z",
+  "url_effective": "https://docs.gcore.com/cloud/kubernetes/about-gcore-kubernetes"
+ },
+ {
+  "label": "trust",
+  "url": "https://gcore.com/security",
+  "file": "providers/gcore/trust.html",
+  "http": 404,
+  "bytes": 361911,
+  "sha256": "54a57668d87d575cb0c7dbbfb51c610dcf55178b56511465e026d117b796257b",
+  "retrieved_utc": "2026-09-29T18:39:30Z"
+ },
+ {
+  "label": "trust_alt",
+  "url": "https://gcore.com/legal",
+  "file": "providers/gcore/trust_alt.html",
+  "http": 200,
+  "bytes": 471780,
+  "sha256": "0d7b11b361eb8e161576e9bb6b91e2318ce99fec05f06da8198c49729741369a",
+  "retrieved_utc": "2026-09-29T18:39:32Z"
+ },
+ {
+  "label": "trust_certs",
+  "url": "https://gcore.com/legal/certifications",
+  "file": "providers/gcore/trust_certs.html",
+  "http": 404,
+  "bytes": 361911,
+  "sha256": "ae8fc3f3b3bff811dc11d03a348f393a316099fddd38766f410dca8b9c5c3077",
+  "retrieved_utc": "2026-09-29T18:40:08Z"
+ }
+]

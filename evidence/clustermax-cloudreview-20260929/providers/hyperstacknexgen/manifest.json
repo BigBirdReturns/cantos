@@ -1,0 +1,103 @@
+{
+ "slug": "hyperstacknexgen",
+ "user_agent": "Mozilla/5.0",
+ "timeout_s": 60,
+ "entries": [
+  {
+   "kind": "pricing",
+   "url": "https://www.hyperstack.cloud/gpu-pricing",
+   "url_effective": "https://www.hyperstack.cloud/gpu-pricing",
+   "file": "providers/hyperstacknexgen/pricing.html",
+   "http": 200,
+   "content_type": "text/html; charset=UTF-8",
+   "bytes": 159190,
+   "sha256": "ed806e0d003a62671f1f6a15ef8f4db268efd34cf922d95e3e88ec36311577bc",
+   "retrieved_utc": "2026-09-29T18:46:45Z",
+   "curl_error": null
+  },
+  {
+   "kind": "status",
+   "url": "https://status.hyperstack.cloud/",
+   "url_effective": "https://status.hyperstack.cloud/",
+   "file": "providers/hyperstacknexgen/status.html",
+   "http": 200,
+   "content_type": "text/html; charset=utf-8",
+   "bytes": 114084,
+   "sha256": "4bf04537c451dd2c1425156e5427539a5a074b4f79a30494c9f43e9ed1358b36",
+   "retrieved_utc": "2026-09-29T18:46:45Z",
+   "curl_error": null
+  },
+  {
+   "kind": "status_api_incidents",
+   "url": "https://status.hyperstack.cloud/api/v2/incidents.json",
+   "url_effective": "https://status.hyperstack.cloud/api/v2/incidents.json",
+   "file": "providers/hyperstacknexgen/status_api_incidents.json",
+   "http": 200,
+   "content_type": "application/json; charset=utf-8",
+   "bytes": 139919,
+   "sha256": "0b9f15ba20ddc9f14f7eaff1bc11a040f033a7cfdd8262260a13147d1e8db403",
+   "retrieved_utc": "2026-09-29T18:46:44Z",
+   "curl_error": null
+  },
+  {
+   "kind": "docs_index",
+   "url": "https://docs.hyperstack.cloud/docs/intro",
+   "url_effective": "https://docs.hyperstack.cloud/docs/intro/",
+   "file": "providers/hyperstacknexgen/docs_index.html",
+   "http": 200,
+   "content_type": "text/html; charset=utf-8",
+   "bytes": 37375,
+   "sha256": "54d50bf4e1e0ed98c611e1d3ce3c6b53e58e6a80f76b741a1fa39edbaf07d452",
+   "retrieved_utc": "2026-09-29T18:46:44Z",
+   "curl_error": null
+  },
+  {
+   "kind": "docs_kubernetes",
+   "url": "https://docs.hyperstack.cloud/docs/kubernetes/",
+   "url_effective": "https://docs.hyperstack.cloud/docs/kubernetes/",
+   "file": "providers/hyperstacknexgen/docs_kubernetes.html",
+   "http": 200,
+   "content_type": "text/html; charset=utf-8",
+   "bytes": 33629,
+   "sha256": "90df094d809c0686f7bd98c56e02584286721155925aad40e8a18dee10f75368",
+   "retrieved_utc": "2026-09-29T18:46:44Z",
+   "curl_error": null
+  },
+  {
+   "kind": "docs_slurm",
+   "url": "https://docs.hyperstack.cloud/docs/slurm/",
+   "url_effective": "https://docs.hyperstack.cloud/docs/slurm/",
+   "file": "providers/hyperstacknexgen/docs_slurm.html",
+   "http": 404,
+   "content_type": "text/html; charset=utf-8",
+   "bytes": 9096,
+   "sha256": "7cfd270d77b4de7e7e573b420aaf1ff0c60a566c071b9fc1b790987a54cc9708",
+   "retrieved_utc": "2026-09-29T18:46:44Z",
+   "curl_error": null
+  },
+  {
+   "kind": "trust",
+   "url": "https://www.hyperstack.cloud/security",
+   "url_effective": "https://www.hyperstack.cloud/security",
+   "file": "providers/hyperstacknexgen/trust.html",
+   "http": 404,
+   "content_type": "text/html;charset=utf-8",
+   "bytes": 75206,
+   "sha256": "d5b0cf3f546e3a99b5932488bcbc63f2267586503755e9fdf87314d4cd468370",
+   "retrieved_utc": "2026-09-29T18:46:45Z",
+   "curl_error": null
+  },
+  {
+   "kind": "trust_nexgen",
+   "url": "https://www.nexgencloud.com/security",
+   "url_effective": "https://www.nexgencloud.com/security",
+   "file": "providers/hyperstacknexgen/trust_nexgen.html",
+   "http": 200,
+   "content_type": "text/html; charset=UTF-8",
+   "bytes": 116075,
+   "sha256": "2381b2f4dd2a2c857bf5a13f6b58939ee4b12792bb6ed8d4134984ebb69098b4",
+   "retrieved_utc": "2026-09-29T18:46:45Z",
+   "curl_error": null
+  }
+ ]
+}

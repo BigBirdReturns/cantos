@@ -1,0 +1,94 @@
+[
+ {
+  "kind": "home",
+  "url": "https://farmgpu.com",
+  "file": "providers/farmgpu/farmgpu.com",
+  "http": 200,
+  "bytes": 252077,
+  "sha256": "e27d8024fc8e85fb358094fd143744ac9f26cdf94a39bbba4c0e0bd166613fea",
+  "retrieved_utc": "2026-09-29T18:36:30Z"
+ },
+ {
+  "kind": "pricing",
+  "url": "https://farmgpu.com/pricing",
+  "file": "providers/farmgpu/farmgpu.com_pricing.html",
+  "http": 200,
+  "bytes": 184131,
+  "sha256": "14ac4faf535c189dbd819069dda87c62159111db8296cdc3d6805f8ca93cd086",
+  "retrieved_utc": "2026-09-29T18:36:30Z"
+ },
+ {
+  "kind": "pricing",
+  "url": "https://www.farmgpu.com/pricing",
+  "file": "providers/farmgpu/www.farmgpu.com_pricing.html",
+  "http": 200,
+  "bytes": 184131,
+  "sha256": "14ac4faf535c189dbd819069dda87c62159111db8296cdc3d6805f8ca93cd086",
+  "retrieved_utc": "2026-09-29T18:36:31Z"
+ },
+ {
+  "kind": "status",
+  "url": "https://status.farmgpu.com",
+  "file": "providers/farmgpu/status.farmgpu.com",
+  "http": 0,
+  "bytes": 0,
+  "sha256": null,
+  "retrieved_utc": "2026-09-29T18:36:31Z",
+  "curl_stderr": "curl: (6) Could not resolve host: status.farmgpu.com"
+ },
+ {
+  "kind": "docs",
+  "url": "https://docs.farmgpu.com",
+  "file": "providers/farmgpu/docs.farmgpu.com",
+  "http": 200,
+  "bytes": 321977,
+  "sha256": "b447b8eb12d7b01939f5dfbfb95f49299de7e5626e4af421ef522dd756a567ba",
+  "retrieved_utc": "2026-09-29T18:36:31Z"
+ },
+ {
+  "kind": "trust",
+  "url": "https://trust.farmgpu.com",
+  "file": "providers/farmgpu/trust.farmgpu.com",
+  "http": 0,
+  "bytes": 0,
+  "sha256": null,
+  "retrieved_utc": "2026-09-29T18:36:31Z",
+  "curl_stderr": "curl: (6) Could not resolve host: trust.farmgpu.com"
+ },
+ {
+  "kind": "trust",
+  "url": "https://farmgpu.com/security",
+  "file": "providers/farmgpu/farmgpu.com_security.html",
+  "http": 404,
+  "bytes": 74595,
+  "sha256": "5f2bc9cc833c302d203f47aa5e37f9d42c768c5e14648f825648e4063de84a11",
+  "retrieved_utc": "2026-09-29T18:36:31Z"
+ },
+ {
+  "kind": "discovered",
+  "url": "https://docs.farmgpu.com/",
+  "file": "providers/farmgpu/docs.farmgpu.com",
+  "http": 200,
+  "bytes": 321977,
+  "sha256": "b447b8eb12d7b01939f5dfbfb95f49299de7e5626e4af421ef522dd756a567ba",
+  "retrieved_utc": "2026-09-29T18:36:32Z"
+ },
+ {
+  "kind": "trust",
+  "url": "https://farmgpu.com/trust",
+  "file": "providers/farmgpu/farmgpu.com_trust.html",
+  "http": 404,
+  "bytes": 74595,
+  "sha256": "5f2bc9cc833c302d203f47aa5e37f9d42c768c5e14648f825648e4063de84a11",
+  "retrieved_utc": "2026-09-29T18:42:54Z"
+ },
+ {
+  "kind": "docs",
+  "url": "https://docs.farmgpu.com/kubernetes",
+  "file": "providers/farmgpu/docs.farmgpu.com_kubernetes.html",
+  "http": 404,
+  "bytes": 113414,
+  "sha256": "a1a2029b071d39f9e78687a539a1e7366d6416b915d7dbff5d0f599294ef5c4b",
+  "retrieved_utc": "2026-09-29T18:42:55Z"
+ }
+]

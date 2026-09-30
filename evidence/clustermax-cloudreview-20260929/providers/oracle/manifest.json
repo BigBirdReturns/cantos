@@ -1,0 +1,147 @@
+[
+ {
+  "label": "homepage",
+  "url": "https://www.oracle.com/cloud/",
+  "file": "providers/oracle/home.html",
+  "http": 403,
+  "bytes": 1450,
+  "sha256": "2d5ab41b62b107e3eaa5463f3c95e76ba1be090db1034785c929b8a6dad12d58",
+  "retrieved_utc": "2026-09-29T18:37:52Z"
+ },
+ {
+  "label": "pricing",
+  "url": "https://www.oracle.com/cloud/compute/pricing/",
+  "file": "providers/oracle/pricing.html",
+  "http": 200,
+  "bytes": 352970,
+  "sha256": "b70d38239558b54cf43c350c5321f912d599e5eeeb6560f7d1f7f2ad533b9d40",
+  "retrieved_utc": "2026-09-29T18:37:52Z",
+  "url_effective": "https://www.oracle.com/cloud/price-list/#pricing-compute"
+ },
+ {
+  "label": "pricing_gpu",
+  "url": "https://www.oracle.com/cloud/compute/gpu/",
+  "file": "providers/oracle/pricing_gpu.html",
+  "http": 200,
+  "bytes": 78655,
+  "sha256": "3c94b197d7b3d4dbd325febfe9ff3a138df4b51cf33b08a4981dbf4cf82bbe4e",
+  "retrieved_utc": "2026-09-29T18:37:52Z"
+ },
+ {
+  "label": "status",
+  "url": "https://ocistatus.oraclecloud.com/",
+  "file": "providers/oracle/status.html",
+  "http": 200,
+  "bytes": 2459,
+  "sha256": "f651ca6e1be24474bcaa772210772c73f8d07440612c12c963c7ba33eda4cc31",
+  "retrieved_utc": "2026-09-29T18:37:52Z"
+ },
+ {
+  "label": "status_api",
+  "url": "https://ocistatus.oraclecloud.com/api/v2/incidents.json",
+  "file": "providers/oracle/status_incidents.json",
+  "http": 404,
+  "bytes": 10,
+  "sha256": "493fda53120050f85836032324409be6c6484f90a0755ae0c6a673ba7626818b",
+  "retrieved_utc": "2026-09-29T18:37:52Z"
+ },
+ {
+  "label": "status_history",
+  "url": "https://ocistatus.oraclecloud.com/history",
+  "file": "providers/oracle/status_history.html",
+  "http": 200,
+  "bytes": 2459,
+  "sha256": "f651ca6e1be24474bcaa772210772c73f8d07440612c12c963c7ba33eda4cc31",
+  "retrieved_utc": "2026-09-29T18:37:53Z"
+ },
+ {
+  "label": "docs_index",
+  "url": "https://docs.oracle.com/en-us/iaas/Content/home.htm",
+  "file": "providers/oracle/docs_index.html",
+  "http": 200,
+  "bytes": 59494,
+  "sha256": "315fac084a93155e1ce9e43662374699b79add2b18e597a3d5c557738b5d8d1e",
+  "retrieved_utc": "2026-09-29T18:37:53Z"
+ },
+ {
+  "label": "docs_slurm",
+  "url": "https://github.com/oracle-quickstart/oci-hpc",
+  "file": "providers/oracle/docs_slurm.html",
+  "http": 200,
+  "bytes": 382680,
+  "sha256": "c0fec820724a8b7374ec9793ee0cc03d510f059e7a37a35fe5ae8c81da555922",
+  "retrieved_utc": "2026-09-29T18:37:53Z"
+ },
+ {
+  "label": "docs_k8s",
+  "url": "https://docs.oracle.com/en-us/iaas/Content/ContEng/home.htm",
+  "file": "providers/oracle/docs_k8s.html",
+  "http": 200,
+  "bytes": 19983,
+  "sha256": "43ea7fef53eeb224e418ad1986c690f5d3dfb1c9829ccb405947dfbedb8046d7",
+  "retrieved_utc": "2026-09-29T18:37:57Z"
+ },
+ {
+  "label": "trust",
+  "url": "https://www.oracle.com/corporate/cloud-compliance/",
+  "file": "providers/oracle/trust.html",
+  "http": 200,
+  "bytes": 205037,
+  "sha256": "9900a0ade09be2fb4dea0c18884e30552b4e8c23bcf78ee2644411eee1084c57",
+  "retrieved_utc": "2026-09-29T18:37:57Z"
+ },
+ {
+  "label": "status_rss",
+  "url": "https://ocistatus.oraclecloud.com/rss",
+  "file": "providers/oracle/status.rss",
+  "http": 404,
+  "bytes": 10,
+  "sha256": "493fda53120050f85836032324409be6c6484f90a0755ae0c6a673ba7626818b",
+  "retrieved_utc": "2026-09-29T18:39:36Z"
+ },
+ {
+  "label": "status_summary",
+  "url": "https://ocistatus.oraclecloud.com/api/v2/summary.json",
+  "file": "providers/oracle/status_summary.json",
+  "http": 404,
+  "bytes": 10,
+  "sha256": "493fda53120050f85836032324409be6c6484f90a0755ae0c6a673ba7626818b",
+  "retrieved_utc": "2026-09-29T18:39:36Z"
+ },
+ {
+  "label": "status_history_json",
+  "url": "https://ocistatus.oraclecloud.com/api/v2/history.json",
+  "file": "providers/oracle/status_history.json",
+  "http": 404,
+  "bytes": 10,
+  "sha256": "493fda53120050f85836032324409be6c6484f90a0755ae0c6a673ba7626818b",
+  "retrieved_utc": "2026-09-29T18:40:07Z"
+ },
+ {
+  "label": "status_status_json",
+  "url": "https://ocistatus.oraclecloud.com/api/v2/status.json",
+  "file": "providers/oracle/status_status.json",
+  "http": 200,
+  "bytes": 173,
+  "sha256": "3cd09522d04bcb85ef87470de82f1c4e2d6828fa387a5359a24a7232684f2db0",
+  "retrieved_utc": "2026-09-29T18:40:08Z"
+ },
+ {
+  "label": "status_incidents_v2",
+  "url": "https://ocistatus.oraclecloud.com/api/v2/incidents/unresolved.json",
+  "file": "providers/oracle/status_unresolved.json",
+  "http": 404,
+  "bytes": 10,
+  "sha256": "493fda53120050f85836032324409be6c6484f90a0755ae0c6a673ba7626818b",
+  "retrieved_utc": "2026-09-29T18:40:27Z"
+ },
+ {
+  "label": "status_components",
+  "url": "https://ocistatus.oraclecloud.com/api/v2/components.json",
+  "file": "providers/oracle/status_components.json",
+  "http": 200,
+  "bytes": 1743941,
+  "sha256": "e5af062f3ef429bfa548b2836d759e3dccac4ffda2c1610a9dca4e31c0aef902",
+  "retrieved_utc": "2026-09-29T18:40:27Z"
+ }
+]

@@ -8,10 +8,15 @@ import sys
 from importer import BASE, digest, acquire, inferencemax, raw_manifest
 
 RETRIEVED = "2026-09-23T23:40:00Z"  # operator-declared time for the first 100 artifacts, which have no sidecar
-LANE = Path("D:/Projects/Organs/AXM/axm-tools/sessions/public-tail-20260929/lanes/inferencex-history/raw/artifact-index.jsonl")
+sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "tools"))
+import evidence_root
+LANE = evidence_root.resolve("public-tail-20260929", "lanes", "inferencex-history", "raw", "artifact-index.jsonl")   # bulk input; not shipped in evidence/
 
 
 def main():
+    if not LANE.is_file():
+        print(evidence_root.skip_message("public-tail-20260929", "lanes", "inferencex-history", "raw", "artifact-index.jsonl") + "; nothing written.")
+        return 0
     raw = BASE / "data-raw"
     ids = set(json.loads((raw / "lane-2026-09-29-ids.json").read_text()))
     manifest = raw_manifest(raw, RETRIEVED, ids)

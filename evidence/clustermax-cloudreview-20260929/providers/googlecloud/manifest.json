@@ -1,0 +1,78 @@
+[
+ {
+  "label": "homepage",
+  "url": "https://cloud.google.com/",
+  "file": "providers/googlecloud/home.html",
+  "http": 200,
+  "bytes": 2394319,
+  "sha256": "680a92a1a9c2a492ac1b70079ca5a66b1edf1e7606a72699e2732025a512f0a0",
+  "retrieved_utc": "2026-09-29T18:37:57Z"
+ },
+ {
+  "label": "pricing",
+  "url": "https://cloud.google.com/compute/gpus-pricing",
+  "file": "providers/googlecloud/pricing.html",
+  "http": 200,
+  "bytes": 2285455,
+  "sha256": "0a114a15bdfe4372fe7261b5f7ae69d57a8bf6861cb897d6a510ab393ba1d8db",
+  "retrieved_utc": "2026-09-29T18:37:57Z",
+  "url_effective": "https://cloud.google.com/products/compute/pricing"
+ },
+ {
+  "label": "status",
+  "url": "https://status.cloud.google.com/",
+  "file": "providers/googlecloud/status.html",
+  "http": 200,
+  "bytes": 526330,
+  "sha256": "b722ce54320bcbea0c6149170841cdc95c7af3556189bec634c90d278b2bbfa4",
+  "retrieved_utc": "2026-09-29T18:37:58Z"
+ },
+ {
+  "label": "status_api",
+  "url": "https://status.cloud.google.com/incidents.json",
+  "file": "providers/googlecloud/status_incidents.json",
+  "http": 200,
+  "bytes": 171290,
+  "sha256": "201d34fc0af9af7732e96d14c63042afedd7da0e5ae41a512425a8a6a9bb4258",
+  "retrieved_utc": "2026-09-29T18:37:58Z"
+ },
+ {
+  "label": "docs_index",
+  "url": "https://cloud.google.com/docs",
+  "file": "providers/googlecloud/docs_index.html",
+  "http": 200,
+  "bytes": 288123,
+  "sha256": "f51c23a64551ee931d23ad62b109b4c1f7c54ef5eb12e98a04bbf258d64ac15d",
+  "retrieved_utc": "2026-09-29T18:37:58Z",
+  "url_effective": "https://docs.cloud.google.com/docs"
+ },
+ {
+  "label": "docs_slurm",
+  "url": "https://cloud.google.com/cluster-director/docs",
+  "file": "providers/googlecloud/docs_slurm.html",
+  "http": 200,
+  "bytes": 250155,
+  "sha256": "f46e252e7c5c1d1a093d0507efca4c4d275cf09334dbd0a1dc4efdb228a5e6a1",
+  "retrieved_utc": "2026-09-29T18:37:59Z",
+  "url_effective": "https://docs.cloud.google.com/cluster-director/docs"
+ },
+ {
+  "label": "docs_k8s",
+  "url": "https://cloud.google.com/kubernetes-engine/docs",
+  "file": "providers/googlecloud/docs_k8s.html",
+  "http": 200,
+  "bytes": 292509,
+  "sha256": "a5c5c89d7699d4cbd8a71ecd250cf32ce36ef72eca8c60062a6f5cd3ae076f51",
+  "retrieved_utc": "2026-09-29T18:38:00Z",
+  "url_effective": "https://docs.cloud.google.com/kubernetes-engine/docs"
+ },
+ {
+  "label": "trust",
+  "url": "https://cloud.google.com/security/compliance/soc-2",
+  "file": "providers/googlecloud/trust.html",
+  "http": 200,
+  "bytes": 2329008,
+  "sha256": "b0feb6c289d8a914295c7ba080a6508e3e3a5558dfd2c53fe1c99b9f54418ebd",
+  "retrieved_utc": "2026-09-29T18:38:01Z"
+ }
+]

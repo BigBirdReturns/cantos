@@ -1,0 +1,93 @@
+[
+ {
+  "url": "https://fptcloud.com/",
+  "kind": "home",
+  "file": "providers/fptcloud/home.html",
+  "http": 200,
+  "bytes": 220492,
+  "sha256": "e9a9638907e881aa3a3cb4701b3a3242ed5a710d475634a2b6ad032209913e67",
+  "retrieved_utc": "2026-09-29T18:48:18Z"
+ },
+ {
+  "url": "https://fptcloud.com/en/pricing/",
+  "kind": "pricing",
+  "file": "providers/fptcloud/pricing.html",
+  "http": 200,
+  "bytes": 443288,
+  "sha256": "5919cce5bea1e93a5b8ffe5c552919a2fa547edca443f324685b3bcd13df61e0",
+  "retrieved_utc": "2026-09-29T18:48:21Z"
+ },
+ {
+  "url": "https://fptcloud.com/bang-gia/",
+  "kind": "pricing_vi",
+  "file": "providers/fptcloud/pricing_vi.html",
+  "http": 200,
+  "bytes": 774033,
+  "sha256": "62f66eedb2f8831770f904507216c1f4d9c152672c018be38a7e971b4366f005",
+  "retrieved_utc": "2026-09-29T18:48:22Z"
+ },
+ {
+  "url": "https://docs.fptcloud.com/",
+  "kind": "docs",
+  "file": "providers/fptcloud/docs.html",
+  "http": 200,
+  "bytes": 12119,
+  "sha256": "64435d29c6abcf93dd90d3c304e519cfd0267491c266edbd1f93fb56c0080cf7",
+  "retrieved_utc": "2026-09-29T18:48:23Z"
+ },
+ {
+  "url": "https://fptcloud.com/product/kubernetes-with-gpu/",
+  "kind": "docs_k8s",
+  "file": "providers/fptcloud/docs_k8s.html",
+  "http": 200,
+  "bytes": 160056,
+  "sha256": "34922752f2674ea98f58ee37d89c3fd1ea62fc39451be3f45a3bd974fc2400fa",
+  "retrieved_utc": "2026-09-29T18:48:25Z"
+ },
+ {
+  "url": "https://fptcloud.com/product/fpt-data-governance-security-quan-ly-tai-san/",
+  "kind": "security",
+  "file": "providers/fptcloud/security.html",
+  "http": 200,
+  "bytes": 161915,
+  "sha256": "a41b11b453c12a3abf144bb089223540a35742a8c5955762c887bdf1c3b2aa62",
+  "retrieved_utc": "2026-09-29T18:48:26Z"
+ },
+ {
+  "url": "https://status.fptcloud.com/",
+  "kind": "status",
+  "file": "providers/fptcloud/status.html",
+  "http": 0,
+  "bytes": 0,
+  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "retrieved_utc": "2026-09-29T18:48:26Z",
+  "curl_error": "curl: (6) Could not resolve host: status.fptcloud.com"
+ },
+ {
+  "url": "https://ai.fptcloud.com/pricing/container",
+  "kind": "pricing_ai",
+  "file": "providers/fptcloud/pricing_ai.html",
+  "http": 200,
+  "bytes": 1550,
+  "sha256": "ebb21408254c9dc1b81c92e2a605457f62f2a34b461d485031a049f53d398707",
+  "retrieved_utc": "2026-09-29T18:50:50Z"
+ },
+ {
+  "url": "https://fptcloud.com/en/product/kubernetes-engine-en/",
+  "kind": "docs_k8s_en",
+  "file": "providers/fptcloud/docs_k8s_en.html",
+  "http": 200,
+  "bytes": 123494,
+  "sha256": "7c1e210d736483d88a97ac8daecb93e6953002f15fa67e963cc07a23b11b09c7",
+  "retrieved_utc": "2026-09-29T18:50:51Z"
+ },
+ {
+  "url": "https://docs.fptcloud.com/vi/docs/fpt-cloud-server/cloud-server/Initial-Setup/",
+  "kind": "docs_vi",
+  "file": "providers/fptcloud/docs_vi.html",
+  "http": 200,
+  "bytes": 8611,
+  "sha256": "bb4d895b63a1b4204c9ba680f8726015a7a07b44943745d7e00d1ee1af0a8402",
+  "retrieved_utc": "2026-09-29T18:50:52Z"
+ }
+]

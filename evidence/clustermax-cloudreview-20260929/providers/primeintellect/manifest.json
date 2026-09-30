@@ -1,0 +1,103 @@
+{
+ "slug": "primeintellect",
+ "user_agent": "Mozilla/5.0",
+ "timeout_s": 60,
+ "entries": [
+  {
+   "kind": "pricing",
+   "url": "https://www.primeintellect.ai/pricing",
+   "url_effective": "https://www.primeintellect.ai/pricing",
+   "file": "providers/primeintellect/pricing.html",
+   "http": 404,
+   "content_type": "text/html; charset=utf-8",
+   "bytes": 35926,
+   "sha256": "2169bb3a0b1a196aeb3501eb30f064bfd9c35de51c5fd77b550bdfca98b2b5fe",
+   "retrieved_utc": "2026-09-29T18:46:41Z",
+   "curl_error": null
+  },
+  {
+   "kind": "status",
+   "url": "https://status.primeintellect.ai/",
+   "url_effective": "https://status.primeintellect.ai/",
+   "file": "providers/primeintellect/status.html",
+   "http": 200,
+   "content_type": "text/html; charset=utf-8",
+   "bytes": 146154,
+   "sha256": "9f128fe931a63503613c8ba0f9e271f3eb3fd0d7bf203bef810d07ac78358dca",
+   "retrieved_utc": "2026-09-29T18:46:43Z",
+   "curl_error": null
+  },
+  {
+   "kind": "status_incidents",
+   "url": "https://status.primeintellect.ai/incidents",
+   "url_effective": "https://status.primeintellect.ai/incidents",
+   "file": "providers/primeintellect/status_incidents.html",
+   "http": 200,
+   "content_type": "text/html; charset=utf-8",
+   "bytes": 142671,
+   "sha256": "6818b753927e787164f45f9364a10608a5ee3df347d0e3d62255d96c203610d6",
+   "retrieved_utc": "2026-09-29T18:46:43Z",
+   "curl_error": null
+  },
+  {
+   "kind": "docs_index",
+   "url": "https://docs.primeintellect.ai/introduction",
+   "url_effective": "https://docs.primeintellect.ai/introduction",
+   "file": "providers/primeintellect/docs_index.html",
+   "http": 200,
+   "content_type": "text/html; charset=utf-8",
+   "bytes": 302197,
+   "sha256": "f0802264ec7fcb37351e85ce7d5fc6a0aac1571fa6c87e33906cf09053ca17ce",
+   "retrieved_utc": "2026-09-29T18:46:42Z",
+   "curl_error": null
+  },
+  {
+   "kind": "docs_slurm",
+   "url": "https://docs.primeintellect.ai/tutorials-multi-node-cluster/deploy-multi-node",
+   "url_effective": "https://docs.primeintellect.ai/tutorials-multi-node-cluster/deploy-multi-node",
+   "file": "providers/primeintellect/docs_slurm.html",
+   "http": 200,
+   "content_type": "text/html; charset=utf-8",
+   "bytes": 270216,
+   "sha256": "f62c61ec4c91dc26ffda98ad85654bf2838ac4c9646fb77327bcc866c0580ef4",
+   "retrieved_utc": "2026-09-29T18:46:42Z",
+   "curl_error": null
+  },
+  {
+   "kind": "docs_kubernetes",
+   "url": "https://docs.primeintellect.ai/tutorials-reserved-clusters/monitoring",
+   "url_effective": "https://docs.primeintellect.ai/tutorials-reserved-clusters/monitoring",
+   "file": "providers/primeintellect/docs_kubernetes.html",
+   "http": 200,
+   "content_type": "text/html; charset=utf-8",
+   "bytes": 317959,
+   "sha256": "1405a84a2d53a6f87f535f70659da2215bfea7cbf25e215f6aceae90fc60a0ed",
+   "retrieved_utc": "2026-09-29T18:46:42Z",
+   "curl_error": null
+  },
+  {
+   "kind": "trust",
+   "url": "https://trust.primeintellect.ai/",
+   "url_effective": "https://trust.primeintellect.ai/",
+   "file": "providers/primeintellect/trust.html",
+   "http": 200,
+   "content_type": "text/html; charset=utf-8",
+   "bytes": 160248,
+   "sha256": "d5d97185a0efb473377850e5c7497746cb914bfdec2fce64a17252f8e7ba1b80",
+   "retrieved_utc": "2026-09-29T18:46:42Z",
+   "curl_error": null
+  },
+  {
+   "kind": "trust_security_page",
+   "url": "https://www.primeintellect.ai/security",
+   "url_effective": "https://www.primeintellect.ai/security",
+   "file": "providers/primeintellect/trust_security_page.html",
+   "http": 200,
+   "content_type": "text/html; charset=utf-8",
+   "bytes": 45699,
+   "sha256": "c13878edd0096465e8fe9bdb7043a61909d9ba96f7cbe7f2f595bd55e3a29d3e",
+   "retrieved_utc": "2026-09-29T18:46:43Z",
+   "curl_error": null
+  }
+ ]
+}

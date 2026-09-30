@@ -1,0 +1,91 @@
+{
+ "slug": "lightningai",
+ "user_agent": "Mozilla/5.0",
+ "timeout_s": 60,
+ "entries": [
+  {
+   "kind": "pricing",
+   "url": "https://lightning.ai/pricing",
+   "url_effective": "https://lightning.ai/pricing",
+   "file": "providers/lightningai/pricing.html",
+   "http": 200,
+   "content_type": "text/html; charset=utf-8",
+   "bytes": 17699,
+   "sha256": "dd7e97fb3304e06f52de465a878f68a6a0f0d5e2999272d30adfa2991b7e29a8",
+   "retrieved_utc": "2026-09-29T18:46:47Z",
+   "curl_error": null
+  },
+  {
+   "kind": "status",
+   "url": "https://status.lightning.ai/",
+   "url_effective": "https://status.lightning.ai/",
+   "file": "providers/lightningai/status.html",
+   "http": 200,
+   "content_type": "text/html; charset=utf-8",
+   "bytes": 66330,
+   "sha256": "974844ebe107d8a65d7d6af6de63c0f77310b782d010bb9a735007cbafc787d9",
+   "retrieved_utc": "2026-09-29T18:46:47Z",
+   "curl_error": null
+  },
+  {
+   "kind": "status_api_incidents",
+   "url": "https://status.lightning.ai/api/v2/incidents.json",
+   "url_effective": "https://status.lightning.ai/api/v2/incidents.json",
+   "file": "providers/lightningai/status_api_incidents.json",
+   "http": 200,
+   "content_type": "application/json; charset=utf-8",
+   "bytes": 29742,
+   "sha256": "7f1d15dfd0ba685d71d11202b55087a1c6c49c49f5df338b2bd45c406b141c32",
+   "retrieved_utc": "2026-09-29T18:46:47Z",
+   "curl_error": null
+  },
+  {
+   "kind": "docs_index",
+   "url": "https://lightning.ai/docs/overview",
+   "url_effective": "https://lightning.ai/docs/overview",
+   "file": "providers/lightningai/docs_index.html",
+   "http": 200,
+   "content_type": "text/html; charset=utf-8",
+   "bytes": 17642,
+   "sha256": "acbc216535b53053be15b704780d7a50d337165853ba17b780bb92cfd459f290",
+   "retrieved_utc": "2026-09-29T18:46:47Z",
+   "curl_error": null
+  },
+  {
+   "kind": "docs_slurm",
+   "url": "https://lightning.ai/docs/overview/slurm",
+   "url_effective": "https://lightning.ai/docs/overview/slurm",
+   "file": "providers/lightningai/docs_slurm.html",
+   "http": 200,
+   "content_type": "text/html; charset=utf-8",
+   "bytes": 17699,
+   "sha256": "dd7e97fb3304e06f52de465a878f68a6a0f0d5e2999272d30adfa2991b7e29a8",
+   "retrieved_utc": "2026-09-29T18:46:47Z",
+   "curl_error": null
+  },
+  {
+   "kind": "docs_kubernetes",
+   "url": "https://lightning.ai/docs/overview/kubernetes",
+   "url_effective": "https://lightning.ai/docs/overview/kubernetes",
+   "file": "providers/lightningai/docs_kubernetes.html",
+   "http": 200,
+   "content_type": "text/html; charset=utf-8",
+   "bytes": 17699,
+   "sha256": "dd7e97fb3304e06f52de465a878f68a6a0f0d5e2999272d30adfa2991b7e29a8",
+   "retrieved_utc": "2026-09-29T18:46:47Z",
+   "curl_error": null
+  },
+  {
+   "kind": "trust",
+   "url": "https://lightning.ai/security",
+   "url_effective": "https://lightning.ai/security",
+   "file": "providers/lightningai/trust.html",
+   "http": 200,
+   "content_type": "text/html; charset=utf-8",
+   "bytes": 17699,
+   "sha256": "dd7e97fb3304e06f52de465a878f68a6a0f0d5e2999272d30adfa2991b7e29a8",
+   "retrieved_utc": "2026-09-29T18:46:47Z",
+   "curl_error": null
+  }
+ ]
+}

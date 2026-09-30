@@ -29,8 +29,9 @@ PREFIX = 25
 
 
 def base_rebuild_check(ctx, s):
-    sessions = Path(os.environ.get('CIRCULATE_SESSIONS') or (ctx.repo.parent / 'sessions'))
-    if ctx.offline or not (sessions / 'clustermax-cloudreview-20260929').exists() or not (sessions / 'public-tail-20260929/lanes').exists():
+    from stages._common import evidence_root
+    sessions = evidence_root.sessions_dir('clustermax-cloudreview-20260929/tco-model.json', 'public-tail-20260929/lanes/sa-newsletter')
+    if ctx.offline or not (sessions / 'clustermax-cloudreview-20260929/tco-model.json').exists() or not (sessions / 'public-tail-20260929/lanes/sa-newsletter').exists():
         return None
     work = ctx.stage_dir() / 'rebuild'
     shutil.rmtree(work, ignore_errors=True)

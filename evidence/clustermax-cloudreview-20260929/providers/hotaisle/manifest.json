@@ -1,0 +1,127 @@
+{
+ "slug": "hotaisle",
+ "user_agent": "Mozilla/5.0",
+ "timeout_s": 60,
+ "entries": [
+  {
+   "kind": "pricing",
+   "url": "https://hotaisle.xyz/pricing",
+   "url_effective": "https://hotaisle.xyz/pricing",
+   "file": "providers/hotaisle/pricing.html",
+   "http": 200,
+   "content_type": "text/html",
+   "bytes": 166907,
+   "sha256": "37ef9ffd5cb725777acf62b8df6ff750dfee52d6d56df2cb53e3776f1c564afb",
+   "retrieved_utc": "2026-09-29T18:46:45Z",
+   "curl_error": null
+  },
+  {
+   "kind": "status",
+   "url": "https://status.hotaisle.xyz/",
+   "url_effective": "https://status.hotaisle.xyz/",
+   "file": "providers/hotaisle/status.html",
+   "http": 0,
+   "content_type": "",
+   "bytes": 0,
+   "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "retrieved_utc": "2026-09-29T18:46:45Z",
+   "curl_error": "curl: (6) Could not resolve host: status.hotaisle.xyz"
+  },
+  {
+   "kind": "status_alt",
+   "url": "https://hotaisle.cloud/",
+   "url_effective": "https://hotaisle.cloud/",
+   "file": "providers/hotaisle/status_alt.html",
+   "http": 200,
+   "content_type": "text/html",
+   "bytes": 32725,
+   "sha256": "e9694c63aa7bef98f253750c7c89a45c7aa403619b686401087cc69b6708af4c",
+   "retrieved_utc": "2026-09-29T18:46:46Z",
+   "curl_error": null
+  },
+  {
+   "kind": "docs_index",
+   "url": "https://hotaisle.xyz/docs/api",
+   "url_effective": "https://hotaisle.xyz/docs/api",
+   "file": "providers/hotaisle/docs_index.html",
+   "http": 200,
+   "content_type": "text/html",
+   "bytes": 162312,
+   "sha256": "13628b7a25da1e8afd8213278fcd17e3b46fffca9bcdb098336700768a899c80",
+   "retrieved_utc": "2026-09-29T18:46:46Z",
+   "curl_error": null
+  },
+  {
+   "kind": "docs_api_admin",
+   "url": "https://admin.hotaisle.app/api/docs/",
+   "url_effective": "https://admin.hotaisle.app/api/docs/",
+   "file": "providers/hotaisle/docs_api_admin.html",
+   "http": 200,
+   "content_type": "text/html; charset=utf-8",
+   "bytes": 1517,
+   "sha256": "a21191e6a612b0f1ec6c014dca37504f7493b26a346e81d07dea15fa94f5930a",
+   "retrieved_utc": "2026-09-29T18:46:46Z",
+   "curl_error": null
+  },
+  {
+   "kind": "docs_cluster",
+   "url": "https://hotaisle.xyz/cluster",
+   "url_effective": "https://hotaisle.xyz/cluster",
+   "file": "providers/hotaisle/docs_cluster.html",
+   "http": 200,
+   "content_type": "text/html",
+   "bytes": 162395,
+   "sha256": "b1827980ce656f47c03873f16fbafe8354d8d400936e1ccf2a8b3313d2d7607b",
+   "retrieved_utc": "2026-09-29T18:46:46Z",
+   "curl_error": null
+  },
+  {
+   "kind": "docs_compute",
+   "url": "https://hotaisle.xyz/compute",
+   "url_effective": "https://hotaisle.xyz/compute",
+   "file": "providers/hotaisle/docs_compute.html",
+   "http": 200,
+   "content_type": "text/html",
+   "bytes": 163965,
+   "sha256": "a915e1c3b369f8b2ad4779d9c470ca0df83f2d8778d85b43787675dd96a58650",
+   "retrieved_utc": "2026-09-29T18:46:46Z",
+   "curl_error": null
+  },
+  {
+   "kind": "docs_quick_start",
+   "url": "https://hotaisle.xyz/quick-start",
+   "url_effective": "https://hotaisle.xyz/quick-start",
+   "file": "providers/hotaisle/docs_quick_start.html",
+   "http": 200,
+   "content_type": "text/html",
+   "bytes": 178137,
+   "sha256": "7f0a66f7887c2e4066e58cee1ff488eac6b19ff53350d24f845c7411f8a41c56",
+   "retrieved_utc": "2026-09-29T18:46:46Z",
+   "curl_error": null
+  },
+  {
+   "kind": "trust",
+   "url": "https://hotaisle.xyz/policies/security-and-compliance",
+   "url_effective": "https://hotaisle.xyz/policies/security-and-compliance",
+   "file": "providers/hotaisle/trust.html",
+   "http": 200,
+   "content_type": "text/html",
+   "bytes": 158935,
+   "sha256": "a0595f8d409001c1bef6f88496e1dccbe243dda20bbefcbd83a69d4721eaa525",
+   "retrieved_utc": "2026-09-29T18:46:46Z",
+   "curl_error": null
+  },
+  {
+   "kind": "home",
+   "url": "https://hotaisle.xyz/",
+   "url_effective": "https://hotaisle.xyz/",
+   "file": "providers/hotaisle/home.html",
+   "http": 200,
+   "content_type": "text/html",
+   "bytes": 168213,
+   "sha256": "e998712ce4409c275ec7b8ec4871bc851ed0ef6c06fb5d05bbb292d6cdf08a83",
+   "retrieved_utc": "2026-09-29T18:46:46Z",
+   "curl_error": null
+  }
+ ]
+}

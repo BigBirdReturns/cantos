@@ -1,0 +1,79 @@
+{
+ "slug": "cirrascale",
+ "user_agent": "Mozilla/5.0",
+ "timeout_s": 60,
+ "entries": [
+  {
+   "kind": "pricing",
+   "url": "https://www.cirrascale.com/pricing",
+   "url_effective": "https://www.cirrascale.com/pricing",
+   "file": "providers/cirrascale/pricing.html",
+   "http": 200,
+   "content_type": "text/html; charset=utf-8",
+   "bytes": 134341,
+   "sha256": "12b529fafac4b1c6162a32db8b173e81b0ae30415f74e9c7037af457f248d5b2",
+   "retrieved_utc": "2026-09-29T18:46:46Z",
+   "curl_error": null
+  },
+  {
+   "kind": "status",
+   "url": "https://status.cirrascale.com/",
+   "url_effective": "https://status.cirrascale.com/",
+   "file": "providers/cirrascale/status.html",
+   "http": 200,
+   "content_type": "text/html; charset=utf-8",
+   "bytes": 156512,
+   "sha256": "1a573e15ffffdd27b23689cae794749a9111e449a2f5028490fe08ffe1b69e43",
+   "retrieved_utc": "2026-09-29T18:46:46Z",
+   "curl_error": null
+  },
+  {
+   "kind": "status_api_incidents",
+   "url": "https://status.cirrascale.com/api/v2/incidents.json",
+   "url_effective": "https://status.cirrascale.com/api/v2/incidents.json",
+   "file": "providers/cirrascale/status_api_incidents.json",
+   "http": 200,
+   "content_type": "application/json; charset=utf-8",
+   "bytes": 13900,
+   "sha256": "d22d4550ab575af940d186e29ebfd269daff82ca5948ca7a5ce418273ff2275a",
+   "retrieved_utc": "2026-09-29T18:46:46Z",
+   "curl_error": null
+  },
+  {
+   "kind": "docs_index",
+   "url": "https://docs.cirrascale.com/",
+   "url_effective": "https://docs.cirrascale.com/",
+   "file": "providers/cirrascale/docs_index.html",
+   "http": 0,
+   "content_type": "",
+   "bytes": 0,
+   "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "retrieved_utc": "2026-09-29T18:46:46Z",
+   "curl_error": "curl: (6) Could not resolve host: docs.cirrascale.com"
+  },
+  {
+   "kind": "docs_support",
+   "url": "https://www.cirrascale.com/support",
+   "url_effective": "https://www.cirrascale.com/support",
+   "file": "providers/cirrascale/docs_support.html",
+   "http": 200,
+   "content_type": "text/html; charset=utf-8",
+   "bytes": 49525,
+   "sha256": "8f2bab439662d7398f743e4cab11636d879354bd59d5c19c89ba1708043a9b02",
+   "retrieved_utc": "2026-09-29T18:46:46Z",
+   "curl_error": null
+  },
+  {
+   "kind": "trust",
+   "url": "https://www.cirrascale.com/security",
+   "url_effective": "https://www.cirrascale.com/security",
+   "file": "providers/cirrascale/trust.html",
+   "http": 404,
+   "content_type": "text/html; charset=utf-8",
+   "bytes": 40094,
+   "sha256": "aa4963a71c07cfbca3592037ccfaffeff28ed146935631bf02a276397bdc3c63",
+   "retrieved_utc": "2026-09-29T18:46:46Z",
+   "curl_error": null
+  }
+ ]
+}

@@ -12,7 +12,11 @@ const HERE = __dirname;
 const DESK = path.resolve(HERE, '..');
 const APP_HTML = path.join(DESK, 'app.html');
 const APP_SHA256 = '5951f7f3d994ec980d2958ae18246edc6dbe5b57db8d38e90c1c18956b96e470';
-const SESS = process.env.PT_SESSIONS || 'D:/Projects/Organs/AXM/axm-tools/sessions';
+// Evidence root: PT_SESSIONS, else $CANTOS_EVIDENCE / <repo>/evidence, else (only if the bulk lanes are missing there) the old session folder.
+const NEED = ['clustermax-cloudreview-20260929/tco-model.json', 'public-tail-20260929/lanes/sa-newsletter'];
+const EVID = process.env.CANTOS_EVIDENCE || path.resolve(HERE, '..', '..', 'evidence');
+const LEGACY = 'D:/Projects/Organs/AXM/axm-tools/sessions';
+const SESS = process.env.PT_SESSIONS || [EVID, LEGACY].find(b => NEED.every(n => fs.existsSync(path.join(b, n)))) || EVID;
 const CMAX = path.join(SESS, 'clustermax-cloudreview-20260929');
 const LANES = path.join(SESS, 'public-tail-20260929/lanes');
 const OUT = path.join(HERE, 'PUBLIC-TAIL-2026-09-29.research-packet.json');
@@ -307,4 +311,5 @@ async function build() {
 }
 
 module.exports = { canonical, clone, hash, safeTree, plain, loadAppCore, sha256hex, APP_SHA256, APP_HTML, build, BOUNDARY, ZERO, SCHEMA, VERSION };
-if (require.main === module) build().then(n => { console.log(JSON.stringify({ ...n, inputs: undefined }, null, 1)); }).catch(e => { console.error(e); process.exit(1); });
+if (require.main === module && !NEED.every(n => fs.existsSync(path.join(SESS, n)))) console.log('SKIP: bulk build inputs not found under ' + SESS + ' (' + NEED.join(', ') + '); set CANTOS_EVIDENCE or PT_SESSIONS. The committed packet is unchanged.');
+else if (require.main === module) build().then(n => { console.log(JSON.stringify({ ...n, inputs: undefined }, null, 1)); }).catch(e => { console.error(e); process.exit(1); });

@@ -29,7 +29,8 @@ LANE_SHA = 'public-tail-20260929/lanes/opencomputeprices/sha256.txt'
 
 
 def sessions_dir(ctx) -> Path:
-    return Path(os.environ.get('CIRCULATE_SESSIONS') or (ctx.repo.parent / 'sessions'))
+    from stages._common import evidence_root
+    return evidence_root.sessions_dir(LANE_SHA)
 
 
 def observed_assets(release: dict) -> dict:

@@ -1,0 +1,75 @@
+[
+ {
+  "url": "https://shakticloud.ai/",
+  "kind": "home",
+  "file": "providers/yotta/home.html",
+  "http": 200,
+  "bytes": 99180,
+  "sha256": "66c724287e28a8402ff3659c847c25db4d9474670324046f807e9f5244a31a7a",
+  "retrieved_utc": "2026-09-29T18:49:02Z"
+ },
+ {
+  "url": "https://yotta.com/",
+  "kind": "home_yotta",
+  "file": "providers/yotta/home_yotta.html",
+  "http": 200,
+  "bytes": 348386,
+  "sha256": "6c36ed4cd77e94a18b0d67cbd03a2b3107dfe2b234101725601071dca005dfc4",
+  "retrieved_utc": "2026-09-29T18:49:05Z"
+ },
+ {
+  "url": "https://shakticloud.ai/pricing/",
+  "kind": "pricing",
+  "file": "providers/yotta/pricing.html",
+  "http": 200,
+  "bytes": 301313,
+  "sha256": "37123acb9f0673e1605713b76255c49a2283644f704b69b96e07bea39898f3ee",
+  "retrieved_utc": "2026-09-29T18:49:08Z"
+ },
+ {
+  "url": "https://shakticloud.ai/pricing/calculator/baremetal/",
+  "kind": "pricing_baremetal",
+  "file": "providers/yotta/pricing_baremetal.html",
+  "http": 200,
+  "bytes": 47479,
+  "sha256": "b3ae8a7f94f04d3d933cd51bbf082504afc7287aff8a68a0a0615026a29aab6e",
+  "retrieved_utc": "2026-09-29T18:49:10Z"
+ },
+ {
+  "url": "https://shakticloud.ai/docs/",
+  "kind": "docs",
+  "file": "providers/yotta/docs.html",
+  "http": 500,
+  "bytes": 2711,
+  "sha256": "fa0b5b7c4d66290ff8a331ad53ae88b6a09f4720a5421b6038ddd4edaea38ff8",
+  "retrieved_utc": "2026-09-29T18:49:11Z"
+ },
+ {
+  "url": "https://status.shakticloud.ai/",
+  "kind": "status",
+  "file": "providers/yotta/status.html",
+  "http": 0,
+  "bytes": 0,
+  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "retrieved_utc": "2026-09-29T18:49:12Z",
+  "curl_error": "curl: (6) Could not resolve host: status.shakticloud.ai"
+ },
+ {
+  "url": "https://shakticloud.ai/security/",
+  "kind": "trust",
+  "file": "providers/yotta/trust.html",
+  "http": 500,
+  "bytes": 2711,
+  "sha256": "fa0b5b7c4d66290ff8a331ad53ae88b6a09f4720a5421b6038ddd4edaea38ff8",
+  "retrieved_utc": "2026-09-29T18:49:13Z"
+ },
+ {
+  "url": "https://shakticloud.ai/compliance/",
+  "kind": "trust_compliance",
+  "file": "providers/yotta/trust_compliance.html",
+  "http": 500,
+  "bytes": 2711,
+  "sha256": "fa0b5b7c4d66290ff8a331ad53ae88b6a09f4720a5421b6038ddd4edaea38ff8",
+  "retrieved_utc": "2026-09-29T18:51:04Z"
+ }
+]

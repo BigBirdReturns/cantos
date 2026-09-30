@@ -1,0 +1,50 @@
+[
+ {
+  "url": "https://www.shadeform.ai/",
+  "kind": "home",
+  "file": "providers/shadeform/home.html",
+  "http": 200,
+  "bytes": 724410,
+  "sha256": "57eb8c8ff7c6d825b6355f134d20ae9b3ecf7257eabceb25067a49f25fe88a1f",
+  "retrieved_utc": "2026-09-29T18:48:07Z",
+  "url_effective": "https://shadeform.com/"
+ },
+ {
+  "url": "https://www.shadeform.ai/prices",
+  "kind": "pricing",
+  "file": "providers/shadeform/pricing.html",
+  "http": 200,
+  "bytes": 195616,
+  "sha256": "bec91d52da8eadad34a90c79730c8aa59d77843c8cf00385556d9a7917d68443",
+  "retrieved_utc": "2026-09-29T18:48:08Z",
+  "url_effective": "https://shadeform.com/prices"
+ },
+ {
+  "url": "https://status.shadeform.ai/",
+  "kind": "status",
+  "file": "providers/shadeform/status.html",
+  "http": 0,
+  "bytes": 0,
+  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "retrieved_utc": "2026-09-29T18:48:08Z",
+  "curl_error": "curl: (6) Could not resolve host: status.shadeform.ai"
+ },
+ {
+  "url": "https://trust.shadeform.com/",
+  "kind": "trust",
+  "file": "providers/shadeform/trust.html",
+  "http": 200,
+  "bytes": 7633,
+  "sha256": "a122339d62303f1ad5fb3de103404058aa16145dd1856a97fa1be31f4840fc0a",
+  "retrieved_utc": "2026-09-29T18:48:09Z"
+ },
+ {
+  "url": "https://docs.shadeform.ai/getting-started/introduction",
+  "kind": "docs",
+  "file": "providers/shadeform/docs.html",
+  "http": 200,
+  "bytes": 252008,
+  "sha256": "c08656aba96aeb498985688f45dc5d2bdc6f3c7134aa55c9e410e396c8747f82",
+  "retrieved_utc": "2026-09-29T18:48:10Z"
+ }
+]

@@ -1,0 +1,170 @@
+[
+ {
+  "label": "homepage",
+  "url": "https://firmus.co/",
+  "file": "providers/firmussustainablemetalcloud/home.html",
+  "http": 200,
+  "bytes": 248070,
+  "sha256": "8a847fe289b0090f8ef14b34827168a63bdc739f5a71ba2c35c935518bafbe31",
+  "retrieved_utc": "2026-09-29T18:38:12Z"
+ },
+ {
+  "label": "homepage_smc",
+  "url": "https://smc.co/",
+  "file": "providers/firmussustainablemetalcloud/home_smc.html",
+  "http": 200,
+  "bytes": 2333114,
+  "sha256": "0b7e276ecf31ce79f99ebe933a3071f5171977d2a05dadb18ded2bf1b3ce41d4",
+  "retrieved_utc": "2026-09-29T18:38:12Z"
+ },
+ {
+  "label": "pricing",
+  "url": "https://firmus.co/pricing",
+  "file": "providers/firmussustainablemetalcloud/pricing.html",
+  "http": 404,
+  "bytes": 35324,
+  "sha256": "80915ca32b48be9d54d55b65299bab8b18e9c45daa901d285da10b02109f9c00",
+  "retrieved_utc": "2026-09-29T18:38:13Z"
+ },
+ {
+  "label": "pricing_smc",
+  "url": "https://smc.co/pricing",
+  "file": "providers/firmussustainablemetalcloud/pricing_smc.html",
+  "http": 404,
+  "bytes": 65426,
+  "sha256": "c0f781e322096c13fa03c45cf565a17d6f9b2d00bf48959f353500375f10e0f4",
+  "retrieved_utc": "2026-09-29T18:38:13Z"
+ },
+ {
+  "label": "status",
+  "url": "https://status.firmus.co/",
+  "file": "providers/firmussustainablemetalcloud/status.html",
+  "http": 0,
+  "bytes": 0,
+  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "retrieved_utc": "2026-09-29T18:38:13Z",
+  "curl_error": "curl: (6) Could not resolve host: status.firmus.co"
+ },
+ {
+  "label": "status_smc",
+  "url": "https://status.smc.co/",
+  "file": "providers/firmussustainablemetalcloud/status_smc.html",
+  "http": 0,
+  "bytes": 0,
+  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "retrieved_utc": "2026-09-29T18:38:13Z",
+  "curl_error": "curl: (6) Could not resolve host: status.smc.co"
+ },
+ {
+  "label": "docs_index",
+  "url": "https://docs.firmus.co/",
+  "file": "providers/firmussustainablemetalcloud/docs_index.html",
+  "http": 0,
+  "bytes": 0,
+  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "retrieved_utc": "2026-09-29T18:38:13Z",
+  "curl_error": "curl: (6) Could not resolve host: docs.firmus.co"
+ },
+ {
+  "label": "docs_smc",
+  "url": "https://docs.smc.co/",
+  "file": "providers/firmussustainablemetalcloud/docs_smc.html",
+  "http": 0,
+  "bytes": 0,
+  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "retrieved_utc": "2026-09-29T18:38:13Z",
+  "curl_error": "curl: (6) Could not resolve host: docs.smc.co"
+ },
+ {
+  "label": "trust",
+  "url": "https://trust.firmus.co/",
+  "file": "providers/firmussustainablemetalcloud/trust.html",
+  "http": 0,
+  "bytes": 0,
+  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "retrieved_utc": "2026-09-29T18:38:14Z",
+  "curl_error": "curl: (6) Could not resolve host: trust.firmus.co"
+ },
+ {
+  "label": "trust_smc",
+  "url": "https://smc.co/security",
+  "file": "providers/firmussustainablemetalcloud/trust_smc.html",
+  "http": 404,
+  "bytes": 65430,
+  "sha256": "7af003567926e594b333e6413e6cb991c6533043e742102eeaf2c55d3ca3a903",
+  "retrieved_utc": "2026-09-29T18:38:14Z"
+ },
+ {
+  "label": "product_aicloud",
+  "url": "https://firmus.co/aicloud",
+  "file": "providers/firmussustainablemetalcloud/product_aicloud.html",
+  "http": 200,
+  "bytes": 133683,
+  "sha256": "dda3b78c68002823d5dc6af6728902874f24221274c895167440ec11f73a676c",
+  "retrieved_utc": "2026-09-29T18:40:02Z"
+ },
+ {
+  "label": "product_gpu_instances",
+  "url": "https://smc.co/gpu-instances",
+  "file": "providers/firmussustainablemetalcloud/product_gpu_instances.html",
+  "http": 200,
+  "bytes": 277154,
+  "sha256": "e7f0f0775b0eeba76c1691be28d14523ef7670ab64937be29b196645175f1bb4",
+  "retrieved_utc": "2026-09-29T18:40:03Z"
+ },
+ {
+  "label": "product_h200",
+  "url": "https://smc.co/h200",
+  "file": "providers/firmussustainablemetalcloud/product_h200.html",
+  "http": 200,
+  "bytes": 192932,
+  "sha256": "6958c231152dba1f688c8617e9c4e7eeb121532d4a4267217c0e29ec5bbc9bdf",
+  "retrieved_utc": "2026-09-29T18:40:03Z"
+ },
+ {
+  "label": "trust_alt2",
+  "url": "https://trust.smc.co/",
+  "file": "providers/firmussustainablemetalcloud/trust_alt2.html",
+  "http": 0,
+  "bytes": 0,
+  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "retrieved_utc": "2026-09-29T18:40:03Z",
+  "curl_error": "curl: (6) Could not resolve host: trust.smc.co"
+ },
+ {
+  "label": "trust_alt3",
+  "url": "https://smc.co/trust-center",
+  "file": "providers/firmussustainablemetalcloud/trust_alt3.html",
+  "http": 404,
+  "bytes": 65446,
+  "sha256": "c34f0dfcbfa32db638de5662262f3f1b8345f47e68daf815198cee8fa280a96e",
+  "retrieved_utc": "2026-09-29T18:40:03Z"
+ },
+ {
+  "label": "trust_alt4",
+  "url": "https://firmus.co/security",
+  "file": "providers/firmussustainablemetalcloud/trust_alt4.html",
+  "http": 404,
+  "bytes": 35326,
+  "sha256": "d62bd3ad21cea8de8e33ded894904413b4d343a54135d454705cf6a945a74410",
+  "retrieved_utc": "2026-09-29T18:40:04Z"
+ },
+ {
+  "label": "technology",
+  "url": "https://smc.co/technology",
+  "file": "providers/firmussustainablemetalcloud/technology.html",
+  "http": 200,
+  "bytes": 596169,
+  "sha256": "e70ab2ebf99aa2bcf7a7b7265bf1381f7d282f6a1b6791223f3308a0253ad28c",
+  "retrieved_utc": "2026-09-29T18:40:04Z"
+ },
+ {
+  "label": "trust_cloud_services",
+  "url": "https://firmus.co/ai-cloud/cloud-services",
+  "file": "providers/firmussustainablemetalcloud/trust_cloud_services.html",
+  "http": 200,
+  "bytes": 121470,
+  "sha256": "1e42979b96bbff0cd477bb2ec0a31d52f87ed71d45dfbcdf79ba1cc077360c4e",
+  "retrieved_utc": "2026-09-29T18:45:20Z"
+ }
+]

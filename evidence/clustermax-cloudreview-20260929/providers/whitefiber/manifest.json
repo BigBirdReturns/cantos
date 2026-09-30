@@ -1,0 +1,104 @@
+[
+ {
+  "kind": "home",
+  "url": "https://www.whitefiber.com/",
+  "file": "providers/whitefiber/www.whitefiber.com",
+  "http": 200,
+  "bytes": 258132,
+  "sha256": "6dec9e6e3de5183fd5b3e212526b0067ff381ba652468304752407e4b74f7693",
+  "retrieved_utc": "2026-09-29T18:36:32Z"
+ },
+ {
+  "kind": "pricing",
+  "url": "https://www.whitefiber.com/pricing",
+  "file": "providers/whitefiber/www.whitefiber.com_pricing.html",
+  "http": 404,
+  "bytes": 115800,
+  "sha256": "4356a8b6da545d2df3863760781d7b629b73d2b53761ad9f37caea8387c7db71",
+  "retrieved_utc": "2026-09-29T18:36:32Z"
+ },
+ {
+  "kind": "pricing",
+  "url": "https://www.whitefiber.com/gpu-cloud",
+  "file": "providers/whitefiber/www.whitefiber.com_gpu-cloud.html",
+  "http": 200,
+  "bytes": 99338,
+  "sha256": "211282f02b9ada0997588e0561e5882e26c63d06f8e50c52be104cb0a47261db",
+  "retrieved_utc": "2026-09-29T18:36:32Z"
+ },
+ {
+  "kind": "status",
+  "url": "https://status.whitefiber.com",
+  "file": "providers/whitefiber/status.whitefiber.com",
+  "http": 0,
+  "bytes": 0,
+  "sha256": null,
+  "retrieved_utc": "2026-09-29T18:36:32Z",
+  "curl_stderr": "curl: (6) Could not resolve host: status.whitefiber.com"
+ },
+ {
+  "kind": "docs",
+  "url": "https://docs.whitefiber.com",
+  "file": "providers/whitefiber/docs.whitefiber.com",
+  "http": 0,
+  "bytes": 0,
+  "sha256": null,
+  "retrieved_utc": "2026-09-29T18:36:32Z",
+  "curl_stderr": "curl: (6) Could not resolve host: docs.whitefiber.com"
+ },
+ {
+  "kind": "trust",
+  "url": "https://trust.whitefiber.com",
+  "file": "providers/whitefiber/trust.whitefiber.com",
+  "http": 0,
+  "bytes": 0,
+  "sha256": null,
+  "retrieved_utc": "2026-09-29T18:36:32Z",
+  "curl_stderr": "curl: (6) Could not resolve host: trust.whitefiber.com"
+ },
+ {
+  "kind": "trust",
+  "url": "https://www.whitefiber.com/security",
+  "file": "providers/whitefiber/www.whitefiber.com_security.html",
+  "http": 404,
+  "bytes": 115800,
+  "sha256": "4356a8b6da545d2df3863760781d7b629b73d2b53761ad9f37caea8387c7db71",
+  "retrieved_utc": "2026-09-29T18:36:32Z"
+ },
+ {
+  "kind": "discovered",
+  "url": "https://www.whitefiber.com/cloud/security",
+  "file": "providers/whitefiber/www.whitefiber.com_cloud_security.html",
+  "http": 200,
+  "bytes": 95775,
+  "sha256": "24d949b6f2c1b66ef4587d5c26910728aef32d9f5f66730a859895cf4e77706b",
+  "retrieved_utc": "2026-09-29T18:36:32Z"
+ },
+ {
+  "kind": "discovered",
+  "url": "https://www.whitefiber.com/gpu-pricing",
+  "file": "providers/whitefiber/www.whitefiber.com_gpu-pricing.html",
+  "http": 200,
+  "bytes": 146408,
+  "sha256": "f8b904bd4786d05d96dea4a569fa8517371ca6847c5474efc3ea13f30d5bfc2e",
+  "retrieved_utc": "2026-09-29T18:36:33Z"
+ },
+ {
+  "kind": "docs",
+  "url": "https://www.whitefiber.com/cloud/kubernetes",
+  "file": "providers/whitefiber/www.whitefiber.com_cloud_kubernetes.html",
+  "http": 404,
+  "bytes": 115800,
+  "sha256": "4356a8b6da545d2df3863760781d7b629b73d2b53761ad9f37caea8387c7db71",
+  "retrieved_utc": "2026-09-29T18:42:52Z"
+ },
+ {
+  "kind": "docs",
+  "url": "https://www.whitefiber.com/cloud/slurm",
+  "file": "providers/whitefiber/www.whitefiber.com_cloud_slurm.html",
+  "http": 404,
+  "bytes": 115800,
+  "sha256": "4356a8b6da545d2df3863760781d7b629b73d2b53761ad9f37caea8387c7db71",
+  "retrieved_utc": "2026-09-29T18:42:53Z"
+ }
+]

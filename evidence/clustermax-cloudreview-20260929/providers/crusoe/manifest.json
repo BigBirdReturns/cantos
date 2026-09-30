@@ -1,0 +1,103 @@
+{
+ "slug": "crusoe",
+ "user_agent": "Mozilla/5.0",
+ "timeout_s": 60,
+ "entries": [
+  {
+   "kind": "pricing",
+   "url": "https://www.crusoe.ai/cloud/pricing",
+   "url_effective": "https://www.crusoe.ai/cloud/pricing",
+   "file": "providers/crusoe/pricing.html",
+   "http": 200,
+   "content_type": "text/html; charset=utf-8",
+   "bytes": 281653,
+   "sha256": "aee2503c189c9345c47093cc3e28f04c478aa3a41f56b861503282dde9e39e95",
+   "retrieved_utc": "2026-09-29T18:46:43Z",
+   "curl_error": null
+  },
+  {
+   "kind": "status",
+   "url": "https://status.crusoecloud.com/",
+   "url_effective": "https://status.crusoecloud.com/",
+   "file": "providers/crusoe/status.html",
+   "http": 200,
+   "content_type": "text/html; charset=utf-8",
+   "bytes": 168124,
+   "sha256": "1044d71f70ac1eca244ee6b645e2f727287b18dbc2aefd5abcfed4a1d8735042",
+   "retrieved_utc": "2026-09-29T18:46:43Z",
+   "curl_error": null
+  },
+  {
+   "kind": "status_api_incidents",
+   "url": "https://status.crusoecloud.com/api/v2/incidents.json",
+   "url_effective": "https://status.crusoecloud.com/api/v2/incidents.json",
+   "file": "providers/crusoe/status_api_incidents.json",
+   "http": 200,
+   "content_type": "application/json; charset=utf-8",
+   "bytes": 204006,
+   "sha256": "830baa590a9be536c025910bd98cb957dceed17eebd3066ee7b024e7d5737abc",
+   "retrieved_utc": "2026-09-29T18:46:43Z",
+   "curl_error": null
+  },
+  {
+   "kind": "docs_index",
+   "url": "https://docs.crusoecloud.com/",
+   "url_effective": "https://docs.crusoecloud.com/",
+   "file": "providers/crusoe/docs_index.html",
+   "http": 200,
+   "content_type": "text/html",
+   "bytes": 22609,
+   "sha256": "34242029ae0c3257b54cfd439c5f785203b9e0019eee319664d4710e0efe6a8a",
+   "retrieved_utc": "2026-09-29T18:46:43Z",
+   "curl_error": null
+  },
+  {
+   "kind": "docs_slurm",
+   "url": "https://docs.crusoecloud.com/orchestration/slurm/",
+   "url_effective": "https://docs.crusoecloud.com/orchestration/slurm/",
+   "file": "providers/crusoe/docs_slurm.html",
+   "http": 200,
+   "content_type": "text/html",
+   "bytes": 38741,
+   "sha256": "fb76fcd0935adc38fb427e9e6ef66923a8a9a683c79888b329555e1a079ab584",
+   "retrieved_utc": "2026-09-29T18:46:43Z",
+   "curl_error": null
+  },
+  {
+   "kind": "docs_kubernetes",
+   "url": "https://docs.crusoecloud.com/orchestration/cmk/",
+   "url_effective": "https://docs.crusoecloud.com/orchestration/cmk/",
+   "file": "providers/crusoe/docs_kubernetes.html",
+   "http": 200,
+   "content_type": "text/html",
+   "bytes": 40444,
+   "sha256": "64d3d739b3e77fc362b87ef4f6aaca0c48e76874d3ee09a215d38b604e3bfb1e",
+   "retrieved_utc": "2026-09-29T18:46:43Z",
+   "curl_error": null
+  },
+  {
+   "kind": "docs_kubernetes_alt",
+   "url": "https://docs.crusoecloud.com/orchestration/kubernetes/",
+   "url_effective": "https://docs.crusoecloud.com/orchestration/kubernetes/",
+   "file": "providers/crusoe/docs_kubernetes_alt.html",
+   "http": 404,
+   "content_type": "text/html",
+   "bytes": 11994,
+   "sha256": "101a44e711af369b2697df4f583ebd5ac45ab137b912c77e7e9057285de04489",
+   "retrieved_utc": "2026-09-29T18:46:43Z",
+   "curl_error": null
+  },
+  {
+   "kind": "trust",
+   "url": "https://trust.crusoe.ai/",
+   "url_effective": "https://trust.crusoe.ai/",
+   "file": "providers/crusoe/trust.html",
+   "http": 200,
+   "content_type": "text/html",
+   "bytes": 7763,
+   "sha256": "f84231d9b1097c723fe74ca8c69dd380c9ab2b7b1147b210765676c57200f7c6",
+   "retrieved_utc": "2026-09-29T18:46:44Z",
+   "curl_error": null
+  }
+ ]
+}

@@ -1,0 +1,91 @@
+{
+ "slug": "gmocloud",
+ "user_agent": "Mozilla/5.0",
+ "timeout_s": 60,
+ "entries": [
+  {
+   "kind": "pricing",
+   "url": "https://gpucloud.gmo/price",
+   "url_effective": "https://gpucloud.gmo/contact/",
+   "file": "providers/gmocloud/pricing.html",
+   "http": 200,
+   "content_type": "text/html; charset=UTF-8",
+   "bytes": 18121,
+   "sha256": "5260fe6c07b646ed0cdb904be941045cc429fc13eb1c57128388459db8109a18",
+   "retrieved_utc": "2026-09-29T18:46:44Z",
+   "curl_error": null
+  },
+  {
+   "kind": "pricing_bare_metal",
+   "url": "https://gpucloud.gmo/services/bare-metal/",
+   "url_effective": "https://gpucloud.gmo/services/bare-metal/",
+   "file": "providers/gmocloud/pricing_bare_metal.html",
+   "http": 200,
+   "content_type": "text/html; charset=UTF-8",
+   "bytes": 48308,
+   "sha256": "bc677a0e507ef407eabb6920478c612222fc61494e75ded205369efd2b5b7fce",
+   "retrieved_utc": "2026-09-29T18:46:44Z",
+   "curl_error": null
+  },
+  {
+   "kind": "status",
+   "url": "https://status.gpucloud.gmo/",
+   "url_effective": "https://status.gpucloud.gmo/",
+   "file": "providers/gmocloud/status.html",
+   "http": 0,
+   "content_type": "",
+   "bytes": 0,
+   "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "retrieved_utc": "2026-09-29T18:46:44Z",
+   "curl_error": "curl: (6) Could not resolve host: status.gpucloud.gmo"
+  },
+  {
+   "kind": "docs_index",
+   "url": "https://navi.gpucloud.gmo/",
+   "url_effective": "https://navi.gpucloud.gmo/login",
+   "file": "providers/gmocloud/docs_index.html",
+   "http": 200,
+   "content_type": "text/html; charset=UTF-8",
+   "bytes": 5230,
+   "sha256": "074a962c1b5e5acdd9ea99b14bb4c45ce06475911eecf0d86dc3c1c3d6be2279",
+   "retrieved_utc": "2026-09-29T18:46:44Z",
+   "curl_error": null
+  },
+  {
+   "kind": "docs_slurm",
+   "url": "https://gpucloud.gmo/services/managed-hpc/",
+   "url_effective": "https://gpucloud.gmo/services/managed-hpc/",
+   "file": "providers/gmocloud/docs_slurm.html",
+   "http": 200,
+   "content_type": "text/html; charset=UTF-8",
+   "bytes": 58890,
+   "sha256": "6ed2facdd5082fec91a3601c4b9ec60c69bd792d26b2ee2f10d6f54c7d049019",
+   "retrieved_utc": "2026-09-29T18:46:44Z",
+   "curl_error": null
+  },
+  {
+   "kind": "docs_faq",
+   "url": "https://gpucloud.gmo/faq/",
+   "url_effective": "https://gpucloud.gmo/faq/",
+   "file": "providers/gmocloud/docs_faq.html",
+   "http": 200,
+   "content_type": "text/html; charset=UTF-8",
+   "bytes": 14183,
+   "sha256": "8761e6c0aef8de07cbd355ef0f056cd1939d54b91c42920998609434ee1155fe",
+   "retrieved_utc": "2026-09-29T18:46:44Z",
+   "curl_error": null
+  },
+  {
+   "kind": "trust",
+   "url": "https://internet.gmo/terms/infosecurity/",
+   "url_effective": "https://internet.gmo/terms/infosecurity/",
+   "file": "providers/gmocloud/trust.html",
+   "http": 200,
+   "content_type": "text/html; charset=UTF-8",
+   "bytes": 29758,
+   "sha256": "657fad84a28d275df1a80e5f128a92464243b48d995bcc1449bc357c4a73226b",
+   "retrieved_utc": "2026-09-29T18:46:44Z",
+   "curl_error": null
+  }
+ ]
+}

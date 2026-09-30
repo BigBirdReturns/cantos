@@ -1,0 +1,148 @@
+[
+ {
+  "kind": "home",
+  "url": "https://hydrahost.com",
+  "file": "providers/hydrahost/hydrahost.com",
+  "http": 200,
+  "bytes": 149882,
+  "sha256": "c7ba639ff3f7f9d8d824c4124f77aaf0393489e7c7674e0e6dd5bf867cf705a5",
+  "retrieved_utc": "2026-09-29T18:36:25Z"
+ },
+ {
+  "kind": "pricing",
+  "url": "https://hydrahost.com/pricing",
+  "file": "providers/hydrahost/hydrahost.com_pricing.html",
+  "http": 404,
+  "bytes": 27693,
+  "sha256": "6ce68117848a4233f8ae7d61b0b79c30a70abb24e82899f685a2598dd0bedc1b",
+  "retrieved_utc": "2026-09-29T18:36:26Z"
+ },
+ {
+  "kind": "pricing",
+  "url": "https://brokkr.hydrahost.com",
+  "file": "providers/hydrahost/brokkr.hydrahost.com",
+  "http": 200,
+  "bytes": 1098,
+  "sha256": "9dc21ed2597787c61aae9821a146a20673ec7d16ffad915a6e058fcbda2ced94",
+  "retrieved_utc": "2026-09-29T18:36:26Z"
+ },
+ {
+  "kind": "pricing",
+  "url": "https://brokkr.hydrahost.com/pricing",
+  "file": "providers/hydrahost/brokkr.hydrahost.com_pricing.html",
+  "http": 200,
+  "bytes": 1098,
+  "sha256": "9dc21ed2597787c61aae9821a146a20673ec7d16ffad915a6e058fcbda2ced94",
+  "retrieved_utc": "2026-09-29T18:36:26Z"
+ },
+ {
+  "kind": "status",
+  "url": "https://status.hydrahost.com",
+  "file": "providers/hydrahost/status.hydrahost.com",
+  "http": 200,
+  "bytes": 200610,
+  "sha256": "c3628419cfca67db6590a0442061338b4e0da96a7fc9461e15cfbe2411f52dce",
+  "retrieved_utc": "2026-09-29T18:36:27Z"
+ },
+ {
+  "kind": "docs",
+  "url": "https://docs.hydrahost.com",
+  "file": "providers/hydrahost/docs.hydrahost.com",
+  "http": 200,
+  "bytes": 1098,
+  "sha256": "9dc21ed2597787c61aae9821a146a20673ec7d16ffad915a6e058fcbda2ced94",
+  "retrieved_utc": "2026-09-29T18:36:28Z"
+ },
+ {
+  "kind": "docs",
+  "url": "https://docs.brokkr.hydrahost.com",
+  "file": "providers/hydrahost/docs.brokkr.hydrahost.com",
+  "http": 0,
+  "bytes": 0,
+  "sha256": null,
+  "retrieved_utc": "2026-09-29T18:36:28Z",
+  "curl_stderr": "curl: (6) Could not resolve host: docs.brokkr.hydrahost.com"
+ },
+ {
+  "kind": "trust",
+  "url": "https://trust.hydrahost.com",
+  "file": "providers/hydrahost/trust.hydrahost.com",
+  "http": 0,
+  "bytes": 0,
+  "sha256": null,
+  "retrieved_utc": "2026-09-29T18:36:28Z",
+  "curl_stderr": "curl: (6) Could not resolve host: trust.hydrahost.com"
+ },
+ {
+  "kind": "trust",
+  "url": "https://hydrahost.com/security",
+  "file": "providers/hydrahost/hydrahost.com_security.html",
+  "http": 404,
+  "bytes": 27693,
+  "sha256": "6ce68117848a4233f8ae7d61b0b79c30a70abb24e82899f685a2598dd0bedc1b",
+  "retrieved_utc": "2026-09-29T18:36:28Z"
+ },
+ {
+  "kind": "discovered",
+  "url": "https://docs.hydrahost.com/docs/brokkr-api-overview",
+  "file": "providers/hydrahost/docs.hydrahost.com_docs_brokkr-api-overview.html",
+  "http": 200,
+  "bytes": 1098,
+  "sha256": "9dc21ed2597787c61aae9821a146a20673ec7d16ffad915a6e058fcbda2ced94",
+  "retrieved_utc": "2026-09-29T18:36:28Z"
+ },
+ {
+  "kind": "discovered",
+  "url": "https://hydrahost.com/legal/export-compliance/",
+  "file": "providers/hydrahost/hydrahost.com_legal_export-compliance.html",
+  "http": 200,
+  "bytes": 29896,
+  "sha256": "b6ee1765bb9d66087a3ddc230781e135d8dedd3042f666b8f93c5a3c64b3f26d",
+  "retrieved_utc": "2026-09-29T18:36:29Z"
+ },
+ {
+  "kind": "discovered",
+  "url": "https://docs.hydrahost.com/",
+  "file": "providers/hydrahost/docs.hydrahost.com",
+  "http": 200,
+  "bytes": 1098,
+  "sha256": "9dc21ed2597787c61aae9821a146a20673ec7d16ffad915a6e058fcbda2ced94",
+  "retrieved_utc": "2026-09-29T18:36:30Z"
+ },
+ {
+  "kind": "discovered",
+  "url": "https://security.hydrahost.com/",
+  "file": "providers/hydrahost/security.hydrahost.com",
+  "http": 200,
+  "bytes": 604,
+  "sha256": "5004ef9107435e7ebdcf6fb22c428ec3bc4995b97b36a6bf71656bc73547f634",
+  "retrieved_utc": "2026-09-29T18:36:30Z"
+ },
+ {
+  "kind": "pricing",
+  "url": "https://hydrahost.com/gpu-pricing/",
+  "file": "providers/hydrahost/hydrahost.com_gpu-pricing.html",
+  "http": 404,
+  "bytes": 27693,
+  "sha256": "6ce68117848a4233f8ae7d61b0b79c30a70abb24e82899f685a2598dd0bedc1b",
+  "retrieved_utc": "2026-09-29T18:42:50Z"
+ },
+ {
+  "kind": "pricing",
+  "url": "https://hydrahost.com/brokkr/",
+  "file": "providers/hydrahost/hydrahost.com_brokkr.html",
+  "http": 404,
+  "bytes": 27693,
+  "sha256": "6ce68117848a4233f8ae7d61b0b79c30a70abb24e82899f685a2598dd0bedc1b",
+  "retrieved_utc": "2026-09-29T18:42:51Z"
+ },
+ {
+  "kind": "trust",
+  "url": "https://hydrahost.com/security/",
+  "file": "providers/hydrahost/hydrahost.com_security.html",
+  "http": 404,
+  "bytes": 27693,
+  "sha256": "6ce68117848a4233f8ae7d61b0b79c30a70abb24e82899f685a2598dd0bedc1b",
+  "retrieved_utc": "2026-09-29T18:42:51Z"
+ }
+]

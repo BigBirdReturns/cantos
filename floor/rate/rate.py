@@ -28,10 +28,12 @@ import sys
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
-MAIN = HERE.parents[1]                 # .../axm-tools/main
-AXM = MAIN.parent                      # .../axm-tools
-SESSION = AXM / "sessions" / "clustermax-cloudreview-20260929"
-PRICES = AXM / "sessions" / "public-tail-20260929" / "lanes" / "opencomputeprices" / "rows" / "prices.jsonl"
+MAIN = HERE.parents[1]                 # repo root
+sys.path.insert(0, str(MAIN / "tools"))
+import evidence_root  # noqa: E402
+CR = "clustermax-cloudreview-20260929"
+SESSION = evidence_root.resolve(CR)    # evidence/ copy; old session folder only if the copy is missing
+PRICES = evidence_root.resolve("public-tail-20260929", "lanes", "opencomputeprices", "rows", "prices.jsonl")
 CM = MAIN / "clustermax-challenge"
 CAMPAIGN_PROVIDERS = MAIN / "hot-aisle" / "campaign" / "providers" / "providers.jsonl"
 CACHE = HERE / "cache" / "price_agg_2026-07.json"
@@ -332,10 +334,20 @@ def manifest_entries(slug, session=SESSION):
     for e in es:
         kind = (e.get("kind") or e.get("label") or "").lower()
         f = e.get("file") or ""
+        fp = (session / f) if f else None
+        if fp is not None and not fp.exists():
+            fp = evidence_root.resolve(CR, f)      # fetched pages are not shipped; use the old session copy if present
         out.append({"kind": kind, "url": e.get("url"), "http": e.get("http"), "bytes": e.get("bytes") or 0,
-                    "file": (session / f) if f else None, "curl_error": e.get("curl_error"),
+                    "file": fp, "curl_error": e.get("curl_error"),
                     "retrieved_utc": e.get("retrieved_utc")})
     return out
+
+
+def surface_pages_missing(manifest):
+    """Count manifest entries that name a fetched page (http 200) whose bytes are not on disk.
+    evidence/ ships manifests only, so a recompute without the old session folder scores those surfaces UNKNOWN."""
+    return sum(1 for es in manifest.values() for e in es
+               if e["http"] == 200 and e["bytes"] >= 2000 and e["file"] and not Path(e["file"]).exists())
 
 
 def load_inputs():
@@ -918,6 +930,10 @@ def main(argv=None):
     ap.add_argument("--out", default=str(HERE))
     a = ap.parse_args(argv)
     rows = run(refresh_prices=a.refresh_prices, out=a.out)
+    miss = surface_pages_missing({s: manifest_entries(s) for s in load_inputs()["headers"]})
+    if miss:
+        print("WARNING: %d fetched provider pages are not on disk (evidence/ ships manifests only); those surfaces were scored UNKNOWN. "
+              "Do not overwrite the committed RATINGS.* from this run." % miss)
     print("rows:", len(rows), "out:", a.out)
     return 0
 

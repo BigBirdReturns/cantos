@@ -1,0 +1,110 @@
+[
+ {
+  "label": "homepage",
+  "url": "https://lambda.ai/",
+  "file": "providers/lambda/home.html",
+  "http": 200,
+  "bytes": 135272,
+  "sha256": "5b064d26194d80e3e8080ff8bf63f2f8226b86a73205593aa70ab7f8e259e659",
+  "retrieved_utc": "2026-09-29T18:38:14Z"
+ },
+ {
+  "label": "pricing",
+  "url": "https://lambda.ai/pricing",
+  "file": "providers/lambda/pricing.html",
+  "http": 200,
+  "bytes": 86216,
+  "sha256": "9efbf862bb173223429c991d25ac395cb40491610c0902a933007b183c0322fa",
+  "retrieved_utc": "2026-09-29T18:38:14Z"
+ },
+ {
+  "label": "status",
+  "url": "https://status.lambda.ai/",
+  "file": "providers/lambda/status.html",
+  "http": 200,
+  "bytes": 299874,
+  "sha256": "a03b68da2865f4ee7fb122505feb365fc876db268c4b032d6dd99fe35aa2d2eb",
+  "retrieved_utc": "2026-09-29T18:38:15Z"
+ },
+ {
+  "label": "status_api",
+  "url": "https://status.lambda.ai/api/v2/incidents.json",
+  "file": "providers/lambda/status_incidents.json",
+  "http": 200,
+  "bytes": 91786,
+  "sha256": "d710db6622fded4a39aa79dcd89f3ff721133328910886599ec1ded09039480e",
+  "retrieved_utc": "2026-09-29T18:38:15Z"
+ },
+ {
+  "label": "status_summary",
+  "url": "https://status.lambda.ai/api/v2/summary.json",
+  "file": "providers/lambda/status_summary.json",
+  "http": 200,
+  "bytes": 2636,
+  "sha256": "1ec9127459cb391456df1b087491b4614d99516993beb2a4a6e4d12019b9ab2f",
+  "retrieved_utc": "2026-09-29T18:38:15Z"
+ },
+ {
+  "label": "docs_index",
+  "url": "https://docs.lambda.ai/",
+  "file": "providers/lambda/docs_index.html",
+  "http": 200,
+  "bytes": 73037,
+  "sha256": "409921e47b4063cbf3f853c635d1d81d713b2ac58a56330e5c30bb98bec90b04",
+  "retrieved_utc": "2026-09-29T18:38:16Z"
+ },
+ {
+  "label": "docs_slurm",
+  "url": "https://docs.lambda.ai/public-cloud/1-click-clusters/",
+  "file": "providers/lambda/docs_slurm.html",
+  "http": 200,
+  "bytes": 91802,
+  "sha256": "bb3e40478af323e17c4a542c7f76d5e3adda2c5e29b4c375bf1214e021a91698",
+  "retrieved_utc": "2026-09-29T18:38:16Z"
+ },
+ {
+  "label": "docs_k8s",
+  "url": "https://docs.lambda.ai/public-cloud/managed-kubernetes/",
+  "file": "providers/lambda/docs_k8s.html",
+  "http": 404,
+  "bytes": 66508,
+  "sha256": "e63686b028cc01e61609ced80d7c6c9fc413744bbb4e1b66e8f12e0ea8361a67",
+  "retrieved_utc": "2026-09-29T18:38:16Z"
+ },
+ {
+  "label": "trust",
+  "url": "https://lambda.ai/trust",
+  "file": "providers/lambda/trust.html",
+  "http": 200,
+  "bytes": 61091,
+  "sha256": "d5c95040dfa09452edee68b27df935d7843858a00a9dc6bb63e14f681097ade7",
+  "retrieved_utc": "2026-09-29T18:38:16Z"
+ },
+ {
+  "label": "trust_alt",
+  "url": "https://trust.lambda.ai/",
+  "file": "providers/lambda/trust_alt.html",
+  "http": 200,
+  "bytes": 320435,
+  "sha256": "7e5a6a1a81c68d31d0d60c44c2488c2c376fc88fa016f389ac56f2b76f58eaa6",
+  "retrieved_utc": "2026-09-29T18:38:16Z"
+ },
+ {
+  "label": "docs_slurm",
+  "url": "https://docs.lambda.ai/managed-slurm/",
+  "file": "providers/lambda/docs_slurm.html",
+  "http": 200,
+  "bytes": 79125,
+  "sha256": "882a120a44b259e227d32b62f5b28ca8e1ef6de6eba8b147c700ac8f7ddfc834",
+  "retrieved_utc": "2026-09-29T18:39:36Z"
+ },
+ {
+  "label": "docs_k8s",
+  "url": "https://docs.lambda.ai/managed-kubernetes/",
+  "file": "providers/lambda/docs_k8s.html",
+  "http": 200,
+  "bytes": 148822,
+  "sha256": "f2dc7da61f37bd19c1d1268a2b72e2431ca5f724372263f10e65e119cf4f9b1e",
+  "retrieved_utc": "2026-09-29T18:39:36Z"
+ }
+]

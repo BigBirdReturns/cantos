@@ -1,0 +1,58 @@
+[
+ {
+  "url": "https://www.sesterce.com/",
+  "kind": "home",
+  "file": "providers/sesterce/home.html",
+  "http": 200,
+  "bytes": 335766,
+  "sha256": "d208b68212fe7e32aa4366b9fd2104cc6c11d0969e358aceda833930ba292802",
+  "retrieved_utc": "2026-09-29T18:49:00Z"
+ },
+ {
+  "url": "https://docs.sesterce.com/",
+  "kind": "docs",
+  "file": "providers/sesterce/docs.html",
+  "http": 200,
+  "bytes": 474878,
+  "sha256": "6d0c2774c1a3d9663b161de14d7ce627b8920b1808d0230ed39fbe27be79922b",
+  "retrieved_utc": "2026-09-29T18:49:00Z"
+ },
+ {
+  "url": "https://www.sesterce.com/pricing",
+  "kind": "pricing",
+  "file": "providers/sesterce/pricing.html",
+  "http": 404,
+  "bytes": 8056,
+  "sha256": "bb581d0098f8de99a74f76b290d1e1b77012bf9343ebcab72da3c9f837f4caf9",
+  "retrieved_utc": "2026-09-29T18:49:00Z"
+ },
+ {
+  "url": "https://status.sesterce.com/",
+  "kind": "status",
+  "file": "providers/sesterce/status.html",
+  "http": 0,
+  "bytes": 0,
+  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "retrieved_utc": "2026-09-29T18:49:01Z",
+  "curl_error": "curl: (6) Could not resolve host: status.sesterce.com"
+ },
+ {
+  "url": "https://trust.sesterce.com/",
+  "kind": "trust",
+  "file": "providers/sesterce/trust.html",
+  "http": 0,
+  "bytes": 0,
+  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "retrieved_utc": "2026-09-29T18:49:01Z",
+  "curl_error": "curl: (6) Could not resolve host: trust.sesterce.com"
+ },
+ {
+  "url": "https://docs.sesterce.com/llms.txt",
+  "kind": "docs_llms",
+  "file": "providers/sesterce/docs_llms.html",
+  "http": 200,
+  "bytes": 3055,
+  "sha256": "9fedf4fd827fe414b4bd2bbc195445a1464b909c8e7674fa02912c701ebe82d5",
+  "retrieved_utc": "2026-09-29T18:51:03Z"
+ }
+]

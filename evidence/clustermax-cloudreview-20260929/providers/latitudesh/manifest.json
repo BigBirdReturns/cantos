@@ -1,0 +1,75 @@
+[
+ {
+  "url": "https://www.latitude.sh/",
+  "kind": "home",
+  "file": "providers/latitudesh/home.html",
+  "http": 200,
+  "bytes": 216069,
+  "sha256": "8a9df2cf4678a92d9f71949e54d1b5f482c4321ff3a02d06e661f84179eea62f",
+  "retrieved_utc": "2026-09-29T18:48:29Z"
+ },
+ {
+  "url": "https://www.latitude.sh/pricing",
+  "kind": "pricing",
+  "file": "providers/latitudesh/pricing.html",
+  "http": 200,
+  "bytes": 335877,
+  "sha256": "732d7166bda8b3ef46e39ec0676b3532eb2a12de3909aad6acd99f70ae2a9528",
+  "retrieved_utc": "2026-09-29T18:48:29Z"
+ },
+ {
+  "url": "https://status.latitude.sh/",
+  "kind": "status",
+  "file": "providers/latitudesh/status.html",
+  "http": 200,
+  "bytes": 143979,
+  "sha256": "b81dd35b387064b8a9dab32d499a069f187c26850d205b474064fba8edf27be0",
+  "retrieved_utc": "2026-09-29T18:48:30Z"
+ },
+ {
+  "url": "https://status.latitude.sh/api/v2/incidents.json",
+  "kind": "status_api",
+  "file": "providers/latitudesh/status_api.json",
+  "http": 200,
+  "bytes": 288880,
+  "sha256": "8deb35fb7bed847777a3cd7dd64660ab08c45a08793dba1a0b751f80571ec017",
+  "retrieved_utc": "2026-09-29T18:48:30Z"
+ },
+ {
+  "url": "https://www.latitude.sh/docs",
+  "kind": "docs",
+  "file": "providers/latitudesh/docs.html",
+  "http": 200,
+  "bytes": 375274,
+  "sha256": "88c00f095a125a855893052d3d270f08e7e5298f432d76f618566da64c7f7ab9",
+  "retrieved_utc": "2026-09-29T18:48:30Z"
+ },
+ {
+  "url": "https://www.latitude.sh/docs/kubernetes",
+  "kind": "docs_k8s",
+  "file": "providers/latitudesh/docs_k8s.html",
+  "http": 200,
+  "bytes": 295573,
+  "sha256": "6e5d59a4a91ceefa55b2da70f2a972f3ed1dd53d9379f1a9a81c1a026f6f7873",
+  "retrieved_utc": "2026-09-29T18:48:31Z",
+  "url_effective": "https://www.latitude.sh/docs/lks"
+ },
+ {
+  "url": "https://trust.latitude.sh/",
+  "kind": "trust",
+  "file": "providers/latitudesh/trust.html",
+  "http": 200,
+  "bytes": 6935,
+  "sha256": "09674f79533149ae4efc4416550870fcf99b548861fcc0a4e2f94e7ee98e2ac7",
+  "retrieved_utc": "2026-09-29T18:48:31Z"
+ },
+ {
+  "url": "https://www.latitude.sh/legal/security",
+  "kind": "security",
+  "file": "providers/latitudesh/security.html",
+  "http": 200,
+  "bytes": 178937,
+  "sha256": "c4cef756e6b975e1b11cffceeabf6dda0a61b24687459022bf2289f541137036",
+  "retrieved_utc": "2026-09-29T18:48:31Z"
+ }
+]

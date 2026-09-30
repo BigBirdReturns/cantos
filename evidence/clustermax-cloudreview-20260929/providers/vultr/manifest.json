@@ -1,0 +1,103 @@
+[
+ {
+  "url": "https://www.vultr.com/",
+  "kind": "home",
+  "file": "providers/vultr/home.html",
+  "http": 403,
+  "bytes": 5340,
+  "sha256": "0f35ed00c763aeca1d3dcfb190a64af44e2d1b7e0181835a7c90eb6514ef1fc1",
+  "retrieved_utc": "2026-09-29T18:47:56Z"
+ },
+ {
+  "url": "https://www.vultr.com/pricing/",
+  "kind": "pricing",
+  "file": "providers/vultr/pricing.html",
+  "http": 403,
+  "bytes": 5385,
+  "sha256": "d659e9ad4db977a5514410cc4d124cba201382ae86414f6c5a20e41db0f02da6",
+  "retrieved_utc": "2026-09-29T18:47:57Z"
+ },
+ {
+  "url": "https://status.vultr.com/",
+  "kind": "status",
+  "file": "providers/vultr/status.html",
+  "http": 403,
+  "bytes": 5364,
+  "sha256": "1808c985e6d906799bb43d4fd2f947dc4e9928b8afed137cb7caedd604664ec3",
+  "retrieved_utc": "2026-09-29T18:47:57Z"
+ },
+ {
+  "url": "https://docs.vultr.com/",
+  "kind": "docs",
+  "file": "providers/vultr/docs.html",
+  "http": 200,
+  "bytes": 214721,
+  "sha256": "957721a89f91822bef870fc7d6903e422a19b5e703f2c37f60577ef8c83d0941",
+  "retrieved_utc": "2026-09-29T18:47:58Z"
+ },
+ {
+  "url": "https://www.vultr.com/kubernetes/",
+  "kind": "docs_k8s",
+  "file": "providers/vultr/docs_k8s.html",
+  "http": 403,
+  "bytes": 5394,
+  "sha256": "550febea183f3ca6f00a7d641bfd3ea73683bed5e4f035a8ead7f911495ec3d1",
+  "retrieved_utc": "2026-09-29T18:47:58Z"
+ },
+ {
+  "url": "https://docs.vultr.com/vultr-kubernetes-engine",
+  "kind": "docs_k8s_vke",
+  "file": "providers/vultr/docs_k8s_vke.html",
+  "http": 200,
+  "bytes": 245817,
+  "sha256": "f7b960d1849e983dd2decb1a2aaf9558ab2e514ff3e0bed1e0e9a8b7bee5ce28",
+  "retrieved_utc": "2026-09-29T18:48:00Z",
+  "url_effective": "https://docs.vultr.com/products/compute/kubernetes"
+ },
+ {
+  "url": "https://www.vultr.com/legal/compliance/",
+  "kind": "trust",
+  "file": "providers/vultr/trust.html",
+  "http": 403,
+  "bytes": 5433,
+  "sha256": "cb619f7a19b1f3dd325c335b805b5cb127a291076048a7acd9cb9293c673e4b2",
+  "retrieved_utc": "2026-09-29T18:48:00Z"
+ },
+ {
+  "url": "https://www.vultr.com/company/trust/",
+  "kind": "trust_center",
+  "file": "providers/vultr/trust_center.html",
+  "http": 403,
+  "bytes": 5403,
+  "sha256": "f14ee50109a3f31f46a4b92310a446bd04e322db40b4cdcef8a4d0894c9478bb",
+  "retrieved_utc": "2026-09-29T18:48:00Z"
+ },
+ {
+  "url": "https://docs.vultr.com/products/compute/kubernetes/features",
+  "kind": "docs_k8s_features",
+  "file": "providers/vultr/docs_k8s_features.html",
+  "http": 200,
+  "bytes": 242322,
+  "sha256": "f704ad33b0fce7605bf63597232aa0496263bf83190f20ee56aea4e3d2ede0a6",
+  "retrieved_utc": "2026-09-29T18:50:47Z"
+ },
+ {
+  "url": "https://docs.vultr.com/products/compute/cloud-gpu",
+  "kind": "docs_gpu",
+  "file": "providers/vultr/docs_gpu.html",
+  "http": 200,
+  "bytes": 258804,
+  "sha256": "a2a677648e1d68ab98992f0c5472208d169ed743a99df6821636cc9f2b42f5df",
+  "retrieved_utc": "2026-09-29T18:50:48Z",
+  "url_effective": "https://docs.vultr.com/products/compute/instances/cloud-gpu"
+ },
+ {
+  "url": "https://status.vultr.com/api/v2/summary.json",
+  "kind": "status_api",
+  "file": "providers/vultr/status_api.json",
+  "http": 404,
+  "bytes": 0,
+  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "retrieved_utc": "2026-09-29T18:50:48Z"
+ }
+]

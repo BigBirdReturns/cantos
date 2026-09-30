@@ -28,6 +28,14 @@ from pathlib import Path
 CIRC = Path(__file__).resolve().parent
 REPO = CIRC.parent
 sys.dont_write_bytecode = True
+# Force UTF-8 on the driver's own streams and on every child process (Windows consoles default to a legacy code page).
+os.environ['PYTHONUTF8'] = '1'
+os.environ['PYTHONIOENCODING'] = 'utf-8'
+for _s in (sys.stdout, sys.stderr):
+    try:
+        _s.reconfigure(encoding='utf-8', errors='replace')
+    except (AttributeError, ValueError):
+        pass
 sys.path.insert(0, str(CIRC))
 
 from stages._common import Ctx, FAIL, HOLD, OK, SKIP, STATUSES, Hold, iso, sha256_file, utcnow  # noqa: E402

@@ -1,0 +1,110 @@
+[
+ {
+  "kind": "home",
+  "url": "https://www.hetzner.com/",
+  "file": "providers/hetzner/www.hetzner.com",
+  "http": 200,
+  "bytes": 135123,
+  "sha256": "ecb28b9bfcb3afb2aec537c24b3d990d055a9fc973943e69b240a4438d6d330c",
+  "retrieved_utc": "2026-09-29T18:36:43Z"
+ },
+ {
+  "kind": "pricing",
+  "url": "https://www.hetzner.com/dedicated-rootserver/matrix-gpu/",
+  "file": "providers/hetzner/www.hetzner.com_dedicated-rootserver_matrix-gpu.html",
+  "http": 200,
+  "bytes": 167596,
+  "sha256": "fe0063b3a85c1097111ccbcbd2c991e6f20fd0186e0bfb06f5ed84b8bf83c13d",
+  "retrieved_utc": "2026-09-29T18:36:44Z"
+ },
+ {
+  "kind": "pricing",
+  "url": "https://www.hetzner.com/cloud/",
+  "file": "providers/hetzner/www.hetzner.com_cloud.html",
+  "http": 200,
+  "bytes": 163688,
+  "sha256": "85e5b99ddbf0082e41366cd2da5613838edc548b765903f3ffc471f184126d50",
+  "retrieved_utc": "2026-09-29T18:36:45Z"
+ },
+ {
+  "kind": "status",
+  "url": "https://status.hetzner.com",
+  "file": "providers/hetzner/status.hetzner.com",
+  "http": 200,
+  "bytes": 109693,
+  "sha256": "8e45ee5945a4e29196378688076dcb6f7f0ec6f69c4644ae3eda3870d7c58775",
+  "retrieved_utc": "2026-09-29T18:36:46Z"
+ },
+ {
+  "kind": "status_api",
+  "url": "https://status.hetzner.com/api/v2/incidents.json",
+  "file": "providers/hetzner/status.hetzner.com_api_v2_incidents.json",
+  "http": 404,
+  "bytes": 15308,
+  "sha256": "5ad099eb1341d0b853d71ec37ae0bd55b05ab4d195382b8148b5d755798b7b07",
+  "retrieved_utc": "2026-09-29T18:36:47Z"
+ },
+ {
+  "kind": "docs",
+  "url": "https://docs.hetzner.com/",
+  "file": "providers/hetzner/docs.hetzner.com",
+  "http": 200,
+  "bytes": 349036,
+  "sha256": "85b7cdec8d9388a3ec7dd160235293db97943e7d1e82d58430cfaaf7fa3d5f85",
+  "retrieved_utc": "2026-09-29T18:36:48Z"
+ },
+ {
+  "kind": "docs",
+  "url": "https://docs.hetzner.com/cloud/",
+  "file": "providers/hetzner/docs.hetzner.com_cloud.html",
+  "http": 200,
+  "bytes": 342313,
+  "sha256": "96f5c9b5a5862b521adf470c2865acde16cc92d960562fdf29b26c07e90f22f1",
+  "retrieved_utc": "2026-09-29T18:36:49Z"
+ },
+ {
+  "kind": "trust",
+  "url": "https://www.hetzner.com/unternehmen/zertifizierung/",
+  "file": "providers/hetzner/www.hetzner.com_unternehmen_zertifizierung.html",
+  "http": 200,
+  "bytes": 110892,
+  "sha256": "7947875b65b212740535156a7ca84c6606b1bb9f4b0ab20584451a14e352e806",
+  "retrieved_utc": "2026-09-29T18:36:50Z"
+ },
+ {
+  "kind": "trust",
+  "url": "https://www.hetzner.com/legal/privacy-policy/",
+  "file": "providers/hetzner/www.hetzner.com_legal_privacy-policy.html",
+  "http": 200,
+  "bytes": 167237,
+  "sha256": "5e8c555e3f99cc40855f5da7a8f0af8305ecc1676bee2f5b1b5d7c9a5f699f0b",
+  "retrieved_utc": "2026-09-29T18:36:51Z"
+ },
+ {
+  "kind": "discovered",
+  "url": "https://status.hetzner.com/",
+  "file": "providers/hetzner/status.hetzner.com",
+  "http": 200,
+  "bytes": 109693,
+  "sha256": "8e45ee5945a4e29196378688076dcb6f7f0ec6f69c4644ae3eda3870d7c58775",
+  "retrieved_utc": "2026-09-29T18:36:52Z"
+ },
+ {
+  "kind": "status_api",
+  "url": "https://status.hetzner.com/history",
+  "file": "providers/hetzner/status.hetzner.com_history.html",
+  "http": 404,
+  "bytes": 15308,
+  "sha256": "5ad099eb1341d0b853d71ec37ae0bd55b05ab4d195382b8148b5d755798b7b07",
+  "retrieved_utc": "2026-09-29T18:42:49Z"
+ },
+ {
+  "kind": "docs",
+  "url": "https://docs.hetzner.com/cloud/kubernetes/",
+  "file": "providers/hetzner/docs.hetzner.com_cloud_kubernetes.html",
+  "http": 404,
+  "bytes": 156,
+  "sha256": "5ae7eaa2afb3e380a1c3d210996d476d3dc0b11ce4231f23c50c20dad5f2e3ed",
+  "retrieved_utc": "2026-09-29T18:42:50Z"
+ }
+]

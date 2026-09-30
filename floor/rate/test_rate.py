@@ -190,6 +190,9 @@ class Prices(unittest.TestCase):
 
 class Outputs(unittest.TestCase):
     def test_committed_outputs_match_recompute(self):
+        miss = rate.surface_pages_missing(INP["manifest"])
+        if miss:
+            self.skipTest("%d fetched provider pages absent (evidence/ ships manifests only); recompute would differ by design" % miss)
         j = HERE / "RATINGS.jsonl"
         m = HERE / "RATINGS.md"
         self.assertTrue(j.exists() and m.exists(), "run rate.py first")

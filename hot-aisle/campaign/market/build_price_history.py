@@ -7,9 +7,11 @@ Writes: ../../data/price-history/<provider>/<date>.json + INDEX.json,
 """
 import json, os, re, sys, hashlib, statistics, collections
 
-LANE = 'D:/Projects/Organs/AXM/axm-tools/sessions/public-tail-20260929/lanes/opencomputeprices'
-ROWS = LANE + '/rows/prices.jsonl'
 HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, os.path.normpath(os.path.join(HERE, '../../../tools')))
+import evidence_root
+LANE = str(evidence_root.resolve('public-tail-20260929', 'lanes', 'opencomputeprices'))   # bulk input; not shipped in evidence/
+ROWS = LANE + '/rows/prices.jsonl'
 OUT = os.path.normpath(os.path.join(HERE, '../../data/price-history'))
 ALIAS = {'do': 'digitalocean'}   # older DigitalOcean id in the series (2025-09-02..2026-01-13)
 PROVIDERS = ['hot_aisle', 'nebius', 'digitalocean', 'runpod', 'lambda', 'crusoe', 'tensorwave',
@@ -40,6 +42,9 @@ def sha256_file(p):
 
 
 def main():
+    if not os.path.isfile(ROWS):
+        print(evidence_root.skip_message('public-tail-20260929', 'lanes', 'opencomputeprices', 'rows', 'prices.jsonl') + '; nothing written.')
+        return 0
     src_sha = sha256_file(ROWS)
     prod = {}
     avail = {}

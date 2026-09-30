@@ -1,0 +1,91 @@
+{
+ "slug": "voltagepark",
+ "user_agent": "Mozilla/5.0",
+ "timeout_s": 60,
+ "entries": [
+  {
+   "kind": "pricing",
+   "url": "https://www.voltagepark.com/pricing",
+   "url_effective": "https://voltagepark.com/pricing",
+   "file": "providers/voltagepark/pricing.html",
+   "http": 200,
+   "content_type": "text/html; charset=utf-8",
+   "bytes": 178612,
+   "sha256": "bdb6b3b079e8f8a14bac1b7eaf2ead1f98ce44bf0382f9e9796522d9a665f7d9",
+   "retrieved_utc": "2026-09-29T18:46:45Z",
+   "curl_error": null
+  },
+  {
+   "kind": "status",
+   "url": "https://status.voltagepark.com/",
+   "url_effective": "https://status.voltagepark.com/",
+   "file": "providers/voltagepark/status.html",
+   "http": 0,
+   "content_type": "",
+   "bytes": 0,
+   "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "retrieved_utc": "2026-09-29T18:46:45Z",
+   "curl_error": "curl: (6) Could not resolve host: status.voltagepark.com"
+  },
+  {
+   "kind": "docs_index",
+   "url": "https://docs.voltagepark.com/",
+   "url_effective": "https://support.voltagepark.com/?location=%2F",
+   "file": "providers/voltagepark/docs_index.html",
+   "http": 200,
+   "content_type": "text/html; charset=utf-8",
+   "bytes": 94776,
+   "sha256": "3141b6a752bbb847523250cea8d020ea701526e673397e5ae07c88f6de8147be",
+   "retrieved_utc": "2026-09-29T18:46:45Z",
+   "curl_error": null
+  },
+  {
+   "kind": "docs_kubernetes",
+   "url": "https://www.voltagepark.com/managed-kubernetes",
+   "url_effective": "https://voltagepark.com/managed-kubernetes",
+   "file": "providers/voltagepark/docs_kubernetes.html",
+   "http": 200,
+   "content_type": "text/html; charset=utf-8",
+   "bytes": 188286,
+   "sha256": "858b9cf6e246ecbd01aeb2341f4048b1d5f4afaff9fa379c8b4ca2bd0d7b1d1f",
+   "retrieved_utc": "2026-09-29T18:46:45Z",
+   "curl_error": null
+  },
+  {
+   "kind": "docs_slurm",
+   "url": "https://www.voltagepark.com/slurm",
+   "url_effective": "https://voltagepark.com/slurm",
+   "file": "providers/voltagepark/docs_slurm.html",
+   "http": 404,
+   "content_type": "text/html; charset=utf-8",
+   "bytes": 147339,
+   "sha256": "3206b2c860723cb56e70180b4733e53df82ce495e60f61b089af789c0033ccc9",
+   "retrieved_utc": "2026-09-29T18:46:45Z",
+   "curl_error": null
+  },
+  {
+   "kind": "trust",
+   "url": "https://trust.voltagepark.com/",
+   "url_effective": "https://trust.voltagepark.com/",
+   "file": "providers/voltagepark/trust.html",
+   "http": 200,
+   "content_type": "text/html",
+   "bytes": 7228,
+   "sha256": "a4731bdf480aa434a3094e4485dd758b032fa5284a5747d8799067cd78d16ce9",
+   "retrieved_utc": "2026-09-29T18:46:45Z",
+   "curl_error": null
+  },
+  {
+   "kind": "trust_security_page",
+   "url": "https://www.voltagepark.com/security",
+   "url_effective": "https://voltagepark.com/security",
+   "file": "providers/voltagepark/trust_security_page.html",
+   "http": 200,
+   "content_type": "text/html; charset=utf-8",
+   "bytes": 160861,
+   "sha256": "8eca63f0574b3566fedee20beee1516975f4e72ab56976e62e676a131de09dd7",
+   "retrieved_utc": "2026-09-29T18:46:45Z",
+   "curl_error": null
+  }
+ ]
+}

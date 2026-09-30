@@ -1,0 +1,79 @@
+{
+ "slug": "digitalocean",
+ "user_agent": "Mozilla/5.0",
+ "timeout_s": 60,
+ "entries": [
+  {
+   "kind": "pricing",
+   "url": "https://www.digitalocean.com/pricing/gpu-droplets",
+   "url_effective": "https://www.digitalocean.com/pricing/gpu-droplets",
+   "file": "providers/digitalocean/pricing.html",
+   "http": 200,
+   "content_type": "text/html; charset=utf-8",
+   "bytes": 245834,
+   "sha256": "406ea54de9bb8dc33d4fb0485d45aaf4622427e2d846252139f298a7b6b74c1c",
+   "retrieved_utc": "2026-09-29T18:46:44Z",
+   "curl_error": null
+  },
+  {
+   "kind": "status",
+   "url": "https://status.digitalocean.com/",
+   "url_effective": "https://status.digitalocean.com/",
+   "file": "providers/digitalocean/status.html",
+   "http": 200,
+   "content_type": "text/html; charset=utf-8",
+   "bytes": 233587,
+   "sha256": "d38f075f007e786b37c51ce1a60927d3bc0bcdc78cdd10a533a89d8b8f12fa9b",
+   "retrieved_utc": "2026-09-29T18:46:43Z",
+   "curl_error": null
+  },
+  {
+   "kind": "status_api_incidents",
+   "url": "https://status.digitalocean.com/api/v2/incidents.json",
+   "url_effective": "https://status.digitalocean.com/api/v2/incidents.json",
+   "file": "providers/digitalocean/status_api_incidents.json",
+   "http": 200,
+   "content_type": "application/json; charset=utf-8",
+   "bytes": 206901,
+   "sha256": "8c86c1d7dc5521ef48b597c32c93d3df0fd1cf624191f1798d9113cf2960e9e5",
+   "retrieved_utc": "2026-09-29T18:46:43Z",
+   "curl_error": null
+  },
+  {
+   "kind": "docs_index",
+   "url": "https://docs.digitalocean.com/products/gpu-droplets/",
+   "url_effective": "https://docs.digitalocean.com/products/gpu-droplets/",
+   "file": "providers/digitalocean/docs_index.html",
+   "http": 200,
+   "content_type": "text/html; charset=utf-8",
+   "bytes": 55100,
+   "sha256": "2e4133cfa5ebb89104216f0b73bfb088f76c69a90ca3706665efce5fb4628abf",
+   "retrieved_utc": "2026-09-29T18:46:44Z",
+   "curl_error": null
+  },
+  {
+   "kind": "docs_kubernetes",
+   "url": "https://docs.digitalocean.com/products/kubernetes/",
+   "url_effective": "https://docs.digitalocean.com/products/kubernetes/",
+   "file": "providers/digitalocean/docs_kubernetes.html",
+   "http": 200,
+   "content_type": "text/html; charset=utf-8",
+   "bytes": 59643,
+   "sha256": "8b0806c3444e2dc0e00b4c86d7fb0ec6400675206f346931d5054fc902dcfc58",
+   "retrieved_utc": "2026-09-29T18:46:44Z",
+   "curl_error": null
+  },
+  {
+   "kind": "trust",
+   "url": "https://www.digitalocean.com/trust/certification-reports",
+   "url_effective": "https://www.digitalocean.com/trust/certification-reports",
+   "file": "providers/digitalocean/trust.html",
+   "http": 200,
+   "content_type": "text/html; charset=utf-8",
+   "bytes": 546391,
+   "sha256": "f79eb3f5d8bf1decdddce4c2fc24f9a49f294f9fb32b0292eb00bb6d208b5796",
+   "retrieved_utc": "2026-09-29T18:46:43Z",
+   "curl_error": null
+  }
+ ]
+}

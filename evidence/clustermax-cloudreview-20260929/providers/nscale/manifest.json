@@ -1,0 +1,66 @@
+[
+ {
+  "url": "https://www.nscale.com/",
+  "kind": "home",
+  "file": "providers/nscale/home.html",
+  "http": 200,
+  "bytes": 128202,
+  "sha256": "20d9880943ef522470866fa78f7f640909db8054654093458faf76ec1e45b1ef",
+  "retrieved_utc": "2026-09-29T18:48:55Z"
+ },
+ {
+  "url": "https://www.nscale.com/pricing",
+  "kind": "pricing",
+  "file": "providers/nscale/pricing.html",
+  "http": 404,
+  "bytes": 906,
+  "sha256": "90c032f35272ba1a7aa93027ab635e6610d4f24cf9e53c0624d00f065d7c7e7d",
+  "retrieved_utc": "2026-09-29T18:48:55Z"
+ },
+ {
+  "url": "https://docs.nscale.com/docs/getting-started/overview",
+  "kind": "docs",
+  "file": "providers/nscale/docs.html",
+  "http": 200,
+  "bytes": 311420,
+  "sha256": "41384930c39a0315182a89e4cc529e49be00252beaa78a4e179a9e79b99d6587",
+  "retrieved_utc": "2026-09-29T18:48:56Z"
+ },
+ {
+  "url": "https://status.nscale.com/",
+  "kind": "status",
+  "file": "providers/nscale/status.html",
+  "http": 200,
+  "bytes": 104087,
+  "sha256": "3a899d067bc3ebee2e4c277c82d8c493166c415143301a45f2760941ec0ecc84",
+  "retrieved_utc": "2026-09-29T18:48:56Z"
+ },
+ {
+  "url": "https://trust.nscale.com/",
+  "kind": "trust",
+  "file": "providers/nscale/trust.html",
+  "http": 0,
+  "bytes": 0,
+  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "retrieved_utc": "2026-09-29T18:48:56Z",
+  "curl_error": "curl: (6) Could not resolve host: trust.nscale.com"
+ },
+ {
+  "url": "https://status.nscale.com/api/v2/incidents.json",
+  "kind": "status_api",
+  "file": "providers/nscale/status_api.json",
+  "http": 200,
+  "bytes": 2195,
+  "sha256": "a678a86898c114f83ca468928ad78ee834f3fac30ad9b30960e53b0b131964a5",
+  "retrieved_utc": "2026-09-29T18:51:02Z"
+ },
+ {
+  "url": "https://status.nscale.com/history.atom",
+  "kind": "status_history",
+  "file": "providers/nscale/status_history.html",
+  "http": 200,
+  "bytes": 2034,
+  "sha256": "2da5ec630358de3321a19d151a421117fc9b7680248249dcc2c06914790e23c8",
+  "retrieved_utc": "2026-09-29T18:51:02Z"
+ }
+]

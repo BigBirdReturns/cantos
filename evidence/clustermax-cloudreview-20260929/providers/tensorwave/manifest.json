@@ -1,0 +1,94 @@
+[
+ {
+  "label": "homepage",
+  "url": "https://tensorwave.com/",
+  "file": "providers/tensorwave/home.html",
+  "http": 200,
+  "bytes": 110076,
+  "sha256": "650cbc0e84e1d0c2402b7953334e6ddef39fde001723e38b2dbb7fb3f9ef11ec",
+  "retrieved_utc": "2026-09-29T18:38:18Z"
+ },
+ {
+  "label": "pricing",
+  "url": "https://tensorwave.com/pricing",
+  "file": "providers/tensorwave/pricing.html",
+  "http": 200,
+  "bytes": 11337,
+  "sha256": "ce1093f868e60f8161d87d24792cbc4dc07fe177e2fc4984eb9573fd72e08ee5",
+  "retrieved_utc": "2026-09-29T18:38:19Z"
+ },
+ {
+  "label": "status",
+  "url": "https://status.tensorwave.com/",
+  "file": "providers/tensorwave/status.html",
+  "http": 0,
+  "bytes": 0,
+  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "retrieved_utc": "2026-09-29T18:38:19Z",
+  "curl_error": "curl: (6) Could not resolve host: status.tensorwave.com"
+ },
+ {
+  "label": "docs_index",
+  "url": "https://docs.tensorwave.com/",
+  "file": "providers/tensorwave/docs_index.html",
+  "http": 200,
+  "bytes": 385238,
+  "sha256": "a30cc71c27a801b7ebb7e02acfae6361337d3c248ced2d83293e2debdeead384",
+  "retrieved_utc": "2026-09-29T18:38:19Z"
+ },
+ {
+  "label": "trust",
+  "url": "https://security.tensorwave.com/",
+  "file": "providers/tensorwave/trust.html",
+  "http": 403,
+  "bytes": 919,
+  "sha256": "7fe47057007aa9639d1f343c1a58fe6e1c5dfa296cc117b5d8495b4e4031a799",
+  "retrieved_utc": "2026-09-29T18:38:19Z"
+ },
+ {
+  "label": "trust_alt",
+  "url": "https://trust.tensorwave.com/",
+  "file": "providers/tensorwave/trust_alt.html",
+  "http": 403,
+  "bytes": 919,
+  "sha256": "ecb5a7571872f2f5d992c4aa69ca342d3a734fa338508c80e895c78f681b3907",
+  "retrieved_utc": "2026-09-29T18:38:19Z",
+  "url_effective": "https://security.tensorwave.com/"
+ },
+ {
+  "label": "docs_slurm",
+  "url": "https://docs.tensorwave.com/slurm/slurm-overview",
+  "file": "providers/tensorwave/docs_slurm.html",
+  "http": 200,
+  "bytes": 515466,
+  "sha256": "670343fdb4d05fbc26fd64c51fcd360b019fb4881c51e62128d164609f2f5542",
+  "retrieved_utc": "2026-09-29T18:39:34Z"
+ },
+ {
+  "label": "docs_k8s",
+  "url": "https://docs.tensorwave.com/observability/kubernetes",
+  "file": "providers/tensorwave/docs_k8s.html",
+  "http": 200,
+  "bytes": 427211,
+  "sha256": "2db703ebfaa79a950cf02b233c0e02fff38a285c19e5ef34ed73713a54af243a",
+  "retrieved_utc": "2026-09-29T18:39:34Z"
+ },
+ {
+  "label": "product_slurm",
+  "url": "https://tensorwave.com/products/managed-services/managed-slurm",
+  "file": "providers/tensorwave/product_slurm.html",
+  "http": 200,
+  "bytes": 66277,
+  "sha256": "d65f0684b50ed928c1f8b7e8b625e2821fb5d8fb085a9717eedf60f80c342683",
+  "retrieved_utc": "2026-09-29T18:39:35Z"
+ },
+ {
+  "label": "product_k8s",
+  "url": "https://tensorwave.com/products/managed-services/managed-kubernetes",
+  "file": "providers/tensorwave/product_k8s.html",
+  "http": 200,
+  "bytes": 82174,
+  "sha256": "c29d7301e94acc63ba098b044369dbc600956267e570c026b096ea0243b285f3",
+  "retrieved_utc": "2026-09-29T18:39:35Z"
+ }
+]

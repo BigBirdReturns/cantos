@@ -1,0 +1,146 @@
+[
+ {
+  "kind": "home",
+  "url": "https://www.linode.com/",
+  "file": "providers/akamailinode/www.linode.com",
+  "http": 403,
+  "bytes": 2981,
+  "sha256": "fc5b67e1079c35eb3e93595eae9e4da1981b6422a2d3409ee7526827b86c6990",
+  "retrieved_utc": "2026-09-29T18:36:34Z"
+ },
+ {
+  "kind": "pricing",
+  "url": "https://www.linode.com/pricing/",
+  "file": "providers/akamailinode/www.linode.com_pricing.html",
+  "http": 403,
+  "bytes": 2981,
+  "sha256": "8bd1387c28b18efe4604a320190e765e0d51742edde8018af76914f4595c93a1",
+  "retrieved_utc": "2026-09-29T18:36:34Z"
+ },
+ {
+  "kind": "pricing",
+  "url": "https://www.linode.com/products/gpu/",
+  "file": "providers/akamailinode/www.linode.com_products_gpu.html",
+  "http": 403,
+  "bytes": 2981,
+  "sha256": "7e51f83043ee4e6c21817032c2f08991396d66e238a8d070be290679d181f31a",
+  "retrieved_utc": "2026-09-29T18:36:34Z"
+ },
+ {
+  "kind": "status",
+  "url": "https://www.akamaistatus.com",
+  "file": "providers/akamailinode/www.akamaistatus.com",
+  "http": 200,
+  "bytes": 186384,
+  "sha256": "86d30f8659876089bf84fb6ffea59e41854a6e713d624439145860ef349caad2",
+  "retrieved_utc": "2026-09-29T18:36:34Z"
+ },
+ {
+  "kind": "status",
+  "url": "https://status.linode.com",
+  "file": "providers/akamailinode/status.linode.com",
+  "http": 200,
+  "bytes": 326351,
+  "sha256": "b0795b4fbdf570eb4eee7b3d8b7c490dd59c8d5b825948e0da05fa9560744d11",
+  "retrieved_utc": "2026-09-29T18:36:34Z"
+ },
+ {
+  "kind": "status_api",
+  "url": "https://www.akamaistatus.com/api/v2/incidents.json",
+  "file": "providers/akamailinode/www.akamaistatus.com_api_v2_incidents.json",
+  "http": 200,
+  "bytes": 225856,
+  "sha256": "21a8d457733f6b4bfb1c2609d05a8f188a81cd0473f1206394a6eac9a516e19a",
+  "retrieved_utc": "2026-09-29T18:36:35Z"
+ },
+ {
+  "kind": "status_api",
+  "url": "https://status.linode.com/api/v2/incidents.json",
+  "file": "providers/akamailinode/status.linode.com_api_v2_incidents.json",
+  "http": 200,
+  "bytes": 1112271,
+  "sha256": "a17ec843249b211ecd630c1eb09a3f9f9925a1005f211437bdd54d76e79bbab5",
+  "retrieved_utc": "2026-09-29T18:36:35Z"
+ },
+ {
+  "kind": "docs",
+  "url": "https://techdocs.akamai.com/cloud-computing/docs/linode-kubernetes-engine",
+  "file": "providers/akamailinode/techdocs.akamai.com_cloud-computing_docs_linode-kubernetes-engine.html",
+  "http": 200,
+  "bytes": 3248261,
+  "sha256": "8713a3469179ee07cc8eb6d7ba24cc3f9a8f702c9c15c91bd28da103419243ad",
+  "retrieved_utc": "2026-09-29T18:36:41Z"
+ },
+ {
+  "kind": "docs",
+  "url": "https://techdocs.akamai.com/cloud-computing/docs/gpu-compute-instances",
+  "file": "providers/akamailinode/techdocs.akamai.com_cloud-computing_docs_gpu-compute-instances.html",
+  "http": 200,
+  "bytes": 3271530,
+  "sha256": "6ffe7b1202e9bbe5633a06eaf16c01c77df8794414b4a267b90a0a6b5e348fce",
+  "retrieved_utc": "2026-09-29T18:36:41Z"
+ },
+ {
+  "kind": "trust",
+  "url": "https://www.akamai.com/company/compliance",
+  "file": "providers/akamailinode/www.akamai.com_company_compliance.html",
+  "http": 403,
+  "bytes": 390,
+  "sha256": "5e7f6a4eda644431d40bb163dd78ae3d39d01992c43a7d5ba8c1bb4b507011f8",
+  "retrieved_utc": "2026-09-29T18:36:41Z"
+ },
+ {
+  "kind": "trust",
+  "url": "https://www.akamai.com/trust-center",
+  "file": "providers/akamailinode/www.akamai.com_trust-center.html",
+  "http": 403,
+  "bytes": 384,
+  "sha256": "88b7f54bc8f33fb812d70cdef05e2b2fd21ee7479c1fb2703faf16f9d3d315c2",
+  "retrieved_utc": "2026-09-29T18:36:41Z"
+ },
+ {
+  "kind": "pricing",
+  "url": "https://www.akamai.com/cloud/pricing",
+  "file": "providers/akamailinode/www.akamai.com_cloud_pricing.html",
+  "http": 403,
+  "bytes": 383,
+  "sha256": "d181bf59a36c5aeeb9f3df814116a1bfeaaaa31c51dc8617ce4263d1a18acb25",
+  "retrieved_utc": "2026-09-29T18:42:41Z"
+ },
+ {
+  "kind": "pricing",
+  "url": "https://www.akamai.com/cloud/gpu",
+  "file": "providers/akamailinode/www.akamai.com_cloud_gpu.html",
+  "http": 403,
+  "bytes": 379,
+  "sha256": "9719c4056e34f19e3f7837d75472e86fd33b402758b9becbb550e8edcc3c093c",
+  "retrieved_utc": "2026-09-29T18:42:41Z"
+ },
+ {
+  "kind": "trust",
+  "url": "https://www.akamai.com/legal/compliance",
+  "file": "providers/akamailinode/www.akamai.com_legal_compliance.html",
+  "http": 403,
+  "bytes": 386,
+  "sha256": "29dda4a4c50720f2bc0b25d2cb73a1a1445357ba183752e46a95f020f784618b",
+  "retrieved_utc": "2026-09-29T18:42:42Z"
+ },
+ {
+  "kind": "trust",
+  "url": "https://www.akamai.com/company/compliance/soc-2",
+  "file": "providers/akamailinode/www.akamai.com_company_compliance_soc-2.html",
+  "http": 403,
+  "bytes": 402,
+  "sha256": "34fba7043efcfe274ee9cb403df721ab6d9e6acbe9472ed21cdfc3ae31b2ce2b",
+  "retrieved_utc": "2026-09-29T18:42:42Z"
+ },
+ {
+  "kind": "pricing",
+  "url": "https://techdocs.akamai.com/cloud-computing/docs/pricing",
+  "file": "providers/akamailinode/techdocs.akamai.com_cloud-computing_docs_pricing.html",
+  "http": 200,
+  "bytes": 3218487,
+  "sha256": "6443a4da4b505bad93b6b454f8b7e34a14066b383ffccc46c8d747b5331e2b07",
+  "retrieved_utc": "2026-09-29T18:42:43Z"
+ }
+]

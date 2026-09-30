@@ -22,7 +22,13 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 CIRCULATE = HERE.parent
 ROOT = CIRCULATE.parent          # the axm-tools checkout (main/)
-SESSIONS = ROOT.parent / "sessions" / "public-tail-20260929"
+sys.path.insert(0, str(ROOT / "tools"))
+import evidence_root  # noqa: E402
+
+
+def lane(*parts) -> Path:
+    """Path under public-tail-20260929 in the evidence root (old session folder only if the copy is missing)."""
+    return evidence_root.resolve("public-tail-20260929", *parts)
 
 # Files no probe may move. Paths are relative to ROOT.
 FROZEN = [
@@ -82,6 +88,8 @@ def run_cmd(args, cwd=None, env=None, timeout=300, input_bytes=None):
     e = dict(os.environ)
     e.update(env or {})
     e.setdefault("PYTHONDONTWRITEBYTECODE", "1")
+    e["PYTHONUTF8"] = "1"
+    e["PYTHONIOENCODING"] = "utf-8"
     p = subprocess.run([str(a) for a in args], cwd=str(cwd) if cwd else None, env=e, capture_output=True,
                        timeout=timeout, input=input_bytes)
     return p.returncode, p.stdout.decode("utf-8", "replace"), p.stderr.decode("utf-8", "replace")

@@ -1,0 +1,66 @@
+[
+ {
+  "url": "https://www.denvr.com/",
+  "kind": "home",
+  "file": "providers/denvrdataworks/home.html",
+  "http": 200,
+  "bytes": 1829005,
+  "sha256": "0a86daf7843a18b90e7b7ae78ae7f7ca36a69d5ddb5746139c8c03532ea95ad6",
+  "retrieved_utc": "2026-09-29T18:48:51Z"
+ },
+ {
+  "url": "https://www.denvr.com/pricing",
+  "kind": "pricing",
+  "file": "providers/denvrdataworks/pricing.html",
+  "http": 200,
+  "bytes": 1896307,
+  "sha256": "1866b6959500272d4a48b6599c9b8e77c5e7b694df6b718bb0820611f5751684",
+  "retrieved_utc": "2026-09-29T18:48:51Z"
+ },
+ {
+  "url": "https://docs.denvrdata.com/docs",
+  "kind": "docs",
+  "file": "providers/denvrdataworks/docs.html",
+  "http": 200,
+  "bytes": 428021,
+  "sha256": "8efed7068d5508c57349955cefaeda4cc11ebf34b46e346166b4b39737a8efb8",
+  "retrieved_utc": "2026-09-29T18:48:51Z"
+ },
+ {
+  "url": "https://docs.denvrdata.com/docs/api-reference/clusters",
+  "kind": "docs_clusters",
+  "file": "providers/denvrdataworks/docs_clusters.html",
+  "http": 200,
+  "bytes": 412043,
+  "sha256": "e91bc3e0ae13f7b34c2a8e9321aed6447f1d18671f6db295e8a83f9e57964fb1",
+  "retrieved_utc": "2026-09-29T18:48:51Z"
+ },
+ {
+  "url": "https://status.denvr.com/",
+  "kind": "status",
+  "file": "providers/denvrdataworks/status.html",
+  "http": 0,
+  "bytes": 0,
+  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "retrieved_utc": "2026-09-29T18:48:51Z",
+  "curl_error": "curl: (6) Could not resolve host: status.denvr.com"
+ },
+ {
+  "url": "https://www.denvr.com/security",
+  "kind": "trust",
+  "file": "providers/denvrdataworks/trust.html",
+  "http": 404,
+  "bytes": 1195942,
+  "sha256": "315b98aa1f878d3ec51582c5466bfcfa0f8a8ed9a88779d7355672329a132a71",
+  "retrieved_utc": "2026-09-29T18:48:53Z"
+ },
+ {
+  "url": "https://www.denvr.com/trust",
+  "kind": "trust2",
+  "file": "providers/denvrdataworks/trust2.html",
+  "http": 404,
+  "bytes": 1195937,
+  "sha256": "77533076dc6ead8c4497076833916ba96e0a416f9c3798af689130542584ddae",
+  "retrieved_utc": "2026-09-29T18:48:55Z"
+ }
+]

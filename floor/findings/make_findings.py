@@ -4,19 +4,31 @@ retyped except a few constants copied from a named source file (marked 'src:'). 
 here (sha256 of the file as it exists now) except the two very large inputs, whose hashes were computed by the
 streaming scripts (ix_extract.py, price_dispersion.py) in the same pass that read them.
 Usage:  WORK=<dir with the *_result.json / _run*.json files> python make_findings.py"""
-import json, os, hashlib
-WORK = os.environ['WORK']
+import json, os, sys, hashlib
 HERE = os.path.dirname(os.path.abspath(__file__))
-ROOT = os.path.normpath(os.path.join(HERE, '..', '..', '..'))          # .../axm-tools
-MAIN = os.path.join(ROOT, 'main')
+ROOT = os.path.normpath(os.path.join(HERE, '..', '..'))          # this repo (the old axm-tools 'main/' checkout)
+sys.path.insert(0, os.path.join(ROOT, 'tools'))
+import evidence_root
+if not os.path.isfile(os.path.join(os.environ.get('WORK', ''), '_run2_cells.json')):
+    print('SKIP: set WORK=<dir holding the _run*.json / *_result.json intermediates the analysis scripts write (none found there); findings.jsonl left untouched.')
+    sys.exit(0)
+WORK = os.environ['WORK']
 BIG = {  # sha256 of very large inputs, computed by the scripts that streamed them (input_sha256 / sha256 fields)
     'sessions/public-tail-20260929/lanes/inferencex-history/imported-main/inferencex-2026-09-29.jsonl': '1eab076241673432f84802d83597161aeb31420c95a87b49ae4b64accf69bf2f',
     'sessions/public-tail-20260929/lanes/opencomputeprices/rows/prices.jsonl': '390b25b1b25d59631166dae6273ba7b04c4a8645191002eafafe865afaa73bd0',
 }
+MISSING = []
 def J(name): return json.load(open(os.path.join(WORK, name), encoding='utf-8'))
+def locate(rel):
+    """Evidence paths are recorded as written in the old checkout: 'main/<repo path>' or 'sessions/<session path>'."""
+    if rel.startswith('main/'): return os.path.join(ROOT, rel[5:])
+    if rel.startswith('sessions/'): return str(evidence_root.resolve(rel[len('sessions/'):]))
+    return os.path.join(ROOT, rel)
 def sha(rel):
     if rel in BIG: return BIG[rel]
-    p = os.path.join(ROOT, rel)
+    p = locate(rel)
+    if not os.path.isfile(p):
+        MISSING.append(rel); return None
     h = hashlib.sha256()
     with open(p, 'rb') as f:
         for b in iter(lambda: f.read(1 << 22), b''): h.update(b)
@@ -247,6 +259,10 @@ F('M14', 'market', 'derived', 'Ollama library top-20 non-embedding models by cum
   J('demand_anchor_result.json')['ollama_by_level'] | {'top20_total_pulls': J('demand_anchor_result.json')['ollama_top20_total'], 'rows': J('demand_anchor_result.json')['ollama_rows']},
   ev('sessions/public-tail-20260929/lanes/demand-signals/rows/ollama_models.jsonl', 'sessions/public-tail-20260929/lanes/mlperf/rows/mlperf.jsonl', 'sessions/public-tail-20260929/lanes/inferencex-history/imported-main/inferencex-2026-09-29.jsonl'),
   'imported', 'Pulls are cumulative, rounded, from 200 of 240 listed models; the default Ollama tag size is used to judge "other size"; embeddings excluded. Judgement map in demand_anchor.py.', 'Small and mid-size dense models (the bulk of local demand) have no MI300X reference; a floor kit that measures them adds the missing anchors.', 'medium', 'Add the top 10 by pulls to the shop-eval workload set.', 'to 2026-09-29')
+if MISSING:
+    u = sorted(set(MISSING))
+    print('SKIP: %d evidence input(s) not found (bulk inputs are not shipped in evidence/; set CANTOS_EVIDENCE to a folder that holds them); findings.jsonl left untouched. First missing: %s' % (len(u), u[0]))
+    sys.exit(0)
 with open(os.path.join(HERE, 'findings.jsonl'), 'w', encoding='utf-8') as f:
     for r in rows: f.write(json.dumps(r, ensure_ascii=False) + '\n')
 print(len(rows), 'findings written')

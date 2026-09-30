@@ -1,0 +1,68 @@
+[
+ {
+  "label": "homepage",
+  "url": "https://www.gmicloud.ai/",
+  "file": "providers/gmi/home.html",
+  "http": 200,
+  "bytes": 292804,
+  "sha256": "8191e0aae59c8be85bf34be70b35214738a5af8d091a18f960eef3a64fa1d041",
+  "retrieved_utc": "2026-09-29T18:38:16Z",
+  "url_effective": "https://www.gmicloud.ai/en"
+ },
+ {
+  "label": "pricing",
+  "url": "https://www.gmicloud.ai/pricing",
+  "file": "providers/gmi/pricing.html",
+  "http": 200,
+  "bytes": 103685,
+  "sha256": "677f7d01552f970a8e61f37f06dddddf74b33b24cf21ce206ae5dd19daa2531e",
+  "retrieved_utc": "2026-09-29T18:38:17Z",
+  "url_effective": "https://www.gmicloud.ai/en/pricing"
+ },
+ {
+  "label": "status",
+  "url": "https://status.gmicloud.ai/",
+  "file": "providers/gmi/status.html",
+  "http": 0,
+  "bytes": 0,
+  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "retrieved_utc": "2026-09-29T18:38:17Z",
+  "curl_error": "curl: (6) Could not resolve host: status.gmicloud.ai"
+ },
+ {
+  "label": "docs_index",
+  "url": "https://docs.gmicloud.ai/",
+  "file": "providers/gmi/docs_index.html",
+  "http": 200,
+  "bytes": 274685,
+  "sha256": "3d0897c0b7b7b8f7dd0bdbf87b0a3bd530077ee47443e4a0e2ecb3a5b00f15ca",
+  "retrieved_utc": "2026-09-29T18:38:17Z"
+ },
+ {
+  "label": "trust",
+  "url": "https://trust.gmicloud.ai/",
+  "file": "providers/gmi/trust.html",
+  "http": 200,
+  "bytes": 7027,
+  "sha256": "60a34b616f2592afef3b1e8bceca45a4afaaea1b76d695f0959136a2f736e845",
+  "retrieved_utc": "2026-09-29T18:38:17Z"
+ },
+ {
+  "label": "docs_cluster",
+  "url": "https://docs.gmicloud.ai/cluster-engine",
+  "file": "providers/gmi/docs_cluster.html",
+  "http": 200,
+  "bytes": 269073,
+  "sha256": "73d5836f5ae9c8813992ceaaedd29689d5365ef84a73fb3914ccc9e932c81b38",
+  "retrieved_utc": "2026-09-29T18:39:33Z"
+ },
+ {
+  "label": "legal",
+  "url": "https://www.gmicloud.ai/en/legal",
+  "file": "providers/gmi/legal.html",
+  "http": 200,
+  "bytes": 77072,
+  "sha256": "64c759206033b7cb22f8ddabcb8df59ba4b322bc715c9f8028bc1d2c56e50da6",
+  "retrieved_utc": "2026-09-29T18:40:04Z"
+ }
+]

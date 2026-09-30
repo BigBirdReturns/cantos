@@ -1,0 +1,67 @@
+[
+ {
+  "url": "https://www.core42.ai/",
+  "kind": "home",
+  "file": "providers/core42g42/home.html",
+  "http": 200,
+  "bytes": 288720,
+  "sha256": "c688f3e0fca9af69baba0db67fb237c38bcfbadb71b3339ff4ecd17abaeea48b",
+  "retrieved_utc": "2026-09-29T18:48:27Z"
+ },
+ {
+  "url": "https://docs.aicloud.core42.ai/",
+  "kind": "docs",
+  "file": "providers/core42g42/docs.html",
+  "http": 200,
+  "bytes": 463,
+  "sha256": "1a9027181f254101720a1d2120b0106aad6ced8022ac6d5f24675b61ab031b12",
+  "retrieved_utc": "2026-09-29T18:48:27Z"
+ },
+ {
+  "url": "https://www.core42.ai/ai-cloud",
+  "kind": "pricing",
+  "file": "providers/core42g42/pricing.html",
+  "http": 200,
+  "bytes": 284081,
+  "sha256": "2a05fac9943dd427abc2f905ee4eceaa6539a8d4b94e2551776b806a06baafd6",
+  "retrieved_utc": "2026-09-29T18:48:28Z",
+  "url_effective": "https://www.core42.ai/products/ai-cloud"
+ },
+ {
+  "url": "https://www.core42.ai/trust",
+  "kind": "trust",
+  "file": "providers/core42g42/trust.html",
+  "http": 404,
+  "bytes": 15237,
+  "sha256": "3a3d94928c469443df760905db3b3019eb411c30299c2546587c62f2330c8375",
+  "retrieved_utc": "2026-09-29T18:48:29Z"
+ },
+ {
+  "url": "https://status.core42.ai/",
+  "kind": "status",
+  "file": "providers/core42g42/status.html",
+  "http": 0,
+  "bytes": 0,
+  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "retrieved_utc": "2026-09-29T18:48:29Z",
+  "curl_error": "curl: (6) Could not resolve host: status.core42.ai"
+ },
+ {
+  "url": "https://www.core42.ai/security",
+  "kind": "trust_security",
+  "file": "providers/core42g42/trust_security.html",
+  "http": 404,
+  "bytes": 15237,
+  "sha256": "3a3d94928c469443df760905db3b3019eb411c30299c2546587c62f2330c8375",
+  "retrieved_utc": "2026-09-29T18:50:53Z"
+ },
+ {
+  "url": "https://www.core42.ai/compliance",
+  "kind": "trust_compliance",
+  "file": "providers/core42g42/trust_compliance.html",
+  "http": 404,
+  "bytes": 15237,
+  "sha256": "3a3d94928c469443df760905db3b3019eb411c30299c2546587c62f2330c8375",
+  "retrieved_utc": "2026-09-29T18:50:54Z"
+ }
+]

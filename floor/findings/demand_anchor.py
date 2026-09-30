@@ -4,10 +4,17 @@ Demand: OpenRouter weekly top-10 tokens, Ollama library pulls (top non-embedding
 (ix_rows from ix_extract.py) and MLPerf v4.1-v5.1 LLM summaries. Anchor level: 'exact' = same model family AND the size class people pull
 by default appears on MI300X; 'family-other-size' = family appears only at a very different size/version; 'none'.
 Usage: demand_anchor.py <ix_rows.jsonl> <out.json>"""
-import json, sys, re, collections
+import json, os, sys, re, collections
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'tools'))
+import evidence_root
+_L = ('public-tail-20260929', 'lanes')
+mlp_p = str(evidence_root.resolve(*_L, 'mlperf', 'rows', 'mlperf.jsonl'))
+base = str(evidence_root.resolve(*_L, 'demand-signals', 'rows', 'openrouter_rankings.jsonl').parent) + '/'
+_need = [mlp_p, base + 'openrouter_rankings.jsonl', base + 'ollama_models.jsonl']
+if not all(os.path.isfile(x) for x in _need):
+    print(evidence_root.skip_message(*_L, 'mlperf/rows/mlperf.jsonl') + ' (also demand-signals/rows/*.jsonl); nothing written.')
+    sys.exit(0)
 ix = [json.loads(l) for l in open(sys.argv[1], encoding='utf-8')]
-mlp_p = 'D:/Projects/Organs/AXM/axm-tools/sessions/public-tail-20260929/lanes/mlperf/rows/mlperf.jsonl'
-base = 'D:/Projects/Organs/AXM/axm-tools/sessions/public-tail-20260929/lanes/demand-signals/rows/'
 ixm = sorted(set(re.sub(r'^.*/', '', r['model'] or '') for r in ix if r['hw'] == 'MI300X'))
 mlm = sorted(set(json.loads(l).get('model') for l in open(mlp_p, encoding='utf-8') if '"hardware": "MI300X"' in l))
 print('InferenceX MI300X models:', ixm); print('MLPerf MI300X models:', mlm)

@@ -1,0 +1,96 @@
+[
+ {
+  "url": "https://www.bitdeer.com/",
+  "kind": "home",
+  "file": "providers/bitdeer/home.html",
+  "http": 200,
+  "bytes": 108351,
+  "sha256": "9942b4ab8c418c3c7bf407de2807c114c50706be534000b1e7acf1a5581b9d61",
+  "retrieved_utc": "2026-09-29T18:48:40Z"
+ },
+ {
+  "url": "https://www.bitdeer.ai/",
+  "kind": "home_ai",
+  "file": "providers/bitdeer/home_ai.html",
+  "http": 200,
+  "bytes": 117693,
+  "sha256": "f2debd31c528007f8e5d2b409da776cdbf76e4dd91d7a644131bd421fa466c0d",
+  "retrieved_utc": "2026-09-29T18:48:41Z",
+  "url_effective": "https://www.bitdeer.ai/en"
+ },
+ {
+  "url": "https://www.bitdeer.ai/en/price",
+  "kind": "pricing",
+  "file": "providers/bitdeer/pricing.html",
+  "http": 200,
+  "bytes": 108395,
+  "sha256": "9d0cb222ed5e5fb92d5cf259aaf6d3cbc89a203e189d1c4cfa947f8310ae2813",
+  "retrieved_utc": "2026-09-29T18:48:42Z",
+  "url_effective": "https://www.bitdeer.ai/en/pricing/gpu-compute"
+ },
+ {
+  "url": "https://www.bitdeer.ai/en/docs",
+  "kind": "docs",
+  "file": "providers/bitdeer/docs.html",
+  "http": 200,
+  "bytes": 38327,
+  "sha256": "107c9d0a7a005e4988f1de90d9408e7e975a2a46cf6b75dd9f5df5071cc8718e",
+  "retrieved_utc": "2026-09-29T18:48:42Z"
+ },
+ {
+  "url": "https://www.bitdeer.ai/en/trust",
+  "kind": "trust",
+  "file": "providers/bitdeer/trust.html",
+  "http": 404,
+  "bytes": 40613,
+  "sha256": "c70589b7dcdef775c5352a130e171d1ab8c41ea78aa8f72766a3194d09595d31",
+  "retrieved_utc": "2026-09-29T18:48:42Z"
+ },
+ {
+  "url": "https://status.bitdeer.ai/",
+  "kind": "status",
+  "file": "providers/bitdeer/status.html",
+  "http": 0,
+  "bytes": 0,
+  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "retrieved_utc": "2026-09-29T18:48:43Z",
+  "curl_error": "curl: (6) Could not resolve host: status.bitdeer.ai"
+ },
+ {
+  "url": "https://www.bitdeer.ai/en/docs/security",
+  "kind": "docs_security",
+  "file": "providers/bitdeer/docs_security.html",
+  "http": 200,
+  "bytes": 42249,
+  "sha256": "2c168a7bea9a3e19a51d2b994e4ea63fcde92b33c97620ab20f34aea57a54efa",
+  "retrieved_utc": "2026-09-29T18:50:57Z",
+  "url_effective": "https://www.bitdeer.ai/en/docs/security/"
+ },
+ {
+  "url": "https://www.bitdeer.ai/en/pricing/network-storage",
+  "kind": "pricing_network",
+  "file": "providers/bitdeer/pricing_network.html",
+  "http": 200,
+  "bytes": 109324,
+  "sha256": "2a2b56868dcf60763b66c1c6e0c80fea5d51da805838c227604357e494c42564",
+  "retrieved_utc": "2026-09-29T18:50:57Z"
+ },
+ {
+  "url": "https://www.bitdeer.ai/en/docs/container/",
+  "kind": "docs_container",
+  "file": "providers/bitdeer/docs_container.html",
+  "http": 200,
+  "bytes": 72256,
+  "sha256": "5fe4077a015bd465c5ca159f680b40f757d861e691992a144bf39ddb8700c14d",
+  "retrieved_utc": "2026-09-29T18:50:58Z"
+ },
+ {
+  "url": "https://www.bitdeer.ai/en/docs/training/",
+  "kind": "docs_training",
+  "file": "providers/bitdeer/docs_training.html",
+  "http": 200,
+  "bytes": 68208,
+  "sha256": "5f63fc077e3621ce0d2a2b002c7d6d1552bffddb815e5ac1f6ac356bdd169935",
+  "retrieved_utc": "2026-09-29T18:50:58Z"
+ }
+]

@@ -1,0 +1,103 @@
+[
+ {
+  "label": "homepage",
+  "url": "https://www.coreweave.com/",
+  "file": "providers/coreweave/home.html",
+  "http": 200,
+  "bytes": 573713,
+  "sha256": "d8c98910515ba03301edc6ec761fae8ad97773f744b8f500e28867b89c9372bf",
+  "retrieved_utc": "2026-09-29T18:37:39Z"
+ },
+ {
+  "label": "pricing",
+  "url": "https://www.coreweave.com/pricing",
+  "file": "providers/coreweave/pricing.html",
+  "http": 200,
+  "bytes": 468462,
+  "sha256": "8dd327de6241b3c3496c85bbe7a8ad590d4fc58b728fa9bfc5b58384f5f77b20",
+  "retrieved_utc": "2026-09-29T18:37:40Z"
+ },
+ {
+  "label": "status",
+  "url": "https://status.coreweave.com/",
+  "file": "providers/coreweave/status.html",
+  "http": 200,
+  "bytes": 159622,
+  "sha256": "96630c83b77927c6b1cb46e964d11c5344189ad5af09ecdbaa7627b2d05ccb1e",
+  "retrieved_utc": "2026-09-29T18:37:40Z"
+ },
+ {
+  "label": "status_history",
+  "url": "https://status.coreweave.com/pages/history/5e126e998f2f032e1f8f0f4b?date=2026-09",
+  "file": "providers/coreweave/status_history_2026-09.html",
+  "http": 200,
+  "bytes": 97861,
+  "sha256": "23ceb7a0eb245485f2075d5d279b6073a28e5001693dd00e7e787a165b4fc884",
+  "retrieved_utc": "2026-09-29T18:37:40Z"
+ },
+ {
+  "label": "status_api",
+  "url": "https://status.coreweave.com/api/v2/incidents.json",
+  "file": "providers/coreweave/status_incidents.json",
+  "http": 404,
+  "bytes": 427,
+  "sha256": "9c49453a0797e988617b7ea7bd38f4c5e660e8d22e2cdc7507965879943d6563",
+  "retrieved_utc": "2026-09-29T18:37:41Z"
+ },
+ {
+  "label": "docs_index",
+  "url": "https://docs.coreweave.com/",
+  "file": "providers/coreweave/docs_index.html",
+  "http": 200,
+  "bytes": 282294,
+  "sha256": "1d48acf9dcc54671fee0fba74b5c3dfb3c77805e7b2cb0bf15abdfc150388957",
+  "retrieved_utc": "2026-09-29T18:37:41Z"
+ },
+ {
+  "label": "docs_slurm",
+  "url": "https://docs.coreweave.com/docs/products/sunk",
+  "file": "providers/coreweave/docs_slurm.html",
+  "http": 200,
+  "bytes": 333084,
+  "sha256": "3ab7019555f777c3ffaed04a25fa98cc73ad74441ad6e5d0b46b6510c10a7bb3",
+  "retrieved_utc": "2026-09-29T18:37:42Z",
+  "url_effective": "https://docs.coreweave.com/products/sunk"
+ },
+ {
+  "label": "docs_k8s",
+  "url": "https://docs.coreweave.com/docs/products/cks",
+  "file": "providers/coreweave/docs_k8s.html",
+  "http": 200,
+  "bytes": 353827,
+  "sha256": "48cef8215f058a44d91502ae631b2edcdabd0753335738bfb494213452a2fb5f",
+  "retrieved_utc": "2026-09-29T18:37:43Z",
+  "url_effective": "https://docs.coreweave.com/products/cks"
+ },
+ {
+  "label": "trust",
+  "url": "https://www.coreweave.com/trust",
+  "file": "providers/coreweave/trust.html",
+  "http": 200,
+  "bytes": 406769,
+  "sha256": "2e86f60429a3ce4e2fce0c807eaada15f1d99d3d2d3a06e00479dbd1d4207277",
+  "retrieved_utc": "2026-09-29T18:37:44Z"
+ },
+ {
+  "label": "trust_alt",
+  "url": "https://trust.coreweave.com/",
+  "file": "providers/coreweave/trust_alt.html",
+  "http": 200,
+  "bytes": 112944,
+  "sha256": "ab31ed3bb86a931e9d4f17c7888fd237b284cfeba1f423d562380980711891ba",
+  "retrieved_utc": "2026-09-29T18:37:45Z"
+ },
+ {
+  "label": "status_api",
+  "url": "https://api.status.io/1.0/status/5e126e998f2f032e1f8f0f4b",
+  "file": "providers/coreweave/status_api.json",
+  "http": 200,
+  "bytes": 100761,
+  "sha256": "eb948198021d9dda1a55de7809611d075f4d02d309d42fb284234b1bcdefd2f6",
+  "retrieved_utc": "2026-09-29T18:39:37Z"
+ }
+]

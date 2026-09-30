@@ -10,7 +10,7 @@ from urllib.parse import urlsplit, parse_qs
 from _common import *  # noqa
 
 NAME = "p08_platform_mislabel"
-RAW = SESSIONS / "lanes" / "clustermax-r2-raw"
+RAW = lane("lanes", "clustermax-r2-raw")
 
 
 def make_server(routes):

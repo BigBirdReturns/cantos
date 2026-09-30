@@ -1,0 +1,85 @@
+[
+ {
+  "label": "homepage",
+  "url": "https://azure.microsoft.com/en-us/",
+  "file": "providers/azure/home.html",
+  "http": 200,
+  "bytes": 465754,
+  "sha256": "109d5b3b19d637befbff6612c4913e7eb53158ab1044ff64620f01b4daef31ff",
+  "retrieved_utc": "2026-09-29T18:38:02Z",
+  "url_effective": "https://azure.microsoft.com/en-us"
+ },
+ {
+  "label": "pricing",
+  "url": "https://azure.microsoft.com/en-us/pricing/details/virtual-machines/linux/",
+  "file": "providers/azure/pricing.html",
+  "http": 200,
+  "bytes": 468716,
+  "sha256": "8f8da8b6989d2516e20bafbb0babdeb76942769c4b961e421dd2a29903a12b1d",
+  "retrieved_utc": "2026-09-29T18:38:06Z"
+ },
+ {
+  "label": "status",
+  "url": "https://azure.status.microsoft/en-us/status",
+  "file": "providers/azure/status.html",
+  "http": 200,
+  "bytes": 6971679,
+  "sha256": "e1ee24cb2b9bcd7c8fb1d11fb4b6c9c09f47a8f13471b13b8d320763ef493a4e",
+  "retrieved_utc": "2026-09-29T18:38:09Z"
+ },
+ {
+  "label": "status_history",
+  "url": "https://azure.status.microsoft/en-us/status/history/",
+  "file": "providers/azure/status_history.html",
+  "http": 200,
+  "bytes": 90749,
+  "sha256": "0cbed02488e8edb7be42114e64a207edb8e3065f3a7be73b5d9ea08d6c66e028",
+  "retrieved_utc": "2026-09-29T18:38:10Z"
+ },
+ {
+  "label": "status_rss",
+  "url": "https://azure.status.microsoft/en-us/status/feed/",
+  "file": "providers/azure/status_feed.xml",
+  "http": 200,
+  "bytes": 2660,
+  "sha256": "493cd42b851e57f4b9ecf64a4fd03e3001d5bef8160f53fce354bb67754698b9",
+  "retrieved_utc": "2026-09-29T18:38:10Z"
+ },
+ {
+  "label": "docs_index",
+  "url": "https://learn.microsoft.com/en-us/azure/",
+  "file": "providers/azure/docs_index.html",
+  "http": 200,
+  "bytes": 673429,
+  "sha256": "534e039f8ed42687b790ab483885828e66da607843d948edb5a9592da82af072",
+  "retrieved_utc": "2026-09-29T18:38:10Z"
+ },
+ {
+  "label": "docs_slurm",
+  "url": "https://learn.microsoft.com/en-us/azure/cyclecloud/",
+  "file": "providers/azure/docs_slurm.html",
+  "http": 200,
+  "bytes": 39285,
+  "sha256": "a4b68da25ddc39362b52954e3fc4bfde5d731ba2bc2efdd98a435bebd00a4442",
+  "retrieved_utc": "2026-09-29T18:38:10Z",
+  "url_effective": "https://learn.microsoft.com/en-us/azure/cyclecloud/?view=cyclecloud-8"
+ },
+ {
+  "label": "docs_k8s",
+  "url": "https://learn.microsoft.com/en-us/azure/aks/",
+  "file": "providers/azure/docs_k8s.html",
+  "http": 200,
+  "bytes": 33260,
+  "sha256": "9656f0cb26c707d13d077bd7544abfb6e03fbb7dee28cd98a7e500837f81cae4",
+  "retrieved_utc": "2026-09-29T18:38:10Z"
+ },
+ {
+  "label": "trust",
+  "url": "https://learn.microsoft.com/en-us/azure/compliance/offerings/offering-soc-2",
+  "file": "providers/azure/trust.html",
+  "http": 200,
+  "bytes": 44694,
+  "sha256": "59d898bb553f93799f8c2dd592b96612514eb77c133076f085dfcc7d059f8cb6",
+  "retrieved_utc": "2026-09-29T18:38:11Z"
+ }
+]

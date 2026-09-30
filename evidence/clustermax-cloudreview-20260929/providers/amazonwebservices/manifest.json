@@ -1,0 +1,103 @@
+[
+ {
+  "label": "homepage",
+  "url": "https://aws.amazon.com/",
+  "file": "providers/amazonwebservices/home.html",
+  "http": 200,
+  "bytes": 500186,
+  "sha256": "aa85ab1177f3e3be2e921db64b92606e59412aa4f3d60fb1dace63e0cc57a680",
+  "retrieved_utc": "2026-09-29T18:38:19Z"
+ },
+ {
+  "label": "pricing",
+  "url": "https://aws.amazon.com/ec2/pricing/on-demand/",
+  "file": "providers/amazonwebservices/pricing.html",
+  "http": 200,
+  "bytes": 367306,
+  "sha256": "a4c9fac9bab12f9ff41cadf39bb9c991c584c09e54e93f837cb9be21e46ad524",
+  "retrieved_utc": "2026-09-29T18:38:20Z"
+ },
+ {
+  "label": "pricing_hyperpod",
+  "url": "https://aws.amazon.com/sagemaker/ai/pricing/",
+  "file": "providers/amazonwebservices/pricing_hyperpod.html",
+  "http": 200,
+  "bytes": 675488,
+  "sha256": "eaf46c635e237ccab7e8b68b518173988ee1468f25457a94ac8170ca76ddaeda",
+  "retrieved_utc": "2026-09-29T18:38:20Z"
+ },
+ {
+  "label": "status",
+  "url": "https://health.aws.amazon.com/health/status",
+  "file": "providers/amazonwebservices/status.html",
+  "http": 200,
+  "bytes": 3384,
+  "sha256": "cb3034f1961d9582bb76d2b90c60c9870bc64cea06804119420505e812760d99",
+  "retrieved_utc": "2026-09-29T18:38:20Z"
+ },
+ {
+  "label": "status_legacy",
+  "url": "https://status.aws.amazon.com/",
+  "file": "providers/amazonwebservices/status_legacy.html",
+  "http": 200,
+  "bytes": 3384,
+  "sha256": "cb3034f1961d9582bb76d2b90c60c9870bc64cea06804119420505e812760d99",
+  "retrieved_utc": "2026-09-29T18:38:20Z",
+  "url_effective": "https://health.aws.amazon.com/health/status"
+ },
+ {
+  "label": "status_rss",
+  "url": "https://status.aws.amazon.com/rss/all.rss",
+  "file": "providers/amazonwebservices/status_all.rss",
+  "http": 200,
+  "bytes": 56406,
+  "sha256": "4e5ecf951e7a4de28250a3f02cde49e18b105ba67147706d86aa8a9ce2e7bfdf",
+  "retrieved_utc": "2026-09-29T18:38:21Z"
+ },
+ {
+  "label": "docs_index",
+  "url": "https://docs.aws.amazon.com/",
+  "file": "providers/amazonwebservices/docs_index.html",
+  "http": 200,
+  "bytes": 601870,
+  "sha256": "06fa54590b291f6cc237f69be10fc3ff86a0b15eb6515dea256707b1790b27c6",
+  "retrieved_utc": "2026-09-29T18:38:21Z"
+ },
+ {
+  "label": "docs_slurm",
+  "url": "https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-hyperpod.html",
+  "file": "providers/amazonwebservices/docs_slurm.html",
+  "http": 200,
+  "bytes": 20029,
+  "sha256": "4b94ed0c219657df5776df8f1ff3d150fe90739d1404b43bfae7439a3dc9c639",
+  "retrieved_utc": "2026-09-29T18:38:21Z"
+ },
+ {
+  "label": "docs_k8s",
+  "url": "https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html",
+  "file": "providers/amazonwebservices/docs_k8s.html",
+  "http": 200,
+  "bytes": 28888,
+  "sha256": "c36487cc08e247bfcbf1b12decedcafe41d94685e8185e6e8fca78a332571a37",
+  "retrieved_utc": "2026-09-29T18:38:21Z"
+ },
+ {
+  "label": "trust",
+  "url": "https://aws.amazon.com/compliance/soc-faqs/",
+  "file": "providers/amazonwebservices/trust.html",
+  "http": 200,
+  "bytes": 380144,
+  "sha256": "fad06fb0f0e60da6602d0f2251178a582d80723ef7aba71eac2a41bb5f531818",
+  "retrieved_utc": "2026-09-29T18:38:21Z"
+ },
+ {
+  "label": "status_data",
+  "url": "https://status.aws.amazon.com/data.json",
+  "file": "providers/amazonwebservices/status_data.json",
+  "http": 200,
+  "bytes": 231276,
+  "sha256": "ead64c82685dba23d0f7224cd5a4ce3d11c6900f34ed594c76c832749ab11d90",
+  "retrieved_utc": "2026-09-29T18:39:37Z",
+  "url_effective": "https://health.aws.amazon.com/public/currentevents"
+ }
+]

@@ -6,8 +6,8 @@ import urllib.request
 from _common import *  # noqa
 
 NAME = "p05_gated_source"
-LISTING = SESSIONS / "lanes" / "chat-corpora-meta" / "raw" / "lmsys__lmsys-chat-1m.parquet.json"
-MANIFEST = SESSIONS / "lanes" / "chat-corpora-meta" / "manifest.json"
+LISTING = lane("lanes", "chat-corpora-meta", "raw", "lmsys__lmsys-chat-1m.parquet.json")
+MANIFEST = lane("lanes", "chat-corpora-meta", "manifest.json")
 
 
 class NoAuthNoRedirect(urllib.request.HTTPRedirectHandler):

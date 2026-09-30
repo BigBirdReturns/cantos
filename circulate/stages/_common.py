@@ -22,6 +22,9 @@ from pathlib import Path
 
 OK, HOLD, FAIL, SKIP = 'OK', 'HOLD', 'FAIL', 'SKIP'
 STATUSES = (OK, HOLD, FAIL, SKIP)
+sys.path.insert(0, str(Path(__file__).resolve().parents[2] / 'tools'))
+import evidence_root  # noqa: E402
+
 UA = 'circulate/1 (+https://github.com/second-run/axm-tools)'
 
 
@@ -182,7 +185,8 @@ class Ctx:
     def run(self, cmd, cwd=None, timeout=1800, env=None, check=False) -> subprocess.CompletedProcess:
         self.log('$ ' + ' '.join(str(c) for c in cmd))
         e = dict(os.environ)
-        e.setdefault('PYTHONUTF8', '1')
+        e['PYTHONUTF8'] = '1'
+        e['PYTHONIOENCODING'] = 'utf-8'
         e['PYTHONDONTWRITEBYTECODE'] = '1'
         if env:
             e.update(env)

@@ -1,0 +1,103 @@
+{
+ "slug": "scaleway",
+ "user_agent": "Mozilla/5.0",
+ "timeout_s": 60,
+ "entries": [
+  {
+   "kind": "pricing",
+   "url": "https://www.scaleway.com/en/pricing/gpu/",
+   "url_effective": "https://www.scaleway.com/en/pricing/gpu/",
+   "file": "providers/scaleway/pricing.html",
+   "http": 200,
+   "content_type": "text/html; charset=utf-8",
+   "bytes": 6305346,
+   "sha256": "8ea71acd11ca1c35b9dbd3eebc56569896ae69e23cf4dae226b0201d0734e161",
+   "retrieved_utc": "2026-09-29T18:46:46Z",
+   "curl_error": null
+  },
+  {
+   "kind": "status",
+   "url": "https://status.scaleway.com/",
+   "url_effective": "https://status.scaleway.com/",
+   "file": "providers/scaleway/status.html",
+   "http": 200,
+   "content_type": "text/html; charset=utf-8",
+   "bytes": 372797,
+   "sha256": "603c780fe88d6a61c8f08c16e58793c0a4189de8c83e3f57d76351fc3720bca4",
+   "retrieved_utc": "2026-09-29T18:46:47Z",
+   "curl_error": null
+  },
+  {
+   "kind": "status_api_incidents",
+   "url": "https://status.scaleway.com/api/v2/incidents.json",
+   "url_effective": "https://status.scaleway.com/api/v2/incidents.json",
+   "file": "providers/scaleway/status_api_incidents.json",
+   "http": 200,
+   "content_type": "application/json; charset=utf-8",
+   "bytes": 119067,
+   "sha256": "c9b9b9c347cccda524171d12675112101be8dc293bf0fe2caaa1bebc2584c847",
+   "retrieved_utc": "2026-09-29T18:46:46Z",
+   "curl_error": null
+  },
+  {
+   "kind": "docs_index",
+   "url": "https://www.scaleway.com/en/docs/gpu/",
+   "url_effective": "https://www.scaleway.com/en/docs/gpu/",
+   "file": "providers/scaleway/docs_index.html",
+   "http": 200,
+   "content_type": "text/html",
+   "bytes": 1679148,
+   "sha256": "88ce2b59aa36eba91214634b11b20b645ccac82f652e7c4656eca70e7313f6bd",
+   "retrieved_utc": "2026-09-29T18:46:47Z",
+   "curl_error": null
+  },
+  {
+   "kind": "docs_kubernetes",
+   "url": "https://www.scaleway.com/en/docs/kubernetes/",
+   "url_effective": "https://www.scaleway.com/en/docs/kubernetes/",
+   "file": "providers/scaleway/docs_kubernetes.html",
+   "http": 200,
+   "content_type": "text/html",
+   "bytes": 1682883,
+   "sha256": "1b1e0ae25ff5f31e2dfd7ba8b7cac3e5b49d12ab6dcb303b9e5bb5e01003c348",
+   "retrieved_utc": "2026-09-29T18:46:47Z",
+   "curl_error": null
+  },
+  {
+   "kind": "docs_slurm",
+   "url": "https://www.scaleway.com/en/docs/gpu/reference-content/gpu-cluster-slurm/",
+   "url_effective": "https://www.scaleway.com/en/docs/gpu/reference-content/gpu-cluster-slurm/",
+   "file": "providers/scaleway/docs_slurm.html",
+   "http": 404,
+   "content_type": "text/html",
+   "bytes": 820454,
+   "sha256": "a99d7ef90e917a3b3f115915a08bcafcb450f8e415278e68fa3237b4a7fc3d2f",
+   "retrieved_utc": "2026-09-29T18:46:47Z",
+   "curl_error": null
+  },
+  {
+   "kind": "trust",
+   "url": "https://security.scaleway.com/",
+   "url_effective": "https://security.scaleway.com/",
+   "file": "providers/scaleway/trust.html",
+   "http": 200,
+   "content_type": "text/html; charset=utf-8",
+   "bytes": 415639,
+   "sha256": "f9826865d69274296c5c78b500a61d3111896d0ac0faefbbf49e56b08ffd2980",
+   "retrieved_utc": "2026-09-29T18:46:46Z",
+   "curl_error": null
+  },
+  {
+   "kind": "trust_compliance",
+   "url": "https://www.scaleway.com/en/security-and-compliance/",
+   "url_effective": "https://www.scaleway.com/en/security-and-compliance/",
+   "file": "providers/scaleway/trust_compliance.html",
+   "http": 200,
+   "content_type": "text/html; charset=utf-8",
+   "bytes": 466744,
+   "sha256": "183f57286ef051b225f2c2c39bac10101c29466a9eacfda227ffa2178a851fb6",
+   "retrieved_utc": "2026-09-29T18:46:47Z",
+   "curl_error": null
+  }
+ ]
+}

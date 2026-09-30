@@ -1,0 +1,77 @@
+[
+ {
+  "url": "https://vast.ai/",
+  "kind": "home",
+  "file": "providers/vastai/home.html",
+  "http": 200,
+  "bytes": 102689,
+  "sha256": "0a032be2ed4cb999b0c3ba8d7332cffbdd5e4c9b6d01c038c72c77fffebf56c0",
+  "retrieved_utc": "2026-09-29T18:48:39Z"
+ },
+ {
+  "url": "https://vast.ai/pricing",
+  "kind": "pricing",
+  "file": "providers/vastai/pricing.html",
+  "http": 200,
+  "bytes": 53293,
+  "sha256": "4656cdcea0673aaa791bd36ec690a6342f4e101f31bcfaf45eb2176fb13e16cd",
+  "retrieved_utc": "2026-09-29T18:48:39Z"
+ },
+ {
+  "url": "https://status.vast.ai/",
+  "kind": "status",
+  "file": "providers/vastai/status.html",
+  "http": 200,
+  "bytes": 1762,
+  "sha256": "5a9b765115cb657a763e45e80adc496afc706be227766ebeb5c52b9ae1df917c",
+  "retrieved_utc": "2026-09-29T18:48:39Z"
+ },
+ {
+  "url": "https://docs.vast.ai/",
+  "kind": "docs",
+  "file": "providers/vastai/docs.html",
+  "http": 200,
+  "bytes": 350992,
+  "sha256": "5d4ef9e91d47e1a2bdbc6325900f796981c2cde8a35c59dafe36eb7d347aa75f",
+  "retrieved_utc": "2026-09-29T18:48:39Z",
+  "url_effective": "https://docs.vast.ai/guides/get-started"
+ },
+ {
+  "url": "https://vast.ai/clusters",
+  "kind": "docs_clusters",
+  "file": "providers/vastai/docs_clusters.html",
+  "http": 200,
+  "bytes": 62540,
+  "sha256": "ea5d6199a8d56dd07561f97afc1b37a3f5544794607f8967d3085267222b3785",
+  "retrieved_utc": "2026-09-29T18:48:39Z",
+  "url_effective": "https://vast.ai/products/clusters"
+ },
+ {
+  "url": "https://vast.ai/compliance",
+  "kind": "trust",
+  "file": "providers/vastai/trust.html",
+  "http": 200,
+  "bytes": 71758,
+  "sha256": "06c138afd2314dd2952812d11b7305d3aa8df7f1054ec216acae67728cbf05aa",
+  "retrieved_utc": "2026-09-29T18:48:40Z"
+ },
+ {
+  "url": "https://docs.vast.ai/guides/pricing",
+  "kind": "docs_pricing",
+  "file": "providers/vastai/docs_pricing.html",
+  "http": 200,
+  "bytes": 370083,
+  "sha256": "1e6f723dffc40e738b029d1ff6c4b6a8aad0cedf1b7ca783694cc7be829204ea",
+  "retrieved_utc": "2026-09-29T18:50:56Z",
+  "url_effective": "https://docs.vast.ai/guides/instances/pricing"
+ },
+ {
+  "url": "https://docs.vast.ai/guides/reference/faq/security",
+  "kind": "docs_security",
+  "file": "providers/vastai/docs_security.html",
+  "http": 200,
+  "bytes": 355545,
+  "sha256": "8c57a739920a3e53454212b28c75c4eb6ddbc98e1577bfc97fe4404101d82c5b",
+  "retrieved_utc": "2026-09-29T18:50:56Z"
+ }
+]

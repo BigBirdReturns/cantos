@@ -35,8 +35,9 @@ RUN3 = [('run3-scored-a-t0', ['detailed.json', 'grade/evaluation.json', 'ledger-
 def day_sources(ctx):
     roots = [ctx.retained / 'price-history', ctx.repo / 'hot-aisle/data/price-history']
     if not ctx.offline:
-        sessions = Path(os.environ.get('CIRCULATE_SESSIONS') or (ctx.repo.parent / 'sessions'))
-        roots.append(sessions / 'public-tail-20260929/lanes/opencomputeprices/price-history')
+        from stages._common import evidence_root
+        rel = 'public-tail-20260929/lanes/opencomputeprices/price-history'
+        roots.append(evidence_root.sessions_dir(rel) / rel)
     return roots
 
 

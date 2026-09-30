@@ -1,0 +1,103 @@
+{
+ "slug": "verdadatacrunch",
+ "user_agent": "Mozilla/5.0",
+ "timeout_s": 60,
+ "entries": [
+  {
+   "kind": "pricing",
+   "url": "https://verda.com/pricing",
+   "url_effective": "https://verda.com/pricing",
+   "file": "providers/verdadatacrunch/pricing.html",
+   "http": 200,
+   "content_type": "text/html",
+   "bytes": 420138,
+   "sha256": "e00935bf2c4e995a73d706a69d897e8879fae6cead69b9b247c8c5a3d0e2d301",
+   "retrieved_utc": "2026-09-29T18:46:41Z",
+   "curl_error": null
+  },
+  {
+   "kind": "status",
+   "url": "https://status.verda.com/",
+   "url_effective": "https://status.verda.com/",
+   "file": "providers/verdadatacrunch/status.html",
+   "http": 200,
+   "content_type": "text/html; charset=utf-8",
+   "bytes": 1669481,
+   "sha256": "ca02169d3b4972e283f4b06f092ecfcd2e7981b5a5367cabbde34066c821eabf",
+   "retrieved_utc": "2026-09-29T18:46:43Z",
+   "curl_error": null
+  },
+  {
+   "kind": "status_incidents",
+   "url": "https://status.verda.com/incidents",
+   "url_effective": "https://status.verda.com/incidents",
+   "file": "providers/verdadatacrunch/status_incidents.html",
+   "http": 200,
+   "content_type": "text/html; charset=utf-8",
+   "bytes": 208449,
+   "sha256": "c040d5d27011bc68a271b0b9522baedc1512e02a8c25b123bf6c4e3fd9a1eb16",
+   "retrieved_utc": "2026-09-29T18:46:42Z",
+   "curl_error": null
+  },
+  {
+   "kind": "status_api_incidents",
+   "url": "https://status.verda.com/api/v2/incidents.json",
+   "url_effective": "https://status.verda.com/",
+   "file": "providers/verdadatacrunch/status_api_incidents.json",
+   "http": 200,
+   "content_type": "text/html; charset=utf-8",
+   "bytes": 1669481,
+   "sha256": "ca02169d3b4972e283f4b06f092ecfcd2e7981b5a5367cabbde34066c821eabf",
+   "retrieved_utc": "2026-09-29T18:46:43Z",
+   "curl_error": null
+  },
+  {
+   "kind": "docs_index",
+   "url": "https://docs.verda.com/",
+   "url_effective": "https://docs.verda.com/",
+   "file": "providers/verdadatacrunch/docs_index.html",
+   "http": 200,
+   "content_type": "text/html",
+   "bytes": 113386,
+   "sha256": "98cb964223e09c4ee3405112716e6be195975c0f1a5609950c69c055690a5029",
+   "retrieved_utc": "2026-09-29T18:46:42Z",
+   "curl_error": null
+  },
+  {
+   "kind": "docs_slurm",
+   "url": "https://docs.verda.com/clusters/instant-clusters/slinky/",
+   "url_effective": "https://docs.verda.com/clusters/instant-clusters/slinky/",
+   "file": "providers/verdadatacrunch/docs_slurm.html",
+   "http": 200,
+   "content_type": "text/html",
+   "bytes": 98227,
+   "sha256": "ebbf2df832e7e707c6b5984ea4a3006588ca5d7d0be3ef142fe6043d668327e0",
+   "retrieved_utc": "2026-09-29T18:46:42Z",
+   "curl_error": null
+  },
+  {
+   "kind": "docs_kubernetes",
+   "url": "https://docs.verda.com/clusters/instant-clusters/kubernetes/",
+   "url_effective": "https://docs.verda.com/clusters/instant-clusters/kubernetes/",
+   "file": "providers/verdadatacrunch/docs_kubernetes.html",
+   "http": 200,
+   "content_type": "text/html",
+   "bytes": 94863,
+   "sha256": "68c6c8baed37f7138313c0a40916bd7f6f68cd16a0053185981e56d636aa6722",
+   "retrieved_utc": "2026-09-29T18:46:42Z",
+   "curl_error": null
+  },
+  {
+   "kind": "trust",
+   "url": "https://trust.verda.com/",
+   "url_effective": "https://trust.verda.com/",
+   "file": "providers/verdadatacrunch/trust.html",
+   "http": 200,
+   "content_type": "text/html",
+   "bytes": 7916,
+   "sha256": "7928661916230bb11d18c34bcfa8f1f00e40fb2aee7d19a67087a5785c6c59e7",
+   "retrieved_utc": "2026-09-29T18:46:42Z",
+   "curl_error": null
+  }
+ ]
+}

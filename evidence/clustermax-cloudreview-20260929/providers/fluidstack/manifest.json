@@ -1,0 +1,103 @@
+{
+ "slug": "fluidstack",
+ "user_agent": "Mozilla/5.0",
+ "timeout_s": 60,
+ "entries": [
+  {
+   "kind": "pricing",
+   "url": "https://www.fluidstack.io/pricing",
+   "url_effective": "https://fluidstack.io/pricing",
+   "file": "providers/fluidstack/pricing.html",
+   "http": 404,
+   "content_type": "text/html; charset=utf-8",
+   "bytes": 35092,
+   "sha256": "177dc14b6f67365769767eb1e7e3b7ecb0327893b70beb18c89c08a01fd6c58c",
+   "retrieved_utc": "2026-09-29T18:46:44Z",
+   "curl_error": null
+  },
+  {
+   "kind": "status",
+   "url": "https://status.fluidstack.io/",
+   "url_effective": "https://status.fluidstack.io/",
+   "file": "providers/fluidstack/status.html",
+   "http": 200,
+   "content_type": "text/html; charset=utf-8",
+   "bytes": 127793,
+   "sha256": "c1f9531c9296dbf6b2162a0f028d2dae8e9abca435edc21ea0c5462366fef4ab",
+   "retrieved_utc": "2026-09-29T18:46:45Z",
+   "curl_error": null
+  },
+  {
+   "kind": "status_incidents",
+   "url": "https://status.fluidstack.io/incidents",
+   "url_effective": "https://status.fluidstack.io/incidents",
+   "file": "providers/fluidstack/status_incidents.html",
+   "http": 200,
+   "content_type": "text/html; charset=utf-8",
+   "bytes": 129844,
+   "sha256": "17b82a4d2dad096bc0d7bcddd444870e0876d3f0ddf6d0db89f400d6e8a26277",
+   "retrieved_utc": "2026-09-29T18:46:46Z",
+   "curl_error": null
+  },
+  {
+   "kind": "docs_index",
+   "url": "https://docs.fluidstack.io/",
+   "url_effective": "https://docs.fluidstack.io/",
+   "file": "providers/fluidstack/docs_index.html",
+   "http": 200,
+   "content_type": "text/html; charset=utf-8",
+   "bytes": 14141,
+   "sha256": "6a077bf6f6efc7fb075ca7fa930f665a318b2df1003ba894f83bdd4c65562077",
+   "retrieved_utc": "2026-09-29T18:46:45Z",
+   "curl_error": null
+  },
+  {
+   "kind": "docs_slurm",
+   "url": "https://docs.fluidstack.io/slurm/overview",
+   "url_effective": "https://docs.fluidstack.io/slurm/overview",
+   "file": "providers/fluidstack/docs_slurm.html",
+   "http": 200,
+   "content_type": "text/html; charset=utf-8",
+   "bytes": 12941,
+   "sha256": "1e3eab5aa6305f5dfd7b64d9fd2b3f0b4374ad903ef4a2a9e0cb934ec1bb1725",
+   "retrieved_utc": "2026-09-29T18:46:45Z",
+   "curl_error": null
+  },
+  {
+   "kind": "docs_kubernetes",
+   "url": "https://docs.fluidstack.io/kubernetes/overview",
+   "url_effective": "https://docs.fluidstack.io/kubernetes/overview",
+   "file": "providers/fluidstack/docs_kubernetes.html",
+   "http": 200,
+   "content_type": "text/html; charset=utf-8",
+   "bytes": 13032,
+   "sha256": "57466a2503d091cfd138a76d9ce6727d863914c9c418a64b2153d4c380adfaf4",
+   "retrieved_utc": "2026-09-29T18:46:45Z",
+   "curl_error": null
+  },
+  {
+   "kind": "trust",
+   "url": "https://www.fluidstack.io/security",
+   "url_effective": "https://fluidstack.io/security",
+   "file": "providers/fluidstack/trust.html",
+   "http": 404,
+   "content_type": "text/html; charset=utf-8",
+   "bytes": 35092,
+   "sha256": "177dc14b6f67365769767eb1e7e3b7ecb0327893b70beb18c89c08a01fd6c58c",
+   "retrieved_utc": "2026-09-29T18:46:45Z",
+   "curl_error": null
+  },
+  {
+   "kind": "trust_alt",
+   "url": "https://trust.fluidstack.io/",
+   "url_effective": "https://trust.fluidstack.io/",
+   "file": "providers/fluidstack/trust_alt.html",
+   "http": 0,
+   "content_type": "",
+   "bytes": 0,
+   "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "retrieved_utc": "2026-09-29T18:46:45Z",
+   "curl_error": "curl: (6) Could not resolve host: trust.fluidstack.io"
+  }
+ ]
+}
