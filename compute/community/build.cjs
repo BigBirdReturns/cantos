@@ -15,7 +15,7 @@ function build(){const config=JSON.parse(read(path.join(ROOT,'data/release.json'
  const links={prices:'index.html',rating:'../clustermax-challenge/',instrument:'../hot-aisle/',kit:'community-kit.zip',docs:'community/README.md'},rendered=U.renderPage(config,records,{record_base:'community/data/records/',report_base:'community/r/',built_at:config.built_at,links});
  write(path.join(COMPUTE,'results.html'),rendered.html);write(path.join(ROOT,'board.json'),json(rendered.board));write(path.join(ROOT,'feed.json'),json(U.feed({...config,origin:'Second Run public source-bound seed'},records,[],config.built_at)));
  for(const p of records)write(path.join(ROOT,'r',p.sha256+'.html'),U.renderResult(p));
- const allowed=['core.cjs','workload-engine.cjs','qualified-engine.cjs','app.js','style.css','template.html','cli.cjs','build.cjs','import-seed.cjs','README.md','board.json','feed.json','data/release.json','data/source-manifest.json','tests/test_core.cjs','tests/browser.py','tests/browser.cjs','LICENSE','QUALIFICATION.json'];
+ const allowed=['core.cjs','workload-engine.cjs','qualified-engine.cjs','app.js','style.css','template.html','cli.cjs','build.cjs','import-seed.cjs','README.md','board.json','feed.json','data/release.json','data/source-manifest.json','tests/test_core.cjs','tests/test_recovery.cjs','tests/browser.py','tests/browser.cjs','LICENSE','QUALIFICATION.json'];
  const files=[['compute/results.html',read(path.join(COMPUTE,'results.html'))]];
  for(const n of allowed){const p=path.join(ROOT,n);if(!fs.existsSync(p))throw Error('Required source missing '+n);files.push(['compute/community/'+n,read(p)]);}
  // Include the existing static decision desk; no service, credential or generated workload is bundled.

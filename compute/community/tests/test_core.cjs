@@ -51,3 +51,5 @@ test('unknown workload cost basis cannot be called invoice verified',()=>{const 
 test('separate findings cannot forge a native workload group',()=>{const p=historical(),q=copy(p);q.payload.body.task='unrelated';q.sha256=C.hash(q.payload);const c={left:p.sha256,right:q.sha256,metric:'ratio',operator:'at_least',threshold:0,scope:'observed',wording:'Compare two different tasks'};a.equal(C.checkClaim([p,q],c).status,'EVIDENCE_GAP');});
 
 test('historical source zero can be preserved without pricing it as free',()=>{const p=historical();p.payload.body.trials[0].source_cost_usd=0;p.payload.body.trials[0].cost_usd=null;p.sha256=C.hash(p.payload);a.equal(C.summarize(p).cost_per_unit,null);a.equal(C.verify(p).payload.body.trials[0].source_cost_usd,0);});
+
+require('./test_recovery.cjs');

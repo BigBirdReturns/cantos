@@ -60,13 +60,23 @@
     },
     {
       "path": "scripts/recompute.cjs",
-      "bytes": 1797,
-      "sha256": "ff856f82705df05682b01d05431f5dca9bd0ea8971f17a9a8a1a92420b9e765d"
+      "bytes": 2094,
+      "sha256": "59d02c1216e09043d5d8bc92921433ba1da831acea57188b3458f0e83c6c0255"
+    },
+    {
+      "path": "community/core.cjs",
+      "bytes": 16140,
+      "sha256": "ee3c316aa6c30e68ba427252fbd7fe5c599381f2cfbde4d9919e7497fa860b89"
+    },
+    {
+      "path": "community/workload-engine.cjs",
+      "bytes": 24798,
+      "sha256": "78600d009f43ca37a81fa15231dfb5be307d8b0a01cfcfe42d94ed8015061593"
     },
     {
       "path": "scripts/build.py",
-      "bytes": 4571,
-      "sha256": "3e8cf4cdea5fc8386636743a72116f3ffd8b355c249240ec68398434a622fc93"
+      "bytes": 4660,
+      "sha256": "8cc86736d71180d36d35a8b9f68df69d0269e5b2261cad6f7c279da42cee20ff"
     },
     {
       "path": "scripts/review_prices.py",
@@ -75,8 +85,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 12549,
-      "sha256": "8a4dd7127e27a89457421026d67fb92df5fc950869e287ce7a158e0c72ed3250"
+      "bytes": 13055,
+      "sha256": "22826f6671078e8c6f07c1d26cc57899b787a4325c2e8b1da6a6c08da1b8d6bf"
     },
     {
       "path": "LICENSE",
@@ -105,8 +115,13 @@
     },
     {
       "path": "tests/test_core.cjs",
-      "bytes": 9809,
-      "sha256": "ac6dea491d9c514ce8c34689c0079292d1e86583aa4d998b2429af7b8e8293af"
+      "bytes": 9852,
+      "sha256": "c8af314832dabe1c0ab13e70cd96be0365fa977717b030145409886198fa2db8"
+    },
+    {
+      "path": "tests/test_community_dispatch.cjs",
+      "bytes": 2181,
+      "sha256": "806b20e3e41d9b53689054a6bbdc6f8ea0927c294d64309896c875ddb288cc32"
     },
     {
       "path": "tests/test_bridge.cjs",

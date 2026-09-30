@@ -1,0 +1,435 @@
+{
+  "schema": "second-run/four-role-acceptance@1",
+  "base_commit": "a74b41f6674fdf51f9a6558b89df76ed0451a406",
+  "candidate_branch": "agent/second-run-four-roles-20260927",
+  "recorded_at": "2026-09-27T23:42:08.243805+00:00",
+  "actors": [
+    {
+      "role": "opus",
+      "observed_claude_models": [
+        "claude-opus-5-5"
+      ],
+      "identity_boundary": "Claude returned model ID; Codex selected CLI model ID, no weight attestation",
+      "stages": [
+        {
+          "requested_model": "opus",
+          "started_at": "2026-09-27T23:06:07.427489+00:00",
+          "finished_at": "2026-09-27T23:08:42.016337+00:00",
+          "state": "exited",
+          "exit_code": 0,
+          "stage": "initial",
+          "wall_seconds": 154.589,
+          "stream_sha256": "573c384fce48bf15fecdbf653fbc07173b46fa3e6d6d7852c8061b9aec20a824",
+          "provider_usage": {
+            "claude-opus-5-5": {
+              "inputTokens": 26,
+              "outputTokens": 12834,
+              "cacheReadInputTokens": 320472,
+              "cacheCreationInputTokens": 38530,
+              "webSearchRequests": 0,
+              "costUSD": 0.6291184000000001,
+              "contextWindow": 1000000,
+              "maxOutputTokens": 128000,
+              "thinkingTokens": 1161,
+              "canonicalModel": "claude-opus-5-5",
+              "provider": "firstParty",
+              "costBasis": "list"
+            }
+          },
+          "list_price_equivalent_usd": 0.6291184000000001
+        },
+        {
+          "requested_model": "opus",
+          "started_at": "2026-09-27T23:10:45.671291+00:00",
+          "finished_at": "2026-09-27T23:13:50.595117+00:00",
+          "exit_code": 0,
+          "stage": "followup",
+          "wall_seconds": 184.924,
+          "stream_sha256": "12dac10be2feca65de4d91933aa9d58048fe71d7b339fc6c673e52d5f96eafd1",
+          "provider_usage": {
+            "claude-opus-5-5": {
+              "inputTokens": 50,
+              "outputTokens": 11974,
+              "cacheReadInputTokens": 484377,
+              "cacheCreationInputTokens": 24975,
+              "webSearchRequests": 0,
+              "costUSD": 0.5363554,
+              "contextWindow": 1000000,
+              "maxOutputTokens": 128000,
+              "thinkingTokens": 1154,
+              "canonicalModel": "claude-opus-5-5",
+              "provider": "firstParty",
+              "costBasis": "list"
+            }
+          },
+          "list_price_equivalent_usd": 0.5363554
+        }
+      ]
+    },
+    {
+      "role": "sol",
+      "observed_claude_models": [],
+      "identity_boundary": "Claude returned model ID; Codex selected CLI model ID, no weight attestation",
+      "stages": [
+        {
+          "requested_model": "gpt-6-sol",
+          "started_at": "2026-09-27T23:08:42.018791+00:00",
+          "finished_at": "2026-09-27T23:15:29.301687+00:00",
+          "state": "exited",
+          "exit_code": 0,
+          "stage": "initial",
+          "wall_seconds": 407.283,
+          "stream_sha256": "5f028cf778ff4e7e272a9ba543d5eaafb2c0c372e9008b444b0b65ac4a742eb4",
+          "token_usage": {
+            "input_tokens": 2866300,
+            "cached_input_tokens": 2767744,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 16556,
+            "reasoning_output_tokens": 4908
+          }
+        },
+        {
+          "requested_model": "gpt-6-sol",
+          "started_at": "2026-09-27T23:23:47.749669+00:00",
+          "finished_at": "2026-09-27T23:28:19.362869+00:00",
+          "exit_code": 0,
+          "stage": "followup",
+          "wall_seconds": 271.613,
+          "stream_sha256": "1b1e85b99cb6de7923b292fee7a4c7fd6e8d8b410efdcda0dd51fd189e8ff723",
+          "token_usage": {
+            "input_tokens": 1166441,
+            "cached_input_tokens": 1105664,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 12031,
+            "reasoning_output_tokens": 3003
+          }
+        }
+      ]
+    },
+    {
+      "role": "astra",
+      "observed_claude_models": [],
+      "identity_boundary": "Claude returned model ID; Codex selected CLI model ID, no weight attestation",
+      "stages": [
+        {
+          "requested_model": "gpt-6-astra",
+          "started_at": "2026-09-27T23:06:07.425959+00:00",
+          "finished_at": "2026-09-27T23:15:45.728148+00:00",
+          "state": "exited",
+          "exit_code": 0,
+          "stage": "initial",
+          "wall_seconds": 578.302,
+          "stream_sha256": "ed7cac4c9d3f0af8411960747d05a7db15ec59db7984e1ced2b77693da839d68",
+          "token_usage": {
+            "input_tokens": 1535379,
+            "cached_input_tokens": 1457280,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 14245,
+            "reasoning_output_tokens": 3303
+          }
+        }
+      ]
+    },
+    {
+      "role": "fable",
+      "observed_claude_models": [
+        "claude-fable-5-1"
+      ],
+      "identity_boundary": "Claude returned model ID; Codex selected CLI model ID, no weight attestation",
+      "stages": [
+        {
+          "requested_model": "fable",
+          "started_at": "2026-09-27T23:15:29.303286+00:00",
+          "finished_at": "2026-09-27T23:28:29.574487+00:00",
+          "state": "timeout",
+          "exit_code": 1,
+          "stage": "initial",
+          "wall_seconds": 780.271,
+          "stream_sha256": "d37f2e8f6b1c076244718fb3299bb4cd5d025151272e482141ef2113e6b35fdb"
+        },
+        {
+          "requested_model": "fable",
+          "started_at": "2026-09-27T23:30:17.344444+00:00",
+          "finished_at": "2026-09-27T23:33:47.484899+00:00",
+          "timeout": true,
+          "stage": "followup",
+          "wall_seconds": 210.14,
+          "stream_sha256": "ee821f285ce608d76d669c7ef9775c6c54728b9f4ebe8de826cb1ff2dac16bba"
+        }
+      ]
+    }
+  ],
+  "design": "Shared cold buyer question plus different specialist jobs in isolated copies. Not a balanced model leaderboard. Controller corrections and runtime restrictions are retained.",
+  "authority": "Named authenticated subscription CLIs. No provider GPU allocation or paid API-key invocation. List-price telemetry is not invoiced spend.",
+  "accepted_repairs": [
+    "Community decision schema and size dispatch through the desk verifier, including standalone kit dependencies.",
+    "Prevalidate a seed before creating a hub destination.",
+    "Retire withdrawn generated routes while preserving durable objects and review events.",
+    "Separate immutable shelf seed from extensible active filings.",
+    "Preserve accounting, source and check-scope fields in shelf answers.",
+    "Resolve browser which queries separately for each source hub."
+  ],
+  "limitations": [
+    "Codex Windows sandbox blocked browser subprocesses; controller ran inspected scripts outside that child sandbox.",
+    "Opus needed correction of inaccurate elapsed-time and missing-file claims before completing its buyer flow.",
+    "Sol initial specimen-specific seed fix was replaced with a generic retained-seed boundary.",
+    "Fable reached two time limits before a final narrative report; retained executable findings were independently rerun.",
+    "One existing bridge test needs a filesystem symlink privilege unavailable in this Windows controller. Full Linux CI is not inferred.",
+    "No independent human adoption, source authentication or new GPU measurement is asserted."
+  ],
+  "verification": {
+    "community_browser": {
+      "native_navigation": true,
+      "set_content_used": false,
+      "checks": [
+        {
+          "name": "native first visit shows source rows",
+          "pass": true
+        },
+        {
+          "name": "HTML-shaped labels stay text",
+          "pass": true
+        },
+        {
+          "name": "source-bound inspection opens",
+          "pass": true
+        },
+        {
+          "name": "export preserves packet identity",
+          "pass": true
+        },
+        {
+          "name": "separate process recomputes exported evidence",
+          "pass": true
+        },
+        {
+          "name": "claim interpretation returns the observed result",
+          "pass": true
+        },
+        {
+          "name": "saved decision survives reload",
+          "pass": true
+        },
+        {
+          "name": "downloaded decision recomputes in another process",
+          "pass": true
+        },
+        {
+          "name": "public export requires separate approval",
+          "pass": true
+        },
+        {
+          "name": "reviewed packet can be exported",
+          "pass": true
+        },
+        {
+          "name": "editing public label revokes approval",
+          "pass": true
+        },
+        {
+          "name": "independent hub no overflow 1440",
+          "pass": true
+        },
+        {
+          "name": "independent hub no overflow 768",
+          "pass": true
+        },
+        {
+          "name": "independent hub no overflow 390",
+          "pass": true
+        },
+        {
+          "name": "independent hub no overflow 320",
+          "pass": true
+        },
+        {
+          "name": "second-generation board works after origin loss",
+          "pass": true
+        },
+        {
+          "name": "second-generation record verifies without origin",
+          "pass": true
+        },
+        {
+          "name": "standalone result recomputes on file origin",
+          "pass": true
+        },
+        {
+          "name": "release board native navigation",
+          "pass": true
+        },
+        {
+          "name": "answer names the current claim cost",
+          "pass": true
+        },
+        {
+          "name": "example cost returns SUPPORTED IN SELECTED RECORDS",
+          "pass": true
+        },
+        {
+          "name": "small currency values remain nonzero",
+          "pass": true
+        },
+        {
+          "name": "answer names the current claim tail",
+          "pass": true
+        },
+        {
+          "name": "example tail returns CONTRADICTED IN SELECTED RECORDS",
+          "pass": true
+        },
+        {
+          "name": "answer names the current claim method",
+          "pass": true
+        },
+        {
+          "name": "example method returns SUPPORTED IN SELECTED RECORDS",
+          "pass": true
+        },
+        {
+          "name": "editing the claim invalidates old answer actions",
+          "pass": true
+        },
+        {
+          "name": "release no document overflow 1440",
+          "pass": true
+        },
+        {
+          "name": "release no document overflow 768",
+          "pass": true
+        },
+        {
+          "name": "release no document overflow 390",
+          "pass": true
+        },
+        {
+          "name": "release no document overflow 320",
+          "pass": true
+        },
+        {
+          "name": "search limits displayed paths",
+          "pass": true
+        },
+        {
+          "name": "reset restores broader board",
+          "pass": true
+        },
+        {
+          "name": "no page JavaScript errors",
+          "pass": true
+        },
+        {
+          "name": "zero external requests",
+          "pass": true
+        }
+      ],
+      "passed": 35,
+      "failed": 0,
+      "external_requests": [],
+      "page_errors": [],
+      "scope": "Real native navigation on local services; two isolated test owners and source-loss are controlled software tests, not outside contributor adoption or hardware replication."
+    },
+    "shelf_browser": {
+      "checks": [
+        {
+          "name": "same slug remains usable in each separate hub",
+          "pass": true
+        },
+        {
+          "name": "query output carries both hub identities",
+          "pass": true
+        },
+        {
+          "name": "accounting distinction survives displayed result",
+          "pass": true
+        },
+        {
+          "name": "recomputation scope survives displayed result",
+          "pass": true
+        },
+        {
+          "name": "independence flag stays visible",
+          "pass": true
+        },
+        {
+          "name": "invalid filing is refused visibly",
+          "pass": true
+        },
+        {
+          "name": "scope details fit 768",
+          "pass": true
+        },
+        {
+          "name": "scope details fit 390",
+          "pass": true
+        },
+        {
+          "name": "scope details fit 320",
+          "pass": true
+        },
+        {
+          "name": "no JavaScript errors",
+          "pass": true
+        },
+        {
+          "name": "no external requests",
+          "pass": true
+        }
+      ],
+      "errors": [],
+      "external": [],
+      "passed": 11,
+      "failed": 0,
+      "scope": "Real local HTTP, two attributed hubs containing the same retained card; no independent performance observation inferred."
+    },
+    "extracted_kit": {
+      "source_kit_sha256": "da46efe0eeb4f2d2348a38d05f3c0353d5a0f6b0d81b7ed8dafef9f37fd6f1b0",
+      "decision_bytes": 7086286,
+      "decision_sha256": "d303e1a4a554f1ef27cc8176b8580747eb95a31903ea3fd26c114e8eda9b45a8",
+      "exit_code": 0,
+      "verifier_kind": "community-claim",
+      "scope": "Freshly extracted small compute desk kit, actual Opus browser export above old 5 MiB limit, no sibling source tree required."
+    },
+    "fable_replay_exit": 0,
+    "astra_recovery": true,
+    "sol_admission": {
+      "feed_records": 58,
+      "admission_event": "6072f3453d0e84d17effacb005cf68c0fe1383340e26cb00e4a8e838ebc4564c",
+      "correction": "0a8c4155e303a98ac3cfd0f98afa709cac6424786e85324377ccc1b0e355da3a",
+      "original": "27e74e1231e414dac441aed312c7e251877a29e7592780711d34ae7560a8a041",
+      "board_sha256": "27b8a590ea5c4dcada46be3fdac9097b1d4a9d5c6bbda697190a6e2f25420eea",
+      "standalone_report": true
+    }
+  },
+  "suite_receipts": {
+    "controller-compute-suites.log": {
+      "sha256": "2789de78ebdbf717379c021eb37745a53d39df0512e6e0486debe59848532f32",
+      "counts": [
+        "tests 143",
+        "pass 142",
+        "fail 1"
+      ]
+    },
+    "controller-shelf-final-python.log": {
+      "sha256": "da3e2c4f5e80b66d9dfa571c9e14e3df8272d63c7acdaad3fe92d6c7f164e72e",
+      "counts": [
+        "Ran 25 tests"
+      ]
+    },
+    "controller-shelf-final-node.log": {
+      "sha256": "8f7d13066031fef937e279e486ccc8598d3f3e14a5058f76d70d8c8593517173",
+      "counts": [
+        "tests 25",
+        "pass 25",
+        "fail 0"
+      ]
+    }
+  },
+  "source_sha256": {
+    "compute/scripts/recompute.cjs": "59d02c1216e09043d5d8bc92921433ba1da831acea57188b3458f0e83c6c0255",
+    "compute/community/cli.cjs": "73c6d81736ae61e9a18f2a7fee60119f2e2579ee2f60cc922f5b3cbdd7fa0888",
+    "shelf/scripts/shelf.py": "e414c1ff414c39ca0937eb3758983df5b642c104a1abdceddb66d6910bc74a6a",
+    "shelf/index.html": "02885f5e8a56ef155e14fa1a6655797bd849323fa603b1d5d78e64301c54b4b0",
+    "shelf/data/seed.cards.jsonl": "635a207069270701d8c039998183c9587025b4199b3322cec259b8e96698d3a8"
+  }
+}

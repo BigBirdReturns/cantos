@@ -172,3 +172,7 @@ Genesis shards to check identity, non-transfer of trust and succession through t
 kernel's own lineage. The ten invariants it holds are listed at the top of the script;
 `FORGE-VERIFICATION.json` records the last full run with the seed and the tested bytes.
 A human stranger remains the test of documentation and ergonomics, not of the algebra.
+
+## Query projection, 27 September 2026
+
+A supporting query result preserves the complete matched value objects and all recorded check fields, including source, accounting, scope, record reference and explicit independence limits. These are attributed source statements, not additional validation. A browser that combines hubs queries each originating hub separately and labels its output; a slug collision across different hubs does not invalidate either hub. Duplicate IDs within one hub still fail. Seed custody and active additions are specified by the tool README and do not alter filing version 2.

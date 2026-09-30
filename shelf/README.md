@@ -22,7 +22,8 @@ shelf/
 │   └── forge_genesis.py   the kernel regime: sampled cards bound as signed Genesis shards (identity, non-transfer, succession)
 ├── FORGE-VERIFICATION.json  the last recorded full-scale forge run (seed, counts, tested bytes, failures)
 ├── data/
-│   ├── cards.jsonl        this hub's shelf: five cards filed 2026-09-24 (byte-checked copy, see below)
+│   ├── cards.jsonl        this hub's shelf: retained seed filings plus locally admitted additions
+│   ├── seed.cards.jsonl   retained original seed bytes (five cards for this hub)
 │   ├── hubs.json          hubs the page reads (human-owned)
 │   ├── promotions.jsonl   recorded decisions to move a staged card onto the shelf (human-owned; absent until the first one)
 │   └── staging/           what `pull` wrote: exact bytes, hash, time, filing errors, standing imported/candidate
@@ -68,10 +69,13 @@ failing filings; `compose` returns 2 on a refusal; `sync --check` returns 1 on d
   retrieval time and filing errors. Standing is `imported/candidate` and stays so until a
   local admission decision names the exact captured input. An authorized person or
   procedure may make that decision. Pulling never writes to `data/cards.jsonl`.
-- **sync --check** confirms `data/cards.jsonl` is byte-identical to the retained campaign
-  record in `hot-aisle/campaign/shelf/cards.jsonl`, where the first five cards were filed
-  and where the Run 3 recomputation, propagation and narrowing checks still run against
-  the campaign bytes they need.
+- **sync --check** checks that the beginning of `data/cards.jsonl` matches the explicit
+  `data/seed.cards.jsonl` byte for byte. The seed's complete JSONL lines determine its
+  size and card count; later local cards may follow. If the original campaign file is
+  present, sync also compares its bytes with the retained seed. Without that file, a
+  pass establishes only the local retained-seed boundary, not campaign authenticity.
+  A missing or invalid seed fails closed. A fresh independent hub must retain its own
+  chosen original seed explicitly; sync never adopts the current shelf as a fallback.
 
 ## Acceptance by population, not by stranger
 
@@ -157,11 +161,13 @@ silently add them. Evidence flags remain separate dimensions, not a trust ladder
   your hub's name on the row, and `pull` imports them as candidates.
 - A card on this shelf is one line in `data/cards.jsonl` that passes `validate`. Review
   checks the cited sources. Filing and machine validation do not grant standing.
+  Append new cards after the retained seed, then run `validate data/cards.jsonl` and
+  `sync --check`. Neither check records an admission decision.
 
 ## Ownership (CONTINUITY §4)
 
-Human-owned: `data/hubs.json`, `data/promotions.jsonl`, `data/staging/**`, `data/cards.jsonl`
-(which must also match the retained campaign record). Nothing here is machine-owned; there
+Human-owned: `data/hubs.json`, `data/promotions.jsonl`, `data/staging/**`, `data/cards.jsonl`,
+`data/seed.cards.jsonl` (retained original bytes). Nothing here is machine-owned; there
 is no scheduled workflow. `.github/workflows/shelf-ci.yml` only verifies.
 
 ## Disclosure
@@ -169,3 +175,7 @@ is no scheduled workflow. `.github/workflows/shelf-ci.yml` only verifies.
 On the run card, Hot Aisle's credit paid for the AMD arm and Hot Aisle is a sales prospect
 of the shelf's author. The H100 arm was paid in cash. One run per arm, no repeats. The card
 says so on its spine.
+
+## Scoped query and native browser check
+
+`which` retains result-specific accounting/source fields and the full inspection, recomputation and repetition records in JSON; the CLI prints their scope and the page exposes them beside each supporting answer. The browser queries separate hubs in their own ID domains. To rerun that actual interface: `NODE_PATH=<test Playwright modules> node shelf/tests/browser_scope.cjs` from the repository root, with `SHELF_QA_DIR` set to an approved scratch directory. This is a native HTTP/browser check, separate from the fixture parity suite.
