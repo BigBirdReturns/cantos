@@ -29,10 +29,16 @@ try:
   browser=pw.chromium.launch(**options);ctx=browser.new_context(viewport={'width':1440,'height':1000},accept_downloads=True)
   page=ctx.new_page();page.on('pageerror',lambda e:errors.append(str(e)));page.on('request',lambda r:requests.append(r.url))
   def select_example():
-   # Cold load now opens the Run 3 decision; these checks were written against the synthetic invoice example, so select it first (rail link, confirm replace).
-   wait(page,'Boolean(window.CantosPreviewState) && !busy')
-   page.locator('[data-open-workspace="example"]').click();wait(page,'document.getElementById("import-dialog").open');page.click('#confirm-import');wait(page,'!busy && !pendingImport && document.querySelectorAll(".task-cell").length===48')
-  def boot():page.goto(url);wait(page,'Boolean(window.CantosPreviewState)');select_example()
+   # The umbrella overview is the cold entry; selecting another packet uses the existing confirmation path.
+   wait(page,'Boolean(window.CantosPreviewState) && !busy && !document.getElementById("overview-view").hidden')
+   page.locator('.example-card[data-open-workspace="example"]').click();wait(page,'document.getElementById("import-dialog").open');page.click('#confirm-import');wait(page,'!busy && !pendingImport && document.querySelectorAll(".task-cell").length===48')
+  def boot():
+   page.goto(url);wait(page,'Boolean(window.CantosPreviewState) && !document.getElementById("overview-view").hidden')
+   check('cold entry is the Cantos overview with decision state held in memory',page.locator('#overview-view').is_visible() and page.evaluate("D.decisionClass(workspace)==='hardware'"))
+   links=page.locator('[data-site-path]').evaluate_all('(els)=>els.map(e=>[e.dataset.sitePath,e.getAttribute("href")])')
+   prefix='../' if page.evaluate('location.pathname.endsWith("/app/Cantos.html")') else ''
+   check('overview offers packet, three Second Run areas, examples and resolved Research Desk link',page.locator('#home-open-btn').is_visible() and page.locator('#overview-view .program-card').count()==3 and page.locator('#overview-view .example-card').count()==2 and any(path=='research-desk/index.html' and href==prefix+path for path,href in links))
+   select_example()
   def actual():return page.evaluate('C.pack(workspace).then(p=>p.sha256)')
   def exported_hash(name):
    with page.expect_download() as download:page.locator('#export-btn').click()

@@ -2,6 +2,9 @@
 const D=CantosDesk,C=D.core,$=id=>document.getElementById(id),KEY='cantos.research-preview.v0.1',money=n=>n===null?'Unavailable':'$'+n.toFixed(2);
 let workspace,viewState,busy=false,lastInputs='',persist=false,pendingImport=null,savedHash=null;
 const escapeHTML=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const sitePrefix=/\/app\/Cantos\.html$/i.test(location.pathname)?'../':'';
+document.querySelectorAll('[data-site-path]').forEach(a=>a.href=sitePrefix+a.dataset.sitePath);
+document.querySelector('.brand').addEventListener('click',e=>{e.preventDefault();view('overview');});
 function notice(message,error=false){$('notice').textContent=message;$('notice').classList.toggle('error',error);}
 function download(name,text,type='application/json'){const blob=new Blob([text],{type}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
 // The analytical owner is unchanged. This layer prepares a complete detached
@@ -150,13 +153,19 @@ function inspectEdition(i){
 }
 function brief(i){const r=viewState.reports[i],s=r.snapshot,rows=Object.values(s.records),calc=rows.find(x=>x.kind==='calculation'),p=rows.find(x=>x.kind==='policy');const html=`<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'none';style-src 'unsafe-inline';base-uri 'none'"><title>Cantos research edition ${i+1}</title><style>body{font:16px/1.65 system-ui;max-width:850px;margin:45px auto;padding:0 24px;color:#18232c}h1{font:42px Georgia}table{border-collapse:collapse;width:100%}td,th{padding:12px;text-align:left;border-bottom:1px solid #ddd}.boundary{padding:15px;background:#f2ead8}code{overflow-wrap:anywhere}small{color:#55616a}</style><body><small>CANTOS / SECOND RUN / EDITION ${i+1}</small><h1>${escapeHTML(s.records[s.target].title)}</h1><p class="boundary">Synthetic worked example. No BEP data, production performance, client endorsement or purchase authority.</p><p>${escapeHTML(s.records[s.target].summary)}</p><h2>Calculation</h2><table><thead><tr><th>Configuration</th><th>Accepted / tasks</th><th>Complete quote</th><th>Cost / accepted</th></tr></thead><tbody>${calc.data.results.map(x=>`<tr><td>${escapeHTML(x.label)}</td><td>${x.accepted} / ${x.tasks}</td><td>${money(x.total_usd)}</td><td>${money(x.cost_per_success)}</td></tr>`).join('')}</tbody></table><p>Contract: ${escapeHTML(p.data.grader)}; deadline ${p.data.deadline_ms/1000} seconds; cost basis ${escapeHTML(p.data.cost_basis)}.</p><h2>Edition history</h2><p>${escapeHTML(editionDifference(r,viewState.reports[i-1]))}</p>${i?'<p>Supersedes Edition '+i+' · '+viewState.reports[i-1].snapshot_hash+'</p>':''}<h2>Recorded review</h2><p>${escapeHTML(s.review.reviewer)} · ${escapeHTML(s.review.at)}</p><p>${escapeHTML(s.review.rationale)}</p><h2>Retained identity</h2><code>${r.snapshot_hash}</code><p>This document is a readable projection. Export the workspace packet for the complete journal, source records and native recomputation. A checksum is not source authentication.</p></body></html>`;download('Cantos-research-edition-'+(i+1)+'.html',html,'text/html');notice('The retained edition was exported. Its original snapshot is unchanged.');}
 function view(name){
- if(!['decision','evidence','architecture'].includes(name))return;
+ if(!['overview','decision','evidence','architecture'].includes(name))return;
+ const changed=$(name+'-view').hidden;
  setControls(false);
- for(const n of ['decision','evidence','architecture'])$(n+'-view').hidden=n!==name;
+ for(const n of ['overview','decision','evidence','architecture'])$(n+'-view').hidden=n!==name;
+ if(changed)window.scrollTo({top:0,left:0,behavior:'instant'});
  document.querySelectorAll('.nav').forEach(b=>b.classList.toggle('active',b.dataset.view===name));
- document.querySelector('.workspace-name').innerHTML=name==='decision'?'Research decision <span class="tag">SYNTHETIC EXAMPLE</span>':name==='evidence'?'GPU inference <span class="tag">RETAINED EXPERIMENT</span>':'Cantos / Second Run <span class="tag">SYSTEM MAP</span>';
- document.querySelector('.toolbar-actions').hidden=name!=='decision';document.querySelector('.rail-section').hidden=name!=='decision';
- notice(name==='evidence'?'Run 3 · historical measurement · list-price accounting.':name==='architecture'?'The page and estate components retain separate owners.':'Invoice laboratory · select a task to inspect its retained answer.');
+ const crumb=document.querySelector('.app-breadcrumb'),skip=document.querySelector('.skip');
+ if(crumb)crumb.innerHTML=name==='overview'?'Cantos <span>/</span> Overview':name==='decision'?'Second Run <span>/</span> Decision workspace':name==='evidence'?'Second Run <span>/</span> Retained experiment':'Cantos <span>/</span> System map';
+ if(skip){skip.href=name==='overview'?'#overview-view':'#workspace';skip.textContent=name==='overview'?'Skip to Cantos overview':'Skip to decision workspace';}
+ const overviewShortcut=$('overview-shortcut');if(overviewShortcut)overviewShortcut.hidden=name==='overview';
+ document.querySelector('.workspace-name').innerHTML=name==='overview'?'Cantos <span class="tag">OVERVIEW</span>':name==='decision'?'Research decision <span class="tag">SYNTHETIC EXAMPLE</span>':name==='evidence'?'GPU inference <span class="tag">RETAINED EXPERIMENT</span>':'Cantos / Second Run <span class="tag">SYSTEM MAP</span>';
+  document.querySelector('.toolbar-actions').hidden=name!=='decision';document.querySelector('.rail-section').hidden=name!=='decision';$('reset-btn').hidden=name==='overview';
+  notice(name==='overview'?'Cantos overview. Start in Research Desk, open a packet, or explore a workspace example.':name==='evidence'?'Run 3 - historical measurement - list-price accounting.':name==='architecture'?'The page and estate components retain separate owners.':name==='decision'?'Invoice laboratory - select a task to inspect its retained answer.':'');
 }
 function setControls(open){
  const main=document.querySelector('main'),panel=$('scenario-panel');
@@ -174,7 +183,7 @@ async function importFile(file){
   if(file.size>12000000)throw Error('File exceeds the 12 MB import limit.');
   const candidate=await D.restore(C.parse(await file.text()));
   const prepared=await prepareView(candidate);
-  if(prepared.v.packetHash===viewState.packetHash){notice('Packet verified. It is identical to the current workspace.');return;}
+  if(prepared.v.packetHash===viewState.packetHash){view('decision');notice('Packet verified. It is already the current workspace.');return;}
   pendingImport={candidate,baseHash:viewState.packetHash};
   $('import-dialog').showModal();
  }catch(e){notice('Import refused: '+e.message+' Current work was preserved.',true);}
@@ -186,7 +195,7 @@ async function confirmImport(){
   if(pendingImport.baseHash!==(await D.pack(workspace)).sha256)throw Error('Current work changed while confirmation was open. Reopen the packet.');
   const next=await D.restore(await D.pack(pendingImport.candidate));
   const prepared=await prepareView(next);
-  await installPrepared(next,prepared,{persist:false,resetFields:true});pendingImport=null;$('import-dialog').close();
+  await installPrepared(next,prepared,{persist:false,resetFields:true});pendingImport=null;$('import-dialog').close();view('decision');
   notice('Verified workspace restored. Previous saved copy unchanged; save explicitly to replace it.');
  }catch(e){pendingImport=null;$('import-dialog').close();notice('Import refused: '+e.message+' Current work was preserved.',true);}
  finally{busy=false;}
@@ -227,7 +236,7 @@ document.addEventListener('click',async e=>{
    case 'freeze-btn':await transact(w=>D.sealed(w,$('reviewer').value),'Successor edition retained with its predecessor visible.');break;
    case 'save-btn':await saveCurrent();break;
    case 'export-btn':case 'export-before-import':await exportCurrent();break;
-   case 'open-btn':$('packet-file').click();break;
+   case 'open-btn':case 'home-open-btn':$('packet-file').click();break;
    case 'confirm-import':await confirmImport();break;
    case 'cancel-import':pendingImport=null;$('import-dialog').close();notice('Import cancelled. Current work and saved state were preserved.');break;
    case 'reset-btn':$('reset-dialog').showModal();break;
@@ -244,15 +253,16 @@ $('import-dialog').addEventListener('cancel',()=>{pendingImport=null;notice('Imp
 (async()=>{
  try{
   let saved;try{saved=localStorage.getItem(KEY);}catch{}
-  let next,message;
-  if(saved){try{next=await D.restore(C.parse(saved));persist=true;savedHash=(await D.pack(next)).sha256;message='Saved workspace restored after native and workflow verification.';}catch(e){next=await D.create();message='Saved copy could not be restored and was left untouched. A fresh in-memory example is open; export before replacing saved work.';}}
+  let next,message,landingOverview=false;
+  if(saved){try{next=await D.restore(C.parse(saved));persist=true;savedHash=(await D.pack(next)).sha256;message='Saved workspace restored after native and workflow verification.';}catch(e){next=await D.create();landingOverview=true;message='Saved copy could not be restored and was left untouched. Cantos overview is open; the saved copy was not changed.';}}
   else{
-   // Cold visitor: open the real, verified Run 3 decision (Edition 01) from the embedded packet.
+   // Keep a verified starting decision in memory while a cold visitor begins at the Cantos overview.
+   landingOverview=true;
    const node=document.getElementById('run3-packet');
-   try{if(!node)throw Error('embedded Run 3 packet absent');next=await D.restore(C.parse(node.textContent));message='Run 3 decision open: Hot Aisle 1x MI300X against DigitalOcean 1x H100, Edition 01. Ctrl K opens the worked example.';}
-   catch(e){next=await D.create();message='Purple invoices contain correct JSON inside a wrapper. Select one to inspect it, or change the receiving system.';}
+   try{if(!node)throw Error('embedded Run 3 packet absent');next=await D.restore(C.parse(node.textContent));message='Start with the Research Desk, open a saved packet, or explore a retained decision.';}
+   catch(e){next=await D.create();message='Start with the Research Desk, open a saved packet, or explore the synthetic example. The retained Run 3 packet could not be verified.';}
   }
-  const prepared=await prepareView(next);await installPrepared(next,prepared,{resetFields:true});notice(message);
+  const prepared=await prepareView(next);await installPrepared(next,prepared,{resetFields:true});view(landingOverview?'overview':'decision');notice(message);
  }catch(e){notice('Unable to start: '+e.message,true);}
 })();
 
@@ -412,9 +422,10 @@ $('command-btn')?.addEventListener('click',openPalette);
   }, true);
 
   const card = $('tile-card'), originalShow = showTileCard, originalHide = hideTileCard;
-  let anchor = null, previousDescription = null;
+  let anchor = null, previousDescription = null, tooltipEpoch = 0;
   card.removeAttribute('aria-hidden'); card.setAttribute('role', 'tooltip');
   hideTileCard = function () {
+    tooltipEpoch++;
     clearTimeout(tileTimer);
     if (anchor) {
       if (previousDescription === null) anchor.removeAttribute('aria-describedby');
@@ -438,7 +449,16 @@ $('command-btn')?.addEventListener('click',openPalette);
     card.style.top = Math.max(gap, Math.min(innerHeight - c.height - gap, preferred)) + 'px';
   };
   document.addEventListener('pointerdown', () => hideTileCard(), true);
-  document.addEventListener('scroll', () => hideTileCard(), {capture: true, passive: true});
+  document.addEventListener('scroll', () => {
+    const cell = document.activeElement?.closest?.('.task-cell');
+    hideTileCard();
+    const epoch = tooltipEpoch;
+    if (cell) requestAnimationFrame(() => {
+      if (epoch !== tooltipEpoch || document.activeElement !== cell || !cell.isConnected) return;
+      const r = cell.getBoundingClientRect();
+      if (r.bottom > 0 && r.top < innerHeight && r.right > 0 && r.left < innerWidth) showTileCard(cell);
+    });
+  }, {capture: true, passive: true});
   window.addEventListener('resize', () => hideTileCard(), {passive: true});
   for (const dialog of document.querySelectorAll('dialog')) {
     dialog.addEventListener('beforetoggle', e => { if (e.newState === 'open') hideTileCard(); });
@@ -669,7 +689,7 @@ async function openWorkspace(kind){
   if(run3){const node=document.getElementById('run3-packet');if(!node)return;candidate=await D.restore(C.parse(node.textContent));}
   else candidate=await D.create();
   const prepared=await prepareView(candidate);
-  if(prepared.v.packetHash===viewState.packetHash){notice(run3?'The Run 3 decision is already open.':'The worked example is already open.');return;}
+  if(prepared.v.packetHash===viewState.packetHash){view('decision');notice(run3?'The Run 3 decision is open.':'The worked example is open.');return;}
   pendingImport={candidate,baseHash:viewState.packetHash};$('import-dialog').showModal();
  }catch(e){notice((run3?'Run 3 decision':'Worked example')+' refused: '+e.message+' Current work was preserved.',true);}
  finally{busy=false;}
@@ -677,22 +697,22 @@ async function openWorkspace(kind){
 const openEmbeddedRun3=()=>openWorkspace('run3');
 if(typeof commands==='function'){const baseCommands=commands;commands=function(){const list=baseCommands();list.unshift({label:'Open the Run 3 decision (real, MI300X vs H100)',hint:'decision',run:()=>openWorkspace('run3'),on:true},{label:'Open the worked example',hint:'synthetic',run:()=>openWorkspace('example'),on:true});return list;};}
 
-// ===== cold-visitor entry: rail lists the real decision first, orientation line on Run 3 =====
-const ORIENTATION='One retained decision from the Second Run compute campaign: the same coding workload on two rented seats, cost per 1,000 accepted requests at list price, every figure stamped with its source. Cantos is the record it lives in.';
+// ===== Cantos overview and the two available decision workspaces =====
 function composeRail(node,run3){
  const nav=node.querySelector('.case-nav');if(!nav)return;
  const viewOn=n=>{const v=node.querySelector('#'+n+'-view');return v&&!v.hidden;};
  const link=(attr,eyebrow,name,active)=>'<button class="nav case-link'+(active?' active':'')+'" '+attr+'><span><small class="ws-eyebrow">'+eyebrow+'</small><strong>'+name+'</strong></span></button>';
- const gpu=['Real decision · Run 3, 24 Sep 2026','GPU inference'],ex=['Worked example · synthetic','Invoice extraction'];
- nav.setAttribute('aria-label','Workspaces');
- nav.innerHTML=run3
+  const gpu=['Real decision - Run 3, 24 Sep 2026','GPU inference'],ex=['Worked example - synthetic','Invoice extraction'];
+  const home=link('data-view="overview"','Cantos - overview','Overview',viewOn('overview'));
+ nav.setAttribute('aria-label','Cantos overview and decision examples');
+ nav.innerHTML=home+(run3
   ?link('data-view="decision"',gpu[0],gpu[1],viewOn('decision'))+link('data-open-workspace="example"',ex[0],ex[1],false)
-  :link('data-open-workspace="run3"',gpu[0],gpu[1],false)+link('data-view="decision"',ex[0],ex[1],viewOn('decision'));
+  :link('data-open-workspace="run3"',gpu[0],gpu[1],false)+link('data-view="decision"',ex[0],ex[1],viewOn('decision')));
  const ev=node.querySelector('.rail-bottom .nav[data-view="evidence"]');if(ev)ev.classList.toggle('active',viewOn('evidence'));
  const arch=node.querySelector('.rail-bottom .nav[data-view="architecture"]');if(arch)arch.classList.toggle('active',viewOn('architecture'));
  node.querySelectorAll('.orientation').forEach(e=>e.remove());
- const head=node.querySelector('.case-heading');
- if(run3&&head){const p=document.createElement('p');p.className='orientation';p.textContent=ORIENTATION;head.after(p);}
 }
 {const basePrepare=prepareView;prepareView=async function(candidate){const prepared=await basePrepare(candidate);composeRail(prepared.node,Boolean(D.decisionClass&&D.decisionClass(candidate)==='hardware'));return prepared;};}
 
+const beforeOverviewCommands=commands;
+commands=function(){const list=beforeOverviewCommands();list.unshift({label:'Go to Cantos overview',hint:'program',run:()=>view('overview'),on:true});return list;};

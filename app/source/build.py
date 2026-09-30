@@ -18,5 +18,5 @@ manifest={'artifact':args.out.name,'sha256':sha(args.out),'status':'local revise
  'core_owner':'owner-research-core/research-core-1.0.2.js','core_sha256':sha(owner),
  'prior_core_sha256':sha(P.parent/'owner-research-core/1.0.0-original.js'),
  'prior_native_app_unchanged':True,'source_files':{p.name:sha(p) for p in sorted(P.iterdir()) if p.suffix in ['.js','.css','.html','.py','.cjs']}}
-args.out.with_suffix('.manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
+args.out.with_suffix('.manifest.json').write_text(json.dumps(manifest,indent=2)+'\n',encoding='utf-8',newline='\n')
 print(json.dumps(manifest,indent=2))

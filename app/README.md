@@ -1,16 +1,51 @@
-# Cantos / decision workspace 0.3.0
+# Cantos overview and decision workspace
 
-Open Cantos.html locally. Press Ctrl K and choose "Open the Run 3 decision" to load the real MI300X-vs-H100 decision backfilled from the retained Run 3 records (packets/). Set the N/T0 list rate to 2.49, apply, recompute: the decision flips; review and retain Edition 02. Press Ctrl K (⌘ K on a Mac) for the command palette; hover any invoice tile for its retained result. Inter and Fraunces are embedded under the SIL Open Font License (see fonts/FONTS.json); nothing is fetched. The invoice workspace is a labeled synthetic example; GPU inference is the separately retained Run 3 evidence.
+The root `index.html` and `app/Cantos.html` are the same built application.
+A fresh visit opens the Cantos overview: continue from a supported decision
+packet, open the general Research Desk, or choose a retained example. An
+explicitly saved workspace resumes after verification. Overview navigation
+does not write, replace or reinterpret that workspace.
 
-Select an invoice cell to inspect its actual retained output, expected fields and timing. Change the receiving system to JSON extraction, apply, then recompute. The ten wrapper failures now pass the same field and deadline checks. Review the result, retain its successor and compare the editions. On a phone, Scenario & review opens the controls as a bottom sheet.
+Second Run's software, production and technical-investigation scope is broader
+than the examples supported by this page. The linked tools retain separate
+owners. The page does not execute estate procedures or provide a production
+media workspace. Public examples and available actions are labelled accordingly.
 
-Save on this device is optional. Export workspace preserves a portable native packet. Reopening verifies the packet and supported workflow before asking to replace current work. Source withdrawal lives in source inspection and retains the historical editions while blocking dependent computation.
+## Decision examples
 
-Only the interface changed. The foundation and versioned ResearchCore 1.0.1 owner candidate remain byte-identical to 0.1.3 and 0.2.0. They are not the published ResearchCore 1.0.0. No model, API or GPU runs inside this application.
+**Run 3** is a historical compute decision from one Second Run campaign.
+Choose it deliberately, inspect the retained MI300X/H100 evidence and separate
+accounting bases, or change a list price to examine a scenario. A price change
+does not create a new benchmark, quote, invoice or availability observation.
 
-Rebuild: python -B source/build.py
-Native checks: node --test source/foundation.test.cjs tests/regression.test.cjs
-Browser checks: python tests/browser_regressions.py --out NEW_OUTPUT_DIRECTORY
-Supply --packets with the original council packet directory to replay the original adversarial files instead of included reproduced examples. Playwright and its browser are test dependencies only.
+**Invoice extraction** is a synthetic worked example with 24 authored invoices.
+Change the receiving system to JSON extraction, apply and recompute. The same
+retained fields and deadlines still control acceptance. Review and retain a
+successor to compare the editions.
 
-The working page, source and tests remain local. No hosting, publication, outreach or deployment occurred. Older previews and their evidence remain historical.
+The command palette (Ctrl K, or Command K on macOS) provides navigation and
+the existing decision actions. On a phone, Scenario & review opens the controls.
+
+## Custody and calculation
+
+Save on this device is explicit and subject to browser storage limits. Large
+Run 3 revisions can exceed that quota; a failed save leaves work in memory and
+shows an export instruction. Export workspace retains a portable native packet.
+Imports verify both the packet and the supported workflow before
+offering replacement; failed or cancelled imports preserve current work.
+Source withdrawal preserves earlier editions while blocking dependent work.
+
+`source/foundation.js` owns this page's supported workflow contract. The
+versioned `owner-research-core/research-core-1.0.2.js` supplies its record engine;
+the builder checks the exact owner bytes against `source/research-core.js`.
+The separately published Research Desk 1.0.0 remains its own application.
+The overview change does not alter either analytical owner or the source packets.
+
+The built page embeds its fonts, code and example records. It makes no automatic
+application network requests. Links to other tools require those tools to be
+available alongside the site, or an intentional visit to their published page.
+No model, API or GPU job runs inside this application.
+
+See [BUILD.md](BUILD.md) for reproducible builds and native acceptance commands.
+Prior files in `verification/` record earlier artifact checks; their hashes and
+counts must not be used as acceptance of a changed build.

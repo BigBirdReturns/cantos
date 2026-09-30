@@ -1,8 +1,8 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="dark"><meta http-equiv="Content-Security-Policy" content="default-src 'none';script-src 'unsafe-inline';style-src 'unsafe-inline';img-src data:;font-src data:;connect-src 'none';base-uri 'none';form-action 'none'"><title>Cantos · Research that survives its next revision</title><style>/*STYLE*/</style></head>
 <body>
-<a class="skip" href="#workspace">Skip to decision workspace</a>
-<header class="app-bar"><a class="brand" href="#workspace" aria-label="Cantos workspace"><svg aria-hidden="true" class="mark-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40" fill="none" role="img" aria-labelledby="cantos-mark-title">
+<a class="skip" href="#overview-view">Skip to Cantos overview</a>
+<header class="app-bar"><a class="brand" href="#overview-view" aria-label="Cantos overview"><svg aria-hidden="true" class="mark-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40" fill="none" role="img" aria-labelledby="cantos-mark-title">
   <title id="cantos-mark-title">Cantos orbit mark</title>
   <ellipse cx="20" cy="20" rx="16" ry="8.5" transform="rotate(-32 20 20)" stroke="oklch(82% .06 230)" stroke-width="1"/>
   <ellipse cx="20" cy="20" rx="15.5" ry="8" transform="rotate(51 20 20)" stroke="oklch(80% .08 85)" stroke-width="1"/>
@@ -11,21 +11,64 @@
 </svg><span class="wordmark">CANTOS</span></a><span class="app-breadcrumb">Second Run <span>/</span> Research workspace</span><button id="command-btn" class="command-hint" type="button" aria-label="Open command palette"><span>Search or run a command</span><kbd id="command-kbd">Ctrl K</kbd></button><span class="local-indicator"><i></i> Local · owner-held</span></header>
 <main>
 <aside class="rail" aria-label="Workspace navigation">
-<div class="rail-title">WORKSPACE <span>02</span></div>
+<div class="rail-title">PROGRAM NAVIGATION</div>
 <nav class="case-nav" aria-label="Workspaces">
 <button class="nav case-link" data-open-workspace="run3"><span><small class="ws-eyebrow">Real decision · Run 3, 24 Sep 2026</small><strong>GPU inference</strong></span></button>
 <button class="nav active case-link" data-view="decision"><span><small class="ws-eyebrow">Worked example · synthetic</small><strong>Invoice extraction</strong></span><span class="nav-dot"></span></button>
 </nav>
 <div class="rail-section"><div class="rail-title">IN THIS DECISION</div><button class="rail-record source-card" data-inspect="source">24 original invoices </button><button class="rail-record" data-inspect="policy">Acceptance contract </button><button class="rail-record" data-inspect="calculation">Native calculation </button></div>
-<div class="rail-section"><div class="rail-title">ALSO ON THIS SITE</div><a class="rail-record" href="floor/index.html">Distance to the floor</a><a class="rail-record" href="circulate/index.html">Circulation receipts</a></div>
+<div class="rail-section"><div class="rail-title">ALSO ON THIS SITE</div><a class="rail-record" data-site-path="floor/index.html" href="floor/index.html">Distance to the floor</a><a class="rail-record" data-site-path="circulate/index.html" href="circulate/index.html">Circulation receipts</a></div>
 <div class="rail-bottom"><button class="nav" data-view="evidence">Evidence</button><button class="nav" data-view="architecture">System map</button><button id="reset-btn" class="text-button">Reset worked example</button><div class="rail-signature">CANTOS / SECOND RUN<span>Evidence, decision, next run</span></div></div>
 </aside>
 <div class="desk">
-<div class="desk-toolbar"><div class="workspace-name">Research decision <span class="tag">SYNTHETIC EXAMPLE</span></div><div class="toolbar-actions"><button id="save-btn" class="text-button">Save on this device</button><button id="open-btn" class="text-button">Open packet</button><button id="export-btn" class="outline-button">Export workspace</button><input id="packet-file" type="file" accept=".json,application/json" hidden></div></div>
+<div class="desk-toolbar"><div class="workspace-name">Research decision <span class="tag">SYNTHETIC EXAMPLE</span></div><button id="overview-shortcut" class="text-button overview-shortcut" data-view="overview" type="button">Cantos overview</button><div class="toolbar-actions"><button id="save-btn" class="text-button">Save on this device</button><button id="open-btn" class="text-button">Open packet</button><button id="export-btn" class="outline-button">Export workspace</button><input id="packet-file" type="file" accept=".json,application/json" hidden></div></div>
+<section id="overview-view" class="view overview-view" hidden>
+  <div class="overview-wrap">
+    <header class="overview-hero">
+      <span class="eyebrow">CANTOS / WORK THAT CAN CONTINUE</span>
+      <h1>Knowledge and judgment that compound.</h1>
+      <p>Cantos connects evidence, decisions, execution and consequences so work can be understood, corrected and continued. Second Run makes applicable judgment repeatable; AXM foundations give records durable identity and continuity.</p>
+      <div class="overview-actions">
+        <a class="primary overview-primary" data-site-path="research-desk/index.html" href="research-desk/index.html">Start with the Research Desk <span aria-hidden="true">↗</span></a>
+        <button id="home-open-btn" class="outline-button" type="button">Open a decision packet</button>
+        <button id="home-return-btn" class="text-button" type="button" data-view="decision">Return to open workspace</button>
+      </div>
+    </header>
+    <section class="overview-section" aria-labelledby="program-title">
+      <div class="overview-section-head"><span class="eyebrow">HOW WORK CONTINUES</span><h2 id="program-title">Second Run carries resolved judgment into execution and reuse</h2></div>
+      <div class="program-grid">
+        <article class="program-card"><span class="program-index">SECOND RUN / SOFTWARE</span><h3>Qualify recurring work</h3><p>Retain the procedure; measure failures, intervention, latency and total cost per accepted outcome while its preconditions hold.</p></article>
+        <article class="program-card"><span class="program-index">SECOND RUN / PRODUCTION</span><h3>Restore and reconstruct</h3><p>Carry the source and processing record through restoration, rendering and reconstruction. Those production examples are held in estate records, not published here.</p></article>
+        <article class="program-card"><span class="program-index">SECOND RUN / INVESTIGATION</span><h3>Test consequential claims</h3><p>Reconstruct a claim, test its decisive assumptions and identify the evidence that would change the conclusion.</p></article>
+      </div>
+      <aside class="foundation-strip"><span>FOUNDATIONS / AXM</span><p>Genesis binds claims to source identity; journals retain how knowledge changed; Arc separates artifacts, execution and consequences.</p><a href="https://github.com/BigBirdReturns/axm-core/blob/main/START_HERE.md">Start with the ecosystem guide</a></aside>
+    </section>
+    <section class="overview-section overview-work" aria-labelledby="work-title">
+      <div class="overview-section-head"><span class="eyebrow">IN THIS REPOSITORY</span><h2 id="work-title">Implemented work and entry points</h2></div>
+      <div class="catalog-grid">
+        <a class="catalog-card" data-site-path="hot-aisle/index.html" href="hot-aisle/index.html"><span>CAMPAIGN / MEASURED WORK</span><strong>Hot Aisle · Workload report</strong><small>Connected runner, retained Run 1–3 records, price history and rented-seat qualification kit.</small><b>Open report ↗</b></a>
+        <a class="catalog-card" data-site-path="floor/index.html" href="floor/index.html"><span>EXPERIMENTAL DESK / PUBLIC EVIDENCE</span><strong>Distance to the floor</strong><small>Experimental desk rating from dated public reviews and provider surfaces; shortfalls and unknowns remain explicit.</small><b>Open floor ↗</b></a>
+        <a class="catalog-card" data-site-path="clustermax-challenge/index.html" href="clustermax-challenge/index.html"><span>TECHNICAL INVESTIGATION</span><strong>ClusterMAX challenge</strong><small>Frozen retrospectives, the 3.0 binding and a standing incident collection.</small><b>Open investigation ↗</b></a>
+        <a class="catalog-card" data-site-path="circulate/index.html" href="circulate/index.html"><span>MANUAL DATA CYCLE</span><strong>Circulation receipts</strong><small>Manually invoked public-data cycles, receipts, retained-study checks and probes.</small><b>Open receipts ↗</b></a>
+        <a class="catalog-card" data-site-path="shelf/index.html" href="shelf/index.html"><span>BOUNDED CLAIMS</span><strong>Public shelf</strong><small>A public shelf of bounded claims with their evidence limits.</small><b>Open shelf ↗</b></a>
+        <a class="catalog-card" data-site-path="compute/index.html" href="compute/index.html"><span>ECONOMICS / INSTRUMENT</span><strong>Compute desk</strong><small>Provider-neutral price and material inputs for bounded decisions.</small><b>Open Compute desk</b></a>
+        <a class="catalog-card" href="https://github.com/BigBirdReturns/cantos/blob/main/integration/WORK.md"><span>EXECUTION / QUALIFIED CANDIDATE</span><strong>Integration work</strong><small>Local execution and reuse documentation; qualification does not imply production activation.</small><b>Read work and qualification</b></a>
+      </div>
+    </section>
+    <section class="overview-section overview-examples" aria-labelledby="examples-title">
+      <div class="overview-section-head"><span class="eyebrow">WORKSPACES / EXAMPLES</span><h2 id="examples-title">Open a concrete decision</h2><p>These are two examples inside the program. Run 3 is a retained measurement; the invoice scenario is synthetic.</p></div>
+      <div class="example-grid">
+        <button class="example-card" type="button" data-open-workspace="run3"><span>REAL RETAINED MEASUREMENT · 24 SEP 2026</span><strong>GPU inference / Run 3</strong><small>Hot Aisle MI300X against DigitalOcean H100 · measured requests and list-price accounting.</small><b>Open Run 3 →</b></button>
+        <button class="example-card" type="button" data-open-workspace="example"><span>SYNTHETIC WORKED EXAMPLE</span><strong>Invoice extraction</strong><small>Two configurations, 24 authored fictional invoices, acceptance rules and retained revisions.</small><b>Open invoice example →</b></button>
+      </div>
+      <p class="overview-boundary">This repository includes the software campaign and technical investigations shown above. Media restoration and reconstruction examples remain in estate records. Published examples do not establish production qualification.</p>
+    </section>
+  </div>
+</section>
 <section id="decision-view" class="view active-view">
 <div class="decision-layout">
 <section class="canvas" id="workspace" tabindex="-1">
-<div class="case-heading"><div><div class="eyebrow">DECISION / 01</div><h1>Synthetic worked example</h1><p>Invoice extraction · 24 invoices. Two implementations. The same required fields.</p></div><span id="current-state" class="state">Opening</span></div><div class="stamps decision-stamps"><span class="stamp"><span>Synthetic</span><span>24 authored invoices</span><span><time datetime="2026-09-28">fixed 28 Sep 2026</time></span></span><span class="stamp stamp--lineage"><span>Engine</span><span>ResearchCore 1.0.1 candidate</span><span>local, verified</span></span></div>
+<div class="case-heading"><div><div class="eyebrow">DECISION / 01</div><h1>Synthetic worked example</h1><p>Invoice extraction · 24 invoices. Two implementations. The same required fields.</p></div><span id="current-state" class="state">Opening</span></div><div class="stamps decision-stamps"><span class="stamp"><span>Synthetic</span><span>24 authored invoices</span><span><time datetime="2026-09-28">fixed 28 Sep 2026</time></span></span><span class="stamp stamp--lineage"><span>Engine</span><span>ResearchCore 1.0.2 candidate</span><span>local, verified</span></span></div>
 <button id="mobile-scenario" class="mobile-scenario" aria-controls="scenario-panel" aria-expanded="false">Scenario & review</button>
 <div class="lineage" aria-label="Decision dependencies"><button data-inspect="source"><i></i><span>24 inputs</span></button><span class="line"></span><button data-inspect="policy"><i></i><span>Contract <b id="policy-version">v1</b></span></button><span class="line"></span><button data-inspect="calculation"><i id="calc-node"></i><span>Comparison</span></button><span class="line"></span><button data-inspect="decision"><i id="decision-node"></i><span>Decision</span></button></div>
 <div class="recommendation"><div><div id="decision-kicker" class="eyebrow">LOWEST COST / ACCEPTED INVOICE</div><h2 id="winner">Opening the decision…</h2><p id="decision-summary"></p></div><div id="advantage" class="advantage"></div></div>
@@ -85,7 +128,7 @@
           <h2>ResearchCore</h2>
           <span class="tag">IN THIS PAGE</span>
           <p>Evaluation → dependencies → review → edition</p>
-          <details><summary>Owner &amp; version</summary><p>The local, tested ResearchCore 1.0.1 owner candidate. The published 1.0.0 application remains unchanged.</p></details>
+          <details><summary>Owner &amp; version</summary><p>The local, tested ResearchCore 1.0.2 owner candidate. The published 1.0.0 application remains unchanged.</p></details>
         </article>
         <article>
           <div class="station-head"><span class="component-number">02</span><span class="station-point" aria-hidden="true"></span><span class="station-coordinate">PROCEDURE / ESTATE</span></div>
