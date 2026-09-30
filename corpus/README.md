@@ -26,6 +26,14 @@ through its packet with producer links exposed, and a full deterministic
 re-import. `ESTATE.json` names the lanes, their manifests and reports by hash.
 An existing output folder is never overwritten.
 
+Estate JSONL ingestion streams the lane instead of loading its entire file.
+A selected-row rebuild hashes all retained bytes while parsing and projecting
+only that row. The history owner independently repeats that check before append.
+Native packet production pulls the next input chunk only when the current batch
+is ready, so packet verification cannot accumulate an unread queue of the lane.
+These changes preserve the observations and native packet identities; they do
+not require rebuilding an existing collection to use the faster replay path.
+
 An opened observation from such a collection links to the producer record, the
 producing commit and workflow run (InferenceX), the system and measurement
 descriptions (MLPerf), or the issue or pull request itself. Producer issues and
@@ -45,6 +53,7 @@ their recorded conditions, open producing-source and implementation links,
 inspect the initial and corrected projections, and rebuild an observation.
 The default search shows benchmarks; traces, model metadata and prices remain
 separate kinds. No performance/price join or automatic ranking is inferred.
+The exact engine filter also applies to captured producer issues and PRs.
 
 The September 29 delivery includes 70,725 observations in 74 native Research
 Desk packets. Its retained correction gives latency its own field for 571
@@ -74,13 +83,22 @@ The existing calibration shapes have no bound hardware/model/acceptance contract
 and are not calibration runs. The full Cantos product extends beyond this
 collection interface.
 
+The September 30 estate collection contains 293,172 benchmark observations and
+25,300 producer issues/PRs in 718 packets. Issue records are captured metadata;
+their state and links do not establish decision rationale or a verified fix.
+The existing price lane needs an offer-specific projection preserving GPU-hour
+versus instance-hour accounting, terms, location, availability and snapshot time.
+The workload lane's small rows file contains summaries, while request events
+live in the retained trace files. Neither lane is admitted by renaming its rows
+as benchmarks. Their larger ingestion remains separate work.
+
 Search with the existing filters and pagination:
 
 ```powershell
-python corpus/query.py --db <bundle>\corpus\corpus.sqlite --kind benchmark --hardware H100 --model llama2-70b-99 --scenario Offline --unit Tokens/s --limit 25 --offset 0
+python corpus/query.py --db <bundle>\corpus\corpus.sqlite --kind benchmark --hardware H100 --model llama2-70b-99 --engine vLLM --scenario Offline --unit Tokens/s --limit 25 --offset 0
 ```
 
-The same query is callable as `select_rows(db_path, *, kind, hardware, model,
+The same query is callable as `select_rows(db_path, *, kind, hardware, model, engine,
 scenario, unit, limit, offset)`. Use `row_by_id(db_path, row_id)` to retrieve
 the complete stored observation.
 
@@ -101,6 +119,7 @@ Verification from the repository root:
 
 ```powershell
 python -B -m unittest discover -s corpus/tests -p "test_*.py" -v
+node --test corpus/tests/batch_stream.test.cjs
 python -B corpus/tests/browser_collection.py --bundle <retained-bundle> --out <fresh-verification-directory>
 ```
 

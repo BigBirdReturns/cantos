@@ -67,24 +67,15 @@ def reproject(bundle, row_id, actor="Local operator"):
     raw_path = (manifest_path.parent / source["path"]).resolve(strict=True)
     if manifest_path.parent.resolve() not in raw_path.parents:
         raise ValueError("manifest source path escapes inputs directory")
-    raw = raw_path.read_bytes()
-    raw_sha = _sha_bytes(raw)
-    if raw_sha != source["sha256"]:
-        raise ValueError("raw source SHA-256 mismatch")
-
-    adapter = bulk_import.ADAPTERS.get(source.get("format"))
-    if adapter is None:
+    if source.get("format") not in bulk_import.ADAPTERS:
         raise ValueError("manifest uses an unsupported retained adapter")
     row_index = before.get("source", {}).get("row_index")
     if not isinstance(row_index, int) or row_index < 0:
         raise ValueError("stored observation has an invalid source row index")
-    rebuilt = None
-    for index, candidate in enumerate(adapter(source, raw)):
-        if index == row_index:
-            rebuilt = candidate
-            break
-    if rebuilt is None:
-        raise ValueError("pinned raw source does not contain the stored row index")
+    # JSONL adapters hash the full retained file while keeping only the selected
+    # native line. Other formats retain the existing byte-backed adapter path.
+    rebuilt = bulk_import.rebuild_source_row(source, raw_path, row_index)
+    raw_sha = source["sha256"]
 
     native = rebuilt.get("native")
     native_sha = _sha_bytes(_canonical(native).encode("utf-8"))
@@ -130,7 +121,7 @@ def reproject(bundle, row_id, actor="Local operator"):
         },
         "checks": checks,
         "procedure": {
-            "name": "corpus.projection.reproject + bulk_import.ADAPTERS[format]",
+            "name": "corpus.projection.reproject + bulk_import.rebuild_source_row",
             "sha256": procedure_sha,
             "projection_sha256": procedure_file_sha,
             "adapter_sha256": adapter_file_sha,

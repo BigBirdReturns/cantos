@@ -91,6 +91,20 @@ class CorpusTests(unittest.TestCase):
         with self.assertRaises(KeyError):
             query.row_by_id(self.db, "missing")
 
+    def test_engine_filter_is_exact_and_reported_in_selection(self):
+        db = sqlite3.connect(self.db)
+        rows = query.select_rows(self.db, kind="benchmark", limit=2)["rows"]
+        db.execute("UPDATE rows SET engine = ?, json = json_set(json, '$.engine', ?) WHERE row_id = ?", ("vLLM", "vLLM", rows[0]["row_id"]))
+        db.execute("UPDATE rows SET engine = ?, json = json_set(json, '$.engine', ?) WHERE row_id = ?", ("TensorRT-LLM", "TensorRT-LLM", rows[1]["row_id"]))
+        db.commit()
+        db.close()
+        result = query.select_rows(self.db, kind="benchmark", engine="vLLM")
+        self.assertEqual(1, result["matching_rows"])
+        self.assertEqual("vLLM", result["selection"]["engine"])
+        self.assertEqual("vLLM", result["rows"][0]["engine"])
+        empty = query.select_rows(self.db, kind="benchmark", engine="vllm")
+        self.assertEqual(0, empty["matching_rows"])
+
     def test_projection_replays_source_and_preserves_synthetic_evidence(self):
         selected = query.select_rows(self.db, kind="benchmark", limit=1)["rows"][0]
         receipt = projection.reproject(self.bundle, selected["row_id"], actor="Test operator")

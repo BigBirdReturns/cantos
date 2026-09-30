@@ -5,7 +5,7 @@ import json
 import sqlite3
 
 
-def select_rows(db_path, *, kind=None, hardware=None, model=None,
+def select_rows(db_path, *, kind=None, hardware=None, model=None, engine=None,
                 scenario=None, unit=None, limit=25, offset=0):
     """Return the established query result shape from a read-only corpus."""
     if not 1 <= limit <= 10000:
@@ -17,6 +17,7 @@ def select_rows(db_path, *, kind=None, hardware=None, model=None,
     for value, field in (
         (kind, "kind"),
         (model, "model"),
+        (engine, "engine"),
         (scenario, "json_extract(json,'$.scope.Scenario')"),
         (unit, "json_extract(json,'$.measurement.unit')"),
     ):
@@ -48,6 +49,7 @@ def select_rows(db_path, *, kind=None, hardware=None, model=None,
             "kind": kind,
             "hardware": hardware,
             "model": model,
+            "engine": engine,
             "scenario": scenario,
             "unit": unit,
             "offset": offset,
@@ -79,6 +81,7 @@ def main(argv=None):
     parser.add_argument("--kind")
     parser.add_argument("--hardware")
     parser.add_argument("--model")
+    parser.add_argument("--engine")
     parser.add_argument("--scenario")
     parser.add_argument("--unit")
     parser.add_argument("--limit", type=int, default=25)
@@ -94,6 +97,7 @@ def main(argv=None):
         kind=args.kind,
         hardware=args.hardware,
         model=args.model,
+        engine=args.engine,
         scenario=args.scenario,
         unit=args.unit,
         limit=args.limit,

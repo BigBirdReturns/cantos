@@ -122,63 +122,130 @@ def jsonl(raw):
     for line in io.BytesIO(raw):
         if line.strip(): yield json.loads(line)
 
+def jsonl_native_path(path, expected_sha256, *, hash_error="raw source SHA-256 mismatch"):
+    """Yield indexed JSONL objects while hashing the exact bytes in the same pass."""
+    digest = hashlib.sha256()
+    index = 0
+    with Path(path).open("rb") as stream:
+        for line in stream:
+            digest.update(line)
+            if line.strip():
+                yield index, json.loads(line)
+                index += 1
+    if digest.hexdigest() != expected_sha256:
+        raise ValueError(hash_error)
+
+def jsonl_native_at(path, row_index, expected_sha256):
+    """Hash exact source bytes through EOF and parse only the selected non-empty row."""
+    digest = hashlib.sha256()
+    selected = None
+    index = 0
+    with Path(path).open("rb") as stream:
+        for line in stream:
+            digest.update(line)
+            if line.strip():
+                if index == row_index:
+                    selected = line
+                index += 1
+    if digest.hexdigest() != expected_sha256:
+        raise ValueError("raw source SHA-256 mismatch")
+    if selected is None:
+        raise ValueError("Pinned raw source does not contain the stored row index")
+    return json.loads(selected)
+
+
 def finite(x):
     if x is None: return None
     if isinstance(x,bool) or not isinstance(x,(int,float)) or not math.isfinite(x): raise ValueError('Invalid measurement')
     return x
 
 LATENCY_UNITS={'ns','us','ms','s'}
-def imported_observation(s,raw):
-    """Estate capture lanes: rows the estate's own adapters already wrote as imported-observation@1.
+def imported_observation_row(s,i,n):
+    """Project one estate-native imported-observation row at its stable source index."""
+    if n.get('schema')!='imported-observation@1': raise ValueError('Expected imported-observation@1 rows')
+    r=base(s,i,n,'benchmark')
+    m=n.get('metric') if isinstance(n.get('metric'),dict) else {}
+    measurement={'value':finite(m.get('value')),'unit':m.get('units'),'metric':m.get('name')}
+    r['measurement']=measurement
+    unit=str(m.get('units') or '')
+    if '/s' in unit: r['throughput']=measurement
+    elif unit in LATENCY_UNITS: r['latency']=measurement
+    else: r['scope']['unmapped_metric_unit']=m.get('units')
+    gpus=n.get('gpus')
+    r.update(hardware=n.get('hardware'),hardware_count=gpus if isinstance(gpus,int) and not isinstance(gpus,bool) else None,
+             model=n.get('model'),quant=n.get('precision'),engine=engine(n.get('framework')) or n.get('framework'))
+    config=n.get('config') if isinstance(n.get('config'),dict) else {}
+    loadgen=config.get('loadgen') if isinstance(config.get('loadgen'),dict) else {}
+    provenance=n.get('provenance') if isinstance(n.get('provenance'),dict) else {}
+    r['scope'].update({'workload':n.get('workload'),'Scenario':loadgen.get('Scenario') or config.get('scenario_type'),
+        'source':n.get('source'),'data_kind':n.get('data_kind'),'observed_at':n.get('observed_at'),'model_class':n.get('model_class'),
+        'framework':n.get('framework'),'framework_version':n.get('framework_version'),'precision_detail':n.get('precision_detail'),
+        'comparison_hold':n.get('comparison_hold'),'warnings':len(n.get('warnings') or []),
+        'producer_revision':provenance.get('revision') or provenance.get('head_sha'),'producer_release':provenance.get('release'),
+        'accepted_equivalence':None})
+    r['outcome']={'success_rate':n.get('success_rate'),'requests_successful':n.get('num_requests_successful'),
+        'requests_total':n.get('num_requests_total'),'source_outcome':n.get('outcome'),'gates':n.get('gates'),
+        'contract':('MLPerf '+str(provenance.get('release') or '')).strip() if n.get('source')=='mlperf' else str(n.get('source'))+' producer aggregate'}
+    return r
 
-    The lane row is retained whole as `native`, including its producer provenance
-    (artifact or file URL, revision, retrieval time, hash) and the producer's configuration.
-    """
+def imported_observation(s,raw):
+    """Bytes-compatible adapter wrapper; path-based ingest uses the streaming sibling."""
     for i,n in enumerate(jsonl(raw)):
-        if n.get('schema')!='imported-observation@1': raise ValueError('Expected imported-observation@1 rows')
-        r=base(s,i,n,'benchmark')
-        m=n.get('metric') if isinstance(n.get('metric'),dict) else {}
-        measurement={'value':finite(m.get('value')),'unit':m.get('units'),'metric':m.get('name')}
-        r['measurement']=measurement
-        unit=str(m.get('units') or '')
-        if '/s' in unit: r['throughput']=measurement
-        elif unit in LATENCY_UNITS: r['latency']=measurement
-        else: r['scope']['unmapped_metric_unit']=m.get('units')
-        gpus=n.get('gpus')
-        r.update(hardware=n.get('hardware'),hardware_count=gpus if isinstance(gpus,int) and not isinstance(gpus,bool) else None,
-                 model=n.get('model'),quant=n.get('precision'),engine=engine(n.get('framework')) or n.get('framework'))
-        config=n.get('config') if isinstance(n.get('config'),dict) else {}
-        loadgen=config.get('loadgen') if isinstance(config.get('loadgen'),dict) else {}
-        provenance=n.get('provenance') if isinstance(n.get('provenance'),dict) else {}
-        r['scope'].update({'workload':n.get('workload'),'Scenario':loadgen.get('Scenario') or config.get('scenario_type'),
-            'source':n.get('source'),'data_kind':n.get('data_kind'),'observed_at':n.get('observed_at'),'model_class':n.get('model_class'),
-            'framework':n.get('framework'),'framework_version':n.get('framework_version'),'precision_detail':n.get('precision_detail'),
-            'comparison_hold':n.get('comparison_hold'),'warnings':len(n.get('warnings') or []),
-            'producer_revision':provenance.get('revision') or provenance.get('head_sha'),'producer_release':provenance.get('release'),
-            'accepted_equivalence':None})
-        r['outcome']={'success_rate':n.get('success_rate'),'requests_successful':n.get('num_requests_successful'),
-            'requests_total':n.get('num_requests_total'),'source_outcome':n.get('outcome'),'gates':n.get('gates'),
-            'contract':('MLPerf '+str(provenance.get('release') or '')).strip() if n.get('source')=='mlperf' else str(n.get('source'))+' producer aggregate'}
-        yield r
+        yield imported_observation_row(s,i,n)
+
+def producer_issue_row(s,i,n):
+    """Project one estate GitHub issue row at its stable source index."""
+    if n.get('source')!='github-issues' or not isinstance(n.get('repo'),str): raise ValueError('Expected github-issues rows')
+    r=base(s,i,n,'producer_issue')
+    mentions=[x for x in (n.get('hardware') or []) if isinstance(x,str)]
+    r.update(hardware=', '.join(mentions) or None,engine=engine(n.get('repo')))
+    r['scope']={'repo':n['repo'],'number':n.get('number'),'title':n.get('title'),'is_pull_request':n.get('is_pull_request'),
+        'labels':n.get('labels'),'hardware_mentions':mentions,'model_family':n.get('model_family'),'error_class':n.get('error_class'),
+        'created_at':n.get('created_at'),'updated_at':n.get('updated_at'),'url':n.get('url'),'accepted_equivalence':None}
+    r['outcome']={'state':n.get('state'),'state_reason':n.get('state_reason'),'closed_at':n.get('closed_at'),'fix_reference':n.get('fix_reference')}
+    return r
 
 def producer_issues(s,raw):
-    """Estate capture lane of producer repositories' issues and pull requests (metadata rows only)."""
+    """Bytes-compatible adapter wrapper; path-based ingest uses the streaming sibling."""
     for i,n in enumerate(jsonl(raw)):
-        if n.get('source')!='github-issues' or not isinstance(n.get('repo'),str): raise ValueError('Expected github-issues rows')
-        r=base(s,i,n,'producer_issue')
-        mentions=[x for x in (n.get('hardware') or []) if isinstance(x,str)]
-        r.update(hardware=', '.join(mentions) or None,engine=engine(n.get('repo')))
-        r['scope']={'repo':n['repo'],'number':n.get('number'),'title':n.get('title'),'is_pull_request':n.get('is_pull_request'),
-            'labels':n.get('labels'),'hardware_mentions':mentions,'model_family':n.get('model_family'),'error_class':n.get('error_class'),
-            'created_at':n.get('created_at'),'updated_at':n.get('updated_at'),'url':n.get('url'),'accepted_equivalence':None}
-        r['outcome']={'state':n.get('state'),'state_reason':n.get('state_reason'),'closed_at':n.get('closed_at'),'fix_reference':n.get('fix_reference')}
-        yield r
+        yield producer_issue_row(s,i,n)
 
+ROW_PROJECTORS={
+    'imported-observation-jsonl': imported_observation_row,
+    'github-issues-jsonl': producer_issue_row,
+}
 ADAPTERS={'mlperf-summary':mlperf,'azure-trace-csv':traces,'mooncake-trace-jsonl':traces,'openrouter-rankings':openrouter,'openrouter-models':openrouter,'azure-prices':prices,'aws-prices':prices,'gcp-prices':prices,'reddit-listing':community,'llama-bench-json':community,
          'imported-observation-jsonl':imported_observation,'github-issues-jsonl':producer_issues}
 
+def iter_source_rows(s,path):
+    """Read a retained source with bounded memory, streaming estate JSONL formats."""
+    fmt=s['format']
+    if fmt in ROW_PROJECTORS:
+        projector=ROW_PROJECTORS[fmt]
+        for index,native in jsonl_native_path(path,s['sha256'],hash_error='Raw hash mismatch: '+s['origin']):
+            yield projector(s,index,native)
+        return
+    raw=Path(path).read_bytes()
+    if sha(raw)!=s['sha256']: raise ValueError('Raw hash mismatch: '+s['origin'])
+    yield from ADAPTERS[fmt](s,raw)
+
+def rebuild_source_row(s,path,row_index):
+    """Rebuild one stable source row, streaming and verifying JSONL through EOF."""
+    fmt=s['format']
+    if fmt in ROW_PROJECTORS:
+        native=jsonl_native_at(path,row_index,s['sha256'])
+        return ROW_PROJECTORS[fmt](s,row_index,native)
+    raw=Path(path).read_bytes()
+    if sha(raw)!=s['sha256']: raise ValueError('raw source SHA-256 mismatch')
+    for index,row in enumerate(ADAPTERS[fmt](s,raw)):
+        if index==row_index: return row
+    raise ValueError('Pinned raw source does not contain the stored row index')
+
+
 def ingest(manifest_path,destination):
-    manifest=json.loads(manifest_path.read_text());destination.mkdir(parents=True,exist_ok=True)
+    manifest_path=Path(manifest_path)
+    manifest=json.loads(manifest_path.read_text(encoding='utf-8'));destination=Path(destination)
+    destination.mkdir(parents=True,exist_ok=True)
     db=sqlite3.connect(destination/'corpus.sqlite')
     db.execute('CREATE TABLE IF NOT EXISTS rows (row_id TEXT PRIMARY KEY,kind TEXT,origin TEXT,hardware TEXT,model TEXT,quant TEXT,engine TEXT,json TEXT NOT NULL)')
     db.execute('CREATE TABLE IF NOT EXISTS sightings (row_id TEXT,snapshot TEXT,source_url TEXT,retrieved_at TEXT,PRIMARY KEY(row_id,snapshot,source_url))')
@@ -190,21 +257,30 @@ def ingest(manifest_path,destination):
     for s in manifest['sources']:
         p=(manifest_path.parent/s['path']).resolve()
         if not p.is_relative_to(manifest_path.parent.resolve()): raise ValueError('Path escapes manifest directory')
-        raw=p.read_bytes()
-        if sha(raw)!=s['sha256']: raise ValueError('Raw hash mismatch: '+s['origin'])
         count=inserted=0
-        with db:
-            for row in ADAPTERS[s['format']](s,raw):
-                count+=1
-                cur=db.execute('INSERT OR IGNORE INTO rows VALUES (?,?,?,?,?,?,?,?)',(row['row_id'],row['kind'],s['origin'],row['hardware'],row['model'],row['quant'],row['engine'],canonical(row)))
-                inserted+=cur.rowcount
-                db.execute('INSERT OR IGNORE INTO sightings VALUES (?,?,?,?)',(row['row_id'],s['sha256'],s['url'],s['retrieved_at']))
+        try:
+            with db:
+                for row in iter_source_rows(s,p):
+                    count+=1
+                    cur=db.execute('INSERT OR IGNORE INTO rows VALUES (?,?,?,?,?,?,?,?)',(row['row_id'],row['kind'],s['origin'],row['hardware'],row['model'],row['quant'],row['engine'],canonical(row)))
+                    inserted+=cur.rowcount
+                    db.execute('INSERT OR IGNORE INTO sightings VALUES (?,?,?,?)',(row['row_id'],s['sha256'],s['url'],s['retrieved_at']))
+        except Exception:
+            db.close()
+            raise
         stats.append({'origin':s['origin'],'format':s['format'],'source_rows':count,'inserted':inserted,'existing':count-inserted,'raw_sha256':s['sha256']})
+    rows_digest=hashlib.sha256()
     with (destination/'rows.jsonl').open('w',encoding='utf-8',newline='\n') as f:
-        for (text,) in db.execute('SELECT json FROM rows ORDER BY origin,row_id'): f.write(text+'\n')
-    report={'sources':stats,'rows':db.execute('SELECT count(*) FROM rows').fetchone()[0],'by_kind':dict(db.execute('SELECT kind,count(*) FROM rows GROUP BY kind')),'new_rows':sum(s['inserted'] for s in stats),'reused_rows':sum(s['existing'] for s in stats),'rows_sha256':sha((destination/'rows.jsonl').read_bytes()),'accepted_values':db.execute("SELECT count(*) FROM rows WHERE json_extract(json,'$.accepted') IS NOT NULL").fetchone()[0]}
-    db.close();(destination/'IMPORT.json').write_text(json.dumps(report,indent=2)+'\n');return report
+        for (text,) in db.execute('SELECT json FROM rows ORDER BY origin,row_id'):
+            line=(text+'\n').encode('utf-8')
+            f.write(text+'\n')
+            rows_digest.update(line)
+    report={'sources':stats,'rows':db.execute('SELECT count(*) FROM rows').fetchone()[0],'by_kind':dict(db.execute('SELECT kind,count(*) FROM rows GROUP BY kind')),'new_rows':sum(s['inserted'] for s in stats),'reused_rows':sum(s['existing'] for s in stats),'rows_sha256':rows_digest.hexdigest(),'accepted_values':db.execute("SELECT count(*) FROM rows WHERE json_extract(json,'$.accepted') IS NOT NULL").fetchone()[0]}
+    db.close();(destination/'IMPORT.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8');return report
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--manifest',type=Path,required=True);p.add_argument('--out',type=Path,required=True)
-    a=p.parse_args();print(json.dumps(ingest(a.manifest,a.out),indent=2))
+    parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--manifest',type=Path,required=True)
+    parser.add_argument('--out',type=Path,required=True)
+    args=parser.parse_args()
+    print(json.dumps(ingest(args.manifest,args.out),indent=2))

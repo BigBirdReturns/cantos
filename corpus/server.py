@@ -42,7 +42,7 @@ def make_server(bundle, state, port=8768):
                 if url.path == "/api/collection":
                     return self.reply(200, collection.overview())
                 if url.path == "/api/query":
-                    filters = {k: params.get(k) or None for k in ("kind", "hardware", "model", "scenario", "unit")}
+                    filters = {k: params.get(k) or None for k in ("kind", "hardware", "model", "engine", "scenario", "unit")}
                     result = select_rows(collection.db, **filters, limit=min(int(params.get("limit", 25)), 100), offset=int(params.get("offset", 0)))
                     return self.reply(200, result)
                 if url.path == "/api/history":

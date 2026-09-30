@@ -45,7 +45,9 @@ jobs:
           python -m unittest discover -s integration/tests -p 'test_task_*.py' -v
           python -m unittest discover -s integration/tests -p 'test_work.py' -v
       - name: Local corpus source replay and native history continuity
-        run: python -B -m unittest discover -s corpus/tests -p 'test_*.py' -v
+        run: |
+          python -B -m unittest discover -s corpus/tests -p 'test_*.py' -v
+          node --test corpus/tests/batch_stream.test.cjs
       - name: Source-driven kits are reproducible
         run: |
           set -euo pipefail

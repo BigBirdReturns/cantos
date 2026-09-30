@@ -20,16 +20,17 @@ import tempfile
 from datetime import datetime, timezone
 from pathlib import Path
 
-try:
+HERE = Path(__file__).resolve().parent
+if __package__:
     from . import bulk_import
     from .projection import reproject
     from .reader import Collection
-except ImportError:  # Direct invocation: python corpus/estate_bundle.py
-    import bulk_import
-    from projection import reproject
-    from reader import Collection
+else:  # Direct invocation: python corpus/estate_bundle.py
+    sys.path.insert(0, str(HERE.parent))
+    from corpus import bulk_import
+    from corpus.projection import reproject
+    from corpus.reader import Collection
 
-HERE = Path(__file__).resolve().parent
 FORMATS = {
     "imported-observation@1": ("imported-observation-jsonl", "producer_reported"),
     "github-issues": ("github-issues-jsonl", "public_listing"),
