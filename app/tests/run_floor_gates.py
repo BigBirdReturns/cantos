@@ -38,7 +38,21 @@ def controller(pd, vdir, tmp):
     shutil.copy2(pd/'Cantos.html', stage/'candidate'/'Cantos.html')
     res = {}
     for name, sub, key in (('mobile_check.py', 'mobile-final', 'mobile'), ('visual_check_v2.py', 'visual', 'workspace')):
-        shutil.copy2(CTRL/name, stage/name)
+        # The controller scripts were written when the cold load was the synthetic invoice example.
+        # The staged copy (never the original) selects that example through the rail first; the checks themselves are untouched.
+        src = (CTRL/name).read_text(encoding='utf-8')
+        pat = "wait(page,'Boolean(window.CantosPreviewState)')"
+        assert pat in src, name
+        helper = '''def _select_example(page):
+    wait(page,'Boolean(window.CantosPreviewState) && !busy')
+    page.locator('[data-open-workspace="example"]').click();wait(page,'document.getElementById("import-dialog").open')
+    page.click('#confirm-import');wait(page,'!busy && !pendingImport && document.querySelectorAll(".task-cell").length===48')
+
+'''
+        i = src.index('def wait(')
+        src = src[:i] + helper + src[i:]
+        src = src.replace(pat, pat + ';_select_example(page)')
+        (stage/name).write_text(src, encoding='utf-8')
         rc, log = run([sys.executable, str(stage/name)], cwd=stage)
         f = stage / sub / 'CHECKS.json'
         if not f.exists():

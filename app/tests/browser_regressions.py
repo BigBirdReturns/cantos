@@ -28,13 +28,17 @@ try:
   if a.browser_executable:options['executable_path']=a.browser_executable
   browser=pw.chromium.launch(**options);ctx=browser.new_context(viewport={'width':1440,'height':1000},accept_downloads=True)
   page=ctx.new_page();page.on('pageerror',lambda e:errors.append(str(e)));page.on('request',lambda r:requests.append(r.url))
-  def boot():page.goto(url);wait(page,'Boolean(window.CantosPreviewState)')
+  def select_example():
+   # Cold load now opens the Run 3 decision; these checks were written against the synthetic invoice example, so select it first (rail link, confirm replace).
+   wait(page,'Boolean(window.CantosPreviewState) && !busy')
+   page.locator('[data-open-workspace="example"]').click();wait(page,'document.getElementById("import-dialog").open');page.click('#confirm-import');wait(page,'!busy && !pendingImport && document.querySelectorAll(".task-cell").length===48')
+  def boot():page.goto(url);wait(page,'Boolean(window.CantosPreviewState)');select_example()
   def actual():return page.evaluate('C.pack(workspace).then(p=>p.sha256)')
   def exported_hash(name):
    with page.expect_download() as download:page.locator('#export-btn').click()
    f=a.out/name;download.value.save_as(str(f));return json.loads(f.read_text())['sha256']
   boot();initial=actual();edition=page.evaluate('viewState.reports[0].snapshot_hash')
-  page.reload();wait(page,'Boolean(window.CantosPreviewState)');check('fresh startup preserves baseline edition identity',edition==page.evaluate('viewState.reports[0].snapshot_hash'))
+  page.reload();wait(page,'Boolean(window.CantosPreviewState)');select_example();check('fresh startup preserves baseline edition identity',edition==page.evaluate('viewState.reports[0].snapshot_hash'))
   # Real exports, rather than the cached UI hash alone, establish preservation.
   for name in ['null-quote.json','detached-decision.json','mixed-evidence.json','review-mismatch.json']:
    f=a.packets/name;packet_hashes[name]=sha(f);before=actual();saved=page.evaluate('localStorage.getItem(KEY)')

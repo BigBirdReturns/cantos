@@ -12,20 +12,20 @@
 <main>
 <aside class="rail" aria-label="Workspace navigation">
 <div class="rail-title">WORKSPACE <span>02</span></div>
-<nav class="case-nav" aria-label="Views">
-<button class="nav active case-link" data-view="decision"><span><strong>Invoice extraction</strong><small>Decision laboratory</small></span><span class="nav-dot"></span></button>
-<button class="nav case-link" data-view="evidence"><span><strong>GPU inference</strong><small>Run 3 · operating evidence</small></span></button>
+<nav class="case-nav" aria-label="Workspaces">
+<button class="nav case-link" data-open-workspace="run3"><span><small class="ws-eyebrow">Real decision · Run 3, 24 Sep 2026</small><strong>GPU inference</strong></span></button>
+<button class="nav active case-link" data-view="decision"><span><small class="ws-eyebrow">Worked example · synthetic</small><strong>Invoice extraction</strong></span><span class="nav-dot"></span></button>
 </nav>
 <div class="rail-section"><div class="rail-title">IN THIS DECISION</div><button class="rail-record source-card" data-inspect="source">24 original invoices </button><button class="rail-record" data-inspect="policy">Acceptance contract </button><button class="rail-record" data-inspect="calculation">Native calculation </button></div>
 <div class="rail-section"><div class="rail-title">ALSO ON THIS SITE</div><a class="rail-record" href="floor/index.html">Distance to the floor</a><a class="rail-record" href="circulate/index.html">Circulation receipts</a></div>
-<div class="rail-bottom"><button class="nav" data-view="architecture">System map</button><button id="reset-btn" class="text-button">Reset worked example</button><div class="rail-signature">CANTOS / SECOND RUN<span>Evidence, decision, next run</span></div></div>
+<div class="rail-bottom"><button class="nav" data-view="evidence">Evidence</button><button class="nav" data-view="architecture">System map</button><button id="reset-btn" class="text-button">Reset worked example</button><div class="rail-signature">CANTOS / SECOND RUN<span>Evidence, decision, next run</span></div></div>
 </aside>
 <div class="desk">
 <div class="desk-toolbar"><div class="workspace-name">Research decision <span class="tag">SYNTHETIC EXAMPLE</span></div><div class="toolbar-actions"><button id="save-btn" class="text-button">Save on this device</button><button id="open-btn" class="text-button">Open packet</button><button id="export-btn" class="outline-button">Export workspace</button><input id="packet-file" type="file" accept=".json,application/json" hidden></div></div>
 <section id="decision-view" class="view active-view">
 <div class="decision-layout">
 <section class="canvas" id="workspace" tabindex="-1">
-<div class="case-heading"><div><div class="eyebrow">DECISION / 01</div><h1>Invoice extraction</h1><p>24 invoices. Two implementations. The same required fields.</p></div><span id="current-state" class="state">Opening</span></div><div class="stamps decision-stamps"><span class="stamp"><span>Synthetic</span><span>24 authored invoices</span><span><time datetime="2026-09-28">fixed 28 Sep 2026</time></span></span><span class="stamp stamp--lineage"><span>Engine</span><span>ResearchCore 1.0.1 candidate</span><span>local, verified</span></span></div>
+<div class="case-heading"><div><div class="eyebrow">DECISION / 01</div><h1>Synthetic worked example</h1><p>Invoice extraction · 24 invoices. Two implementations. The same required fields.</p></div><span id="current-state" class="state">Opening</span></div><div class="stamps decision-stamps"><span class="stamp"><span>Synthetic</span><span>24 authored invoices</span><span><time datetime="2026-09-28">fixed 28 Sep 2026</time></span></span><span class="stamp stamp--lineage"><span>Engine</span><span>ResearchCore 1.0.1 candidate</span><span>local, verified</span></span></div>
 <button id="mobile-scenario" class="mobile-scenario" aria-controls="scenario-panel" aria-expanded="false">Scenario & review</button>
 <div class="lineage" aria-label="Decision dependencies"><button data-inspect="source"><i></i><span>24 inputs</span></button><span class="line"></span><button data-inspect="policy"><i></i><span>Contract <b id="policy-version">v1</b></span></button><span class="line"></span><button data-inspect="calculation"><i id="calc-node"></i><span>Comparison</span></button><span class="line"></span><button data-inspect="decision"><i id="decision-node"></i><span>Decision</span></button></div>
 <div class="recommendation"><div><div id="decision-kicker" class="eyebrow">LOWEST COST / ACCEPTED INVOICE</div><h2 id="winner">Opening the decision…</h2><p id="decision-summary"></p></div><div id="advantage" class="advantage"></div></div>

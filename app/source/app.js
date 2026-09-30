@@ -212,6 +212,7 @@ document.addEventListener('click',async e=>{
  const b=e.target.closest('button');if(!b)return;
  try{
   if(b.dataset.view)view(b.dataset.view);
+  if(b.dataset.openWorkspace)openWorkspace(b.dataset.openWorkspace);
   if(b.dataset.inspect)inspect(b.dataset.inspect);
   if(b.dataset.edition!==undefined)inspectEdition(Number(b.dataset.edition));
   if(b.dataset.brief!==undefined)brief(Number(b.dataset.brief));
@@ -245,7 +246,12 @@ $('import-dialog').addEventListener('cancel',()=>{pendingImport=null;notice('Imp
   let saved;try{saved=localStorage.getItem(KEY);}catch{}
   let next,message;
   if(saved){try{next=await D.restore(C.parse(saved));persist=true;savedHash=(await D.pack(next)).sha256;message='Saved workspace restored after native and workflow verification.';}catch(e){next=await D.create();message='Saved copy could not be restored and was left untouched. A fresh in-memory example is open; export before replacing saved work.';}}
-  else{next=await D.create();message='Purple invoices contain correct JSON inside a wrapper. Select one to inspect it, or change the receiving system.';}
+  else{
+   // Cold visitor: open the real, verified Run 3 decision (Edition 01) from the embedded packet.
+   const node=document.getElementById('run3-packet');
+   try{if(!node)throw Error('embedded Run 3 packet absent');next=await D.restore(C.parse(node.textContent));message='Run 3 decision open: Hot Aisle 1x MI300X against DigitalOcean 1x H100, Edition 01. Ctrl K opens the worked example.';}
+   catch(e){next=await D.create();message='Purple invoices contain correct JSON inside a wrapper. Select one to inspect it, or change the receiving system.';}
+  }
   const prepared=await prepareView(next);await installPrepared(next,prepared,{resetFields:true});notice(message);
  }catch(e){notice('Unable to start: '+e.message,true);}
 })();
@@ -563,7 +569,7 @@ $('command-btn')?.addEventListener('click',openPalette);
   // Preserve current navigation and drawer state across an atomic render.
   const old=document.querySelector('main');
   for(const name of ['decision','evidence','architecture'])get(name+'-view').hidden=old.querySelector('#'+name+'-view').hidden;
-  for(const nav of main.querySelectorAll('.nav'))nav.classList.toggle('active',!get(nav.dataset.view+'-view').hidden);
+  for(const nav of main.querySelectorAll('.nav[data-view]'))nav.classList.toggle('active',!get(nav.dataset.view+'-view').hidden);
   if(old.classList.contains('controls-open'))main.classList.add('controls-open');
   main.querySelector('.workspace-name').innerHTML='Research decision <span class="tag">RETAINED RUN 3</span>';
   main.querySelector('.case-heading h1').textContent='Same work. Different list prices.';
@@ -654,17 +660,39 @@ $('command-btn')?.addEventListener('click',openPalette);
 
 
 // ===== integrated: fable — open the real Run 3 decision from the embedded packet (no fetch; CSP) =====
-async function openEmbeddedRun3(){
- const node=document.getElementById('run3-packet');if(!node)return;
- if(busy||pendingImport){notice('Finish the current operation before opening the Run 3 decision.',true);return;}
+async function openWorkspace(kind){
+ const run3=kind==='run3',label=run3?'the Run 3 decision':'the worked example';
+ if(busy||pendingImport){notice('Finish the current operation before opening '+label+'.',true);return;}
  busy=true;
  try{
-  const candidate=await D.restore(C.parse(node.textContent));
+  let candidate;
+  if(run3){const node=document.getElementById('run3-packet');if(!node)return;candidate=await D.restore(C.parse(node.textContent));}
+  else candidate=await D.create();
   const prepared=await prepareView(candidate);
-  if(prepared.v.packetHash===viewState.packetHash){notice('The Run 3 decision is already open.');return;}
+  if(prepared.v.packetHash===viewState.packetHash){notice(run3?'The Run 3 decision is already open.':'The worked example is already open.');return;}
   pendingImport={candidate,baseHash:viewState.packetHash};$('import-dialog').showModal();
- }catch(e){notice('Run 3 decision refused: '+e.message+' Current work was preserved.',true);}
+ }catch(e){notice((run3?'Run 3 decision':'Worked example')+' refused: '+e.message+' Current work was preserved.',true);}
  finally{busy=false;}
 }
-if(typeof commands==='function'){const baseCommands=commands;commands=function(){const list=baseCommands();list.unshift({label:'Open the Run 3 decision (real, MI300X vs H100)',hint:'decision',run:openEmbeddedRun3,on:true});return list;};}
+const openEmbeddedRun3=()=>openWorkspace('run3');
+if(typeof commands==='function'){const baseCommands=commands;commands=function(){const list=baseCommands();list.unshift({label:'Open the Run 3 decision (real, MI300X vs H100)',hint:'decision',run:()=>openWorkspace('run3'),on:true},{label:'Open the worked example',hint:'synthetic',run:()=>openWorkspace('example'),on:true});return list;};}
+
+// ===== cold-visitor entry: rail lists the real decision first, orientation line on Run 3 =====
+const ORIENTATION='One measured decision: the same coding workload on two rented seats, cost per 1,000 accepted requests at list price, every figure stamped with its source.';
+function composeRail(node,run3){
+ const nav=node.querySelector('.case-nav');if(!nav)return;
+ const viewOn=n=>{const v=node.querySelector('#'+n+'-view');return v&&!v.hidden;};
+ const link=(attr,eyebrow,name,active)=>'<button class="nav case-link'+(active?' active':'')+'" '+attr+'><span><small class="ws-eyebrow">'+eyebrow+'</small><strong>'+name+'</strong></span></button>';
+ const gpu=['Real decision · Run 3, 24 Sep 2026','GPU inference'],ex=['Worked example · synthetic','Invoice extraction'];
+ nav.setAttribute('aria-label','Workspaces');
+ nav.innerHTML=run3
+  ?link('data-view="decision"',gpu[0],gpu[1],viewOn('decision'))+link('data-open-workspace="example"',ex[0],ex[1],false)
+  :link('data-open-workspace="run3"',gpu[0],gpu[1],false)+link('data-view="decision"',ex[0],ex[1],viewOn('decision'));
+ const ev=node.querySelector('.rail-bottom .nav[data-view="evidence"]');if(ev)ev.classList.toggle('active',viewOn('evidence'));
+ const arch=node.querySelector('.rail-bottom .nav[data-view="architecture"]');if(arch)arch.classList.toggle('active',viewOn('architecture'));
+ node.querySelectorAll('.orientation').forEach(e=>e.remove());
+ const head=node.querySelector('.case-heading');
+ if(run3&&head){const p=document.createElement('p');p.className='orientation';p.textContent=ORIENTATION;head.after(p);}
+}
+{const basePrepare=prepareView;prepareView=async function(candidate){const prepared=await basePrepare(candidate);composeRail(prepared.node,Boolean(D.decisionClass&&D.decisionClass(candidate)==='hardware'));return prepared;};}
 

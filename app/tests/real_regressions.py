@@ -55,6 +55,9 @@ try:
         raise AssertionError('Condition not reached: '+expr)
     def boot():
         page.goto(origin+a.page.name);wait('Boolean(window.CantosPreviewState) && !busy')
+        # Cold load now opens the Run 3 decision; these checks start from the synthetic invoice example, so select it first.
+        page.locator('[data-open-workspace="example"]').click();wait('document.getElementById("import-dialog").open')
+        page.locator('#confirm-import').click();wait('!busy && !pendingImport && document.querySelectorAll(".task-cell").length===48')
     def open_packet(path):
         page.locator('#open-btn').click()
         page.locator('#packet-file').set_input_files(str(path.resolve()))

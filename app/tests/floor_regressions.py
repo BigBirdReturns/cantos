@@ -50,14 +50,20 @@ try:
             if page.evaluate(expression): return
             page.wait_for_timeout(15)
         raise AssertionError('Condition not reached: '+expression)
-    def boot(width=1440, motion='no-preference'):
+    def boot(width=1440, motion='no-preference', select_example_first=True):
         page.emulate_media(reduced_motion=motion)
         page.set_viewport_size(dict(width=width,height=1000))
         page.goto(url)
-        wait('Boolean(window.CantosPreviewState)')
+        wait('Boolean(window.CantosPreviewState) && !busy')
+        if select_example_first:
+            # Cold load now opens the Run 3 decision; these checks were written against the synthetic invoice example, so select it first.
+            page.locator('[data-open-workspace="example"]').click();wait('document.getElementById("import-dialog").open')
+            page.locator('#confirm-import').click();wait('!busy && !pendingImport && document.querySelectorAll(".task-cell").length===48')
+            page.wait_for_timeout(900)  # let the swap's view transition settle so timing-sensitive checks see the same page as a fresh load
     def palette(query=''):
         page.keyboard.press('Control+k')
         page.locator('#command-input').fill(query)
+        page.wait_for_timeout(80)  # dialog 'toggle' (aria-expanded) is dispatched as a queued task; let it land before reading ARIA
     def palette_aria():
         boot(); palette('invoice')
         return page.evaluate("""() => { const i=document.querySelector('#command-input'), active=document.getElementById(i.getAttribute('aria-activedescendant')); return i.getAttribute('role')==='combobox' && i.getAttribute('aria-controls')==='command-list' && i.getAttribute('aria-expanded')==='true' && active?.getAttribute('aria-selected')==='true'; }""")
@@ -178,6 +184,46 @@ try:
         figures=page.locator('#evidence-view figure')
         return all(figures.nth(i).locator('.stamp').count()>0 for i in range(figures.count()))
     check('evidence freshness stamps are present and substantive', stamps)
+    # ---- cold-visitor entry (added with the root-entry change) ----
+    def cold_run3():
+        boot(select_example_first=False)
+        d=page.evaluate("D.decisionClass(workspace)")
+        assert d=='hardware', 'cold load did not open the Run 3 decision: '+str(d)
+        assert page.locator('[data-arm="A/T0"]').count()==1 and page.locator('[data-arm="N/T0"]').count()==1, 'arm cards missing'
+        assert page.locator('.task-cell').count()==0, 'invoice tiles present on cold load'
+        return page.locator('#comparison .comp-value').all_text_contents()==['$0.74','$1.20']
+    check('cold load with no saved state opens the Run 3 decision (Edition 01, $0.74 vs $1.20)', cold_run3)
+    def cold_orientation():
+        boot(select_example_first=False)
+        want='One measured decision: the same coding workload on two rented seats, cost per 1,000 accepted requests at list price, every figure stamped with its source.'
+        return page.locator('.orientation').count()==1 and page.locator('.orientation').inner_text()==want
+    check('Run 3 view carries the one-sentence orientation line', cold_orientation)
+    def rail_order():
+        boot(select_example_first=False)
+        links=page.locator('.case-nav .case-link')
+        assert links.count()==2
+        first,second=links.nth(0).inner_text().replace(chr(10),' | '),links.nth(1).inner_text().replace(chr(10),' | ')
+        assert 'Real decision · Run 3, 24 Sep 2026' in first and 'GPU inference' in first, first
+        assert 'Worked example · synthetic' in second and 'Invoice extraction' in second, second
+        return links.nth(0).get_attribute('class').find('active')>=0
+    check('rail lists GPU inference first (real decision) and the invoice example second (worked example)', rail_order)
+    def example_header():
+        boot()
+        return page.locator('#decision-view .case-heading h1').inner_text()=='Synthetic worked example' and page.locator('.orientation').count()==0
+    check('worked example header says Synthetic worked example', example_header)
+    def palette_pair():
+        boot(select_example_first=False); palette('Open the')
+        labels=page.locator('[data-cmd]').all_text_contents()
+        return any('Open the Run 3 decision' in l for l in labels) and any('Open the worked example' in l for l in labels)
+    check('palette offers Open the Run 3 decision and Open the worked example', palette_pair)
+    def saved_restore():
+        boot()  # example selected
+        page.click('#save-btn');wait('persist===true')
+        page.reload();wait('Boolean(window.CantosPreviewState) && !busy')
+        ok=page.locator('.task-cell').count()==48 and page.evaluate("D.decisionClass(workspace)")!='hardware'
+        page.evaluate("localStorage.clear()")
+        return ok
+    check('saved state still restores the invoice example on reload', saved_restore)
     check('no runtime JavaScript errors', lambda:not errors)
     check('no non-loopback request attempted', lambda:not blocked)
     browser.close()

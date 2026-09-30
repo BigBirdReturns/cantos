@@ -585,3 +585,7 @@ html.cascade .task-cell{view-transition-name:var(--vt)!important}
 .hardware-workspace .matrix-legend{flex-wrap:wrap}
 @media(max-width:720px){.hardware-workspace .comp-value{font-size:40px}.hardware-workspace .hardware-percentiles{font-size:12px}.hardware-workspace .request-density canvas{height:82px}.hardware-workspace .comparison{gap:14px}}
 
+.case-link .ws-eyebrow{display:block;margin:0 0 4px;font-size:var(--s0);line-height:1.35;letter-spacing:.02em;color:var(--dim);font-weight:500}
+.case-link.active .ws-eyebrow{color:var(--muted)}
+.orientation{margin:0 0 14px;font-size:var(--s1);line-height:1.5;color:var(--muted);max-width:62ch}
+@media(max-width:1000px){.case-link .ws-eyebrow{display:none}.rail-bottom>button:first-child{white-space:nowrap}}

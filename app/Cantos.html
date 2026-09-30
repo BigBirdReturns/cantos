@@ -586,6 +586,10 @@ html.cascade .task-cell{view-transition-name:var(--vt)!important}
 .hardware-workspace .matrix-legend{flex-wrap:wrap}
 @media(max-width:720px){.hardware-workspace .comp-value{font-size:40px}.hardware-workspace .hardware-percentiles{font-size:12px}.hardware-workspace .request-density canvas{height:82px}.hardware-workspace .comparison{gap:14px}}
 
+.case-link .ws-eyebrow{display:block;margin:0 0 4px;font-size:var(--s0);line-height:1.35;letter-spacing:.02em;color:var(--dim);font-weight:500}
+.case-link.active .ws-eyebrow{color:var(--muted)}
+.orientation{margin:0 0 14px;font-size:var(--s1);line-height:1.5;color:var(--muted);max-width:62ch}
+@media(max-width:1000px){.case-link .ws-eyebrow{display:none}.rail-bottom>button:first-child{white-space:nowrap}}
 </style></head>
 <body>
 <a class="skip" href="#workspace">Skip to decision workspace</a>
@@ -599,20 +603,20 @@ html.cascade .task-cell{view-transition-name:var(--vt)!important}
 <main>
 <aside class="rail" aria-label="Workspace navigation">
 <div class="rail-title">WORKSPACE <span>02</span></div>
-<nav class="case-nav" aria-label="Views">
-<button class="nav active case-link" data-view="decision"><span><strong>Invoice extraction</strong><small>Decision laboratory</small></span><span class="nav-dot"></span></button>
-<button class="nav case-link" data-view="evidence"><span><strong>GPU inference</strong><small>Run 3 · operating evidence</small></span></button>
+<nav class="case-nav" aria-label="Workspaces">
+<button class="nav case-link" data-open-workspace="run3"><span><small class="ws-eyebrow">Real decision · Run 3, 24 Sep 2026</small><strong>GPU inference</strong></span></button>
+<button class="nav active case-link" data-view="decision"><span><small class="ws-eyebrow">Worked example · synthetic</small><strong>Invoice extraction</strong></span><span class="nav-dot"></span></button>
 </nav>
 <div class="rail-section"><div class="rail-title">IN THIS DECISION</div><button class="rail-record source-card" data-inspect="source">24 original invoices </button><button class="rail-record" data-inspect="policy">Acceptance contract </button><button class="rail-record" data-inspect="calculation">Native calculation </button></div>
 <div class="rail-section"><div class="rail-title">ALSO ON THIS SITE</div><a class="rail-record" href="floor/index.html">Distance to the floor</a><a class="rail-record" href="circulate/index.html">Circulation receipts</a></div>
-<div class="rail-bottom"><button class="nav" data-view="architecture">System map</button><button id="reset-btn" class="text-button">Reset worked example</button><div class="rail-signature">CANTOS / SECOND RUN<span>Evidence, decision, next run</span></div></div>
+<div class="rail-bottom"><button class="nav" data-view="evidence">Evidence</button><button class="nav" data-view="architecture">System map</button><button id="reset-btn" class="text-button">Reset worked example</button><div class="rail-signature">CANTOS / SECOND RUN<span>Evidence, decision, next run</span></div></div>
 </aside>
 <div class="desk">
 <div class="desk-toolbar"><div class="workspace-name">Research decision <span class="tag">SYNTHETIC EXAMPLE</span></div><div class="toolbar-actions"><button id="save-btn" class="text-button">Save on this device</button><button id="open-btn" class="text-button">Open packet</button><button id="export-btn" class="outline-button">Export workspace</button><input id="packet-file" type="file" accept=".json,application/json" hidden></div></div>
 <section id="decision-view" class="view active-view">
 <div class="decision-layout">
 <section class="canvas" id="workspace" tabindex="-1">
-<div class="case-heading"><div><div class="eyebrow">DECISION / 01</div><h1>Invoice extraction</h1><p>24 invoices. Two implementations. The same required fields.</p></div><span id="current-state" class="state">Opening</span></div><div class="stamps decision-stamps"><span class="stamp"><span>Synthetic</span><span>24 authored invoices</span><span><time datetime="2026-09-28">fixed 28 Sep 2026</time></span></span><span class="stamp stamp--lineage"><span>Engine</span><span>ResearchCore 1.0.1 candidate</span><span>local, verified</span></span></div>
+<div class="case-heading"><div><div class="eyebrow">DECISION / 01</div><h1>Synthetic worked example</h1><p>Invoice extraction · 24 invoices. Two implementations. The same required fields.</p></div><span id="current-state" class="state">Opening</span></div><div class="stamps decision-stamps"><span class="stamp"><span>Synthetic</span><span>24 authored invoices</span><span><time datetime="2026-09-28">fixed 28 Sep 2026</time></span></span><span class="stamp stamp--lineage"><span>Engine</span><span>ResearchCore 1.0.1 candidate</span><span>local, verified</span></span></div>
 <button id="mobile-scenario" class="mobile-scenario" aria-controls="scenario-panel" aria-expanded="false">Scenario & review</button>
 <div class="lineage" aria-label="Decision dependencies"><button data-inspect="source"><i></i><span>24 inputs</span></button><span class="line"></span><button data-inspect="policy"><i></i><span>Contract <b id="policy-version">v1</b></span></button><span class="line"></span><button data-inspect="calculation"><i id="calc-node"></i><span>Comparison</span></button><span class="line"></span><button data-inspect="decision"><i id="decision-node"></i><span>Decision</span></button></div>
 <div class="recommendation"><div><div id="decision-kicker" class="eyebrow">LOWEST COST / ACCEPTED INVOICE</div><h2 id="winner">Opening the decision…</h2><p id="decision-summary"></p></div><div id="advantage" class="advantage"></div></div>
@@ -1191,6 +1195,7 @@ document.addEventListener('click',async e=>{
  const b=e.target.closest('button');if(!b)return;
  try{
   if(b.dataset.view)view(b.dataset.view);
+  if(b.dataset.openWorkspace)openWorkspace(b.dataset.openWorkspace);
   if(b.dataset.inspect)inspect(b.dataset.inspect);
   if(b.dataset.edition!==undefined)inspectEdition(Number(b.dataset.edition));
   if(b.dataset.brief!==undefined)brief(Number(b.dataset.brief));
@@ -1224,7 +1229,12 @@ $('import-dialog').addEventListener('cancel',()=>{pendingImport=null;notice('Imp
   let saved;try{saved=localStorage.getItem(KEY);}catch{}
   let next,message;
   if(saved){try{next=await D.restore(C.parse(saved));persist=true;savedHash=(await D.pack(next)).sha256;message='Saved workspace restored after native and workflow verification.';}catch(e){next=await D.create();message='Saved copy could not be restored and was left untouched. A fresh in-memory example is open; export before replacing saved work.';}}
-  else{next=await D.create();message='Purple invoices contain correct JSON inside a wrapper. Select one to inspect it, or change the receiving system.';}
+  else{
+   // Cold visitor: open the real, verified Run 3 decision (Edition 01) from the embedded packet.
+   const node=document.getElementById('run3-packet');
+   try{if(!node)throw Error('embedded Run 3 packet absent');next=await D.restore(C.parse(node.textContent));message='Run 3 decision open: Hot Aisle 1x MI300X against DigitalOcean 1x H100, Edition 01. Ctrl K opens the worked example.';}
+   catch(e){next=await D.create();message='Purple invoices contain correct JSON inside a wrapper. Select one to inspect it, or change the receiving system.';}
+  }
   const prepared=await prepareView(next);await installPrepared(next,prepared,{resetFields:true});notice(message);
  }catch(e){notice('Unable to start: '+e.message,true);}
 })();
@@ -1542,7 +1552,7 @@ $('command-btn')?.addEventListener('click',openPalette);
   // Preserve current navigation and drawer state across an atomic render.
   const old=document.querySelector('main');
   for(const name of ['decision','evidence','architecture'])get(name+'-view').hidden=old.querySelector('#'+name+'-view').hidden;
-  for(const nav of main.querySelectorAll('.nav'))nav.classList.toggle('active',!get(nav.dataset.view+'-view').hidden);
+  for(const nav of main.querySelectorAll('.nav[data-view]'))nav.classList.toggle('active',!get(nav.dataset.view+'-view').hidden);
   if(old.classList.contains('controls-open'))main.classList.add('controls-open');
   main.querySelector('.workspace-name').innerHTML='Research decision <span class="tag">RETAINED RUN 3</span>';
   main.querySelector('.case-heading h1').textContent='Same work. Different list prices.';
@@ -1633,18 +1643,40 @@ $('command-btn')?.addEventListener('click',openPalette);
 
 
 // ===== integrated: fable — open the real Run 3 decision from the embedded packet (no fetch; CSP) =====
-async function openEmbeddedRun3(){
- const node=document.getElementById('run3-packet');if(!node)return;
- if(busy||pendingImport){notice('Finish the current operation before opening the Run 3 decision.',true);return;}
+async function openWorkspace(kind){
+ const run3=kind==='run3',label=run3?'the Run 3 decision':'the worked example';
+ if(busy||pendingImport){notice('Finish the current operation before opening '+label+'.',true);return;}
  busy=true;
  try{
-  const candidate=await D.restore(C.parse(node.textContent));
+  let candidate;
+  if(run3){const node=document.getElementById('run3-packet');if(!node)return;candidate=await D.restore(C.parse(node.textContent));}
+  else candidate=await D.create();
   const prepared=await prepareView(candidate);
-  if(prepared.v.packetHash===viewState.packetHash){notice('The Run 3 decision is already open.');return;}
+  if(prepared.v.packetHash===viewState.packetHash){notice(run3?'The Run 3 decision is already open.':'The worked example is already open.');return;}
   pendingImport={candidate,baseHash:viewState.packetHash};$('import-dialog').showModal();
- }catch(e){notice('Run 3 decision refused: '+e.message+' Current work was preserved.',true);}
+ }catch(e){notice((run3?'Run 3 decision':'Worked example')+' refused: '+e.message+' Current work was preserved.',true);}
  finally{busy=false;}
 }
-if(typeof commands==='function'){const baseCommands=commands;commands=function(){const list=baseCommands();list.unshift({label:'Open the Run 3 decision (real, MI300X vs H100)',hint:'decision',run:openEmbeddedRun3,on:true});return list;};}
+const openEmbeddedRun3=()=>openWorkspace('run3');
+if(typeof commands==='function'){const baseCommands=commands;commands=function(){const list=baseCommands();list.unshift({label:'Open the Run 3 decision (real, MI300X vs H100)',hint:'decision',run:()=>openWorkspace('run3'),on:true},{label:'Open the worked example',hint:'synthetic',run:()=>openWorkspace('example'),on:true});return list;};}
+
+// ===== cold-visitor entry: rail lists the real decision first, orientation line on Run 3 =====
+const ORIENTATION='One measured decision: the same coding workload on two rented seats, cost per 1,000 accepted requests at list price, every figure stamped with its source.';
+function composeRail(node,run3){
+ const nav=node.querySelector('.case-nav');if(!nav)return;
+ const viewOn=n=>{const v=node.querySelector('#'+n+'-view');return v&&!v.hidden;};
+ const link=(attr,eyebrow,name,active)=>'<button class="nav case-link'+(active?' active':'')+'" '+attr+'><span><small class="ws-eyebrow">'+eyebrow+'</small><strong>'+name+'</strong></span></button>';
+ const gpu=['Real decision · Run 3, 24 Sep 2026','GPU inference'],ex=['Worked example · synthetic','Invoice extraction'];
+ nav.setAttribute('aria-label','Workspaces');
+ nav.innerHTML=run3
+  ?link('data-view="decision"',gpu[0],gpu[1],viewOn('decision'))+link('data-open-workspace="example"',ex[0],ex[1],false)
+  :link('data-open-workspace="run3"',gpu[0],gpu[1],false)+link('data-view="decision"',ex[0],ex[1],viewOn('decision'));
+ const ev=node.querySelector('.rail-bottom .nav[data-view="evidence"]');if(ev)ev.classList.toggle('active',viewOn('evidence'));
+ const arch=node.querySelector('.rail-bottom .nav[data-view="architecture"]');if(arch)arch.classList.toggle('active',viewOn('architecture'));
+ node.querySelectorAll('.orientation').forEach(e=>e.remove());
+ const head=node.querySelector('.case-heading');
+ if(run3&&head){const p=document.createElement('p');p.className='orientation';p.textContent=ORIENTATION;head.after(p);}
+}
+{const basePrepare=prepareView;prepareView=async function(candidate){const prepared=await basePrepare(candidate);composeRail(prepared.node,Boolean(D.decisionClass&&D.decisionClass(candidate)==='hardware'));return prepared;};}
 
 </script></body></html>
