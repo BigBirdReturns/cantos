@@ -8,18 +8,38 @@ Current state: Sept 29 full public InferenceX history and MLPerf LLM rounds. The
 
 **Imported external observations; not our measurements or qualified results.** Written by `circulate/stages/inferencex.py`; rows are `imported-observation@1` from the same adapter as the full-history import, appended under `imported/daily/`.
 
-Updated 2026-09-29. `history-index.json` holds 4168 artifacts (4161 in the 2026-09-29 baseline, 7 added since, 0 refused by the importer and kept with the reason).
+Updated 2026-09-30. `history-index.json` holds 4247 artifacts (4161 in the 2026-09-29 baseline, 86 added since, 0 refused by the importer and kept with the reason).
 
 | Day file | New artifacts | Source rows | Metric observations | Empty aggregates |
 |---|---:|---:|---:|---:|
 | 2026-09-29 | 7 | 28 | 526 | 3 |
+| 2026-09-30 | 79 | 172 | 3488 | 33 |
 
 | Hardware | Framework | Scenario | Rows | Successful / total |
 |---|---|---|---:|---:|
-| B200 | sglang | agentic-coding | 11 | 40855 / 44584 |
-| GB200 | dynamo-vllm | agentic-coding | 8 | 18314 / 19882 |
+| B200 | dynamo-sglang | agentic-coding | 1 | 33 / 44 |
+| B200 | sglang | agentic-coding | 22 | 81710 / 89168 |
+| B200 | sglang | fixed-sequence | 5 | 382 / 382 |
+| B200 | tilert | fixed-sequence | 3 | 48 / 48 |
+| B200 | vllm | agentic-coding | 12 | 1631 / 2873 |
+| B200 | vllm | fixed-sequence | 3 | 52 / 52 |
+| B300 | dynamo-sglang | agentic-coding | 3 | 37833 / 41216 |
+| B300 | sglang | fixed-sequence | 2 | 20 / 20 |
+| B300 | vllm | fixed-sequence | 3 | 52 / 52 |
+| GB200 | dynamo-sglang | agentic-coding | 20 | 306975 / 337378 |
+| GB200 | dynamo-vllm | agentic-coding | 20 | 292362 / 318437 |
+| GB200 | vllm | agentic-coding | 5 | 21391 / 23312 |
+| GB300 | dynamo-sglang | agentic-coding | 8 | 484140 / 540670 |
+| GB300 | dynamo-vllm | agentic-coding | 6 | 343652 / 378344 |
+| H200 | sglang | agentic-coding | 1 | 32 / 75 |
+| H200 | sglang | fixed-sequence | 4 | 350 / 350 |
+| H200 | vllm | agentic-coding | 10 | 686 / 1336 |
+| H200 | vllm | fixed-sequence | 2 | 20 / 20 |
+| MI355X | atom | agentic-coding | 10 | 46665 / 53579 |
+| MI355X | sglang | agentic-coding | 28 | 95024 / 101074 |
 | MI355X | sglang-disagg | fixed-sequence | 1 | 80 / 80 |
-| MI355X | vllm | agentic-coding | 8 | 3586 / 4614 |
+| MI355X | vllm | agentic-coding | 29 | 40919 / 47524 |
+| MI355X | vllm-disagg | agentic-coding | 2 | 46 / 150 |
 <!-- circulate:standing:end -->
 
 ## Full history, 2026-09-29 (InferenceX results_bmk)

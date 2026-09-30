@@ -1,0 +1,69 @@
+{
+  "name": "tests",
+  "status": "OK",
+  "started_utc": "2026-09-30T17:41:20Z",
+  "finished_utc": "2026-09-30T17:47:02Z",
+  "seconds": 341.91,
+  "counts": {
+    "suites": 7,
+    "passed": 7,
+    "failed": 0,
+    "skipped": 0,
+    "detail": [
+      {
+        "suite": "hot-aisle runner (node --test)",
+        "status": "pass",
+        "exit": 0,
+        "seconds": 5.0,
+        "last_line": "\u2139 duration_ms 4875.9885"
+      },
+      {
+        "suite": "hot-aisle workbench engine",
+        "status": "pass",
+        "exit": 0,
+        "seconds": 0.2,
+        "last_line": "{\"tests\":80,\"failed\":false,\"scope\":\"Software qualification with synthetic fixtures; no GPU performance measurement.\"}"
+      },
+      {
+        "suite": "backfill importer --self-test",
+        "status": "pass",
+        "exit": 0,
+        "seconds": 0.5,
+        "last_line": "OK"
+      },
+      {
+        "suite": "clustermax engine parity (node)",
+        "status": "pass",
+        "exit": 0,
+        "seconds": 4.1,
+        "last_line": "}"
+      },
+      {
+        "suite": "clustermax-challenge unittest (all)",
+        "status": "pass",
+        "exit": 0,
+        "seconds": 71.9,
+        "last_line": "OK"
+      },
+      {
+        "suite": "integration pytest",
+        "status": "pass",
+        "exit": 0,
+        "seconds": 80.4,
+        "last_line": "80 passed, 20 subtests passed in 79.92s (0:01:19)"
+      },
+      {
+        "suite": "validate_packet on the committed packet",
+        "status": "pass",
+        "exit": 0,
+        "seconds": 179.9,
+        "last_line": "PASS PUBLIC-TAIL-2026-09-29.research-packet.json (3707009 bytes, envelope sha256 3904ccb34ed263f309f2153d68902dee305d556630f93b7b967c9070d5fdc70d)"
+      }
+    ]
+  },
+  "sources": [],
+  "outputs": [],
+  "notes": "7 suites passed.",
+  "error": null,
+  "log": "logs/tests.log"
+}

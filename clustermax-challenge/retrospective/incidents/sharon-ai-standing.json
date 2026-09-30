@@ -2,56 +2,66 @@
   "schema": "secondrun.status-incidents.v1",
   "provider": "Sharon AI",
   "status_page_url": "https://sharonai.statuspage.io",
-  "retrieved_utc": "2026-09-29T23:32:20Z",
+  "retrieved_utc": "2026-09-30T17:36:14Z",
   "raw_files": [
     {
       "path": "circulate/retained/status/raw-root/raw/sharon-ai-standing/history-page-1.json",
-      "sha256": "c1a48e94f5bd6167ab405af46a592288451f8f986fd15493106980b39505e39b",
+      "sha256": "a6f3dbe34a87a4a03f78064f2142f50f5cc7068e59b3122de5fcff2bee9aecea",
       "url": "https://sharonai.statuspage.io/history.json?page=1"
     },
     {
       "path": "circulate/retained/status/raw-root/raw/sharon-ai-standing/history-page-2.json",
-      "sha256": "e8f6df2ef83aaafd58b5bd5dc5a195053cc66ecfedc5b8782dc16dbe9ad7bcf8",
+      "sha256": "b0deeece5de92e0401a4025e80f4a64f58fd0b37258671947e57b45b630fdbeb",
       "url": "https://sharonai.statuspage.io/history.json?page=2"
     },
     {
       "path": "circulate/retained/status/raw-root/raw/sharon-ai-standing/history-page-3.json",
-      "sha256": "ccf30402c393c0053379ab97512e75da75f13d5435af008993dac9c491f164db",
+      "sha256": "5992d9b8e5ab1d6605cc8c70f3cecba7bdf6a0dec633b013ac0d4d6c59d4ed31",
       "url": "https://sharonai.statuspage.io/history.json?page=3"
     },
     {
+      "path": "circulate/retained/status/raw-root/raw/sharon-ai-standing/incident-y2xs5nv7zmcx.json",
+      "sha256": "56d8bb02c800ec9b247e2138c9dbe1c5eff73a48b4474b349b358f778b896aa4",
+      "url": "https://sharonai.statuspage.io/incidents/y2xs5nv7zmcx.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/sharon-ai-standing/incident-blj47pt8p6kl.json",
+      "sha256": "d766e0e54202d0ed463450ee8de0f51cb49785844434c9ef76b513912f460682",
+      "url": "https://sharonai.statuspage.io/incidents/blj47pt8p6kl.json"
+    },
+    {
       "path": "circulate/retained/status/raw-root/raw/sharon-ai-standing/incident-29tp18hw9xrj.json",
-      "sha256": "fc7823dcb89a7541626b3b5c42b0d1e8a7ac90c9ba99357ccbeb52b3db515372",
+      "sha256": "e048c3769c2b3b188b5cfe61291bf41281894ac6576a13c3fd3685d3167cd574",
       "url": "https://sharonai.statuspage.io/incidents/29tp18hw9xrj.json"
     },
     {
       "path": "circulate/retained/status/raw-root/raw/sharon-ai-standing/incident-mxsgzsttyy4h.json",
-      "sha256": "dbd36ee961293ef22d42afa444091fbd12999117462c5edc08aaa5d7df435693",
+      "sha256": "841460a3f5907a0e777fc1d2d0865662afa3ce243fe053c5c61c847ff5aefc34",
       "url": "https://sharonai.statuspage.io/incidents/mxsgzsttyy4h.json"
     },
     {
       "path": "circulate/retained/status/raw-root/raw/sharon-ai-standing/incident-rych6kv4h5tc.json",
-      "sha256": "006cda1a35ac29a175bfe74dfad326745652016e692680765c1e3c08cfc9f3ea",
+      "sha256": "707d738bfc71cc61d7c47d2d98517e19994ff0d90fa76a82ed23a6f0ee5629d2",
       "url": "https://sharonai.statuspage.io/incidents/rych6kv4h5tc.json"
     },
     {
       "path": "circulate/retained/status/raw-root/raw/sharon-ai-standing/incident-698dz0jnsfn9.json",
-      "sha256": "239b97a6fe398468a2096dec5601bef4784a37d0a1f1e8a4fed49bee1129287f",
+      "sha256": "4a8c3b93bf32b368d3cc5e6d1d1cdcd4b2345f56e13716c27e461bcc2a632e63",
       "url": "https://sharonai.statuspage.io/incidents/698dz0jnsfn9.json"
     },
     {
       "path": "circulate/retained/status/raw-root/raw/sharon-ai-standing/incident-zgtst58c0xz8.json",
-      "sha256": "5341f2ef587054911a84a2813adb0c57fd6c328243b8e4420a0b706fee1b0b1a",
+      "sha256": "1022f7f06ddbdba84d4284932a0a5b684c5d8545abc5650c589ce176f5c23e61",
       "url": "https://sharonai.statuspage.io/incidents/zgtst58c0xz8.json"
     },
     {
       "path": "circulate/retained/status/raw-root/raw/sharon-ai-standing/incident-7y90vh33w3c1.json",
-      "sha256": "df1e602fc35c25c0bbd9de649dd76ebb6d16cf74185d7b606a96ab75c78aeca0",
+      "sha256": "a42459e6b876392a2743290578a350800d0df9395b6b757204c52a07a087a05d",
       "url": "https://sharonai.statuspage.io/incidents/7y90vh33w3c1.json"
     },
     {
       "path": "circulate/retained/status/raw-root/raw/sharon-ai-standing/incident-wyp2xf0762jy.json",
-      "sha256": "18fc8bdf240df4ec406fdc2bcf7cdd40db000c6af94f0579fad880bbaebc74a1",
+      "sha256": "afac486330500a61353407fd55f3f3f595e964e7afedff750daca1cfab151b7c",
       "url": "https://sharonai.statuspage.io/incidents/wyp2xf0762jy.json"
     },
     {
@@ -61,12 +71,12 @@
     },
     {
       "path": "circulate/retained/status/raw-root/raw/sharon-ai-standing/incident-qq9pv47kg7dd.json",
-      "sha256": "7e94b32c6f3ba8408ff58b7f3cbd608bd963c71fe15aef20effd584fd354a51e",
+      "sha256": "3a4f10ea2d62cba459139d37208835a68b528dcd38a362b574823ca2125d640b",
       "url": "https://sharonai.statuspage.io/incidents/qq9pv47kg7dd.json"
     },
     {
       "path": "circulate/retained/status/raw-root/raw/sharon-ai-standing/incident-20ff19ql13y6.json",
-      "sha256": "149f84e50a407cf16b379876307e747a304e2b13c924ec2e21ba048234f2ec20",
+      "sha256": "e5171db5a398a8ea51b101c02e47604aebf60e1aa18e4f4d56f324be12248253",
       "url": "https://sharonai.statuspage.io/incidents/20ff19ql13y6.json"
     },
     {
@@ -76,17 +86,17 @@
     },
     {
       "path": "circulate/retained/status/raw-root/raw/sharon-ai-standing/incident-w7cpr5p2mrz2.json",
-      "sha256": "4270bc8c3870772c4e2718701fdae19de715a75d891dfbabc4d36363bcbe5532",
+      "sha256": "b2ce668138b330d415a4f1901220e2527634e3f68bf4cf491e0921d929c3adda",
       "url": "https://sharonai.statuspage.io/incidents/w7cpr5p2mrz2.json"
     },
     {
       "path": "circulate/retained/status/raw-root/raw/sharon-ai-standing/incident-tbqbgprhj44c.json",
-      "sha256": "6ad6eb6ff78f166b70063396d15d209f7091c9da4b35738c14725c1fe21de107",
+      "sha256": "2365999f431c48ab5cef11ffd9085226b45ec829b5422a3aabeccc653eb90892",
       "url": "https://sharonai.statuspage.io/incidents/tbqbgprhj44c.json"
     },
     {
       "path": "circulate/retained/status/raw-root/raw/sharon-ai-standing/incident-fxhb04tqf6vp.json",
-      "sha256": "3bac6b5f848b5c58ad56602be1ba79bcd5986611e40d78039efee069deb1a0ac",
+      "sha256": "6b7a8ad8226a569c90c3d7c5e27edd7d67c23cefa452cb250d7966b563126d9d",
       "url": "https://sharonai.statuspage.io/incidents/fxhb04tqf6vp.json"
     },
     {
@@ -101,7 +111,7 @@
     },
     {
       "path": "circulate/retained/status/raw-root/raw/sharon-ai-standing/incident-tp4h0zj6md1z.json",
-      "sha256": "6816406e377147b1f7c4cd471f3d8a0fc5540a75630afe772b31c5b5c1352963",
+      "sha256": "1de70c300d80537f63fa200a270501e1211ef97e30e98aa44b02489fa2523131",
       "url": "https://sharonai.statuspage.io/incidents/tp4h0zj6md1z.json"
     },
     {
@@ -180,8 +190,8 @@
       "url": "https://sharonai.statuspage.io/incidents/vwxg43tdb8vr.json"
     }
   ],
-  "coverage_start": "2026-01-01",
-  "coverage_end": "2026-09-29",
+  "coverage_start": "2026-02-01",
+  "coverage_end": "2026-09-30",
   "severity_map": {
     "maintenance": "none",
     "major": "major"
@@ -506,9 +516,29 @@
       "resolved_utc": "2026-09-29T20:15:12.948+10:00",
       "is_maintenance": true,
       "url": "https://stspg.io/bjpzxgkcyxlh"
+    },
+    {
+      "id": "blj47pt8p6kl",
+      "title": "SharonAI Network Maintenance",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-09-30T12:07:06.934+10:00",
+      "resolved_utc": "2026-09-30T14:15:07.267+10:00",
+      "is_maintenance": true,
+      "url": "https://stspg.io/4rqv0gpz5lp2"
+    },
+    {
+      "id": "y2xs5nv7zmcx",
+      "title": "SharonAI Network Maintenance",
+      "impact_label": "maintenance",
+      "severity": "none",
+      "started_utc": "2026-09-30T17:10:34.294+10:00",
+      "resolved_utc": "2026-09-30T19:19:19.829+10:00",
+      "is_maintenance": true,
+      "url": "https://stspg.io/3pc5k0xnr5bl"
     }
   ],
   "notes": [
-    "STANDING collection 2026-09-29 by circulate; not read by R1 or R2. Raw pages (with SHA-256 above) are kept in the CI artifact / retained/, not committed."
+    "STANDING collection 2026-09-30 by circulate; not read by R1 or R2. Raw pages (with SHA-256 above) are kept in the CI artifact / retained/, not committed."
   ]
 }

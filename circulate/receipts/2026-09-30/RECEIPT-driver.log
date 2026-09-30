@@ -1,0 +1,22 @@
+2026-09-30T17:23:35Z circulate online run for 2026-09-30; receipt dir receipts\2026-09-30; retained D:\Projects\Products\Cantos\repo\circulate\retained; stages ['inferencex', 'prices', 'status', 'economics', 'delta', 'r2-standing', 'newsletter', 'packet', 'frontdoor', 'tests']
+2026-09-30T17:23:35Z == stage inferencex ==
+2026-09-30T17:24:50Z == stage inferencex: OK in 75.65 s. 79 artifacts imported (172 source rows, 3488 metric observations, 33 empty), 0 refused.
+2026-09-30T17:24:50Z == stage prices ==
+2026-09-30T17:24:51Z == stage prices: SKIP in 0.35 s. release unchanged: all 8 asset digests equal the recorded set (GPU Pricing Data — 2026-07-29 14:36 UTC).
+2026-09-30T17:24:51Z == stage status ==
+2026-09-30T17:37:16Z == stage status: OK in 744.93 s. 23 providers collected (1548 incident records); 0 unreachable (HOLD), 0 unsupported, 40 without a collector.
+2026-09-30T17:37:16Z == stage economics ==
+2026-09-30T17:37:17Z == stage economics: OK in 1.6 s. recomputed 121 rows through the page engine; byte-identical to the committed file.
+2026-09-30T17:37:17Z == stage delta ==
+2026-09-30T17:37:28Z == stage delta: OK in 10.33 s. 11915 observations vs 45 measured cells: 0 comparable, 11915 ranked.
+2026-09-30T17:37:28Z == stage r2-standing ==
+2026-09-30T17:41:18Z == stage r2-standing: OK in 230.67 s. STANDING: window 2026-04-03..2026-09-30, 16 providers, Spearman rho 0.41480895520125544 on major_or_critical_incident_count, bootstrap 95% interval [-0.060615444347344644, 0.7728006354170801], permuta
+2026-09-30T17:41:18Z == stage newsletter ==
+2026-09-30T17:41:19Z == stage newsletter: SKIP in 0.22 s. no post in the sitemap (343) is missing from the packet or the standing rows (343 known).
+2026-09-30T17:41:19Z == stage packet ==
+2026-09-30T17:41:19Z == stage packet: SKIP in 0.71 s. no standing newsletter rows; the committed packet stands (rebuilt from the lane inputs: identical=True).
+2026-09-30T17:41:19Z == stage frontdoor ==
+2026-09-30T17:41:20Z == stage frontdoor: SKIP in 0.46 s. nothing to rebuild: embeds equal data/market.json and data/run3/record.json, Run 3 record verified, kit matches source.
+2026-09-30T17:41:20Z == stage tests ==
+2026-09-30T17:47:02Z == stage tests: OK in 341.91 s. 7 suites passed.
+2026-09-30T17:47:02Z overall OK; stages inferencex OK, prices SKIP, status OK, economics OK, delta OK, r2-standing OK, newsletter SKIP, packet SKIP, frontdoor SKIP, tests OK

@@ -2,7 +2,7 @@
   "schema": "secondrun.status-incidents.v1",
   "provider": "GCore",
   "status_page_url": "https://status.gcore.com",
-  "retrieved_utc": "2026-09-29T23:28:04Z",
+  "retrieved_utc": "2026-09-30T17:31:58Z",
   "raw_files": [
     {
       "path": "circulate/retained/status/raw-root/raw/gcore-standing/notices_2026-03_p1.json",
@@ -106,22 +106,22 @@
     },
     {
       "path": "circulate/retained/status/raw-root/raw/gcore-standing/notices_2026-09_p1.json",
-      "sha256": "272151ec2b243bb506553819c0b7d84c50f6190709e6e3419078660d2d9b0018",
+      "sha256": "68ce763d56eee225db4abf3cac3659a29af728be155985de46b50bf50d2ec3e5",
       "url": "https://api.instatus.com/public/status.gcore.com/notices/monthly/1788220800000?page_no=1"
     },
     {
       "path": "circulate/retained/status/raw-root/raw/gcore-standing/notices_2026-09_p2.json",
-      "sha256": "21610f2c86a52d8c8697b72c88252540d257d6151817cc8590317279c8299049",
+      "sha256": "92f3b249f28e17210820ad316c8a747da3aef5b3001c05cb9494087b69341907",
       "url": "https://api.instatus.com/public/status.gcore.com/notices/monthly/1788220800000?page_no=2"
     },
     {
       "path": "circulate/retained/status/raw-root/raw/gcore-standing/notices_2026-09_p3.json",
-      "sha256": "d36fa97160ec850a68bedcfb1ce03b818a6923528de72f2f91b5b54542b2ff47",
+      "sha256": "b67cf75a6e8b0ac74d62b07102d2470fae64c7046a0abb9a636c8e6541e7d73b",
       "url": "https://api.instatus.com/public/status.gcore.com/notices/monthly/1788220800000?page_no=3"
     }
   ],
   "coverage_start": "2026-03-01",
-  "coverage_end": "2026-09-29",
+  "coverage_end": "2026-09-30",
   "severity_map": {
     "PARTIALOUTAGE": "major",
     "UNDERMAINTENANCE": "none",
@@ -2956,7 +2956,7 @@
       "impact_label": "UNDERMAINTENANCE",
       "severity": "none",
       "started_utc": "2026-09-30T00:00:00.000Z",
-      "resolved_utc": null,
+      "resolved_utc": "2026-09-30T04:00:00.000Z",
       "is_maintenance": true,
       "url": "https://status.gcore.com/cmu4lsgg601yj1nqg4kdne9fw"
     },
@@ -2966,13 +2966,23 @@
       "impact_label": "UNDERMAINTENANCE",
       "severity": "none",
       "started_utc": "2026-09-30T07:00:00.000Z",
-      "resolved_utc": null,
+      "resolved_utc": "2026-09-30T11:00:00.000Z",
       "is_maintenance": true,
       "url": "https://status.gcore.com/cmul8scr30a4713qtj2qjgl3g"
+    },
+    {
+      "id": "cmuo1neib026013l5izqea26t",
+      "title": "Cloud | Almaty Incident Details ",
+      "impact_label": "PARTIALOUTAGE",
+      "severity": "major",
+      "started_utc": "2026-09-30T11:50:39.896Z",
+      "resolved_utc": "2026-09-30T13:28:23.835Z",
+      "is_maintenance": false,
+      "url": "https://status.gcore.com/cmuo1neib026013l5izqea26t"
     }
   ],
   "notes": [
-    "STANDING collection 2026-09-29 by circulate; not read by R1 or R2. Raw pages (with SHA-256 above) are kept in the CI artifact / retained/, not committed.",
+    "STANDING collection 2026-09-30 by circulate; not read by R1 or R2. Raw pages (with SHA-256 above) are kept in the CI artifact / retained/, not committed.",
     "instatus platform; collected via https://api.instatus.com/public/status.gcore.com/notices/monthly/<monthKey>?page_no=N for every month 2026-03..2026-09, following pages until isLastPage. Notices with impact UNDERMAINTENANCE (or without a \"started\" field) are is_maintenance. MAJOROUTAGE->critical, PARTIALOUTAGE->major, DEGRADEDPERFORMANCE/MINOROUTAGE->minor."
   ]
 }

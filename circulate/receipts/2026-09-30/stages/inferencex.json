@@ -1,0 +1,449 @@
+{
+  "name": "inferencex",
+  "status": "OK",
+  "started_utc": "2026-09-30T17:23:35Z",
+  "finished_utc": "2026-09-30T17:24:50Z",
+  "seconds": 75.65,
+  "counts": {
+    "index_before": 4168,
+    "listing_pages": 2,
+    "new_artifacts_found": 79,
+    "downloaded": 79,
+    "imported": 79,
+    "empty": 33,
+    "refused": 0,
+    "source_rows": 172,
+    "metric_observations": 3488,
+    "capped_at": null
+  },
+  "sources": [
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts?name=results_bmk&per_page=100&page=1",
+      "sha256": "8bfcb906c44c74bc08ebd506bf1a5a13906becb2898c85b6426aa5e5dfe862ca",
+      "retrieved_utc": "2026-09-30T17:23:39Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts?name=results_bmk&per_page=100&page=2",
+      "sha256": "9221afd2834c000be5ac1156d00a7c1ef2e32ba4fe620e2cf81a60da4532eb79",
+      "retrieved_utc": "2026-09-30T17:23:44Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11067853159",
+      "sha256": "c44ede38e25720f3bf392596a2ba763863e8cc918b571a4d28371d0ecdc795a2",
+      "retrieved_utc": "2026-09-30T17:23:44Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11068229619",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "retrieved_utc": "2026-09-30T17:23:45Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11068753126",
+      "sha256": "ac6717b09fc0da3c84d8d7ae315cc13247ac771f2408684596d839e7604a4f4a",
+      "retrieved_utc": "2026-09-30T17:23:46Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11069301672",
+      "sha256": "4037400a4ebc6e1fb0f3971038a9fdd7d8372e48f2551a2c0805cc3eccd71f03",
+      "retrieved_utc": "2026-09-30T17:23:47Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11071773014",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "retrieved_utc": "2026-09-30T17:23:48Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11071812570",
+      "sha256": "4981b7f0b915404d285b51ea0432d58edd37ce239e7f2e44be5bee8345f97bc6",
+      "retrieved_utc": "2026-09-30T17:23:49Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11072559861",
+      "sha256": "fdf37e154341629cb4440f4644de5fb84910a6ac2e82f9728392f28d9fd1bcad",
+      "retrieved_utc": "2026-09-30T17:23:50Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11072909897",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "retrieved_utc": "2026-09-30T17:23:51Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11073018488",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "retrieved_utc": "2026-09-30T17:23:51Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11073140598",
+      "sha256": "a73ed8810fe61546cef01eb676512d6a5a50c92b43bf4fc6fce9d69dc692aa9c",
+      "retrieved_utc": "2026-09-30T17:23:52Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11073243827",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "retrieved_utc": "2026-09-30T17:23:53Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11073706825",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "retrieved_utc": "2026-09-30T17:23:54Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11073790763",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "retrieved_utc": "2026-09-30T17:23:55Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11074083792",
+      "sha256": "8fbd63286341bd6d5e7c71a95a7358fa5b4e110d5bace14994db048348bb2b83",
+      "retrieved_utc": "2026-09-30T17:23:55Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11074368891",
+      "sha256": "a91d63f93865f58db8a61a03956de88fee46a8392e5fcf234e32c68e770f69af",
+      "retrieved_utc": "2026-09-30T17:23:57Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11074528500",
+      "sha256": "6b1e7def0fc82664489190a397d6a4fd9ba837988599fff437595bf672df93e8",
+      "retrieved_utc": "2026-09-30T17:23:57Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11075066779",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "retrieved_utc": "2026-09-30T17:23:58Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11075672680",
+      "sha256": "5405ee1997b4f9cff4777a400d436083bf1442df86d314b8deed4fff09b375dc",
+      "retrieved_utc": "2026-09-30T17:23:59Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11075773952",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "retrieved_utc": "2026-09-30T17:24:00Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11076758812",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "retrieved_utc": "2026-09-30T17:24:01Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11076871892",
+      "sha256": "3c4bbff36f95741e3c6db2bcde2851da61ff1e514d6d0c7f62cda936e578dbb1",
+      "retrieved_utc": "2026-09-30T17:24:02Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11077199121",
+      "sha256": "58556a06871338dc8dcc7d4ba61050211707d5e95c1c018afcf5e0baaf1a5b19",
+      "retrieved_utc": "2026-09-30T17:24:03Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11077400591",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "retrieved_utc": "2026-09-30T17:24:03Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11077971272",
+      "sha256": "ad1896d14e23c46e6054d623a09efa1a20931991731d25b3e716821711432d99",
+      "retrieved_utc": "2026-09-30T17:24:04Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11078245856",
+      "sha256": "ef0b968eb5e99d18043cd3ec455d9f5f6650788a44213b67dbaba338e0f9988b",
+      "retrieved_utc": "2026-09-30T17:24:05Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11079109925",
+      "sha256": "2eea97399bbd4b594385db5641ee171dcb6825d334834fb0eb14e08b09665565",
+      "retrieved_utc": "2026-09-30T17:24:06Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11079621916",
+      "sha256": "c1ce8aedf2e1761ed282b14067ce01f7449d7bb9c9e2b1d0d0f2e6bd988d2db2",
+      "retrieved_utc": "2026-09-30T17:24:07Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11080257385",
+      "sha256": "56df3f9c2bbb54bdc5c3714e9d1af47a0be2b50cfb7776d27e7316f0db4aa434",
+      "retrieved_utc": "2026-09-30T17:24:08Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11081840941",
+      "sha256": "2aa84dfd8a13623548a05218e3d56708171abf531aa7e57842bbb33454500557",
+      "retrieved_utc": "2026-09-30T17:24:09Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11085250847",
+      "sha256": "0fc9291261003f16a6c9b9584b061e4a7d6236191db5aa5b7d80e1421f730d78",
+      "retrieved_utc": "2026-09-30T17:24:09Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11085284284",
+      "sha256": "fcb2a43de4ea41e0e380c42c16297f50274c37fc434d32c17a2831a9ee526c93",
+      "retrieved_utc": "2026-09-30T17:24:10Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11085831082",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "retrieved_utc": "2026-09-30T17:24:11Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11085862551",
+      "sha256": "7003d3a4d0cfd403aef1e46edd6208487c9dec90974015ee65e747444c8bc0ae",
+      "retrieved_utc": "2026-09-30T17:24:12Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11087891261",
+      "sha256": "5ac87bc857040d15f8506bfbe48ceb5d455dccf8d8a54fc3c50732b89d3c691c",
+      "retrieved_utc": "2026-09-30T17:24:13Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11089423772",
+      "sha256": "fd6646215fbb78f4b993990ae07f75f7bc5a9abebc0d04b1b7157e14ac926cd0",
+      "retrieved_utc": "2026-09-30T17:24:14Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11090342119",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "retrieved_utc": "2026-09-30T17:24:14Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11090667610",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "retrieved_utc": "2026-09-30T17:24:15Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11091010422",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "retrieved_utc": "2026-09-30T17:24:16Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11091926081",
+      "sha256": "4fce55bb814e52084f3d0ee0b365870eda673165d8eb9e5905e5045141db882d",
+      "retrieved_utc": "2026-09-30T17:24:17Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11091989942",
+      "sha256": "180c1bc17ff89226a4c08668764a0b377b993f186f55ff3039aa29b7103d30eb",
+      "retrieved_utc": "2026-09-30T17:24:18Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11092227885",
+      "sha256": "0671fa7bc0b6db51d24cc9605e536e9ddd065279713f08cf49525d9d8fda32dc",
+      "retrieved_utc": "2026-09-30T17:24:19Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11092777195",
+      "sha256": "bd93bf7c4aed4080202cd4b2ed90caed00491d6fcaba983381073136099d219d",
+      "retrieved_utc": "2026-09-30T17:24:20Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11093358840",
+      "sha256": "8695994114d2fa0458ee5a734237e36b37e5667a994b6a0843cc48a9352585a4",
+      "retrieved_utc": "2026-09-30T17:24:21Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11093368149",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "retrieved_utc": "2026-09-30T17:24:22Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11093538079",
+      "sha256": "d89d194664230a5ced29ebc72268413d31a90d8b1cb5235423a20e5a93dfae38",
+      "retrieved_utc": "2026-09-30T17:24:22Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11093543036",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "retrieved_utc": "2026-09-30T17:24:23Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11094396811",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "retrieved_utc": "2026-09-30T17:24:24Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11094422896",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "retrieved_utc": "2026-09-30T17:24:25Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11094442742",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "retrieved_utc": "2026-09-30T17:24:26Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11094516374",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "retrieved_utc": "2026-09-30T17:24:27Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11094821276",
+      "sha256": "843ac86778a47fff38e480d395b9e49d0046025d3cf197a6e86440c5df372028",
+      "retrieved_utc": "2026-09-30T17:24:28Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11095290048",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "retrieved_utc": "2026-09-30T17:24:28Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11095507565",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "retrieved_utc": "2026-09-30T17:24:29Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11095507838",
+      "sha256": "a23f93d94274d8d3d6f1fc4c0865856daf3c4883d8241b52b55129d2439bcba9",
+      "retrieved_utc": "2026-09-30T17:24:30Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11095613146",
+      "sha256": "be415315cdffc5f09b4341f2997986bd142420bc52dd44059c98b6a690e73978",
+      "retrieved_utc": "2026-09-30T17:24:31Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11096108633",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "retrieved_utc": "2026-09-30T17:24:32Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11096633294",
+      "sha256": "e7bfdbad2b26a77c4a951922c2b90ee23396ef5cc842468a8c3c07a59c30bbc6",
+      "retrieved_utc": "2026-09-30T17:24:32Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11099065100",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "retrieved_utc": "2026-09-30T17:24:33Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11101920466",
+      "sha256": "1478bf3bff048c30efc1e85c7420b96e74330b83292073a6f53df518a604d103",
+      "retrieved_utc": "2026-09-30T17:24:34Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11102101196",
+      "sha256": "35514896b7e9c7a52e58e47498cb12943087124490a43832e9eccfbc8e263ec4",
+      "retrieved_utc": "2026-09-30T17:24:35Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11102427868",
+      "sha256": "316f0682af8cc17aa36006aa475e965effbaa953babef2adf4186ce33a8815dd",
+      "retrieved_utc": "2026-09-30T17:24:35Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11103946910",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "retrieved_utc": "2026-09-30T17:24:36Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11104601287",
+      "sha256": "f45db59139a8d81f42d98e3bd94025769567012b27cccb0dc8d5667bdda40a4c",
+      "retrieved_utc": "2026-09-30T17:24:37Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11104984700",
+      "sha256": "c8c149f6705bee0e6473fcad0a2af53587bda0569c213222660e22304344680d",
+      "retrieved_utc": "2026-09-30T17:24:38Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11106362896",
+      "sha256": "de5bd809a0abc3ba922d25ea096e154739c6a71cba6363110725e6c83eb7172f",
+      "retrieved_utc": "2026-09-30T17:24:39Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11106524771",
+      "sha256": "5625e2df20b4536928d706f465aad0101be986f2bca05eae6b534689efe7e6b9",
+      "retrieved_utc": "2026-09-30T17:24:40Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11106808471",
+      "sha256": "066761ffffe4da096821ec51f71faa5add189e70bbee0411892263c69349c670",
+      "retrieved_utc": "2026-09-30T17:24:41Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11106888629",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "retrieved_utc": "2026-09-30T17:24:41Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11109912461",
+      "sha256": "cc04efe03ecbc8183fbb2b036d5314cad0c7b82ec95934092fed57fb10f6ecbc",
+      "retrieved_utc": "2026-09-30T17:24:42Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11110087999",
+      "sha256": "fe9570b9cfa31fd091be3c6da080f1e71dee5c9c0cac55a4fbeb1b32509000c2",
+      "retrieved_utc": "2026-09-30T17:24:43Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11110817764",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "retrieved_utc": "2026-09-30T17:24:44Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11111017810",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "retrieved_utc": "2026-09-30T17:24:44Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11111606464",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "retrieved_utc": "2026-09-30T17:24:45Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11111823965",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "retrieved_utc": "2026-09-30T17:24:46Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11111955535",
+      "sha256": "c911428e9013abfddbd7807ed8f41c6590ece033daa14f90c67a8427a6d89328",
+      "retrieved_utc": "2026-09-30T17:24:47Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11112658810",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "retrieved_utc": "2026-09-30T17:24:47Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11113215932",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "retrieved_utc": "2026-09-30T17:24:48Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11113584091",
+      "sha256": "b98b0037c9f532cfd7393c3c2f907b9c3c35b6c229ffb79e7cde0a09e9c174f2",
+      "retrieved_utc": "2026-09-30T17:24:49Z"
+    },
+    {
+      "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11113841377",
+      "sha256": "e99aeda2a2d441a04d35537067b6a064f6d469410b66bf850fb30608c9cf3e96",
+      "retrieved_utc": "2026-09-30T17:24:50Z"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "hot-aisle/campaign/backfill/imported/daily/2026-09-30.jsonl.gz",
+      "sha256": "67f37f6dd4372591e9f5c22962fcbf5cc7a6e29b7102ee15420cbccd33e5ec25",
+      "bytes": 504009,
+      "committed": true
+    },
+    {
+      "path": "hot-aisle/campaign/backfill/imported/history-index.json",
+      "sha256": "558cd2dd0b5eb01d2e7a2f0120f3ba599ba5fe7a0c05a2d187f945080d02bf56",
+      "bytes": 2083719,
+      "committed": true
+    },
+    {
+      "path": "hot-aisle/campaign/backfill/IMPORT-SUMMARY.md",
+      "sha256": "d8ee659d1a7111d6ee941188e8f838f839e45bf90bc0f441f4d4686471e8bc9b",
+      "bytes": 20722,
+      "committed": true
+    }
+  ],
+  "notes": "79 artifacts imported (172 source rows, 3488 metric observations, 33 empty), 0 refused.",
+  "error": null,
+  "log": "logs/inferencex.log"
+}

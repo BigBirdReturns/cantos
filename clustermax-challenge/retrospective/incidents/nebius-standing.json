@@ -2,21 +2,21 @@
   "schema": "secondrun.status-incidents.v1",
   "provider": "Nebius",
   "status_page_url": "https://status.nebius.com",
-  "retrieved_utc": "2026-09-29T23:21:54Z",
+  "retrieved_utc": "2026-09-30T17:25:30Z",
   "raw_files": [
     {
       "path": "circulate/retained/status/raw-root/raw/nebius-standing/history-page-1.json",
-      "sha256": "71a72025aebcab6b668dd0a9575dd91e88ec0a0bcd4eab7e0d45bf00f2faeed2",
+      "sha256": "d733da9ae045ffd3cc9ddfd3901dbdd80674661653d224657af15be040b0ff7c",
       "url": "https://status.nebius.com/history.json?page=1"
     },
     {
       "path": "circulate/retained/status/raw-root/raw/nebius-standing/history-page-2.json",
-      "sha256": "4cf44b8edcf6661bc063a42246361b4075ea4f569187c307a08921cb1770e6e2",
+      "sha256": "1c6e2e12b333f694617aeb4599a90d780852a62f45c83e64e6201efc39c06416",
       "url": "https://status.nebius.com/history.json?page=2"
     },
     {
       "path": "circulate/retained/status/raw-root/raw/nebius-standing/history-page-3.json",
-      "sha256": "e936d40f7840d25bc1eafb33762cfa8beb15bf953081beafde6d44a508669df0",
+      "sha256": "baa0a4d7b4ab7c244be91fcaeea893aeb9884de3381c3113f2b1ba16a4788c53",
       "url": "https://status.nebius.com/history.json?page=3"
     },
     {
@@ -356,7 +356,7 @@
     }
   ],
   "coverage_start": "2026-01-01",
-  "coverage_end": "2026-09-29",
+  "coverage_end": "2026-09-30",
   "severity_map": {
     "major": "major",
     "none": "none",
@@ -1036,6 +1036,6 @@
     }
   ],
   "notes": [
-    "STANDING collection 2026-09-29 by circulate; not read by R1 or R2. Raw pages (with SHA-256 above) are kept in the CI artifact / retained/, not committed."
+    "STANDING collection 2026-09-30 by circulate; not read by R1 or R2. Raw pages (with SHA-256 above) are kept in the CI artifact / retained/, not committed."
   ]
 }

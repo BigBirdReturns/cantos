@@ -2,7 +2,7 @@
   "schema": "secondrun.status-incidents.v1",
   "provider": "Atlas Cloud",
   "status_page_url": "https://atlascloud.instatus.com",
-  "retrieved_utc": "2026-09-29T23:29:41Z",
+  "retrieved_utc": "2026-09-30T17:33:40Z",
   "raw_files": [
     {
       "path": "circulate/retained/status/raw-root/raw/atlas-cloud-standing/notices_2026-03_p1.json",
@@ -51,7 +51,7 @@
     }
   ],
   "coverage_start": "2026-03-01",
-  "coverage_end": "2026-09-29",
+  "coverage_end": "2026-09-30",
   "severity_map": {
     "MAJOROUTAGE": "critical"
   },
@@ -458,7 +458,7 @@
     }
   ],
   "notes": [
-    "STANDING collection 2026-09-29 by circulate; not read by R1 or R2. Raw pages (with SHA-256 above) are kept in the CI artifact / retained/, not committed.",
+    "STANDING collection 2026-09-30 by circulate; not read by R1 or R2. Raw pages (with SHA-256 above) are kept in the CI artifact / retained/, not committed.",
     "instatus platform; collected via https://api.instatus.com/public/atlascloud/notices/monthly/<monthKey>?page_no=N for every month 2026-03..2026-09, following pages until isLastPage. Notices with impact UNDERMAINTENANCE (or without a \"started\" field) are is_maintenance. MAJOROUTAGE->critical, PARTIALOUTAGE->major, DEGRADEDPERFORMANCE/MINOROUTAGE->minor."
   ]
 }

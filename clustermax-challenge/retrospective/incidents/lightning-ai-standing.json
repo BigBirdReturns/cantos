@@ -2,21 +2,21 @@
   "schema": "secondrun.status-incidents.v1",
   "provider": "Lightning AI",
   "status_page_url": "https://status.lightning.ai",
-  "retrieved_utc": "2026-09-29T23:30:42Z",
+  "retrieved_utc": "2026-09-30T17:34:30Z",
   "raw_files": [
     {
       "path": "circulate/retained/status/raw-root/raw/lightning-ai-standing/history-page-1.json",
-      "sha256": "148625bafb0b9ab92a1ec25f12ba2d621235f74a5f0ba3cbbd0402f598bed5d0",
+      "sha256": "d6e209ba5579c32c200ee6b5b27bf16fb4691b6c4d1be250a9bd7bd0fe7617d3",
       "url": "https://status.lightning.ai/history.json?page=1"
     },
     {
       "path": "circulate/retained/status/raw-root/raw/lightning-ai-standing/history-page-2.json",
-      "sha256": "fcbd0075917d6e9078bb2897831ece5ca5f9bfdf2109883ce48778a71a114529",
+      "sha256": "1c3be9b3bffd4a3197910ecdfdece9d3702cd540bbda38833cf35895341b4493",
       "url": "https://status.lightning.ai/history.json?page=2"
     },
     {
       "path": "circulate/retained/status/raw-root/raw/lightning-ai-standing/history-page-3.json",
-      "sha256": "776edc93b254ed56dc11742021fcd2b7f1490ae0dc3a97f85503fcecd3bfe100",
+      "sha256": "72511ffba6a56ef6a4a2b0e69a1d16f1a4507c880e59dec1331da2f20c32f56a",
       "url": "https://status.lightning.ai/history.json?page=3"
     },
     {
@@ -76,7 +76,7 @@
     }
   ],
   "coverage_start": "2026-01-01",
-  "coverage_end": "2026-09-29",
+  "coverage_end": "2026-09-30",
   "severity_map": {
     "none": "none",
     "major": "major",
@@ -195,6 +195,6 @@
     }
   ],
   "notes": [
-    "STANDING collection 2026-09-29 by circulate; not read by R1 or R2. Raw pages (with SHA-256 above) are kept in the CI artifact / retained/, not committed."
+    "STANDING collection 2026-09-30 by circulate; not read by R1 or R2. Raw pages (with SHA-256 above) are kept in the CI artifact / retained/, not committed."
   ]
 }

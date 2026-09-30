@@ -2,7 +2,7 @@
   "schema": "secondrun.status-incidents.v1",
   "provider": "DigitalOcean",
   "status_page_url": "https://status.digitalocean.com",
-  "retrieved_utc": "2026-09-29T23:32:03Z",
+  "retrieved_utc": "2026-09-30T17:35:55Z",
   "raw_files": [
     {
       "path": "circulate/retained/status/raw-root/raw/digitalocean-standing/history-page-1.json",
@@ -621,7 +621,7 @@
     }
   ],
   "coverage_start": "2026-01-01",
-  "coverage_end": "2026-09-29",
+  "coverage_end": "2026-09-30",
   "severity_map": {
     "minor": "minor",
     "maintenance": "none",
@@ -1832,6 +1832,6 @@
     }
   ],
   "notes": [
-    "STANDING collection 2026-09-29 by circulate; not read by R1 or R2. Raw pages (with SHA-256 above) are kept in the CI artifact / retained/, not committed."
+    "STANDING collection 2026-09-30 by circulate; not read by R1 or R2. Raw pages (with SHA-256 above) are kept in the CI artifact / retained/, not committed."
   ]
 }

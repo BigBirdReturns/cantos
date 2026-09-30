@@ -2,21 +2,21 @@
   "schema": "secondrun.status-incidents.v1",
   "provider": "Hyperstack",
   "status_page_url": "https://status.hyperstack.cloud",
-  "retrieved_utc": "2026-09-29T23:28:36Z",
+  "retrieved_utc": "2026-09-30T17:32:30Z",
   "raw_files": [
     {
       "path": "circulate/retained/status/raw-root/raw/hyperstack-standing/history-page-1.json",
-      "sha256": "32f2d92f0acd8f791b87a817951f0e17f47ac0fd4f22ab939ae799910def2b2a",
+      "sha256": "0f50aa61a64304a467cc0502ab5c2e98530489ad9c278718446cfcccccb35adc",
       "url": "https://status.hyperstack.cloud/history.json?page=1"
     },
     {
       "path": "circulate/retained/status/raw-root/raw/hyperstack-standing/history-page-2.json",
-      "sha256": "de702aa766402ac1a46ff9a4d5c2bdfa29637849f56bb5b42e27769466fe9429",
+      "sha256": "ce9646ded87e7da0ce7dd01d6309a36116d60618e7715b9bdc048255e1618c0d",
       "url": "https://status.hyperstack.cloud/history.json?page=2"
     },
     {
       "path": "circulate/retained/status/raw-root/raw/hyperstack-standing/history-page-3.json",
-      "sha256": "4959053506c993095581c6e9a886351c8db2bc35a6c5a0cc6c23b04bc5afab57",
+      "sha256": "9409af2c6e7d7690cb4ec976506764dfa479cd0c65d7068ad64a67b3cfca0d39",
       "url": "https://status.hyperstack.cloud/history.json?page=3"
     },
     {
@@ -321,7 +321,7 @@
     }
   ],
   "coverage_start": "2026-01-01",
-  "coverage_end": "2026-09-29",
+  "coverage_end": "2026-09-30",
   "severity_map": {
     "maintenance": "none",
     "none": "none",
@@ -932,6 +932,6 @@
     }
   ],
   "notes": [
-    "STANDING collection 2026-09-29 by circulate; not read by R1 or R2. Raw pages (with SHA-256 above) are kept in the CI artifact / retained/, not committed."
+    "STANDING collection 2026-09-30 by circulate; not read by R1 or R2. Raw pages (with SHA-256 above) are kept in the CI artifact / retained/, not committed."
   ]
 }

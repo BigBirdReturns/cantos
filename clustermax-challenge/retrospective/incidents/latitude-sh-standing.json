@@ -2,21 +2,21 @@
   "schema": "secondrun.status-incidents.v1",
   "provider": "latitude.sh",
   "status_page_url": "https://status.latitude.sh",
-  "retrieved_utc": "2026-09-29T23:30:35Z",
+  "retrieved_utc": "2026-09-30T17:34:23Z",
   "raw_files": [
     {
       "path": "circulate/retained/status/raw-root/raw/latitude-sh-standing/history-page-1.json",
-      "sha256": "c78dd38b1be343ede76368f0f1d6c47fcddcf3cbaebe59ceb12891eb236a39d2",
+      "sha256": "dd57da47a73909f8d17042645dda1a63c162ab194539dfd292c531ebb82d89cf",
       "url": "https://status.latitude.sh/history.json?page=1"
     },
     {
       "path": "circulate/retained/status/raw-root/raw/latitude-sh-standing/history-page-2.json",
-      "sha256": "212f50281a2902e688c5d728675b3f29057aecd8c8a151aed08a99378879a7f7",
+      "sha256": "30f8e0ca5bd7343cad6e73d45000e215e10caf42ad11c922a327a25d375a9737",
       "url": "https://status.latitude.sh/history.json?page=2"
     },
     {
       "path": "circulate/retained/status/raw-root/raw/latitude-sh-standing/history-page-3.json",
-      "sha256": "3de61cfa6060c9a5b584e832b8456415efc6f116601d5cbcdd3eed7f73c4b064",
+      "sha256": "1026e4dc840af7ea7109285c7fd94a217c4228beddc87cce008932f316290846",
       "url": "https://status.latitude.sh/history.json?page=3"
     },
     {
@@ -261,7 +261,7 @@
     }
   ],
   "coverage_start": "2026-01-01",
-  "coverage_end": "2026-09-29",
+  "coverage_end": "2026-09-30",
   "severity_map": {
     "maintenance": "none",
     "minor": "minor",
@@ -752,6 +752,6 @@
     }
   ],
   "notes": [
-    "STANDING collection 2026-09-29 by circulate; not read by R1 or R2. Raw pages (with SHA-256 above) are kept in the CI artifact / retained/, not committed."
+    "STANDING collection 2026-09-30 by circulate; not read by R1 or R2. Raw pages (with SHA-256 above) are kept in the CI artifact / retained/, not committed."
   ]
 }

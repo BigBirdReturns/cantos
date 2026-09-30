@@ -2,21 +2,21 @@
   "schema": "secondrun.status-incidents.v1",
   "provider": "Cirrascale",
   "status_page_url": "https://status.cirrascale.com",
-  "retrieved_utc": "2026-09-29T23:27:53Z",
+  "retrieved_utc": "2026-09-30T17:31:33Z",
   "raw_files": [
     {
       "path": "circulate/retained/status/raw-root/raw/cirrascale-standing/history-page-1.json",
-      "sha256": "2a1f632f45af4597bcfe9c3b309b141c987070b8eb2a2fbfec97ea89f492b99d",
+      "sha256": "7c146175a9ae64cdf0a512f5c622644b78423f3bc71ebbb3f32e7867ed3ad121",
       "url": "https://status.cirrascale.com/history.json?page=1"
     },
     {
       "path": "circulate/retained/status/raw-root/raw/cirrascale-standing/history-page-2.json",
-      "sha256": "95da24559157b87631ef047668389a913ab8a8aac4a705f4523673c4fa143e30",
+      "sha256": "63beec1b11672d18307153e83e02546625d9b5ed86ea75851f505cfc7419c359",
       "url": "https://status.cirrascale.com/history.json?page=2"
     },
     {
       "path": "circulate/retained/status/raw-root/raw/cirrascale-standing/history-page-3.json",
-      "sha256": "efe839a3f6bda7deeda11516e07cb1ae414a9ba69f9ef35886a3c09c4a3d1877",
+      "sha256": "0583c25dc57e65283696fc0577201dd68196f11142201b60ca0ef92aa087b33c",
       "url": "https://status.cirrascale.com/history.json?page=3"
     },
     {
@@ -531,7 +531,7 @@
     }
   ],
   "coverage_start": "2026-01-01",
-  "coverage_end": "2026-09-29",
+  "coverage_end": "2026-09-30",
   "severity_map": {
     "maintenance": "none",
     "major": "major"
@@ -1559,6 +1559,6 @@
     }
   ],
   "notes": [
-    "STANDING collection 2026-09-29 by circulate; not read by R1 or R2. Raw pages (with SHA-256 above) are kept in the CI artifact / retained/, not committed."
+    "STANDING collection 2026-09-30 by circulate; not read by R1 or R2. Raw pages (with SHA-256 above) are kept in the CI artifact / retained/, not committed."
   ]
 }

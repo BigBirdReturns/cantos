@@ -1,0 +1,1104 @@
+{
+  "schema": "circulate/receipt@1",
+  "date": "2026-09-30",
+  "mode": "online",
+  "complete": true,
+  "overall": "OK",
+  "started_utc": "2026-09-30T17:23:35Z",
+  "finished_utc": "2026-09-30T17:47:02Z",
+  "seconds": 1406.8,
+  "host": {
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.13.15",
+    "node": "24.19.0",
+    "gh": "gh version 2.97.0 (2026-07-31)"
+  },
+  "git": {
+    "head": "9aebbff64328"
+  },
+  "driver": {
+    "path": "circulate/circulate.py",
+    "sha256": "c8e6d170b914d2c2b368e38168f68dbd95a5c8fac3d939fb81ccb5381ffdbf0a"
+  },
+  "stages": [
+    {
+      "name": "inferencex",
+      "status": "OK",
+      "started_utc": "2026-09-30T17:23:35Z",
+      "finished_utc": "2026-09-30T17:24:50Z",
+      "seconds": 75.65,
+      "counts": {
+        "index_before": 4168,
+        "listing_pages": 2,
+        "new_artifacts_found": 79,
+        "downloaded": 79,
+        "imported": 79,
+        "empty": 33,
+        "refused": 0,
+        "source_rows": 172,
+        "metric_observations": 3488,
+        "capped_at": null
+      },
+      "sources": [
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts?name=results_bmk&per_page=100&page=1",
+          "sha256": "8bfcb906c44c74bc08ebd506bf1a5a13906becb2898c85b6426aa5e5dfe862ca",
+          "retrieved_utc": "2026-09-30T17:23:39Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts?name=results_bmk&per_page=100&page=2",
+          "sha256": "9221afd2834c000be5ac1156d00a7c1ef2e32ba4fe620e2cf81a60da4532eb79",
+          "retrieved_utc": "2026-09-30T17:23:44Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11067853159",
+          "sha256": "c44ede38e25720f3bf392596a2ba763863e8cc918b571a4d28371d0ecdc795a2",
+          "retrieved_utc": "2026-09-30T17:23:44Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11068229619",
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "retrieved_utc": "2026-09-30T17:23:45Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11068753126",
+          "sha256": "ac6717b09fc0da3c84d8d7ae315cc13247ac771f2408684596d839e7604a4f4a",
+          "retrieved_utc": "2026-09-30T17:23:46Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11069301672",
+          "sha256": "4037400a4ebc6e1fb0f3971038a9fdd7d8372e48f2551a2c0805cc3eccd71f03",
+          "retrieved_utc": "2026-09-30T17:23:47Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11071773014",
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "retrieved_utc": "2026-09-30T17:23:48Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11071812570",
+          "sha256": "4981b7f0b915404d285b51ea0432d58edd37ce239e7f2e44be5bee8345f97bc6",
+          "retrieved_utc": "2026-09-30T17:23:49Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11072559861",
+          "sha256": "fdf37e154341629cb4440f4644de5fb84910a6ac2e82f9728392f28d9fd1bcad",
+          "retrieved_utc": "2026-09-30T17:23:50Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11072909897",
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "retrieved_utc": "2026-09-30T17:23:51Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11073018488",
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "retrieved_utc": "2026-09-30T17:23:51Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11073140598",
+          "sha256": "a73ed8810fe61546cef01eb676512d6a5a50c92b43bf4fc6fce9d69dc692aa9c",
+          "retrieved_utc": "2026-09-30T17:23:52Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11073243827",
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "retrieved_utc": "2026-09-30T17:23:53Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11073706825",
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "retrieved_utc": "2026-09-30T17:23:54Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11073790763",
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "retrieved_utc": "2026-09-30T17:23:55Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11074083792",
+          "sha256": "8fbd63286341bd6d5e7c71a95a7358fa5b4e110d5bace14994db048348bb2b83",
+          "retrieved_utc": "2026-09-30T17:23:55Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11074368891",
+          "sha256": "a91d63f93865f58db8a61a03956de88fee46a8392e5fcf234e32c68e770f69af",
+          "retrieved_utc": "2026-09-30T17:23:57Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11074528500",
+          "sha256": "6b1e7def0fc82664489190a397d6a4fd9ba837988599fff437595bf672df93e8",
+          "retrieved_utc": "2026-09-30T17:23:57Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11075066779",
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "retrieved_utc": "2026-09-30T17:23:58Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11075672680",
+          "sha256": "5405ee1997b4f9cff4777a400d436083bf1442df86d314b8deed4fff09b375dc",
+          "retrieved_utc": "2026-09-30T17:23:59Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11075773952",
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "retrieved_utc": "2026-09-30T17:24:00Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11076758812",
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "retrieved_utc": "2026-09-30T17:24:01Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11076871892",
+          "sha256": "3c4bbff36f95741e3c6db2bcde2851da61ff1e514d6d0c7f62cda936e578dbb1",
+          "retrieved_utc": "2026-09-30T17:24:02Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11077199121",
+          "sha256": "58556a06871338dc8dcc7d4ba61050211707d5e95c1c018afcf5e0baaf1a5b19",
+          "retrieved_utc": "2026-09-30T17:24:03Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11077400591",
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "retrieved_utc": "2026-09-30T17:24:03Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11077971272",
+          "sha256": "ad1896d14e23c46e6054d623a09efa1a20931991731d25b3e716821711432d99",
+          "retrieved_utc": "2026-09-30T17:24:04Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11078245856",
+          "sha256": "ef0b968eb5e99d18043cd3ec455d9f5f6650788a44213b67dbaba338e0f9988b",
+          "retrieved_utc": "2026-09-30T17:24:05Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11079109925",
+          "sha256": "2eea97399bbd4b594385db5641ee171dcb6825d334834fb0eb14e08b09665565",
+          "retrieved_utc": "2026-09-30T17:24:06Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11079621916",
+          "sha256": "c1ce8aedf2e1761ed282b14067ce01f7449d7bb9c9e2b1d0d0f2e6bd988d2db2",
+          "retrieved_utc": "2026-09-30T17:24:07Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11080257385",
+          "sha256": "56df3f9c2bbb54bdc5c3714e9d1af47a0be2b50cfb7776d27e7316f0db4aa434",
+          "retrieved_utc": "2026-09-30T17:24:08Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11081840941",
+          "sha256": "2aa84dfd8a13623548a05218e3d56708171abf531aa7e57842bbb33454500557",
+          "retrieved_utc": "2026-09-30T17:24:09Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11085250847",
+          "sha256": "0fc9291261003f16a6c9b9584b061e4a7d6236191db5aa5b7d80e1421f730d78",
+          "retrieved_utc": "2026-09-30T17:24:09Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11085284284",
+          "sha256": "fcb2a43de4ea41e0e380c42c16297f50274c37fc434d32c17a2831a9ee526c93",
+          "retrieved_utc": "2026-09-30T17:24:10Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11085831082",
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "retrieved_utc": "2026-09-30T17:24:11Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11085862551",
+          "sha256": "7003d3a4d0cfd403aef1e46edd6208487c9dec90974015ee65e747444c8bc0ae",
+          "retrieved_utc": "2026-09-30T17:24:12Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11087891261",
+          "sha256": "5ac87bc857040d15f8506bfbe48ceb5d455dccf8d8a54fc3c50732b89d3c691c",
+          "retrieved_utc": "2026-09-30T17:24:13Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11089423772",
+          "sha256": "fd6646215fbb78f4b993990ae07f75f7bc5a9abebc0d04b1b7157e14ac926cd0",
+          "retrieved_utc": "2026-09-30T17:24:14Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11090342119",
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "retrieved_utc": "2026-09-30T17:24:14Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11090667610",
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "retrieved_utc": "2026-09-30T17:24:15Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11091010422",
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "retrieved_utc": "2026-09-30T17:24:16Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11091926081",
+          "sha256": "4fce55bb814e52084f3d0ee0b365870eda673165d8eb9e5905e5045141db882d",
+          "retrieved_utc": "2026-09-30T17:24:17Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11091989942",
+          "sha256": "180c1bc17ff89226a4c08668764a0b377b993f186f55ff3039aa29b7103d30eb",
+          "retrieved_utc": "2026-09-30T17:24:18Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11092227885",
+          "sha256": "0671fa7bc0b6db51d24cc9605e536e9ddd065279713f08cf49525d9d8fda32dc",
+          "retrieved_utc": "2026-09-30T17:24:19Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11092777195",
+          "sha256": "bd93bf7c4aed4080202cd4b2ed90caed00491d6fcaba983381073136099d219d",
+          "retrieved_utc": "2026-09-30T17:24:20Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11093358840",
+          "sha256": "8695994114d2fa0458ee5a734237e36b37e5667a994b6a0843cc48a9352585a4",
+          "retrieved_utc": "2026-09-30T17:24:21Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11093368149",
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "retrieved_utc": "2026-09-30T17:24:22Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11093538079",
+          "sha256": "d89d194664230a5ced29ebc72268413d31a90d8b1cb5235423a20e5a93dfae38",
+          "retrieved_utc": "2026-09-30T17:24:22Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11093543036",
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "retrieved_utc": "2026-09-30T17:24:23Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11094396811",
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "retrieved_utc": "2026-09-30T17:24:24Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11094422896",
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "retrieved_utc": "2026-09-30T17:24:25Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11094442742",
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "retrieved_utc": "2026-09-30T17:24:26Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11094516374",
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "retrieved_utc": "2026-09-30T17:24:27Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11094821276",
+          "sha256": "843ac86778a47fff38e480d395b9e49d0046025d3cf197a6e86440c5df372028",
+          "retrieved_utc": "2026-09-30T17:24:28Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11095290048",
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "retrieved_utc": "2026-09-30T17:24:28Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11095507565",
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "retrieved_utc": "2026-09-30T17:24:29Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11095507838",
+          "sha256": "a23f93d94274d8d3d6f1fc4c0865856daf3c4883d8241b52b55129d2439bcba9",
+          "retrieved_utc": "2026-09-30T17:24:30Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11095613146",
+          "sha256": "be415315cdffc5f09b4341f2997986bd142420bc52dd44059c98b6a690e73978",
+          "retrieved_utc": "2026-09-30T17:24:31Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11096108633",
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "retrieved_utc": "2026-09-30T17:24:32Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11096633294",
+          "sha256": "e7bfdbad2b26a77c4a951922c2b90ee23396ef5cc842468a8c3c07a59c30bbc6",
+          "retrieved_utc": "2026-09-30T17:24:32Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11099065100",
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "retrieved_utc": "2026-09-30T17:24:33Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11101920466",
+          "sha256": "1478bf3bff048c30efc1e85c7420b96e74330b83292073a6f53df518a604d103",
+          "retrieved_utc": "2026-09-30T17:24:34Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11102101196",
+          "sha256": "35514896b7e9c7a52e58e47498cb12943087124490a43832e9eccfbc8e263ec4",
+          "retrieved_utc": "2026-09-30T17:24:35Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11102427868",
+          "sha256": "316f0682af8cc17aa36006aa475e965effbaa953babef2adf4186ce33a8815dd",
+          "retrieved_utc": "2026-09-30T17:24:35Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11103946910",
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "retrieved_utc": "2026-09-30T17:24:36Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11104601287",
+          "sha256": "f45db59139a8d81f42d98e3bd94025769567012b27cccb0dc8d5667bdda40a4c",
+          "retrieved_utc": "2026-09-30T17:24:37Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11104984700",
+          "sha256": "c8c149f6705bee0e6473fcad0a2af53587bda0569c213222660e22304344680d",
+          "retrieved_utc": "2026-09-30T17:24:38Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11106362896",
+          "sha256": "de5bd809a0abc3ba922d25ea096e154739c6a71cba6363110725e6c83eb7172f",
+          "retrieved_utc": "2026-09-30T17:24:39Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11106524771",
+          "sha256": "5625e2df20b4536928d706f465aad0101be986f2bca05eae6b534689efe7e6b9",
+          "retrieved_utc": "2026-09-30T17:24:40Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11106808471",
+          "sha256": "066761ffffe4da096821ec51f71faa5add189e70bbee0411892263c69349c670",
+          "retrieved_utc": "2026-09-30T17:24:41Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11106888629",
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "retrieved_utc": "2026-09-30T17:24:41Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11109912461",
+          "sha256": "cc04efe03ecbc8183fbb2b036d5314cad0c7b82ec95934092fed57fb10f6ecbc",
+          "retrieved_utc": "2026-09-30T17:24:42Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11110087999",
+          "sha256": "fe9570b9cfa31fd091be3c6da080f1e71dee5c9c0cac55a4fbeb1b32509000c2",
+          "retrieved_utc": "2026-09-30T17:24:43Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11110817764",
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "retrieved_utc": "2026-09-30T17:24:44Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11111017810",
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "retrieved_utc": "2026-09-30T17:24:44Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11111606464",
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "retrieved_utc": "2026-09-30T17:24:45Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11111823965",
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "retrieved_utc": "2026-09-30T17:24:46Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11111955535",
+          "sha256": "c911428e9013abfddbd7807ed8f41c6590ece033daa14f90c67a8427a6d89328",
+          "retrieved_utc": "2026-09-30T17:24:47Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11112658810",
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "retrieved_utc": "2026-09-30T17:24:47Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11113215932",
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "retrieved_utc": "2026-09-30T17:24:48Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11113584091",
+          "sha256": "b98b0037c9f532cfd7393c3c2f907b9c3c35b6c229ffb79e7cde0a09e9c174f2",
+          "retrieved_utc": "2026-09-30T17:24:49Z"
+        },
+        {
+          "url": "https://api.github.com/repos/SemiAnalysisAI/InferenceX/actions/artifacts/11113841377",
+          "sha256": "e99aeda2a2d441a04d35537067b6a064f6d469410b66bf850fb30608c9cf3e96",
+          "retrieved_utc": "2026-09-30T17:24:50Z"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "hot-aisle/campaign/backfill/imported/daily/2026-09-30.jsonl.gz",
+          "sha256": "67f37f6dd4372591e9f5c22962fcbf5cc7a6e29b7102ee15420cbccd33e5ec25",
+          "bytes": 504009,
+          "committed": true
+        },
+        {
+          "path": "hot-aisle/campaign/backfill/imported/history-index.json",
+          "sha256": "558cd2dd0b5eb01d2e7a2f0120f3ba599ba5fe7a0c05a2d187f945080d02bf56",
+          "bytes": 2083719,
+          "committed": true
+        },
+        {
+          "path": "hot-aisle/campaign/backfill/IMPORT-SUMMARY.md",
+          "sha256": "d8ee659d1a7111d6ee941188e8f838f839e45bf90bc0f441f4d4686471e8bc9b",
+          "bytes": 20722,
+          "committed": true
+        }
+      ],
+      "notes": "79 artifacts imported (172 source rows, 3488 metric observations, 33 empty), 0 refused.",
+      "error": null,
+      "log": "logs/inferencex.log"
+    },
+    {
+      "name": "prices",
+      "status": "SKIP",
+      "started_utc": "2026-09-30T17:24:50Z",
+      "finished_utc": "2026-09-30T17:24:51Z",
+      "seconds": 0.35,
+      "counts": {
+        "assets": 8,
+        "days_before": 2201,
+        "changed_assets": 0,
+        "removed_assets": 0
+      },
+      "sources": [
+        {
+          "url": "https://api.github.com/repos/thatkavish/OpenComputePrices/releases/tags/latest-data",
+          "sha256": "1890256fa6f958f7e40d6da06380bc15c765d0da61511d3f3ae8271d55eb9ae1",
+          "retrieved_utc": "2026-09-30T17:24:51Z"
+        }
+      ],
+      "outputs": [],
+      "notes": "release unchanged: all 8 asset digests equal the recorded set (GPU Pricing Data \u2014 2026-07-29 14:36 UTC).",
+      "error": null,
+      "log": "logs/prices.log"
+    },
+    {
+      "name": "status",
+      "status": "OK",
+      "started_utc": "2026-09-30T17:24:51Z",
+      "finished_utc": "2026-09-30T17:37:16Z",
+      "seconds": 744.93,
+      "counts": {
+        "providers_in_file": 63,
+        "collected": 23,
+        "hold": 0,
+        "unsupported": 0,
+        "failed": 0,
+        "no_collector": 40,
+        "incidents": 1548
+      },
+      "sources": [
+        {
+          "url": "https://status.nebius.com",
+          "sha256": "20f94990528be432d4d0de25221f93cbadabad7e2f293ba1ca7213db9055cd85",
+          "retrieved_utc": "2026-09-30T17:25:30Z",
+          "pages": 70
+        },
+        {
+          "url": "https://status.crusoecloud.com",
+          "sha256": "689729042365590217a7bb7913b77425fbf8447b787e35de9f1319028cf5eb0b",
+          "retrieved_utc": "2026-09-30T17:26:09Z",
+          "pages": 75
+        },
+        {
+          "url": "https://status.fluidstack.io",
+          "sha256": "151a8538650357fd529af8e2d1bd68a451d52b8ec2c764852051b7b68acfa3ad",
+          "retrieved_utc": "2026-09-30T17:26:13Z",
+          "pages": 3
+        },
+        {
+          "url": "https://status.together.ai",
+          "sha256": "6e07fc60e11e7e6303276c14e28d2b1ef92ca6433e9f7eb44896d40994731327",
+          "retrieved_utc": "2026-09-30T17:26:17Z",
+          "pages": 3
+        },
+        {
+          "url": "https://status.lambda.ai",
+          "sha256": "62301cd1d69843762f51daec0a9834b88a603761eb0eb7fc717c6bfcc7b6def0",
+          "retrieved_utc": "2026-09-30T17:26:19Z",
+          "pages": 1
+        },
+        {
+          "url": "https://status.scaleway.com",
+          "sha256": "843f33b2c1153ea3f06ae24167e5a3bf6503fe3ed349a3d30b1bff7497c01287",
+          "retrieved_utc": "2026-09-30T17:30:40Z",
+          "pages": 506
+        },
+        {
+          "url": "https://status.cirrascale.com",
+          "sha256": "bb10cb92530278c28de0bb711e345038f3985f82ceae5b04571f9a4b74f3bb23",
+          "retrieved_utc": "2026-09-30T17:31:33Z",
+          "pages": 105
+        },
+        {
+          "url": "https://status.gcore.com",
+          "sha256": "175c8a6b0b75cce108c196d5b5126bead783529e4583fca2f92f16a44d946752",
+          "retrieved_utc": "2026-09-30T17:31:58Z",
+          "pages": 23
+        },
+        {
+          "url": "https://status.hyperstack.cloud",
+          "sha256": "138bf04bae2f3b74f61ee15655a607c6524ea0b84abfd6d6999bc7358f94fd45",
+          "retrieved_utc": "2026-09-30T17:32:30Z",
+          "pages": 63
+        },
+        {
+          "url": "https://uptime.runpod.io",
+          "sha256": "1710ab4867dd02f96a6c4ae26a702dcf9ff755e24ce3bceec022c02e48cdf5e4",
+          "retrieved_utc": "2026-09-30T17:33:34Z",
+          "pages": 54
+        },
+        {
+          "url": "https://atlascloud.instatus.com",
+          "sha256": "855be0dfdc223d44dee0b1e03c0e81e67af85ef3bb89b1579339055a83a26105",
+          "retrieved_utc": "2026-09-30T17:33:40Z",
+          "pages": 9
+        },
+        {
+          "url": "https://status.primeintellect.ai",
+          "sha256": "8dd2873064d35c4dc7188c820115120b25c855398de60d6d31c5538726ffabfd",
+          "retrieved_utc": "2026-09-30T17:33:54Z",
+          "pages": 13
+        },
+        {
+          "url": "https://status.cudocompute.com",
+          "sha256": "89d6eccb5b32fd943b2cfc39f48898406f2dfb413ef630569c2f2374473d09b6",
+          "retrieved_utc": "2026-09-30T17:33:57Z",
+          "pages": 3
+        },
+        {
+          "url": "https://status.latitude.sh",
+          "sha256": "f890a05d5fb4dc2cffc15262b8e76ce6ad86d6f6dbcdd1d0b0fb15f7dd9eb677",
+          "retrieved_utc": "2026-09-30T17:34:23Z",
+          "pages": 51
+        },
+        {
+          "url": "https://status.lightning.ai",
+          "sha256": "acb033d244f80029b374e78b5df9ca8afefe17c73e85438e0867aa8ae763f703",
+          "retrieved_utc": "2026-09-30T17:34:30Z",
+          "pages": 14
+        },
+        {
+          "url": "https://status.verda.com",
+          "sha256": "6cb0f521c9fee8b6fab0ebcee1970f8c757b321546025bb95f75896f6dfb9250",
+          "retrieved_utc": "2026-09-30T17:34:50Z",
+          "pages": 17
+        },
+        {
+          "url": "https://status.digitalocean.com",
+          "sha256": "009ea1b62d4ba4f10bb00a07cd6458380fcb9221d7c32d861beb2d0be2ba696c",
+          "retrieved_utc": "2026-09-30T17:35:55Z",
+          "pages": 123
+        },
+        {
+          "url": "https://sharonai.statuspage.io",
+          "sha256": "abd11c7aac831b4c107933c6c8a136fa0a2e9e19b36fd97c268881c7a0e7a9df",
+          "retrieved_utc": "2026-09-30T17:36:14Z",
+          "pages": 37
+        },
+        {
+          "url": "https://status.hydrahost.com",
+          "sha256": "c1b6d8979a9b03a59b23d408ab2a231851f65a7c07b8f5c536d4ff102313ecd0",
+          "retrieved_utc": "2026-09-30T17:36:17Z",
+          "pages": 3
+        },
+        {
+          "url": "https://status.gpu.net",
+          "sha256": "9eef2ea706ad37dc4c70203741e6bfa6cc2e6ce618232a78a3d689729f582bb7",
+          "retrieved_utc": "2026-09-30T17:36:20Z",
+          "pages": 3
+        },
+        {
+          "url": "https://www.akamaistatus.com",
+          "sha256": "072ace3ce7c0658de83b391bd5f4faa141cd415b9bc36b065462f1650d158556",
+          "retrieved_utc": "2026-09-30T17:37:06Z",
+          "pages": 91
+        },
+        {
+          "url": "https://status.mithril.ai",
+          "sha256": "becafdb492c990bf278f143cb3da4990f46cb2def04a70d6de54b23bbab9231e",
+          "retrieved_utc": "2026-09-30T17:37:12Z",
+          "pages": 7
+        },
+        {
+          "url": "https://status.radiant.co",
+          "sha256": "6312fa2ce5d008d2ac66f10ca730d6eea31096ebe6a5f77a9da15c16109bb30b",
+          "retrieved_utc": "2026-09-30T17:37:15Z",
+          "pages": 4
+        }
+      ],
+      "outputs": [
+        {
+          "path": "clustermax-challenge/retrospective/incidents/nebius-standing.json",
+          "sha256": "ecbd32b4b1a29dd4e33980b6e1e9cef5fc624e22f3ac07fcbc36c28a4bd0cae2",
+          "bytes": 41970,
+          "committed": true
+        },
+        {
+          "path": "clustermax-challenge/retrospective/incidents/crusoe-r2-standing.json",
+          "sha256": "8fd8bf8048b129eb9a2338ae35daacff435929ec336ce908ad83dd9038ee693f",
+          "bytes": 46377,
+          "committed": true
+        },
+        {
+          "path": "clustermax-challenge/retrospective/incidents/fluidstack-standing.json",
+          "sha256": "29768467778e83055f9107b725d55f4e0cd43e13471b21a0adcb2aa8ba8d2ea9",
+          "bytes": 1808,
+          "committed": true
+        },
+        {
+          "path": "clustermax-challenge/retrospective/incidents/together-ai-standing.json",
+          "sha256": "62468757d7ba595e60ff3857fa9c04ee8f2aded77cdd242eca536e13c4716e63",
+          "bytes": 1804,
+          "committed": true
+        },
+        {
+          "path": "clustermax-challenge/retrospective/incidents/lambda-standing.json",
+          "sha256": "966fafe17228bf42cabac6e9aa664f0662329fc36c1d148bb4801ed46419c6ad",
+          "bytes": 10920,
+          "committed": true
+        },
+        {
+          "path": "clustermax-challenge/retrospective/incidents/scaleway-standing.json",
+          "sha256": "bdf6a56ca1fcaafcddf32ec0fccf469b4e4e3cf981e44c93a3cc1b74381b1fb5",
+          "bytes": 318285,
+          "committed": true
+        },
+        {
+          "path": "clustermax-challenge/retrospective/incidents/cirrascale-standing.json",
+          "sha256": "a3d270150af02a985d8b618c3560bd62c7ad4d685be37f7756b56a0de931b826",
+          "bytes": 72877,
+          "committed": true
+        },
+        {
+          "path": "clustermax-challenge/retrospective/incidents/gcore-standing.json",
+          "sha256": "05c118bd9b2304f168a5e3cb2a738c0cc493a4fd923c206aa768308097993cf6",
+          "bytes": 115399,
+          "committed": true
+        },
+        {
+          "path": "clustermax-challenge/retrospective/incidents/hyperstack-standing.json",
+          "sha256": "dfcaca5f86fb32957202860595b5013ad549a1f6f4ed07354fbaf98f4a221f3b",
+          "bytes": 37768,
+          "committed": true
+        },
+        {
+          "path": "clustermax-challenge/retrospective/incidents/runpod-standing.json",
+          "sha256": "c6c41e8783e684074a21b1598a73a4e36f38fd0f95ab82336f85fa775d37adf7",
+          "bytes": 31710,
+          "committed": true
+        },
+        {
+          "path": "clustermax-challenge/retrospective/incidents/atlas-cloud-standing.json",
+          "sha256": "4a6711b5206cfbdbfc4479e6c35f16e3edcb1a2e7790bc3fc86b0db8be0020e5",
+          "bytes": 18384,
+          "committed": true
+        },
+        {
+          "path": "clustermax-challenge/retrospective/incidents/prime-intellect-standing.json",
+          "sha256": "f76fee3bc8d9f70188f0618ad8ebb99205bc122620350c20eb588cb996659463",
+          "bytes": 8124,
+          "committed": true
+        },
+        {
+          "path": "clustermax-challenge/retrospective/incidents/cudo-compute-standing.json",
+          "sha256": "48e6367d2c8a28ef97404cc538a8983b0ee97a7b1831c9b56db8b5f7d2e2b0e8",
+          "bytes": 1824,
+          "committed": true
+        },
+        {
+          "path": "clustermax-challenge/retrospective/incidents/latitude-sh-standing.json",
+          "sha256": "3d600bf72b9826c3b5ca0c77d59f7fd4ffbdd775eae777d8db809b31758789df",
+          "bytes": 30767,
+          "committed": true
+        },
+        {
+          "path": "clustermax-challenge/retrospective/incidents/lightning-ai-standing.json",
+          "sha256": "76f71e86f984e70f06c460877b7b2a7ca34ae0af24954105fc7f89d87c0589be",
+          "bytes": 7900,
+          "committed": true
+        },
+        {
+          "path": "clustermax-challenge/retrospective/incidents/verda-standing.json",
+          "sha256": "b78a762408b6467e9f70c33ebadf69530059e2a8114a1da784a8540650c21276",
+          "bytes": 10323,
+          "committed": true
+        },
+        {
+          "path": "clustermax-challenge/retrospective/incidents/digitalocean-standing.json",
+          "sha256": "b6a93b3b294e326b3824dad9d5b9eadaf350143c296a44044bf67f3fbf794fcc",
+          "bytes": 74565,
+          "committed": true
+        },
+        {
+          "path": "clustermax-challenge/retrospective/incidents/sharon-ai-standing.json",
+          "sha256": "d802c3081825de2098ea211e6760d87fbfa63ce2783e273bfda2287eedc8021b",
+          "bytes": 22046,
+          "committed": true
+        },
+        {
+          "path": "clustermax-challenge/retrospective/incidents/hydra-standing.json",
+          "sha256": "991e6155860423f688a0159d8d58f6dd212f0c7aa3bd0c964cafa6141e444af1",
+          "bytes": 1788,
+          "committed": true
+        },
+        {
+          "path": "clustermax-challenge/retrospective/incidents/gpu-net-standing.json",
+          "sha256": "b3dabb7bfbaf97f9e7efef1d3cb46ff12a8da902c5bb7c901a09abd6fa94b585",
+          "bytes": 1772,
+          "committed": true
+        },
+        {
+          "path": "clustermax-challenge/retrospective/incidents/akamai-standing.json",
+          "sha256": "c8dbe74920337480cafaa8afe72710291dd831697b98bc4019c6ecda47d6dc43",
+          "bytes": 54450,
+          "committed": true
+        },
+        {
+          "path": "clustermax-challenge/retrospective/incidents/mithril-standing.json",
+          "sha256": "7623ed09432b0d4d1ee22a31bc1ebd12c7f160cea7fb324d4b3553d12b7da5df",
+          "bytes": 6806,
+          "committed": true
+        },
+        {
+          "path": "clustermax-challenge/retrospective/incidents/radiant-standing.json",
+          "sha256": "2249a571856b681ae0d3c413c2a581af0c37c46359f5dcb985d352e4c40c59fc",
+          "bytes": 5039,
+          "committed": true
+        },
+        {
+          "path": "clustermax-challenge/retrospective/incidents/COLLECTION-LOG-standing.md",
+          "sha256": "d3477995892be8ca835c0a3c49988bf5134aa20c5ccc96301667a8386ad6fd8d",
+          "bytes": 6928,
+          "committed": true
+        }
+      ],
+      "notes": "23 providers collected (1548 incident records); 0 unreachable (HOLD), 0 unsupported, 40 without a collector.",
+      "error": null,
+      "log": "logs/status.log"
+    },
+    {
+      "name": "economics",
+      "status": "OK",
+      "started_utc": "2026-09-30T17:37:16Z",
+      "finished_utc": "2026-09-30T17:37:17Z",
+      "seconds": 1.6,
+      "counts": {
+        "index_days": 120,
+        "days_with_verified_files": 120,
+        "committed_rows": 121,
+        "rows_computed": 121,
+        "dated_priced": 120
+      },
+      "sources": [],
+      "outputs": [
+        {
+          "path": "hot-aisle/campaign/market/MARKET.md",
+          "sha256": "7036d787a2c9e9abfe94690e26e09b95499474fd865dc7cf43eb9fd917b5d34a",
+          "bytes": 5290,
+          "committed": true
+        }
+      ],
+      "notes": "recomputed 121 rows through the page engine; byte-identical to the committed file.",
+      "error": null,
+      "log": "logs/economics.log"
+    },
+    {
+      "name": "delta",
+      "status": "OK",
+      "started_utc": "2026-09-30T17:37:17Z",
+      "finished_utc": "2026-09-30T17:37:27Z",
+      "seconds": 10.33,
+      "counts": {
+        "inputs": 4,
+        "observations": 11915,
+        "source_rows": 1868,
+        "chunks": 1,
+        "measured_cells": 45,
+        "comparable_observations": 0,
+        "gaps": 0,
+        "ranked": 11915
+      },
+      "sources": [
+        {
+          "url": "hot-aisle/campaign/backfill/imported/inferencex-2026-09-23.jsonl",
+          "sha256": "c05e34341baeb24362484bb8ed6a2bbd83e69f94fab4749263ad2a7448815def",
+          "retrieved_utc": null
+        },
+        {
+          "url": "hot-aisle/campaign/backfill/imported/mlperf-2026-09-29.jsonl",
+          "sha256": "a68c9e81ade4ea1857fda5b9877c59aa5ba12ced1a426029eda16e23cf326e4a",
+          "retrieved_utc": null
+        },
+        {
+          "url": "hot-aisle/campaign/backfill/imported/daily/2026-09-29.jsonl.gz",
+          "sha256": "a978efa4882f74783fc4b05737889b2237777d0d093f171816a87c89699c8065",
+          "retrieved_utc": null
+        },
+        {
+          "url": "hot-aisle/campaign/backfill/imported/daily/2026-09-30.jsonl.gz",
+          "sha256": "67f37f6dd4372591e9f5c22962fcbf5cc7a6e29b7102ee15420cbccd33e5ec25",
+          "retrieved_utc": null
+        }
+      ],
+      "outputs": [
+        {
+          "path": "circulate/retained/delta/delta-standing.json.gz",
+          "sha256": "b879f1af97c00ab57f0c697b13db969bdea025ec923c2fa26d7d7a63004e869b",
+          "bytes": 1883154,
+          "committed": false
+        },
+        {
+          "path": "hot-aisle/campaign/backfill/DELTA-standing.md",
+          "sha256": "cbfb230715f850229e0c054fc056e5b1bc3d2d5195a4b22ca8c1da3f7bb81bc5",
+          "bytes": 24696,
+          "committed": true
+        }
+      ],
+      "notes": "11915 observations vs 45 measured cells: 0 comparable, 11915 ranked.",
+      "error": null,
+      "log": "logs/delta.log"
+    },
+    {
+      "name": "r2-standing",
+      "status": "OK",
+      "started_utc": "2026-09-30T17:37:28Z",
+      "finished_utc": "2026-09-30T17:41:18Z",
+      "seconds": 230.67,
+      "counts": {
+        "window_start": "2026-04-03",
+        "window_end": "2026-09-30",
+        "included_primary": 16,
+        "included_secondary": 22,
+        "reading": "inconclusive",
+        "seed": 20260930,
+        "spearman_rho": 0.41480895520125544
+      },
+      "sources": [],
+      "outputs": [
+        {
+          "path": "clustermax-challenge/retrospective/results/R2-standing-2026-09-30.json",
+          "sha256": "8608bf29c3f2959486b81554aa2b34188e67fb54769978d971c033536f7b8616",
+          "bytes": 70594,
+          "committed": true
+        },
+        {
+          "path": "clustermax-challenge/retrospective/results/R2-standing-2026-09-30.md",
+          "sha256": "0eeb7aa2487c0e0fde7dfd63e9e57314534f650f32c50e51b21768ce9d6d8aae",
+          "bytes": 39164,
+          "committed": true
+        }
+      ],
+      "notes": "STANDING: window 2026-04-03..2026-09-30, 16 providers, Spearman rho 0.41480895520125544 on major_or_critical_incident_count, bootstrap 95% interval [-0.060615444347344644, 0.7728006354170801], permutation p 0.1109; reading inconclusive.",
+      "error": null,
+      "log": "logs/r2-standing.log"
+    },
+    {
+      "name": "newsletter",
+      "status": "SKIP",
+      "started_utc": "2026-09-30T17:41:18Z",
+      "finished_utc": "2026-09-30T17:41:19Z",
+      "seconds": 0.22,
+      "counts": {
+        "sitemap_posts": 343,
+        "known": 343,
+        "new_found": 0,
+        "fetched": 0,
+        "appended": 0,
+        "paywalled": 0,
+        "no_body": 0,
+        "failed": 0,
+        "capped_at": null
+      },
+      "sources": [
+        {
+          "url": "https://newsletter.semianalysis.com/sitemap.xml",
+          "sha256": "b20950794d12b73a0fdb4c0ef201b30b00363223643fbebc1428e1f2ea020f41",
+          "retrieved_utc": "2026-09-30T17:41:18Z"
+        }
+      ],
+      "outputs": [],
+      "notes": "no post in the sitemap (343) is missing from the packet or the standing rows (343 known).",
+      "error": null,
+      "log": "logs/newsletter.log"
+    },
+    {
+      "name": "packet",
+      "status": "SKIP",
+      "started_utc": "2026-09-30T17:41:19Z",
+      "finished_utc": "2026-09-30T17:41:19Z",
+      "seconds": 0.71,
+      "counts": {
+        "base_rebuild_identical": true,
+        "base_rebuild_matches_build_notes": true,
+        "standing_rows": 0
+      },
+      "sources": [],
+      "outputs": [],
+      "notes": "no standing newsletter rows; the committed packet stands (rebuilt from the lane inputs: identical=True).",
+      "error": null,
+      "log": "logs/packet.log"
+    },
+    {
+      "name": "frontdoor",
+      "status": "SKIP",
+      "started_utc": "2026-09-30T17:41:19Z",
+      "finished_utc": "2026-09-30T17:41:20Z",
+      "seconds": 0.46,
+      "counts": {
+        "market_embed_in_sync": true,
+        "record_embed_in_sync": true,
+        "record_verified": true,
+        "record_sha256": "57e21870e378259d",
+        "kit": "kit matches source: 42 files, 1864029 bytes"
+      },
+      "sources": [],
+      "outputs": [],
+      "notes": "nothing to rebuild: embeds equal data/market.json and data/run3/record.json, Run 3 record verified, kit matches source.",
+      "error": null,
+      "log": "logs/frontdoor.log"
+    },
+    {
+      "name": "tests",
+      "status": "OK",
+      "started_utc": "2026-09-30T17:41:20Z",
+      "finished_utc": "2026-09-30T17:47:02Z",
+      "seconds": 341.91,
+      "counts": {
+        "suites": 7,
+        "passed": 7,
+        "failed": 0,
+        "skipped": 0,
+        "detail": [
+          {
+            "suite": "hot-aisle runner (node --test)",
+            "status": "pass",
+            "exit": 0,
+            "seconds": 5.0,
+            "last_line": "\u2139 duration_ms 4875.9885"
+          },
+          {
+            "suite": "hot-aisle workbench engine",
+            "status": "pass",
+            "exit": 0,
+            "seconds": 0.2,
+            "last_line": "{\"tests\":80,\"failed\":false,\"scope\":\"Software qualification with synthetic fixtures; no GPU performance measurement.\"}"
+          },
+          {
+            "suite": "backfill importer --self-test",
+            "status": "pass",
+            "exit": 0,
+            "seconds": 0.5,
+            "last_line": "OK"
+          },
+          {
+            "suite": "clustermax engine parity (node)",
+            "status": "pass",
+            "exit": 0,
+            "seconds": 4.1,
+            "last_line": "}"
+          },
+          {
+            "suite": "clustermax-challenge unittest (all)",
+            "status": "pass",
+            "exit": 0,
+            "seconds": 71.9,
+            "last_line": "OK"
+          },
+          {
+            "suite": "integration pytest",
+            "status": "pass",
+            "exit": 0,
+            "seconds": 80.4,
+            "last_line": "80 passed, 20 subtests passed in 79.92s (0:01:19)"
+          },
+          {
+            "suite": "validate_packet on the committed packet",
+            "status": "pass",
+            "exit": 0,
+            "seconds": 179.9,
+            "last_line": "PASS PUBLIC-TAIL-2026-09-29.research-packet.json (3707009 bytes, envelope sha256 3904ccb34ed263f309f2153d68902dee305d556630f93b7b967c9070d5fdc70d)"
+          }
+        ]
+      },
+      "sources": [],
+      "outputs": [],
+      "notes": "7 suites passed.",
+      "error": null,
+      "log": "logs/tests.log"
+    }
+  ],
+  "frozen": {
+    "checked": 8,
+    "pin_created": false,
+    "moved": [],
+    "sha256": {
+      "clustermax-challenge/retrospective/plan-R2.json": "5efa99728e6cce2fc462f1073e446e5bdfdccec16508145509d2182402f55ab7",
+      "clustermax-challenge/retrospective/PLAN-R2.md": "a8c93b65041ca8144a21cf4890d2f2724b58a9d91df260e364ec2d3ffc163bdd",
+      "clustermax-challenge/retrospective/plan.json": "2ffe38d650bd7ef5fe1512b3e3f85b89d237a5b07101da9c212556925011b950",
+      "clustermax-challenge/retrospective/results/R2-result.json": "e7cfd62fce4200a1579a999e56f1e63995008ab053007a93386ef0ab19027cfb",
+      "clustermax-challenge/retrospective/results/R2-result.md": "e3c257f437fc73d2f99e90b8fc7b85192107f835d02834a03e2f9f23f583569c",
+      "clustermax-challenge/retrospective/results/R1-result.html": "2091b66014ac3c577d0eddca191cfb515fffa95cb1ba57f692315313aa03d1d3",
+      "clustermax-challenge/retrospective/results/R1-result.json": "f0c311af44f45ef83b9d828f93df8e077a8d1437e54b181e92ca693911101abb",
+      "clustermax-challenge/retrospective/results/R1-result.md": "0c544497424fa519658052a99a6d99bd53f3c1148ea80cf35e9b2f273700e465"
+    }
+  },
+  "probes": null,
+  "committed_paths": [
+    "clustermax-challenge/retrospective/incidents/COLLECTION-LOG-standing.md",
+    "clustermax-challenge/retrospective/incidents/akamai-standing.json",
+    "clustermax-challenge/retrospective/incidents/atlas-cloud-standing.json",
+    "clustermax-challenge/retrospective/incidents/cirrascale-standing.json",
+    "clustermax-challenge/retrospective/incidents/crusoe-r2-standing.json",
+    "clustermax-challenge/retrospective/incidents/cudo-compute-standing.json",
+    "clustermax-challenge/retrospective/incidents/digitalocean-standing.json",
+    "clustermax-challenge/retrospective/incidents/fluidstack-standing.json",
+    "clustermax-challenge/retrospective/incidents/gcore-standing.json",
+    "clustermax-challenge/retrospective/incidents/gpu-net-standing.json",
+    "clustermax-challenge/retrospective/incidents/hydra-standing.json",
+    "clustermax-challenge/retrospective/incidents/hyperstack-standing.json",
+    "clustermax-challenge/retrospective/incidents/lambda-standing.json",
+    "clustermax-challenge/retrospective/incidents/latitude-sh-standing.json",
+    "clustermax-challenge/retrospective/incidents/lightning-ai-standing.json",
+    "clustermax-challenge/retrospective/incidents/mithril-standing.json",
+    "clustermax-challenge/retrospective/incidents/nebius-standing.json",
+    "clustermax-challenge/retrospective/incidents/prime-intellect-standing.json",
+    "clustermax-challenge/retrospective/incidents/radiant-standing.json",
+    "clustermax-challenge/retrospective/incidents/runpod-standing.json",
+    "clustermax-challenge/retrospective/incidents/scaleway-standing.json",
+    "clustermax-challenge/retrospective/incidents/sharon-ai-standing.json",
+    "clustermax-challenge/retrospective/incidents/together-ai-standing.json",
+    "clustermax-challenge/retrospective/incidents/verda-standing.json",
+    "clustermax-challenge/retrospective/results/R2-standing-2026-09-30.json",
+    "clustermax-challenge/retrospective/results/R2-standing-2026-09-30.md",
+    "hot-aisle/campaign/backfill/DELTA-standing.md",
+    "hot-aisle/campaign/backfill/IMPORT-SUMMARY.md",
+    "hot-aisle/campaign/backfill/imported/daily/2026-09-30.jsonl.gz",
+    "hot-aisle/campaign/backfill/imported/history-index.json",
+    "hot-aisle/campaign/market/MARKET.md"
+  ],
+  "retained_artifact": "circulate-retained-2026-09-30",
+  "disclosure": "Hot Aisle arm run on a provider credit; costed at undiscounted list price. See hot-aisle/campaign/DISCLOSURES.md. Imported external observations (InferenceX, MLPerf, OpenComputePrices, provider status pages, SemiAnalysis newsletter) are third-party data, not our measurements. Nothing in this receipt invents a value: a gated or unreachable source is HOLD with its HTTP code."
+}

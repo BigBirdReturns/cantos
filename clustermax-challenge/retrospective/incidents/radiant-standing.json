@@ -2,31 +2,31 @@
   "schema": "secondrun.status-incidents.v1",
   "provider": "Radiant",
   "status_page_url": "https://status.radiant.co",
-  "retrieved_utc": "2026-09-29T23:33:19Z",
+  "retrieved_utc": "2026-09-30T17:37:15Z",
   "raw_files": [
     {
       "path": "circulate/retained/status/raw-root/raw/radiant-standing/history_2026-march.html",
-      "sha256": "49a256b4e6f67221a268cd8f249b37e365babc42594a4790a3b8bbeebd4d3c58",
+      "sha256": "3b7c5bb6a656cfbf6989df784712653ed02717db6dfb5f35428b3becddd5a4f2",
       "url": "https://status.radiant.co/history/2026/march"
     },
     {
       "path": "circulate/retained/status/raw-root/raw/radiant-standing/history_2026-april.html",
-      "sha256": "4ceaa96e75773acb26a34d39493f9bc655457cd1a7595954d846762bc56b8f89",
+      "sha256": "bbfe22fff6b52f1d7016a9f7124c4876b6a366afa5d4680a37b8220834fbfeba",
       "url": "https://status.radiant.co/history/2026/april"
     },
     {
       "path": "circulate/retained/status/raw-root/raw/radiant-standing/history_2026-may.html",
-      "sha256": "f70660bb803ce06abe125859509cb73ae97e1ebd51471a96930e79b3ac4431f8",
+      "sha256": "7a008cc9dafb25ba3b83549f89d090487d2ab9ea68d6b8ee33fab9d4dd6aa75f",
       "url": "https://status.radiant.co/history/2026/may"
     },
     {
       "path": "circulate/retained/status/raw-root/raw/radiant-standing/history_2026-september.html",
-      "sha256": "23a13c5825ab8fa848aa65f9f0e6962bf8da2ad7f0504c4f88b159398d585ce1",
+      "sha256": "282bc013f57d724f5e96a9ed7f42a78f4f9aa9f137a5c42428c8d3c229bb3494",
       "url": "https://status.radiant.co/history/2026/september"
     }
   ],
   "coverage_start": "2026-03-01",
-  "coverage_end": "2026-09-29",
+  "coverage_end": "2026-09-30",
   "severity_map": {
     "notice-complete": "none",
     "notice-resolved": "none"
@@ -114,7 +114,7 @@
     }
   ],
   "notes": [
-    "STANDING collection 2026-09-29 by circulate; not read by R1 or R2. Raw pages (with SHA-256 above) are kept in the CI artifact / retained/, not committed.",
+    "STANDING collection 2026-09-30 by circulate; not read by R1 or R2. Raw pages (with SHA-256 above) are kept in the CI artifact / retained/, not committed.",
     "months returning 404 (the site lists no notices for them): 2026-06, 2026-07, 2026-08. A 404 is weaker evidence than an explicit \"no incidents\" page.",
     "SorryApp platform; parsed /history/<year>/<month> notice cards. The card shows only the \"Ended\" time, so started_utc == resolved_utc == Ended. SorryApp exposes no severity: impact_label is the card state (Resolved / Complete ...), severity is none. Cards in the Complete state are treated as maintenance; a Resolved card is an incident."
   ]

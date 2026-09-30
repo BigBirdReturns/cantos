@@ -2,22 +2,32 @@
   "schema": "secondrun.status-incidents.v1",
   "provider": "Akamai",
   "status_page_url": "https://www.akamaistatus.com",
-  "retrieved_utc": "2026-09-29T23:33:12Z",
+  "retrieved_utc": "2026-09-30T17:37:06Z",
   "raw_files": [
     {
       "path": "circulate/retained/status/raw-root/raw/akamai-standing/history-page-1.json",
-      "sha256": "35402e50d4306136e4428e2f6c413c1e640267ad0492145dfc2cd38e297f2ae8",
+      "sha256": "83f8596e743239cb25a0b5cd44e1e12e126f88b6797202fbc20f1cac97b30659",
       "url": "https://www.akamaistatus.com/history.json?page=1"
     },
     {
       "path": "circulate/retained/status/raw-root/raw/akamai-standing/history-page-2.json",
-      "sha256": "37cdc3def751aa4842987427412fd90eaa21cd15de455e124c8a20945dfc66ee",
+      "sha256": "25a3c5d26c5b9eae9a8d4f98af60361c0dffd794f67c594c77c33149f76d2d51",
       "url": "https://www.akamaistatus.com/history.json?page=2"
     },
     {
       "path": "circulate/retained/status/raw-root/raw/akamai-standing/history-page-3.json",
-      "sha256": "4b9b73b4733fd4e30ef6eca45e8d7420214451098faebbc7910f3fb3b3b55440",
+      "sha256": "6cd0d1f74a08de80cb539589c888aa37bab62e0d7c6266cb10adeef573b27dca",
       "url": "https://www.akamaistatus.com/history.json?page=3"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-s1vkf5lh450l.json",
+      "sha256": "5158a353184d1fe6f32bdd294ad31f8aaf618a4f1b94fb0409d2cd1ef2e66970",
+      "url": "https://www.akamaistatus.com/incidents/s1vkf5lh450l.json"
+    },
+    {
+      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-hn14km8cxmc7.json",
+      "sha256": "556340fe22742595ea28ef00ebbb01e5c91aab3d6cd4518addc4ba430fa8c81b",
+      "url": "https://www.akamaistatus.com/incidents/hn14km8cxmc7.json"
     },
     {
       "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-5qqq8jksvcr2.json",
@@ -38,11 +48,6 @@
       "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-fmpdhlpkr4jp.json",
       "sha256": "c93e5180d5d49b82d43ab58866c38739b5e248caf690941e4b98101ed428fd61",
       "url": "https://www.akamaistatus.com/incidents/fmpdhlpkr4jp.json"
-    },
-    {
-      "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-hn14km8cxmc7.json",
-      "sha256": "aa7b04a629b9e73d1c49a5c34611369cc20685e99600096609782b11c262c1cb",
-      "url": "https://www.akamaistatus.com/incidents/hn14km8cxmc7.json"
     },
     {
       "path": "circulate/retained/status/raw-root/raw/akamai-standing/incident-grsptb646r9c.json",
@@ -456,7 +461,7 @@
     }
   ],
   "coverage_start": "2026-01-01",
-  "coverage_end": "2026-09-29",
+  "coverage_end": "2026-09-30",
   "severity_map": {
     "minor": "minor",
     "none": "none",
@@ -1289,7 +1294,7 @@
       "impact_label": "minor",
       "severity": "minor",
       "started_utc": "2026-09-22T00:30:17.015Z",
-      "resolved_utc": null,
+      "resolved_utc": "2026-09-30T11:11:09.333Z",
       "is_maintenance": false,
       "url": "https://stspg.io/dqxjf24pcwwp"
     },
@@ -1332,9 +1337,19 @@
       "resolved_utc": "2026-09-29T21:22:32.664Z",
       "is_maintenance": false,
       "url": "https://stspg.io/z21cpxftrhhm"
+    },
+    {
+      "id": "s1vkf5lh450l",
+      "title": "Akamai Control Center and Configuration Deployment Issues",
+      "impact_label": "none",
+      "severity": "none",
+      "started_utc": "2026-09-30T15:03:18.012Z",
+      "resolved_utc": "2026-09-30T15:03:18.076Z",
+      "is_maintenance": false,
+      "url": "https://stspg.io/jfc5hdqs21pc"
     }
   ],
   "notes": [
-    "STANDING collection 2026-09-29 by circulate; not read by R1 or R2. Raw pages (with SHA-256 above) are kept in the CI artifact / retained/, not committed."
+    "STANDING collection 2026-09-30 by circulate; not read by R1 or R2. Raw pages (with SHA-256 above) are kept in the CI artifact / retained/, not committed."
   ]
 }

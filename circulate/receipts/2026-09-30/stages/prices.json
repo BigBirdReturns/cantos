@@ -1,0 +1,24 @@
+{
+  "name": "prices",
+  "status": "SKIP",
+  "started_utc": "2026-09-30T17:24:50Z",
+  "finished_utc": "2026-09-30T17:24:51Z",
+  "seconds": 0.35,
+  "counts": {
+    "assets": 8,
+    "days_before": 2201,
+    "changed_assets": 0,
+    "removed_assets": 0
+  },
+  "sources": [
+    {
+      "url": "https://api.github.com/repos/thatkavish/OpenComputePrices/releases/tags/latest-data",
+      "sha256": "1890256fa6f958f7e40d6da06380bc15c765d0da61511d3f3ae8271d55eb9ae1",
+      "retrieved_utc": "2026-09-30T17:24:51Z"
+    }
+  ],
+  "outputs": [],
+  "notes": "release unchanged: all 8 asset digests equal the recorded set (GPU Pricing Data \u2014 2026-07-29 14:36 UTC).",
+  "error": null,
+  "log": "logs/prices.log"
+}

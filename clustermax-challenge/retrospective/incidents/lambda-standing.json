@@ -2,7 +2,7 @@
   "schema": "secondrun.status-incidents.v1",
   "provider": "Lambda",
   "status_page_url": "https://status.lambda.ai",
-  "retrieved_utc": "2026-09-29T23:22:40Z",
+  "retrieved_utc": "2026-09-30T17:26:19Z",
   "raw_files": [
     {
       "path": "circulate/retained/status/raw-root/raw/lambda-standing/api-v2-incidents.json",
@@ -11,7 +11,7 @@
     }
   ],
   "coverage_start": null,
-  "coverage_end": "2026-09-29",
+  "coverage_end": "2026-09-30",
   "severity_map": {
     "major": "major",
     "minor": "minor",
@@ -271,7 +271,7 @@
     }
   ],
   "notes": [
-    "STANDING collection 2026-09-29 by circulate; not read by R1 or R2. Raw pages (with SHA-256 above) are kept in the CI artifact / retained/, not committed.",
+    "STANDING collection 2026-09-30 by circulate; not read by R1 or R2. Raw pages (with SHA-256 above) are kept in the CI artifact / retained/, not committed.",
     "https://status.lambda.ai/api/v2/incidents.json returned 25 incidents (most such endpoints cap this at a fixed recent window, commonly ~50; it is not a complete history by itself)",
     "https://status.lambda.ai/api/v2/scheduled-maintenances.json unavailable (HTTP Error 404: Not Found); scheduled maintenance not separately captured",
     "no classic Atlassian /history page found at https://status.lambda.ai/history?page=1 (HTTP Error 404: Not Found); relying on the recent-incidents API only",

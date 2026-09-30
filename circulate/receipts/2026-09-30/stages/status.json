@@ -1,0 +1,305 @@
+{
+  "name": "status",
+  "status": "OK",
+  "started_utc": "2026-09-30T17:24:51Z",
+  "finished_utc": "2026-09-30T17:37:16Z",
+  "seconds": 744.93,
+  "counts": {
+    "providers_in_file": 63,
+    "collected": 23,
+    "hold": 0,
+    "unsupported": 0,
+    "failed": 0,
+    "no_collector": 40,
+    "incidents": 1548
+  },
+  "sources": [
+    {
+      "url": "https://status.nebius.com",
+      "sha256": "20f94990528be432d4d0de25221f93cbadabad7e2f293ba1ca7213db9055cd85",
+      "retrieved_utc": "2026-09-30T17:25:30Z",
+      "pages": 70
+    },
+    {
+      "url": "https://status.crusoecloud.com",
+      "sha256": "689729042365590217a7bb7913b77425fbf8447b787e35de9f1319028cf5eb0b",
+      "retrieved_utc": "2026-09-30T17:26:09Z",
+      "pages": 75
+    },
+    {
+      "url": "https://status.fluidstack.io",
+      "sha256": "151a8538650357fd529af8e2d1bd68a451d52b8ec2c764852051b7b68acfa3ad",
+      "retrieved_utc": "2026-09-30T17:26:13Z",
+      "pages": 3
+    },
+    {
+      "url": "https://status.together.ai",
+      "sha256": "6e07fc60e11e7e6303276c14e28d2b1ef92ca6433e9f7eb44896d40994731327",
+      "retrieved_utc": "2026-09-30T17:26:17Z",
+      "pages": 3
+    },
+    {
+      "url": "https://status.lambda.ai",
+      "sha256": "62301cd1d69843762f51daec0a9834b88a603761eb0eb7fc717c6bfcc7b6def0",
+      "retrieved_utc": "2026-09-30T17:26:19Z",
+      "pages": 1
+    },
+    {
+      "url": "https://status.scaleway.com",
+      "sha256": "843f33b2c1153ea3f06ae24167e5a3bf6503fe3ed349a3d30b1bff7497c01287",
+      "retrieved_utc": "2026-09-30T17:30:40Z",
+      "pages": 506
+    },
+    {
+      "url": "https://status.cirrascale.com",
+      "sha256": "bb10cb92530278c28de0bb711e345038f3985f82ceae5b04571f9a4b74f3bb23",
+      "retrieved_utc": "2026-09-30T17:31:33Z",
+      "pages": 105
+    },
+    {
+      "url": "https://status.gcore.com",
+      "sha256": "175c8a6b0b75cce108c196d5b5126bead783529e4583fca2f92f16a44d946752",
+      "retrieved_utc": "2026-09-30T17:31:58Z",
+      "pages": 23
+    },
+    {
+      "url": "https://status.hyperstack.cloud",
+      "sha256": "138bf04bae2f3b74f61ee15655a607c6524ea0b84abfd6d6999bc7358f94fd45",
+      "retrieved_utc": "2026-09-30T17:32:30Z",
+      "pages": 63
+    },
+    {
+      "url": "https://uptime.runpod.io",
+      "sha256": "1710ab4867dd02f96a6c4ae26a702dcf9ff755e24ce3bceec022c02e48cdf5e4",
+      "retrieved_utc": "2026-09-30T17:33:34Z",
+      "pages": 54
+    },
+    {
+      "url": "https://atlascloud.instatus.com",
+      "sha256": "855be0dfdc223d44dee0b1e03c0e81e67af85ef3bb89b1579339055a83a26105",
+      "retrieved_utc": "2026-09-30T17:33:40Z",
+      "pages": 9
+    },
+    {
+      "url": "https://status.primeintellect.ai",
+      "sha256": "8dd2873064d35c4dc7188c820115120b25c855398de60d6d31c5538726ffabfd",
+      "retrieved_utc": "2026-09-30T17:33:54Z",
+      "pages": 13
+    },
+    {
+      "url": "https://status.cudocompute.com",
+      "sha256": "89d6eccb5b32fd943b2cfc39f48898406f2dfb413ef630569c2f2374473d09b6",
+      "retrieved_utc": "2026-09-30T17:33:57Z",
+      "pages": 3
+    },
+    {
+      "url": "https://status.latitude.sh",
+      "sha256": "f890a05d5fb4dc2cffc15262b8e76ce6ad86d6f6dbcdd1d0b0fb15f7dd9eb677",
+      "retrieved_utc": "2026-09-30T17:34:23Z",
+      "pages": 51
+    },
+    {
+      "url": "https://status.lightning.ai",
+      "sha256": "acb033d244f80029b374e78b5df9ca8afefe17c73e85438e0867aa8ae763f703",
+      "retrieved_utc": "2026-09-30T17:34:30Z",
+      "pages": 14
+    },
+    {
+      "url": "https://status.verda.com",
+      "sha256": "6cb0f521c9fee8b6fab0ebcee1970f8c757b321546025bb95f75896f6dfb9250",
+      "retrieved_utc": "2026-09-30T17:34:50Z",
+      "pages": 17
+    },
+    {
+      "url": "https://status.digitalocean.com",
+      "sha256": "009ea1b62d4ba4f10bb00a07cd6458380fcb9221d7c32d861beb2d0be2ba696c",
+      "retrieved_utc": "2026-09-30T17:35:55Z",
+      "pages": 123
+    },
+    {
+      "url": "https://sharonai.statuspage.io",
+      "sha256": "abd11c7aac831b4c107933c6c8a136fa0a2e9e19b36fd97c268881c7a0e7a9df",
+      "retrieved_utc": "2026-09-30T17:36:14Z",
+      "pages": 37
+    },
+    {
+      "url": "https://status.hydrahost.com",
+      "sha256": "c1b6d8979a9b03a59b23d408ab2a231851f65a7c07b8f5c536d4ff102313ecd0",
+      "retrieved_utc": "2026-09-30T17:36:17Z",
+      "pages": 3
+    },
+    {
+      "url": "https://status.gpu.net",
+      "sha256": "9eef2ea706ad37dc4c70203741e6bfa6cc2e6ce618232a78a3d689729f582bb7",
+      "retrieved_utc": "2026-09-30T17:36:20Z",
+      "pages": 3
+    },
+    {
+      "url": "https://www.akamaistatus.com",
+      "sha256": "072ace3ce7c0658de83b391bd5f4faa141cd415b9bc36b065462f1650d158556",
+      "retrieved_utc": "2026-09-30T17:37:06Z",
+      "pages": 91
+    },
+    {
+      "url": "https://status.mithril.ai",
+      "sha256": "becafdb492c990bf278f143cb3da4990f46cb2def04a70d6de54b23bbab9231e",
+      "retrieved_utc": "2026-09-30T17:37:12Z",
+      "pages": 7
+    },
+    {
+      "url": "https://status.radiant.co",
+      "sha256": "6312fa2ce5d008d2ac66f10ca730d6eea31096ebe6a5f77a9da15c16109bb30b",
+      "retrieved_utc": "2026-09-30T17:37:15Z",
+      "pages": 4
+    }
+  ],
+  "outputs": [
+    {
+      "path": "clustermax-challenge/retrospective/incidents/nebius-standing.json",
+      "sha256": "ecbd32b4b1a29dd4e33980b6e1e9cef5fc624e22f3ac07fcbc36c28a4bd0cae2",
+      "bytes": 41970,
+      "committed": true
+    },
+    {
+      "path": "clustermax-challenge/retrospective/incidents/crusoe-r2-standing.json",
+      "sha256": "8fd8bf8048b129eb9a2338ae35daacff435929ec336ce908ad83dd9038ee693f",
+      "bytes": 46377,
+      "committed": true
+    },
+    {
+      "path": "clustermax-challenge/retrospective/incidents/fluidstack-standing.json",
+      "sha256": "29768467778e83055f9107b725d55f4e0cd43e13471b21a0adcb2aa8ba8d2ea9",
+      "bytes": 1808,
+      "committed": true
+    },
+    {
+      "path": "clustermax-challenge/retrospective/incidents/together-ai-standing.json",
+      "sha256": "62468757d7ba595e60ff3857fa9c04ee8f2aded77cdd242eca536e13c4716e63",
+      "bytes": 1804,
+      "committed": true
+    },
+    {
+      "path": "clustermax-challenge/retrospective/incidents/lambda-standing.json",
+      "sha256": "966fafe17228bf42cabac6e9aa664f0662329fc36c1d148bb4801ed46419c6ad",
+      "bytes": 10920,
+      "committed": true
+    },
+    {
+      "path": "clustermax-challenge/retrospective/incidents/scaleway-standing.json",
+      "sha256": "bdf6a56ca1fcaafcddf32ec0fccf469b4e4e3cf981e44c93a3cc1b74381b1fb5",
+      "bytes": 318285,
+      "committed": true
+    },
+    {
+      "path": "clustermax-challenge/retrospective/incidents/cirrascale-standing.json",
+      "sha256": "a3d270150af02a985d8b618c3560bd62c7ad4d685be37f7756b56a0de931b826",
+      "bytes": 72877,
+      "committed": true
+    },
+    {
+      "path": "clustermax-challenge/retrospective/incidents/gcore-standing.json",
+      "sha256": "05c118bd9b2304f168a5e3cb2a738c0cc493a4fd923c206aa768308097993cf6",
+      "bytes": 115399,
+      "committed": true
+    },
+    {
+      "path": "clustermax-challenge/retrospective/incidents/hyperstack-standing.json",
+      "sha256": "dfcaca5f86fb32957202860595b5013ad549a1f6f4ed07354fbaf98f4a221f3b",
+      "bytes": 37768,
+      "committed": true
+    },
+    {
+      "path": "clustermax-challenge/retrospective/incidents/runpod-standing.json",
+      "sha256": "c6c41e8783e684074a21b1598a73a4e36f38fd0f95ab82336f85fa775d37adf7",
+      "bytes": 31710,
+      "committed": true
+    },
+    {
+      "path": "clustermax-challenge/retrospective/incidents/atlas-cloud-standing.json",
+      "sha256": "4a6711b5206cfbdbfc4479e6c35f16e3edcb1a2e7790bc3fc86b0db8be0020e5",
+      "bytes": 18384,
+      "committed": true
+    },
+    {
+      "path": "clustermax-challenge/retrospective/incidents/prime-intellect-standing.json",
+      "sha256": "f76fee3bc8d9f70188f0618ad8ebb99205bc122620350c20eb588cb996659463",
+      "bytes": 8124,
+      "committed": true
+    },
+    {
+      "path": "clustermax-challenge/retrospective/incidents/cudo-compute-standing.json",
+      "sha256": "48e6367d2c8a28ef97404cc538a8983b0ee97a7b1831c9b56db8b5f7d2e2b0e8",
+      "bytes": 1824,
+      "committed": true
+    },
+    {
+      "path": "clustermax-challenge/retrospective/incidents/latitude-sh-standing.json",
+      "sha256": "3d600bf72b9826c3b5ca0c77d59f7fd4ffbdd775eae777d8db809b31758789df",
+      "bytes": 30767,
+      "committed": true
+    },
+    {
+      "path": "clustermax-challenge/retrospective/incidents/lightning-ai-standing.json",
+      "sha256": "76f71e86f984e70f06c460877b7b2a7ca34ae0af24954105fc7f89d87c0589be",
+      "bytes": 7900,
+      "committed": true
+    },
+    {
+      "path": "clustermax-challenge/retrospective/incidents/verda-standing.json",
+      "sha256": "b78a762408b6467e9f70c33ebadf69530059e2a8114a1da784a8540650c21276",
+      "bytes": 10323,
+      "committed": true
+    },
+    {
+      "path": "clustermax-challenge/retrospective/incidents/digitalocean-standing.json",
+      "sha256": "b6a93b3b294e326b3824dad9d5b9eadaf350143c296a44044bf67f3fbf794fcc",
+      "bytes": 74565,
+      "committed": true
+    },
+    {
+      "path": "clustermax-challenge/retrospective/incidents/sharon-ai-standing.json",
+      "sha256": "d802c3081825de2098ea211e6760d87fbfa63ce2783e273bfda2287eedc8021b",
+      "bytes": 22046,
+      "committed": true
+    },
+    {
+      "path": "clustermax-challenge/retrospective/incidents/hydra-standing.json",
+      "sha256": "991e6155860423f688a0159d8d58f6dd212f0c7aa3bd0c964cafa6141e444af1",
+      "bytes": 1788,
+      "committed": true
+    },
+    {
+      "path": "clustermax-challenge/retrospective/incidents/gpu-net-standing.json",
+      "sha256": "b3dabb7bfbaf97f9e7efef1d3cb46ff12a8da902c5bb7c901a09abd6fa94b585",
+      "bytes": 1772,
+      "committed": true
+    },
+    {
+      "path": "clustermax-challenge/retrospective/incidents/akamai-standing.json",
+      "sha256": "c8dbe74920337480cafaa8afe72710291dd831697b98bc4019c6ecda47d6dc43",
+      "bytes": 54450,
+      "committed": true
+    },
+    {
+      "path": "clustermax-challenge/retrospective/incidents/mithril-standing.json",
+      "sha256": "7623ed09432b0d4d1ee22a31bc1ebd12c7f160cea7fb324d4b3553d12b7da5df",
+      "bytes": 6806,
+      "committed": true
+    },
+    {
+      "path": "clustermax-challenge/retrospective/incidents/radiant-standing.json",
+      "sha256": "2249a571856b681ae0d3c413c2a581af0c37c46359f5dcb985d352e4c40c59fc",
+      "bytes": 5039,
+      "committed": true
+    },
+    {
+      "path": "clustermax-challenge/retrospective/incidents/COLLECTION-LOG-standing.md",
+      "sha256": "d3477995892be8ca835c0a3c49988bf5134aa20c5ccc96301667a8386ad6fd8d",
+      "bytes": 6928,
+      "committed": true
+    }
+  ],
+  "notes": "23 providers collected (1548 incident records); 0 unreachable (HOLD), 0 unsupported, 40 without a collector.",
+  "error": null,
+  "log": "logs/status.log"
+}

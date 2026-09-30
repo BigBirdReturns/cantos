@@ -1,0 +1,56 @@
+{
+  "name": "delta",
+  "status": "OK",
+  "started_utc": "2026-09-30T17:37:17Z",
+  "finished_utc": "2026-09-30T17:37:27Z",
+  "seconds": 10.33,
+  "counts": {
+    "inputs": 4,
+    "observations": 11915,
+    "source_rows": 1868,
+    "chunks": 1,
+    "measured_cells": 45,
+    "comparable_observations": 0,
+    "gaps": 0,
+    "ranked": 11915
+  },
+  "sources": [
+    {
+      "url": "hot-aisle/campaign/backfill/imported/inferencex-2026-09-23.jsonl",
+      "sha256": "c05e34341baeb24362484bb8ed6a2bbd83e69f94fab4749263ad2a7448815def",
+      "retrieved_utc": null
+    },
+    {
+      "url": "hot-aisle/campaign/backfill/imported/mlperf-2026-09-29.jsonl",
+      "sha256": "a68c9e81ade4ea1857fda5b9877c59aa5ba12ced1a426029eda16e23cf326e4a",
+      "retrieved_utc": null
+    },
+    {
+      "url": "hot-aisle/campaign/backfill/imported/daily/2026-09-29.jsonl.gz",
+      "sha256": "a978efa4882f74783fc4b05737889b2237777d0d093f171816a87c89699c8065",
+      "retrieved_utc": null
+    },
+    {
+      "url": "hot-aisle/campaign/backfill/imported/daily/2026-09-30.jsonl.gz",
+      "sha256": "67f37f6dd4372591e9f5c22962fcbf5cc7a6e29b7102ee15420cbccd33e5ec25",
+      "retrieved_utc": null
+    }
+  ],
+  "outputs": [
+    {
+      "path": "circulate/retained/delta/delta-standing.json.gz",
+      "sha256": "b879f1af97c00ab57f0c697b13db969bdea025ec923c2fa26d7d7a63004e869b",
+      "bytes": 1883154,
+      "committed": false
+    },
+    {
+      "path": "hot-aisle/campaign/backfill/DELTA-standing.md",
+      "sha256": "cbfb230715f850229e0c054fc056e5b1bc3d2d5195a4b22ca8c1da3f7bb81bc5",
+      "bytes": 24696,
+      "committed": true
+    }
+  ],
+  "notes": "11915 observations vs 45 measured cells: 0 comparable, 11915 ranked.",
+  "error": null,
+  "log": "logs/delta.log"
+}
