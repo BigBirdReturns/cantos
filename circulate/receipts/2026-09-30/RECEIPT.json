@@ -1065,7 +1065,12 @@
       "clustermax-challenge/retrospective/results/R1-result.md": "0c544497424fa519658052a99a6d99bd53f3c1148ea80cf35e9b2f273700e465"
     }
   },
-  "probes": null,
+  "probes": {
+    "overall": "PASS",
+    "counts": {
+      "PASS": 11
+    }
+  },
   "committed_paths": [
     "clustermax-challenge/retrospective/incidents/COLLECTION-LOG-standing.md",
     "clustermax-challenge/retrospective/incidents/akamai-standing.json",

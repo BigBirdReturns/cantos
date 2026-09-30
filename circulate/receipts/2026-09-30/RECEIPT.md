@@ -21,6 +21,10 @@
 
 8 frozen files hashed before and after the run and compared with circulate/frozen-hashes.json. Moved: none.
 
+## Probes
+
+PROBES.json: overall PASS, counts {"PASS": 11}.
+
 ## Outputs
 
 | Stage | Path | Committed | SHA-256 |
