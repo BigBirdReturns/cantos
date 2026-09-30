@@ -195,7 +195,7 @@ try:
     check('cold load with no saved state opens the Run 3 decision (Edition 01, $0.74 vs $1.20)', cold_run3)
     def cold_orientation():
         boot(select_example_first=False)
-        want='One measured decision: the same coding workload on two rented seats, cost per 1,000 accepted requests at list price, every figure stamped with its source.'
+        want='One retained decision from the Second Run compute campaign: the same coding workload on two rented seats, cost per 1,000 accepted requests at list price, every figure stamped with its source. Cantos is the record it lives in.'
         return page.locator('.orientation').count()==1 and page.locator('.orientation').inner_text()==want
     check('Run 3 view carries the one-sentence orientation line', cold_orientation)
     def rail_order():

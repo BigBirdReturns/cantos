@@ -35,3 +35,8 @@ Gates on the built page (run from repo root):
 - python app/tests/real_regressions.py --page app/Cantos.html --packets app/packets --out NEW_DIR: 32/32, all_pass true
 - python app/tests/run_floor_gates.py app: native 34/33/0 PASS; browser 30 checks PASS; mobile 22 PASS; workspace 8 PASS; overflow 9 cases 0 failures PASS; STATUS PASS
 Screenshots of the new cold load: app/verification/root-cold-1440.png, root-cold-390.png.
+
+
+## 2026-09-30, orientation line places the decision in the record
+
+ORIENTATION now reads: "One retained decision from the Second Run compute campaign: the same coding workload on two rented seats, cost per 1,000 accepted requests at list price, every figure stamped with its source. Cantos is the record it lives in." Rebuilt page sha256 57ee74039d9afb7f… (5,155,572 bytes); index.html at the root is identical. Gates: native 33/34, browser 30, mobile 22, workspace 8, overflow 0/9, floor regressions 38/38.

@@ -678,7 +678,7 @@ const openEmbeddedRun3=()=>openWorkspace('run3');
 if(typeof commands==='function'){const baseCommands=commands;commands=function(){const list=baseCommands();list.unshift({label:'Open the Run 3 decision (real, MI300X vs H100)',hint:'decision',run:()=>openWorkspace('run3'),on:true},{label:'Open the worked example',hint:'synthetic',run:()=>openWorkspace('example'),on:true});return list;};}
 
 // ===== cold-visitor entry: rail lists the real decision first, orientation line on Run 3 =====
-const ORIENTATION='One measured decision: the same coding workload on two rented seats, cost per 1,000 accepted requests at list price, every figure stamped with its source.';
+const ORIENTATION='One retained decision from the Second Run compute campaign: the same coding workload on two rented seats, cost per 1,000 accepted requests at list price, every figure stamped with its source. Cantos is the record it lives in.';
 function composeRail(node,run3){
  const nav=node.querySelector('.case-nav');if(!nav)return;
  const viewOn=n=>{const v=node.querySelector('#'+n+'-view');return v&&!v.hidden;};
