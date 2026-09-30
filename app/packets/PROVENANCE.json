@@ -1,0 +1,213 @@
+{
+  "schema": "cantos/figure-provenance@1",
+  "source_date": "2026-09-24",
+  "figures": {
+    "workload": {
+      "file": "D:/Projects/Organs/AXM/axm-tools/main/hot-aisle/campaign/results/RUN3-RESULTS.md",
+      "lines": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "scope": "Run 3 registered workload and acceptance rule"
+    },
+    "A/T0 accepted 4336": {
+      "file": "D:/Projects/Organs/AXM/axm-tools/main/hot-aisle/campaign/results/run3-scored-a-t0/grade/evaluation.json",
+      "lines": [
+        1
+      ],
+      "scope": "Grade bits joined by request index to timed request rows"
+    },
+    "N/T0 accepted 4280": {
+      "file": "D:/Projects/Organs/AXM/axm-tools/main/hot-aisle/campaign/results/run3-scored-n-t0/grade/evaluation.json",
+      "lines": [
+        1
+      ],
+      "scope": "Grade bits joined by request index to timed request rows"
+    },
+    "A/T0 requests 8622": {
+      "file": "D:/Projects/Organs/AXM/axm-tools/main/hot-aisle/campaign/results/run3-scored-a-t0/replay/requests.jsonl",
+      "lines": [
+        1,
+        8622
+      ],
+      "scope": "One retained request per line"
+    },
+    "N/T0 requests 8622": {
+      "file": "D:/Projects/Organs/AXM/axm-tools/main/hot-aisle/campaign/results/run3-scored-n-t0/replay/requests.jsonl",
+      "lines": [
+        1,
+        8622
+      ],
+      "scope": "One retained request per line"
+    },
+    "A/T0 $2.99/h": {
+      "file": "D:/Projects/Organs/AXM/axm-tools/main/hot-aisle/campaign/results/RUN3-RESULTS.md",
+      "lines": [
+        12
+      ],
+      "scope": "Published list rate"
+    },
+    "N/T0 $4.41/h": {
+      "file": "D:/Projects/Organs/AXM/axm-tools/main/hot-aisle/campaign/results/RUN3-RESULTS.md",
+      "lines": [
+        12
+      ],
+      "scope": "Published list rate"
+    },
+    "A/T0 64.7 min": {
+      "file": "D:/Projects/Organs/AXM/axm-tools/main/hot-aisle/campaign/results/RUN3-RESULTS.md",
+      "lines": [
+        18,
+        44
+      ],
+      "scope": "Own-seat equivalent window"
+    },
+    "N/T0 69.8 min": {
+      "file": "D:/Projects/Organs/AXM/axm-tools/main/hot-aisle/campaign/results/RUN3-RESULTS.md",
+      "lines": [
+        18
+      ],
+      "scope": "Closed ledger window"
+    },
+    "A/T0 $0.74/1000": {
+      "file": "D:/Projects/Organs/AXM/axm-tools/main/hot-aisle/campaign/results/RUN3-RESULTS.md",
+      "lines": [
+        18
+      ],
+      "scope": "Report display rounds recomputed list-cost value"
+    },
+    "N/T0 $1.20/1000": {
+      "file": "D:/Projects/Organs/AXM/axm-tools/main/hot-aisle/campaign/results/RUN3-RESULTS.md",
+      "lines": [
+        18
+      ],
+      "scope": "Report display rounds recomputed list-cost value"
+    },
+    "H100 $2.49/h scenario": {
+      "file": "D:/Projects/Organs/AXM/axm-tools/main/hot-aisle/campaign/results/RUN3-RESULTS.md",
+      "lines": [
+        23,
+        28
+      ],
+      "scope": "Report flip-table assumption; no new run"
+    },
+    "H100 $0.68/1000 scenario": {
+      "file": "D:/Projects/Organs/AXM/axm-tools/main/hot-aisle/campaign/results/RUN3-RESULTS.md",
+      "lines": [
+        28
+      ],
+      "scope": "Report display rounds recomputed scenario value"
+    },
+    "26 Sep baseline 4274": {
+      "file": "D:/Projects/Organs/AXM/axm-tools/sessions/compute-shop-compare-20260925/supervision/codex-takeover-20260926/FIRST-BASELINE-RESULT.md",
+      "lines": [
+        1,
+        14
+      ],
+      "scope": "Separate later Hot Aisle baseline, lineage only"
+    },
+    "A/T0 TTFT p50/p95/p99 53/155/571 ms": {
+      "file": "D:/Projects/Organs/AXM/axm-tools/main/hot-aisle/campaign/results/RUN3-RESULTS.md",
+      "lines": [
+        15
+      ],
+      "scope": "Reported Run 3 timing summary"
+    },
+    "N/T0 TTFT p50/p95/p99 35/76/2254 ms": {
+      "file": "D:/Projects/Organs/AXM/axm-tools/main/hot-aisle/campaign/results/RUN3-RESULTS.md",
+      "lines": [
+        15
+      ],
+      "scope": "Reported Run 3 timing summary"
+    }
+  },
+  "request_fields": {
+    "A/T0": {
+      "scheduled_at_ms": {
+        "file": "D:/Projects/Organs/AXM/axm-tools/main/hot-aisle/campaign/results/run3-scored-a-t0/replay/requests.jsonl",
+        "lines": [
+          1,
+          8622
+        ],
+        "scope": "scheduled_ts minus plan.start_ts"
+      },
+      "first_token_ms": {
+        "file": "D:/Projects/Organs/AXM/axm-tools/main/hot-aisle/campaign/results/run3-scored-a-t0/replay/requests.jsonl",
+        "lines": [
+          1,
+          8622
+        ],
+        "scope": "first_token_ts minus scheduled_ts"
+      },
+      "elapsed_ms": {
+        "file": "D:/Projects/Organs/AXM/axm-tools/main/hot-aisle/campaign/results/run3-scored-a-t0/replay/requests.jsonl",
+        "lines": [
+          1,
+          8622
+        ],
+        "scope": "end_ts minus scheduled_ts"
+      },
+      "correct": {
+        "file": "D:/Projects/Organs/AXM/axm-tools/main/hot-aisle/campaign/results/run3-scored-a-t0/grade/evaluation.json",
+        "lines": [
+          1
+        ],
+        "scope": "passed[request_index]"
+      },
+      "start": {
+        "file": "D:/Projects/Organs/AXM/axm-tools/main/hot-aisle/campaign/results/run3-scored-a-t0/replay/plan.json",
+        "lines": [
+          1
+        ],
+        "scope": "start_ts"
+      }
+    },
+    "N/T0": {
+      "scheduled_at_ms": {
+        "file": "D:/Projects/Organs/AXM/axm-tools/main/hot-aisle/campaign/results/run3-scored-n-t0/replay/requests.jsonl",
+        "lines": [
+          1,
+          8622
+        ],
+        "scope": "scheduled_ts minus plan.start_ts"
+      },
+      "first_token_ms": {
+        "file": "D:/Projects/Organs/AXM/axm-tools/main/hot-aisle/campaign/results/run3-scored-n-t0/replay/requests.jsonl",
+        "lines": [
+          1,
+          8622
+        ],
+        "scope": "first_token_ts minus scheduled_ts"
+      },
+      "elapsed_ms": {
+        "file": "D:/Projects/Organs/AXM/axm-tools/main/hot-aisle/campaign/results/run3-scored-n-t0/replay/requests.jsonl",
+        "lines": [
+          1,
+          8622
+        ],
+        "scope": "end_ts minus scheduled_ts"
+      },
+      "correct": {
+        "file": "D:/Projects/Organs/AXM/axm-tools/main/hot-aisle/campaign/results/run3-scored-n-t0/grade/evaluation.json",
+        "lines": [
+          1
+        ],
+        "scope": "passed[request_index]"
+      },
+      "start": {
+        "file": "D:/Projects/Organs/AXM/axm-tools/main/hot-aisle/campaign/results/run3-scored-n-t0/replay/plan.json",
+        "lines": [
+          1
+        ],
+        "scope": "start_ts"
+      }
+    }
+  },
+  "derived": {
+    "edition1_sha256": "8663be62fe287bcf2d3a8255585f45029b576e74ca06df468551d9ed9400361b",
+    "edition2_sha256": "2adeb1b947d424fd2eee159c3c729de829b00f21574606a0dec743237f3ee84c",
+    "formula": "rate_usd_per_hour * window_minutes / 60 / accepted; multiply by 1000 for display"
+  }
+}

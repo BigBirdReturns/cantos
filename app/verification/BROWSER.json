@@ -1,0 +1,139 @@
+{
+  "page_sha256": "56a4c84045c2c76cecb4adbf7655445cc0056178c0a1604baea992495a20ce18",
+  "packet_sha256": {
+    "null-quote.json": "4746a6de9507c8b0c1dfb2a8b6bc7f4dc00c6cc46123878306c2e3a985debee8",
+    "detached-decision.json": "895e8e2732b5fa0fa641ac2af995651555e8028207530fbeaa8402079e8d5bab",
+    "mixed-evidence.json": "77d0fa76bbec55a878102e4a0a4e7e5195be74c5ed6b8434c78342637ec054ef",
+    "review-mismatch.json": "f353be92f307954640b2aadc42356e95364d1487a0686541abbacfc071605b54"
+  },
+  "checks": [
+    {
+      "name": "fresh startup preserves baseline edition identity",
+      "pass": true
+    },
+    {
+      "name": "null-quote.json preserves actual workspace, cached display and saved copy",
+      "pass": true
+    },
+    {
+      "name": "null-quote.json export contains the original workspace",
+      "pass": true
+    },
+    {
+      "name": "detached-decision.json preserves actual workspace, cached display and saved copy",
+      "pass": true
+    },
+    {
+      "name": "detached-decision.json export contains the original workspace",
+      "pass": true
+    },
+    {
+      "name": "mixed-evidence.json preserves actual workspace, cached display and saved copy",
+      "pass": true
+    },
+    {
+      "name": "mixed-evidence.json export contains the original workspace",
+      "pass": true
+    },
+    {
+      "name": "review-mismatch.json preserves actual workspace, cached display and saved copy",
+      "pass": true
+    },
+    {
+      "name": "review-mismatch.json export contains the original workspace",
+      "pass": true
+    },
+    {
+      "name": "new contract joins unchanged fields and deadlines",
+      "pass": true
+    },
+    {
+      "name": "causal explanation is visible",
+      "pass": true
+    },
+    {
+      "name": "successor identifies the earlier edition",
+      "pass": true
+    },
+    {
+      "name": "edition inspection includes a readable comparison",
+      "pass": true
+    },
+    {
+      "name": "replacement waits for confirmation",
+      "pass": true
+    },
+    {
+      "name": "cancel preserves unsaved work",
+      "pass": true
+    },
+    {
+      "name": "confirmed import commits the verified candidate",
+      "pass": true
+    },
+    {
+      "name": "render failure leaves actual and displayed workspace unchanged",
+      "pass": true
+    },
+    {
+      "name": "autosave failure labels current memory honestly",
+      "pass": true
+    },
+    {
+      "name": "failed reset preserves memory and saved copy",
+      "pass": true
+    },
+    {
+      "name": "decision no overflow 1440",
+      "pass": true
+    },
+    {
+      "name": "decision no overflow 390",
+      "pass": true
+    },
+    {
+      "name": "decision no overflow 320",
+      "pass": true
+    },
+    {
+      "name": "evidence no overflow 1440",
+      "pass": true
+    },
+    {
+      "name": "evidence no overflow 390",
+      "pass": true
+    },
+    {
+      "name": "evidence no overflow 320",
+      "pass": true
+    },
+    {
+      "name": "architecture no overflow 1440",
+      "pass": true
+    },
+    {
+      "name": "architecture no overflow 390",
+      "pass": true
+    },
+    {
+      "name": "architecture no overflow 320",
+      "pass": true
+    },
+    {
+      "name": "no page errors",
+      "pass": true
+    },
+    {
+      "name": "no unexpected runtime requests",
+      "pass": true
+    }
+  ],
+  "errors": [],
+  "requests": [
+    "http://127.0.0.1:60166/Cantos.html",
+    "http://127.0.0.1:60166/Cantos.html"
+  ],
+  "all_pass": true,
+  "packet_directory": "D:\\Projects\\Organs\\AXM\\axm-tools\\sessions\\field-niches-20260927\\cantos-ben-build-20260928\\council-review\\astra",
+  "scope": "Browser behavior only; no audience comprehension, source truth, external action or production qualification."
+}

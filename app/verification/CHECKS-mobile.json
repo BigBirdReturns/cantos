@@ -1,0 +1,96 @@
+{
+  "page_sha256": "56a4c84045c2c76cecb4adbf7655445cc0056178c0a1604baea992495a20ce18",
+  "checks": [
+    {
+      "name": "390: scenario controls start folded",
+      "pass": true
+    },
+    {
+      "name": "390: controls open as a dialog",
+      "pass": true
+    },
+    {
+      "name": "390: apply returns to affected decision",
+      "pass": true
+    },
+    {
+      "name": "390: native result and cells agree",
+      "pass": true
+    },
+    {
+      "name": "390: review and retain from sheet",
+      "pass": true
+    },
+    {
+      "name": "390: Escape returns focus",
+      "pass": true
+    },
+    {
+      "name": "390: real evidence keeps its own label",
+      "pass": true
+    },
+    {
+      "name": "390: return preserves work",
+      "pass": true
+    },
+    {
+      "name": "390: no horizontal overflow",
+      "pass": true
+    },
+    {
+      "name": "320: scenario controls start folded",
+      "pass": true
+    },
+    {
+      "name": "320: controls open as a dialog",
+      "pass": true
+    },
+    {
+      "name": "320: apply returns to affected decision",
+      "pass": true
+    },
+    {
+      "name": "320: native result and cells agree",
+      "pass": true
+    },
+    {
+      "name": "320: review and retain from sheet",
+      "pass": true
+    },
+    {
+      "name": "320: Escape returns focus",
+      "pass": true
+    },
+    {
+      "name": "320: real evidence keeps its own label",
+      "pass": true
+    },
+    {
+      "name": "320: return preserves work",
+      "pass": true
+    },
+    {
+      "name": "320: no horizontal overflow",
+      "pass": true
+    },
+    {
+      "name": "reduced motion has no running animations",
+      "pass": true
+    },
+    {
+      "name": "reduced motion uses no view transition",
+      "pass": true
+    },
+    {
+      "name": "no JavaScript errors",
+      "pass": true
+    },
+    {
+      "name": "no runtime network calls",
+      "pass": true
+    }
+  ],
+  "errors": [],
+  "all_pass": true,
+  "scope": "Real browser interactions and layout; not human comprehension or production qualification."
+}

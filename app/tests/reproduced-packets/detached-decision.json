@@ -1,0 +1,2648 @@
+{
+  "schema": "second-run/research-packet@1",
+  "workspace": {
+    "events": [
+      {
+        "actor": "Cantos synthetic example author",
+        "at": "2026-09-28T00:00:00Z",
+        "hash": "27fb57eb7598c69dc97451653ae6e0ac00b2917b3957bb57d6fa14adbf0e5e57",
+        "payload": {
+          "data": {
+            "basis": "New authored synthetic example; not BEP data or a GPU measurement.",
+            "id": "cantos-research-preview",
+            "original_data": "Authored fixture, no customer or provider data.",
+            "owner": "ResearchCore 1.0.0",
+            "sourceApp": "5951f7f3d994ec980d2958ae18246edc6dbe5b57db8d38e90c1c18956b96e470",
+            "task_count": 24,
+            "version": "0.1.0"
+          },
+          "deps": [],
+          "disposition": "observed",
+          "id": "source",
+          "kind": "source",
+          "revision": 1,
+          "summary": "Two authored configurations process the same 24 fictional invoices. Some outputs are fenced JSON; wrong fields, timeouts and late answers remain in the record.",
+          "tier": "synthetic",
+          "title": "24 invoice records / worked example"
+        },
+        "prev": "0000000000000000000000000000000000000000000000000000000000000000",
+        "seq": 1,
+        "type": "record"
+      },
+      {
+        "actor": "Cantos synthetic example author",
+        "at": "2026-09-28T00:00:00Z",
+        "hash": "bc7246e8dde10374f3d402f06f2c17c16ab2d8c2fe622dfe8cd01bebdb8cd6d9",
+        "payload": {
+          "data": {
+            "comparison_mode": "task",
+            "cost_basis": "quote",
+            "deadline_ms": 12000,
+            "grader": "strict_json",
+            "min_tasks": 24,
+            "quality_floor": 0.5
+          },
+          "deps": [
+            {
+              "id": "source",
+              "revision": 1
+            }
+          ],
+          "disposition": "draft",
+          "id": "policy",
+          "kind": "policy",
+          "revision": 1,
+          "summary": "Read the complete JSON response, verify every expected field, and finish within 12 seconds.",
+          "tier": "synthetic",
+          "title": "Acceptance contract"
+        },
+        "prev": "27fb57eb7598c69dc97451653ae6e0ac00b2917b3957bb57d6fa14adbf0e5e57",
+        "seq": 2,
+        "type": "record"
+      },
+      {
+        "actor": "Cantos synthetic example author",
+        "at": "2026-09-28T00:00:00Z",
+        "hash": "41860ae887d0a97324f33008a2b16741cbe68f5ff9e653034772fec7184b58c0",
+        "payload": {
+          "data": {
+            "billing": {
+              "actual_total_usd": null,
+              "currency": "USD",
+              "quote_total_usd": 2.4,
+              "scope": "Illustrative complete cost for 24 tasks including failures; not an invoice."
+            },
+            "evidence": "synthetic",
+            "label": "Configuration A",
+            "pins": {
+              "boundary": "original-task-to-completion",
+              "contract": "extract-invoice-fields-v1",
+              "load": "authored-24-items-v1",
+              "taskset": "cantos-invoices-24-v1"
+            },
+            "run_id": "configuration-a",
+            "schema": "second-run/task-run@1",
+            "tasks": [
+              {
+                "attempts": [
+                  {
+                    "cost_usd": null,
+                    "elapsed_ms": 2080,
+                    "output": "{\"invoice\":\"INV-001\",\"total\":101}",
+                    "status": "ok"
+                  }
+                ],
+                "expected": {
+                  "invoice": "INV-001",
+                  "total": 101
+                },
+                "id": "invoice-1"
+              },
+              {
+                "attempts": [
+                  {
+                    "cost_usd": null,
+                    "elapsed_ms": 2160,
+                    "output": "{\"invoice\":\"INV-002\",\"total\":102}",
+                    "status": "ok"
+                  }
+                ],
+                "expected": {
+                  "invoice": "INV-002",
+                  "total": 102
+                },
+                "id": "invoice-2"
+              },
+              {
+                "attempts": [
+                  {
+                    "cost_usd": null,
+                    "elapsed_ms": 2240,
+                    "output": "{\"invoice\":\"INV-003\",\"total\":103}",
+                    "status": "ok"
+                  }
+                ],
+                "expected": {
+                  "invoice": "INV-003",
+                  "total": 103
+                },
+                "id": "invoice-3"
+              },
+              {
+                "attempts": [
+                  {
+                    "cost_usd": null,
+                    "elapsed_ms": 2320,
+                    "output": "{\"invoice\":\"INV-004\",\"total\":104}",
+                    "status": "ok"
+                  }
+                ],
+                "expected": {
+                  "invoice": "INV-004",
+                  "total": 104
+                },
+                "id": "invoice-4"
+              },
+              {
+                "attempts": [
+                  {
+                    "cost_usd": null,
+                    "elapsed_ms": 2400,
+                    "output": "{\"invoice\":\"INV-005\",\"total\":105}",
+                    "status": "ok"
+                  }
+                ],
+                "expected": {
+                  "invoice": "INV-005",
+                  "total": 105
+                },
+                "id": "invoice-5"
+              },
+              {
+                "attempts": [
+                  {
+                    "cost_usd": null,
+                    "elapsed_ms": 2480,
+                    "output": "{\"invoice\":\"INV-006\",\"total\":106}",
+                    "status": "ok"
+                  }
+                ],
+                "expected": {
+                  "invoice": "INV-006",
+                  "total": 106
+                },
+                "id": "invoice-6"
+              },
+              {
+                "attempts": [
+                  {
+                    "cost_usd": null,
+                    "elapsed_ms": 2560,
+                    "output": "{\"invoice\":\"INV-007\",\"total\":107}",
+                    "status": "ok"
+                  }
+                ],
+                "expected": {
+                  "invoice": "INV-007",
+                  "total": 107
+                },
+                "id": "invoice-7"
+              },
+              {
+                "attempts": [
+                  {
+                    "cost_usd": null,
+                    "elapsed_ms": 2640,
+                    "output": "{\"invoice\":\"INV-008\",\"total\":108}",
+                    "status": "ok"
+                  }
+                ],
+                "expected": {
+                  "invoice": "INV-008",
+                  "total": 108
+                },
+                "id": "invoice-8"
+              },
+              {
+                "attempts": [
+                  {
+                    "cost_usd": null,
+                    "elapsed_ms": 2720,
+                    "output": "{\"invoice\":\"INV-009\",\"total\":109}",
+                    "status": "ok"
+                  }
+                ],
+                "expected": {
+                  "invoice": "INV-009",
+                  "total": 109
+                },
+                "id": "invoice-9"
+              },
+              {
+                "attempts": [
+                  {
+                    "cost_usd": null,
+                    "elapsed_ms": 2800,
+                    "output": "{\"invoice\":\"INV-010\",\"total\":110}",
+                    "status": "ok"
+                  }
+                ],
+                "expected": {
+                  "invoice": "INV-010",
+                  "total": 110
+                },
+                "id": "invoice-10"
+              },
+              {
+                "attempts": [
+                  {
+                    "cost_usd": null,
+                    "elapsed_ms": 2880,
+                    "output": "{\"invoice\":\"INV-011\",\"total\":111}",
+                    "status": "ok"
+                  }
+                ],
+                "expected": {
+                  "invoice": "INV-011",
+                  "total": 111
+                },
+                "id": "invoice-11"
+              },
+              {
+                "attempts": [
+                  {
+                    "cost_usd": null,
+                    "elapsed_ms": 2960,
+                    "output": "{\"invoice\":\"INV-012\",\"total\":112}",
+                    "status": "ok"
+                  }
+                ],
+                "expected": {
+                  "invoice": "INV-012",
+                  "total": 112
+                },
+                "id": "invoice-12"
+              },
+              {
+                "attempts": [
+                  {
+                    "cost_usd": null,
+                    "elapsed_ms": 3040,
+                    "output": "```json\n{\"invoice\":\"INV-013\",\"total\":113}\n```",
+                    "status": "ok"
+                  }
+                ],
+                "expected": {
+                  "invoice": "INV-013",
+                  "total": 113
+                },
+                "id": "invoice-13"
+              },
+              {
+                "attempts": [
+                  {
+                    "cost_usd": null,
+                    "elapsed_ms": 3120,
+                    "output": "```json\n{\"invoice\":\"INV-014\",\"total\":114}\n```",
+                    "status": "ok"
+                  }
+                ],
+                "expected": {
+                  "invoice": "INV-014",
+                  "total": 114
+                },
+                "id": "invoice-14"
+              },
+              {
+                "attempts": [
+                  {
+                    "cost_usd": null,
+                    "elapsed_ms": 3200,
+                    "output": "```json\n{\"invoice\":\"INV-015\",\"total\":115}\n```",
+                    "status": "ok"
+                  }
+                ],
+                "expected": {
+                  "invoice": "INV-015",
+                  "total": 115
+                },
+                "id": "invoice-15"
+              },
+              {
+                "attempts": [
+                  {
+                    "cost_usd": null,
+                    "elapsed_ms": 3280,
+                    "output": "```json\n{\"invoice\":\"INV-016\",\"total\":116}\n```",
+                    "status": "ok"
+                  }
+                ],
+                "expected": {
+                  "invoice": "INV-016",
+                  "total": 116
+                },
+                "id": "invoice-16"
+              },
+              {
+                "attempts": [
+                  {
+                    "cost_usd": null,
+                    "elapsed_ms": 3360,
+                    "output": "```json\n{\"invoice\":\"INV-017\",\"total\":117}\n```",
+                    "status": "ok"
+                  }
+                ],
+                "expected": {
+                  "invoice": "INV-017",
+                  "total": 117
+                },
+                "id": "invoice-17"
+              },
+              {
+                "attempts": [
+                  {
+                    "cost_usd": null,
+                    "elapsed_ms": 3440,
+                    "output": "```json\n{\"invoice\":\"INV-018\",\"total\":118}\n```",
+                    "status": "ok"
+                  }
+                ],
+                "expected": {
+                  "invoice": "INV-018",
+                  "total": 118
+                },
+                "id": "invoice-18"
+              },
+              {
+                "attempts": [
+                  {
+                    "cost_usd": null,
+                    "elapsed_ms": 3520,
+                    "output": "```json\n{\"invoice\":\"INV-019\",\"total\":119}\n```",
+                    "status": "ok"
+                  }
+                ],
+                "expected": {
+                  "invoice": "INV-019",
+                  "total": 119
+                },
+                "id": "invoice-19"
+              },
+              {
+                "attempts": [
+                  {
+                    "cost_usd": null,
+                    "elapsed_ms": 3600,
+                    "output": "```json\n{\"invoice\":\"INV-020\",\"total\":120}\n```",
+                    "status": "ok"
+                  }
+                ],
+                "expected": {
+                  "invoice": "INV-020",
+                  "total": 120
+                },
+                "id": "invoice-20"
+              },
+              {
+                "attempts": [
+                  {
+                    "cost_usd": null,
+                    "elapsed_ms": 3680,
+                    "output": "```json\n{\"invoice\":\"INV-021\",\"total\":121}\n```",
+                    "status": "ok"
+                  }
+                ],
+                "expected": {
+                  "invoice": "INV-021",
+                  "total": 121
+                },
+                "id": "invoice-21"
+              },
+              {
+                "attempts": [
+                  {
+                    "cost_usd": null,
+                    "elapsed_ms": 3760,
+                    "output": "```json\n{\"invoice\":\"INV-022\",\"total\":122}\n```",
+                    "status": "ok"
+                  }
+                ],
+                "expected": {
+                  "invoice": "INV-022",
+                  "total": 122
+                },
+                "id": "invoice-22"
+              },
+              {
+                "attempts": [
+                  {
+                    "cost_usd": null,
+                    "elapsed_ms": 3840,
+                    "output": "{\"invoice\":\"INV-023\",\"total\":0}",
+                    "status": "ok"
+                  }
+                ],
+                "expected": {
+                  "invoice": "INV-023",
+                  "total": 123
+                },
+                "id": "invoice-23"
+              },
+              {
+                "attempts": [
+                  {
+                    "cost_usd": null,
+                    "elapsed_ms": 12000,
+                    "output": "",
+                    "status": "timeout"
+                  }
+                ],
+                "expected": {
+                  "invoice": "INV-024",
+                  "total": 124
+                },
+                "id": "invoice-24"
+              }
+            ]
+          },
+          "deps": [
+            {
+              "id": "source",
+              "revision": 1
+            }
+          ],
+          "disposition": "draft",
+          "id": "run-a",
+          "kind": "run",
+          "revision": 1,
+          "summary": "Original task outputs, cumulative timing and complete quoted cost remain inspectable.",
+          "tier": "synthetic",
+          "title": "Configuration A / retained attempts"
+        },
+        "prev": "bc7246e8dde10374f3d402f06f2c17c16ab2d8c2fe622dfe8cd01bebdb8cd6d9",
+        "seq": 3,
+        "type": "record"
+      },
+      {
+        "actor": "Cantos synthetic example author",
+        "at": "2026-09-28T00:00:00Z",
+        "hash": "581971fc4d729f375000913494b1dfb765158cd560d87bbbef0ab95ad6139d59",
+        "payload": {
+          "data": {
+            "billing": {
+              "actual_total_usd": null,
+              "currency": "USD",
+              "quote_total_usd": 3.6,
+              "scope": "Illustrative complete cost for 24 tasks including failures; not an invoice."
+            },
+            "evidence": "synthetic",
+            "label": "Configuration B",
+            "pins": {
+              "boundary": "original-task-to-completion",
+              "contract": "extract-invoice-fields-v1",
+              "load": "authored-24-items-v1",
+              "taskset": "cantos-invoices-24-v1"
+            },
+            "run_id": "configuration-b",
+            "schema": "second-run/task-run@1",
+            "tasks": [
+              {
+                "attempts": [
+                  {
+                    "cost_usd": null,
+                    "elapsed_ms": 2080,
+                    "output": "{\"invoice\":\"INV-001\",\"total\":101}",
+                    "status": "ok"
+                  }
+                ],
+                "expected": {
+                  "invoice": "INV-001",
+                  "total": 101
+                },
+                "id": "invoice-1"
+              },
+              {
+                "attempts": [
+                  {
+                    "cost_usd": null,
+                    "elapsed_ms": 2160,
+                    "output": "{\"invoice\":\"INV-002\",\"total\":102}",
+                    "status": "ok"
+                  }
+                ],
+                "expected": {
+                  "invoice": "INV-002",
+                  "total": 102
+                },
+                "id": "invoice-2"
+              },
+              {
+                "attempts": [
+                  {
+                    "cost_usd": null,
+                    "elapsed_ms": 2240,
+                    "output": "{\"invoice\":\"INV-003\",\"total\":103}",
+                    "status": "ok"
+                  }
+                ],
+                "expected": {
+                  "invoice": "INV-003",
+                  "total": 103
+                },
+                "id": "invoice-3"
+              },
+              {
+                "attempts": [
+                  {
+                    "cost_usd": null,
+                    "elapsed_ms": 2320,
+                    "output": "{\"invoice\":\"INV-004\",\"total\":104}",
+                    "status": "ok"
+                  }
+                ],
+                "expected": {
+                  "invoice": "INV-004",
+                  "total": 104
+                },
+                "id": "invoice-4"
+              },
+              {
+                "attempts": [
+                  {
+                    "cost_usd": null,
+                    "elapsed_ms": 2400,
+                    "output": "{\"invoice\":\"INV-005\",\"total\":105}",
+                    "status": "ok"
+                  }
+                ],
+                "expected": {
+                  "invoice": "INV-005",
+                  "total": 105
+                },
+                "id": "invoice-5"
+              },
+              {
+                "attempts": [
+                  {
+                    "cost_usd": null,
+                    "elapsed_ms": 2480,
+                    "output": "{\"invoice\":\"INV-006\",\"total\":106}",
+                    "status": "ok"
+                  }
+                ],
+                "expected": {
+                  "invoice": "INV-006",
+                  "total": 106
+                },
+                "id": "invoice-6"
+              },
+              {
+                "attempts": [
+                  {
+                    "cost_usd": null,
+                    "elapsed_ms": 2560,
+                    "output": "{\"invoice\":\"INV-007\",\"total\":107}",
+                    "status": "ok"
+                  }
+                ],
+                "expected": {
+                  "invoice": "INV-007",
+                  "total": 107
+                },
+                "id": "invoice-7"
+              },
+              {
+                "attempts": [
+                  {
+                    "cost_usd": null,
+                    "elapsed_ms": 2640,
+                    "output": "{\"invoice\":\"INV-008\",\"total\":108}",
+                    "status": "ok"
+                  }
+                ],
+                "expected": {
+                  "invoice": "INV-008",
+                  "total": 108
+                },
+                "id": "invoice-8"
+              },
+              {
+                "attempts": [
+                  {
+                    "cost_usd": null,
+                    "elapsed_ms": 2720,
+                    "output": "{\"invoice\":\"INV-009\",\"total\":109}",
+                    "status": "ok"
+                  }
+                ],
+                "expected": {
+                  "invoice": "INV-009",
+                  "total": 109
+                },
+                "id": "invoice-9"
+              },
+              {
+                "attempts": [
+                  {
+                    "cost_usd": null,
+                    "elapsed_ms": 2800,
+                    "output": "{\"invoice\":\"INV-010\",\"total\":110}",
+                    "status": "ok"
+                  }
+                ],
+                "expected": {
+                  "invoice": "INV-010",
+                  "total": 110
+                },
+                "id": "invoice-10"
+              },
+              {
+                "attempts": [
+                  {
+                    "cost_usd": null,
+                    "elapsed_ms": 2880,
+                    "output": "{\"invoice\":\"INV-011\",\"total\":111}",
+                    "status": "ok"
+                  }
+                ],
+                "expected": {
+                  "invoice": "INV-011",
+                  "total": 111
+                },
+                "id": "invoice-11"
+              },
+              {
+                "attempts": [
+                  {
+                    "cost_usd": null,
+                    "elapsed_ms": 2960,
+                    "output": "{\"invoice\":\"INV-012\",\"total\":112}",
+                    "status": "ok"
+                  }
+                ],
+                "expected": {
+                  "invoice": "INV-012",
+                  "total": 112
+                },
+                "id": "invoice-12"
+              },
+              {
+                "attempts": [
+                  {
+                    "cost_usd": null,
+                    "elapsed_ms": 3040,
+                    "output": "{\"invoice\":\"INV-013\",\"total\":113}",
+                    "status": "ok"
+                  }
+                ],
+                "expected": {
+                  "invoice": "INV-013",
+                  "total": 113
+                },
+                "id": "invoice-13"
+              },
+              {
+                "attempts": [
+                  {
+                    "cost_usd": null,
+                    "elapsed_ms": 3120,
+                    "output": "{\"invoice\":\"INV-014\",\"total\":114}",
+                    "status": "ok"
+                  }
+                ],
+                "expected": {
+                  "invoice": "INV-014",
+                  "total": 114
+                },
+                "id": "invoice-14"
+              },
+              {
+                "attempts": [
+                  {
+                    "cost_usd": null,
+                    "elapsed_ms": 3200,
+                    "output": "{\"invoice\":\"INV-015\",\"total\":115}",
+                    "status": "ok"
+                  }
+                ],
+                "expected": {
+                  "invoice": "INV-015",
+                  "total": 115
+                },
+                "id": "invoice-15"
+              },
+              {
+                "attempts": [
+                  {
+                    "cost_usd": null,
+                    "elapsed_ms": 3280,
+                    "output": "{\"invoice\":\"INV-016\",\"total\":116}",
+                    "status": "ok"
+                  }
+                ],
+                "expected": {
+                  "invoice": "INV-016",
+                  "total": 116
+                },
+                "id": "invoice-16"
+              },
+              {
+                "attempts": [
+                  {
+                    "cost_usd": null,
+                    "elapsed_ms": 3360,
+                    "output": "{\"invoice\":\"INV-017\",\"total\":117}",
+                    "status": "ok"
+                  }
+                ],
+                "expected": {
+                  "invoice": "INV-017",
+                  "total": 117
+                },
+                "id": "invoice-17"
+              },
+              {
+                "attempts": [
+                  {
+                    "cost_usd": null,
+                    "elapsed_ms": 3440,
+                    "output": "{\"invoice\":\"INV-018\",\"total\":118}",
+                    "status": "ok"
+                  }
+                ],
+                "expected": {
+                  "invoice": "INV-018",
+                  "total": 118
+                },
+                "id": "invoice-18"
+              },
+              {
+                "attempts": [
+                  {
+                    "cost_usd": null,
+                    "elapsed_ms": 3520,
+                    "output": "{\"invoice\":\"INV-019\",\"total\":119}",
+                    "status": "ok"
+                  }
+                ],
+                "expected": {
+                  "invoice": "INV-019",
+                  "total": 119
+                },
+                "id": "invoice-19"
+              },
+              {
+                "attempts": [
+                  {
+                    "cost_usd": null,
+                    "elapsed_ms": 3600,
+                    "output": "{\"invoice\":\"INV-020\",\"total\":120}",
+                    "status": "ok"
+                  }
+                ],
+                "expected": {
+                  "invoice": "INV-020",
+                  "total": 120
+                },
+                "id": "invoice-20"
+              },
+              {
+                "attempts": [
+                  {
+                    "cost_usd": null,
+                    "elapsed_ms": 3680,
+                    "output": "{\"invoice\":\"INV-021\",\"total\":0}",
+                    "status": "ok"
+                  }
+                ],
+                "expected": {
+                  "invoice": "INV-021",
+                  "total": 121
+                },
+                "id": "invoice-21"
+              },
+              {
+                "attempts": [
+                  {
+                    "cost_usd": null,
+                    "elapsed_ms": 3760,
+                    "output": "{\"invoice\":\"INV-022\",\"total\":0}",
+                    "status": "ok"
+                  }
+                ],
+                "expected": {
+                  "invoice": "INV-022",
+                  "total": 122
+                },
+                "id": "invoice-22"
+              },
+              {
+                "attempts": [
+                  {
+                    "cost_usd": null,
+                    "elapsed_ms": 14000,
+                    "output": "{\"invoice\":\"INV-023\",\"total\":123}",
+                    "status": "ok"
+                  }
+                ],
+                "expected": {
+                  "invoice": "INV-023",
+                  "total": 123
+                },
+                "id": "invoice-23"
+              },
+              {
+                "attempts": [
+                  {
+                    "cost_usd": null,
+                    "elapsed_ms": 14000,
+                    "output": "{\"invoice\":\"INV-024\",\"total\":124}",
+                    "status": "ok"
+                  }
+                ],
+                "expected": {
+                  "invoice": "INV-024",
+                  "total": 124
+                },
+                "id": "invoice-24"
+              }
+            ]
+          },
+          "deps": [
+            {
+              "id": "source",
+              "revision": 1
+            }
+          ],
+          "disposition": "draft",
+          "id": "run-b",
+          "kind": "run",
+          "revision": 1,
+          "summary": "Original task outputs, cumulative timing and complete quoted cost remain inspectable.",
+          "tier": "synthetic",
+          "title": "Configuration B / retained attempts"
+        },
+        "prev": "41860ae887d0a97324f33008a2b16741cbe68f5ff9e653034772fec7184b58c0",
+        "seq": 4,
+        "type": "record"
+      },
+      {
+        "actor": "Cantos local calculation",
+        "at": "2026-09-28T20:59:34.916Z",
+        "hash": "f5b84ceb0a7188e0f6debf5ce2fb6639f3a2532f6807eda796cb18fef37318d3",
+        "payload": {
+          "data": {
+            "blockers": [],
+            "recipe": "task-cost@1",
+            "results": [
+              {
+                "accepted": 12,
+                "actual_total_usd": null,
+                "attempt_cost_usd": null,
+                "attempts": 24,
+                "blockers": [],
+                "censored": 1,
+                "completed_latency_p95_ms": 3760,
+                "cost_basis": "quote",
+                "cost_per_success": 0.19999999999999998,
+                "eligible": true,
+                "evidence": "synthetic",
+                "label": "Configuration A",
+                "quality": 12,
+                "quote_total_usd": 2.4,
+                "rows": [
+                  {
+                    "accepted": true,
+                    "attempts": 1,
+                    "id": "invoice-1",
+                    "quality": true
+                  },
+                  {
+                    "accepted": true,
+                    "attempts": 1,
+                    "id": "invoice-2",
+                    "quality": true
+                  },
+                  {
+                    "accepted": true,
+                    "attempts": 1,
+                    "id": "invoice-3",
+                    "quality": true
+                  },
+                  {
+                    "accepted": true,
+                    "attempts": 1,
+                    "id": "invoice-4",
+                    "quality": true
+                  },
+                  {
+                    "accepted": true,
+                    "attempts": 1,
+                    "id": "invoice-5",
+                    "quality": true
+                  },
+                  {
+                    "accepted": true,
+                    "attempts": 1,
+                    "id": "invoice-6",
+                    "quality": true
+                  },
+                  {
+                    "accepted": true,
+                    "attempts": 1,
+                    "id": "invoice-7",
+                    "quality": true
+                  },
+                  {
+                    "accepted": true,
+                    "attempts": 1,
+                    "id": "invoice-8",
+                    "quality": true
+                  },
+                  {
+                    "accepted": true,
+                    "attempts": 1,
+                    "id": "invoice-9",
+                    "quality": true
+                  },
+                  {
+                    "accepted": true,
+                    "attempts": 1,
+                    "id": "invoice-10",
+                    "quality": true
+                  },
+                  {
+                    "accepted": true,
+                    "attempts": 1,
+                    "id": "invoice-11",
+                    "quality": true
+                  },
+                  {
+                    "accepted": true,
+                    "attempts": 1,
+                    "id": "invoice-12",
+                    "quality": true
+                  },
+                  {
+                    "accepted": false,
+                    "attempts": 1,
+                    "id": "invoice-13",
+                    "quality": false
+                  },
+                  {
+                    "accepted": false,
+                    "attempts": 1,
+                    "id": "invoice-14",
+                    "quality": false
+                  },
+                  {
+                    "accepted": false,
+                    "attempts": 1,
+                    "id": "invoice-15",
+                    "quality": false
+                  },
+                  {
+                    "accepted": false,
+                    "attempts": 1,
+                    "id": "invoice-16",
+                    "quality": false
+                  },
+                  {
+                    "accepted": false,
+                    "attempts": 1,
+                    "id": "invoice-17",
+                    "quality": false
+                  },
+                  {
+                    "accepted": false,
+                    "attempts": 1,
+                    "id": "invoice-18",
+                    "quality": false
+                  },
+                  {
+                    "accepted": false,
+                    "attempts": 1,
+                    "id": "invoice-19",
+                    "quality": false
+                  },
+                  {
+                    "accepted": false,
+                    "attempts": 1,
+                    "id": "invoice-20",
+                    "quality": false
+                  },
+                  {
+                    "accepted": false,
+                    "attempts": 1,
+                    "id": "invoice-21",
+                    "quality": false
+                  },
+                  {
+                    "accepted": false,
+                    "attempts": 1,
+                    "id": "invoice-22",
+                    "quality": false
+                  },
+                  {
+                    "accepted": false,
+                    "attempts": 1,
+                    "id": "invoice-23",
+                    "quality": false
+                  },
+                  {
+                    "accepted": false,
+                    "attempts": 1,
+                    "id": "invoice-24",
+                    "quality": false
+                  }
+                ],
+                "run_id": "configuration-a",
+                "scope": "Observed fixed-task result. No population reliability estimate or production qualification.",
+                "success_rate": 0.5,
+                "tasks": 24,
+                "total_usd": 2.4
+              },
+              {
+                "accepted": 20,
+                "actual_total_usd": null,
+                "attempt_cost_usd": null,
+                "attempts": 24,
+                "blockers": [],
+                "censored": 0,
+                "completed_latency_p95_ms": 14000,
+                "cost_basis": "quote",
+                "cost_per_success": 0.18,
+                "eligible": true,
+                "evidence": "synthetic",
+                "label": "Configuration B",
+                "quality": 22,
+                "quote_total_usd": 3.6,
+                "rows": [
+                  {
+                    "accepted": true,
+                    "attempts": 1,
+                    "id": "invoice-1",
+                    "quality": true
+                  },
+                  {
+                    "accepted": true,
+                    "attempts": 1,
+                    "id": "invoice-2",
+                    "quality": true
+                  },
+                  {
+                    "accepted": true,
+                    "attempts": 1,
+                    "id": "invoice-3",
+                    "quality": true
+                  },
+                  {
+                    "accepted": true,
+                    "attempts": 1,
+                    "id": "invoice-4",
+                    "quality": true
+                  },
+                  {
+                    "accepted": true,
+                    "attempts": 1,
+                    "id": "invoice-5",
+                    "quality": true
+                  },
+                  {
+                    "accepted": true,
+                    "attempts": 1,
+                    "id": "invoice-6",
+                    "quality": true
+                  },
+                  {
+                    "accepted": true,
+                    "attempts": 1,
+                    "id": "invoice-7",
+                    "quality": true
+                  },
+                  {
+                    "accepted": true,
+                    "attempts": 1,
+                    "id": "invoice-8",
+                    "quality": true
+                  },
+                  {
+                    "accepted": true,
+                    "attempts": 1,
+                    "id": "invoice-9",
+                    "quality": true
+                  },
+                  {
+                    "accepted": true,
+                    "attempts": 1,
+                    "id": "invoice-10",
+                    "quality": true
+                  },
+                  {
+                    "accepted": true,
+                    "attempts": 1,
+                    "id": "invoice-11",
+                    "quality": true
+                  },
+                  {
+                    "accepted": true,
+                    "attempts": 1,
+                    "id": "invoice-12",
+                    "quality": true
+                  },
+                  {
+                    "accepted": true,
+                    "attempts": 1,
+                    "id": "invoice-13",
+                    "quality": true
+                  },
+                  {
+                    "accepted": true,
+                    "attempts": 1,
+                    "id": "invoice-14",
+                    "quality": true
+                  },
+                  {
+                    "accepted": true,
+                    "attempts": 1,
+                    "id": "invoice-15",
+                    "quality": true
+                  },
+                  {
+                    "accepted": true,
+                    "attempts": 1,
+                    "id": "invoice-16",
+                    "quality": true
+                  },
+                  {
+                    "accepted": true,
+                    "attempts": 1,
+                    "id": "invoice-17",
+                    "quality": true
+                  },
+                  {
+                    "accepted": true,
+                    "attempts": 1,
+                    "id": "invoice-18",
+                    "quality": true
+                  },
+                  {
+                    "accepted": true,
+                    "attempts": 1,
+                    "id": "invoice-19",
+                    "quality": true
+                  },
+                  {
+                    "accepted": true,
+                    "attempts": 1,
+                    "id": "invoice-20",
+                    "quality": true
+                  },
+                  {
+                    "accepted": false,
+                    "attempts": 1,
+                    "id": "invoice-21",
+                    "quality": false
+                  },
+                  {
+                    "accepted": false,
+                    "attempts": 1,
+                    "id": "invoice-22",
+                    "quality": false
+                  },
+                  {
+                    "accepted": false,
+                    "attempts": 1,
+                    "id": "invoice-23",
+                    "quality": true
+                  },
+                  {
+                    "accepted": false,
+                    "attempts": 1,
+                    "id": "invoice-24",
+                    "quality": true
+                  }
+                ],
+                "run_id": "configuration-b",
+                "scope": "Observed fixed-task result. No population reliability estimate or production qualification.",
+                "success_rate": 0.8333333333333334,
+                "tasks": 24,
+                "total_usd": 3.6
+              }
+            ],
+            "scope": "SYNTHETIC ACCOUNTING EXERCISE",
+            "selectedRecordIds": [
+              "run-a",
+              "run-b"
+            ],
+            "tied": false,
+            "winner": "configuration-b"
+          },
+          "deps": [
+            {
+              "id": "policy",
+              "revision": 1
+            },
+            {
+              "id": "run-a",
+              "revision": 1
+            },
+            {
+              "id": "run-b",
+              "revision": 1
+            }
+          ],
+          "disposition": "draft",
+          "id": "calculation",
+          "kind": "calculation",
+          "revision": 1,
+          "summary": "Computed by the retained ResearchCore evaluator; all 24 tasks remain in each denominator.",
+          "tier": "synthetic",
+          "title": "Cost per accepted original task"
+        },
+        "prev": "581971fc4d729f375000913494b1dfb765158cd560d87bbbef0ab95ad6139d59",
+        "seq": 5,
+        "type": "record"
+      },
+      {
+        "actor": "Cantos local calculation",
+        "at": "2026-09-28T20:59:34.917Z",
+        "hash": "b4537fdcb5fb869b528024c3fa834741a850e3b4a07777d107b57506cc5f36c9",
+        "payload": {
+          "data": {
+            "limitations": [
+              "New authored synthetic example; not BEP data or a GPU measurement.",
+              "Sample eligibility is not production reliability.",
+              "No purchase or execution authority is granted."
+            ],
+            "reason": [],
+            "winner": "configuration-b"
+          },
+          "deps": [
+            {
+              "id": "calculation",
+              "revision": 1
+            }
+          ],
+          "disposition": "draft",
+          "id": "decision",
+          "kind": "conclusion",
+          "revision": 1,
+          "summary": "Configuration B has the lowest complete quoted cost per accepted task under this version of the contract.",
+          "tier": "synthetic",
+          "title": "Configuration recommendation"
+        },
+        "prev": "f5b84ceb0a7188e0f6debf5ce2fb6639f3a2532f6807eda796cb18fef37318d3",
+        "seq": 6,
+        "type": "record"
+      },
+      {
+        "actor": "Cantos synthetic example author",
+        "at": "2026-09-28T20:59:34.918Z",
+        "hash": "e63ae63ac2f5b143e4b2302cd5b8a815a82811f62c3f28a25fee474f73c6d0cc",
+        "payload": {
+          "decision": "accept",
+          "fingerprint": "a75c05c77c1d2cc8ebe5c4aaf201550a6b9060b61b903838e37a7225d758714d",
+          "rationale": "Bundled synthetic baseline edition for demonstrating preserved delivery and a later revision.",
+          "reviewer": "Cantos synthetic example author",
+          "target": "decision"
+        },
+        "prev": "b4537fdcb5fb869b528024c3fa834741a850e3b4a07777d107b57506cc5f36c9",
+        "seq": 7,
+        "type": "review"
+      },
+      {
+        "actor": "Cantos synthetic example author",
+        "at": "2026-09-28T20:59:34.919Z",
+        "hash": "7f5dbabfa091b2c78f97c089711ff115798a375e448237b59b76967d45d1fbb1",
+        "payload": {
+          "fingerprint": "a75c05c77c1d2cc8ebe5c4aaf201550a6b9060b61b903838e37a7225d758714d",
+          "snapshot": {
+            "evidence_boundary": "Source identity and recomputable reasoning; not source truth, authenticated human identity or investment approval.",
+            "records": {
+              "calculation": {
+                "data": {
+                  "blockers": [],
+                  "recipe": "task-cost@1",
+                  "results": [
+                    {
+                      "accepted": 12,
+                      "actual_total_usd": null,
+                      "attempt_cost_usd": null,
+                      "attempts": 24,
+                      "blockers": [],
+                      "censored": 1,
+                      "completed_latency_p95_ms": 3760,
+                      "cost_basis": "quote",
+                      "cost_per_success": 0.19999999999999998,
+                      "eligible": true,
+                      "evidence": "synthetic",
+                      "label": "Configuration A",
+                      "quality": 12,
+                      "quote_total_usd": 2.4,
+                      "rows": [
+                        {
+                          "accepted": true,
+                          "attempts": 1,
+                          "id": "invoice-1",
+                          "quality": true
+                        },
+                        {
+                          "accepted": true,
+                          "attempts": 1,
+                          "id": "invoice-2",
+                          "quality": true
+                        },
+                        {
+                          "accepted": true,
+                          "attempts": 1,
+                          "id": "invoice-3",
+                          "quality": true
+                        },
+                        {
+                          "accepted": true,
+                          "attempts": 1,
+                          "id": "invoice-4",
+                          "quality": true
+                        },
+                        {
+                          "accepted": true,
+                          "attempts": 1,
+                          "id": "invoice-5",
+                          "quality": true
+                        },
+                        {
+                          "accepted": true,
+                          "attempts": 1,
+                          "id": "invoice-6",
+                          "quality": true
+                        },
+                        {
+                          "accepted": true,
+                          "attempts": 1,
+                          "id": "invoice-7",
+                          "quality": true
+                        },
+                        {
+                          "accepted": true,
+                          "attempts": 1,
+                          "id": "invoice-8",
+                          "quality": true
+                        },
+                        {
+                          "accepted": true,
+                          "attempts": 1,
+                          "id": "invoice-9",
+                          "quality": true
+                        },
+                        {
+                          "accepted": true,
+                          "attempts": 1,
+                          "id": "invoice-10",
+                          "quality": true
+                        },
+                        {
+                          "accepted": true,
+                          "attempts": 1,
+                          "id": "invoice-11",
+                          "quality": true
+                        },
+                        {
+                          "accepted": true,
+                          "attempts": 1,
+                          "id": "invoice-12",
+                          "quality": true
+                        },
+                        {
+                          "accepted": false,
+                          "attempts": 1,
+                          "id": "invoice-13",
+                          "quality": false
+                        },
+                        {
+                          "accepted": false,
+                          "attempts": 1,
+                          "id": "invoice-14",
+                          "quality": false
+                        },
+                        {
+                          "accepted": false,
+                          "attempts": 1,
+                          "id": "invoice-15",
+                          "quality": false
+                        },
+                        {
+                          "accepted": false,
+                          "attempts": 1,
+                          "id": "invoice-16",
+                          "quality": false
+                        },
+                        {
+                          "accepted": false,
+                          "attempts": 1,
+                          "id": "invoice-17",
+                          "quality": false
+                        },
+                        {
+                          "accepted": false,
+                          "attempts": 1,
+                          "id": "invoice-18",
+                          "quality": false
+                        },
+                        {
+                          "accepted": false,
+                          "attempts": 1,
+                          "id": "invoice-19",
+                          "quality": false
+                        },
+                        {
+                          "accepted": false,
+                          "attempts": 1,
+                          "id": "invoice-20",
+                          "quality": false
+                        },
+                        {
+                          "accepted": false,
+                          "attempts": 1,
+                          "id": "invoice-21",
+                          "quality": false
+                        },
+                        {
+                          "accepted": false,
+                          "attempts": 1,
+                          "id": "invoice-22",
+                          "quality": false
+                        },
+                        {
+                          "accepted": false,
+                          "attempts": 1,
+                          "id": "invoice-23",
+                          "quality": false
+                        },
+                        {
+                          "accepted": false,
+                          "attempts": 1,
+                          "id": "invoice-24",
+                          "quality": false
+                        }
+                      ],
+                      "run_id": "configuration-a",
+                      "scope": "Observed fixed-task result. No population reliability estimate or production qualification.",
+                      "success_rate": 0.5,
+                      "tasks": 24,
+                      "total_usd": 2.4
+                    },
+                    {
+                      "accepted": 20,
+                      "actual_total_usd": null,
+                      "attempt_cost_usd": null,
+                      "attempts": 24,
+                      "blockers": [],
+                      "censored": 0,
+                      "completed_latency_p95_ms": 14000,
+                      "cost_basis": "quote",
+                      "cost_per_success": 0.18,
+                      "eligible": true,
+                      "evidence": "synthetic",
+                      "label": "Configuration B",
+                      "quality": 22,
+                      "quote_total_usd": 3.6,
+                      "rows": [
+                        {
+                          "accepted": true,
+                          "attempts": 1,
+                          "id": "invoice-1",
+                          "quality": true
+                        },
+                        {
+                          "accepted": true,
+                          "attempts": 1,
+                          "id": "invoice-2",
+                          "quality": true
+                        },
+                        {
+                          "accepted": true,
+                          "attempts": 1,
+                          "id": "invoice-3",
+                          "quality": true
+                        },
+                        {
+                          "accepted": true,
+                          "attempts": 1,
+                          "id": "invoice-4",
+                          "quality": true
+                        },
+                        {
+                          "accepted": true,
+                          "attempts": 1,
+                          "id": "invoice-5",
+                          "quality": true
+                        },
+                        {
+                          "accepted": true,
+                          "attempts": 1,
+                          "id": "invoice-6",
+                          "quality": true
+                        },
+                        {
+                          "accepted": true,
+                          "attempts": 1,
+                          "id": "invoice-7",
+                          "quality": true
+                        },
+                        {
+                          "accepted": true,
+                          "attempts": 1,
+                          "id": "invoice-8",
+                          "quality": true
+                        },
+                        {
+                          "accepted": true,
+                          "attempts": 1,
+                          "id": "invoice-9",
+                          "quality": true
+                        },
+                        {
+                          "accepted": true,
+                          "attempts": 1,
+                          "id": "invoice-10",
+                          "quality": true
+                        },
+                        {
+                          "accepted": true,
+                          "attempts": 1,
+                          "id": "invoice-11",
+                          "quality": true
+                        },
+                        {
+                          "accepted": true,
+                          "attempts": 1,
+                          "id": "invoice-12",
+                          "quality": true
+                        },
+                        {
+                          "accepted": true,
+                          "attempts": 1,
+                          "id": "invoice-13",
+                          "quality": true
+                        },
+                        {
+                          "accepted": true,
+                          "attempts": 1,
+                          "id": "invoice-14",
+                          "quality": true
+                        },
+                        {
+                          "accepted": true,
+                          "attempts": 1,
+                          "id": "invoice-15",
+                          "quality": true
+                        },
+                        {
+                          "accepted": true,
+                          "attempts": 1,
+                          "id": "invoice-16",
+                          "quality": true
+                        },
+                        {
+                          "accepted": true,
+                          "attempts": 1,
+                          "id": "invoice-17",
+                          "quality": true
+                        },
+                        {
+                          "accepted": true,
+                          "attempts": 1,
+                          "id": "invoice-18",
+                          "quality": true
+                        },
+                        {
+                          "accepted": true,
+                          "attempts": 1,
+                          "id": "invoice-19",
+                          "quality": true
+                        },
+                        {
+                          "accepted": true,
+                          "attempts": 1,
+                          "id": "invoice-20",
+                          "quality": true
+                        },
+                        {
+                          "accepted": false,
+                          "attempts": 1,
+                          "id": "invoice-21",
+                          "quality": false
+                        },
+                        {
+                          "accepted": false,
+                          "attempts": 1,
+                          "id": "invoice-22",
+                          "quality": false
+                        },
+                        {
+                          "accepted": false,
+                          "attempts": 1,
+                          "id": "invoice-23",
+                          "quality": true
+                        },
+                        {
+                          "accepted": false,
+                          "attempts": 1,
+                          "id": "invoice-24",
+                          "quality": true
+                        }
+                      ],
+                      "run_id": "configuration-b",
+                      "scope": "Observed fixed-task result. No population reliability estimate or production qualification.",
+                      "success_rate": 0.8333333333333334,
+                      "tasks": 24,
+                      "total_usd": 3.6
+                    }
+                  ],
+                  "scope": "SYNTHETIC ACCOUNTING EXERCISE",
+                  "selectedRecordIds": [
+                    "run-a",
+                    "run-b"
+                  ],
+                  "tied": false,
+                  "winner": "configuration-b"
+                },
+                "deps": [
+                  {
+                    "id": "policy",
+                    "revision": 1
+                  },
+                  {
+                    "id": "run-a",
+                    "revision": 1
+                  },
+                  {
+                    "id": "run-b",
+                    "revision": 1
+                  }
+                ],
+                "disposition": "draft",
+                "id": "calculation",
+                "kind": "calculation",
+                "revision": 1,
+                "summary": "Computed by the retained ResearchCore evaluator; all 24 tasks remain in each denominator.",
+                "tier": "synthetic",
+                "title": "Cost per accepted original task"
+              },
+              "decision": {
+                "data": {
+                  "limitations": [
+                    "New authored synthetic example; not BEP data or a GPU measurement.",
+                    "Sample eligibility is not production reliability.",
+                    "No purchase or execution authority is granted."
+                  ],
+                  "reason": [],
+                  "winner": "configuration-b"
+                },
+                "deps": [
+                  {
+                    "id": "calculation",
+                    "revision": 1
+                  }
+                ],
+                "disposition": "draft",
+                "id": "decision",
+                "kind": "conclusion",
+                "revision": 1,
+                "summary": "Configuration B has the lowest complete quoted cost per accepted task under this version of the contract.",
+                "tier": "synthetic",
+                "title": "Configuration recommendation"
+              },
+              "policy": {
+                "data": {
+                  "comparison_mode": "task",
+                  "cost_basis": "quote",
+                  "deadline_ms": 12000,
+                  "grader": "strict_json",
+                  "min_tasks": 24,
+                  "quality_floor": 0.5
+                },
+                "deps": [
+                  {
+                    "id": "source",
+                    "revision": 1
+                  }
+                ],
+                "disposition": "draft",
+                "id": "policy",
+                "kind": "policy",
+                "revision": 1,
+                "summary": "Read the complete JSON response, verify every expected field, and finish within 12 seconds.",
+                "tier": "synthetic",
+                "title": "Acceptance contract"
+              },
+              "run-a": {
+                "data": {
+                  "billing": {
+                    "actual_total_usd": null,
+                    "currency": "USD",
+                    "quote_total_usd": 2.4,
+                    "scope": "Illustrative complete cost for 24 tasks including failures; not an invoice."
+                  },
+                  "evidence": "synthetic",
+                  "label": "Configuration A",
+                  "pins": {
+                    "boundary": "original-task-to-completion",
+                    "contract": "extract-invoice-fields-v1",
+                    "load": "authored-24-items-v1",
+                    "taskset": "cantos-invoices-24-v1"
+                  },
+                  "run_id": "configuration-a",
+                  "schema": "second-run/task-run@1",
+                  "tasks": [
+                    {
+                      "attempts": [
+                        {
+                          "cost_usd": null,
+                          "elapsed_ms": 2080,
+                          "output": "{\"invoice\":\"INV-001\",\"total\":101}",
+                          "status": "ok"
+                        }
+                      ],
+                      "expected": {
+                        "invoice": "INV-001",
+                        "total": 101
+                      },
+                      "id": "invoice-1"
+                    },
+                    {
+                      "attempts": [
+                        {
+                          "cost_usd": null,
+                          "elapsed_ms": 2160,
+                          "output": "{\"invoice\":\"INV-002\",\"total\":102}",
+                          "status": "ok"
+                        }
+                      ],
+                      "expected": {
+                        "invoice": "INV-002",
+                        "total": 102
+                      },
+                      "id": "invoice-2"
+                    },
+                    {
+                      "attempts": [
+                        {
+                          "cost_usd": null,
+                          "elapsed_ms": 2240,
+                          "output": "{\"invoice\":\"INV-003\",\"total\":103}",
+                          "status": "ok"
+                        }
+                      ],
+                      "expected": {
+                        "invoice": "INV-003",
+                        "total": 103
+                      },
+                      "id": "invoice-3"
+                    },
+                    {
+                      "attempts": [
+                        {
+                          "cost_usd": null,
+                          "elapsed_ms": 2320,
+                          "output": "{\"invoice\":\"INV-004\",\"total\":104}",
+                          "status": "ok"
+                        }
+                      ],
+                      "expected": {
+                        "invoice": "INV-004",
+                        "total": 104
+                      },
+                      "id": "invoice-4"
+                    },
+                    {
+                      "attempts": [
+                        {
+                          "cost_usd": null,
+                          "elapsed_ms": 2400,
+                          "output": "{\"invoice\":\"INV-005\",\"total\":105}",
+                          "status": "ok"
+                        }
+                      ],
+                      "expected": {
+                        "invoice": "INV-005",
+                        "total": 105
+                      },
+                      "id": "invoice-5"
+                    },
+                    {
+                      "attempts": [
+                        {
+                          "cost_usd": null,
+                          "elapsed_ms": 2480,
+                          "output": "{\"invoice\":\"INV-006\",\"total\":106}",
+                          "status": "ok"
+                        }
+                      ],
+                      "expected": {
+                        "invoice": "INV-006",
+                        "total": 106
+                      },
+                      "id": "invoice-6"
+                    },
+                    {
+                      "attempts": [
+                        {
+                          "cost_usd": null,
+                          "elapsed_ms": 2560,
+                          "output": "{\"invoice\":\"INV-007\",\"total\":107}",
+                          "status": "ok"
+                        }
+                      ],
+                      "expected": {
+                        "invoice": "INV-007",
+                        "total": 107
+                      },
+                      "id": "invoice-7"
+                    },
+                    {
+                      "attempts": [
+                        {
+                          "cost_usd": null,
+                          "elapsed_ms": 2640,
+                          "output": "{\"invoice\":\"INV-008\",\"total\":108}",
+                          "status": "ok"
+                        }
+                      ],
+                      "expected": {
+                        "invoice": "INV-008",
+                        "total": 108
+                      },
+                      "id": "invoice-8"
+                    },
+                    {
+                      "attempts": [
+                        {
+                          "cost_usd": null,
+                          "elapsed_ms": 2720,
+                          "output": "{\"invoice\":\"INV-009\",\"total\":109}",
+                          "status": "ok"
+                        }
+                      ],
+                      "expected": {
+                        "invoice": "INV-009",
+                        "total": 109
+                      },
+                      "id": "invoice-9"
+                    },
+                    {
+                      "attempts": [
+                        {
+                          "cost_usd": null,
+                          "elapsed_ms": 2800,
+                          "output": "{\"invoice\":\"INV-010\",\"total\":110}",
+                          "status": "ok"
+                        }
+                      ],
+                      "expected": {
+                        "invoice": "INV-010",
+                        "total": 110
+                      },
+                      "id": "invoice-10"
+                    },
+                    {
+                      "attempts": [
+                        {
+                          "cost_usd": null,
+                          "elapsed_ms": 2880,
+                          "output": "{\"invoice\":\"INV-011\",\"total\":111}",
+                          "status": "ok"
+                        }
+                      ],
+                      "expected": {
+                        "invoice": "INV-011",
+                        "total": 111
+                      },
+                      "id": "invoice-11"
+                    },
+                    {
+                      "attempts": [
+                        {
+                          "cost_usd": null,
+                          "elapsed_ms": 2960,
+                          "output": "{\"invoice\":\"INV-012\",\"total\":112}",
+                          "status": "ok"
+                        }
+                      ],
+                      "expected": {
+                        "invoice": "INV-012",
+                        "total": 112
+                      },
+                      "id": "invoice-12"
+                    },
+                    {
+                      "attempts": [
+                        {
+                          "cost_usd": null,
+                          "elapsed_ms": 3040,
+                          "output": "```json\n{\"invoice\":\"INV-013\",\"total\":113}\n```",
+                          "status": "ok"
+                        }
+                      ],
+                      "expected": {
+                        "invoice": "INV-013",
+                        "total": 113
+                      },
+                      "id": "invoice-13"
+                    },
+                    {
+                      "attempts": [
+                        {
+                          "cost_usd": null,
+                          "elapsed_ms": 3120,
+                          "output": "```json\n{\"invoice\":\"INV-014\",\"total\":114}\n```",
+                          "status": "ok"
+                        }
+                      ],
+                      "expected": {
+                        "invoice": "INV-014",
+                        "total": 114
+                      },
+                      "id": "invoice-14"
+                    },
+                    {
+                      "attempts": [
+                        {
+                          "cost_usd": null,
+                          "elapsed_ms": 3200,
+                          "output": "```json\n{\"invoice\":\"INV-015\",\"total\":115}\n```",
+                          "status": "ok"
+                        }
+                      ],
+                      "expected": {
+                        "invoice": "INV-015",
+                        "total": 115
+                      },
+                      "id": "invoice-15"
+                    },
+                    {
+                      "attempts": [
+                        {
+                          "cost_usd": null,
+                          "elapsed_ms": 3280,
+                          "output": "```json\n{\"invoice\":\"INV-016\",\"total\":116}\n```",
+                          "status": "ok"
+                        }
+                      ],
+                      "expected": {
+                        "invoice": "INV-016",
+                        "total": 116
+                      },
+                      "id": "invoice-16"
+                    },
+                    {
+                      "attempts": [
+                        {
+                          "cost_usd": null,
+                          "elapsed_ms": 3360,
+                          "output": "```json\n{\"invoice\":\"INV-017\",\"total\":117}\n```",
+                          "status": "ok"
+                        }
+                      ],
+                      "expected": {
+                        "invoice": "INV-017",
+                        "total": 117
+                      },
+                      "id": "invoice-17"
+                    },
+                    {
+                      "attempts": [
+                        {
+                          "cost_usd": null,
+                          "elapsed_ms": 3440,
+                          "output": "```json\n{\"invoice\":\"INV-018\",\"total\":118}\n```",
+                          "status": "ok"
+                        }
+                      ],
+                      "expected": {
+                        "invoice": "INV-018",
+                        "total": 118
+                      },
+                      "id": "invoice-18"
+                    },
+                    {
+                      "attempts": [
+                        {
+                          "cost_usd": null,
+                          "elapsed_ms": 3520,
+                          "output": "```json\n{\"invoice\":\"INV-019\",\"total\":119}\n```",
+                          "status": "ok"
+                        }
+                      ],
+                      "expected": {
+                        "invoice": "INV-019",
+                        "total": 119
+                      },
+                      "id": "invoice-19"
+                    },
+                    {
+                      "attempts": [
+                        {
+                          "cost_usd": null,
+                          "elapsed_ms": 3600,
+                          "output": "```json\n{\"invoice\":\"INV-020\",\"total\":120}\n```",
+                          "status": "ok"
+                        }
+                      ],
+                      "expected": {
+                        "invoice": "INV-020",
+                        "total": 120
+                      },
+                      "id": "invoice-20"
+                    },
+                    {
+                      "attempts": [
+                        {
+                          "cost_usd": null,
+                          "elapsed_ms": 3680,
+                          "output": "```json\n{\"invoice\":\"INV-021\",\"total\":121}\n```",
+                          "status": "ok"
+                        }
+                      ],
+                      "expected": {
+                        "invoice": "INV-021",
+                        "total": 121
+                      },
+                      "id": "invoice-21"
+                    },
+                    {
+                      "attempts": [
+                        {
+                          "cost_usd": null,
+                          "elapsed_ms": 3760,
+                          "output": "```json\n{\"invoice\":\"INV-022\",\"total\":122}\n```",
+                          "status": "ok"
+                        }
+                      ],
+                      "expected": {
+                        "invoice": "INV-022",
+                        "total": 122
+                      },
+                      "id": "invoice-22"
+                    },
+                    {
+                      "attempts": [
+                        {
+                          "cost_usd": null,
+                          "elapsed_ms": 3840,
+                          "output": "{\"invoice\":\"INV-023\",\"total\":0}",
+                          "status": "ok"
+                        }
+                      ],
+                      "expected": {
+                        "invoice": "INV-023",
+                        "total": 123
+                      },
+                      "id": "invoice-23"
+                    },
+                    {
+                      "attempts": [
+                        {
+                          "cost_usd": null,
+                          "elapsed_ms": 12000,
+                          "output": "",
+                          "status": "timeout"
+                        }
+                      ],
+                      "expected": {
+                        "invoice": "INV-024",
+                        "total": 124
+                      },
+                      "id": "invoice-24"
+                    }
+                  ]
+                },
+                "deps": [
+                  {
+                    "id": "source",
+                    "revision": 1
+                  }
+                ],
+                "disposition": "draft",
+                "id": "run-a",
+                "kind": "run",
+                "revision": 1,
+                "summary": "Original task outputs, cumulative timing and complete quoted cost remain inspectable.",
+                "tier": "synthetic",
+                "title": "Configuration A / retained attempts"
+              },
+              "run-b": {
+                "data": {
+                  "billing": {
+                    "actual_total_usd": null,
+                    "currency": "USD",
+                    "quote_total_usd": 3.6,
+                    "scope": "Illustrative complete cost for 24 tasks including failures; not an invoice."
+                  },
+                  "evidence": "synthetic",
+                  "label": "Configuration B",
+                  "pins": {
+                    "boundary": "original-task-to-completion",
+                    "contract": "extract-invoice-fields-v1",
+                    "load": "authored-24-items-v1",
+                    "taskset": "cantos-invoices-24-v1"
+                  },
+                  "run_id": "configuration-b",
+                  "schema": "second-run/task-run@1",
+                  "tasks": [
+                    {
+                      "attempts": [
+                        {
+                          "cost_usd": null,
+                          "elapsed_ms": 2080,
+                          "output": "{\"invoice\":\"INV-001\",\"total\":101}",
+                          "status": "ok"
+                        }
+                      ],
+                      "expected": {
+                        "invoice": "INV-001",
+                        "total": 101
+                      },
+                      "id": "invoice-1"
+                    },
+                    {
+                      "attempts": [
+                        {
+                          "cost_usd": null,
+                          "elapsed_ms": 2160,
+                          "output": "{\"invoice\":\"INV-002\",\"total\":102}",
+                          "status": "ok"
+                        }
+                      ],
+                      "expected": {
+                        "invoice": "INV-002",
+                        "total": 102
+                      },
+                      "id": "invoice-2"
+                    },
+                    {
+                      "attempts": [
+                        {
+                          "cost_usd": null,
+                          "elapsed_ms": 2240,
+                          "output": "{\"invoice\":\"INV-003\",\"total\":103}",
+                          "status": "ok"
+                        }
+                      ],
+                      "expected": {
+                        "invoice": "INV-003",
+                        "total": 103
+                      },
+                      "id": "invoice-3"
+                    },
+                    {
+                      "attempts": [
+                        {
+                          "cost_usd": null,
+                          "elapsed_ms": 2320,
+                          "output": "{\"invoice\":\"INV-004\",\"total\":104}",
+                          "status": "ok"
+                        }
+                      ],
+                      "expected": {
+                        "invoice": "INV-004",
+                        "total": 104
+                      },
+                      "id": "invoice-4"
+                    },
+                    {
+                      "attempts": [
+                        {
+                          "cost_usd": null,
+                          "elapsed_ms": 2400,
+                          "output": "{\"invoice\":\"INV-005\",\"total\":105}",
+                          "status": "ok"
+                        }
+                      ],
+                      "expected": {
+                        "invoice": "INV-005",
+                        "total": 105
+                      },
+                      "id": "invoice-5"
+                    },
+                    {
+                      "attempts": [
+                        {
+                          "cost_usd": null,
+                          "elapsed_ms": 2480,
+                          "output": "{\"invoice\":\"INV-006\",\"total\":106}",
+                          "status": "ok"
+                        }
+                      ],
+                      "expected": {
+                        "invoice": "INV-006",
+                        "total": 106
+                      },
+                      "id": "invoice-6"
+                    },
+                    {
+                      "attempts": [
+                        {
+                          "cost_usd": null,
+                          "elapsed_ms": 2560,
+                          "output": "{\"invoice\":\"INV-007\",\"total\":107}",
+                          "status": "ok"
+                        }
+                      ],
+                      "expected": {
+                        "invoice": "INV-007",
+                        "total": 107
+                      },
+                      "id": "invoice-7"
+                    },
+                    {
+                      "attempts": [
+                        {
+                          "cost_usd": null,
+                          "elapsed_ms": 2640,
+                          "output": "{\"invoice\":\"INV-008\",\"total\":108}",
+                          "status": "ok"
+                        }
+                      ],
+                      "expected": {
+                        "invoice": "INV-008",
+                        "total": 108
+                      },
+                      "id": "invoice-8"
+                    },
+                    {
+                      "attempts": [
+                        {
+                          "cost_usd": null,
+                          "elapsed_ms": 2720,
+                          "output": "{\"invoice\":\"INV-009\",\"total\":109}",
+                          "status": "ok"
+                        }
+                      ],
+                      "expected": {
+                        "invoice": "INV-009",
+                        "total": 109
+                      },
+                      "id": "invoice-9"
+                    },
+                    {
+                      "attempts": [
+                        {
+                          "cost_usd": null,
+                          "elapsed_ms": 2800,
+                          "output": "{\"invoice\":\"INV-010\",\"total\":110}",
+                          "status": "ok"
+                        }
+                      ],
+                      "expected": {
+                        "invoice": "INV-010",
+                        "total": 110
+                      },
+                      "id": "invoice-10"
+                    },
+                    {
+                      "attempts": [
+                        {
+                          "cost_usd": null,
+                          "elapsed_ms": 2880,
+                          "output": "{\"invoice\":\"INV-011\",\"total\":111}",
+                          "status": "ok"
+                        }
+                      ],
+                      "expected": {
+                        "invoice": "INV-011",
+                        "total": 111
+                      },
+                      "id": "invoice-11"
+                    },
+                    {
+                      "attempts": [
+                        {
+                          "cost_usd": null,
+                          "elapsed_ms": 2960,
+                          "output": "{\"invoice\":\"INV-012\",\"total\":112}",
+                          "status": "ok"
+                        }
+                      ],
+                      "expected": {
+                        "invoice": "INV-012",
+                        "total": 112
+                      },
+                      "id": "invoice-12"
+                    },
+                    {
+                      "attempts": [
+                        {
+                          "cost_usd": null,
+                          "elapsed_ms": 3040,
+                          "output": "{\"invoice\":\"INV-013\",\"total\":113}",
+                          "status": "ok"
+                        }
+                      ],
+                      "expected": {
+                        "invoice": "INV-013",
+                        "total": 113
+                      },
+                      "id": "invoice-13"
+                    },
+                    {
+                      "attempts": [
+                        {
+                          "cost_usd": null,
+                          "elapsed_ms": 3120,
+                          "output": "{\"invoice\":\"INV-014\",\"total\":114}",
+                          "status": "ok"
+                        }
+                      ],
+                      "expected": {
+                        "invoice": "INV-014",
+                        "total": 114
+                      },
+                      "id": "invoice-14"
+                    },
+                    {
+                      "attempts": [
+                        {
+                          "cost_usd": null,
+                          "elapsed_ms": 3200,
+                          "output": "{\"invoice\":\"INV-015\",\"total\":115}",
+                          "status": "ok"
+                        }
+                      ],
+                      "expected": {
+                        "invoice": "INV-015",
+                        "total": 115
+                      },
+                      "id": "invoice-15"
+                    },
+                    {
+                      "attempts": [
+                        {
+                          "cost_usd": null,
+                          "elapsed_ms": 3280,
+                          "output": "{\"invoice\":\"INV-016\",\"total\":116}",
+                          "status": "ok"
+                        }
+                      ],
+                      "expected": {
+                        "invoice": "INV-016",
+                        "total": 116
+                      },
+                      "id": "invoice-16"
+                    },
+                    {
+                      "attempts": [
+                        {
+                          "cost_usd": null,
+                          "elapsed_ms": 3360,
+                          "output": "{\"invoice\":\"INV-017\",\"total\":117}",
+                          "status": "ok"
+                        }
+                      ],
+                      "expected": {
+                        "invoice": "INV-017",
+                        "total": 117
+                      },
+                      "id": "invoice-17"
+                    },
+                    {
+                      "attempts": [
+                        {
+                          "cost_usd": null,
+                          "elapsed_ms": 3440,
+                          "output": "{\"invoice\":\"INV-018\",\"total\":118}",
+                          "status": "ok"
+                        }
+                      ],
+                      "expected": {
+                        "invoice": "INV-018",
+                        "total": 118
+                      },
+                      "id": "invoice-18"
+                    },
+                    {
+                      "attempts": [
+                        {
+                          "cost_usd": null,
+                          "elapsed_ms": 3520,
+                          "output": "{\"invoice\":\"INV-019\",\"total\":119}",
+                          "status": "ok"
+                        }
+                      ],
+                      "expected": {
+                        "invoice": "INV-019",
+                        "total": 119
+                      },
+                      "id": "invoice-19"
+                    },
+                    {
+                      "attempts": [
+                        {
+                          "cost_usd": null,
+                          "elapsed_ms": 3600,
+                          "output": "{\"invoice\":\"INV-020\",\"total\":120}",
+                          "status": "ok"
+                        }
+                      ],
+                      "expected": {
+                        "invoice": "INV-020",
+                        "total": 120
+                      },
+                      "id": "invoice-20"
+                    },
+                    {
+                      "attempts": [
+                        {
+                          "cost_usd": null,
+                          "elapsed_ms": 3680,
+                          "output": "{\"invoice\":\"INV-021\",\"total\":0}",
+                          "status": "ok"
+                        }
+                      ],
+                      "expected": {
+                        "invoice": "INV-021",
+                        "total": 121
+                      },
+                      "id": "invoice-21"
+                    },
+                    {
+                      "attempts": [
+                        {
+                          "cost_usd": null,
+                          "elapsed_ms": 3760,
+                          "output": "{\"invoice\":\"INV-022\",\"total\":0}",
+                          "status": "ok"
+                        }
+                      ],
+                      "expected": {
+                        "invoice": "INV-022",
+                        "total": 122
+                      },
+                      "id": "invoice-22"
+                    },
+                    {
+                      "attempts": [
+                        {
+                          "cost_usd": null,
+                          "elapsed_ms": 14000,
+                          "output": "{\"invoice\":\"INV-023\",\"total\":123}",
+                          "status": "ok"
+                        }
+                      ],
+                      "expected": {
+                        "invoice": "INV-023",
+                        "total": 123
+                      },
+                      "id": "invoice-23"
+                    },
+                    {
+                      "attempts": [
+                        {
+                          "cost_usd": null,
+                          "elapsed_ms": 14000,
+                          "output": "{\"invoice\":\"INV-024\",\"total\":124}",
+                          "status": "ok"
+                        }
+                      ],
+                      "expected": {
+                        "invoice": "INV-024",
+                        "total": 124
+                      },
+                      "id": "invoice-24"
+                    }
+                  ]
+                },
+                "deps": [
+                  {
+                    "id": "source",
+                    "revision": 1
+                  }
+                ],
+                "disposition": "draft",
+                "id": "run-b",
+                "kind": "run",
+                "revision": 1,
+                "summary": "Original task outputs, cumulative timing and complete quoted cost remain inspectable.",
+                "tier": "synthetic",
+                "title": "Configuration B / retained attempts"
+              },
+              "source": {
+                "data": {
+                  "basis": "New authored synthetic example; not BEP data or a GPU measurement.",
+                  "id": "cantos-research-preview",
+                  "original_data": "Authored fixture, no customer or provider data.",
+                  "owner": "ResearchCore 1.0.0",
+                  "sourceApp": "5951f7f3d994ec980d2958ae18246edc6dbe5b57db8d38e90c1c18956b96e470",
+                  "task_count": 24,
+                  "version": "0.1.0"
+                },
+                "deps": [],
+                "disposition": "observed",
+                "id": "source",
+                "kind": "source",
+                "revision": 1,
+                "summary": "Two authored configurations process the same 24 fictional invoices. Some outputs are fenced JSON; wrong fields, timeouts and late answers remain in the record.",
+                "tier": "synthetic",
+                "title": "24 invoice records / worked example"
+              }
+            },
+            "review": {
+              "at": "2026-09-28T20:59:34.918Z",
+              "decision": "accept",
+              "event_hash": "e63ae63ac2f5b143e4b2302cd5b8a815a82811f62c3f28a25fee474f73c6d0cc",
+              "fingerprint": "a75c05c77c1d2cc8ebe5c4aaf201550a6b9060b61b903838e37a7225d758714d",
+              "rationale": "Bundled synthetic baseline edition for demonstrating preserved delivery and a later revision.",
+              "reviewer": "Cantos synthetic example author",
+              "target": "decision"
+            },
+            "schema": "second-run/research-report@1",
+            "target": "decision",
+            "workspace": "Cantos / research that can be continued"
+          },
+          "snapshot_hash": "012748ba97e96ee301e18333520d332e634d7d52de39e86f987593db27cd8b81",
+          "target": "decision"
+        },
+        "prev": "e63ae63ac2f5b143e4b2302cd5b8a815a82811f62c3f28a25fee474f73c6d0cc",
+        "seq": 8,
+        "type": "freeze"
+      },
+      {
+        "actor": "Astra boundary test",
+        "at": "2026-09-28T20:59:34.922Z",
+        "hash": "4eb924721969645dc35f597b61b30a4c70aac5441f5e69d2998707768c44dbf6",
+        "payload": {
+          "data": {
+            "limitations": [
+              "New authored synthetic example; not BEP data or a GPU measurement.",
+              "Sample eligibility is not production reliability.",
+              "No purchase or execution authority is granted."
+            ],
+            "reason": [],
+            "winner": "configuration-b"
+          },
+          "deps": [],
+          "disposition": "draft",
+          "id": "decision",
+          "kind": "conclusion",
+          "revision": 2,
+          "summary": "Detached conclusion created by the independent boundary test.",
+          "tier": "synthetic",
+          "title": "Configuration recommendation"
+        },
+        "prev": "7f5dbabfa091b2c78f97c089711ff115798a375e448237b59b76967d45d1fbb1",
+        "seq": 9,
+        "type": "record"
+      },
+      {
+        "actor": "Astra boundary test",
+        "at": "2026-09-28T20:59:34.923Z",
+        "hash": "a26b69c4280a7bf22f84642c409e7281a0025c7fc82f1b88fe711a25fea44a04",
+        "payload": {
+          "decision": "accept",
+          "fingerprint": "bbdb00440ccc4df171902f67961ff242ce4135634fd26f1d9e245d6d027904f6",
+          "rationale": "Testing a native-valid conclusion with no calculation dependency.",
+          "reviewer": "Astra boundary test",
+          "target": "decision"
+        },
+        "prev": "4eb924721969645dc35f597b61b30a4c70aac5441f5e69d2998707768c44dbf6",
+        "seq": 10,
+        "type": "review"
+      },
+      {
+        "actor": "Astra boundary test",
+        "at": "2026-09-28T20:59:34.923Z",
+        "hash": "846f03b0f9a9fe422a86a4748efe7ee8b797a6456971ab17bff498dc6b3d070f",
+        "payload": {
+          "fingerprint": "bbdb00440ccc4df171902f67961ff242ce4135634fd26f1d9e245d6d027904f6",
+          "snapshot": {
+            "evidence_boundary": "Source identity and recomputable reasoning; not source truth, authenticated human identity or investment approval.",
+            "records": {
+              "decision": {
+                "data": {
+                  "limitations": [
+                    "New authored synthetic example; not BEP data or a GPU measurement.",
+                    "Sample eligibility is not production reliability.",
+                    "No purchase or execution authority is granted."
+                  ],
+                  "reason": [],
+                  "winner": "configuration-b"
+                },
+                "deps": [],
+                "disposition": "draft",
+                "id": "decision",
+                "kind": "conclusion",
+                "revision": 2,
+                "summary": "Detached conclusion created by the independent boundary test.",
+                "tier": "synthetic",
+                "title": "Configuration recommendation"
+              }
+            },
+            "review": {
+              "at": "2026-09-28T20:59:34.923Z",
+              "decision": "accept",
+              "event_hash": "a26b69c4280a7bf22f84642c409e7281a0025c7fc82f1b88fe711a25fea44a04",
+              "fingerprint": "bbdb00440ccc4df171902f67961ff242ce4135634fd26f1d9e245d6d027904f6",
+              "rationale": "Testing a native-valid conclusion with no calculation dependency.",
+              "reviewer": "Astra boundary test",
+              "target": "decision"
+            },
+            "schema": "second-run/research-report@1",
+            "target": "decision",
+            "workspace": "Cantos / research that can be continued"
+          },
+          "snapshot_hash": "1c468ee2447e97db1624fb23247821c5c92ad323f453f60c0794da9853613daa",
+          "target": "decision"
+        },
+        "prev": "a26b69c4280a7bf22f84642c409e7281a0025c7fc82f1b88fe711a25fea44a04",
+        "seq": 11,
+        "type": "freeze"
+      }
+    ],
+    "label": "Cantos / research that can be continued",
+    "schema": "second-run/research-desk@1",
+    "version": "1.0.0"
+  },
+  "sha256": "2c081e6e20a221801da6dad53a78472074313b242cc7d6f1572a9a775dd7e0a6",
+  "boundary": "Checksum and journal detect changes relative to this packet. They do not authenticate a publisher or prevent a hostile party from rebuilding an entirely new chain. Retain a trusted prior checksum separately."
+}

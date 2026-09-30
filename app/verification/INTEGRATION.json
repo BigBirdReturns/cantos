@@ -1,0 +1,27 @@
+{
+  "assembled_at": "2026-09-29T06:32:09.437251+00:00",
+  "base_sha256": "8f5e015bd4dee351ebd2504a1cb2b562997902ddb9a31e5e700952cedfb005e8",
+  "integrated": [
+    "opus/deliverables/research-core-1.0.2.js",
+    "opus/deliverables/foundation.js",
+    "opus/deliverables/foundation.test.cjs",
+    "opus/deliverables/regression.test.cjs",
+    "astra/deliverables/hardware-view.css",
+    "astra/deliverables/hardware-view.js",
+    "astra/deliverables/real_regressions.py -> tests/",
+    "fable/packets/run3-decision.workspace.json",
+    "fable/packets/run3-decision.workspace.edition2.json",
+    "fable/packets/PROVENANCE.json",
+    "fable/packets/build_run3_workspace.cjs",
+    "fable: embedded Run 3 packet + palette command"
+  ],
+  "skipped": [],
+  "notes": [
+    "build.py repointed to core 1.0.2 with its sha",
+    "packets taken from fable/packets"
+  ],
+  "build_ok": true,
+  "build_stderr": "",
+  "page_sha256": "b7dda1c8fb088c43e8a1a0ee8674070f03d5e23be06a1c61c7a4da2ee8c26cb6",
+  "page_bytes": 5151873
+}

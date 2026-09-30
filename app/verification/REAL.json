@@ -1,0 +1,187 @@
+{
+  "page_sha256": "b7dda1c8fb088c43e8a1a0ee8674070f03d5e23be06a1c61c7a4da2ee8c26cb6",
+  "packets": {
+    "run3-decision.workspace.json": "a327e02a61067e976d0d6b8084026a7d4c482ed577c0df114b2a24768542f67d",
+    "run3-decision.workspace.edition2.json": "fa4431a1705503027c5443c82b8a9780b425d6620b0a06114785291b5b8afedc"
+  },
+  "checks": [
+    {
+      "name": "default task fixture remains intact",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "both real packets fit the 12 MB import boundary",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "Edition 01 imports through Open packet",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "two real arms visible",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "existing element ids survive hardware import",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "registered prices $0.74 and $1.20",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "accepted counts reconcile to retained records",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "MI300X is initial winner",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "first-token percentiles present for both arms",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "density replaces invoice tiles and retains all requests",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "real cards carry source date and scope stamps",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "arm inspection reaches retained request measurements",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "rate change recomputes to $0.68 without changing retained counts",
+      "passed": true,
+      "detail": [
+        {
+          "run": "a-t0",
+          "accepted": 4336,
+          "cost": 0.0007435924046740469,
+          "eligible": true,
+          "blockers": []
+        },
+        {
+          "run": "n-t0",
+          "accepted": 4280,
+          "cost": 0.0006767990654205609,
+          "eligible": true,
+          "blockers": []
+        }
+      ]
+    },
+    {
+      "name": "requested $2.49 change flips decision to H100",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "scenario explicitly says no new model run",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "Edition 02 imports through Open packet",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "two retained editions and supersedes line",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "Edition 02 retains $0.74 and $0.68",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "Edition 02 winner is H100",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "decision no horizontal overflow 1440",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "decision no horizontal overflow 390",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "decision no horizontal overflow 320",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "evidence no horizontal overflow 1440",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "evidence no horizontal overflow 390",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "evidence no horizontal overflow 320",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "architecture no horizontal overflow 1440",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "architecture no horizontal overflow 390",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "architecture no horizontal overflow 320",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "hardware scenario drawer and focus at 320",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "reset returns to the task fixture",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "no runtime JavaScript errors",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "no external requests attempted",
+      "passed": true,
+      "detail": true
+    }
+  ],
+  "errors": [],
+  "blocked": [],
+  "all_pass": true
+}

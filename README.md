@@ -1,5 +1,7 @@
 # Cantos
 
+The root page (`index.html`) is the Cantos decision workspace: a single file that opens locally and loads the verified Run 3 decision (MI300X against H100) from Ctrl K. Its source, tests and build live in `app/` (see `app/BUILD.md`). The distance-to-the-floor page is at `floor/index.html` and the circulation receipts are at `circulate/index.html`; both are linked from the workspace.
+
 Cantos rates every GPU cloud against a written floor for what a properly set up neocloud delivers, names the exact shortfall behind each miss, prescribes the fix, and keeps all of it current from public data every night. Where public data cannot answer, the practice inside it, Second Run, rents a seat, runs the workload, and retains everything so the answer can be recomputed by anyone.
 
 It exists because the market has one rating system, it is relative, it is behind a paywall, it comes with no prescription, and its own review text shows the same operational gaps rebuilt by shop after shop. A buyer choosing a provider, a shop trying to reach the floor, and an analyst who wants numbers with receipts all need the same thing: the distance, the reason, the fix, and the evidence, refreshed without anyone asking.

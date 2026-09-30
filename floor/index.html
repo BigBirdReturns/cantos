@@ -1,90 +1,322 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Distance to the floor</title>
-<meta name="description" content="Every ClusterMAX-reviewed GPU cloud rated against a written floor for a properly set up neocloud, from public evidence only, with the shortfalls named and the likely fix for each.">
-<style>
-:root{--bg:#fbfaf6;--fg:#1c1c1c;--muted:#5b5b5b;--line:#d9d6cc;--card:#fff;--meets:#1f7a3a;--short:#a3261f;--unk:#6b6b6b;--acc:#0b3d91}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#101214;--fg:#ececec;--muted:#a3a3a3;--line:#2c3138;--card:#171a1e;--meets:#4cc26f;--short:#ef6b62;--unk:#9a9a9a;--acc:#8ab4ff}}
-:root[data-theme="dark"]{--bg:#101214;--fg:#ececec;--muted:#a3a3a3;--line:#2c3138;--card:#171a1e;--meets:#4cc26f;--short:#ef6b62;--unk:#9a9a9a;--acc:#8ab4ff}
-body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
-main{max-width:1000px;margin:0 auto;padding:24px 16px 48px}
-h1{font-size:1.6rem;margin:0 0 4px}h2{font-size:1.15rem;margin:28px 0 8px}
-p{margin:.4rem 0}.muted{color:var(--muted)}
-.box{border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:14px 0;background:var(--card)}
-table{width:100%;border-collapse:collapse;margin:10px 0;font-size:.93rem}
-th,td{text-align:left;padding:7px 6px;border-bottom:1px solid var(--line);vertical-align:top}
-th{cursor:pointer;white-space:nowrap}
-.chip{display:inline-block;padding:0 7px;border-radius:999px;font-size:.78rem;border:1px solid var(--line);margin:1px 2px 1px 0;white-space:nowrap}
-.MEETS{color:var(--meets);border-color:var(--meets)}.SHORT{color:var(--short);border-color:var(--short)}.UNKNOWN{color:var(--unk)}
-.thin{opacity:.6}
-.num{text-align:right;font-variant-numeric:tabular-nums}
-a{color:inherit}
-details{margin:12px 0}summary{cursor:pointer}
-input[type=search]{width:100%;max-width:360px;padding:6px 8px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--fg);font:inherit}
-@media (max-width:700px){.hide-sm{display:none}}
-</style>
+<meta name="color-scheme" content="dark light">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none';script-src 'unsafe-inline';style-src 'self' 'unsafe-inline';img-src data:;font-src 'self';connect-src 'self';base-uri 'none';form-action 'none'">
+<title>Cantos floor</title>
+<meta name="description" content="Every ClusterMAX-reviewed GPU cloud rated against a written floor, from public evidence only, with each shortfall named and the likely fix.">
+<script>try{var t=localStorage.getItem('cantos-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}</script>
+<link rel="preload" href="../assets/fonts/Inter-variable-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/Fraunces-variable-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/cantos.css">
+<style id="vt-arm"></style>
 </head>
 <body>
-<main>
-<h1>Distance to the floor</h1>
-<p class="muted">Every GPU cloud with a ClusterMAX review page, rated against a written floor for a properly set up neocloud. Public evidence only. A shortfall is named with the sentence that shows it, and each shortfall has a likely fix. As of 2026-09-29.</p>
+<a class="skip" href="#ratings">Skip to ratings</a>
+<header class="app-bar">
+  <a class="brand" href="../" aria-label="Cantos, back to the workspace">
+    <svg class="mark" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="32" height="32" fill="none">
+      <ellipse cx="20" cy="20" rx="16" ry="8.5" transform="rotate(-32 20 20)" stroke="oklch(82% .06 230)" stroke-width="1"/>
+      <g class="orbit-b"><ellipse cx="20" cy="20" rx="15.5" ry="8" transform="rotate(51 20 20)" stroke="oklch(80% .08 85)" stroke-width="1"/><circle cx="32.1" cy="10.1" r="2" fill="oklch(80% .08 85)"/></g>
+      <path d="M20 15.5 21.2 18.8 24.5 20 21.2 21.2 20 24.5 18.8 21.2 15.5 20 18.8 18.8Z" fill="oklch(82% .06 230)"/>
+    </svg>
+    <span class="wordmark">CANTOS</span><span class="spark" aria-hidden="true">&#10022;</span>
+  </a>
+  <span class="crumb"><b>Second Run</b><i>/</i>Floor</span>
+  <div class="bar-actions">
+    <button id="cmd" class="kbtn" type="button" aria-label="Open command palette"><span>Search or run a command</span><kbd id="kbd">Ctrl K</kbd></button>
+    <button id="theme" class="tbtn" type="button" aria-label="Switch theme">Light</button>
+  </div>
+</header>
+<div class="shell">
+  <aside class="rail" aria-label="Navigation">
+    <section><h2>Surfaces</h2>
+      <a href="./" aria-current="page">Floor</a>
+      <a href="../circulate/">Circulate</a>
+    </section>
+    <section class="docs"><h2>On this page</h2>
+      <a href="#ratings">Ratings</a>
+      <a href="#prescriptions">Prescriptions</a>
+    </section>
+    <section class="docs"><h2>Documents</h2>
+      <a href="FLOOR.md">FLOOR.md</a>
+      <a href="PRESCRIPTIONS.md">PRESCRIPTIONS.md</a>
+      <a href="findings/TELEMETRY.md">Findings, telemetry</a>
+      <a href="findings/EFFICIENCY.md">Findings, efficiency</a>
+      <a href="rate/RATINGS.md">Full ratings</a>
+      <a href="SOURCES.md">Sources</a>
+    </section>
+    <section class="last"><a href="../">Workspace <small>..</small></a></section>
+  </aside>
+  <main class="desk" id="main">
+    <div class="head">
+      <div class="eyebrow">Floor / Distance</div>
+      <h1>Distance to the floor</h1>
+      <p class="lede">Every GPU cloud with a ClusterMAX review page, rated against a written floor from public evidence only.</p>
+    </div>
 
-<div class="box">
-<p><strong>How to read a row.</strong> Distance is the number of dimensions where public evidence shows the shop short of the floor. Unknown is the number of dimensions with no evidence either way; it never counts as short. Evidence is the number of distinct items behind the row, and rows under three are faded because a thin row is an artifact of a thin page, not a clean record. The ClusterMAX medal is shown as context and is never an input.</p>
-<p><strong>Rules.</strong> No value is invented. Every row carries who produced it and under what conditions. Hot Aisle's row is scored from public evidence only.</p>
-<p><a href="FLOOR.md">The floor</a> · <a href="PRESCRIPTIONS.md">Prescriptions</a> · <a href="findings/TELEMETRY.md">What our telemetry shows</a> · <a href="findings/EFFICIENCY.md">Where the market wastes</a> · <a href="rate/RATINGS.md">Full ratings</a> · <a href="SOURCES.md">Sources</a></p>
+    <section class="winner" id="hero" aria-labelledby="hero-h">
+      <p class="fig"><span id="fig">&ndash;</span><span class="of" id="of"></span></p>
+      <div>
+        <h2 id="hero-h">providers meet the floor with well-evidenced zero distance</h2>
+        <p id="scope">Reading rate/RATINGS.jsonl.</p>
+        <span class="stamp" id="hero-stamp"><span>Rating</span><span><time id="hs-date">&ndash;</time></span><span>rate/RATINGS.jsonl</span><span id="hs-scope">85 providers</span></span>
+      </div>
+    </section>
+
+    <section id="ratings" aria-label="Ratings">
+      <div class="toolbar" role="toolbar" aria-label="Sort and filter">
+        <div class="seg" role="group" aria-label="Sort">
+          <button type="button" data-sort="distance" aria-pressed="true">Distance</button>
+          <button type="button" data-sort="evidence" aria-pressed="false">Evidence</button>
+          <button type="button" data-sort="name" aria-pressed="false">Name</button>
+        </div>
+        <label class="sr" for="lab">Short on</label>
+        <select id="lab" class="field"><option value="">Short on: any</option></select>
+        <label class="sr" for="q">Find a provider</label>
+        <input id="q" class="field" type="search" placeholder="Find a provider" autocomplete="off">
+        <span class="count" id="count" role="status" aria-live="polite"></span>
+      </div>
+      <p class="legend">Distance counts dimensions where public evidence shows the shop short of the floor. Unknown never counts as short. Rows under three evidence items are dimmed. The ClusterMAX medal is context and never an input.</p>
+      <div class="table-wrap" role="table" aria-label="Provider ratings">
+        <div class="row hd" role="row">
+          <span role="columnheader">Provider</span><span role="columnheader" class="num">Distance</span><span role="columnheader" class="num">Unknown</span><span role="columnheader" class="num">Evidence</span><span role="columnheader">Short on</span><span role="columnheader">Dimensions</span><span role="columnheader">Medal 3.0</span>
+        </div>
+        <div id="rows" role="rowgroup"><p class="note" style="padding:16px 4px">Reading rate/RATINGS.jsonl.</p></div>
+      </div>
+    </section>
+
+    <section class="sec" id="prescriptions" aria-labelledby="rx-h">
+      <div class="sec-h"><h2 id="rx-h">Prescriptions, by providers affected</h2></div>
+      <ol id="rx"><li class="note" style="padding:14px 0">Reading prescriptions.json.</li></ol>
+    </section>
+  </main>
 </div>
 
-<input type="search" id="q" placeholder="Filter by provider or shortfall">
-<div id="table"><p class="muted">Loading ratings…</p></div>
+<div id="card" class="card" popover="manual" role="dialog" aria-label="Provider evidence"></div>
 
-<h2>Shortfalls, by providers affected</h2>
-<div id="rx"><p class="muted">Loading prescriptions…</p></div>
+<dialog id="pal" class="pal" aria-label="Command palette">
+  <input id="pin" type="text" role="combobox" aria-expanded="true" aria-controls="plist" aria-autocomplete="list" placeholder="Type a command" autocomplete="off" spellcheck="false">
+  <ul id="plist" role="listbox" aria-label="Commands"></ul>
+  <footer><span>Up Down to move</span><span>Enter to run</span><span>Esc to close</span></footer>
+</dialog>
 
-<h2>Dimensions</h2>
-<table>
-<thead><tr><th>Dimension</th><th>What counts as evidence</th></tr></thead>
-<tbody>
-<tr><td>access</td><td>Self-serve pricing surface, acquisition friction sentences, account gates. Reviewer test-access trouble is recorded but never scored.</td></tr>
-<tr><td>delivery</td><td>Slurm and Kubernetes actually working, health checks, monitoring, shared storage, networking, base image.</td></tr>
-<tr><td>security</td><td>SOC 2 or ISO attestation, driver and CVE age, RBAC, trust page present.</td></tr>
-<tr><td>reliability</td><td>Status page with reachable history, major and critical incidents per 180 days. A page that reports zero incidents is unverifiable and stays unknown.</td></tr>
-<tr><td>pricing</td><td>Provider's July 2026 on-demand median against the market, billing during outages, undisclosed underlying provider.</td></tr>
-<tr><td>transparency</td><td>Status API, public pricing, public docs, provider disclosed. Overlaps the others by design; the JSON carries a distance that excludes it.</td></tr>
-</tbody>
-</table>
-</main>
 <script>
 (function(){
-  var rows=[],rx=[];
-  function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
-  function render(filter){
-    var f=(filter||'').toLowerCase();
-    var list=rows.filter(function(r){return !f||(r.provider+' '+(r.short_labels||[]).join(' ')).toLowerCase().indexOf(f)>=0;});
-    list.sort(function(a,b){return (b.distance_to_floor-a.distance_to_floor)||(a.unknown_count-b.unknown_count)||(b.evidence_count-a.evidence_count);});
-    var h='<table><thead><tr><th>Provider</th><th class="num">Distance</th><th class="num">Unknown</th><th class="num">Evidence</th><th>Short on</th><th class="hide-sm">Dimensions</th><th class="hide-sm">ClusterMAX 3.0</th></tr></thead><tbody>';
-    list.forEach(function(r){
-      var dims=Object.keys(r.dimensions||{}).map(function(k){return '<span class="chip '+r.dimensions[k].status+'">'+k+'</span>';}).join('');
-      var medal=(r.imported_context||{}).clustermax_3_0_medal||'';
-      h+='<tr class="'+(r.evidence_count<3?'thin':'')+'"><td>'+esc(r.provider)+'</td><td class="num">'+r.distance_to_floor+'</td><td class="num">'+r.unknown_count+'</td><td class="num">'+r.evidence_count+'</td><td>'+(r.short_labels||[]).map(function(l){return '<span class="chip SHORT">'+esc(l.replace(/_/g,' '))+'</span>';}).join('')+'</td><td class="hide-sm">'+dims+'</td><td class="hide-sm muted">'+esc(medal)+'</td></tr>';
+'use strict';
+var $=function(s){return document.querySelector(s)};
+var mq=matchMedia('(prefers-reduced-motion: reduce)'),reduced=mq.matches;
+mq.addEventListener('change',function(e){reduced=e.matches});
+var DIMS=['access','delivery','security','reliability','pricing','transparency'];
+var CODE={access:'ACC',delivery:'DEL',security:'SEC',reliability:'REL',pricing:'PRI',transparency:'TRA'};
+var rows=[],rx=[],state={sort:'distance',dir:-1,label:'',q:''};
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+function nice(l){return String(l).replace(/_/g,' ')}
+function vtn(slug){return 'r-'+String(slug).replace(/[^a-zA-Z0-9]/g,'-')}
+
+/* theme */
+var tbtn=$('#theme');
+function paintTheme(){tbtn.textContent=document.documentElement.dataset.theme==='light'?'Dark':'Light'}
+function toggleTheme(){var n=document.documentElement.dataset.theme==='light'?'dark':'light';document.documentElement.dataset.theme=n;try{localStorage.setItem('cantos-theme',n)}catch(e){}paintTheme()}
+tbtn.addEventListener('click',toggleTheme);paintTheme();
+$('#kbd').textContent=/Mac|iPhone|iPad/.test(navigator.platform||'')?'⌘ K':'Ctrl K';
+
+/* ticker: the big figure only */
+function tick(el,to,ms){
+  if(reduced||!to){el.textContent=to;return}
+  var t0=performance.now();
+  (function f(t){var p=Math.min(1,(t-t0)/ms),e=p===1?1:1-Math.pow(2,-10*p);el.textContent=Math.round(to*e);if(p<1)requestAnimationFrame(f);else el.textContent=to})(t0);
+}
+
+/* view transition, armed per action; names live on rows only, for the length of one transition */
+var arm=$('#vt-arm');
+function nameRows(){document.querySelectorAll('#rows .row').forEach(function(r){r.style.viewTransitionName=vtn(r.dataset.slug)})}
+function clearRows(){document.querySelectorAll('#rows .row').forEach(function(r){r.style.viewTransitionName=''});arm.textContent=''}
+function stagger(){var css='';document.querySelectorAll('#rows .row').forEach(function(r,i){if(i<14)css+='::view-transition-group('+vtn(r.dataset.slug)+'){animation-delay:'+(i*14)+'ms}\n'});arm.textContent=css}
+function act(change){
+  hideCard();
+  if(reduced||!document.startViewTransition){change();return}
+  nameRows();
+  var vt=document.startViewTransition(function(){change();nameRows();stagger()});
+  vt.finished.then(clearRows,clearRows);
+}
+
+/* data */
+function view(){
+  var f=state.q.toLowerCase(),d=state.dir;
+  var list=rows.filter(function(r){
+    if(state.label&&(r.short_labels||[]).indexOf(state.label)<0)return false;
+    return !f||(r.provider+' '+(r.short_labels||[]).join(' ')).toLowerCase().indexOf(f)>=0;
+  });
+  var byName=function(a,b){return a.provider.localeCompare(b.provider)};
+  list.sort(function(a,b){
+    if(state.sort==='name')return -d*byName(a,b);
+    if(state.sort==='evidence')return d*(a.evidence_count-b.evidence_count)||a.distance_to_floor-b.distance_to_floor||byName(a,b);
+    return d*(a.distance_to_floor-b.distance_to_floor)||a.unknown_count-b.unknown_count||b.evidence_count-a.evidence_count||byName(a,b);
+  });
+  return list;
+}
+function rowHtml(r){
+  var dims=DIMS.map(function(k){var s=(r.dimensions[k]||{}).status||'UNKNOWN';return '<span class="tile '+s+'" role="img" aria-label="'+k+' '+s+'" title="'+k+': '+s+'">'+CODE[k]+'</span>'}).join('');
+  var chips=(r.short_labels||[]).map(function(l){return '<button type="button" class="chip" data-label="'+esc(l)+'" aria-pressed="'+(state.label===l)+'">'+esc(nice(l))+'</button>'}).join('');
+  var medal=(r.imported_context||{}).clustermax_3_0_medal||'';
+  var dz=r.distance_to_floor;
+  return '<div class="row'+(r.evidence_count<3?' thin':'')+'" role="row" data-slug="'+esc(r.slug)+'">'+
+   '<span class="c-n" role="cell"><button type="button" class="pname" data-slug="'+esc(r.slug)+'" aria-haspopup="dialog" aria-expanded="false">'+esc(r.provider)+'</button></span>'+
+   '<span class="c-d num" role="cell" data-l="Distance"><span class="d '+(dz?'nz':'z')+'">'+dz+'</span></span>'+
+   '<span class="c-u num u" role="cell" data-l="Unknown">'+r.unknown_count+'</span>'+
+   '<span class="c-e num e" role="cell" data-l="Evidence">'+r.evidence_count+'</span>'+
+   '<span class="c-s chips" role="cell">'+(chips||(dz?'':'<span class="none">none</span>'))+'</span>'+
+   '<span class="c-x dims" role="cell">'+dims+'</span>'+
+   '<span class="c-m medal" role="cell">'+esc(medal)+'</span></div>';
+}
+function render(){
+  var list=view();
+  $('#rows').innerHTML=list.length?list.map(rowHtml).join(''):'<p class="note" style="padding:16px 4px">No provider matches. Clear the filter to see all '+rows.length+'.</p>';
+  var how=state.sort==='name'?(state.dir<0?'A to Z':'Z to A'):state.sort==='evidence'?(state.dir<0?'most evidence first':'fewest evidence first'):(state.dir<0?'farthest from the floor first':'closest to the floor first');
+  $('#count').textContent=list.length+' of '+rows.length+' providers, '+how;
+  document.querySelectorAll('[data-sort]').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.sort===state.sort))});
+  $('#lab').value=state.label;
+}
+function setSort(k,dir){act(function(){if(dir!=null){state.sort=k;state.dir=dir}else if(state.sort===k){state.dir*=-1}else{state.sort=k;state.dir=-1}render()})}
+function setLabel(l){act(function(){state.label=l;render()})}
+function setQuery(q){act(function(){state.q=q;render()})}
+
+/* hover card (Popover API) */
+var card=$('#card'),cardFor=null,timer=0;
+function quoteFor(r,id){for(var i=0;i<(r.evidence||[]).length;i++){var e=r.evidence[i];if(e.id===id)return e.quote||e.detail||''}return ''}
+function cardHtml(r){
+  var h='<h3>'+esc(r.provider)+'</h3><div class="sub">'+esc(r.as_of)+' &middot; rate/RATINGS.jsonl &middot; '+r.evidence_count+' evidence items &middot; distance '+r.distance_to_floor+', unknown '+r.unknown_count+'</div>';
+  var shown=0,seen={},shortDims=DIMS.filter(function(k){return (r.dimensions[k]||{}).status==='SHORT'});
+  shortDims.forEach(function(k){
+    h+='<div class="dim-h">Short on '+k+'</div>';
+    ((r.dimensions[k].shortfalls)||[]).forEach(function(s){
+      h+='<div class="lab">'+esc(nice(s.label))+'</div><div class="ids">'+(s.evidence_ids||[]).map(esc).join(', ')+'</div>';
+      (s.evidence_ids||[]).forEach(function(id){var q=quoteFor(r,id);if(q&&shown<5&&!seen[id]){seen[id]=1;shown++;h+='<blockquote>'+esc(q.length>240?q.slice(0,237)+'...':q)+'</blockquote>'}});
     });
-    document.getElementById('table').innerHTML=h+'</tbody></table><p class="muted">'+list.length+' providers. Rows sort by distance, then fewest unknowns, then most evidence.</p>';
-  }
-  fetch('rate/RATINGS.jsonl',{cache:'no-store'}).then(function(r){return r.text();}).then(function(t){
-    rows=t.split(/\r?\n/).filter(Boolean).map(function(l){try{return JSON.parse(l);}catch(e){return null;}}).filter(Boolean);
-    render('');
-    document.getElementById('q').addEventListener('input',function(e){render(e.target.value);});
-  }).catch(function(){document.getElementById('table').innerHTML='<p class="muted">rate/RATINGS.jsonl is not readable from here.</p>';});
-  fetch('prescriptions.json',{cache:'no-store'}).then(function(r){return r.json();}).then(function(p){
-    rx=Array.isArray(p)?p:(p.rows||p.prescriptions||[]);
-    rx.sort(function(a,b){return (b.providers_affected||0)-(a.providers_affected||0);});
-    var h='<table><thead><tr><th class="num">Providers</th><th>Shortfall</th><th>What the customer sees</th><th class="hide-sm">Likely fix</th><th class="hide-sm">Effort</th></tr></thead><tbody>';
-    rx.forEach(function(x){h+='<tr><td class="num">'+esc(x.providers_affected)+'</td><td>'+esc(x.shortfall)+'</td><td>'+esc(x.what_customer_observes)+'</td><td class="hide-sm">'+esc(x.likely_fix)+'</td><td class="hide-sm">'+esc(x.effort_class)+'</td></tr>';});
-    document.getElementById('rx').innerHTML=h+'</tbody></table>';
-  }).catch(function(){document.getElementById('rx').innerHTML='<p class="muted">prescriptions.json is not readable from here.</p>';});
+  });
+  if(!shortDims.length)h+='<p class="ok">No dimension is short on public evidence.</p>';
+  var unk=DIMS.filter(function(k){return (r.dimensions[k]||{}).status==='UNKNOWN'});
+  if(unk.length)h+='<p class="ids" style="margin-top:10px">Unknown: '+unk.join(', ')+'</p>';
+  if(r.slug==='hotaisle')h+='<p class="pub">Hot Aisle&rsquo;s row is scored from public evidence only.</p>';
+  return h;
+}
+function placeCard(btn){
+  var b=btn.getBoundingClientRect(),w=card.offsetWidth,h=card.offsetHeight,vw=innerWidth,vh=innerHeight;
+  var left=Math.max(12,Math.min(b.left,vw-w-12)),top=b.bottom+8;
+  if(top+h>vh-12)top=Math.max(12,b.top-h-8);
+  card.style.left=left+'px';card.style.top=top+'px';
+}
+function showCard(btn){
+  var r=rows.filter(function(x){return x.slug===btn.dataset.slug})[0];if(!r)return;
+  if(cardFor&&cardFor!==btn)cardFor.setAttribute('aria-expanded','false');
+  cardFor=btn;card.innerHTML=cardHtml(r);
+  if(!card.matches(':popover-open'))card.showPopover();
+  placeCard(btn);btn.setAttribute('aria-expanded','true');
+}
+function hideCard(){clearTimeout(timer);if(cardFor){cardFor.setAttribute('aria-expanded','false');cardFor=null}if(card.matches(':popover-open'))card.hidePopover()}
+function later(){clearTimeout(timer);timer=setTimeout(hideCard,180)}
+var hoverable=matchMedia('(hover:hover)');
+var rowsEl=$('#rows');
+rowsEl.addEventListener('mouseover',function(e){var b=e.target.closest('.pname');if(b&&hoverable.matches){clearTimeout(timer);timer=setTimeout(function(){showCard(b)},110)}});
+rowsEl.addEventListener('mouseout',function(e){if(e.target.closest('.pname'))later()});
+rowsEl.addEventListener('focusin',function(e){var b=e.target.closest('.pname');if(b)showCard(b)});
+rowsEl.addEventListener('focusout',function(e){if(e.target.closest('.pname'))later()});
+card.addEventListener('mouseenter',function(){clearTimeout(timer)});
+card.addEventListener('mouseleave',later);
+rowsEl.addEventListener('click',function(e){
+  var c=e.target.closest('.chip[data-label]');
+  if(c){setLabel(state.label===c.dataset.label?'':c.dataset.label);return}
+  var b=e.target.closest('.pname');
+  if(b){if(cardFor===b&&card.matches(':popover-open')&&!hoverable.matches)hideCard();else showCard(b)}
+});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&card.matches(':popover-open')&&!$('#pal').open){var b=cardFor;hideCard();if(b)b.focus()}});
+addEventListener('scroll',function(){if(cardFor)hideCard()},{passive:true});
+addEventListener('resize',function(){if(cardFor)hideCard()});
+document.addEventListener('pointerdown',function(e){if(cardFor&&!card.contains(e.target)&&!e.target.closest('.pname'))hideCard()});
+
+/* controls */
+document.querySelectorAll('[data-sort]').forEach(function(b){b.addEventListener('click',function(){setSort(b.dataset.sort)})});
+$('#lab').addEventListener('change',function(e){setLabel(e.target.value)});
+var qt=0;$('#q').addEventListener('input',function(e){var v=e.target.value;clearTimeout(qt);qt=setTimeout(function(){setQuery(v)},140)});
+
+/* command palette: every action */
+var pal=$('#pal'),pin=$('#pin'),plist=$('#plist'),cmds=[],shownCmds=[],sel=0;
+function go(u){return function(){location.href=u}}
+function buildCmds(){
+  var c=[
+    {n:'Sort by distance, farthest first',h:'Sort',f:function(){setSort('distance',-1)}},
+    {n:'Sort by distance, closest first',h:'Sort',f:function(){setSort('distance',1)}},
+    {n:'Sort by evidence, most first',h:'Sort',f:function(){setSort('evidence',-1)}},
+    {n:'Sort by evidence, fewest first',h:'Sort',f:function(){setSort('evidence',1)}},
+    {n:'Sort by name',h:'Sort',f:function(){setSort('name',-1)}},
+    {n:'Filter: clear short label',h:'Filter',f:function(){setLabel('')}}
+  ];
+  var counts={};rows.forEach(function(r){(r.short_labels||[]).forEach(function(l){counts[l]=(counts[l]||0)+1})});
+  Object.keys(counts).sort(function(a,b){return counts[b]-counts[a]}).forEach(function(l){c.push({n:'Filter short label: '+nice(l),h:counts[l]+' providers',f:function(){setLabel(l)}})});
+  c.push(
+    {n:'Open FLOOR.md',h:'Document',f:go('FLOOR.md')},
+    {n:'Open PRESCRIPTIONS.md',h:'Document',f:go('PRESCRIPTIONS.md')},
+    {n:'Open findings: telemetry',h:'Document',f:go('findings/TELEMETRY.md')},
+    {n:'Open findings: efficiency',h:'Document',f:go('findings/EFFICIENCY.md')},
+    {n:'Open full ratings',h:'Document',f:go('rate/RATINGS.md')},
+    {n:'Open receipts',h:'Surface',f:go('../circulate/')},
+    {n:'Switch theme',h:'View',f:toggleTheme},
+    {n:'Back to the workspace',h:'Surface',f:go('../')}
+  );
+  cmds=c;
+}
+function paintPal(){
+  var toks=pin.value.toLowerCase().split(/\s+/).filter(Boolean);
+  shownCmds=cmds.filter(function(c){var s=(c.n+' '+c.h).toLowerCase();return toks.every(function(t){return s.indexOf(t)>=0})});
+  if(sel>=shownCmds.length)sel=Math.max(0,shownCmds.length-1);
+  plist.innerHTML=shownCmds.length?shownCmds.map(function(c,i){return '<li role="option" id="pc'+i+'" data-i="'+i+'" aria-selected="'+(i===sel)+'"><span>'+esc(c.n)+'</span><small>'+esc(c.h)+'</small></li>'}).join(''):'<li class="empty">No command matches.</li>';
+  if(shownCmds.length)pin.setAttribute('aria-activedescendant','pc'+sel);else pin.removeAttribute('aria-activedescendant');
+  var s=plist.querySelector('[aria-selected="true"]');if(s)s.scrollIntoView({block:'nearest'});
+}
+function openPal(){hideCard();if(pal.open)return;buildCmds();pin.value='';sel=0;paintPal();pal.showModal();pin.focus()}
+function runCmd(i){var c=shownCmds[i];if(!c)return;pal.close();c.f()}
+pin.addEventListener('input',function(){sel=0;paintPal()});
+pin.addEventListener('keydown',function(e){
+  if(e.key==='ArrowDown'){e.preventDefault();sel=Math.min(shownCmds.length-1,sel+1);paintPal()}
+  else if(e.key==='ArrowUp'){e.preventDefault();sel=Math.max(0,sel-1);paintPal()}
+  else if(e.key==='Enter'){e.preventDefault();runCmd(sel)}
+});
+plist.addEventListener('click',function(e){var li=e.target.closest('li[data-i]');if(li)runCmd(+li.dataset.i)});
+plist.addEventListener('mousemove',function(e){var li=e.target.closest('li[data-i]');if(li&&+li.dataset.i!==sel){sel=+li.dataset.i;paintPal()}});
+pal.addEventListener('click',function(e){if(e.target===pal)pal.close()});
+$('#cmd').addEventListener('click',openPal);
+document.addEventListener('keydown',function(e){if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();pal.open?pal.close():openPal()}});
+buildCmds();
+
+/* load */
+function fmtErr(what){return '<p class="note" style="padding:16px 4px">'+what+' is not readable from here. Serve the repo root over http, for example python -m http.server, and open /floor/.</p>'}
+fetch('rate/RATINGS.jsonl',{cache:'no-store'}).then(function(r){if(!r.ok)throw 0;return r.text()}).then(function(t){
+  rows=t.split(/\r?\n/).filter(Boolean).map(function(l){try{return JSON.parse(l)}catch(e){return null}}).filter(Boolean);
+  var n=rows.length,zero=rows.filter(function(r){return r.distance_to_floor===0}),good=zero.filter(function(r){return r.evidence_count>=3});
+  var asof=(rows[0]&&rows[0].as_of)||'';
+  $('#of').textContent='of '+n;
+  $('#fig').setAttribute('aria-label',good.length+' of '+n);
+  tick($('#fig'),good.length,900);
+  $('#scope').textContent='Zero distance on all six dimensions and at least three evidence items. '+zero.length+' providers sit at zero distance; '+(zero.length-good.length)+' of them rest on fewer than three items.';
+  var d=$('#hs-date');d.textContent=asof;d.setAttribute('datetime',asof);
+  $('#hs-scope').textContent=n+' providers';
+  var sl=$('#lab'),counts={};rows.forEach(function(r){(r.short_labels||[]).forEach(function(l){counts[l]=(counts[l]||0)+1})});
+  Object.keys(counts).sort(function(a,b){return counts[b]-counts[a]}).forEach(function(l){var o=document.createElement('option');o.value=l;o.textContent=nice(l)+' ('+counts[l]+')';sl.appendChild(o)});
+  buildCmds();render();
+}).catch(function(){$('#rows').innerHTML=fmtErr('rate/RATINGS.jsonl');$('#scope').textContent='rate/RATINGS.jsonl is not readable.'});
+fetch('prescriptions.json',{cache:'no-store'}).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(p){
+  rx=(Array.isArray(p)?p:(p.rows||[])).slice().sort(function(a,b){return (b.providers_affected||0)-(a.providers_affected||0)||(a.rank||0)-(b.rank||0)});
+  var max=Math.max.apply(null,rx.map(function(x){return x.providers_affected||0}).concat(1)),pages=(p.corpus||{}).review_pages||85,gen=p.generated||'';
+  $('#rx').innerHTML=rx.map(function(x){
+    var fix=(x.likely_fix&&x.likely_fix.text)||x.likely_fix||'',eff=x.effort_class||'';
+    return '<li class="rx"><div class="rx-n">'+esc(x.providers_affected)+'<i style="--w:'+Math.round(100*(x.providers_affected||0)/max)+'%"></i></div>'+
+     '<div><h3>'+esc(x.shortfall)+'</h3><p>'+esc(x.what_customer_observes)+'</p><details><summary>Likely fix</summary><p>'+esc(fix)+'</p></details></div>'+
+     '<div class="rx-m"><span class="stamp"><span><time datetime="'+esc(gen)+'">'+esc(gen)+'</time></span><span>prescriptions.json</span><span>'+esc(x.providers_affected)+' of '+pages+' providers</span></span>'+(eff?'<span class="chip">'+esc(eff)+'</span>':'')+'</div></li>';
+  }).join('');
+}).catch(function(){$('#rx').innerHTML='<li>'+fmtErr('prescriptions.json')+'</li>'});
 })();
 </script>
 </body>

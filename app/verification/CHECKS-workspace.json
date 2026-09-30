@@ -1,0 +1,39 @@
+{
+  "page_sha256": "56a4c84045c2c76cecb4adbf7655445cc0056178c0a1604baea992495a20ce18",
+  "checks": [
+    {
+      "name": "48 inspectable original-task cells",
+      "pass": true
+    },
+    {
+      "name": "ten format failures in initial A",
+      "pass": true
+    },
+    {
+      "name": "task inspection shows retained fenced JSON",
+      "pass": true
+    },
+    {
+      "name": "native accepted A cells increase to 22",
+      "pass": true
+    },
+    {
+      "name": "no document overflow at 390",
+      "pass": true
+    },
+    {
+      "name": "no document overflow at 320",
+      "pass": true
+    },
+    {
+      "name": "source withdrawal holds dependent work",
+      "pass": true
+    },
+    {
+      "name": "withdrawal retains both editions",
+      "pass": true
+    }
+  ],
+  "errors": [],
+  "all_pass": true
+}

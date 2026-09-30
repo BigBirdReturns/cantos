@@ -1,102 +1,236 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Circulation receipts</title>
+<meta name="color-scheme" content="dark light">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none';script-src 'unsafe-inline';style-src 'self' 'unsafe-inline';img-src data:;font-src 'self';connect-src 'self';base-uri 'none';form-action 'none'">
+<title>Cantos circulate</title>
 <meta name="description" content="Nightly receipts from the driver that pulls public GPU-market, benchmark and status data through every joint of the Second Run instruments, plus the probes that try to break them.">
+<script>try{var t=localStorage.getItem('cantos-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}</script>
+<link rel="preload" href="../assets/fonts/Inter-variable-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/Fraunces-variable-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/cantos.css">
 <style>
-:root{--bg:#fbfaf6;--fg:#1c1c1c;--muted:#5b5b5b;--line:#d9d6cc;--ok:#1f7a3a;--hold:#8a6d00;--fail:#a3261f;--skip:#6b6b6b;--card:#ffffff}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#101214;--fg:#ececec;--muted:#a3a3a3;--line:#2c3138;--ok:#4cc26f;--hold:#e0b83a;--fail:#ef6b62;--skip:#9a9a9a;--card:#171a1e}}
-:root[data-theme="dark"]{--bg:#101214;--fg:#ececec;--muted:#a3a3a3;--line:#2c3138;--ok:#4cc26f;--hold:#e0b83a;--fail:#ef6b62;--skip:#9a9a9a;--card:#171a1e}
-body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
-main{max-width:920px;margin:0 auto;padding:24px 16px 48px}
-h1{font-size:1.6rem;margin:0 0 4px}
-p{margin:.4rem 0}
-.muted{color:var(--muted)}
-.rules{border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:16px 0;background:var(--card)}
-table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.95rem}
-th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:top}
-.chip{display:inline-block;padding:1px 8px;border-radius:999px;font-size:.8rem;border:1px solid var(--line);margin:1px 2px 1px 0;white-space:nowrap}
-.OK{color:var(--ok);border-color:var(--ok)}
-.HOLD{color:var(--hold);border-color:var(--hold)}
-.FAIL{color:var(--fail);border-color:var(--fail)}
-.SKIP,.PASS{color:var(--skip)}
-.PASS{color:var(--ok)}
-.overall{font-weight:600}
-a{color:inherit}
-details{margin:14px 0}
-summary{cursor:pointer}
-@media (max-width:600px){table,thead,tbody,tr,td,th{display:block}thead{display:none}tr{border:1px solid var(--line);border-radius:8px;padding:8px;margin:8px 0;background:var(--card)}td{border:0;padding:4px 0}}
+.winner .fig .date{font:400 var(--t32)/1 var(--display);letter-spacing:-.02em;color:var(--muted)}
+.winner .pr{display:flex;align-items:baseline;gap:8px;margin-bottom:12px;font-size:var(--t15);color:var(--muted)}
+.winner .pr b{font:400 var(--t56)/1 var(--display);font-variation-settings:"opsz" 144;color:color-mix(in oklch,var(--gold) 72%,var(--ink))}
+.winner[data-state="FAIL"] .pr b{color:var(--loud)}
+.rc{padding:16px 0 18px;border-bottom:1px solid var(--hair);display:grid;gap:12px}
+.rc-h{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 22px}
+.rc-d{font:600 var(--t15)/1 var(--sans);letter-spacing:-.01em}
+.rc-d:hover{color:var(--gold-ink)}
+.ov{font:600 var(--t13)/1 var(--sans);letter-spacing:.06em}
+.ov.OK{color:var(--dim);font-weight:500}.ov.HOLD{color:var(--gold-ink)}.ov.FAIL{color:var(--loud)}
+.rc-p{color:var(--muted)}.rc-p .bad{color:var(--loud);font-weight:600}
+.rc-l{margin-left:auto;display:flex;gap:16px;color:var(--muted)}
+.rc-l a{border-bottom:1px solid var(--line)}.rc-l a:hover{color:var(--ink);border-bottom-color:var(--gold)}
+.stages{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:6px}
+.stages .tile{display:grid;grid-template-columns:1fr;place-items:start;height:auto;min-width:0;padding:6px 8px;gap:4px;text-transform:none;letter-spacing:0;font-weight:500;font-size:11px}
+.stages .tile b{font-weight:600;color:var(--ink);overflow-wrap:anywhere}
+.stages .tile.SKIP b{color:var(--dim);font-weight:500}
+.stages .tile.FAIL b{color:var(--on-loud)}
+.stages .tile i{font:600 9px/1 var(--sans);font-style:normal;letter-spacing:.08em;text-transform:uppercase}
+@media (max-width:719px){.rc-l{margin-left:0;width:100%}.stages{grid-template-columns:repeat(2,minmax(0,1fr))}}
 </style>
+<style id="vt-arm"></style>
 </head>
 <body>
-<main>
-<h1>Circulation receipts</h1>
-<p class="muted">Each cycle the driver pulls new public rows through every joint of the Second Run instruments and the probes try to break each joint. One receipt per cycle. Newest first.</p>
+<a class="skip" href="#receipts">Skip to receipts</a>
+<header class="app-bar">
+  <a class="brand" href="../" aria-label="Cantos, back to the workspace">
+    <svg class="mark" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="32" height="32" fill="none">
+      <ellipse cx="20" cy="20" rx="16" ry="8.5" transform="rotate(-32 20 20)" stroke="oklch(82% .06 230)" stroke-width="1"/>
+      <g class="orbit-b"><ellipse cx="20" cy="20" rx="15.5" ry="8" transform="rotate(51 20 20)" stroke="oklch(80% .08 85)" stroke-width="1"/><circle cx="32.1" cy="10.1" r="2" fill="oklch(80% .08 85)"/></g>
+      <path d="M20 15.5 21.2 18.8 24.5 20 21.2 21.2 20 24.5 18.8 21.2 15.5 20 18.8 18.8Z" fill="oklch(82% .06 230)"/>
+    </svg>
+    <span class="wordmark">CANTOS</span><span class="spark" aria-hidden="true">&#10022;</span>
+  </a>
+  <span class="crumb"><b>Second Run</b><i>/</i>Circulate</span>
+  <div class="bar-actions">
+    <button id="cmd" class="kbtn" type="button" aria-label="Open command palette"><span>Search or run a command</span><kbd id="kbd">Ctrl K</kbd></button>
+    <button id="theme" class="tbtn" type="button" aria-label="Switch theme">Light</button>
+  </div>
+</header>
+<div class="shell">
+  <aside class="rail" aria-label="Navigation">
+    <section><h2>Surfaces</h2>
+      <a href="../floor/">Floor</a>
+      <a href="./" aria-current="page">Circulate</a>
+    </section>
+    <section class="docs"><h2>On this page</h2>
+      <a href="#receipts">Receipts</a>
+      <a href="#stages">Stage legend</a>
+      <a href="#probes">Probe legend</a>
+    </section>
+    <section class="docs"><h2>Documents</h2>
+      <a href="CONTRACT.md">CONTRACT.md</a>
+      <a href="README.md">README.md</a>
+      <a id="rail-latest" href="LATEST.md">LATEST.md</a>
+    </section>
+    <section class="last"><a href="../">Workspace <small>..</small></a></section>
+  </aside>
+  <main class="desk" id="main">
+    <div class="head">
+      <div class="eyebrow">Circulate / Receipts</div>
+      <h1>Circulation receipts</h1>
+      <p class="lede">Each cycle the driver pulls new public rows through every joint of the Second Run instruments and the probes try to break each joint. One receipt per cycle, newest first.</p>
+    </div>
 
-<div class="rules">
-<p><strong>Three rules travel with everything here.</strong> No value is invented: a missing or gated source records HOLD, never a number. Every row carries who produced it and under what conditions. An imported row stays labelled imported.</p>
+    <section class="winner" id="hero" aria-labelledby="hero-h" data-state="">
+      <p class="fig"><span id="fig">&ndash;</span><span class="date" id="fig-date"></span></p>
+      <div>
+        <h2 id="hero-h">Latest receipt, overall</h2>
+        <div class="pr"><b id="pnum">&ndash;</b><span id="ptxt">probes</span></div>
+        <p id="scope">Reading receipts/index.json.</p>
+        <span class="stamp" id="hero-stamp"><span>Receipt</span><span><time id="hs-date">&ndash;</time></span><span>receipts/index.json</span><span id="hs-scope">&ndash;</span></span>
+      </div>
+    </section>
+
+    <section id="receipts" aria-label="Receipts">
+      <div class="sec-h" style="margin-top:0"><h2 style="font:600 var(--t20)/1.2 var(--sans);letter-spacing:-.02em">Receipts</h2><span class="count" id="count" role="status"></span></div>
+      <div id="rlist"><p class="note" style="padding:16px 0">Reading receipts/index.json.</p></div>
+      <p class="legend" style="margin-top:14px">Stage cells: OK quiet, HOLD gold, FAIL loud, SKIP dim. A missing or gated source records HOLD, never a number. Every row carries who produced it and under what conditions. An imported row stays labelled imported.</p>
+    </section>
+
+    <section class="sec" id="stages" aria-labelledby="st-h">
+      <div class="sec-h"><h2 id="st-h">What each stage does</h2></div>
+      <table class="ht">
+        <thead><tr><th>Stage</th><th>Source</th><th>Leaves behind</th></tr></thead>
+        <tbody>
+          <tr><td>inferencex</td><td>SemiAnalysis InferenceX results_bmk artifacts, newest since the last index</td><td>daily imported-observation rows, index, standing summary</td></tr>
+          <tr><td>prices</td><td>OpenComputePrices release, only when an asset digest changed</td><td>price-history index, market medians</td></tr>
+          <tr><td>status</td><td>provider status pages with a supported platform</td><td>standing incident files, collection log</td></tr>
+          <tr><td>economics</td><td>page engine over the Run 3 record and dated price snapshots</td><td>Run 3 cost per 1k accepted by date</td></tr>
+          <tr><td>delta</td><td>all imported rows against the 45 retained cells</td><td>ranked triage, match counts</td></tr>
+          <tr><td>r2-standing</td><td>3.0 medals against incidents, rolling 180-day window, unfrozen</td><td>standing result next to the frozen R2</td></tr>
+          <tr><td>newsletter</td><td>SemiAnalysis newsletter sitemap, new posts only</td><td>standing post rows</td></tr>
+          <tr><td>packet</td><td>all claim files plus standing rows</td><td>validated Research Desk packet</td></tr>
+          <tr><td>frontdoor</td><td>market data and kit sources</td><td>refreshed page and kit</td></tr>
+          <tr><td>tests</td><td>the fast suites of every instrument</td><td>pass and fail counts</td></tr>
+        </tbody>
+      </table>
+      <p class="note">Bulk outputs (raw artifacts, per-day price files, raw HTML, full delta) are kept as run artifacts, not committed. Frozen studies are hash-checked at the end of every run; the run fails if they moved.</p>
+    </section>
+
+    <section class="sec" id="probes" aria-labelledby="pr-h">
+      <div class="sec-h"><h2 id="pr-h">What the probes break</h2></div>
+      <table class="ht">
+        <thead><tr><th>Probe</th><th>Break</th><th>Must observe</th></tr></thead>
+        <tbody>
+          <tr><td>packet tamper</td><td>one flipped byte in a packet copy</td><td>validator refuses and names the check</td></tr>
+          <tr><td>evidence tamper</td><td>one flipped byte in a Run 3 evidence copy</td><td>checksum mismatch, no number rendered</td></tr>
+          <tr><td>price shift</td><td>+10% Hot Aisle price in a snapshot copy</td><td>cost per 1k moves by exactly the ratio</td></tr>
+          <tr><td>bad artifact</td><td>truncated, empty, or zero-GPU artifact</td><td>loud refusal or null with a rule, never a made-up count</td></tr>
+          <tr><td>gated source</td><td>fetch a gated dataset shard</td><td>401 recorded as HOLD, no credentialed retry</td></tr>
+          <tr><td>stale kit</td><td>edit a kit source in a copy</td><td>kit check fails, rebuild passes</td></tr>
+          <tr><td>R2 perturb</td><td>double one provider's incidents in a copy</td><td>rho moves, frozen files unchanged</td></tr>
+          <tr><td>platform mislabel</td><td>wrong platform in a status-pages copy</td><td>detected or recorded unsupported, never a silent zero</td></tr>
+          <tr><td>kill and resume</td><td>kill the driver mid-run</td><td>completed stages reused by hash, killed stage rerun</td></tr>
+          <tr><td>duplicate artifact</td><td>same bytes under two ids</td><td>two provenance rows, deduped only by exact key</td></tr>
+          <tr><td>secret scan</td><td>grep committed outputs for credential patterns</td><td>zero hits</td></tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
 </div>
 
-<div id="receipts"><p class="muted">Loading receipts…</p></div>
+<dialog id="pal" class="pal" aria-label="Command palette">
+  <input id="pin" type="text" role="combobox" aria-expanded="true" aria-controls="plist" aria-autocomplete="list" placeholder="Type a command" autocomplete="off" spellcheck="false">
+  <ul id="plist" role="listbox" aria-label="Commands"></ul>
+  <footer><span>Up Down to move</span><span>Enter to run</span><span>Esc to close</span></footer>
+</dialog>
 
-<details>
-<summary>What each stage does</summary>
-<table>
-<thead><tr><th>Stage</th><th>Source</th><th>Leaves behind</th></tr></thead>
-<tbody>
-<tr><td>inferencex</td><td>SemiAnalysis InferenceX results_bmk artifacts, newest since the last index</td><td>daily imported-observation rows, index, standing summary</td></tr>
-<tr><td>prices</td><td>OpenComputePrices release, only when an asset digest changed</td><td>price-history index, market medians</td></tr>
-<tr><td>status</td><td>provider status pages with a supported platform</td><td>standing incident files, collection log</td></tr>
-<tr><td>economics</td><td>page engine over the Run 3 record and dated price snapshots</td><td>Run 3 cost per 1k accepted by date</td></tr>
-<tr><td>delta</td><td>all imported rows against the 45 retained cells</td><td>ranked triage, match counts</td></tr>
-<tr><td>r2-standing</td><td>3.0 medals against incidents, rolling 180-day window, unfrozen</td><td>standing result next to the frozen R2</td></tr>
-<tr><td>newsletter</td><td>SemiAnalysis newsletter sitemap, new posts only</td><td>standing post rows</td></tr>
-<tr><td>packet</td><td>all claim files plus standing rows</td><td>validated Research Desk packet</td></tr>
-<tr><td>frontdoor</td><td>market data and kit sources</td><td>refreshed page and kit</td></tr>
-<tr><td>tests</td><td>the fast suites of every instrument</td><td>pass and fail counts</td></tr>
-</tbody>
-</table>
-<p class="muted">Bulk outputs (raw artifacts, per-day price files, raw HTML, full delta) are kept as run artifacts, not committed. Frozen studies are hash-checked at the end of every run; the run fails if they moved.</p>
-</details>
-
-<details>
-<summary>What the probes break</summary>
-<table>
-<thead><tr><th>Probe</th><th>Break</th><th>Must observe</th></tr></thead>
-<tbody>
-<tr><td>packet tamper</td><td>one flipped byte in a packet copy</td><td>validator refuses and names the check</td></tr>
-<tr><td>evidence tamper</td><td>one flipped byte in a Run 3 evidence copy</td><td>checksum mismatch, no number rendered</td></tr>
-<tr><td>price shift</td><td>+10% Hot Aisle price in a snapshot copy</td><td>cost per 1k moves by exactly the ratio</td></tr>
-<tr><td>bad artifact</td><td>truncated, empty, or zero-GPU artifact</td><td>loud refusal or null with a rule, never a made-up count</td></tr>
-<tr><td>gated source</td><td>fetch a gated dataset shard</td><td>401 recorded as HOLD, no credentialed retry</td></tr>
-<tr><td>stale kit</td><td>edit a kit source in a copy</td><td>kit check fails, rebuild passes</td></tr>
-<tr><td>R2 perturb</td><td>double one provider's incidents in a copy</td><td>rho moves, frozen files unchanged</td></tr>
-<tr><td>platform mislabel</td><td>wrong platform in a status-pages copy</td><td>detected or recorded unsupported, never a silent zero</td></tr>
-<tr><td>kill and resume</td><td>kill the driver mid-run</td><td>completed stages reused by hash, killed stage rerun</td></tr>
-<tr><td>duplicate artifact</td><td>same bytes under two ids</td><td>two provenance rows, deduped only by exact key</td></tr>
-<tr><td>secret scan</td><td>grep committed outputs for credential patterns</td><td>zero hits</td></tr>
-</tbody>
-</table>
-</details>
-</main>
 <script>
 (function(){
-  var el=document.getElementById('receipts');
-  function chip(t,s){return '<span class="chip '+s+'">'+t+' '+s+'</span>';}
-  fetch('receipts/index.json',{cache:'no-store'}).then(function(r){return r.json();}).then(function(list){
-    if(!Array.isArray(list)||!list.length){el.innerHTML='<p class="muted">No receipts yet. The first cycle writes one.</p>';return;}
-    list.sort(function(a,b){return (b.date||'').localeCompare(a.date||'');});
-    var h='<table><thead><tr><th>Date</th><th>Overall</th><th>Stages</th><th>Probes</th><th>Files</th></tr></thead><tbody>';
-    list.forEach(function(r){
-      var stages=(r.stages||[]).map(function(s){return chip(s.name,s.status);}).join('');
-      var pr=r.probes||{};var probes=(pr.pass!=null)?(pr.pass+' pass'+(pr.fail?', '+pr.fail+' fail':'')+(pr.skip?', '+pr.skip+' skip':'')):'—';
-      var d=r.date||'';
-      h+='<tr><td>'+d+'</td><td class="overall '+(r.overall||'')+'">'+(r.overall||'')+'</td><td>'+stages+'</td><td>'+probes+'</td><td><a href="receipts/'+d+'/RECEIPT.md">receipt</a> · <a href="receipts/'+d+'/PROBES.json">probes</a></td></tr>';
-    });
-    el.innerHTML=h+'</tbody></table>';
-  }).catch(function(){el.innerHTML='<p class="muted">receipts/index.json is not readable from here.</p>';});
+'use strict';
+var $=function(s){return document.querySelector(s)};
+var mq=matchMedia('(prefers-reduced-motion: reduce)'),reduced=mq.matches;
+mq.addEventListener('change',function(e){reduced=e.matches});
+var list=[];
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+
+var tbtn=$('#theme');
+function paintTheme(){tbtn.textContent=document.documentElement.dataset.theme==='light'?'Dark':'Light'}
+function toggleTheme(){var n=document.documentElement.dataset.theme==='light'?'dark':'light';document.documentElement.dataset.theme=n;try{localStorage.setItem('cantos-theme',n)}catch(e){}paintTheme()}
+tbtn.addEventListener('click',toggleTheme);paintTheme();
+$('#kbd').textContent=/Mac|iPhone|iPad/.test(navigator.platform||'')?'⌘ K':'Ctrl K';
+
+function tick(el,to,ms){
+  if(reduced||!to){el.textContent=to;return}
+  var t0=performance.now();
+  (function f(t){var p=Math.min(1,(t-t0)/ms),e=p===1?1:1-Math.pow(2,-10*p);el.textContent=Math.round(to*e);if(p<1)requestAnimationFrame(f);else el.textContent=to})(t0);
+}
+
+function rowHtml(r){
+  var d=r.date||'',pr=r.probes||{},ov=r.overall||'';
+  var tiles=(r.stages||[]).map(function(s){return '<span class="tile '+esc(s.status)+'" role="img" aria-label="'+esc(s.name)+' '+esc(s.status)+'"><b>'+esc(s.name)+'</b><i>'+esc(s.status)+'</i></span>'}).join('');
+  var p=(pr.pass!=null)?pr.pass+' pass'+(pr.fail?', <span class="bad">'+pr.fail+' fail</span>':'')+(pr.hold?', '+pr.hold+' hold':'')+(pr.skip?', '+pr.skip+' skip':''):'no probe counts';
+  return '<article class="rc"><div class="rc-h"><a class="rc-d" href="receipts/'+esc(d)+'/RECEIPT.md">'+esc(d)+'</a><span class="ov '+esc(ov)+'">'+esc(ov)+'</span><span class="rc-p">Probes: '+p+'</span><span class="rc-l"><a href="receipts/'+esc(d)+'/RECEIPT.md">RECEIPT.md</a><a href="receipts/'+esc(d)+'/PROBES.json">PROBES.json</a></span></div><div class="stages" role="group" aria-label="Stages, '+esc(d)+'">'+tiles+'</div></article>';
+}
+
+/* command palette */
+var pal=$('#pal'),pin=$('#pin'),plist=$('#plist'),cmds=[],shown=[],sel=0;
+function go(u){return function(){location.href=u}}
+function buildCmds(){
+  var l=list[0],c=[];
+  if(l){
+    c.push({n:'Open latest receipt ('+l.date+')',h:'Receipt',f:go('receipts/'+l.date+'/RECEIPT.md')});
+    c.push({n:'Open latest probes ('+l.date+')',h:'Receipt',f:go('receipts/'+l.date+'/PROBES.json')});
+  }
+  c.push(
+    {n:'Open contract',h:'Document',f:go('CONTRACT.md')},
+    {n:'Open README',h:'Document',f:go('README.md')},
+    {n:'Open the floor',h:'Surface',f:go('../floor/')},
+    {n:'Switch theme',h:'View',f:toggleTheme},
+    {n:'Back to the workspace',h:'Surface',f:go('../')}
+  );
+  cmds=c;
+}
+function paintPal(){
+  var toks=pin.value.toLowerCase().split(/\s+/).filter(Boolean);
+  shown=cmds.filter(function(c){var s=(c.n+' '+c.h).toLowerCase();return toks.every(function(t){return s.indexOf(t)>=0})});
+  if(sel>=shown.length)sel=Math.max(0,shown.length-1);
+  plist.innerHTML=shown.length?shown.map(function(c,i){return '<li role="option" id="pc'+i+'" data-i="'+i+'" aria-selected="'+(i===sel)+'"><span>'+esc(c.n)+'</span><small>'+esc(c.h)+'</small></li>'}).join(''):'<li class="empty">No command matches.</li>';
+  if(shown.length)pin.setAttribute('aria-activedescendant','pc'+sel);else pin.removeAttribute('aria-activedescendant');
+  var s=plist.querySelector('[aria-selected="true"]');if(s)s.scrollIntoView({block:'nearest'});
+}
+function openPal(){if(pal.open)return;buildCmds();pin.value='';sel=0;paintPal();pal.showModal();pin.focus()}
+function runCmd(i){var c=shown[i];if(!c)return;pal.close();c.f()}
+pin.addEventListener('input',function(){sel=0;paintPal()});
+pin.addEventListener('keydown',function(e){
+  if(e.key==='ArrowDown'){e.preventDefault();sel=Math.min(shown.length-1,sel+1);paintPal()}
+  else if(e.key==='ArrowUp'){e.preventDefault();sel=Math.max(0,sel-1);paintPal()}
+  else if(e.key==='Enter'){e.preventDefault();runCmd(sel)}
+});
+plist.addEventListener('click',function(e){var li=e.target.closest('li[data-i]');if(li)runCmd(+li.dataset.i)});
+plist.addEventListener('mousemove',function(e){var li=e.target.closest('li[data-i]');if(li&&+li.dataset.i!==sel){sel=+li.dataset.i;paintPal()}});
+pal.addEventListener('click',function(e){if(e.target===pal)pal.close()});
+$('#cmd').addEventListener('click',openPal);
+document.addEventListener('keydown',function(e){if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();pal.open?pal.close():openPal()}});
+buildCmds();
+
+/* load */
+fetch('receipts/index.json',{cache:'no-store'}).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(data){
+  if(!Array.isArray(data)||!data.length){$('#rlist').innerHTML='<p class="note" style="padding:16px 0">No receipts yet. The first cycle writes one.</p>';$('#scope').textContent='No receipts yet.';return}
+  list=data.slice().sort(function(a,b){return (b.date||'').localeCompare(a.date||'')});
+  var l=list[0],st=l.stages||[],pr=l.probes||{};
+  var by=function(s){return st.filter(function(x){return x.status===s}).length};
+  var hero=$('#hero');hero.dataset.state=l.overall||'';
+  $('#fig').textContent=l.overall||'';$('#fig-date').textContent=l.date||'';
+  $('#fig').setAttribute('aria-label','Overall '+l.overall+', '+l.date);
+  $('#hero-h').textContent='Latest receipt, overall';
+  var pass=pr.pass!=null?pr.pass:0;
+  tick($('#pnum'),pass,900);
+  $('#ptxt').textContent='probes pass'+(pr.fail?', '+pr.fail+' fail':', 0 fail')+(pr.hold?', '+pr.hold+' hold':'')+(pr.skip?', '+pr.skip+' skip':'');
+  $('#scope').textContent=by('OK')+' of '+st.length+' stages OK, '+by('SKIP')+' skipped, '+by('HOLD')+' on hold, '+by('FAIL')+' failed. Mode '+(l.mode||'unknown')+'.';
+  var d=$('#hs-date');d.textContent=l.date;d.setAttribute('datetime',l.date);
+  $('#hs-scope').textContent=st.length+' stages, '+(pr.pass+pr.fail+(pr.hold||0)+(pr.skip||0))+' probes';
+  $('#count').textContent=list.length+(list.length===1?' receipt':' receipts');
+  $('#rail-latest').href='receipts/'+l.date+'/RECEIPT.md';$('#rail-latest').textContent='Latest RECEIPT.md';
+  $('#rlist').innerHTML=list.map(rowHtml).join('');
+  buildCmds();
+}).catch(function(){$('#rlist').innerHTML='<p class="note" style="padding:16px 0">receipts/index.json is not readable from here. Serve the repo root over http, for example python -m http.server, and open /circulate/.</p>';$('#scope').textContent='receipts/index.json is not readable.'});
 })();
 </script>
 </body>

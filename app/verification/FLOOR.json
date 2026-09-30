@@ -1,0 +1,202 @@
+{
+  "page_sha256": "b7dda1c8fb088c43e8a1a0ee8674070f03d5e23be06a1c61c7a4da2ee8c26cb6",
+  "page_bytes": 5151873,
+  "checks": [
+    {
+      "name": "palette combobox exposes active option",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "palette Tab and Enter do not execute a different focused command",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "palette empty results recover after arrow and Enter",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "palette unavailable command is announced and cannot mutate",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "palette Escape restores invoker focus",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "palette arrows scroll selected option into view",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "palette shortcut preserves an existing modal without stacking",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "tile focus exposes described tooltip 1440",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "tile focus exposes described tooltip 390",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "tile focus exposes described tooltip 320",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "tile tooltip flips at viewport top",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "tile tooltip dismisses with Escape",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "pending tile hover cannot reopen over inspection dialog",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "ticker rapid successive changes end at committed values",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "ticker reduced motion immediately shows committed values",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "real pointer click during view transition reaches recompute",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "real pointer tile inspection during transition reaches its dialog",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "enabling reduced motion cancels an active ticker",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "reduced motion has no running document animation",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "embedded Inter and Fraunces load",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "decision no horizontal overflow 1440",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "decision no horizontal overflow 390",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "decision no horizontal overflow 320",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "evidence no horizontal overflow 1440",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "evidence no horizontal overflow 390",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "evidence no horizontal overflow 320",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "architecture no horizontal overflow 1440",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "architecture no horizontal overflow 390",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "architecture no horizontal overflow 320",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "evidence freshness stamps are present and substantive",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "no runtime JavaScript errors",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "no non-loopback request attempted",
+      "passed": true,
+      "detail": true
+    }
+  ],
+  "errors": [],
+  "requests": [
+    "http://127.0.0.1:53367/Cantos.html",
+    "http://127.0.0.1:53367/Cantos.html",
+    "http://127.0.0.1:53367/Cantos.html",
+    "http://127.0.0.1:53367/Cantos.html",
+    "http://127.0.0.1:53367/Cantos.html",
+    "http://127.0.0.1:53367/Cantos.html",
+    "http://127.0.0.1:53367/Cantos.html",
+    "http://127.0.0.1:53367/Cantos.html",
+    "http://127.0.0.1:53367/Cantos.html",
+    "http://127.0.0.1:53367/Cantos.html",
+    "http://127.0.0.1:53367/Cantos.html",
+    "http://127.0.0.1:53367/Cantos.html",
+    "http://127.0.0.1:53367/Cantos.html",
+    "http://127.0.0.1:53367/Cantos.html",
+    "http://127.0.0.1:53367/Cantos.html",
+    "http://127.0.0.1:53367/Cantos.html",
+    "http://127.0.0.1:53367/Cantos.html",
+    "http://127.0.0.1:53367/Cantos.html",
+    "http://127.0.0.1:53367/Cantos.html",
+    "http://127.0.0.1:53367/Cantos.html",
+    "http://127.0.0.1:53367/Cantos.html",
+    "http://127.0.0.1:53367/Cantos.html",
+    "http://127.0.0.1:53367/Cantos.html",
+    "http://127.0.0.1:53367/Cantos.html",
+    "http://127.0.0.1:53367/Cantos.html",
+    "http://127.0.0.1:53367/Cantos.html",
+    "http://127.0.0.1:53367/Cantos.html",
+    "http://127.0.0.1:53367/Cantos.html",
+    "http://127.0.0.1:53367/Cantos.html",
+    "http://127.0.0.1:53367/Cantos.html"
+  ],
+  "blocked": [],
+  "all_pass": true,
+  "stamp_exemption": false
+}
