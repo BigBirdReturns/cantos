@@ -26,6 +26,13 @@ class ReleaseGateTests(unittest.TestCase):
     def test_old_green_cannot_bless_changed_source(self):
         row=self.run_row()
         self.assertEqual(self.decide([row],{row['head_sha']:{'compute':'old-source'}})['state'], 'WAIT')
+    def test_workspace_change_cannot_reuse_compute_only_qualification(self):
+        self.assertTrue({'README.md', 'app', 'index.html', 'assets'}.issubset(gate.SCOPES))
+        current = {p: 'current' for p in gate.SCOPES}
+        for changed in ('README.md', 'app', 'index.html', 'assets'):
+            previous = dict(current, **{changed: 'previous'})
+            verdict = gate.decide([self.run_row()], current, lambda sha: previous)
+            self.assertEqual(verdict['state'], 'WAIT', changed)
     def test_data_only_revision_can_reuse_identical_sources(self):
         row=self.run_row(sha='b'*40)
         self.assertEqual(self.decide([row])['tested_commit'], 'b'*40)

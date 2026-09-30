@@ -55,9 +55,10 @@ try:
         page.set_viewport_size(dict(width=width,height=1000))
         page.goto(url)
         wait('Boolean(window.CantosPreviewState) && !busy')
+        wait('!document.getElementById("overview-view").hidden')
         if select_example_first:
-            # Cold load now opens the Run 3 decision; these checks were written against the synthetic invoice example, so select it first.
-            page.locator('[data-open-workspace="example"]').click();wait('document.getElementById("import-dialog").open')
+            # Start at the Cantos overview, then select the synthetic example through the confirmed workspace switch.
+            page.locator('.example-card[data-open-workspace="example"]').click();wait('document.getElementById("import-dialog").open')
             page.locator('#confirm-import').click();wait('!busy && !pendingImport && document.querySelectorAll(".task-cell").length===48')
             page.wait_for_timeout(900)  # let the swap's view transition settle so timing-sensitive checks see the same page as a fresh load
     def palette(query=''):
@@ -73,10 +74,10 @@ try:
         page.keyboard.press('Tab'); page.keyboard.press('Tab')
         focus=page.evaluate('document.activeElement.id')
         page.keyboard.press('Enter')
-        # If rows are tabbable, focused evidence row must execute. A proper
+        # If rows are tabbable, focused decision row must execute. A proper
         # active-descendant combobox keeps Tab in the dialog's sole input.
-        if focus=='command-input': return page.locator('#decision-view').is_visible() and not page.locator('#command-palette').evaluate('(d)=>d.open')
-        return page.locator('#evidence-view').is_visible()
+        if focus=='command-input': return page.locator('#overview-view').is_visible() and not page.locator('#command-palette').evaluate('(d)=>d.open')
+        return page.locator('#decision-view').is_visible()
     check('palette Tab and Enter do not execute a different focused command', tab_enter)
     def empty():
         boot(); palette('zzzzzzzz-no-result')
@@ -184,33 +185,41 @@ try:
         figures=page.locator('#evidence-view figure')
         return all(figures.nth(i).locator('.stamp').count()>0 for i in range(figures.count()))
     check('evidence freshness stamps are present and substantive', stamps)
-    # ---- cold-visitor entry (added with the root-entry change) ----
-    def cold_run3():
+    # ---- umbrella entry and packet-state boundary ----
+    def cold_overview():
         boot(select_example_first=False)
-        d=page.evaluate("D.decisionClass(workspace)")
-        assert d=='hardware', 'cold load did not open the Run 3 decision: '+str(d)
-        assert page.locator('[data-arm="A/T0"]').count()==1 and page.locator('[data-arm="N/T0"]').count()==1, 'arm cards missing'
-        assert page.locator('.task-cell').count()==0, 'invoice tiles present on cold load'
-        return page.locator('#comparison .comp-value').all_text_contents()==['$0.74','$1.20']
-    check('cold load with no saved state opens the Run 3 decision (Edition 01, $0.74 vs $1.20)', cold_run3)
-    def cold_orientation():
-        boot(select_example_first=False)
-        want='One retained decision from the Second Run compute campaign: the same coding workload on two rented seats, cost per 1,000 accepted requests at list price, every figure stamped with its source. Cantos is the record it lives in.'
-        return page.locator('.orientation').count()==1 and page.locator('.orientation').inner_text()==want
-    check('Run 3 view carries the one-sentence orientation line', cold_orientation)
+        assert page.locator("#overview-view").is_visible() and page.locator("#decision-view").is_hidden(), "cold entry is not the overview"
+        assert page.evaluate("D.decisionClass(workspace)") == "hardware", "verified Run 3 workspace was not retained behind the overview"
+        assert page.locator(".task-cell").count() == 0, "synthetic invoice cells leaked into the overview"
+        assert page.locator("#overview-view .program-card").count() == 3 and page.locator("#overview-view .catalog-card").count() == 7, "program or implemented-work catalog is incomplete"
+        assert page.locator("#home-open-btn").is_visible(), "packet entry is not available from the overview"
+        return "Cantos overview visible; verified Run 3 packet remains in memory without changing saved state"
+    check("cold entry is a Cantos overview while the verified Run 3 packet remains in memory", cold_overview)
     def rail_order():
         boot(select_example_first=False)
-        links=page.locator('.case-nav .case-link')
-        assert links.count()==2
-        first,second=links.nth(0).inner_text().replace(chr(10),' | '),links.nth(1).inner_text().replace(chr(10),' | ')
-        assert 'Real decision · Run 3, 24 Sep 2026' in first and 'GPU inference' in first, first
-        assert 'Worked example · synthetic' in second and 'Invoice extraction' in second, second
-        return links.nth(0).get_attribute('class').find('active')>=0
-    check('rail lists GPU inference first (real decision) and the invoice example second (worked example)', rail_order)
+        links = page.locator(".case-nav .case-link")
+        assert links.count() == 3
+        home, run3, example = [links.nth(i).inner_text().replace(chr(10), " | ") for i in range(3)]
+        assert "Cantos" in home and "Overview" in home, home
+        assert "Real decision" in run3 and "Run 3" in run3 and "GPU inference" in run3, run3
+        assert "Worked example" in example and "Invoice extraction" in example, example
+        return links.nth(0).get_attribute("class").find("active") >= 0
+    check("rail lists Cantos overview before Run 3 and synthetic examples", rail_order)
     def example_header():
         boot()
         return page.locator('#decision-view .case-heading h1').inner_text()=='Synthetic worked example' and page.locator('.orientation').count()==0
     check('worked example header says Synthetic worked example', example_header)
+    def home_switches_without_packet_replacement():
+        boot(select_example_first=False)
+        before = page.evaluate("C.pack(workspace).then(p=>p.sha256)")
+        page.locator('.example-card[data-open-workspace="run3"]').click()
+        wait('!document.getElementById("decision-view").hidden')
+        assert page.locator("#decision-view").is_visible(), "selecting the current packet did not navigate to the decision"
+        assert not page.locator("#import-dialog").evaluate("e=>e.open"), "selecting the current packet asked to replace itself"
+        assert page.evaluate("C.pack(workspace).then(p=>p.sha256)") == before, "same packet navigation changed workspace state"
+        page.locator('.case-nav [data-view="overview"]').click()
+        return page.locator("#overview-view").is_visible() and page.evaluate("C.pack(workspace).then(p=>p.sha256)") == before
+    check("overview return preserves packet and current-packet selection opens the decision directly", home_switches_without_packet_replacement)
     def palette_pair():
         boot(select_example_first=False); palette('Open the')
         labels=page.locator('[data-cmd]').all_text_contents()

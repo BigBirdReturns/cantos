@@ -4,6 +4,16 @@ integration/** text eol=lf
 shelf/** text eol=lf
 *.zip binary
 
+# The app build hashes source bytes and embeds the exact ResearchCore owner.
+app/source/** text eol=lf
+app/owner-research-core/** -text
+app/packets/** -text
+app/tests/reproduced-packets/** -text
+app/tests/*.py text eol=lf
+app/Cantos.html text eol=lf
+app/Cantos.manifest.json text eol=lf
+index.html text eol=lf
+
 .github/workflows/hot-aisle-ci.yml text eol=lf
 .github/workflows/shelf-ci.yml text eol=lf
 shelf/data/cards.jsonl -text

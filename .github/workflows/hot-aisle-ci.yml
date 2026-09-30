@@ -1,9 +1,9 @@
-name: Compute desk and workload instrument
+name: Cantos workspace and execution instruments
 on:
   push:
-    paths: ['hot-aisle/**', 'compute/**', 'integration/**', '.gitattributes', '.github/workflows/pta-fetch.yml', '.github/workflows/organ-evolution-observe.yml', '.github/workflows/axm-witness-0.9.2.yml', '.github/workflows/axm-witness-live-readback-0.9.2.yml', '.github/workflows/hot-aisle-ci.yml']
+    paths: ['README.md', 'app/**', 'index.html', 'assets/**', 'hot-aisle/**', 'compute/**', 'integration/**', '.gitattributes', '.github/workflows/pages.yml', '.github/workflows/hot-aisle-ci.yml']
   pull_request:
-    paths: ['hot-aisle/**', 'compute/**', 'integration/**', '.gitattributes', '.github/workflows/pta-fetch.yml', '.github/workflows/organ-evolution-observe.yml', '.github/workflows/axm-witness-0.9.2.yml', '.github/workflows/axm-witness-live-readback-0.9.2.yml', '.github/workflows/hot-aisle-ci.yml']
+    paths: ['README.md', 'app/**', 'index.html', 'assets/**', 'hot-aisle/**', 'compute/**', 'integration/**', '.gitattributes', '.github/workflows/pages.yml', '.github/workflows/hot-aisle-ci.yml']
   workflow_dispatch: {}
 permissions:
   contents: read
@@ -24,6 +24,10 @@ jobs:
           python-version: '3.12'
       - name: Generated authority copies match their sources
         run: python integration/build.py --check
+      - name: Workspace build and native record boundaries
+        run: |
+          python -B app/tests/check_build.py
+          node --test app/source/foundation.test.cjs app/tests/regression.test.cjs
       - name: Measured-result engine and scenario engines
         run: |
           set -euo pipefail
@@ -60,6 +64,14 @@ jobs:
         run: |
           set -euo pipefail
           node hot-aisle/scripts/verify_page.mjs | tee instrument-journeys.json
+      - name: Cantos overview and decision continuation journeys
+        if: ${{ !cancelled() && steps.browser_setup.outcome == 'success' }}
+        run: |
+          set -euo pipefail
+          python -B app/tests/overview_regressions.py --page index.html --out /tmp/cantos-overview-qa
+          python -B app/tests/browser_regressions.py --page index.html --out /tmp/cantos-workspace-qa
+          python -B app/tests/floor_regressions.py --page index.html --out /tmp/cantos-interaction-qa
+          python -B app/tests/real_regressions.py --page index.html --packets app/packets --out /tmp/cantos-run3-qa
       - name: Desk native browser journeys, with no set_content substitution
         if: ${{ !cancelled() && steps.browser_setup.outcome == 'success' }}
         run: python compute/tests/test_browser.py --require-navigation --out compute-browser-qa
@@ -106,4 +118,8 @@ jobs:
             compute/community-kit.zip
             compute/compute-kit.zip
             hot-aisle/workload-report.zip
+            /tmp/cantos-overview-qa/
+            /tmp/cantos-workspace-qa/
+            /tmp/cantos-interaction-qa/
+            /tmp/cantos-run3-qa/
           if-no-files-found: error

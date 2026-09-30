@@ -2,7 +2,7 @@
 
 Cantos is the umbrella for work that can be understood, continued, corrected, and built upon. It preserves the connection between evidence, judgment, decisions, execution, and consequences, so another person or a later session can continue meaningful work without reconstructing it: what was known, why a choice was reasonable, the alternatives considered, what actually happened, and what changed afterward. Failures, abandoned approaches, corrections, and contributor credit are kept on purpose; they are material for the next piece of work.
 
-The workflow every surface here exposes is general:
+The research-to-decision workflow is general:
 
 **sources → claims → measurement → economics → recommendation → delivery → changed inputs → revised recommendation**
 
@@ -14,42 +14,46 @@ Cantos makes knowledge and judgment compound. Second Run makes the applicable pa
 
 ## What is in this repository
 
-This repository holds one instance of that workflow carried all the way through, plus the instruments it produced. The instance is a Second Run software-area campaign: the same coding workload qualified on two rented GPU seats, its procedure retained, its outcome measured as cost per accepted request, and its record kept so the decision can be recomputed, challenged, and revised when an input changes. Around it sit the instruments that turned the campaign into standing capability.
+The [Cantos overview](index.html) is the entry point. Start a source-based investigation, reopen a decision packet, inspect the execution/reuse path, or choose a retained example. A fresh visit opens the overview; a previously saved decision resumes without being replaced. Returning to the overview does not change that decision.
+
+The repository implements parts of the broader program: a general Research Desk, a bounded decision workspace, checked execution and reuse, and a substantial compute investigation. Run 3 is one retained experiment within that investigation. It supplies a useful test case; it does not define Cantos or Second Run. The existing pages keep their own calculation, evidence and execution boundaries.
 
 | Directory | What it is | Page |
 |---|---|---|
-| [`app/`](app/) | The decision workspace. Opens on the campaign's retained decision (Run 3, Edition 01), with the scenario controls, review and retain, editions, the evidence plates, and the system map. A synthetic worked example is second in the rail. | [Workspace](index.html) |
+| [`app/`](app/) | Cantos overview and decision workspace. Choose Run 3 or the synthetic invoice example, or reopen a supported packet; revise assumptions, review, retain editions and export. The overview itself is navigation, not an invented decision record. | [Cantos](index.html) |
 | [`research-desk/`](research-desk/) | The desk that holds sources, claims, runs, calculations, and conclusions with dependency pins and hash-chained history. The first real packet has 1,847 public records. | [Research Desk](research-desk/index.html) |
 | [`hot-aisle/`](hot-aisle/) | The campaign: the connected runner, the retained Run 1 to Run 3 records, the backfill of the public InferenceX and MLPerf history, the price-history join, and the shop-eval kit for rating a rented seat. | [Workload report](hot-aisle/index.html) |
-| [`floor/`](floor/) | What the campaign and the public tail established about the market: a written floor for a properly set up neocloud (86 sourced items), every ClusterMAX-reviewed provider's distance from it on public evidence, 35 prescriptions ordered by providers affected, and the telemetry and market findings behind them. | [Distance to the floor](floor/index.html) |
+| [`floor/`](floor/) | An experimental desk rating based on captured public reviews and provider surfaces, with a proposed floor, shortfall labels, suggested fixes and explicit unknowns. This is one technical investigation, not a universal definition of provider quality. | [Distance to the floor](floor/index.html) |
 | [`clustermax-challenge/`](clustermax-challenge/) | A technical investigation: does the ClusterMAX medal predict the job? Two frozen retrospectives, the 3.0 binding, standing incident collection. | [Challenge](clustermax-challenge/index.html) |
-| [`circulate/`](circulate/) | The loop that keeps the record current: each cycle pulls new public rows through every instrument, hash-checks the frozen studies, leaves a receipt, and runs eleven probes that try to break each joint. | [Receipts](circulate/index.html) |
+| [`circulate/`](circulate/) | A manually invoked public-data cycle and its receipts. Supported sources refresh when collected; HOLD, unsupported sources and unchanged historical inputs retain their limits. No nightly schedule is installed. | [Receipts](circulate/index.html) |
 | [`compute/`](compute/), [`integration/`](integration/), [`shelf/`](shelf/) | The provider-neutral decision desk, the runner that binds retained judgments to deterministic operations, and the public shelf of bounded claims. | [Compute desk](compute/index.html) |
 | [`evidence/`](evidence/) | The inputs the instruments read at run time, so a clean clone needs nothing else. | |
 
 Second Run's production and investigation work outside this campaign (media restoration and reconstruction, the SemiAnalysis network study) is retained in the estate's own records and is not in this repository.
 
-## What the campaign established
+## Observations from the compute campaign
 
-- **The floor is mostly configuration.** Across 85 reviewed providers the most common shortfalls are wired GPU health checks (25), a working monitoring dashboard (23), Slurm or Kubernetes delivered working (16), and a usable shared filesystem (13). None is capital.
+- **The captured reviews repeatedly describe configuration and operational gaps.** The desk labels health checks (25 providers), monitoring (23), Slurm or Kubernetes (16), and shared filesystems (13). These counts describe the captured review text, mostly from November 2025; they do not establish current deficiencies or the cost of fixing them.
 - **One provider is a clean zero**, Nebius, on 28 evidence items. Thirty sit at zero only because their public record is a stub, and the table says so.
 - **The reference does not pass its own floor on public evidence.** Hot Aisle, whose measured performance anchors the floor, rates distance 4 on its November 2025 review record. The first prescription is the reference's.
-- **The biggest waste is on the customer's side of the seat.** Serving below the concurrency knee swings cost 23x. Two thirds of decode tokens in the qualified run went to requests that failed grading; output sanitizing lifts total correct 42 percent. The same 4,336 accepted requests price five ways, 1.57x apart, with no invoice reconciling them.
+- **The measured workload exposes large differences in cost and accepted output.** Serving below the concurrency knee swings cost 23x. Two thirds of decode tokens in the qualified run went to requests that failed grading; output sanitizing lifts total correct 42 percent. The same 4,336 accepted requests price five ways, 1.57x apart, with no invoice reconciling them.
 - **The market disagrees with itself about price.** Same-SKU on-demand prices spread 3.0x to 3.6x across providers in July 2026, aggregators differ 2x on one provider's H100, and the incumbent research house's TCO priors sit below 1 percent of observed listings.
 - **The medal does not yet predict the job.** Both frozen retrospectives are inconclusive and both flip with the bootstrap seed. The standing version reruns on a rolling window.
 
-## What comes next, from the record
+## Current capability and remaining work
 
-The controller's disposition of 28 September sets the sequence, and it is about the workflow, not the campaign:
+The 28 September disposition is historical direction. Subsequent code implements its first bounded handoff; repeating that item as wholly unstarted loses the work already done.
 
-1. **Consume retained judgment through the existing owners**: a cold process locates the applicable retained work, identifies a valid next operation or a precise residual, and keeps the contribution and correction lineage. Acceptance is a request, a supported native result, a fresh-process continuation, one source correction, and only the affected work going stale.
-2. **Bind performance evidence to the exact executable variant**, so selecting a seat resolves its implementation and preparation requirements, not just a name and an hourly price.
-3. **Qualify preparation and residency economics** from the partitioned clock: preflight, image and model setup, warm readiness, work, drain, release; cold launch against prepared launch against continued warm residency under the same useful-work contract.
-4. **Test the cheapest applicable cache mechanism**, conditional on the actual workload, with fresh-output semantics and full costs retained.
-5. **Grade the existing output-contract candidate**, then qualify live timing separately.
-6. **Prove transfer on recurring document and source updates** using the estate's own corpus: unchanged work reused, changed dependencies selectively rebuilt, deletions and permission changes reaching derived results, restart not duplicating completed effects.
+| Area | Present capability | Remaining boundary |
+|---|---|---|
+| Retained judgment to procedure | [`from_record`](integration/WORK.md#retained-judgment-procedure-handoff) verifies a named Research Desk revision and its dependencies, invokes an existing deterministic operation, and reuses its checked result. [Native tests](integration/tests/test_task_research_handoff.py) exercise reuse and blocking after a source correction invalidates the retained judgment. | The caller supplies an exact supported binding. There is no general natural-language dispatcher, automatic renewal of judgment, or authority to perform an external action. |
+| Continuing a decision | The workspace preserves sources, assumptions, reviews, prior editions and a portable packet; the Research Desk supports general source and claim records. | The focused decision page supports its declared workflows, not every valid Research Desk packet. Browser interaction is not an estate job executor. |
+| Execution and reuse | [Nine deterministic task classes](integration/WORK.md) share retained computation identities. Existing interruption checks cover restart between operations. | Domain transfer and recovery during a write or external transaction need their own qualification. |
+| Compute qualification | Retained runs, exact runtime evidence, price scenarios, diagnosis, supply assessment and pool arithmetic are available within their documented scopes. | Recipe applicability, preparation/residency economics, cache experiments, candidate grading and prospective timing remain separate, bounded investigations. |
 
-Ahead of those, two bounded items: the rental tier of the shop-eval kit has never run on a second seat, and the loop runs by hand until its nightly workflow is added.
+A useful next qualification is **transfer to a recurring document/source workflow**: use the existing owners, retain the original and changed inputs, reuse unaffected work, invalidate dependent judgments, carry withdrawal and permission changes into derived results, and continue after interruption. A domain-native outcome check must decide success. This would extend the operating capability beyond the coding benchmark; adding another benchmark is not a prerequisite.
+
+The manually run circulation loop and a second-provider rental smoke are compute-program follow-ups. Their readiness does not establish priority for the wider Cantos program. A rental requires its own current authority and useful experimental question. No schedule, rental or broader integration is implied by this roadmap.
 
 ## Running it
 
@@ -61,4 +65,4 @@ python circulate/circulate.py --offline      # the same path on fixtures, no net
 python floor/rate/rate.py                    # regenerate the rating from the evidence on disk
 ```
 
-Three rules hold everywhere. No value is invented; a missing or gated source records HOLD, never a number. Every row carries who produced it and under what conditions, and an imported row stays labelled imported. A measured row is one whose raw bytes and invoice are retained, so anyone can recompute the receipt. Nothing here rents, provisions, publishes, or contacts a provider on its own. Funding terms for the campaign are in [hot-aisle/campaign/DISCLOSURES.md](hot-aisle/campaign/DISCLOSURES.md). Extracted 2026-09-29 from the axm-tools demo shelf with full history.
+Missing or gated evidence stays unknown or HOLD, and synthetic examples are labeled. Imported observations retain their producer, date and conditions. Our measurements retain their source records, while each cost states its accounting basis; list-price estimates and credit changes are not invoices. Integrity checks establish unchanged bytes, not source truth or execution authority. The public pages do not rent, provision, publish or contact providers. Funding terms are in [hot-aisle/campaign/DISCLOSURES.md](hot-aisle/campaign/DISCLOSURES.md). The instruments were extracted from the axm-tools demo shelf on 2026-09-29 with their history.
