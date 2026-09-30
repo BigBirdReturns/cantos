@@ -47,7 +47,7 @@ At the listed public prices Hot Aisle is 46% cheaper per accepted request at $1.
 - MI355X has one provider and MI300X seven, so the MI300X percentile rests on six comparators.
 
 <!-- circulate:market:begin -->
-## Standing refresh (2026-09-29, circulate)
+## Standing refresh (2026-09-30, circulate)
 
 Computed by `circulate/stages/economics.py` from `RUN3-ECONOMICS-BY-DATE.jsonl` and `data/price-history/INDEX.json`; nothing here is typed by hand. Recomputed in this run and identical to the committed rows.
 
