@@ -1,5 +1,65 @@
 # Availability ledger
 
+## Authenticated TUI supervision
+
+`tui_watch.py --config <private-json> --once` supports the account's existing
+SSH-key login when no API token is available. It first probes Estate's configured
+front door, then routes the provider connection through that peer with pinned
+host keys. The key remains on its owning seat. Connection locations, team,
+private evidence directory, expiry and sampling interval belong in configuration.
+
+The monitor sends the provisioning-menu key after identifying the expected,
+fully loaded, idle team dashboard, at most one PageDown when the expected page
+explicitly says its list is below the viewport, then Escape and Ctrl-C. A listing is
+never treated as a delivered VM. Unknown screens remain unknown. Sampling is
+serialized, at least 30 minutes apart, and stops on expiry or a private STOP file.
+Raw captures and append-only observations are private; do not put them in this
+published checkout.
+
+`n01_tick.py` is the scheduler-side delegate. `supervision.py` consumes the current
+monitor result and can wake one explicitly configured Fable executor on a fresh
+candidate. An exclusive persistent acquisition claim prevents another automated
+launch. The executor follows `EXECUTOR.md`: one exactly matched MI300X baseline,
+pre-create price/release checks, an $8 first-allocation ceiling within the existing
+$50 campaign cap, collection, deletion and N01 grading. Source hashes are checked
+before execution. It does not grant authority to publish or run the later trials.
+
+On the verified Windows key seat, the SSH service terminates ordinary background
+children at disconnect. Launch workers through registered Windows Task Scheduler
+tasks, with their names held in private configuration. The deployed interactive
+principal requires that user to remain logged in. Verify an actual harmless task
+survives the remote command ending before enabling automatic acquisition.
+
+Qualify the provider connection inside the actual scheduled remote environment
+as well. Windows sshd can set `SHELL=cmd.exe`, which breaks Git SSH's implicit
+ProxyJump command. `ssh_environment()` applies Estate's child-environment cleanup
+and removes that incompatible shell override for the SSH child only. Styled TUI
+text preserves inline SGR words, and exact loaded team breadcrumbs allow automatic
+team entry even when the root handle list was not drawn. Failed observations exit
+nonzero through the supervisor, remote PowerShell and N01 service, with their
+campaign JSON retained beside Estate's transport result.
+
+An executor's successful process exit is not workload success. A retained
+`hold_permission_refused` result becomes `permission_refused` and exits nonzero.
+N01 stops acquisition scheduling for that hold only when the allocation is
+confirmed `not_acquired`; possible paid resources keep their recovery path.
+Clearing a tool denial requires the appropriate explicit approval, not a retry
+through another tool or host.
+
+The wrapper watches executor lifetime and can invoke a release-only recovery lane
+after cancellation, timeout or a stale heartbeat. An uncertain acquisition or
+failed release remains held and cannot trigger another rental. This is
+model-supervised control, not a provider-side hard billing limit. Provider or
+key-seat outages can prevent release and remain visible failures. No claim of
+end-to-end rental qualification follows from offline tests or executor preparation.
+
+Validation: `python -B test_tui_watch.py` and `python -B test_supervision.py`.
+The deployed instance and its activation receipt belong in the private campaign
+session, outside this public source tree. Creating these files alone starts no
+timer, model session or rental.
+
+## Observation format
+
 One JSON line per observation of whether a provider would sell a given GPU SKU, in a given region, at a given moment. Every provisioning attempt the campaign makes writes here, including failures. This is the raw material for the availability heatmap: provider × SKU × region × hour. Nobody publishes this from the buyer's side.
 
 Fields: `ts` (UTC), `provider`, `region`, `sku`, `gpus`, `method`, `layer`,

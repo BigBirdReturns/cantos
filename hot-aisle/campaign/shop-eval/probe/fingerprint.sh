@@ -293,7 +293,12 @@ gpu_pci_addrs() {
   for f in "$root"/*/class; do
     [[ -f "$f" ]] || continue
     cls="$(cat "$f" 2>/dev/null)"
-    case "$cls" in 0x030000*|0x030200*) ;; *) continue ;; esac
+    case "$cls" in
+      0x030000*|0x030200*) ;;
+      # Observed MI300X VF: AMD 1002:74b5, PCI processing accelerator 1200.
+      0x120000*) [[ "$VENDOR" == "amd" ]] || continue ;;
+      *) continue ;;
+    esac
     vendor="$(cat "$(dirname "$f")/vendor" 2>/dev/null || true)"
     [[ "$vendor" == "$expected" ]] && basename "$(dirname "$f")"
   done
