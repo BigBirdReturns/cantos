@@ -1,0 +1,117 @@
+{
+  "schema": "cantos/seed@1",
+  "provisional": true,
+  "workspace_label": "Cantos research desk: Hot Aisle MI300X Run 3 (provisional seed)",
+  "case": {
+    "id": "run3-mi300x",
+    "title": "What did one accepted coding request cost on a rented MI300X seat, and what would change that answer?",
+    "question": "Under the registered raw-completion contract, arm A/T0 accepted 4,336 of 8,622 requests in its own 1.044 h window at the observed $2.99 list rate. Is $0.72 per 1,000 accepted requests the number to carry, and under which conditions?",
+    "target": "recommendation",
+    "three_minute_path": [
+      "Read the recommendation and its conditions.",
+      "Open the evidence: the measurement is source-reported and never recomputed here; the economics record recomputes from the price record through the Compute engine.",
+      "Record a review with your name and rationale, then freeze the delivery.",
+      "Change the price assumption. The recommendation goes stale with the exact pin that moved; the measurement is untouched.",
+      "Recompute. A successor economics record and a draft successor recommendation appear; a fresh review is required before a second delivery.",
+      "Export the packet and restore it in a fresh browser: both deliveries and the full journal survive."
+    ]
+  },
+  "actor": "Cantos provisional seed (public Run 3 evidence)",
+  "at": "2026-09-28T00:00:00Z",
+  "boundaries": {
+    "evidence": "Source identity and recomputable reasoning; not source truth. Measured counts are copied from the public Run 3 summary and are never recomputed by this page.",
+    "review": "Reviewer names are attributed, not authenticated. A review binds the exact dependency set and lapses when any pinned input changes.",
+    "scenario": "A price scenario is an assumption. It never refreshes provider supply, changes measured acceptance, or becomes a quote.",
+    "export": "The packet carries the whole journal and a SHA-256. Hash consistency detects change; it does not authenticate a publisher."
+  },
+  "records": [
+    {
+      "id": "source-run3", "kind": "source", "tier": "public_observation", "disposition": "observed",
+      "title": "Run 3 summary: Hot Aisle MI300X arms (published 2026-09-24)",
+      "summary": "Public campaign summary for Run 3 on one rented 1x MI300X VM. It reports per-arm request counts, registered and post-hoc correctness, TTFT percentiles and an own-window cost, and it records a cost correction against the earlier ledger figures.",
+      "deps": [],
+      "data": {
+        "role": "source",
+        "relative_path": "hot-aisle/campaign/results/RUN3-HOTAISLE-SUMMARY.md",
+        "sha256": "0796d8e840a59cea8096f4a0e2e583db7a1ba1d3647f6a3888c59d7a6c5f1d77",
+        "observed_on": "2026-09-24",
+        "limitations": [
+          "One seat, one day, one model; not a population estimate.",
+          "The ledger's earlier modeled-lower-bound figures charged later arms for earlier arms' seat time; the summary's own-window figures supersede them."
+        ]
+      }
+    },
+    {
+      "id": "measurement-a-t0", "kind": "claim", "tier": "public_observation", "disposition": "observed",
+      "title": "Arm A/T0 measured result (registered raw-completion contract)",
+      "summary": "8,622 of 8,622 scheduled requests completed; 4,371 correct under the registered raw-completion grader; 4,336 accepted (50.3%) within the deadline. TTFT p50/p95/p99 = 53/155/571 ms. Post-hoc sanitised re-grading reaches 6,192 correct but is not the registered result.",
+      "deps": [{"id": "source-run3"}],
+      "data": {
+        "role": "measurement",
+        "observed_on": "2026-09-24",
+        "metrics": {"completed": 8622, "scheduled": 8622, "correct_raw": 4371, "accepted": 4336, "acceptance_rate": 0.503, "ttft_p50_ms": 53, "ttft_p95_ms": 155, "ttft_p99_ms": 571},
+        "window": {"start": "2026-09-24T00:42:43Z", "end": "2026-09-24T01:45:22Z", "hours": 1.044, "basis": "arm's own t_script_start to t_script_end, not the shared seat's t_ssh"},
+        "identity": {"model": "Qwen/Qwen3-Coder-30B-A3B-Instruct-FP8", "revision": "dcaee4d4dfc5ee71ad501f01f530e5652438fde0", "precision": "FP8 (fine-grained, block 128)", "backend": "ROCM_ATTN (auto-selected)", "runtime": "vLLM ROCm container; digest in the source summary"},
+        "grading": {"registered": "raw completion contract (stray fences, re-declared functions and test prints fail)", "posthoc": {"correct_after_sanitize": 6192, "humaneval_plus": "24.4% -> 82.4%", "mbpp_plus": "62.2% -> 67.2%", "label": "post-hoc, not registered; shown for format-versus-capability context only"}},
+        "limitations": [
+          "Registered correctness is dominated by output format, not model capability; the post-hoc figure is a separate, unregistered analysis.",
+          "TTFT percentiles come from the serving log of one arm on one seat."
+        ]
+      }
+    },
+    {
+      "id": "price-hotaisle", "kind": "source", "tier": "public_observation", "disposition": "observed",
+      "title": "Hot Aisle MI300X VM list price (reviewed 2026-09-23)",
+      "summary": "$2.99 per GPU-hour for a new-customer 1x MI300X VM, billed by the minute, no stated minimum. Run 3 was paid from provider credit and costed at this list rate.",
+      "deps": [],
+      "data": {
+        "role": "price",
+        "url": "https://hotaisle.xyz/pricing/",
+        "observed_on": "2026-09-23",
+        "offer": {"id": "hotaisle-mi300x-vm", "provider": "Hot Aisle", "gpu": "MI300X", "vendor": "AMD", "memoryGB": 192, "gpus": 1, "rate": 2.99, "minimumHours": 0, "reviewedOn": "2026-09-23", "schedules": []},
+        "billing": "per-minute list price; the seat was paid from provider credit",
+        "scope": "one own-seat VM at list rate; not a whole-allocation invoice and not a negotiated price",
+        "limitations": ["A dated listing observation. It is not evidence of current availability or of future price."]
+      }
+    },
+    {
+      "id": "economics-a-t0", "kind": "claim", "tier": "public_observation", "disposition": "supported",
+      "title": "Own-window seat cost per 1,000 accepted requests (A/T0)",
+      "summary": "Compute.quote at the pinned list rate for the arm's own 1.044 h window, divided by the pinned accepted count. The number is filled and re-verified by the Compute engine, never typed.",
+      "deps": [{"id": "price-hotaisle"}, {"id": "measurement-a-t0"}],
+      "data": {
+        "role": "economics",
+        "recipe": "cantos/seat-economics@1",
+        "inputs": {"hours": 1.044, "accepted": 4336, "asOf": "2026-09-24", "extraPerHour": 0, "fixedCost": 0},
+        "limitations": ["Own-window cost only: smoke, setup and idle seat time are attributed separately (whole seat: 2.73 h, $8.15, 9,086 accepted across arms)."]
+      }
+    },
+    {
+      "id": "context-program", "kind": "claim", "tier": "public_observation", "disposition": "observed",
+      "title": "Scope: Second Run program, public evidence, no customer engagement",
+      "summary": "This case uses retained public Run 3 evidence produced by the Second Run program. No customer, sponsor or endorsement is implied; the prospective viewer has not commissioned this work.",
+      "deps": [],
+      "data": {"role": "context", "limitations": ["Funding: provider credit for the seat; no client budget."]}
+    },
+    {
+      "id": "recommendation", "kind": "conclusion", "tier": "public_observation", "disposition": "supported",
+      "title": "Carry $0.72 per 1,000 accepted requests for A/T0, with conditions",
+      "summary": "Carry $0.72 per 1,000 accepted requests as the own-window figure for arm A/T0 at the observed $2.99 list rate. It holds only under the registered raw-completion contract; the post-hoc sanitised figure is a format finding, not a capability claim. Whole-seat cost including smoke, setup and idle time is $0.90 per 1,000 accepted and must not be mixed with the own-window figure.",
+      "deps": [{"id": "economics-a-t0"}, {"id": "measurement-a-t0"}, {"id": "context-program"}],
+      "data": {
+        "role": "recommendation",
+        "conditions": [
+          "Registered raw-completion grading, not the post-hoc sanitised re-grade.",
+          "Own-window seat time (1.044 h), not the shared-seat clock.",
+          "List rate $2.99 per GPU-hour as observed 2026-09-23; any other rate is a scenario until observed."
+        ],
+        "holds_unless": [
+          "The price record is revised or replaced by a scenario.",
+          "New measured evidence for the same identity is admitted.",
+          "The grading contract changes."
+        ],
+        "template": "Carry {usd_per_1k_accepted} per 1,000 accepted requests for A/T0 at {rate} per GPU-hour ({hours} h own window, {accepted} accepted). The registered-contract, own-window and list-rate conditions of the prior revision still apply."
+      }
+    }
+  ]
+}

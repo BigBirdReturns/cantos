@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src data:; base-uri 'none'; form-action 'none'">
+<title>Cantos research desk (PROVISIONAL builder template)</title>
+<style>
+body{font:16px/1.5 system-ui,sans-serif;margin:0;padding:24px;background:#141216;color:#efe9ee;max-width:960px}
+h1{font-size:22px;margin:0 0 4px}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#1f1b22;padding:12px;font-size:12px}
+button{font:inherit;padding:6px 12px;margin:4px 4px 4px 0;background:#2b2530;color:#f4c6dc;border:1px solid #6b3f57;border-radius:4px}
+input,textarea{font:inherit;width:100%;box-sizing:border-box;background:#1f1b22;color:#efe9ee;border:1px solid #444;padding:6px;margin:2px 0}
+.stale{color:#ff9fc3}.ok{color:#9fe0b3}small{color:#a89ba5}
+{{cantos.style}}
+</style>
+</head>
+<body>
+<p><small>PROVISIONAL builder template. Opus's page.html replaces this file; it exists so build.py --check and the bridge can be exercised before the real page lands.</small></p>
+<h1>Cantos <small>· Second Run research desk</small></h1>
+<p id="question"></p>
+<div id="status"></div>
+<div>
+<button id="b-review">Record review (accept)</button>
+<button id="b-freeze">Freeze delivery</button>
+<button id="b-scenario">Price scenario $3.39</button>
+<button id="b-recompute">Recompute</button>
+<button id="b-export">Export packet</button>
+<button id="b-reset">Restore seed</button>
+</div>
+<p><label>Reviewer <input id="reviewer" value="Local reviewer"></label><label>Rationale <input id="rationale" value="Checked the pinned evidence and its stated limitations."></label></p>
+<p><label>Restore packet (paste JSON) <textarea id="packet" rows="3"></textarea></label><button id="b-import">Import packet</button></p>
+<p id="error" class="stale"></p>
+<h2>View</h2>
+<pre id="view"></pre>
+<script id="research-core">{{cantos.native_core}}</script>
+<script id="compute-engine">{{cantos.native_compute}}</script>
+<script id="cantos-foundation">{{cantos.foundation}}</script>
+<script id="cantos-seed" type="application/json">{{cantos.seed}}</script>
+<script id="cantos-build" type="application/json">{{cantos.build}}</script>
+<script id="cantos-page">
+(async function(){
+const $=id=>document.getElementById(id);
+function show(v){$('question').textContent=v.case.question;const r=v.recommendation;$('status').innerHTML='<b>'+ResearchCore.escape(r.title)+'</b> · revision '+r.revision+' · <span class="'+(r.status==='stale'?'stale':'ok')+'">'+r.status+'</span>'+(r.dependency.blockers.length?'<br><small>'+ResearchCore.escape(r.dependency.blockers.join('; '))+'</small>':'');$('view').textContent=JSON.stringify({recommendation:r,scenario:v.scenario,stale:v.stale,deliveries:v.deliveries,identity:v.identity,path:v.path},null,1);}
+function outcome(res){$('error').textContent=res.ok?'':res.error;if(res.view)show(res.view);}
+const v=await CantosDesk.ready();show(v);
+$('b-review').onclick=async()=>outcome(await CantosDesk.review({decision:'accept',rationale:$('rationale').value,reviewer:$('reviewer').value}));
+$('b-freeze').onclick=async()=>outcome(await CantosDesk.freeze({reviewer:$('reviewer').value}));
+$('b-scenario').onclick=async()=>outcome(await CantosDesk.priceScenario({rate:3.39,note:'Provisional page: bare-metal list rate as a scenario.',actor:$('reviewer').value}));
+$('b-recompute').onclick=async()=>outcome(await CantosDesk.recompute({actor:$('reviewer').value}));
+$('b-export').onclick=async()=>{const r=await CantosDesk.exportPacket();if(!r.ok)return outcome(r);const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([r.text],{type:'application/json'}));a.download=r.name;a.click();$('packet').value=r.text;};
+$('b-import').onclick=async()=>outcome(await CantosDesk.importPacket($('packet').value));
+$('b-reset').onclick=async()=>outcome(await CantosDesk.restoreSeed());
+{{cantos.page_script}}
+})();
+</script>
+</body>
+</html>

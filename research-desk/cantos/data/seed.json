@@ -1,0 +1,362 @@
+{
+  "schema": "cantos/seed@1",
+  "workspace_label": "Cantos Research Desk — retained Run 3 decision",
+  "case": {
+    "id": "run3-cost-continuation",
+    "title": "A cost recommendation that survives a changed price",
+    "question": "For this one graded coding workload, what does the retained result support at the dated list price, and what must change when that price changes?",
+    "target": "recommendation",
+    "three_minute_path": [
+      "Read the dated recommendation and its measurement and billing limits.",
+      "Record a local review and issue the baseline snapshot.",
+      "Try an A/T0 price scenario, inspect the stale conclusion, recompute, review again and issue a successor while keeping the first delivery."
+    ]
+  },
+  "actor": "Cantos public-safe case seed",
+  "at": "2026-09-28T00:00:00Z",
+  "records": [
+    {
+      "id": "source-run3",
+      "kind": "source",
+      "tier": "operator_supplied",
+      "disposition": "observed",
+      "title": "Run 3 report and correction",
+      "summary": "Retained one-run-per-arm coding experiment on 2026-09-24. The reported cost comparison and later sanitizer correction are bounded to this workload and accounting.",
+      "deps": [],
+      "data": {
+        "role": "source",
+        "relative_path": "hot-aisle/campaign/results/RUN3-RESULTS.md",
+        "sha256": "2f29c31a56c72100395af280efc04a682188e74bd760be554f5c0916868b5de2",
+        "observed_on": "2026-09-24",
+        "limitations": [
+          "One run per arm, no repeat or population reliability estimate.",
+          "Private preregistration is not an independent timestamp.",
+          "Reported list-price costs are not reconciled invoices."
+        ]
+      }
+    },
+    {
+      "id": "source-disclosure",
+      "kind": "source",
+      "tier": "operator_supplied",
+      "disposition": "observed",
+      "title": "Campaign method and funding disclosure",
+      "summary": "The Hot Aisle arm used provider credit and is valued at undiscounted list price; the DigitalOcean H100 arm was self-funded.",
+      "deps": [],
+      "data": {
+        "role": "source",
+        "relative_path": "hot-aisle/campaign/DISCLOSURES.md",
+        "sha256": "327114957bbeda4b24eb79af60fcd0a32f8fdf21a64fc5bd9d30af717866714f",
+        "observed_on": "2026-09-23",
+        "limitations": [
+          "Provider credit is disclosed; the displayed cost is valued at list price rather than cash spend.",
+          "Neither arm has a reconciled invoice in this case."
+        ]
+      }
+    },
+    {
+      "id": "measurement-a",
+      "kind": "claim",
+      "tier": "operator_supplied",
+      "disposition": "supported",
+      "title": "A/T0 measured accepted work",
+      "summary": "Hot Aisle 1× MI300X: 8,622 scheduled and completed, 4,371 raw-correct and 4,336 accepted under the registered rule. Local native recomputation of retained bytes confirmed the accepted count.",
+      "deps": [
+        {
+          "id": "source-run3"
+        }
+      ],
+      "data": {
+        "role": "measurement",
+        "relative_path": "hot-aisle/campaign/results/run3-scored-a-t0/grade/evaluation.json",
+        "sha256": "f5e2fe316996ac26d953fb5ebe6d0415b2debd9664c1bc74a309776748ff08ca",
+        "observed_on": "2026-09-24",
+        "metrics": {
+          "scheduled": 8622,
+          "completed": 8622,
+          "correct_raw": 4371,
+          "accepted": 4336,
+          "acceptance_rate": 0.503,
+          "ttft_p50_ms": 53,
+          "ttft_p95_ms": 155,
+          "ttft_p99_ms": 571
+        },
+        "window": {
+          "hours": 1,
+          "basis": "2023 Azure LLM CODE arrivals replayed for one hour at factor 0.95; 542 EvalPlus tasks cycled. Cost window is separate."
+        },
+        "identity": {
+          "model": "Qwen3-Coder-30B-A3B-Instruct-FP8",
+          "revision": "dcaee4d4dfc5ee71ad501f01f530e5652438fde0",
+          "precision": "FP8",
+          "runtime": "vLLM 0.30.0",
+          "image_digest": "sha256:2e7da1ad1c66836802072588adea75f9f4991da5f9545b4318e91d422c22ce6a",
+          "backend": "ROCM_ATTN"
+        },
+        "grading": {
+          "registered": "Raw base-and-plus correctness, first token ≤1 second, completion ≤60 seconds, both timed from scheduled arrival.",
+          "posthoc": {
+            "sanitized_correct": 6192,
+            "registered_raw_correct": 4371,
+            "label": "post-hoc correctness only; accepted intersection not recomputed"
+          }
+        },
+        "limitations": [
+          "One run, no repeats.",
+          "The post-hoc sanitizer regrade did not recompute deadline-qualified accepted closures; 4,336 remains the registered accepted count.",
+          "Grader-blind tasks remained in the denominator."
+        ]
+      }
+    },
+    {
+      "id": "measurement-n",
+      "kind": "claim",
+      "tier": "operator_supplied",
+      "disposition": "supported",
+      "title": "N/T0 retained comparator",
+      "summary": "DigitalOcean 1× H100: 8,622 scheduled and completed, 4,329 raw-correct and 4,280 accepted. Local native recomputation of retained bytes confirmed the accepted count.",
+      "deps": [
+        {
+          "id": "source-run3"
+        }
+      ],
+      "data": {
+        "role": "measurement",
+        "relative_path": "hot-aisle/campaign/results/run3-scored-n-t0/grade/evaluation.json",
+        "sha256": "7ff6854844b405ea067ec347750e80d8633087d65578c949f5d9144e58532349",
+        "observed_on": "2026-09-24",
+        "metrics": {
+          "scheduled": 8622,
+          "completed": 8622,
+          "correct_raw": 4329,
+          "accepted": 4280,
+          "acceptance_rate": 0.496,
+          "ttft_p50_ms": 35,
+          "ttft_p95_ms": 76,
+          "ttft_p99_ms": 2254
+        },
+        "window": {
+          "hours": 1,
+          "basis": "Same task cycle and trace as A/T0; H100 vendor image and selected kernels differ."
+        },
+        "identity": {
+          "model": "Qwen3-Coder-30B-A3B-Instruct-FP8",
+          "revision": "dcaee4d4dfc5ee71ad501f01f530e5652438fde0",
+          "precision": "FP8",
+          "runtime": "vLLM 0.30.0",
+          "backend": "FLASH_ATTN"
+        },
+        "grading": {
+          "registered": "Same raw base-and-plus and scheduled-arrival timing rule as A/T0."
+        },
+        "limitations": [
+          "One run, no repeats.",
+          "H100 p50 was faster while its p99 TTFT was longer on this bursty trace; these are workload results, not general hardware properties."
+        ]
+      }
+    },
+    {
+      "id": "price-a",
+      "kind": "source",
+      "tier": "operator_supplied",
+      "disposition": "observed",
+      "title": "A/T0 dated list price",
+      "summary": "Hot Aisle MI300X list price was $2.99 per GPU-hour on the 2026-09-24 run. The 64.7-minute standalone equivalent is modeled from provisioning and the arm window, not an invoice.",
+      "deps": [
+        {
+          "id": "source-run3"
+        },
+        {
+          "id": "source-disclosure"
+        }
+      ],
+      "data": {
+        "role": "price",
+        "relative_path": "hot-aisle/campaign/results/RUN3-RESULTS.md",
+        "sha256": "2f29c31a56c72100395af280efc04a682188e74bd760be554f5c0916868b5de2",
+        "observed_on": "2026-09-24",
+        "offer": {
+          "id": "hotaisle-mi300x-run3",
+          "provider": "Hot Aisle",
+          "gpu": "MI300X",
+          "vendor": "AMD",
+          "memoryGB": 192,
+          "gpus": 1,
+          "rate": 2.99,
+          "minimumHours": 0,
+          "reviewedOn": "2026-09-24",
+          "schedules": []
+        },
+        "billing": "Provider-credit-funded run valued at undiscounted list price; invoices unreconciled.",
+        "scope": "Modeled 64.7-minute A/T0 own-seat equivalent, including provisioning, request to release; not the actual shared-seat invoice.",
+        "limitations": [
+          "Dated list price, no current quote or capacity check.",
+          "The shorter own-script window reports $0.72 per 1,000 and excludes modeled provisioning; this case uses the 64.7-minute own-seat equivalent instead.",
+          "Full shared seat was about $0.90 per 1,000 across smoke, A/T0 and A/T1; it is a different aggregation."
+        ]
+      }
+    },
+    {
+      "id": "economics-a",
+      "kind": "claim",
+      "tier": "operator_supplied",
+      "disposition": "supported",
+      "title": "A/T0 modeled cost per accepted work",
+      "summary": "The reported own-seat equivalent is $0.74 per 1,000 accepted at the dated $2.99/GPU-hour list price, using a 64.7-minute model window. The exact projection is computed by the native Compute owner.",
+      "deps": [
+        {
+          "id": "price-a"
+        },
+        {
+          "id": "measurement-a"
+        }
+      ],
+      "data": {
+        "role": "economics",
+        "recipe": "cantos/seat-economics@1",
+        "inputs": {
+          "hours": 1.0783333333333334,
+          "accepted": 4336,
+          "asOf": "2026-09-24",
+          "extraPerHour": 0,
+          "fixedCost": 0
+        },
+        "reported_rounded_usd_per_1000": 0.74,
+        "limitations": [
+          "Own-seat equivalent is modeled, not a reconciled invoice.",
+          "A price scenario changes this economic projection and leaves measured acceptance unchanged."
+        ]
+      }
+    },
+    {
+      "id": "context-comparator",
+      "kind": "claim",
+      "tier": "operator_supplied",
+      "disposition": "supported",
+      "title": "Comparator accounting and funding",
+      "summary": "The H100 N/T0 result is reported at $1.20 per 1,000 accepted using its 69.8-minute closed request-to-release ledger and $4.41/GPU-hour list price. It is not the Hot Aisle shared-seat aggregate or a reconciled invoice.",
+      "deps": [
+        {
+          "id": "measurement-n"
+        },
+        {
+          "id": "source-run3"
+        },
+        {
+          "id": "source-disclosure"
+        }
+      ],
+      "data": {
+        "role": "context",
+        "n_t0": {
+          "reported_usd_per_1000_accepted": 1.2,
+          "list_rate_usd_per_gpu_hour": 4.41,
+          "accounting_minutes": 69.8,
+          "accounting": "closed request-to-release allocation ledger"
+        },
+        "funding": "N/T0 self-funded; A/T0 provider-credit-funded but valued at list price",
+        "limitations": [
+          "The A/T0 comparison uses a modeled own-seat equivalent, while N/T0 uses a closed ledger; label this accounting difference beside the figures.",
+          "No current price, availability or invoice reconciliation is established."
+        ]
+      }
+    },
+    {
+      "id": "recommendation",
+      "kind": "conclusion",
+      "tier": "operator_supplied",
+      "disposition": "supported",
+      "title": "Use a dated, conditional cost reference",
+      "summary": "At the 2026-09-24 list prices, A/T0's modeled $0.74 per 1,000 accepted is below N/T0's reported $1.20 for this one workload. Use it as a research reference; obtain fresh prices, capacity and full bills before placement.",
+      "deps": [
+        {
+          "id": "economics-a"
+        },
+        {
+          "id": "measurement-a"
+        },
+        {
+          "id": "context-comparator"
+        }
+      ],
+      "data": {
+        "role": "recommendation",
+        "conditions": [
+          "The same Qwen3-Coder model revision, EvalPlus task cycle, Azure CODE trace and registered correctness/deadline rule are in scope; vendor images and selected kernels differ.",
+          "A/T0 is a modeled own-seat equivalent; N/T0 is a closed allocation ledger. Neither is a reconciled invoice.",
+          "One retained run per arm; no present capacity or general hardware ranking follows."
+        ],
+        "holds_unless": [
+          "a fresh quote and capacity check supports the selected offer",
+          "full billing, failed starts and other charges are reconciled",
+          "the exact workload and acceptance rule still match the intended use"
+        ],
+        "template": "The A/T0 modeled own-seat estimate is {usd_per_1k_accepted} per 1,000 accepted at an assumed {rate}/GPU-hour, using the unchanged 4,336 accepted requests. The historical N/T0 reference remains $1.20 per 1,000 at its separate closed-ledger boundary. Reassess placement with fresh price, capacity and full billing before deciding."
+      }
+    }
+  ],
+  "boundaries": {
+    "evidence": "Retained one-run evidence, not a new benchmark. Local native recomputation confirmed 4,336 A/T0 and 4,280 N/T0 accepted. The post-hoc sanitizer result concerns correctness only, not deadline-qualified acceptance.",
+    "review": "A named local reviewer records a rationale bound to the exact dependency closure. The name is attributed, not identity-authenticated or institutional approval.",
+    "scenario": "Changing the A/T0 hourly price is an illustrative assumption. It does not refresh provider supply, billing terms, measured correctness or the historical H100 result.",
+    "export": "A packet retains the journal, reviews and frozen snapshots and is checked by replay and SHA-256. It is not a signed source attestation; customer-entered text travels in the export."
+  },
+  "architecture": {
+    "summary": "Cantos presents the research workflow; Second Run supplies its operating methods. This page reuses two existing native owners. Adjacent estate systems retain their own authority and are not silently replaced or activated.",
+    "groups": [
+      {
+        "title": "Runs in this page",
+        "items": [
+          {
+            "name": "Research Desk / ResearchCore 1.0.0",
+            "status": "implemented",
+            "role": "Original journal, revision pins, dependency checks, attributed review, frozen delivery and packet replay. The source application is unchanged.",
+            "path": "research-desk/app.html#research-core"
+          },
+          {
+            "name": "Second Run Compute",
+            "status": "implemented",
+            "role": "Existing quote arithmetic prices the declared allocation; the bridge relates that cost to the retained accepted count. It does not create an invoice or current offer.",
+            "path": "compute/engine.cjs"
+          },
+          {
+            "name": "Cantos workbench bridge",
+            "status": "implemented",
+            "role": "Connects the case, the two native owners and this interface. Scenarios require a successor and a fresh review; export retains the history.",
+            "path": "research-desk/cantos/foundation.js"
+          }
+        ]
+      },
+      {
+        "title": "Existing estate capabilities, separate from this browser",
+        "note": "These are architectural owners and continuation paths, not claims that this page invokes every system.",
+        "items": [
+          {
+            "name": "Second Run shared execution",
+            "status": "existing",
+            "role": "The local from_record entry can bind a retained Research Desk judgment to an exact native task and checked computation. This browser does not execute that local runner.",
+            "path": "integration/work.py; integration/research_handoff.py"
+          },
+          {
+            "name": "Genesis and Core",
+            "status": "separate",
+            "role": "Genesis owns signed shard construction and verification; Core owns verified extraction and query. The local journal checksum here is not a Genesis signature.",
+            "path": "axm-genesis; axm-core"
+          },
+          {
+            "name": "Canon and the claim shelf",
+            "status": "candidate",
+            "role": "The inspected Run 3 bridge retains filed/candidate standing. Source-format checks and hashes do not grant accepted institutional standing or automatic reuse.",
+            "path": "shelf/; hot-aisle/campaign/shelf/"
+          },
+          {
+            "name": "CAIRN-derived Knot lifecycle",
+            "status": "bounded",
+            "role": "The campaign implements bounded lifecycle states. Broader CAIRN federation and execution remain separate work, with no activation in this page.",
+            "path": "hot-aisle/campaign/ledger/KNOT-LIFECYCLE.md"
+          }
+        ]
+      }
+    ]
+  }
+}
