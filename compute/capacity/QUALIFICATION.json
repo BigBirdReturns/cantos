@@ -1,0 +1,37 @@
+{
+  "artifact": "Cantos dedicated-capacity view",
+  "version": "0.1.0-candidate",
+  "integrated_on": "2026-10-09",
+  "origin": {
+    "candidate_base_commit": "9633e3e79d7a5c4ba0382560ed99dc9273b5fdeb",
+    "candidate_checks": "23 Node tests, 250 independent Python arithmetic cases and 3 rehashed-tampering rejections passed in the candidate's build container; its browser navigation was blocked there, so no browser result came with it."
+  },
+  "native_changes": [
+    "Embeds compute/engine.cjs and hot-aisle/campaign/results/RUN3-RESULTS.md directly at their pinned blob identities instead of vendored copies.",
+    "Provider-neutral wording: no named provider appears in the page, packets or documentation.",
+    "build.py reads and writes UTF-8 with LF line endings, so it reproduces the page on Windows and Linux.",
+    "The browser journey prefers Playwright's own Chromium unless CHROMIUM_EXECUTABLE is set, and runs as a CI step.",
+    "The badge no longer says a browser check is pending; publication now depends on that check."
+  ],
+  "local_checks": {
+    "date": "2026-10-09",
+    "platform": "Windows 11, Node 24.19.0, Python 3.13",
+    "node_tests": {"passed": 23, "failed": 0},
+    "independent_python_arithmetic": {"passed": 250, "rehash_tamper_rejections": 3},
+    "example_decision": {"verify_cjs": "PASS", "check_math_py": "PASS"},
+    "existing_compute_kit_rebuild": "byte-identical; this view is outside the compute release allowlist",
+    "browser_journey": "not run locally; Playwright is not installed on the integrating machine"
+  },
+  "browser_qualification": "tests/browser_check.py runs in .github/workflows/hot-aisle-ci.yml with Playwright Chromium: offline calculation, export, independent verification, tamper refusal, reopen, saved-page restoration, mobile layout, no external requests and no runtime errors. The Pages release gate requires that workflow to pass for the exact source trees before deployment.",
+  "state": {
+    "provider_quote": false,
+    "target_measurement_performed": false,
+    "fleet_signing_integrated": false,
+    "linked_from_overview": false
+  },
+  "limits": [
+    "Scenario arithmetic only: no workload, provider performance, SLA, location or jurisdiction is measured or proven.",
+    "Historical acceptance comes from the pinned published Run 3 summary, not a fresh grader run or request-row recomputation.",
+    "Decision packets carry a checksum, not a signature."
+  ]
+}
