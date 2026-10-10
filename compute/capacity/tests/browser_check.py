@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Real HTTP and file navigation. Requires test-only Playwright and Chromium."""
-import functools,hashlib,http.server,json,subprocess,tempfile,threading,sys,os
+import functools,hashlib,http.server,json,re,subprocess,tempfile,threading,sys,os
 from pathlib import Path
-from playwright.sync_api import sync_playwright
+from playwright.sync_api import expect,sync_playwright
 ROOT=Path(__file__).resolve().parents[1]
 OUT=Path(sys.argv[1]).resolve() if len(sys.argv)>1 else Path(tempfile.mkdtemp(prefix='capacity-browser-'))
 OUT.mkdir(parents=True,exist_ok=True)
@@ -50,14 +50,14 @@ with sync_playwright() as p:
     check('independent Python arithmetic check',independent.returncode==0)
     (OUT/'node-verifier.json').write_text(node.stdout);(OUT/'python-arithmetic.json').write_text(independent.stdout)
     original=json.loads(packet.read_text());bad=dict(original);bad['sha256']='0'*64
-    tampered=OUT/'tampered.json';tampered.write_text(json.dumps(bad));page.locator('#importer').set_input_files(str(tampered));page.wait_for_function("document.querySelector('#feedback').textContent.includes('mismatch')")
+    tampered=OUT/'tampered.json';tampered.write_text(json.dumps(bad));page.locator('#importer').set_input_files(str(tampered));expect(page.locator('#feedback')).to_contain_text('mismatch',timeout=30000)
     check('checksum mismatch refused',page.locator('#feedback').evaluate('(e)=>e.classList.contains("error")'))
     check('refused packet leaves the starting-example note','$10,000 / 720-hour' in page.locator('#scenario-note').inner_text())
-    page.locator('#fee').fill('2000');page.locator('#importer').set_input_files(str(packet));page.wait_for_function("document.querySelector('#fee').value === '5000'")
+    page.locator('#fee').fill('2000');page.locator('#importer').set_input_files(str(packet));expect(page.locator('#fee')).to_have_value('5000',timeout=30000)
     check('successful reopen restores inputs',page.locator('#cost-operations').input_value()=='2500')
     check('reopened decision is named in the note',page.locator('#scenario-note').inner_text().startswith('Scenario “Dedicated allocation”, opened from a saved decision'))
     changed=json.loads(original['body_json']);changed['result']['target_qualified']=True
-    bad={'schema':original['schema'],'body_json':json.dumps(changed,separators=(',',':'),ensure_ascii=False)};bad['sha256']=hashlib.sha256(bad['body_json'].encode()).hexdigest();tampered.write_text(json.dumps(bad));page.locator('#importer').set_input_files(str(tampered));page.wait_for_function("document.querySelector('#feedback').textContent.includes('disagrees')")
+    bad={'schema':original['schema'],'body_json':json.dumps(changed,separators=(',',':'),ensure_ascii=False)};bad['sha256']=hashlib.sha256(bad['body_json'].encode()).hexdigest();tampered.write_text(json.dumps(bad));page.locator('#importer').set_input_files(str(tampered));expect(page.locator('#feedback')).to_contain_text('disagrees',timeout=30000)
     check('rehashing false qualification fails full derivation',page.locator('#feedback').evaluate('(e)=>e.classList.contains("error")'))
     injection='<script>globalThis.__injected=true</script>'
     page.locator('#runtime').fill(injection)
@@ -66,7 +66,7 @@ with sync_playwright() as p:
     saved=OUT/'saved-page.html';d.value.save_as(str(saved))
     check('saved file carries the starting note until its packet verifies','id="scenario-note">The starting $10,000 / 720-hour' in saved.read_text(encoding='utf-8'))
     fresh=context.new_page();fresh.on('pageerror',lambda e:errors.append(str(e)))
-    fresh.goto(saved.as_uri(),wait_until='load');fresh.wait_for_function("document.querySelector('#runtime').value.includes('__injected')")
+    fresh.goto(saved.as_uri(),wait_until='load');expect(fresh.locator('#runtime')).to_have_value(re.compile('__injected'),timeout=30000)
     check('saved offline HTML restores packet',fresh.locator('#fee').input_value()=='5000')
     fresh_note=fresh.locator('#scenario-note').inner_text()
     check('saved page names its scenario, not the starting example','opened from a saved decision' in fresh_note and '$10,000' not in fresh_note)
