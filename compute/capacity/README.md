@@ -11,7 +11,7 @@ A single offline page for anyone weighing a fixed GPU commitment: a reserved nod
 - **Reprices one published result without stretching it.** The Run 3 MI300X summary (4,336 accepted of 8,622 scheduled requests, 24 September 2026) can be repriced at any hourly rate. Its count, date, acceptance rule and caveats are preserved, and it says nothing about other hardware.
 - **Retains the decision.** Download the decision as a JSON packet with a SHA-256 checksum, or save a copy of the page with your inputs embedded. Reopening either verifies the checksum and recomputes every value.
 
-The starting $10,000 / 720-hour / 8-GPU values are illustrative, not a quotation.
+The starting $10,000 / 720-hour / 8-GPU values are illustrative, not a quotation. Once a saved decision or page is reopened, including a page whose saved-input slot is filled by an embedding view, the note names that scenario instead of describing the starting example.
 
 ## Check a decision offline
 
