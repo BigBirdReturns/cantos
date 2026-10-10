@@ -48,6 +48,7 @@ jobs:
           python -B compute/capacity/tests/check_reference.py
           node compute/capacity/verify.cjs compute/capacity/example-decision.json
           python -B compute/capacity/check_math.py compute/capacity/example-decision.json
+          node compute/chapek/check.cjs
       - name: Local corpus source replay and native history continuity
         run: |
           python -B -m unittest discover -s corpus/tests -p 'test_*.py' -v
@@ -87,6 +88,9 @@ jobs:
       - name: Dedicated-capacity view journey, with real HTTP and file navigation
         if: ${{ !cancelled() && steps.browser_setup.outcome == 'success' }}
         run: python -B compute/capacity/tests/browser_check.py capacity-browser-qa
+      - name: Chapek seat page journey, served over HTTP and reopened offline
+        if: ${{ !cancelled() && steps.browser_setup.outcome == 'success' }}
+        run: python -B compute/chapek/tests/browser_check.py chapek-browser-qa
       - name: Two-service qualification-to-decision journey
         if: ${{ !cancelled() && steps.browser_setup.outcome == 'success' }}
         env:
@@ -109,7 +113,7 @@ jobs:
           python - <<'PY'
           from pathlib import Path
           import hashlib,json,os
-          paths=['compute/index.html','hot-aisle/index.html','compute/data/catalog.json','hot-aisle/data/catalog.json','compute/compute-kit.zip','hot-aisle/workload-report.zip','compute/results.html','compute/community-kit.zip','compute/community/MANIFEST.json','compute/capacity/index.html']
+          paths=['compute/index.html','hot-aisle/index.html','compute/data/catalog.json','hot-aisle/data/catalog.json','compute/compute-kit.zip','hot-aisle/workload-report.zip','compute/results.html','compute/community-kit.zip','compute/community/MANIFEST.json','compute/capacity/index.html','compute/chapek/index.html']
           record={'source_commit':os.environ['GITHUB_SHA'],'run_id':os.environ['GITHUB_RUN_ID'],'files':{p:hashlib.sha256(Path(p).read_bytes()).hexdigest() for p in paths if Path(p).exists()},'scope':'Software and native local-service tests with authored fixtures, retained source-bound campaign projections, and independent-hub origin-loss tests. No new provider account access, GPU measurement, or outside adoption is asserted.'}
           Path('integration-ci-identity.json').write_text(json.dumps(record,indent=2)+'\n')
           PY
@@ -125,6 +129,7 @@ jobs:
             integration-ci-identity.json
             compute-browser-qa/
             capacity-browser-qa/
+            chapek-browser-qa/
             seam-browser-qa/
             newcomer-qa/
             community-browser-qa/
