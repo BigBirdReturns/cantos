@@ -14,7 +14,7 @@ server=http.server.ThreadingHTTPServer(('127.0.0.1',0),functools.partial(QuietHa
 threading.Thread(target=server.serve_forever,daemon=True).start()
 URL=f'http://127.0.0.1:{server.server_port}/index.html'
 READY="window.CantosSeatState&&window.CantosSeatState.frameSynced===window.CantosSeatState.allocationSha"
-STORAGE_KEY='cantos.chapek.seat.v5'
+STORAGE_KEY='cantos.chapek.seat.v6'
 NAME='Krauss Maschinenbau'
 checks=[]
 def check(name,condition):
@@ -40,12 +40,17 @@ with sync_playwright() as p:
     check('first screen lists what changed',page.locator('#changes li').count()>=1)
     check('first screen summarises native runs',page.locator('#performed-summary tr').count()==state['runs']+1 and state['runs']>=1)
     check('first screen lists open items',page.locator('#open li').count()==state['open'] and state['open']>=1)
-    check('first screen shows the next command','next.py' in page.locator('#next-cmd').inner_text())
+    # The command sits in a collapsed <details>; a reader opens it, so the test does too and then reads what is visible.
+    page.locator('#seat details:has(#next-cmd) summary').click()
+    check('first screen shows the next command once opened',page.locator('#next-cmd').is_visible() and 'next.py' in page.locator('#next-cmd').inner_text())
+    link=page.locator('#package-link');check('first screen links the package download',link.is_visible() and link.get_attribute('href').endswith('/compute/chapek/Cantos-Chapek-Seat-package.zip'))
     check('the quick test is not on the first screen',page.locator('#seat #quick').count()==0)
     page.screenshot(path=str(OUT/'laptop-first.png'))
     page.locator('nav [data-tab=performed]').click()
     check('work performed lists every retained procedure',page.locator('#procedures .proc').count()==state['procedures'] and state['procedures']>=1)
-    check('run 3 source is checkout-relative','"source": "hot-aisle/campaign/results/run3-scored-a-t0"' in page.locator('#procedures').inner_text())
+    run3=page.locator('#procedures .proc').filter(has_text='Run 3 acceptance recomputed')
+    run3.locator('details').first.locator('summary').click()
+    check('run 3 source is checkout-relative once its details are opened',run3.locator('pre').first.is_visible() and '"source": "hot-aisle/campaign/results/run3-scored-a-t0"' in run3.locator('pre').first.inner_text())
     page.locator('nav [data-tab=allocation]').click()
     lead=page.locator('#server-lead').inner_text()
     check('server lead follows the numbers in use','USD' in lead and 'read ' in lead)
@@ -72,7 +77,8 @@ with sync_playwright() as p:
     offline=browser.new_context(viewport={'width':1366,'height':640},offline=True);fresh=watch(offline.new_page())
     fresh.goto(copy.as_uri(),wait_until='load');fresh.wait_for_function(READY)
     check('saved copy reopens offline from disk with the work',fresh.locator('#notice').inner_text().startswith('Opened with the work saved in this copy ('+NAME+')') and fresh.evaluate('window.CantosSeatState.packetHash')==record)
-    check('saved copy carries the first screen','next.py' in fresh.locator('#next-cmd').inner_text() and fresh.locator('#performed-summary tr').count()==state['runs']+1)
+    fresh.locator('#seat details:has(#next-cmd) summary').click()
+    check('saved copy carries the first screen',fresh.locator('#next-cmd').is_visible() and 'next.py' in fresh.locator('#next-cmd').inner_text() and fresh.locator('#performed-summary tr').count()==state['runs']+1)
     # Replacing work must also replace the quick form, or its old values can overwrite the import.
     page.locator('nav [data-tab=allocation]').click()
     page.locator('#q-name').fill('Prospect A');page.locator('#q-volume').fill('15.000')

@@ -38,6 +38,9 @@ const scriptsOf=html=>[...html.matchAll(/<script(\s[^>]*)?>([\s\S]*?)<\/script>/
  const ex=parent.match(/<strong>Worked example\.<\/strong> ([^<]*)/);must(ex&&ex[1].includes(money),'No-JavaScript worked example does not state the numbers in use ('+money+').');
  if(a.data.price_source&&a.data.price_source.commitment)must(ex[1].includes('annual term')&&a.data.price_source.commitment.includes('twelve months'),'Commitment basis must be stated wherever the changed economics appear.');
  pass('worked_example_states_numbers_in_use',money+(a.data.price_source&&a.data.price_source.commitment?' as the monthly equivalent under the annual term, commitment basis stated':''));
+ const ZIP='Cantos-Chapek-Seat-package.zip',link=parent.match(/href="(https:\/\/bigbirdreturns\.github\.io\/cantos\/compute\/chapek\/Cantos-Chapek-Seat-package\.zip)"/);
+ must(link&&fs.existsSync(path.join(HERE,ZIP))&&fs.statSync(path.join(HERE,ZIP)).size<20*1024*1024,'The page must link the package zip beside it (tests/package_check.py verifies its contents).');
+ pass('package_download_linked_and_present',ZIP+' · '+fs.statSync(path.join(HERE,ZIP)).size+' bytes');
  must(parent.includes('Jonathan Sandhu')&&parent.includes('href="mailto:'+CONTACT+'"'),'Author or contact missing.');
  const emails=[...new Set((html.replace(exec[0].body,'').match(/[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+\.[A-Za-z]{2,}/g)||[]))];must(emails.length===1&&emails[0]===CONTACT,'Unexpected email addresses: '+emails.join(', '));
  must(!/[A-Z]:[\\/](Projects|Users)/.test(html),'Local file paths in the page.');pass('author_contact_only_and_no_local_paths',CONTACT);

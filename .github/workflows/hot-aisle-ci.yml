@@ -49,6 +49,7 @@ jobs:
           node compute/capacity/verify.cjs compute/capacity/example-decision.json
           python -B compute/capacity/check_math.py compute/capacity/example-decision.json
           node compute/chapek/check.cjs
+          python -B compute/chapek/tests/package_check.py chapek-package-qa
       - name: Local corpus source replay and native history continuity
         run: |
           python -B -m unittest discover -s corpus/tests -p 'test_*.py' -v

@@ -19,11 +19,14 @@ The page embeds, unchanged:
 - `app/source/research-core.js`, for decisions, revisions, sign-offs and portable records;
 - `compute/capacity/index.html`, for server economics, with only its saved-input slot filled.
 
-Every price it shows comes from `compute/capacity/capacity.cjs` and the Compute engine. The retained procedures were run by `integration/work.py` outside this page; their keys bind to results in the working record's store, which travels in the delivered package, not in this repository.
+Every price it shows comes from `compute/capacity/capacity.cjs` and the Compute engine. The retained procedures were run by `integration/work.py` outside this page; their keys bind to results in the working record's store, which travels in the delivered package.
+
+`Cantos-Chapek-Seat-package.zip`, linked from the page's first screen, is that package: the page, the record, the inputs, the requests, the retained results and receipts, `next.py` and a manifest naming every file's hash and the exact runner bytes it was qualified against. A recipient extracts it and runs `python next.py --checkout <cantos checkout>`; record-bound requests are checked against the record's revision, dependency state and expected computation key, and are held when the runner's own files have changed since, until a successor binding is appended (the record carries three such successors from the repair of the judgment handoff).
 
 ```sh
-node compute/chapek/check.cjs                      # published bytes against the owners in this tree
-python -B compute/chapek/tests/browser_check.py    # reader journey over HTTP and an offline saved copy
+node compute/chapek/check.cjs                      # published bytes against the owners in this tree; the zip is present and linked
+python -B compute/chapek/tests/package_check.py    # the zip extracts, hashes as its manifest says, carries this page and record, and resolves against this checkout
+python -B compute/chapek/tests/browser_check.py    # reader journey over HTTP and an offline saved copy (Playwright)
 ```
 
 If either embedded owner changes, `check.cjs` fails until the page is rebuilt against it. The page is built outside this repository, from the Cantos working record that also holds its fuller qualification. Neither check establishes customer fit, measured H200 NVL or B300 throughput, a quote, legal jurisdiction or execution location.
