@@ -3,6 +3,7 @@
 ResearchCore owns journal and dependency validity. The shared work runner owns
 computation identity and execution. This bridge grants neither review standing
 nor arbitrary commands; it returns a pinned native task for the caller to check.
+The record owner is chosen by the packet's declared version (research_owner.py).
 """
 from __future__ import annotations
 
@@ -12,8 +13,9 @@ import json
 from pathlib import Path
 import subprocess
 
+import research_owner
+
 HERE = Path(__file__).resolve().parent
-APP = HERE.parent / 'research-desk/app.html'
 HELPER = HERE / 'change_owner.cjs'
 PATH_ARGUMENTS = {'source', 'evidence', 'seats', 'availability', 'local_models', 'offers'}
 PERMITTED_TASKS = frozenset({'provider-intake', 'benchmark-import', 'run-recompute',
@@ -37,11 +39,15 @@ def resolve(task, base, allowed):
     if type(ref['revision']) is not int or ref['revision'] < 1:
         raise ValueError('from_record.revision must be a positive integer')
     source = (Path(base) / ref['source']).resolve()
-    paths = {'packet': source, 'bridge': Path(__file__), 'helper': HELPER, 'native_app': APP}
+    if not source.is_file():
+        raise ValueError('Research packet is missing: ' + str(source))
+    owner = research_owner.owner_for(source)
+    paths = {'packet': source, 'bridge': Path(__file__), 'helper': HELPER,
+             'owner_selector': Path(research_owner.__file__), 'native_owner': owner['path']}
     before = {k: sha(p) for k, p in paths.items()}
     payload = {'task_class': 'research-procedure', 'source': str(source),
                'record_id': ref['record_id'], 'revision': ref['revision'],
-               'expected_app_sha256': before['native_app']}
+               'expected_app_sha256': owner['sha256']}
     try:
         p = subprocess.run(['node', str(HELPER)], input=json.dumps(payload),
                            capture_output=True, text=True, encoding='utf-8', timeout=60)
@@ -51,7 +57,7 @@ def resolve(task, base, allowed):
         raise ValueError('Native Research Desk refused: ' + p.stderr.strip())
     result = json.loads(p.stdout)
     after = {k: sha(p) for k, p in paths.items()}
-    if before != after or result['source_sha256'] != before['packet']:
+    if before != after or result['source_sha256'] != before['packet'] or result['research_core_sha256'] != owner['sha256']:
         raise ValueError('Research evidence changed during resolution; inspect again')
     native = copy.deepcopy(result['work']['task'])
     if native.get('task_class') not in allowed or native.get('task_class') not in PERMITTED_TASKS or 'from_record' in native:
@@ -75,8 +81,10 @@ def resolve(task, base, allowed):
             'knowledge': {'record': result['record'],
                           'dependency': result['dependency'], 'review': result['review'],
                           'source_packet': str(source), 'source_sha256': before['packet'],
+                          'workspace_version': result['workspace_version'],
                           'procedure_reader_sha256': before['helper'],
-                          'research_core_sha256': before['native_app'],
+                          'research_core_path': result['research_core_path'],
+                          'research_core_sha256': result['research_core_sha256'],
                           'boundary': result['boundary'],
                           'external_execution_authorized': False}}
 

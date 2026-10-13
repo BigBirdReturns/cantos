@@ -350,7 +350,11 @@ The record's summary/rationale and native dependency pins retain why this is the
 chosen operation. A caller explicitly selecting a draft record permits only the
 existing local investigation, not an accepted review or an external action.
 
-The existing `change_owner.cjs` bridge loads the unchanged ResearchCore script,
+The existing `change_owner.cjs` bridge loads the unchanged ResearchCore owner that
+the packet declares (`research_owner.py`: a 1.0.0 journal keeps the script embedded in
+`research-desk/app.html`, so earlier identities are unchanged; a 1.0.1 or 1.0.2 journal
+is read by `app/source/research-core.js`, which replays all three). The chosen owner's
+bytes are pinned before and after resolution. The bridge then
 verifies the original packet by native replay, checks the requested current
 revision and dependency closure, and retains the native review state. It creates
 no review event. A blocked or superseded judgment stops that task; unrelated tasks
@@ -372,6 +376,12 @@ files, changed input bytes, changed procedure/runtime, stale record pins or a
 superseded target stop use of that binding. New inputs require an explicit
 successor judgment and newly described native computation. No automatic repinning
 or class-general capability inference is implemented.
+
+Numbers in a retained task are compared as the journal keeps them: a JSON journal
+stores `2.0` as `2`, and the Python identity treats `2.0` and `2` as different declared
+computations. A key computed from `2.0` therefore does not bind to the retained task,
+and the request is held (`test_task_research_handoff_102.py`). Write scenario numbers
+in the record as JSON keeps them.
 
 Native qualification runs three council-linked operations: retained provider
 intake, diagnosis of historical A/T0 and imported benchmark artifacts. A fresh

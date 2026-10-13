@@ -6,6 +6,8 @@ import json
 from pathlib import Path
 import subprocess
 
+import research_owner
+
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent
@@ -70,8 +72,13 @@ def prepare(task, base):
         inputs["native_report_engine"] = ROOT / "hot-aisle/index.html"
         app_pin = None
     else:
-        inputs["native_research_core"] = APP
-        app_pin = hashlib.sha256(APP.read_bytes()).hexdigest()
+        # The record owner follows the packet's declared version: 1.0.0 journals keep the
+        # Research Desk app (identities unchanged); later journals use app/source/research-core.js.
+        owner = research_owner.owner_for(source)
+        inputs["native_research_core"] = owner["path"]
+        if owner["label"] != "research-desk/app.html":
+            inputs["owner_selector"] = Path(research_owner.__file__)
+        app_pin = owner["sha256"]
     parameters = {"task_class": task_class, "change": change}
     if task_class == "source-correction":
         parameters["timestamp_policy"] = "explicit change.timestamp, otherwise inherited last input-event timestamp; not a fresh observation time"

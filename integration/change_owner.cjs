@@ -7,6 +7,30 @@ const crypto = require('node:crypto');
 const root = path.resolve(__dirname, '..');
 const digest = bytes => crypto.createHash('sha256').update(bytes).digest('hex');
 
+/* The record owner is chosen by the packet's declared version, as research_owner.py does
+   on the Python side: 1.0.0 journals keep the script embedded in research-desk/app.html;
+   1.0.1 and 1.0.2 journals are read by app/source/research-core.js, which replays all three.
+   The caller pins the expected owner bytes; a mismatch stops the operation. */
+function loadOwner(source, expected) {
+  const version = source && source.workspace && source.workspace.version;
+  if (version === '1.0.0') {
+    const app = fs.readFileSync(path.join(root, 'research-desk/app.html'));
+    if (digest(app) !== expected) throw Error('Research Desk source changed after preparation.');
+    const scripts = [...app.toString('utf8').matchAll(/<script id="research-core">([\s\S]*?)<\/script>/g)];
+    if (scripts.length !== 1) throw Error('Exactly one marked ResearchCore script is required.');
+    vm.runInThisContext(scripts[0][1], { filename: 'research-desk/app.html#research-core' });
+    return { C: globalThis.ResearchCore, sha256: digest(app), label: 'research-desk/app.html' };
+  }
+  if (version === '1.0.1' || version === '1.0.2') {
+    const file = path.join(root, 'app/source/research-core.js'), bytes = fs.readFileSync(file);
+    if (digest(bytes) !== expected) throw Error('ResearchCore source changed after preparation.');
+    const C = require(file);
+    if (C.VERSION !== '1.0.2') throw Error('Unexpected ResearchCore owner version: ' + C.VERSION);
+    return { C, sha256: digest(bytes), label: 'app/source/research-core.js' };
+  }
+  throw Error('Unsupported research packet version: ' + version);
+}
+
 async function execute(input) {
   const raw = fs.readFileSync(input.source);
   const source = JSON.parse(raw);
@@ -19,12 +43,8 @@ async function execute(input) {
       boundary: 'Native revalidation of supplied retained evidence. Plans and evaluator requests are proposed operations; no benchmark, evaluator, resource allocation, approval or publication was executed.' };
   }
   if (!['source-correction', 'research-procedure'].includes(input.task_class)) throw Error('Unsupported change task class.');
-  const app = fs.readFileSync(path.join(root, 'research-desk/app.html'));
-  if (digest(app) !== input.expected_app_sha256) throw Error('Research Desk source changed after preparation.');
-  const scripts = [...app.toString('utf8').matchAll(/<script id="research-core">([\s\S]*?)<\/script>/g)];
-  if (scripts.length !== 1) throw Error('Exactly one marked ResearchCore script is required.');
-  vm.runInThisContext(scripts[0][1], { filename: 'research-desk/app.html#research-core' });
-  const C = globalThis.ResearchCore;
+  const owner = loadOwner(source, input.expected_app_sha256);
+  const C = owner.C;
   const ws = await C.verifyPacket(source);
   const before = C.state(ws);
   if (input.task_class === 'research-procedure') {
@@ -39,7 +59,8 @@ async function execute(input) {
         !/^[0-9a-f]{64}$/.test(work.computation_key)) throw Error('Record needs an explicit native work task and computation_key.');
     const review = await C.reviewState(before, record.id);
     return {task_class: input.task_class, source_sha256: digest(raw),
-      research_core_sha256: digest(app), record: C.clone(record), dependency, review,
+      research_core_sha256: owner.sha256, research_core_path: owner.label, workspace_version: ws.version,
+      record: C.clone(record), dependency, review,
       work: C.clone(work), boundary: 'Operator-selected deterministic investigation. Current dependency pins do not confer review acceptance, source truth, or external execution authority.'};
   }
   const previous = C.latest(before, input.change.record_id);
@@ -60,7 +81,8 @@ async function execute(input) {
     after: { dependency: C.dependencyState(after, id), review: await C.reviewState(after, id) } });
   if (historical !== C.canonical(after.reports)) throw Error('Historical report snapshots changed.');
   return { task_class: input.task_class, source_sha256: digest(raw),
-    research_core_sha256: digest(app), source_record_id: previous.id,
+    research_core_sha256: owner.sha256, research_core_path: owner.label, workspace_version: ws.version,
+    source_record_id: previous.id,
     before_revision: previous.revision, after_revision: successor.revision,
     event_timestamp: timestamp, timestamp_basis: input.change.timestamp ? 'explicit' : 'inherited from last input event; not a fresh observation time',
     affected, packet: await C.pack(ws), historical_reports_preserved: true,
