@@ -1,13 +1,16 @@
-# A seat for every Chapek customer
+# What the next operator inherits: the Chapek seat record
 
 `index.html` is a working page prepared for Chapek.io by Jonathan Sandhu. It runs entirely in the reader's browser. It makes no requests, needs no account, and keeps what the reader enters in that browser unless they save or send a copy.
 
-The page puts one idea to a GPU-capacity seller: customers buy a seat, the place where their AI work runs and stays their own, more than they buy a node. The page lets the reader test that on one prospect:
+The page continues one record across editions. Edition 3 put one idea to a GPU-capacity seller: customers buy a seat, the place where their AI work runs and stays their own, more than they buy a node, and let the reader test it on one prospect. Edition 5 opens on what the next operator inherits from that record:
 
-- **Quick test.** On the first screen, a prospect and their monthly volume of checked results give a price per result on one H200 NVL server at Chapek's public monthly list price. The page also shows what happens to that price as more of the prospect's work runs on the same server.
-- **Prospect.** The questions that decide fit, plus a draft recommendation that is flagged whenever an answer it depended on changes.
-- **Server.** The full dedicated-capacity economics.
+- **What you inherit.** The recommendation in use and its state (flagged by the record's own dependency check when an input it was built on has a later version), what changed since it was written, the native work already performed, what is still open, and what to do next.
+- **Prospect.** The questions that decide fit, plus the recommendation and the reader's own conclusion.
+- **Server.** The full dedicated-capacity economics, with the quick test (a prospect's monthly volume priced on the server in use).
+- **Work performed.** Four native runs of the Cantos operation runner, their receipts, and eight retained procedures, each with its exact native task and computation key. The page shows these; it never executes them.
 - **Evidence.** Dated sources, each kept within its own scope.
+
+The changed server numbers in the record are the monthly equivalent under Chapek's annual term, not a reduced price for a monthly commitment; the record says so wherever they appear.
 
 ## Owners and checks
 
@@ -16,7 +19,7 @@ The page embeds, unchanged:
 - `app/source/research-core.js`, for decisions, revisions, sign-offs and portable records;
 - `compute/capacity/index.html`, for server economics, with only its saved-input slot filled.
 
-Every price it shows comes from `compute/capacity/capacity.cjs` and the Compute engine.
+Every price it shows comes from `compute/capacity/capacity.cjs` and the Compute engine. The retained procedures were run by `integration/work.py` outside this page; their keys bind to results in the working record's store, which travels in the delivered package, not in this repository.
 
 ```sh
 node compute/chapek/check.cjs                      # published bytes against the owners in this tree
