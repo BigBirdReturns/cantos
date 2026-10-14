@@ -169,7 +169,9 @@ try:
         return page.evaluate("[...document.getAnimations()].every(a=>a.playState!=='running') && getComputedStyle(document.documentElement).scrollBehavior==='auto'")
     check('reduced motion has no running document animation', reduced_css)
     boot()
-    font_data=page.evaluate("async()=>{await document.fonts.ready;return [...document.fonts].map(f=>({family:f.family,status:f.status}))}")
+    # A face unused by the current view remains lazy. Request the embedded faces
+    # explicitly so this check tests their availability, not incidental typography.
+    font_data=page.evaluate("async()=>{const faces=[...document.fonts].filter(f=>/Inter|Fraunces/.test(f.family));await Promise.all(faces.map(f=>f.load()));return faces.map(f=>({family:f.family,status:f.status}))}")
     check('embedded Inter and Fraunces load', lambda:all(any(f['status']=='loaded' and family in f['family'] for f in font_data) for family in ['Inter','Fraunces']))
     for view in ['decision','evidence','architecture']:
         for width in [1440,390,320]:
