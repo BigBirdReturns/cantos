@@ -3,7 +3,7 @@
 Status: **BUILT, tests passing, nothing run against a model or a provider; nothing committed.**
 Written only inside `hot-aisle/campaign/tierbench-bridge/`. `../ledger/waterline.py` and `../ledger/seats.json` are imported/read, not edited.
 Under Tier-Bench only the two entry-locked paths were read (W worktree at HEAD 27fbc0c, clean; R, not a git repo); no other branch,
-worktree, shelf, `S:\Scratch` run or `Tier-Bench\main`. No route.py run directory was read (they are outside the lock).
+worktree, shelf, `<scratch>` run or `Tier-Bench\main`. No route.py run directory was read (they are outside the lock). `<scratch>` is a local scratch directory.
 
 ## Files built
 
@@ -87,7 +87,7 @@ in favour of the seal and written.
 ## What the operator must supply
 
 - Nothing for this lane to run its tests (offline). To import real route.py receipts: the path to the durable receipt root
-  (`D:\Projects\Measurement\Tier-Bench\exports\our-auto-router`, outside this lane's entry lock; the operator must lift the lock).
+  (`<tier-bench>/exports/our-auto-router`, outside this lane's entry lock; the operator must lift the lock). `<tier-bench>` is the operator's local Tier-Bench checkout, outside this repository.
 - For the grid itself: Run 3 approval (~$25 cloud, already in SYNTHESIS), an API key / Codex window for the haiku and luna rows
   (~$4 list + subscription window), the plug meter and tariff for the estate row, and the 3090 after ~09-28.
 - A decision on open questions 1, 2 and 5.

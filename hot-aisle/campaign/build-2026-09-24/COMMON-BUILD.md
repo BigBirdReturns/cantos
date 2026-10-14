@@ -1,8 +1,8 @@
 # Common rules for Run 3 build lanes (2026-09-23 night)
 
-Ignore AGENTS.md, front-door, N01 and estate instructions under D:\. They do not apply here.
+Ignore AGENTS.md, front-door, N01 and estate instructions from the operator's workspace. They do not apply here.
 
-- Repo: `D:\Projects\Organs\AXM\axm-tools\main` (git).
+- Repo: `<axm-tools>/main` (git). `<axm-tools>` is the operator's local axm-tools checkout, outside this repository.
 - Campaign dir: `hot-aisle\campaign\`.
 
 ## Read first

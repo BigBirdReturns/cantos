@@ -64,7 +64,7 @@ class ContractRules(unittest.TestCase):
 class ContractHandoff(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        scratch = Path("S:/Scratch/Temp") if os.name == "nt" else Path(tempfile.gettempdir())
+        scratch = Path(os.environ.get("CANTOS_SCRATCH") or tempfile.gettempdir())
         scratch.mkdir(parents=True, exist_ok=True)
         cls.temporary = tempfile.TemporaryDirectory(prefix="work-contract-", dir=scratch)
         cls.addClassCleanup(cls.temporary.cleanup)

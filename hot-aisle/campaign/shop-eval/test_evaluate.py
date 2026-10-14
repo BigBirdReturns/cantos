@@ -12,10 +12,9 @@ import unittest
 SOURCE = Path(__file__).resolve().parent
 if os.name == "nt":
     BASH = Path(r"C:\Program Files\Git\bin\bash.exe")
-    SCRATCH = Path(r"S:\Scratch\Runs\ha-combined-reference-20260925")
 else:
     BASH = Path(shutil.which("bash") or "/bin/bash")
-    SCRATCH = Path(tempfile.gettempdir()) / "ha-combined-reference-20260925"
+SCRATCH = Path(os.environ.get("CANTOS_SCRATCH") or tempfile.gettempdir()) / "ha-combined-reference-20260925"
 
 
 class Lifecycle(unittest.TestCase):

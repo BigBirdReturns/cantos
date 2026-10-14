@@ -33,7 +33,7 @@ spec.loader.exec_module(IMPORTER)
 class TierPlanTasks(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        scratch = Path("S:/Scratch/Temp") if os.name == "nt" else Path(tempfile.gettempdir())
+        scratch = Path(os.environ.get("CANTOS_SCRATCH") or tempfile.gettempdir())
         scratch.mkdir(parents=True, exist_ok=True)
         cls.temporary = tempfile.TemporaryDirectory(prefix="tier-plan-tasks-", dir=scratch)
         cls.addClassCleanup(cls.temporary.cleanup)

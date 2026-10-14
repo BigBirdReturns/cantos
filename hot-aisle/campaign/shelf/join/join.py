@@ -300,7 +300,7 @@ def main():
     parser.add_argument("--genesis", required=True, type=Path)
     parser.add_argument("--output", type=Path, default=HERE / "run3-v3")
     parser.add_argument("--campaign", type=Path, default=CAMPAIGN)
-    parser.add_argument("--scratch", type=Path, default=Path("S:/Scratch/Runs/run3-shelf-join"))
+    parser.add_argument("--scratch", type=Path, default=Path(os.environ.get("CANTOS_SCRATCH") or tempfile.gettempdir()) / "run3-shelf-join")
     parser.add_argument("--context", type=Path)
     parser.add_argument("--canon", type=Path, help="Pinned Canon source cache; fresh native validation when supplied")
     args = parser.parse_args()

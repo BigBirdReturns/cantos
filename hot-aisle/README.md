@@ -2,7 +2,7 @@
 
 Submit a vLLM result, retain its conditions and produce a recomputable receipt.
 
-Live: https://bigbirdreturns.github.io/axm-tools/hot-aisle/
+Live: https://bigbirdreturns.github.io/cantos/hot-aisle/
 
 2.4 (29 September 2026) opens the front door on real data. The first card is the retained
 Run 3 record from 24 September 2026: one Hot Aisle 1x MI300X VM, 4,336 of 8,622 graded coding

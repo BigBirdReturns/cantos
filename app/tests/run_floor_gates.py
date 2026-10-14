@@ -2,7 +2,10 @@
 import argparse, hashlib, json, os, re, shutil, subprocess, sys, tempfile, datetime
 from pathlib import Path
 
-BUILD = Path(r'D:\Projects\Organs\AXM\axm-tools\sessions\field-niches-20260927\cantos-ben-build-20260928')
+BUILD = Path(os.environ.get('CANTOS_FLOOR_BUILD', ''))
+if not os.environ.get('CANTOS_FLOOR_BUILD'):
+    print('set CANTOS_FLOOR_BUILD to the floor build folder', file=sys.stderr)
+    sys.exit(2)
 DEF_PACKETS = BUILD / 'council-review' / 'astra'
 CTRL = BUILD / 'preview-v0.2.0' / 'verification'
 

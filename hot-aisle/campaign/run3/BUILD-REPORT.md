@@ -132,8 +132,8 @@ No benchmark result, provider comparison, correctness rate or public registratio
 Scope: Lane A only. All file writes stayed in `hot-aisle/campaign/run3/`; other lanes
 were left untouched. No commit, push, branch, rental, provider API or GPU operation.
 The required Estate front-door probe failed before contact because its configured runtime
-file at `S:\Scratch\Runs\Estate-Peer\known_hosts` is sandbox-denied. Continued only the
-explicitly authorized local Lane A repair; no remote recovery or substitute execution.
+file at `<scratch>/Runs/Estate-Peer/known_hosts` is sandbox-denied. Continued only the
+explicitly authorized local Lane A repair; no remote recovery or substitute execution. `<scratch>` is a local scratch directory.
 
 Files changed/built:
 

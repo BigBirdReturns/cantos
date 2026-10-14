@@ -4,7 +4,7 @@ Result: the per-request records exist and reconcile exactly. 8,622 sent per arm;
 
 Files here: `run3-requests-a-t0.json`, `run3-requests-n-t0.json`, `run3-requests-a-t1.json` (bonus), `build.py` (reproduces all three; read-only on the campaign tree). Each JSON is a compact list in arrival order (request_index 0..8621; `scheduled_at_ms` non-decreasing, verified).
 
-R = `D:/Projects/Organs/AXM/axm-tools/main/hot-aisle/campaign/results/run3-scored-<arm>/` with arm in `a-t0`, `n-t0`, `a-t1`.
+R = `<axm-tools>/main/hot-aisle/campaign/results/run3-scored-<arm>/` with arm in `a-t0`, `n-t0`, `a-t1`. `<axm-tools>` is the operator's local axm-tools checkout, outside this repository.
 
 ## File layout (per arm, under R)
 - `replay/requests.jsonl`: 8,622 lines, one record per request (11 MB). THE per-request source. Read as UTF-8 (output_text contains bytes cp1252 cannot decode).

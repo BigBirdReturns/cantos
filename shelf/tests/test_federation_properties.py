@@ -44,9 +44,9 @@ def encoded(value, **kwargs):
 
 class FederationProperties(unittest.TestCase):
     def setUp(self):
-        scratch = Path(r"S:\Scratch\Temp") if os.name == "nt" else None
-        if scratch is not None and not scratch.is_dir():
-            self.fail("W01 federation tests require the existing typed S:\\Scratch\\Temp")
+        scratch = os.environ.get("CANTOS_SCRATCH")
+        if scratch is not None and not Path(scratch).is_dir():
+            self.fail("CANTOS_SCRATCH must name an existing folder")
         self.temp = tempfile.TemporaryDirectory(prefix="shelf-federation-", dir=scratch)
         self.addCleanup(self.temp.cleanup)
         self.base = Path(self.temp.name)

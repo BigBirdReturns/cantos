@@ -17,7 +17,7 @@ import work
 
 class PoolSupply(unittest.TestCase):
     def setUp(self):
-        scratch = Path('S:/Scratch/Temp') if os.name == 'nt' else Path(tempfile.gettempdir())
+        scratch = Path(os.environ.get("CANTOS_SCRATCH") or tempfile.gettempdir())
         self.temp = tempfile.TemporaryDirectory(prefix='pool-supply-', dir=scratch)
         self.addCleanup(self.temp.cleanup)
         self.base = Path(self.temp.name)

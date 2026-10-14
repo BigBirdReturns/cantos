@@ -6,9 +6,13 @@ const fs = require('node:fs');
 const path = require('node:path');
 
 const HERE = __dirname;
-const RESULTS = 'D:/Projects/Organs/AXM/axm-tools/main/hot-aisle/campaign/results';
+const RESULTS = process.env.CANTOS_RUN3_RESULTS;
+const BASELINE = process.env.CANTOS_RUN3_BASELINE;
+if (!RESULTS || !BASELINE) {
+  process.stderr.write('set CANTOS_RUN3_RESULTS and CANTOS_RUN3_BASELINE to the campaign results folder and baseline file\n');
+  process.exit(2);
+}
 const REPORT = path.join(RESULTS, 'RUN3-RESULTS.md');
-const BASELINE = 'D:/Projects/Organs/AXM/axm-tools/sessions/compute-shop-compare-20260925/supervision/codex-takeover-20260926/FIRST-BASELINE-RESULT.md';
 const CORE_102 = path.resolve(HERE, '../../opus/deliverables/research-core-1.0.2.js');
 const CORE_101 = path.resolve(HERE, '../../base/owner-research-core/research-core-1.0.1.js');
 const corePath = fs.existsSync(CORE_102) ? CORE_102 : CORE_101;

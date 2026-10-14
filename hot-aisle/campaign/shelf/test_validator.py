@@ -1,7 +1,7 @@
 """Focused regressions from the stranger filing and retained-byte false pass.
 
 Run: python -m unittest test_validator -v
-Mutations use disposable copies under S:/Scratch/Temp on Windows. No retained
+Mutations use disposable copies under a temporary directory (CANTOS_SCRATCH overrides). No retained
 card, replay, evaluation or stranger output is modified.
 """
 import contextlib
@@ -31,7 +31,7 @@ class ShelfValidatorTests(unittest.TestCase):
         return result, output.getvalue()
 
     def temporary(self):
-        root = Path("S:/Scratch/Temp") if os.name == "nt" else Path(tempfile.gettempdir())
+        root = Path(os.environ.get("CANTOS_SCRATCH") or tempfile.gettempdir())
         self.assertTrue(root.is_dir(), "typed scratch location must already exist")
         return tempfile.TemporaryDirectory(prefix="shelf-validator-", dir=root)
 

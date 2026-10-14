@@ -28,7 +28,7 @@ Independent collections retain their own criteria and accumulated state.
 The estate's evidence mostly lives outside this repository: capture lanes under
 `axm-tools/sessions/<session>/lanes/<lane>/` (rows in the estate's own
 `imported-observation@1` schema with per-file manifests), retained bundles under
-`S:\Scratch\Builds\`, and other organs' evidence folders. Before declaring
+a local scratch build folder, and other organs' evidence folders. Before declaring
 material missing, look there. `corpus/estate_bundle.py` turns capture lanes into
 a Cantos collection without re-fetching; use it rather than re-pulling sources.
 

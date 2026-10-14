@@ -15,8 +15,8 @@ const APP_SHA256 = '5951f7f3d994ec980d2958ae18246edc6dbe5b57db8d38e90c1c18956b96
 // Evidence root: PT_SESSIONS, else $CANTOS_EVIDENCE / <repo>/evidence, else (only if the bulk lanes are missing there) the old session folder.
 const NEED = ['clustermax-cloudreview-20260929/tco-model.json', 'public-tail-20260929/lanes/sa-newsletter'];
 const EVID = process.env.CANTOS_EVIDENCE || path.resolve(HERE, '..', '..', 'evidence');
-const LEGACY = 'D:/Projects/Organs/AXM/axm-tools/sessions';
-const SESS = process.env.PT_SESSIONS || [EVID, LEGACY].find(b => NEED.every(n => fs.existsSync(path.join(b, n)))) || EVID;
+const LEGACY = process.env.CANTOS_LEGACY_SESSIONS || null;
+const SESS = process.env.PT_SESSIONS || [EVID, LEGACY].filter(Boolean).find(b => NEED.every(n => fs.existsSync(path.join(b, n)))) || EVID;
 const CMAX = path.join(SESS, 'clustermax-cloudreview-20260929');
 const LANES = path.join(SESS, 'public-tail-20260929/lanes');
 const OUT = path.join(HERE, 'PUBLIC-TAIL-2026-09-29.research-packet.json');

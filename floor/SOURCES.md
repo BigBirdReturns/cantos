@@ -1,6 +1,6 @@
 # Sources
 
-Built 2026-09-29. Root: `D:/Projects/Organs/AXM/axm-tools/`. Every path cited in `FLOOR.md`, `PRESCRIPTIONS.md`, `floor.json` and `prescriptions.json` is below with sha256 and size at build time. Nothing here was modified. Numbers not read directly from a file were computed by the build script from the files listed (window minutes, per-hour and per-1,000 figures, percentiles, medians, nearest-rank percentiles, uplift ratios).
+Built 2026-09-29. Root: `<axm-tools>/`. `<axm-tools>` is the operator's local axm-tools checkout, outside this repository. Every path cited in `FLOOR.md`, `PRESCRIPTIONS.md`, `floor.json` and `prescriptions.json` is below with sha256 and size at build time. Nothing here was modified. Numbers not read directly from a file were computed by the build script from the files listed (window minutes, per-hour and per-1,000 figures, percentiles, medians, nearest-rank percentiles, uplift ratios).
 
 ## Files
 
