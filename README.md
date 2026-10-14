@@ -1,5 +1,47 @@
 # Cantos
 
+**AI workflow software for continuing work across engineers, models and infrastructure.**
+
+Cantos connects a job's inputs, decisions and results to reusable procedures, giving the next operator the context and executable steps to continue. **Second Run**, its execution-and-reuse capability, runs supported procedures, reuses verified results and identifies the work requiring requalification when dependencies change.
+
+[Open Cantos](https://bigbirdreturns.github.io/cantos/) · [Chapek working example](https://bigbirdreturns.github.io/cantos/compute/chapek/) · [Run the handover](compute/chapek/START.md)
+
+## Start with existing work
+
+Inspect an existing decision, change an assumption, continue a supported operation and keep the result for its successor. Cantos applies this approach to recurring software workflows, production and technical investigation. The compute campaign supplies one worked example within that broader program.
+
+The Chapek example connects customer requirements, capacity assumptions, retained results and a runnable handover. It uses our own research, historical compute evidence and a labelled synthetic workload. Its proposed Chapek integration sits alongside AI Studio, with provisioning, model serving and access controls remaining in their existing systems.
+
+## Run the included example
+
+Python 3.12+ and Node 22+. From this checkout:
+
+```sh
+python -B integration/work.py --request integration/examples/work.json --store .cantos-example-results
+```
+
+With an empty store, six tasks execute. Repeat the command and six checked results are reused. The output names each result and the new run receipt. The [operation reference](integration/WORK.md) explains the supported task classes, inputs and changed-dependency handling.
+
+For the complete Chapek handover, [download and run its package](compute/chapek/START.md). That guide names the source revision and replay environment for its retained bindings.
+
+## Find the relevant component
+
+| Component | Use it for |
+|---|---|
+| [Decision workspace](app/README.md) and [Research Desk](research-desk/) | Source-based decisions, revisions, review and portable work records. |
+| [Second Run](integration/WORK.md) | Supported local operations, record-bound execution and checked reuse. |
+| [Compute tools](compute/) and [workload runner](hot-aisle/) | Allocation economics, retained results and deployment qualification. |
+| [Corpus](corpus/README.md) | Search an owned collection, inspect an observation's history and continue its supported processing. |
+
+AXM supplies the source-bound identity, verification and continuity foundations. Customers retain their authoritative sources and decisions; the applicable native systems enforce their operating permissions.
+
+Jonathan Sandhu · Sandhu Consulting Group · bigbirdreturns@proton.me
+
+<details>
+<summary>Program detail, implementation scope and retained campaign findings</summary>
+
+# Cantos
+
 Cantos is a body of work people can find, understand, reproduce, change, and extend. The bulk dataset supplies discovery and comparison; work histories preserve decisions and consequences; Second Run makes applicable work executable.
 
 Cantos preserves the connection between evidence, judgment, decisions, execution, and consequences, so another person or a later session can continue meaningful work without reconstructing it: what was known, why a choice was reasonable, the alternatives considered where documented, what actually happened, and what changed afterward. Failures, abandoned approaches, corrections, and contributor credit are kept on purpose. Missing rationale stays missing; a configuration change establishes what changed without establishing why someone chose it.
@@ -77,3 +119,5 @@ python floor/rate/rate.py                    # regenerate the rating from the ev
 ```
 
 Missing or gated evidence stays unknown or HOLD, and synthetic examples are labeled. Imported observations retain their producer, date and conditions. Our measurements retain their source records, while each cost states its accounting basis; list-price estimates and credit changes are not invoices. Integrity checks establish unchanged bytes, not source truth or execution authority. The public pages do not rent, provision, publish or contact providers. Funding terms are in [hot-aisle/campaign/DISCLOSURES.md](hot-aisle/campaign/DISCLOSURES.md). The instruments were extracted from the axm-tools demo shelf on 2026-09-29 with their history.
+
+</details>

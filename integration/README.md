@@ -1,3 +1,26 @@
+# Second Run integration
+
+Second Run executes supported procedures from existing work and reuses their verified results while declared dependencies hold. Use the local example first; connect a workload service when the job requires actual model execution.
+
+## Local example
+
+From the repository root with Python 3.12+ and Node 22+:
+
+```sh
+python -B integration/work.py --request integration/examples/work.json --store .cantos-example-results
+```
+
+An empty store executes six tasks. Repeat the command to reuse six checked results. Each invocation writes a receipt identifying the results and the work performed.
+
+[Run the Chapek handover](../compute/chapek/START.md) · [Operation classes and formats](WORK.md)
+
+## Connect a workload service
+
+The existing workload service runs evaluations on an authorized allocation; the compute desk reads explicit publications from that service. Their setup, interfaces and qualification procedures follow below. The customer record retains the connection between the chosen operation, its evidence and the next action.
+
+<details>
+<summary>Workload-service setup and integration reference</summary>
+
 # Compute desk / qualification instrument integration
 
 The [shared operation runner](WORK.md) joins existing source intake, retained-run
@@ -77,3 +100,5 @@ The public catalogue retains its actual review date. Rebuilding, copying, repric
 Every current workflow uploading the full Pages site runs `integration/release_gate.py` before upload. It requires a successful native-CI run for the exact product and release-workflow source identities. A newer matching failed run holds release; unrelated data-only commits can reuse an identical passing source set. Uncommitted product changes, missing proof and timeouts hold publication. Data-refresh commits remain separate from whether their site artifact may deploy.
 
 Qualification JSON files describe the contract; workflow outcomes and captured source hashes establish results. The historical integration receipt applies only to its recorded bytes. Verify the gate with `python -m unittest discover -s integration/tests -p test_release_gate.py -v`.
+
+</details>

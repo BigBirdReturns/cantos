@@ -68,6 +68,7 @@ with sync_playwright() as p:
     nxt.click();check('next lands on the prospect',page.locator('#decision').is_visible() and page.locator('#customer').input_value()==NAME)
     check('open questions name the prospect',page.locator('#unknowns').inner_text().startswith('Still open for '+NAME))
     page.locator('nav [data-tab=seat]').click()
+    page.locator('#seat details:has(#open) summary').click()
     check('first screen reflects the saved prospect',any(NAME in t for t in page.locator('#open li').all_inner_texts()))
     page.reload(wait_until='load');page.wait_for_function(READY)
     check('reload reopens the work',page.locator('#notice').inner_text().startswith('Your work from this browser is open ('+NAME+')'))

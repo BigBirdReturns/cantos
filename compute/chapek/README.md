@@ -1,32 +1,37 @@
-# What the next operator inherits: the Chapek seat record
+# Cantos for Chapek
 
-`index.html` is a working page prepared for Chapek.io by Jonathan Sandhu. It runs entirely in the reader's browser. It makes no requests, needs no account, and keeps what the reader enters in that browser unless they save or send a copy.
+AI workflow software for continuing work across engineers, models and infrastructure. Cantos connects a job's inputs, decisions and results to reusable procedures. Second Run is its execution-and-reuse capability.
 
-The page continues one record across editions. Edition 3 put one idea to a GPU-capacity seller: customers buy a seat, the place where their AI work runs and stays their own, more than they buy a node, and let the reader test it on one prospect. Edition 5 opens on what the next operator inherits from that record:
+[Open the working example](https://bigbirdreturns.github.io/cantos/compute/chapek/) · [Download the runnable package](https://bigbirdreturns.github.io/cantos/compute/chapek/Cantos-Chapek-Seat-package.zip) · [Run instructions](START.md)
 
-- **What you inherit.** The recommendation in use and its state (flagged by the record's own dependency check when an input it was built on has a later version), what changed since it was written, the native work already performed, what is still open, and what to do next.
-- **Prospect.** The questions that decide fit, plus the recommendation and the reader's own conclusion.
-- **Server.** The full dedicated-capacity economics, with the quick test (a prospect's monthly volume priced on the server in use).
-- **Work performed.** Four native runs of the Cantos operation runner, their receipts, and eight retained procedures, each with its exact native task and computation key. The page shows these; it never executes them.
-- **Evidence.** Dated sources, each kept within its own scope.
+## Continue a customer operation
 
-The changed server numbers in the record are the monthly equivalent under Chapek's annual term, not a reduced price for a monthly commitment; the record says so wherever they appear.
+Carry requirements and configuration decisions from onboarding into deployment and support. A replacement engineer inherits the basis for the work. A model, workload or commercial change identifies the affected decisions and procedures. The customer keeps the working record and the runnable handover.
 
-## Owners and checks
+The Chapek example uses our own research, dated public pricing, historical compute results and a labelled synthetic workload. It contains five retained execution runs and eight current procedures. Price changes update calculations; a model change produces a revalidation plan; a runner change produces new bindings with the earlier history preserved.
 
-The page embeds, unchanged:
+## Use the example
 
-- `app/source/research-core.js`, for decisions, revisions, sign-offs and portable records;
-- `compute/capacity/index.html`, for server economics, with only its saved-input slot filled.
+The first screen shows the recommendation, changed inputs, completed work and remaining decisions. **Prospect** records a customer's requirements. **Server** evaluates capacity assumptions, with monthly and annual terms identified. **Work performed** exposes the procedures, results and execution history. **Keep & share** exports the current work for another operator.
 
-Every price it shows comes from `compute/capacity/capacity.cjs` and the Compute engine. The retained procedures were run by `integration/work.py` outside this page; their keys bind to results in the working record's store, which travels in the delivered package.
+The browser runs the record rules and capacity calculations locally. The downloaded package runs the retained procedures using Python and Node. [START.md](START.md) gives the reference code, qualified replay environment, commands and expected outcomes.
 
-`Cantos-Chapek-Seat-package.zip`, linked from the page's first screen, is that package: the page, the record, the inputs, the requests, the retained results and receipts, `next.py` and a manifest naming every file's hash and the exact runner bytes it was qualified against. A recipient extracts it and runs `python next.py --checkout <cantos checkout>`; record-bound requests are checked against the record's revision, dependency state and expected computation key, and are held when the runner's own files have changed since, until a successor binding is appended (the record carries three such successors from the repair of the judgment handoff).
+## Proposed Chapek integration
+
+Connect the supported operations to existing provisioning, model endpoints and access controls. AI Studio retains model serving and tenant authentication; the customer retains its authoritative sources and decisions. One existing workflow supplies the initial integration case.
+
+## Implementation
+
+ResearchCore owns revisions, dependency checks, reviews and portable records. The Compute engine owns capacity arithmetic. The native runner owns procedure execution and checked reuse. Source formats and operation contracts are in [integration/WORK.md](../../integration/WORK.md).
+
+For maintainers:
 
 ```sh
-node compute/chapek/check.cjs                      # published bytes against the owners in this tree; the zip is present and linked
-python -B compute/chapek/tests/package_check.py    # the zip extracts, hashes as its manifest says, carries this page and record, and resolves against this checkout
-python -B compute/chapek/tests/browser_check.py    # reader journey over HTTP and an offline saved copy (Playwright)
+node compute/chapek/check.cjs
+python -B compute/chapek/tests/package_check.py
+python -B compute/chapek/tests/browser_check.py
 ```
 
-If either embedded owner changes, `check.cjs` fails until the page is rebuilt against it. The page is built outside this repository, from the Cantos working record that also holds its fuller qualification. Neither check establishes customer fit, measured H200 NVL or B300 throughput, a quote, legal jurisdiction or execution location.
+The checks bind the page, package and supported browser journey to this source tree. Recorded evidence remains attached to its original inputs and conditions.
+
+Jonathan Sandhu · Sandhu Consulting Group · bigbirdreturns@proton.me
