@@ -17,6 +17,8 @@ Tier-Bench's `docs/residue-broker.md` / `docs/burden-discipline.md` (cheapest su
 
 ## Run
 
+`<tier-bench>` is the operator's local Tier-Bench checkout, outside this repository.
+
 From this directory (`hot-aisle/campaign/tierbench-bridge/`):
 
 ```sh
@@ -24,8 +26,8 @@ python test_all.py                                          # all offline self-t
 
 python import_tierbench.py --selftest
 python import_tierbench.py --fixtures --out /tmp/ev         # fixture excerpts -> tierbench-calls.jsonl, tierbench-summary.json, tier-ladder.json
-python import_tierbench.py --tierbench-root "D:\Projects\Measurement\Tier-Bench\worktrees\task-computer-no-console-current-main-20260730" \
-                           --router-root "D:\Projects\Measurement\Tier-Bench\integrations\our-auto-router" \
+python import_tierbench.py --tierbench-root "<tier-bench>/worktrees/task-computer-no-console-current-main-20260730" \
+                           --router-root "<tier-bench>/integrations/our-auto-router" \
                            --receipts <dir-or-files of route.py receipt.json> --out /tmp/ev     # the real pinned inputs (read-only)
 
 python tier_waterline.py --selftest

@@ -15,7 +15,7 @@ import task_pool
 
 class PoolTask(unittest.TestCase):
     def setUp(self):
-        scratch = Path("S:/Scratch/Temp") if os.name == "nt" else Path(tempfile.gettempdir())
+        scratch = Path(os.environ.get("CANTOS_SCRATCH") or tempfile.gettempdir())
         self.temporary = tempfile.TemporaryDirectory(prefix="pool-task-", dir=scratch)
         self.addCleanup(self.temporary.cleanup)
         self.base = Path(self.temporary.name)

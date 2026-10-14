@@ -55,7 +55,7 @@ process.stdout.write(JSON.stringify({ verified: verification.verified,
 class ChangeTasks(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        scratch = Path("S:/Scratch/Runs") if os.name == "nt" else Path(tempfile.gettempdir())
+        scratch = Path(os.environ.get("CANTOS_SCRATCH") or tempfile.gettempdir())
         scratch.mkdir(parents=True, exist_ok=True)
         cls.temporary = tempfile.TemporaryDirectory(prefix="change-owner-tests-", dir=scratch)
         cls.base = Path(cls.temporary.name)

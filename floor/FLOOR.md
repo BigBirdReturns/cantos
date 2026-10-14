@@ -1,10 +1,10 @@
 # The reference floor for a properly set up neocloud
 
-Built 2026-09-29. Local draft: not committed, not pushed. Machine form: `floor.json` (same item ids). Companion: `PRESCRIPTIONS.md` / `prescriptions.json`, `SOURCES.md` (every file cited, with sha256).
+Built 2026-09-29. Machine form: `floor.json` (same item ids). Companion: `PRESCRIPTIONS.md` / `prescriptions.json`, `SOURCES.md` (every file cited, with sha256).
 
 ## Reading rules
 
-- Paths are relative to `D:/Projects/Organs/AXM/axm-tools/`. Every number below carries a source. Where the estate has no number the item says UNKNOWN and states what would establish it.
+- Paths are relative to `<axm-tools>/`. `<axm-tools>` is the operator's local axm-tools checkout, outside this repository. Every number below carries a source. Where the estate has no number the item says UNKNOWN and states what would establish it.
 - Evidence class is the kit vocabulary from `main/hot-aisle/campaign/shop-eval/MANUAL.md`: published_claim, operator_report, measured, derived, hypothesis. The field `origin` separates **ours** (Second Run/Hot Aisle campaign) from **imported** (InferenceX, MLPerf, SemiAnalysis, OpenComputePrices; not reproduced by us).
 - Hot Aisle is a dated reference observation, one allocation, one run per arm. Where a figure is a Hot Aisle measurement the floor says so; where Hot Aisle itself misses the floor, per its own SemiAnalysis 2.0 review, the item says so (Section 5).
 - Funding disclosure (`main/hot-aisle/campaign/DISCLOSURES.md`): the Hot Aisle arms ran on a $200 credit Hot Aisle gave to Second Run, which is pitching Hot Aisle a paid engagement; costs are undiscounted list. The DigitalOcean arm was self-funded.

@@ -40,10 +40,12 @@ The applicability receipt identifies the exact card revision, Shard ID and seale
 dependency/scope digest. Its timestamp describes a saved check, not ongoing
 applicability; rerun `check` against current retained bytes before relying on it.
 
+`<axm-genesis>` is the operator's local axm-genesis checkout.
+
 From this directory, using the resolved canonical Genesis checkout:
 
 ```powershell
-python -B join.py check --genesis D:/Projects/Organs/AXM/axm-genesis/main
+python -B join.py check --genesis <axm-genesis>
 python -B test_join.py
 ```
 
@@ -61,17 +63,19 @@ Canon TypeScript sources are pinned to commit
 `canon_check.mjs`. Source and generated JavaScript live in typed scratch, not in
 this repository. No package installation or copied validator is needed.
 
+`<scratch>` is a local scratch directory.
+
 Fresh native Canon verification with the retained source cache:
 
 ```powershell
-python -B join.py check --genesis D:/Projects/Organs/AXM/axm-genesis/main --canon S:/Scratch/Runs/run3-shelf-join/canon-fec0ddc9a5697d465ac46e55b7e3cb7647221952
+python -B join.py check --genesis <axm-genesis> --canon <scratch>/Runs/run3-shelf-join/canon-fec0ddc9a5697d465ac46e55b7e3cb7647221952
 ```
 
 To restore that cache on another seat, pass a scratch path to this explicit
 download-and-verify command, then supply the same path to `join.py --canon`:
 
 ```powershell
-node canon_check.mjs --source-root S:/Scratch/Runs/run3-shelf-join/canon-fec0ddc9a5697d465ac46e55b7e3cb7647221952 --bundle run3-v3 --fetch
+node canon_check.mjs --source-root <scratch>/Runs/run3-shelf-join/canon-fec0ddc9a5697d465ac46e55b7e3cb7647221952 --bundle run3-v3 --fetch
 ```
 
 Without `--canon`, `check` validates the retained Canon receipt's linkage; it does
@@ -80,7 +84,7 @@ native validator runs again. The evidence-bundle SHA uses the exact UTF-8
 `JSON.stringify(input)` bytes emitted by the adapter. Genesis remains the byte
 integrity authority; Canon's evidence validator does not itself read source bytes.
 
-Tests mutate disposable copies under `S:/Scratch/Runs/run3-shelf-join`, including
+Tests mutate disposable copies under `<scratch>/Runs/run3-shelf-join`, including
 native source tamper, missing binding, changed evaluator dependency, changed
 period/evaluator context, invented Claim ID and attempted acceptance by editing
 the standing file. They preserve historical bound bytes when applicability fails.

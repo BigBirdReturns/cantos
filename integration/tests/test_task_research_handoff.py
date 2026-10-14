@@ -24,7 +24,7 @@ def put_records(records, packet=None):
 
 class ResearchHandoff(unittest.TestCase):
     def setUp(self):
-        scratch = Path('S:/Scratch/Temp') if os.name == 'nt' else Path(tempfile.gettempdir())
+        scratch = Path(os.environ.get("CANTOS_SCRATCH") or tempfile.gettempdir())
         self.tmp = tempfile.TemporaryDirectory(prefix='research-handoff-', dir=scratch)
         self.addCleanup(self.tmp.cleanup)
         self.base = Path(self.tmp.name)

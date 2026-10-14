@@ -1,6 +1,7 @@
 """Boundary checks against the real native Run 3 shard; fixtures stay in scratch."""
 import copy
 import json
+import os
 from pathlib import Path
 import shutil
 import tempfile
@@ -9,14 +10,16 @@ import unittest
 import join
 
 
-GENESIS = Path("D:/Projects/Organs/AXM/axm-genesis/main")
-SCRATCH = Path("S:/Scratch/Runs/run3-shelf-join")
+GENESIS = Path(os.environ["AXM_GENESIS"]) if os.environ.get("AXM_GENESIS") else None
+SCRATCH = Path(os.environ.get("CANTOS_SCRATCH") or tempfile.gettempdir()) / "run3-shelf-join"
 BUNDLE = join.HERE / "run3-v3"
 
 
 class JoinChecks(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
+        if GENESIS is None:
+            raise unittest.SkipTest("set AXM_GENESIS to the axm-genesis checkout to run the native shard checks")
         SCRATCH.mkdir(parents=True, exist_ok=True)
         cls.work = tempfile.TemporaryDirectory(prefix="boundary-tests-", dir=SCRATCH)
         cls.root = Path(cls.work.name)

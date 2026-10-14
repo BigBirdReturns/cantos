@@ -1,4 +1,5 @@
 """Require both shipped entry pages to match a fresh build without editing them."""
+import os
 from pathlib import Path
 import subprocess
 import sys
@@ -8,7 +9,7 @@ ROOT = Path(__file__).resolve().parents[2]
 
 
 def main():
-    scratch = Path('S:/Scratch/Temp')
+    scratch = Path(os.environ.get('CANTOS_SCRATCH') or tempfile.gettempdir())
     if not scratch.is_dir():
         scratch = Path(tempfile.gettempdir())
     with tempfile.TemporaryDirectory(prefix='cantos-build-', dir=scratch) as directory:

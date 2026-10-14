@@ -78,9 +78,11 @@ failing filings; `compose` returns 2 on a refusal; `sync --check` returns 1 on d
 
 ## Acceptance by population, not by stranger
 
+`<axm-genesis>` is the operator's local axm-genesis checkout.
+
 ```
 python scripts/forge.py --scale small                         # seconds; what CI runs
-python scripts/forge.py --scale full --record --genesis D:/Projects/Organs/AXM/axm-genesis/main
+python scripts/forge.py --scale full --record --genesis <axm-genesis>
 ```
 
 The forge generates, from one seed, valid cards of six archetypes alongside the five real
@@ -119,10 +121,12 @@ native Python and embedded browser engines. Each pair exercises one of the five
 declared purposes; it does not claim every purpose on every pair. Seeded rule cases
 check the expected result as well as parity, including the named refusal rule.
 
+`<scratch>` is a local scratch directory.
+
 From the repository root:
 
 ```powershell
-python -B shelf/tests/generated.py --profile full --seed 20260924 --out S:/Scratch/Runs/shelf-generated-full
+python -B shelf/tests/generated.py --profile full --seed 20260924 --out <scratch>/Runs/shelf-generated-full
 python -B -m unittest discover -s shelf/tests -p "test_generated_*.py" -v
 python -B -m unittest discover -s shelf/tests -p test_federation_properties.py -v
 ```

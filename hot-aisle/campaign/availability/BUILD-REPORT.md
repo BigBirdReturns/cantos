@@ -106,12 +106,12 @@ credentials and nobody was messaged.
 ## Front-door and local environment limitations
 
 The supplied root instructions require the Estate front door. Estate resolved
-through `python D:\Projects\where.py estate`; the canonical policy was read.
+through the estate's `where.py estate` resolver; the canonical policy was read.
 `estate_peer.py probe OCTO-N01` failed before connecting because its configured
-runtime could not write `S:\Scratch\Runs\Estate-Peer\known_hosts`
+runtime could not write `<scratch>/Runs/Estate-Peer/known_hosts`
 (`PermissionError`). N01 contact therefore remains unestablished. No alternate
 peer, direct SSH or Estate recovery action was attempted. The explicitly
-authorized local lane build proceeded; this is not an N01 deployment receipt.
+authorized local lane build proceeded; this is not an N01 deployment receipt. `<scratch>` is a local scratch directory.
 
 The initial test run failed because Python 3.13's mode-0700 temporary directories
 on Windows excluded the sandbox token. Tests now create UUID-named directories
@@ -186,6 +186,6 @@ comparison, and coordinated installation authorization/custody. Real delivered
 receipts additionally need the actual create method; no method is inferred.
 
 The required canonical N01 probe was attempted again and failed before connecting
-with PermissionError writing `S:\Scratch\Runs\Estate-Peer\known_hosts`.
+with PermissionError writing `<scratch>/Runs/Estate-Peer/known_hosts`.
 N01 contact remains unestablished; no alternate route or recovery was attempted.
 Only the explicitly requested local lane fixes proceeded.

@@ -61,7 +61,7 @@ class DeliberatelyDivergentBridge:
 class GeneratedDriver(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        scratch = Path("S:/Scratch/Runs") if os.name == "nt" else Path(tempfile.gettempdir())
+        scratch = Path(os.environ.get("CANTOS_SCRATCH") or tempfile.gettempdir())
         scratch.mkdir(parents=True, exist_ok=True)
         cls.temporary = tempfile.TemporaryDirectory(prefix="shelf-generated-driver-", dir=scratch)
         cls.output = Path(cls.temporary.name)

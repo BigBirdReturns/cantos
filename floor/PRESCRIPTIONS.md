@@ -1,6 +1,6 @@
 # Prescriptions: what recurs in the review sentences, what it costs, and how to fix and verify it
 
-Built 2026-09-29 from `floor/floor.json` and the 1,273 ClusterMAX review sentences. Local draft; not committed. Machine form: `prescriptions.json`. Paths are relative to `D:/Projects/Organs/AXM/axm-tools/` unless they start with `floor/`.
+Built 2026-09-29 from `floor/floor.json` and the 1,273 ClusterMAX review sentences. Machine form: `prescriptions.json`. Paths are relative to `<axm-tools>/` unless they start with `floor/`. `<axm-tools>` is the operator's local axm-tools checkout, outside this repository.
 
 ## How the rows were made
 

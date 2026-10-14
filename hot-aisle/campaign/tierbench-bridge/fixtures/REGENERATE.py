@@ -16,8 +16,8 @@ import subprocess
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-W_DEFAULT = r"D:\Projects\Measurement\Tier-Bench\worktrees\task-computer-no-console-current-main-20260730"
-R_DEFAULT = r"D:\Projects\Measurement\Tier-Bench\integrations\our-auto-router"
+W_DEFAULT = os.environ.get("TIERBENCH_ROOT")  # the pinned Tier-Bench worktree; set it or pass --tierbench-root
+R_DEFAULT = os.environ.get("ROUTER_ROOT")  # the our-auto-router checkout; set it or pass --router-root
 PIN = "9693cb99694338e72c15d0ffbb87b5a1c5bbf16a"
 
 LEDGER_TASKS = {  # task_id -> max rows to copy (verbatim, in file order)
@@ -65,6 +65,8 @@ def main(argv):
         if argv[i] == "--tierbench-root": W = argv[i + 1]; i += 2
         elif argv[i] == "--router-root": R = argv[i + 1]; i += 2
         else: print(__doc__); return 1
+    if not W or not R:
+        print("set TIERBENCH_ROOT and ROUTER_ROOT, or pass --tierbench-root and --router-root", file=sys.stderr); return 2
     P = {"schema": "second-run/tierbench-fixture-provenance@1", "pin": PIN, "entry_lock": {"W": W, "R": R}, "sources": {}}
     tb = os.path.join(HERE, "tierbench")
     # ledger.jsonl excerpt: verbatim rows, capped per task

@@ -7,14 +7,14 @@ Import by relative path insertion, e.g.
 
 Order of resolution for a path such as ("clustermax-cloudreview-20260929", "claims.all.jsonl"):
   1. $CANTOS_EVIDENCE (default: <repo>/evidence) / path
-  2. only if that copy is missing: the original session folder at LEGACY_SESSIONS / path
+  2. only if that copy is missing and CANTOS_LEGACY_SESSIONS is set: that original session folder / path
   3. if neither exists, the (missing) primary path is returned, so callers can report it and SKIP.
 """
 import os
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
-LEGACY_SESSIONS = Path("D:/Projects/Organs/AXM/axm-tools/sessions")
+LEGACY_SESSIONS = Path(os.environ["CANTOS_LEGACY_SESSIONS"]) if os.environ.get("CANTOS_LEGACY_SESSIONS") else None
 
 
 def root() -> Path:
@@ -26,7 +26,7 @@ def resolve(*parts) -> Path:
     primary = root() / rel
     if primary.exists():
         return primary
-    if os.environ.get("CANTOS_NO_LEGACY"):      # verification switch: prove a clean clone works
+    if LEGACY_SESSIONS is None or os.environ.get("CANTOS_NO_LEGACY"):      # verification switch: prove a clean clone works
         return primary
     legacy = LEGACY_SESSIONS / rel
     return legacy if legacy.exists() else primary
@@ -38,7 +38,7 @@ def sessions_dir(*required) -> Path:
     env = os.environ.get("CIRCULATE_SESSIONS")
     if env:
         return Path(env)
-    for base in ((root(),) if os.environ.get("CANTOS_NO_LEGACY") else (root(), LEGACY_SESSIONS)):
+    for base in ((root(),) if LEGACY_SESSIONS is None or os.environ.get("CANTOS_NO_LEGACY") else (root(), LEGACY_SESSIONS)):
         if all((base / q).exists() for q in required):
             return base
     return root()

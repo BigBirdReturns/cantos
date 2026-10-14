@@ -18,7 +18,7 @@ import work
 class WorkHandoff(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        scratch = Path("S:/Scratch/Temp") if os.name == "nt" else Path(tempfile.gettempdir())
+        scratch = Path(os.environ.get("CANTOS_SCRATCH") or tempfile.gettempdir())
         cls.temporary = tempfile.TemporaryDirectory(prefix="work-handoff-", dir=scratch)
         cls.addClassCleanup(cls.temporary.cleanup)
         cls.directory = Path(cls.temporary.name)

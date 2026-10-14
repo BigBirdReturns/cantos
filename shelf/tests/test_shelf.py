@@ -207,7 +207,7 @@ class Cli(unittest.TestCase):
         self.assertEqual(shelf.main(["validate", os.path.join(HERE, "fixtures", "card6-latitude-h100.json")]), 1)
 
     def test_compose_exit_code(self):
-        scratch = r"S:\Scratch\Temp" if os.name == "nt" else None
+        scratch = os.environ.get("CANTOS_SCRATCH")
         with tempfile.TemporaryDirectory(prefix="shelf-cli-", dir=scratch) as tmp:
             run = os.path.join(tmp, "run3-at0.json")
             with open(run, "w", encoding="utf-8") as f:

@@ -19,14 +19,14 @@ outer `executed` or `reused` status.
 
 On this estate, ongoing results are retained under the project home at
 `../sessions/shared-work/`, outside the published checkout. Qualification uses
-`S:/Scratch/Runs/` or `S:/Scratch/Temp/`. Scratch qualification is not durable
+`<scratch>/Runs/` or `<scratch>/Temp/`. `<scratch>` is a local scratch directory. Scratch qualification is not durable
 operating custody. A store is explicitly selected on each invocation; another
 operator can keep the same format under their own custody.
 
 From the repository root on this estate:
 
 ```powershell
-python -B integration/work.py --request integration/examples/work.json --store S:/Scratch/Runs/shared-work
+python -B integration/work.py --request integration/examples/work.json --store <scratch>/Runs/shared-work
 ```
 
 Run it again with the same store. On an empty store, the shipped example executes
@@ -52,7 +52,7 @@ operators can use an appropriate writable result directory on their own machines
 To diagnose the committed retained arm instead of only recomputing it:
 
 ```powershell
-python -B integration/work.py --request integration/examples/diagnose.json --store S:/Scratch/Runs/shared-work
+python -B integration/work.py --request integration/examples/diagnose.json --store <scratch>/Runs/shared-work
 ```
 
 Point the same request shape at any other retained arm directory, from any provider,
@@ -64,7 +64,7 @@ Hot Aisle baseline 1 (4,274 accepted) reproduced N01's retained figures exactly:
 The larger local archive has a separate request:
 
 ```powershell
-python -B integration/work.py --request integration/examples/archive-local.json --store S:/Scratch/Runs/shared-work
+python -B integration/work.py --request integration/examples/archive-local.json --store <scratch>/Runs/shared-work
 ```
 
 That request requires the already-retained `backfill/data-raw` archive, which is

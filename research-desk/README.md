@@ -1,6 +1,6 @@
 # Second Run Research Desk: public handoff
 
-One shareable entry: https://bigbirdreturns.github.io/axm-tools/research-desk/
+One shareable entry: https://bigbirdreturns.github.io/cantos/research-desk/
 
 Open `index.html` for the explanation; `app.html` is the entire original Research Desk 1.0.0 application. It compares supplied task results and costs, tracks which records depend on revised sources or rules, and exports reviewed client reports. It also examines supplied commercial instruments in a separate diligence view. Ben Pouladian and BEP have not commissioned, adopted or endorsed this independent build.
 

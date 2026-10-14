@@ -21,7 +21,7 @@ CLASSES = ("correct", "syntax_valid_grade_failed", "syntax_invalid",
 class DiagnoseHandoff(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        scratch = Path("S:/Scratch/Temp") if os.name == "nt" else Path(tempfile.gettempdir())
+        scratch = Path(os.environ.get("CANTOS_SCRATCH") or tempfile.gettempdir())
         cls.temporary = tempfile.TemporaryDirectory(prefix="work-diagnose-", dir=scratch)
         cls.addClassCleanup(cls.temporary.cleanup)
         cls.directory = Path(cls.temporary.name)

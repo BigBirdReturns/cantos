@@ -6,12 +6,14 @@ Stdlib Python 3.10+, `node` (page engine, Research Desk packet), `gh` (GitHub re
 
 ## Run it
 
+`<scratch>` is a local scratch directory.
+
 ```text
 python circulate/circulate.py                      # online, all ten stages, writes committed outputs
 python circulate/circulate.py --offline            # every stage on circulate/fixtures/, no network, writes only under circulate/
 python circulate/circulate.py --stage prices status
 python circulate/circulate.py --resume 2026-09-29  # re-run only stages that are missing or FAIL in that receipt
-python circulate/circulate.py --retained D:\scratch\circ
+python circulate/circulate.py --retained <scratch>/circ
 python circulate/circulate.py --finalize 2026-09-29   # recompute overall/index after PROBES.json was written
 python circulate/probes/run_probes.py              # writes receipts/<today>/PROBES.json (then run --finalize)
 python -m unittest circulate.tests.test_offline    # from the repo root: the offline end-to-end assertion
