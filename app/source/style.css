@@ -649,3 +649,5 @@ html.cascade .task-cell{view-transition-name:var(--vt)!important}
 .rail-history{display:block;margin:6px 0 12px;padding:12px;color:var(--gold);border-left:2px solid var(--gold);font-size:13px}
 .rail-history small{display:block;color:var(--muted);font-size:10px;margin-top:3px}
 @media(max-width:720px){.overview-hero{padding:18px 0 26px}.overview-hero h1{font-size:32px}.overview-hero p{font-size:15px}.rail-history{margin:0;padding:8px;font-size:11px}.rail-history small{display:none}}
+
+@media(max-width:1000px){.case-nav{flex-wrap:wrap}.rail-history{flex-basis:100%;margin:0;padding:7px 10px}.rail-history small{display:none}}

@@ -69,6 +69,10 @@ try:
               'Experimental desk rating from dated public reviews' in page.locator('.catalog-card[data-site-path="floor/index.html"]').inner_text()
               and 'Manually invoked' in page.locator('.catalog-card[data-site-path="circulate/index.html"]').inner_text())
 
+        check('historical collection survives composed navigation',
+              page.locator('.case-nav .rail-history').is_visible()
+              and page.locator('.case-nav .rail-history').get_attribute('href').endswith('corpus/history.html'))
+
         check('historical corpus is the primary discovery path',
               page.locator('.overview-primary').get_attribute('data-site-path') == 'corpus/history.html'
               and page.locator('.trail-card').first.get_attribute('data-site-path') == 'corpus/history.html')

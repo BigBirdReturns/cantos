@@ -710,8 +710,9 @@ function composeRail(node,run3){
  const link=(attr,eyebrow,name,active)=>'<button class="nav case-link'+(active?' active':'')+'" '+attr+'><span><small class="ws-eyebrow">'+eyebrow+'</small><strong>'+name+'</strong></span></button>';
   const gpu=['Real decision - Run 3, 24 Sep 2026','GPU inference'],ex=['Worked example - synthetic','Invoice extraction'];
   const home=link('data-view="overview"','Cantos - overview','Overview',viewOn('overview'));
- nav.setAttribute('aria-label','Cantos overview and decision examples');
- nav.innerHTML=home+(run3
+ nav.setAttribute('aria-label','Cantos history and working examples');
+ const history='<a class="rail-history" data-site-path="corpus/history.html" href="'+sitePrefix+'corpus/history.html">Historical source collection<small>Measurements, issues, prices and research</small></a>';
+ nav.innerHTML=home+history+(run3
   ?link('data-view="decision"',gpu[0],gpu[1],viewOn('decision'))+link('data-open-workspace="example"',ex[0],ex[1],false)
   :link('data-open-workspace="run3"',gpu[0],gpu[1],false)+link('data-view="decision"',ex[0],ex[1],viewOn('decision')));
  const ev=node.querySelector('.rail-bottom .nav[data-view="evidence"]');if(ev)ev.classList.toggle('active',viewOn('evidence'));
