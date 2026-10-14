@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cantos · Historical record</title><link rel="stylesheet" href="history.css">
+</head>
+<body>
+<header><a class="brand" href="../index.html">CANTOS</a><nav><a href="../index.html">Home</a><a aria-current="page" href="history.html">History</a><a href="../compute/chapek/">Worked handover</a><a href="https://github.com/BigBirdReturns/cantos/blob/main/corpus/README.md">Source replay</a></nav></header>
+<main>
+<p class="eyebrow">PUBLIC SOURCE HISTORY</p><h1>Explore the historical record.</h1>
+<p class="lead">Search retained measurements, configurations, issues, prices and research. Open a source, compare its conditions, and carry the relevant evidence into your next job.</p>
+<section class="summary" aria-label="Corpus summary"><div><b id="total-count">—</b><span>captured source observations</span></div><div id="counts"></div></section>
+<section class="controls" aria-label="Search controls">
+<label>Collection<select id="kind-filter"><option value="benchmarks">Benchmarks</option><option value="all">All collections</option><option value="issues">Issues / PRs</option><option value="prices">GPU prices</option><option value="models">Models / demand</option><option value="traces">Workload traces</option><option value="research">Research / podcasts</option><option value="datasets">Datasets</option></select></label>
+<label>Source<select id="source-filter"><option value="">All sources</option></select></label>
+<label>Search<input id="search-input" type="search" placeholder="title, model, hardware, context…"></label>
+<label>Hardware<input id="hardware-filter" type="search"></label><label>Model<input id="model-filter" type="search"></label><label>Engine<input id="engine-filter" type="search"></label>
+<div class="actions"><button id="search-btn">Search</button><button id="stop-btn" disabled>Stop</button><button id="more-btn" hidden>Load more</button><button id="compare-btn" disabled>Compare</button><button id="export-btn" disabled>Export selected</button></div>
+</section>
+<p id="status" role="status" aria-live="polite">Loading manifest…</p>
+<div class="table-wrap"><table><thead><tr><th>Select</th><th>Source / kind</th><th>Date</th><th>Record</th><th>Hardware</th><th>Model</th><th>Value</th></tr></thead><tbody id="results-body"></tbody></table></div>
+</main>
+<dialog id="detail"><button class="close" id="detail-close" aria-label="Close">×</button><p class="eyebrow">SOURCE OBSERVATION</p><h2 id="detail-title"></h2><div id="detail-body"></div></dialog>
+<script src="history.js"></script></body></html>

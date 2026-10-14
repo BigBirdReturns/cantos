@@ -64,10 +64,14 @@ try:
               and page.locator('.foundation-strip').count() == 1)
         check('overview exposes the packet picker, two examples and actual work catalog',
               page.locator('#home-open-btn').is_visible()
-              and page.locator('.example-card').count() == 2 and page.locator('.catalog-card').count() == 9)
+              and page.locator('.example-card').count() == 2 and page.locator('.catalog-card').count() == 10)
         check('overview identifies the floor as experimental and circulation as manual',
               'Experimental desk rating from dated public reviews' in page.locator('.catalog-card[data-site-path="floor/index.html"]').inner_text()
               and 'Manually invoked' in page.locator('.catalog-card[data-site-path="circulate/index.html"]').inner_text())
+
+        check('historical corpus is the primary discovery path',
+              page.locator('.overview-primary').get_attribute('data-site-path') == 'corpus/history.html'
+              and page.locator('.trail-card').first.get_attribute('data-site-path') == 'corpus/history.html')
 
         prefix = '../' if '/app/Cantos.html' in page.evaluate('location.pathname') else ''
         paths = page.locator('[data-site-path]').evaluate_all('(nodes)=>nodes.map(n=>[n.dataset.sitePath,n.getAttribute("href")])')
@@ -78,7 +82,7 @@ try:
 
         before_hash = page.evaluate('C.pack(workspace).then(p=>p.sha256)')
         before_storage = page.evaluate('JSON.stringify(Object.entries(localStorage))')
-        page.locator('.trail-card[data-open-workspace="run3"]').click()
+        page.locator('.example-card[data-open-workspace="run3"]').click()
         wait(page, '!document.getElementById("decision-view").hidden && !busy')
         check('selecting the current packet opens decision directly without replacement confirmation',
               page.locator('#import-dialog').evaluate('(d)=>!d.open')

@@ -165,7 +165,7 @@ function view(name){
  const overviewShortcut=$('overview-shortcut');if(overviewShortcut)overviewShortcut.hidden=name==='overview';
  document.querySelector('.workspace-name').innerHTML=name==='overview'?'Cantos <span class="tag">OVERVIEW</span>':name==='decision'?'Research decision <span class="tag">SYNTHETIC EXAMPLE</span>':name==='evidence'?'GPU inference <span class="tag">RETAINED EXPERIMENT</span>':'Cantos / Second Run <span class="tag">SYSTEM MAP</span>';
   document.querySelector('.toolbar-actions').hidden=name!=='decision';document.querySelector('.rail-section').hidden=name!=='decision';$('reset-btn').hidden=name==='overview';
-  notice(name==='overview'?'Cantos overview. Start in Research Desk, open a packet, or explore a workspace example.':name==='evidence'?'Run 3 - historical measurement - list-price accounting.':name==='architecture'?'The page and estate components retain separate owners.':name==='decision'?'Invoice laboratory - select a task to inspect its retained answer.':'');
+  notice(name==='overview'?'Cantos overview. Explore the source history, open your work, or run a supported example.':name==='evidence'?'Run 3 - historical measurement - list-price accounting.':name==='architecture'?'The page and estate components retain separate owners.':name==='decision'?'Invoice laboratory - select a task to inspect its retained answer.':'');
 }
 function setControls(open){
  const main=document.querySelector('main'),panel=$('scenario-panel');

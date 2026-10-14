@@ -110,7 +110,7 @@
           <tr><td>tests</td><td>the fast suites of every instrument</td><td>pass and fail counts</td></tr>
         </tbody>
       </table>
-      <p class="note">Bulk outputs (raw artifacts, per-day price files, raw HTML, full delta) are kept as run artifacts, not committed. Frozen studies are hash-checked at the end of every run; the run fails if they moved.</p>
+      <p class="note">Each collection cycle retains its source artifacts, price snapshots and revision history. Completed studies keep their recorded identities.</p>
     </section>
 
     <section class="sec" id="probes" aria-labelledby="pr-h">

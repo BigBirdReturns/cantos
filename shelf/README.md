@@ -1,11 +1,10 @@
 # The shelf
 
-Claims about compute, filed side by side so that someone who was not there can see what
-each one supports and what it does not. This directory is the format, the checker, and
-the rule for pulling other people's shelves into yours. It is not a ranking, a rating, a
-registry of trust, or a service. Nothing here bills, expires, or phones home.
+Compare compute claims with their conditions, source evidence and recorded checks. The shelf supplies a portable card format and matching browser/CLI checks. Imported cards retain their original attribution and local review state.
 
-Live page: https://bigbirdreturns.github.io/axm-tools/shelf/
+Browse the [historical source collection](../corpus/history.html), then retain the specific evidence needed for a decision.
+
+Live page: https://bigbirdreturns.github.io/cantos/shelf/
 
 ## What is here
 

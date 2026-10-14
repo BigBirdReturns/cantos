@@ -1,9 +1,8 @@
 name: Publish Cantos to GitHub Pages
 
 # One workflow gates and deploys. The release gate holds publication until the exact
-# product sources at this SHA have passed the native CI workflow; only then is the site
-# staged and deployed. When the nightly circulation workflow is added, it must deploy in
-# its own run the same way, because pushes made with GITHUB_TOKEN never trigger this one.
+# product sources at this SHA have passed the Cantos qualification workflow; only then is
+# the site staged and deployed. GITHUB_TOKEN pushes do not trigger this workflow.
 
 on:
   push:

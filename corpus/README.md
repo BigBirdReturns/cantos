@@ -1,4 +1,12 @@
-# Observation corpus
+# Historical source collection
+
+[Browse the public historical record](https://bigbirdreturns.github.io/cantos/corpus/history.html). Filter measurements, configurations, producer issues, price observations, model metadata, trace summaries and research references. Open each source, compare its recorded conditions and export the selected evidence. The population and source dates come from [`history/manifest.json`](history/manifest.json).
+
+`build_history.py` projects complete retained row files into compressed, source-bound shards. It uses the existing `bulk_import.py` benchmark and issue owners; source metadata remains attributed to its original producer. Research is a bibliographic projection, with prose and recordings linked at their source. `--check` verifies the delivered shards and population. Public browsing uses the included `history.html`, `history.js` and `history.css` without a service account.
+
+## Continue locally
+
+The native collection tools below open an existing source bundle, replay its supported importer, and append the actual attempt to a portable work history. Benchmark execution and source re-import remain distinct actions.
 
 These readers use a retained bundle in place. They do not mutate its payload and
 do not create another index. The bundle's SQLite database remains the selection
@@ -6,10 +14,7 @@ index.
 
 ## The estate practices on itself
 
-The estate's capture lanes already write observations in its own
-`imported-observation@1` schema, each row carrying the producer's URL, revision,
-retrieval time and hash, plus the producer's configuration. `estate_bundle.py`
-turns those lanes into a Cantos collection without re-fetching anything:
+The estate's capture lanes write observations in its `imported-observation@1` schema. Each row carries the producer's URL, revision, retrieval time, hash and configuration. `estate_bundle.py` turns those lanes into a Cantos collection without re-fetching anything:
 
 ```powershell
 python -B -m corpus.estate_bundle --lane <session>\lanes\inferencex-history --lane <session>\lanes\mlperf --lane <session>\lanes\github-issues --out <new-collection>

@@ -7,16 +7,16 @@ Open `index.html` for the explanation; `app.html` is the entire original Researc
 ## First use
 
 1. Open the working example. Select Client delivery, enter a reviewer and rationale, record the review, and freeze a baseline report.
-2. Select Start here, then Change the contract to extraction.
-3. Select Record recomputation, then Draft a successor client note.
-4. Return to Client delivery, record a fresh review, and freeze the revised report. The earlier report remains historical.
-5. Save packet before closing. Open packet restores that working history on the next visit.
+2. Select Start here, then change the contract to extraction.
+3. Select Record recomputation, then draft a successor client note.
+4. Return to Client delivery, record a fresh review, and freeze the revised report.
+5. Save the packet before closing; opening it restores the working history.
 
 `examples/` contains two synthetic report generations, their common restorable packet, a fictional diligence report and input templates. The 24 invoices, outputs, timing and bills are authored examples. They establish software behavior, not measured hardware performance. Existing attributed public-page observations in the app are dated, not a live feed.
 
 ## Real use and privacy
 
-Download `app.html` using the page button; open the single file in a current desktop browser. For confidential data use a saved copy on an approved device. Create a blank workspace, admit permissioned sources, set an acceptance policy and import runs using the examples and `CONTRACTS.md`. Arbitrary file import retains identity; it does not infer task correctness. Native BEP runner compatibility has not been established.
+Download `app.html` using the page button and open the single file in a current desktop browser. For confidential data use a saved copy on an approved device. Create a blank workspace, admit permissioned sources, set an acceptance policy and import runs using the examples and `CONTRACTS.md`. Arbitrary file import retains identity; task correctness remains subject to the acceptance policy. Native BEP runner compatibility has not been established.
 
 The application keeps working data in memory only. Save before closing. Full packets include entered text and task outputs; use its encrypted backup option where appropriate. Names entered as reviewers are attributed, not authenticated. There is no multi-user account, automatic persistence, news collection, model execution, automatic website publication, client notification or live dependency-cut test. The application makes no backend, analytics or model request; the static host receives normal page requests.
 

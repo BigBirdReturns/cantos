@@ -46,17 +46,17 @@ li{margin:.25rem 0}
 <body><a href="#main" class="skip-link">Skip to main content</a>
 <main id="main">
 <h1>The shelf</h1>
-<p class="lede">Claims about compute, filed side by side so that someone who was not there can see what each one supports and what it does not. A card format, a checker with no dependencies, and a rule for pulling other people's shelves into yours without granting them standing. Nothing here ranks.</p>
-<p class="small">Everything on this page runs in your browser from committed plain text. No account, no upload, no analytics. The same checks run from the command line with <code>python shelf.py</code>; shared examples and generated rule-boundary cases check that both engines agree.</p>
+<p class="lede">Claims about compute, filed side by side with their conditions, evidence and limits. Cards, a dependency-free checker and an import rule let readers compare records without treating them as rankings.</p>
+<p class="small">This page runs in your browser from committed plain text. The same checks run from the command line with <code>python shelf.py</code>; shared examples and generated boundary cases keep both engines aligned.</p>
 
 <h2 id="on-it">What is on it</h2>
-<p>Each card answers five questions: <b>(a)</b> what exactly is claimed, under which conditions, over what period; <b>(b)</b> what population, denominator and acceptance rule produced the number; <b>(c)</b> who observed, who controlled the conditions, who granted access, who paid, and whether the observer benefits from the outcome; <b>(d)</b> what a reader can obtain; <b>(e)</b> whether anyone inspected the evidence, recomputed the result, or independently repeated the operation, kept as three separate facts. Measured, imported, modeled and attributed are four separate flags, never one grade. Unknown is null, never a guess.</p>
+<p>Each card records the claim, conditions and period; population, denominator and acceptance rule; observers, control, access, payment and observer benefit; available materials; and three separate checks for inspection, recomputation and independent repetition. Measured, imported, modeled and attributed are separate flags, with unknown represented as null.</p>
 <div id="load-fail" class="fail" hidden></div>
 <div class="wrap"><table id="cards"><thead><tr><th>hub</th><th>card</th><th>spine</th><th>M I Mo A</th><th>inspected / recomputed / repeated</th></tr></thead><tbody></tbody></table></div>
 <p class="small">M = measured, I = imported, Mo = modeled, A = attributed. <code>+</code> true, <code>-</code> false, <code>?</code> unknown. Flags describe the card's own evidence; they do not rate it.</p>
 
 <h2 id="which">Which cards can support a question?</h2>
-<p>State the unit the answer would need, the period it is about, and whether it must be a measurement. Each card either supports the question, bounded by its own limits and recorded checks, or cannot be used, with the rule that says why. This is the check a stranger performed by hand on 2026-09-24; here it is mechanical.</p>
+<p>State the required unit, period and measurement basis. The checker reports whether a card supports that reading within its recorded limits and checks, and identifies the rule when it cannot.</p>
 <form id="which-form" class="two">
   <label>Unit the answer needs<select id="w-unit"></select></label>
   <label>Period (YYYY, YYYY-MM, YYYY-MM-DD or START..END; blank for any)<input type="text" id="w-period" value="2026-09" placeholder="2026-09"></label>
@@ -66,7 +66,7 @@ li{margin:.25rem 0}
 <div id="which-out"></div>
 
 <h2 id="check">Check a filing</h2>
-<p>Paste a card. The check reports whether it carries the five answers, the four flags, the three checks, a publication-date basis, an observer-benefit record and explicit hourly units. It cannot establish that a cited source warrants a value, that a populated disclosure is complete, or that a claim is true.</p>
+<p>Paste a card to check its required fields, publication-date basis, observer-benefit record and explicit hourly units. The checker describes the record; source warrant, disclosure completeness and truth remain matters for review.</p>
 <form id="check-form">
   <textarea id="c-text" spellcheck="false" placeholder='{"id": "your-card-id", ...}'></textarea>
   <div class="row"><button type="submit">Check</button><button type="button" class="quiet" id="c-skeleton">Load the skeleton</button></div>
@@ -74,7 +74,7 @@ li{margin:.25rem 0}
 <div id="check-out"></div>
 
 <h2 id="compose">Compose two cards</h2>
-<p>Records combine only when identities, periods, scopes and assumptions agree. Pick two cards and a purpose; the engine either refuses with the rule it comes from, or finds no refusal. Finding none is not admission.</p>
+<p>Records combine when identities, periods, scopes and assumptions agree. Pick two cards and a purpose; the engine reports the applicable rule and whether the declared combination clears its checks; admission remains a separate decision.</p>
 <form id="compose-form" class="two">
   <label>Card A<select id="p-a"></select></label>
   <label>Card B<select id="p-b"></select></label>

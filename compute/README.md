@@ -1,6 +1,6 @@
 # Second Run Compute · release 0.3
 
-**Compare rental allocations, model ownership, price reusable work, and keep the evidence you already produce.**
+**Compare rental allocations, model ownership and reusable work while retaining the evidence you already produce.**
 
 Open `index.html`. The public application works without an account, installation or application network requests. It includes four provider price snapshots, three economic models, saved decisions, source inspection and a private local-runner connection path. All core calculations run locally. This is a compute decision desk, not a broker or scheduler.
 

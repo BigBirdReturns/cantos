@@ -1,6 +1,6 @@
 # Hot Aisle workload report · 2.3.0
 
-**Drop your vLLM result. One figure. A receipt anyone can recompute.**
+Submit a vLLM result, retain its conditions and produce a recomputable receipt.
 
 Live: https://bigbirdreturns.github.io/axm-tools/hot-aisle/
 

@@ -638,3 +638,14 @@ html.cascade .task-cell{view-transition-name:var(--vt)!important}
 @media(max-width:440px){.overview-view{padding-inline:12px}.overview-hero{padding:21px 16px}.program-grid,.catalog-grid,.example-grid{grid-template-columns:minmax(0,1fr)}.program-card{border-right:0;border-bottom:1px solid var(--line)}.program-card:last-child{border-bottom:0}.program-card:nth-child(2){border-bottom:1px solid var(--line)}.catalog-card{padding:14px}.example-card{min-height:0}.overview-actions>*{width:100%;justify-content:center}}
 @media(max-width:720px){.desk-toolbar{flex-wrap:wrap}.overview-shortcut{margin-left:auto}.workspace-name{min-width:0}}
 @media(max-width:1000px){.rail{flex-wrap:wrap;row-gap:8px}.case-nav{min-width:0;flex-wrap:wrap}.rail-bottom{margin-left:auto;flex-shrink:0}}
+
+/* Shared presentation with the technical overview and historical reader. */
+:root{--gold:#84dccc;--gold-ink:#bceee5;--ink:#edf2f0;--muted:#abb9b5;--dim:#899b95}
+.overview-hero{background:transparent;box-shadow:none;border:0;border-bottom:1px solid var(--line);padding:30px 24px 36px}
+.overview-hero h1{font-family:var(--sans);font-size:clamp(32px,4vw,52px);font-weight:350;line-height:1.08;letter-spacing:-.035em;max-width:950px}
+.overview-hero p{max-width:920px;font-size:17px;line-height:1.55}
+.overview-hero .overview-ownership{font-size:13px;font-weight:400;color:var(--muted)}
+.wordmark{font-family:var(--sans);font-size:14px;font-weight:600;letter-spacing:.2em}
+.rail-history{display:block;margin:6px 0 12px;padding:12px;color:var(--gold);border-left:2px solid var(--gold);font-size:13px}
+.rail-history small{display:block;color:var(--muted);font-size:10px;margin-top:3px}
+@media(max-width:720px){.overview-hero{padding:18px 0 26px}.overview-hero h1{font-size:32px}.overview-hero p{font-size:15px}.rail-history{margin:0;padding:8px;font-size:11px}.rail-history small{display:none}}

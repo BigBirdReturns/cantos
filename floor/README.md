@@ -1,6 +1,6 @@
-# floor — a written floor for a properly set up neocloud, and every reviewed shop's distance from it
+# floor
 
-Built 2026-09-29 from the public tail captured that day (ClusterMAX reviews and rubric, SemiAnalysis expectations pages and audit tool, InferenceX and MLPerf, provider status histories, OpenComputePrices) and from this project's own Run 1 to Run 3 telemetry. Read [index.html](index.html) for the table, or the files directly:
+A written floor for a properly set up neocloud and each reviewed shop's distance from it. Built 2026-09-29 from the public tail captured that day (ClusterMAX reviews and rubric, SemiAnalysis expectations pages and audit tool, InferenceX and MLPerf, provider status histories, OpenComputePrices) and this project's Run 1 to Run 3 telemetry. Read [index.html](index.html) for the table, or the files directly:
 
 | File | What it is |
 |---|---|

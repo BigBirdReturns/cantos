@@ -1,0 +1,991 @@
+{
+  "scope": "Every tracked or candidate HTML surface, from document title through visible body; source snapshots and native identities are preserved.",
+  "pages": [
+    {
+      "path": "app/Cantos.html",
+      "role": "generated-current-page",
+      "owner": "app/source/index.template.html",
+      "title": "CANTOS \u00b7 AI workflow software for continuing work",
+      "visible_characters": 11981,
+      "linked_targets": 26
+    },
+    {
+      "path": "app/source/index.template.html",
+      "role": "presentation-source",
+      "owner": "app/source/index.template.html",
+      "title": "CANTOS \u00b7 AI workflow software for continuing work",
+      "visible_characters": 11981,
+      "linked_targets": 26
+    },
+    {
+      "path": "circulate/fixtures/newsletter/openai-chip-team-is-now-serious.html",
+      "role": "retained-source-or-fixture",
+      "owner": null,
+      "title": "OpenAI Chip Team Is Now Serious - by Dylan Patel",
+      "visible_characters": 4376,
+      "linked_targets": 13
+    },
+    {
+      "path": "circulate/fixtures/newsletter/semianalysis-compliance-policies.html",
+      "role": "retained-source-or-fixture",
+      "owner": null,
+      "title": "Compliance Policies - by Dylan Patel - SemiAnalysis",
+      "visible_characters": 5624,
+      "linked_targets": 16
+    },
+    {
+      "path": "circulate/fixtures/newsletter/short-report-nvidia-supplier-cut.html",
+      "role": "retained-source-or-fixture",
+      "owner": null,
+      "title": "Short Report: Nvidia Supplier Cut Out Of Next Generation Hopper GPUs - Nvidia Represents Up To 55% of Revenue",
+      "visible_characters": 5304,
+      "linked_targets": 14
+    },
+    {
+      "path": "circulate/fixtures/status/radiant/history_2026-september.html",
+      "role": "retained-source-or-fixture",
+      "owner": null,
+      "title": "History | Radiant AI Cloud",
+      "visible_characters": 57387,
+      "linked_targets": 42
+    },
+    {
+      "path": "circulate/fixtures/status/verda/incident_1010924.html",
+      "role": "retained-source-or-fixture",
+      "owner": null,
+      "title": "An issue is affecting our S... | Verda",
+      "visible_characters": 4552,
+      "linked_targets": 10
+    },
+    {
+      "path": "circulate/fixtures/status/verda/incident_1050614.html",
+      "role": "retained-source-or-fixture",
+      "owner": null,
+      "title": "Serverless container gatewa... | Verda",
+      "visible_characters": 4537,
+      "linked_targets": 11
+    },
+    {
+      "path": "circulate/fixtures/status/verda/incident_1069624.html",
+      "role": "retained-source-or-fixture",
+      "owner": null,
+      "title": "Serverless container upload... | Verda",
+      "visible_characters": 3799,
+      "linked_targets": 10
+    },
+    {
+      "path": "circulate/fixtures/status/verda/incident_1073923.html",
+      "role": "retained-source-or-fixture",
+      "owner": null,
+      "title": "Service Disruption Affectin... | Verda",
+      "visible_characters": 4735,
+      "linked_targets": 9
+    },
+    {
+      "path": "circulate/fixtures/status/verda/incidents_2026-07_2026-09.html",
+      "role": "retained-source-or-fixture",
+      "owner": null,
+      "title": "Previous incidents | Verda",
+      "visible_characters": 5392,
+      "linked_targets": 14
+    },
+    {
+      "path": "circulate/index.html",
+      "role": "current-page",
+      "owner": "circulate/index.html",
+      "title": "Cantos circulate",
+      "visible_characters": 3748,
+      "linked_targets": 11
+    },
+    {
+      "path": "clustermax-challenge/README.html",
+      "role": "generated-current-page",
+      "owner": "clustermax-challenge/README.md",
+      "title": "SecondRun \u00b7 ClusterMAX Challenge | Cantos",
+      "visible_characters": 25852,
+      "linked_targets": 20
+    },
+    {
+      "path": "clustermax-challenge/SUBMITTING.html",
+      "role": "generated-current-page",
+      "owner": "clustermax-challenge/SUBMITTING.md",
+      "title": "Submitting to the ClusterMAX challenge | Cantos",
+      "visible_characters": 16894,
+      "linked_targets": 14
+    },
+    {
+      "path": "clustermax-challenge/index.html",
+      "role": "current-page",
+      "owner": "clustermax-challenge/index.html",
+      "title": "ClusterMAX Challenge \u00b7 SecondRun",
+      "visible_characters": 7549,
+      "linked_targets": 24
+    },
+    {
+      "path": "clustermax-challenge/intake/run3-20260924/calculator-report.html",
+      "role": "retained-study-or-example",
+      "owner": null,
+      "title": "Workload cost report",
+      "visible_characters": 4218,
+      "linked_targets": 0
+    },
+    {
+      "path": "clustermax-challenge/intake/run3-20260924/index.html",
+      "role": "retained-study-or-example",
+      "owner": null,
+      "title": "SecondRun: real Run 3 intake",
+      "visible_characters": 797,
+      "linked_targets": 4
+    },
+    {
+      "path": "clustermax-challenge/launch/README.html",
+      "role": "retained-study-or-example",
+      "owner": null,
+      "title": "ClusterMAX 3.0 launch evidence | Cantos",
+      "visible_characters": 3722,
+      "linked_targets": 13
+    },
+    {
+      "path": "clustermax-challenge/launch/index.html",
+      "role": "retained-study-or-example",
+      "owner": null,
+      "title": "ClusterMAX 3.0 evidence ledger | SecondRun",
+      "visible_characters": 7392,
+      "linked_targets": 16
+    },
+    {
+      "path": "clustermax-challenge/launch/release-3.0/raw/cloudreview.html",
+      "role": "retained-source-capture",
+      "owner": null,
+      "title": "Best GPU Clouds 2026: Top 85 GPU Cloud Providers Ranked | ClusterMAX\u2122 2.0 + 2.1 | ClusterMAX by SemiAnalysis",
+      "visible_characters": 6719,
+      "linked_targets": 135
+    },
+    {
+      "path": "clustermax-challenge/launch/release-3.0/raw/clustermax-home.html",
+      "role": "retained-source-capture",
+      "owner": null,
+      "title": "GPU Cloud ClusterMAX\u2122 Rating & Ranking System | SemiAnalysis",
+      "visible_characters": 4266,
+      "linked_targets": 50
+    },
+    {
+      "path": "clustermax-challenge/launch/release-3.0/raw/clustermax-v3.0.html",
+      "role": "retained-source-capture",
+      "owner": null,
+      "title": "GPU Cloud ClusterMAX\u2122 Rating & Ranking System | SemiAnalysis",
+      "visible_characters": 4068,
+      "linked_targets": 51
+    },
+    {
+      "path": "clustermax-challenge/launch/release-3.0/raw/clustermax-v3.html",
+      "role": "retained-source-capture",
+      "owner": null,
+      "title": "GPU Cloud ClusterMAX\u2122 Rating & Ranking System | SemiAnalysis",
+      "visible_characters": 4068,
+      "linked_targets": 51
+    },
+    {
+      "path": "clustermax-challenge/research/round2/index.html",
+      "role": "retained-study-or-example",
+      "owner": null,
+      "title": "SecondRun: research round 2",
+      "visible_characters": 2449,
+      "linked_targets": 3
+    },
+    {
+      "path": "clustermax-challenge/retrospective/PLAN.html",
+      "role": "retained-study-or-example",
+      "owner": null,
+      "title": "Retrospective study R1: do ClusterMAX medals track providers' own public incident records? | Cantos",
+      "visible_characters": 3959,
+      "linked_targets": 6
+    },
+    {
+      "path": "clustermax-challenge/retrospective/READOUT.html",
+      "role": "retained-study-or-example",
+      "owner": null,
+      "title": "R1: what the first collection establishes | Cantos",
+      "visible_characters": 6425,
+      "linked_targets": 9
+    },
+    {
+      "path": "clustermax-challenge/retrospective/incidents/INELIGIBLE.html",
+      "role": "retained-study-or-example",
+      "owner": null,
+      "title": "R1 ineligible / not-collected providers | Cantos",
+      "visible_characters": 9566,
+      "linked_targets": 6
+    },
+    {
+      "path": "clustermax-challenge/retrospective/ratings/raw/clustermax-home.html",
+      "role": "retained-source-capture",
+      "owner": null,
+      "title": "GPU Cloud ClusterMAX\u2122 Rating & Ranking System | SemiAnalysis",
+      "visible_characters": 4266,
+      "linked_targets": 50
+    },
+    {
+      "path": "clustermax-challenge/retrospective/ratings/raw/clustermax-v2.1-page.html",
+      "role": "retained-source-capture",
+      "owner": null,
+      "title": "ClusterMAX 2.1 \u2014 Updated Tier Rankings & New Entrants | ClusterMAX by SemiAnalysis",
+      "visible_characters": 4876,
+      "linked_targets": 53
+    },
+    {
+      "path": "clustermax-challenge/retrospective/ratings/raw/coreweave-news.html",
+      "role": "retained-source-capture",
+      "owner": null,
+      "title": "CoreWeave Achieves SemiAnalysis\u2019 Platinum ClusterMAX\u2122 Rating | CoreWeave",
+      "visible_characters": 12606,
+      "linked_targets": 171
+    },
+    {
+      "path": "clustermax-challenge/retrospective/results/R1-result.html",
+      "role": "retained-study-or-example",
+      "owner": null,
+      "title": "R1 result: do ClusterMAX medals track providers\u2019 own public incident records? | Cantos",
+      "visible_characters": 13585,
+      "linked_targets": 6
+    },
+    {
+      "path": "clustermax-challenge/submissions/templates/FIELDS.html",
+      "role": "current-page",
+      "owner": "clustermax-challenge/submissions/templates/FIELDS.html",
+      "title": "Template field reference | Cantos",
+      "visible_characters": 16714,
+      "linked_targets": 12
+    },
+    {
+      "path": "clustermax-challenge/tests/fixtures/status_modes/radiant/history_2026-january.html",
+      "role": "retained-source-or-fixture",
+      "owner": null,
+      "title": "January 2026 | History | Radiant AI Cloud",
+      "visible_characters": 57912,
+      "linked_targets": 43
+    },
+    {
+      "path": "clustermax-challenge/tests/fixtures/status_modes/radiant/history_2026-march.html",
+      "role": "retained-source-or-fixture",
+      "owner": null,
+      "title": "March 2026 | History | Radiant AI Cloud",
+      "visible_characters": 59246,
+      "linked_targets": 45
+    },
+    {
+      "path": "clustermax-challenge/tests/fixtures/status_modes/together-ai/incidents_2026-07_2026-09.html",
+      "role": "retained-source-or-fixture",
+      "owner": null,
+      "title": "Previous incidents | Together AI",
+      "visible_characters": 3053,
+      "linked_targets": 10
+    },
+    {
+      "path": "clustermax-challenge/tests/fixtures/status_modes/verda/incident_901666.html",
+      "role": "retained-source-or-fixture",
+      "owner": null,
+      "title": "Serverless Container Servic... | Verda",
+      "visible_characters": 3728,
+      "linked_targets": 9
+    },
+    {
+      "path": "clustermax-challenge/tests/fixtures/status_modes/verda/incident_905600.html",
+      "role": "retained-source-or-fixture",
+      "owner": null,
+      "title": "Storage volume reachability... | Verda",
+      "visible_characters": 4422,
+      "linked_targets": 9
+    },
+    {
+      "path": "clustermax-challenge/tests/fixtures/status_modes/verda/incident_909828.html",
+      "role": "retained-source-or-fixture",
+      "owner": null,
+      "title": "Instance provisioning degra... | Verda",
+      "visible_characters": 4553,
+      "linked_targets": 11
+    },
+    {
+      "path": "clustermax-challenge/tests/fixtures/status_modes/verda/incidents_2026-04_2026-06.html",
+      "role": "retained-source-or-fixture",
+      "owner": null,
+      "title": "Previous incidents | Verda",
+      "visible_characters": 4643,
+      "linked_targets": 13
+    },
+    {
+      "path": "compute/adapters/workload-report-v2.html",
+      "role": "pinned-native-owner",
+      "owner": "compute/adapters/workload-report-v2.html",
+      "title": "Hot Aisle \u00b7 Workload report",
+      "visible_characters": 3922,
+      "linked_targets": 12
+    },
+    {
+      "path": "compute/capacity/index.html",
+      "role": "generated-current-page",
+      "owner": "compute/capacity/template.html",
+      "title": "Cantos | Dedicated capacity",
+      "visible_characters": 4561,
+      "linked_targets": 3
+    },
+    {
+      "path": "compute/capacity/template.html",
+      "role": "presentation-source",
+      "owner": "compute/capacity/template.html",
+      "title": "Cantos | Dedicated capacity",
+      "visible_characters": 4561,
+      "linked_targets": 3
+    },
+    {
+      "path": "compute/chapek/index.html",
+      "role": "current-page",
+      "owner": "compute/chapek/index.html",
+      "title": "Cantos | What the next operator inherits",
+      "visible_characters": 9962,
+      "linked_targets": 6
+    },
+    {
+      "path": "compute/community/r/01b79294920db48a9ee46d341f6997d0350e64c941cf6d5f51d0d21861288003.html",
+      "role": "generated-result-view",
+      "owner": "compute/community/cli.cjs",
+      "title": "t3_refactor_god_function_002 \u00b7 claude-haiku-4-5 \u00b7 Second Run result",
+      "visible_characters": 454,
+      "linked_targets": 0
+    },
+    {
+      "path": "compute/community/r/071b5614bf0b26b0b689b353aa83bfc5f4886664d05ccd724f8f5ce6067466c8.html",
+      "role": "generated-result-view",
+      "owner": "compute/community/cli.cjs",
+      "title": "t0_rename_symbol_003 \u00b7 claude-fable-5 \u00b7 Second Run result",
+      "visible_characters": 434,
+      "linked_targets": 0
+    },
+    {
+      "path": "compute/community/r/07ebe024b12aef5fb44f1a64676b5c302747746fa0593f00a6576278b1404a84.html",
+      "role": "generated-result-view",
+      "owner": "compute/community/cli.cjs",
+      "title": "almanac_rule_boundary_001 \u00b7 claude-haiku-4-5 \u00b7 Second Run result",
+      "visible_characters": 448,
+      "linked_targets": 0
+    },
+    {
+      "path": "compute/community/r/188a581706e36421d0c0c7af5d1f5a99a589153915fd88eda98dd946db0ddf83.html",
+      "role": "generated-result-view",
+      "owner": "compute/community/cli.cjs",
+      "title": "replay03_validate_patterns \u00b7 claude-haiku-4-5 \u00b7 Second Run result",
+      "visible_characters": 450,
+      "linked_targets": 0
+    },
+    {
+      "path": "compute/community/r/1a5cf1f40675caefe87dcc046c2b97470e3df9a8faaca8d5e2c0c6f5700c84ed.html",
+      "role": "generated-result-view",
+      "owner": "compute/community/cli.cjs",
+      "title": "almanac_exception_class_001 \u00b7 claude-haiku-4-5 \u00b7 Second Run result",
+      "visible_characters": 452,
+      "linked_targets": 0
+    },
+    {
+      "path": "compute/community/r/1f2d69fdec2e4bf8b2409c7e0aef295e835d93ab5951b39bfbc4f660b42d91c5.html",
+      "role": "generated-result-view",
+      "owner": "compute/community/cli.cjs",
+      "title": "sonnet \u00b7 Solo baseline \u00b7 Second Run result",
+      "visible_characters": 404,
+      "linked_targets": 0
+    },
+    {
+      "path": "compute/community/r/1ff0a5d08eb527b88cdc87bc0f849eee94ebe3ad36e620269cbd95f79a94eb6d.html",
+      "role": "generated-result-view",
+      "owner": "compute/community/cli.cjs",
+      "title": "b2_grade_attrs_1567_setattr_mro \u00b7 claude-fable-5 \u00b7 Second Run result",
+      "visible_characters": 456,
+      "linked_targets": 0
+    },
+    {
+      "path": "compute/community/r/21a339e40dea10466024a2c9fa43a4ca007b21c2fade3106bc57df92c21b2fc0.html",
+      "role": "generated-result-view",
+      "owner": "compute/community/cli.cjs",
+      "title": "t1_simple_refactor_003 \u00b7 claude-fable-5 \u00b7 Second Run result",
+      "visible_characters": 438,
+      "linked_targets": 0
+    },
+    {
+      "path": "compute/community/r/27e74e1231e414dac441aed312c7e251877a29e7592780711d34ae7560a8a041.html",
+      "role": "generated-result-view",
+      "owner": "compute/community/cli.cjs",
+      "title": "MI300X \u00b7 graded coding \u00b7 Default attention selection \u00b7 Second Run result",
+      "visible_characters": 464,
+      "linked_targets": 0
+    },
+    {
+      "path": "compute/community/r/296f1fe0cbc8abe33f7f1bdffe983938fcdde88c9e9ea21899e3f3735c998ec4.html",
+      "role": "generated-result-view",
+      "owner": "compute/community/cli.cjs",
+      "title": "opus \u00b7 Solo baseline \u00b7 Second Run result",
+      "visible_characters": 400,
+      "linked_targets": 0
+    },
+    {
+      "path": "compute/community/r/2c2969ed922da21a92f915a521b3dc4b955c5f0486747e19f2d3b874f12d9073.html",
+      "role": "generated-result-view",
+      "owner": "compute/community/cli.cjs",
+      "title": "t3_due_date_shift_001 \u00b7 claude-haiku-4-5 \u00b7 Second Run result",
+      "visible_characters": 440,
+      "linked_targets": 0
+    },
+    {
+      "path": "compute/community/r/2c93809f665e8cd2c201a1dfbf92841b1059db46bd4f48b0271dee44986ac644.html",
+      "role": "generated-result-view",
+      "owner": "compute/community/cli.cjs",
+      "title": "t3_parse_duration_004 \u00b7 claude-haiku-4-5 \u00b7 Second Run result",
+      "visible_characters": 440,
+      "linked_targets": 0
+    },
+    {
+      "path": "compute/community/r/2d2782ccd0e15ccb848401f259af5c5edb1baa339e28425e2c78c12c684fec7b.html",
+      "role": "generated-result-view",
+      "owner": "compute/community/cli.cjs",
+      "title": "task02_wildcard \u00b7 claude-haiku-4-5 \u00b7 Second Run result",
+      "visible_characters": 428,
+      "linked_targets": 0
+    },
+    {
+      "path": "compute/community/r/323ec3c29b9133d3034cfa9b4d19d01cc81fe57bc208089483b597bb0b65aa05.html",
+      "role": "generated-result-view",
+      "owner": "compute/community/cli.cjs",
+      "title": "t2_multi_file_patch_003 \u00b7 claude-haiku-4-5 \u00b7 Second Run result",
+      "visible_characters": 444,
+      "linked_targets": 0
+    },
+    {
+      "path": "compute/community/r/331475abdcbf299de4cb249bdec87ab272efdde3f46d1688a4653b387143051c.html",
+      "role": "generated-result-view",
+      "owner": "compute/community/cli.cjs",
+      "title": "replay04_count_matches \u00b7 claude-haiku-4-5 \u00b7 Second Run result",
+      "visible_characters": 442,
+      "linked_targets": 0
+    },
+    {
+      "path": "compute/community/r/38f6a07b66c64194b37078af9aa52ef6c2588e3c1a93765c63ea5952910ccc32.html",
+      "role": "generated-result-view",
+      "owner": "compute/community/cli.cjs",
+      "title": "t3_window_limit_001 \u00b7 claude-haiku-4-5 \u00b7 Second Run result",
+      "visible_characters": 436,
+      "linked_targets": 0
+    },
+    {
+      "path": "compute/community/r/3d2886dd5c16ee9bae3ad19ca90f84bbbf00159412ee0b24f898bac15e0bb3c2.html",
+      "role": "generated-result-view",
+      "owner": "compute/community/cli.cjs",
+      "title": "t2_fix_failing_test_001 \u00b7 claude-haiku-4-5 \u00b7 Second Run result",
+      "visible_characters": 444,
+      "linked_targets": 0
+    },
+    {
+      "path": "compute/community/r/3e2349a980d6e241418d88751a2739dca30d70e5ca52e7f4975829f9ba5e3417.html",
+      "role": "generated-result-view",
+      "owner": "compute/community/cli.cjs",
+      "title": "H100 \u00b7 graded coding \u00b7 Default attention selection \u00b7 Second Run result",
+      "visible_characters": 460,
+      "linked_targets": 0
+    },
+    {
+      "path": "compute/community/r/3f3522bb2aa6081d57902acdbf998ffd35a01f3d0cb3b766f4b57d0e065ad32a.html",
+      "role": "generated-result-view",
+      "owner": "compute/community/cli.cjs",
+      "title": "task02_wildcard \u00b7 claude-haiku-4-5 \u00b7 Second Run result",
+      "visible_characters": 428,
+      "linked_targets": 0
+    },
+    {
+      "path": "compute/community/r/488efa54e90bde6d4b619172445ede06a5b7a823a6fa9deb21b3714db92f8ac3.html",
+      "role": "generated-result-view",
+      "owner": "compute/community/cli.cjs",
+      "title": "task02_wildcard \u00b7 claude-sonnet-5 \u00b7 Second Run result",
+      "visible_characters": 426,
+      "linked_targets": 0
+    },
+    {
+      "path": "compute/community/r/4bb54c2ef657351f84e252cf606a680d1921912e07cbfd779aac279f383e6ed9.html",
+      "role": "generated-result-view",
+      "owner": "compute/community/cli.cjs",
+      "title": "replay02_charclass_filter \u00b7 claude-haiku-4-5 \u00b7 Second Run result",
+      "visible_characters": 448,
+      "linked_targets": 0
+    },
+    {
+      "path": "compute/community/r/518763f8c20141ae5decbdceadd888be7e16c8849b27bb18c089ead7e4f95397.html",
+      "role": "generated-result-view",
+      "owner": "compute/community/cli.cjs",
+      "title": "task09_pattern_class \u00b7 claude-haiku-4-5 \u00b7 Second Run result",
+      "visible_characters": 438,
+      "linked_targets": 0
+    },
+    {
+      "path": "compute/community/r/53554c66f76527dddab78c5305d028b1700d4dc2ba4b155335e389ccfdcc777b.html",
+      "role": "generated-result-view",
+      "owner": "compute/community/cli.cjs",
+      "title": "t3_sql_injection_fix_001 \u00b7 claude-haiku-4-5 \u00b7 Second Run result",
+      "visible_characters": 446,
+      "linked_targets": 0
+    },
+    {
+      "path": "compute/community/r/5a3527a0b4a2eed17318fbf7646082cee256f9621d6888bde0e1f4ea284e8d5d.html",
+      "role": "generated-result-view",
+      "owner": "compute/community/cli.cjs",
+      "title": "t1_unit_test_gen_002 \u00b7 claude-haiku-4-5 \u00b7 Second Run result",
+      "visible_characters": 438,
+      "linked_targets": 0
+    },
+    {
+      "path": "compute/community/r/5ca3a1d44131c0933bab411ff694a257f3d456f55e31f196c15bc124e996cacf.html",
+      "role": "generated-result-view",
+      "owner": "compute/community/cli.cjs",
+      "title": "t2_fix_failing_test_001 \u00b7 claude-fable-5 \u00b7 Second Run result",
+      "visible_characters": 440,
+      "linked_targets": 0
+    },
+    {
+      "path": "compute/community/r/60f1886ca38178f514c81df72d7009c8611fa7674ad32e6cad0cc9eeb85f2235.html",
+      "role": "generated-result-view",
+      "owner": "compute/community/cli.cjs",
+      "title": "t1_impl_from_docstring_001 \u00b7 claude-haiku-4-5 \u00b7 Second Run result",
+      "visible_characters": 450,
+      "linked_targets": 0
+    },
+    {
+      "path": "compute/community/r/62f120e63cd99c48424a94a6c3c6474876d584bb1fd3969b90a4ae51a52e7a72.html",
+      "role": "generated-result-view",
+      "owner": "compute/community/cli.cjs",
+      "title": "t4_plan_decomposition_001 \u00b7 claude-haiku-4-5 \u00b7 Second Run result",
+      "visible_characters": 448,
+      "linked_targets": 0
+    },
+    {
+      "path": "compute/community/r/655a150c5c5aecf8d850d980baa6710e4dcc8500e16b41bb72e90e5ab0958211.html",
+      "role": "generated-result-view",
+      "owner": "compute/community/cli.cjs",
+      "title": "t3_cross_module_bug_003 \u00b7 claude-haiku-4-5 \u00b7 Second Run result",
+      "visible_characters": 444,
+      "linked_targets": 0
+    },
+    {
+      "path": "compute/community/r/6e00bb97c61fd6bdd017319b67c08f4a52a82047a4693514ff58906057d84a20.html",
+      "role": "generated-result-view",
+      "owner": "compute/community/cli.cjs",
+      "title": "replay03_validate_patterns \u00b7 claude-haiku-4-5 \u00b7 Second Run result",
+      "visible_characters": 450,
+      "linked_targets": 0
+    },
+    {
+      "path": "compute/community/r/80332ee9dc8691ab67ae0cf1008cdccaf942613d6da78113fd0802728fe07278.html",
+      "role": "generated-result-view",
+      "owner": "compute/community/cli.cjs",
+      "title": "t2_ossrf_fnmatch_charclass \u00b7 claude-haiku-4-5 \u00b7 Second Run result",
+      "visible_characters": 450,
+      "linked_targets": 0
+    },
+    {
+      "path": "compute/community/r/8486e34944db49942d178ff5481a62dc5ea33ed604fdcb33d88609caaa3f43aa.html",
+      "role": "generated-result-view",
+      "owner": "compute/community/cli.cjs",
+      "title": "t3_parse_duration_004 \u00b7 claude-haiku-4-5 \u00b7 Second Run result",
+      "visible_characters": 440,
+      "linked_targets": 0
+    },
+    {
+      "path": "compute/community/r/962aae3b9eb9bc21ea42c90baf6f779dffbe7c27ea9c0b14aa2d1cf7291d4eef.html",
+      "role": "generated-result-view",
+      "owner": "compute/community/cli.cjs",
+      "title": "t2_api_integration_002 \u00b7 claude-haiku-4-5 \u00b7 Second Run result",
+      "visible_characters": 442,
+      "linked_targets": 0
+    },
+    {
+      "path": "compute/community/r/9c52aaaead1fd252d3831583b70a18c26c506499a259fdcf966f9d71038c156c.html",
+      "role": "generated-result-view",
+      "owner": "compute/community/cli.cjs",
+      "title": "replay02_charclass_filter \u00b7 claude-haiku-4-5 \u00b7 Second Run result",
+      "visible_characters": 448,
+      "linked_targets": 0
+    },
+    {
+      "path": "compute/community/r/a188b3c5483a640beea7b35461a43f65812f4c6dd091749beb5c43bf4583c803.html",
+      "role": "generated-result-view",
+      "owner": "compute/community/cli.cjs",
+      "title": "MI300X \u00b7 graded coding \u00b7 Forced ROCM_AITER_FA \u00b7 Second Run result",
+      "visible_characters": 450,
+      "linked_targets": 0
+    },
+    {
+      "path": "compute/community/r/a26d51fa92498e5fb49e507c087ee36b1a32c623b489e6887234dc2c89d8da06.html",
+      "role": "generated-result-view",
+      "owner": "compute/community/cli.cjs",
+      "title": "task10_topo_endmin \u00b7 claude-haiku-4-5 \u00b7 Second Run result",
+      "visible_characters": 434,
+      "linked_targets": 0
+    },
+    {
+      "path": "compute/community/r/a32b8637a8619b7743821599a28cd78bd4e1c66be001ece5124432b862fa8253.html",
+      "role": "generated-result-view",
+      "owner": "compute/community/cli.cjs",
+      "title": "t0_format_whitespace_002 \u00b7 claude-haiku-4-5 \u00b7 Second Run result",
+      "visible_characters": 446,
+      "linked_targets": 0
+    },
+    {
+      "path": "compute/community/r/abd30ec04b3d82b5e4f36e2992815faeeb68df04cc46d80f2d10fa13cb23b8cb.html",
+      "role": "generated-result-view",
+      "owner": "compute/community/cli.cjs",
+      "title": "t1_simple_refactor_003 \u00b7 claude-haiku-4-5 \u00b7 Second Run result",
+      "visible_characters": 442,
+      "linked_targets": 0
+    },
+    {
+      "path": "compute/community/r/b0662c3c75918f3dfcce442995cbdfdca8152d1bdca02404fbe324dbbcea877e.html",
+      "role": "generated-result-view",
+      "owner": "compute/community/cli.cjs",
+      "title": "task08_select_exchange \u00b7 claude-haiku-4-5 \u00b7 Second Run result",
+      "visible_characters": 442,
+      "linked_targets": 0
+    },
+    {
+      "path": "compute/community/r/b195ab92786f8e8d9dfc48ac8e503cd589b38ff701f154e3427fec8c1c52d92a.html",
+      "role": "generated-result-view",
+      "owner": "compute/community/cli.cjs",
+      "title": "haiku \u00b7 Solo baseline \u00b7 Second Run result",
+      "visible_characters": 402,
+      "linked_targets": 0
+    },
+    {
+      "path": "compute/community/r/bdc4bffd157ad03e43225f46fe69266d7f87121307d2d4c1d0e57b275a0e4602.html",
+      "role": "generated-result-view",
+      "owner": "compute/community/cli.cjs",
+      "title": "task01_parse_duration \u00b7 claude-haiku-4-5 \u00b7 Second Run result",
+      "visible_characters": 440,
+      "linked_targets": 0
+    },
+    {
+      "path": "compute/community/r/bfe7c6e9a372c9406f3fc5653a495a71c404d7608a3019e1840cec520e63535f.html",
+      "role": "generated-result-view",
+      "owner": "compute/community/cli.cjs",
+      "title": "almanac_record_binding_001 \u00b7 claude-haiku-4-5 \u00b7 Second Run result",
+      "visible_characters": 450,
+      "linked_targets": 0
+    },
+    {
+      "path": "compute/community/r/c2db3d9d3aa11030b050947257d398c13903aeddf188734d54008d681fa1d348.html",
+      "role": "generated-result-view",
+      "owner": "compute/community/cli.cjs",
+      "title": "task08_select_exchange \u00b7 claude-haiku-4-5 \u00b7 Second Run result",
+      "visible_characters": 442,
+      "linked_targets": 0
+    },
+    {
+      "path": "compute/community/r/c96bf722e4282d0f371c05ebb110800c480b883076ab57b46af890d767167440.html",
+      "role": "generated-result-view",
+      "owner": "compute/community/cli.cjs",
+      "title": "t3_billing_anchor_001 \u00b7 claude-haiku-4-5 \u00b7 Second Run result",
+      "visible_characters": 440,
+      "linked_targets": 0
+    },
+    {
+      "path": "compute/community/r/cedd62b7cf76378450b608f02a044c629f89962c05829070e0f2c61aa2cd7af0.html",
+      "role": "generated-result-view",
+      "owner": "compute/community/cli.cjs",
+      "title": "task06_select \u00b7 claude-haiku-4-5 \u00b7 Second Run result",
+      "visible_characters": 424,
+      "linked_targets": 0
+    },
+    {
+      "path": "compute/community/r/d58fa88828802b212b259229b8d5ea00cad9463571c618a6fb2918d761bec302.html",
+      "role": "generated-result-view",
+      "owner": "compute/community/cli.cjs",
+      "title": "replay04_count_matches \u00b7 claude-haiku-4-5 \u00b7 Second Run result",
+      "visible_characters": 442,
+      "linked_targets": 0
+    },
+    {
+      "path": "compute/community/r/d7cdf4178a3dadd902edf7754fa57eb6c6fcea36f17b7f3ce45bf762dae28810.html",
+      "role": "generated-result-view",
+      "owner": "compute/community/cli.cjs",
+      "title": "task02_wildcard \u00b7 claude-haiku-4-5 \u00b7 Second Run result",
+      "visible_characters": 428,
+      "linked_targets": 0
+    },
+    {
+      "path": "compute/community/r/daafdb2ef5b6640735541214fc79140165b6fe66867deb8a3670892f15106f0f.html",
+      "role": "generated-result-view",
+      "owner": "compute/community/cli.cjs",
+      "title": "b2_grade_httpx_3614_base_url_query \u00b7 claude-fable-5 \u00b7 Second Run result",
+      "visible_characters": 462,
+      "linked_targets": 0
+    },
+    {
+      "path": "compute/community/r/dd884f4d67ebb8cb0e7807154cd2ee6e46e0c50124e985e6dad220385a4013b3.html",
+      "role": "generated-result-view",
+      "owner": "compute/community/cli.cjs",
+      "title": "haiku \u00b7 Frozen generic five-lens sweep \u00b7 Second Run result",
+      "visible_characters": 436,
+      "linked_targets": 0
+    },
+    {
+      "path": "compute/community/r/de8664b63fc3f762ab52316e4a464382ef373b046f005054e01b22d7bde5f167.html",
+      "role": "generated-result-view",
+      "owner": "compute/community/cli.cjs",
+      "title": "t3_refactor_god_function_002 \u00b7 claude-haiku-4-5 \u00b7 Second Run result",
+      "visible_characters": 454,
+      "linked_targets": 0
+    },
+    {
+      "path": "compute/community/r/e98bece0631ceae3d0db432c3bd1969b18fdfc2537061dabb904814a908cad05.html",
+      "role": "generated-result-view",
+      "owner": "compute/community/cli.cjs",
+      "title": "t0_rename_symbol_003 \u00b7 claude-haiku-4-5 \u00b7 Second Run result",
+      "visible_characters": 438,
+      "linked_targets": 0
+    },
+    {
+      "path": "compute/community/r/ed526678ad47e78391b7fc7453ca26e22629923c30db669eeab9e4457b265f7c.html",
+      "role": "generated-result-view",
+      "owner": "compute/community/cli.cjs",
+      "title": "t3_sql_injection_fix_001 \u00b7 claude-haiku-4-5 \u00b7 Second Run result",
+      "visible_characters": 446,
+      "linked_targets": 0
+    },
+    {
+      "path": "compute/community/r/edeba487d9ebda913b4e0bffadcfa10d709febcee686c51f45771bb1e9cc02a9.html",
+      "role": "generated-result-view",
+      "owner": "compute/community/cli.cjs",
+      "title": "almanac_rule_boundary_001 \u00b7 claude-fable-5 \u00b7 Second Run result",
+      "visible_characters": 444,
+      "linked_targets": 0
+    },
+    {
+      "path": "compute/community/r/ee801985443f29be6102cfdb618c46870a950b53f1a206b7585de5e8989e59e9.html",
+      "role": "generated-result-view",
+      "owner": "compute/community/cli.cjs",
+      "title": "t0_sort_imports_001 \u00b7 claude-haiku-4-5 \u00b7 Second Run result",
+      "visible_characters": 436,
+      "linked_targets": 0
+    },
+    {
+      "path": "compute/community/r/f168ceeebbeaa886c8f8e0499760d3b14c4497e480e2d19143af5a450363d22a.html",
+      "role": "generated-result-view",
+      "owner": "compute/community/cli.cjs",
+      "title": "t4_plan_decomposition_001 \u00b7 claude-haiku-4-5 \u00b7 Second Run result",
+      "visible_characters": 448,
+      "linked_targets": 0
+    },
+    {
+      "path": "compute/community/r/f219a7bde02ade8c4a9dcc8c551090ed5e0e9193ebf66ee7c7b1c9c2e3b230db.html",
+      "role": "generated-result-view",
+      "owner": "compute/community/cli.cjs",
+      "title": "t3_cross_module_bug_003 \u00b7 claude-haiku-4-5 \u00b7 Second Run result",
+      "visible_characters": 444,
+      "linked_targets": 0
+    },
+    {
+      "path": "compute/community/r/f447c6c96cda954487914ffbc41083bce6bbc556ddcc23b63af67f9a147a4300.html",
+      "role": "generated-result-view",
+      "owner": "compute/community/cli.cjs",
+      "title": "task02_wildcard \u00b7 claude-haiku-4-5 \u00b7 Second Run result",
+      "visible_characters": 428,
+      "linked_targets": 0
+    },
+    {
+      "path": "compute/community/r/f96eaf31c7d83a9db0d00c49193dfc21e132fbd44c2038cc10b200b3d005f5b5.html",
+      "role": "generated-result-view",
+      "owner": "compute/community/cli.cjs",
+      "title": "b2_grade_httpx_3221_ipv6_no_proxy \u00b7 claude-fable-5 \u00b7 Second Run result",
+      "visible_characters": 460,
+      "linked_targets": 0
+    },
+    {
+      "path": "compute/community/template.html",
+      "role": "presentation-source",
+      "owner": "compute/community/template.html",
+      "title": "Results \u00b7 Second Run Compute",
+      "visible_characters": 5848,
+      "linked_targets": 7
+    },
+    {
+      "path": "compute/index.html",
+      "role": "generated-current-page",
+      "owner": "compute/template.html",
+      "title": "Compute \u00b7 Second Run",
+      "visible_characters": 6027,
+      "linked_targets": 11
+    },
+    {
+      "path": "compute/results.html",
+      "role": "generated-current-page",
+      "owner": "compute/community/template.html",
+      "title": "Results \u00b7 Second Run Compute",
+      "visible_characters": 5848,
+      "linked_targets": 7
+    },
+    {
+      "path": "compute/template.html",
+      "role": "presentation-source",
+      "owner": "compute/template.html",
+      "title": "Compute \u00b7 Second Run",
+      "visible_characters": 6009,
+      "linked_targets": 11
+    },
+    {
+      "path": "corpus/app.html",
+      "role": "current-page",
+      "owner": "corpus/app.html",
+      "title": "Cantos \u00b7 Collection",
+      "visible_characters": 2229,
+      "linked_targets": 6
+    },
+    {
+      "path": "corpus/history.html",
+      "role": "current-page",
+      "owner": "corpus/history.html",
+      "title": "Cantos \u00b7 Historical record",
+      "visible_characters": 682,
+      "linked_targets": 5
+    },
+    {
+      "path": "evidence/public-tail-20260929/lanes/clustermax-r2-raw/coreweave/history_2026-09.html",
+      "role": "retained-source-or-fixture",
+      "owner": null,
+      "title": "CoreWeave Cloud",
+      "visible_characters": 2333,
+      "linked_targets": 95
+    },
+    {
+      "path": "floor/index.html",
+      "role": "current-page",
+      "owner": "floor/index.html",
+      "title": "Cantos floor",
+      "visible_characters": 1595,
+      "linked_targets": 13
+    },
+    {
+      "path": "hot-aisle/campaign/availability/heatmap.html",
+      "role": "current-page",
+      "owner": "hot-aisle/campaign/availability/heatmap.html",
+      "title": "Availability ledger \u2014 seven UTC days",
+      "visible_characters": 1251,
+      "linked_targets": 0
+    },
+    {
+      "path": "hot-aisle/campaign/results/receipt-run3.html",
+      "role": "retained-study-or-example",
+      "owner": null,
+      "title": "Second Run Receipt 3",
+      "visible_characters": 2525,
+      "linked_targets": 1
+    },
+    {
+      "path": "hot-aisle/data/demo/report.html",
+      "role": "retained-study-or-example",
+      "owner": null,
+      "title": "Workload cost report",
+      "visible_characters": 2281,
+      "linked_targets": 0
+    },
+    {
+      "path": "hot-aisle/data/run3/report.html",
+      "role": "retained-study-or-example",
+      "owner": null,
+      "title": "Workload cost report",
+      "visible_characters": 2678,
+      "linked_targets": 0
+    },
+    {
+      "path": "hot-aisle/index.html",
+      "role": "pinned-native-owner",
+      "owner": "hot-aisle/index.html",
+      "title": "Workload report for Hot Aisle MI300X \u00b7 Second Run",
+      "visible_characters": 7436,
+      "linked_targets": 28
+    },
+    {
+      "path": "index.html",
+      "role": "generated-current-page",
+      "owner": "app/source/index.template.html",
+      "title": "CANTOS \u00b7 AI workflow software for continuing work",
+      "visible_characters": 11981,
+      "linked_targets": 26
+    },
+    {
+      "path": "research-desk/app.html",
+      "role": "pinned-native-owner",
+      "owner": "research-desk/app.html",
+      "title": "Research Desk \u00b7 Second Run \u00b7 Ben Pouladian edition",
+      "visible_characters": 760,
+      "linked_targets": 0
+    },
+    {
+      "path": "research-desk/cantos/page.html",
+      "role": "presentation-source",
+      "owner": "research-desk/cantos/page.html",
+      "title": "Cantos \u00b7 research that stays useful when an input changes",
+      "visible_characters": 1977,
+      "linked_targets": 1
+    },
+    {
+      "path": "research-desk/cantos/scripts/fallback-page.html",
+      "role": "presentation-source",
+      "owner": "research-desk/cantos/scripts/fallback-page.html",
+      "title": "Cantos research desk (PROVISIONAL builder template)",
+      "visible_characters": 479,
+      "linked_targets": 0
+    },
+    {
+      "path": "research-desk/examples/baseline.html",
+      "role": "retained-study-or-example",
+      "owner": null,
+      "title": "Client compute note / synthetic",
+      "visible_characters": 10224,
+      "linked_targets": 0
+    },
+    {
+      "path": "research-desk/examples/corrected.html",
+      "role": "retained-study-or-example",
+      "owner": null,
+      "title": "Revised compute recommendation / synthetic",
+      "visible_characters": 10233,
+      "linked_targets": 0
+    },
+    {
+      "path": "research-desk/examples/diligence.html",
+      "role": "retained-study-or-example",
+      "owner": null,
+      "title": "Underwriting note / synthetic",
+      "visible_characters": 4949,
+      "linked_targets": 0
+    },
+    {
+      "path": "research-desk/index.html",
+      "role": "current-page",
+      "owner": "research-desk/index.html",
+      "title": "From benchmark to client recommendation | Second Run Research Desk",
+      "visible_characters": 5562,
+      "linked_targets": 14
+    },
+    {
+      "path": "shelf/index.html",
+      "role": "current-page",
+      "owner": "shelf/index.html",
+      "title": "The shelf",
+      "visible_characters": 4996,
+      "linked_targets": 4
+    }
+  ],
+  "counts": {
+    "generated-current-page": 7,
+    "presentation-source": 6,
+    "retained-source-or-fixture": 17,
+    "current-page": 10,
+    "retained-study-or-example": 15,
+    "retained-source-capture": 7,
+    "pinned-native-owner": 3,
+    "generated-result-view": 57
+  }
+}

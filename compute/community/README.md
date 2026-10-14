@@ -1,6 +1,6 @@
 # Second Run Compute: the community loop
 
-One board for retained execution paths, supported by the existing workload-report arithmetic. Public browsing, claim checks and saved decisions require no account. The optional Node helper manages a local admission queue, immutable result objects and append-only review events. This release is a community beta, not a certification or an operating compute exchange.
+A board for retained execution paths using the existing workload-report arithmetic. Public browsing, claim checks and saved decisions require no account. The optional Node helper manages a local admission queue, immutable result objects and append-only review events.
 
 ## A complete first visit
 

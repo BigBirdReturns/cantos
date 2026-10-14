@@ -1,13 +1,19 @@
-name: Cantos workspace and execution instruments
+name: Cantos qualification
 on:
   push:
-    paths: ['README.md', 'app/**', 'index.html', 'assets/**', 'hot-aisle/**', 'compute/**', 'integration/**', 'corpus/**', 'research-desk/**', '.gitattributes', '.github/workflows/pages.yml', '.github/workflows/hot-aisle-ci.yml']
+    paths: ['README.md', 'app/**', 'index.html', 'assets/**', 'hot-aisle/**', 'compute/**', 'integration/**', 'corpus/**', 'research-desk/**', 'floor/**', 'circulate/**', 'shelf/**', 'clustermax-challenge/**', 'evidence/**', '.gitattributes', '.github/workflows/pages.yml', '.github/workflows/hot-aisle-ci.yml', '.github/workflows/shelf-ci.yml', '.github/workflows/clustermax-challenge-ci.yml']
   pull_request:
-    paths: ['README.md', 'app/**', 'index.html', 'assets/**', 'hot-aisle/**', 'compute/**', 'integration/**', 'corpus/**', 'research-desk/**', '.gitattributes', '.github/workflows/pages.yml', '.github/workflows/hot-aisle-ci.yml']
+    paths: ['README.md', 'app/**', 'index.html', 'assets/**', 'hot-aisle/**', 'compute/**', 'integration/**', 'corpus/**', 'research-desk/**', 'floor/**', 'circulate/**', 'shelf/**', 'clustermax-challenge/**', 'evidence/**', '.gitattributes', '.github/workflows/pages.yml', '.github/workflows/hot-aisle-ci.yml', '.github/workflows/shelf-ci.yml', '.github/workflows/clustermax-challenge-ci.yml']
   workflow_dispatch: {}
 permissions:
   contents: read
 jobs:
+  shelf:
+    name: Shelf qualification
+    uses: ./.github/workflows/shelf-ci.yml
+  clustermax:
+    name: ClusterMAX qualification
+    uses: ./.github/workflows/clustermax-challenge-ci.yml
   verify:
     name: Authorities, software, native browsers, reproducible kits
     runs-on: ubuntu-latest
@@ -28,6 +34,11 @@ jobs:
         run: |
           python -B app/tests/check_build.py
           node --test app/source/foundation.test.cjs app/tests/regression.test.cjs
+      - name: Cantos native public-surface qualification
+        run: |
+          python -B corpus/build_history.py --check
+          python -B -m unittest discover -s corpus/tests -p "test_public_history.py" -v
+          python -B app/tests/site_surface_check.py
       - name: Measured-result engine and scenario engines
         run: |
           set -euo pipefail
@@ -68,6 +79,9 @@ jobs:
           npm install --no-save --prefix /tmp/compute-browser playwright@1.58.0
           python -m pip install playwright==1.58.0
           /tmp/compute-browser/node_modules/.bin/playwright install --with-deps chromium
+      - name: Corpus history browser qualification
+        if: ${{ !cancelled() && steps.browser_setup.outcome == 'success' }}
+        run: python -B corpus/tests/browser_history.py --out /tmp/cantos-history-qa
       - name: Instrument native browser, SSE and reconnect journeys
         if: ${{ !cancelled() && steps.browser_setup.outcome == 'success' }}
         env:
@@ -141,4 +155,5 @@ jobs:
             /tmp/cantos-workspace-qa/
             /tmp/cantos-interaction-qa/
             /tmp/cantos-run3-qa/
+            /tmp/cantos-history-qa/
           if-no-files-found: error

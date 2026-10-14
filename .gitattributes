@@ -30,3 +30,6 @@ hot-aisle/campaign/**/fixtures/** -text
 # Signed shelf bundles and hashed blind-handoff packets are byte identities.
 hot-aisle/campaign/shelf/join/run3-*/** -text
 hot-aisle/campaign/shelf/stranger-2-2026-09-24/** -text whitespace=cr-at-eol
+
+# Compressed historical projections are exact binary payloads.
+corpus/history/**/*.gz binary
