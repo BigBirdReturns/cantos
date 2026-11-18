@@ -37,8 +37,8 @@ class Endpoint:
                 body = json.loads(self.rfile.read(int(self.headers["Content-Length"])))
                 if not body["stream"]:
                     raise AssertionError("client failed to request streaming")
-                if outer.mode == "http":
-                    self.send_response(500)
+                if outer.mode in ("http", "auth"):
+                    self.send_response(401 if outer.mode == "auth" else 500)
                     self.end_headers()
                     self.wfile.write(b'{"error":"fixture failure"}')
                     return
@@ -197,14 +197,29 @@ class Instrument(unittest.TestCase):
         result = self.run_pair()
         self.assertEqual(result["verdict"], "incomparable", result)
 
-    def test_http_failure_is_error_and_raw_body_survives(self):
+    def test_http_5xx_is_failure_inclusive_regression_and_raw_body_survives(self):
         self.b.mode = "http"
         result = self.run_pair()
-        self.assertEqual(result["verdict"], "error", result)
+        self.assertEqual(result["verdict"], "regression", result)
+        self.assertEqual(result["candidate"]["server_http_failures"], 2)
+        self.assertEqual(result["candidate"]["accepted_tasks"], 0)
+        self.assertEqual(result["candidate"]["other_request_errors"], 0)
+        self.assertEqual(result["candidate"]["capture_status"], "error")
         run = m.validate_receipt(self.root / "pair/candidate/run.json")
         raw = load(self.root / "pair/candidate" / run["observations"][0]["attempts"][0]["raw_path"])
         self.assertEqual(raw["http_status"], 500)
         self.assertIn("http_error_body_b64", raw)
+        self.assertEqual((self.a.requests, self.b.requests), (2, 2))
+        # Reanalyzing retained observations uses no fresh inference.
+        self.assertEqual(self.analyze()["verdict"], "regression")
+        self.assertEqual((self.a.requests, self.b.requests), (2, 2))
+
+    def test_authentication_http_failure_remains_instrument_error(self):
+        self.b.mode = "auth"
+        result = self.run_pair()
+        self.assertEqual(result["verdict"], "error", result)
+        self.assertEqual(result["candidate"]["other_request_errors"], 2)
+        self.assertEqual(result["candidate"]["server_http_failures"], 0)
 
     def test_unfinished_stream_is_error_even_with_correct_visible_answer(self):
         self.b.mode = "missing_done"

@@ -173,3 +173,17 @@ python -B new-packets/workbench-owner/cantos/open-compute-ledger/run.py --store 
 ```
 
 Select **History** to inspect the saved decision. The workbench owner is the verified bundle already extracted during export. Importing the two packet files into a different workspace creates a separate operator import; explicitly set requirements when making a new decision there.
+
+## Failure-inclusive serving verdicts
+
+Raw-verifiable HTTP 429 and 5xx responses are completed *failed endpoint requests*.
+They count against task acceptance, throughput, and cost per accepted task, and can
+produce a CI regression when the pinned baseline is usable. A failed HTTP request
+does not attest the model behind the endpoint: before/after model advertisements
+remain required under the observed-identity policy, and the declared hardware and
+weights remain operator claims. Authentication failures, other HTTP errors, broken
+streams, network failures and incomplete captures remain instrument errors.
+The native receipt retains `status=error` for failed HTTP attempts; the paired
+verdict separately records service failure counts and only promotes verifiable
+service responses into failure-inclusive quality comparisons. A retained receipt
+can be reanalyzed without repeating inference.
