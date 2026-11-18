@@ -52,6 +52,7 @@ def main():
         call("-m", "unittest", "discover", "-s", "compute/maintainer/tests", "-p", "test_retry.py", "-v")
         call("-m", "unittest", "discover", "-s", "compute/maintainer/tests", "-p", "test_retry_resources.py", "-v")
         call("-m", "unittest", "discover", "-s", "compute/maintainer/tests", "-p", "test_operational_http.py", "-v")
+        call("-m", "unittest", "discover", "-s", "compute/maintainer/tests", "-p", "test_operational_http_get.py", "-v")
         call("-m", "unittest", "discover", "-s", "compute/maintainer/tests", "-p", "test_job.py", "-v")
         call("-m", "unittest", "discover", "-s", "compute/maintainer/tests", "-p", "test_external_grader.py", "-v")
         call("-m", "unittest", "compute.maintainer.tests.test_network_health", "-v")
