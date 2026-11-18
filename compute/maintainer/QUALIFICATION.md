@@ -58,3 +58,49 @@ The export contains exact raw capture/grade/oracle closures, both producer sourc
 The fixed reference and expanded test inputs retain EvalPlus licensing and OpenAI HumanEval notices. The workflow source retains the existing compute MIT license. Qwen's model license is included as attribution; model weights and the private Docker image are not redistributed in the evidence archive. Each has an exact identity and a documented role. The original A/B/C product outcome also requires broader representative workloads and configurations, operational audits and fuller measured economics. This empirical package qualifies the scoped streaming, grading, refusal and retained-analysis paths described above.
 
 Native filesystem paths, host labels and GPU identities in original command receipts, runtime declarations and `source/SOURCES.json` are retained provenance. They are not recipient path requirements. Public verification and the commands above resolve the extracted relative tree; recipients can unpack it at any local path. The public archive contains only the fixed open HumanEval+ workload, its source tests and generated responses, the owned runtime evidence and the named source snapshots. It contains no model weights, provider credentials, private customer workload, external message, or unrelated project result.
+
+## Frozen SecondRun and operating-envelope evidence
+
+Two additional archives extend the same retained evidence. They preserve actual state transitions and resource failures independently of the completed vLLM comparison. All three archive digests are in [SHA256SUMS.txt](evidence/SHA256SUMS.txt).
+
+| Archive | Exact bytes | SHA256 | Supported conclusion |
+| --- | ---: | --- | --- |
+| [SecondRun retained-evidence replay](evidence/secondrun-empirical-20261118.zip) | 356,306 | `085ebecf6cb97bd1520d183bbf724698f8e2aef25e46f23e9747e00dbd2591e3` | Initial execution, unchanged reuse, price-only recalculation and native failure propagation on the same real vLLM evidence. |
+| [30B guarded operating-envelope attempts](evidence/thermal-envelope-20261118.zip) | 1,442,165 | `c36078e40c73d829e55c5d2b18b526d8778a9c363eab5e79e228b68b02fe31d0` | Two incomplete serving attempts stopped at the unchanged 80 C guard; completed-response grades and owned-process cleanup remain inspectable. |
+
+From the extracted kit root, extract the three archives to a new directory. The archive filenames below differ from their self-contained extracted root names; the commands use both exact names.
+
+```sh
+python -m zipfile -e compute/maintainer/evidence/vllm-humaneval-20261118.zip /absolute/new/evidence
+python -m zipfile -e compute/maintainer/evidence/secondrun-empirical-20261118.zip /absolute/new/evidence
+python -m zipfile -e compute/maintainer/evidence/thermal-envelope-20261118.zip /absolute/new/evidence
+python -B /absolute/new/evidence/cantos-vllm-humaneval-evidence-20261118/verify.py
+python -B /absolute/new/evidence/cantos-thermal-envelope-20261118/verify.py
+python -B /absolute/new/evidence/cantos-secondrun-empirical-20261118/verify-secondrun.py \
+  --evidence /absolute/new/evidence/cantos-vllm-humaneval-evidence-20261118 \
+  --source . --out /absolute/new/secondrun-recipient-output
+```
+
+The output directory must be new. `--source .` exercises the delivered kit's `integration/work.py` and `compute/maintainer` from the kit root. Omitting `--source` exercises the source snapshot included in the SecondRun archive. The original snapshot remains bound to commit `92a39104c5210d2d66afda84b7c899ba97ebfcef`; each replay records the source bytes it actually uses. These checks use Python and its standard library, make no model requests and require no GPU. They replay retained observations and grades without executing generated Python solutions.
+
+### Actual retained-work transitions
+
+The first SecondRun invocation executes two comparisons and returns native verdict exit 2 for the unchanged 21/96 acceptance result. An unchanged invocation reuses both. Changing one task's declared hourly price recalculates that comparison and reuses its independent peer. Replacing that task's candidate with the retained 96-connection-refusal receipt recalculates one comparison, reuses one and propagates native error exit 3. All four invocations record zero model calls, GPU runs and new observations. The enclosing verifier returns zero only after those distinct state transitions and native exits match the expected evidence. Hourly prices of 1.0 and 2.0 remain illustrative assumptions. The immutable inference receipts, grades, original 80% floor and observation identities remain unchanged.
+
+### Thermal failures and completed application work
+
+Two attempts used the retained Qwen3-Coder-30B-A3B-Instruct Q4_K_M weights and pinned llama.cpp source. Each compared one serving slot with four slots on one RTX 8000, with 4,096 context tokens per slot, the same predetermined 32 HumanEval+ tasks, three planned paired trials, concurrency four, temperature zero and max_tokens 1024. GPU1 retained its existing 260 W cap; GPU0 retained its existing 200 W cap. Both reached the unchanged 80 C guard before completing the comparison. Their different devices, caps and shared host conditions prevent a controlled causal comparison of the two attempts.
+
+| Completed evidence | GPU1 attempt | GPU0 attempt |
+| --- | ---: | ---: |
+| Accepted baseline responses, complete first pass | 31/32 | 31/32 |
+| Accepted candidate responses, censored subset | 17/18 | 9/9 |
+| Retained raw response streams | 51 | 41 |
+| Completed paired trials | 0 | 0 |
+| Collector exit after owned thermal stop | -15 | -15 |
+
+The thermal archive grades all 91 persisted completed observations against their exact response and normalizer hashes. The extra GPU1 candidate stream lacks a persisted completion row and remains ungraded. Termination can leave other initiated requests without durable records, so total initiated requests remain unknown. The candidate fractions describe censored subsets and supply no full-workload acceptance estimate. No complete `run.json` was synthesized, no comparison passed, and the 80% requirement and minimum three trials remained intact. The different model, precision, runtime and output limit also prevent treating these partial outcomes as a controlled improvement over the separate 0.6B vLLM experiment.
+
+The guard stopped only its owned collector and servers, released its leases and retained the original caps. The cleanup receipt checked all six owned PIDs absent and all four loopback ports closed. The first wrapper's outer exit zero remains recorded alongside the actual thermal failure and collector exit -15; the corrected second wrapper propagated exit 3. A new sustained experiment needs a consequential changed operating condition and an explicit new protocol. The offline verifier checks the complete manifest, exact raw-to-grade joins, thermal telemetry and retained cleanup evidence. Board power samples remain board observations; these failures establish no facility energy, provider SLA, full-cost result or qualified serving recommendation.
+
+The source archives retain their supplied MIT, HumanEval and EvalPlus license notices and publication reviews. They exclude model weights, runtime binaries, compiler installations and container layers while retaining exact source/build/runtime identities. The broader accelerator, provider-operation and full-cost outcome remains open.
