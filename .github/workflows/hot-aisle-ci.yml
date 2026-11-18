@@ -16,7 +16,8 @@ jobs:
     uses: ./.github/workflows/clustermax-challenge-ci.yml
   verify:
     name: Authorities, software, native browsers, reproducible kits
-    runs-on: ubuntu-latest
+    # Playwright 1.58.0 supports Ubuntu 24.04; keep its browser host stable.
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     env:
       PYTHONDONTWRITEBYTECODE: '1'
