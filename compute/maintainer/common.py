@@ -257,11 +257,14 @@ def policy(value):
 GRADING_ONLY = frozenset({"evalplus_bridge.py", "normalize.py"})
 
 
-def producer_records():
+def producer_records(*, for_observation=False):
+    # Packet export owns offline workbench import and grouping. Keep its source
+    # in analysis/export provenance while excluding it from collection identity.
+    excluded = GRADING_ONLY | {"packets.py"} if for_observation else GRADING_ONLY
     return [file_record(p, ROOT) for p in sorted(ROOT.rglob("*.py"))
             if "tests" not in p.relative_to(ROOT).parts
             and not p.name.startswith("test_")
-            and not (p.parent == ROOT and p.name in GRADING_ONLY)]
+            and not (p.parent == ROOT and p.name in excluded)]
 
 
 def prepare(spec_path, arm=None):
@@ -303,7 +306,7 @@ def prepare(spec_path, arm=None):
             raise ValueError("missing implementation input: " + name)
         impl.append({"path": name, "sha256": sha256_file(p), "bytes": p.stat().st_size})
         dependencies.append(str(p))
-    producers = producer_records()
+    producers = producer_records(for_observation=True)
     dependencies.extend(str(ROOT / x["path"]) for x in producers)
     projection = {"configuration": config, "implementation_inputs": impl,
                   "workload_sha256": sha256_file(workpath), "protocol": proto,

@@ -157,8 +157,7 @@ def prepare(task, base, execution_context=None):
         prepared = owner.prepare(source, arm)
         parameters = {"arm": arm, "observation_id": epoch,
                       "declared_observation": prepared["identity"]}
-        dependencies = list(dict.fromkeys([*_procedures(), *prepared["dependencies"]]))
-        inputs = {"adapter_code": HERE, **_inputs(dependencies, "observation")}
+        inputs = {"adapter_code": HERE, **_inputs(prepared["dependencies"], "observation")}
 
         def execute():
             directory = _output(execution_context)
