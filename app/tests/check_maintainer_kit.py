@@ -38,15 +38,20 @@ def main():
                 raise AssertionError(proc.stdout + "\n" + proc.stderr)
             return proc.stdout
         call("compute/maintainer/maintainer.py", "--help")
+        call("compute/maintainer/retry.py", "--help")
+        call("compute/maintainer/retry_resources.py", "--help")
         catalog = json.loads(call("integration/work.py", "--catalog"))
         names = {entry["task_class"] for entry in catalog["operations"]}
         assert {"maintainer-observe", "maintainer-compare"} <= names
         # Exercise the extracted dependency closure using an explicitly authored
         # HTTP/SSE fixture; this is software verification, not model performance.
+        call("-m", "unittest", "discover", "-s", "compute/maintainer/tests", "-p", "test_retry.py", "-v")
+        call("-m", "unittest", "discover", "-s", "compute/maintainer/tests", "-p", "test_retry_resources.py", "-v")
+        call("-m", "unittest", "discover", "-s", "compute/maintainer/experiments/hy4-flash/tests", "-p", "test_preflight.py", "-v")
         call("-m", "unittest", "discover", "-s", "integration/tests", "-p", "test_maintainer_work.py", "-v")
         call("-m", "unittest", "discover", "-s", "integration/tests", "-p", "test_maintainer_dependency_boundary.py", "-v")
         call("app/tests/check_maintainer_evidence.py")
-    print("Exact public maintainer kit: manifest, executable CLI, operation discovery, streamed-fixture regression/reuse/fresh/custody and retained live-evidence decision import passed. No new model measurement is asserted.")
+    print("Exact public maintainer kit: manifest, executable CLIs, operation discovery, retry/resource/Hy4 fixture contracts, streamed-fixture regression/reuse/fresh/custody and retained live-evidence decision import passed. No new model measurement is asserted.")
 
 if __name__ == "__main__":
     main()

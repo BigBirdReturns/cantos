@@ -1,0 +1,145 @@
+{
+  "compressed_amd64_layer_bytes": 9943497064,
+  "deployment_verified": false,
+  "documented": {
+    "amd_instinct_supported": false,
+    "compute_dtype": "bfloat16",
+    "context_limit_advertised": 1048576,
+    "engram_offload": "host_ram_by_default",
+    "gpu_memory_minimum_measured_bytes": null,
+    "host_ram_minimum_measured_bytes": null,
+    "max_model_len_for_selected_recipe": 8192,
+    "max_num_batched_tokens": 8192,
+    "max_num_seqs": 4,
+    "released_generic_vllm_wheel_support": false,
+    "selected_recipe_gpu_count": 8,
+    "selected_recipe_gpu_model": "NVIDIA H200",
+    "speculative_decoding": "disabled_for_primary_precision_comparison",
+    "supported_gpu_families": [
+      "NVIDIA H100",
+      "NVIDIA H200",
+      "NVIDIA B200",
+      "NVIDIA GB200",
+      "NVIDIA B300",
+      "NVIDIA GB300"
+    ]
+  },
+  "estimates": {
+    "bf16_download_bytes_times_1_2": 528625278256.8,
+    "fp8_download_bytes_times_1_2": 344488068141.6,
+    "source": "vLLM recipe explains weight-download bytes multiplied by 1.2; these are not measured GPU allocation minima"
+  },
+  "image_digest": "sha256:6b645bfbf4b89602d38f6e93c1c418516ec0bfbf54b64cd661b8075bfec01da1",
+  "image_repository": "vllm/vllm-openai",
+  "observed_at": "2026-11-18T05:35:09.685842Z",
+  "observed_tag": "hy4-flash",
+  "platform_digests": {
+    "amd64": "sha256:f4c3ca45840d5612d673b9723f8a82740707a2e5ff06c02df03246f4276a7c69",
+    "arm64": "sha256:5e2c1badbca60595d6591c60feb4b8547f59da96e7a91710d40239250e721aba"
+  },
+  "recipes": {
+    "bf16": {
+      "argv": [
+        "vllm",
+        "serve",
+        "tencent/Hy4-flash",
+        "--dtype",
+        "bfloat16",
+        "--max-model-len",
+        "8192",
+        "--max-num-seqs",
+        "4",
+        "--max-num-batched-tokens",
+        "8192",
+        "--limit-mm-per-prompt",
+        "{\"image\":1,\"video\":0}",
+        "--tensor-parallel-size",
+        "8"
+      ],
+      "artifact": "snapshots/bf16.recipe.json",
+      "docker_argv": [
+        "docker",
+        "run",
+        "--gpus",
+        "all",
+        "--privileged",
+        "--ipc=host",
+        "-p",
+        "8000:8000",
+        "-v",
+        "~/.cache/huggingface:/root/.cache/huggingface",
+        "-e",
+        "VLLM_USE_RUST_FRONTEND=1",
+        "vllm/vllm-openai:hy4-flash",
+        "tencent/Hy4-flash",
+        "--dtype",
+        "bfloat16",
+        "--max-model-len",
+        "8192",
+        "--max-num-seqs",
+        "4",
+        "--max-num-batched-tokens",
+        "8192",
+        "--limit-mm-per-prompt",
+        "{\"image\":1,\"video\":0}",
+        "--tensor-parallel-size",
+        "8"
+      ],
+      "env": {
+        "VLLM_USE_RUST_FRONTEND": "1"
+      }
+    },
+    "fp8": {
+      "argv": [
+        "vllm",
+        "serve",
+        "tencent/Hy4-flash-FP8",
+        "--dtype",
+        "bfloat16",
+        "--max-model-len",
+        "8192",
+        "--max-num-seqs",
+        "4",
+        "--max-num-batched-tokens",
+        "8192",
+        "--limit-mm-per-prompt",
+        "{\"image\":1,\"video\":0}",
+        "--tensor-parallel-size",
+        "8"
+      ],
+      "artifact": "snapshots/fp8.recipe.json",
+      "docker_argv": [
+        "docker",
+        "run",
+        "--gpus",
+        "all",
+        "--privileged",
+        "--ipc=host",
+        "-p",
+        "8000:8000",
+        "-v",
+        "~/.cache/huggingface:/root/.cache/huggingface",
+        "-e",
+        "VLLM_USE_RUST_FRONTEND=1",
+        "vllm/vllm-openai:hy4-flash",
+        "tencent/Hy4-flash-FP8",
+        "--dtype",
+        "bfloat16",
+        "--max-model-len",
+        "8192",
+        "--max-num-seqs",
+        "4",
+        "--max-num-batched-tokens",
+        "8192",
+        "--limit-mm-per-prompt",
+        "{\"image\":1,\"video\":0}",
+        "--tensor-parallel-size",
+        "8"
+      ],
+      "env": {
+        "VLLM_USE_RUST_FRONTEND": "1"
+      }
+    }
+  },
+  "schema": "cantos.hy4.runtime/1"
+}

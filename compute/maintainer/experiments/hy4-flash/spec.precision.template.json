@@ -1,0 +1,92 @@
+{
+  "schema": "cantos.maintainer.spec/1",
+  "workload": "workload.smoke.json",
+  "policy": "policy.precision.json",
+  "protocol": {
+    "trials": 3,
+    "repeats": 1,
+    "concurrency": 1,
+    "seed": 1729,
+    "timeout_s": 120,
+    "max_tokens": 256,
+    "warmup": 0,
+    "extra_body": {
+      "chat_template_kwargs": {
+        "reasoning_effort": "no_think"
+      },
+      "top_p": 1
+    }
+  },
+  "baseline": {
+    "base_url": "http://127.0.0.1:8000/v1",
+    "model": "hy4-flash",
+    "implementation_files": [],
+    "identity": {
+      "implementation": {
+        "name": "vllm",
+        "revision": "vllm/vllm-openai@sha256:6b645bfbf4b89602d38f6e93c1c418516ec0bfbf54b64cd661b8075bfec01da1"
+      },
+      "model": {
+        "revision": "d88c9dfd96ba4f2e6b92adba0b8e8f1c8696f959",
+        "sha256": "REPLACE_WITH_VERIFIED_LOCAL_WEIGHTS_MANIFEST_SHA256"
+      },
+      "tokenizer": {
+        "revision": "git-blob-sha1:ff6aaf29542a31a718ffc2986100c3ac195f223d"
+      },
+      "hardware": {
+        "id": "REPLACE_WITH_SAME_QUALIFIED_DEVICE_UUIDS",
+        "description": "REPLACE_WITH_CPU_RAM_GPU_DRIVER_AND_INTERCONNECT"
+      },
+      "precision": "bf16_weights_bf16_compute",
+      "context_limit": 8192,
+      "settings": {
+        "tensor_parallel_size": 8,
+        "compute_dtype": "bfloat16",
+        "speculative_decoding": false,
+        "reasoning_effort": "no_think",
+        "max_num_seqs": 4,
+        "max_num_batched_tokens": 8192,
+        "prefix_cache": "REPLACE_WITH_OBSERVED_EFFECTIVE_CACHE_SETTING",
+        "co_tenancy": "REPLACE_WITH_OBSERVED_OTHER_LOAD",
+        "power_and_cooling": "REPLACE_WITH_CURRENT_UNCHANGED_CONTROLS",
+        "effective_runtime": "REPLACE_WITH_VERIFIED_SERVER_FLAGS_AND_KERNEL_IDENTITY"
+      }
+    }
+  },
+  "candidate": {
+    "base_url": "http://127.0.0.1:8001/v1",
+    "model": "hy4-flash",
+    "implementation_files": [],
+    "identity": {
+      "implementation": {
+        "name": "vllm",
+        "revision": "vllm/vllm-openai@sha256:6b645bfbf4b89602d38f6e93c1c418516ec0bfbf54b64cd661b8075bfec01da1"
+      },
+      "model": {
+        "revision": "003107fa248f5892064ab1c43af0a7003dd68c9b",
+        "sha256": "REPLACE_WITH_VERIFIED_LOCAL_WEIGHTS_MANIFEST_SHA256"
+      },
+      "tokenizer": {
+        "revision": "git-blob-sha1:ff6aaf29542a31a718ffc2986100c3ac195f223d"
+      },
+      "hardware": {
+        "id": "REPLACE_WITH_SAME_QUALIFIED_DEVICE_UUIDS",
+        "description": "REPLACE_WITH_CPU_RAM_GPU_DRIVER_AND_INTERCONNECT"
+      },
+      "precision": "fp8_mixed_bf16_weights_bf16_compute",
+      "context_limit": 8192,
+      "settings": {
+        "tensor_parallel_size": 8,
+        "compute_dtype": "bfloat16",
+        "speculative_decoding": false,
+        "reasoning_effort": "no_think",
+        "max_num_seqs": 4,
+        "max_num_batched_tokens": 8192,
+        "prefix_cache": "REPLACE_WITH_OBSERVED_EFFECTIVE_CACHE_SETTING",
+        "co_tenancy": "REPLACE_WITH_OBSERVED_OTHER_LOAD",
+        "power_and_cooling": "REPLACE_WITH_CURRENT_UNCHANGED_CONTROLS",
+        "effective_runtime": "REPLACE_WITH_VERIFIED_SERVER_FLAGS_AND_KERNEL_IDENTITY"
+      }
+    }
+  }
+}

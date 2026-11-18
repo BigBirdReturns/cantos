@@ -1,0 +1,95 @@
+{
+  "base_commit": "d2f1aaf9196267fefbf079a6e70033a297963d74",
+  "base_variant": "Separate unconfigured pretrained-model task-fit proposal; excluded from the precision comparison.",
+  "boundaries": {
+    "container_layers_downloaded": false,
+    "gpu_workloads_started": 0,
+    "hy4_energy_observed": false,
+    "hy4_performance_observed": false,
+    "hy4_retry_execution_observed": false,
+    "local_weight_payloads_verified": false,
+    "model_requests_sent": 0,
+    "publisher_weight_manifests": true,
+    "weight_payloads_downloaded": false
+  },
+  "branch": "work/hy4-readiness-20261118",
+  "observed_holds": [
+    "W03 has two Quadro RTX8000 compute-capability7.5 GPUs; this retained serving recipe selects eight H200 data-center GPUs.",
+    "The pinned Hy4 container image is absent from W03.",
+    "No local Hy4 weight payload has been verified.",
+    "Hardware/runtime controls in native spec remain deliberately unbound.",
+    "No Hy4 kernel, endpoint or accepted application request has been observed."
+  ],
+  "schema": "cantos.hy4.readiness-receipt/1",
+  "scope": "Pinned source/model/runtime metadata, native schema contract, read-only hardware preflight and unexecuted command proposals.",
+  "source_snapshot_jobs": [
+    "hy4-readiness-metadata-snapshot-20261118a",
+    "hy4-readiness-recipe-inspect-20261118a",
+    "hy4-readiness-metadata-resume-20261118a"
+  ],
+  "status": "blocked",
+  "verification": {
+    "at": "2026-11-18T05:41:17.981494Z",
+    "job_id": "hy4-readiness-verify-20261118a",
+    "runs": [
+      {
+        "argv": [
+          "python3",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "compute/maintainer/experiments/hy4-flash/tests",
+          "-p",
+          "test_*.py",
+          "-v"
+        ],
+        "bytes": 1062,
+        "exit_code": 0,
+        "expected_exit_code": 0,
+        "log": "/srv/w03/scratch/cantos-hy4-readiness-20261118/tests.log",
+        "name": "tests",
+        "pass": true,
+        "sha256": "c32804350aeb318b011db1aad607ce0ebd65eacb9b6b2b4cf83f4cba052c9f42"
+      },
+      {
+        "argv": [
+          "python3",
+          "-B",
+          "compute/maintainer/experiments/hy4-flash/preflight.py"
+        ],
+        "bytes": 5385,
+        "exit_code": 2,
+        "expected_exit_code": 2,
+        "log": "/srv/w03/scratch/cantos-hy4-readiness-20261118/retained-preflight.log",
+        "name": "retained-preflight",
+        "pass": true,
+        "sha256": "fa0c472cdb48ab7e9ac1ab825ecf638390669682aa3d13ce58b10f6e0d6da861"
+      },
+      {
+        "argv": [
+          "python3",
+          "-B",
+          "compute/maintainer/experiments/hy4-flash/preflight.py",
+          "--live"
+        ],
+        "bytes": 5264,
+        "exit_code": 2,
+        "expected_exit_code": 2,
+        "log": "/srv/w03/scratch/cantos-hy4-readiness-20261118/live-preflight.log",
+        "name": "live-preflight",
+        "pass": true,
+        "sha256": "e56cea842566b4f35585b494b9500c32eb930c9dbf0a6ff857804d73253c7692"
+      }
+    ],
+    "source_python_sha256": {
+      "preflight.py": "114fdce8dd98c9749262a1be45c32c3432732e0b8e5a1823498e63c237e52788",
+      "render_recipe.py": "4d06d5b59d884973753bd653fb1ade56a76c5e1767e53cff65ba74f80a4f549d",
+      "tests/test_preflight.py": "fb6cfe92a196a51c79047cf37be57aec339af37dba0b6a8b1730d4dc5381f03f"
+    },
+    "status": "passed_scope_specific_checks",
+    "tests_are": "Authored software and refusal-boundary fixtures; no Hy4 execution.",
+    "tests_passed": 6
+  }
+}

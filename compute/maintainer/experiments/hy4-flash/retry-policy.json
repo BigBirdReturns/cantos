@@ -1,0 +1,10 @@
+{
+  "schema": "cantos.maintainer.retry-policy/1",
+  "max_attempts": 3,
+  "backoff_s": 0.25,
+  "retry_on": [
+    "rejected",
+    "transport_error"
+  ],
+  "attempt_seed_stride": 0
+}

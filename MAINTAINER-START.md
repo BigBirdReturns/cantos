@@ -24,6 +24,19 @@ An explicit `--fresh` invocation requests new observations. Retained observation
 
 `MAINTAINER-MANIFEST.json` records every included file and its hash. The public download's SHA-256 receipt identifies the ZIP. [DELIVERY.md](DELIVERY.md) and [DELIVERY.json](DELIVERY.json) preserve the complete product goal and current scope. Automated fixture tests qualify software behavior; representative live measurements retain their separately stated workload, hardware and observation conditions.
 
+## Count retries and accepted work
+
+The [real-model retry qualification](compute/maintainer/RETRY-QUALIFICATION.md) retains 22 actual requests, complete grades and 978 board power samples in an offline-verifiable archive.
+
+[Retry campaigns](compute/maintainer/RETRY.md) run bounded solution attempts with durable dispatch journals, source-bound acceptance, first-pass success, and complete retry and elapsed-time accounting. [Resource accounting](compute/maintainer/RETRY-RESOURCES.md) joins the exact campaign to measured power evidence and separately sourced cost assumptions. Configure the declared retry policy before collecting a new campaign.
+
+```sh
+python -B compute/maintainer/retry.py --help
+python -B compute/maintainer/retry_resources.py --help
+```
+
+These commands produce their own campaign and resource receipts. The baseline/candidate comparison, SecondRun operations, and workbench packet export below retain their existing contracts.
+
 ## Retain the comparison as a deployment decision
 
 After collection and any independent grading, run the documented `analyze` command. It exports validated native OCL receipts alongside the verdict. Then export workbench packets using the exact decision engine included in this kit:

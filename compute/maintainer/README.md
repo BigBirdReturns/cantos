@@ -2,6 +2,10 @@
 
 Run the same versioned application workload against baseline and candidate serving endpoints, retain the streamed evidence, and obtain a machine-readable regression verdict. The instrument connects the existing Open Compute Ledger exact evaluator and paired comparison to streamed execution and the independent vLLM concurrency auditor. `SOURCES.json` identifies the unchanged native owner modules and their hashes. Python 3.10 or later and the standard library are sufficient for collection and comparison; model servers and application graders keep their own environments.
 
+## Retry campaigns and measured resources
+
+[RETRY.md](RETRY.md) documents the separate bounded retry campaign: first-pass success, every solution attempt and HTTP step, exhausted work, full task latency, durable interruption evidence, and source-bound sandboxed EvalPlus grading. [RETRY-RESOURCES.md](RETRY-RESOURCES.md) documents the exact campaign join to GPU board power and declared cost scenarios. The original paired comparison below keeps its existing one-attempt protocol. Each retry arm needs its own immutable campaign under the same workload and retry policy; a retry receipt alone supplies no paired deployment verdict. The [Hy4 Flash readiness package](experiments/hy4-flash/README.md) pins model/runtime metadata and refuses unsupported or incomplete deployment inputs before inference.
+
 ## Run a comparison
 
 From a Cantos checkout, copy `compute/maintainer/examples/` into a working directory, set the two endpoint URLs and served model names, and replace every identity placeholder in `spec.json`. The example deliberately refuses live requests until it is configured. Preserve the actual implementation revision or container digest, weights manifest SHA256, tokenizer revision, hardware identifiers, precision, context limit and serving flags. Set the shared request controls and choose a representative workload file. The two illustrative exact-output cases demonstrate the file contract; they establish no model or hardware ranking.
