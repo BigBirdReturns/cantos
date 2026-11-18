@@ -19,7 +19,7 @@ import sys
 import time
 from urllib.error import HTTPError, URLError
 from urllib.parse import urlsplit
-from urllib.request import HTTPRedirectHandler, Request, build_opener
+from urllib.request import HTTPRedirectHandler, ProxyHandler, Request, build_opener
 
 
 class AuditInputError(ValueError):
@@ -82,7 +82,9 @@ def audit(url: str, *, allow_host: str | None = None, samples: int = 3,
         raise AuditInputError("min_success_fraction must be between zero and one")
     if max_p95_ms is not None and (not math.isfinite(max_p95_ms) or max_p95_ms <= 0):
         raise AuditInputError("max_p95_ms must be positive and finite")
-    opener = build_opener(NoRedirect())
+    # The exact authorized target must be contacted directly, independently of
+    # ambient HTTP(S)_PROXY variables that can redirect its network request.
+    opener = build_opener(ProxyHandler({}), NoRedirect())
     observations = []
     for index in range(samples):
         started = datetime.now(timezone.utc).isoformat()

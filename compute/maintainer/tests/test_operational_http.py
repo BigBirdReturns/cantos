@@ -2,9 +2,11 @@
 import hashlib
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import json
+import os
 from pathlib import Path
 import threading
 import tempfile
+from unittest.mock import patch
 import unittest
 
 from compute.maintainer.operational_http import (
@@ -48,6 +50,15 @@ class ObservedHTTPTests(unittest.TestCase):
         self.assertEqual([x["http_status"] for x in r["observations"]], [200] * 3)
         raw = json.dumps(r["observations"], sort_keys=True, separators=(",", ":"), allow_nan=False).encode()
         self.assertEqual(r["observations_sha256"], hashlib.sha256(raw).hexdigest())
+
+    def test_proxy_environment_cannot_redirect_authorized_loopback_probe(self):
+        # Explicit, local probe must not silently honor an ambient proxy route.
+        with patch.dict(os.environ, {"http_proxy": "http://127.0.0.1:1",
+                                     "HTTP_PROXY": "http://127.0.0.1:1",
+                                     "no_proxy": "", "NO_PROXY": ""}):
+            result = audit(self.base + "/ok", samples=1, timeout_seconds=0.5)
+        self.assertEqual(result["summary"]["outcome_counts"], {"http_success": 1})
+        self.assertEqual(result["verdict"], "pass")
 
     def test_5xx_fails_without_losing_observation(self):
         r = audit(self.base + "/failure", samples=2)
