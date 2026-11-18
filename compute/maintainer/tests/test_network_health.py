@@ -316,7 +316,7 @@ class NetworkTests(unittest.TestCase):
     def test_native_job_network_gate_child_and_data_only_import(self):
         # Reuse the owner's real streamed HTTP fixture and native validator.
         # Responses are authored synthetic SSE, never a model qualification.
-        from .test_job import JobTests
+        from compute.maintainer.tests.test_job import JobTests
         case = JobTests("test_manifest_paths_reject_traversal")
         case.setUp()
         self.addCleanup(case.tearDown)
