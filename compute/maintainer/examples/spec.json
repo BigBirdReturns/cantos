@@ -1,0 +1,28 @@
+{
+  "schema": "cantos.maintainer.spec/1",
+  "workload": "workload.json",
+  "policy": "policy.json",
+  "protocol": {"trials": 3, "repeats": 2, "concurrency": 4, "seed": 1729, "timeout_s": 60, "max_tokens": 512, "warmup": 2, "extra_body": {"chat_template_kwargs": {"enable_thinking": false}}},
+  "baseline": {
+    "base_url": "http://127.0.0.1:8000/v1", "model": "your-served-model-id", "implementation_files": [],
+    "identity": {
+      "implementation": {"name": "vllm", "revision": "REPLACE_WITH_BASELINE_COMMIT_OR_IMAGE_DIGEST"},
+      "model": {"revision": "REPLACE_WITH_MODEL_REVISION", "sha256": "REPLACE_WITH_WEIGHTS_MANIFEST_SHA256"},
+      "tokenizer": {"revision": "REPLACE_WITH_TOKENIZER_REVISION_OR_HASH"},
+      "hardware": {"id": "REPLACE_WITH_SERVER_GPU_UUIDS", "description": "REPLACE_WITH_SERVER_CPU_GPU_DRIVER_DETAILS"},
+      "precision": "REPLACE_WITH_PRECISION", "context_limit": 4096,
+      "settings": {"prefix_cache": false, "tensor_parallel_size": 1, "server_flags": "REPLACE_WITH_EXACT_FLAGS", "co_tenancy": "REPLACE_WITH_OBSERVED_OTHER_LOAD", "power_and_cooling": "REPLACE_WITH_CURRENT_CONTROLS"}
+    }
+  },
+  "candidate": {
+    "base_url": "http://127.0.0.1:8001/v1", "model": "your-served-model-id", "implementation_files": [],
+    "identity": {
+      "implementation": {"name": "vllm", "revision": "REPLACE_WITH_CANDIDATE_COMMIT_OR_IMAGE_DIGEST"},
+      "model": {"revision": "REPLACE_WITH_MODEL_REVISION", "sha256": "REPLACE_WITH_WEIGHTS_MANIFEST_SHA256"},
+      "tokenizer": {"revision": "REPLACE_WITH_TOKENIZER_REVISION_OR_HASH"},
+      "hardware": {"id": "REPLACE_WITH_SERVER_GPU_UUIDS", "description": "REPLACE_WITH_SERVER_CPU_GPU_DRIVER_DETAILS"},
+      "precision": "REPLACE_WITH_PRECISION", "context_limit": 4096,
+      "settings": {"prefix_cache": false, "tensor_parallel_size": 1, "server_flags": "REPLACE_WITH_EXACT_FLAGS", "co_tenancy": "REPLACE_WITH_OBSERVED_OTHER_LOAD", "power_and_cooling": "REPLACE_WITH_CURRENT_CONTROLS"}
+    }
+  }
+}

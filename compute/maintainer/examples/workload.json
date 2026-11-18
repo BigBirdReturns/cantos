@@ -1,0 +1,24 @@
+{
+  "schema": "cantos.maintainer.workload/1",
+  "name": "Order summary contract example",
+  "version": "1",
+  "source": "Illustrative exact application contracts; replace with your versioned representative workloads",
+  "cases": [
+    {
+      "id": "order-discount-001",
+      "messages": [
+        {"role": "system", "content": "Return only the requested JSON. Use integer cents. /no_think"},
+        {"role": "user", "content": "An order contains three items priced at 1250 cents each, with a 100-cent discount per item. Return {\"total_cents\": integer}."}
+      ],
+      "expect": {"kind": "json_exact", "value": {"total_cents": 3450}}
+    },
+    {
+      "id": "source-id-001",
+      "messages": [
+        {"role": "system", "content": "Return the matching record as JSON without prose. /no_think"},
+        {"role": "user", "content": "Records: [{\"source_id\":\"a\",\"value\":4},{\"source_id\":\"b\",\"value\":7}]. Return the record whose source_id is b."}
+      ],
+      "expect": {"kind": "json_exact", "value": {"source_id": "b", "value": 7}}
+    }
+  ]
+}
