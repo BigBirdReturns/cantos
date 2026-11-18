@@ -1,0 +1,43 @@
+{
+  "schema": "cantos.delivery-acceptance/1",
+  "updated_at": "2026-11-18T02:04:00Z",
+  "overall_status": "in_progress",
+  "authority": "DELIVERY.md",
+  "scope": "inference/useful-work, authorized operations, operating economics, maintainer workflow and recipient delivery",
+  "acceptance": {
+    "inference_useful_work": {
+      "status": "partial",
+      "evidence": "Retained cross-accelerator Run3 grades and raw observations; vLLM streamed trials; published endpoint collector",
+      "remaining": "Expose usable controlled maintainer workflow, representative source-bound application outcomes and qualified AgentX outcomes; preserve runtime/model/precision differences."
+    },
+    "operational_audits": {
+      "status": "partial",
+      "evidence": "Published provider research and scoped owned inventory/storage/recovery measurements",
+      "remaining": "Extend executable authorized network/security/monitoring/lifecycle/availability/performance auditing and observed provider coverage; local evidence does not imply commercial SLA."
+    },
+    "economics": {
+      "status": "partial",
+      "evidence": "Retained accepted-work cost scenarios, price histories, decision sensitivity, scoped board telemetry",
+      "remaining": "Attributable fuller-system energy and actual operating-cost evidence where available; include failures/retries/verification/operator/idle costs or explicit sourced assumptions."
+    },
+    "maintainer_workflow": {
+      "status": "implementation_in_progress",
+      "source_path": "compute/maintainer/",
+      "secondrun_path": "integration/work.py",
+      "acceptance": "Independent recipient can compare baseline/candidate with representative fixed workload, streamed raw observations, exact accepted outcomes, repeated comparisons, changed-factor attribution, thresholds and CI exits; demonstrate regression, incompatibility and fresh-observation semantics."
+    },
+    "recipient_publication": {
+      "status": "published_previous_release",
+      "cantos_commit": "f29ee3fd3bfb3a5240fa3280d7f2f4ed6ba7747e",
+      "cantos_url": "https://bigbirdreturns.github.io/cantos/",
+      "secondrun_url": "https://bigbirdreturns.github.io/axm-tools/second-run/",
+      "remaining": "Integrate and publish the maintainer workflow with source, executable examples, raw scoped evidence, licenses and tested recipient commands."
+    }
+  },
+  "current_work": {
+    "instrument": "compute/maintainer/",
+    "execution": "integration/work.py",
+    "release_branch": "work/maintainer-release-20261118"
+  },
+  "evidence_policy": "Preserve source, conditions, date, failures and observed/published/modeled/unknown basis. Fresh observation and retained analysis are distinct."
+}

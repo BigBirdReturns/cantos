@@ -1,0 +1,3 @@
+# Shared Cantos continuation
+
+Read AGENTS.md, DELIVERY.md and DELIVERY.json before historical handoffs. All assistants inherit the same full Open Compute outcome and scope-specific evidence requirements. The maintainer instrument belongs at compute/maintainer/; SecondRun execution and reuse belong at integration/work.py and integration/WORK.md. Preserve actual observations, source identities, failure records and valid cache invalidation. Current source/jobs supersede historical status. Publication completes a distribution milestone; report each substantive capability and remaining dependency separately.

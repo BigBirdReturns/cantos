@@ -1,5 +1,7 @@
 # Working on Cantos
 
+For Open Compute / maintainer work, first read `DELIVERY.md` and `DELIVERY.json`, then the owning implementation and `integration/WORK.md`. They preserve the full accepted scope, separate publication from measured capability, and retain current evidence and remaining dependencies. Continue the original outcome across assistants; a new benchmark, kit or successful site deployment cannot silently redefine completion.
+
 Read `README.md` for scope and current capability, then the owning component's
 README and contracts. Cantos is the umbrella; Second Run is its execution and
 reuse program across software, production and technical investigation. AXM
