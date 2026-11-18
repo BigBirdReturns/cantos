@@ -1,6 +1,6 @@
 {
   "schema": "cantos.delivery-acceptance/1",
-  "updated_at": "2026-11-18T04:12:05.722931+00:00",
+  "updated_at": "2026-11-18T17:15:14.696972+00:00",
   "overall_status": "in_progress",
   "authority": "DELIVERY.md",
   "scope": "inference/useful-work, authorized operations, operating economics, maintainer workflow and recipient delivery",
@@ -42,7 +42,9 @@
         "recipient_kit": "included_with_Linux_and_Windows_acceptance_jobs",
         "publication": "Exact source qualification and Pages deployment are recorded by this commit's GitHub Actions runs.",
         "explicit_regrading": "Implemented: separately pinned grading contract reuses immutable captures, binds both arms and creates a distinct retained decision identity.",
-        "packet_dependency": "Packet adapter and workbench bundle updates preserve capture dependencies; collector/parser changes invalidate observation identity."
+        "packet_dependency": "Packet adapter and workbench bundle updates preserve capture dependencies; collector/parser changes invalidate observation identity.",
+        "native_comparison_review": "Implemented: single data-only bundle, trusted native verdict, explicit post-hoc policy history and original evidence export; qualified by app/tests/check_comparison_workbench.py.",
+        "joined_deployment_job": "Implemented; exact source and extracted recipient acceptance required by the release workflow."
       },
       "empirical": {
         "archive": "compute/maintainer/evidence/vllm-humaneval-20261118.zip",
@@ -65,12 +67,20 @@
       ],
       "workbench_dependency": {
         "archive": "public/open-compute/open-compute-workbench.zip",
-        "sha256": "449ec4d453ee4c272c867148c0f12ff7b9890726845923bc991980960e274624",
+        "sha256": "7fd478a22a73a123dc5acba594409fbf231dd4956137d508d10e5b80e9547e34",
         "release": "public/open-compute/WORKBENCH-RELEASE.json",
         "features": [
           "atomic retained decisions/imports",
           "operational evidence API and interface",
-          "recipient-owned operational collection"
+          "recipient-owned operational collection",
+          "native baseline/candidate review",
+          "immutable post-hoc policy reanalysis",
+          "frozen real vLLM comparison",
+          "joined recipient deployment job",
+          "required operational gates",
+          "source-bound economic ranges and allocations",
+          "chunked retained job import",
+          "separate retry campaign accounting"
         ]
       }
     },
@@ -84,12 +94,22 @@
       "checksum": "public/open-compute/MAINTAINER-SHA256SUMS.txt",
       "qualification_workflow": ".github/workflows/hot-aisle-ci.yml",
       "publication_workflow": ".github/workflows/pages.yml"
+    },
+    "joined_deployment_job": {
+      "status": "implemented_with_recipient_acceptance_suite",
+      "source": "compute/maintainer/job.py",
+      "guide": "compute/maintainer/DEPLOYMENT-JOB.md",
+      "entry": "Decide what to run",
+      "capability": "Recipient-owned paired capture, exact application acceptance, supported local operations, full source-labeled scenario allocations, retained child analyses, separate retry campaigns and bounded data-only export/import.",
+      "qualification": "Exact release qualification is recorded by the current commit GitHub Actions and retained owner receipts. Tests distinguish authored HTTP fixtures, actual sandbox executions and source-bound model observations.",
+      "native_regression": "The retained 192-request vLLM pair remains incomparable at 21/96 accepted per arm under its original 80% requirement.",
+      "remaining": "Representative general agentic tasks, controlled wider runtime/accelerator comparisons, broader real provider audits, full-system metering and observed production costs, and independent external recipient adoption."
     }
   },
   "current_work": {
     "instrument": "compute/maintainer/",
     "execution": "integration/work.py",
-    "release_branch": "work/maintainer-release-20261118",
+    "release_branch": "work/deployment-job-20261118",
     "source_identity": "Use the exact Git commit and recipient manifest for this checkout; producer commits identify source custody."
   },
   "evidence_policy": "Preserve source, conditions, date, failures and observed/published/modeled/unknown basis. Fresh observation and retained analysis are distinct.",

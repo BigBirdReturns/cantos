@@ -1,0 +1,16 @@
+{
+  "schema": "cantos.deployment-job/1",
+  "id": "recipient-own-deployment-review",
+  "comparison": {
+    "spec": "spec.json"
+  },
+  "decision": {
+    "objective": "min_cost_per_accepted",
+    "economics_required": true,
+    "operational_requirements": []
+  },
+  "arms": {
+    "baseline": {"operations": [], "resources": null},
+    "candidate": {"operations": [], "resources": null}
+  }
+}

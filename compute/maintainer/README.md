@@ -2,6 +2,12 @@
 
 Run the same versioned application workload against baseline and candidate serving endpoints, retain the streamed evidence, and obtain a machine-readable regression verdict. The instrument connects the existing Open Compute Ledger exact evaluator and paired comparison to streamed execution and the independent vLLM concurrency auditor. `SOURCES.json` identifies the unchanged native owner modules and their hashes. Python 3.10 or later and the standard library are sufficient for collection and comparison; model servers and application graders keep their own environments.
 
+## Decide which deployment to operate
+
+The [deployment job](DEPLOYMENT-JOB.md) joins this native comparison to required operational checks and attributed cost or energy inputs. Configure your own workload and existing endpoints, validate the manifest, collect supported local operations, run the comparison and export one retained result. Required unknown evidence blocks a deployment selection. Changing prices or requirements creates a child analysis over the original capture; changing serving conditions requires new observations. The [external grader adapter](EXTERNAL-GRADER.md) binds exact captured text conversations to a pinned evaluator and supports explicit, bounded local Docker execution.
+
+The workbench's **Decide what to run** view prepares the inputs and imports the returned bundle. [MAINTAINER-START.md](../../MAINTAINER-START.md) gives the runnable kit entry point. A blank [resource worksheet](examples/deployment-resources.json) names the cost fields and allocations; its unknown values must be replaced with your own sourced assumptions before economics can resolve. Supported operational tests and modeled accounting retain their scopes; this workflow does not establish broader provider, accelerator or application coverage.
+
 ## Retry campaigns and measured resources
 
 [RETRY.md](RETRY.md) documents the separate bounded retry campaign: first-pass success, every solution attempt and HTTP step, exhausted work, full task latency, durable interruption evidence, and source-bound sandboxed EvalPlus grading. [RETRY-RESOURCES.md](RETRY-RESOURCES.md) documents the exact campaign join to GPU board power and declared cost scenarios. The original paired comparison below keeps its existing one-attempt protocol. Each retry arm needs its own immutable campaign under the same workload and retry policy; a retry receipt alone supplies no paired deployment verdict. The [Hy4 Flash readiness package](experiments/hy4-flash/README.md) pins model/runtime metadata and refuses unsupported or incomplete deployment inputs before inference.
@@ -101,7 +107,7 @@ Omit the two grade arguments for exact JSON/text workloads. Change acceptance la
 
 After complete grading, `analyze` also emits `baseline.ocl.json`, `candidate.ocl.json`, and `resolved-policy.json`. These are validated projections into the existing `ocl.run/1` receipt schema, with original run/workload/grade hashes, capture producer identity, raw artifact manifest and exact applied policy. The original observation time stays original. Native task repetition IDs flatten trial/repetition for the existing owner, while `trial` and `source_repetition` retain the original coordinates. A final attempt uses native stage `final` and preserves its captured stage as `source_stage`. External outputs awaiting their application grades produce no native receipt export, so ungraded work cannot become an invented failure count.
 
-Use the qualified public workbench ZIP as the explicit, pinned collector/engine dependency. The maintainer recipient kit includes it at `public/open-compute/open-compute-workbench.zip`; its SHA256 is `449ec4d453ee4c272c867148c0f12ff7b9890726845923bc991980960e274624`. [WORKBENCH-RELEASE.json](../../public/open-compute/WORKBENCH-RELEASE.json) records its source lineage and public projection; the archive manifest binds every shipped source file. This edition includes atomic retained decisions and the operational evidence interface. The exporter checks this identity before loading code and bounds extraction while rejecting traversal and symlinks.
+Use the qualified public workbench ZIP as the explicit, pinned collector/engine dependency. The maintainer recipient kit includes it at `public/open-compute/open-compute-workbench.zip`; its SHA256 is `7fd478a22a73a123dc5acba594409fbf231dd4956137d508d10e5b80e9547e34`. [WORKBENCH-RELEASE.json](../../public/open-compute/WORKBENCH-RELEASE.json) records its source lineage and public projection; the archive manifest binds every shipped source file. This edition includes atomic retained decisions and the operational evidence interface. The exporter checks this identity before loading code and bounds extraction while rejecting traversal and symlinks.
 
 ```bash
 python -B compute/maintainer/maintainer.py export-packets \
@@ -173,3 +179,17 @@ python -B new-packets/workbench-owner/cantos/open-compute-ledger/run.py --store 
 ```
 
 Select **History** to inspect the saved decision. The workbench owner is the verified bundle already extracted during export. Importing the two packet files into a different workspace creates a separate operator import; explicitly set requirements when making a new decision there.
+
+## Failure-inclusive serving verdicts
+
+Raw-verifiable HTTP 429 and 5xx responses are completed *failed endpoint requests*.
+They count against task acceptance, throughput, and cost per accepted task, and can
+produce a CI regression when the pinned baseline is usable. A failed HTTP request
+does not attest the model behind the endpoint: before/after model advertisements
+remain required under the observed-identity policy, and the declared hardware and
+weights remain operator claims. Authentication failures, other HTTP errors, broken
+streams, network failures and incomplete captures remain instrument errors.
+The native receipt retains `status=error` for failed HTTP attempts; the paired
+verdict separately records service failure counts and only promotes verifiable
+service responses into failure-inclusive quality comparisons. A retained receipt
+can be reanalyzed without repeating inference.

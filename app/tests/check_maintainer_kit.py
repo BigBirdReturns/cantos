@@ -40,6 +40,8 @@ def main():
         call("compute/maintainer/maintainer.py", "--help")
         call("compute/maintainer/retry.py", "--help")
         call("compute/maintainer/retry_resources.py", "--help")
+        call("compute/maintainer/job.py", "--help")
+        call("compute/maintainer/external_grader.py", "--help")
         catalog = json.loads(call("integration/work.py", "--catalog"))
         names = {entry["task_class"] for entry in catalog["operations"]}
         assert {"maintainer-observe", "maintainer-compare"} <= names
@@ -47,11 +49,15 @@ def main():
         # HTTP/SSE fixture; this is software verification, not model performance.
         call("-m", "unittest", "discover", "-s", "compute/maintainer/tests", "-p", "test_retry.py", "-v")
         call("-m", "unittest", "discover", "-s", "compute/maintainer/tests", "-p", "test_retry_resources.py", "-v")
+        call("-m", "unittest", "discover", "-s", "compute/maintainer/tests", "-p", "test_job.py", "-v")
+        call("-m", "unittest", "discover", "-s", "compute/maintainer/tests", "-p", "test_external_grader.py", "-v")
         call("-m", "unittest", "discover", "-s", "compute/maintainer/experiments/hy4-flash/tests", "-p", "test_preflight.py", "-v")
         call("-m", "unittest", "discover", "-s", "integration/tests", "-p", "test_maintainer_work.py", "-v")
         call("-m", "unittest", "discover", "-s", "integration/tests", "-p", "test_maintainer_dependency_boundary.py", "-v")
         call("app/tests/check_maintainer_evidence.py")
-    print("Exact public maintainer kit: manifest, executable CLIs, operation discovery, retry/resource/Hy4 fixture contracts, streamed-fixture regression/reuse/fresh/custody and retained live-evidence decision import passed. No new model measurement is asserted.")
+        call("app/tests/check_comparison_workbench.py")
+        call("app/tests/check_deployment_workbench.py")
+    print("Exact public maintainer kit: manifest, executable CLIs, operation discovery, joined job/grading/retry/resource/Hy4 contracts, streamed-fixture regression/reuse/fresh/custody and retained live-evidence deployment import passed. No new model measurement is asserted.")
 
 if __name__ == "__main__":
     main()

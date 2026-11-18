@@ -25,7 +25,9 @@ jobs:
           - os: windows-2025
             python: '3.12'
     runs-on: ${{ matrix.os }}
-    timeout-minutes: 10
+    # The joined-job suite plus a second run from the extracted kit exceeds
+    # ten minutes on hosted Windows. Retain every check with a finite allowance.
+    timeout-minutes: 15
     env:
       PYTHONDONTWRITEBYTECODE: '1'
     steps:

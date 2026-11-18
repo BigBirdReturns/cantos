@@ -45,7 +45,7 @@ LIMITS = [
     "Repeated cases are correlated. Trial ranges describe variation and are not a population confidence guarantee.",
     "TTFT measures first visible content at the client, including network and queueing; content chunks are not tokens.",
     "Token counts come from server usage. The instrument does not manufacture per-token timings, power or GPU run counts.",
-    "No request retries. Transport and incomplete stream failures are retained and force an error verdict.",
+    "No request retries. Captured HTTP 429/5xx are counted as endpoint service failures; other transport and incomplete streams force an error verdict.",
     "Server cache state, co-tenancy, thermals and load require operator controls and declared identity settings.",
 ]
 
@@ -376,6 +376,22 @@ def _factor_view(run):
             "producer_files": run["producer_files"], "workload_sha256": run["workload_sha256"]}
 
 
+def _counted_service_failure(attempt):
+    """Only raw-verifiable HTTP 429/5xx, not connectivity or malformed SSE."""
+    error = attempt.get("transport_error")
+    if not isinstance(error, str) or not error.startswith("HTTPError: "):
+        return False
+    status = error[len("HTTPError: "):]
+    if len(status) != 3 or not status.isdigit():
+        return False
+    n = int(status)
+    return ((n == 429 or 500 <= n <= 599)
+            and attempt.get("stream_error") == "ValueError: HTTP status " + status
+            and attempt.get("finish_reason") is None
+            and not attempt.get("stream_done")
+            and not attempt.get("response_text"))
+
+
 def _identity_problems(run, pol, side):
     flat = _flatten(run["declared_identity"])
     required = ("implementation.name", "implementation.revision", "model.revision", "model.sha256",
@@ -394,7 +410,13 @@ def _identity_problems(run, pol, side):
     expected_model = run["configuration"]["model"]
     observed = run["observed_identity"]
     if pol["require_observed_model"] and observed["stream_models"] != [expected_model]:
-        issues.append(side + ": response model differs from requested identity or is absent")
+        attempts = [a for o in run["observations"] + run["warmups"] for a in o["attempts"]]
+        # A failed endpoint cannot emit its served model name. Both identity
+        # probes must still advertise the declared model; the observed failure
+        # is attributable to that endpoint, not attestation of model weights.
+        if not (not observed["stream_models"] and attempts
+                and all(_counted_service_failure(a) for a in attempts)):
+            issues.append(side + ": response model differs from requested identity or is absent")
     versions = []
     for phase in ("before", "after"):
         probes = observed[phase]
@@ -513,6 +535,9 @@ def _metrics(run, projected, rate, matched_keys):
     result["cost_duration_scope"] = "summed measured trial windows only, including request failures; excludes warmup, probes, server startup, between-trial idle and other reserved time"
     result["cost_per_accepted"] = result["estimated_cost"] / len(accepted) if accepted and result["estimated_cost"] is not None else None
     attempts = [a for o in projected["observations"] for a in o["attempts"]]
+    result["capture_status"] = run["status"]
+    result["server_http_failures"] = sum(_counted_service_failure(a) for a in attempts)
+    result["other_request_errors"] = sum(bool(a["error"]) and not _counted_service_failure(a) for a in attempts)
     result["peak_request_concurrency"] = exact_peak([a["started_monotonic_s"] for a in attempts],
                                                     [a["duration_s"] for a in attempts], [None] * len(attempts))
     result["trial_metrics"] = []
@@ -536,8 +561,13 @@ def _compare_runs(a, b, wa, wb, pol, ga=None, gb=None):
         reasons.extend(_identity_problems(run, pol, side))
         if run["protocol"]["trials"] < pol["min_trials"]:
             reasons.append(side + ": insufficient repeated trials")
-        if run["status"] == "error":
-            errors.append(side + ": captured transport or stream errors")
+        retained = [a for o in run["observations"] + run["warmups"] for a in o["attempts"]]
+        other_errors = [a for a in retained if a["error"] and not _counted_service_failure(a)]
+        if other_errors:
+            errors.append(side + ": " + str(len(other_errors)) + " transport, authentication or malformed-stream errors")
+        # The native receipt keeps status=error for any failed HTTP attempt.
+        # A complete captured 429/5xx is nevertheless a real failed service
+        # request, graded against the unchanged task and reliability policy.
     fa, fb = _flatten(_factor_view(a)), _flatten(_factor_view(b))
     changed = [{"factor": k, "baseline": fa.get(k), "candidate": fb.get(k)}
                for k in sorted(set(fa) | set(fb)) if not _equal(fa.get(k), fb.get(k))]
@@ -763,6 +793,11 @@ def main(argv=None):
     packets.add_argument("--baseline-financials")
     packets.add_argument("--candidate-financials")
     packets.add_argument("--policy-prices-usd", action="store_true", help="Declare supplied policy hourly rates as modeled USD for the measured trial windows")
+    review = sub.add_parser("export-comparison", help="export a single data-only baseline/candidate ZIP for native workbench review")
+    review.add_argument("--analysis", required=True)
+    review.add_argument("--out", required=True)
+    review.add_argument("--notice", action="append", default=[], metavar="FILE",
+                        help="Retain exact source-license or provenance notice bytes (repeatable)")
     args = parser.parse_args(argv)
     try:
         if args.command == "run":
@@ -778,6 +813,13 @@ def main(argv=None):
         elif args.command == "prepare":
             result = prepare(args.spec, args.arm)
             print(json.dumps({key: result[key] for key in ("identity", "observation_key", "dependencies", "protocol")}, indent=2))
+            return 0
+        elif args.command == "export-comparison":
+            try:
+                from .comparison_bundle import export_comparison
+            except ImportError:
+                from comparison_bundle import export_comparison
+            print(json.dumps(export_comparison(args.analysis, args.out, notices=args.notice)))
             return 0
         elif args.command == "export-packets":
             try:

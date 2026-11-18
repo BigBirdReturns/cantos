@@ -16,6 +16,8 @@ REQUIRED = (
     "MAINTAINER-START.md", "DELIVERY.md", "DELIVERY.json",
     "AGENTS.md", "CLAUDE.md",
     "app/tests/check_maintainer_evidence.py",
+    "app/tests/check_comparison_workbench.py",
+    "app/tests/check_deployment_workbench.py",
     "integration/work.py", "integration/task_maintainer.py",
     "integration/WORK.md", "integration/examples/maintainer-work.json",
     "integration/tests/test_maintainer_work.py",
@@ -55,7 +57,7 @@ def build_bytes():
     manifest = {
         "schema": "cantos.maintainer-kit/1",
         "files": {rel: {"sha256": sha256(data).hexdigest(), "bytes": len(data)} for rel, data in files.items()},
-        "scope": "Streamed baseline/candidate observations, evidence analysis and SecondRun retention/invalidation; source examples require explicit serving configuration. Other SecondRun adapters require the full source checkout.",
+        "scope": "Streamed baseline/candidate observations, joined operational and economic decisions, retained reanalysis, bounded data-only transport, explicit external grading and SecondRun retention/invalidation; source examples require explicit serving configuration. Other SecondRun adapters require the full source checkout.",
     }
     manifest["source_tree_sha256"] = sha256(encoded(manifest["files"])).hexdigest()
     files["MAINTAINER-MANIFEST.json"] = encoded(manifest) + b"\n"
