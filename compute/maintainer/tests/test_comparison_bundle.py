@@ -119,6 +119,43 @@ class ComparisonBundle(unittest.TestCase):
         self.assertNotEqual(analysis_before, analysis_after)
         self.assertEqual((self.a.requests, self.b.requests), (0, 0))
 
+    def test_explicit_notices_preserve_exact_bytes_and_manifest_hashes_via_cli(self):
+        self.run_pair()
+        notice = self.root / 'LICENSE-fixture.txt'
+        provenance = self.root / 'SOURCES.json'
+        notice.write_bytes(b'Fixture license notice\r\nCopyright fixture\r\n')
+        provenance.write_bytes(b'{"source":"authored local protocol fixture"}\n')
+        destination = self.root / 'with-notices.zip'
+        requests = (self.a.requests, self.b.requests)
+        cli = subprocess.run([
+            sys.executable, '-B', str(Path(fixture.m.__file__)), 'export-comparison',
+            '--analysis', str(self.root / 'pair/analysis'), '--out', str(destination),
+            '--notice', str(notice), '--notice', str(provenance)],
+            capture_output=True, text=True, encoding='utf-8', timeout=20)
+        self.assertEqual(cli.returncode, 0, cli.stderr)
+        with zipfile.ZipFile(destination) as archive:
+            manifest = json.loads(archive.read('comparison.json'))
+            entries = {entry['path']: entry for entry in manifest['files']}
+            for source in (notice, provenance):
+                name = 'notices/' + source.name
+                self.assertEqual(archive.read(name), source.read_bytes())
+                self.assertEqual(entries[name]['bytes'], len(source.read_bytes()))
+                self.assertEqual(entries[name]['sha256'], hashlib.sha256(source.read_bytes()).hexdigest())
+        self.assertEqual((self.a.requests, self.b.requests), requests)
+
+    def test_notice_basename_collision_is_rejected_before_archive_creation(self):
+        self.run_pair()
+        one, two = self.root / 'one', self.root / 'two'
+        one.mkdir()
+        two.mkdir()
+        first, second = one / 'LICENSE.txt', two / 'license.TXT'
+        first.write_bytes(b'first notice')
+        second.write_bytes(b'second notice')
+        destination = self.root / 'colliding-notices.zip'
+        with self.assertRaisesRegex(ValueError, 'Conflicting notice path'):
+            export_comparison(self.root / 'pair/analysis', destination, notices=(first, second))
+        self.assertFalse(destination.exists())
+
 
 if __name__ == '__main__':
     unittest.main()

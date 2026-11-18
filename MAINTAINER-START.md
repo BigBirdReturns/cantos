@@ -1,12 +1,13 @@
 # Review a retained serving change
 
-Start the local workbench from the extracted `cantos` directory:
+From the extracted maintainer kit's `cantos` directory, unpack and start its included workbench:
 
 ```sh
-python -B open-compute-ledger/run.py --open
+python -m zipfile -e public/open-compute/open-compute-workbench.zip workbench
+python -B workbench/cantos/open-compute-ledger/run.py --open
 ```
 
-Choose **Review a serving change → Open the real vLLM experiment**. This frozen example makes zero inference requests. Its native verdict is **incomparable**: baseline and candidate each accepted 21 of 96 requests; the 80% requirement needs at least 77. The instrument correctly refuses to call this a passing change or rank a winner.
+Choose **Review a serving change â†’ Open the real vLLM experiment**. This frozen example makes zero inference requests. Its native verdict is **incomparable**: baseline and candidate each accepted 21 of 96 requests; the 80% requirement needs at least 77. The instrument correctly refuses to call this a passing change or rank a winner.
 
 To package an analyzed comparison for the workbench, run this from the extracted `cantos` directory:
 
@@ -14,7 +15,9 @@ To package an analyzed comparison for the workbench, run this from the extracted
 python -B compute/maintainer/maintainer.py export-comparison --analysis YOUR_ANALYSIS --out comparison.zip
 ```
 
-In the workbench, choose **Review a serving change → Import comparison** and select `comparison.zip`. The displayed native verdict, exact policy, observations and evidence identity travel with the analysis. The workbench does not rerun the model or replace the instrument verdict.
+Add repeated `--notice FILE` arguments when source licenses or attribution notices must accompany the shared evidence. The frozen example includes its source notices.
+
+In the workbench, choose **Review a serving change â†’ Import comparison** and select `comparison.zip`. The displayed native verdict, exact policy, observations and evidence identity travel with the analysis. The workbench does not rerun the model or replace the instrument verdict.
 
 The original evidence ZIP remains the source record. Editing policy in the workbench creates a visibly labeled **post-hoc analysis** linked to its parent and original. It reuses the captured responses and existing application grades with zero new inference requests. A changed acceptance rule can change which tasks qualify, but it cannot alter captured responses or their grades. Export the revised decision as **Analysis JSON**; the **Original evidence ZIP** remains unchanged. Keep both with the retained history.
 

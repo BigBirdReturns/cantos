@@ -1,6 +1,6 @@
 {
   "schema": "cantos.delivery-acceptance/1",
-  "updated_at": "2026-11-18T04:12:05.722931+00:00",
+  "updated_at": "2026-11-18T10:36:23.882872+00:00",
   "overall_status": "in_progress",
   "authority": "DELIVERY.md",
   "scope": "inference/useful-work, authorized operations, operating economics, maintainer workflow and recipient delivery",
@@ -66,7 +66,7 @@
       ],
       "workbench_dependency": {
         "archive": "public/open-compute/open-compute-workbench.zip",
-        "sha256": "5b52f5b5081e1b09d2c243e08d81fa84159a3f0d817cccc0317fa20377df372d",
+        "sha256": "7d0cdf845de818418b36d83012976cd4d23b0254e6ff89afb105dfea9dc71213",
         "release": "public/open-compute/WORKBENCH-RELEASE.json",
         "features": [
           "atomic retained decisions/imports",
@@ -93,7 +93,7 @@
   "current_work": {
     "instrument": "compute/maintainer/",
     "execution": "integration/work.py",
-    "release_branch": "work/maintainer-release-20261118",
+    "release_branch": "work/recipient-public-20261118",
     "source_identity": "Use the exact Git commit and recipient manifest for this checkout; producer commits identify source custody."
   },
   "evidence_policy": "Preserve source, conditions, date, failures and observed/published/modeled/unknown basis. Fresh observation and retained analysis are distinct.",

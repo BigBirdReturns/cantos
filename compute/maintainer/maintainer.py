@@ -796,6 +796,8 @@ def main(argv=None):
     review = sub.add_parser("export-comparison", help="export a single data-only baseline/candidate ZIP for native workbench review")
     review.add_argument("--analysis", required=True)
     review.add_argument("--out", required=True)
+    review.add_argument("--notice", action="append", default=[], metavar="FILE",
+                        help="Retain exact source-license or provenance notice bytes (repeatable)")
     args = parser.parse_args(argv)
     try:
         if args.command == "run":
@@ -817,7 +819,7 @@ def main(argv=None):
                 from .comparison_bundle import export_comparison
             except ImportError:
                 from comparison_bundle import export_comparison
-            print(json.dumps(export_comparison(args.analysis, args.out)))
+            print(json.dumps(export_comparison(args.analysis, args.out, notices=args.notice)))
             return 0
         elif args.command == "export-packets":
             try:

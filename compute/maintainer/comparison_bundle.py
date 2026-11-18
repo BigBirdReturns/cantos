@@ -14,7 +14,7 @@ except ImportError:
     from packets import _checked_analysis
 
 
-def export_comparison(analysis, destination):
+def export_comparison(analysis, destination, notices=()):
     path, result, pol, runs, workloads, grades = _checked_analysis(analysis)
     destination = Path(destination)
     files, inputs = {}, {}
@@ -40,6 +40,14 @@ def export_comparison(analysis, destination):
     if "grading_contract" in result["inputs"]:
         inputs["grading_contract"] = add("grading-contract.json", result["inputs"]["grading_contract"]["path"])
     add("original-analysis.json", path)
+    notice_names = set()
+    for notice in notices:
+        source = Path(notice)
+        name = "notices/" + source.name
+        if name.casefold() in notice_names:
+            raise ValueError("Conflicting notice path: " + name)
+        notice_names.add(name.casefold())
+        add(name, source)
     manifest = {
         "schema": "cantos.comparison-bundle/1",
         "title": workloads["baseline"]["name"] + " — baseline / candidate",
