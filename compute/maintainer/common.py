@@ -236,10 +236,18 @@ def policy(value):
     return out
 
 
+# Grading operates after inference. Changing an independent normalizer or
+# grader-to-receipt bridge must regrade/reanalyze, never issue fresh model calls.
+# The observation producer still includes all in-process collector, strict
+# evaluator, stream parser, model/request/protocol and auditor Python modules.
+GRADING_ONLY = frozenset({"evalplus_bridge.py", "normalize.py"})
+
+
 def producer_records():
-    # Hash actual code, including the pinned owner modules, not a version label.
     return [file_record(p, ROOT) for p in sorted(ROOT.rglob("*.py"))
-            if "tests" not in p.relative_to(ROOT).parts and not p.name.startswith("test_")]
+            if "tests" not in p.relative_to(ROOT).parts
+            and not p.name.startswith("test_")
+            and not (p.parent == ROOT and p.name in GRADING_ONLY)]
 
 
 def prepare(spec_path, arm=None):

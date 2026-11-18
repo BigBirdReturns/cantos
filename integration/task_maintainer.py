@@ -54,9 +54,13 @@ def _path(value, base, label):
 
 
 def _procedures():
+    # Grading-only modules do not participate in streamed observation. Their
+    # results and source identities enter the comparison through grade receipts.
     return sorted(p.resolve() for p in OWNER.parent.rglob("*.py")
                   if "tests" not in p.relative_to(OWNER.parent).parts
-                  and "__pycache__" not in p.parts)
+                  and "__pycache__" not in p.parts
+                  and not (p.parent == OWNER.parent
+                           and p.name in {"evalplus_bridge.py", "normalize.py"}))
 
 
 def _inputs(paths, prefix):
