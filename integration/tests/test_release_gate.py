@@ -2,7 +2,7 @@
 import sys
 from pathlib import Path
 import unittest
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import release_gate as gate
 
@@ -46,6 +46,40 @@ class ReleaseGateTests(unittest.TestCase):
     def test_dirty_sources_are_rejected(self):
         with patch.object(gate, 'git', return_value=' M compute/index.html'):
             with self.assertRaises(RuntimeError): gate.local_signature()
+    def test_current_main_is_accepted(self):
+        api = Mock()
+        api.get.return_value = {'object': {'sha': 'a' * 40}}
+        gate.require_main(api, 'a' * 40)
+        api.get.assert_called_once_with('/git/ref/heads/main')
+
+    def test_delayed_completion_cannot_publish_old_main(self):
+        api = Mock()
+        api.get.return_value = {'object': {'sha': 'b' * 40}}
+        with self.assertRaisesRegex(RuntimeError, 'no longer current main'):
+            gate.require_main(api, 'a' * 40)
+
+    def test_main_lookup_failure_does_not_publish(self):
+        api = Mock()
+        api.get.side_effect = RuntimeError('lookup unavailable')
+        with self.assertRaises(RuntimeError):
+            gate.require_main(api, 'a' * 40)
+
+    def test_publication_waits_for_trusted_main_completion(self):
+        text = (gate.ROOT / '.github/workflows/pages.yml').read_text()
+        self.assertNotIn('\n  push:', text)
+        for required in (
+            'workflows: [Cantos qualification]', 'types: [completed]',
+            "github.event.workflow_run.conclusion == 'success'",
+            "github.event.workflow_run.head_branch == 'main'",
+            'github.event.workflow_run.head_repository.full_name == github.repository',
+            "github.event.workflow_run.event == 'push'",
+            "github.event.workflow_run.event == 'workflow_dispatch'",
+            "github.ref == 'refs/heads/main'",
+            'ref: ${{ github.event.workflow_run.head_sha || github.sha }}',
+        ):
+            self.assertIn(required, text)
+        self.assertEqual(text.count('release_gate.py --require-main'), 2)
+
     @staticmethod
     def publishers():
         """Workflows that publish a Pages artifact. Zero is allowed: Pages may be served from the branch."""

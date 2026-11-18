@@ -1,11 +1,13 @@
 name: Publish Cantos to GitHub Pages
 
-# One workflow gates and deploys. The release gate holds publication until the exact
-# product sources at this SHA have passed the Cantos qualification workflow; only then is
-# the site staged and deployed. GITHUB_TOKEN pushes do not trigger this workflow.
+# Qualification completion starts publication, so CI duration cannot exhaust a
+# parallel publisher's wait. Only trusted main commits enter this privileged job.
+# The source gate remains authoritative, including for manual publication.
 
 on:
-  push:
+  workflow_run:
+    workflows: [Cantos qualification]
+    types: [completed]
     branches: [main]
   workflow_dispatch: {}
 
@@ -21,23 +23,35 @@ concurrency:
 
 jobs:
   gate-and-deploy:
+    if: >-
+      (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main') ||
+      (github.event_name == 'workflow_run' &&
+       github.event.workflow_run.conclusion == 'success' &&
+       github.event.workflow_run.head_branch == 'main' &&
+       github.event.workflow_run.head_repository.full_name == github.repository &&
+       (github.event.workflow_run.event == 'push' ||
+        github.event.workflow_run.event == 'workflow_dispatch'))
+    timeout-minutes: 10
     runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deploy.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
+          persist-credentials: false
 
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
-      # Holds until hot-aisle-ci.yml has a passing run for these exact source trees.
+      # Recheck source identity after completion; allow only a short API propagation delay.
       - name: Release gate
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: python integration/release_gate.py --receipt _release-gate.json
+        run: python integration/release_gate.py --require-main --timeout 60 --receipt _release-gate.json
 
       # The site is the repository minus bulk data, scratch and caches. Bulk stays in git
       # (with hashed pointers where it exceeds GitHub's size limit); the pages read only the
@@ -62,6 +76,12 @@ jobs:
           find _site -type f -size +25M ! -path '_site/compute/community-kit.zip' -print -delete
           cmp compute/community-kit.zip _site/compute/community-kit.zip
           du -sh _site
+
+      # A queued older completion must not roll back a newer main revision.
+      - name: Recheck main before publication
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python integration/release_gate.py --require-main --timeout 0 --receipt _release-gate.json
 
       - uses: actions/configure-pages@v5
 
