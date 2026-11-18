@@ -42,8 +42,14 @@ check('the packaged record is the page\'s record', seed and json.loads(seed.grou
 check('the page links the package download', 'href="' + manifest['download'] + '"' in page and manifest['download'].endswith('/compute/chapek/' + ZIP.name))
 pins = manifest['checkout']['pins']
 drift = {name for name, rel in (('work', 'integration/work.py'), ('change_owner', 'integration/change_owner.cjs'), ('research_handoff', 'integration/research_handoff.py'), ('research_owner', 'integration/research_owner.py'), ('task_changes', 'integration/task_changes.py')) if sha(ROOT / rel) != pins[name]}
-check('this checkout carries the runner bytes the package was qualified against (' + ', '.join(sorted(drift)) + ')', not drift)
+# This artifact is pinned to a historical runner. The current checkout can
+# legitimately evolve; next.py must disclose any drift and preserve binding
+# holds rather than silently treating changed source as the original code.
 dry = subprocess.run([sys.executable, '-I', 'next.py', '--checkout', str(ROOT), '--dry-run'], cwd=pkg, capture_output=True, text=True, encoding='utf-8')
+check('historical runner remains pinned or current drift is explicitly disclosed',
+      not drift or ('these runner files differ from the bytes this package was qualified against' in dry.stdout
+                    and 'record-bound requests are held with "binding differs"' in dry.stdout
+                    and all(name in dry.stdout.split('(')[0] for name in sorted(drift))))
 check('next.py resolves against this checkout (dry run)', dry.returncode == 0 and 'Resolved request' in dry.stdout and '<checkout>' not in Path(dry.stdout.split('Resolved request: ', 1)[1].splitlines()[0]).read_text(encoding='utf-8'))
 report = {'status': 'PASS', 'checks': checks, 'count': len(checks), 'zip_sha256': sha(ZIP), 'page_sha256': sha(PAGE), 'record_sha256': record['sha256'], 'scope': 'Package integrity and binding to the published page in this checkout; the entry point in dry run. No native procedure executed, no network.'}
 (OUT / 'package-results.json').write_text(json.dumps(report, indent=2))

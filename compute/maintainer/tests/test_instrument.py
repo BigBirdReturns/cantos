@@ -296,10 +296,15 @@ class Instrument(unittest.TestCase):
         self.assertEqual(self.analyze()["verdict"], "error")
 
     def test_performance_threshold_detects_real_fixture_delay(self):
-        self.b.delay = 0.06
-        self.pol["max_p95_latency_increase"] = 1
-        self.pol["max_p95_ttft_increase"] = 1
-        self.assertEqual(self.run_pair()["verdict"], "regression")
+        # The response delay must exceed Windows timer and HTTP fixture jitter.
+        # This still measures a real streamed response, not synthetic metrics.
+        self.b.delay = 0.6
+        self.pol["max_p95_latency_increase"] = 0.25
+        self.pol["max_p95_ttft_increase"] = 0.25
+        result = self.run_pair()
+        self.assertEqual(result["verdict"], "regression", result["performance_checks"])
+        self.assertIn("p95_latency_s",
+                      {check["metric"] for check in result["performance_checks"] if check["status"] == "regression"})
 
     def test_external_grades_bound_to_response_workload_and_grader(self):
         grader = {"name": "fixture application grader", "revision": "1", "artifact_sha256": "1" * 64,
