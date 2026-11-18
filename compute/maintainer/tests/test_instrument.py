@@ -14,6 +14,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import maintainer as m
 from common import closure, load, prepare, sha256_file, write
+from owner_ocl.core import validate_record
 
 
 class Endpoint:
@@ -137,6 +138,36 @@ class Instrument(unittest.TestCase):
         self.assertEqual(attempt["output_tokens"], 4)
         self.assertEqual(len(attempt["content_chunk_times_s"]), 1)
         self.assertEqual(result["baseline"]["peak_request_concurrency"], 1)
+
+    def test_native_ocl_export_keeps_source_and_policy_identity(self):
+        result = self.run_pair()
+        self.assertEqual(result["ocl_exports"]["status"], "exported")
+        native = load(self.root / "pair/analysis/baseline.ocl.json")
+        self.assertEqual(validate_record(native), [])
+        self.assertEqual(native["observations"][0]["attempts"][-1]["stage"], "final")
+        self.assertEqual(native["observations"][0]["attempts"][-1]["source_stage"], "step_0")
+        self.assertEqual(native["provenance"]["maintainer_evidence"]["source_run_sha256"], sha256_file(self.root / "pair/baseline/run.json"))
+        self.assertIsNone(native["cost"])
+        self.assertEqual(native["provenance"]["maintainer_evidence"]["new_inference_requests"], 0)
+
+    def test_packet_export_rejects_an_unpinned_bundle_before_loading_code(self):
+        import packets
+        self.run_pair()
+        bad = self.root / "untrusted.zip"
+        bad.write_bytes(b"not the pinned workbench source")
+        with self.assertRaisesRegex(ValueError, "pinned original"):
+            packets.export_packets(self.root / "pair/analysis", bad, self.root / "export")
+        self.assertFalse((self.root / "export").exists())
+
+    def test_changed_native_export_blocks_packet_generation(self):
+        import packets
+        self.run_pair()
+        path = self.root / "pair/analysis/baseline.ocl.json"
+        value = load(path)
+        value["observations"][0]["accepted"] = False
+        path.write_text(json.dumps(value))
+        with self.assertRaisesRegex(ValueError, "analysis export changed"):
+            packets._checked_analysis(self.root / "pair/analysis")
 
     def test_quality_regression_even_when_every_candidate_response_is_http_200(self):
         self.b.mode = "wrong"
@@ -277,6 +308,8 @@ class Instrument(unittest.TestCase):
         self.a.mode = self.b.mode = "external"
         result = self.run_pair()
         self.assertEqual(result["verdict"], "incomparable", result)
+        self.assertEqual(result["ocl_exports"]["status"], "awaiting_external_grades")
+        self.assertFalse((self.root / "pair/analysis/baseline.ocl.json").exists())
         grade_paths = {}
         for arm in ("baseline", "candidate"):
             run_path = self.root / "pair" / arm / "run.json"

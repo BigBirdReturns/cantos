@@ -23,7 +23,7 @@ try:
                          sha256_file, steps, validate_closure, validate_workload, write)
     from .streaming import capture, parse_capture, probe
     from .owner_ocl.compare import compare as ocl_compare
-    from .owner_ocl.core import _pct, summarize
+    from .owner_ocl.core import _pct, summarize, validate_record
     from .owner_ocl.runner import FORMATS
     from .owner_ocl.tasks import make_tasks
     from .owner_vllm.audit import exact_peak
@@ -33,7 +33,7 @@ except ImportError:
                         sha256_file, steps, validate_closure, validate_workload, write)
     from streaming import capture, parse_capture, probe
     from owner_ocl.compare import compare as ocl_compare
-    from owner_ocl.core import _pct, summarize
+    from owner_ocl.core import _pct, summarize, validate_record
     from owner_ocl.runner import FORMATS
     from owner_ocl.tasks import make_tasks
     from owner_vllm.audit import exact_peak
@@ -421,6 +421,7 @@ def _graded(run, workload, pol, grades=None):
         if max_ttft is not None and any(a["ttft_s"] is None or a["ttft_s"] > max_ttft for a in obs["attempts"]):
             reasons.append("TTFT requirement exceeded or unmeasured")
         accepted = not reasons
+        obs["source_repetition"] = obs["repetition"]
         obs.update({"accepted": accepted, "actual": actual, "expected": expected,
                     "error": "; ".join(reasons) if reasons else None,
                     "checks": {"exact_expected": all(check), "acceptance_policy": not reasons},
@@ -438,6 +439,44 @@ def _graded(run, workload, pol, grades=None):
                                 "context_limit": identity.get("context_limit"), "hardware": identity.get("hardware")},
                  "energy": None, "cost": None, "limitations": LIMITS}
     return projected, ungraded
+
+
+def export_ocl_receipt(run_path, run, workload, pol, grades=None, grades_path=None):
+    """Project already validated exact outcomes into the existing OCL receipt schema."""
+    projected, ungraded = _graded(run, workload, pol, grades)
+    if ungraded:
+        raise ValueError("external application grades are required before OCL export")
+    for obs in projected["observations"]:
+        case = workload["cases"][obs["case_index"]]
+        final_expect = steps(case)[-1]["expect"]
+        if final_expect["kind"] == "external":
+            obs["evaluator_version"] = "cantos.external-grade-join/1:" + digest(final_expect["grader"])
+        elif final_expect["kind"] == "text_exact":
+            obs["evaluator_version"] = "cantos.text-exact/1"
+        # The existing collector recognizes a completed final task turn by its
+        # native stage name. Preserve the streamed source stage separately.
+        for index, attempt in enumerate(obs["attempts"]):
+            attempt["source_stage"] = attempt["stage"]
+            if index == len(steps(case)) - 1:
+                attempt["stage"] = "final"
+    projected["workload"]["description"] = workload.get("description")
+    projected["workload"]["source"] = workload.get("source")
+    projected["provenance"]["maintainer_evidence"] = {
+        "source_run_sha256": sha256_file(run_path), "source_run_id": run["run_id"],
+        "original_started_at": run["started_at"], "original_ended_at": run["ended_at"],
+        "observation_key": run["observation_key"], "workload_sha256": run["workload_sha256"],
+        "declared_identity": run["declared_identity"], "observed_identity": run["observed_identity"],
+        "capture_producer_files": run["producer_files"], "raw_artifacts": run["artifacts"],
+        "policy": pol, "policy_identity": digest(pol),
+        "grade_receipt_sha256": sha256_file(grades_path) if grades_path else None,
+        "grader": grades["grader"] if grades else None,
+        "trials": run["trials"], "pairing": run["pairing"],
+        "new_inference_requests": 0,
+        "cost_scope": "No cost or energy inferred. Explicit workbench financial input or later cost scenario retains its own basis."}
+    problems = validate_record(projected)
+    if problems:
+        raise ValueError("native OCL export invalid: " + "; ".join(problems))
+    return projected
 
 
 def _metrics(run, projected, rate, matched_keys):
@@ -591,6 +630,20 @@ def analyze_receipts(baseline_path, candidate_path, policy_path, out_dir,
             if path:
                 inputs[key] = {"path": str(Path(path).resolve()), "sha256": sha256_file(path)}
         result = _compare_runs(a, b, wa, wb, pol, ga, gb)
+        pending = any(o["accepted"] is None for o in a["observations"]) and ga is None
+        pending |= any(o["accepted"] is None for o in b["observations"]) and gb is None
+        if pending:
+            result["ocl_exports"] = {"status": "awaiting_external_grades"}
+        else:
+            exports = {
+                "baseline": export_ocl_receipt(baseline_path, a, wa, pol, ga, baseline_grades),
+                "candidate": export_ocl_receipt(candidate_path, b, wb, pol, gb, candidate_grades)}
+            write(root / "resolved-policy.json", pol)
+            result["ocl_exports"] = {"status": "exported", "policy": file_record(root / "resolved-policy.json", root)}
+            for side, value in exports.items():
+                target = root / (side + ".ocl.json")
+                write(target, value)
+                result["ocl_exports"][side] = file_record(target, root)
     except Exception as exc:
         result = {"schema": "cantos.maintainer.verdict/1", "created_at": now(), "verdict": "error",
                   "exit_code": EXITS["error"], "reasons": [type(exc).__name__ + ": " + str(exc)[:1000]],
@@ -669,6 +722,12 @@ def main(argv=None):
     export = sub.add_parser("export-ocl", help="export the existing synthetic OCL two-turn workload")
     export.add_argument("--out", required=True)
     export.add_argument("--seed", type=int, default=1729)
+    packets = sub.add_parser("export-packets", help="use the pinned existing workbench collector to export and verify portable decision packets")
+    for flag in ("analysis", "bundle", "out"):
+        packets.add_argument("--" + flag, required=True)
+    packets.add_argument("--baseline-financials")
+    packets.add_argument("--candidate-financials")
+    packets.add_argument("--policy-prices-usd", action="store_true", help="Declare supplied policy hourly rates as modeled USD for the measured trial windows")
     args = parser.parse_args(argv)
     try:
         if args.command == "run":
@@ -684,6 +743,16 @@ def main(argv=None):
         elif args.command == "prepare":
             result = prepare(args.spec, args.arm)
             print(json.dumps({key: result[key] for key in ("identity", "observation_key", "dependencies", "protocol")}, indent=2))
+            return 0
+        elif args.command == "export-packets":
+            try:
+                from .packets import export_packets
+            except ImportError:
+                from packets import export_packets
+            result = export_packets(args.analysis, args.bundle, args.out,
+                                    args.baseline_financials, args.candidate_financials, args.policy_prices_usd)
+            print(json.dumps({"status": result["status"], "packets": result["packets"],
+                              "workbench_decision": result["workbench_import"]["decision"], "new_inference_requests": 0}))
             return 0
         else:
             export_ocl(args.out, args.seed)

@@ -93,6 +93,25 @@ python -B compute/maintainer/maintainer.py analyze \
 
 Omit the two grade arguments for exact JSON/text workloads. Change acceptance latency limits, permitted finish reasons, performance thresholds or hourly prices in a policy file, then reanalyze the existing observations. Acceptance-policy changes may change the accepted count; a price-only change preserves it. The original raw receipt and its initial grade remain unchanged.
 
+### Retain the result in the existing Cantos workbench
+
+After complete grading, `analyze` also emits `baseline.ocl.json`, `candidate.ocl.json`, and `resolved-policy.json`. These are validated projections into the existing `ocl.run/1` receipt schema, with original run/workload/grade hashes, capture producer identity, raw artifact manifest and exact applied policy. The original observation time stays original. Native task repetition IDs flatten trial/repetition for the existing owner, while `trial` and `source_repetition` retain the original coordinates. A final attempt uses native stage `final` and preserves its captured stage as `source_stage`. External outputs awaiting their application grades produce no native receipt export, so ungraded work cannot become an invented failure count.
+
+Use the original published workbench ZIP as the explicit, pinned collector/engine dependency. The maintainer recipient kit includes it at `public/open-compute/open-compute-workbench.zip`; its SHA256 is `fb759ca80b8b24f5c81958775985032ef2285966b410a8194f72ee454f1c04b5`. The source is Cantos commit `f29ee3fd3bfb3a5240fa3280d7f2f4ed6ba7747e`. The exporter checks this identity before loading code and bounds extraction while rejecting traversal and symlinks.
+
+```bash
+python -B compute/maintainer/maintainer.py export-packets \
+  --analysis /absolute/path/to/new-analysis \
+  --bundle public/open-compute/open-compute-workbench.zip \
+  --out /absolute/path/to/new-workbench-export
+```
+
+`export-packets` executes the existing collector's `ingest` operation for acceptance accounting and financial validation. It retains the collector's original output, then maps the application workload, already validated matched latency metrics, original observation date and evidence closure into the existing `ocl.instrument-packet/1` schema. This explicit adapter removes the old collector's synthetic-suite defaults without replacing its arithmetic. Raw run and grade artifacts, original/resolved policies, source manifests and the pinned owner archive travel with each final packet.
+
+In the running workbench's **Collect & import**, select `baseline/packet.json` and `candidate/packet.json` from the export directory. The exporter already exercises the same existing `Ledger.import_packet` owner, verifies idempotent reimport, and retains a decision/history in `workbench-verification-store`. `workbench-import.json` records that actual import; `export.json` records the complete export closure. The verification decision uses the original quality floor and any declared per-request latency requirements. An `incomparable` maintainer result remains attached to provenance, and a configuration below the original acceptance floor remains ineligible. Choosing a lower floor later creates an explicitly different decision scenario.
+
+Packet costs remain unknown by default. `--baseline-financials FILE` and `--candidate-financials FILE` accept the existing collector's sourced costs/energy input format. To carry supplied policy hourly assumptions, add `--policy-prices-usd`, explicitly declaring their currency and measured-window scope. That option copies the already validated modeled totals into the native financial-input owner; it performs no new measurement and infers no invoice or energy data. It cannot be combined with independent financial inputs for the same priced arm. Missing rates stay unknown; an explicit zero retains its declared zero-cost scenario. Changing only price and repeating retained analysis/export preserves the measured acceptance counts and source observation identities.
+
 The policy schema is `cantos.maintainer.policy/1`. Unknown fields are rejected. The example lists the usual requirements; omitted fields use conservative defaults.
 
 | Policy field | Default | Gate |
