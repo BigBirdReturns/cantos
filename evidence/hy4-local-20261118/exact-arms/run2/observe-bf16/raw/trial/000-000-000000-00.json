@@ -1,0 +1,49 @@
+{
+  "chunks": [
+    {
+      "at_s": 31.8460879069753,
+      "data_b64": "ZGF0YTogeyJpZCI6ICJjaGF0Y21wbC0xNzk1MDE4NDgzMTUxIiwgIm9iamVjdCI6ICJjaGF0LmNvbXBsZXRpb24uY2h1bmsiLCAiY3JlYXRlZCI6IDE3OTUwMTg0ODMsICJtb2RlbCI6ICJoeTQtZmxhc2giLCAiY2hvaWNlcyI6IFt7ImluZGV4IjogMCwgImRlbHRhIjogeyJjb250ZW50IjogIntcInN1bVwiOjQyfSJ9LCAiZmluaXNoX3JlYXNvbiI6IG51bGx9XX0KCg=="
+    },
+    {
+      "at_s": 31.853361138142645,
+      "data_b64": "ZGF0YTogeyJpZCI6ICJjaGF0Y21wbC0xNzk1MDE4NDgzMTUxIiwgIm9iamVjdCI6ICJjaGF0LmNvbXBsZXRpb24uY2h1bmsiLCAiY3JlYXRlZCI6IDE3OTUwMTg0ODMsICJtb2RlbCI6ICJoeTQtZmxhc2giLCAiY2hvaWNlcyI6IFt7ImluZGV4IjogMCwgImRlbHRhIjoge30sICJmaW5pc2hfcmVhc29uIjogInN0b3AifV19Cgo="
+    },
+    {
+      "at_s": 31.8533907760866,
+      "data_b64": "ZGF0YTogeyJpZCI6ICJjaGF0Y21wbC0xNzk1MDE4NDgzMTUxIiwgIm9iamVjdCI6ICJjaGF0LmNvbXBsZXRpb24uY2h1bmsiLCAiY3JlYXRlZCI6IDE3OTUwMTg0ODMsICJtb2RlbCI6ICJoeTQtZmxhc2giLCAiY2hvaWNlcyI6IFtdLCAidXNhZ2UiOiB7InByb21wdF90b2tlbnMiOiA0OCwgImNvbXBsZXRpb25fdG9rZW5zIjogNiwgInRvdGFsX3Rva2VucyI6IDU0fX0KCg=="
+    },
+    {
+      "at_s": 31.853399774990976,
+      "data_b64": "ZGF0YTogW0RPTkVdCgo="
+    }
+  ],
+  "content_type": "text/event-stream",
+  "ended_at": "2026-11-18T16:15:14.984666Z",
+  "ended_monotonic_s": 1160250.907937953,
+  "http_status": 200,
+  "request": {
+    "chat_template_kwargs": {
+      "reasoning_effort": "no_think"
+    },
+    "max_tokens": 256,
+    "messages": [
+      {
+        "content": "Return exactly one JSON object with key sum and the integer sum of 17 and 25. Do not add explanation.",
+        "role": "user"
+      }
+    ],
+    "model": "hy4-flash",
+    "seed": 1729,
+    "stream": true,
+    "stream_options": {
+      "include_usage": true
+    },
+    "temperature": 0,
+    "top_p": 1
+  },
+  "schema": "cantos.maintainer.stream/1",
+  "stage": "step_0",
+  "started_at": "2026-11-18T16:14:43.131188Z",
+  "started_monotonic_s": 1160219.054464727,
+  "transport_error": null
+}

@@ -1,0 +1,178 @@
+{
+  "identity": {
+    "configuration": {
+      "base_url": "http://127.0.0.1:18400/v1",
+      "model": "hy4-flash",
+      "implementation_files": [],
+      "identity": {
+        "implementation": {
+          "name": "llama.cpp llama-server, unmerged pull request 32517",
+          "revision": "ggml-org/llama.cpp@0a054d0b02454c998e068381d15f3f6615bdd987"
+        },
+        "model": {
+          "revision": "AngelSlim/Hy4-flash-GGUF@f8def04a2fc74edb21c53166dad5f94113baab4a",
+          "sha256": "b35216ef9c4bb648502a6bd6f7ef79b01f59bc264bfddb4bb1fad1e6fc9e8596"
+        },
+        "tokenizer": {
+          "revision": "embedded in GGUF part 1 sha256:987b2902813ad94919e3e46e375bd8144d36113cced62d25f13013ccc88a3abb"
+        },
+        "hardware": {
+          "id": "GPU-64559d3d-dd59-05ac-1531-88ac32ddc58b,GPU-c3b25970-4ab3-f2ae-5157-1598a46fc778",
+          "description": "OCTO-W03: Intel Core i9-10900X, 123 GiB RAM; GPU-64559d3d-dd59-05ac-1531-88ac32ddc58b, Quadro RTX 8000, 49152 MiB, 615.71.09, 200.00 W; GPU-c3b25970-4ab3-f2ae-5157-1598a46fc778, Quadro RTX 8000, 49152 MiB, 615.71.09, 260.00 W; CUDA 13.4; interconnect not measured"
+        },
+        "precision": "gguf_q3_k_mixed_publisher_quantized",
+        "context_limit": 8192,
+        "settings": {
+          "server_flags": "-m /srv/w03/nvme-work/jobs/Cantos-Hy4-Local-First-20261118/models/Hy4-flash-Q3_K-00001-of-00002.gguf -c 8192 -ngl 99 --jinja --host 127.0.0.1 --port 18400 --alias hy4-flash -np 1",
+          "speculative_decoding": false,
+          "reasoning_effort": "no_think",
+          "prefix_cache": "llama-server default slot prompt cache, one slot",
+          "co_tenancy": "GPU compute processes at spec time: 2176, /srv/w03/nvme-work/jobs/Cantos-Hy4-Local-First-20261118/build/bin/llama-server\n2176, /srv/w03/nvme-work/jobs/Cantos-Hy4-Local-First-20261118/build/bin/llama-server",
+          "power_and_cooling": "unchanged as found; a guard stops this server at 80 C",
+          "effective_runtime": "see server.log beside this run for the loaded backend and tensor placement"
+        }
+      },
+      "auth_env": "OCL_API_KEY"
+    },
+    "implementation_inputs": [],
+    "workload_sha256": "d96ed51dc7296867f0dd5f577bba88f9ba37f542368ff3eb0a896f9aedb0f7dc",
+    "protocol": {
+      "trials": 3,
+      "repeats": 1,
+      "concurrency": 1,
+      "seed": 1729,
+      "timeout_s": 120,
+      "max_tokens": 256,
+      "warmup": 0,
+      "extra_body": {
+        "chat_template_kwargs": {
+          "reasoning_effort": "no_think"
+        },
+        "top_p": 1
+      }
+    },
+    "producer_files": [
+      {
+        "path": "__init__.py",
+        "sha256": "694bb1ed29bb473d8879602f1318f551c5a2420fdc3b4cd7180457058e018b21",
+        "bytes": 36
+      },
+      {
+        "path": "common.py",
+        "sha256": "ab579a8aa3ac0d5f952307bb3d78a69e78e54f6958d029ff37479a5b2cbd8f9c",
+        "bytes": 15326
+      },
+      {
+        "path": "experiments/hy4-flash/preflight.py",
+        "sha256": "114fdce8dd98c9749262a1be45c32c3432732e0b8e5a1823498e63c237e52788",
+        "bytes": 12321
+      },
+      {
+        "path": "experiments/hy4-flash/render_recipe.py",
+        "sha256": "4d06d5b59d884973753bd653fb1ade56a76c5e1767e53cff65ba74f80a4f549d",
+        "bytes": 3360
+      },
+      {
+        "path": "maintainer.py",
+        "sha256": "c42222a3222cf8be6dca9bb96945a757fa1f9438a35a0b0077d0d98699eef2f6",
+        "bytes": 48631
+      },
+      {
+        "path": "owner_ocl/__init__.py",
+        "sha256": "d146cc59df9f49fd0816f7a98145c09718237ad11dcbd2aa0bb4e144b9ca207b",
+        "bytes": 66
+      },
+      {
+        "path": "owner_ocl/compare.py",
+        "sha256": "7b0861d0d56b332db862052ff593bca85787a28810c27a137e29fb38946ad373",
+        "bytes": 4817
+      },
+      {
+        "path": "owner_ocl/core.py",
+        "sha256": "996a2930e98211423104f1b4fa5f95a005b8e8fdfedd59fa08b7557e9525b1a5",
+        "bytes": 8128
+      },
+      {
+        "path": "owner_ocl/costs.py",
+        "sha256": "59787191c181c6d17b3ecc50268051f0fc10b85cd508c8f65d76dc423741721d",
+        "bytes": 4129
+      },
+      {
+        "path": "owner_ocl/energy.py",
+        "sha256": "cc5129a5fdea946094e99783f4c65b1f8b1385a4f6e54f12158434cd116a505b",
+        "bytes": 1651
+      },
+      {
+        "path": "owner_ocl/runner.py",
+        "sha256": "e31ecd9ec76b75d036f1201e8415618e3d85e750fe67fd7ce789cf4730b30ed3",
+        "bytes": 11850
+      },
+      {
+        "path": "owner_ocl/tasks.py",
+        "sha256": "3f8220f61dfc119728517299cebbc63319098213ae5ad7d4486f3415c8a811cf",
+        "bytes": 3880
+      },
+      {
+        "path": "owner_vllm/__init__.py",
+        "sha256": "b5c16e8bd3c46838ba822d25825547dca64e8bdb6fd149a72b9d9ab46ba562f8",
+        "bytes": 55
+      },
+      {
+        "path": "owner_vllm/audit.py",
+        "sha256": "9e81415da13b5dac5f2f57938c818af255e55029eb48c259365ec5bd02f8e7ba",
+        "bytes": 5921
+      },
+      {
+        "path": "retry.py",
+        "sha256": "2a795193b927c80c1105e40a8d9e50ff96dcdc71a787032adea877008ae33d4e",
+        "bytes": 40836
+      },
+      {
+        "path": "retry_resources.py",
+        "sha256": "b3d3fc24d76b6d10177bfefdf39a37d69c105d444913f776a1b85438a8aedf24",
+        "bytes": 16619
+      },
+      {
+        "path": "streaming.py",
+        "sha256": "3453996783c68a0d745345b3bccd0505a3f9b31135bdd2e8148f613768baf30e",
+        "bytes": 10442
+      }
+    ]
+  },
+  "observation_key": "3932b670d00ac8e65109ed9f1391b30697ed543a15911da24172844c2adfbd34",
+  "dependencies": [
+    "/srv/w03/nvme-work/jobs/Cantos-Hy4-Local-First-20261118/cantos/compute/maintainer/__init__.py",
+    "/srv/w03/nvme-work/jobs/Cantos-Hy4-Local-First-20261118/cantos/compute/maintainer/common.py",
+    "/srv/w03/nvme-work/jobs/Cantos-Hy4-Local-First-20261118/cantos/compute/maintainer/experiments/hy4-flash/preflight.py",
+    "/srv/w03/nvme-work/jobs/Cantos-Hy4-Local-First-20261118/cantos/compute/maintainer/experiments/hy4-flash/render_recipe.py",
+    "/srv/w03/nvme-work/jobs/Cantos-Hy4-Local-First-20261118/cantos/compute/maintainer/maintainer.py",
+    "/srv/w03/nvme-work/jobs/Cantos-Hy4-Local-First-20261118/cantos/compute/maintainer/owner_ocl/__init__.py",
+    "/srv/w03/nvme-work/jobs/Cantos-Hy4-Local-First-20261118/cantos/compute/maintainer/owner_ocl/compare.py",
+    "/srv/w03/nvme-work/jobs/Cantos-Hy4-Local-First-20261118/cantos/compute/maintainer/owner_ocl/core.py",
+    "/srv/w03/nvme-work/jobs/Cantos-Hy4-Local-First-20261118/cantos/compute/maintainer/owner_ocl/costs.py",
+    "/srv/w03/nvme-work/jobs/Cantos-Hy4-Local-First-20261118/cantos/compute/maintainer/owner_ocl/energy.py",
+    "/srv/w03/nvme-work/jobs/Cantos-Hy4-Local-First-20261118/cantos/compute/maintainer/owner_ocl/runner.py",
+    "/srv/w03/nvme-work/jobs/Cantos-Hy4-Local-First-20261118/cantos/compute/maintainer/owner_ocl/tasks.py",
+    "/srv/w03/nvme-work/jobs/Cantos-Hy4-Local-First-20261118/cantos/compute/maintainer/owner_vllm/__init__.py",
+    "/srv/w03/nvme-work/jobs/Cantos-Hy4-Local-First-20261118/cantos/compute/maintainer/owner_vllm/audit.py",
+    "/srv/w03/nvme-work/jobs/Cantos-Hy4-Local-First-20261118/cantos/compute/maintainer/retry.py",
+    "/srv/w03/nvme-work/jobs/Cantos-Hy4-Local-First-20261118/cantos/compute/maintainer/retry_resources.py",
+    "/srv/w03/nvme-work/jobs/Cantos-Hy4-Local-First-20261118/cantos/compute/maintainer/streaming.py",
+    "/srv/w03/nvme-work/jobs/Cantos-Hy4-Local-First-20261118/run/spec-q3k-r01/workload.smoke.json"
+  ],
+  "protocol": {
+    "trials": 3,
+    "repeats": 1,
+    "concurrency": 1,
+    "seed": 1729,
+    "timeout_s": 120,
+    "max_tokens": 256,
+    "warmup": 0,
+    "extra_body": {
+      "chat_template_kwargs": {
+        "reasoning_effort": "no_think"
+      },
+      "top_p": 1
+    }
+  }
+}

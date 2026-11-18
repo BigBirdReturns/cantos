@@ -1,0 +1,49 @@
+{
+  "chunks": [
+    {
+      "at_s": 26.337622337974608,
+      "data_b64": "ZGF0YTogeyJpZCI6ICJjaGF0Y21wbC0xNzk1MDIyMjU0OTU5IiwgIm9iamVjdCI6ICJjaGF0LmNvbXBsZXRpb24uY2h1bmsiLCAiY3JlYXRlZCI6IDE3OTUwMjIyNTQsICJtb2RlbCI6ICJoeTQtZmxhc2giLCAiY2hvaWNlcyI6IFt7ImluZGV4IjogMCwgImRlbHRhIjogeyJjb250ZW50IjogIntcIml0ZW1cIjpcImJvbHRcIixcInF1YW50aXR5XCI6MTJ9In0sICJmaW5pc2hfcmVhc29uIjogbnVsbH1dfQoK"
+    },
+    {
+      "at_s": 26.35478300298564,
+      "data_b64": "ZGF0YTogeyJpZCI6ICJjaGF0Y21wbC0xNzk1MDIyMjU0OTU5IiwgIm9iamVjdCI6ICJjaGF0LmNvbXBsZXRpb24uY2h1bmsiLCAiY3JlYXRlZCI6IDE3OTUwMjIyNTQsICJtb2RlbCI6ICJoeTQtZmxhc2giLCAiY2hvaWNlcyI6IFt7ImluZGV4IjogMCwgImRlbHRhIjoge30sICJmaW5pc2hfcmVhc29uIjogInN0b3AifV19Cgo="
+    },
+    {
+      "at_s": 26.354825154179707,
+      "data_b64": "ZGF0YTogeyJpZCI6ICJjaGF0Y21wbC0xNzk1MDIyMjU0OTU5IiwgIm9iamVjdCI6ICJjaGF0LmNvbXBsZXRpb24uY2h1bmsiLCAiY3JlYXRlZCI6IDE3OTUwMjIyNTQsICJtb2RlbCI6ICJoeTQtZmxhc2giLCAiY2hvaWNlcyI6IFtdLCAidXNhZ2UiOiB7InByb21wdF90b2tlbnMiOiA2MCwgImNvbXBsZXRpb25fdG9rZW5zIjogMTAsICJ0b3RhbF90b2tlbnMiOiA3MH19Cgo="
+    },
+    {
+      "at_s": 26.354840870015323,
+      "data_b64": "ZGF0YTogW0RPTkVdCgo="
+    }
+  ],
+  "content_type": "text/event-stream",
+  "ended_at": "2026-11-18T17:18:01.293494Z",
+  "ended_monotonic_s": 1164017.216763723,
+  "http_status": 200,
+  "request": {
+    "chat_template_kwargs": {
+      "reasoning_effort": "no_think"
+    },
+    "max_tokens": 256,
+    "messages": [
+      {
+        "content": "Record: item=bolt; quantity=12; color=blue. Return exactly one JSON object containing only item as a string and quantity as an integer. Do not add explanation.",
+        "role": "user"
+      }
+    ],
+    "model": "hy4-flash",
+    "seed": 1729,
+    "stream": true,
+    "stream_options": {
+      "include_usage": true
+    },
+    "temperature": 0,
+    "top_p": 1
+  },
+  "schema": "cantos.maintainer.stream/1",
+  "stage": "step_0",
+  "started_at": "2026-11-18T17:17:34.938539Z",
+  "started_monotonic_s": 1163990.861816299,
+  "transport_error": null
+}

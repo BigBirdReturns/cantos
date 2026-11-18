@@ -1,0 +1,17 @@
+{
+  "spec": "/srv/w03/nvme-work/jobs/Cantos-Hy4-Local-First-20261118/code-r01/spec/spec.json",
+  "protocol": {
+    "trials": 3,
+    "repeats": 1,
+    "concurrency": 1,
+    "seed": 1729,
+    "timeout_s": 600,
+    "max_tokens": 1024,
+    "warmup": 0,
+    "extra_body": {
+      "chat_template_kwargs": {
+        "reasoning_effort": "no_think"
+      }
+    }
+  }
+}

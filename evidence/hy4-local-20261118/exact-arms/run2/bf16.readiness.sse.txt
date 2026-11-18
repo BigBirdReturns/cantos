@@ -1,0 +1,8 @@
+data: {"id": "chatcmpl-1795018017091", "object": "chat.completion.chunk", "created": 1795018017, "model": "hy4-flash", "choices": [{"index": 0, "delta": {"content": "OK"}, "finish_reason": null}]}
+
+data: {"id": "chatcmpl-1795018017091", "object": "chat.completion.chunk", "created": 1795018017, "model": "hy4-flash", "choices": [{"index": 0, "delta": {}, "finish_reason": "stop"}]}
+
+data: {"id": "chatcmpl-1795018017091", "object": "chat.completion.chunk", "created": 1795018017, "model": "hy4-flash", "choices": [], "usage": {"prompt_tokens": 27, "completion_tokens": 2, "total_tokens": 29}}
+
+data: [DONE]
+

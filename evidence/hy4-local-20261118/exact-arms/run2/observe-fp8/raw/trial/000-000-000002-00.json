@@ -1,0 +1,49 @@
+{
+  "chunks": [
+    {
+      "at_s": 98.32594115682878,
+      "data_b64": "ZGF0YTogeyJpZCI6ICJjaGF0Y21wbC0xNzk1MDIxODU4NTMxIiwgIm9iamVjdCI6ICJjaGF0LmNvbXBsZXRpb24uY2h1bmsiLCAiY3JlYXRlZCI6IDE3OTUwMjE4NTgsICJtb2RlbCI6ICJoeTQtZmxhc2giLCAiY2hvaWNlcyI6IFt7ImluZGV4IjogMCwgImRlbHRhIjogeyJjb250ZW50IjogIntcInJlYWR5XCI6dHJ1ZSxcIm1pc3NpbmdcIjpudWxsLFwiY291bnRcIjozfSJ9LCAiZmluaXNoX3JlYXNvbiI6IG51bGx9XX0KCg=="
+    },
+    {
+      "at_s": 98.33865330996923,
+      "data_b64": "ZGF0YTogeyJpZCI6ICJjaGF0Y21wbC0xNzk1MDIxODU4NTMxIiwgIm9iamVjdCI6ICJjaGF0LmNvbXBsZXRpb24uY2h1bmsiLCAiY3JlYXRlZCI6IDE3OTUwMjE4NTgsICJtb2RlbCI6ICJoeTQtZmxhc2giLCAiY2hvaWNlcyI6IFt7ImluZGV4IjogMCwgImRlbHRhIjoge30sICJmaW5pc2hfcmVhc29uIjogInN0b3AifV19Cgo="
+    },
+    {
+      "at_s": 98.33868496096693,
+      "data_b64": "ZGF0YTogeyJpZCI6ICJjaGF0Y21wbC0xNzk1MDIxODU4NTMxIiwgIm9iamVjdCI6ICJjaGF0LmNvbXBsZXRpb24uY2h1bmsiLCAiY3JlYXRlZCI6IDE3OTUwMjE4NTgsICJtb2RlbCI6ICJoeTQtZmxhc2giLCAiY2hvaWNlcyI6IFtdLCAidXNhZ2UiOiB7InByb21wdF90b2tlbnMiOiA1NCwgImNvbXBsZXRpb25fdG9rZW5zIjogMTQsICJ0b3RhbF90b2tlbnMiOiA2OH19Cgo="
+    },
+    {
+      "at_s": 98.33871059399098,
+      "data_b64": "ZGF0YTogW0RPTkVdCgo="
+    }
+  ],
+  "content_type": "text/event-stream",
+  "ended_at": "2026-11-18T17:12:36.849869Z",
+  "ended_monotonic_s": 1163692.773138379,
+  "http_status": 200,
+  "request": {
+    "chat_template_kwargs": {
+      "reasoning_effort": "no_think"
+    },
+    "max_tokens": 256,
+    "messages": [
+      {
+        "content": "Return exactly this JSON object with the indicated types: ready is boolean true, missing is null, count is integer 3. Do not add explanation.",
+        "role": "user"
+      }
+    ],
+    "model": "hy4-flash",
+    "seed": 1729,
+    "stream": true,
+    "stream_options": {
+      "include_usage": true
+    },
+    "temperature": 0,
+    "top_p": 1
+  },
+  "schema": "cantos.maintainer.stream/1",
+  "stage": "step_0",
+  "started_at": "2026-11-18T17:10:58.511012Z",
+  "started_monotonic_s": 1163594.434288121,
+  "transport_error": null
+}

@@ -1,0 +1,31 @@
+{
+  "schema": "cantos.maintainer.policy/1",
+  "allowed_changes": [
+    "identity.model.revision",
+    "identity.model.sha256",
+    "identity.precision",
+    "observed.version"
+  ],
+  "min_trials": 3,
+  "min_baseline_acceptance": 1,
+  "min_candidate_acceptance": 1,
+  "max_acceptance_drop": 0,
+  "max_new_failures": 0,
+  "max_p95_latency_increase": null,
+  "max_p95_ttft_increase": null,
+  "max_accepted_throughput_drop": 1,
+  "max_cost_per_accepted_increase": null,
+  "acceptance": {
+    "max_latency_s": null,
+    "max_ttft_s": null,
+    "finish_reasons": [
+      "stop"
+    ]
+  },
+  "prices": {
+    "baseline_per_hour": null,
+    "candidate_per_hour": null
+  },
+  "require_observed_model": true,
+  "require_observed_version": true
+}

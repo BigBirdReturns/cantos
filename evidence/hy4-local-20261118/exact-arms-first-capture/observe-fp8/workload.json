@@ -1,0 +1,77 @@
+{
+  "schema": "cantos.maintainer.workload/1",
+  "name": "Hy4 text API and acceptance smoke",
+  "version": "2026-11-18.1",
+  "source": "Authored protocol fixtures; no application-population or model-ranking claim.",
+  "description": "Four bounded exact JSON cases qualify transport, visible answer and acceptance wiring only. Text-only, short context, deterministic request controls.",
+  "cases": [
+    {
+      "id": "sum-42",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Return exactly one JSON object with key sum and the integer sum of 17 and 25. Do not add explanation."
+        }
+      ],
+      "expect": {
+        "kind": "json_exact",
+        "value": {
+          "sum": 42
+        }
+      }
+    },
+    {
+      "id": "sort-integers",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Return exactly one JSON object with key values and the array [9, 2, 7, 2] sorted in ascending order. Do not add explanation."
+        }
+      ],
+      "expect": {
+        "kind": "json_exact",
+        "value": {
+          "values": [
+            2,
+            2,
+            7,
+            9
+          ]
+        }
+      }
+    },
+    {
+      "id": "literal-types",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Return exactly this JSON object with the indicated types: ready is boolean true, missing is null, count is integer 3. Do not add explanation."
+        }
+      ],
+      "expect": {
+        "kind": "json_exact",
+        "value": {
+          "ready": true,
+          "missing": null,
+          "count": 3
+        }
+      }
+    },
+    {
+      "id": "extract-quantity",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Record: item=bolt; quantity=12; color=blue. Return exactly one JSON object containing only item as a string and quantity as an integer. Do not add explanation."
+        }
+      ],
+      "expect": {
+        "kind": "json_exact",
+        "value": {
+          "item": "bolt",
+          "quantity": 12
+        }
+      }
+    }
+  ]
+}

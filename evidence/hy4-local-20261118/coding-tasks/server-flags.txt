@@ -1,0 +1,1 @@
+-m /srv/w03/nvme-work/jobs/Cantos-Hy4-Local-First-20261118/models/Hy4-flash-Q3_K-00001-of-00002.gguf -c 8192 -ngl 99 --jinja --host 127.0.0.1 --port 18400 --alias hy4-flash -np 1

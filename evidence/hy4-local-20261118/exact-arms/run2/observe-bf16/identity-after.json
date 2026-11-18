@@ -1,0 +1,30 @@
+{
+  "captured_at": "2026-11-18T16:19:23.956265Z",
+  "models": {
+    "body": {
+      "data": [
+        {
+          "id": "hy4-flash",
+          "meta": {
+            "element_counts_by_dtype": {
+              "torch.float32": 219405011261
+            },
+            "fp8": false,
+            "fp8_load": null,
+            "snapshot": "/dev/shm/hy4/bf16"
+          },
+          "object": "model",
+          "owned_by": "transformers"
+        }
+      ],
+      "object": "list"
+    },
+    "http_status": 200
+  },
+  "version": {
+    "body": {
+      "version": "serve_hy4/4 transformers 5.24.0.dev0 torch 2.15.0+cpu"
+    },
+    "http_status": 200
+  }
+}

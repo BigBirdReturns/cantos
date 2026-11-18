@@ -1,0 +1,12 @@
+{
+  "protocol.timeout_s": {
+    "template": 120,
+    "used": 600,
+    "why": "processor arms answer in minutes, not seconds; 600 is the largest value the instrument accepts"
+  },
+  "runtime": "transformers loader on processors instead of the pinned vLLM image on eight H200s",
+  "compute": "float32 arithmetic instead of bfloat16",
+  "fp8": "FP8 arithmetic emulated: library-dequantized FP8 weights and FP8-rounded inputs multiplied in float32",
+  "tokenizer_template_declared": "git-blob-sha1:ff6aaf29542a31a718ffc2986100c3ac195f223d",
+  "tokenizer_observed": "git-blob-sha1:ff6aaf29542a31a718ffc2986100c3ac195f223d"
+}

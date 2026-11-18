@@ -1,0 +1,32 @@
+{
+  "protocol_of_the_session_that_defined_the_workload": {
+    "concurrency": 4,
+    "extra_body": {},
+    "max_tokens": 1024,
+    "repeats": 1,
+    "seed": 1729,
+    "timeout_s": 120,
+    "trials": 3,
+    "warmup": 0
+  },
+  "protocol_used": {
+    "trials": 3,
+    "repeats": 1,
+    "concurrency": 1,
+    "seed": 1729,
+    "timeout_s": 600,
+    "max_tokens": 1024,
+    "warmup": 0,
+    "extra_body": {
+      "chat_template_kwargs": {
+        "reasoning_effort": "no_think"
+      }
+    }
+  },
+  "why": {
+    "concurrency": "one server slot",
+    "timeout_s": "thermal pacing can pause a request",
+    "extra_body": "Hy4 is asked to answer without a thinking phase"
+  },
+  "arms": "one arm only; no paired verdict is produced"
+}

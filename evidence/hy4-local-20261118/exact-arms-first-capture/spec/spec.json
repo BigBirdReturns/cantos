@@ -1,0 +1,92 @@
+{
+  "schema": "cantos.maintainer.spec/1",
+  "workload": "workload.smoke.json",
+  "policy": "policy.precision.json",
+  "protocol": {
+    "trials": 3,
+    "repeats": 1,
+    "concurrency": 1,
+    "seed": 1729,
+    "timeout_s": 600,
+    "max_tokens": 256,
+    "warmup": 0,
+    "extra_body": {
+      "chat_template_kwargs": {
+        "reasoning_effort": "no_think"
+      },
+      "top_p": 1
+    }
+  },
+  "baseline": {
+    "base_url": "http://127.0.0.1:18510/v1",
+    "model": "hy4-flash",
+    "implementation_files": [],
+    "identity": {
+      "implementation": {
+        "name": "transformers publisher loader on processors behind serve_hy4.py",
+        "revision": "huggingface/transformers@c2ec850510a37978ea83df226589623d5f2be776 (pull request 50903); torch==2.15.0+cpu; serve_hy4.py sha256:0642b5716e91fda10e36aacbc6c7ba95e65fdf220ba3dcec1bf78096bb9f2868"
+      },
+      "model": {
+        "revision": "d88c9dfd96ba4f2e6b92adba0b8e8f1c8696f959",
+        "sha256": "9d2405bea66ad2a8bebb3fdaea58cfbab8475f6396f069ce9a00660ab3516ab5"
+      },
+      "tokenizer": {
+        "revision": "git-blob-sha1:ff6aaf29542a31a718ffc2986100c3ac195f223d"
+      },
+      "hardware": {
+        "id": "OCTO-W02 processors, no accelerator used",
+        "description": "2 x Intel(R) Xeon(R) Platinum 8276L CPU @ 2.20GHz, 112 threads; 1,971 GiB memory (256 GB DRAM in front of 2 TB Optane persistent memory, memory mode); kernel 7.0.0-42-generic"
+      },
+      "precision": "bf16_weights_fp32_compute",
+      "context_limit": 8192,
+      "settings": {
+        "server": "serve_hy4.py, 56 torch threads, numactl --interleave=all, one request at a time, greedy decoding",
+        "compute_dtype": "float32 on both arms; the vendor recipe computes in bfloat16",
+        "weights": "loaded as float32: BF16 values widen exactly; FP8 weights are multiplied by their checkpoint block scales by the library",
+        "fp8_input_rounding": "where the checkpoint is FP8, inputs of the FP8-scaled matmuls are rounded through FP8 per row and per block of 128 (scale max/448), as the kernels-community/finegrained-fp8 kernels do; no such tensors exist in the BF16 checkpoint",
+        "speculative_decoding": false,
+        "reasoning_effort": "no_think",
+        "context_limit_enforced": false,
+        "prefix_cache": "none",
+        "co_tenancy": "W02 recorder services on the same processors; arms run one after the other, never together",
+        "power_and_cooling": "unchanged as found"
+      }
+    }
+  },
+  "candidate": {
+    "base_url": "http://127.0.0.1:18511/v1",
+    "model": "hy4-flash",
+    "implementation_files": [],
+    "identity": {
+      "implementation": {
+        "name": "transformers publisher loader on processors behind serve_hy4.py",
+        "revision": "huggingface/transformers@c2ec850510a37978ea83df226589623d5f2be776 (pull request 50903); torch==2.15.0+cpu; serve_hy4.py sha256:0642b5716e91fda10e36aacbc6c7ba95e65fdf220ba3dcec1bf78096bb9f2868"
+      },
+      "model": {
+        "revision": "003107fa248f5892064ab1c43af0a7003dd68c9b",
+        "sha256": "4554684cced8587248c9e9a7ad7a3c54e650534e680adb39c486c5cb4f61b6ef"
+      },
+      "tokenizer": {
+        "revision": "git-blob-sha1:ff6aaf29542a31a718ffc2986100c3ac195f223d"
+      },
+      "hardware": {
+        "id": "OCTO-W02 processors, no accelerator used",
+        "description": "2 x Intel(R) Xeon(R) Platinum 8276L CPU @ 2.20GHz, 112 threads; 1,971 GiB memory (256 GB DRAM in front of 2 TB Optane persistent memory, memory mode); kernel 7.0.0-42-generic"
+      },
+      "precision": "fp8_weights_fp8_rounded_inputs_fp32_compute",
+      "context_limit": 8192,
+      "settings": {
+        "server": "serve_hy4.py, 56 torch threads, numactl --interleave=all, one request at a time, greedy decoding",
+        "compute_dtype": "float32 on both arms; the vendor recipe computes in bfloat16",
+        "weights": "loaded as float32: BF16 values widen exactly; FP8 weights are multiplied by their checkpoint block scales by the library",
+        "fp8_input_rounding": "where the checkpoint is FP8, inputs of the FP8-scaled matmuls are rounded through FP8 per row and per block of 128 (scale max/448), as the kernels-community/finegrained-fp8 kernels do; no such tensors exist in the BF16 checkpoint",
+        "speculative_decoding": false,
+        "reasoning_effort": "no_think",
+        "context_limit_enforced": false,
+        "prefix_cache": "none",
+        "co_tenancy": "W02 recorder services on the same processors; arms run one after the other, never together",
+        "power_and_cooling": "unchanged as found"
+      }
+    }
+  }
+}

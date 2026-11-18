@@ -1,0 +1,86 @@
+{
+  "schema": "cantos.maintainer.spec/1",
+  "workload": "workload.smoke.json",
+  "policy": "policy.precision.json",
+  "protocol": {
+    "trials": 3,
+    "repeats": 1,
+    "concurrency": 1,
+    "seed": 1729,
+    "timeout_s": 120,
+    "max_tokens": 256,
+    "warmup": 0,
+    "extra_body": {
+      "chat_template_kwargs": {
+        "reasoning_effort": "no_think"
+      },
+      "top_p": 1
+    }
+  },
+  "baseline": {
+    "base_url": "http://127.0.0.1:18400/v1",
+    "model": "hy4-flash",
+    "implementation_files": [],
+    "identity": {
+      "implementation": {
+        "name": "llama.cpp llama-server, unmerged pull request 32517",
+        "revision": "ggml-org/llama.cpp@0a054d0b02454c998e068381d15f3f6615bdd987"
+      },
+      "model": {
+        "revision": "AngelSlim/Hy4-flash-GGUF@f8def04a2fc74edb21c53166dad5f94113baab4a",
+        "sha256": "b35216ef9c4bb648502a6bd6f7ef79b01f59bc264bfddb4bb1fad1e6fc9e8596"
+      },
+      "tokenizer": {
+        "revision": "embedded in GGUF part 1 sha256:987b2902813ad94919e3e46e375bd8144d36113cced62d25f13013ccc88a3abb"
+      },
+      "hardware": {
+        "id": "GPU-64559d3d-dd59-05ac-1531-88ac32ddc58b,GPU-c3b25970-4ab3-f2ae-5157-1598a46fc778",
+        "description": "OCTO-W03: Intel Core i9-10900X, 123 GiB RAM; GPU-64559d3d-dd59-05ac-1531-88ac32ddc58b, Quadro RTX 8000, 49152 MiB, 615.71.09, 200.00 W; GPU-c3b25970-4ab3-f2ae-5157-1598a46fc778, Quadro RTX 8000, 49152 MiB, 615.71.09, 260.00 W; CUDA 13.4; interconnect not measured"
+      },
+      "precision": "gguf_q3_k_mixed_publisher_quantized",
+      "context_limit": 8192,
+      "settings": {
+        "server_flags": "-m /srv/w03/nvme-work/jobs/Cantos-Hy4-Local-First-20261118/models/Hy4-flash-Q3_K-00001-of-00002.gguf -c 8192 -ngl 99 --jinja --host 127.0.0.1 --port 18400 --alias hy4-flash -np 1",
+        "speculative_decoding": false,
+        "reasoning_effort": "no_think",
+        "prefix_cache": "llama-server default slot prompt cache, one slot",
+        "co_tenancy": "GPU compute processes at spec time: 2176, /srv/w03/nvme-work/jobs/Cantos-Hy4-Local-First-20261118/build/bin/llama-server\n2176, /srv/w03/nvme-work/jobs/Cantos-Hy4-Local-First-20261118/build/bin/llama-server",
+        "power_and_cooling": "unchanged as found; a guard stops this server at 80 C",
+        "effective_runtime": "see server.log beside this run for the loaded backend and tensor placement"
+      }
+    }
+  },
+  "candidate": {
+    "base_url": "http://127.0.0.1:18400/v1",
+    "model": "hy4-flash",
+    "implementation_files": [],
+    "identity": {
+      "implementation": {
+        "name": "llama.cpp llama-server, unmerged pull request 32517",
+        "revision": "ggml-org/llama.cpp@0a054d0b02454c998e068381d15f3f6615bdd987"
+      },
+      "model": {
+        "revision": "AngelSlim/Hy4-flash-GGUF@f8def04a2fc74edb21c53166dad5f94113baab4a",
+        "sha256": "b35216ef9c4bb648502a6bd6f7ef79b01f59bc264bfddb4bb1fad1e6fc9e8596"
+      },
+      "tokenizer": {
+        "revision": "embedded in GGUF part 1 sha256:987b2902813ad94919e3e46e375bd8144d36113cced62d25f13013ccc88a3abb"
+      },
+      "hardware": {
+        "id": "GPU-64559d3d-dd59-05ac-1531-88ac32ddc58b,GPU-c3b25970-4ab3-f2ae-5157-1598a46fc778",
+        "description": "OCTO-W03: Intel Core i9-10900X, 123 GiB RAM; GPU-64559d3d-dd59-05ac-1531-88ac32ddc58b, Quadro RTX 8000, 49152 MiB, 615.71.09, 200.00 W; GPU-c3b25970-4ab3-f2ae-5157-1598a46fc778, Quadro RTX 8000, 49152 MiB, 615.71.09, 260.00 W; CUDA 13.4; interconnect not measured"
+      },
+      "precision": "gguf_q3_k_mixed_publisher_quantized",
+      "context_limit": 8192,
+      "settings": {
+        "server_flags": "-m /srv/w03/nvme-work/jobs/Cantos-Hy4-Local-First-20261118/models/Hy4-flash-Q3_K-00001-of-00002.gguf -c 8192 -ngl 99 --jinja --host 127.0.0.1 --port 18400 --alias hy4-flash -np 1",
+        "speculative_decoding": false,
+        "reasoning_effort": "no_think",
+        "prefix_cache": "llama-server default slot prompt cache, one slot",
+        "co_tenancy": "GPU compute processes at spec time: 2176, /srv/w03/nvme-work/jobs/Cantos-Hy4-Local-First-20261118/build/bin/llama-server\n2176, /srv/w03/nvme-work/jobs/Cantos-Hy4-Local-First-20261118/build/bin/llama-server",
+        "power_and_cooling": "unchanged as found; a guard stops this server at 80 C",
+        "effective_runtime": "see server.log beside this run for the loaded backend and tensor placement"
+      }
+    }
+  }
+}
