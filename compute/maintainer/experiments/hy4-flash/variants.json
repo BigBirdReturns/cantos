@@ -1,0 +1,137 @@
+{
+  "comparison": {
+    "base": {
+      "reason": "A pretrained base checkpoint changes training stage as well as precision relative to the FP8 instruction model.",
+      "status": "separate_task_fit_protocol_required",
+      "variant": "base-bf16"
+    },
+    "primary": {
+      "baseline": "instruct-bf16",
+      "candidate": "instruct-fp8",
+      "changed_factor": "published inference weight precision and corresponding checkpoint",
+      "qualification": "Published paired instruction variants share tokenizer/chat-template blob identities; provenance does not independently prove identical posttraining trajectory."
+    }
+  },
+  "observed_at": "2026-11-18T05:32:38.254364Z",
+  "schema": "cantos.hy4.variants/1",
+  "variants": [
+    {
+      "architectures": [
+        "HYV4FlashForConditionalGeneration"
+      ],
+      "chat_template_git_blob_sha1": "8bb8ebcdf8b687c0edd5c5a746f38ab4a98efc9b",
+      "config": {
+        "bytes": 10759,
+        "path": "snapshots/instruct-bf16.config.json",
+        "sha256": "a59ea10f98683e83c6515e340c85e24eb2e48c91d75af491ed3d6e88c3bc1b3c"
+      },
+      "gated": false,
+      "id": "instruct-bf16",
+      "local_weights_verified": false,
+      "metadata": {
+        "bytes": 60976,
+        "path": "snapshots/instruct-bf16.hf-metadata.json",
+        "sha256": "ae5d6c5fe756368dd4b520a7c4d5675047e16ee6627ad1a0772789bf8ff40760"
+      },
+      "parameter_counts": {
+        "parameters": {
+          "BF16": 220241986961,
+          "F32": 8731725,
+          "I32": 483272
+        },
+        "total": 220251201958
+      },
+      "publisher_weight_manifest": {
+        "bytes": 25751,
+        "path": "model-manifests/instruct-bf16.json",
+        "sha256": "76adfbcb80f22649d3b627e9f285b6574543775fd2b6f1682e00e69a4215037a"
+      },
+      "repository": "tencent/Hy4-flash",
+      "revision": "d88c9dfd96ba4f2e6b92adba0b8e8f1c8696f959",
+      "storage_precision": "bf16",
+      "tokenizer_git_blob_sha1": "ff6aaf29542a31a718ffc2986100c3ac195f223d",
+      "training_stage": "instruction_tuned",
+      "weight_bytes": 440521065214,
+      "weight_file_count": 148
+    },
+    {
+      "architectures": [
+        "HYV4FlashForConditionalGeneration"
+      ],
+      "chat_template_git_blob_sha1": "8bb8ebcdf8b687c0edd5c5a746f38ab4a98efc9b",
+      "config": {
+        "bytes": 60968,
+        "path": "snapshots/instruct-fp8.config.json",
+        "sha256": "25c33298be04f349f3220fbd73b5024c7943cb5a8b17747951d3d2a1cd69d2e7"
+      },
+      "gated": false,
+      "id": "instruct-fp8",
+      "local_weights_verified": false,
+      "metadata": {
+        "bytes": 104548,
+        "path": "snapshots/instruct-fp8.hf-metadata.json",
+        "sha256": "213b5f7ffaf0f5d53aafe98287e822719c192d5ab541505f02e2da8b5226ec25"
+      },
+      "parameter_counts": {
+        "parameters": {
+          "BF16": 66784617873,
+          "F32": 8731725,
+          "F8_E4M3": 153466437632,
+          "I32": 483272
+        },
+        "total": 220260270502
+      },
+      "publisher_weight_manifest": {
+        "bytes": 25745,
+        "path": "model-manifests/instruct-fp8.json",
+        "sha256": "6160aa6ea9a9ecaa2ce8dfc67598b0fedfa477f9c550f1c30f3b5105c1165d4a"
+      },
+      "repository": "tencent/Hy4-flash-FP8",
+      "revision": "003107fa248f5892064ab1c43af0a7003dd68c9b",
+      "storage_precision": "fp8_mixed_bf16",
+      "tokenizer_git_blob_sha1": "ff6aaf29542a31a718ffc2986100c3ac195f223d",
+      "training_stage": "instruction_tuned",
+      "weight_bytes": 287073390118,
+      "weight_file_count": 148
+    },
+    {
+      "architectures": [
+        "HYV4FlashForConditionalGeneration"
+      ],
+      "chat_template_git_blob_sha1": "2daf04f512538c74a65ebb0f9f664fb0e3bc5ebd",
+      "config": {
+        "bytes": 9534,
+        "path": "snapshots/base-bf16.config.json",
+        "sha256": "7f7d0c6b63fa9e018be943e95167ea7953087b1a4b00de546402430a18c06650"
+      },
+      "gated": false,
+      "id": "base-bf16",
+      "local_weights_verified": false,
+      "metadata": {
+        "bytes": 53364,
+        "path": "snapshots/base-bf16.hf-metadata.json",
+        "sha256": "6989588c82d4629865a23e7c416edc720dc2cad15dd142976f5a45a7218cde6f"
+      },
+      "parameter_counts": {
+        "parameters": {
+          "BF16": 219396300528,
+          "F32": 8731725,
+          "I32": 483272
+        },
+        "total": 219405515525
+      },
+      "publisher_weight_manifest": {
+        "bytes": 24225,
+        "path": "model-manifests/base-bf16.json",
+        "sha256": "2e6ddca5c095ca479d9f6fb2382b21048d2e8bac4072c1659d58a8e6665a147b"
+      },
+      "repository": "tencent/Hy4-flash-base",
+      "revision": "95b9f8239e2f63cb837c91704f070ae47332ebdf",
+      "storage_precision": "bf16",
+      "tokenizer_git_blob_sha1": "547deeb4d2573fc5695ecf687199061c36f18924",
+      "training_stage": "pretrained_base",
+      "weight_bytes": 438829681356,
+      "weight_file_count": 139
+    }
+  ]
+}

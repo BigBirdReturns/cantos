@@ -1,0 +1,17 @@
+{
+  "schema": "cantos.hy4.base-task-fit-proposal/1",
+  "status": "blocked_unconfigured",
+  "model_id": "tencent/Hy4-flash-base",
+  "revision": "95b9f8239e2f63cb837c91704f070ae47332ebdf",
+  "training_stage": "pretrained_base",
+  "comparison_type": "separate_task_fit",
+  "precision_comparison_eligible": false,
+  "required": [
+    "A fixed completion or few-shot task distribution appropriate to a pretrained base model.",
+    "A separately pinned prompting/completion adapter and acceptance oracle.",
+    "Explicit treatment of the changed training stage and any changed tokenizer/template behavior.",
+    "Qualified hardware/runtime and actual source-bound observations."
+  ],
+  "implemented_by_this_package": false,
+  "reason": "The maintainer owner captures text chat-completion requests. A Base task-fit protocol is not implemented or qualified here."
+}

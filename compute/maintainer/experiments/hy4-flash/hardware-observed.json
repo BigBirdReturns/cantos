@@ -1,0 +1,43 @@
+{
+  "container_probe": {
+    "argv": [
+      "docker",
+      "image",
+      "inspect",
+      "vllm/vllm-openai@sha256:6b645bfbf4b89602d38f6e93c1c418516ec0bfbf54b64cd661b8075bfec01da1",
+      "--format",
+      "{{json .RepoDigests}}"
+    ],
+    "exit_code": 1,
+    "stderr": "Error response from daemon: No such image: vllm/vllm-openai@sha256:6b645bfbf4b89602d38f6e93c1c418516ec0bfbf54b64cd661b8075bfec01da1\n",
+    "stdout": "\n"
+  },
+  "filesystem": {
+    "free_bytes": 3936991989760,
+    "path": "/mnt/w03data/Incoming/DataArray/Projects/Products/Cantos/worktrees/hy4-readiness-20261118/compute/maintainer/experiments/hy4-flash",
+    "total_bytes": 11904377847808
+  },
+  "gpu_probe": {
+    "argv": [
+      "nvidia-smi",
+      "--query-gpu=index,name,uuid,memory.total,memory.used,driver_version,compute_cap,power.draw,power.limit,temperature.gpu",
+      "--format=csv,noheader,nounits"
+    ],
+    "exit_code": 0,
+    "stderr": "",
+    "stdout": "0, Quadro RTX 8000, GPU-64559d3d-dd59-05ac-1531-88ac32ddc58b, 49152, 7438, 615.71.09, 7.5, 32.53, 200.00, 47\n1, Quadro RTX 8000, GPU-c3b25970-4ab3-f2ae-5157-1598a46fc778, 49152, 8290, 615.71.09, 7.5, 248.01, 260.00, 78\n"
+  },
+  "host": "OCTO-W03",
+  "memory": {
+    "MemAvailable_bytes": 119742738432,
+    "MemTotal_bytes": 132342702080
+  },
+  "observed_at": "2026-11-18T05:35:12.491138Z",
+  "platform": {
+    "machine": "x86_64",
+    "release": "7.0.0-42-generic",
+    "system": "Linux"
+  },
+  "schema": "cantos.hy4.hardware-observation/1",
+  "scope": "Read-only operating-system and local Docker metadata; no GPU workload, model request, image pull, or weight download."
+}
