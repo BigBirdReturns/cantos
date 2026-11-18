@@ -66,7 +66,7 @@ Two additional archives extend the same retained evidence. They preserve actual 
 | Archive | Exact bytes | SHA256 | Supported conclusion |
 | --- | ---: | --- | --- |
 | [SecondRun retained-evidence replay](evidence/secondrun-empirical-20261118.zip) | 356,306 | `085ebecf6cb97bd1520d183bbf724698f8e2aef25e46f23e9747e00dbd2591e3` | Initial execution, unchanged reuse, price-only recalculation and native failure propagation on the same real vLLM evidence. |
-| [30B guarded operating-envelope attempts](evidence/thermal-envelope-20261118.zip) | 1,442,165 | `c36078e40c73d829e55c5d2b18b526d8778a9c363eab5e79e228b68b02fe31d0` | Two incomplete serving attempts stopped at the unchanged 80 C guard; completed-response grades and owned-process cleanup remain inspectable. |
+| [30B guarded operating-envelope attempts](evidence/thermal-envelope-20261118.zip) | 1,496,296 | `c96e93d74fdcb7137c4c2c7c25be95dc30c36c5845f81e374bcad81406de69f9` | Two incomplete serving attempts stopped at the unchanged 80 C guard; completed-response grades and owned-process cleanup remain inspectable. |
 
 From the extracted kit root, extract the three archives to a new directory. The archive filenames below differ from their self-contained extracted root names; the commands use both exact names.
 
