@@ -24,8 +24,8 @@ except ImportError:
     from common import ROOT, _safe, canonical, closure, digest, load, policy, producer_records, read_grading_contract, sha256_file, steps, write
     from maintainer import _compare_runs, export_ocl_receipt, validate_grades, validate_receipt
 
-BUNDLE_SHA256 = "fb759ca80b8b24f5c81958775985032ef2285966b410a8194f72ee454f1c04b5"
-BUNDLE_SOURCE = "BigBirdReturns/cantos@f29ee3fd3bfb3a5240fa3280d7f2f4ed6ba7747e:public/open-compute/open-compute-workbench.zip"
+BUNDLE_SHA256 = "449ec4d453ee4c272c867148c0f12ff7b9890726845923bc991980960e274624"
+BUNDLE_SOURCE = "Cantos public workbench 2026-11-18; public/open-compute/WORKBENCH-RELEASE.json and exact archive MANIFEST.json"
 
 
 def unpack_owner(bundle, out):

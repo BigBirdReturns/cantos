@@ -1,0 +1,23 @@
+{
+  "schema": "ocl.operations.public-workbench-candidate/1",
+  "owner_source_commit": "7abf8bac0edbabc3c5ae1a79e33cecee5059b3be",
+  "prior_published_commit": "f29ee3fd3bfb3a5240fa3280d7f2f4ed6ba7747e",
+  "prior_archive_sha256": "fb759ca80b8b24f5c81958775985032ef2285966b410a8194f72ee454f1c04b5",
+  "archive": "open-compute-workbench.zip",
+  "sha256": "449ec4d453ee4c272c867148c0f12ff7b9890726845923bc991980960e274624",
+  "bytes": 178848,
+  "files": 38,
+  "changed_public_members": [
+    "open-compute-ledger/MANIFEST.json",
+    "open-compute-ledger/PUBLIC-SOURCES.json",
+    "open-compute-ledger/WORKBENCH.md",
+    "open-compute-ledger/engine/engine.py",
+    "open-compute-ledger/engine/operations.py",
+    "open-compute-ledger/instruments/INSTRUMENT-PACKET.md",
+    "open-compute-ledger/instruments/collect.py",
+    "open-compute-ledger/workbench.css",
+    "open-compute-ledger/workbench.html",
+    "open-compute-ledger/workbench.js"
+  ],
+  "includes_private_operational_closure": false
+}

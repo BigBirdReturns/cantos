@@ -1,6 +1,6 @@
 {
   "schema": "cantos.delivery-acceptance/1",
-  "updated_at": "2026-11-18T02:46:34.997451+00:00",
+  "updated_at": "2026-11-18T04:12:05.722931+00:00",
   "overall_status": "in_progress",
   "authority": "DELIVERY.md",
   "scope": "inference/useful-work, authorized operations, operating economics, maintainer workflow and recipient delivery",
@@ -12,7 +12,7 @@
     },
     "operational_audits": {
       "status": "partial",
-      "evidence": "Published provider research and scoped owned inventory/storage/recovery measurements",
+      "evidence": "Published provider research, reverified owned peer/storage/recovery observations, and executable recipient-owned operational collection with explicit observation/declaration boundaries.",
       "remaining": "Extend executable authorized network/security/monitoring/lifecycle/availability/performance auditing and observed provider coverage; local evidence does not imply commercial SLA."
     },
     "economics": {
@@ -28,7 +28,9 @@
       "source_commits": [
         "f9439d84e16e5a21a3aaa743f2a1f6fe17aa7fb1",
         "bb4d21bd16b3e2d8b62138a7e4dbfcce16c6bfdc",
-        "25ce79d5a50484d034dc87246196f001662b4aa7"
+        "25ce79d5a50484d034dc87246196f001662b4aa7",
+        "e636f3ea0ed84d32a434c9794dc1d637374b13c4",
+        "2dedd16f711c89900d88a4f96424bb4fa5bb5893"
       ],
       "secondrun_source_commit": "92828db2c73c7f4754da4bb3673b73743bda810e",
       "qualification": "compute/maintainer/QUALIFICATION.md",
@@ -38,7 +40,9 @@
         "live_application_exercise": "measured_not_qualified",
         "existing_workbench_import_history": "verified_with_original_requirement",
         "recipient_kit": "included_with_Linux_and_Windows_acceptance_jobs",
-        "publication": "Exact source qualification and Pages deployment are recorded by this commit's GitHub Actions runs."
+        "publication": "Exact source qualification and Pages deployment are recorded by this commit's GitHub Actions runs.",
+        "explicit_regrading": "Implemented: separately pinned grading contract reuses immutable captures, binds both arms and creates a distinct retained decision identity.",
+        "packet_dependency": "Packet adapter and workbench bundle updates preserve capture dependencies; collector/parser changes invalidate observation identity."
       },
       "empirical": {
         "archive": "compute/maintainer/evidence/vllm-humaneval-20261118.zip",
@@ -58,7 +62,17 @@
       "recipient_commands": [
         "python -B app/tests/check_maintainer_evidence.py",
         "python -B app/tests/check_maintainer_kit.py"
-      ]
+      ],
+      "workbench_dependency": {
+        "archive": "public/open-compute/open-compute-workbench.zip",
+        "sha256": "449ec4d453ee4c272c867148c0f12ff7b9890726845923bc991980960e274624",
+        "release": "public/open-compute/WORKBENCH-RELEASE.json",
+        "features": [
+          "atomic retained decisions/imports",
+          "operational evidence API and interface",
+          "recipient-owned operational collection"
+        ]
+      }
     },
     "recipient_publication": {
       "status": "source_and_recipient_artifacts_provided",

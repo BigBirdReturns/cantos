@@ -22,6 +22,7 @@ REQUIRED = (
     "integration/tests/test_maintainer_dependency_boundary.py",
     "public/open-compute/open-compute-workbench.zip",
     "public/open-compute/SHA256SUMS.txt",
+    "public/open-compute/WORKBENCH-RELEASE.json",
     "hot-aisle/campaign/run3/grade.sh",
     "hot-aisle/campaign/run3/grader.Dockerfile",
 )
