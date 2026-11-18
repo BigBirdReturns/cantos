@@ -21,22 +21,44 @@ def execute(root, *args, expected=0):
 
 def main():
     evidence_dir = ROOT / "compute/maintainer/evidence"
-    digest, name = (evidence_dir / "SHA256SUMS.txt").read_text(encoding="utf-8").split()
-    archive = evidence_dir / name
-    assert archive.is_file() and sha256(archive.read_bytes()).hexdigest() == digest
+    required = {
+        "vllm-humaneval-20261118.zip",
+        "secondrun-empirical-20261118.zip",
+        "thermal-envelope-20261118.zip",
+    }
+    archives = {}
+    for line in (evidence_dir / "SHA256SUMS.txt").read_text(encoding="utf-8").splitlines():
+        if not line.strip():
+            continue
+        digest, name = line.split()
+        assert len(digest) == 64 and all(c in "0123456789abcdef" for c in digest)
+        assert name in required and name not in archives, name
+        archive = evidence_dir / name
+        assert archive.is_file() and sha256(archive.read_bytes()).hexdigest() == digest, name
+        archives[name] = archive
+    assert set(archives) == required
     cli = ROOT / "compute/maintainer/maintainer.py"
     bundle = ROOT / "public/open-compute/open-compute-workbench.zip"
     with TemporaryDirectory(prefix="cantos-recipient-evidence-") as temporary:
         target = Path(temporary)
         evidence = target / "evidence"
-        with ZipFile(archive) as zipped:
-            names = zipped.namelist()
-            assert len(names) == len(set(names))
-            assert all(not PurePosixPath(n).is_absolute() and ".." not in PurePosixPath(n).parts
-                       and "\\" not in n and ":" not in n for n in names)
-            zipped.extractall(evidence)
+        extracted_names = set()
+        for archive in archives.values():
+            with ZipFile(archive) as zipped:
+                names = zipped.namelist()
+                assert len(names) == len(set(names))
+                assert not (extracted_names & set(names))
+                assert all(not PurePosixPath(n).is_absolute() and ".." not in PurePosixPath(n).parts
+                           and "\\" not in n and ":" not in n for n in names)
+                extracted_names.update(names)
+                zipped.extractall(evidence)
+        thermal = evidence / "cantos-thermal-envelope-20261118"
+        secondrun = evidence / "cantos-secondrun-empirical-20261118"
         evidence = evidence / "cantos-vllm-humaneval-evidence-20261118"
         execute(evidence, evidence / "verify.py")
+        execute(thermal, thermal / "verify.py")
+        execute(ROOT, secondrun / "verify-secondrun.py", "--evidence", evidence,
+                "--source", ROOT, "--out", target / "secondrun-recipient-output")
         base_run = evidence / "vllm-capture/baseline/run.json"
         candidate_run = evidence / "vllm-capture/candidate/run.json"
         arguments = ["--baseline", base_run, "--candidate", candidate_run,
@@ -91,7 +113,8 @@ def main():
                           "decision":"no_eligible_configuration", "retained_acceptance_floor":.8,
                           "price_only_scenario":"recalculated_without_inference",
                           "new_inference_requests":0,
-                          "scope":"Original and delivered-analyzer validation, source-bound grades, native collector import, decision history and portable packets."}))
+                          "evidence_archives":sorted(archives),
+                          "scope":"All three evidence manifests, original and delivered-analyzer validation, source-bound grades, native collector import, decision history, SecondRun transitions and retained thermal failures."}))
 
 if __name__ == "__main__":
     main()
