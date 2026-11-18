@@ -24,7 +24,7 @@ except ImportError:
     from common import ROOT, _safe, canonical, closure, digest, load, policy, producer_records, read_grading_contract, sha256_file, steps, write
     from maintainer import _compare_runs, export_ocl_receipt, validate_grades, validate_receipt
 
-BUNDLE_SHA256 = "7fd478a22a73a123dc5acba594409fbf231dd4956137d508d10e5b80e9547e34"
+BUNDLE_SHA256 = "a0df6c8fcf1b66e10b78cc640dc3f3e627a64bad4fc3f40964543ca90915870b"
 BUNDLE_SOURCE = "Cantos public workbench 2026-11-18; public/open-compute/WORKBENCH-RELEASE.json and exact archive MANIFEST.json"
 
 

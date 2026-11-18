@@ -42,6 +42,7 @@ def main():
         call("compute/maintainer/retry_resources.py", "--help")
         call("compute/maintainer/job.py", "--help")
         call("compute/maintainer/external_grader.py", "--help")
+        call("compute/maintainer/owner_ocl/network_health.py", "--help")
         catalog = json.loads(call("integration/work.py", "--catalog"))
         names = {entry["task_class"] for entry in catalog["operations"]}
         assert {"maintainer-observe", "maintainer-compare"} <= names
@@ -51,6 +52,7 @@ def main():
         call("-m", "unittest", "discover", "-s", "compute/maintainer/tests", "-p", "test_retry_resources.py", "-v")
         call("-m", "unittest", "discover", "-s", "compute/maintainer/tests", "-p", "test_job.py", "-v")
         call("-m", "unittest", "discover", "-s", "compute/maintainer/tests", "-p", "test_external_grader.py", "-v")
+        call("-m", "unittest", "compute.maintainer.tests.test_network_health", "-v")
         call("-m", "unittest", "discover", "-s", "compute/maintainer/experiments/hy4-flash/tests", "-p", "test_preflight.py", "-v")
         call("-m", "unittest", "discover", "-s", "integration/tests", "-p", "test_maintainer_work.py", "-v")
         call("-m", "unittest", "discover", "-s", "integration/tests", "-p", "test_maintainer_dependency_boundary.py", "-v")

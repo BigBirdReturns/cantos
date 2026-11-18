@@ -1,6 +1,6 @@
 {
   "schema": "cantos.delivery-acceptance/1",
-  "updated_at": "2026-11-18T17:15:14.696972+00:00",
+  "updated_at": "2026-11-18T20:31:00.951914+00:00",
   "overall_status": "in_progress",
   "authority": "DELIVERY.md",
   "scope": "inference/useful-work, authorized operations, operating economics, maintainer workflow and recipient delivery",
@@ -13,7 +13,7 @@
     "operational_audits": {
       "status": "partial",
       "evidence": "Published provider research, reverified owned peer/storage/recovery observations, and executable recipient-owned operational collection with explicit observation/declaration boundaries.",
-      "remaining": "Extend executable authorized network/security/monitoring/lifecycle/availability/performance auditing and observed provider coverage; local evidence does not imply commercial SLA."
+      "remaining": "Qualify the bounded authorized named-route network gate on real hosts; extend broader security/monitoring/lifecycle/availability/performance and provider coverage. Local/owned route evidence does not imply commercial SLA or model endpoint health."
     },
     "economics": {
       "status": "partial",
@@ -67,7 +67,7 @@
       ],
       "workbench_dependency": {
         "archive": "public/open-compute/open-compute-workbench.zip",
-        "sha256": "7fd478a22a73a123dc5acba594409fbf231dd4956137d508d10e5b80e9547e34",
+        "sha256": "a0df6c8fcf1b66e10b78cc640dc3f3e627a64bad4fc3f40964543ca90915870b",
         "release": "public/open-compute/WORKBENCH-RELEASE.json",
         "features": [
           "atomic retained decisions/imports",
@@ -80,7 +80,9 @@
           "required operational gates",
           "source-bound economic ranges and allocations",
           "chunked retained job import",
-          "separate retry campaign accounting"
+          "separate retry campaign accounting",
+          "explicit authorized owned TLS health route",
+          "source-bound required network latency and failure gates"
         ]
       }
     },
@@ -104,13 +106,23 @@
       "qualification": "Exact release qualification is recorded by the current commit GitHub Actions and retained owner receipts. Tests distinguish authored HTTP fixtures, actual sandbox executions and source-bound model observations.",
       "native_regression": "The retained 192-request vLLM pair remains incomparable at 21/96 accepted per arm under its original 80% requirement.",
       "remaining": "Representative general agentic tasks, controlled wider runtime/accelerator comparisons, broader real provider audits, full-system metering and observed production costs, and independent external recipient adoption."
+    },
+    "owned_network_gate": {
+      "status": "implemented_source_reviewed_live_qualification_pending",
+      "source": "compute/maintainer/owner_ocl/network_health.py",
+      "guide": "compute/maintainer/NETWORK-HEALTH.md",
+      "entry": "CLI collect-network; existing requirement JSON and retained decision rendering",
+      "scope": "One explicitly authorized named owned TLS health route; bounded complete-attempt latency/failure evidence, declared collector/responder identity, certificate/nonce/body/source binding and required deployment gates.",
+      "software_evidence": "Synthetic transport, actual native receipt/HTTP fixture integration, immutable child/data-only import, and real previously qualified repaired recovery-bundle compatibility regression. Exact artifact qualification is recorded separately by release receipts.",
+      "remaining": "Live cross-host acquisition with declared target/source custody and applicable native run; no SLA, model endpoint health, remote execution attestation or general provider-security qualification."
     }
   },
   "current_work": {
     "instrument": "compute/maintainer/",
     "execution": "integration/work.py",
-    "release_branch": "work/deployment-job-20261118",
-    "source_identity": "Use the exact Git commit and recipient manifest for this checkout; producer commits identify source custody."
+    "release_branch": "feat/owned-network-gate-20261118",
+    "source_identity": "Use the exact Git commit and recipient manifest for this checkout; producer commits identify source custody.",
+    "owned_network_gate": "Source-reviewed narrow extension; exact release qualification and live acceptance remain separately recorded. Preserve full inference/operations/economics/recipient scope."
   },
   "evidence_policy": "Preserve source, conditions, date, failures and observed/published/modeled/unknown basis. Fresh observation and retained analysis are distinct.",
   "outcome": {
