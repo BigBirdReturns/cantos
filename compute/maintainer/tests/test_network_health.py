@@ -3,6 +3,7 @@ import base64
 import copy
 from datetime import datetime, timedelta, timezone
 import json
+import io
 import os
 from pathlib import Path
 import socket
@@ -224,6 +225,56 @@ class NetworkTests(unittest.TestCase):
                 raw.close.assert_called()
                 if phase != "tcp": tls.close.assert_called()
                 if phase == "wrap-race": tls.do_handshake.assert_not_called()
+
+    def test_real_http_response_close_owns_reader_without_mutating_closed_tls(self):
+        # Exercise stdlib HTTPConnection/HTTPResponse, rather than a mocked
+        # response that misses HTTP/1.0's connection-close/file-reader lifetime.
+        body = N.canonical(N.identity(self.target) | {"nonce": "f" * 64, "status": "ok"})
+        class TLS:
+            closed = False
+            def settimeout(self, value):
+                if self.closed:
+                    raise OSError(10038, "operation on a closed socket")
+            def do_handshake(self): pass
+            def getpeercert(self, binary_form): return CERT
+            def sendall(self, data): pass
+            def makefile(self, mode):
+                return io.BytesIO(b"HTTP/1.0 200 OK\r\nContent-Type: application/json\r\nContent-Length: "
+                                  + str(len(body)).encode() + b"\r\n\r\n" + body)
+            def close(self): self.closed = True
+            def shutdown(self, how): pass
+        tls, raw, context = TLS(), Mock(), Mock()
+        context.wrap_socket.return_value = tls
+        with patch.object(N.socket, "socket", return_value=raw), \
+             patch.object(N.ssl, "SSLContext", return_value=context):
+            result = N.probe_one(self.target, "f" * 64, 1)
+        self.assertTrue(tls.closed)
+        self.assertIsNone(result["error"])
+        self.assertTrue(result["request_sent"])
+        self.assertEqual(result["response"]["status"], 200)
+        self.assertEqual(base64.b64decode(result["response"]["body_base64"]), body)
+
+    def test_absolute_deadline_still_terminates_blocked_response_body(self):
+        stopped = threading.Event()
+        raw, tls, context, connection, response = Mock(), Mock(), Mock(), Mock(), Mock(status=200)
+        tls.getpeercert.return_value = CERT
+        context.wrap_socket.return_value = tls
+        connection.getresponse.return_value = response
+        response.getheaders.return_value = [("Content-Type", "application/json")]
+        tls.shutdown.side_effect = lambda *_: stopped.set()
+        def blocked(size):
+            self.assertTrue(stopped.wait(.3), "Absolute watchdog did not stop response body")
+            raise OSError("synthetic response-body shutdown")
+        response.read1.side_effect = blocked
+        with patch.object(N.socket, "socket", return_value=raw), \
+             patch.object(N.ssl, "SSLContext", return_value=context), \
+             patch.object(N.http.client, "HTTPConnection", return_value=connection):
+            start = time.monotonic()
+            result = N.probe_one(self.target, "f" * 64, .02)
+        self.assertLess(time.monotonic() - start, .2)
+        self.assertTrue(result["request_sent"])
+        self.assertIsNotNone(result["error"])
+        tls.close.assert_called()
 
     def test_readiness_publication_is_atomic_new_and_never_replaces(self):
         with tempfile.TemporaryDirectory() as temporary:

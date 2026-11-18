@@ -181,11 +181,16 @@ def probe_one(expected, nonce, timeout):
             connection.putheader(key, value)
         connection.endheaders()
         observed["request_sent"] = True
+        tls.settimeout(remaining())
         response = connection.getresponse()
         observed["response"] = {"status": response.status, "headers": response.getheaders(), "body_base64": ""}
         data = bytearray()
         while len(data) <= LIMIT:
-            tls.settimeout(remaining())
+            # HTTPResponse owns its file reader after getresponse may close the
+            # connection socket reference (HTTP/1.0 or Connection: close). Never
+            # mutate that closed socket. The registered absolute watchdog still
+            # bounds header/body reads, including a blocked response reader.
+            remaining()
             block = response.read1(min(1024, LIMIT + 1 - len(data)))
             if not block:
                 break

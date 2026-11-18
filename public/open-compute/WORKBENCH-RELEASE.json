@@ -1,11 +1,11 @@
 {
   "schema": "cantos.comparison-workbench-release/1",
-  "owner_source_commit": "23b9786c024e33ebc7516444f35db25d256be5e5",
+  "owner_source_commit": "15a01dbc1dd0f0c951bf6a8853f23b4037e1065c",
   "prior_published_commit": "22ce99cdfccd18b77897a641312ed576b6f24cb2",
   "prior_archive_sha256": "449ec4d453ee4c272c867148c0f12ff7b9890726845923bc991980960e274624",
   "archive": "open-compute-workbench.zip",
-  "sha256": "2d657bbb0366834228f20b74f84657448ac8795b87bacd0ea8a2e19b7ec2dd85",
-  "bytes": 3936041,
+  "sha256": "a0df6c8fcf1b66e10b78cc640dc3f3e627a64bad4fc3f40964543ca90915870b",
+  "bytes": 3936298,
   "files": 74,
   "changed_public_members": [
     "cantos/open-compute-ledger/MANIFEST.json",
@@ -58,5 +58,5 @@
   "new_inference_requests": 0,
   "owned_network_scope": "Explicit bounded named TLS health-route acquisition and required latency/failure gates; no live qualification, model health, SLA or general provider security claim.",
   "collector_source_sha256": "be02fb41d70c8841c5e1fb7fb621cb14a704e5ba2a03af97476b5fa6a50e94c3",
-  "network_source_sha256": "42f6e763e58c397e91b28b9854254e60483a91f439cabc725b5ae8c7f964a483"
+  "network_source_sha256": "72f22aa7bf348b3695d882f07ccd81c8bc3b7dc4c0aa859ad493d5b9ea377059"
 }
