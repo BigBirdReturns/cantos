@@ -20,7 +20,13 @@ For `run`, `decide` and `import`, exit codes follow the decision state: 0 select
 
 ## Operational and resource records
 
-Attach operation JSON paths in each arm's `operations` array and a resource template or binding in `resources`. The job accepts only supported `cantos.operation-binding/1` check ids, binds them to the exact run hash and declared hardware identity, and uses the shipped raw-evidence verifier. Unknown or unsupported checks remain unknown. The binding records operator-declared custody; it is not provider attestation. The pinned local acquisition runs only on an explicitly authorized local host; it does not inspect or control remote endpoints. Declare `audit_host_label` and `audit_host_id_sha256` in the native hardware identity, then collect:
+Attach operation JSON paths in each arm's `operations` array and a resource template or binding in `resources`. The job accepts only supported `cantos.operation-binding/1` check ids, binds them to the exact run hash and declared hardware identity, and uses the shipped raw-evidence verifier. Unknown or unsupported checks remain unknown. The binding records operator-declared custody; it is not provider attestation. The pinned local acquisition runs only on an explicitly authorized local host; it does not inspect or control remote endpoints. Choose a local `audit_host_label` and add it to the arm's `identity.hardware` in the native spec. On the machine that will run `collect` and the paired job, print its hostname digest:
+
+```text
+python -B -c "import hashlib,socket; print(hashlib.sha256(socket.gethostname().encode('utf-8')).hexdigest())"
+```
+
+Copy that output into `identity.hardware.audit_host_id_sha256`. This is the exact hostname-byte digest checked by the local collector; it does not attest the host behind a remote endpoint. Use the same label in `--authorize-local-host`. If both arms run on this local host, set these fields on both arms. Finish all hardware identity fields before computing resource hashes below, then collect:
 
 ```text
 python -B compute/maintainer/job.py collect --manifest deployment-job.json --arm baseline --authorize-local-host HOST_LABEL --out baseline-ops
@@ -29,6 +35,14 @@ python -B compute/maintainer/job.py collect --manifest deployment-job.json --arm
 Repeat for candidate, point each arm's `collection` at its `acquisition.json`, then run the paired job. Raw packet, summary and original collection packet are retained and bound to the captured run; unsupported checks remain unknown.
 
 Before capture, resource files may use `cantos.resource-template/1` with declared hardware hash, measured-trials accounting, source-bound scenario assumptions and explicit verification/retry/operator/idle allocations. See [`examples/deployment-resources.json`](examples/deployment-resources.json) and [`examples/deployment-assumptions.txt`](examples/deployment-assumptions.txt); these are hypothetical placeholders, not current provider prices. Replace every value, basis, source and hash with recipient evidence, and replace the hardware hash with SHA-256 of the canonical hardware identity object. The run creates `cantos.resource-binding/1` records bound to exact run hashes and native trial windows. Missing cost categories, allocations, energy scope or source records remain unknown; zero must be an explicit sourced value. Ranges propagate conservatively. Board-only energy cannot establish whole-system energy.
+
+Compute each resource template's `resource_identity_sha256` with the shipped canonical identity helper. From the extracted kit's `cantos` directory, run the following; replace `spec.json` with your actual spec path:
+
+```text
+python -B -c "import sys; from compute.maintainer.common import digest,load; s=load(sys.argv[1]); print('baseline',digest(s['baseline']['identity']['hardware'])); print('candidate',digest(s['candidate']['identity']['hardware']))" spec.json
+```
+
+Copy each arm's printed hexadecimal digest into its resource template. The helper includes every hardware field, including the local audit fields. Recompute the digest whenever that declared object changes; do not hash the spec file or manually format a JSON string. A changed serving hardware identity requires a fresh capture.
 
 An optional separately labeled retry layer uses top-level `retry: {"required": true, "economics": false}` and per-arm `retry` paths: `campaign` is the retained `retry-campaign.json`, with optional `telemetry`, `scenario` and `allocations`. Campaigns are read-only evidence and never cause replay. Retry identity, acceptance controls, timing and campaign artifacts are checked against the native captured experiment. Retry economics, when explicitly enabled, uses the complete retry campaign window and its accepted-task denominator; native measured-trial costs are not added. A telemetry receipt uses `cantos.retry.telemetry/1`; its `samples` journal and the allocations file are retained and hash checked even when stored outside the campaign directory. The scenario uses `cantos.retry.cost-scenario/1`. The allocations file uses `cantos.retry.allocations/1`, binds the exact `campaign_sha256`, and contains `additional_costs` records with `category` (`verification`, `retry`, `operator`, `idle` or `other`), `unit: "USD"`, `basis`, `source`, `source_sha256`, exactly one of `value` or `range`, and a rationale. Each record sets `includes_in_scenario`; if true, `scenario_fields` must identify already-priced scenario fields and the amount is not added again. Missing allocation categories remain unknown. This layer does not replace the native verdict or issue new inference requests.
 
