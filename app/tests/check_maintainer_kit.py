@@ -41,6 +41,7 @@ def main():
         call("compute/maintainer/retry.py", "--help")
         call("compute/maintainer/retry_resources.py", "--help")
         call("compute/maintainer/job.py", "--help")
+        call("compute/maintainer/operational_http.py", "--help")
         call("compute/maintainer/external_grader.py", "--help")
         call("compute/maintainer/owner_ocl/network_health.py", "--help")
         catalog = json.loads(call("integration/work.py", "--catalog"))
@@ -50,6 +51,7 @@ def main():
         # HTTP/SSE fixture; this is software verification, not model performance.
         call("-m", "unittest", "discover", "-s", "compute/maintainer/tests", "-p", "test_retry.py", "-v")
         call("-m", "unittest", "discover", "-s", "compute/maintainer/tests", "-p", "test_retry_resources.py", "-v")
+        call("-m", "unittest", "discover", "-s", "compute/maintainer/tests", "-p", "test_operational_http.py", "-v")
         call("-m", "unittest", "discover", "-s", "compute/maintainer/tests", "-p", "test_job.py", "-v")
         call("-m", "unittest", "discover", "-s", "compute/maintainer/tests", "-p", "test_external_grader.py", "-v")
         call("-m", "unittest", "compute.maintainer.tests.test_network_health", "-v")
