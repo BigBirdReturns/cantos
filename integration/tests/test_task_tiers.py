@@ -146,8 +146,9 @@ class TierPlanTasks(unittest.TestCase):
         catalog = json.loads(listing.stdout)
         operation = next(item for item in catalog["operations"] if item["task_class"] == "tier-plan")
         self.assertEqual(before, {p.relative_to(self.base) for p in self.base.rglob("*")})
-        self.assertEqual(catalog["effects"], {"model_calls": 0, "gpu_runs": 0,
+        self.assertEqual(catalog["catalog_effects"], {"model_calls": 0, "gpu_runs": 0,
                                              "resource_acquisition": False})
+        self.assertIn("maintainer-observe", catalog["effects"]["model_calls"])
         task = dict(self.task, id="tier-plan-second", actor="operator-two",
                     task_class=operation["task_class"])
         request = self.base / "catalog-selected-request.json"

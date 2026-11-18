@@ -1,9 +1,111 @@
 # Shared operations, retained for the next request
 
 The floor improves by class, not by user. `work.py` supplies one execution and
-reuse path for nine existing deterministic operations. A different operator or
-provider does not require another implementation. The source owners still decide
-what the evidence supports.
+reuse path for nine existing deterministic operations and two maintainer
+operations. `maintainer-observe` explicitly collects a new streamed observation
+from a configured endpoint; `maintainer-compare` applies acceptance, latency and
+cost policy to retained observations. A different operator or provider uses the
+same adapters. Source owners retain their evidence and acceptance rules.
+
+## Maintain an inference implementation with retained observations
+
+The [native maintainer instrument](../compute/maintainer/README.md) compares a
+baseline and a candidate against the same explicit workload and measurement
+protocol. Second Run executes each selected observation, retains its complete
+receipt and raw stream artifacts, and connects those observations to the native
+comparison. This path measures the configured endpoints; it does not provision
+them or start a serving process.
+
+Configure `compute/maintainer/examples/spec.json`, its workload and its policy for
+the two endpoints you operate. Pin the implementation revision, model revision
+and hash, tokenizer revision, hardware identity, precision, context, settings and
+any implementation files that distinguish the candidate. Then run:
+
+```sh
+python -B integration/work.py --request integration/examples/maintainer-work.json --store /your/retained/maintainer --require-maintainer-pass
+```
+
+The request contains two `maintainer-observe` tasks and one `maintainer-compare`
+task. The comparison's `baseline` and `candidate` fields use `{"task":"ID"}` to
+select earlier successful observation tasks from that invocation. They can also
+name retained observation result files or native `run.json` receipts. A failed,
+held or missing observation holds the dependent comparison while other independent
+tasks continue. The original nine operations and retained Research Desk procedure
+bindings retain their existing behavior; a Research Desk binding authorizes only
+its existing deterministic classes.
+
+| Change | Baseline observation | Candidate observation | Comparison |
+|---|---|---|---|
+| Empty result store | Collect and retain | Collect and retain | Calculate |
+| Same declared inputs and observation epoch | Reuse original | Reuse original | Reuse original |
+| Price or acceptance policy only | Reuse original | Reuse original | Recalculate from retained responses |
+| Candidate implementation bytes or selected configuration | Reuse original | Collect and retain changed candidate | Recalculate |
+| Shared workload or measurement protocol | Collect and retain | Collect and retain | Recalculate |
+| Explicit new observation epoch | Collect and retain | Collect and retain | Recalculate |
+
+Each observation key includes its selected arm's canonical configuration, exact
+workload bytes, declared implementation file bytes, collection protocol, producer
+modules, adapter, runner and Python runtime. The other arm and the policy file
+are excluded from that observation key. The comparison key includes both terminal
+receipts, every raw artifact in their closures, the policy and its procedure
+bytes. The native instrument preserves observed server/model identity separately
+from declared configuration and issues its own comparability verdict.
+
+A reused observation is labelled `retained-observation` and carries its original
+`observed_at` and observation ID. `new_observations` and `model_calls` count only
+work performed by the current invocation. An executed observation reports the
+native instrument's actual HTTP inference request count. `gpu_runs` remains null
+for remote observations because an HTTP endpoint does not establish physical GPU
+execution. Reuse and deterministic comparison report zero new inference calls.
+
+To explicitly collect another measurement under unchanged declared settings:
+
+```sh
+python -B integration/work.py --request integration/examples/maintainer-work.json --store /your/retained/maintainer --fresh --require-maintainer-pass
+```
+
+`--fresh` assigns a new observation epoch and writes the complete effective
+request to `STORE/requests/` before any inference. The invocation receipt records
+`request_record` and `fresh_observation_id`. A chosen ID makes reconnection
+explicit: `--fresh experiment-20261118-b` creates that epoch once; repeating the
+same ID recovers its existing observation instead of presenting it as new work.
+Use a new ID when another measurement is intended. Changing selected dependencies
+creates a different observation key even within the same named experiment.
+
+Second Run claims an observation key exclusively before contacting its endpoint.
+A concurrent request or interrupted attempt without a terminal result holds and
+points to the retained claim and artifact directory. Inspect that attempt before
+selecting a new observation epoch. Complete result envelopes publish atomically
+without replacing an earlier record. Raw artifacts and terminal receipts are
+checksum-verified on every reuse; damage holds the result and its dependent
+comparison while preserving the original files.
+
+External application grading stays with the configured grader. For externally
+graded workloads, the comparison accepts optional `baseline_grades` and
+`candidate_grades` paths. Their native validation pins the exact observation,
+workload and response bytes and checks the grader artifact closure. Adding or
+changing grading evidence recalculates the comparison, with zero new inference.
+Ungraded application outcomes retain the native instrument's unresolved verdict.
+
+The run-level `executed` or `reused` status describes procedure execution. Read
+`native_verdict` and `verdict_receipt` for the maintainer decision. With
+`--require-maintainer-pass`, the command exits 0 for pass, 1 for regression, 2 for
+incomparable evidence and 3 for instrument error or a held/missing comparison.
+Without that flag, the runner retains its established execution-status convention.
+
+The compact maintainer kit contains these two adapters and their native source
+closure. `--catalog` marks each adapter's availability; the nine older operations
+remain available from a complete Cantos checkout. The integration acceptance
+suite uses a labelled local SSE fixture to count actual HTTP requests and prove
+no-change reuse, price-only recalculation, candidate-byte invalidation, explicit
+fresh collection, artifact-damage refusal and concurrent-epoch exclusion:
+
+```sh
+python -B -m unittest discover -s integration/tests -p test_maintainer_work.py -v
+```
+
+That suite qualifies the runner and stream protocol. Actual workload/model/hardware
+claims belong to the separate native observation receipts and their grading.
 
 ## Start from the local record
 
