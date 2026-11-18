@@ -37,7 +37,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: python integration/release_gate.py --receipt _release-gate.json
+        run: python integration/release_gate.py --timeout 900 --receipt _release-gate.json
 
       # The site is the repository minus bulk data, scratch and caches. Bulk stays in git
       # (with hashed pointers where it exceeds GitHub's size limit); the pages read only the
