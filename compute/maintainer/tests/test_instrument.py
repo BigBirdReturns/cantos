@@ -155,7 +155,7 @@ class Instrument(unittest.TestCase):
         self.run_pair()
         bad = self.root / "untrusted.zip"
         bad.write_bytes(b"not the pinned workbench source")
-        with self.assertRaisesRegex(ValueError, "pinned original"):
+        with self.assertRaisesRegex(ValueError, "pinned .*workbench ZIP SHA256"):
             packets.export_packets(self.root / "pair/analysis", bad, self.root / "export")
         self.assertFalse((self.root / "export").exists())
 
