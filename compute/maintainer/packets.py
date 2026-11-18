@@ -142,7 +142,7 @@ def export_packets(analysis, bundle, out_dir, baseline_financials=None, candidat
     grading_contract = result.get("grading_contract")
     bundle = Path(bundle).resolve()
     if sha256_file(bundle) != BUNDLE_SHA256:
-        raise ValueError("expected the pinned original public workbench ZIP SHA256 " + BUNDLE_SHA256)
+        raise ValueError("expected the pinned public workbench ZIP SHA256 " + BUNDLE_SHA256)
     root = Path(out_dir).resolve()
     root.mkdir(parents=True, exist_ok=False)
     package = unpack_owner(bundle, root / "workbench-owner")
