@@ -37,8 +37,8 @@ class Endpoint:
                 body = json.loads(self.rfile.read(int(self.headers["Content-Length"])))
                 if not body["stream"]:
                     raise AssertionError("client failed to request streaming")
-                if outer.mode in ("http", "auth"):
-                    self.send_response(401 if outer.mode == "auth" else 500)
+                if outer.mode in ("http", "auth", "throttle"):
+                    self.send_response(401 if outer.mode == "auth" else 429 if outer.mode == "throttle" else 500)
                     self.end_headers()
                     self.wfile.write(b'{"error":"fixture failure"}')
                     return
@@ -213,6 +213,17 @@ class Instrument(unittest.TestCase):
         # Reanalyzing retained observations uses no fresh inference.
         self.assertEqual(self.analyze()["verdict"], "regression")
         self.assertEqual((self.a.requests, self.b.requests), (2, 2))
+
+    def test_http_429_is_counted_as_throttled_serving_work(self):
+        self.b.mode = "throttle"
+        result = self.run_pair()
+        self.assertEqual(result["verdict"], "regression", result)
+        self.assertEqual(result["candidate"]["server_http_failures"], 2)
+        self.assertEqual(result["candidate"]["accepted_tasks"], 0)
+        self.assertEqual(result["candidate"]["other_request_errors"], 0)
+        run = m.validate_receipt(self.root / "pair/candidate/run.json")
+        raw = load(self.root / "pair/candidate" / run["observations"][0]["attempts"][0]["raw_path"])
+        self.assertEqual(raw["http_status"], 429)
 
     def test_authentication_http_failure_remains_instrument_error(self):
         self.b.mode = "auth"
