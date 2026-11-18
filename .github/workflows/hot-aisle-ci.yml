@@ -1,9 +1,9 @@
 name: Cantos qualification
 on:
   push:
-    paths: ['README.md', 'app/**', 'index.html', 'assets/**', 'hot-aisle/**', 'compute/**', 'integration/**', 'corpus/**', 'research-desk/**', 'floor/**', 'circulate/**', 'shelf/**', 'clustermax-challenge/**', 'evidence/**', '.gitattributes', '.github/workflows/pages.yml', '.github/workflows/hot-aisle-ci.yml', '.github/workflows/shelf-ci.yml', '.github/workflows/clustermax-challenge-ci.yml']
+    paths: ['README.md', 'app/**', 'public/**', 'index.html', 'assets/**', 'hot-aisle/**', 'compute/**', 'integration/**', 'corpus/**', 'research-desk/**', 'floor/**', 'circulate/**', 'shelf/**', 'clustermax-challenge/**', 'evidence/**', '.gitattributes', '.github/workflows/pages.yml', '.github/workflows/hot-aisle-ci.yml', '.github/workflows/shelf-ci.yml', '.github/workflows/clustermax-challenge-ci.yml']
   pull_request:
-    paths: ['README.md', 'app/**', 'index.html', 'assets/**', 'hot-aisle/**', 'compute/**', 'integration/**', 'corpus/**', 'research-desk/**', 'floor/**', 'circulate/**', 'shelf/**', 'clustermax-challenge/**', 'evidence/**', '.gitattributes', '.github/workflows/pages.yml', '.github/workflows/hot-aisle-ci.yml', '.github/workflows/shelf-ci.yml', '.github/workflows/clustermax-challenge-ci.yml']
+    paths: ['README.md', 'app/**', 'public/**', 'index.html', 'assets/**', 'hot-aisle/**', 'compute/**', 'integration/**', 'corpus/**', 'research-desk/**', 'floor/**', 'circulate/**', 'shelf/**', 'clustermax-challenge/**', 'evidence/**', '.gitattributes', '.github/workflows/pages.yml', '.github/workflows/hot-aisle-ci.yml', '.github/workflows/shelf-ci.yml', '.github/workflows/clustermax-challenge-ci.yml']
   workflow_dispatch: {}
 permissions:
   contents: read
@@ -16,7 +16,8 @@ jobs:
     uses: ./.github/workflows/clustermax-challenge-ci.yml
   verify:
     name: Authorities, software, native browsers, reproducible kits
-    runs-on: ubuntu-latest
+    # Playwright 1.58.0 supports Ubuntu 24.04; keep its browser host stable.
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     env:
       PYTHONDONTWRITEBYTECODE: '1'
@@ -39,6 +40,7 @@ jobs:
           python -B corpus/build_history.py --check
           python -B -m unittest discover -s corpus/tests -p "test_public_history.py" -v
           python -B app/tests/site_surface_check.py
+          python -B app/tests/check_open_compute.py
       - name: Measured-result engine and scenario engines
         run: |
           set -euo pipefail

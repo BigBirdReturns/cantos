@@ -64,7 +64,9 @@ try:
               and page.locator('.foundation-strip').count() == 1)
         check('overview exposes the packet picker, two examples and actual work catalog',
               page.locator('#home-open-btn').is_visible()
-              and page.locator('.example-card').count() == 2 and page.locator('.catalog-card').count() == 10)
+              and page.locator('.example-card').count() == 2 and page.locator('.catalog-card').count() == 12
+              and page.locator('.overview-actions [data-site-path="public/open-compute/index.html"]').is_visible()
+              and page.locator('.overview-actions [data-site-path="research-desk/index.html"]').is_visible())
         check('overview identifies the floor as experimental and circulation as manual',
               'Experimental desk rating from dated public reviews' in page.locator('.catalog-card[data-site-path="floor/index.html"]').inner_text()
               and 'Manually invoked' in page.locator('.catalog-card[data-site-path="circulate/index.html"]').inner_text())
