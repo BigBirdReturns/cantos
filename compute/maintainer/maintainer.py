@@ -19,7 +19,7 @@ from pathlib import Path
 
 try:
     from .common import (ROOT, EXITS, _equal, _safe, _strict_loads, canonical, closure,
-                         digest, file_record, load, now, policy, prepare, producer_records,
+                         digest, file_record, load, now, policy, prepare, producer_records, read_grading_contract,
                          sha256_file, steps, validate_closure, validate_workload, write)
     from .streaming import capture, parse_capture, probe
     from .owner_ocl.compare import compare as ocl_compare
@@ -29,7 +29,7 @@ try:
     from .owner_vllm.audit import exact_peak
 except ImportError:
     from common import (ROOT, EXITS, _equal, _safe, _strict_loads, canonical, closure,
-                        digest, file_record, load, now, policy, prepare, producer_records,
+                        digest, file_record, load, now, policy, prepare, producer_records, read_grading_contract,
                         sha256_file, steps, validate_closure, validate_workload, write)
     from streaming import capture, parse_capture, probe
     from owner_ocl.compare import compare as ocl_compare
@@ -305,7 +305,11 @@ def validate_receipt(run_path):
     return receipt
 
 
-def validate_grades(grades_path, run_path):
+class GradingContractMismatch(ValueError):
+    """Two results do not measure acceptance under the selected grading basis."""
+
+
+def validate_grades(grades_path, run_path, grading_basis=None):
     run = validate_receipt(run_path)
     grade = validate_closure(grades_path)
     if grade.get("schema") != "cantos.maintainer.grades/1":
@@ -314,6 +318,21 @@ def validate_grades(grades_path, run_path):
         raise ValueError("external grades belong to another run or workload")
     work = load(Path(run_path).resolve().parent / "workload.json")
     external = {c["id"]: steps(c)[-1]["expect"] for c in work["cases"] if steps(c)[-1]["expect"]["kind"] == "external"}
+    if grading_basis is None:
+        if "grading_contract_sha256" in grade:
+            raise GradingContractMismatch("explicit grade receipts require their selected grading contract")
+        grader = None
+    else:
+        contract, contract_sha = grading_basis
+        if contract["workload_sha256"] != run["workload_sha256"]:
+            raise GradingContractMismatch("grading contract differs from the captured workload")
+        if not external:
+            raise GradingContractMismatch("grading contract requires externally graded observations")
+        if grade.get("grading_contract_sha256") != contract_sha or not _equal(grade.get("grader"), contract["grader"]):
+            raise GradingContractMismatch("external grade receipt differs from the selected grading contract")
+        if not any(x["sha256"] == contract_sha for x in grade["artifacts"]):
+            raise ValueError("external grade receipt is missing its retained grading contract")
+        grader = contract["grader"]
     records = {(o["task_id"], o["trial"], o["repetition"]): o for o in run["observations"]}
     artifacts = {x["path"] for x in grade["artifacts"]}
     seen = set()
@@ -324,7 +343,7 @@ def validate_grades(grades_path, run_path):
         if key in seen or key not in records or key[0] not in external:
             raise ValueError("duplicate or unexpected external grade")
         seen.add(key)
-        if not _equal(grade.get("grader"), external[key[0]]["grader"]):
+        if not _equal(grade.get("grader"), grader if grader is not None else external[key[0]]["grader"]):
             raise ValueError("external grader identity differs from workload contract")
         if result.get("response_sha256") != records[key]["attempts"][-1]["response_sha256"]:
             raise ValueError("external grade response hash mismatch")
@@ -473,6 +492,8 @@ def export_ocl_receipt(run_path, run, workload, pol, grades=None, grades_path=No
         "trials": run["trials"], "pairing": run["pairing"],
         "new_inference_requests": 0,
         "cost_scope": "No cost or energy inferred. Explicit workbench financial input or later cost scenario retains its own basis."}
+    if grades and "grading_contract_sha256" in grades:
+        projected["provenance"]["maintainer_evidence"]["grading_contract_sha256"] = grades["grading_contract_sha256"]
     problems = validate_record(projected)
     if problems:
         raise ValueError("native OCL export invalid: " + "; ".join(problems))
@@ -603,6 +624,8 @@ def _report(result):
     lines = ["# Cantos maintainer verdict", "", "**" + result["verdict"].upper() + "**", ""]
     for reason in result.get("reasons", []):
         lines.append("- " + reason)
+    if "grading_contract" in result:
+        lines += ["External grading contract SHA-256: " + result["grading_contract"]["sha256"], ""]
     if "baseline" in result:
         lines.extend(["", "| Metric | Baseline | Candidate |", "| --- | ---: | ---: |"])
         for key in ("total_tasks", "accepted_tasks", "acceptance_rate", "p95_latency_s", "p95_ttft_s", "accepted_per_s", "peak_request_concurrency", "cost_per_accepted"):
@@ -614,7 +637,7 @@ def _report(result):
 
 
 def analyze_receipts(baseline_path, candidate_path, policy_path, out_dir,
-                     baseline_grades=None, candidate_grades=None):
+                     baseline_grades=None, candidate_grades=None, grading_contract=None):
     root = Path(out_dir).resolve()
     root.mkdir(parents=True, exist_ok=False)
     inputs = {}
@@ -623,13 +646,20 @@ def analyze_receipts(baseline_path, candidate_path, policy_path, out_dir,
         a, b = validate_receipt(baseline_path), validate_receipt(candidate_path)
         wa = load(Path(baseline_path).resolve().parent / "workload.json")
         wb = load(Path(candidate_path).resolve().parent / "workload.json")
-        ga = validate_grades(baseline_grades, baseline_path) if baseline_grades else None
-        gb = validate_grades(candidate_grades, candidate_path) if candidate_grades else None
         for key, path in (("baseline", baseline_path), ("candidate", candidate_path), ("policy", policy_path),
                           ("baseline_grades", baseline_grades), ("candidate_grades", candidate_grades)):
             if path:
                 inputs[key] = {"path": str(Path(path).resolve()), "sha256": sha256_file(path)}
+        basis = read_grading_contract(grading_contract) if grading_contract else None
+        if basis is not None:
+            inputs["grading_contract"] = {"path": str(Path(grading_contract).resolve()), "sha256": basis[1]}
+            if not (baseline_grades and candidate_grades):
+                raise GradingContractMismatch("both arms require grades under the same selected grading contract")
+        ga = validate_grades(baseline_grades, baseline_path, basis) if baseline_grades else None
+        gb = validate_grades(candidate_grades, candidate_path, basis) if candidate_grades else None
         result = _compare_runs(a, b, wa, wb, pol, ga, gb)
+        if basis is not None:
+            result["grading_contract"] = {"sha256": basis[1], **basis[0]}
         pending = any(o["accepted"] is None for o in a["observations"]) and ga is None
         pending |= any(o["accepted"] is None for o in b["observations"]) and gb is None
         if pending:
@@ -644,6 +674,10 @@ def analyze_receipts(baseline_path, candidate_path, policy_path, out_dir,
                 target = root / (side + ".ocl.json")
                 write(target, value)
                 result["ocl_exports"][side] = file_record(target, root)
+    except GradingContractMismatch as exc:
+        result = {"schema": "cantos.maintainer.verdict/1", "created_at": now(), "verdict": "incomparable",
+                  "exit_code": EXITS["incomparable"], "reasons": [str(exc)], "comparability_failures": [str(exc)],
+                  "limitations": LIMITS, "new_inference_requests": 0}
     except Exception as exc:
         result = {"schema": "cantos.maintainer.verdict/1", "created_at": now(), "verdict": "error",
                   "exit_code": EXITS["error"], "reasons": [type(exc).__name__ + ": " + str(exc)[:1000]],
@@ -716,6 +750,7 @@ def main(argv=None):
         analysis.add_argument("--" + flag, required=True)
     analysis.add_argument("--baseline-grades")
     analysis.add_argument("--candidate-grades")
+    analysis.add_argument("--grading-contract", help="Select one explicit external regrading contract for both retained arms")
     prep = sub.add_parser("prepare", help="print selected-arm observation dependency contract, without network")
     prep.add_argument("--spec", required=True)
     prep.add_argument("--arm", choices=("baseline", "candidate"), required=True)
@@ -734,7 +769,7 @@ def main(argv=None):
             result = run(args.spec, args.out)
         elif args.command == "analyze":
             result = analyze_receipts(args.baseline, args.candidate, args.policy, args.out,
-                                      args.baseline_grades, args.candidate_grades)
+                                      args.baseline_grades, args.candidate_grades, args.grading_contract)
         elif args.command == "observe":
             result = observe(args.spec, args.arm, args.out, args.observation_id)
             print(json.dumps({"status": result["status"], "run": str(Path(args.out) / "run.json"),

@@ -2,7 +2,7 @@
 
 This program never executes generated solutions. Run EvalPlus in the documented
 network-isolated container between prepare and bind. The normalizer is trusted
-tool code whose exact bytes must match the workload's pinned grader identity.
+tool code pinned by the captured workload or a separately selected regrading contract.
 """
 import argparse
 import hashlib
@@ -36,10 +36,10 @@ def validator(instrument):
     import maintainer
     if Path(maintainer.__file__).resolve().parent != folder:
         raise ValueError('another maintainer implementation is already imported; use the standalone bridge CLI')
-    files = {str(p.relative_to(folder)):digest(p) for p in folder.rglob('*.py') if '__pycache__' not in p.parts}
+    files = {p.relative_to(folder).as_posix():digest(p) for p in folder.rglob('*.py') if '__pycache__' not in p.parts}
     return maintainer.validate_receipt,files
 
-def checked_run(path,instrument):
+def checked_run(path,instrument,grading_contract=None):
     path = Path(path).resolve()
     validate,files = validator(instrument)
     run = validate(path)
@@ -60,6 +60,13 @@ def checked_run(path,instrument):
     if not graders or any(g != graders[0] for g in graders):
         raise ValueError('one exact grader identity is required')
     grader = graders[0]
+    contract_sha = None
+    if grading_contract:
+        from common import read_grading_contract
+        contract, contract_sha = read_grading_contract(grading_contract)
+        if contract['workload_sha256'] != run['workload_sha256']:
+            raise ValueError('grading contract differs from the captured workload')
+        grader = contract['grader']
     if grader['name'] != 'EvalPlus' or grader['revision'] != '0.3.1':
         raise ValueError('unsupported grader')
     if grader.get('criterion') != 'humanevalplus-v0.1.10-base-and-plus-chat-complete-code-v1':
@@ -78,7 +85,7 @@ def checked_run(path,instrument):
         last = o['attempts'][-1]
         if hashlib.sha256(last['response_text'].encode()).hexdigest() != last['response_sha256']:
             raise ValueError('response SHA mismatch')
-    return path,run,workload_path,grader,files
+    return path,run,workload_path,grader,files,contract_sha
 
 def normalizer_function(path):
     spec = importlib.util.spec_from_file_location('cantos_pinned_normalizer',path)
@@ -87,7 +94,8 @@ def normalizer_function(path):
     return mod.normalize
 
 def prepare(a):
-    path,run,workload_path,grader,files = checked_run(a.run,a.instrument)
+    contract_path = getattr(a, 'grading_contract', None)
+    path,run,workload_path,grader,files,contract_sha = checked_run(a.run,a.instrument,contract_path)
     ref = Path(a.reference).resolve()
     normalizer = Path(a.normalizer).resolve()
     if digest(ref) != grader['reference_sha256']:
@@ -129,16 +137,26 @@ def prepare(a):
             'reference_md5':hashlib.md5(ref.read_bytes()).hexdigest(),
             'samples_sha256':digest(out/'humaneval.jsonl'),'mapping_sha256':digest(out/'mapping.json'),
             'bridge_sha256':digest(__file__),'validator_files':files,'observations':len(mapping)}
+    if contract_sha is not None:
+        shutil.copyfile(contract_path, out/'grading-contract.json')
+        if digest(out/'grading-contract.json') != contract_sha:
+            raise ValueError('grading contract changed while preparing')
+        meta['grading_contract_sha256'] = contract_sha
     write(out/'prepared.json',meta)
     print(json.dumps({'status':'prepared','out':str(out),'observations':len(mapping),
                       'run_sha256':meta['run_sha256'],'samples_sha256':meta['samples_sha256']}))
 
 def bind(a):
-    path,run,workload_path,grader,files = checked_run(a.run,a.instrument)
+    contract_path = getattr(a, 'grading_contract', None)
+    path,run,workload_path,grader,files,contract_sha = checked_run(a.run,a.instrument,contract_path)
     prepared = Path(a.prepared).resolve()
     meta = read(prepared/'prepared.json')
     if meta['run_sha256'] != digest(path) or meta['workload_sha256'] != run['workload_sha256'] or meta['grader'] != grader:
         raise ValueError('prepared inputs belong to a different run/workload/grader')
+    if meta.get('grading_contract_sha256') != contract_sha:
+        raise ValueError('prepared inputs belong to a different grading contract')
+    if contract_sha is not None and digest(prepared/'grading-contract.json') != contract_sha:
+        raise ValueError('prepared grading contract changed')
     if meta['bridge_sha256'] != digest(__file__):
         raise ValueError('prepare/bind bridge implementation changed')
     if meta['validator_files'] != files:
@@ -200,6 +218,10 @@ def bind(a):
     artifacts = out/'artifacts';artifacts.mkdir()
     for n in ('prepared.json','mapping.json','humaneval.jsonl','humaneval-reference.jsonl','normalize.py','workload.json'):
         shutil.copyfile(prepared/n,artifacts/n)
+    if contract_sha is not None:
+        shutil.copyfile(prepared/'grading-contract.json', artifacts/'grading-contract.json')
+        if digest(artifacts/'grading-contract.json') != contract_sha:
+            raise ValueError('grading contract changed while binding')
     for n in ('grader-image.json', 'invocation.json'):
         if (prepared/n).is_file():
             shutil.copyfile(prepared/n,artifacts/n)
@@ -207,9 +229,11 @@ def bind(a):
     shutil.copyfile(a.log,artifacts/'evalplus.log')
     shutil.copyfile(path,artifacts/'source-run.json')
     shutil.copyfile(__file__,artifacts/'evalplus_bridge.py')
-    closure = [{'path':str(p.relative_to(out)),'sha256':digest(p),'bytes':p.stat().st_size} for p in sorted(artifacts.iterdir())]
+    closure = [{'path':p.relative_to(out).as_posix(),'sha256':digest(p),'bytes':p.stat().st_size} for p in sorted(artifacts.iterdir())]
     receipt = {'schema':'cantos.maintainer.grades/1','run_sha256':digest(path),
                'workload_sha256':run['workload_sha256'],'grader':grader,'results':joined,'artifacts':closure}
+    if contract_sha is not None:
+        receipt['grading_contract_sha256'] = contract_sha
     write(out/'grades.json',receipt)
     print(json.dumps({'status':'bound','out':str(out/'grades.json'),'accepted':sum(x['accepted'] for x in joined),
                       'observations':len(joined),'sha256':digest(out/'grades.json')}))
@@ -223,6 +247,8 @@ def main():
     bound = sub.add_parser('bind')
     for arg in ('run','prepared','results','log','out'):bound.add_argument('--'+arg,required=True)
     bound.add_argument('--instrument',default=str(Path(__file__).resolve().parent),help='Same maintainer source used for prepare')
+    for command in (prep, bound):
+        command.add_argument('--grading-contract', help='Same explicit external grading contract for prepare and bind')
     a = p.parse_args()
     (prepare if a.command == 'prepare' else bind)(a)
 

@@ -147,6 +147,20 @@ def expectation(value):
         raise ValueError("expect.kind must be json_exact, text_exact, or external")
 
 
+def read_grading_contract(path):
+    """Load the exact external evaluator declared for analysis of one captured workload."""
+    raw = Path(path).read_bytes()
+    value = _strict_loads(raw.decode("utf-8"))
+    keys(value, {"schema", "workload_sha256", "grader"}, "external grading contract")
+    if value.get("schema") != "cantos.maintainer.grading-contract/1":
+        raise ValueError("unsupported external grading contract schema")
+    workload_sha = value.get("workload_sha256")
+    if not isinstance(workload_sha, str) or len(workload_sha) != 64 or any(c not in "0123456789abcdef" for c in workload_sha):
+        raise ValueError("external grading contract needs the captured workload SHA256")
+    expectation({"kind": "external", "grader": value.get("grader")})
+    return value, hashlib.sha256(raw).hexdigest()
+
+
 def steps(case):
     return case["steps"] if "steps" in case else [{"messages": case["messages"], "expect": case["expect"]}]
 

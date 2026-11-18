@@ -182,15 +182,21 @@ def prepare(task, base, execution_context=None):
         return {"parameters": parameters, "inputs": inputs, "execute": execute}
 
     if task_class == "maintainer-compare":
-        if set(task) - common - {"baseline", "candidate", "policy", "baseline_grades", "candidate_grades"}:
+        if set(task) - common - {"baseline", "candidate", "policy", "baseline_grades", "candidate_grades", "grading_contract"}:
             raise ValueError("Unsupported maintainer-compare task fields")
         baseline, baseline_inputs, baseline_receipt = _receipt_input(task.get("baseline"), base, "baseline", owner)
         candidate, candidate_inputs, candidate_receipt = _receipt_input(task.get("candidate"), base, "candidate", owner)
         policy = _path(task.get("policy"), base, "policy")
         grades = {name: _path(task[name], base, name) for name in ("baseline_grades", "candidate_grades") if name in task}
         grade_inputs = {}
+        grading_contract = _path(task["grading_contract"], base, "grading_contract") if "grading_contract" in task else None
+        basis = owner.read_grading_contract(grading_contract) if grading_contract else None
         for name, path in grades.items():
-            grade = owner.validate_grades(path, baseline if name == "baseline_grades" else candidate)
+            try:
+                grade = owner.validate_grades(path, baseline if name == "baseline_grades" else candidate, basis)
+            except owner.GradingContractMismatch:
+                # Let the native comparison retain and propagate the incomparable verdict.
+                grade = owner.validate_closure(path)
             closure = []
             for artifact in grade.get("artifacts", []):
                 artifact_path = (path.parent / artifact["path"]).resolve()
@@ -201,12 +207,14 @@ def prepare(task, base, execution_context=None):
         inputs = {"adapter_code": HERE, "policy": policy,
                   **_inputs(_procedures(), "procedure"),
                   **_inputs(baseline_inputs, "baseline"), **_inputs(candidate_inputs, "candidate"), **grades, **grade_inputs}
+        if grading_contract is not None:
+            inputs["grading_contract"] = grading_contract
         parameters = {"baseline_observation_id": baseline_receipt["observation_id"],
                       "candidate_observation_id": candidate_receipt["observation_id"]}
 
         def execute():
             directory = _output(execution_context)
-            owner.analyze_receipts(baseline, candidate, policy, directory, **grades)
+            owner.analyze_receipts(baseline, candidate, policy, directory, grading_contract=grading_contract, **grades)
             receipt_path = directory / "verdict.json"
             verdict = json.loads(receipt_path.read_bytes())
             value = {"schema": "second-run/maintainer-comparison@1",

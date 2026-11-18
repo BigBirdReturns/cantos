@@ -18,10 +18,10 @@ import sys
 import zipfile
 
 try:
-    from .common import ROOT, _safe, canonical, closure, digest, load, policy, producer_records, sha256_file, steps, write
+    from .common import ROOT, _safe, canonical, closure, digest, load, policy, producer_records, read_grading_contract, sha256_file, steps, write
     from .maintainer import _compare_runs, export_ocl_receipt, validate_grades, validate_receipt
 except ImportError:
-    from common import ROOT, _safe, canonical, closure, digest, load, policy, producer_records, sha256_file, steps, write
+    from common import ROOT, _safe, canonical, closure, digest, load, policy, producer_records, read_grading_contract, sha256_file, steps, write
     from maintainer import _compare_runs, export_ocl_receipt, validate_grades, validate_receipt
 
 BUNDLE_SHA256 = "fb759ca80b8b24f5c81958775985032ef2285966b410a8194f72ee454f1c04b5"
@@ -92,13 +92,22 @@ def _checked_analysis(path):
         if sha256_file(entry["path"]) != entry["sha256"]:
             raise ValueError("retained analysis input changed: " + name)
     pol = policy(load(_safe(path.parent, exports["policy"]["path"])))
+    grading = result["inputs"].get("grading_contract")
+    basis = read_grading_contract(grading["path"]) if grading else None
+    if basis is not None:
+        if grading["sha256"] != basis[1] or result.get("grading_contract") != {"sha256": basis[1], **basis[0]}:
+            raise ValueError("analysis grading contract differs from its exact input")
+        if not all(arm + "_grades" in result["inputs"] for arm in ("baseline", "candidate")):
+            raise ValueError("analysis grading contract requires grade receipts for both arms")
+    elif "grading_contract" in result:
+        raise ValueError("analysis grading contract input is missing")
     runs, workloads, grades = {}, {}, {}
     for arm in ("baseline", "candidate"):
         run_path = result["inputs"][arm]["path"]
         runs[arm] = validate_receipt(run_path)
         workloads[arm] = load(Path(run_path).parent / "workload.json")
         grade_path = result["inputs"].get(arm + "_grades", {}).get("path")
-        grades[arm] = validate_grades(grade_path, run_path) if grade_path else None
+        grades[arm] = validate_grades(grade_path, run_path, basis) if grade_path else None
         projection = export_ocl_receipt(run_path, runs[arm], workloads[arm], pol, grades[arm], grade_path)
         exported = load(_safe(path.parent, exports[arm]["path"]))
         if canonical(projection) != canonical(exported):
@@ -111,17 +120,26 @@ def _checked_analysis(path):
     return path, result, pol, runs, workloads, grades
 
 
-def _acceptance_definition(workload, pol):
+def _acceptance_definition(workload, pol, grading_contract=None):
     expected = [{"id": c["id"], "expectations": [s["expect"] for s in steps(c)]} for c in workload["cases"]]
+    contract_identity = ""
+    if grading_contract is not None:
+        expected = copy.deepcopy(expected)
+        for case in expected:
+            for expectation in case["expectations"]:
+                if expectation["kind"] == "external":
+                    expectation["grader"] = grading_contract["grader"]
+        contract_identity = "; external grading contract SHA256 " + grading_contract["sha256"]
     return ("All declared task stages must pass their exact text/JSON oracle or pinned independent application grader, "
             "with complete streamed final output and this acceptance policy: " +
             json.dumps(pol["acceptance"], sort_keys=True) +
-            "; expectation identity SHA256 " + digest(expected) +
+            "; expectation identity SHA256 " + digest(expected) + contract_identity +
             ". The acceptance threshold for choosing a configuration is separate from task acceptance.")
 
 
 def export_packets(analysis, bundle, out_dir, baseline_financials=None, candidate_financials=None, policy_prices_usd=False):
     analysis_path, result, pol, runs, workloads, grades = _checked_analysis(analysis)
+    grading_contract = result.get("grading_contract")
     bundle = Path(bundle).resolve()
     if sha256_file(bundle) != BUNDLE_SHA256:
         raise ValueError("expected the pinned original public workbench ZIP SHA256 " + BUNDLE_SHA256)
@@ -187,6 +205,11 @@ def export_packets(analysis, bundle, out_dir, baseline_financials=None, candidat
         shutil.copyfile(_safe(analysis_path.parent, result["ocl_exports"]["policy"]["path"]), destination / "evidence/resolved-policy.json")
         if "policy" in result["inputs"]:
             shutil.copyfile(result["inputs"]["policy"]["path"], destination / "evidence/original-policy.json")
+        if grading_contract is not None:
+            target = destination / "evidence/grading-contract.json"
+            shutil.copyfile(result["inputs"]["grading_contract"]["path"], target)
+            if sha256_file(target) != grading_contract["sha256"]:
+                raise ValueError("grading contract changed while exporting packet")
         shutil.copyfile(bundle, destination / "evidence/workbench-source.zip")
         producer = destination / "evidence/packet-adapter-source"
         producer.mkdir()
@@ -194,11 +217,15 @@ def export_packets(analysis, bundle, out_dir, baseline_financials=None, candidat
             target = _safe(producer, entry["path"])
             target.parent.mkdir(parents=True, exist_ok=True)
             shutil.copyfile(ROOT / entry["path"], target)
+        workload_identity = run["workload_sha256"]
+        if grading_contract is not None:
+            workload_identity = digest({"captured_workload_sha256": workload_identity,
+                                        "grading_contract_sha256": grading_contract["sha256"]})
         packet["workload"] = {
-            "id": "maintainer/" + run["workload_sha256"], "label": workload["name"],
+            "id": "maintainer/" + workload_identity, "label": workload["name"],
             "kind": "application" if grades[arm] else "declared_exact_workload",
-            "identity": run["workload_sha256"], "seed": run["protocol"]["seed"],
-            "acceptance_definition": _acceptance_definition(workload, pol),
+            "identity": workload_identity, "seed": run["protocol"]["seed"],
+            "acceptance_definition": _acceptance_definition(workload, pol, grading_contract),
             "source": workload.get("source"), "limits": result["limitations"] + [
                 "Imported latency and TTFT use matched both-accepted task/trial/repetition pairs from the paired maintainer comparison.",
                 result[arm]["cost_duration_scope"],
@@ -221,6 +248,10 @@ def export_packets(analysis, bundle, out_dir, baseline_financials=None, candidat
             "pricing_mode": pricing_mode[arm],
             "projection": "Existing collector ingest accounting; explicit workload, timing, original date and evidence-closure mapping",
             "new_inference_requests": 0}
+        if grading_contract is not None:
+            packet["provenance"]["maintainer"].update(
+                captured_workload_sha256=run["workload_sha256"],
+                grading_contract_sha256=grading_contract["sha256"])
         packet["coverage"]["useful_work"] = "independent_application_grading" if grades[arm] else "declared_exact_output_grading"
         if run["status"] == "error":
             packet["status"] = "partial_failure"

@@ -11,7 +11,7 @@ python -B compute/maintainer/maintainer.py run --spec YOUR_SPEC.json --out new-c
 
 The kit includes the existing `grade.sh --build-image` branch and `grader.Dockerfile` used by the [EvalPlus bridge](compute/maintainer/EVALPLUS-BRIDGE.md). That construction step requires Docker and a pinned Python 3.11 CPU base image; other historical Run3 grading commands require the full source checkout.
 
-The result retains raw observations, a readable report and a machine verdict. The guide defines supported workload evaluators, external grading, streaming metrics and pass/regression/incomparable/error conditions.
+The result retains raw observations, a readable report and a machine verdict. The guide defines supported workload evaluators, external grading, streaming metrics and pass/regression/incomparable/error conditions. Use one [explicit grading contract](compute/maintainer/EVALPLUS-BRIDGE.md#regrade-an-unchanged-capture-with-a-new-pinned-grader) to analyze revised grades for both retained arms. SecondRun reuses the captures and records the new analysis alongside the original result.
 
 Use [SecondRun's maintainer workflow](integration/WORK.md) to retain each observation separately, reuse unchanged evidence, update analysis after a price or policy change, and obtain fresh observations when serving inputs change. Configure the example request to reference your specification and policy.
 

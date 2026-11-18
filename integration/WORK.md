@@ -38,7 +38,7 @@ its existing deterministic classes.
 |---|---|---|---|
 | Empty result store | Collect and retain | Collect and retain | Calculate |
 | Same declared inputs and observation epoch | Reuse original | Reuse original | Reuse original |
-| Price or acceptance policy only | Reuse original | Reuse original | Recalculate from retained responses |
+| Price, acceptance policy or external grade evidence only | Reuse original | Reuse original | Recalculate from retained responses |
 | Candidate implementation bytes or selected configuration | Reuse original | Collect and retain changed candidate | Recalculate |
 | Shared workload or measurement protocol | Collect and retain | Collect and retain | Recalculate |
 | Explicit new observation epoch | Collect and retain | Collect and retain | Recalculate |
@@ -86,6 +86,13 @@ graded workloads, the comparison accepts optional `baseline_grades` and
 workload and response bytes and checks the grader artifact closure. Adding or
 changing grading evidence recalculates the comparison, with zero new inference.
 Ungraded application outcomes retain the native instrument's unresolved verdict.
+When a grader or normalization implementation changes, prepare independently
+bound grades for both retained arms under one [explicit grading contract](../compute/maintainer/EVALPLUS-BRIDGE.md#regrade-an-unchanged-capture-with-a-new-pinned-grader).
+Add `"grading_contract": "path/to/regrade.json"` and both grade receipt paths
+to the `maintainer-compare` task. The contract and grade bytes affect only this
+comparison's key. Using one graded arm or incompatible contracts returns the
+native incomparable verdict. Keep the collection specification, archived workload
+and original analysis with their original identities.
 
 The run-level `executed` or `reused` status describes procedure execution. Read
 `native_verdict` and `verdict_receipt` for the maintainer decision. With

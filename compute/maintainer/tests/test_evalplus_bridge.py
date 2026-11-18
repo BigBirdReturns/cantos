@@ -19,7 +19,7 @@ class EvalPlusBinding(unittest.TestCase):
     save = fixtures.Instrument.save
     run_pair = fixtures.Instrument.run_pair
 
-    def prepared(self):
+    def prepared(self, regrade=False):
         reference = self.root / "reference.jsonl"
         reference.write_text(json.dumps({"task_id": "case", "prompt": "def f():\n", "canonical_solution": "    return 2\n"}) + "\n")
         normalizer = Path(maintainer.__file__).parent / "normalize.py"
@@ -32,8 +32,19 @@ class EvalPlusBinding(unittest.TestCase):
         self.run_pair()
         run = self.root / "pair/baseline/run.json"
         prepared = self.root / "prepared"
+        grading_contract = None
+        if regrade:
+            normalizer = self.root / "revised-normalizer.py"
+            normalizer.write_text('def normalize(text):\n    return text + "\\n# revised normalization\\n"\n')
+            workload = load(run)["workload_sha256"]
+            grader = {**self.work["cases"][0]["expect"]["grader"],
+                      "artifact_sha256": "b" * 64, "normalizer_sha256": sha256_file(normalizer)}
+            grading_contract = self.root / "grading-contract.json"
+            grading_contract.write_text(json.dumps({"schema": "cantos.maintainer.grading-contract/1",
+                                                    "workload_sha256": workload, "grader": grader}))
         args = argparse.Namespace(run=str(run), reference=str(reference), normalizer=str(normalizer),
-                                  instrument=str(Path(maintainer.__file__).parent), out=str(prepared))
+                                  instrument=str(Path(maintainer.__file__).parent), out=str(prepared),
+                                  grading_contract=grading_contract)
         with contextlib.redirect_stdout(io.StringIO()):
             bridge.prepare(args)
         samples = [json.loads(x) for x in (prepared / "humaneval.jsonl").read_text().splitlines()]
@@ -44,7 +55,8 @@ class EvalPlusBinding(unittest.TestCase):
         log = self.root / "fixture-evalplus.log"
         log.write_text("Synthetic join test. No code was executed and this is not a benchmark result.\n")
         return argparse.Namespace(run=str(run), prepared=str(prepared), results=str(path), log=str(log),
-                                  instrument=str(Path(maintainer.__file__).parent), out=str(self.root / "bound"))
+                                  instrument=str(Path(maintainer.__file__).parent), out=str(self.root / "bound"),
+                                  grading_contract=grading_contract)
 
     def test_complete_public_prepare_bind_join(self):
         args = self.prepared()
@@ -53,6 +65,34 @@ class EvalPlusBinding(unittest.TestCase):
         grade = maintainer.validate_grades(self.root / "bound/grades.json", args.run)
         self.assertEqual(sum(x["accepted"] for x in grade["results"]), 2)
         self.assertEqual(grade["grader"]["artifact_sha256"], "a" * 64)
+
+    def test_changed_normalizer_binds_with_explicit_contract_and_immutable_capture(self):
+        args = self.prepared(regrade=True)
+        original = sha256_file(args.run)
+        captured_workload = Path(args.run).with_name("workload.json")
+        workload_sha = sha256_file(captured_workload)
+        with contextlib.redirect_stdout(io.StringIO()):
+            bridge.bind(args)
+        self.assertEqual(sha256_file(args.run), original)
+        self.assertEqual(sha256_file(captured_workload), workload_sha)
+        grade_path = self.root / "bound/grades.json"
+        basis = maintainer.read_grading_contract(args.grading_contract)
+        grade = maintainer.validate_grades(grade_path, args.run, basis)
+        self.assertEqual(grade["grading_contract_sha256"], sha256_file(args.grading_contract))
+        self.assertEqual(grade["grader"]["artifact_sha256"], "b" * 64)
+        samples = (grade_path.parent / "artifacts/humaneval.jsonl").read_text()
+        self.assertIn("revised normalization", samples)
+        self.assertEqual(sum(row["accepted"] for row in grade["results"]), 2)
+        self.assertEqual(self.a.requests, 2)
+        self.assertEqual(self.b.requests, 2)
+
+        with self.assertRaisesRegex(maintainer.GradingContractMismatch, "selected grading contract"):
+            maintainer.validate_grades(grade_path, args.run)
+        args.grading_contract.write_bytes(args.grading_contract.read_bytes() + b"\n")
+        with self.assertRaisesRegex(ValueError, "different grading contract"):
+            bridge.bind(args)
+        with self.assertRaisesRegex(maintainer.GradingContractMismatch, "differs from the selected"):
+            maintainer.validate_grades(grade_path, args.run, maintainer.read_grading_contract(args.grading_contract))
 
     def test_changed_normalized_solution_fails_even_with_updated_intermediate_hashes(self):
         args = self.prepared()

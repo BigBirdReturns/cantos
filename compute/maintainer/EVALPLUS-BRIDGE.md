@@ -70,4 +70,25 @@ python -B compute/maintainer/maintainer.py analyze \
 
 Repeat prepare, container and bind for the candidate. Binding recomputes normalization directly from each exact raw answer; validates the run/workload, response and normalizer hashes; recomputes the reference MD5 used by EvalPlus from the pinned reference bytes; requires complete result coverage; and checks exact normalized solution strings and trial/repetition joins. It copies grader inputs, mapping, full evaluator output, log, source run and bridge into the grade receipt's artifact closure. The original raw run retains its own closure. Missing grades, changed raw responses, different solutions, changed validator code or mismatched references produce an error rather than accepted work.
 
+## Regrade an unchanged capture with a new pinned grader
+
+Use a separate JSON grading contract when the independent evaluator image, trusted normalizer or reference changes after collection. Read the original `workload_sha256` from either arm's validated `run.json`. Give both arms the same contract file and use new preparation, grade and analysis directories. The archived workload, observation dates and raw responses stay byte-identical.
+
+```json
+{
+  "schema": "cantos.maintainer.grading-contract/1",
+  "workload_sha256": "<original captured workload SHA-256>",
+  "grader": {
+    "name": "EvalPlus",
+    "revision": "0.3.1",
+    "criterion": "humanevalplus-v0.1.10-base-and-plus-chat-complete-code-v1",
+    "artifact_sha256": "<explicit grader image ID without sha256:>",
+    "reference_sha256": "<SHA-256 of the reference JSONL>",
+    "normalizer_sha256": "<SHA-256 of the trusted normalizer source>"
+  }
+}
+```
+
+Add `--grading-contract /absolute/path/to/regrade.json` to each arm's `prepare` and `bind` commands and to `analyze`. Grade each prepared sample set with the declared image. The binder retains the exact contract bytes with the new grade receipt. The analyzer checks both grade receipts against that contract and the original run, workload and response hashes. An analysis with only one regraded arm or two different grading bases returns exit 2. Omitting the flag selects the grader pinned in the captured workload. Reuse the original grades and policy to reproduce the original qualification. When exporting a revised analysis to the workbench, the packet retains its original workload SHA and the exact new grading contract. A different grading contract creates a separate workload identity for decision grouping.
+
 The artifact and version fields identify the declared grader, while the retained container image inspection and command log document the actual invocation. When grader-image.json is present, binding requires its observed local image ID to equal the declared image SHA256 and retains it in the artifact closure. It also retains an optional invocation.json. Preserve these environment receipts beside the prepared grading inputs; without the image receipt, image identity remains a declaration. This bridge's integrity checks establish a reproducible join; they are not a remote attestation service. The empirical 32-case subset is a scoped application comparison, not a full 164-case HumanEval score.

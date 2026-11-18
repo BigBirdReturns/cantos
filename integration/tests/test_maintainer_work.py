@@ -146,6 +146,77 @@ class MaintainerWork(unittest.TestCase):
         for path, content in original_results.items():
             self.assertEqual(content, Path(path).read_bytes())
 
+    def test_explicit_external_regrade_reuses_both_captures(self):
+        captured_grader = {"name": "fixture grader", "revision": "1", "artifact_sha256": "1" * 64,
+                           "reference_sha256": "2" * 64, "normalizer_sha256": "3" * 64}
+        workload_path = self.base / "workload.json"
+        workload = json.loads(workload_path.read_bytes())
+        for case in workload["cases"]:
+            case["expect"] = {"kind": "external", "grader": captured_grader}
+        self.write("workload.json", workload)
+        cold = self.run_work()
+        self.assertEqual("incomparable", cold["tasks"][2]["native_verdict"])
+        self.assertEqual(4, len(self.calls))
+        revised_grader = {**captured_grader, "revision": "2", "artifact_sha256": "4" * 64,
+                          "normalizer_sha256": "5" * 64}
+        contract = {"schema": "cantos.maintainer.grading-contract/1",
+                    "workload_sha256": hashlib.sha256(workload_path.read_bytes()).hexdigest(),
+                    "grader": revised_grader}
+        self.write("regrade.json", contract)
+        contract_bytes = (self.base / "regrade.json").read_bytes()
+        contract_sha = hashlib.sha256(contract_bytes).hexdigest()
+        observation_bytes = {}
+        comparison = self.request["tasks"][2]
+        comparison["grading_contract"] = "regrade.json"
+        for step in cold["tasks"][:2]:
+            side = step["id"]
+            run_path = Path(step["observation"]["receipt"])
+            observation_bytes[run_path] = run_path.read_bytes()
+            observed = json.loads(observation_bytes[run_path])
+            archive = self.base / (side + "-graded")
+            archive.mkdir()
+            (archive / "grading-contract.json").write_bytes(contract_bytes)
+            fixture = b"Authored acceptance fixture. No application was executed.\n"
+            (archive / "fixture-grade.log").write_bytes(fixture)
+            results = [{"task_id": row["task_id"], "trial": row["trial"], "repetition": row["repetition"],
+                        "response_sha256": row["attempts"][-1]["response_sha256"], "accepted": True,
+                        "evidence": ["fixture-grade.log"]} for row in observed["observations"]]
+            receipt = {"schema": "cantos.maintainer.grades/1", "workload_sha256": observed["workload_sha256"],
+                       "run_sha256": hashlib.sha256(observation_bytes[run_path]).hexdigest(),
+                       "grader": revised_grader, "grading_contract_sha256": contract_sha, "results": results,
+                       "artifacts": [{"path": "grading-contract.json", "sha256": contract_sha, "bytes": len(contract_bytes)},
+                                     {"path": "fixture-grade.log", "sha256": hashlib.sha256(fixture).hexdigest(), "bytes": len(fixture)}]}
+            grade_path = archive / "grades.json"
+            self.write(grade_path.relative_to(self.base), receipt)
+            comparison[side + "_grades"] = str(grade_path.relative_to(self.base))
+
+        graded = self.run_work()
+        self.assertEqual(["reused", "reused", "executed"], [t["status"] for t in graded["tasks"]])
+        self.assertEqual("pass", graded["tasks"][2]["native_verdict"])
+        self.assertEqual(0, graded["model_calls"])
+        self.assertEqual(0, graded["new_observations"])
+        self.assertEqual(4, len(self.calls))
+        result = json.loads(Path(graded["tasks"][2]["verdict_receipt"]).read_bytes())
+        self.assertEqual(contract_sha, result["grading_contract"]["sha256"])
+        self.assertEqual(2, result["baseline"]["accepted_tasks"])
+        self.assertEqual(2, result["candidate"]["accepted_tasks"])
+        for path, raw in observation_bytes.items():
+            self.assertEqual(raw, path.read_bytes())
+        retained = self.run_work()
+        self.assertEqual(["reused"] * 3, [t["status"] for t in retained["tasks"]])
+        self.assertEqual(4, len(self.calls))
+
+        candidate_grade = self.base / comparison["candidate_grades"]
+        mismatched = json.loads(candidate_grade.read_bytes())
+        mismatched["grading_contract_sha256"] = "f" * 64
+        self.write(candidate_grade.relative_to(self.base), mismatched)
+        rejected = self.run_work()
+        self.assertEqual(["reused", "reused", "executed"], [t["status"] for t in rejected["tasks"]])
+        self.assertEqual("incomparable", rejected["tasks"][2]["native_verdict"])
+        self.assertEqual(2, rejected["tasks"][2]["native_exit_code"])
+        self.assertEqual(0, rejected["model_calls"])
+        self.assertEqual(4, len(self.calls))
+
     def test_candidate_implementation_change_only_reobserves_candidate(self):
         cold = self.run_work()
         (self.base / "candidate-implementation.txt").write_text("candidate fixture implementation revision two\n")
