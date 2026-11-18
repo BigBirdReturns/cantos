@@ -51,6 +51,7 @@ def main():
         call("-m", "unittest", "discover", "-s", "integration/tests", "-p", "test_maintainer_work.py", "-v")
         call("-m", "unittest", "discover", "-s", "integration/tests", "-p", "test_maintainer_dependency_boundary.py", "-v")
         call("app/tests/check_maintainer_evidence.py")
+        call("app/tests/check_comparison_workbench.py")
     print("Exact public maintainer kit: manifest, executable CLIs, operation discovery, retry/resource/Hy4 fixture contracts, streamed-fixture regression/reuse/fresh/custody and retained live-evidence decision import passed. No new model measurement is asserted.")
 
 if __name__ == "__main__":

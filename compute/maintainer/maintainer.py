@@ -793,6 +793,9 @@ def main(argv=None):
     packets.add_argument("--baseline-financials")
     packets.add_argument("--candidate-financials")
     packets.add_argument("--policy-prices-usd", action="store_true", help="Declare supplied policy hourly rates as modeled USD for the measured trial windows")
+    review = sub.add_parser("export-comparison", help="export a single data-only baseline/candidate ZIP for native workbench review")
+    review.add_argument("--analysis", required=True)
+    review.add_argument("--out", required=True)
     args = parser.parse_args(argv)
     try:
         if args.command == "run":
@@ -808,6 +811,13 @@ def main(argv=None):
         elif args.command == "prepare":
             result = prepare(args.spec, args.arm)
             print(json.dumps({key: result[key] for key in ("identity", "observation_key", "dependencies", "protocol")}, indent=2))
+            return 0
+        elif args.command == "export-comparison":
+            try:
+                from .comparison_bundle import export_comparison
+            except ImportError:
+                from comparison_bundle import export_comparison
+            print(json.dumps(export_comparison(args.analysis, args.out)))
             return 0
         elif args.command == "export-packets":
             try:

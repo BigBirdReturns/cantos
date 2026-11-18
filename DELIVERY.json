@@ -42,7 +42,8 @@
         "recipient_kit": "included_with_Linux_and_Windows_acceptance_jobs",
         "publication": "Exact source qualification and Pages deployment are recorded by this commit's GitHub Actions runs.",
         "explicit_regrading": "Implemented: separately pinned grading contract reuses immutable captures, binds both arms and creates a distinct retained decision identity.",
-        "packet_dependency": "Packet adapter and workbench bundle updates preserve capture dependencies; collector/parser changes invalidate observation identity."
+        "packet_dependency": "Packet adapter and workbench bundle updates preserve capture dependencies; collector/parser changes invalidate observation identity.",
+        "native_comparison_review": "Implemented: single data-only bundle, trusted native verdict, explicit post-hoc policy history and original evidence export; qualified by app/tests/check_comparison_workbench.py."
       },
       "empirical": {
         "archive": "compute/maintainer/evidence/vllm-humaneval-20261118.zip",
@@ -65,12 +66,15 @@
       ],
       "workbench_dependency": {
         "archive": "public/open-compute/open-compute-workbench.zip",
-        "sha256": "449ec4d453ee4c272c867148c0f12ff7b9890726845923bc991980960e274624",
+        "sha256": "5b52f5b5081e1b09d2c243e08d81fa84159a3f0d817cccc0317fa20377df372d",
         "release": "public/open-compute/WORKBENCH-RELEASE.json",
         "features": [
           "atomic retained decisions/imports",
           "operational evidence API and interface",
-          "recipient-owned operational collection"
+          "recipient-owned operational collection",
+          "native baseline/candidate review",
+          "immutable post-hoc policy reanalysis",
+          "frozen real vLLM comparison"
         ]
       }
     },

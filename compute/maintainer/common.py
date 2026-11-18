@@ -260,7 +260,7 @@ GRADING_ONLY = frozenset({"evalplus_bridge.py", "normalize.py"})
 def producer_records(*, for_observation=False):
     # Packet export owns offline workbench import and grouping. Keep its source
     # in analysis/export provenance while excluding it from collection identity.
-    excluded = GRADING_ONLY | {"packets.py"} if for_observation else GRADING_ONLY
+    excluded = GRADING_ONLY | {"packets.py", "comparison_bundle.py"} if for_observation else GRADING_ONLY
     return [file_record(p, ROOT) for p in sorted(ROOT.rglob("*.py"))
             if "tests" not in p.relative_to(ROOT).parts
             and not p.name.startswith("test_")

@@ -16,6 +16,7 @@ REQUIRED = (
     "MAINTAINER-START.md", "DELIVERY.md", "DELIVERY.json",
     "AGENTS.md", "CLAUDE.md",
     "app/tests/check_maintainer_evidence.py",
+    "app/tests/check_comparison_workbench.py",
     "integration/work.py", "integration/task_maintainer.py",
     "integration/WORK.md", "integration/examples/maintainer-work.json",
     "integration/tests/test_maintainer_work.py",
