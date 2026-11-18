@@ -1,0 +1,14 @@
+# Retained useful-work energy and economic attribution
+
+The executable empirical_economics.py recomputes GPU-board joules from original pinned board-samples.jsonl readings over each original capture trial's exact monotonic window. It verifies captured trial lengths, reported per-trial and aggregate joules/Wh, and accepted denominators against externally executed, source-bound EvalPlus grades. All requests, including failed application attempts, enter the energy numerator. Missing samples, sampling gaps, mixed GPU identities, falsified energy totals, mislabeled grades and changed source hashes fail qualification.
+
+Run on a complete retained campaign directory:
+
+    python3 -m compute.maintainer.empirical_economics /path/to/campaign --output /path/to/energy.json
+    python3 -m unittest compute.maintainer.tests.test_empirical_economics
+
+An optional --scenario scenario.json adds priced assumption-only components, with exactly these fields: electricity_usd_per_kwh, it_to_facility_multiplier (at least 1), fixed_usd_per_hour, verification_usd_per_attempt, intervention_seconds_per_attempt, and intervention_usd_per_hour. All costs are nonnegative, finite and explicit. fixed_usd_per_hour applies to summed trial duration; per-attempt verification and intervention apply to all graded attempts, not only successful ones. A price-only scenario change recomputes economics without replaying captured inference, grading or telemetry. No scenario defaults or observed invoice claims are supplied.
+
+electricity_board_proxy multiplies board watt-hours by the declared price and factor. It does not reconstruct facility electricity or infer host consumption. Observed energy excludes CPU, the other resident GPU, storage/network, startup, between-trial idle, resource reservation, upstream grading and actual operator time. The instrument reports board joules per externally accepted task and modeled per-accepted cost only with explicit assumptions; it does not issue a deployment winner verdict from low-acceptance experiments. Exact source SHA-256 receipts require independent custody; matching a jointly rewritten journal and manifest does not independently authenticate either.
+
+The retained November 18 Qwen3-0.6B FP16/vLLM campaign has 32 tasks repeated three times per arm. Each arm accepted 21/96. This audit recomputes baseline GPU-board energy of approximately 8,812.17 J (419.63 J/accepted) and candidate 9,002.66 J (428.70 J/accepted). The 190.49 J observed increase accompanies zero additional accepted work under this fixed campaign. These are board-sensor totals inside trial windows, not causal whole-system cost or production break-even evidence.
