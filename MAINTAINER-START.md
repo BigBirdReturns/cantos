@@ -105,3 +105,22 @@ python -B app/tests/check_maintainer_evidence.py
 ```
 
 The expected application verdict is `incomparable`: each arm accepted 21 of 96 observations against its original 80% requirement. Successful verification means those observations, grades, unknown costs and refusal survive the entire delivered workflow.
+
+
+## Reconcile repeated operational probes
+
+For a bounded multi-window operational audit, retain each original HEAD/GET
+receipt and its SHA-256 independently. Write an inventory JSON containing
+`{"schema":"cantos.operational-http-ledger-manifest/1","endpoint":"https://EXACT-HOST/health","method":"GET","receipts":[{"file":"window-01.json","sha256":"EXACT-RECEIPT-SHA256"}]}`.
+Pin the complete manifest's SHA-256 separately before verification, then run:
+
+```sh
+python -B compute/maintainer/operational_http_ledger.py --manifest windows.json --expected-manifest-sha256 PINNED-MANIFEST-SHA256 --evidence-directory RECEIPTS_DIR --output temporal-verification.json
+```
+
+The verifier reads only the named, digest-pinned JSON receipts in the specified
+directory. It independently replays every HTTP verdict, refuses missing or
+duplicate evidence, cross-endpoint mixing and out-of-order observations, then
+reports sampled failures, probe time and the unobserved gaps. Its verdict
+requires each source window to satisfy its original policy. It never converts
+sampling into provider-wide uptime or a service-level agreement.
