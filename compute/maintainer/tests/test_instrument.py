@@ -236,6 +236,19 @@ class Instrument(unittest.TestCase):
         self.assertEqual(result["baseline"]["accepted_tasks"], result["candidate"]["accepted_tasks"])
         self.assertEqual((self.a.requests, self.b.requests), (2, 2))
 
+    def test_unpriced_work_stays_unknown_until_price_is_explicit(self):
+        result = self.run_pair()
+        for arm in ("baseline", "candidate"):
+            self.assertIsNone(result[arm]["cost_assumption_per_hour"])
+            self.assertIsNone(result[arm]["estimated_cost"])
+            self.assertIsNone(result[arm]["cost_per_accepted"])
+        self.assertIn("| cost_per_accepted | unpriced | unpriced |", (self.root / "pair/report.md").read_text())
+        self.pol["prices"] = {"baseline_per_hour": 0, "candidate_per_hour": 0}
+        result = self.analyze()
+        self.assertEqual(result["candidate"]["estimated_cost"], 0)
+        self.assertEqual(result["candidate"]["cost_per_accepted"], 0)
+        self.assertEqual((self.a.requests, self.b.requests), (2, 2))
+
     def test_tampered_response_or_grade_cannot_false_pass(self):
         self.b.mode = "wrong"
         self.run_pair()

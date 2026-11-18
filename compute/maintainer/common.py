@@ -195,7 +195,7 @@ POLICY_DEFAULTS = {
     "max_p95_latency_increase": 0.15, "max_p95_ttft_increase": 0.15,
     "max_accepted_throughput_drop": 0.15, "max_cost_per_accepted_increase": None,
     "acceptance": {"max_latency_s": None, "max_ttft_s": None, "finish_reasons": ["stop"]},
-    "prices": {"baseline_per_hour": 0.0, "candidate_per_hour": 0.0},
+    "prices": {"baseline_per_hour": None, "candidate_per_hour": None},
     "require_observed_model": True, "require_observed_version": False,
 }
 
@@ -231,7 +231,8 @@ def policy(value):
     if not isinstance(reasons, list) or not reasons or any(not isinstance(x, str) or not x for x in reasons):
         raise ValueError("finish_reasons must be nonempty")
     for key, value in out["prices"].items():
-        number(value, key, 0, 1000000000)
+        if value is not None:
+            number(value, key, 0, 1000000000)
     return out
 
 

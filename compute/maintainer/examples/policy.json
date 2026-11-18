@@ -11,7 +11,7 @@
   "max_accepted_throughput_drop": 0.15,
   "max_cost_per_accepted_increase": null,
   "acceptance": {"max_latency_s": 30, "max_ttft_s": 10, "finish_reasons": ["stop"]},
-  "prices": {"baseline_per_hour": 0, "candidate_per_hour": 0},
+  "prices": {"baseline_per_hour": null, "candidate_per_hour": null},
   "require_observed_model": true,
   "require_observed_version": true
 }

@@ -211,7 +211,7 @@ def capture(config, proto, messages, stage):
                     line = line.rstrip(b"\r")
                     if not line and done_line:
                         done = True
-                    if line.strip() == b"data: [DONE]":
+                    if line.startswith(b"data:") and line[5:].lstrip(b" ") == b"[DONE]":
                         done_line = True
                 if done and tail.strip():
                     raise ValueError("trailing nonframed bytes after DONE")

@@ -59,13 +59,15 @@ For code or other application tasks, use a final expectation with `kind: "extern
     "revision": "0.3.1",
     "artifact_sha256": "<64 lowercase hex characters>",
     "reference_sha256": "<64 lowercase hex characters>",
-    "criterion": "base_status == pass and plus_status == pass",
+    "criterion": "humanevalplus-v0.1.10-base-and-plus-chat-complete-code-v1",
     "normalizer_sha256": "<64 lowercase hex characters>"
   }
 }
 ```
 
 The external grade receipt uses schema `cantos.maintainer.grades/1`, `run_sha256` over exact `run.json` bytes, `workload_sha256`, the exact declared `grader`, and `results`. Every result contains `task_id`, zero-based `trial` and `repetition`, SHA256 of the exact UTF-8 final `response_text`, a boolean `accepted`, and `evidence` paths. Its `artifacts` closure retains the grader inputs, results and logs using the same relative path/SHA256/bytes records. All completed external responses require results; duplicate, missing or mismatched joins fail closed. The instrument verifies these bindings and hashes, then imports outcomes into the existing OCL paired accounting. Evidence integrity does not turn a grader self-report into independent hardware or identity attestation.
+
+For the existing EvalPlus 0.3.1 owner, [EVALPLUS-BRIDGE.md](EVALPLUS-BRIDGE.md) gives the public `evalplus_bridge.py prepare` → bounded container → `bind` commands. `normalize.py` is the explicit whole-response Python-fence transform, with no repair. The binder rechecks the full raw run, reruns that pinned transform on the exact answer, joins every result to its task/trial/repetition and rejects changed or missing solutions. A compatible recipient-built grader uses its own explicitly pinned image identity; the estate's earlier image is evidence, not a hidden runtime dependency.
 
 The OCL synthetic two-turn task generator remains available for a bounded protocol check:
 
@@ -104,7 +106,7 @@ The policy schema is `cantos.maintainer.policy/1`. Unknown fields are rejected. 
 | `max_accepted_throughput_drop` | 0.15 | Maximum fractional loss in accepted tasks/second over full measured trial windows. |
 | `acceptance.max_latency_s` / `acceptance.max_ttft_s` | `null` / `null` | Per-task duration and per-request visible TTFT limits. |
 | `acceptance.finish_reasons` | `["stop"]` | Explicitly accepted terminal reasons. Truncation is preserved and rejected by default. |
-| `prices.baseline_per_hour` / `prices.candidate_per_hour` | 0 / 0 | Declared modeled hourly rates, never inference dependencies. |
+| `prices.baseline_per_hour` / `prices.candidate_per_hour` | `null` / `null` | Declared modeled hourly rates, never inference dependencies; absent prices remain unknown. |
 | `max_cost_per_accepted_increase` | `null` | Optional modeled-cost ratio gate; requires positive baseline rate and accepted work. |
 | `require_observed_model` / `require_observed_version` | `true` / `false` | Require response/model-list consistency and optional `/version` availability. |
 
@@ -112,7 +114,7 @@ Workload bytes, procedure files, trial count, repeats and seed remain mandatory 
 
 Latency and TTFT use exactly matched task/trial/repetition instances accepted in **both** arms. A candidate cannot appear faster by failing a harder task that disappears from its accepted population. The full native OCL comparison retains both-accepted, baseline-only, candidate-only and both-failed counts and task transitions. New task losses have their own gate, so equal aggregate acceptance cannot conceal changed failures. Accepted throughput includes all measured trial time and failed work. Per-trial ratios and ranges remain visible; their median is the specified operational gate, not a statistical population claim. Small sample p95 estimates and repeated fixtures retain their limitations.
 
-Modeled cost equals the declared hourly rate multiplied by the sum of measured trial windows. It includes failed requests inside those windows and excludes warmup, identity probes, server startup, between-trial idle, setup, and other reserved time. It measures no energy or provider invoice. A deployment-capacity or total-reservation analysis should supply its own independently measured allocation window rather than interpret this metric as full cluster TCO.
+Absent prices produce null cost and cost-per-accepted metrics. An explicit zero rate represents the operator's zero-cost scenario; a missing price never implies free work. Modeled cost equals the declared hourly rate multiplied by the sum of measured trial windows. It includes failed requests inside those windows and excludes warmup, identity probes, server startup, between-trial idle, setup, and other reserved time. It measures no energy or provider invoice. A deployment-capacity or total-reservation analysis should supply its own independently measured allocation window rather than interpret this metric as full cluster TCO.
 
 ## Timing and identity boundaries
 

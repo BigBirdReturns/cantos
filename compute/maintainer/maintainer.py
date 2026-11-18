@@ -449,9 +449,9 @@ def _metrics(run, projected, rate, matched_keys):
     result["performance_population"] = "latency/TTFT: exact matched both-accepted task/trial/repetition pairs; accepted throughput: all measured tasks and full trial windows"
     result["matched_accepted_tasks"] = len(matched)
     result["cost_assumption_per_hour"] = rate
-    result["estimated_cost"] = rate * run["duration_s"] / 3600
+    result["estimated_cost"] = rate * run["duration_s"] / 3600 if rate is not None else None
     result["cost_duration_scope"] = "summed measured trial windows only, including request failures; excludes warmup, probes, server startup, between-trial idle and other reserved time"
-    result["cost_per_accepted"] = result["estimated_cost"] / len(accepted) if accepted else None
+    result["cost_per_accepted"] = result["estimated_cost"] / len(accepted) if accepted and result["estimated_cost"] is not None else None
     attempts = [a for o in projected["observations"] for a in o["attempts"]]
     result["peak_request_concurrency"] = exact_peak([a["started_monotonic_s"] for a in attempts],
                                                     [a["duration_s"] for a in attempts], [None] * len(attempts))
@@ -567,7 +567,9 @@ def _report(result):
     if "baseline" in result:
         lines.extend(["", "| Metric | Baseline | Candidate |", "| --- | ---: | ---: |"])
         for key in ("total_tasks", "accepted_tasks", "acceptance_rate", "p95_latency_s", "p95_ttft_s", "accepted_per_s", "peak_request_concurrency", "cost_per_accepted"):
-            lines.append(f"| {key} | {result['baseline'].get(key)} | {result['candidate'].get(key)} |")
+            values = [result[side].get(key) for side in ("baseline", "candidate")]
+            values = [("unpriced" if key == "cost_per_accepted" else "unmeasured") if value is None else str(value) for value in values]
+            lines.append(f"| {key} | {values[0]} | {values[1]} |")
     lines.extend(["", "## Evidence scope", ""] + ["- " + x for x in result.get("limitations", LIMITS)])
     return "\n".join(lines) + "\n"
 
