@@ -29,9 +29,9 @@ def main():
     with zipfile.ZipFile(io.BytesIO(base)) as z:
         files = {name:z.read(name) for name in z.namelist()}
     before = dict(files)
-    sources = ['engine/engine.py', 'engine/comparisons.py', 'workbench.html', 'workbench.css', 'workbench.js', 'comparisons/frozen-vllm.zip']
+    sources = ['engine/engine.py', 'engine/comparisons.py', 'engine/deployments.py', 'workbench.html', 'workbench.css', 'workbench.js', 'comparisons/frozen-vllm.zip']
     tracked = git(args.owner, 'ls-tree', '-r', '--name-only', args.commit, '--', 'open-compute-ledger/engine/native_maintainer').decode().splitlines()
-    sources += [p.removeprefix('open-compute-ledger/') for p in tracked if p.endswith(('.py', '/SOURCE.json'))]
+    sources += [p.removeprefix('open-compute-ledger/') for p in tracked if p.endswith(('.py', '/SOURCE.json', '/SOURCES.json'))]
     provenance = json.loads(files[PREFIX+'PUBLIC-SOURCES.json'])
     for path in sources:
         raw = git(args.owner, 'show', args.commit + ':open-compute-ledger/' + path)
@@ -43,14 +43,15 @@ def main():
                 assert raw.count(a) == 1, a
                 raw = raw.replace(a,b)
         if path == 'workbench.html':
-            raw = raw.replace(b'<a href="open-compute-ledger-kit.zip">Download kit</a>', b'<a href="comparisons/frozen-vllm.zip" download>Example comparison</a>')
+            raw = raw.replace(b'<a href="maintainer-kit.zip">Download runnable kit</a>', b'<a href="https://bigbirdreturns.github.io/cantos/open-compute/maintainer-kit.zip" download>Download runnable kit</a>')
             raw = raw.replace('href="index.html#b" class="text-button">All provider records →'.encode(), 'href="inputs/providers/ratings.json" class="text-button">Provider records (JSON) →'.encode())
         files[PREFIX+path] = raw
     provenance.update(prior_public_commit=BASE, workbench_source_commit=args.commit,
-        comparison_scope='Data-only native verdict review, immutable policy reanalysis, frozen real evidence; no new empirical measurement.')
+        comparison_scope='Native comparison and joined deployment decisions, bounded data-only chunk import, immutable analysis history; empirical scope remains attached to each observation.')
     files[PREFIX+'PUBLIC-SOURCES.json'] = encoded(provenance)
     notes = b'''\n\n## Review a serving change\n\nStart the workbench and select **Open the real vLLM experiment**. The first view\nrevalidates 192 retained requests and source-bound application grades: 21/96\naccepted on each side, incomparable under the original 80% requirement. No\ninference or uploaded code executes. Import one comparison ZIP exported with\n`maintainer.py export-comparison --analysis ANALYSIS --out comparison.zip`.\n\nNative pass/regression/incomparable/error is authoritative. Policy reanalysis\nkeeps the original capture and creates a permanently labelled post-hoc history\nentry. Export the analysis JSON for that edition and the original evidence ZIP\nseparately. Price assumptions remain modeled; actual cost and whole-system energy\nremain unknown. The catalog is separately available for scoped configuration\nscreening. Broader application, operational and economic coverage remains open.\n'''
-    files[PREFIX+'WORKBENCH.md'] = files[PREFIX+'WORKBENCH.md'].rstrip() + notes
+    joined_notes = b'''\n\n## Decide what to run\n\nThe first view prepares a recipient-owned deployment job for existing endpoints,\napplication cases, useful-work policy, operating requirements and cost inputs.\nSave its files together and run them from the extracted Cantos maintainer kit:\n\n```sh\npython -B compute/maintainer/job.py validate --manifest deployment-job.json\npython -B compute/maintainer/job.py run --manifest deployment-job.json --out deployment-run\npython -B compute/maintainer/job.py export --job deployment-run --out deployment-bundle\n```\n\nSelect the returned deployment-bundle folder in the workbench. Its data is\nre-evaluated by installed trusted code; import does not run inference or graders.\nThe result joins useful work, supported operational checks, resource accounting,\nunknowns and reversal conditions. Required unknown evidence blocks selection.\nNative incomparable results remain incomparable. Every changed analysis keeps\nits parent and original; source evidence stays intact.\n\nThe complete job and explicit sandboxed-grader contracts are in the maintainer\nkit's compute/maintainer/DEPLOYMENT-JOB.md and EXTERNAL-GRADER.md. Local recovery\nand storage checks have their stated scope. They establish no commercial-cloud\nrating; price scenarios and board energy establish no actual full-system bill.\nBroader runtime, application, provider and empirical coverage remains open.\n'''
+    files[PREFIX+'WORKBENCH.md'] = files[PREFIX+'WORKBENCH.md'].rstrip() + joined_notes + notes
     manifest = json.loads(files[PREFIX+'MANIFEST.json'])
     manifest['files'] = {k.removeprefix('cantos/'):hashlib.sha256(v).hexdigest() for k,v in sorted(files.items()) if k != PREFIX+'MANIFEST.json'}
     files[PREFIX+'MANIFEST.json'] = encoded(manifest)

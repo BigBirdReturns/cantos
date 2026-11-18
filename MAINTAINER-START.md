@@ -1,4 +1,18 @@
-# Review a retained serving change
+# Decide what to run
+
+Use the [deployment job](compute/maintainer/DEPLOYMENT-JOB.md) to compare two systems you operate under your own workload, acceptance policy, operating requirements and cost assumptions. It joins the native useful-work verdict with applicable operational checks and attributable economics. Missing required evidence leaves the decision unresolved; it never becomes a passing requirement or a free cost.
+
+From the extracted kit's `cantos` directory, configure the job's spec and inputs, then run and export it:
+
+```sh
+python -B compute/maintainer/job.py validate --manifest deployment-job.json
+python -B compute/maintainer/job.py run --manifest deployment-job.json --out deployment-run
+python -B compute/maintainer/job.py export --job deployment-run --out deployment-bundle
+```
+
+The **Decide what to run** view prepares the input files and command for systems you already operate. Run the command locally, then select the resulting bundle folder in that view. Import reproduces the decision from its data using the installed analyzer; it makes no model calls. Each bundle carries its native verdict, operational gates, cost ranges, unknowns and conditions that would change the answer. The original comparisons and catalog remain available separately.
+
+## Review a retained serving change
 
 From the extracted maintainer kit's `cantos` directory, unpack and start its included workbench:
 
@@ -7,7 +21,7 @@ python -m zipfile -e public/open-compute/open-compute-workbench.zip workbench
 python -B workbench/cantos/open-compute-ledger/run.py --open
 ```
 
-Choose **Review a serving change â†’ Open the real vLLM experiment**. This frozen example makes zero inference requests. Its native verdict is **incomparable**: baseline and candidate each accepted 21 of 96 requests; the 80% requirement needs at least 77. The instrument correctly refuses to call this a passing change or rank a winner.
+Choose **Review a serving change → Open the real vLLM experiment**. This frozen example makes zero inference requests. Its native verdict is **incomparable**: baseline and candidate each accepted 21 of 96 requests; the 80% requirement needs at least 77. The instrument correctly refuses to call this a passing change or rank a winner.
 
 To package an analyzed comparison for the workbench, run this from the extracted `cantos` directory:
 
@@ -17,7 +31,7 @@ python -B compute/maintainer/maintainer.py export-comparison --analysis YOUR_ANA
 
 Add repeated `--notice FILE` arguments when source licenses or attribution notices must accompany the shared evidence. The frozen example includes its source notices.
 
-In the workbench, choose **Review a serving change â†’ Import comparison** and select `comparison.zip`. The displayed native verdict, exact policy, observations and evidence identity travel with the analysis. The workbench does not rerun the model or replace the instrument verdict.
+In the workbench, choose **Review a serving change → Import comparison** and select `comparison.zip`. The displayed native verdict, exact policy, observations and evidence identity travel with the analysis. The workbench does not rerun the model or replace the instrument verdict.
 
 The original evidence ZIP remains the source record. Editing policy in the workbench creates a visibly labeled **post-hoc analysis** linked to its parent and original. It reuses the captured responses and existing application grades with zero new inference requests. A changed acceptance rule can change which tasks qualify, but it cannot alter captured responses or their grades. Export the revised decision as **Analysis JSON**; the **Original evidence ZIP** remains unchanged. Keep both with the retained history.
 

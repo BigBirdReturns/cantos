@@ -38,6 +38,34 @@
       "sha256": "9e81415da13b5dac5f2f57938c818af255e55029eb48c259365ec5bd02f8e7ba",
       "bytes": 5921,
       "modifications": "none"
+    },
+    {
+      "path": "owner_ocl/costs.py",
+      "origin": "S:\\Projects\\Measurement\\Open-Compute-Ledger\\workbench\\open-compute-ledger\\instruments\\controller\\ocl\\costs.py",
+      "sha256": "59787191c181c6d17b3ecc50268051f0fc10b85cd508c8f65d76dc423741721d",
+      "bytes": 4129,
+      "modifications": "none"
+    },
+    {
+      "path": "owner_ocl/energy.py",
+      "origin": "S:\\Projects\\Measurement\\Open-Compute-Ledger\\workbench\\open-compute-ledger\\instruments\\controller\\ocl\\energy.py",
+      "sha256": "cc5129a5fdea946094e99783f4c65b1f8b1385a4f6e54f12158434cd116a505b",
+      "bytes": 1651,
+      "modifications": "none"
+    },
+    {
+      "path": "owner_ocl/recovery_verifier.py",
+      "origin": "S:\\Projects\\Measurement\\Open-Compute-Ledger\\workbench\\open-compute-ledger\\instruments\\controller\\scripts\\reanalyze_owned_loopback_recovery.py",
+      "sha256": "7cf2bcd3857d6f6a13c8f2aca5b2a383038724c84caa3ad7a65c9aee9c2fd95f",
+      "bytes": 8081,
+      "modifications": "none"
+    },
+    {
+      "path": "owner_ocl/storage_verifier.py",
+      "origin": "S:\\Projects\\Measurement\\Open-Compute-Ledger\\workbench\\open-compute-ledger\\instruments\\controller\\scripts\\reanalyze_storage_evidence.py",
+      "sha256": "c3526b65abb62514a125b5afa8bd74e81ef976f7ad82a61a27e7154d49622414",
+      "bytes": 6611,
+      "modifications": "none"
     }
   ],
   "contributions": [
@@ -52,5 +80,11 @@
       "sha256": "de8bd9e76891348f2f48f5451fff446561b0740c625a62bc095104c451b92391",
       "modifications": "none"
     }
-  ]
+  ],
+  "operational_collector": {
+    "sha256": "348b194d7eda533541248c5210d015b210eacf46c424ab8175df2d6180404dc0",
+    "origin_bundle_sha256": "7d0cdf845de818418b36d83012976cd4d23b0254e6ff89afb105dfea9dc71213",
+    "origin": "cantos/open-compute-ledger/instruments/collect.py",
+    "meaning": "Exact collector source pin; original distribution hash is provenance, not a self-reference to a containing bundle."
+  }
 }
