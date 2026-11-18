@@ -7,13 +7,13 @@ import unittest
 
 from compute.maintainer.diagnose_grades import EvidenceError, sha256
 from compute.maintainer.empirical_economics import audit
-from compute.maintainer.tests.test_diagnose_grades import CodingDiagnosisTests, write_json
+from compute.maintainer.tests import test_diagnose_grades as fixture
 
 
 class EmpiricalEconomicsTests(unittest.TestCase):
     def setUp(self):
         # Existing fully source-bound two-arm external grading fixture.
-        CodingDiagnosisTests.setUp(self)
+        fixture.CodingDiagnosisTests.setUp(self)
         self.journal = self.root / "vllm-serving/board-samples.jsonl"
         self.journal.parent.mkdir(parents=True, exist_ok=True)
         self.samples = [{"monotonic_s": i, "watts": 100.0, "uuid": "GPU-test"}
@@ -27,10 +27,10 @@ class EmpiricalEconomicsTests(unittest.TestCase):
             run = json.loads(run_file.read_text())
             run["trials"] = [{"trial": 0, "started_monotonic_s": start,
                               "ended_monotonic_s": start + 1, "duration_s": 1}]
-            write_json(run_file, run)
+            fixture.write_json(run_file, run)
             grade = json.loads(grade_file.read_text())
             grade["run_sha256"] = sha256(run_file)
-            write_json(grade_file, grade)
+            fixture.write_json(grade_file, grade)
             self.receipt["sources"][run_name] = sha256(run_file)
             self.receipt["sources"][grade_name] = sha256(grade_file)
             self.receipt.setdefault("arms", {})[arm] = {
@@ -45,7 +45,7 @@ class EmpiricalEconomicsTests(unittest.TestCase):
         self.save_receipt()
 
     def save_receipt(self):
-        write_json(self.root / "VLLM-EMPIRICAL-RECEIPT.json", self.receipt)
+        fixture.write_json(self.root / "VLLM-EMPIRICAL-RECEIPT.json", self.receipt)
 
     def save_samples(self):
         self.journal.write_text("".join(json.dumps(x) + "\n" for x in self.samples), encoding="utf-8")
