@@ -4,6 +4,10 @@
 
 Cantos connects a job's inputs, decisions and results to reusable procedures. **Second Run**, its execution-and-reuse capability, runs supported procedures, reuses verified results and identifies work requiring requalification when declared dependencies change. AXM supplies the record and execution foundations.
 
+## Use Cantos
+
+[Open Research Desk](https://bigbirdreturns.github.io/cantos/research-desk/) to connect evidence, claims and decisions. [Use Second Run](https://bigbirdreturns.github.io/axm-tools/second-run/) to execute supported work and reuse a result while its declared dependencies hold. [Open Compute Workbench](https://bigbirdreturns.github.io/cantos/public/open-compute/) applies this workflow to serving choices. It includes common-grade and original results, published benchmark and price operands, decision history, portable result import and JSON export. The download runs with Python 3.10 or later.
+
 ## Start with the work already available
 
 [Explore the historical record](https://bigbirdreturns.github.io/cantos/corpus/history.html) to search measurements, configurations, issues, price snapshots, workload traces and research. Each observation retains its source, dates and operating conditions. Filter a collection, inspect the original source, compare conditions and export the evidence relevant to your next job.

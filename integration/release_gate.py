@@ -19,7 +19,7 @@ from urllib.request import Request, urlopen
 ROOT = Path(__file__).resolve().parent.parent
 WORKFLOW = '.github/workflows/hot-aisle-ci.yml'
 PUBLISHERS = ('pages.yml',)
-SCOPES = ('README.md', 'app', 'index.html', 'assets', 'hot-aisle', 'compute', 'integration', 'corpus', 'research-desk', 'floor', 'circulate', 'shelf', 'clustermax-challenge', 'evidence', '.gitattributes', WORKFLOW, '.github/workflows/shelf-ci.yml', '.github/workflows/clustermax-challenge-ci.yml') + tuple('.github/workflows/' + p for p in PUBLISHERS)
+SCOPES = ('README.md', 'app', 'public', 'index.html', 'assets', 'hot-aisle', 'compute', 'integration', 'corpus', 'research-desk', 'floor', 'circulate', 'shelf', 'clustermax-challenge', 'evidence', '.gitattributes', WORKFLOW, '.github/workflows/shelf-ci.yml', '.github/workflows/clustermax-challenge-ci.yml') + tuple('.github/workflows/' + p for p in PUBLISHERS)
 
 def git(*args: str) -> str:
     return subprocess.check_output(['git', *args], cwd=ROOT, text=True).strip()
