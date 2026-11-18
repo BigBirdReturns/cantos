@@ -26,3 +26,32 @@ python3 -m compute.maintainer.operational_http \
 Replace the example digest with the authentic expected digest from the application owner or published release manifest. The request uses no credentials, no body, no redirect, no environment proxy and no inference POST. The collector records the returned entity's byte count, SHA-256 and server-reported content length/encoding, without retaining the response body. It reads at most the configured limit plus one byte per attempt (maximum permitted limit 1 MiB); an oversized or incomplete body fails. A syntactically valid HTTP 200 with the wrong bytes becomes `http_body_mismatch`, independently of HTTP status. The existing sampled success and latency gates count body mismatches, truncated bodies and oversize bodies as failures. When an expected digest is supplied, any returned corrupt body fails the whole identity gate, even with a relaxed availability threshold; at least one matching response is required. A GET without an expected digest remains a body observation, **not** a content-integrity acceptance.
 
 The digest covers the HTTP client's received entity bytes after transfer framing, without content decompression; the recorded encoding header is the server's claim, not a verified application decoder. Obtaining the expected digest from the same unauthenticated response would not independently validate origin or release provenance. This audit establishes bounded route behavior from its client vantage, not provider-side storage durability, remote security controls, inference correctness or a commercial SLA. For independently audited content, supply the digest from retained and separately verified source/release evidence.
+
+
+## Offline receipt requalification against independent custody
+
+The executable replay checks the original receipt bytes against a SHA-256 retained
+**outside the receipt** by the acquisition owner. It recomputes the observation-journal
+hash, status/error/body classifications, per-sample ordering, policy thresholds,
+p95 and summary, and refuses any verdict that the evidence does not support.
+The replay makes no HTTP requests.
+
+```sh
+python3 -m compute.maintainer.operational_http_verify \
+  --receipt /tmp/health-body-observation.json \
+  --expected-receipt-sha256 "$PINNED_RECEIPT_SHA256" \
+  --output /tmp/health-body-verification.json
+```
+
+Take `PINNED_RECEIPT_SHA256` from a separately retained and independently
+authenticated original capture manifest. Computing a new pin from a modified
+receipt merely authenticates the modified bytes. Exit 0 signifies an authentic
+receipt whose original sampled verdict independently replays as pass; exit 1
+signifies an authentic receipt whose measured verdict replays as fail; exit 2
+signals an invalid source, broken custody pin or output error. The verifier
+creates its output exclusively and never overwrites the original.
+
+The journal captures response status, latency and (for bounded GET) an entity
+hash. It does not retain raw response bodies or authenticate provider-side
+identity; independent server evidence, capture custody, applicable service
+contracts and provider-side instrumentation remain separate requirements.
