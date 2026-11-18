@@ -10,6 +10,7 @@ import argparse
 import copy
 import functools
 import json
+import math
 import os
 import platform
 import random
@@ -368,8 +369,13 @@ def run(spec_path, arm, retry_policy_path, out_dir, observation_id, grader=None)
                   "started_monotonic_ns": task_start["monotonic_ns"], "attempts": [], "accepted": False}
         for n in range(1, p["retry_policy"]["max_attempts"]+1):
             if n > 1 and p["retry_policy"]["backoff_s"]:
-                journal.event("backoff_start", task_instance=instance, attempt=n, seconds=p["retry_policy"]["backoff_s"])
-                time.sleep(p["retry_policy"]["backoff_s"])
+                backoff_s = p["retry_policy"]["backoff_s"]
+                begun = journal.event("backoff_start", task_instance=instance, attempt=n, seconds=backoff_s)
+                deadline_ns = begun["monotonic_ns"] + math.ceil(backoff_s * 1_000_000_000)
+                # The recorded interval, not the requested sleep, must satisfy
+                # the policy: Windows timers can return before the deadline.
+                while (remaining_ns := deadline_ns - time.monotonic_ns()) > 0:
+                    time.sleep(remaining_ns / 1_000_000_000)
                 journal.event("backoff_end", task_instance=instance, attempt=n)
             event = journal.event("task_attempt_start", task_instance=instance, attempt=n)
             attempt_root = root/"attempts"/instance/f"attempt-{n:03d}"

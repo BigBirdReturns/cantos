@@ -8,6 +8,7 @@ import tempfile
 import time
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
 sys.path.insert(0,str(Path(__file__).resolve().parent))
@@ -75,6 +76,24 @@ class RetryCampaign(unittest.TestCase):
             run=load(self.root/"run"/a["run"]["path"])
             seeds.append(run["protocol"]["seed"])
         self.assertEqual(seeds,[11,13,15])
+
+    def test_early_sleep_return_still_satisfies_pinned_backoff(self):
+        self.endpoint.mode="wrong"
+        real_sleep=time.sleep
+        calls=[]
+        def early_return(seconds):
+            calls.append(seconds)
+            return real_sleep(min(seconds, 0.0001))
+        with patch.object(retry.time, "sleep", side_effect=early_return):
+            result=self.execute("early-sleep")
+        self.assertEqual(result["metrics"]["retries_total"],2)
+        self.assertGreater(len(calls),2)
+        events=[json.loads(s) for s in (self.root/"early-sleep/events.jsonl").read_text().splitlines()]
+        starts={e["attempt"]:e["monotonic_ns"] for e in events if e["event"]=="backoff_start"}
+        ends={e["attempt"]:e["monotonic_ns"] for e in events if e["event"]=="backoff_end"}
+        self.assertEqual(sorted(starts),[2,3])
+        self.assertTrue(all((ends[n]-starts[n])/1e9 >= self.rp["backoff_s"] for n in starts))
+        self.assertEqual(retry.validate_campaign(self.root/"early-sleep")["metrics"],result["metrics"])
 
     def test_task_queue_delay_is_recorded(self):
         self.endpoint.delay=0.04
