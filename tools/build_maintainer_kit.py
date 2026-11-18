@@ -39,6 +39,11 @@ def build_bytes():
         raise ValueError("Required public source is missing or untracked: " + ", ".join(missing))
     if not any(p.endswith("/maintainer.py") for p in selected):
         raise ValueError("Maintainer producer source is absent")
+    # The Git index is the source-of-truth for the shipped bytes. Windows
+    # worktree CRLF conversion must not change the reproducible ZIP.
+    unstaged = subprocess.run(["git", "diff", "--quiet", "--", *selected], cwd=ROOT)
+    if unstaged.returncode:
+        raise ValueError("Stage intended maintainer source edits before building the kit")
     files = {}
     for rel in selected:
         path = ROOT / rel
@@ -46,7 +51,7 @@ def build_bytes():
             raise ValueError("Source must be a regular in-tree file: " + rel)
         if "__pycache__" in path.parts or path.suffix in (".pyc", ".pyo"):
             raise ValueError("Generated cache cannot enter the public kit: " + rel)
-        files[rel] = path.read_bytes()
+        files[rel] = subprocess.check_output(["git", "show", ":" + rel], cwd=ROOT)
     manifest = {
         "schema": "cantos.maintainer-kit/1",
         "files": {rel: {"sha256": sha256(data).hexdigest(), "bytes": len(data)} for rel, data in files.items()},
