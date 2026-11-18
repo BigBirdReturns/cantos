@@ -1,5 +1,10 @@
 # Recipient-owned deployment job
 
+An optional [owned cross-host health-route gate](NETWORK-HEALTH.md) adds explicit
+CLI-only acquisition of pinned responder identity, complete health attempts and
+latency/failure requirements. It retains its named-route scope; it does not infer
+native model health, an SLA or broader provider qualification.
+
 This driver joins the existing paired endpoint capture and native application verdict with explicitly bound operational and economic evidence. It does not install or start serving systems. Configure both endpoints, workload, policy and declared identities in a copy of `examples/spec.json`; create `deployment-job.json` from the template and point `comparison.spec` at that file. The native spec remains authoritative for endpoints, workload, inference protocol, identities and acceptance policy.
 
 Run the paired comparison once:

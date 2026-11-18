@@ -21,13 +21,13 @@ try:
     from .common import ROOT, canonical, load, policy, protocol
     from .owner_ocl.costs import estimate_cost
     from .owner_ocl.energy import integrate_power
-    from .owner_ocl import recovery_verifier, storage_verifier
+    from .owner_ocl import recovery_verifier, storage_verifier, network_health
 except ImportError:
     import maintainer, deployment_retry
     from common import ROOT, canonical, load, policy, protocol
     from owner_ocl.costs import estimate_cost
     from owner_ocl.energy import integrate_power
-    from owner_ocl import recovery_verifier, storage_verifier
+    from owner_ocl import recovery_verifier, storage_verifier, network_health
 
 STATES = ("SELECT-CANDIDATE", "KEEP-BASELINE", "NO-ELIGIBLE", "INCOMPARABLE", "INCOMPLETE", "UNDETERMINED")
 BASES = {"observed", "published", "modeled", "unknown"}
@@ -89,8 +89,16 @@ def validate_deployment(value):
         raise ValueError("At most 100 operational requirements are supported")
     seen = set()
     for req in requirements:
-        if not isinstance(req, dict) or set(req) != {"id", "check_id", "operator", "threshold", "required", "max_age_s", "allowed_basis"}:
+        required_keys = {"id", "check_id", "operator", "threshold", "required", "max_age_s", "allowed_basis"}
+        if not isinstance(req, dict) or set(req) - (required_keys | {"network_target", "network_protocol"}) or not required_keys <= set(req):
             raise ValueError("Invalid operational requirement")
+        if req["check_id"] in network_health.CHECKS:
+            network_health.target(req.get("network_target"))
+            network_health.protocol(req.get("network_protocol"))
+            if req["operator"] != "lte":
+                raise ValueError("Owned network requirements use explicit upper bounds")
+        elif set(req) & {"network_target", "network_protocol"}:
+            raise ValueError("Network identity/protocol apply only to owned network checks")
         for key in ("id", "check_id"):
             if not isinstance(req[key], str) or not req[key]:
                 raise ValueError("Requirement needs " + key)
@@ -182,8 +190,13 @@ def _operation_value(attachment):
         checked = recovery_verifier.verify(raw, summary, sha(raw_bytes), "recipient-owned-resource")
         packet_bytes = _blob(attachment.get("packet_base64"))
         packet = json.loads(packet_bytes)
-        pin = load(ROOT / "SOURCES.json").get("operational_collector", {}).get("sha256")
-        if not isinstance(pin, str) or not SHA.fullmatch(pin) or packet.get("schema") != "ocl.instrument-packet/1" or packet.get("provenance", {}).get("source_sha256") != pin:
+        collector = load(ROOT / "SOURCES.json").get("operational_collector", {})
+        pin = collector.get("sha256")
+        historical = collector.get("historical_recovery_sha256", [])
+        if (not isinstance(historical, list) or len(historical) > 10
+                or any(not isinstance(value, str) or not SHA.fullmatch(value) for value in historical)):
+            raise ValueError("Invalid trusted historical recovery collector pins")
+        if not isinstance(pin, str) or not SHA.fullmatch(pin) or packet.get("schema") != "ocl.instrument-packet/1" or packet.get("provenance", {}).get("source_sha256") not in {pin, *historical}:
             raise ValueError("Recovery freshness requires the retained packet from the pinned operational collector")
         entries = packet.get("files")
         if not isinstance(entries, list):
@@ -227,6 +240,34 @@ def _operation_value(attachment):
     raise ValueError("Unsupported operational check; no trusted raw verifier is installed")
 
 
+def _network_operation_value(attachment, requirement, run):
+    expected, settings = requirement["network_target"], requirement["network_protocol"]
+    hardware = run["declared_identity"]["hardware"]
+    if (sha(hardware) != expected["resource_identity_sha256"]
+            or hardware.get("audit_host_id_sha256") != expected["responder_host_id_sha256"]):
+        raise ValueError("Named responder is not bound to the native declared hardware/audit host")
+    sources = load(ROOT / "SOURCES.json")
+    pins = {row["path"]: row["sha256"] for row in sources["files"]}
+    module_pin = pins.get("owner_ocl/network_health.py")
+    collector_pin = sources.get("operational_collector", {}).get("sha256")
+    if not isinstance(module_pin, str) or not SHA.fullmatch(module_pin) or not isinstance(collector_pin, str) or not SHA.fullmatch(collector_pin):
+        raise ValueError("No trusted network collector/verifier source pin")
+    if expected["responder_source_sha256"] != module_pin:
+        raise ValueError("Designated responder source is not the installed supported source")
+    blobs = {key: _blob(attachment.get(key + "_base64")) for key in ("raw", "summary", "events", "packet")}
+    checked = network_health.verify_packet(blobs["raw"], blobs["summary"], blobs["events"], blobs["packet"],
+        expected, settings, collector_sha256=collector_pin, producer_sha256=module_pin)
+    field = "failure_count" if requirement["check_id"] == "owned_network.failure_count" else "latency_p95_ms"
+    value = checked[field]
+    if value is None:
+        raise ValueError("Owned network latency is unknown because an authorized attempt failed")
+    return value, {"verifier": "owner_ocl.network_health.verify_packet", "raw_sha256": sha(blobs["raw"]),
+        "collection_packet_sha256": sha(blobs["packet"]), "expected_target": expected,
+        "observed_window": checked["observed_window"], "window_rule": "exact_collector_window",
+        "attempts": checked["attempts"], "failure_count": checked["failure_count"], "scope": checked["scope"],
+        "identity_basis": "Exact TLS certificate pin/key possession during collection; returned host/instance/source labels remain declared identities, not signed receipts or remote execution attestation."}
+
+
 def _operations(requirements, attachments, run, run_hash):
     if attachments is None:
         attachments = []
@@ -251,7 +292,8 @@ def _operations(requirements, attachments, run, run_hash):
             if basis != "observed" or basis not in req["allowed_basis"]:
                 raise ValueError("A declaration is not a verified observed operational result")
             gate["binding"] = _binding(attachment.get("binding"), run, run_hash, req["max_age_s"])
-            value, proof = _operation_value(attachment)
+            value, proof = (_network_operation_value(attachment, req, run) if req["check_id"] in network_health.CHECKS
+                            else _operation_value(attachment))
             actual_window = proof.get("observed_window")
             actual_start, actual_end = _window(actual_window)
             declared_start, declared_end = _window(attachment["binding"]["observed_window"])

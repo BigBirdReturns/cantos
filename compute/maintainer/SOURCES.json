@@ -66,6 +66,13 @@
       "sha256": "c3526b65abb62514a125b5afa8bd74e81ef976f7ad82a61a27e7154d49622414",
       "bytes": 6611,
       "modifications": "none"
+    },
+    {
+      "path": "owner_ocl/network_health.py",
+      "origin": "Open Compute private owner feat/ocl-owned-network-gate-20261118:open-compute-ledger/instruments/controller/ocl/network_health.py",
+      "sha256": "42f6e763e58c397e91b28b9854254e60483a91f439cabc725b5ae8c7f964a483",
+      "bytes": 25248,
+      "modifications": "none; exact shared acquisition/offline verifier source"
     }
   ],
   "contributions": [
@@ -82,9 +89,14 @@
     }
   ],
   "operational_collector": {
-    "sha256": "348b194d7eda533541248c5210d015b210eacf46c424ab8175df2d6180404dc0",
-    "origin_bundle_sha256": "7d0cdf845de818418b36d83012976cd4d23b0254e6ff89afb105dfea9dc71213",
-    "origin": "cantos/open-compute-ledger/instruments/collect.py",
-    "meaning": "Exact collector source pin; original distribution hash is provenance, not a self-reference to a containing bundle."
+    "sha256": "be02fb41d70c8841c5e1fb7fb621cb14a704e5ba2a03af97476b5fa6a50e94c3",
+    "origin": "Open Compute private owner feat/ocl-owned-network-gate-20261118 (base e72bf26cc9e94a521186183b0894a435d2ebdf4d):open-compute-ledger/instruments/collect.py",
+    "meaning": "Exact current collector source pin. The historical bundle identifies prior custody only; new acquisition requires a separately built and reviewed recipient archive.",
+    "historical_origin_bundle_sha256": "7d0cdf845de818418b36d83012976cd4d23b0254e6ff89afb105dfea9dc71213",
+    "modifications": "Added explicit bounded network-health acquisition; this modified code is not claimed to originate in the historical bundle.",
+    "historical_recovery_sha256": [
+      "348b194d7eda533541248c5210d015b210eacf46c424ab8175df2d6180404dc0"
+    ],
+    "historical_recovery_basis": "Exact previously installed/qualified collector source SHA independently checked by owner; permits only historical recovery verification with unchanged raw/run/hardware/time checks, never new network acquisition."
   }
 }

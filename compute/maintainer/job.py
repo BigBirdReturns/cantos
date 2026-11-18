@@ -309,11 +309,31 @@ def _bind_job_evidence(job: dict, runs: dict, collections: dict, operation_paths
         run_hash = hashlib.sha256(run_path.read_bytes()).hexdigest()
         generated = []
         existing_checks = set()
+        network_templates, bound_network = {}, {}
         for path in operation_paths.get(side, []):
             retained = load(path)
             for item in retained if isinstance(retained, list) else [retained]:
                 if isinstance(item, dict):
-                    existing_checks.add(item.get("check_id"))
+                    check = item.get("check_id")
+                    if item.get("schema") == "cantos.operation-template/1":
+                        if check not in deployment.network_health.CHECKS or check in network_templates:
+                            raise ValueError("Duplicate or unsupported network operation template")
+                        network_templates[check] = item
+                    else:
+                        existing_checks.add(check)
+                        if check in deployment.network_health.CHECKS:
+                            bound_network[check] = item
+        for check, template in network_templates.items():
+            template_hash = hashlib.sha256(canonical(template)).hexdigest()
+            if check in bound_network:
+                if bound_network[check].get("template_sha256") != template_hash:
+                    raise ValueError("Changed network acquisition requires removing its stale bound attachment from the child manifest")
+                continue
+            raw = deployment.network_health.strict(deployment._blob(template.get("raw_base64")))
+            attachment = {**template, "schema": "cantos.operation-binding/1", "template_sha256": template_hash,
+                "binding": {"run_sha256": run_hash, "resource_identity_sha256": deployment.sha(hardware),
+                            "observed_window": {"start": raw["started_at"], "end": raw["ended_at"]}}}
+            generated.append(attachment)
         collection_path = collections.get(side)
         if collection_path:
             acquisition = load(collection_path)
@@ -354,14 +374,13 @@ def _bind_job_evidence(job: dict, runs: dict, collections: dict, operation_paths
                                   "packet_base64": acquisition["packet_base64"],
                                   "collection_sha256": hashlib.sha256(base64.b64decode(acquisition["packet_base64"], validate=True)).hexdigest()}
                     generated.append(attachment)
-                if generated:
-                    destination = ops_root / (side + ".json")
-                    write(destination, generated)
-                    derived_ops[side] = [destination]
-                else:
-                    derived_ops[side] = []
+                derived_ops[side] = []
         else:
             derived_ops[side] = []
+        if generated:
+            destination = ops_root / (side + ".json")
+            write(destination, generated)
+            derived_ops[side] = [destination]
         resource_path = resource_paths.get(side)
         if resource_path:
             resource = load(resource_path)
@@ -413,7 +432,8 @@ def _read_evidence(operations, resources):
         ops[side] = []
         for path in paths:
             value = load(path)
-            ops[side].extend(value if isinstance(value, list) else [value])
+            ops[side].extend(item for item in (value if isinstance(value, list) else [value])
+                             if not isinstance(item, dict) or item.get("schema") != "cantos.operation-template/1")
     res = {side: load(path) if path else None for side, path in resources.items()}
     return ops, res
 
@@ -750,6 +770,53 @@ def collect_local(manifest_path, arm, authorize_local_host, out_dir):
     return acquisition
 
 
+def collect_network(manifest_path, arm, requirement_id, authorize_target, out_dir):
+    """Explicit health-only probe through the pinned collector; never runs on import."""
+    job, _, _, spec, *_ = _load_job(Path(manifest_path))
+    if arm not in ("baseline", "candidate"):
+        raise ValueError("Expected baseline or candidate arm")
+    selected = [req for req in job["decision"]["operational_requirements"] if req["id"] == requirement_id]
+    if len(selected) != 1 or selected[0]["check_id"] not in deployment.network_health.CHECKS:
+        raise ValueError("Select one declared owned network requirement")
+    req = selected[0]
+    expected, settings = req["network_target"], req["network_protocol"]
+    hardware = spec[arm]["identity"]["hardware"]
+    if (expected["resource_identity_sha256"] != deployment.sha(hardware)
+            or hardware.get("audit_host_id_sha256") != expected["responder_host_id_sha256"]):
+        raise ValueError("Network target differs from the declared arm hardware/audit host")
+    if authorize_target != deployment.network_health.sha(canonical(expected)):
+        raise ValueError("Explicit authorization must match declared exact network target hash")
+    out = Path(out_dir).resolve()
+    out.mkdir(parents=True, exist_ok=False)
+    bundle = Path(__file__).resolve().parents[2] / "public/open-compute/open-compute-workbench.zip"
+    owner = packets.unpack_owner(bundle, out / "pinned-workbench")
+    sources = load(Path(__file__).resolve().parent / "SOURCES.json")
+    collector_pin = sources["operational_collector"]["sha256"]
+    network_pin = next(row["sha256"] for row in sources["files"] if row["path"] == "owner_ocl/network_health.py")
+    # Check both source pins BEFORE the collector can contact the target.
+    if (sha256_file(owner / "instruments/collect.py") != collector_pin
+            or sha256_file(owner / "instruments/controller/ocl/network_health.py") != network_pin):
+        raise ValueError("Network acquisition requires a reviewed workbench archive with the exact pinned collector/source")
+    config = out / "network-config.json"
+    write(config, {"network_target": expected, "network_protocol": settings})
+    collector = packets._module(owner / "instruments/collect.py", "cantos_pinned_network_operations")
+    packet_dir = out / "packet"
+    collector.main(["network-health", "--config", str(config), "--authorize-target", authorize_target, "--out", str(packet_dir)])
+    contents = {key: (packet_dir / path).read_bytes() for key, path in
+                (("raw", "network/raw.json"), ("summary", "network/summary.json"),
+                 ("events", "network/attempt-events.jsonl"), ("packet", "packet.json"))}
+    checked = deployment.network_health.verify_packet(contents["raw"], contents["summary"], contents["events"],
+        contents["packet"], expected, settings, collector_sha256=collector_pin, producer_sha256=network_pin)
+    templates = [{"schema": "cantos.operation-template/1", "check_id": item["check_id"], "basis": "observed",
+                  **{key + "_base64": base64.b64encode(value).decode("ascii") for key, value in contents.items()}}
+                 for item in job["decision"]["operational_requirements"] if item["check_id"] in deployment.network_health.CHECKS
+                 and item["network_target"] == expected and item["network_protocol"] == settings]
+    write(out / "operation-template.json", templates)
+    return {"schema": "cantos.network-operation-acquisition/1", "arm": arm, "summary": checked,
+            "operation_template": str(out / "operation-template.json"), "pinned_workbench_sha256": sha256_file(bundle),
+            "scope": "Named owned health route only. Attach operation-template.json to this arm's operations; normal run binds exact run/time/hardware. No inference or server launch occurred."}
+
+
 def _verify_recovery_collection(raw_bytes, summary_bytes, packet_bytes):
     """Preflight the exact raw, summary and original packet before retaining them."""
     return deployment._operation_value({"check_id": "owned_loopback.recovery_verified",
@@ -763,7 +830,7 @@ def validate_job(manifest_path):
     job, base, spec_path, spec, workload_path, policy_path, grades, grading_contract, operations, resources, collections, expected = _load_job(Path(manifest_path))
     blockers = []
     requirements = job["decision"]["operational_requirements"]
-    supported_checks = {"owned_loopback.recovery_verified", "owned_loopback.recovery_max_s"}
+    supported_checks = {"owned_loopback.recovery_verified", "owned_loopback.recovery_max_s", *deployment.network_health.CHECKS}
     for side in ("baseline", "candidate"):
         if not resources.get(side):
             if job["decision"]["economics_required"]:
@@ -906,6 +973,12 @@ def main(argv=None):
     collect.add_argument("--arm", choices=("baseline", "candidate"), required=True)
     collect.add_argument("--authorize-local-host", required=True)
     collect.add_argument("--out", required=True)
+    network = sub.add_parser("collect-network", help="explicit authorized TLS health-only acquisition through pinned collector")
+    network.add_argument("--manifest", required=True)
+    network.add_argument("--arm", choices=("baseline", "candidate"), required=True)
+    network.add_argument("--requirement", required=True)
+    network.add_argument("--authorize-target", required=True)
+    network.add_argument("--out", required=True)
     validate = sub.add_parser("validate", help="validate a manifest and display required-unknown blockers without inference")
     validate.add_argument("--manifest", required=True)
     args = parser.parse_args(argv)
@@ -918,6 +991,8 @@ def main(argv=None):
             result = export_job(args.job, args.out)
         elif args.command == "collect":
             result = collect_local(args.manifest, args.arm, args.authorize_local_host, args.out)
+        elif args.command == "collect-network":
+            result = collect_network(args.manifest, args.arm, args.requirement, args.authorize_target, args.out)
         elif args.command == "validate":
             result = validate_job(args.manifest)
         else:

@@ -22,6 +22,16 @@ A price-only change may reuse observations and recompute economics. A serving im
 
 ## Current state and continuation
 
+The optional [owned network gate](compute/maintainer/NETWORK-HEALTH.md) adds
+CLI-only acquisition for one explicitly authorized named TLS responder and
+required latency/failure gates. It retains every attempt, independently declared
+collector/target identities, exact certificate/instance/body/nonce bindings and
+source-bound raw timing. Offline import never recollects; incompatible or unknown
+required evidence blocks preference. Source and synthetic/retained-data tests
+support the software path; live cross-host qualification remains open. This does
+not establish model endpoint health, commercial uptime, provider security or an
+SLA, and it does not close the broader operational scope.
+
 `DELIVERY.json` records separate scope states and exact release/evidence identities. Publication of the prior workbench and six-task SecondRun demonstration completed. Their publication alone does not complete the broader measurement outcome.
 
 The [deployment job](compute/maintainer/DEPLOYMENT-JOB.md) connects the native paired comparison to operational requirements and source-bound resource economics. A recipient can supply existing endpoints, their own application cases, acceptance thresholds, authorized local operational observations and cost assumptions; execute the job; and import its retained result into the workbench. Required unknowns block a positive deployment preference. Six explicit outcomes distinguish selecting the candidate, keeping the baseline, no eligible configuration, incomparable evidence, incomplete evidence and an undetermined decision. A price or policy revision creates a linked child while preserving the original captures. Chunked export/import carries the evidence and re-evaluates it with installed trusted code, without replaying inference or uploaded graders.

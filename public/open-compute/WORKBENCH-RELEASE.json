@@ -1,12 +1,12 @@
 {
   "schema": "cantos.comparison-workbench-release/1",
-  "owner_source_commit": "67a18d830f26e4016a954f7d9335023aed8a9709",
+  "owner_source_commit": "23b9786c024e33ebc7516444f35db25d256be5e5",
   "prior_published_commit": "22ce99cdfccd18b77897a641312ed576b6f24cb2",
   "prior_archive_sha256": "449ec4d453ee4c272c867148c0f12ff7b9890726845923bc991980960e274624",
   "archive": "open-compute-workbench.zip",
-  "sha256": "7fd478a22a73a123dc5acba594409fbf231dd4956137d508d10e5b80e9547e34",
-  "bytes": 3910494,
-  "files": 71,
+  "sha256": "2d657bbb0366834228f20b74f84657448ac8795b87bacd0ea8a2e19b7ec2dd85",
+  "bytes": 3936041,
+  "files": 74,
   "changed_public_members": [
     "cantos/open-compute-ledger/MANIFEST.json",
     "cantos/open-compute-ledger/PUBLIC-SOURCES.json",
@@ -35,6 +35,7 @@
     "cantos/open-compute-ledger/engine/native_maintainer/owner_ocl/core.py",
     "cantos/open-compute-ledger/engine/native_maintainer/owner_ocl/costs.py",
     "cantos/open-compute-ledger/engine/native_maintainer/owner_ocl/energy.py",
+    "cantos/open-compute-ledger/engine/native_maintainer/owner_ocl/network_health.py",
     "cantos/open-compute-ledger/engine/native_maintainer/owner_ocl/recovery_verifier.py",
     "cantos/open-compute-ledger/engine/native_maintainer/owner_ocl/runner.py",
     "cantos/open-compute-ledger/engine/native_maintainer/owner_ocl/storage_verifier.py",
@@ -45,10 +46,17 @@
     "cantos/open-compute-ledger/engine/native_maintainer/retry.py",
     "cantos/open-compute-ledger/engine/native_maintainer/retry_resources.py",
     "cantos/open-compute-ledger/engine/native_maintainer/streaming.py",
+    "cantos/open-compute-ledger/instruments/NETWORK-HEALTH.md",
+    "cantos/open-compute-ledger/instruments/collect.py",
+    "cantos/open-compute-ledger/instruments/controller/SNAPSHOT.json",
+    "cantos/open-compute-ledger/instruments/controller/ocl/network_health.py",
     "cantos/open-compute-ledger/workbench.css",
     "cantos/open-compute-ledger/workbench.html",
     "cantos/open-compute-ledger/workbench.js"
   ],
   "includes_private_operational_closure": false,
-  "new_inference_requests": 0
+  "new_inference_requests": 0,
+  "owned_network_scope": "Explicit bounded named TLS health-route acquisition and required latency/failure gates; no live qualification, model health, SLA or general provider security claim.",
+  "collector_source_sha256": "be02fb41d70c8841c5e1fb7fb621cb14a704e5ba2a03af97476b5fa6a50e94c3",
+  "network_source_sha256": "42f6e763e58c397e91b28b9854254e60483a91f439cabc725b5ae8c7f964a483"
 }
