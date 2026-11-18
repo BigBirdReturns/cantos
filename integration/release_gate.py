@@ -74,17 +74,26 @@ def decide(runs: list[dict], target: dict, signature) -> dict:
         return {**result, 'state': 'HOLD', 'reason': 'Matching qualification ended: ' + str(run.get('conclusion'))}
     return {'state': 'WAIT', 'reason': 'No qualification run matches these product source trees.'}
 
+def require_main(api: GitHub, head: str) -> None:
+    current = api.get('/git/ref/heads/main')['object']['sha']
+    if current != head:
+        raise RuntimeError('Deployment commit is no longer current main: ' + head)
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--repository', default=os.environ.get('GITHUB_REPOSITORY'))
     parser.add_argument('--timeout', type=int, default=600)
     parser.add_argument('--receipt', type=Path)
+    parser.add_argument('--require-main', action='store_true',
+                        help='Reject queued or manually selected commits that are not current main.')
     args = parser.parse_args()
     if args.timeout < 0 or args.timeout > 900:
         parser.error('Timeout must be between 0 and 900 seconds.')
     api = GitHub(args.repository or '')
     target = local_signature()
     head = git('rev-parse', 'HEAD')
+    if args.require_main:
+        require_main(api, head)
     api.cache[head] = target
     deadline = time.monotonic() + args.timeout
     while True:
@@ -100,6 +109,8 @@ def main() -> int:
             result.update(state='HOLD', reason='Timed out: ' + result['reason'])
         if result['state'] == 'PASS' and local_signature() != target:
             raise RuntimeError('Product sources changed while awaiting qualification.')
+        if result['state'] == 'PASS' and args.require_main:
+            require_main(api, head)
         print(json.dumps(result, indent=2), flush=True)
         if args.receipt:
             args.receipt.parent.mkdir(parents=True, exist_ok=True)
