@@ -294,13 +294,14 @@ def _copy_file_to_inputs(source: Path, base: Path, out: Path):
 
 
 def _bind_job_evidence(job: dict, runs: dict, collections: dict, operation_paths: dict,
-                       resource_paths: dict, out: Path):
+                       resource_paths: dict, out: Path, *, evidence_root: Path | None = None):
     derived_ops, derived_resources = {}, {}
     requirements = job.get("decision", {}).get("operational_requirements", [])
-    ops_root = out / "derived-operations"
-    resources_root = out / "derived-resources"
+    evidence_root = evidence_root or (out / "derived-evidence" / uuid.uuid4().hex)
+    ops_root = evidence_root / "operations"
+    resources_root = evidence_root / "resources"
     for directory in (ops_root, resources_root):
-        directory.mkdir(exist_ok=True)
+        directory.mkdir(parents=True, exist_ok=True)
     for side in ("baseline", "candidate"):
         run_path = Path(runs[side])
         run = maintainer.load(run_path)
@@ -468,12 +469,31 @@ def _replace_json(path: Path, value: dict):
     path.write_text(json.dumps(value, sort_keys=True, indent=2, ensure_ascii=False, allow_nan=False) + "\n", encoding="utf-8")
 
 
+def _write_status(root: Path, status: str, decision_identity: str | None = None):
+    value = {"schema": "cantos.deployment-job-status/1", "status": status}
+    if decision_identity:
+        value["decision_identity"] = decision_identity
+    _replace_json(root / "decision-status.json", value)
+
+
+def _require_complete(root: Path):
+    status = load(_inside(root, "decision-status.json", "decision status"))
+    decision = load(_inside(root, "decision.json", "decision.json"))
+    result = load(_inside(root, "job-result.json", "job-result.json"))
+    if (status.get("schema") != "cantos.deployment-job-status/1" or status.get("status") != "complete"
+            or status.get("decision_identity") != decision.get("decision_identity")
+            or result.get("decision_identity") != decision.get("decision_identity")):
+        raise ValueError("Retained job is incomplete or its decision/status records differ")
+    return decision
+
+
 def run_job(manifest_path, out_dir):
     """Stage a manifest closure, perform one paired run, then make a deployment decision."""
     (job, base, spec_path, spec, workload_path, policy_path, grades, grading_contract,
      operations, resources, collections, expected) = _load_job(Path(manifest_path))
     out = Path(out_dir).resolve()
     out.mkdir(parents=True, exist_ok=False)
+    _write_status(out, "in_progress")
     staged_spec, staged_grades, staged_contract, staged_ops, staged_resources, copied = _copy_source_inputs(
         out, base, spec_path, spec, policy_path, grades, grading_contract, operations, resources)
     staged_collections = {side: _copy_file_to_inputs(path, base, out) if path else None
@@ -535,7 +555,9 @@ def run_job(manifest_path, out_dir):
                                              baseline_grades=staged_grades["baseline"],
                                              candidate_grades=staged_grades["candidate"],
                                              grading_contract=staged_contract)
-    ops, res, derived_ops, derived_resources = _bind_job_evidence(staged, run_paths, staged_collections, staged_ops, staged_resources, out)
+    ops, res, derived_ops, derived_resources = _bind_job_evidence(
+        staged, run_paths, staged_collections, staged_ops, staged_resources, out,
+        evidence_root=out / "derived-evidence" / ("initial-" + uuid.uuid4().hex))
     for side in ("baseline", "candidate"):
         staged["arms"][side]["operations"] = [p.relative_to(out).as_posix() for p in staged_ops[side] + derived_ops[side]]
         # Keep the collection source as provenance, but do not regenerate a check
@@ -559,6 +581,7 @@ def run_job(manifest_path, out_dir):
                                       "actual_observations": sum(len(maintainer.load(run_paths[s])["observations"]) for s in ("baseline", "candidate")),
                                       "inference_requests": sum(maintainer.load(run_paths[s]).get("inference_requests", 0) for s in ("baseline", "candidate")),
                                       "decision_identity": decision["decision_identity"]})
+    _write_status(out, "complete", decision["decision_identity"])
     return decision
 
 
@@ -574,7 +597,9 @@ def decide_job(root_dir, out_dir, *, manifest_path=None):
     runs = {side: _inside(root, "native/capture/" + side + "/run.json", side + " run") for side in ("baseline", "candidate")}
     _validate_runs_against_spec(spec_path, len(load(workload_path)["cases"]), runs)
     out.mkdir(parents=True, exist_ok=False)
-    shutil.copytree(root, out, dirs_exist_ok=True, ignore=shutil.ignore_patterns("*.pyc", "__pycache__"))
+    _write_status(out, "in_progress")
+    shutil.copytree(root, out, dirs_exist_ok=True,
+                    ignore=shutil.ignore_patterns("*.pyc", "__pycache__", "decision-status.json"))
     parent_record = load(root / "decision.json")
     if not parent_record.get("decision_identity"):
         raise ValueError("Retained parent decision has no decision_identity")
@@ -626,7 +651,9 @@ def decide_job(root_dir, out_dir, *, manifest_path=None):
     staged_collections = {side: out / p.relative_to(root) if p else None for side, p in collections.items()}
     staged_ops = {side: [out / p.relative_to(root) for p in paths] for side, paths in operations.items()}
     staged_resources = {side: out / p.relative_to(root) if p else None for side, p in resources.items()}
-    ops, res, derived_ops, derived_resources = _bind_job_evidence(child_job, run_copies, staged_collections, staged_ops, staged_resources, out)
+    ops, res, derived_ops, derived_resources = _bind_job_evidence(
+        child_job, run_copies, staged_collections, staged_ops, staged_resources, out,
+        evidence_root=out / "derived-evidence" / ("analysis-" + uuid.uuid4().hex))
     for side in ("baseline", "candidate"):
         child_job["arms"][side]["operations"] = [p.relative_to(out).as_posix() for p in staged_ops[side] + derived_ops[side]]
         template = staged_resources[side]
@@ -643,11 +670,13 @@ def decide_job(root_dir, out_dir, *, manifest_path=None):
     _replace_json(out / "job-result.json", {"schema": "cantos.deployment-job-result/1", "expected_observations": expected,
                                       "actual_observations": 2 * expected, "inference_requests": 0,
                                       "decision_identity": decision["decision_identity"]})
+    _write_status(out, "complete", decision["decision_identity"])
     return decision
 
 
 def export_job(root_dir, destination):
     root = Path(root_dir).resolve()
+    _require_complete(root)
     return deployment_bundle.export_bundle(root, destination, record="decision.json")
 
 
@@ -805,6 +834,7 @@ def import_job(source, out_dir):
     """Import data only and recompute the decision using installed trusted code."""
     out = Path(out_dir).resolve()
     out.mkdir(parents=True, exist_ok=False)
+    _write_status(out, "in_progress")
     unpacked = deployment_bundle.import_bundle(source, out / "bundle")
     root = Path(unpacked["root"]).resolve()
     record = Path(unpacked["record"]).resolve()
@@ -841,6 +871,10 @@ def import_job(source, out_dir):
         raise ValueError("Imported decision differs from trusted recomputation")
     write(out / "native-verdict.json", _portable_native(native, out))
     write(out / "decision.json", decision)
+    result_path = out / "job-result.json"
+    write(result_path, {"schema": "cantos.deployment-job-result/1", "decision_identity": decision["decision_identity"],
+                        "inference_requests": 0, "grader_executions": 0})
+    _write_status(out, "complete", decision["decision_identity"])
     return decision
 
 

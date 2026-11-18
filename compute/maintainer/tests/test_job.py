@@ -94,7 +94,8 @@ class JobTests(unittest.TestCase):
         self.assertEqual((self.a.requests, self.b.requests), (1, 1))
         for side in ("baseline", "candidate"):
             run_path = run_dir / "native" / "capture" / side / "run.json"
-            bound = json.loads((run_dir / "derived-resources" / (side + ".json")).read_text())
+            resource_ref = json.loads((run_dir / "job.json").read_text())["arms"][side]["resources"]
+            bound = json.loads((run_dir / resource_ref).read_text())
             self.assertEqual(bound["binding"]["run_sha256"], hashlib.sha256(run_path.read_bytes()).hexdigest())
             self.assertEqual(bound["accounting"]["window"], bound["binding"]["observed_window"])
         self.assertFalse((run_dir / "SHOULD_NOT_EXIST").exists())
@@ -171,12 +172,14 @@ class JobTests(unittest.TestCase):
         retained = self.root / "collected-retained"
         job.run_job(self.root / "collected-job.json", retained)
         for side in ("baseline", "candidate"):
-            attachments = json.loads((retained / "derived-operations" / (side + ".json")).read_text())
+            operation_ref = json.loads((retained / "job.json").read_text())["arms"][side]["operations"][-1]
+            attachments = json.loads((retained / operation_ref).read_text())
             self.assertEqual([item["check_id"] for item in attachments], ["owned_loopback.recovery_verified"])
         child = self.root / "collected-child"
         job.decide_job(retained, child)
         for side in ("baseline", "candidate"):
-            attachments = json.loads((child / "derived-operations" / (side + ".json")).read_text())
+            operation_ref = json.loads((child / "job.json").read_text())["arms"][side]["operations"][-1]
+            attachments = json.loads((child / operation_ref).read_text())
             self.assertEqual(len(attachments), 1)
         job.export_job(child, self.root / "collected-bundle")
         imported = job.import_job(self.root / "collected-bundle", self.root / "collected-import")
@@ -230,6 +233,19 @@ class JobTests(unittest.TestCase):
             job.import_job(self.root / "external-bundle", self.root / "external-import")
             grader.assert_called_once()
         self.assertEqual((self.a.requests, self.b.requests), (1, 1))
+
+    def test_failed_posthoc_child_cannot_export_copied_parent_decision(self):
+        from unittest.mock import patch
+        retained = self.root / "retained-for-failure"
+        job.run_job(self.root / "deployment-job.json", retained)
+        partial = self.root / "partial-child"
+        with patch.object(job.deployment, "decide_deployment", side_effect=RuntimeError("fixture decision failure")):
+            with self.assertRaisesRegex(RuntimeError, "fixture decision failure"):
+                job.decide_job(retained, partial)
+        self.assertTrue((partial / "decision.json").is_file())  # copied parent remains for recovery
+        self.assertEqual(json.loads((partial / "decision-status.json").read_text())["status"], "in_progress")
+        with self.assertRaisesRegex(ValueError, "incomplete"):
+            job.export_job(partial, self.root / "must-not-export")
 
     def test_retry_campaign_closure_survives_child_export_import_without_requests(self):
         retry_policy = {"schema": "cantos.maintainer.retry-policy/1", "max_attempts": 2,

@@ -1,6 +1,6 @@
 {
   "schema": "cantos.delivery-acceptance/1",
-  "updated_at": "2026-11-18T17:04:40.824642+00:00",
+  "updated_at": "2026-11-18T17:12:13.496462+00:00",
   "overall_status": "in_progress",
   "authority": "DELIVERY.md",
   "scope": "inference/useful-work, authorized operations, operating economics, maintainer workflow and recipient delivery",
@@ -67,7 +67,7 @@
       ],
       "workbench_dependency": {
         "archive": "public/open-compute/open-compute-workbench.zip",
-        "sha256": "ec4088f30c733b96b525cf78026132ca6047b0d2918ebdede3d1e64cefd50206",
+        "sha256": "16ea5f01a458971d07f87a12bf61b95e9643379c9a6a44655c3c387be8e3ab82",
         "release": "public/open-compute/WORKBENCH-RELEASE.json",
         "features": [
           "atomic retained decisions/imports",

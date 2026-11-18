@@ -60,7 +60,11 @@ def main():
         decision = deployment.decide_deployment(contract, native, runs,
             {side: [] for side in runs}, {side: None for side in runs})
         common.write(retained / 'decision.json', decision)
-        manifest = job.export_job(retained, root / 'bundle')
+        # Upgrade retained observations through the real data-only lifecycle.
+        # An authored decision file alone must not certify a completed job.
+        completed = root / 'completed-job'
+        decision = job.decide_job(retained, completed)
+        manifest = job.export_job(completed, root / 'bundle')
         ledger = engine.Ledger(package, root / 'store')
         server = engine.ExclusiveHTTPServer(('127.0.0.1', 0), engine.handler_for(ledger))
         origin = 'http://127.0.0.1:' + str(server.server_port)
