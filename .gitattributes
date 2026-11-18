@@ -33,3 +33,12 @@ hot-aisle/campaign/shelf/stranger-2-2026-09-24/** -text whitespace=cr-at-eol
 
 # Compressed historical projections are exact binary payloads.
 corpus/history/**/*.gz binary
+
+# Maintainer kit source bytes are portable across Linux and Windows.
+AGENTS.md text eol=lf
+CLAUDE.md text eol=lf
+DELIVERY.md text eol=lf
+DELIVERY.json text eol=lf
+MAINTAINER-START.md text eol=lf
+tools/*.py text eol=lf
+public/open-compute/*.txt text eol=lf

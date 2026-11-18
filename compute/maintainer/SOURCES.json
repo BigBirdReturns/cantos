@@ -1,0 +1,56 @@
+{
+  "schema": "cantos.maintainer.sources/1",
+  "relationship": "Portable pinned owner modules, copied without semantic changes. Extensions import their strict evaluator, receipt validator/comparator, task generator and exact event sweep.",
+  "authors": "Native Open Compute Ledger and vLLM-Independent project authors retained under the Cantos product owner. This is independent audit code, not a copy of vLLM source.",
+  "license": "This code directory is distributed under the existing compute/LICENSE: MIT, Copyright (c) 2026 Second Run contributors. Native source provenance is listed per file. It contains no upstream vLLM code, model weights or third-party benchmark dataset. Separately distributed empirical workload/evidence bundles retain their own source, selection and license manifests; this code license does not relicense those inputs.",
+  "files": [
+    {
+      "path": "owner_ocl/tasks.py",
+      "origin": "OCTO-W01:S:/Projects/Measurement/Open-Compute-Ledger/main/ocl/tasks.py",
+      "sha256": "3f8220f61dfc119728517299cebbc63319098213ae5ad7d4486f3415c8a811cf",
+      "bytes": 3880,
+      "modifications": "none"
+    },
+    {
+      "path": "owner_ocl/runner.py",
+      "origin": "Cantos public workbench ZIP fb759ca80b8b24f5c81958775985032ef2285966b410a8194f72ee454f1c04b5:instruments/controller/ocl/runner.py",
+      "sha256": "e31ecd9ec76b75d036f1201e8415618e3d85e750fe67fd7ce789cf4730b30ed3",
+      "bytes": 11850,
+      "modifications": "none"
+    },
+    {
+      "path": "owner_ocl/core.py",
+      "origin": "OCTO-W01:S:/Projects/Measurement/Open-Compute-Ledger/main/ocl/core.py",
+      "sha256": "996a2930e98211423104f1b4fa5f95a005b8e8fdfedd59fa08b7557e9525b1a5",
+      "bytes": 8128,
+      "modifications": "none"
+    },
+    {
+      "path": "owner_ocl/compare.py",
+      "origin": "OCTO-W01:S:/Projects/Measurement/Open-Compute-Ledger/main/ocl/compare.py",
+      "sha256": "7b0861d0d56b332db862052ff593bca85787a28810c27a137e29fb38946ad373",
+      "bytes": 4817,
+      "modifications": "none"
+    },
+    {
+      "path": "owner_vllm/audit.py",
+      "origin": "OCTO-W01:S:/Projects/Measurement/vLLM-Independent/main/audit.py",
+      "sha256": "9e81415da13b5dac5f2f57938c818af255e55029eb48c259365ec5bd02f8e7ba",
+      "bytes": 5921,
+      "modifications": "none"
+    }
+  ],
+  "contributions": [
+    {
+      "path": "evalplus_bridge.py",
+      "origin": "Cantos maintainer empirical qualification, 2026-11-18; extended public binding of existing EvalPlus owner outputs",
+      "modifications": "Accept compatible explicitly pinned EvalPlus0.3.1 images; validate optional observed image receipt; retain image/invocation evidence."
+    },
+    {
+      "path": "normalize.py",
+      "origin": "Cantos maintainer empirical qualification, 2026-11-18",
+      "sha256": "de8bd9e76891348f2f48f5451fff446561b0740c625a62bc095104c451b92391",
+      "modifications": "none"
+    }
+  ]
+}

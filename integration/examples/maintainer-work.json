@@ -1,0 +1,25 @@
+{
+  "tasks": [
+    {
+      "id": "baseline-observation",
+      "task_class": "maintainer-observe",
+      "source": "../../compute/maintainer/examples/spec.json",
+      "arm": "baseline",
+      "observation_id": "maintainer-example-initial"
+    },
+    {
+      "id": "candidate-observation",
+      "task_class": "maintainer-observe",
+      "source": "../../compute/maintainer/examples/spec.json",
+      "arm": "candidate",
+      "observation_id": "maintainer-example-initial"
+    },
+    {
+      "id": "maintainer-verdict",
+      "task_class": "maintainer-compare",
+      "baseline": {"task": "baseline-observation"},
+      "candidate": {"task": "candidate-observation"},
+      "policy": "../../compute/maintainer/examples/policy.json"
+    }
+  ]
+}
