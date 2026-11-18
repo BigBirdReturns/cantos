@@ -15,9 +15,14 @@ CHECKSUM = DEST / "MAINTAINER-SHA256SUMS.txt"
 REQUIRED = (
     "MAINTAINER-START.md", "DELIVERY.md", "DELIVERY.json",
     "AGENTS.md", "CLAUDE.md",
+    "app/tests/check_maintainer_evidence.py",
     "integration/work.py", "integration/task_maintainer.py",
     "integration/WORK.md", "integration/examples/maintainer-work.json",
     "integration/tests/test_maintainer_work.py",
+    "public/open-compute/open-compute-workbench.zip",
+    "public/open-compute/SHA256SUMS.txt",
+    "hot-aisle/campaign/run3/grade.sh",
+    "hot-aisle/campaign/run3/grader.Dockerfile",
 )
 PREFIX = "compute/maintainer/"
 

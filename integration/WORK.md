@@ -135,8 +135,11 @@ Run it again with the same store. On an empty store, the shipped example execute
 six tasks. The second request reuses six checked results. Each invocation prints
 its per-task status and writes a new run receipt. Result files contain the native
 outputs, dependency hashes and semantic parameters; source files are read only.
-Local qualification used Python 3.13.15 and Node 24.19.0. The existing CI is
-configured for Python 3.12 and Node 22; a remote run remains pending. Other
+The original local qualification used Python 3.13.15 and Node 24.19.0.
+The previous public release at f29ee3fd3bfb3a5240fa3280d7f2f4ed6ba7747e
+subsequently passed Cantos qualification run 44214791217 with Python 3.12 and
+Node 22. The maintainer recipient jobs separately qualify Python 3.10 on Linux
+and Python 3.12 on Windows for the exact candidate source. Other
 operators can use an appropriate writable result directory on their own machines.
 
 | Task class | Existing owner | Example and retained boundary |

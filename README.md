@@ -8,6 +8,12 @@ Cantos connects a job's inputs, decisions and results to reusable procedures. **
 
 [Open Research Desk](https://bigbirdreturns.github.io/cantos/research-desk/) to connect evidence, claims and decisions. [Use Second Run](https://bigbirdreturns.github.io/axm-tools/second-run/) to execute supported work and reuse a result while its declared dependencies hold. [Open Compute Workbench](https://bigbirdreturns.github.io/cantos/public/open-compute/) applies this workflow to serving choices. It includes common-grade and original results, published benchmark and price operands, decision history, portable result import and JSON export. The download runs with Python 3.10 or later.
 
+## Compare a serving change
+
+The [maintainer instrument](compute/maintainer/README.md) runs source-bound application workloads against baseline and candidate endpoints, retains streamed response evidence and independent grades, compares matched accepted cases, and emits CI verdicts with explicit thresholds. [Download the compact maintainer kit](https://bigbirdreturns.github.io/cantos/public/open-compute/#maintainers) or use this checkout. SecondRun's [maintainer workflow](integration/WORK.md#maintain-an-inference-implementation-with-retained-observations) retains observations, invalidates changed execution inputs, reuses unaffected analysis and supports explicit fresh requests. [Qualification](compute/maintainer/QUALIFICATION.md) separates live application observations from authored software fixtures. [Delivery scope](DELIVERY.md) and [current acceptance](DELIVERY.json) preserve the complete measurement-system goal across continuations.
+
+The same retained comparison exports portable packets through the existing Open Compute collector and decision engine. Import each packet into the workbench, retain its original quality requirement and observation date, and reopen the resulting decision when an assumption changes. [The kit start guide](MAINTAINER-START.md) includes the complete path and an offline check using the shipped live application evidence.
+
 ## Start with the work already available
 
 [Explore the historical record](https://bigbirdreturns.github.io/cantos/corpus/history.html) to search measurements, configurations, issues, price snapshots, workload traces and research. Each observation retains its source, dates and operating conditions. Filter a collection, inspect the original source, compare conditions and export the evidence relevant to your next job.

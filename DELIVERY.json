@@ -1,6 +1,6 @@
 {
   "schema": "cantos.delivery-acceptance/1",
-  "updated_at": "2026-11-18T02:04:00Z",
+  "updated_at": "2026-11-18T02:46:34.997451+00:00",
   "overall_status": "in_progress",
   "authority": "DELIVERY.md",
   "scope": "inference/useful-work, authorized operations, operating economics, maintainer workflow and recipient delivery",
@@ -8,7 +8,7 @@
     "inference_useful_work": {
       "status": "partial",
       "evidence": "Retained cross-accelerator Run3 grades and raw observations; vLLM streamed trials; published endpoint collector",
-      "remaining": "Expose usable controlled maintainer workflow, representative source-bound application outcomes and qualified AgentX outcomes; preserve runtime/model/precision differences."
+      "remaining": "Wider representative application/AgentX outcomes and qualified runtime/accelerator comparisons under explicit model, precision and operating conditions."
     },
     "operational_audits": {
       "status": "partial",
@@ -21,23 +21,67 @@
       "remaining": "Attributable fuller-system energy and actual operating-cost evidence where available; include failures/retries/verification/operator/idle costs or explicit sourced assumptions."
     },
     "maintainer_workflow": {
-      "status": "implementation_in_progress",
+      "status": "implemented_with_live_evidence_and_portable_acceptance",
       "source_path": "compute/maintainer/",
       "secondrun_path": "integration/work.py",
-      "acceptance": "Independent recipient can compare baseline/candidate with representative fixed workload, streamed raw observations, exact accepted outcomes, repeated comparisons, changed-factor attribution, thresholds and CI exits; demonstrate regression, incompatibility and fresh-observation semantics."
+      "acceptance": "Independent recipient can compare baseline/candidate with representative fixed workload, streamed raw observations, exact accepted outcomes, repeated comparisons, changed-factor attribution, thresholds and CI exits; demonstrate regression, incompatibility and fresh-observation semantics.",
+      "source_commits": [
+        "f9439d84e16e5a21a3aaa743f2a1f6fe17aa7fb1",
+        "bb4d21bd16b3e2d8b62138a7e4dbfcce16c6bfdc",
+        "25ce79d5a50484d034dc87246196f001662b4aa7"
+      ],
+      "secondrun_source_commit": "92828db2c73c7f4754da4bb3673b73743bda810e",
+      "qualification": "compute/maintainer/QUALIFICATION.md",
+      "stages": {
+        "instrument": "implemented",
+        "secondrun_integration": "implemented",
+        "live_application_exercise": "measured_not_qualified",
+        "existing_workbench_import_history": "verified_with_original_requirement",
+        "recipient_kit": "included_with_Linux_and_Windows_acceptance_jobs",
+        "publication": "Exact source qualification and Pages deployment are recorded by this commit's GitHub Actions runs."
+      },
+      "empirical": {
+        "archive": "compute/maintainer/evidence/vllm-humaneval-20261118.zip",
+        "sha256": "c4bcb662a5c200a81a206d70d7d41d7a8a9d9fec9930634de05ca407d5f59a3e",
+        "actual_inference_requests": 192,
+        "accepted_per_arm": 21,
+        "observations_per_arm": 96,
+        "original_minimum_acceptance": 0.8,
+        "verdict": "incomparable",
+        "workbench_decision": "no_eligible_configuration",
+        "oracle_canary_passed": 32,
+        "oracle_canary_total": 32,
+        "post_shutdown_refused_http_attempts": 96,
+        "actual_cost": "unknown",
+        "energy_scope": "GPU0 board telemetry integrated over measured trial windows; host and facility excluded."
+      },
+      "recipient_commands": [
+        "python -B app/tests/check_maintainer_evidence.py",
+        "python -B app/tests/check_maintainer_kit.py"
+      ]
     },
     "recipient_publication": {
-      "status": "published_previous_release",
-      "cantos_commit": "f29ee3fd3bfb3a5240fa3280d7f2f4ed6ba7747e",
+      "status": "source_and_recipient_artifacts_provided",
       "cantos_url": "https://bigbirdreturns.github.io/cantos/",
       "secondrun_url": "https://bigbirdreturns.github.io/axm-tools/second-run/",
-      "remaining": "Integrate and publish the maintainer workflow with source, executable examples, raw scoped evidence, licenses and tested recipient commands."
+      "remaining": "Public activation is gated by successful exact-source qualification and recorded in GitHub Actions. The broader original scope retains its separate residuals.",
+      "previous_cantos_commit": "f29ee3fd3bfb3a5240fa3280d7f2f4ed6ba7747e",
+      "maintainer_kit": "public/open-compute/maintainer-kit.zip",
+      "checksum": "public/open-compute/MAINTAINER-SHA256SUMS.txt",
+      "qualification_workflow": ".github/workflows/hot-aisle-ci.yml",
+      "publication_workflow": ".github/workflows/pages.yml"
     }
   },
   "current_work": {
     "instrument": "compute/maintainer/",
     "execution": "integration/work.py",
-    "release_branch": "work/maintainer-release-20261118"
+    "release_branch": "work/maintainer-release-20261118",
+    "source_identity": "Use the exact Git commit and recipient manifest for this checkout; producer commits identify source custody."
   },
-  "evidence_policy": "Preserve source, conditions, date, failures and observed/published/modeled/unknown basis. Fresh observation and retained analysis are distinct."
+  "evidence_policy": "Preserve source, conditions, date, failures and observed/published/modeled/unknown basis. Fresh observation and retained analysis are distinct.",
+  "outcome": {
+    "id": "ocl-original-user-delivery-20261117",
+    "status": "open",
+    "closure": "Scope-specific evidence must satisfy inference/useful-work, operations, economics and recipient acceptance."
+  }
 }

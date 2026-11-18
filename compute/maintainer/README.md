@@ -158,3 +158,14 @@ python -B -m unittest discover -s compute/maintainer/tests -v
 ```
 
 The tests use a labeled local HTTP/SSE protocol fixture. They exercise incomplete and malformed streams, HTTP errors, duplicate JSON, wrong answers, truncated output, missing identity, unexpected versus declared factor changes, raw evidence tampering, balanced task wins/losses, matched performance populations, external grade binding, price-only retained analysis and CI exits. Fixture timing tests establish instrument behavior; they make no physical accelerator or model-quality claim. Real endpoint/application qualification receipts remain separately identified.
+
+
+### Reopen the exported decision
+
+The export's `workbench-verification-store/` contains both imported configurations and the actual decision under the original acceptance requirement. From the same working directory used for `--out new-packets`, open that retained store:
+
+```sh
+python -B new-packets/workbench-owner/cantos/open-compute-ledger/run.py --store new-packets/workbench-verification-store --open
+```
+
+Select **History** to inspect the saved decision. The workbench owner is the verified bundle already extracted during export. Importing the two packet files into a different workspace creates a separate operator import; explicitly set requirements when making a new decision there.
