@@ -12,6 +12,8 @@ The [operational HTTP auditor](OPERATIONAL-HTTP.md) runs bounded authorized HEAD
 
 The [TLS certificate auditor](OPERATIONAL-TLS.md) collects bounded direct, authorized HTTPS-origin handshakes using default CA and hostname validation. Its externally pinned, offline-replayable receipts bind leaf DER identity, expiry policy and observed failure classes without converting them into provider security or SLA claims.
 
+The [single-connection HTTPS auditor](OPERATIONAL-HTTPS-JOINT.md) joins the verified TLS leaf and bounded HTTP response on the same direct socket. It records exact connection-level identities, rejection classes and observed response integrity in an externally pinned, offline-replayable receipt; no provider-wide SLA is inferred.
+
 ## Retry campaigns and measured resources
 
 [RETRY.md](RETRY.md) documents the separate bounded retry campaign: first-pass success, every solution attempt and HTTP step, exhausted work, full task latency, durable interruption evidence, and source-bound sandboxed EvalPlus grading. [RETRY-RESOURCES.md](RETRY-RESOURCES.md) documents the exact campaign join to GPU board power and declared cost scenarios. The original paired comparison below keeps its existing one-attempt protocol. Each retry arm needs its own immutable campaign under the same workload and retry policy; a retry receipt alone supplies no paired deployment verdict. The [Hy4 Flash readiness package](experiments/hy4-flash/README.md) pins model/runtime metadata and refuses unsupported or incomplete deployment inputs before inference.
