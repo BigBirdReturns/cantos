@@ -8,10 +8,12 @@ import subprocess
 import sys
 from tempfile import TemporaryDirectory
 import unittest
+from unittest import mock
 
 from compute.maintainer import operational_storage as storage
 
 
+@unittest.skipUnless(storage.SECURE_DIRFD, "secure descriptor collection unavailable on this OS")
 class StorageReadbackTests(unittest.TestCase):
     def setUp(self):
         self.tmp = TemporaryDirectory(prefix="cantos-storage-test-")
@@ -131,6 +133,18 @@ class StorageReadbackTests(unittest.TestCase):
                                   capture_output=True, text=True)
         self.assertEqual(negative.returncode, 3)
         self.assertFalse((self.root / "forbidden.json").exists())
+
+
+class CrossPlatformStorageTests(unittest.TestCase):
+    def test_plan_validation_portable(self):
+        plan = {"schema": storage.PLAN_SCHEMA, "samples": 1,
+                "entries": [{"path": "sample.bin", "bytes": 3, "sha256": "a" * 64}]}
+        self.assertEqual(storage.validate_plan(plan), plan)
+
+    def test_unsupported_collector_fails_closed(self):
+        with mock.patch.object(storage, "SECURE_DIRFD", False):
+            with self.assertRaisesRegex(storage.StorageAuditError, "traversal unavailable"):
+                storage.root_fd(Path("/owned/real/root"))
 
 
 if __name__ == "__main__":

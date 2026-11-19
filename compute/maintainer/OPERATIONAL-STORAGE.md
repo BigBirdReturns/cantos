@@ -7,6 +7,8 @@ python3 compute/maintainer/operational_storage.py collect --root /absolute/owned
 python3 compute/maintainer/operational_storage.py verify --plan /path/pinned-plan.json --receipt /separate/receipt.json
 ```
 
+The active readback collector requires POSIX directory-descriptor and no-follow support (qualified on Linux). Windows recipients can inspect the source and reproduce an existing receipt, but collection fails closed rather than following Windows reparse points without a qualified native handle implementation. The extracted-recipient gate exercises live readback on supported systems and retains the other portable gates on Windows.
+
 The plan has schema `cantos.storage-readback-plan/1`, a `samples` integer from 1 to 3, and an `entries` array of `{"path":"relative/file","bytes":123,"sha256":"<64 lowercase hex>"}`. Use a separately pinned source manifest to create the plan, rather than deriving expected digests from the same read under audit. The collector uses relative descriptor traversal with `O_NOFOLLOW`, rejects symlinks and nonregular files, checks file identity before, after and on a fresh open, and records missing or changed files as failed observations. It accepts only an absolute owned root and writes its receipt outside that root.
 
 Exit 0 means all observed samples matched the declared source identity; exit 2 means a completed audit observed mismatches or read errors; exit 3 means invalid input, an unsafe path, or collection failure. The offline verifier independently recomputes the plan binding and sample-level classifications and detects a falsified successful readback. Its verdict demonstrates internal receipt consistency, not independent collector authentication.

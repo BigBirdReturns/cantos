@@ -24,6 +24,11 @@ MAX_FILES = 32
 MAX_FILE_BYTES = 16 * 1024 * 1024
 MAX_TOTAL_BYTES = 64 * 1024 * 1024
 HEX = frozenset("0123456789abcdef")
+# A Windows pathlib fallback would traverse reparse points between validation
+# and open; fail closed until a native handle-based secure collector is qualified.
+SECURE_DIRFD = (os.open in os.supports_dir_fd
+                and bool(getattr(os, "O_NOFOLLOW", 0))
+                and bool(getattr(os, "O_DIRECTORY", 0)))
 
 
 class StorageAuditError(ValueError):
@@ -73,6 +78,7 @@ def validate_plan(plan):
 
 
 def root_fd(root):
+    require(SECURE_DIRFD, "secure POSIX directory-descriptor traversal unavailable")
     raw = Path(root)
     require(raw.is_absolute(), "absolute owned root required")
     require(raw.exists() and raw.is_dir() and not raw.is_symlink(),
