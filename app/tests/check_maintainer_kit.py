@@ -47,6 +47,8 @@ def main():
         call("compute/maintainer/operational_tls.py", "--help")
         call("compute/maintainer/operational_https_joint.py", "--help")
         call("compute/maintainer/external_grader.py", "--help")
+        call("compute/maintainer/diagnose_grades.py", "--help")
+        call("-m", "compute.maintainer.empirical_economics", "--help")
         call("compute/maintainer/owner_ocl/network_health.py", "--help")
         catalog = json.loads(call("integration/work.py", "--catalog"))
         names = {entry["task_class"] for entry in catalog["operations"]}
@@ -63,6 +65,8 @@ def main():
         call("-m", "unittest", "discover", "-s", "compute/maintainer/tests", "-p", "test_operational_https_joint.py", "-v")
         call("-m", "unittest", "discover", "-s", "compute/maintainer/tests", "-p", "test_job.py", "-v")
         call("-m", "unittest", "discover", "-s", "compute/maintainer/tests", "-p", "test_external_grader.py", "-v")
+        call("-m", "unittest", "discover", "-s", "compute/maintainer/tests", "-p", "test_diagnose_grades.py", "-v")
+        call("-m", "unittest", "discover", "-s", "compute/maintainer/tests", "-p", "test_empirical_economics.py", "-v")
         call("-m", "unittest", "compute.maintainer.tests.test_network_health", "-v")
         call("-m", "unittest", "discover", "-s", "compute/maintainer/experiments/hy4-flash/tests", "-p", "test_preflight.py", "-v")
         call("-m", "unittest", "discover", "-s", "integration/tests", "-p", "test_maintainer_work.py", "-v")
