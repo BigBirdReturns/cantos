@@ -54,6 +54,7 @@ def main():
         call("compute/maintainer/diagnose_grades.py", "--help")
         call("-m", "compute.maintainer.empirical_economics", "--help")
         call("-m", "compute.maintainer.ownership_economics", "--help")
+        call("-m", "compute.maintainer.provider_cur", "--help")
         call("compute/maintainer/owner_ocl/network_health.py", "--help")
         catalog = json.loads(call("integration/work.py", "--catalog"))
         names = {entry["task_class"] for entry in catalog["operations"]}

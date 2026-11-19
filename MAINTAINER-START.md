@@ -53,3 +53,10 @@ python -B app/tests/check_maintainer_evidence.py
 ```
 
 The expected application verdict is `incomparable`: each arm accepted 21 of 96 observations against its original 80% requirement. Successful verification means those observations, grades, unknown costs and refusal survive the entire delivered workflow.
+
+### Offline AWS CUR resource-cost attribution
+
+The extracted recipient can run the AWS legacy Cost and Usage Report audit with:
+    python -m compute.maintainer.provider_cur --cur PATH --cur-sha256 SHA256 --sessions PATH --sessions-sha256 SHA256 --receipt NEW_PATH
+
+Use an operator-supplied UTF-8 legacy CUR CSV with resource IDs enabled and externally retained SHA-256. The session JSON schema is cantos.aws-cur-resource-sessions/1 with 1 to 64 entries containing session_id, 12-digit account_id, resource_id, UTC start_utc/end_utc and observation_sha256 for separately held resource-session evidence. The executable attributes only USD Usage line items wholly inside one session. It retains unmatched rows, fee/discount types and incomplete intervals without prorating charges or inventing a provider rate. The exclusive receipt contains source digests, exact decimal arithmetic and allocation holds. Source pins establish file identity, not AWS provenance, complete billing, application acceptance or whole-system costs. No AWS account connection or charges are required.
