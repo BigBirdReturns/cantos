@@ -128,6 +128,41 @@ class ProcessContinuityTests(unittest.TestCase):
                 with self.assertRaises(audit.ContinuityError):
                     audit.validate_plan(dict(self.plan, **change))
 
+    def test_receipt_creation_is_exclusive_private_and_replayable(self):
+        target = self.root / "receipt-immutable.json"
+        report = self.report()
+        payload = audit.canonical(report) + b"\n"
+        digest = audit.write_receipt_once(target, payload)
+        self.assertEqual(digest, sha256(payload).hexdigest())
+        self.assertEqual(audit.read_receipt_bounded(target), payload)
+        self.assertEqual(self.replay(report)["verdict"], "stable_observed")
+        self.assertEqual(target.stat().st_mode & 0o077, 0)
+        with self.assertRaises(FileExistsError):
+            audit.write_receipt_once(target, b"replacement")
+        self.assertEqual(target.read_bytes(), payload)
+
+    def test_preexisting_symlink_never_overwrites_referenced_file(self):
+        victim = self.root / "victim.json"
+        victim.write_bytes(b"preserve-original")
+        link = self.root / "receipt-link.json"
+        link.symlink_to(victim)
+        with self.assertRaises(OSError):
+            audit.write_receipt_once(link, b"malicious-replacement")
+        self.assertEqual(victim.read_bytes(), b"preserve-original")
+        with self.assertRaises(OSError):
+            audit.read_receipt_bounded(link)
+
+    def test_replay_read_is_bounded_and_requires_regular_file(self):
+        oversized = self.root / "oversized.json"
+        oversized.write_bytes(b"x" * 131073)
+        with self.assertRaisesRegex(audit.ContinuityError, "bounded regular"):
+            audit.read_receipt_bounded(oversized)
+        with self.assertRaisesRegex(audit.ContinuityError, "bounded regular"):
+            audit.read_receipt_bounded(self.root)
+        with self.assertRaisesRegex(audit.ContinuityError, "bounded receipt"):
+            audit.write_receipt_once(self.root / "too-big.json", b"x" * 131073)
+        self.assertFalse((self.root / "too-big.json").exists())
+
     def test_cli_and_extracted_invocation(self):
         r = self.root / "receipt.json"
         p = self.root / "plan.json"

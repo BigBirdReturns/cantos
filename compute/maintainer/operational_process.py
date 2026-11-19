@@ -223,6 +223,39 @@ def verify(raw_receipt, plan, expected_sha256):
             "replay_scope": "receipt consistency, not authenticated observation"}
 
 
+def write_receipt_once(target, payload):
+    """Create a private, fsynced receipt exactly once, never replace evidence."""
+    require(type(payload) is bytes and 0 < len(payload) <= 131072,
+            "bounded receipt bytes")
+    target = Path(target)
+    target.parent.mkdir(parents=True, exist_ok=True)
+    flags = os.O_WRONLY | os.O_CREAT | os.O_EXCL | getattr(os, "O_NOFOLLOW", 0)
+    fd = os.open(target, flags, 0o600)
+    with os.fdopen(fd, "wb") as stream:
+        stream.write(payload)
+        stream.flush()
+        os.fsync(stream.fileno())
+    return sha256(payload).hexdigest()
+
+
+def read_receipt_bounded(target):
+    """Limit memory use and reject filesystem redirections while replaying."""
+    flags = os.O_RDONLY | getattr(os, "O_NOFOLLOW", 0) | getattr(os, "O_NONBLOCK", 0)
+    fd = os.open(target, flags)
+    try:
+        info = os.fstat(fd)
+        require(stat.S_ISREG(info.st_mode) and info.st_size <= 131072,
+                "receipt must be a bounded regular file")
+        with os.fdopen(fd, "rb") as stream:
+            fd = -1
+            payload = stream.read(131073)
+    finally:
+        if fd >= 0:
+            os.close(fd)
+    require(len(payload) <= 131072, "receipt size budget")
+    return payload
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     sub = parser.add_subparsers(dest="operation", required=True)
@@ -237,16 +270,15 @@ def main():
     try:
         plan = json.loads(Path(args.plan).read_text(encoding="utf-8"))
         if args.operation == "collect":
-            require(not Path(args.receipt).exists(), "refuse existing receipt")
+            # Exclusivity is enforced by O_EXCL at the write, not a racy exists check.
             result = collect(plan)
             target = Path(args.receipt)
-            target.parent.mkdir(parents=True, exist_ok=True)
-            target.write_bytes(canonical(result) + b"\n")
+            receipt_sha = write_receipt_once(target, canonical(result) + b"\n")
             print(json.dumps({"verdict": result["summary"]["verdict"],
                               "receipt": str(target),
-                              "sha256": sha256(target.read_bytes()).hexdigest()}))
+                              "sha256": receipt_sha}))
             return 0 if result["summary"]["verdict"] == "stable_observed" else 2
-        raw = Path(args.receipt).read_bytes()
+        raw = read_receipt_bounded(args.receipt)
         print(json.dumps(verify(raw, plan, args.expected_sha256)))
         return 0
     except (OSError, ValueError, json.JSONDecodeError) as exc:
