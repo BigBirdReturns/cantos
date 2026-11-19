@@ -101,6 +101,31 @@ class ProcessContinuityTests(unittest.TestCase):
         with self.assertRaises(audit.ContinuityError):
             self.report()
 
+    def test_ancestor_symlink_denied_even_if_path_precheck_races(self):
+        from unittest.mock import patch
+        # Simulates a parent becoming a symlink after advisory realpath
+        # validation. Descriptor-relative traversal must reject it.
+        foreign = self.root / "foreign"
+        foreign.mkdir()
+        (foreign / "service.pid").write_text(str(self.procs[-1].pid) + "\n")
+        redirected = self.root / "redirect"
+        redirected.symlink_to(foreign, target_is_directory=True)
+        plan = dict(self.plan, pidfile=str(redirected / "service.pid"))
+        with patch.object(audit.os.path, "realpath", side_effect=lambda p: str(p)):
+            report = self.report(plan)
+        self.assertEqual(report["summary"]["unreadable"], 3)
+        self.assertEqual(report["summary"]["observed"], 0)
+        self.assertEqual(self.replay(report, plan)["verdict"], "incomplete")
+
+    def test_pidfile_direct_open_refuses_symlink_ancestor(self):
+        alternate = self.root / "alternate"
+        alternate.mkdir()
+        (alternate / "service.pid").write_text(str(self.procs[-1].pid) + "\n")
+        redirect = self.root / "subdirectory-link"
+        redirect.symlink_to(alternate, target_is_directory=True)
+        with self.assertRaises(OSError):
+            audit._pidfile(str(redirect / "service.pid"))
+
     def test_tamper_and_external_digest(self):
         r = self.report()
         h = sha256(audit.canonical(r) + b"\n").hexdigest()

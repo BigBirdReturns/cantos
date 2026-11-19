@@ -60,10 +60,24 @@ def validate_plan(plan):
 
 
 def _pidfile(path):
-    # Never follow a final-component symbolic link. Limit intake to a numeric
-    # PID; do not import command lines, environment variables or process memory.
-    flags = os.O_RDONLY | getattr(os, "O_NOFOLLOW", 0) | getattr(os, "O_NONBLOCK", 0)
-    fd = os.open(path, flags)
+    # Walk every parent from a pinned directory descriptor, refusing symlinks
+    # in each component. A realpath precheck alone is racy if a parent moves.
+    # Never import command lines, environment variables or process memory.
+    require(sys.platform.startswith("linux") and hasattr(os, "O_NOFOLLOW"),
+            "Linux no-follow directory support required")
+    parts = Path(path).parts
+    require(Path(path).is_absolute() and len(parts) >= 2, "PID path invalid")
+    dir_flags = os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW | os.O_CLOEXEC
+    file_flags = os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK | os.O_CLOEXEC
+    parent_fd = os.open("/", dir_flags)
+    try:
+        for component in parts[1:-1]:
+            next_fd = os.open(component, dir_flags, dir_fd=parent_fd)
+            os.close(parent_fd)
+            parent_fd = next_fd
+        fd = os.open(parts[-1], file_flags, dir_fd=parent_fd)
+    finally:
+        os.close(parent_fd)
     try:
         st = os.fstat(fd)
         require(stat.S_ISREG(st.st_mode), "PID file is not regular")
