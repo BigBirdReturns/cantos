@@ -51,6 +51,7 @@ def main():
         call("compute/maintainer/external_grader.py", "--help")
         call("compute/maintainer/diagnose_grades.py", "--help")
         call("-m", "compute.maintainer.empirical_economics", "--help")
+        call("-m", "compute.maintainer.ownership_economics", "--help")
         call("compute/maintainer/owner_ocl/network_health.py", "--help")
         catalog = json.loads(call("integration/work.py", "--catalog"))
         names = {entry["task_class"] for entry in catalog["operations"]}
@@ -71,6 +72,7 @@ def main():
         call("-m", "unittest", "discover", "-s", "compute/maintainer/tests", "-p", "test_external_grader.py", "-v")
         call("-m", "unittest", "discover", "-s", "compute/maintainer/tests", "-p", "test_diagnose_grades.py", "-v")
         call("-m", "unittest", "discover", "-s", "compute/maintainer/tests", "-p", "test_empirical_economics.py", "-v")
+        call("-m", "unittest", "discover", "-s", "compute/maintainer/tests", "-p", "test_ownership_economics.py", "-v")
         call("-m", "unittest", "compute.maintainer.tests.test_network_health", "-v")
         call("-m", "unittest", "discover", "-s", "compute/maintainer/experiments/hy4-flash/tests", "-p", "test_preflight.py", "-v")
         call("-m", "unittest", "discover", "-s", "integration/tests", "-p", "test_maintainer_work.py", "-v")
@@ -93,6 +95,21 @@ def main():
         assert replay["verdict"] == "pass"
         assert replay["samples"]["attempts"] == 4 and replay["samples"]["successes"] == 4
         assert replay == json.loads((evidence / "ledger-report.json").read_text())
+        # Recompute reserved-capacity economics from original retained real
+        # external grades/board telemetry in the extracted recipient package.
+        retained = root / "ownership-retained"
+        retained.mkdir()
+        with ZipFile(kit / "compute/maintainer/evidence/vllm-humaneval-20261118.zip") as z:
+            assert all(not PurePosixPath(n).is_absolute() and ".." not in PurePosixPath(n).parts
+                       and "\\" not in n for n in z.namelist())
+            z.extractall(retained)
+        ownership = json.loads(call("-m", "compute.maintainer.ownership_economics",
+            str(retained / "cantos-vllm-humaneval-evidence-20261118"),
+            "--scenario", str(kit / "compute/maintainer/examples/ownership-scenario.json")))
+        assert [ownership["arms"][a]["observed"]["accepted"]
+                for a in ("baseline", "candidate")] == [21, 21]
+        assert ownership["comparison"]["decision"] == "hold_both_below_observed_acceptance_floor"
+        assert len(ownership["original_source_sha256"]) >= 10
         call("app/tests/check_maintainer_evidence.py")
         call("app/tests/check_comparison_workbench.py")
         call("app/tests/check_deployment_workbench.py")
