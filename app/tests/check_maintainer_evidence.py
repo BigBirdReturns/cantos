@@ -55,6 +55,19 @@ def main():
         thermal = evidence / "cantos-thermal-envelope-20261118"
         secondrun = evidence / "cantos-secondrun-empirical-20261118"
         evidence = evidence / "cantos-vllm-humaneval-evidence-20261118"
+        paired_output = target / "paired-grade-diagnosis.json"
+        execute(ROOT, "-m", "compute.maintainer.diagnose_grades", evidence,
+                "--output", paired_output)
+        paired = read(paired_output)
+        assert paired["accepted"] == {"baseline": 21, "candidate": 21}
+        assert paired["paired_acceptance"]["attempt_contingency"] == {
+            "both_accepted": 21, "baseline_only": 0,
+            "candidate_only": 0, "neither_accepted": 75}
+        assert paired["paired_acceptance"]["task_direction"] == {
+            "candidate_favored": 0, "baseline_favored": 0,
+            "tied": 32, "task_count": 32}
+        assert paired["paired_acceptance"]["attempt_pairs"] == 96
+        assert paired["paired_acceptance"]["candidate_minus_baseline_accepted"] == 0
         execute(evidence, evidence / "verify.py")
         execute(thermal, thermal / "verify.py")
         execute(ROOT, secondrun / "verify-secondrun.py", "--evidence", evidence,

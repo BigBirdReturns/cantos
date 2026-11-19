@@ -7,7 +7,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from compute.maintainer.diagnose_grades import EvidenceError, diagnose, sha256
+from compute.maintainer.diagnose_grades import EvidenceError, diagnose, sha256, paired_acceptance
 
 
 def write_json(path: Path, obj) -> None:
@@ -85,6 +85,7 @@ class CodingDiagnosisTests(unittest.TestCase):
         self.assertEqual(result["total_per_arm"], 2)
         self.assertEqual(result["accepted"], {"baseline": 1, "candidate": 1})
         self.assertEqual(result["cross_arm_acceptance_disagreements"], 0)
+        self.assertEqual(result["paired_acceptance"]["attempt_contingency"], {"both_accepted": 1, "baseline_only": 0, "candidate_only": 0, "neither_accepted": 1})
         self.assertEqual(result["grading_categories"]["baseline"]["base_fail_plus_fail"], 1)
         self.assertNotIn("return True", json.dumps(result))
         self.assertNotIn("return None", json.dumps(result))
@@ -140,3 +141,37 @@ class CodingDiagnosisTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class PairedAcceptanceTests(unittest.TestCase):
+    def test_balanced_total_hides_paired_replacements(self):
+        keys = [(f"HumanEval/{i}", 0, 0) for i in range(4)]
+        a = {k: {"accepted": i == 0} for i, k in enumerate(keys)}
+        b = {k: {"accepted": i == 1} for i, k in enumerate(keys)}
+        result = paired_acceptance(a, b)
+        self.assertEqual(result["candidate_minus_baseline_accepted"], 0)
+        self.assertEqual(result["attempt_contingency"], {"both_accepted": 0, "baseline_only": 1, "candidate_only": 1, "neither_accepted": 2})
+        self.assertEqual(result["task_direction"], {"candidate_favored": 1, "baseline_favored": 1, "tied": 2, "task_count": 4})
+        self.assertEqual(result["task_sign_two_sided_p_conditional"], 1.0)
+
+    def test_task_cluster_is_unit_not_repeated_attempts(self):
+        keys = [("A", 0, 0), ("A", 1, 0), ("B", 0, 0), ("C", 0, 0)]
+        a = {k: {"accepted": i == 2} for i, k in enumerate(keys)}
+        b = {k: {"accepted": i in (0, 1)} for i, k in enumerate(keys)}
+        result = paired_acceptance(a, b)
+        self.assertEqual(result["candidate_minus_baseline_accepted"], 1)
+        self.assertEqual(result["task_direction"], {"candidate_favored": 1, "baseline_favored": 1, "tied": 1, "task_count": 3})
+        self.assertEqual(result["task_sign_two_sided_p_conditional"], 1.0)
+
+    def test_exact_two_sided_conditional_sign(self):
+        keys = [(str(i), 0, 0) for i in range(5)]
+        a = {k: {"accepted": i == 3} for i, k in enumerate(keys)}
+        b = {k: {"accepted": i < 3} for i, k in enumerate(keys)}
+        result = paired_acceptance(a, b)
+        self.assertEqual(result["task_sign_two_sided_p_conditional"], 0.625)
+
+    def test_fail_closed_mismatched_and_nonboolean_grade(self):
+        with self.assertRaisesRegex(EvidenceError, "unmatched"):
+            paired_acceptance({("A", 0, 0): {"accepted": True}}, {})
+        with self.assertRaisesRegex(EvidenceError, "boolean"):
+            paired_acceptance({("A", 0, 0): {"accepted": 1}}, {("A", 0, 0): {"accepted": True}})

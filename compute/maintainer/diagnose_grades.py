@@ -30,6 +30,46 @@ def _key(entry: dict) -> tuple[str, int, int]:
     return (entry["task_id"], entry["trial"], entry["repetition"])
 
 
+def _exact_sign_p(wins: int, losses: int) -> float:
+    """Two-sided conditional sign probability for a declared independent unit."""
+    from math import comb
+    n = wins + losses
+    if not n:
+        return 1.0
+    smaller = min(wins, losses)
+    return min(1.0, (2 * sum(comb(n, k) for k in range(smaller + 1))) / (1 << n))
+
+
+def paired_acceptance(left: dict, right: dict) -> dict:
+    """Reconcile paired grade outcomes, grouping repetitions at task level."""
+    if set(left) != set(right):
+        raise EvidenceError("unmatched paired grade keys")
+    counts = {"both_accepted": 0, "baseline_only": 0,
+              "candidate_only": 0, "neither_accepted": 0}
+    task_scores = collections.defaultdict(lambda: [0, 0])
+    for key in sorted(left):
+        a, b = left[key]["accepted"], right[key]["accepted"]
+        if type(a) is not bool or type(b) is not bool:
+            raise EvidenceError("paired grade acceptance must be boolean")
+        counts["both_accepted" if a and b else
+               "baseline_only" if a else
+               "candidate_only" if b else "neither_accepted"] += 1
+        task_scores[key[0]][0] += int(a)
+        task_scores[key[0]][1] += int(b)
+    wins = sum(b > a for a, b in task_scores.values())
+    losses = sum(a > b for a, b in task_scores.values())
+    ties = len(task_scores) - wins - losses
+    return {
+        "attempt_pairs": len(left),
+        "attempt_contingency": counts,
+        "candidate_minus_baseline_accepted": counts["candidate_only"] - counts["baseline_only"],
+        "task_direction": {"candidate_favored": wins, "baseline_favored": losses,
+                           "tied": ties, "task_count": len(task_scores)},
+        "task_sign_two_sided_p_conditional": _exact_sign_p(wins, losses),
+        "interpretation": "Descriptive paired outcomes from verified grades. Task sign probability assumes independent exchangeable tasks; benchmark coverage, trial clustering, nonrandom assignment and pairing metadata limit external inference."
+    }
+
+
 def diagnose(campaign: Path) -> dict:
     campaign = campaign.resolve(strict=True)
     receipt_path = campaign / "VLLM-EMPIRICAL-RECEIPT.json"
@@ -155,6 +195,7 @@ def diagnose(campaign: Path) -> dict:
         "cross_arm_identical_responses": sum(left[k]["response_sha256"] == right[k]["response_sha256"] for k in left),
         "cross_arm_different_responses": sum(left[k]["response_sha256"] != right[k]["response_sha256"] for k in left),
         "cross_arm_acceptance_disagreements": sum(left[k]["accepted"] != right[k]["accepted"] for k in left),
+        "paired_acceptance": paired_acceptance(left, right),
         "task_diagnosis": detail,
         "limits": ["No raw solutions or prompts are exported", "No provider/cloud SLA inference",
                    "Board-only energy is not whole-system economics", "No model change or application improvement demonstrated"],
