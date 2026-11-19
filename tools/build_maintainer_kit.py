@@ -27,6 +27,7 @@ REQUIRED = (
     "public/open-compute/WORKBENCH-RELEASE.json",
     "hot-aisle/campaign/run3/grade.sh",
     "hot-aisle/campaign/run3/grader.Dockerfile",
+    "tools/check_release_promotion.py",
 )
 PREFIX = "compute/maintainer/"
 

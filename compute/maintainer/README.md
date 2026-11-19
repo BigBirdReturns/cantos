@@ -199,3 +199,7 @@ The native receipt retains `status=error` for failed HTTP attempts; the paired
 verdict separately records service failure counts and only promotes verifiable
 service responses into failure-inclusive quality comparisons. A retained receipt
 can be reanalyzed without repeating inference.
+
+### Publication lineage preflight
+
+The recipient kit includes `tools/check_release_promotion.py`. Before any source promotion, invoke it with the exact candidate commit, expected live public-main commit, independently protected root-owner commit, and candidate kit SHA-256 and byte count. It performs live read-only remote-head verification, requires both accepted lineages to be ancestors of the candidate, checks a clean exact HEAD, and verifies the candidate's committed kit bytes. A `HOLD` exits 2. Passing this source preflight does not establish hosted CI or GitHub Pages deployment. Custom remotes are explicitly classified as fixtures, not evidence of public GitHub state.
