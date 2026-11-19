@@ -21,10 +21,16 @@ import sys
 import time
 from urllib.parse import urlsplit
 
-from .operational_http import classify
-from .operational_http_verify import _replay_observation
-from .operational_tls import (_evaluate, _number, _digest, _utc, _require,
-                              certificate_validity, validate_origin, AuditInputError)
+if __package__:
+    from .operational_http import classify
+    from .operational_http_verify import _replay_observation
+    from .operational_tls import (_evaluate, _number, _digest, _utc, _require,
+                                  certificate_validity, validate_origin, AuditInputError)
+else:
+    from operational_http import classify
+    from operational_http_verify import _replay_observation
+    from operational_tls import (_evaluate, _number, _digest, _utc, _require,
+                                 certificate_validity, validate_origin, AuditInputError)
 
 
 def canonical(doc: dict) -> bytes:
