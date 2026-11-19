@@ -61,6 +61,21 @@ class ContractRules(unittest.TestCase):
         self.assertFalse(task_contract.comment_only("# a\nreturn 1\n"))
 
 
+    def test_pinned_grader_resolves_and_restores_conflicting_helper_modules(self):
+        import types
+        from unittest.mock import patch
+        collision_common = types.ModuleType("common")
+        collision_replay = types.ModuleType("replay")
+        with patch.dict(sys.modules, {"common": collision_common, "replay": collision_replay}):
+            grade = task_contract._load(
+                "_run3_pinned_isolation_regression", task_contract.RUN3 / "grade.py", task_contract.RUN3
+            )
+            self.assertEqual(grade.encoded({"x": 1}), b'{"x":1}\n')
+            self.assertTrue(callable(grade.buckets))
+            self.assertIs(sys.modules["common"], collision_common)
+            self.assertIs(sys.modules["replay"], collision_replay)
+
+
 class ContractHandoff(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -102,8 +117,23 @@ class ContractHandoff(unittest.TestCase):
             self.assertNotEqual(meta["samples_sha256"], meta["retained_samples_sha256"])
 
     def test_materialized_candidates_match_the_pinned_grader_input_and_prepare_layout(self):
-        import common
-        import grade
+        # Resolve the pinned run3 modules by exact file, independent of the
+        # global common/replay module cache populated by other test suites.
+        import importlib.util
+        from unittest.mock import patch
+        grader_dir = ROOT / "hot-aisle" / "campaign" / "run3"
+
+        def pinned_module(label, script):
+            spec = importlib.util.spec_from_file_location(label, grader_dir / script)
+            module = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(module)
+            return module
+
+        common = pinned_module("run3_grader_common", "common.py")
+        with patch.dict(sys.modules, {"common": common}):
+            replay = pinned_module("run3_grader_replay", "replay.py")
+            with patch.dict(sys.modules, {"replay": replay}):
+                grade = pinned_module("run3_grader_grade", "grade.py")
         out = self.directory / "candidate-grade"
         new_map = task_contract.materialize(self.result_path, FIXTURE, out)
         retained = json.loads((FIXTURE / "grade" / "mapping.json").read_bytes())

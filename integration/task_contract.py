@@ -97,8 +97,18 @@ def prepare(task, base):
 
 
 def _load(name, path, sibling_path=None):
+    # The pinned Run 3 grader imports generic sibling names, common and
+    # replay. Other Cantos tests may already have cached different modules
+    # under those names. Resolve the grader's own helpers for this import,
+    # then restore the caller's exact module cache, including missing keys.
+    shadowed = {}
+    missing = object()
     if sibling_path is not None:
+        sibling_path = Path(sibling_path)
         sys.path.insert(0, str(sibling_path))
+        for helper in ("common", "replay"):
+            if (sibling_path / (helper + ".py")).is_file():
+                shadowed[helper] = sys.modules.pop(helper, missing)
     try:
         spec = importlib.util.spec_from_file_location(name, path)
         module = importlib.util.module_from_spec(spec)
@@ -106,6 +116,10 @@ def _load(name, path, sibling_path=None):
     finally:
         if sibling_path is not None:
             sys.path.remove(str(sibling_path))
+            for helper, previous in shadowed.items():
+                sys.modules.pop(helper, None)
+                if previous is not missing:
+                    sys.modules[helper] = previous
     return module
 
 

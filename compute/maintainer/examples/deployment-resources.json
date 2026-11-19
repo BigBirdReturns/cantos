@@ -1,0 +1,129 @@
+{
+  "schema": "cantos.resource-template/1",
+  "resource_identity_sha256": "<replace-with-declared-hardware-sha256>",
+  "accounting_mode": "measured_trials",
+  "scenario": {
+    "capex_usd": {
+      "basis": "unknown",
+      "source": "Blank recipient worksheet: deployment-assumptions.txt",
+      "source_sha256": "e3a6b17478cb2234bd7bfed0aa520ab897af45fe1ded679c6f1022aecaf3b146",
+      "value": null
+    },
+    "residual_usd": {
+      "basis": "unknown",
+      "source": "Blank recipient worksheet: deployment-assumptions.txt",
+      "source_sha256": "e3a6b17478cb2234bd7bfed0aa520ab897af45fe1ded679c6f1022aecaf3b146",
+      "value": null
+    },
+    "life_hours": {
+      "basis": "unknown",
+      "source": "Blank recipient worksheet: deployment-assumptions.txt",
+      "source_sha256": "e3a6b17478cb2234bd7bfed0aa520ab897af45fe1ded679c6f1022aecaf3b146",
+      "value": null
+    },
+    "utilization": {
+      "basis": "unknown",
+      "source": "Blank recipient worksheet: deployment-assumptions.txt",
+      "source_sha256": "e3a6b17478cb2234bd7bfed0aa520ab897af45fe1ded679c6f1022aecaf3b146",
+      "value": null
+    },
+    "financing_usd_per_hour": {
+      "basis": "unknown",
+      "source": "Blank recipient worksheet: deployment-assumptions.txt",
+      "source_sha256": "e3a6b17478cb2234bd7bfed0aa520ab897af45fe1ded679c6f1022aecaf3b146",
+      "value": null
+    },
+    "hosting_usd_per_hour": {
+      "basis": "unknown",
+      "source": "Blank recipient worksheet: deployment-assumptions.txt",
+      "source_sha256": "e3a6b17478cb2234bd7bfed0aa520ab897af45fe1ded679c6f1022aecaf3b146",
+      "value": null
+    },
+    "operations_usd_per_hour": {
+      "basis": "unknown",
+      "source": "Blank recipient worksheet: deployment-assumptions.txt",
+      "source_sha256": "e3a6b17478cb2234bd7bfed0aa520ab897af45fe1ded679c6f1022aecaf3b146",
+      "value": null
+    },
+    "maintenance_usd_per_hour": {
+      "basis": "unknown",
+      "source": "Blank recipient worksheet: deployment-assumptions.txt",
+      "source_sha256": "e3a6b17478cb2234bd7bfed0aa520ab897af45fe1ded679c6f1022aecaf3b146",
+      "value": null
+    },
+    "network_usd_per_hour": {
+      "basis": "unknown",
+      "source": "Blank recipient worksheet: deployment-assumptions.txt",
+      "source_sha256": "e3a6b17478cb2234bd7bfed0aa520ab897af45fe1ded679c6f1022aecaf3b146",
+      "value": null
+    },
+    "electricity_usd_per_kwh": {
+      "basis": "unknown",
+      "source": "Blank recipient worksheet: deployment-assumptions.txt",
+      "source_sha256": "e3a6b17478cb2234bd7bfed0aa520ab897af45fe1ded679c6f1022aecaf3b146",
+      "value": null
+    },
+    "pue": {
+      "basis": "unknown",
+      "source": "Blank recipient worksheet: deployment-assumptions.txt",
+      "source_sha256": "e3a6b17478cb2234bd7bfed0aa520ab897af45fe1ded679c6f1022aecaf3b146",
+      "value": null
+    },
+    "intervention_seconds": {
+      "basis": "unknown",
+      "source": "Blank recipient worksheet: deployment-assumptions.txt",
+      "source_sha256": "e3a6b17478cb2234bd7bfed0aa520ab897af45fe1ded679c6f1022aecaf3b146",
+      "value": null
+    },
+    "intervention_usd_per_hour": {
+      "basis": "unknown",
+      "source": "Blank recipient worksheet: deployment-assumptions.txt",
+      "source_sha256": "e3a6b17478cb2234bd7bfed0aa520ab897af45fe1ded679c6f1022aecaf3b146",
+      "value": null
+    },
+    "average_it_power_w": {
+      "basis": "unknown",
+      "source": "Blank recipient worksheet: deployment-assumptions.txt",
+      "source_sha256": "e3a6b17478cb2234bd7bfed0aa520ab897af45fe1ded679c6f1022aecaf3b146",
+      "value": null
+    }
+  },
+  "additional_costs": [
+    {
+      "category": "verification",
+      "unit": "USD",
+      "includes_in_scenario": false,
+      "basis": "unknown",
+      "source": "Blank recipient worksheet: deployment-assumptions.txt",
+      "source_sha256": "e3a6b17478cb2234bd7bfed0aa520ab897af45fe1ded679c6f1022aecaf3b146",
+      "value": null
+    },
+    {
+      "category": "retry",
+      "unit": "USD",
+      "includes_in_scenario": false,
+      "basis": "unknown",
+      "source": "Blank recipient worksheet: deployment-assumptions.txt",
+      "source_sha256": "e3a6b17478cb2234bd7bfed0aa520ab897af45fe1ded679c6f1022aecaf3b146",
+      "value": null
+    },
+    {
+      "category": "operator",
+      "unit": "USD",
+      "includes_in_scenario": false,
+      "basis": "unknown",
+      "source": "Blank recipient worksheet: deployment-assumptions.txt",
+      "source_sha256": "e3a6b17478cb2234bd7bfed0aa520ab897af45fe1ded679c6f1022aecaf3b146",
+      "value": null
+    },
+    {
+      "category": "idle",
+      "unit": "USD",
+      "includes_in_scenario": false,
+      "basis": "unknown",
+      "source": "Blank recipient worksheet: deployment-assumptions.txt",
+      "source_sha256": "e3a6b17478cb2234bd7bfed0aa520ab897af45fe1ded679c6f1022aecaf3b146",
+      "value": null
+    }
+  ]
+}

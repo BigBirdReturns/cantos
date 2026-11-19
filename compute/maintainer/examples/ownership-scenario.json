@@ -1,0 +1,31 @@
+{
+  "electricity_usd_per_kwh": 0.25,
+  "it_to_facility_multiplier": 1.2,
+  "acceptance_floor": 0.8,
+  "verification_usd_per_attempt": 0.01,
+  "recovery_usd_per_failed_attempt": 0.1,
+  "operator_seconds_per_failed_attempt": 30,
+  "operator_usd_per_hour": 36,
+  "arms": {
+    "baseline": {
+      "hardware_usd": 10000,
+      "service_life_calendar_hours": 17520,
+      "utilization_fraction": 0.6,
+      "availability_fraction": 0.95,
+      "operations_usd_per_calendar_hour": 0.1,
+      "network_storage_usd_per_active_hour": 0.02,
+      "unmetered_active_watts_assumed": 60,
+      "whole_host_idle_watts_assumed": 80
+    },
+    "candidate": {
+      "hardware_usd": 12000,
+      "service_life_calendar_hours": 17520,
+      "utilization_fraction": 0.6,
+      "availability_fraction": 0.95,
+      "operations_usd_per_calendar_hour": 0.1,
+      "network_storage_usd_per_active_hour": 0.02,
+      "unmetered_active_watts_assumed": 60,
+      "whole_host_idle_watts_assumed": 80
+    }
+  }
+}

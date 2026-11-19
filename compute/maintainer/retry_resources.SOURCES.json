@@ -1,0 +1,22 @@
+{
+  "schema": "cantos.retry.owner-sources/1",
+  "owner": "Open Compute Ledger",
+  "capture_date_utc": "2026-11-18",
+  "integration": "Unmodified owner functions; retry_resources.py binds them to validated campaign windows.",
+  "files": [
+    {
+      "source": "Open-Compute-Ledger/main/ocl/energy.py",
+      "destination": "owner_ocl/energy.py",
+      "sha256": "cc5129a5fdea946094e99783f4c65b1f8b1385a4f6e54f12158434cd116a505b",
+      "bytes": 1651,
+      "modified": false
+    },
+    {
+      "source": "Open-Compute-Ledger/main/ocl/costs.py",
+      "destination": "owner_ocl/costs.py",
+      "sha256": "59787191c181c6d17b3ecc50268051f0fc10b85cd508c8f65d76dc423741721d",
+      "bytes": 4129,
+      "modified": false
+    }
+  ]
+}

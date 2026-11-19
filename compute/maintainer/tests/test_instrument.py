@@ -37,8 +37,8 @@ class Endpoint:
                 body = json.loads(self.rfile.read(int(self.headers["Content-Length"])))
                 if not body["stream"]:
                     raise AssertionError("client failed to request streaming")
-                if outer.mode == "http":
-                    self.send_response(500)
+                if outer.mode in ("http", "auth", "throttle"):
+                    self.send_response(401 if outer.mode == "auth" else 429 if outer.mode == "throttle" else 500)
                     self.end_headers()
                     self.wfile.write(b'{"error":"fixture failure"}')
                     return
@@ -197,14 +197,40 @@ class Instrument(unittest.TestCase):
         result = self.run_pair()
         self.assertEqual(result["verdict"], "incomparable", result)
 
-    def test_http_failure_is_error_and_raw_body_survives(self):
+    def test_http_5xx_is_failure_inclusive_regression_and_raw_body_survives(self):
         self.b.mode = "http"
         result = self.run_pair()
-        self.assertEqual(result["verdict"], "error", result)
+        self.assertEqual(result["verdict"], "regression", result)
+        self.assertEqual(result["candidate"]["server_http_failures"], 2)
+        self.assertEqual(result["candidate"]["accepted_tasks"], 0)
+        self.assertEqual(result["candidate"]["other_request_errors"], 0)
+        self.assertEqual(result["candidate"]["capture_status"], "error")
         run = m.validate_receipt(self.root / "pair/candidate/run.json")
         raw = load(self.root / "pair/candidate" / run["observations"][0]["attempts"][0]["raw_path"])
         self.assertEqual(raw["http_status"], 500)
         self.assertIn("http_error_body_b64", raw)
+        self.assertEqual((self.a.requests, self.b.requests), (2, 2))
+        # Reanalyzing retained observations uses no fresh inference.
+        self.assertEqual(self.analyze()["verdict"], "regression")
+        self.assertEqual((self.a.requests, self.b.requests), (2, 2))
+
+    def test_http_429_is_counted_as_throttled_serving_work(self):
+        self.b.mode = "throttle"
+        result = self.run_pair()
+        self.assertEqual(result["verdict"], "regression", result)
+        self.assertEqual(result["candidate"]["server_http_failures"], 2)
+        self.assertEqual(result["candidate"]["accepted_tasks"], 0)
+        self.assertEqual(result["candidate"]["other_request_errors"], 0)
+        run = m.validate_receipt(self.root / "pair/candidate/run.json")
+        raw = load(self.root / "pair/candidate" / run["observations"][0]["attempts"][0]["raw_path"])
+        self.assertEqual(raw["http_status"], 429)
+
+    def test_authentication_http_failure_remains_instrument_error(self):
+        self.b.mode = "auth"
+        result = self.run_pair()
+        self.assertEqual(result["verdict"], "error", result)
+        self.assertEqual(result["candidate"]["other_request_errors"], 2)
+        self.assertEqual(result["candidate"]["server_http_failures"], 0)
 
     def test_unfinished_stream_is_error_even_with_correct_visible_answer(self):
         self.b.mode = "missing_done"
@@ -296,10 +322,15 @@ class Instrument(unittest.TestCase):
         self.assertEqual(self.analyze()["verdict"], "error")
 
     def test_performance_threshold_detects_real_fixture_delay(self):
-        self.b.delay = 0.06
-        self.pol["max_p95_latency_increase"] = 1
-        self.pol["max_p95_ttft_increase"] = 1
-        self.assertEqual(self.run_pair()["verdict"], "regression")
+        # The response delay must exceed Windows timer and HTTP fixture jitter.
+        # This still measures a real streamed response, not synthetic metrics.
+        self.b.delay = 0.6
+        self.pol["max_p95_latency_increase"] = 0.25
+        self.pol["max_p95_ttft_increase"] = 0.25
+        result = self.run_pair()
+        self.assertEqual(result["verdict"], "regression", result["performance_checks"])
+        self.assertIn("p95_latency_s",
+                      {check["metric"] for check in result["performance_checks"] if check["status"] == "regression"})
 
     def test_external_grades_bound_to_response_workload_and_grader(self):
         grader = {"name": "fixture application grader", "revision": "1", "artifact_sha256": "1" * 64,

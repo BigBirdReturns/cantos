@@ -254,13 +254,13 @@ def policy(value):
 # grader-to-receipt bridge must regrade/reanalyze, never issue fresh model calls.
 # The observation producer still includes all in-process collector, strict
 # evaluator, stream parser, model/request/protocol and auditor Python modules.
-GRADING_ONLY = frozenset({"evalplus_bridge.py", "normalize.py"})
+GRADING_ONLY = frozenset({"evalplus_bridge.py", "normalize.py", "external_grader.py"})
 
 
 def producer_records(*, for_observation=False):
     # Packet export owns offline workbench import and grouping. Keep its source
     # in analysis/export provenance while excluding it from collection identity.
-    excluded = GRADING_ONLY | {"packets.py"} if for_observation else GRADING_ONLY
+    excluded = GRADING_ONLY | {"packets.py", "comparison_bundle.py", "deployment.py", "deployment_bundle.py", "deployment_retry.py"} if for_observation else GRADING_ONLY
     return [file_record(p, ROOT) for p in sorted(ROOT.rglob("*.py"))
             if "tests" not in p.relative_to(ROOT).parts
             and not p.name.startswith("test_")

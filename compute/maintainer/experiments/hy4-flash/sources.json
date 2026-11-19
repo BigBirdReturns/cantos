@@ -1,0 +1,145 @@
+{
+  "collection_correction": "BF16 recipe selector is default; the source normalizes unsupported bf16 selector to default. Retained canonical requests have no adjusted parameters.",
+  "collection_jobs": [
+    "hy4-readiness-metadata-snapshot-20261118a",
+    "hy4-readiness-recipe-inspect-20261118a",
+    "hy4-readiness-metadata-resume-20261118a"
+  ],
+  "container_layers_downloaded": false,
+  "inference_executed": false,
+  "observed_at": "2026-11-18T05:35:09.685842Z",
+  "schema": "cantos.hy4.sources/1",
+  "sources": [
+    {
+      "artifact": {
+        "bytes": 60976,
+        "path": "snapshots/instruct-bf16.hf-metadata.json",
+        "sha256": "ae5d6c5fe756368dd4b520a7c4d5675047e16ee6627ad1a0772789bf8ff40760"
+      },
+      "evidence_class": "publisher_metadata",
+      "id": "instruct-bf16-hf-metadata",
+      "retrieved_at": "2026-11-18T05:32:38.254364Z",
+      "url": "https://huggingface.co/api/models/tencent/Hy4-flash/revision/d88c9dfd96ba4f2e6b92adba0b8e8f1c8696f959?blobs=true"
+    },
+    {
+      "artifact": {
+        "bytes": 10759,
+        "path": "snapshots/instruct-bf16.config.json",
+        "sha256": "a59ea10f98683e83c6515e340c85e24eb2e48c91d75af491ed3d6e88c3bc1b3c"
+      },
+      "evidence_class": "publisher_configuration",
+      "id": "instruct-bf16-config",
+      "retrieved_at": "2026-11-18T05:32:38.254364Z",
+      "url": "https://huggingface.co/tencent/Hy4-flash/raw/d88c9dfd96ba4f2e6b92adba0b8e8f1c8696f959/config.json"
+    },
+    {
+      "artifact": {
+        "bytes": 104548,
+        "path": "snapshots/instruct-fp8.hf-metadata.json",
+        "sha256": "213b5f7ffaf0f5d53aafe98287e822719c192d5ab541505f02e2da8b5226ec25"
+      },
+      "evidence_class": "publisher_metadata",
+      "id": "instruct-fp8-hf-metadata",
+      "retrieved_at": "2026-11-18T05:32:38.254364Z",
+      "url": "https://huggingface.co/api/models/tencent/Hy4-flash-FP8/revision/003107fa248f5892064ab1c43af0a7003dd68c9b?blobs=true"
+    },
+    {
+      "artifact": {
+        "bytes": 60968,
+        "path": "snapshots/instruct-fp8.config.json",
+        "sha256": "25c33298be04f349f3220fbd73b5024c7943cb5a8b17747951d3d2a1cd69d2e7"
+      },
+      "evidence_class": "publisher_configuration",
+      "id": "instruct-fp8-config",
+      "retrieved_at": "2026-11-18T05:32:38.254364Z",
+      "url": "https://huggingface.co/tencent/Hy4-flash-FP8/raw/003107fa248f5892064ab1c43af0a7003dd68c9b/config.json"
+    },
+    {
+      "artifact": {
+        "bytes": 53364,
+        "path": "snapshots/base-bf16.hf-metadata.json",
+        "sha256": "6989588c82d4629865a23e7c416edc720dc2cad15dd142976f5a45a7218cde6f"
+      },
+      "evidence_class": "publisher_metadata",
+      "id": "base-bf16-hf-metadata",
+      "retrieved_at": "2026-11-18T05:32:38.254364Z",
+      "url": "https://huggingface.co/api/models/tencent/Hy4-flash-base/revision/95b9f8239e2f63cb837c91704f070ae47332ebdf?blobs=true"
+    },
+    {
+      "artifact": {
+        "bytes": 9534,
+        "path": "snapshots/base-bf16.config.json",
+        "sha256": "7f7d0c6b63fa9e018be943e95167ea7953087b1a4b00de546402430a18c06650"
+      },
+      "evidence_class": "publisher_configuration",
+      "id": "base-bf16-config",
+      "retrieved_at": "2026-11-18T05:32:38.254364Z",
+      "url": "https://huggingface.co/tencent/Hy4-flash-base/raw/95b9f8239e2f63cb837c91704f070ae47332ebdf/config.json"
+    },
+    {
+      "artifact": {
+        "bytes": 1978,
+        "path": "snapshots/bf16.recipe.json",
+        "sha256": "308e9b82bb576664265873fc0a42eb24a6c60ce587c1d2556cf017b24f99f7d9"
+      },
+      "evidence_class": "maintainer_recipe",
+      "id": "bf16-recipe",
+      "retrieved_at": "2026-11-18T05:35:09.685842Z",
+      "url": "https://recipes.vllm.ai/tencent/Hy4-flash.json?hardware=h200&variant=default&strategy=single_node_tp&features=none"
+    },
+    {
+      "artifact": {
+        "bytes": 1978,
+        "path": "snapshots/fp8.recipe.json",
+        "sha256": "004e68e67db02bfcf03c1fac04ee2f390e8d2a7c2478ce2e273bec109c71590a"
+      },
+      "evidence_class": "maintainer_recipe",
+      "id": "fp8-recipe",
+      "retrieved_at": "2026-11-18T05:35:09.685842Z",
+      "url": "https://recipes.vllm.ai/tencent/Hy4-flash.json?hardware=h200&variant=fp8&strategy=single_node_tp&features=none"
+    },
+    {
+      "evidence_class": "publisher_documentation",
+      "git_revision": "7ab20f35602b1d3fc863f85aee20cb87eb8e53c5",
+      "id": "tencent-model-readme",
+      "reason": "Source identity and factual findings retained; full documentation remains at pinned public URL.",
+      "response_bytes": 19630,
+      "response_sha256": "414b04a08e764316b4765eb85507070407a9ddaaeb8d4fd2c0ea7d25a68b7867",
+      "retained": false,
+      "retrieved_at": "2026-11-18T05:35:09.685842Z",
+      "url": "https://raw.githubusercontent.com/Tencent-Hunyuan/Hy4-flash/7ab20f35602b1d3fc863f85aee20cb87eb8e53c5/README.md"
+    },
+    {
+      "evidence_class": "maintainer_documentation",
+      "id": "vllm-recipe-documentation",
+      "response_bytes": 5324,
+      "response_sha256": "7dca2b4f3ae5cc1e672f983b60d0a4d97608f38f39b003e4ec2aebaefd6a9cec",
+      "retained": false,
+      "retrieved_at": "2026-11-18T05:35:09.685842Z",
+      "url": "https://recipes.vllm.ai/tencent/Hy4-flash.md?hardware=h200&variant=fp8&strategy=single_node_tp&features=none"
+    },
+    {
+      "artifact": {
+        "bytes": 743,
+        "path": "snapshots/container-index.json",
+        "sha256": "6b645bfbf4b89602d38f6e93c1c418516ec0bfbf54b64cd661b8075bfec01da1"
+      },
+      "evidence_class": "container_registry_metadata",
+      "id": "vllm-container-index",
+      "retrieved_at": "2026-11-18T05:35:09.685842Z",
+      "url": "https://registry-1.docker.io/v2/vllm/vllm-openai/manifests/sha256:6b645bfbf4b89602d38f6e93c1c418516ec0bfbf54b64cd661b8075bfec01da1"
+    },
+    {
+      "artifact": {
+        "bytes": 9717,
+        "path": "snapshots/container-linux-amd64-manifest.json",
+        "sha256": "f4c3ca45840d5612d673b9723f8a82740707a2e5ff06c02df03246f4276a7c69"
+      },
+      "evidence_class": "container_registry_metadata",
+      "id": "vllm-container-linux-amd64",
+      "retrieved_at": "2026-11-18T05:35:09.685842Z",
+      "url": "https://registry-1.docker.io/v2/vllm/vllm-openai/manifests/sha256:f4c3ca45840d5612d673b9723f8a82740707a2e5ff06c02df03246f4276a7c69"
+    }
+  ],
+  "weight_payloads_downloaded": false
+}

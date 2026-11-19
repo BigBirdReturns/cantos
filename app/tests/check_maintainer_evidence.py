@@ -1,6 +1,7 @@
 """Verify retained live evidence through the delivered analyzer and decision engine."""
 from hashlib import sha256
 import json
+import os
 from pathlib import Path, PurePosixPath
 import subprocess
 import sys
@@ -55,6 +56,46 @@ def main():
         thermal = evidence / "cantos-thermal-envelope-20261118"
         secondrun = evidence / "cantos-secondrun-empirical-20261118"
         evidence = evidence / "cantos-vllm-humaneval-evidence-20261118"
+        if (os.open in os.supports_dir_fd and getattr(os, "O_NOFOLLOW", 0)
+                and getattr(os, "O_DIRECTORY", 0)):
+            # Independent extracted-recipient B path: actual owned archive file
+            # readback with pinned identity and a rejected wrong-hash control.
+            audit_source = evidence / "grade-baseline/grades.json"
+            storage_plan = {"schema": "cantos.storage-readback-plan/1", "samples": 2,
+                            "entries": [{"path": "grade-baseline/grades.json",
+                                         "bytes": audit_source.stat().st_size,
+                                         "sha256": sha256(audit_source.read_bytes()).hexdigest()}]}
+            storage_plan_path = target / "storage-plan.json"
+            storage_receipt_path = target / "storage-receipt.json"
+            storage_plan_path.write_text(json.dumps(storage_plan) + "\n", encoding="utf-8")
+            storage_cli = ROOT / "compute/maintainer/operational_storage.py"
+            execute(ROOT, storage_cli, "collect", "--root", evidence,
+                    "--plan", storage_plan_path, "--output", storage_receipt_path)
+            execute(ROOT, storage_cli, "verify", "--plan", storage_plan_path,
+                    "--receipt", storage_receipt_path)
+            assert read(storage_receipt_path)["summary"]["passed"] == 2
+            wrong_plan = json.loads(json.dumps(storage_plan))
+            wrong_plan["entries"][0]["sha256"] = "0" * 64
+            wrong_plan_path = target / "wrong-storage-plan.json"
+            wrong_plan_path.write_text(json.dumps(wrong_plan) + "\n", encoding="utf-8")
+            execute(ROOT, storage_cli, "collect", "--root", evidence,
+                    "--plan", wrong_plan_path, "--output", target / "storage-negative.json",
+                    expected=2)
+            execute(ROOT, storage_cli, "verify", "--plan", wrong_plan_path,
+                    "--receipt", target / "storage-negative.json", expected=2)
+        paired_output = target / "paired-grade-diagnosis.json"
+        execute(ROOT, "-m", "compute.maintainer.diagnose_grades", evidence,
+                "--output", paired_output)
+        paired = read(paired_output)
+        assert paired["accepted"] == {"baseline": 21, "candidate": 21}
+        assert paired["paired_acceptance"]["attempt_contingency"] == {
+            "both_accepted": 21, "baseline_only": 0,
+            "candidate_only": 0, "neither_accepted": 75}
+        assert paired["paired_acceptance"]["task_direction"] == {
+            "candidate_favored": 0, "baseline_favored": 0,
+            "tied": 32, "task_count": 32}
+        assert paired["paired_acceptance"]["attempt_pairs"] == 96
+        assert paired["paired_acceptance"]["candidate_minus_baseline_accepted"] == 0
         execute(evidence, evidence / "verify.py")
         execute(thermal, thermal / "verify.py")
         execute(ROOT, secondrun / "verify-secondrun.py", "--evidence", evidence,
