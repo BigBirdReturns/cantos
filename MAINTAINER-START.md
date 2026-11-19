@@ -124,3 +124,20 @@ duplicate evidence, cross-endpoint mixing and out-of-order observations, then
 reports sampled failures, probe time and the unobserved gaps. Its verdict
 requires each source window to satisfy its original policy. It never converts
 sampling into provider-wide uptime or a service-level agreement.
+
+## Audit a TLS certificate for an authorized origin
+
+The [TLS certificate audit](compute/maintainer/OPERATIONAL-TLS.md) validates a
+live leaf certificate under the platform default CA and hostname trust policy,
+then replays the public certificate DER, expiry and fingerprint against an
+independently retained exact receipt SHA-256. From the extracted kit:
+
+```sh
+python -B compute/maintainer/operational_tls.py collect --url https://EXACT-HOST/ --allow-host EXACT-HOST --samples 2 --min-remaining-days 14 --output tls-observations.json
+sha256sum tls-observations.json
+python -B compute/maintainer/operational_tls.py verify --receipt tls-observations.json --expected-receipt-sha256 INDEPENDENTLY-RETAINED-SHA256 --output tls-verification.json
+```
+
+A TLS handshake verifies the sampled endpoint certificate, not the application
+route, provider-wide SLA or complete security posture. Offline replay cannot
+repeat the live CA trust check.

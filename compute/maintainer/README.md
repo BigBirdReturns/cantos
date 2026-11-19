@@ -10,6 +10,8 @@ The workbench's **Decide what to run** view prepares the inputs and imports the 
 
 The [operational HTTP auditor](OPERATIONAL-HTTP.md) runs bounded authorized HEAD availability probes or GET response-body identity checks with explicit expected SHA-256, direct transport and fail-closed receipt handling. It provides observed client-vantage network and content-distribution evidence for operational requirements, without claiming provider-side SLA or application acceptance.
 
+The [TLS certificate auditor](OPERATIONAL-TLS.md) collects bounded direct, authorized HTTPS-origin handshakes using default CA and hostname validation. Its externally pinned, offline-replayable receipts bind leaf DER identity, expiry policy and observed failure classes without converting them into provider security or SLA claims.
+
 ## Retry campaigns and measured resources
 
 [RETRY.md](RETRY.md) documents the separate bounded retry campaign: first-pass success, every solution attempt and HTTP step, exhausted work, full task latency, durable interruption evidence, and source-bound sandboxed EvalPlus grading. [RETRY-RESOURCES.md](RETRY-RESOURCES.md) documents the exact campaign join to GPU board power and declared cost scenarios. The original paired comparison below keeps its existing one-attempt protocol. Each retry arm needs its own immutable campaign under the same workload and retry policy; a retry receipt alone supplies no paired deployment verdict. The [Hy4 Flash readiness package](experiments/hy4-flash/README.md) pins model/runtime metadata and refuses unsupported or incomplete deployment inputs before inference.
