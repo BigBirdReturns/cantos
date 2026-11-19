@@ -55,6 +55,31 @@ def main():
         thermal = evidence / "cantos-thermal-envelope-20261118"
         secondrun = evidence / "cantos-secondrun-empirical-20261118"
         evidence = evidence / "cantos-vllm-humaneval-evidence-20261118"
+        # Independent extracted-recipient B path: actual owned archive file
+        # readback with pinned identity and a rejected wrong-hash control.
+        audit_source = evidence / "grade-baseline/grades.json"
+        storage_plan = {"schema": "cantos.storage-readback-plan/1", "samples": 2,
+                        "entries": [{"path": "grade-baseline/grades.json",
+                                     "bytes": audit_source.stat().st_size,
+                                     "sha256": sha256(audit_source.read_bytes()).hexdigest()}]}
+        storage_plan_path = target / "storage-plan.json"
+        storage_receipt_path = target / "storage-receipt.json"
+        storage_plan_path.write_text(json.dumps(storage_plan) + "\n", encoding="utf-8")
+        storage_cli = ROOT / "compute/maintainer/operational_storage.py"
+        execute(ROOT, storage_cli, "collect", "--root", evidence,
+                "--plan", storage_plan_path, "--output", storage_receipt_path)
+        execute(ROOT, storage_cli, "verify", "--plan", storage_plan_path,
+                "--receipt", storage_receipt_path)
+        assert read(storage_receipt_path)["summary"]["passed"] == 2
+        wrong_plan = json.loads(json.dumps(storage_plan))
+        wrong_plan["entries"][0]["sha256"] = "0" * 64
+        wrong_plan_path = target / "wrong-storage-plan.json"
+        wrong_plan_path.write_text(json.dumps(wrong_plan) + "\n", encoding="utf-8")
+        execute(ROOT, storage_cli, "collect", "--root", evidence,
+                "--plan", wrong_plan_path, "--output", target / "storage-negative.json",
+                expected=2)
+        execute(ROOT, storage_cli, "verify", "--plan", wrong_plan_path,
+                "--receipt", target / "storage-negative.json", expected=2)
         paired_output = target / "paired-grade-diagnosis.json"
         execute(ROOT, "-m", "compute.maintainer.diagnose_grades", evidence,
                 "--output", paired_output)
