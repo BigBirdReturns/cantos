@@ -54,6 +54,65 @@ def _scenario(value: dict | None) -> dict | None:
             for k in sorted(SCENARIO_FIELDS)}
 
 
+def scenario_sensitivity(arms: dict, assumptions: dict) -> dict:
+    """Differentiate modeled cost per accepted task, holding observations fixed.
+
+    A one-axis price change is affine in these six declared assumptions.
+    Crossing a modeled cost gap does not establish a measured deployment winner.
+    """
+    baseline, candidate = (arms[name] for name in ARMS)
+    if not baseline["accepted"] or not candidate["accepted"]:
+        return {"status": "undefined_without_accepted_work", "axes": {}}
+
+    def coefficient(record: dict, field: str) -> float:
+        attempts = record["attempts"]
+        joules = record["board_joules"]
+        duration = record["trial_duration_s"]
+        n = record["accepted"]
+        coefficients = {
+            "electricity_usd_per_kwh": joules / 3_600_000 * assumptions["it_to_facility_multiplier"],
+            "it_to_facility_multiplier": joules / 3_600_000 * assumptions["electricity_usd_per_kwh"],
+            "fixed_usd_per_hour": duration / 3600,
+            "verification_usd_per_attempt": attempts,
+            "intervention_seconds_per_attempt": attempts / 3600 * assumptions["intervention_usd_per_hour"],
+            "intervention_usd_per_hour": attempts / 3600 * assumptions["intervention_seconds_per_attempt"],
+        }
+        return coefficients[field] / n
+
+    delta = candidate["scenario_usd"]["per_accepted"] - baseline["scenario_usd"]["per_accepted"]
+    axes = {}
+    for field in sorted(SCENARIO_FIELDS):
+        slope = coefficient(candidate, field) - coefficient(baseline, field)
+        current = assumptions[field]
+        minimum = 1.0 if field == "it_to_facility_multiplier" else 0.0
+        if math.isclose(slope, 0.0, rel_tol=0.0, abs_tol=1e-15):
+            root = None
+            state = "gap_invariant_on_axis"
+        else:
+            crossing = current - delta / slope
+            # Avoid losing a boundary root to subtraction rounding; reject
+            # genuinely negative prices and multipliers below their domain.
+            if math.isfinite(crossing) and crossing < minimum and math.isclose(
+                crossing, minimum, rel_tol=0.0, abs_tol=1e-10
+            ):
+                crossing = minimum
+            root = crossing if math.isfinite(crossing) and crossing >= minimum else None
+            state = "conditional_in_domain_crossing" if root is not None else "no_in_domain_crossing"
+        axes[field] = {
+            "at_assumption": current,
+            "minimum_allowed": minimum,
+            "gap_slope_usd_per_accepted_per_unit": slope,
+            "zero_gap_assumption": root,
+            "status": state,
+        }
+    return {
+        "status": "conditional_price_axis_sensitivity",
+        "candidate_minus_baseline_usd_per_accepted": delta,
+        "axes": axes,
+        "interpretation": "Affine one-axis scenarios with other assumptions fixed; no observed invoices or deployment winner.",
+    }
+
+
 def audit(campaign: Path, scenario: dict | None = None) -> dict:
     campaign = campaign.resolve(strict=True)
     grade_diagnosis = diagnose(campaign)  # Validates original source bytes and external grades.
@@ -173,6 +232,7 @@ def audit(campaign: Path, scenario: dict | None = None) -> dict:
             "candidate_minus_baseline_board_joules": arms["candidate"]["board_joules"]-arms["baseline"]["board_joules"],
             "candidate_minus_baseline_accepted": arms["candidate"]["accepted"]-arms["baseline"]["accepted"]},
         "scenario": scenario,
+        "sensitivity": scenario_sensitivity(arms, scenario) if scenario is not None else None,
         "scope": "Board sensor energy inside captured trial windows, inclusive of failed attempts; accepted task outcomes from source-pinned external grading.",
         "limits": [
             "Board sensor is not whole-host/facility energy or exclusive job attribution.",

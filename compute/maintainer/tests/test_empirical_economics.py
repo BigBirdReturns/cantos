@@ -110,6 +110,45 @@ class EmpiricalEconomicsTests(unittest.TestCase):
             with self.subTest(mutation=mutation), self.assertRaises(EvidenceError):
                 audit(self.root, scenario)
 
+    def test_price_axis_sensitivity_from_pinned_board_evidence(self):
+        # Candidate power changes only within its captured trial window.
+        self.samples[3]["watts"] = 130.0
+        self.samples[4]["watts"] = 130.0
+        self.save_samples()
+        cand = self.receipt["arms"]["candidate"]
+        cand["board_joules"] = 130.0
+        cand["board_wh"] = 130.0 / 3600
+        cand["joules_per_accepted"] = 130.0
+        cand["per_trial"][0].update({
+            "board_joules": 130.0,
+            "board_wh": 130.0 / 3600,
+            "joules_per_accepted": 130.0,
+        })
+        self.save_receipt()
+        assumptions = self.scenario()
+        result = audit(self.root, assumptions)
+        effect = result["sensitivity"]
+        self.assertEqual(effect["status"], "conditional_price_axis_sensitivity")
+        electricity = effect["axes"]["electricity_usd_per_kwh"]
+        self.assertAlmostEqual(electricity["gap_slope_usd_per_accepted_per_unit"],
+                               30.0 / 3_600_000 * 1.3)
+        self.assertAlmostEqual(electricity["zero_gap_assumption"], 0.0)
+        self.assertEqual(electricity["status"], "conditional_in_domain_crossing")
+        self.assertEqual(effect["axes"]["verification_usd_per_attempt"]["status"],
+                         "gap_invariant_on_axis")
+        changed = {**assumptions, "electricity_usd_per_kwh": 0.4}
+        revised = audit(self.root, changed)
+        self.assertEqual(result["source_sha256"], revised["source_sha256"])
+        self.assertAlmostEqual(revised["sensitivity"]["candidate_minus_baseline_usd_per_accepted"],
+                               2 * effect["candidate_minus_baseline_usd_per_accepted"])
+
+    def test_sensitivity_undefined_without_accepted_tasks(self):
+        from compute.maintainer.empirical_economics import scenario_sensitivity
+        arms = {"baseline": {"accepted": 0},
+                "candidate": {"accepted": 1}}
+        self.assertEqual(scenario_sensitivity(arms, self.scenario())["status"],
+                         "undefined_without_accepted_work")
+
     def test_scenario_reuses_observations_without_promoting_to_invoices(self):
         a, b = self.scenario(), self.scenario()
         b["electricity_usd_per_kwh"] = .4
