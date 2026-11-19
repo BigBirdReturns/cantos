@@ -46,6 +46,7 @@ def main():
         call("compute/maintainer/operational_http_ledger.py", "--help")
         call("compute/maintainer/operational_tls.py", "--help")
         call("compute/maintainer/operational_https_joint.py", "--help")
+        call("compute/maintainer/operational_https_ledger.py", "--help")
         call("compute/maintainer/publication_witness.py", "--help")
         call("compute/maintainer/external_grader.py", "--help")
         call("compute/maintainer/diagnose_grades.py", "--help")
@@ -64,6 +65,7 @@ def main():
         call("-m", "unittest", "discover", "-s", "compute/maintainer/tests", "-p", "test_operational_http_ledger.py", "-v")
         call("-m", "unittest", "discover", "-s", "compute/maintainer/tests", "-p", "test_operational_tls.py", "-v")
         call("-m", "unittest", "discover", "-s", "compute/maintainer/tests", "-p", "test_operational_https_joint.py", "-v")
+        call("-m", "unittest", "discover", "-s", "compute/maintainer/tests", "-p", "test_operational_https_ledger.py", "-v")
         call("-m", "unittest", "discover", "-s", "compute/maintainer/tests", "-p", "test_publication_witness.py", "-v")
         call("-m", "unittest", "discover", "-s", "compute/maintainer/tests", "-p", "test_job.py", "-v")
         call("-m", "unittest", "discover", "-s", "compute/maintainer/tests", "-p", "test_external_grader.py", "-v")
@@ -73,6 +75,24 @@ def main():
         call("-m", "unittest", "discover", "-s", "compute/maintainer/experiments/hy4-flash/tests", "-p", "test_preflight.py", "-v")
         call("-m", "unittest", "discover", "-s", "integration/tests", "-p", "test_maintainer_work.py", "-v")
         call("-m", "unittest", "discover", "-s", "integration/tests", "-p", "test_maintainer_dependency_boundary.py", "-v")
+        # Independently replay four captured real HTTPS observations from the
+        # extracted kit. These are sparse endpoint samples, never an SLA claim.
+        evidence = root / "https-temporal-replay"
+        evidence.mkdir()
+        with ZipFile(kit / "compute/maintainer/evidence/https-temporal-20261119.zip") as z:
+            members = z.namelist()
+            assert set(members) == {"manifest.json", "manifest.sha256",
+                                    "receipt-1.json", "receipt-2.json", "ledger-report.json"}
+            assert all("/" not in x and "\\" not in x for x in members)
+            z.extractall(evidence)
+        pinned_manifest = (evidence / "manifest.sha256").read_text().strip()
+        replay = json.loads(call("compute/maintainer/operational_https_ledger.py",
+            "--manifest", str(evidence / "manifest.json"),
+            "--expected-manifest-sha256", pinned_manifest,
+            "--evidence-directory", str(evidence)))
+        assert replay["verdict"] == "pass"
+        assert replay["samples"]["attempts"] == 4 and replay["samples"]["successes"] == 4
+        assert replay == json.loads((evidence / "ledger-report.json").read_text())
         call("app/tests/check_maintainer_evidence.py")
         call("app/tests/check_comparison_workbench.py")
         call("app/tests/check_deployment_workbench.py")
