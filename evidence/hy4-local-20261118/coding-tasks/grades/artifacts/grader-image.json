@@ -1,0 +1,54 @@
+[
+    {
+        "Id": "sha256:803e956852925ff35f8d7a9f55a97fbcfad09a8dfa77a439f5b2ac537702563d",
+        "RepoTags": [
+            "cantos-evalplus:20261024"
+        ],
+        "RepoDigests": [
+            "cantos-evalplus@sha256:803e956852925ff35f8d7a9f55a97fbcfad09a8dfa77a439f5b2ac537702563d"
+        ],
+        "Comment": "buildkit.dockerfile.v0",
+        "Created": "2026-10-24T21:27:27.558485467Z",
+        "Config": {
+            "Env": [
+                "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "LANG=C.UTF-8",
+                "GPG_KEY=A035C8C19219BA821ECEA86B64E628F8D684696D",
+                "PYTHON_VERSION=3.11.16",
+                "PYTHON_SHA256=91bcdebfdde239a003ae93738a7fce0f9230fee5c4bc2b86f6e6e8c6f98aabe8"
+            ],
+            "Cmd": [
+                "python3"
+            ]
+        },
+        "Architecture": "amd64",
+        "Os": "linux",
+        "Size": 1241561879,
+        "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:a6dc765193a52cbaede3c93a9ff48b9540948dd0774bbe7031fcb5847606f9ac",
+                "sha256:a5c84380b3657bb723a1f71fa963f1e3a3f01e2c6bcba12e3b9a0d336158c7a9",
+                "sha256:4a01ba3ac604812ef31dab0006efecd1d572676f7a68afa169a9d57883025006",
+                "sha256:d190d09d7bd91836f809045799a7024a54026b3da5de1ccb811627fcf9878b92",
+                "sha256:edf67c63eb392715f12c68e37066406d765ef753e3877e6126b93ef1636f3ab6"
+            ]
+        },
+        "Metadata": {
+            "LastTagTime": "2026-10-24T21:28:09.528248746Z"
+        },
+        "Descriptor": {
+            "mediaType": "application/vnd.oci.image.index.v1+json",
+            "digest": "sha256:803e956852925ff35f8d7a9f55a97fbcfad09a8dfa77a439f5b2ac537702563d",
+            "size": 856
+        },
+        "Identity": {
+            "Build": [
+                {
+                    "Ref": "okhy7k4cfti8kbqjxo66mj2sw",
+                    "CreatedAt": "2026-10-24T21:28:27.630959662Z"
+                }
+            ]
+        }
+    }
+]

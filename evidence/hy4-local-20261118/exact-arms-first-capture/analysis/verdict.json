@@ -1,0 +1,512 @@
+{
+  "analysis_producer_files": [
+    {
+      "bytes": 36,
+      "path": "__init__.py",
+      "sha256": "694bb1ed29bb473d8879602f1318f551c5a2420fdc3b4cd7180457058e018b21"
+    },
+    {
+      "bytes": 15326,
+      "path": "common.py",
+      "sha256": "ab579a8aa3ac0d5f952307bb3d78a69e78e54f6958d029ff37479a5b2cbd8f9c"
+    },
+    {
+      "bytes": 12321,
+      "path": "experiments/hy4-flash/preflight.py",
+      "sha256": "114fdce8dd98c9749262a1be45c32c3432732e0b8e5a1823498e63c237e52788"
+    },
+    {
+      "bytes": 3360,
+      "path": "experiments/hy4-flash/render_recipe.py",
+      "sha256": "4d06d5b59d884973753bd653fb1ade56a76c5e1767e53cff65ba74f80a4f549d"
+    },
+    {
+      "bytes": 48631,
+      "path": "maintainer.py",
+      "sha256": "c42222a3222cf8be6dca9bb96945a757fa1f9438a35a0b0077d0d98699eef2f6"
+    },
+    {
+      "bytes": 66,
+      "path": "owner_ocl/__init__.py",
+      "sha256": "d146cc59df9f49fd0816f7a98145c09718237ad11dcbd2aa0bb4e144b9ca207b"
+    },
+    {
+      "bytes": 4817,
+      "path": "owner_ocl/compare.py",
+      "sha256": "7b0861d0d56b332db862052ff593bca85787a28810c27a137e29fb38946ad373"
+    },
+    {
+      "bytes": 8128,
+      "path": "owner_ocl/core.py",
+      "sha256": "996a2930e98211423104f1b4fa5f95a005b8e8fdfedd59fa08b7557e9525b1a5"
+    },
+    {
+      "bytes": 4129,
+      "path": "owner_ocl/costs.py",
+      "sha256": "59787191c181c6d17b3ecc50268051f0fc10b85cd508c8f65d76dc423741721d"
+    },
+    {
+      "bytes": 1651,
+      "path": "owner_ocl/energy.py",
+      "sha256": "cc5129a5fdea946094e99783f4c65b1f8b1385a4f6e54f12158434cd116a505b"
+    },
+    {
+      "bytes": 11850,
+      "path": "owner_ocl/runner.py",
+      "sha256": "e31ecd9ec76b75d036f1201e8415618e3d85e750fe67fd7ce789cf4730b30ed3"
+    },
+    {
+      "bytes": 3880,
+      "path": "owner_ocl/tasks.py",
+      "sha256": "3f8220f61dfc119728517299cebbc63319098213ae5ad7d4486f3415c8a811cf"
+    },
+    {
+      "bytes": 55,
+      "path": "owner_vllm/__init__.py",
+      "sha256": "b5c16e8bd3c46838ba822d25825547dca64e8bdb6fd149a72b9d9ab46ba562f8"
+    },
+    {
+      "bytes": 5921,
+      "path": "owner_vllm/audit.py",
+      "sha256": "9e81415da13b5dac5f2f57938c818af255e55029eb48c259365ec5bd02f8e7ba"
+    },
+    {
+      "bytes": 19392,
+      "path": "packets.py",
+      "sha256": "937d9617425c5326a6e6e6271e3abea51fab5efbddf20f91781bee7368f05dfb"
+    },
+    {
+      "bytes": 40836,
+      "path": "retry.py",
+      "sha256": "2a795193b927c80c1105e40a8d9e50ff96dcdc71a787032adea877008ae33d4e"
+    },
+    {
+      "bytes": 16619,
+      "path": "retry_resources.py",
+      "sha256": "b3d3fc24d76b6d10177bfefdf39a37d69c105d444913f776a1b85438a8aedf24"
+    },
+    {
+      "bytes": 10442,
+      "path": "streaming.py",
+      "sha256": "3453996783c68a0d745345b3bccd0505a3f9b31135bdd2e8148f613768baf30e"
+    }
+  ],
+  "baseline": {
+    "acceptance_rate": 1.0,
+    "acceptance_wilson95": [
+      0.7575059933447592,
+      1
+    ],
+    "accepted_per_s": 0.011429450528025513,
+    "accepted_tasks": 12,
+    "attempts": 12,
+    "cost_assumption_per_hour": null,
+    "cost_duration_scope": "summed measured trial windows only, including request failures; excludes warmup, probes, server startup, between-trial idle and other reserved time",
+    "cost_per_accepted": null,
+    "duration_s": 1049.919238949893,
+    "estimated_cost": null,
+    "failed_tasks": 0,
+    "input_tokens_known": 657,
+    "interval_assumption": "Descriptive binomial interval; repeated/correlated fixtures violate independent-trial inference.",
+    "matched_accepted_tasks": 12,
+    "output_tokens_known": 126,
+    "p50_task_s": 58.1914745796239,
+    "p95_latency_s": 227.12695851842864,
+    "p95_task_s": 227.12695851842864,
+    "p95_ttft_s": 227.06750231523756,
+    "peak_request_concurrency": 1,
+    "percentile_method": "linear interpolation at (n-1)*p",
+    "performance_population": "latency/TTFT: exact matched both-accepted task/trial/repetition pairs; accepted throughput: all measured tasks and full trial windows",
+    "retries": 0,
+    "total_tasks": 12,
+    "trial_metrics": [
+      {
+        "acceptance_rate": 1.0,
+        "accepted": 4,
+        "accepted_per_s": 0.006415283516356648,
+        "duration_s": 623.5110248520505,
+        "matched_accepted": 4,
+        "p95_latency_s": 275.95229379083025,
+        "p95_ttft_s": 275.88882098476165,
+        "tasks": 4,
+        "trial": 0
+      },
+      {
+        "acceptance_rate": 1.0,
+        "accepted": 4,
+        "accepted_per_s": 0.017645885105782563,
+        "duration_s": 226.68174342182465,
+        "matched_accepted": 4,
+        "p95_latency_s": 65.23217510593823,
+        "p95_ttft_s": 65.14541983265663,
+        "tasks": 4,
+        "trial": 1
+      },
+      {
+        "acceptance_rate": 1.0,
+        "accepted": 4,
+        "accepted_per_s": 0.020027390392776307,
+        "duration_s": 199.72647067601793,
+        "matched_accepted": 4,
+        "p95_latency_s": 57.178667465073524,
+        "p95_ttft_s": 57.13097075106343,
+        "tasks": 4,
+        "trial": 2
+      }
+    ],
+    "ttft_mean_s": 87.43424118488717,
+    "unknown_token_attempts": 0
+  },
+  "candidate": {
+    "acceptance_rate": 1.0,
+    "acceptance_wilson95": [
+      0.7575059933447592,
+      1
+    ],
+    "accepted_per_s": 0.012140951239356896,
+    "accepted_tasks": 12,
+    "attempts": 12,
+    "cost_assumption_per_hour": null,
+    "cost_duration_scope": "summed measured trial windows only, including request failures; excludes warmup, probes, server startup, between-trial idle and other reserved time",
+    "cost_per_accepted": null,
+    "duration_s": 988.3904286758043,
+    "estimated_cost": null,
+    "failed_tasks": 0,
+    "input_tokens_known": 657,
+    "interval_assumption": "Descriptive binomial interval; repeated/correlated fixtures violate independent-trial inference.",
+    "matched_accepted_tasks": 12,
+    "output_tokens_known": 126,
+    "p50_task_s": 56.83175828540698,
+    "p95_latency_s": 206.3553885810193,
+    "p95_task_s": 206.3553885810193,
+    "p95_ttft_s": 206.29665737515307,
+    "peak_request_concurrency": 1,
+    "percentile_method": "linear interpolation at (n-1)*p",
+    "performance_population": "latency/TTFT: exact matched both-accepted task/trial/repetition pairs; accepted throughput: all measured tasks and full trial windows",
+    "retries": 0,
+    "total_tasks": 12,
+    "trial_metrics": [
+      {
+        "acceptance_rate": 1.0,
+        "accepted": 4,
+        "accepted_per_s": 0.00695877950617498,
+        "duration_s": 574.8134419908747,
+        "matched_accepted": 4,
+        "p95_latency_s": 245.29790851707799,
+        "p95_ttft_s": 245.23024722589176,
+        "tasks": 4,
+        "trial": 0
+      },
+      {
+        "acceptance_rate": 1.0,
+        "accepted": 4,
+        "accepted_per_s": 0.018292744085513155,
+        "duration_s": 218.66593559179455,
+        "matched_accepted": 4,
+        "p95_latency_s": 63.443865549378096,
+        "p95_ttft_s": 63.386815555917565,
+        "tasks": 4,
+        "trial": 1
+      },
+      {
+        "acceptance_rate": 1.0,
+        "accepted": 4,
+        "accepted_per_s": 0.020522181669877026,
+        "duration_s": 194.91105109313503,
+        "matched_accepted": 4,
+        "p95_latency_s": 56.31050746787805,
+        "p95_ttft_s": 56.25100506175077,
+        "tasks": 4,
+        "trial": 2
+      }
+    ],
+    "ttft_mean_s": 82.30887192840844,
+    "unknown_token_attempts": 0
+  },
+  "changed_factors": [
+    {
+      "allowed": true,
+      "baseline": "d88c9dfd96ba4f2e6b92adba0b8e8f1c8696f959",
+      "candidate": "003107fa248f5892064ab1c43af0a7003dd68c9b",
+      "factor": "identity.model.revision"
+    },
+    {
+      "allowed": true,
+      "baseline": "9d2405bea66ad2a8bebb3fdaea58cfbab8475f6396f069ce9a00660ab3516ab5",
+      "candidate": "4554684cced8587248c9e9a7ad7a3c54e650534e680adb39c486c5cb4f61b6ef",
+      "factor": "identity.model.sha256"
+    },
+    {
+      "allowed": true,
+      "baseline": "bf16_weights_fp32_compute",
+      "candidate": "fp8_weights_fp8_rounded_inputs_fp32_compute",
+      "factor": "identity.precision"
+    },
+    {
+      "allowed": false,
+      "baseline": "serve_hy4/3 transformers 5.24.0.dev0 torch 2.15.0+cpu fp8=False",
+      "candidate": "serve_hy4/3 transformers 5.24.0.dev0 torch 2.15.0+cpu fp8=True",
+      "factor": "observed.version"
+    }
+  ],
+  "comparability_failures": [
+    "undeclared changed condition: observed.version"
+  ],
+  "created_at": "2026-11-18T13:07:49.377693Z",
+  "errors": [],
+  "exit_code": 2,
+  "inputs": {
+    "baseline": {
+      "path": "/mnt/w03data/Incoming/DataArray/Scratch/hy4-exact-arms-20261118/run/observe-bf16/run.json",
+      "sha256": "3894cfcbab0b28002e17d4f0d26aa0b83512e7aa69956adef0153c9ba888d0af"
+    },
+    "candidate": {
+      "path": "/mnt/w03data/Incoming/DataArray/Scratch/hy4-exact-arms-20261118/run/observe-fp8/run.json",
+      "sha256": "1c73dd6310529eb3e2af782984d992800cc3344714c55a1fb0c23d45f93eaf26"
+    },
+    "policy": {
+      "path": "/mnt/w03data/Incoming/DataArray/Scratch/hy4-exact-arms-20261118/run/spec/policy.precision.json",
+      "sha256": "13d4e43ea6c09cbd5bb9190d7b46d1fd0aad66acb5a937a95af50acf5aa3cafa"
+    }
+  },
+  "limitations": [
+    "This verdict covers the supplied workload, serving endpoints and policy only.",
+    "Declared weights, hardware, tokenizer and server flags are operator declarations; HTTP probes do not attest them.",
+    "Repeated cases are correlated. Trial ranges describe variation and are not a population confidence guarantee.",
+    "TTFT measures first visible content at the client, including network and queueing; content chunks are not tokens.",
+    "Token counts come from server usage. The instrument does not manufacture per-token timings, power or GPU run counts.",
+    "No request retries. Transport and incomplete stream failures are retained and force an error verdict.",
+    "Server cache state, co-tenancy, thermals and load require operator controls and declared identity settings."
+  ],
+  "native_ocl_comparison": {
+    "a": {
+      "acceptance_rate": 1.0,
+      "acceptance_wilson95": [
+        0.7575059933447592,
+        1
+      ],
+      "accepted_per_s": 0.011429450528025513,
+      "accepted_tasks": 12,
+      "attempts": 12,
+      "duration_s": 1049.919238949893,
+      "failed_tasks": 0,
+      "input_tokens_known": 657,
+      "interval_assumption": "Descriptive binomial interval; repeated/correlated fixtures violate independent-trial inference.",
+      "output_tokens_known": 126,
+      "p50_task_s": 58.1914745796239,
+      "p95_task_s": 227.12695851842864,
+      "percentile_method": "linear interpolation at (n-1)*p",
+      "retries": 0,
+      "total_tasks": 12,
+      "ttft_mean_s": 87.43424118488717,
+      "unknown_token_attempts": 0
+    },
+    "a_run_id": "hy4-bf16-w02-processors-20261118-r01",
+    "a_template_options": [
+      "{\"reasoning_effort\": \"no_think\"}"
+    ],
+    "b": {
+      "acceptance_rate": 1.0,
+      "acceptance_wilson95": [
+        0.7575059933447592,
+        1
+      ],
+      "accepted_per_s": 0.012140951239356896,
+      "accepted_tasks": 12,
+      "attempts": 12,
+      "duration_s": 988.3904286758043,
+      "failed_tasks": 0,
+      "input_tokens_known": 657,
+      "interval_assumption": "Descriptive binomial interval; repeated/correlated fixtures violate independent-trial inference.",
+      "output_tokens_known": 126,
+      "p50_task_s": 56.83175828540698,
+      "p95_task_s": 206.3553885810193,
+      "percentile_method": "linear interpolation at (n-1)*p",
+      "retries": 0,
+      "total_tasks": 12,
+      "ttft_mean_s": 82.30887192840844,
+      "unknown_token_attempts": 0
+    },
+    "b_run_id": "hy4-fp8-w02-processors-20261118-r01",
+    "b_template_options": [
+      "{\"reasoning_effort\": \"no_think\"}"
+    ],
+    "classification": "paired outcomes with changed conditions",
+    "deviations": [
+      "provenance.model_sha256",
+      "provenance.precision"
+    ],
+    "identical_execution_conditions": false,
+    "interpretation": "This comparison counts only exact accepted outcomes. Differences in templates, models, runtime or host are not hardware speedups; partial or unsupported variables forbid ranking.",
+    "paired_counts": {
+      "a_only": 0,
+      "b_only": 0,
+      "both_accepted": 12,
+      "both_failed": 0
+    },
+    "paired_task_accounting": true,
+    "rate_uncertainty": "Small correlated synthetic fixtures do not support a population reliability estimate.",
+    "schema": "ocl.comparison/1",
+    "task_transitions": [
+      {
+        "a_error": null,
+        "b_error": null,
+        "outcome": "both_accepted",
+        "repetition": 0,
+        "task_id": "extract-quantity"
+      },
+      {
+        "a_error": null,
+        "b_error": null,
+        "outcome": "both_accepted",
+        "repetition": 1,
+        "task_id": "extract-quantity"
+      },
+      {
+        "a_error": null,
+        "b_error": null,
+        "outcome": "both_accepted",
+        "repetition": 2,
+        "task_id": "extract-quantity"
+      },
+      {
+        "a_error": null,
+        "b_error": null,
+        "outcome": "both_accepted",
+        "repetition": 0,
+        "task_id": "literal-types"
+      },
+      {
+        "a_error": null,
+        "b_error": null,
+        "outcome": "both_accepted",
+        "repetition": 1,
+        "task_id": "literal-types"
+      },
+      {
+        "a_error": null,
+        "b_error": null,
+        "outcome": "both_accepted",
+        "repetition": 2,
+        "task_id": "literal-types"
+      },
+      {
+        "a_error": null,
+        "b_error": null,
+        "outcome": "both_accepted",
+        "repetition": 0,
+        "task_id": "sort-integers"
+      },
+      {
+        "a_error": null,
+        "b_error": null,
+        "outcome": "both_accepted",
+        "repetition": 1,
+        "task_id": "sort-integers"
+      },
+      {
+        "a_error": null,
+        "b_error": null,
+        "outcome": "both_accepted",
+        "repetition": 2,
+        "task_id": "sort-integers"
+      },
+      {
+        "a_error": null,
+        "b_error": null,
+        "outcome": "both_accepted",
+        "repetition": 0,
+        "task_id": "sum-42"
+      },
+      {
+        "a_error": null,
+        "b_error": null,
+        "outcome": "both_accepted",
+        "repetition": 1,
+        "task_id": "sum-42"
+      },
+      {
+        "a_error": null,
+        "b_error": null,
+        "outcome": "both_accepted",
+        "repetition": 2,
+        "task_id": "sum-42"
+      }
+    ]
+  },
+  "new_inference_requests": 0,
+  "ocl_exports": {
+    "baseline": {
+      "bytes": 46428,
+      "path": "baseline.ocl.json",
+      "sha256": "9749cacccd7c0c4cacdad3a11e8b5144a6226d921d74a42cbe3bb998a0ed6d63"
+    },
+    "candidate": {
+      "bytes": 48240,
+      "path": "candidate.ocl.json",
+      "sha256": "9bf36d8598c867fce4694a6dbdf2f48fbcc45fb4a0f1c0b0a2490d295a0821d2"
+    },
+    "policy": {
+      "bytes": 711,
+      "path": "resolved-policy.json",
+      "sha256": "ad2bb762d5b9ac77820189e8d016537bb581de5e51beaba2269d43420f71048c"
+    },
+    "status": "exported"
+  },
+  "paired_trials": false,
+  "performance_checks": [
+    {
+      "median_ratio": 1.0366577803183483,
+      "metric": "accepted_per_s",
+      "range": [
+        1.0247057288741515,
+        1.084718935403652
+      ],
+      "status": "pass",
+      "threshold_fraction": 1,
+      "trial_candidate_over_baseline": [
+        1.084718935403652,
+        1.0366577803183483,
+        1.0247057288741515
+      ]
+    }
+  ],
+  "policy": {
+    "acceptance": {
+      "finish_reasons": [
+        "stop"
+      ],
+      "max_latency_s": null,
+      "max_ttft_s": null
+    },
+    "allowed_changes": [
+      "identity.model.revision",
+      "identity.model.sha256",
+      "identity.precision"
+    ],
+    "max_acceptance_drop": 0,
+    "max_accepted_throughput_drop": 1,
+    "max_cost_per_accepted_increase": null,
+    "max_new_failures": 0,
+    "max_p95_latency_increase": null,
+    "max_p95_ttft_increase": null,
+    "min_baseline_acceptance": 1,
+    "min_candidate_acceptance": 1,
+    "min_trials": 3,
+    "prices": {
+      "baseline_per_hour": null,
+      "candidate_per_hour": null
+    },
+    "require_observed_model": true,
+    "require_observed_version": true,
+    "schema": "cantos.maintainer.policy/1"
+  },
+  "reasons": [
+    "undeclared changed condition: observed.version"
+  ],
+  "regressions": [],
+  "schema": "cantos.maintainer.verdict/1",
+  "scope": "paired accepted outcomes under explicitly declared changes",
+  "trial_schedule": "separate retained observations",
+  "verdict": "incomparable"
+}

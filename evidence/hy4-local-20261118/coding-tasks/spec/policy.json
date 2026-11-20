@@ -1,0 +1,13 @@
+{
+  "allowed_changes": [
+    "identity.settings.serving_slots"
+  ],
+  "max_acceptance_drop": 0,
+  "max_accepted_throughput_drop": 0.15,
+  "max_p95_latency_increase": 0.15,
+  "max_p95_ttft_increase": 0.15,
+  "min_baseline_acceptance": 0.8,
+  "min_candidate_acceptance": 0.8,
+  "min_trials": 3,
+  "schema": "cantos.maintainer.policy/1"
+}

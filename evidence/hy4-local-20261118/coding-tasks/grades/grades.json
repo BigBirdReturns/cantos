@@ -1,0 +1,1320 @@
+{
+  "artifacts": [
+    {
+      "bytes": 1702,
+      "path": "artifacts/evalplus.log",
+      "sha256": "7173d6e99d1ae17a3e749cac2eed2566e26af9a0c22d1f8d2f4662935dc95358"
+    },
+    {
+      "bytes": 14592,
+      "path": "artifacts/evalplus_bridge.py",
+      "sha256": "1bafa9b1f0c8f669cc591118d48b9dd4a79e4c3f28837e40f543851130ba1f8f"
+    },
+    {
+      "bytes": 2061,
+      "path": "artifacts/grader-image.json",
+      "sha256": "8e36baf8a558f9ecc20c5e9788acac7d49eeb8b10bec3a0ee0c49b5a5c86b7a6"
+    },
+    {
+      "bytes": 1306340,
+      "path": "artifacts/humaneval-reference.jsonl",
+      "sha256": "bf1d4a46ad8ac2c3082e7fe273ebeadd1eca561182ebaef6b0976ac8d9ed1d93"
+    },
+    {
+      "bytes": 30198,
+      "path": "artifacts/humaneval.jsonl",
+      "sha256": "1d4a4843668bab8b97175bb28c4946fb1d02e85832fbcbdce2d516457036cea7"
+    },
+    {
+      "bytes": 39818,
+      "path": "artifacts/humaneval_eval_results.json",
+      "sha256": "c712be29dc4753ecbd4a06bc24f4354372f285bae1663f79157d3f4acc1a8021"
+    },
+    {
+      "bytes": 33335,
+      "path": "artifacts/mapping.json",
+      "sha256": "d3f121c3280ff0af433dce9a4c83049e991c213ec5aa001b8da9bda381303387"
+    },
+    {
+      "bytes": 269,
+      "path": "artifacts/normalize.py",
+      "sha256": "de8bd9e76891348f2f48f5451fff446561b0740c625a62bc095104c451b92391"
+    },
+    {
+      "bytes": 3419,
+      "path": "artifacts/prepared.json",
+      "sha256": "3db965609db4fde7f5b636569224bebd1fbdc6763aef79f7e440c744537b7672"
+    },
+    {
+      "bytes": 850912,
+      "path": "artifacts/source-run.json",
+      "sha256": "0311caa276c37ffc07cf5a799a060f88654eb0101338916f18163aaa0bd71d31"
+    },
+    {
+      "bytes": 46951,
+      "path": "artifacts/workload.json",
+      "sha256": "29d2ccc7d2a987436dfab6990d38585f481c0f73e1b4a6774467fcb4a1940b70"
+    }
+  ],
+  "grader": {
+    "artifact_sha256": "803e956852925ff35f8d7a9f55a97fbcfad09a8dfa77a439f5b2ac537702563d",
+    "criterion": "humanevalplus-v0.1.10-base-and-plus-chat-complete-code-v1",
+    "name": "EvalPlus",
+    "normalizer_sha256": "de8bd9e76891348f2f48f5451fff446561b0740c625a62bc095104c451b92391",
+    "reference_sha256": "bf1d4a46ad8ac2c3082e7fe273ebeadd1eca561182ebaef6b0976ac8d9ed1d93",
+    "revision": "0.3.1"
+  },
+  "results": [
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "e280a16db62e3a9718fe527408ba415b0de57efa53db1b7305955f9c47377966",
+      "task_id": "HumanEval/0",
+      "trial": 0
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "9fd8e4fa07146ff789ab003f19889b0c9649eef257ba530009bfa69771a155a6",
+      "task_id": "HumanEval/10",
+      "trial": 0
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "83fff8c8b1efe4f07076577637b3ca99193fb7d602bc1cba6a46f31f629507c2",
+      "task_id": "HumanEval/102",
+      "trial": 0
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "ed50e8b5f0cc065e713849486b04627c7213c7dfe2eee2215548bd0a7a92d918",
+      "task_id": "HumanEval/107",
+      "trial": 0
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "e9108b113498e7a2fafdd31ad3c559d09a305b8034447c84793d1dac52b3fc29",
+      "task_id": "HumanEval/112",
+      "trial": 0
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "5d9afde237e49596417220002145bf3d9d71a70f4047e814b4657e9670d9010e",
+      "task_id": "HumanEval/117",
+      "trial": 0
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "453705e210033741aba8e002349592572d2783eb97c7e56188d97ba9cd52a775",
+      "task_id": "HumanEval/123",
+      "trial": 0
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "4923191635c27ce6d8a7474183f31e490d9ff4872ad5cfaba6878914c6b2fd84",
+      "task_id": "HumanEval/128",
+      "trial": 0
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "cff7a939f960a0753dd545b2ef29ecf9654c10253de9f3e0d48798689063a6e4",
+      "task_id": "HumanEval/133",
+      "trial": 0
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "f75c9a562b7a5dca1cc7c944fa3f5137f494dda9c5e66b11d9a0c39eba10075d",
+      "task_id": "HumanEval/138",
+      "trial": 0
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "568a55b814ff9205327e3de90bd671751652f26f86d01dd885fcdafe62154da3",
+      "task_id": "HumanEval/143",
+      "trial": 0
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "6e4a227927246a7955e11eba81d53b1bbf155132dd83865b710dcc22c719d2df",
+      "task_id": "HumanEval/148",
+      "trial": 0
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "64a67ee6474e7aca221b6ccba755da3e06b8222d46758ebc2ceed6b0e1cbb8f1",
+      "task_id": "HumanEval/15",
+      "trial": 0
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "6ff3ecf3da1501c6dc33e67f445ceb9f9be1064cb45fffedd40e4d4f8db5b2a3",
+      "task_id": "HumanEval/153",
+      "trial": 0
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "8a4e3c82011c744809adc86195403cef70ac7baab6bcfcac4d5737976728e7fa",
+      "task_id": "HumanEval/158",
+      "trial": 0
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "aa4bfe0b27a9633b8e55966a301b377803ecd97a421bdbc9f0042942e8587b4a",
+      "task_id": "HumanEval/20",
+      "trial": 0
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "514f6d05ab85bf1a0715120405096a6b96d9a73aeea54c78bb3bdfebda63c2a0",
+      "task_id": "HumanEval/25",
+      "trial": 0
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "c6040d2674a5f5669c433d1642fde0eb7d84df11fbcdaa39e30cd0fc6a4fccc4",
+      "task_id": "HumanEval/30",
+      "trial": 0
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "9ca235f05592eb777e2f0c47c6dee26ce26b75053a9d5bb2b5ee1ad2b08079c0",
+      "task_id": "HumanEval/35",
+      "trial": 0
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "3bcd660ecd874c41438e69ff57733dcb78a2ae1a88741ac3df474686f6da87e7",
+      "task_id": "HumanEval/41",
+      "trial": 0
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "c62e7bf339c5c11fd2eb2ec8fa9b23e2a3306d0d640a72a4273456840f8ad559",
+      "task_id": "HumanEval/46",
+      "trial": 0
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "859909c6fdd652ff8def11e7e630a35c3d4613e1c533425b8d9f0928ca6eed36",
+      "task_id": "HumanEval/5",
+      "trial": 0
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "7a91c4b445ac47bd3d727f85c94d4b4a1ebe4d6cf7960c3726aa759db229b1f8",
+      "task_id": "HumanEval/51",
+      "trial": 0
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "6ec91b7c8b86675d66cebb8e79425e7fe670498d73484d518225b0eb6613f7be",
+      "task_id": "HumanEval/56",
+      "trial": 0
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "04c9fd6b1984d38f1c64341b608a9cc7ae7019837089ce389d04026ceb480d5f",
+      "task_id": "HumanEval/61",
+      "trial": 0
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "753defdcc0328643cb9ae45531de9ce18a9f68bca84d460dcc8f4202aaa98ddd",
+      "task_id": "HumanEval/66",
+      "trial": 0
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "386da2b2893a4dc4afa04f9d2f0efca9bca495d198afd2b6932a824348e3cca8",
+      "task_id": "HumanEval/71",
+      "trial": 0
+    },
+    {
+      "accepted": false,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "c2a7bd80b465599661d474b7b76a4e6be7f0229f91e64a39e250eb769035597c",
+      "task_id": "HumanEval/76",
+      "trial": 0
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "bdb0cdb4940c9aea6f7e08d0e77b145f5c2a6db05257fa4e94984cd4f02f88d2",
+      "task_id": "HumanEval/82",
+      "trial": 0
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "700b89e902f439fd8b13d2f86dd5df253fb7b7f71b026fa2b0e626ca52577808",
+      "task_id": "HumanEval/87",
+      "trial": 0
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "a784d52164d9a66a1ca28967fcc5c8c672e8e38db524dbfee33fc14a4c532083",
+      "task_id": "HumanEval/92",
+      "trial": 0
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "9ab971092fb6a4e1b19725e8f2f8485700735d555541c5200b9aa50cf80db242",
+      "task_id": "HumanEval/97",
+      "trial": 0
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "db15f8f459e9e795a5b4d27b3170826862836f5eee538215d07a037113f8b9ee",
+      "task_id": "HumanEval/0",
+      "trial": 1
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "9fd8e4fa07146ff789ab003f19889b0c9649eef257ba530009bfa69771a155a6",
+      "task_id": "HumanEval/10",
+      "trial": 1
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "83fff8c8b1efe4f07076577637b3ca99193fb7d602bc1cba6a46f31f629507c2",
+      "task_id": "HumanEval/102",
+      "trial": 1
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "ed50e8b5f0cc065e713849486b04627c7213c7dfe2eee2215548bd0a7a92d918",
+      "task_id": "HumanEval/107",
+      "trial": 1
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "e9108b113498e7a2fafdd31ad3c559d09a305b8034447c84793d1dac52b3fc29",
+      "task_id": "HumanEval/112",
+      "trial": 1
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "5d9afde237e49596417220002145bf3d9d71a70f4047e814b4657e9670d9010e",
+      "task_id": "HumanEval/117",
+      "trial": 1
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "453705e210033741aba8e002349592572d2783eb97c7e56188d97ba9cd52a775",
+      "task_id": "HumanEval/123",
+      "trial": 1
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "4923191635c27ce6d8a7474183f31e490d9ff4872ad5cfaba6878914c6b2fd84",
+      "task_id": "HumanEval/128",
+      "trial": 1
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "cff7a939f960a0753dd545b2ef29ecf9654c10253de9f3e0d48798689063a6e4",
+      "task_id": "HumanEval/133",
+      "trial": 1
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "f75c9a562b7a5dca1cc7c944fa3f5137f494dda9c5e66b11d9a0c39eba10075d",
+      "task_id": "HumanEval/138",
+      "trial": 1
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "568a55b814ff9205327e3de90bd671751652f26f86d01dd885fcdafe62154da3",
+      "task_id": "HumanEval/143",
+      "trial": 1
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "6e4a227927246a7955e11eba81d53b1bbf155132dd83865b710dcc22c719d2df",
+      "task_id": "HumanEval/148",
+      "trial": 1
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "64a67ee6474e7aca221b6ccba755da3e06b8222d46758ebc2ceed6b0e1cbb8f1",
+      "task_id": "HumanEval/15",
+      "trial": 1
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "6ff3ecf3da1501c6dc33e67f445ceb9f9be1064cb45fffedd40e4d4f8db5b2a3",
+      "task_id": "HumanEval/153",
+      "trial": 1
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "8a4e3c82011c744809adc86195403cef70ac7baab6bcfcac4d5737976728e7fa",
+      "task_id": "HumanEval/158",
+      "trial": 1
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "aa4bfe0b27a9633b8e55966a301b377803ecd97a421bdbc9f0042942e8587b4a",
+      "task_id": "HumanEval/20",
+      "trial": 1
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "15807238c25b95232333bd41a7eb1d5dfb32c8af07036a5084e64bb5b3076c6f",
+      "task_id": "HumanEval/25",
+      "trial": 1
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "c6040d2674a5f5669c433d1642fde0eb7d84df11fbcdaa39e30cd0fc6a4fccc4",
+      "task_id": "HumanEval/30",
+      "trial": 1
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "9ca235f05592eb777e2f0c47c6dee26ce26b75053a9d5bb2b5ee1ad2b08079c0",
+      "task_id": "HumanEval/35",
+      "trial": 1
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "3bcd660ecd874c41438e69ff57733dcb78a2ae1a88741ac3df474686f6da87e7",
+      "task_id": "HumanEval/41",
+      "trial": 1
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "c62e7bf339c5c11fd2eb2ec8fa9b23e2a3306d0d640a72a4273456840f8ad559",
+      "task_id": "HumanEval/46",
+      "trial": 1
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "859909c6fdd652ff8def11e7e630a35c3d4613e1c533425b8d9f0928ca6eed36",
+      "task_id": "HumanEval/5",
+      "trial": 1
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "7a91c4b445ac47bd3d727f85c94d4b4a1ebe4d6cf7960c3726aa759db229b1f8",
+      "task_id": "HumanEval/51",
+      "trial": 1
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "6ec91b7c8b86675d66cebb8e79425e7fe670498d73484d518225b0eb6613f7be",
+      "task_id": "HumanEval/56",
+      "trial": 1
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "04c9fd6b1984d38f1c64341b608a9cc7ae7019837089ce389d04026ceb480d5f",
+      "task_id": "HumanEval/61",
+      "trial": 1
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "753defdcc0328643cb9ae45531de9ce18a9f68bca84d460dcc8f4202aaa98ddd",
+      "task_id": "HumanEval/66",
+      "trial": 1
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "58940cd621adef1e5bea9b9b5fb065ea33ff17d2ff19a51572b54c035b642bcf",
+      "task_id": "HumanEval/71",
+      "trial": 1
+    },
+    {
+      "accepted": false,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "c2a7bd80b465599661d474b7b76a4e6be7f0229f91e64a39e250eb769035597c",
+      "task_id": "HumanEval/76",
+      "trial": 1
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "bdb0cdb4940c9aea6f7e08d0e77b145f5c2a6db05257fa4e94984cd4f02f88d2",
+      "task_id": "HumanEval/82",
+      "trial": 1
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "700b89e902f439fd8b13d2f86dd5df253fb7b7f71b026fa2b0e626ca52577808",
+      "task_id": "HumanEval/87",
+      "trial": 1
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "457c8c97ad23323c374fdf717a0dd49b8eb06fb9d8bd7d1dfaa346ebbf3a5356",
+      "task_id": "HumanEval/92",
+      "trial": 1
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "9ab971092fb6a4e1b19725e8f2f8485700735d555541c5200b9aa50cf80db242",
+      "task_id": "HumanEval/97",
+      "trial": 1
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "db15f8f459e9e795a5b4d27b3170826862836f5eee538215d07a037113f8b9ee",
+      "task_id": "HumanEval/0",
+      "trial": 2
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "9fd8e4fa07146ff789ab003f19889b0c9649eef257ba530009bfa69771a155a6",
+      "task_id": "HumanEval/10",
+      "trial": 2
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "83fff8c8b1efe4f07076577637b3ca99193fb7d602bc1cba6a46f31f629507c2",
+      "task_id": "HumanEval/102",
+      "trial": 2
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "ed50e8b5f0cc065e713849486b04627c7213c7dfe2eee2215548bd0a7a92d918",
+      "task_id": "HumanEval/107",
+      "trial": 2
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "e9108b113498e7a2fafdd31ad3c559d09a305b8034447c84793d1dac52b3fc29",
+      "task_id": "HumanEval/112",
+      "trial": 2
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "5d9afde237e49596417220002145bf3d9d71a70f4047e814b4657e9670d9010e",
+      "task_id": "HumanEval/117",
+      "trial": 2
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "453705e210033741aba8e002349592572d2783eb97c7e56188d97ba9cd52a775",
+      "task_id": "HumanEval/123",
+      "trial": 2
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "4923191635c27ce6d8a7474183f31e490d9ff4872ad5cfaba6878914c6b2fd84",
+      "task_id": "HumanEval/128",
+      "trial": 2
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "cff7a939f960a0753dd545b2ef29ecf9654c10253de9f3e0d48798689063a6e4",
+      "task_id": "HumanEval/133",
+      "trial": 2
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "f75c9a562b7a5dca1cc7c944fa3f5137f494dda9c5e66b11d9a0c39eba10075d",
+      "task_id": "HumanEval/138",
+      "trial": 2
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "568a55b814ff9205327e3de90bd671751652f26f86d01dd885fcdafe62154da3",
+      "task_id": "HumanEval/143",
+      "trial": 2
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "6e4a227927246a7955e11eba81d53b1bbf155132dd83865b710dcc22c719d2df",
+      "task_id": "HumanEval/148",
+      "trial": 2
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "64a67ee6474e7aca221b6ccba755da3e06b8222d46758ebc2ceed6b0e1cbb8f1",
+      "task_id": "HumanEval/15",
+      "trial": 2
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "6ff3ecf3da1501c6dc33e67f445ceb9f9be1064cb45fffedd40e4d4f8db5b2a3",
+      "task_id": "HumanEval/153",
+      "trial": 2
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "8a4e3c82011c744809adc86195403cef70ac7baab6bcfcac4d5737976728e7fa",
+      "task_id": "HumanEval/158",
+      "trial": 2
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "aa4bfe0b27a9633b8e55966a301b377803ecd97a421bdbc9f0042942e8587b4a",
+      "task_id": "HumanEval/20",
+      "trial": 2
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "15807238c25b95232333bd41a7eb1d5dfb32c8af07036a5084e64bb5b3076c6f",
+      "task_id": "HumanEval/25",
+      "trial": 2
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "c6040d2674a5f5669c433d1642fde0eb7d84df11fbcdaa39e30cd0fc6a4fccc4",
+      "task_id": "HumanEval/30",
+      "trial": 2
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "9ca235f05592eb777e2f0c47c6dee26ce26b75053a9d5bb2b5ee1ad2b08079c0",
+      "task_id": "HumanEval/35",
+      "trial": 2
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "3bcd660ecd874c41438e69ff57733dcb78a2ae1a88741ac3df474686f6da87e7",
+      "task_id": "HumanEval/41",
+      "trial": 2
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "c62e7bf339c5c11fd2eb2ec8fa9b23e2a3306d0d640a72a4273456840f8ad559",
+      "task_id": "HumanEval/46",
+      "trial": 2
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "859909c6fdd652ff8def11e7e630a35c3d4613e1c533425b8d9f0928ca6eed36",
+      "task_id": "HumanEval/5",
+      "trial": 2
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "7a91c4b445ac47bd3d727f85c94d4b4a1ebe4d6cf7960c3726aa759db229b1f8",
+      "task_id": "HumanEval/51",
+      "trial": 2
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "6ec91b7c8b86675d66cebb8e79425e7fe670498d73484d518225b0eb6613f7be",
+      "task_id": "HumanEval/56",
+      "trial": 2
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "04c9fd6b1984d38f1c64341b608a9cc7ae7019837089ce389d04026ceb480d5f",
+      "task_id": "HumanEval/61",
+      "trial": 2
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "753defdcc0328643cb9ae45531de9ce18a9f68bca84d460dcc8f4202aaa98ddd",
+      "task_id": "HumanEval/66",
+      "trial": 2
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "58940cd621adef1e5bea9b9b5fb065ea33ff17d2ff19a51572b54c035b642bcf",
+      "task_id": "HumanEval/71",
+      "trial": 2
+    },
+    {
+      "accepted": false,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "c2a7bd80b465599661d474b7b76a4e6be7f0229f91e64a39e250eb769035597c",
+      "task_id": "HumanEval/76",
+      "trial": 2
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "bdb0cdb4940c9aea6f7e08d0e77b145f5c2a6db05257fa4e94984cd4f02f88d2",
+      "task_id": "HumanEval/82",
+      "trial": 2
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "700b89e902f439fd8b13d2f86dd5df253fb7b7f71b026fa2b0e626ca52577808",
+      "task_id": "HumanEval/87",
+      "trial": 2
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "457c8c97ad23323c374fdf717a0dd49b8eb06fb9d8bd7d1dfaa346ebbf3a5356",
+      "task_id": "HumanEval/92",
+      "trial": 2
+    },
+    {
+      "accepted": true,
+      "evidence": [
+        "artifacts/humaneval_eval_results.json",
+        "artifacts/mapping.json",
+        "artifacts/humaneval.jsonl",
+        "artifacts/evalplus.log"
+      ],
+      "repetition": 0,
+      "response_sha256": "9ab971092fb6a4e1b19725e8f2f8485700735d555541c5200b9aa50cf80db242",
+      "task_id": "HumanEval/97",
+      "trial": 2
+    }
+  ],
+  "run_sha256": "0311caa276c37ffc07cf5a799a060f88654eb0101338916f18163aaa0bd71d31",
+  "schema": "cantos.maintainer.grades/1",
+  "workload_sha256": "29d2ccc7d2a987436dfab6990d38585f481c0f73e1b4a6774467fcb4a1940b70"
+}

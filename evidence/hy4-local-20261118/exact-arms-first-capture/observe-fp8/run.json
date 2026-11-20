@@ -1,0 +1,1510 @@
+{
+  "arm": "candidate",
+  "artifacts": [
+    {
+      "bytes": 1402,
+      "path": "identity-after.json",
+      "sha256": "eee2c86248e00e6a62975aaa5ae1f29253c4956363463a3e0e602e824bb74076"
+    },
+    {
+      "bytes": 1402,
+      "path": "identity-before.json",
+      "sha256": "ffc1cb7946e208c3b855b70cb99804962259e86429fd8fa295583b909ac66feb"
+    },
+    {
+      "bytes": 18181,
+      "path": "observations.jsonl",
+      "sha256": "b31eacbdc428224842452c137c533a6ee96cfefdd134fdd391555ff1e1f9b1e9"
+    },
+    {
+      "bytes": 6005,
+      "path": "plan.json",
+      "sha256": "b89597bd9b7b9c95fdf8713ddcd9175c1aa23d9a248d13d869e8720baaa5f3d6"
+    },
+    {
+      "bytes": 1914,
+      "path": "raw/trial/000-000-000000-00.json",
+      "sha256": "e233c6ceb9f7eb5b6caa93770826679396f407271eb249ce7a44f78c0fcd96ac"
+    },
+    {
+      "bytes": 1954,
+      "path": "raw/trial/000-000-000001-00.json",
+      "sha256": "c5a8032b31157055d9d2039534c0cdeb401420939a2714235d41d670e102cc1d"
+    },
+    {
+      "bytes": 2002,
+      "path": "raw/trial/000-000-000002-00.json",
+      "sha256": "bbb6040c697303d0d6e40e347070e240f4214d62598cbb9b07559f8ca9801c1f"
+    },
+    {
+      "bytes": 2003,
+      "path": "raw/trial/000-000-000003-00.json",
+      "sha256": "a843740cee5241733284826aafc3565e798bcda554677130358342f1fb2fb24b"
+    },
+    {
+      "bytes": 1916,
+      "path": "raw/trial/001-000-000000-00.json",
+      "sha256": "86f2e640143222338594c3bd393dd530e36c783e89f5ea050c7157126dbb88eb"
+    },
+    {
+      "bytes": 1950,
+      "path": "raw/trial/001-000-000001-00.json",
+      "sha256": "a993bcb180d4b6a5dbe278c959c5ab89d886bb1896225a2e472e33255704beb2"
+    },
+    {
+      "bytes": 1996,
+      "path": "raw/trial/001-000-000002-00.json",
+      "sha256": "466242223d1250c95409bc3832c90c0c2a424be6cdea3bc2166f8e14f52a359a"
+    },
+    {
+      "bytes": 2001,
+      "path": "raw/trial/001-000-000003-00.json",
+      "sha256": "c3d40b1d187e68a09d51a6d0a747dfb5a15a17b4923e774650d0e58a0df06628"
+    },
+    {
+      "bytes": 1914,
+      "path": "raw/trial/002-000-000000-00.json",
+      "sha256": "dd21c5cc326b3caf57dd87123d1f24a0709b7be0e3fbbeaba385fad072dd0344"
+    },
+    {
+      "bytes": 1951,
+      "path": "raw/trial/002-000-000001-00.json",
+      "sha256": "2d5d2a456719b8d787213bc9b537f2b0fc483e951b5ec69417d260f609462ce2"
+    },
+    {
+      "bytes": 2000,
+      "path": "raw/trial/002-000-000002-00.json",
+      "sha256": "c962c3ea86eecafdf198e2463ac1b50450c2d78fb28a18e0fed48021f912d1e9"
+    },
+    {
+      "bytes": 2001,
+      "path": "raw/trial/002-000-000003-00.json",
+      "sha256": "986eaf9c0c2a048887ffb91726a621e6bc894bf02b2c72645e2dcfa3c5220222"
+    },
+    {
+      "bytes": 2065,
+      "path": "workload.json",
+      "sha256": "d96ed51dc7296867f0dd5f577bba88f9ba37f542368ff3eb0a896f9aedb0f7dc"
+    }
+  ],
+  "client": {
+    "hostname": "octo-w02",
+    "platform": "Linux-7.0.0-42-generic-x86_64-with-glibc2.43",
+    "python": "3.14.4"
+  },
+  "configuration": {
+    "auth_env": "OCL_API_KEY",
+    "base_url": "http://127.0.0.1:18511/v1",
+    "identity": {
+      "context_limit": 8192,
+      "hardware": {
+        "description": "2 x Intel(R) Xeon(R) Platinum 8276L CPU @ 2.20GHz, 112 threads; 1,971 GiB memory (256 GB DRAM in front of 2 TB Optane persistent memory, memory mode); kernel 7.0.0-42-generic",
+        "id": "OCTO-W02 processors, no accelerator used"
+      },
+      "implementation": {
+        "name": "transformers publisher loader on processors behind serve_hy4.py",
+        "revision": "huggingface/transformers@c2ec850510a37978ea83df226589623d5f2be776 (pull request 50903); torch==2.15.0+cpu; serve_hy4.py sha256:0642b5716e91fda10e36aacbc6c7ba95e65fdf220ba3dcec1bf78096bb9f2868"
+      },
+      "model": {
+        "revision": "003107fa248f5892064ab1c43af0a7003dd68c9b",
+        "sha256": "4554684cced8587248c9e9a7ad7a3c54e650534e680adb39c486c5cb4f61b6ef"
+      },
+      "precision": "fp8_weights_fp8_rounded_inputs_fp32_compute",
+      "settings": {
+        "co_tenancy": "W02 recorder services on the same processors; arms run one after the other, never together",
+        "compute_dtype": "float32 on both arms; the vendor recipe computes in bfloat16",
+        "context_limit_enforced": false,
+        "fp8_input_rounding": "where the checkpoint is FP8, inputs of the FP8-scaled matmuls are rounded through FP8 per row and per block of 128 (scale max/448), as the kernels-community/finegrained-fp8 kernels do; no such tensors exist in the BF16 checkpoint",
+        "power_and_cooling": "unchanged as found",
+        "prefix_cache": "none",
+        "reasoning_effort": "no_think",
+        "server": "serve_hy4.py, 56 torch threads, numactl --interleave=all, one request at a time, greedy decoding",
+        "speculative_decoding": false,
+        "weights": "loaded as float32: BF16 values widen exactly; FP8 weights are multiplied by their checkpoint block scales by the library"
+      },
+      "tokenizer": {
+        "revision": "git-blob-sha1:ff6aaf29542a31a718ffc2986100c3ac195f223d"
+      }
+    },
+    "implementation_files": [],
+    "model": "hy4-flash"
+  },
+  "declared_identity": {
+    "context_limit": 8192,
+    "hardware": {
+      "description": "2 x Intel(R) Xeon(R) Platinum 8276L CPU @ 2.20GHz, 112 threads; 1,971 GiB memory (256 GB DRAM in front of 2 TB Optane persistent memory, memory mode); kernel 7.0.0-42-generic",
+      "id": "OCTO-W02 processors, no accelerator used"
+    },
+    "implementation": {
+      "name": "transformers publisher loader on processors behind serve_hy4.py",
+      "revision": "huggingface/transformers@c2ec850510a37978ea83df226589623d5f2be776 (pull request 50903); torch==2.15.0+cpu; serve_hy4.py sha256:0642b5716e91fda10e36aacbc6c7ba95e65fdf220ba3dcec1bf78096bb9f2868"
+    },
+    "model": {
+      "revision": "003107fa248f5892064ab1c43af0a7003dd68c9b",
+      "sha256": "4554684cced8587248c9e9a7ad7a3c54e650534e680adb39c486c5cb4f61b6ef"
+    },
+    "precision": "fp8_weights_fp8_rounded_inputs_fp32_compute",
+    "settings": {
+      "co_tenancy": "W02 recorder services on the same processors; arms run one after the other, never together",
+      "compute_dtype": "float32 on both arms; the vendor recipe computes in bfloat16",
+      "context_limit_enforced": false,
+      "fp8_input_rounding": "where the checkpoint is FP8, inputs of the FP8-scaled matmuls are rounded through FP8 per row and per block of 128 (scale max/448), as the kernels-community/finegrained-fp8 kernels do; no such tensors exist in the BF16 checkpoint",
+      "power_and_cooling": "unchanged as found",
+      "prefix_cache": "none",
+      "reasoning_effort": "no_think",
+      "server": "serve_hy4.py, 56 torch threads, numactl --interleave=all, one request at a time, greedy decoding",
+      "speculative_decoding": false,
+      "weights": "loaded as float32: BF16 values widen exactly; FP8 weights are multiplied by their checkpoint block scales by the library"
+    },
+    "tokenizer": {
+      "revision": "git-blob-sha1:ff6aaf29542a31a718ffc2986100c3ac195f223d"
+    }
+  },
+  "duration_s": 988.3904286758043,
+  "ended_at": "2026-11-18T13:06:52.465976Z",
+  "inference_requests": 12,
+  "limitations": [
+    "This verdict covers the supplied workload, serving endpoints and policy only.",
+    "Declared weights, hardware, tokenizer and server flags are operator declarations; HTTP probes do not attest them.",
+    "Repeated cases are correlated. Trial ranges describe variation and are not a population confidence guarantee.",
+    "TTFT measures first visible content at the client, including network and queueing; content chunks are not tokens.",
+    "Token counts come from server usage. The instrument does not manufacture per-token timings, power or GPU run counts.",
+    "No request retries. Transport and incomplete stream failures are retained and force an error verdict.",
+    "Server cache state, co-tenancy, thermals and load require operator controls and declared identity settings."
+  ],
+  "observation_id": "hy4-fp8-w02-processors-20261118-r01",
+  "observation_identity": {
+    "configuration": {
+      "auth_env": "OCL_API_KEY",
+      "base_url": "http://127.0.0.1:18511/v1",
+      "identity": {
+        "context_limit": 8192,
+        "hardware": {
+          "description": "2 x Intel(R) Xeon(R) Platinum 8276L CPU @ 2.20GHz, 112 threads; 1,971 GiB memory (256 GB DRAM in front of 2 TB Optane persistent memory, memory mode); kernel 7.0.0-42-generic",
+          "id": "OCTO-W02 processors, no accelerator used"
+        },
+        "implementation": {
+          "name": "transformers publisher loader on processors behind serve_hy4.py",
+          "revision": "huggingface/transformers@c2ec850510a37978ea83df226589623d5f2be776 (pull request 50903); torch==2.15.0+cpu; serve_hy4.py sha256:0642b5716e91fda10e36aacbc6c7ba95e65fdf220ba3dcec1bf78096bb9f2868"
+        },
+        "model": {
+          "revision": "003107fa248f5892064ab1c43af0a7003dd68c9b",
+          "sha256": "4554684cced8587248c9e9a7ad7a3c54e650534e680adb39c486c5cb4f61b6ef"
+        },
+        "precision": "fp8_weights_fp8_rounded_inputs_fp32_compute",
+        "settings": {
+          "co_tenancy": "W02 recorder services on the same processors; arms run one after the other, never together",
+          "compute_dtype": "float32 on both arms; the vendor recipe computes in bfloat16",
+          "context_limit_enforced": false,
+          "fp8_input_rounding": "where the checkpoint is FP8, inputs of the FP8-scaled matmuls are rounded through FP8 per row and per block of 128 (scale max/448), as the kernels-community/finegrained-fp8 kernels do; no such tensors exist in the BF16 checkpoint",
+          "power_and_cooling": "unchanged as found",
+          "prefix_cache": "none",
+          "reasoning_effort": "no_think",
+          "server": "serve_hy4.py, 56 torch threads, numactl --interleave=all, one request at a time, greedy decoding",
+          "speculative_decoding": false,
+          "weights": "loaded as float32: BF16 values widen exactly; FP8 weights are multiplied by their checkpoint block scales by the library"
+        },
+        "tokenizer": {
+          "revision": "git-blob-sha1:ff6aaf29542a31a718ffc2986100c3ac195f223d"
+        }
+      },
+      "implementation_files": [],
+      "model": "hy4-flash"
+    },
+    "implementation_inputs": [],
+    "producer_files": [
+      {
+        "bytes": 36,
+        "path": "__init__.py",
+        "sha256": "694bb1ed29bb473d8879602f1318f551c5a2420fdc3b4cd7180457058e018b21"
+      },
+      {
+        "bytes": 15326,
+        "path": "common.py",
+        "sha256": "ab579a8aa3ac0d5f952307bb3d78a69e78e54f6958d029ff37479a5b2cbd8f9c"
+      },
+      {
+        "bytes": 12321,
+        "path": "experiments/hy4-flash/preflight.py",
+        "sha256": "114fdce8dd98c9749262a1be45c32c3432732e0b8e5a1823498e63c237e52788"
+      },
+      {
+        "bytes": 3360,
+        "path": "experiments/hy4-flash/render_recipe.py",
+        "sha256": "4d06d5b59d884973753bd653fb1ade56a76c5e1767e53cff65ba74f80a4f549d"
+      },
+      {
+        "bytes": 48631,
+        "path": "maintainer.py",
+        "sha256": "c42222a3222cf8be6dca9bb96945a757fa1f9438a35a0b0077d0d98699eef2f6"
+      },
+      {
+        "bytes": 66,
+        "path": "owner_ocl/__init__.py",
+        "sha256": "d146cc59df9f49fd0816f7a98145c09718237ad11dcbd2aa0bb4e144b9ca207b"
+      },
+      {
+        "bytes": 4817,
+        "path": "owner_ocl/compare.py",
+        "sha256": "7b0861d0d56b332db862052ff593bca85787a28810c27a137e29fb38946ad373"
+      },
+      {
+        "bytes": 8128,
+        "path": "owner_ocl/core.py",
+        "sha256": "996a2930e98211423104f1b4fa5f95a005b8e8fdfedd59fa08b7557e9525b1a5"
+      },
+      {
+        "bytes": 4129,
+        "path": "owner_ocl/costs.py",
+        "sha256": "59787191c181c6d17b3ecc50268051f0fc10b85cd508c8f65d76dc423741721d"
+      },
+      {
+        "bytes": 1651,
+        "path": "owner_ocl/energy.py",
+        "sha256": "cc5129a5fdea946094e99783f4c65b1f8b1385a4f6e54f12158434cd116a505b"
+      },
+      {
+        "bytes": 11850,
+        "path": "owner_ocl/runner.py",
+        "sha256": "e31ecd9ec76b75d036f1201e8415618e3d85e750fe67fd7ce789cf4730b30ed3"
+      },
+      {
+        "bytes": 3880,
+        "path": "owner_ocl/tasks.py",
+        "sha256": "3f8220f61dfc119728517299cebbc63319098213ae5ad7d4486f3415c8a811cf"
+      },
+      {
+        "bytes": 55,
+        "path": "owner_vllm/__init__.py",
+        "sha256": "b5c16e8bd3c46838ba822d25825547dca64e8bdb6fd149a72b9d9ab46ba562f8"
+      },
+      {
+        "bytes": 5921,
+        "path": "owner_vllm/audit.py",
+        "sha256": "9e81415da13b5dac5f2f57938c818af255e55029eb48c259365ec5bd02f8e7ba"
+      },
+      {
+        "bytes": 40836,
+        "path": "retry.py",
+        "sha256": "2a795193b927c80c1105e40a8d9e50ff96dcdc71a787032adea877008ae33d4e"
+      },
+      {
+        "bytes": 16619,
+        "path": "retry_resources.py",
+        "sha256": "b3d3fc24d76b6d10177bfefdf39a37d69c105d444913f776a1b85438a8aedf24"
+      },
+      {
+        "bytes": 10442,
+        "path": "streaming.py",
+        "sha256": "3453996783c68a0d745345b3bccd0505a3f9b31135bdd2e8148f613768baf30e"
+      }
+    ],
+    "protocol": {
+      "concurrency": 1,
+      "extra_body": {
+        "chat_template_kwargs": {
+          "reasoning_effort": "no_think"
+        },
+        "top_p": 1
+      },
+      "max_tokens": 256,
+      "repeats": 1,
+      "seed": 1729,
+      "timeout_s": 600,
+      "trials": 3,
+      "warmup": 0
+    },
+    "workload_sha256": "d96ed51dc7296867f0dd5f577bba88f9ba37f542368ff3eb0a896f9aedb0f7dc"
+  },
+  "observation_key": "548b942037771685051d1282a0a2bb7af96501b508fb10d00f1c9b7a551f8f5f",
+  "observations": [
+    {
+      "accepted": true,
+      "actual": [
+        {
+          "item": "bolt",
+          "quantity": 12
+        }
+      ],
+      "attempts": [
+        {
+          "content_chunk_times_s": [
+            259.8303434199188
+          ],
+          "duration_s": 259.850828794064,
+          "ended_monotonic_s": 1148219.78307474,
+          "error": null,
+          "finish_reason": "stop",
+          "input_tokens": 60,
+          "inter_content_chunk_s": [],
+          "output_tokens": 10,
+          "raw_path": "raw/trial/000-000-000003-00.json",
+          "request": {
+            "chat_template_kwargs": {
+              "reasoning_effort": "no_think"
+            },
+            "max_tokens": 256,
+            "messages": [
+              {
+                "content": "Record: item=bolt; quantity=12; color=blue. Return exactly one JSON object containing only item as a string and quantity as an integer. Do not add explanation.",
+                "role": "user"
+              }
+            ],
+            "model": "hy4-flash",
+            "seed": 1729,
+            "stream": true,
+            "stream_options": {
+              "include_usage": true
+            },
+            "temperature": 0,
+            "top_p": 1
+          },
+          "response_models": [
+            "hy4-flash"
+          ],
+          "response_sha256": "c0635bc9f0b8cee5719edbbc1730e0d01096ed52a5bc719a22bdff3b5bdaf976",
+          "response_text": "{\"item\":\"bolt\",\"quantity\":12}",
+          "stage": "step_0",
+          "started_monotonic_s": 1147959.932245946,
+          "stream_done": true,
+          "stream_error": null,
+          "token_count_source": "server usage; unverified tokenization",
+          "transport_error": null,
+          "ttft_s": 259.8303434199188,
+          "usage": {
+            "completion_tokens": 10,
+            "prompt_tokens": 60,
+            "total_tokens": 70
+          }
+        }
+      ],
+      "case_index": 3,
+      "duration_s": 259.90135349310003,
+      "ended_monotonic_s": 1148219.833428614,
+      "error": null,
+      "evaluator_version": "ocl.exact-json/1+cantos.stream/1",
+      "repetition": 0,
+      "started_monotonic_s": 1147959.932075121,
+      "step_checks": [
+        true
+      ],
+      "task_id": "extract-quantity",
+      "trial": 0,
+      "warmup": false
+    },
+    {
+      "accepted": true,
+      "actual": [
+        {
+          "count": 3,
+          "missing": null,
+          "ready": true
+        }
+      ],
+      "attempts": [
+        {
+          "content_chunk_times_s": [
+            162.49636879307218
+          ],
+          "duration_s": 162.50808184803464,
+          "ended_monotonic_s": 1148382.341815554,
+          "error": null,
+          "finish_reason": "stop",
+          "input_tokens": 54,
+          "inter_content_chunk_s": [],
+          "output_tokens": 14,
+          "raw_path": "raw/trial/000-000-000002-00.json",
+          "request": {
+            "chat_template_kwargs": {
+              "reasoning_effort": "no_think"
+            },
+            "max_tokens": 256,
+            "messages": [
+              {
+                "content": "Return exactly this JSON object with the indicated types: ready is boolean true, missing is null, count is integer 3. Do not add explanation.",
+                "role": "user"
+              }
+            ],
+            "model": "hy4-flash",
+            "seed": 1729,
+            "stream": true,
+            "stream_options": {
+              "include_usage": true
+            },
+            "temperature": 0,
+            "top_p": 1
+          },
+          "response_models": [
+            "hy4-flash"
+          ],
+          "response_sha256": "309fb31fbe18153bd6664b708a213102d745367f7c6f3a938a99c7ff9b24293d",
+          "response_text": "{\"ready\":true,\"missing\":null,\"count\":3}",
+          "stage": "step_0",
+          "started_monotonic_s": 1148219.833733706,
+          "stream_done": true,
+          "stream_error": null,
+          "token_count_source": "server usage; unverified tokenization",
+          "transport_error": null,
+          "ttft_s": 162.49636879307218,
+          "usage": {
+            "completion_tokens": 14,
+            "prompt_tokens": 54,
+            "total_tokens": 68
+          }
+        }
+      ],
+      "case_index": 2,
+      "duration_s": 162.54505365295336,
+      "ended_monotonic_s": 1148382.378638939,
+      "error": null,
+      "evaluator_version": "ocl.exact-json/1+cantos.stream/1",
+      "repetition": 0,
+      "started_monotonic_s": 1148219.833585286,
+      "step_checks": [
+        true
+      ],
+      "task_id": "literal-types",
+      "trial": 0,
+      "warmup": false
+    },
+    {
+      "accepted": true,
+      "actual": [
+        {
+          "values": [
+            2,
+            2,
+            7,
+            9
+          ]
+        }
+      ],
+      "attempts": [
+        {
+          "content_chunk_times_s": [
+            100.50096651096828
+          ],
+          "duration_s": 100.51355815515853,
+          "ended_monotonic_s": 1148482.892475356,
+          "error": null,
+          "finish_reason": "stop",
+          "input_tokens": 57,
+          "inter_content_chunk_s": [],
+          "output_tokens": 12,
+          "raw_path": "raw/trial/000-000-000001-00.json",
+          "request": {
+            "chat_template_kwargs": {
+              "reasoning_effort": "no_think"
+            },
+            "max_tokens": 256,
+            "messages": [
+              {
+                "content": "Return exactly one JSON object with key values and the array [9, 2, 7, 2] sorted in ascending order. Do not add explanation.",
+                "role": "user"
+              }
+            ],
+            "model": "hy4-flash",
+            "seed": 1729,
+            "stream": true,
+            "stream_options": {
+              "include_usage": true
+            },
+            "temperature": 0,
+            "top_p": 1
+          },
+          "response_models": [
+            "hy4-flash"
+          ],
+          "response_sha256": "a65d2a2fd5f90c8760506904d0195ba104b0924861ad63f840235cfeb6b3741b",
+          "response_text": "{\"values\":[2,2,7,9]}",
+          "stage": "step_0",
+          "started_monotonic_s": 1148382.378917201,
+          "stream_done": true,
+          "stream_error": null,
+          "token_count_source": "server usage; unverified tokenization",
+          "transport_error": null,
+          "ttft_s": 100.50096651096828,
+          "usage": {
+            "completion_tokens": 12,
+            "prompt_tokens": 57,
+            "total_tokens": 69
+          }
+        }
+      ],
+      "case_index": 1,
+      "duration_s": 100.55471820198,
+      "ended_monotonic_s": 1148482.933491307,
+      "error": null,
+      "evaluator_version": "ocl.exact-json/1+cantos.stream/1",
+      "repetition": 0,
+      "started_monotonic_s": 1148382.378773105,
+      "step_checks": [
+        true
+      ],
+      "task_id": "sort-integers",
+      "trial": 0,
+      "warmup": false
+    },
+    {
+      "accepted": true,
+      "actual": [
+        {
+          "sum": 42
+        }
+      ],
+      "attempts": [
+        {
+          "content_chunk_times_s": [
+            51.75320506305434
+          ],
+          "duration_s": 51.765123817138374,
+          "ended_monotonic_s": 1148534.698891757,
+          "error": null,
+          "finish_reason": "stop",
+          "input_tokens": 48,
+          "inter_content_chunk_s": [],
+          "output_tokens": 6,
+          "raw_path": "raw/trial/000-000-000000-00.json",
+          "request": {
+            "chat_template_kwargs": {
+              "reasoning_effort": "no_think"
+            },
+            "max_tokens": 256,
+            "messages": [
+              {
+                "content": "Return exactly one JSON object with key sum and the integer sum of 17 and 25. Do not add explanation.",
+                "role": "user"
+              }
+            ],
+            "model": "hy4-flash",
+            "seed": 1729,
+            "stream": true,
+            "stream_options": {
+              "include_usage": true
+            },
+            "temperature": 0,
+            "top_p": 1
+          },
+          "response_models": [
+            "hy4-flash"
+          ],
+          "response_sha256": "82a984dda4159e2e94a3fd7b93727b2cba1a209537257f0df0d3d2f6fbb35a9b",
+          "response_text": "{\"sum\":42}",
+          "stage": "step_0",
+          "started_monotonic_s": 1148482.93376794,
+          "stream_done": true,
+          "stream_error": null,
+          "token_count_source": "server usage; unverified tokenization",
+          "transport_error": null,
+          "ttft_s": 51.75320506305434,
+          "usage": {
+            "completion_tokens": 6,
+            "prompt_tokens": 48,
+            "total_tokens": 54
+          }
+        }
+      ],
+      "case_index": 0,
+      "duration_s": 51.79980862699449,
+      "ended_monotonic_s": 1148534.733424762,
+      "error": null,
+      "evaluator_version": "ocl.exact-json/1+cantos.stream/1",
+      "repetition": 0,
+      "started_monotonic_s": 1148482.933616135,
+      "step_checks": [
+        true
+      ],
+      "task_id": "sum-42",
+      "trial": 0,
+      "warmup": false
+    },
+    {
+      "accepted": true,
+      "actual": [
+        {
+          "item": "bolt",
+          "quantity": 12
+        }
+      ],
+      "attempts": [
+        {
+          "content_chunk_times_s": [
+            58.53278485010378
+          ],
+          "duration_s": 58.54147045803256,
+          "ended_monotonic_s": 1148696.660616369,
+          "error": null,
+          "finish_reason": "stop",
+          "input_tokens": 60,
+          "inter_content_chunk_s": [],
+          "output_tokens": 10,
+          "raw_path": "raw/trial/001-000-000003-00.json",
+          "request": {
+            "chat_template_kwargs": {
+              "reasoning_effort": "no_think"
+            },
+            "max_tokens": 256,
+            "messages": [
+              {
+                "content": "Record: item=bolt; quantity=12; color=blue. Return exactly one JSON object containing only item as a string and quantity as an integer. Do not add explanation.",
+                "role": "user"
+              }
+            ],
+            "model": "hy4-flash",
+            "seed": 1729,
+            "stream": true,
+            "stream_options": {
+              "include_usage": true
+            },
+            "temperature": 0,
+            "top_p": 1
+          },
+          "response_models": [
+            "hy4-flash"
+          ],
+          "response_sha256": "c0635bc9f0b8cee5719edbbc1730e0d01096ed52a5bc719a22bdff3b5bdaf976",
+          "response_text": "{\"item\":\"bolt\",\"quantity\":12}",
+          "stage": "step_0",
+          "started_monotonic_s": 1148638.119145911,
+          "stream_done": true,
+          "stream_error": null,
+          "token_count_source": "server usage; unverified tokenization",
+          "transport_error": null,
+          "ttft_s": 58.53278485010378,
+          "usage": {
+            "completion_tokens": 10,
+            "prompt_tokens": 60,
+            "total_tokens": 70
+          }
+        }
+      ],
+      "case_index": 3,
+      "duration_s": 58.57725720200688,
+      "ended_monotonic_s": 1148696.696245923,
+      "error": null,
+      "evaluator_version": "ocl.exact-json/1+cantos.stream/1",
+      "repetition": 0,
+      "started_monotonic_s": 1148638.118988721,
+      "step_checks": [
+        true
+      ],
+      "task_id": "extract-quantity",
+      "trial": 1,
+      "warmup": false
+    },
+    {
+      "accepted": true,
+      "actual": [
+        {
+          "count": 3,
+          "missing": null,
+          "ready": true
+        }
+      ],
+      "attempts": [
+        {
+          "content_chunk_times_s": [
+            64.2434092098847
+          ],
+          "duration_s": 64.26206550584175,
+          "ended_monotonic_s": 1148599.007859456,
+          "error": null,
+          "finish_reason": "stop",
+          "input_tokens": 54,
+          "inter_content_chunk_s": [],
+          "output_tokens": 14,
+          "raw_path": "raw/trial/001-000-000002-00.json",
+          "request": {
+            "chat_template_kwargs": {
+              "reasoning_effort": "no_think"
+            },
+            "max_tokens": 256,
+            "messages": [
+              {
+                "content": "Return exactly this JSON object with the indicated types: ready is boolean true, missing is null, count is integer 3. Do not add explanation.",
+                "role": "user"
+              }
+            ],
+            "model": "hy4-flash",
+            "seed": 1729,
+            "stream": true,
+            "stream_options": {
+              "include_usage": true
+            },
+            "temperature": 0,
+            "top_p": 1
+          },
+          "response_models": [
+            "hy4-flash"
+          ],
+          "response_sha256": "309fb31fbe18153bd6664b708a213102d745367f7c6f3a938a99c7ff9b24293d",
+          "response_text": "{\"ready\":true,\"missing\":null,\"count\":3}",
+          "stage": "step_0",
+          "started_monotonic_s": 1148534.74579395,
+          "stream_done": true,
+          "stream_error": null,
+          "token_count_source": "server usage; unverified tokenization",
+          "transport_error": null,
+          "ttft_s": 64.2434092098847,
+          "usage": {
+            "completion_tokens": 14,
+            "prompt_tokens": 54,
+            "total_tokens": 68
+          }
+        }
+      ],
+      "case_index": 2,
+      "duration_s": 64.30267878714949,
+      "ended_monotonic_s": 1148599.048315759,
+      "error": null,
+      "evaluator_version": "ocl.exact-json/1+cantos.stream/1",
+      "repetition": 0,
+      "started_monotonic_s": 1148534.745636972,
+      "step_checks": [
+        true
+      ],
+      "task_id": "literal-types",
+      "trial": 1,
+      "warmup": false
+    },
+    {
+      "accepted": true,
+      "actual": [
+        {
+          "values": [
+            2,
+            2,
+            7,
+            9
+          ]
+        }
+      ],
+      "attempts": [
+        {
+          "content_chunk_times_s": [
+            56.63915528403595
+          ],
+          "duration_s": 56.659444361925125,
+          "ended_monotonic_s": 1148753.355962581,
+          "error": null,
+          "finish_reason": "stop",
+          "input_tokens": 57,
+          "inter_content_chunk_s": [],
+          "output_tokens": 12,
+          "raw_path": "raw/trial/001-000-000001-00.json",
+          "request": {
+            "chat_template_kwargs": {
+              "reasoning_effort": "no_think"
+            },
+            "max_tokens": 256,
+            "messages": [
+              {
+                "content": "Return exactly one JSON object with key values and the array [9, 2, 7, 2] sorted in ascending order. Do not add explanation.",
+                "role": "user"
+              }
+            ],
+            "model": "hy4-flash",
+            "seed": 1729,
+            "stream": true,
+            "stream_options": {
+              "include_usage": true
+            },
+            "temperature": 0,
+            "top_p": 1
+          },
+          "response_models": [
+            "hy4-flash"
+          ],
+          "response_sha256": "a65d2a2fd5f90c8760506904d0195ba104b0924861ad63f840235cfeb6b3741b",
+          "response_text": "{\"values\":[2,2,7,9]}",
+          "stage": "step_0",
+          "started_monotonic_s": 1148696.696518219,
+          "stream_done": true,
+          "stream_error": null,
+          "token_count_source": "server usage; unverified tokenization",
+          "transport_error": null,
+          "ttft_s": 56.63915528403595,
+          "usage": {
+            "completion_tokens": 12,
+            "prompt_tokens": 57,
+            "total_tokens": 69
+          }
+        }
+      ],
+      "case_index": 1,
+      "duration_s": 56.70020951889455,
+      "ended_monotonic_s": 1148753.396579501,
+      "error": null,
+      "evaluator_version": "ocl.exact-json/1+cantos.stream/1",
+      "repetition": 0,
+      "started_monotonic_s": 1148696.696369982,
+      "step_checks": [
+        true
+      ],
+      "task_id": "sort-integers",
+      "trial": 1,
+      "warmup": false
+    },
+    {
+      "accepted": true,
+      "actual": [
+        {
+          "sum": 42
+        }
+      ],
+      "attempts": [
+        {
+          "content_chunk_times_s": [
+            39.021692029898986
+          ],
+          "duration_s": 39.034295606892556,
+          "ended_monotonic_s": 1148638.082866547,
+          "error": null,
+          "finish_reason": "stop",
+          "input_tokens": 48,
+          "inter_content_chunk_s": [],
+          "output_tokens": 6,
+          "raw_path": "raw/trial/001-000-000000-00.json",
+          "request": {
+            "chat_template_kwargs": {
+              "reasoning_effort": "no_think"
+            },
+            "max_tokens": 256,
+            "messages": [
+              {
+                "content": "Return exactly one JSON object with key sum and the integer sum of 17 and 25. Do not add explanation.",
+                "role": "user"
+              }
+            ],
+            "model": "hy4-flash",
+            "seed": 1729,
+            "stream": true,
+            "stream_options": {
+              "include_usage": true
+            },
+            "temperature": 0,
+            "top_p": 1
+          },
+          "response_models": [
+            "hy4-flash"
+          ],
+          "response_sha256": "82a984dda4159e2e94a3fd7b93727b2cba1a209537257f0df0d3d2f6fbb35a9b",
+          "response_text": "{\"sum\":42}",
+          "stage": "step_0",
+          "started_monotonic_s": 1148599.04857094,
+          "stream_done": true,
+          "stream_error": null,
+          "token_count_source": "server usage; unverified tokenization",
+          "transport_error": null,
+          "ttft_s": 39.021692029898986,
+          "usage": {
+            "completion_tokens": 6,
+            "prompt_tokens": 48,
+            "total_tokens": 54
+          }
+        }
+      ],
+      "case_index": 0,
+      "duration_s": 39.0704519469291,
+      "ended_monotonic_s": 1148638.118878826,
+      "error": null,
+      "evaluator_version": "ocl.exact-json/1+cantos.stream/1",
+      "repetition": 0,
+      "started_monotonic_s": 1148599.048426879,
+      "step_checks": [
+        true
+      ],
+      "task_id": "sum-42",
+      "trial": 1,
+      "warmup": false
+    },
+    {
+      "accepted": true,
+      "actual": [
+        {
+          "item": "bolt",
+          "quantity": 12
+        }
+      ],
+      "attempts": [
+        {
+          "content_chunk_times_s": [
+            49.658948423108086
+          ],
+          "duration_s": 49.66907465807162,
+          "ended_monotonic_s": 1148948.26399293,
+          "error": null,
+          "finish_reason": "stop",
+          "input_tokens": 60,
+          "inter_content_chunk_s": [],
+          "output_tokens": 10,
+          "raw_path": "raw/trial/002-000-000003-00.json",
+          "request": {
+            "chat_template_kwargs": {
+              "reasoning_effort": "no_think"
+            },
+            "max_tokens": 256,
+            "messages": [
+              {
+                "content": "Record: item=bolt; quantity=12; color=blue. Return exactly one JSON object containing only item as a string and quantity as an integer. Do not add explanation.",
+                "role": "user"
+              }
+            ],
+            "model": "hy4-flash",
+            "seed": 1729,
+            "stream": true,
+            "stream_options": {
+              "include_usage": true
+            },
+            "temperature": 0,
+            "top_p": 1
+          },
+          "response_models": [
+            "hy4-flash"
+          ],
+          "response_sha256": "c0635bc9f0b8cee5719edbbc1730e0d01096ed52a5bc719a22bdff3b5bdaf976",
+          "response_text": "{\"item\":\"bolt\",\"quantity\":12}",
+          "stage": "step_0",
+          "started_monotonic_s": 1148898.594918272,
+          "stream_done": true,
+          "stream_error": null,
+          "token_count_source": "server usage; unverified tokenization",
+          "transport_error": null,
+          "ttft_s": 49.658948423108086,
+          "usage": {
+            "completion_tokens": 10,
+            "prompt_tokens": 60,
+            "total_tokens": 70
+          }
+        }
+      ],
+      "case_index": 3,
+      "duration_s": 49.7064515769016,
+      "ended_monotonic_s": 1148948.301221401,
+      "error": null,
+      "evaluator_version": "ocl.exact-json/1+cantos.stream/1",
+      "repetition": 0,
+      "started_monotonic_s": 1148898.594769824,
+      "step_checks": [
+        true
+      ],
+      "task_id": "extract-quantity",
+      "trial": 2,
+      "warmup": false
+    },
+    {
+      "accepted": true,
+      "actual": [
+        {
+          "count": 3,
+          "missing": null,
+          "ready": true
+        }
+      ],
+      "attempts": [
+        {
+          "content_chunk_times_s": [
+            56.90197966899723
+          ],
+          "duration_s": 56.92977374000475,
+          "ended_monotonic_s": 1148810.341659448,
+          "error": null,
+          "finish_reason": "stop",
+          "input_tokens": 54,
+          "inter_content_chunk_s": [],
+          "output_tokens": 14,
+          "raw_path": "raw/trial/002-000-000002-00.json",
+          "request": {
+            "chat_template_kwargs": {
+              "reasoning_effort": "no_think"
+            },
+            "max_tokens": 256,
+            "messages": [
+              {
+                "content": "Return exactly this JSON object with the indicated types: ready is boolean true, missing is null, count is integer 3. Do not add explanation.",
+                "role": "user"
+              }
+            ],
+            "model": "hy4-flash",
+            "seed": 1729,
+            "stream": true,
+            "stream_options": {
+              "include_usage": true
+            },
+            "temperature": 0,
+            "top_p": 1
+          },
+          "response_models": [
+            "hy4-flash"
+          ],
+          "response_sha256": "309fb31fbe18153bd6664b708a213102d745367f7c6f3a938a99c7ff9b24293d",
+          "response_text": "{\"ready\":true,\"missing\":null,\"count\":3}",
+          "stage": "step_0",
+          "started_monotonic_s": 1148753.411885708,
+          "stream_done": true,
+          "stream_error": null,
+          "token_count_source": "server usage; unverified tokenization",
+          "transport_error": null,
+          "ttft_s": 56.90197966899723,
+          "usage": {
+            "completion_tokens": 14,
+            "prompt_tokens": 54,
+            "total_tokens": 68
+          }
+        }
+      ],
+      "case_index": 2,
+      "duration_s": 56.9633070519194,
+      "ended_monotonic_s": 1148810.37503258,
+      "error": null,
+      "evaluator_version": "ocl.exact-json/1+cantos.stream/1",
+      "repetition": 0,
+      "started_monotonic_s": 1148753.411725528,
+      "step_checks": [
+        true
+      ],
+      "task_id": "literal-types",
+      "trial": 2,
+      "warmup": false
+    },
+    {
+      "accepted": true,
+      "actual": [
+        {
+          "values": [
+            2,
+            2,
+            7,
+            9
+          ]
+        }
+      ],
+      "attempts": [
+        {
+          "content_chunk_times_s": [
+            52.56214895402081
+          ],
+          "duration_s": 52.57673072000034,
+          "ended_monotonic_s": 1148862.952037652,
+          "error": null,
+          "finish_reason": "stop",
+          "input_tokens": 57,
+          "inter_content_chunk_s": [],
+          "output_tokens": 12,
+          "raw_path": "raw/trial/002-000-000001-00.json",
+          "request": {
+            "chat_template_kwargs": {
+              "reasoning_effort": "no_think"
+            },
+            "max_tokens": 256,
+            "messages": [
+              {
+                "content": "Return exactly one JSON object with key values and the array [9, 2, 7, 2] sorted in ascending order. Do not add explanation.",
+                "role": "user"
+              }
+            ],
+            "model": "hy4-flash",
+            "seed": 1729,
+            "stream": true,
+            "stream_options": {
+              "include_usage": true
+            },
+            "temperature": 0,
+            "top_p": 1
+          },
+          "response_models": [
+            "hy4-flash"
+          ],
+          "response_sha256": "a65d2a2fd5f90c8760506904d0195ba104b0924861ad63f840235cfeb6b3741b",
+          "response_text": "{\"values\":[2,2,7,9]}",
+          "stage": "step_0",
+          "started_monotonic_s": 1148810.375306932,
+          "stream_done": true,
+          "stream_error": null,
+          "token_count_source": "server usage; unverified tokenization",
+          "transport_error": null,
+          "ttft_s": 52.56214895402081,
+          "usage": {
+            "completion_tokens": 12,
+            "prompt_tokens": 57,
+            "total_tokens": 69
+          }
+        }
+      ],
+      "case_index": 1,
+      "duration_s": 52.61130982497707,
+      "ended_monotonic_s": 1148862.986465289,
+      "error": null,
+      "evaluator_version": "ocl.exact-json/1+cantos.stream/1",
+      "repetition": 0,
+      "started_monotonic_s": 1148810.375155464,
+      "step_checks": [
+        true
+      ],
+      "task_id": "sort-integers",
+      "trial": 2,
+      "warmup": false
+    },
+    {
+      "accepted": true,
+      "actual": [
+        {
+          "sum": 42
+        }
+      ],
+      "attempts": [
+        {
+          "content_chunk_times_s": [
+            35.56546093383804
+          ],
+          "duration_s": 35.57296071201563,
+          "ended_monotonic_s": 1148898.559698993,
+          "error": null,
+          "finish_reason": "stop",
+          "input_tokens": 48,
+          "inter_content_chunk_s": [],
+          "output_tokens": 6,
+          "raw_path": "raw/trial/002-000-000000-00.json",
+          "request": {
+            "chat_template_kwargs": {
+              "reasoning_effort": "no_think"
+            },
+            "max_tokens": 256,
+            "messages": [
+              {
+                "content": "Return exactly one JSON object with key sum and the integer sum of 17 and 25. Do not add explanation.",
+                "role": "user"
+              }
+            ],
+            "model": "hy4-flash",
+            "seed": 1729,
+            "stream": true,
+            "stream_options": {
+              "include_usage": true
+            },
+            "temperature": 0,
+            "top_p": 1
+          },
+          "response_models": [
+            "hy4-flash"
+          ],
+          "response_sha256": "82a984dda4159e2e94a3fd7b93727b2cba1a209537257f0df0d3d2f6fbb35a9b",
+          "response_text": "{\"sum\":42}",
+          "stage": "step_0",
+          "started_monotonic_s": 1148862.986738281,
+          "stream_done": true,
+          "stream_error": null,
+          "token_count_source": "server usage; unverified tokenization",
+          "transport_error": null,
+          "ttft_s": 35.56546093383804,
+          "usage": {
+            "completion_tokens": 6,
+            "prompt_tokens": 48,
+            "total_tokens": 54
+          }
+        }
+      ],
+      "case_index": 0,
+      "duration_s": 35.60806518001482,
+      "ended_monotonic_s": 1148898.594649919,
+      "error": null,
+      "evaluator_version": "ocl.exact-json/1+cantos.stream/1",
+      "repetition": 0,
+      "started_monotonic_s": 1148862.986584739,
+      "step_checks": [
+        true
+      ],
+      "task_id": "sum-42",
+      "trial": 2,
+      "warmup": false
+    }
+  ],
+  "observed_identity": {
+    "after": {
+      "captured_at": "2026-11-18T13:06:52.399349Z",
+      "models": {
+        "body": {
+          "data": [
+            {
+              "id": "hy4-flash",
+              "meta": {
+                "element_counts_by_dtype": {
+                  "torch.float32": 219405011261
+                },
+                "fp8": true,
+                "fp8_load": {
+                  "checkpoint_tensors_applied": 1877,
+                  "checkpoint_tensors_unmapped": [],
+                  "draft_tensors_skipped": 87,
+                  "fp8_tensors_dequantized": 205,
+                  "fp8_vs_skeleton_cosine_max": 0.9996501281778245,
+                  "fp8_vs_skeleton_cosine_min": 0.9994003057828444,
+                  "hooked_experts": 41,
+                  "hooked_linear_kinds": [
+                    "gate_proj",
+                    "o_proj",
+                    "q_b_proj"
+                  ],
+                  "hooked_linears": 123,
+                  "model_parameters": 1832,
+                  "parameters_not_overwritten": [],
+                  "unscaled_tensors_different_from_skeleton": 0,
+                  "unscaled_tensors_identical_to_skeleton": 1672
+                },
+                "snapshot": "/dev/shm/hy4/fp8"
+              },
+              "object": "model",
+              "owned_by": "transformers"
+            }
+          ],
+          "object": "list"
+        },
+        "http_status": 200
+      },
+      "version": {
+        "body": {
+          "version": "serve_hy4/3 transformers 5.24.0.dev0 torch 2.15.0+cpu fp8=True"
+        },
+        "http_status": 200
+      }
+    },
+    "authority": "endpoint self-report and response fields; not hardware or weights attestation",
+    "before": {
+      "captured_at": "2026-11-18T12:50:23.923515Z",
+      "models": {
+        "body": {
+          "data": [
+            {
+              "id": "hy4-flash",
+              "meta": {
+                "element_counts_by_dtype": {
+                  "torch.float32": 219405011261
+                },
+                "fp8": true,
+                "fp8_load": {
+                  "checkpoint_tensors_applied": 1877,
+                  "checkpoint_tensors_unmapped": [],
+                  "draft_tensors_skipped": 87,
+                  "fp8_tensors_dequantized": 205,
+                  "fp8_vs_skeleton_cosine_max": 0.9996501281778245,
+                  "fp8_vs_skeleton_cosine_min": 0.9994003057828444,
+                  "hooked_experts": 41,
+                  "hooked_linear_kinds": [
+                    "gate_proj",
+                    "o_proj",
+                    "q_b_proj"
+                  ],
+                  "hooked_linears": 123,
+                  "model_parameters": 1832,
+                  "parameters_not_overwritten": [],
+                  "unscaled_tensors_different_from_skeleton": 0,
+                  "unscaled_tensors_identical_to_skeleton": 1672
+                },
+                "snapshot": "/dev/shm/hy4/fp8"
+              },
+              "object": "model",
+              "owned_by": "transformers"
+            }
+          ],
+          "object": "list"
+        },
+        "http_status": 200
+      },
+      "version": {
+        "body": {
+          "version": "serve_hy4/3 transformers 5.24.0.dev0 torch 2.15.0+cpu fp8=True"
+        },
+        "http_status": 200
+      }
+    },
+    "stream_models": [
+      "hy4-flash"
+    ]
+  },
+  "pairing": null,
+  "producer_files": [
+    {
+      "bytes": 36,
+      "path": "__init__.py",
+      "sha256": "694bb1ed29bb473d8879602f1318f551c5a2420fdc3b4cd7180457058e018b21"
+    },
+    {
+      "bytes": 15326,
+      "path": "common.py",
+      "sha256": "ab579a8aa3ac0d5f952307bb3d78a69e78e54f6958d029ff37479a5b2cbd8f9c"
+    },
+    {
+      "bytes": 12321,
+      "path": "experiments/hy4-flash/preflight.py",
+      "sha256": "114fdce8dd98c9749262a1be45c32c3432732e0b8e5a1823498e63c237e52788"
+    },
+    {
+      "bytes": 3360,
+      "path": "experiments/hy4-flash/render_recipe.py",
+      "sha256": "4d06d5b59d884973753bd653fb1ade56a76c5e1767e53cff65ba74f80a4f549d"
+    },
+    {
+      "bytes": 48631,
+      "path": "maintainer.py",
+      "sha256": "c42222a3222cf8be6dca9bb96945a757fa1f9438a35a0b0077d0d98699eef2f6"
+    },
+    {
+      "bytes": 66,
+      "path": "owner_ocl/__init__.py",
+      "sha256": "d146cc59df9f49fd0816f7a98145c09718237ad11dcbd2aa0bb4e144b9ca207b"
+    },
+    {
+      "bytes": 4817,
+      "path": "owner_ocl/compare.py",
+      "sha256": "7b0861d0d56b332db862052ff593bca85787a28810c27a137e29fb38946ad373"
+    },
+    {
+      "bytes": 8128,
+      "path": "owner_ocl/core.py",
+      "sha256": "996a2930e98211423104f1b4fa5f95a005b8e8fdfedd59fa08b7557e9525b1a5"
+    },
+    {
+      "bytes": 4129,
+      "path": "owner_ocl/costs.py",
+      "sha256": "59787191c181c6d17b3ecc50268051f0fc10b85cd508c8f65d76dc423741721d"
+    },
+    {
+      "bytes": 1651,
+      "path": "owner_ocl/energy.py",
+      "sha256": "cc5129a5fdea946094e99783f4c65b1f8b1385a4f6e54f12158434cd116a505b"
+    },
+    {
+      "bytes": 11850,
+      "path": "owner_ocl/runner.py",
+      "sha256": "e31ecd9ec76b75d036f1201e8415618e3d85e750fe67fd7ce789cf4730b30ed3"
+    },
+    {
+      "bytes": 3880,
+      "path": "owner_ocl/tasks.py",
+      "sha256": "3f8220f61dfc119728517299cebbc63319098213ae5ad7d4486f3415c8a811cf"
+    },
+    {
+      "bytes": 55,
+      "path": "owner_vllm/__init__.py",
+      "sha256": "b5c16e8bd3c46838ba822d25825547dca64e8bdb6fd149a72b9d9ab46ba562f8"
+    },
+    {
+      "bytes": 5921,
+      "path": "owner_vllm/audit.py",
+      "sha256": "9e81415da13b5dac5f2f57938c818af255e55029eb48c259365ec5bd02f8e7ba"
+    },
+    {
+      "bytes": 40836,
+      "path": "retry.py",
+      "sha256": "2a795193b927c80c1105e40a8d9e50ff96dcdc71a787032adea877008ae33d4e"
+    },
+    {
+      "bytes": 16619,
+      "path": "retry_resources.py",
+      "sha256": "b3d3fc24d76b6d10177bfefdf39a37d69c105d444913f776a1b85438a8aedf24"
+    },
+    {
+      "bytes": 10442,
+      "path": "streaming.py",
+      "sha256": "3453996783c68a0d745345b3bccd0505a3f9b31135bdd2e8148f613768baf30e"
+    }
+  ],
+  "protocol": {
+    "concurrency": 1,
+    "extra_body": {
+      "chat_template_kwargs": {
+        "reasoning_effort": "no_think"
+      },
+      "top_p": 1
+    },
+    "max_tokens": 256,
+    "repeats": 1,
+    "seed": 1729,
+    "timeout_s": 600,
+    "trials": 3,
+    "warmup": 0
+  },
+  "run_id": "hy4-fp8-w02-processors-20261118-r01",
+  "schema": "cantos.maintainer.run/1",
+  "started_at": "2026-11-18T12:50:23.834037Z",
+  "status": "complete",
+  "trials": [
+    {
+      "duration_s": 574.8134419908747,
+      "ended_monotonic_s": 1148534.744886329,
+      "order": [
+        [
+          "extract-quantity",
+          0
+        ],
+        [
+          "literal-types",
+          0
+        ],
+        [
+          "sort-integers",
+          0
+        ],
+        [
+          "sum-42",
+          0
+        ]
+      ],
+      "paired_position": null,
+      "started_monotonic_s": 1147959.931444338,
+      "trial": 0
+    },
+    {
+      "duration_s": 218.66593559179455,
+      "ended_monotonic_s": 1148753.411025636,
+      "order": [
+        [
+          "literal-types",
+          0
+        ],
+        [
+          "sum-42",
+          0
+        ],
+        [
+          "extract-quantity",
+          0
+        ],
+        [
+          "sort-integers",
+          0
+        ]
+      ],
+      "paired_position": null,
+      "started_monotonic_s": 1148534.745090044,
+      "trial": 1
+    },
+    {
+      "duration_s": 194.91105109313503,
+      "ended_monotonic_s": 1148948.322243432,
+      "order": [
+        [
+          "literal-types",
+          0
+        ],
+        [
+          "sort-integers",
+          0
+        ],
+        [
+          "sum-42",
+          0
+        ],
+        [
+          "extract-quantity",
+          0
+        ]
+      ],
+      "paired_position": null,
+      "started_monotonic_s": 1148753.411192339,
+      "trial": 2
+    }
+  ],
+  "warmups": [],
+  "workload_sha256": "d96ed51dc7296867f0dd5f577bba88f9ba37f542368ff3eb0a896f9aedb0f7dc"
+}

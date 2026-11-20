@@ -1,0 +1,233 @@
+{
+  "model": "/dev/shm/hy4/fp8",
+  "name": "hy4-flash",
+  "threads": 56,
+  "fp8": true,
+  "skeleton": "/dev/shm/hy4/bf16",
+  "torch": "2.15.0+cpu",
+  "transformers": "5.24.0.dev0",
+  "state": "ready",
+  "load_started_epoch": 1795002389.8408759,
+  "requests": [
+    {
+      "started_epoch": 1795006044.4156108,
+      "prompt_tokens": 27,
+      "completion_tokens": 2,
+      "seconds": 178.90000319480896,
+      "first_text_seconds": 178.89858269691467,
+      "template_kwargs": {
+        "reasoning_effort": "no_think"
+      },
+      "fp8_round_trips": {
+        "linear": 246,
+        "experts_in": 82,
+        "experts_mid": 82
+      }
+    },
+    {
+      "started_epoch": 1795006224.02927,
+      "prompt_tokens": 60,
+      "completion_tokens": 10,
+      "seconds": 259.8301603794098,
+      "first_text_seconds": 259.809650182724,
+      "template_kwargs": {
+        "reasoning_effort": "no_think"
+      },
+      "fp8_round_trips": {
+        "linear": 1230,
+        "experts_in": 410,
+        "experts_mid": 410
+      }
+    },
+    {
+      "started_epoch": 1795006483.93051,
+      "prompt_tokens": 54,
+      "completion_tokens": 14,
+      "seconds": 162.48770380020142,
+      "first_text_seconds": 162.47595167160034,
+      "template_kwargs": {
+        "reasoning_effort": "no_think"
+      },
+      "fp8_round_trips": {
+        "linear": 1722,
+        "experts_in": 574,
+        "experts_mid": 574
+      }
+    },
+    {
+      "started_epoch": 1795006646.475211,
+      "prompt_tokens": 57,
+      "completion_tokens": 12,
+      "seconds": 100.49367594718933,
+      "first_text_seconds": 100.48103332519531,
+      "template_kwargs": {
+        "reasoning_effort": "no_think"
+      },
+      "fp8_round_trips": {
+        "linear": 1476,
+        "experts_in": 492,
+        "experts_mid": 492
+      }
+    },
+    {
+      "started_epoch": 1795006747.0301273,
+      "prompt_tokens": 48,
+      "completion_tokens": 6,
+      "seconds": 51.74513626098633,
+      "first_text_seconds": 51.73324632644653,
+      "template_kwargs": {
+        "reasoning_effort": "no_think"
+      },
+      "fp8_round_trips": {
+        "linear": 738,
+        "experts_in": 246,
+        "experts_mid": 246
+      }
+    },
+    {
+      "started_epoch": 1795006798.8423324,
+      "prompt_tokens": 54,
+      "completion_tokens": 14,
+      "seconds": 64.24177980422974,
+      "first_text_seconds": 64.22320461273193,
+      "template_kwargs": {
+        "reasoning_effort": "no_think"
+      },
+      "fp8_round_trips": {
+        "linear": 1722,
+        "experts_in": 574,
+        "experts_mid": 574
+      }
+    },
+    {
+      "started_epoch": 1795006863.1449735,
+      "prompt_tokens": 48,
+      "completion_tokens": 6,
+      "seconds": 39.01430916786194,
+      "first_text_seconds": 39.001625299453735,
+      "template_kwargs": {
+        "reasoning_effort": "no_think"
+      },
+      "fp8_round_trips": {
+        "linear": 738,
+        "experts_in": 246,
+        "experts_mid": 246
+      }
+    },
+    {
+      "started_epoch": 1795006902.21567,
+      "prompt_tokens": 60,
+      "completion_tokens": 10,
+      "seconds": 58.52135682106018,
+      "first_text_seconds": 58.51259732246399,
+      "template_kwargs": {
+        "reasoning_effort": "no_think"
+      },
+      "fp8_round_trips": {
+        "linear": 1230,
+        "experts_in": 410,
+        "experts_mid": 410
+      }
+    },
+    {
+      "started_epoch": 1795006960.7929437,
+      "prompt_tokens": 57,
+      "completion_tokens": 12,
+      "seconds": 56.639151096343994,
+      "first_text_seconds": 56.61910033226013,
+      "template_kwargs": {
+        "reasoning_effort": "no_think"
+      },
+      "fp8_round_trips": {
+        "linear": 1476,
+        "experts_in": 492,
+        "experts_mid": 492
+      }
+    },
+    {
+      "started_epoch": 1795007017.5105178,
+      "prompt_tokens": 54,
+      "completion_tokens": 14,
+      "seconds": 56.9075231552124,
+      "first_text_seconds": 56.87968707084656,
+      "template_kwargs": {
+        "reasoning_effort": "no_think"
+      },
+      "fp8_round_trips": {
+        "linear": 1722,
+        "experts_in": 574,
+        "experts_mid": 574
+      }
+    },
+    {
+      "started_epoch": 1795007074.4733865,
+      "prompt_tokens": 57,
+      "completion_tokens": 12,
+      "seconds": 52.555078744888306,
+      "first_text_seconds": 52.54043912887573,
+      "template_kwargs": {
+        "reasoning_effort": "no_think"
+      },
+      "fp8_round_trips": {
+        "linear": 1476,
+        "experts_in": 492,
+        "experts_mid": 492
+      }
+    },
+    {
+      "started_epoch": 1795007127.084318,
+      "prompt_tokens": 48,
+      "completion_tokens": 6,
+      "seconds": 35.55187225341797,
+      "first_text_seconds": 35.544249296188354,
+      "template_kwargs": {
+        "reasoning_effort": "no_think"
+      },
+      "fp8_round_trips": {
+        "linear": 738,
+        "experts_in": 246,
+        "experts_mid": 246
+      }
+    },
+    {
+      "started_epoch": 1795007162.6922796,
+      "prompt_tokens": 60,
+      "completion_tokens": 10,
+      "seconds": 49.64821720123291,
+      "first_text_seconds": 49.63797426223755,
+      "template_kwargs": {
+        "reasoning_effort": "no_think"
+      },
+      "fp8_round_trips": {
+        "linear": 1230,
+        "experts_in": 410,
+        "experts_mid": 410
+      }
+    }
+  ],
+  "skeleton_load_seconds": 966.4288885593414,
+  "fp8_load": {
+    "checkpoint_tensors_applied": 1877,
+    "model_parameters": 1832,
+    "parameters_not_overwritten": [],
+    "checkpoint_tensors_unmapped": [],
+    "draft_tensors_skipped": 87,
+    "fp8_tensors_dequantized": 205,
+    "unscaled_tensors_identical_to_skeleton": 1672,
+    "unscaled_tensors_different_from_skeleton": 0,
+    "fp8_vs_skeleton_cosine_min": 0.9994003057828444,
+    "fp8_vs_skeleton_cosine_max": 0.9996501281778245,
+    "hooked_linears": 123,
+    "hooked_experts": 41,
+    "hooked_linear_kinds": [
+      "gate_proj",
+      "o_proj",
+      "q_b_proj"
+    ]
+  },
+  "load_seconds": 3648.026781320572,
+  "element_counts_by_dtype": {
+    "torch.float32": 219405011261
+  },
+  "model_class": "HYV4FlashForConditionalGeneration"
+}

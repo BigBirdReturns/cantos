@@ -1,0 +1,83 @@
+{
+  "model": "/dev/shm/hy4/fp8",
+  "name": "hy4-flash",
+  "threads": 56,
+  "fp8_activations": true,
+  "torch": "2.15.0+cpu",
+  "transformers": "5.24.0.dev0",
+  "state": "ready",
+  "load_started_epoch": 1794998237.2494543,
+  "requests": [
+    {
+      "started_epoch": 1794998939.0106971,
+      "prompt_tokens": 27,
+      "completion_tokens": 0,
+      "seconds": 0.8118288516998291,
+      "first_text_seconds": null,
+      "template_kwargs": {
+        "reasoning_effort": "no_think"
+      },
+      "fp8_round_trips": {
+        "linear": 0,
+        "experts_in": 0,
+        "experts_mid": 0
+      },
+      "error": "RuntimeError: self and mat2 must have the same dtype, but got Float and BFloat16"
+    }
+  ],
+  "fp8_hooked_linears": 123,
+  "fp8_hooked_experts": 41,
+  "fp8_scaled_tensors_without_module": [
+    "model.dfly_layers.0.mlp.down_proj",
+    "model.dfly_layers.0.mlp.gate_proj",
+    "model.dfly_layers.0.mlp.up_proj",
+    "model.dfly_layers.0.self_attn.linear_gate",
+    "model.dfly_layers.0.self_attn.o_proj",
+    "model.dfly_layers.0.self_attn.q_b_proj",
+    "model.dfly_layers.1.mlp.down_proj",
+    "model.dfly_layers.1.mlp.gate_proj",
+    "model.dfly_layers.1.mlp.up_proj",
+    "model.dfly_layers.1.self_attn.linear_gate",
+    "model.dfly_layers.1.self_attn.o_proj",
+    "model.dfly_layers.1.self_attn.q_b_proj",
+    "model.dfly_layers.2.mlp.down_proj",
+    "model.dfly_layers.2.mlp.gate_proj",
+    "model.dfly_layers.2.mlp.up_proj",
+    "model.dfly_layers.2.self_attn.linear_gate",
+    "model.dfly_layers.2.self_attn.o_proj",
+    "model.dfly_layers.2.self_attn.q_b_proj",
+    "model.dfly_layers.3.mlp.down_proj",
+    "model.dfly_layers.3.mlp.gate_proj",
+    "model.dfly_layers.3.mlp.up_proj",
+    "model.dfly_layers.3.self_attn.linear_gate",
+    "model.dfly_layers.3.self_attn.o_proj",
+    "model.dfly_layers.3.self_attn.q_b_proj",
+    "model.dfly_layers.4.mlp.down_proj",
+    "model.dfly_layers.4.mlp.gate_proj",
+    "model.dfly_layers.4.mlp.up_proj",
+    "model.dfly_layers.4.self_attn.linear_gate",
+    "model.dfly_layers.4.self_attn.o_proj",
+    "model.dfly_layers.4.self_attn.q_b_proj"
+  ],
+  "fp8_other_scaled_tensors": [],
+  "fp8_hooked_kinds": [
+    "gate_proj",
+    "o_proj",
+    "q_b_proj"
+  ],
+  "load_seconds": 639.2398252487183,
+  "element_counts_by_dtype": {
+    "torch.bfloat16": 66647668736,
+    "torch.float32": 150970569021,
+    "torch.float8_e4m3fn": 1786773504
+  },
+  "model_class": "HYV4FlashForConditionalGeneration",
+  "fp8_hooked_examples": [
+    "model.language_model.layers.1.self_attn.gate_proj",
+    "model.language_model.layers.1.self_attn.o_proj",
+    "model.language_model.layers.1.self_attn.q_b_proj",
+    "model.language_model.layers.10.self_attn.gate_proj",
+    "model.language_model.layers.1.mlp.experts",
+    "model.language_model.layers.10.mlp.experts"
+  ]
+}

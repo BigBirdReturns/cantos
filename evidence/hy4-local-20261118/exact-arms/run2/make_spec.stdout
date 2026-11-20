@@ -1,0 +1,27 @@
+{
+  "spec": "/mnt/w03data/Incoming/DataArray/Scratch/hy4-exact-arms-20261118/run2/spec/spec.json",
+  "protocol": {
+    "trials": 3,
+    "repeats": 1,
+    "concurrency": 1,
+    "seed": 1729,
+    "timeout_s": 600,
+    "max_tokens": 256,
+    "warmup": 0,
+    "extra_body": {
+      "chat_template_kwargs": {
+        "reasoning_effort": "no_think"
+      },
+      "top_p": 1
+    }
+  },
+  "tokenizer": "ff6aaf29542a31a718ffc2986100c3ac195f223d",
+  "baseline_model": {
+    "revision": "d88c9dfd96ba4f2e6b92adba0b8e8f1c8696f959",
+    "sha256": "9d2405bea66ad2a8bebb3fdaea58cfbab8475f6396f069ce9a00660ab3516ab5"
+  },
+  "candidate_model": {
+    "revision": "003107fa248f5892064ab1c43af0a7003dd68c9b",
+    "sha256": "4554684cced8587248c9e9a7ad7a3c54e650534e680adb39c486c5cb4f61b6ef"
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "chunks": [
+    {
+      "at_s": 58.53278485010378,
+      "data_b64": "ZGF0YTogeyJpZCI6ICJjaGF0Y21wbC0xNzk1MDA2OTAyMjE1IiwgIm9iamVjdCI6ICJjaGF0LmNvbXBsZXRpb24uY2h1bmsiLCAiY3JlYXRlZCI6IDE3OTUwMDY5MDIsICJtb2RlbCI6ICJoeTQtZmxhc2giLCAiY2hvaWNlcyI6IFt7ImluZGV4IjogMCwgImRlbHRhIjogeyJjb250ZW50IjogIntcIml0ZW1cIjpcImJvbHRcIixcInF1YW50aXR5XCI6MTJ9In0sICJmaW5pc2hfcmVhc29uIjogbnVsbH1dfQoK"
+    },
+    {
+      "at_s": 58.541323389159516,
+      "data_b64": "ZGF0YTogeyJpZCI6ICJjaGF0Y21wbC0xNzk1MDA2OTAyMjE1IiwgIm9iamVjdCI6ICJjaGF0LmNvbXBsZXRpb24uY2h1bmsiLCAiY3JlYXRlZCI6IDE3OTUwMDY5MDIsICJtb2RlbCI6ICJoeTQtZmxhc2giLCAiY2hvaWNlcyI6IFt7ImluZGV4IjogMCwgImRlbHRhIjoge30sICJmaW5pc2hfcmVhc29uIjogInN0b3AifV19Cgo="
+    },
+    {
+      "at_s": 58.54135161405429,
+      "data_b64": "ZGF0YTogeyJpZCI6ICJjaGF0Y21wbC0xNzk1MDA2OTAyMjE1IiwgIm9iamVjdCI6ICJjaGF0LmNvbXBsZXRpb24uY2h1bmsiLCAiY3JlYXRlZCI6IDE3OTUwMDY5MDIsICJtb2RlbCI6ICJoeTQtZmxhc2giLCAiY2hvaWNlcyI6IFtdLCAidXNhZ2UiOiB7InByb21wdF90b2tlbnMiOiA2MCwgImNvbXBsZXRpb25fdG9rZW5zIjogMTAsICJ0b3RhbF90b2tlbnMiOiA3MH19Cgo="
+    },
+    {
+      "at_s": 58.5413689899724,
+      "data_b64": "ZGF0YTogW0RPTkVdCgo="
+    }
+  ],
+  "content_type": "text/event-stream",
+  "ended_at": "2026-11-18T13:02:40.737352Z",
+  "ended_monotonic_s": 1148696.660616369,
+  "http_status": 200,
+  "request": {
+    "chat_template_kwargs": {
+      "reasoning_effort": "no_think"
+    },
+    "max_tokens": 256,
+    "messages": [
+      {
+        "content": "Record: item=bolt; quantity=12; color=blue. Return exactly one JSON object containing only item as a string and quantity as an integer. Do not add explanation.",
+        "role": "user"
+      }
+    ],
+    "model": "hy4-flash",
+    "seed": 1729,
+    "stream": true,
+    "stream_options": {
+      "include_usage": true
+    },
+    "temperature": 0,
+    "top_p": 1
+  },
+  "schema": "cantos.maintainer.stream/1",
+  "stage": "step_0",
+  "started_at": "2026-11-18T13:01:42.195868Z",
+  "started_monotonic_s": 1148638.119145911,
+  "transport_error": null
+}

@@ -1,0 +1,71 @@
+{
+  "captured_at": "2026-11-18T08:31:32.808071Z",
+  "models": {
+    "body": {
+      "data": [
+        {
+          "aliases": [
+            "hy4-flash"
+          ],
+          "architecture": {
+            "input_modalities": [
+              "text"
+            ],
+            "output_modalities": [
+              "text"
+            ]
+          },
+          "created": 1794990692,
+          "id": "hy4-flash",
+          "meta": {
+            "ftype": "Q4_K - Medium",
+            "n_ctx": 8192,
+            "n_ctx_train": 1048576,
+            "n_embd": 3072,
+            "n_params": 222679844717,
+            "n_vocab": 120832,
+            "size": 155365510068,
+            "vocab_type": 2
+          },
+          "object": "model",
+          "owned_by": "llamacpp",
+          "tags": []
+        }
+      ],
+      "models": [
+        {
+          "capabilities": [
+            "completion"
+          ],
+          "description": "",
+          "details": {
+            "families": [
+              ""
+            ],
+            "family": "",
+            "format": "gguf",
+            "parameter_size": "",
+            "parent_model": "",
+            "quantization_level": ""
+          },
+          "digest": "",
+          "model": "hy4-flash",
+          "modified_at": "",
+          "name": "hy4-flash",
+          "parameters": "",
+          "size": "",
+          "tags": [
+            ""
+          ],
+          "type": "model"
+        }
+      ],
+      "object": "list"
+    },
+    "http_status": 200
+  },
+  "version": {
+    "error": "HTTPError",
+    "http_status": 404
+  }
+}
