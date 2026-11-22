@@ -8,7 +8,7 @@ from __future__ import annotations
 
 import argparse
 from collections import Counter
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 import hashlib
 from http.client import HTTPException
 import json
@@ -20,6 +20,30 @@ import time
 from urllib.error import HTTPError, URLError
 from urllib.parse import urlsplit
 from urllib.request import HTTPRedirectHandler, ProxyHandler, Request, build_opener
+
+# One wall-clock reading per process, advanced by the high-resolution
+# performance counter, so each sample's start and its elapsed time come from
+# the same clock. On Windows with Python 3.12 the wall clock and
+# time.monotonic_ns() both step by 15.6 ms: a later sample could start before
+# the previous sample's recorded end, and a real request could record zero
+# elapsed time.
+_CLOCK_WALL = datetime.now(timezone.utc)
+_CLOCK_TICK = time.perf_counter_ns()
+
+
+def clock_tick() -> int:
+    """Reading of the monotonic high-resolution process clock, in nanoseconds."""
+    return time.perf_counter_ns()
+
+
+def clock_micros(tick_ns: int) -> int:
+    """Whole microseconds from the process clock anchor to a clock_tick reading."""
+    return (tick_ns - _CLOCK_TICK) // 1000
+
+
+def clock_stamp(tick_ns: int) -> datetime:
+    """UTC time of a clock_tick reading on the process clock."""
+    return _CLOCK_WALL + timedelta(microseconds=clock_micros(tick_ns))
 
 
 class AuditInputError(ValueError):
@@ -99,8 +123,8 @@ def audit(url: str, *, allow_host: str | None = None, samples: int = 3,
     opener = build_opener(ProxyHandler({}), NoRedirect())
     observations = []
     for index in range(samples):
-        started = datetime.now(timezone.utc).isoformat()
-        t0 = time.monotonic_ns()
+        t0 = clock_tick()
+        started = clock_stamp(t0).isoformat()
         status, error_type = None, None
         body_sha256, body_bytes, declared_content_length = None, None, None
         body_content_encoding = None
@@ -137,7 +161,7 @@ def audit(url: str, *, allow_host: str | None = None, samples: int = 3,
             exc.close()
         except (URLError, socket.timeout, TimeoutError, ConnectionError, OSError, HTTPException) as exc:
             error_type = type(exc).__name__
-        elapsed_ms = round((time.monotonic_ns() - t0) / 1_000_000, 3)
+        elapsed_ms = (clock_micros(clock_tick()) - clock_micros(t0)) / 1000
         outcome = classify(status, error_type is not None)
         if outcome == "http_success" and method == "GET":
             if body_over_limit:

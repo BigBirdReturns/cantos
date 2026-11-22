@@ -22,12 +22,12 @@ import time
 from urllib.parse import urlsplit
 
 if __package__:
-    from .operational_http import classify
+    from .operational_http import classify, clock_micros, clock_stamp, clock_tick
     from .operational_http_verify import _replay_observation
     from .operational_tls import (_evaluate, _number, _digest, _utc, _require,
                                   certificate_validity, validate_origin, AuditInputError)
 else:
-    from operational_http import classify
+    from operational_http import classify, clock_micros, clock_stamp, clock_tick
     from operational_http_verify import _replay_observation
     from operational_tls import (_evaluate, _number, _digest, _utc, _require,
                                  certificate_validity, validate_origin, AuditInputError)
@@ -149,8 +149,8 @@ def audit(url: str, *, allow_host: str, samples: int = 1, method: str = "GET",
     policy_check(policy)
     rows = []
     for idx in range(samples):
-        started = datetime.now(timezone.utc).isoformat()
-        tick = time.monotonic_ns()
+        tick = clock_tick()
+        started = clock_stamp(tick).isoformat()
         tls = {"outcome": None, "leaf_der_base64": None, "leaf_sha256": None,
                "valid_from_utc": None, "valid_until_utc": None,
                "remaining_days": None, "checked_at_utc": None, "error_type": None}
@@ -169,7 +169,7 @@ def audit(url: str, *, allow_host: str, samples: int = 1, method: str = "GET",
             before, after = certificate_validity(der)
             _require(int(after.timestamp()) == ssl.cert_time_to_seconds(parsed["notAfter"]),
                      "certificate validity mismatch")
-            checked = datetime.now(timezone.utc)
+            checked = clock_stamp(clock_tick())
             outcome, identity = _evaluate(der, checked, expected_leaf_sha256, min_remaining_days)
             tls.update(identity)
             tls["checked_at_utc"] = checked.isoformat()
@@ -209,7 +209,7 @@ def audit(url: str, *, allow_host: str, samples: int = 1, method: str = "GET",
             tls.update(outcome="tls_transport_error", error_type="unknown")
         outcome = tls["outcome"] if tls["outcome"] != "tls_success" else http["outcome"]
         rows.append({"index": idx, "started_at_utc": started,
-                     "elapsed_ms": round((time.monotonic_ns() - tick) / 1e6, 3),
+                     "elapsed_ms": (clock_micros(clock_tick()) - clock_micros(tick)) / 1000,
                      "tls": tls, "http": http, "outcome": outcome})
     summary, verdict = _summary(rows, policy)
     return {"schema": "cantos.operational-https-joint/1",
