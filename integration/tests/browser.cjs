@@ -16,14 +16,14 @@ function listen(page){page.on('pageerror',e=>errors.push(e.message));page.on('re
  try{
   browser=await chromium.launch();const ctx=await browser.newContext({viewport:{width:1440,height:960},acceptDownloads:true,colorScheme:'light'});
   const operator=await ctx.newPage();listen(operator);await operator.goto(origin,{waitUntil:'networkidle'});
-  await operator.waitForFunction(()=>document.querySelector('#rail-state')?.textContent.includes('connected'));
+  await operator.waitForFunction(()=>/^Runner · connected(?: ·|$)/.test(document.querySelector('#rail-state')?.textContent||'')&&/MI300X/.test(document.querySelector('#rail-env')?.textContent||''),null,{timeout:15000});
   check('runner native environment observed',/MI300X/.test(await operator.locator('#rail-env').innerText()));
   await operator.click('#open-plan');await operator.fill('#f-concurrency','1, 8');await operator.fill('#f-repeats','1');await operator.fill('#f-num_prompts','24');
   await operator.click('#preview');await operator.waitForSelector('#approve-start');const hash=(await operator.locator('#instrument .kv .v.mono').innerText()).trim();check('approval presents exact plan identity',/^[a-f0-9]{64}$/.test(hash));
   await operator.click('#approve-start');await operator.waitForFunction(()=>/from the connected runner/.test(document.querySelector('#headline .bar .eyebrow')?.textContent||''),null,{timeout:45000});
   check('native SSE transports actual job progress',requests.some(u=>/\/api\/jobs\/[^/]+\/events/.test(u)));
   check('record recomputes in instrument page',/matches/i.test(await operator.locator('#headline .chip').first().innerText()));
-  const page=await ctx.newPage();listen(page);await page.goto(service.url,{waitUntil:'networkidle'});await page.waitForFunction(()=>document.querySelector('#connection-status')?.textContent.startsWith('CONNECTED ·'));
+  const page=await ctx.newPage();listen(page);await page.goto(service.url,{waitUntil:'domcontentloaded'});await page.waitForFunction(()=>document.querySelector('#connection-status')?.textContent.startsWith('CONNECTED ·'));
   check('completed records remain private until explicit publication',await page.locator('[data-publication]').count()===0);
   await operator.click('#publish');await operator.waitForFunction(()=>document.querySelector('#publish')?.disabled===true);
   check('publish is identified as local handoff',/Published locally/.test(await operator.locator('#publish').innerText()));
