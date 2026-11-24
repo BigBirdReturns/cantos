@@ -72,9 +72,14 @@ jobs:
             ./ _site/
           # The independently runnable community kit is an intentional public
           # download linked by compute/results.html, even above the bulk cutoff.
-          echo "bulk files over 25 MB omitted; the public community kit is retained:"
-          find _site -type f -size +25M ! -path '_site/compute/community-kit.zip' -print -delete
+          echo "bulk files over 25 MB omitted; intentional public kit and film retained:"
+          find _site -type f -size +25M \
+            ! -path '_site/compute/community-kit.zip' \
+            ! -path '_site/public/open-compute/film/demo.mp4' -print -delete
           cmp compute/community-kit.zip _site/compute/community-kit.zip
+          if [ -f public/open-compute/film/demo.mp4 ]; then
+            cmp public/open-compute/film/demo.mp4 _site/public/open-compute/film/demo.mp4
+          fi
           du -sh _site
 
       # A queued older completion must not roll back a newer main revision.
