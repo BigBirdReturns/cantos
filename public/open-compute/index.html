@@ -6,6 +6,18 @@
 <meta name="description" content="Inspect a real compute comparison, change a list-price assumption, and retain the resulting decision with its evidence. Cantos Open Compute Workbench.">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self';script-src 'self';style-src 'self';img-src 'self' data:;media-src 'self';frame-src 'self';connect-src 'self';object-src 'none';base-uri 'self';form-action 'self'">
 <title>Open Compute Workbench | Cantos</title>
+<link rel="canonical" href="https://bigbirdreturns.github.io/cantos/public/open-compute/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://bigbirdreturns.github.io/cantos/public/open-compute/">
+<meta property="og:title" content="Open Compute Workbench | Cantos">
+<meta property="og:description" content="Inspect retained Run 3 evidence, change a list-price assumption, and retain and replay the decision. Try the live workspace or watch the complete workflow.">
+<meta property="og:image" content="https://bigbirdreturns.github.io/cantos/public/open-compute/film/poster.jpg">
+<meta property="og:image:alt" content="Open Compute Workbench showing a retained GPU inference comparison with evidence and scenario controls.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Open Compute Workbench | Cantos">
+<meta name="twitter:description" content="Inspect retained Run 3 evidence, change a list-price assumption, and retain and replay the decision.">
+<meta name="twitter:image" content="https://bigbirdreturns.github.io/cantos/public/open-compute/film/poster.jpg">
+<meta name="twitter:image:alt" content="Open Compute Workbench showing a retained GPU inference comparison with evidence and scenario controls.">
 <link rel="stylesheet" href="experience.css">
 <script defer src="experience.js"></script>
 </head>
@@ -13,7 +25,7 @@
 <a class="skip" href="#workbench">Skip to decision workspace</a>
 <header class="shell topbar">
 <a class="wordmark" href="../../index.html">CANTOS <span>Open Compute</span></a>
-<nav class="topnav" aria-label="Primary"><a href="#source" class="wide">Evidence &amp; scope</a><a href="#maintainers">Run your workload</a><a class="wide" href="https://github.com/BigBirdReturns/cantos">Source</a></nav>
+<nav class="topnav" aria-label="Primary"><a class="watch-link" href="#walkthrough">Watch walkthrough</a><a href="#source" class="wide">Evidence &amp; scope</a><a href="#maintainers">Run your workload</a><a class="wide" href="https://github.com/BigBirdReturns/cantos">Source</a></nav>
 </header>
 <main class="shell">
 <section class="intro" aria-labelledby="page-title">
@@ -38,7 +50,15 @@
 </div>
 <div class="workbench-foot"><p>Original Run 3 grades. Costs use the retained run windows and listed hourly rates. A changed price recalculates the scenario over the same measurements.</p><a href="../../app/Cantos.html?workspace=run3&amp;presentation=1&amp;fresh=1" target="_blank" rel="noopener">Open a fresh replay workspace ↗</a></div>
 </section>
-<!-- film-panel: producer-owned film/demo.mp4, film/poster.jpg, film/captions.vtt and film/transcript.html are attached after rendering and verification. -->
+<section id="walkthrough" class="walkthrough" aria-labelledby="walkthrough-title">
+<div class="film-heading"><div><div class="eyebrow">Recorded from this workspace</div><h2 id="walkthrough-title">Watch the complete decision workflow.</h2><p>Follow the retained evidence through a price revision, explicit recomputation, a reviewed successor and offline replay.</p></div><a href="film/transcript.html">Read the transcript ↗</a></div>
+<video id="walkthrough-video" controls playsinline preload="metadata" poster="film/poster.jpg" aria-label="Cantos Open Compute decision walkthrough">
+<source src="film/demo.mp4" type="video/mp4">
+<track kind="captions" src="film/captions.vtt" srclang="en" label="English captions">
+<a href="film/demo.mp4">Download the walkthrough video</a>.
+</video>
+<div class="film-footer"><p>Use <strong>Export workspace</strong> above to keep a decision packet. Download the offline app, open the HTML file, and choose <strong>Open a decision packet</strong> to replay your exported JSON.</p><div class="film-actions"><a class="button light" href="../../app/Cantos.html" download="Cantos.html">Download offline app</a><a href="film/demo.mp4" download>Download video</a></div></div>
+</section>
 <div class="below">
 <section id="source" class="source-note" aria-labelledby="source-title">
 <div><div class="eyebrow">Read the boundary with the result</div><h2 id="source-title">The evidence stays attached.</h2><p>The workspace starts from the original Run 3 grades: 4,336 accepted requests on MI300X and 4,280 on H100, from 8,622 scheduled requests per arm. Acceptance requires recorded EvalPlus correctness, a first token within one second, and completion within 60 seconds of scheduled arrival.</p><p><a href="../../app/packets/RUN3-DATA.md">Inspect the packet provenance</a> · <a href="https://github.com/BigBirdReturns/cantos/tree/main/app/packets">Read the retained packets</a></p></div>
