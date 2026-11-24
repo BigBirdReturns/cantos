@@ -1,0 +1,164 @@
+WEBVTT
+
+1
+00:00:00.380 --> 00:00:02.930
+You're choosing where to run an inference
+workload.
+
+2
+00:00:03.597 --> 00:00:06.937
+An hourly GPU price tells you what
+capacity costs.
+
+3
+00:00:07.557 --> 00:00:11.231
+The useful question is how much accepted
+work that capacity delivers.
+
+4
+00:00:12.337 --> 00:00:15.677
+Here are two retained runs of the same
+scheduled coding workload:
+
+5
+00:00:15.977 --> 00:00:18.247
+8,622 requests in each.
+
+6
+00:00:18.277 --> 00:00:20.117
+Open the acceptance contract.
+
+7
+00:00:20.737 --> 00:00:23.617
+An answer counts when it passes the
+recorded correctness checks,
+
+8
+00:00:23.677 --> 00:00:26.847
+its first token arrives within one second
+of scheduled arrival,
+
+9
+00:00:26.877 --> 00:00:28.477
+and it finishes within sixty.
+
+10
+00:00:29.097 --> 00:00:31.464
+Every failed or late request stays in the
+record.
+
+11
+00:00:32.577 --> 00:00:37.882
+Under the original grading, the MI300X
+accepted 4,336 requests.
+
+12
+00:00:38.537 --> 00:00:41.381
+The H100 accepted 4,280.
+
+13
+00:00:42.180 --> 00:00:44.270
+Using this scenario's list-price
+assumptions,
+
+14
+00:00:44.300 --> 00:00:48.358
+that's about $0.74 and $1.20 per thousand
+accepted requests.
+
+15
+00:00:49.460 --> 00:00:52.920
+Now change the H100's hourly rate to
+$2.49.
+
+16
+00:00:53.540 --> 00:00:55.520
+This is an explicit price scenario.
+
+17
+00:00:56.744 --> 00:00:59.134
+Save the change. The earlier decision
+becomes stale.
+
+18
+00:00:59.164 --> 00:01:02.967
+Its inputs and conclusion remain visible
+until we explicitly recompute.
+
+19
+00:01:04.084 --> 00:01:05.574
+Run the comparison again.
+
+20
+00:01:06.224 --> 00:01:10.404
+The H100 now costs about $0.68 per
+thousand accepted requests.
+
+21
+00:01:11.033 --> 00:01:13.631
+It becomes the preferred option under
+these requirements.
+
+22
+00:01:14.324 --> 00:01:16.700
+The captured responses and their grades
+stay the same.
+
+23
+00:01:22.304 --> 00:01:25.094
+Retain this edition. Both decisions stay
+in the history,
+
+24
+00:01:25.124 --> 00:01:27.974
+with the assumption that changed and the
+evidence each one used.
+
+25
+00:01:28.004 --> 00:01:29.034
+Export the workspace.
+
+26
+00:01:29.064 --> 00:01:31.394
+Open the same packet in a fresh offline
+client.
+
+27
+00:01:31.424 --> 00:01:33.734
+It verifies the packet and recalculates
+
+28
+00:01:33.764 --> 00:01:35.724
+the decisions from their retained inputs.
+
+29
+00:01:36.824 --> 00:01:39.104
+A new price can reuse existing
+measurements.
+
+30
+00:01:39.724 --> 00:01:41.734
+A new model, runtime, hardware
+configuration
+
+31
+00:01:41.764 --> 00:01:44.144
+or workload needs new observations.
+
+32
+00:01:44.776 --> 00:01:46.854
+Provider reliability and complete
+operating costs
+
+33
+00:01:46.884 --> 00:01:48.544
+still require their own evidence.
+
+34
+00:01:49.876 --> 00:01:51.406
+Inspect this example in your browser,
+
+35
+00:01:51.436 --> 00:01:54.336
+then run the kit against your own
+endpoints and acceptance criteria.

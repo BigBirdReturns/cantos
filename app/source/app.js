@@ -1,16 +1,21 @@
 'use strict';
-const D=CantosDesk,C=D.core,$=id=>document.getElementById(id),KEY='cantos.research-preview.v0.1',money=n=>n===null?'Unavailable':'$'+n.toFixed(2);
-let workspace,viewState,busy=false,lastInputs='',persist=false,pendingImport=null,savedHash=null;
+const entryParams=new URLSearchParams(location.search),requestedRun3=entryParams.get('workspace')==='run3',presentationMode=requestedRun3&&entryParams.get('presentation')==='1',freshWorkspace=entryParams.get('fresh')==='1';
+if(presentationMode)document.documentElement.classList.add('cantos-presentation');
+const D=CantosDesk,C=D.core,$=id=>document.getElementById(id),KEY=presentationMode?'cantos.open-compute.presentation.v1':'cantos.research-preview.v0.1',money=n=>n===null?'Unavailable':'$'+n.toFixed(2);
+let workspace,viewState,busy=false,lastInputs='',persist=false,pendingImport=null,savedHash=null,guidedStorageWarning='';
 const escapeHTML=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const sitePrefix=/\/app\/Cantos\.html$/i.test(location.pathname)?'../':'';
 document.querySelectorAll('[data-site-path]').forEach(a=>a.href=sitePrefix+a.dataset.sitePath);
 document.querySelector('.brand').addEventListener('click',e=>{e.preventDefault();view('overview');});
-function notice(message,error=false){$('notice').textContent=message;$('notice').classList.toggle('error',error);}
+function notice(message,error=false){$('notice').textContent=message;$('notice').classList.toggle('error',error);if(presentationMode)queueMicrotask(emitPresentationState);}
 function download(name,text,type='application/json'){const blob=new Blob([text],{type}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
 // The analytical owner is unchanged. This layer prepares a complete detached
 // display, then commits state and its visible representation in the same callback.
 let transition=null;
 async function installPrepared(candidate,prepared,options={}){
+ let guidedSaveFailed=false;
+ if(presentationMode&&options.resetStorage)await guidedRecord('delete');
+ if(presentationMode&&options.save){try{await guidedRecord('put',prepared.packetJSON);guidedStorageWarning='';}catch{guidedSaveFailed=true;}}
  const swap=()=>{
   const previousMain=document.querySelector('main');
   const focusId=document.activeElement?.id;
@@ -21,9 +26,9 @@ async function installPrepared(candidate,prepared,options={}){
     if(old&&next)next.value=old.value;
    }
   }
-  let saved=options.persist===undefined?persist:options.persist,saveFailed=false;
+  let saved=options.persist===undefined?persist:options.persist,saveFailed=guidedSaveFailed;
   if(options.resetStorage)localStorage.removeItem(KEY);
-  if(options.save){try{localStorage.setItem(KEY,prepared.packetJSON);}catch(e){saved=false;saveFailed=true;}}
+  if(options.save){if(presentationMode){if(saveFailed)saved=false;}else{try{localStorage.setItem(KEY,prepared.packetJSON);}catch(e){saved=false;saveFailed=true;}}}
   prepared.node.querySelector('#save-btn').textContent=saved?'Saved on this device':'Save on this device';
   prepared.node.querySelector('#storage-status').textContent=saved?'Saved on this device · export for portability':'In memory · save or export to retain';
   const before=snapshotNums(document);
@@ -33,6 +38,7 @@ async function installPrepared(candidate,prepared,options={}){
   if(options.resetStorage)savedHash=null;
   if(options.save&&!saveFailed)savedHash=prepared.v.packetHash;
   window.CantosPreviewState=prepared.publicState;
+  if(presentationMode)queueMicrotask(emitPresentationState);
   for(const [id,top] of scrolls)if($(id))$(id).scrollTop=top;
   if(focusId&&$(focusId)&&!$(focusId).disabled)$(focusId).focus({preventScroll:true});
   prepared.saveFailed=saveFailed;
@@ -174,7 +180,32 @@ function setControls(open){
  else {panel.removeAttribute('role');panel.removeAttribute('aria-modal');if(document.activeElement?.closest('#scenario-panel'))$('mobile-scenario').focus({preventScroll:true});}
 }
 
-async function exportCurrent(){const packet=await D.pack(workspace);download('Cantos-research-workspace.json',JSON.stringify(packet,null,2));notice('Exported the actual committed workspace, including its evidence, reviews and editions.');}
+// The guided packet exceeds localStorage's typical quota after a retained successor.
+// Ordinary Cantos storage stays unchanged. The guided store holds the exact native packet.
+async function guidedRecord(operation,value){
+ const db=await new Promise((resolve,reject)=>{
+  const request=indexedDB.open('cantos.open-compute.presentation',1);
+  let blocked=false;
+  request.onupgradeneeded=()=>{if(!request.result.objectStoreNames.contains('workspaces'))request.result.createObjectStore('workspaces');};
+  request.onerror=()=>reject(request.error||Error('Guided browser storage is unavailable.'));
+  request.onblocked=()=>{blocked=true;reject(Error('Guided browser storage is blocked by another tab.'));};
+  request.onsuccess=()=>{if(blocked){request.result.close();return;}resolve(request.result);};
+ });
+ return new Promise((resolve,reject)=>{
+  let result;
+  const tx=db.transaction('workspaces',operation==='get'?'readonly':'readwrite'),store=tx.objectStore('workspaces');
+  const request=operation==='get'?store.get(KEY):operation==='delete'?store.delete(KEY):store.put(value,KEY);
+  request.onsuccess=()=>{result=request.result;};
+  tx.oncomplete=()=>{db.close();resolve(result);};
+  const fail=()=>{const error=tx.error||Error('Guided browser storage transaction failed.');db.close();reject(error);};
+  tx.onerror=fail;tx.onabort=fail;
+ });
+}
+async function exportCurrent(){
+ const packet=await D.pack(workspace),text=JSON.stringify(packet);
+ if(new TextEncoder().encode(text).byteLength>12000000){notice('Export refused: this packet exceeds the 12 MB import limit. Current work and retained editions are unchanged.',true);return;}
+ download('Cantos-research-workspace.json',text);notice('Exported the actual committed workspace, including its evidence, reviews and editions.');
+}
 async function importFile(file){
  if(!file)return;
  if(busy||pendingImport){notice('Finish the current operation before opening another packet.',true);return;}
@@ -252,17 +283,23 @@ document.addEventListener('change',e=>{if(e.target.id==='packet-file')importFile
 $('import-dialog').addEventListener('cancel',()=>{pendingImport=null;notice('Import cancelled. Current work was preserved.');});
 (async()=>{
  try{
-  let saved;try{saved=localStorage.getItem(KEY);}catch{}
+  let saved,legacyGuided=false;
+  if(presentationMode&&!freshWorkspace){
+   try{saved=await guidedRecord('get');}
+   catch{guidedStorageWarning='Saved guided work could not be read. Run 3 is open in memory; the stored copy was not changed.';}
+   if(!saved&&!guidedStorageWarning){try{saved=localStorage.getItem(KEY);legacyGuided=Boolean(saved);}catch{}}
+  }else if(!requestedRun3){try{saved=localStorage.getItem(KEY);}catch{}}
   let next,message,landingOverview=false;
-  if(saved){try{next=await D.restore(C.parse(saved));persist=true;savedHash=(await D.pack(next)).sha256;message='Saved workspace restored after native and workflow verification.';}catch(e){next=await D.create();landingOverview=true;message='Saved copy could not be restored and was left untouched. Cantos overview is open; the saved copy was not changed.';}}
+  if(saved){try{next=await D.restore(C.parse(saved));persist=true;savedHash=(await D.pack(next)).sha256;message='Saved workspace restored after native and workflow verification.';
+   if(legacyGuided){try{await guidedRecord('put',JSON.stringify(await D.pack(next)));message='Saved guided workspace verified and migrated to browser storage. The earlier local copy remains untouched.';}catch{message='Saved guided workspace verified. Browser storage migration failed; the earlier local copy remains untouched.';}}}catch(e){if(presentationMode)throw Error('Saved guided workspace could not be verified and was preserved. Open a fresh replay workspace to continue. '+e.message);next=await D.create();landingOverview=true;message='Saved copy could not be restored and was left untouched. Cantos overview is open; the saved copy was not changed.';}}
   else{
-   // Keep a verified starting decision in memory while a cold visitor begins at the Cantos overview.
-   landingOverview=true;
+   // An explicit Run 3 link opens the verified packet in memory and leaves saved work untouched.
+   landingOverview=!requestedRun3;
    const node=document.getElementById('run3-packet');
-   try{if(!node)throw Error('embedded Run 3 packet absent');next=await D.restore(C.parse(node.textContent));message='Start with the Research Desk, open a saved packet, or explore a retained decision.';}
-   catch(e){next=await D.create();message='Start with the Research Desk, open a saved packet, or explore the synthetic example. The retained Run 3 packet could not be verified.';}
+   try{if(!node)throw Error('embedded Run 3 packet absent');next=await D.restore(C.parse(node.textContent));message=requestedRun3?'Run 3 verified. Retained 24 Sep 2026 measurements with revisable list-price assumptions.':'Start with the Research Desk, open a saved packet, or explore a retained decision.';}
+   catch(e){if(requestedRun3)throw Error('Run 3 packet verification failed: '+e.message);next=await D.create();message='Start with the Research Desk, open a saved packet, or explore the synthetic example. The retained Run 3 packet could not be verified.';}
   }
-  const prepared=await prepareView(next);await installPrepared(next,prepared,{resetFields:true});view(landingOverview?'overview':'decision');notice(message);
+  const prepared=await prepareView(next);await installPrepared(next,prepared,{resetFields:true});view(landingOverview?'overview':'decision');notice(guidedStorageWarning||message);
  }catch(e){notice('Unable to start: '+e.message,true);}
 })();
 
@@ -598,8 +635,8 @@ $('command-btn')?.addEventListener('click',openPalette);
   for(const nav of main.querySelectorAll('.nav[data-view]'))nav.classList.toggle('active',!get(nav.dataset.view+'-view').hidden);
   if(old.classList.contains('controls-open'))main.classList.add('controls-open');
   main.querySelector('.workspace-name').innerHTML='Research decision <span class="tag">RETAINED RUN 3</span>';
-  main.querySelector('.case-heading h1').textContent='Same work. Different list prices.';
-  main.querySelector('.case-heading p').textContent='Same coding workload. Retained answers and timings. A revisable list-price decision.';
+  main.querySelector('.case-heading h1').textContent='Run 3 · GPU inference';
+  main.querySelector('.case-heading p').textContent='Retained 24 Sep 2026 measurements · list-price scenario';
   main.querySelector('.case-link[data-view="decision"] strong').textContent='Run 3 decision';
   main.querySelector('.case-link[data-view="decision"] small').textContent='Hardware · list-price scenario';
   main.querySelector('.rail-section .source-card').textContent='Run 3 source records';
@@ -639,9 +676,9 @@ $('command-btn')?.addEventListener('click',openPalette);
   get('grader').hidden=true;main.querySelector('label[for="grader"]').hidden=true;main.querySelector('.format-preview').hidden=true;
   const deadline=get('deadline'),input=document.createElement('input');for(const a of deadline.attributes)input.setAttribute(a.name,a.value);input.type='number';input.min='1';input.step='1';input.value=v.policy.data.deadline_ms;deadline.replaceWith(input);
   main.querySelector('label[for="deadline"]').textContent='Completion limit · ms';
-  main.querySelector('label[for="quote"]').textContent=v.runs[0].data.identity.arm+' · $/hour';get('quote').value=v.runs[0].data.billing.rate_usd_per_hour;get('quote').dataset.hardwareRate=v.runs[0].id;
+  main.querySelector('label[for="quote"]').textContent=v.runs[0].data.identity.hardware+' · list $/hour';get('quote').value=v.runs[0].data.billing.rate_usd_per_hour;get('quote').dataset.hardwareRate=v.runs[0].id;
   const extra=document.createElement('div');extra.className='hardware-fields';
-  extra.innerHTML=v.runs.slice(1).map(r=>`<label>${escapeHTML(r.data.identity.arm)} · list $/hour<input type="number" min="0" step="0.01" data-hardware-rate="${escapeHTML(r.id)}" value="${r.data.billing.rate_usd_per_hour}"></label>`).join('')+`<label>First-token limit · ms<input type="number" min="1" step="1" data-first-token value="${v.policy.data.first_token_ms}"></label>`;
+  extra.innerHTML=v.runs.slice(1).map(r=>`<label>${escapeHTML(r.data.identity.hardware)} · list $/hour<input type="number" min="0" step="0.01" data-hardware-rate="${escapeHTML(r.id)}" value="${r.data.billing.rate_usd_per_hour}"></label>`).join('')+`<label>First-token limit · ms<input type="number" min="1" step="1" data-first-token value="${v.policy.data.first_token_ms}"></label>`;
   fields.insertBefore(extra,get('apply-btn'));fields.querySelector('.field-note').textContent='Arithmetic over retained measurements; no new model run.';
   get('history-count').textContent=String(v.reports.length).padStart(2,'0');
   get('editions').innerHTML=v.reports.map((r,i)=>{const parts=snapshotParts(r),w=parts.calc.data.results.find(x=>x.run_id===parts.calc.data.winner),same=r.fingerprint===v.review.fingerprint;return `<article class="edition ${same?'current-edition':''}"><header><h3>Edition ${String(i+1).padStart(2,'0')} · ${escapeHTML(w?.label||'No recommendation')}</h3><span class="tag">${same?'CURRENT':'HISTORY'}</span></header><p>${w?price(w.cost_per_success)+'/1,000 accepted':'No eligible result'} · first token ≤ ${parts.policy.data.first_token_ms} ms · complete ≤ ${parts.policy.data.deadline_ms/1000} s</p>${i?'<p class="successor-line">Supersedes Edition '+String(i).padStart(2,'0')+' · '+v.reports[i-1].snapshot_hash.slice(0,12)+'…</p>':''}${stamp('Frozen scenario · retained measurements','calculation@'+parts.calc.revision)}<div class="edition-bottom"><code>${r.snapshot_hash.slice(0,12)}…</code><span><button class="text-button" data-edition="${i}">Compare</button> · <button class="text-button" data-brief="${i}">Brief</button></span></div></article>`;}).join('');
@@ -723,3 +760,48 @@ function composeRail(node,run3){
 
 const beforeOverviewCommands=commands;
 commands=function(){const list=beforeOverviewCommands();list.unshift({label:'Go to Cantos overview',hint:'program',run:()=>view('overview'),on:true});return list;};
+
+
+// Presentation changes navigation and framing only. Native transactions own every decision.
+function emitPresentationState(){
+ if(!presentationMode||window.parent===window)return;
+ const p=window.CantosPreviewState;
+ if(!p||!viewState){
+  if($('notice')?.classList.contains('error'))window.parent.postMessage({type:'cantos-error',message:$('notice').textContent},location.origin);
+  return;
+ }
+ window.parent.postMessage({
+  type:'cantos-state',current:p.current,reportCount:p.reportCount,winner:p.winner,
+  decisionClass:p.decisionClass,packetHash:p.packetHash,events:p.events,
+  state:$('current-state')?.textContent||'',winnerLabel:$('winner')?.textContent||'',
+  notice:$('notice')?.textContent||'',storageWarning:guidedStorageWarning,reviewReady:Boolean(viewState.review?.ready),
+  results:(viewState.calc?.data?.results||[]).map(r=>({runId:r.run_id,label:r.label,accepted:r.accepted,tasks:r.tasks,costPerSuccess:r.cost_per_success})),
+  rates:(viewState.runs||[]).map(r=>({runId:r.id,rate:r.data.billing?.rate_usd_per_hour}))
+ },location.origin);
+}
+if(presentationMode){
+ window.addEventListener('message',e=>{
+  if(e.source!==window.parent||e.origin!==location.origin||e.data?.type!=='cantos-guide')return;
+  const command=e.data.command;
+  if(command==='status'){emitPresentationState();return;}
+  if(!workspace||busy||pendingImport)return;
+  if(!['compare','evidence','request','change','retain','history'].includes(command))return;
+  if($('inspector').open)$('inspector').close();
+  view('decision');
+  if(command==='evidence')inspect('policy');
+  else if(command==='request')inspectTask(0,0);
+  else if(command==='change'){
+   setControls(true);
+   const field=document.querySelector('[data-hardware-rate="n-t0"]');
+   if(field){field.focus({preventScroll:true});field.scrollIntoView({block:'center',behavior:'smooth'});}
+  }else if(command==='retain'){
+   setControls(true);$('reviewer').focus({preventScroll:true});$('reviewer').scrollIntoView({block:'center',behavior:'smooth'});
+  }else if(command==='history'){
+   $('editions').scrollIntoView({block:'center',behavior:'smooth'});
+  }else{
+   $('workspace').scrollTo({top:0,behavior:'smooth'});$('workspace').focus({preventScroll:true});
+  }
+  emitPresentationState();
+ });
+ window.addEventListener('pageshow',emitPresentationState);
+}
