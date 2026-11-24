@@ -2,6 +2,40 @@
 const frame=document.getElementById('decision-app'),steps=[...document.querySelectorAll('[data-step]')];
 const title=document.getElementById('guide-title'),copy=document.getElementById('guide-copy'),next=document.getElementById('guide-next'),request=document.getElementById('guide-request');
 let activeStep='compare',state=null,startupError='';
+const video=document.getElementById('walkthrough-video'),watchPanel=document.getElementById('walkthrough'),livePanel=document.getElementById('workbench'),viewTabs=[...document.querySelectorAll('[data-view]')];
+let currentView='watch';
+function chooseView(name,{scroll=false,remember=false}={}){
+ if(!['watch','live'].includes(name))return;
+ currentView=name;
+ const live=name==='live';
+ if(live&&!video.paused)video.pause();
+ watchPanel.hidden=live;livePanel.hidden=!live;
+ for(const tab of viewTabs){const selected=tab.dataset.view===name;tab.setAttribute('aria-selected',String(selected));tab.tabIndex=selected?0:-1;}
+ if(remember){const url=new URL(location.href);url.hash=live?'workbench':'walkthrough';history.replaceState(null,'',url);}
+ if(live)requestAnimationFrame(()=>command('status'));
+ if(scroll)requestAnimationFrame(()=>document.getElementById('experience').scrollIntoView({block:'start',behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'instant':'smooth'}));
+}
+for(const tab of viewTabs){
+ tab.addEventListener('click',()=>chooseView(tab.dataset.view,{remember:true}));
+ tab.addEventListener('keydown',e=>{
+  if(!['ArrowLeft','ArrowRight','Home','End'].includes(e.key))return;
+  e.preventDefault();
+  const index=e.key==='Home'?0:e.key==='End'?viewTabs.length-1:(viewTabs.indexOf(tab)+(e.key==='ArrowRight'?1:-1)+viewTabs.length)%viewTabs.length;
+  chooseView(viewTabs[index].dataset.view,{remember:true});viewTabs[index].focus();
+ });
+}
+for(const button of document.querySelectorAll('[data-open-live]'))button.addEventListener('click',()=>chooseView('live',{scroll:true,remember:true}));
+for(const link of document.querySelectorAll('.watch-link'))link.addEventListener('click',e=>{e.preventDefault();chooseView('watch',{scroll:true,remember:true});});
+const filmStatus=document.getElementById('film-status');
+video.addEventListener('playing',()=>{
+ // The initial poster has no role after the first decoded playback begins.
+ video.removeAttribute('poster');
+ filmStatus.textContent='Playing recorded walkthrough';
+ document.getElementById('film-error').hidden=true;
+});
+video.addEventListener('pause',()=>{filmStatus.textContent=video.ended?'Walkthrough complete':video.currentTime>0?'Paused walkthrough':'Recorded walkthrough · 1:57';});
+video.addEventListener('ended',()=>{filmStatus.textContent='Walkthrough complete';});
+video.addEventListener('error',()=>{filmStatus.textContent='Recording unavailable in this player';document.getElementById('film-error').hidden=false;});
 function command(name){
  frame.contentWindow?.postMessage({type:'cantos-guide',command:name},location.origin);
  if(name!=='status'&&matchMedia('(max-width:720px)').matches){
@@ -28,7 +62,7 @@ function renderGuide(){
  let heading,body,label,destination;
  if(activeStep==='compare'){
   heading='Start with accepted work.';
-  body='Each arm received 8,622 scheduled requests. The comparison counts answers that met correctness and timing requirements.';
+  body='Each configuration received 8,622 requests. Compare the cost of answers that were correct and delivered on time.';
   label='Inspect acceptance';destination='evidence';
  }else if(activeStep==='evidence'){
   heading='Follow the result to its evidence.';
@@ -50,11 +84,11 @@ function renderGuide(){
   }
  }else if(retained){
   heading='Carry both decisions forward.';
-  body='Compare the retained editions, export the packet, then open it in a fresh workspace. Reopening verifies the journal and recomputes its recorded calculations.';
+  body='Compare the original and revised decisions, export the workspace, then open it in a fresh workspace. Reopening verifies the record and recomputes its calculations.';
   label='Inspect decision history';destination='history';
  }else{
   heading='Keep the reasoning with the decision.';
-  body='Enter a reviewer and rationale, record the review, and retain the edition. Export packet carries the evidence, assumptions, review and predecessor together.';
+  body='Enter a reviewer and rationale, record the review, and retain the revised decision. Export workspace carries the evidence and both versions together.';
   label='Focus review';destination='retain';
  }
  title.textContent=heading;copy.textContent=body;next.textContent=label;next.dataset.command=destination;
@@ -76,6 +110,8 @@ window.addEventListener('message',e=>{
 frame.addEventListener('load',()=>command('status'));
 function revealAnchor(){
  const id=location.hash.slice(1);
+ if(id==='workbench')chooseView('live');
+ else if(id==='walkthrough')chooseView('watch');
  if(['deployment','maintainers','start','common-grade'].includes(id)){document.getElementById('instrument').open=true;requestAnimationFrame(()=>document.getElementById(id)?.scrollIntoView());}
 }
 window.addEventListener('hashchange',revealAnchor);

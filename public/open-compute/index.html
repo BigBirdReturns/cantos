@@ -22,18 +22,33 @@
 <script defer src="experience.js"></script>
 </head>
 <body>
-<a class="skip" href="#workbench">Skip to decision workspace</a>
+<a class="skip" href="#experience">Skip to walkthrough and comparison</a>
 <header class="shell topbar">
 <a class="wordmark" href="../../index.html">CANTOS <span>Open Compute</span></a>
 <nav class="topnav" aria-label="Primary"><a class="watch-link" href="#walkthrough">Watch walkthrough</a><a href="#source" class="wide">Evidence &amp; scope</a><a href="#maintainers">Run your workload</a><a class="wide" href="https://github.com/BigBirdReturns/cantos">Source</a></nav>
 </header>
 <main class="shell">
 <section class="intro" aria-labelledby="page-title">
-<div><div class="eyebrow">Measured work · explicit assumptions · retained decisions</div><h1 id="page-title">Choose compute by completed work.</h1><p>Inspect the experiment, change a price, and carry the decision forward with its evidence.</p></div>
-<div class="intro-actions"><button id="try-change" class="button">Try a price change <span aria-hidden="true">↗</span></button><a class="button light" href="../../app/Cantos.html?workspace=run3">Open full workspace</a></div>
+<div><div class="eyebrow">Measured work · explicit assumptions · retained decisions</div><h1 id="page-title">Choose compute by completed work.</h1><p>Compare correct answers delivered on time, revise an hourly rate, and keep the decision with its evidence.</p></div>
+<p class="intro-basis">A worked example using<br>the 24 Sep 2026 Run 3 measurements.</p>
 </section>
-<section id="workbench" class="workbench" aria-label="Interactive Run 3 decision">
-<div class="workbench-head"><div class="source-line"><strong>Run 3</strong><span class="source-dot" aria-hidden="true"></span><span>24 Sep 2026 measurements</span><span class="optional">/</span><span>List-price scenario</span></div><a href="../../app/packets/RUN3-DATA.md" target="_blank" rel="noopener">Data provenance ↗</a></div>
+<nav id="experience" class="experience-tabs" role="tablist" aria-label="Explore Open Compute">
+<button id="watch-tab" type="button" role="tab" aria-controls="walkthrough" aria-selected="true" data-view="watch">Watch the walkthrough <span>1:57</span></button>
+<button id="live-tab" type="button" role="tab" aria-controls="workbench" aria-selected="false" tabindex="-1" data-view="live">Try the comparison <span>Interactive</span></button>
+</nav>
+<section id="walkthrough" class="walkthrough" role="tabpanel" aria-labelledby="watch-tab">
+<div class="film-heading"><div><span id="film-status" class="eyebrow" aria-live="polite">Recorded walkthrough · 1:57</span><h2 id="walkthrough-title">One decision, from evidence to replay.</h2></div><a href="film/demo.mp4" target="_blank" rel="noopener" aria-label="Open video in a separate player">Open video ↗</a></div>
+<video id="walkthrough-video" controls playsinline preload="metadata" poster="film/poster.jpg" aria-label="Recorded Open Compute walkthrough, one minute fifty-seven seconds">
+<source src="film/demo.mp4" type="video/mp4">
+<track kind="captions" src="film/captions.vtt" srclang="en" label="English captions">
+<a href="film/demo.mp4">Open the walkthrough video</a>.
+</video>
+<p id="film-error" class="film-error" role="status" hidden>The recording could not play here. <a href="film/demo.mp4" target="_blank" rel="noopener">Open the video on its own</a> or <a href="film/demo.mp4" download>download it</a>.</p>
+<div class="film-footer"><p>Watch a hypothetical price change alter the decision while the measured answers stay the same. Keep the original and revised versions, then reopen them offline.</p><div class="film-actions"><button class="button" type="button" data-open-live>Try it yourself</button><a href="film/transcript.html">Transcript</a><a href="film/demo.mp4" download>Download video</a></div></div>
+<div class="offline-handoff"><span>Replaying your own decision?</span><p>Export its workspace, open the offline app, then choose <strong>Open a decision packet</strong>.</p><a href="../../app/Cantos.html" download="Cantos.html">Download offline app ↗</a></div>
+</section>
+<section id="workbench" class="workbench" role="tabpanel" aria-labelledby="live-tab" hidden>
+<div class="workbench-head"><div class="source-line"><strong>Run 3</strong><span class="source-dot" aria-hidden="true"></span><span>24 Sep 2026 measurements</span><span class="optional">/</span><span>List-price scenario</span></div><div class="workbench-links"><button id="try-change" class="text-action">Try a price change</button><a href="../../app/Cantos.html?workspace=run3" target="_blank" rel="noopener">Open full workspace ↗</a></div></div>
 <div class="stage-grid">
 <div class="app-aperture"><iframe id="decision-app" title="Run 3 decision workspace: retained evidence, assumptions and editions" src="../../app/Cantos.html?workspace=run3&amp;presentation=1" loading="eager"></iframe></div>
 <aside class="guide" aria-label="Decision walkthrough">
@@ -44,20 +59,11 @@
 <button class="step" data-step="change"><span>03</span>Change &amp; recompute</button>
 <button class="step" data-step="retain"><span>04</span>Retain &amp; replay</button>
 </nav>
-<div class="guide-copy"><h2 id="guide-title">Start with accepted work.</h2><p id="guide-copy">Each arm received 8,622 scheduled requests. The comparison counts answers that met correctness and timing requirements.</p><div class="guide-actions"><button id="guide-next" class="button">Inspect acceptance</button><button id="guide-request" class="text-action" hidden>Inspect a retained request</button></div></div>
+<div class="guide-copy"><h2 id="guide-title">Start with accepted work.</h2><p id="guide-copy">Each configuration received 8,622 requests. Compare the cost of answers that were correct and delivered on time.</p><div class="guide-actions"><button id="guide-next" class="button">Inspect acceptance</button><button id="guide-request" class="text-action" hidden>Inspect a retained request</button></div></div>
 <div class="state-note" aria-live="polite"><span>Live workspace state</span><strong id="guide-status">Verifying retained packet…</strong><p id="guide-detail">The workspace opens directly in this page.</p><code id="guide-hash"></code></div>
 </aside>
 </div>
 <div class="workbench-foot"><p>Original Run 3 grades. Costs use the retained run windows and listed hourly rates. A changed price recalculates the scenario over the same measurements.</p><a href="../../app/Cantos.html?workspace=run3&amp;presentation=1&amp;fresh=1" target="_blank" rel="noopener">Open a fresh replay workspace ↗</a></div>
-</section>
-<section id="walkthrough" class="walkthrough" aria-labelledby="walkthrough-title">
-<div class="film-heading"><div><div class="eyebrow">Recorded from this workspace</div><h2 id="walkthrough-title">Watch the complete decision workflow.</h2><p>Follow the retained evidence through a price revision, explicit recomputation, a reviewed successor and offline replay.</p></div><a href="film/transcript.html">Read the transcript ↗</a></div>
-<video id="walkthrough-video" controls playsinline preload="metadata" poster="film/poster.jpg" aria-label="Cantos Open Compute decision walkthrough">
-<source src="film/demo.mp4" type="video/mp4">
-<track kind="captions" src="film/captions.vtt" srclang="en" label="English captions">
-<a href="film/demo.mp4">Download the walkthrough video</a>.
-</video>
-<div class="film-footer"><p>Use <strong>Export workspace</strong> above to keep a decision packet. Download the offline app, open the HTML file, and choose <strong>Open a decision packet</strong> to replay your exported JSON.</p><div class="film-actions"><a class="button light" href="../../app/Cantos.html" download="Cantos.html">Download offline app</a><a href="film/demo.mp4" download>Download video</a></div></div>
 </section>
 <div class="below">
 <section id="source" class="source-note" aria-labelledby="source-title">
