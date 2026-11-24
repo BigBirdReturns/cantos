@@ -652,6 +652,97 @@ html.cascade .task-cell{view-transition-name:var(--vt)!important}
 @media(max-width:720px){.overview-hero{padding:18px 0 26px}.overview-hero h1{font-size:32px}.overview-hero p{font-size:15px}.rail-history{margin:0;padding:8px;font-size:11px}.rail-history small{display:none}}
 
 @media(max-width:1000px){.case-nav{flex-wrap:wrap}.rail-history{flex-basis:100%;margin:0;padding:7px 10px}.rail-history small{display:none}}
+
+
+/* Focused Open Compute aperture: native workspace, explicit isolated storage key. */
+html.cantos-presentation,html.cantos-presentation body{height:100%;overflow:hidden}
+.cantos-presentation .app-bar,.cantos-presentation .rail,.cantos-presentation #overview-shortcut{display:none!important}
+.cantos-presentation main{display:block;height:100dvh;min-height:0;max-height:none;margin:0}
+.cantos-presentation .desk{height:100%;min-height:0}
+.cantos-presentation .desk-toolbar{padding:12px 24px;min-height:54px;border-bottom:1px solid var(--line);justify-content:space-between;gap:12px}
+.cantos-presentation .desk-toolbar .workspace-name{display:block;width:auto;font-size:12px}
+.cantos-presentation .toolbar-actions{gap:16px}
+.cantos-presentation .toolbar-actions button{font-size:12px;min-height:30px}
+.cantos-presentation .view{min-height:0;overflow:hidden}
+.cantos-presentation .decision-layout{height:100%;min-height:0;grid-template-columns:minmax(0,1fr) 282px}
+.cantos-presentation .canvas{padding:20px 26px 28px;overflow:auto}
+.cantos-presentation .controls{padding:24px 21px;overflow:auto}
+.cantos-presentation .controls-heading h2{font-size:21px}
+.cantos-presentation .controls label{font-size:12px}
+.cantos-presentation .controls input,.cantos-presentation .controls textarea{font-size:15px;padding:10px 11px;min-height:42px}
+.cantos-presentation .controls textarea{min-height:72px}
+.cantos-presentation .controls .field-pair{grid-template-columns:1fr;gap:13px}
+.cantos-presentation .controls .hardware-fields{gap:13px;margin:13px 0 17px}
+.cantos-presentation .controls .review-box{margin-top:24px;padding-top:22px}
+.cantos-presentation .controls .review-actions{grid-template-columns:1fr;gap:9px}
+.cantos-presentation .controls .primary,.cantos-presentation .controls .outline-button{min-height:40px;font-size:12px}
+.cantos-presentation .case-heading{align-items:center;gap:12px;margin-bottom:8px}
+.cantos-presentation .case-heading h1{font-size:12px}
+.cantos-presentation .case-heading p{display:block;font-size:11px;margin-top:3px}
+.cantos-presentation .case-heading h1::after{content:none}
+.cantos-presentation .state{font-size:10px;padding:6px 9px}
+.cantos-presentation .lineage{padding:11px 0;margin-bottom:18px}
+.cantos-presentation .lineage button{font-size:11px;min-height:24px}
+.cantos-presentation .recommendation h2{font-size:clamp(24px,2.6vw,36px);line-height:1.16}
+.cantos-presentation .recommendation .eyebrow{font-size:10px}
+.cantos-presentation .recommendation p{font-size:12px;max-width:66ch;margin-top:8px}
+.cantos-presentation .comparison{gap:14px}
+.cantos-presentation .comp-row{padding:20px 22px 16px}
+.cantos-presentation .config-id{font-size:13px}
+.cantos-presentation .comp-value{font-size:clamp(42px,4.8vw,60px)}
+.cantos-presentation .hardware-badges{margin-top:9px;font-size:11px}
+.cantos-presentation .hardware-percentiles{margin:11px 0;padding:9px 0}
+.cantos-presentation .request-density canvas{height:48px}
+.cantos-presentation .request-density .stamp{display:none}
+.cantos-presentation .comp-footer{margin-top:10px;padding-top:10px}
+.cantos-presentation .comp-footer button{font-size:12px;min-height:30px}
+.cantos-presentation .matrix-legend{font-size:10px}
+.cantos-presentation .outcome-diff{font-size:12px;line-height:1.55;margin-top:13px}
+.cantos-presentation .next-action{margin-top:14px}
+.cantos-presentation #recompute-btn{min-height:42px;font-size:13px}
+.cantos-presentation #next-step-note{font-size:11px}
+.cantos-presentation .statusbar{position:relative;inset:auto;min-height:34px;flex-shrink:0;padding:8px 24px;font-size:10px}
+.cantos-presentation .statusbar #notice{max-width:none;white-space:normal}
+.cantos-presentation dialog{font-size:14px;width:min(780px,calc(100vw - 32px));max-height:calc(100dvh - 36px);padding:30px}
+.cantos-presentation .inspection-facts strong{font-size:20px}
+.cantos-presentation .raw-details summary{min-height:38px;font-size:13px}
+.cantos-presentation .edition{padding:18px}
+.cantos-presentation .edition h3{font-size:15px}
+.cantos-presentation .edition p{font-size:12px}
+@media(max-width:1050px) and (min-width:721px){
+ .cantos-presentation .decision-layout{grid-template-columns:minmax(0,1fr) 240px}
+ .cantos-presentation .canvas{padding:18px}
+ .cantos-presentation .controls{padding:22px 17px}
+ .cantos-presentation .comp-row{padding:17px 15px}
+ .cantos-presentation .recommendation h2{font-size:26px}
+ .cantos-presentation .comp-value{font-size:42px}
+}
+@media(max-width:720px){
+ .cantos-presentation .desk-toolbar{padding:10px 16px}
+ .cantos-presentation .desk-toolbar .workspace-name{font-size:10px}
+ .cantos-presentation .workspace-name .tag{display:none}
+ .cantos-presentation .toolbar-actions{gap:12px}
+ .cantos-presentation .toolbar-actions button{font-size:11px}
+ .cantos-presentation .decision-layout{display:block;overflow:auto}
+ .cantos-presentation .canvas{overflow:visible;padding:18px 16px 26px}
+ .cantos-presentation .comparison{grid-template-columns:1fr;gap:14px}
+ .cantos-presentation .comp-row{padding:20px}
+ .cantos-presentation .comp-value{font-size:46px}
+ .cantos-presentation .controls{display:none}
+ .cantos-presentation .controls-open .controls{display:block;padding:24px 22px;max-height:88dvh}
+ .cantos-presentation .controls .field-pair{grid-template-columns:1fr 1fr}
+ .cantos-presentation .controls .review-actions{grid-template-columns:1fr 1fr}
+ .cantos-presentation .statusbar{padding:8px 16px;min-height:40px}
+ .cantos-presentation .statusbar #storage-status{display:none}
+ .cantos-presentation .case-heading{align-items:flex-start}
+ .cantos-presentation .state{font-size:9px;padding:5px 7px}
+ .cantos-presentation .recommendation h2{font-size:27px}
+ .cantos-presentation dialog{padding:22px 18px}
+}
+@media(prefers-reduced-motion:reduce){.cantos-presentation *{scroll-behavior:auto!important}}
+
+/* Preserve the fixed currency-prefix clearance after the focused form sizing. */
+.cantos-presentation .controls .money-input input{padding-left:27px}
 </style></head>
 <body>
 <a class="skip" href="#overview-view">Skip to Cantos overview</a>
@@ -766,7 +857,7 @@ html.cascade .task-cell{view-transition-name:var(--vt)!important}
 <figure class="ev-card ev-card--lat"><figcaption><h3>First token p50 · p95 · p99</h3><span class="stamps"><span class="stamp"><span>Run 3</span><span><time datetime="2026-09-24">24 Sep 2026</time></span><span>vLLM 0.30.0</span></span></span></figcaption><svg class="ev-svg" viewBox="0 0 320 150" role="img" aria-labelledby="ev-lat-t ev-lat-d"><title id="ev-lat-t">First-token latency p50, p95 and p99 per arm, milliseconds, log scale</title><desc id="ev-lat-d">A/T0 53 / 155 / 571 ms; A/T1 60 / 202 / 1,119 ms; N/T0 35 / 76 / 2,254 ms. The accepted contract requires first token within 1 s.</desc><line class="ev-rule" x1="164.2" x2="164.2" y1="6" y2="130"/><text class="ev-tick" x="164.2" y="144" text-anchor="middle">100 ms</text><line class="ev-limit" x1="256.1" x2="256.1" y1="6" y2="130"/><text class="ev-tick ev-win-t" x="256.1" y="144" text-anchor="middle">1 s limit</text><text class="ev-code" x="0" y="27">A/T0</text><text class="ev-hw" x="0" y="40">MI300X · Hot Aisle</text><line class="ev-range" x1="138.9" x2="233.8" y1="30" y2="30"/><circle class="ev-dot" cx="138.9" cy="30" r="3.5"/><text class="ev-dv" x="138.9" y="22" text-anchor="middle">53</text><text class="ev-pk" x="138.9" y="46" text-anchor="middle">p50</text><circle class="ev-dot" cx="181.7" cy="30" r="3.5"/><text class="ev-dv" x="181.7" y="22" text-anchor="middle">155</text><text class="ev-pk" x="181.7" y="46" text-anchor="middle">p95</text><circle class="ev-dot" cx="233.8" cy="30" r="3.5"/><text class="ev-dv" x="233.8" y="22" text-anchor="middle">571</text><text class="ev-pk" x="233.8" y="46" text-anchor="middle">p99</text><text class="ev-code" x="0" y="67">A/T1</text><text class="ev-hw" x="0" y="80">MI300X · forced FA</text><line class="ev-range" x1="143.9" x2="260.6" y1="70" y2="70"/><circle class="ev-dot" cx="143.9" cy="70" r="3.5"/><text class="ev-dv" x="143.9" y="62" text-anchor="middle">60</text><circle class="ev-dot" cx="192.3" cy="70" r="3.5"/><text class="ev-dv" x="192.3" y="62" text-anchor="middle">202</text><circle class="ev-dot ev-late" cx="260.6" cy="70" r="3.5"/><text class="ev-dv ev-late" x="260.6" y="62" text-anchor="middle">1,119</text><text class="ev-code" x="0" y="107">N/T0</text><text class="ev-hw" x="0" y="120">H100 · DigitalOcean</text><line class="ev-range" x1="122.3" x2="288.6" y1="110" y2="110"/><circle class="ev-dot" cx="122.3" cy="110" r="3.5"/><text class="ev-dv" x="122.3" y="102" text-anchor="middle">35</text><circle class="ev-dot" cx="153.3" cy="110" r="3.5"/><text class="ev-dv" x="153.3" y="102" text-anchor="middle">76</text><circle class="ev-dot ev-late" cx="288.6" cy="110" r="3.5"/><text class="ev-dv ev-late" x="288.6" y="102" text-anchor="middle">2,254</text></svg><p class="ev-scope">H100 is quicker in the typical case; MI300X holds the tail through the bursts. Log scale, milliseconds.</p></figure>
 </div>
 <div class="ev-lower">
-<figure class="ev-card ev-card--flip"><figcaption><h3>Where the ranking flips</h3><span class="stamps"><span class="stamp"><span>Run 3</span><span><time datetime="2026-09-24">24 Sep 2026</time></span><span>rescaled list price</span></span></span></figcaption><svg class="ev-svg" viewBox="0 0 320 168" role="img" aria-labelledby="ev-flip-t ev-flip-d"><title id="ev-flip-t">H100 dollars per 1,000 accepted at other hourly prices</title><desc id="ev-flip-d">At $4.41/h measured $1.20; rescaled: $2.99/h $0.81, $2.49/h $0.68, $1.99/h $0.54. Hot Aisle $0.74 at $2.99/h. The ranking flips below about $2.72/h.</desc><line class="ev-limit" x1="203.6" x2="203.6" y1="4" y2="150"/><text class="ev-tick ev-win-t" x="203.6" y="162" text-anchor="middle">Hot Aisle $0.74</text><text class="ev-code" x="0" y="18">$4.41/h</text><text class="ev-hw" x="0" y="31">H100 · measured</text><rect class="ev-bar" x="100" y="9" width="168.0" height="12"/><text class="ev-val" x="274.0" y="19">$1.20</text><text class="ev-code" x="0" y="56">$2.99/h</text><text class="ev-hw" x="0" y="69">H100 · rescaled</text><rect class="ev-bar" x="100" y="47" width="113.4" height="12"/><text class="ev-val" x="219.4" y="57">$0.81</text><text class="ev-code" x="0" y="94">$2.49/h</text><text class="ev-hw" x="0" y="107">H100 · rescaled</text><rect class="ev-bar" x="100" y="85" width="95.2" height="12"/><text class="ev-val" x="201.2" y="95">$0.68</text><text class="ev-code" x="0" y="132">$1.99/h</text><text class="ev-hw" x="0" y="145">H100 · rescaled</text><rect class="ev-bar" x="100" y="123" width="75.6" height="12"/><text class="ev-val" x="181.6" y="133">$0.54</text></svg><p class="ev-scope">Arithmetic on the measured H100 run (4.41 × 0.74 / 1.20): below ~$2.72/h the H100 is cheaper. Not separate runs.</p></figure>
+<figure class="ev-card ev-card--flip"><figcaption><h3>Where the ranking flips</h3><span class="stamps"><span class="stamp"><span>Run 3</span><span><time datetime="2026-09-24">24 Sep 2026</time></span><span>rescaled list price</span></span></span></figcaption><svg class="ev-svg" viewBox="0 0 320 168" role="img" aria-labelledby="ev-flip-t ev-flip-d"><title id="ev-flip-t">H100 dollars per 1,000 accepted at other hourly prices</title><desc id="ev-flip-d">At the baseline list rate of $4.41/h, the scenario cost is $1.20; rescaled: $2.99/h $0.81, $2.49/h $0.68, $1.99/h $0.54. Hot Aisle $0.74 at $2.99/h. The ranking flips below about $2.72/h.</desc><line class="ev-limit" x1="203.6" x2="203.6" y1="4" y2="150"/><text class="ev-tick ev-win-t" x="203.6" y="162" text-anchor="middle">Hot Aisle $0.74</text><text class="ev-code" x="0" y="18">$4.41/h</text><text class="ev-hw" x="0" y="31">H100 · list rate</text><rect class="ev-bar" x="100" y="9" width="168.0" height="12"/><text class="ev-val" x="274.0" y="19">$1.20</text><text class="ev-code" x="0" y="56">$2.99/h</text><text class="ev-hw" x="0" y="69">H100 · rescaled</text><rect class="ev-bar" x="100" y="47" width="113.4" height="12"/><text class="ev-val" x="219.4" y="57">$0.81</text><text class="ev-code" x="0" y="94">$2.49/h</text><text class="ev-hw" x="0" y="107">H100 · rescaled</text><rect class="ev-bar" x="100" y="85" width="95.2" height="12"/><text class="ev-val" x="201.2" y="95">$0.68</text><text class="ev-code" x="0" y="132">$1.99/h</text><text class="ev-hw" x="0" y="145">H100 · rescaled</text><rect class="ev-bar" x="100" y="123" width="75.6" height="12"/><text class="ev-val" x="181.6" y="133">$0.54</text></svg><p class="ev-scope">List-price arithmetic over the retained H100 run (4.41 × 0.74 / 1.20): below ~$2.72/h the H100 is cheaper. Not separate runs.</p></figure>
 <div class="ev-card ev-contract"><span class="eyebrow">THE CONTRACT</span><h3>Correct + first token ≤1s + completion ≤60s</h3><p>Qwen3-Coder-30B-A3B-Instruct-FP8 on vLLM 0.30.0; the Azure code trace replayed for one hour at factor 0.95. One run per arm.</p>
 <p>This September decision retains the original grades. The later common-grade comparison reports 4,351 accepted on MI300X and 4,296 on H100. <a data-site-path="public/open-compute/index.html" href="public/open-compute/index.html">Inspect all four configurations and their grading conditions.</a></p><table class="ev-ledger"><caption>Run 3 ledger, as registered</caption><thead><tr><th scope="col"><span class="ev-sr">Measure</span></th><th scope="col"><b class="ev-arm">A/T0</b></th><th scope="col"><b class="ev-arm">A/T1</b></th><th scope="col"><b class="ev-arm">N/T0</b></th></tr></thead><tbody>
 <tr><th scope="row">List rate</th><td>$2.99/h</td><td>$2.99/h</td><td>$4.41/h</td></tr>
@@ -1104,18 +1195,23 @@ async function correctSource(ws){const next=C.clone(ws),st=C.state(next),key=st.
 root.CantosDesk={meta,hwMeta,decisionClass,create,view,workflow,change,recompute,reviewed,sealed,restore,correctSource,pack:C.pack,core:C};if(typeof module!=='undefined')module.exports=root.CantosDesk;
 })(typeof globalThis!=='undefined'?globalThis:this);
 </script><script>'use strict';
-const D=CantosDesk,C=D.core,$=id=>document.getElementById(id),KEY='cantos.research-preview.v0.1',money=n=>n===null?'Unavailable':'$'+n.toFixed(2);
-let workspace,viewState,busy=false,lastInputs='',persist=false,pendingImport=null,savedHash=null;
+const entryParams=new URLSearchParams(location.search),requestedRun3=entryParams.get('workspace')==='run3',presentationMode=requestedRun3&&entryParams.get('presentation')==='1',freshWorkspace=entryParams.get('fresh')==='1';
+if(presentationMode)document.documentElement.classList.add('cantos-presentation');
+const D=CantosDesk,C=D.core,$=id=>document.getElementById(id),KEY=presentationMode?'cantos.open-compute.presentation.v1':'cantos.research-preview.v0.1',money=n=>n===null?'Unavailable':'$'+n.toFixed(2);
+let workspace,viewState,busy=false,lastInputs='',persist=false,pendingImport=null,savedHash=null,guidedStorageWarning='';
 const escapeHTML=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const sitePrefix=/\/app\/Cantos\.html$/i.test(location.pathname)?'../':'';
 document.querySelectorAll('[data-site-path]').forEach(a=>a.href=sitePrefix+a.dataset.sitePath);
 document.querySelector('.brand').addEventListener('click',e=>{e.preventDefault();view('overview');});
-function notice(message,error=false){$('notice').textContent=message;$('notice').classList.toggle('error',error);}
+function notice(message,error=false){$('notice').textContent=message;$('notice').classList.toggle('error',error);if(presentationMode)queueMicrotask(emitPresentationState);}
 function download(name,text,type='application/json'){const blob=new Blob([text],{type}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
 // The analytical owner is unchanged. This layer prepares a complete detached
 // display, then commits state and its visible representation in the same callback.
 let transition=null;
 async function installPrepared(candidate,prepared,options={}){
+ let guidedSaveFailed=false;
+ if(presentationMode&&options.resetStorage)await guidedRecord('delete');
+ if(presentationMode&&options.save){try{await guidedRecord('put',prepared.packetJSON);guidedStorageWarning='';}catch{guidedSaveFailed=true;}}
  const swap=()=>{
   const previousMain=document.querySelector('main');
   const focusId=document.activeElement?.id;
@@ -1126,9 +1222,9 @@ async function installPrepared(candidate,prepared,options={}){
     if(old&&next)next.value=old.value;
    }
   }
-  let saved=options.persist===undefined?persist:options.persist,saveFailed=false;
+  let saved=options.persist===undefined?persist:options.persist,saveFailed=guidedSaveFailed;
   if(options.resetStorage)localStorage.removeItem(KEY);
-  if(options.save){try{localStorage.setItem(KEY,prepared.packetJSON);}catch(e){saved=false;saveFailed=true;}}
+  if(options.save){if(presentationMode){if(saveFailed)saved=false;}else{try{localStorage.setItem(KEY,prepared.packetJSON);}catch(e){saved=false;saveFailed=true;}}}
   prepared.node.querySelector('#save-btn').textContent=saved?'Saved on this device':'Save on this device';
   prepared.node.querySelector('#storage-status').textContent=saved?'Saved on this device · export for portability':'In memory · save or export to retain';
   const before=snapshotNums(document);
@@ -1138,6 +1234,7 @@ async function installPrepared(candidate,prepared,options={}){
   if(options.resetStorage)savedHash=null;
   if(options.save&&!saveFailed)savedHash=prepared.v.packetHash;
   window.CantosPreviewState=prepared.publicState;
+  if(presentationMode)queueMicrotask(emitPresentationState);
   for(const [id,top] of scrolls)if($(id))$(id).scrollTop=top;
   if(focusId&&$(focusId)&&!$(focusId).disabled)$(focusId).focus({preventScroll:true});
   prepared.saveFailed=saveFailed;
@@ -1279,7 +1376,32 @@ function setControls(open){
  else {panel.removeAttribute('role');panel.removeAttribute('aria-modal');if(document.activeElement?.closest('#scenario-panel'))$('mobile-scenario').focus({preventScroll:true});}
 }
 
-async function exportCurrent(){const packet=await D.pack(workspace);download('Cantos-research-workspace.json',JSON.stringify(packet,null,2));notice('Exported the actual committed workspace, including its evidence, reviews and editions.');}
+// The guided packet exceeds localStorage's typical quota after a retained successor.
+// Ordinary Cantos storage stays unchanged. The guided store holds the exact native packet.
+async function guidedRecord(operation,value){
+ const db=await new Promise((resolve,reject)=>{
+  const request=indexedDB.open('cantos.open-compute.presentation',1);
+  let blocked=false;
+  request.onupgradeneeded=()=>{if(!request.result.objectStoreNames.contains('workspaces'))request.result.createObjectStore('workspaces');};
+  request.onerror=()=>reject(request.error||Error('Guided browser storage is unavailable.'));
+  request.onblocked=()=>{blocked=true;reject(Error('Guided browser storage is blocked by another tab.'));};
+  request.onsuccess=()=>{if(blocked){request.result.close();return;}resolve(request.result);};
+ });
+ return new Promise((resolve,reject)=>{
+  let result;
+  const tx=db.transaction('workspaces',operation==='get'?'readonly':'readwrite'),store=tx.objectStore('workspaces');
+  const request=operation==='get'?store.get(KEY):operation==='delete'?store.delete(KEY):store.put(value,KEY);
+  request.onsuccess=()=>{result=request.result;};
+  tx.oncomplete=()=>{db.close();resolve(result);};
+  const fail=()=>{const error=tx.error||Error('Guided browser storage transaction failed.');db.close();reject(error);};
+  tx.onerror=fail;tx.onabort=fail;
+ });
+}
+async function exportCurrent(){
+ const packet=await D.pack(workspace),text=JSON.stringify(packet);
+ if(new TextEncoder().encode(text).byteLength>12000000){notice('Export refused: this packet exceeds the 12 MB import limit. Current work and retained editions are unchanged.',true);return;}
+ download('Cantos-research-workspace.json',text);notice('Exported the actual committed workspace, including its evidence, reviews and editions.');
+}
 async function importFile(file){
  if(!file)return;
  if(busy||pendingImport){notice('Finish the current operation before opening another packet.',true);return;}
@@ -1357,17 +1479,23 @@ document.addEventListener('change',e=>{if(e.target.id==='packet-file')importFile
 $('import-dialog').addEventListener('cancel',()=>{pendingImport=null;notice('Import cancelled. Current work was preserved.');});
 (async()=>{
  try{
-  let saved;try{saved=localStorage.getItem(KEY);}catch{}
+  let saved,legacyGuided=false;
+  if(presentationMode&&!freshWorkspace){
+   try{saved=await guidedRecord('get');}
+   catch{guidedStorageWarning='Saved guided work could not be read. Run 3 is open in memory; the stored copy was not changed.';}
+   if(!saved&&!guidedStorageWarning){try{saved=localStorage.getItem(KEY);legacyGuided=Boolean(saved);}catch{}}
+  }else if(!requestedRun3){try{saved=localStorage.getItem(KEY);}catch{}}
   let next,message,landingOverview=false;
-  if(saved){try{next=await D.restore(C.parse(saved));persist=true;savedHash=(await D.pack(next)).sha256;message='Saved workspace restored after native and workflow verification.';}catch(e){next=await D.create();landingOverview=true;message='Saved copy could not be restored and was left untouched. Cantos overview is open; the saved copy was not changed.';}}
+  if(saved){try{next=await D.restore(C.parse(saved));persist=true;savedHash=(await D.pack(next)).sha256;message='Saved workspace restored after native and workflow verification.';
+   if(legacyGuided){try{await guidedRecord('put',JSON.stringify(await D.pack(next)));message='Saved guided workspace verified and migrated to browser storage. The earlier local copy remains untouched.';}catch{message='Saved guided workspace verified. Browser storage migration failed; the earlier local copy remains untouched.';}}}catch(e){if(presentationMode)throw Error('Saved guided workspace could not be verified and was preserved. Open a fresh replay workspace to continue. '+e.message);next=await D.create();landingOverview=true;message='Saved copy could not be restored and was left untouched. Cantos overview is open; the saved copy was not changed.';}}
   else{
-   // Keep a verified starting decision in memory while a cold visitor begins at the Cantos overview.
-   landingOverview=true;
+   // An explicit Run 3 link opens the verified packet in memory and leaves saved work untouched.
+   landingOverview=!requestedRun3;
    const node=document.getElementById('run3-packet');
-   try{if(!node)throw Error('embedded Run 3 packet absent');next=await D.restore(C.parse(node.textContent));message='Start with the Research Desk, open a saved packet, or explore a retained decision.';}
-   catch(e){next=await D.create();message='Start with the Research Desk, open a saved packet, or explore the synthetic example. The retained Run 3 packet could not be verified.';}
+   try{if(!node)throw Error('embedded Run 3 packet absent');next=await D.restore(C.parse(node.textContent));message=requestedRun3?'Run 3 verified. Retained 24 Sep 2026 measurements with revisable list-price assumptions.':'Start with the Research Desk, open a saved packet, or explore a retained decision.';}
+   catch(e){if(requestedRun3)throw Error('Run 3 packet verification failed: '+e.message);next=await D.create();message='Start with the Research Desk, open a saved packet, or explore the synthetic example. The retained Run 3 packet could not be verified.';}
   }
-  const prepared=await prepareView(next);await installPrepared(next,prepared,{resetFields:true});view(landingOverview?'overview':'decision');notice(message);
+  const prepared=await prepareView(next);await installPrepared(next,prepared,{resetFields:true});view(landingOverview?'overview':'decision');notice(guidedStorageWarning||message);
  }catch(e){notice('Unable to start: '+e.message,true);}
 })();
 
@@ -1703,8 +1831,8 @@ $('command-btn')?.addEventListener('click',openPalette);
   for(const nav of main.querySelectorAll('.nav[data-view]'))nav.classList.toggle('active',!get(nav.dataset.view+'-view').hidden);
   if(old.classList.contains('controls-open'))main.classList.add('controls-open');
   main.querySelector('.workspace-name').innerHTML='Research decision <span class="tag">RETAINED RUN 3</span>';
-  main.querySelector('.case-heading h1').textContent='Same work. Different list prices.';
-  main.querySelector('.case-heading p').textContent='Same coding workload. Retained answers and timings. A revisable list-price decision.';
+  main.querySelector('.case-heading h1').textContent='Run 3 · GPU inference';
+  main.querySelector('.case-heading p').textContent='Retained 24 Sep 2026 measurements · list-price scenario';
   main.querySelector('.case-link[data-view="decision"] strong').textContent='Run 3 decision';
   main.querySelector('.case-link[data-view="decision"] small').textContent='Hardware · list-price scenario';
   main.querySelector('.rail-section .source-card').textContent='Run 3 source records';
@@ -1744,9 +1872,9 @@ $('command-btn')?.addEventListener('click',openPalette);
   get('grader').hidden=true;main.querySelector('label[for="grader"]').hidden=true;main.querySelector('.format-preview').hidden=true;
   const deadline=get('deadline'),input=document.createElement('input');for(const a of deadline.attributes)input.setAttribute(a.name,a.value);input.type='number';input.min='1';input.step='1';input.value=v.policy.data.deadline_ms;deadline.replaceWith(input);
   main.querySelector('label[for="deadline"]').textContent='Completion limit · ms';
-  main.querySelector('label[for="quote"]').textContent=v.runs[0].data.identity.arm+' · $/hour';get('quote').value=v.runs[0].data.billing.rate_usd_per_hour;get('quote').dataset.hardwareRate=v.runs[0].id;
+  main.querySelector('label[for="quote"]').textContent=v.runs[0].data.identity.hardware+' · list $/hour';get('quote').value=v.runs[0].data.billing.rate_usd_per_hour;get('quote').dataset.hardwareRate=v.runs[0].id;
   const extra=document.createElement('div');extra.className='hardware-fields';
-  extra.innerHTML=v.runs.slice(1).map(r=>`<label>${escapeHTML(r.data.identity.arm)} · list $/hour<input type="number" min="0" step="0.01" data-hardware-rate="${escapeHTML(r.id)}" value="${r.data.billing.rate_usd_per_hour}"></label>`).join('')+`<label>First-token limit · ms<input type="number" min="1" step="1" data-first-token value="${v.policy.data.first_token_ms}"></label>`;
+  extra.innerHTML=v.runs.slice(1).map(r=>`<label>${escapeHTML(r.data.identity.hardware)} · list $/hour<input type="number" min="0" step="0.01" data-hardware-rate="${escapeHTML(r.id)}" value="${r.data.billing.rate_usd_per_hour}"></label>`).join('')+`<label>First-token limit · ms<input type="number" min="1" step="1" data-first-token value="${v.policy.data.first_token_ms}"></label>`;
   fields.insertBefore(extra,get('apply-btn'));fields.querySelector('.field-note').textContent='Arithmetic over retained measurements; no new model run.';
   get('history-count').textContent=String(v.reports.length).padStart(2,'0');
   get('editions').innerHTML=v.reports.map((r,i)=>{const parts=snapshotParts(r),w=parts.calc.data.results.find(x=>x.run_id===parts.calc.data.winner),same=r.fingerprint===v.review.fingerprint;return `<article class="edition ${same?'current-edition':''}"><header><h3>Edition ${String(i+1).padStart(2,'0')} · ${escapeHTML(w?.label||'No recommendation')}</h3><span class="tag">${same?'CURRENT':'HISTORY'}</span></header><p>${w?price(w.cost_per_success)+'/1,000 accepted':'No eligible result'} · first token ≤ ${parts.policy.data.first_token_ms} ms · complete ≤ ${parts.policy.data.deadline_ms/1000} s</p>${i?'<p class="successor-line">Supersedes Edition '+String(i).padStart(2,'0')+' · '+v.reports[i-1].snapshot_hash.slice(0,12)+'…</p>':''}${stamp('Frozen scenario · retained measurements','calculation@'+parts.calc.revision)}<div class="edition-bottom"><code>${r.snapshot_hash.slice(0,12)}…</code><span><button class="text-button" data-edition="${i}">Compare</button> · <button class="text-button" data-brief="${i}">Brief</button></span></div></article>`;}).join('');
@@ -1828,4 +1956,49 @@ function composeRail(node,run3){
 
 const beforeOverviewCommands=commands;
 commands=function(){const list=beforeOverviewCommands();list.unshift({label:'Go to Cantos overview',hint:'program',run:()=>view('overview'),on:true});return list;};
+
+
+// Presentation changes navigation and framing only. Native transactions own every decision.
+function emitPresentationState(){
+ if(!presentationMode||window.parent===window)return;
+ const p=window.CantosPreviewState;
+ if(!p||!viewState){
+  if($('notice')?.classList.contains('error'))window.parent.postMessage({type:'cantos-error',message:$('notice').textContent},location.origin);
+  return;
+ }
+ window.parent.postMessage({
+  type:'cantos-state',current:p.current,reportCount:p.reportCount,winner:p.winner,
+  decisionClass:p.decisionClass,packetHash:p.packetHash,events:p.events,
+  state:$('current-state')?.textContent||'',winnerLabel:$('winner')?.textContent||'',
+  notice:$('notice')?.textContent||'',storageWarning:guidedStorageWarning,reviewReady:Boolean(viewState.review?.ready),
+  results:(viewState.calc?.data?.results||[]).map(r=>({runId:r.run_id,label:r.label,accepted:r.accepted,tasks:r.tasks,costPerSuccess:r.cost_per_success})),
+  rates:(viewState.runs||[]).map(r=>({runId:r.id,rate:r.data.billing?.rate_usd_per_hour}))
+ },location.origin);
+}
+if(presentationMode){
+ window.addEventListener('message',e=>{
+  if(e.source!==window.parent||e.origin!==location.origin||e.data?.type!=='cantos-guide')return;
+  const command=e.data.command;
+  if(command==='status'){emitPresentationState();return;}
+  if(!workspace||busy||pendingImport)return;
+  if(!['compare','evidence','request','change','retain','history'].includes(command))return;
+  if($('inspector').open)$('inspector').close();
+  view('decision');
+  if(command==='evidence')inspect('policy');
+  else if(command==='request')inspectTask(0,0);
+  else if(command==='change'){
+   setControls(true);
+   const field=document.querySelector('[data-hardware-rate="n-t0"]');
+   if(field){field.focus({preventScroll:true});field.scrollIntoView({block:'center',behavior:'smooth'});}
+  }else if(command==='retain'){
+   setControls(true);$('reviewer').focus({preventScroll:true});$('reviewer').scrollIntoView({block:'center',behavior:'smooth'});
+  }else if(command==='history'){
+   $('editions').scrollIntoView({block:'center',behavior:'smooth'});
+  }else{
+   $('workspace').scrollTo({top:0,behavior:'smooth'});$('workspace').focus({preventScroll:true});
+  }
+  emitPresentationState();
+ });
+ window.addEventListener('pageshow',emitPresentationState);
+}
 </script></body></html>

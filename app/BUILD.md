@@ -56,3 +56,23 @@ The community results page links to that independently runnable collection.
 `app/verification/` contains historical receipts and captures. New checks must
 name the actual build they exercised; a previous green receipt is not acceptance
 of later bytes. A successful local suite does not claim a hosted deployment.
+
+## Guided Open Compute entry
+
+`public/open-compute/` embeds the same built app at `app/Cantos.html?workspace=run3&presentation=1`. The direct `workspace=run3` route verifies the embedded packet before presenting a decision. Presentation mode changes navigation and layout; ResearchCore and the native change, recompute, review, retain, export and restore transactions remain the owners of the result.
+
+The guided workspace uses a scoped IndexedDB database, `cantos.open-compute.presentation`, with record key `cantos.open-compute.presentation.v1` for explicit local saves. Its transaction completes before the UI acknowledges a save. Ordinary Cantos localStorage behavior remains unchanged. A verified legacy guided localStorage packet migrates into this database while the earlier copy remains untouched. Reload restores a verified guided save. `fresh=1` opens the original packet in memory without deleting either saved copy. Opening an exported packet follows the existing verification and replacement-confirmation path.
+
+The guide accepts only same-origin messages from its own frame, and the app accepts navigation commands only from its same-origin parent. Those commands inspect or focus existing controls; they do not change assumptions, calculate outcomes or manufacture retained editions.
+
+Run the focused public-flow gate in a fresh output directory:
+
+```sh
+python -B app/tests/public_flow_regressions.py --out <new-public-flow-output>
+```
+
+It checks the live page, acceptance and request inspection, price revision and stale gating, explicit recomputation, preserved predecessor, native export and offline replay, isolated local-save recovery, the fresh route, and the mobile scenario drawer. `--browser-executable` selects an installed Chromium-compatible browser; `--base-url` can target a served checkout during native estate QA. The receipt records the app bytes actually exercised.
+
+Portable workspace exports use compact JSON with the same native packet identity. Export checks the existing 12 MB import boundary before offering a file; oversized packets preserve current work and report the limit explicitly. The two-edition Run 3 packet remains below that boundary.
+
+If browser storage is unavailable, the guided entry opens the verified starting packet in memory and reports that saved work could not be read. Corrupt saved packets still fail native verification and remain untouched. Startup failures reach the outer guide instead of leaving an indefinite verification message.
