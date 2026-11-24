@@ -1,0 +1,67 @@
+{
+  "schema": "cantos-open-compute-film/1",
+  "title": "A decision that can be replayed",
+  "duration_seconds": 117.2,
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "source_commit": "33d9df2",
+  "app_sha256": "bcb3c6713427aade5673864e276a6dd55acbc24c285b2e4c7b64671756991a53",
+  "guide_script_sha256": "943c4dcad46aafbcb7a1e3578cddce61ffca94aa5ac02074f23487a85ec6fafa",
+  "canonical_narration_sha256": "318fcd2c0a67a210ea97da640aa91160ff0069979d84724823f160220e472883",
+  "narration": {
+    "single_performance": true,
+    "raw_seconds": 95.12,
+    "paced_seconds": 115.056,
+    "speech_time_stretch": false,
+    "spoken_pcm_preserved": true
+  },
+  "native_capture": {
+    "price_scenario_usd_per_hour": 2.49,
+    "original_accepted": [
+      4336,
+      4280
+    ],
+    "replayed_winner": "n-t0",
+    "retained_editions": 2,
+    "exact_export_packet_sha256": "2748aafdcde39dde05e98c660aa606697bf69d734789b56fcc53d633abc56ad9",
+    "export_bytes": 8340224,
+    "fresh_browser_context": true,
+    "network_offline": true,
+    "requests_after_network_disabled": 0,
+    "new_model_inference": false
+  },
+  "files": {
+    "demo.mp4": {
+      "bytes": 8524081,
+      "sha256": "497a153d07d6238ca83a10e8de60db9e06723d2114de233e89ffeb04772fb5ef"
+    },
+    "poster.jpg": {
+      "bytes": 240594,
+      "sha256": "82430e242638c987c3db4a2686f31ac503f5afdb99cd565b81115e3c7e8fdd69"
+    },
+    "captions.vtt": {
+      "bytes": 2884,
+      "sha256": "71d85e0bcfe8324551b4bb3453821398ac8d83511fc16ec01f818dddc8a75b6d"
+    },
+    "transcript.html": {
+      "bytes": 4826,
+      "sha256": "efda7cbb47c62b71e699cedf0f6b9014c1b0bf9592a26b373ef5084ee7840d77"
+    }
+  },
+  "delivery_checks": {
+    "faststart": true,
+    "video_codec": "H.264",
+    "audio_codec": "AAC",
+    "decoded_audio_seconds": 117.2,
+    "final_speech_preserved": true,
+    "decoded_peak_dbfs": -1.4656769834999548
+  },
+  "caption_checks": {
+    "cue_count": 35,
+    "maximum_lines": 2,
+    "minimum_duration_seconds": 1.029999999999987,
+    "word_alignment_match": 1.0,
+    "method": "Semantic phrase grouping; cue boundaries derived from retained actual-PCM word timestamps."
+  }
+}
